@@ -352,7 +352,7 @@ W optymalnym kolorowaniu grafu (czyli takim, które wykorzystuje możliwie najmn
 
 Wszystkich możliwych par wierzchołków w różnych kolorach spośród $k$ jest $\binom{k}{2}$, zachodzi więc
 \[
-    \binom{k}{2} = \frac{k(k-1)}{2} \le |E|,
+    \binom{k}{2} = \frac{k(k-1)}{2} \ge |E|,
 \]
 skąd $k=O\bigl(\!\sqrt{|E|}\bigr)$, a z założenia, że $|E|=O(|V|)$ natychmiast otrzymujmy tezę.
 
@@ -375,14 +375,12 @@ Wybierzmy z $V$ pewien wierzchołek $v$. Istnieją wtedy w $V$ trzy inne wierzch
 
 \subproblem %B-2(c)
 \begin{twierdzenie}
-	Zbiór wierzchołków $V$ prostego grafu nieskierowanego $G=(V,E)$, można podzielić na dwa rozłączne zbiory tak, żeby co najmniej połowa wierzchołków sąsiednich z wierzchołkiem $v\in V$ nie należała do zbioru, do którego należy $v$.
+	Zbiór wierzchołków $V$ dowolnego prostego grafu nieskierowanego $G=(V,E)$, można podzielić na dwa rozłączne zbiory tak, żeby co najmniej połowa wierzchołków sąsiednich z~wierzchołkiem $v\in V$ nie należała do zbioru, do którego należy $v$.
 \end{twierdzenie}
 \begin{proof}
-Zauważmy, że gdy $G$ nie posiada cykli nieparzystych, to zgodnie z twierdzeniem z problemu~B-1(b) jest dwudzielny i twierdzenie dla takiego grafu zachodzi. Dowód sprowadza się zatem do grafów zawierających cykle nieparzyste.
+Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą różnicy liczby wierzchołków ze zbioru, do którego należy $v$ sąsiednich z~nim i~liczby wierzchołków sąsiednich z~$v$ spoza jego zbioru. Dowód sprowadza się do pokazania, że dla każdego $v\in V$\!, $d(v)\ge0$.
 
-% POPRAWIĆ\\
-% Niech $C$ będzie pewnym nieparzystym cyklem prostym grafu $G$ o długości~$n$. Podzielmy zbiór wierzchołków $C$ na dwa rozłączne podzbiory o rozmiarach $\lfloor n/2\rfloor$ i $\lceil n/2\rceil$ w taki sposób, by istniała dokładnie jedna krawędź łącząca wierzchołki z tego samego zbioru. W cyklu o długości $3$ nie można utworzyć podcykli, ale łatwo sprawdzić, że spełnia on twierdzenie. Jeśli $n>3$, to łącząc nową krawędzią dwa niesąsiednie wierzchołki $C$ z różnych zbiorów, dzielimy ten cykl na dwa podcykle proste o długościach różniących się parzystością.
-
+Zdefiniujmy teraz liczbę $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się jak można ją zmaksymalizować wyznaczając podziały $V$ na dwa rozłączne podzbiory $V_1$ i~$V_2$. Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v_1$ należący do zbioru $V_1$. Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie. Zauważmy, że przenosząc wierzchołek $v$ z~$V_1$ do $V_2$ zmieniamy $d(v)$ na liczbę przeciwną. Ponadto, dla każdego sąsiedniego do $v$ wierzchołka $v_1\in V_1$, jego waga $d(v_1)$ wzrasta o~2, a~dla każdego $v_2\in V_2$ sąsiedniego z~$v$, $d(v_2)$ maleje o~2. Operacja przeniesienia zwiększa zatem wartość $\sigma$ o~$-4d(v)$. Widać więc, że maksymalizując tę liczbę opłaca się przenosić wierzchołki o~ujemnych wagach. Ponieważ $\sigma$ nie może rosnąć nieograniczenie (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie przenosin, w~grafie $G$ wszystkie wierzchołki będą mieć wagi nieujemne, czego należało dowieść.
 \end{proof}
 
 \subproblem %B-2(d)
@@ -444,5 +442,10 @@ Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, ja
 \end{figure}
 
 \subproblem %B-3(c)
+Rozważmy następującą strategię podziału zbioru wierzchołków. Usuwając jedną krawędź możemy podzielić drzewo o $n$ wierzchołkach na dwa zbiory wierzchołków, z których mniejszy będzie składać się z $n/4$ wierzchołków, na podstawie części (a) i (b). Kolejne krawędzie będą usuwane rekurencyjnie z większego poddrzewa. Oczywiście w pewnym momencie może istnieć krawędź, której usunięcie spowoduje podział na mniej więcej równe zbiory, jednak rozważmy pesymistyczny przypadek, w którym po każdym podziale dostajemy zbiory wierzchołków o rozmiarach odpowiednio $1/4$ i $3/4$ rozmiaru zbioru przed podziałem. Niech $k$ oznacza liczbę krawędzi potrzebną do uzyskania zbiorów o rozmiarach równych $\lfloor n/2\rfloor$ i $\lceil n/2\rceil$. Wtedy zachodzi zależność
+\[
+    (3/4)^kn = 1,
+\]
+ponieważ zbioru jednoelementowego nie trzeba dalej dzielić. Stąd $k=\log_{4/3}n$, a zatem musimy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
 
 \endinput

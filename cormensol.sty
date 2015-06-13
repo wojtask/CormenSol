@@ -20,8 +20,10 @@
 \let\@afterindenttrue\@afterindentfalse
 \@afterindentfalse
 
-% ustawienia numerowania wewnątrz spisu treści
+% głębokość numerowania wewnątrz spisu treści
 \setcounter{tocdepth}{1}
+
+% głębokość numerowania sekcji
 \setcounter{secnumdepth}{3}
 
 % definicja polecenia tworzenia podrozdziału
@@ -29,7 +31,7 @@
 \@startsection
 	{section}
 	{1}
-	{-1.5mm}
+	{0mm}
 	{1.5\baselineskip}
 	{0.5\baselineskip}
 	{\Large\sffamily\bfseries}
@@ -40,8 +42,8 @@
 \@startsection
 	{subsection}
 	{2}
-	{-1.5mm}
-	{1.5\baselineskip}
+	{0mm}
+	{-1.5\baselineskip}
 	{0.5\baselineskip}
 	{\sffamily\bfseries}
 }
@@ -87,6 +89,11 @@
 \def\thefigure{\arabic{figure}}
 \def\thetable{\arabic{table}}
 
+% polecenia do spisu algorytmów (poprawić)
+\newcommand{\listofalgorithms}{\chapter*{Spis algorytmów}\@starttoc{alg}}
+\newcommand{\algcaption}[1]{\addcontentsline{alg}{algorithm}{#1}}
+\newcommand{\l@algorithm}[2]{{\sffamily #1}{\sffamily #2}}
+
 % odpowiedni wygląd nagłówków stron
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -98,7 +105,7 @@
 
 % definicja polecenia rozpoczynającego sekcję problemów
 \newcommand\problems{%
-	\section*{\hspace{-1.5mm}Problemy}
+	\section*{\hspace{0mm}Problemy}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
 	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}
@@ -123,9 +130,6 @@
 
 % informacja poboczna w tekście rozwiązania
 \newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}
-
-\newcommand{\wrong}{\marginpar{\Large{$\star$}}}
-\newcommand{\improve}{\marginpar{\hfill{\sc CS}}}
 
 % definicja nowych operatorów matematycznych
 \DeclareMathOperator{\sgn}{sgn}

@@ -6,10 +6,7 @@ DO ZROBIENIA:
 LAYOUT:
 - dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
 - zmienić layout strony, która zawiera nagłówek części i ew. rozdziału
-- numerować algorytmy tak jak rysunki i tabele, zrobić spis algorytmów
-- jakie strony końcowe?
 - ciągi w \langle, \rangle (?)
-- przerobić MetaPost na Asymptote (?)
 - w hyperrefach pdfowych uzyskać polskie litery
 - ujednolicić czcionkę w refach, albo taka jak w labelach albo regularna
 - rysunki drzew (przejścia do T(1)) ujednolicić w fig04.1 fig04.2
@@ -21,13 +18,14 @@ PRZED WYDANIEM v0.4:
 - we wstępie napisać o (La)TeX i METAPOST
 - akapit wstępu mówiący o numeracji rysunków, tożsamości i jak się to odróżnia od tych z książki
 - zbyt duże dolne marginesy
-- zaradzić coś na raggedbottom i flushbottom w ch03
+- zaradzić coś na underfull vboxes
+- 4.2-5 -- rysunek pokazujący dwie wysokości h i H
 
 PRZED WYDANIEM v0.3:
-- więcej rysunków tłumaczących zawiłe rozumowanie w niektórych zadaniach
+- sprawdzić całość __BARDZO_KRYTYCZNIE__, ew. dorobić rysunki
 - warningi, przepełnione hboxy i vboxy (underfull \vbox można chyba zabić \raggedbottom)
-- czy linie są zbyt długie? (do 75 znaków wraz ze spacjami i przestankowymi)
 - bibliografia: linki do manuali, inne pozycje?
+- zaimplementować i przetestować algorytmy
 
 O CZYM NALEŻY PAMIĘTAĆ:
 - używamy następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
@@ -39,14 +37,14 @@ O CZYM NALEŻY PAMIĘTAĆ:
 	\problem{Nazwa} %numer
 		[\subproblem %numer]
 	\endinput
-- tyldy po sierotach i w miejscach, w których nie chcemy łamać
+- tyldy po sierotach i w miejscach niełamliwych
 - stosować makra \twoparts, \zad, \E, \Pr, \Var, \note
 - po użyciu \note na początku zadania, należy użyć \noindent na początku następnego paragrafu
 - preferować \bigl, \bigr i pozostałe zamiast \left, \right (głównie do ułamków) (\biggl, \biggr do dużych operatorów np. \sum)
 - formuły matematyczne składane są tak, jak radzi Knuth w The TeXbook
 - poza tym jeśli piszemy o ciągach, parach itd. to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki należy umieszczać poza tym trybem
 - numery tożsamości wewnątrz ( )
-- po \E, \Pr, \Var używamy nawiasów okrągłych
+- po \E, \Pr, \Var używa się nawiasów okrągłych
 - rysunki i tabele wewnątrz otoczenia figure[ht] i potem center
 - \text{jakis tekst $jakas formula$} zamiast \text{jakis tekst }jakas formula
 - komentarze w pseudokodach
@@ -62,38 +60,27 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - w \note stosować $$ dla tekstu matematycznego, nawet dla pojedynczych liczb, a \/ przed tekstem złożonym czcionką zwykłą lub matematyczną
 - przy składaniu zależności rekurencyjnych w warunkach używa się słowa 'jeżeli', a nie 'dla'
 - kontrolne spacje po skrótach (np., tzn., itd.) jeśli nie kończą zdania i bezpośrednio po nich nie ma spacji
+- lceil, rceil, lfloor, rfloor traktować jako nawiasy, w argumentach funkcji (?)
 
 ETAPY ODDAWANIA ROZDZIAŁÓW:
 poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
 poziom 2. -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca)
 poziom 3. -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna)
 
-ROZDZIAŁ 1 (3)
-ROZDZIAŁ 2 (3)
-ROZDZIAŁ 3 (3) (raggedbottom na str. 17, do usunięcia przed v0.4)
+ROZDZIAŁ 1
+ROZDZIAŁ 2
+ROZDZIAŁ 3
 
-ROZDZIAŁ 4 (2) z wyjątkiem poniższych
-- 4.1-5 -- tą samą metodą jak 4-4(d)
-- 4.2-5 -- rysunek pokazujący dwie wysokości h i H (przed v0.4)
-- 4.3-5 -- źle
-- 4-3 -- co z tym małym n? dokładniej przerobić
+ROZDZIAŁ 4
+- sprawdzić przypadki brzegowe indukcji
 - 4-4(b) -- nie zachodzi dla dolnego oszacowania
-- 4-4(d) -- b niepotrzebne, sprawdzić wybór c
-- 4-4(f) -- co z tym składnikiem w nawiasie?
-- 4-4(i) -- osobne przypadki dla innej parzystości n
-- 4-5(d) -- zaczerpnąć rozwiązanie z rozdziału 3
-- 4-6(b) -- zrobić
+- 4-6(b)
 
-ROZDZIAŁ 5 -- (3) z wyjątkiem poniższych (raggedbottom na str. 57, do usunięcia przed v0.4)
-- 5.3-6 -- ponowne losowanie prowadzi do algorytmu bez własności stopu!
-- 5.4-2 -- niedokończone, wynik w postaci sumy, sprawdzić czy ok (internet)
+ROZDZIAŁ 5
+- 5.4-2 -- niedokończone, wynik w postaci sumy, z Knutha i A063170, E(X) = Q(b) = \sqrt{\pi b/2}, jak dołączyć informację o stronie i miejscu wyprowadzenia?
 
-DODATEK A (3)
-
+DODATEK A
 DODATEK B
-- B-2(c)
-- B-3(c)
 
 DODATEK C
-- C.4-8 -- źle
-- C.4-9 -- sprawdzić pod kątem formalnym i przerobić
+- C.4-9 -- przerobić

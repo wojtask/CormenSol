@@ -141,7 +141,6 @@ a~stąd mamy
 \]
 Permutację identycznościową $\pi_0$ otrzymujemy więc z~prawdopodobieństwem mniejszym od $1/n!$, co oznacza, że procedura \proc{Permute-With-All} nie generuje permutacji losowych zgodnych z~rozkładem jednostajnym.
 
-\raggedbottom
 \exercise %5.3-4
 Na początku działania procedury losowana jest liczba \id{offset}, o~jaką będą przesunięte elementy tablicy $A$ cyklicznie w~prawo. Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset})\bmod n$. Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że element $A[i]$ znajdzie się na pewnej ustalonej pozycji w~$A$, są równe $1/n$.
 
@@ -166,9 +165,10 @@ dzięki liniowości wartości oczekiwanej i~własności zmiennych losowych wska�
 \end{align*}
 Po przekształceniach dostajemy $n^3-2n-1\ge0$, co zachodzi dla $n\ge\phi$, gdzie symbol $\phi$ oznacza złotą proporcję, a~więc jest prawdą także dla $n\ge2$, co spełnia założenie i~kończy dowód nierówności.
 
-\flushbottom
 \exercise %5.3-6
-Użyjemy wektora bitowego o~rozmiarze $n^3$ do przechowania informacji, czy dana liczba wystąpiła już wcześniej jako priorytet. Pozycja $i$ tego wektora przyjmuje wartość~1, jeśli liczba $i$ została wylosowana jako priorytet oraz~0 w~przeciwnym przypadku. Jeśli w~późniejszych losowaniach ponownie zostanie wybrane $i$, to losujemy ponownie aż do natrafienia liczby niewykorzystanej dotąd jako priorytet. W~ten sposób pozbywamy się powtarzających się priorytetów. Opisany algorytm wymaga $O(n^3)$ dodatkowej pamięci i~$O(1)$ dodatkowego czasu.
+Jednym ze sposobów poradzenia sobie z identycznymi priorytetami jest użycie takiego algorytmu ich sortowania, który generuje tablicę, w której ciąg równych sobie priorytetów może być dowolną permutacją. Dokładniej, jeśli w tablicy wejściowej istnieje $k$ priorytetów o wartości $p$, to algorytm powinien generować tablicę posortowaną z każdą możliwą permutacją tych priorytetów na pozycjach $i$, $i+1$,~\dots,~$i+k$, gdzie $i$ jest najmniejszym indeksem tablicy posortowanej, w którym może znaleźć się $p$. Każda taka tablica powinna mieć jednakowe szanse na pojawienie się na wyjściu algorytmu.
+
+Powyższą strategię można zaimplementować w procedurze \proc{Permute-By-Sorting} poprzez dokonanie odpowiedniej zmiany w algorytmie sortującym. Jeśli stosujemy np.\ algorytm sortowania przez scalanie, to podczas scalania, w procedurze \proc{Merge} jeśli elementy $L[i]$ i $R[j]$ są sobie równe, to do wynikowej tablicy $A$ zapisujemy jeden losowo wybrany; każdy z nich ma jednakową szansę być wybrany w danym kroku. Taka modyfikacja sprawi, że na każdym poziomie rekursji ciąg równych elementów będzie tworzył wszystkie możliwe permutacje z równym prawdopodobieństwem ich występowania.
 
 \subchapter{Analiza probabilistyczna i~dalsze zastosowania zmiennych losowych wskaźnikowych}
 
@@ -229,25 +229,23 @@ To czego poszukujemy, to najmniejsze $k$ takie, że $\Pr(B_k)<1/2$. Analiza powy
 a~więc widać, że potrzeba $k=613$ osób.
 
 \exercise %5.4-2
-Zdefiniujmy zdarzenie $A_l$ dla $l=1$, 2,~\dots,~$b+1$ polegające na tym, że po $l$ rzutach wszystkie urny zawierają co najwyżej jedną kulę. Oczywiście $\Pr(A_1)=1$. Szanse trafienia w~zajętą już urnę w~drugim rzucie wynoszą $1/b$, a~więc $\Pr(A_2)=1-1/b$. Ogólnie, zdarzenie $A_l$ zachodzi tylko wtedy, gdy zaszło zdarzenie $A_{l-1}$ i~po \twoparts{$l$}{tym} rzucie nie będzie urny z~więcej niż jedną kulą. Jest zatem
+Niech $X$ oznacza liczbę potrzebnych rzutów zanim w pewnej urnie znajdą się dwie kule. Załóżmy, że po $k-1$ rzutach ($2\le k\le b+1$) nie było urny z więcej niż jedną kulą i obliczmy szanse, że również po \twoparts{$k$}{tym} rzucie nie będzie kolizji. Ponieważ jest zajętych $k-1$ urn, to \twoparts{$k$}{ta} kula wpada do pustej urny z prawdopodobieństwem równym
 \[
-	\Pr(A_l) = \Pr(A_{l-1})\left(1-\frac{l-1}{b}\right) = \Pr(A_{l-2})\left(1-\frac{l-2}{b}\right)\left(1-\frac{l-1}{b}\right) = \dots = \prod_{i=1}^{l-1}\left(1-\frac{i}{b}\right).
+    \Pr(X>k\mid X>k-1) = \frac{b-k+1}{b}.
 \]
-Zauważmy, że $\Pr(A_{b+1})=0$.
-
-Oznaczmy teraz przez $X$ zmienną losową, przyjmującą liczbę rzutów potrzebnych do pierwszego trafienia kulą do zajętej urny. Zmienna ta może przyjmować wartości od 2 do $b+1$, przy czym
+Zachodzi
 \[
-	\Pr(X=l) = \Pr\bigl(\overline{A_l}\bigr) = 1-\Pr(A_l),
+    \Pr(X>k) = \prod_{i=2}^k\Pr(X>i\mid X>i-1) = \frac{(b-1)(b-2)\dots(b-k+1)}{b^{k-1}},
 \]
-skąd dostajemy
-\begin{align*}
-	\E(X) &= \sum_{l=2}^{b+1}l\Pr(X=l) \\
-	&= \sum_{l=2}^{b+1}l\bigl(1-\Pr(A_l)\bigr) \\
-	&= \sum_{l=2}^{b+1}l-\sum_{l=2}^{b+1}l\Pr(A_l) \\
-	&= \frac{(b+1)(b+2)}{2}-\sum_{l=2}^bl\cdot\prod_{i=1}^{l-1}\left(1-\frac{i}{b}\right) \\
-	&= \frac{(b+1)(b+2)}{2}-\sum_{l=2}^b\frac{l\cdot l!}{b^l}\binom{b}{l} \\
-	&= \frac{(b+1)(b+2)}{2}-b!\sum_{l=2}^b\frac{l}{b^l(b-l)!}
-\end{align*}
+a ponieważ $\Pr(X>1)=1$, to mamy
+\[
+    \Pr(X=k) = \Pr(X>k-1)-\Pr(X>k) = \frac{(b-1)(b-2)\dots(b-k+2)(k-1)}{b^{k-1}}.
+\]
+Można teraz obliczyć wartość oczekiwaną zmiennej losowej $X$:
+\[
+    \E(X) = \sum_{k=2}^{b+1}k\Pr(X=k) = \sum_{k=1}^b\frac{(b-1)(b-2)\dots(b-k+1)(k+1)k}{b^k}.
+\]
+W pozycji \cite{taocp1} wyprowadzone jest oszacowanie na powyższą sumę, które wynosi $\sqrt{b\pi/2}$.
 
 \exercise %5.4-3
 Podczas rozważania paradoksu dnia urodzin w~pewnym momencie obliczamy prawdopodobieństwo tego, że dwie osoby urodziły się w~pewnym wybranym dniu i~wykorzystując założenie o~tym, że zdarzenia $b_i=r$ oraz $b_j=r$ dla $i\ne j$ są niezależne, dostajemy wynik. W~klasycznym problemie wystarczy zatem, żeby poszczególne zdarzenia były parami niezależne, jednak uogólniając problem celem wyznaczenia potrzebnej liczby osób do tego, aby co najmniej $l$ z~nich miało urodziny tego samego dnia wymagamy, aby każdy \twoparts{$l$}{elementowy} zbiór zdarzeń był niezależny. Jeśli $l=k$, to warunek sprowadza się do tego, że zdarzenia te muszą być wzajemnie niezależne.

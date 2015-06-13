@@ -552,34 +552,30 @@ otrzymujemy
 \]
 
 \exercise{} %C.4-8
-Na wstępie zauważmy, że $p\ge p_i$ dla każdego $i=1$, 2,~\dots,~$n$ implikuje
+Przekształćmy dowodzoną zależność do alternatywnej postaci rozważając prawdopodobieństwo zdarzenia przeciwnego:
 \[
-	1-p_i \le 1-p \quad\text{oraz}\quad \frac{p_i}{1-p_i}\le\frac{p}{1-p}.
+    1-\Pr(X\ge k) \ge 1-\sum_{i=k}^nb(i;n,p).
 \]
-Ponieważ przy potęgowaniu obu stron nierówności oraz przy mnożeniu ich stronami (obie strony są nieujemne) nie zmienia się znak nierówności, to możemy napisać
+Stąd dostajemy
 \[
-	(1-p_i)^n\left(\frac{p_i}{1-p_i}\right)^i \le (1-p)^n\left(\frac{p}{1-p}\right)^i,
+    \sum_{i=k}^nb(i;n,p) \ge \Pr(X\ge k).
 \]
-a stąd
+Niech $X'$ będzie zmienną losową oznaczającą liczbę sukcesów w serii prób Bernoulliego, każda o prawdopodobieństwie sukcesu równym $p$. Powyższa nierówność sprowadza się zatem do
 \[
-	\binom{n}{i}p_i^i(1-p_i)^{n-i} \le \binom{n}{i}p^i(1-p)^{n-i}.
+    \Pr(X'\ge k) \ge \Pr(X\ge k),
 \]
-Sumując powyższe nierówności po $i$, mamy, że dla dowolnego $1\le k\le n$
-\[
-	\sum_{i=0}^{k-1}\binom{n}{i}p_i^i(1-p_i)^{n-i} \le \sum_{i=0}^{k-1}\binom{n}{i}p^i(1-p)^{n-i} = \sum_{i=0}^{k-1}b(i;n,p),
-\]
-co kończy dowód.
+którą dowodzimy stosując \zad{C.4-9} po przyjęciu $p_i'\equiv p$ dla każdego $i=1$, 2,~\dots,~$n$.
 
 \exercise{} %C.4-9
-Niech $S$ będzie przestrzenią zdarzeń (serii prób Bernoulliego). Rozważmy doświadczenie wykonane dla serii prób z ciągu $s\in S$, którego wynik potraktujmy jako ciąg \twoparts{$n$}{bitowy}. Bit o wartości~0 na \twoparts{$i$}{tej} pozycji w takim ciągu oznacza, że \twoparts{$i$}{ta} próba w tym doświadczeniu zakończyła się sukcesem, a~1 -- że zakończyła się porażką.
+Niech $S$ będzie przestrzenią zdarzeń będących ciągami \twoparts{$n$}{elementowymi} sukcesów i porażek.
 
-Doświadczenie z \twoparts{$i$}{tą} z kolei próbą w pierwszym przypadku zakończy się sukcesem z prawdopodobieństwem równym $p_i$, generując pewien ciąg $A$. Utwórzmy teraz nowy ciąg bitów $A'$ będący reprezentacją doświadczenia wykonanego na $s$ ale dla drugiego przypadku. Sukces w \twoparts{$i$}{tej} próbie z $A'$ wystąpi z niemniejszym prawdopodobieństwem od wystąpienia sukcesu w \twoparts{$i$}{tej} próbie w ciągu $A$. Można zatem utworzyć taki ciąg poprzez przepisanie wszystkich jedynek starego ciągu do odpowiadających pozycji w nowym ciągu, zaś dla każdej pozycji z zerem, wybrać losowo wartość~0 lub 1 na pozycję nowego ciągu.
+Doświadczenie z \twoparts{$i$}{tą} z kolei próbą z ciągu $A$ zakończy się sukcesem z prawdopodobieństwem równym $p_i$, generując pewien ciąg $s\in S$. Utwórzmy teraz nowy ciąg $s'\in S$ będący reprezentacją doświadczenia dającego $s$ ale dla drugiej serii prób. Sukces w \twoparts{$i$}{tej} próbie z ciągu $A'$ wystąpi z niemniejszym prawdopodobieństwem $p_i'$ od wystąpienia sukcesu w \twoparts{$i$}{tej} próbie z ciągu $A$. Można zatem utworzyć $s'$ poprzez przepisanie wszystkich sukcesów z $s$ do odpowiadających pozycji w nowym ciągu, zaś dla każdej pozycji z porażką, dokonać nowej próby z prawdopodobieństwem sukcesu $p_i'-p_i$.
 
-Taka operacja zapewnia, że ciągi $A'$ mają nie mniej jedynek niż odpowiadające ciągi $A$, a co za tym idzie, doświadczenia wykonane w drugim przypadku obfitują w więcej sukcesów niż te z pierwszego. Zatem dla dowolnego zdarzenia $s\in S$, zachodzi
+Taka operacja zapewnia, że zdarzenia otrzymane w wyniku prób z ciągu $A'$ składają się z nie mniejszej liczby sukcesów niż odpowiadające zdarzenia otrzymane z ciągu $A$. Zatem dla dowolnego zdarzenia $s\in S$, zachodzi
 \[
 	X'(s) \ge X(s).
 \]
-Korzystając teraz z wyniku z \zad{C.3-7}, otrzymujemy tezę.
+Korzystając teraz z wyniku z \zad{C.3-7}, otrzymujemy żadaną własność.
 
 \subchapter{Krańce rozkładu dwumianowego}
 
