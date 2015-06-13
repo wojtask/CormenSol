@@ -9,16 +9,16 @@
 
 \subsection{} %A.1-2
 Korzystając z~oszacowania na $H_n$ (wzór (A.7)), mamy
-\begin{eqnarray*}
-	\sum_{k=1}^n\frac{1}{2k-1} &=& H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
-	&=& H_{2n-1}-\frac{1}{2}H_{n-1} \\
-	&=& \ln (2n-1)+O(1)-\left(\frac{1}{2}\ln(n-1)+O(1)\right) \\
-	&=& \ln (2n-2)+\underbrace{\ln\frac{2n-1}{2n-2}}_{O(1)}-\ln\sqrt{n-1}+O(1) \\
-	&=& \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\
-	&=& \ln\left(2\sqrt{n-1}\right)+O(1) \\
-	&=& \underbrace{\ln 2}_{O(1)}+\ln\sqrt{n}+\underbrace{\ln\frac{\sqrt{n-1}}{\sqrt{n}}}_{O(1)}+O(1) \\
-	&=& \ln\sqrt{n}+O(1).
-\end{eqnarray*}
+\begin{align*}
+	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
+	&= H_{2n-1}-\frac{1}{2}H_{n-1} \\
+	&= \ln (2n-1)+O(1)-\left(\frac{1}{2}\ln(n-1)+O(1)\right) \\
+	&= \ln (2n-2)+\underbrace{\ln\frac{2n-1}{2n-2}}_{O(1)}-\ln\sqrt{n-1}+O(1) \\
+	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\
+	&= \ln\left(2\sqrt{n-1}\right)+O(1) \\
+	&= \underbrace{\ln 2}_{O(1)}+\ln\sqrt{n}+\underbrace{\ln\frac{\sqrt{n-1}}{\sqrt{n}}}_{O(1)}+O(1) \\
+	&= \ln\sqrt{n}+O(1).
+\end{align*}
 
 \subsection{} %A.1-3
 \[
@@ -27,20 +27,20 @@ Korzystając z~oszacowania na $H_n$ (wzór (A.7)), mamy
 W~obliczeniu ostatniej sumy wykorzystano wzór (A.8).
 
 \subsection{} %A.1-4
-\begin{eqnarray*}
-	\sum_{k=0}^\infty\frac{k-1}{2^k} &=& \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} \\
-	&=& \frac{\frac{1}{2}}{\left(1-\frac{1}{2}\right)^2}+\sum_{k=0}^\infty\left(\frac{1}{2}\right)^k \\
-	&=& 2-\frac{1}{1-\frac{1}{2}} \\
-	&=& 0.
-\end{eqnarray*}
+\begin{align*}
+	\sum_{k=0}^\infty\frac{k-1}{2^k} &= \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} \\
+	&= \frac{\frac{1}{2}}{\left(1-\frac{1}{2}\right)^2}+\sum_{k=0}^\infty\left(\frac{1}{2}\right)^k \\
+	&= 2-\frac{1}{1-\frac{1}{2}} \\
+	&= 0.
+\end{align*}
 Skorzystano z~wzoru (A.8), a~następnie (A.6) w~obu przypadkach biorąc $x=1/2$.
 
 \subsection{} %A.1-5
-\begin{eqnarray*}
-	\sum_{k=1}^\infty(2k+1)x^{2k} &=& 2\sum_{k=0}^\infty kx^{2k}+\sum_{k=0}^\infty x^{2k}-1 \\
-	&=& \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 \\
-	&=& \frac{x^2(3-x^2)}{(1-x^2)^2}.
-\end{eqnarray*}
+\begin{align*}
+	\sum_{k=1}^\infty(2k+1)x^{2k} &= 2\sum_{k=0}^\infty kx^{2k}+\sum_{k=0}^\infty x^{2k}-1 \\
+	&= \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 \\
+	&= \frac{x^2(3-x^2)}{(1-x^2)^2}.
+\end{align*}
 W~drugiej równości zastosowano wzory (A.6) i~(A.8). Otrzymana wartość jest wartością sumy gdy $|x^2|<1$, w~pozostałych przypadkach suma jest rozbieżna do $\infty$.
 
 \subsection{} %A.1-6
@@ -50,21 +50,21 @@ Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bi
 \]
 
 Niech $(F_i(n))_{1\le i\le n}$ będzie ciągiem funkcji, który spełnia układ nierówności
-\begin{equation}
-	\left\{\begin{array}{ccccl}
-		0 & \le & F_1(n) &\le& cf_1(n) \\
-		0 & \le & F_2(n) &\le& cf_1(n)+cf_2(n) \\
-		& & \vdots \\
-		0 & \le & F_n(n) &\le& \sum_{k=1}^ncf_k(n), \\
-	\end{array}\right. \label{eq:a.1-6}
-\end{equation}
+\[
+	\begin{cases}
+		0 \le F_1(n) \le cf_1(n) \\
+		0 \le F_2(n) \le cf_1(n)+cf_2(n) \\
+		\phantom{0 \le F_2} \vdots \\
+		0 \le F_n(n) \le \sum_{k=1}^ncf_k(n), \\
+	\end{cases} \label{eq:a.1-6}
+\]
 dla pewnych dodatnich stałych $n_0$ i~$c$ oraz dla każdego $n\ge n_0$. Wprost z~definicji notacji $O$ mamy
-\begin{eqnarray*}
-	F_1(n) & = & O(f_1(n)),\\
-	F_2(n)-F_1(n) & = & O(f_2(n)),\\
-	& \vdots \\
-	F_n(n)-F_{n-1}(n) & = & O(f_n(n)).
-\end{eqnarray*}
+\begin{align*}
+	F_1(n) &= O(f_1(n)),\\
+	F_2(n)-F_1(n) &= O(f_2(n)),\\
+	& \,\,\vdots \\
+	F_n(n)-F_{n-1}(n) &= O(f_n(n)).
+\end{align*}
 Dodając powyższe równania stronami, otrzymujemy
 \[
 	F_1(n)+(F_2(n)-F_1(n))+\cdots+(F_n(n)-F_{n-1}(n)) = \sum_{k=1}^nO(f_k(n)).
@@ -80,22 +80,22 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 \]
 
 \subsection{} %A.1-8
-\begin{eqnarray*}
-	\prod_{k=2}^n\left(1-\frac{1}{k^2}\right) &=& \prod_{k=2}^n\frac{k^2-1}{k^2} \\
-	&=& \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} \\
-	&=& \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\prod_{k=1}^nk\cdot\prod_{k=1}^nk} \\
-	&=& \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} \\
-	&=& \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} \\
-	&=& \frac{n(n+1)((n-1)!)^2}{2n^2((n-1)!)^2} \\
-	&=& \frac{n+1}{2n}.
-\end{eqnarray*}
+\begin{align*}
+	\prod_{k=2}^n\left(1-\frac{1}{k^2}\right) &= \prod_{k=2}^n\frac{k^2-1}{k^2} \\
+	&= \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} \\
+	&= \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\prod_{k=1}^nk\cdot\prod_{k=1}^nk} \\
+	&= \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} \\
+	&= \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} \\
+	&= \frac{n(n+1)((n-1)!)^2}{2n^2((n-1)!)^2} \\
+	&= \frac{n+1}{2n}.
+\end{align*}
 
 \section{Szacowanie sum}
 
 \subsection{} %A.2-1
 Z~kryterium d'Alemberta zbieżności szeregów mamy
 \[
-	\frac{1}{(k+1)^2}\bigg/\frac{1}{k^2} \le 1\quad\hbox{dla wszystkich }k\ge1,
+	\frac{1}{(k+1)^2}\bigg/\frac{1}{k^2} \le 1 \quad\text{dla wszystkich $k\ge1$},
 \]
 a~to oznacza, że suma $\sum_{k=1}^n\frac{1}{k^2}$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=\infty$.
 
@@ -109,25 +109,23 @@ z~czego wynika, że $F(n)=O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest
 \subsection{} %A.2-3
 Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Posortujmy wyrazy tej sumy kolejno po ich mianownikach i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami 2. Umieszczamy pierwszy składnik w~grupie 1 o~rozmiarze 1, dwa kolejne w~grupie 2 o~rozmiarze 2, cztery kolejne w~grupie 3 o~rozmiarze 4, itd. aż do grupy $s$, jak to widać poniżej:
 \[
-	\underbrace{\frac{1}{1}}_{\hbox{\scriptsize grupa 1}}\!\!+\;\;\underbrace{\frac{1}{2}+\frac{1}{3}}_{\hbox{\scriptsize grupa 2}}\;\;+\;\;\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\hbox{\scriptsize grupa 3}}\;\;+\cdots+\;\;\underbrace{\cdots +\frac{1}{n}}_{\hbox{\scriptsize grupa $s$}}.
+	\underbrace{\frac{1}{1}}_{\text{\scriptsize grupa 1}}\!\!+\;\;\underbrace{\frac{1}{2}+\frac{1}{3}}_{\text{\scriptsize grupa 2}}\;\;+\;\;\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\text{\scriptsize grupa 3}}\;\;+\cdots+\;\;\underbrace{\cdots +\frac{1}{n}}_{\text{\scriptsize grupa $s$}}.
 \]
 Wszystkie składniki w~grupie 2 przyjmują wartości od $1/3$ do~$1/2$, zatem suma składników tejże grupy mieści się pomiędzy $2\cdot1/3=2/3$ a~$2\cdot1/2=1$. Wszystkie składniki w~grupie 3 przyjmują wartości od $1/7$ do~$1/4$, więc ich suma jest między $4/7$ a~1. W~ogólności, każdy z~$2^{k-1}$ składników w~grupie~$k$ jest zawarty w~przedziale $\bigl(2^{-k},2^{1-k}\,\bigr]$, a~stąd suma składników w~każdej grupie znajduje się w~przedziale $(1/2,1\,]$. W~końcu, jeśli umieściliśmy składnik $1/n$ w~grupie $s = \lfloor\lg n\rfloor+1$, to zachodzi $s/2<H_n\le s$. Zatem $\lim_{n\to\infty}H_n=\infty$ i~istotnie
 \[
-	\frac{\lfloor\lg n\rfloor+1}{2} < H_n \le \lfloor\lg n\rfloor+1,\quad\hbox{więc }H_n = \Theta(\lg n).
+	\frac{\lfloor\lg n\rfloor+1}{2} < H_n \le \lfloor\lg n\rfloor+1, \quad\text{więc }H_n = \Theta(\lg n).
 \]
 
 \subsection{} %A.2-4
 Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności (A.11):
-\begin{equation*}
+\[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
-\end{equation*}
+\]
 Znajdujemy oszacowania obu całek:
-\[
-	\int_0^nx^3\,dx = \frac{n^4}{4} = \Theta(n^4),
-\]
-\[
+\begin{gather*}
+	\int_0^nx^3\,dx = \frac{n^4}{4} = \Theta(n^4), \\\\
 	\int_1^{n+1}x^3\,dx = \frac{(n+1)^4-1}{4} = \Theta(n^4),
-\]
+\end{gather*}
 a~zatem
 \[
 	\sum_{k=0}^nk^3 = \Theta(n^4).
@@ -142,7 +140,7 @@ gdyż wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie s
 
 \problems
 
-\subsection{} %A-1
+\subsection{Szacowanie sum} %A-1
 Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge0$ i~$s\ge0$. Pozwala to na wykorzystanie nierówności (A.11) we wszystkich poniższych punktach.
 
 \subsubsection{} %A-1(a)
@@ -151,12 +149,10 @@ Z~wzoru (A.11) dostajemy
 	\int_0^nx^r\,dx \le \sum_{k=1}^nk^r \le \int_1^{n+1}x^r\,dx.
 \]
 Wartości obu całek wynoszą
-\[
-	\int_0^nx^r\,dx = \frac{n^{r+1}}{r+1} = \Theta(n^{r+1}),
-\]
-\[
+\begin{gather*}
+	\int_0^nx^r\,dx = \frac{n^{r+1}}{r+1} = \Theta(n^{r+1}), \\\\
 	\int_1^{n+1}x^r\,dx = \frac{(n+1)^{r+1}-1}{r+1} = \Theta(n^{r+1}),
-\]
+\end{gather*}
 zatem oszacowaniem sumy jest
 \[
 	\sum_{k=1}^nk^r = \Theta(n^{r+1}).
@@ -169,24 +165,20 @@ Stosujemy wzór (A.11) do sumy $\sum_{k=2}^n\lg^sk$, równoważnej sumie badanej
 \]
 Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=dx$. Pomijając stałe całkowania otrzymujemy
 \[
-	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x}\quad\hbox{oraz}\quad v(x)=x.
+	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = x.
 \]
 Dostajemy zatem
-\begin{eqnarray*}
-	I(x) &=& u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
-	I(x) &=& x\lg^sx-\int s\lg e\lg^{s-1}x\,dx, \\
-	I(x) &=& x\lg^sx-\frac{s\lg e}{\lg x}\cdot I(x), \\
-	I(x) &=& \frac{x\lg^{s+1}x}{\lg x+s\lg e}.
-\end{eqnarray*}
+\begin{align*}
+	I(x) &= u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
+	I(x) &= x\lg^sx-\int s\lg e\lg^{s-1}x\,dx, \\
+	I(x) &= x\lg^sx-\frac{s\lg e}{\lg x}\cdot I(x), \\
+	I(x) &= \frac{x\lg^{s+1}x}{\lg x+s\lg e}.
+\end{align*}
 Wykorzystujemy otrzymany wynik do obliczenia całek ograniczających badaną sumę:
-\[
-	{\int_1^n\lg^sx\,dx} = \frac{n\lg^{s+1}n}{\lg n+s\lg e} = \Theta(n\lg^sn),
-\]
-\\
-\[
+\begin{gather*}
+	{\int_1^n\lg^sx\,dx} = \frac{n\lg^{s+1}n}{\lg n+s\lg e} = \Theta(n\lg^sn), \\\\
 	{\int_2^{n+1}\lg^sx\,dx} = \frac{(n+1)\lg^{s+1}(n+1)}{\lg(n+1)+s\lg e}-\dfrac{2}{1+s\lg e} = \Theta(n\lg^sn),
-\]
-\\
+\end{gather*}
 ponieważ wyrażenie $s\lg e$ jest stałe, a~zatem oszacowaniem sumy jest
 \[
 	\sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
@@ -199,26 +191,25 @@ Po zastosowaniu wzoru (A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$, dostajemy
 \]
 Analogicznie jak w~poprzednim punkcie, obliczmy całkę $I(x) = \int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
 \[
-	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x}\quad\hbox{oraz}\quad v(x)=\frac{x^{r+1}}{r+1},
+	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = \frac{x^{r+1}}{r+1},
 \]
 a~więc otrzymujemy
-\begin{eqnarray*}
-	I(x) &=& u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
-	I(x) &=& \frac{x^{r+1}\lg^sx}{r+1}-\frac{s\lg e}{(r+1)\lg x}\cdot I(x), \\
-	I(x) &=& \frac{x^{r+1}\lg^{s+1}x}{(r+1)\lg x+s\lg e}.
-\end{eqnarray*}
+\begin{align*}
+	I(x) &= u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
+	I(x) &= \frac{x^{r+1}\lg^sx}{r+1}-\frac{s\lg e}{(r+1)\lg x}\cdot I(x), \\
+	I(x) &= \frac{x^{r+1}\lg^{s+1}x}{(r+1)\lg x+s\lg e}.
+\end{align*}
 Całki ograniczające badaną sumę wynoszą zatem
-\[
-	{\int_1^nx^r\lg^sx\,dx} = \frac{n^{r+1}\lg^{s+1}n}{(r+1)\lg n+s\lg e} = \Theta(n^{r+1}\lg^sn),
-\]
-\\
-\[
+\begin{gather*}
+	{\int_1^nx^r\lg^sx\,dx} = \frac{n^{r+1}\lg^{s+1}n}{(r+1)\lg n+s\lg e} = \Theta(n^{r+1}\lg^sn), \\\\
 	{\int_2^{n+1}x^r\lg^sx\,dx} = \frac{(n+1)^{r+1}\lg^{s+1}(n+1)}{(r+1)\lg(n+1)+s\lg e}-\dfrac{2^{r+1}}{r+1+s\lg e} = \Theta(n^{r+1}\lg^sn).
-\]
-\\
+\end{gather*}
+
 Stąd wnioskujemy, że
 \[
 	\sum_{k=1}^nk^r\lg^sk = \Theta(n^{r+1}\lg^sn).
 \]
 
 Przyjmując w~oszacowanej sumie odpowiednio $s=0$ i~$r=0$, otrzymamy sumy i~ich oszacowania z~punktów (a) i~(b).
+
+\endinput

@@ -8,11 +8,14 @@
 \usepackage{amsthm}
 \usepackage{bm}
 \usepackage{epsf}
-\usepackage{graphicx}
+\usepackage[pdftex]{graphicx}
+\usepackage{geometry}
+\usepackage{calc}
 \usepackage{clrscode}
 \usepackage{mathdots}
 \usepackage{url}
 \usepackage{cormensol}
+\usepackage[pdfborder={0 0 0},pdftex,bookmarks=true]{hyperref}
 
 %\id dla identyfikatorow
 %\proc dla procedur
@@ -39,13 +42,33 @@
 
 \frontmatter
 
-\begin{titlepage}
 \include{title}
-\end{titlepage}
+
+\ifpdf
+	\addtocontents{toc}{\protect\pdfbookmark{Spis tre\'sci}{Tableofcont}}
+\fi
+
+\ifpdf
+	\def\DelBookmark{\def\@writetorep##1##2##3##4{\relax}}
+\else
+	\def\DelBookmark{\relax}
+\fi
+
+\begingroup
+	\DelBookmark
+	\include{intro}
+\endgroup
+
+\tableofcontents
+
+%\newpage\pagenumbering{roman}
+
+%\listoffigures
+%\listoftables
 
 \let\mychapter = \chapter
 \renewcommand{\chapter}[1]{
-	\mychapter{#1}
+	\mychapter{\sffamily{\bfseries{#1}}}
 	\setcounter{subsection}{0}
 	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
 }
@@ -89,6 +112,7 @@
 %\include{ch35}
 
 \appendix
+%\def\thechapter{\sffamily\bfseries\Alph{chapter}}
 
 \include{appa}
 \include{appb}
