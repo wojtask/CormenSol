@@ -33,7 +33,7 @@ beginfig(1);
 	draw pp;
 	draw pp shifted (2scale, 0);
 	
-	label(btex 377 etex, (-.25scale, .75scale));
+	label(btex 277 etex, (-.25scale, .75scale));
 	label(btex 80 etex, (1.75scale, .75scale));
 	
 	label(btex 17 etex, (-.75scale, 0));
@@ -43,7 +43,7 @@ beginfig(1);
 	label(btex \scriptsize{Programiści} etex, (-.5scale, .25scale));
 	label(btex \scriptsize{Matematycy} etex, (0, -.25scale));
 	
-	label(btex 10 etex, (1.25scale, 0));
+	label(btex 15 etex, (1.25scale, 0));
 	label(btex 5 etex, (1.75scale, 0));
 	label(btex 5 etex, (2.25scale, 0));
 	

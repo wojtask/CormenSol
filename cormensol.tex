@@ -14,7 +14,7 @@
 \usepackage{sectsty}
 \usepackage{tocloft}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
-\usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false]{hyperref}
+\usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
 \usepackage{cormensol}
 
 \allowdisplaybreaks[1] % to modify
@@ -53,7 +53,6 @@
 \renewcommand{\cftsecpagefont}{\sffamily}
 
 \tableofcontents
-%\listofalgorithms
 
 \let\mychapter=\chapter
 \renewcommand{\chapter}[1]{%
@@ -72,20 +71,21 @@
 
 \part{Podstawy}
 
-\include{ch01}
-\setcounter{chapter}{1}
-\include{ch02}
-\setcounter{chapter}{2}
-\include{ch03}
-\setcounter{chapter}{3}
-\include{ch04}
-\setcounter{chapter}{4}
-\include{ch05}
+% \include{ch01}
+% \setcounter{chapter}{1}
+% \include{ch02}
+% \setcounter{chapter}{2}
+% \include{ch03}
+% \setcounter{chapter}{3}
+% \include{ch04}
+% \setcounter{chapter}{4}
+% \include{ch05}
 
-%\part{Sortowanie i statystyki pozycyjne}
+% \part{Sortowanie i~statystyki pozycyjne}
 
-%\include{ch06}
-%\include{ch07}
+% \setcounter{chapter}{5}
+% \include{ch06}
+% \include{ch07}
 %\include{ch08}
 %\include{ch09}
 
@@ -97,7 +97,7 @@
 %\include{ch13}
 %\include{ch14}
 
-%\part{Zaawansowane metody konstruowania i analizowania algorytmów}
+%\part{Zaawansowane metody konstruowania i~analizowania algorytmów}
 
 %\include{ch15}
 %\include{ch16}
@@ -135,8 +135,10 @@
 \part{Dodatek: Podstawy matematyczne}
 
 \appendix
-\include{appa}
-\include{appb}
+%\include{appa}
+%\setcounter{chapter}{1}
+%\include{appb}
+\setcounter{chapter}{2}
 \include{appc}
 
 \backmatter

@@ -1,32 +1,3 @@
-DO ZROBIENIA:
-- pozostałe rozdziały
-- rozwiązania zadań z wydania 3
-- tłumaczenie na angielski
-
-LAYOUT:
-- dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
-- zmienić layout strony, która zawiera nagłówek części i ew. rozdziału
-- ciągi w \langle, \rangle (?)
-- w hyperrefach pdfowych uzyskać polskie litery
-- ujednolicić czcionkę w refach, albo taka jak w labelach albo regularna
-- rysunki drzew (przejścia do T(1)) ujednolicić w fig04.1 fig04.2
-- krótsze krawędzie w fig04.5
-- rysunki fig04.3 i fig04.4 czy ok?
-- jednolite kolory szarości w rysunkach (wzór: figc)
-
-PRZED WYDANIEM v0.4:
-- we wstępie napisać o (La)TeX i METAPOST
-- akapit wstępu mówiący o numeracji rysunków, tożsamości i jak się to odróżnia od tych z książki
-- zbyt duże dolne marginesy
-- zaradzić coś na underfull vboxes
-- 4.2-5 -- rysunek pokazujący dwie wysokości h i H
-
-PRZED WYDANIEM v0.3:
-- sprawdzić całość __BARDZO_KRYTYCZNIE__, ew. dorobić rysunki
-- warningi, przepełnione hboxy i vboxy (underfull \vbox można chyba zabić \raggedbottom)
-- bibliografia: linki do manuali, inne pozycje?
-- zaimplementować i przetestować algorytmy
-
 O CZYM NALEŻY PAMIĘTAĆ:
 - używamy następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
 	\chapter{Nazwa}
@@ -60,27 +31,72 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - w \note stosować $$ dla tekstu matematycznego, nawet dla pojedynczych liczb, a \/ przed tekstem złożonym czcionką zwykłą lub matematyczną
 - przy składaniu zależności rekurencyjnych w warunkach używa się słowa 'jeżeli', a nie 'dla'
 - kontrolne spacje po skrótach (np., tzn., itd.) jeśli nie kończą zdania i bezpośrednio po nich nie ma spacji
-- lceil, rceil, lfloor, rfloor traktować jako nawiasy, w argumentach funkcji (?)
+- jednolite kolory szarości w rysunkach (jasnoszary = .8white, szary = .6white, ciemnoszary = .4white)
+- nie używać numerowania równań, stosować zawsze środowiska equation* (\[ \]) lub gather* lub align* w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$})
+- http://exlover.wordpress.com/
+- czy elementy zbiorów rozdzielać między $?
+
+MOŻLIWOŚĆ ZOPTYMALIZOWANIA:
+- 1.1-1
+- 1.1-3
+- 1.1-4
+- 2.1-4 -- jak traktujemy bity?
+- 3.2-3 -- dwie ostatnie tożsamości, bez użycia wzoru Stirlinga byłoby prościej
+- 3-6(h) -- podobno da się zejść do \Theta(\lg^*n)
+- A.2-3 -- prostsze rozwiązanie w exlover
+- B.1-3 -- czy da się prościej?
+
+PRZED v0.4:
+- we wstępie napisać o (La)TeX i METAPOST
+- akapit wstępu mówiący o numeracji rysunków, tożsamości i jak się to odróżnia od tych z książki
+- zrobić hyperrefy w \zad
+- fig04.{2,3,4,5} /|\
+- fig04.{3,4} T(1)
+- fig04.4 ma pokazywać dwie wysokości h i H
+- zbyt duże stopki (?)
+- numerek podrozdziału lub zadania przesunąć na margines (?)
+- dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
+
+PRZED v0.3:
+- sprawdzić całość __BARDZO_KRYTYCZNIE__, ew. dorobić rysunki
+- warningi, przepełnione hboxy i vboxy (underfull \vbox można zabić \raggedbottom)
+- czy nie większe pisze się razem czy osobno? przeszukać celem znalezienia wyrażeń nie [większy|mniejszy|...]
 
 ETAPY ODDAWANIA ROZDZIAŁÓW:
 poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
 poziom 2. -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca)
 poziom 3. -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna)
 
-ROZDZIAŁ 1
-ROZDZIAŁ 2
-ROZDZIAŁ 3
 
-ROZDZIAŁ 4
+ROZDZIAŁ 1 (3)
+ROZDZIAŁ 2 (3)
+
+ROZDZIAŁ 3 (3 oprócz poniższych)
+- 3-5(b) -- słownie, bez rozgraniczenia
+- 3-5(c) -- czy na pewno?
+
+ROZDZIAŁ 4 (1)
 - sprawdzić przypadki brzegowe indukcji
-- 4-4(b) -- nie zachodzi dla dolnego oszacowania
-- 4-6(b)
+- 4.2-1 -- błąd w oszacowaniu sumy, brakuje n
 
 ROZDZIAŁ 5
-- 5.4-2 -- niedokończone, wynik w postaci sumy, z Knutha i A063170, E(X) = Q(b) = \sqrt{\pi b/2}, jak dołączyć informację o stronie i miejscu wyprowadzenia?
+- 5.4-2 -- niedokończone, wynik w postaci sumy, z Knutha i A063170, E(X) = 1+Q(b) \approx 1+\sqrt{\pi b/2}
 
-DODATEK A
-DODATEK B
+DODATEK A (3)
 
-DODATEK C
-- C.4-9 -- przerobić
+DODATEK B (3 z wyjątkiem poniższych)
+- B-1(b) -- ostatni dowód zmodyfikować, środkowy dowód można znacznie uprościć:/
+- B-1(d) -- może da się łatwiej to rozwiązanie napisać? kolorowanie zachłanne
+- B-3(a) -- czy da się prościej?
+- B-3(c) -- metoda dobra, ale opisać jaśniej, rysunek (?)
+
+DODATEK C (3 oprócz poniższych)
+- C.1-8 -- co z tym trójkątem Pascala?
+- C.1-12 -- czemu (n+1)/2 ?
+- C.2-4 -- poprawić
+- C.2-7
+- C.2-8 -- zmniejszyć liczby (?)
+- C.4-8 -- pierwsze przekształcenie mi się nie podoba
+- C.4-9 -- do akceptacji, ew. uproszczenia
+- C.5-3 -- musi byc k<np a jest k<n
+- C.5-6 -- pierwszy czynnik nie jest <0

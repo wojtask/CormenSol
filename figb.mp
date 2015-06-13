@@ -10,9 +10,9 @@ prologues := 2;
 
 def venn_base (expr u, v) =
 	path pa, pb, pc;
-	pa := fullcircle scaled u shifted (v+u, 1.5u);
-	pb := fullcircle scaled u shifted (v+1.5u, 1.5u);
-	pc := fullcircle scaled u shifted (v+1.25u, u);
+	pa := (reverse fullcircle) rotated -180 scaled u shifted (v+u, 1.5u);
+	pb := (reverse fullcircle) scaled u shifted (v+1.5u, 1.5u);
+	pc := (reverse fullcircle) rotated -90 scaled u shifted (v+1.25u, u);
 enddef;
 
 def venn_labels =
@@ -25,7 +25,7 @@ beginfig(1);
 	scale := 1.3cm;
 	shift := 2.5scale;
 	descshift := -scale;
-	color gray; gray := .7white;
+	color gray; gray := .6white;
 
 	venn_base(scale, 0);
 	fill pa withcolor gray;
@@ -34,41 +34,43 @@ beginfig(1);
 
 	z0 = (1.25scale, scale); z2 = z0 + (shift, 0); z1 = .5[z0, z2];
 	label(btex $A$ etex, (x0, y0 + descshift));
-	label(btex $\cup$ etex, z1);
-	label(btex $\cup$ etex, (x1, y1 + descshift));
+	label(btex $\cap$ etex, z1);
+	label(btex $\cap$ etex, (x1, y1 + descshift));
 	
 	venn_base(scale, shift);
-	fill buildcycle(pb, pc) withcolor gray;
-	draw pa; draw pb; draw pc;
-	venn_labels;
-
-	z4 = z2 + (shift, 0); z3 = .5[z2, z4];
-	label(btex $(B\cap C)$ etex, (x2, y2 + descshift));
-	label(btex $=$ etex, z3);
-	label(btex $=$ etex, (x3, y3 + descshift));
-	
-	venn_base(scale, 2shift);
-	fill pa withcolor gray;
 	fill pb withcolor gray;
-	draw pa; draw pb; draw pc;
-	venn_labels;
-
-	z6 = z4 + (shift, 0); z5 = .5[z4, z6];
-	label(btex $(A\cup B)$ etex, (x4, y4 + descshift));
-	label(btex $\cap$ etex, z5);
-	label(btex $\cap$ etex, (x5, y5 + descshift));
-
-	venn_base(scale, 3shift);
-	fill pa withcolor gray;
 	fill pc withcolor gray;
 	draw pa; draw pb; draw pc;
 	venn_labels;
 
-	label(btex $(A\cup C)$ etex, (x6, y6 + descshift));
+	z4 = z2 + (shift, 0); z3 = .5[z2, z4];
+	label(btex $(B\cup C)$ etex, (x2, y2 + descshift));
+	label(btex $=$ etex, z3);
+	label(btex $=$ etex, (x3, y3 + descshift));
+	
+	venn_base(scale, 2shift);
+	path area_ab;
+	area_ab = buildcycle(pa, pb);
+	fill area_ab withcolor gray;
+	%fill buildcycle(pa, reverse pc) withcolor gray;
+	draw pa; draw pb; draw pc;
+	venn_labels;
+
+	z6 = z4 + (shift, 0); z5 = .5[z4, z6];
+	label(btex $(A\cap B)$ etex, (x4, y4 + descshift));
+	label(btex $\cup$ etex, z5);
+	label(btex $\cup$ etex, (x5, y5 + descshift));
+
+	venn_base(scale, 3shift);
+	fill buildcycle(pa, pc) withcolor gray;
+	draw pa; draw pb; draw pc;
+	venn_labels;
+
+	label(btex $(A\cap C)$ etex, (x6, y6 + descshift));
 endfig;
 
 vardef graphnode(expr scale, shift) =
-	color gray; gray := .7white;
+	color gray; gray := .6white;
 	path pnd;
 	pnd = fullcircle scaled scale shifted shift;
 	fill pnd withcolor gray;
@@ -77,6 +79,55 @@ vardef graphnode(expr scale, shift) =
 enddef;
 
 beginfig(2);
+	scale := .6cm;
+	numeric d;
+	numeric dd;
+	numeric f;
+
+	for y:=-4 upto 4:
+		for x:=-4 upto 4:
+			if abs(x) > abs(y): d := abs(x)
+			else: d := abs(y)
+			fi;
+			
+			dd := (2d-1) * (2d-1) - 1;
+			
+			if x=d:  f := dd +  d + y fi;
+			if y=d:  f := dd + 3d - x fi;
+			if x=-d: f := dd + 5d - y fi;
+			if y=-d: f := dd + 7d + x fi;
+
+			if (y=-4) and (x=4): label(btex $\dots$ etex, (4.25scale, -4scale))
+			else: label(decimal f, (x*scale, y*scale))
+			fi;
+
+			if (abs(x)<=y)  and (x<>y): draw ((.3scale, 0)--(.7scale, 0)) shifted (x*scale, y*scale) fi;
+			if (abs(x)<=-y) and (x<>4): draw ((.3scale, 0)--(.7scale, 0)) shifted (x*scale, y*scale) fi;
+		endfor;
+
+		if y>0:
+			for i:=y upto 4: draw ((0, -.3scale)--(0, -.7scale)) shifted (-i*scale, y*scale); endfor;
+			for i:=y upto 4: draw ((0, -.3scale)--(0, -.7scale)) shifted (i*scale, y*scale); endfor;
+		else:
+			for i:=-y upto 3: draw ((0, -.3scale)--(0, -.7scale)) shifted ((-i-1)*scale, y*scale); endfor;
+			for i:=-y+1 upto 3: draw ((0, -.3scale)--(0, -.7scale)) shifted ((i+1)*scale, y*scale); endfor;
+		fi;
+	endfor;
+
+	interim ahangle := 30;
+	interim linejoin := mitered;
+    interim linecap := butt;
+
+	draw (-6scale, 0)--(-4.5scale, 0) withpen pencircle scaled 1bp;
+	drawarrow (4.5scale, 0)--(6scale, 0) withpen pencircle scaled 1bp;
+	draw (0, -6scale)--(0, -4.5scale) withpen pencircle scaled 1bp;
+	drawarrow (0, 4.5scale)--(0, 6scale) withpen pencircle scaled 1bp;
+
+	label(btex $x$ etex, (5.75scale, .5scale));
+	label(btex $y$ etex, (-.5scale, 5.75scale));
+endfig;
+
+beginfig(3);
 	scale := .5cm;
 	shift := 4scale;
 
@@ -96,7 +147,7 @@ beginfig(2);
 	draw point 6 of p3 -- point 2 of p6;
 endfig;
 
-beginfig(3);
+beginfig(4);
 	scale := .5cm;
 	shift := 4scale;
 	curlshift := .5scale;
@@ -119,7 +170,7 @@ beginfig(3);
 	drawarrow point 3.5 of p5 {curl 1} .. (.5shift - curlshift, .5shift - curlshift) .. {curl 1} point 6.5 of p1;
 endfig;
 
-beginfig(4);
+beginfig(5);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -144,7 +195,7 @@ beginfig(4);
 	draw point 0 of p7 -- point 4 of p8;
 endfig;
 
-beginfig(5);
+beginfig(6);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -169,7 +220,7 @@ beginfig(5);
 	draw point 7 of p6 -- point 3 of p8;
 endfig;
 
-beginfig(6);
+beginfig(7);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -200,7 +251,7 @@ beginfig(6);
 	draw point 7 of p9 -- point 3 of p11;
 endfig;
 
-beginfig(7);
+beginfig(8);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -238,7 +289,7 @@ beginfig(7);
 	draw point 7 of p10 -- point 3 of p11;
 endfig;
 
-beginfig(8);
+beginfig(9);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -276,7 +327,7 @@ beginfig(8);
 	draw point 7 of p10 -- point 3 of p11;
 endfig;
 
-beginfig(9);
+beginfig(10);
 	scale := .5cm;
 	edgelen := 2scale;
 	shift := 4scale;
@@ -291,12 +342,12 @@ beginfig(9);
 
 	p3 = graphnode(scale, (shift + 1.9edgelen, 2edgelen)); label(btex $A$ etex, center p3);
 	p4 = graphnode(scale, (shift + 1.2edgelen, 1.3edgelen)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (shift + 2.5edgelen, 1.3edgelen)); label(btex $B$ etex, center p5);
+	p5 = graphnode(scale, (shift + 2.6edgelen, 1.3edgelen)); label(btex $B$ etex, center p5);
 	draw point 5 of p3 -- point 1 of p4;
 	draw point 7 of p3 -- point 3 of p5;
 endfig;
 
-beginfig(10);
+beginfig(11);
 	scale := .5cm;
 	shift := 2scale;
 	

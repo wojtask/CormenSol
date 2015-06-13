@@ -50,33 +50,33 @@ Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bi
 \]
 
 Niech $(F_i(n))_{1\le i\le n}$ będzie ciągiem funkcji, który spełnia układ nierówności
-\begin{equation}
+\[
 	\begin{cases}
 		0 \le F_1(n) \le cf_1(n) \\
 		0 \le F_2(n) \le cf_1(n)+cf_2(n) \\
 		\phantom{0 \le F_2} \vdots \\
 		0 \le F_n(n) \le \sum_{k=1}^ncf_k(n), \\
-	\end{cases} \label{eq:A.1-6}
-\end{equation}
+	\end{cases} \tag{$*$}\label{eq:A.1-6}
+\]
 dla pewnych dodatnich stałych $n_0$ i~$c$ oraz dla każdego $n\ge n_0$. Wprost z~definicji notacji $O$ mamy
 \begin{align*}
 	F_1(n) &= O(f_1(n)), \\
 	F_2(n)-F_1(n) &= O(f_2(n)), \\
-	& \,\,\vdots \\
+	& \,\,\,\vdots \\
 	F_n(n)-F_{n-1}(n) &= O(f_n(n)).
 \end{align*}
 Dodając powyższe równania stronami, otrzymujemy
 \[
 	F_1(n)+(F_2(n)-F_1(n))+\cdots+(F_n(n)-F_{n-1}(n)) = \sum_{k=1}^nO(f_k(n)).
 \]
-Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu~(\ref{eq:A.1-6}) wynika $F_n(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$, a~stąd już mamy tożsamość
+Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu~(\ref{eq:A.1-6}) wynika $F_n(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$, a~stąd wynika tożsamość
 \[
 	\sum_{k=1}^nO(f_k(n)) = O\biggl(\sum_{k=1}^nf_k(n)\biggr).
 \]
 
 \exercise %A.1-7
 \[
-	\prod_{k=1}^n2\cdot 4^k = 2^n\cdot 4^{1+2+\cdots+n} = 2^n\cdot 4^{\frac{n(n+1)}{2}} = 2^{n^2\!+2n}.
+	\prod_{k=1}^n2\cdot 4^k = 2^n\cdot 4^{1+2+\cdots+n} = 2^n\cdot 4^{\frac{n(n+1)}{2}} = 2^{n(n+2)}.
 \]
 
 \exercise %A.1-8
@@ -93,11 +93,14 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 \subchapter{Szacowanie sum}
 
 \exercise %A.2-1
-Z~kryterium d'Alemberta zbieżności szeregów mamy
-\[
-	\frac{1}{(k+1)^2}\bigg/\frac{1}{k^2} \le 1 \quad\text{dla wszystkich $k\ge1$},
-\]
-a~to oznacza, że suma $\sum_{k=1}^n(1/k^2)$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=\infty$.
+Wykorzystując własności szeregu teleskopowego, dostajemy:
+\begin{align*}
+	\sum_{k=1}^n\frac{1}{k^2} &\le 1+\sum_{k=2}^n\frac{1}{k(k-1)} \\
+	&= 1+\sum_{k=2}^n\left(\frac{1}{k-1}-\frac{1}{k}\right) \\
+	&= 1+1-\frac{1}{n} \\
+	&< 2,
+\end{align*}
+a~zatem badana suma jest ograniczona przez stałą. Okazuje się, że dla coraz większych $n$, jej wartość zbliża się do liczby $\pi^2\!/6$.
 
 \exercise %A.2-2
 Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
@@ -134,7 +137,7 @@ a~zatem
 \exercise %A.2-5
 Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażenia niezdefiniowanego
 \[
-	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln 0,
+	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln0,
 \]
 ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie sumy $\sum_{k=1}^n(1/k)$ jako $1+\sum_{k=2}^n(1/k)$ pozwala na zastosowanie wzoru~(A.12) do drugiego składnika wprowadzając jedynie stałą różnicę.
 

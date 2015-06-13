@@ -3,14 +3,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{calc}
 
-% do stron początkowych, gdzie potrzebny jest język angielski
-\newcommand{\TPSwitchToEnglish}{\language0\exhyphenpenalty50\relax}
-
-% tuning odstępów na stronie
-%\addtolength{\hoffset}{-0.5cm}
-%\addtolength{\voffset}{-0.5cm}
-%\addtolength{\textheight}{3cm}
-
 % potrzebne do odpowiedniego traktowania rysunków
 \ifpdf
 	\DeclareGraphicsRule{*}{mps}{*}{}
@@ -26,15 +18,64 @@
 % głębokość numerowania sekcji
 \setcounter{secnumdepth}{3}
 
+% zmiana wyglądu nagłówka części
+\renewcommand{\@part}[2][default]{%
+	\ifnum \c@secnumdepth >-2\relax
+		\refstepcounter{part}%
+		\addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+	\else
+		\addcontentsline{toc}{part}{#1}%
+	\fi
+	\markboth{}{}%
+	{%
+		\interlinepenalty \@M
+		\normalfont
+		\ifnum \c@secnumdepth >-2\relax
+			\noindent\hskip0pt\leaders\hrule height1pt \hskip10pt plus1filll \hspace{15pt}\huge\bfseries\sffamily \partname\nobreakspace\thepart
+			\par
+			\vskip 40\p@
+		\fi
+		\raggedleft\Huge \bfseries\sffamily #2\par
+		\vskip 40\p@
+		\rule{\textwidth}{1pt}
+	}%
+	\@endpart%
+}
+
+% zmiana wyglądu nagłówka rozdziału
+\renewcommand{\@makechapterhead}[1]{%
+	{%
+		\parindent \z@ \raggedright \normalfont
+		\ifnum \c@secnumdepth >\m@ne
+			\if@mainmatter
+				\huge\sffamily \@chapapp\space \bfseries\thechapter \hspace{15pt}\null\nobreak\leaders\hrule height1pt \hskip10pt plus1filll\ 
+				\par\nobreak
+				\vskip 20\p@
+			\fi
+		\fi
+		\interlinepenalty\@M
+		\Huge \bfseries\sffamily #1\par
+		\vspace{5pt}
+		\if@mainmatter
+			\rule{\textwidth}{1pt}
+			\nobreak
+			\vskip 20\p@
+		\else
+			\nobreak
+			\vskip 40\p@
+		\fi
+	}%
+}
+
 % definicja polecenia tworzenia podrozdziału
 \newcommand\subchapter{%
 \@startsection
 	{section}
 	{1}
 	{0mm}
-	{1.5\baselineskip}
+	{2.5\baselineskip}
 	{0.5\baselineskip}
-	{\Large\sffamily\bfseries}
+	{\Large\sffamily}
 }
 
 % definicja polecenia tworzenia (rozwiązania) zadania
@@ -63,11 +104,11 @@
 
 % odpowiedni wygląd liczników
 \def\thechapter{\arabic{chapter}}
-\def\thesection{\thechapter.\arabic{section}.}
+\def\thesection{{\bfseries\thechapter.\arabic{section}.}}
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
 \def\thesubsubsection{(\alph{subsubsection})}
 
-% kod odpowiedzialny za uczynienie numerów równań, rysunków i tabel globalnych
+% kod odpowiedzialny za uczynienie numerów rysunków i tabel globalnych
 \def\@removefromreset#1#2{{%
 	\expandafter\let\csname c@#1\endcsname\@removefromreset
 	\def\@elt##1{
@@ -80,19 +121,12 @@
 	}
 	\expandafter\xdef\csname cl@#2\endcsname{\csname cl@#2\endcsname}}
 }
-\@removefromreset{equation}{chapter}
 \@removefromreset{figure}{chapter}
 \@removefromreset{table}{chapter}
 
-% odpowiednie wyświetlanie liczników równań, rysunków i tabel
-\def\theequation{{\sffamily\arabic{equation}}}
+% odpowiednie wyświetlanie liczników rysunków i tabel
 \def\thefigure{\arabic{figure}}
 \def\thetable{\arabic{table}}
-
-% polecenia do spisu algorytmów (poprawić)
-\newcommand{\listofalgorithms}{\chapter*{Spis algorytmów}\@starttoc{alg}}
-\newcommand{\algcaption}[1]{\addcontentsline{alg}{algorithm}{#1}}
-\newcommand{\l@algorithm}[2]{{\sffamily #1}{\sffamily #2}}
 
 % odpowiedni wygląd nagłówków stron
 \pagestyle{fancyplain}
@@ -105,7 +139,8 @@
 
 % definicja polecenia rozpoczynającego sekcję problemów
 \newcommand\problems{%
-	\section*{\hspace{0mm}Problemy}
+	\vspace*{1.3\baselineskip}
+	\section*{{\mdseries Problemy}}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
 	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}

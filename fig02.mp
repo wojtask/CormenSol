@@ -10,7 +10,7 @@ prologues := 2;
 
 beginfig(1);
 	scale := .5cm;
-	color gray; gray := .7white;
+	color gray; gray := .6white;
 	path p[];
 	
 	for i:=0 upto 5:
@@ -122,7 +122,7 @@ endfig;
 
 beginfig(2);
 	scale := .5cm;
-	color gray; gray := .7white;
+	color gray; gray := .6white;
 	path p[];
 	
 	p0 := unitsquare scaled scale shifted (0, 2scale);

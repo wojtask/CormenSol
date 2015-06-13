@@ -187,7 +187,7 @@ gdzie $A_i$ jest zdarzeniem polegającym na tym, że osoba $i$ ma urodziny w~inn
 	\Pr(B_k) = \Pr\biggl(\bigcap_{i=1}^kA_i\biggr) = \prod_{i=1}^k\Pr(A_i) = \prod_{i=1}^k\frac{n-1}{n} = \left(\frac{n-1}{n}\right)^k.
 \]
 
-Aby prawdopodobieństwo tego, że wsród $k$ osób jest przynajmniej jedna, która ma urodziny tego samego dnia co ja, było niemniejsze niż $1/2$, musi zachodzić
+Aby prawdopodobieństwo tego, że wśród $k$ osób jest przynajmniej jedna, która ma urodziny tego samego dnia co ja, nie było mniejsze niż $1/2$, musi zachodzić
 \[
 	\left(\frac{n-1}{n}\right)^k \le \frac{1}{2}.
 \]
@@ -239,13 +239,13 @@ Zachodzi
 \]
 a ponieważ $\Pr(X>1)=1$, to mamy
 \[
-    \Pr(X=k) = \Pr(X>k-1)-\Pr(X>k) = \frac{(b-1)(b-2)\dots(b-k+2)(k-1)}{b^{k-1}}.
+    \Pr(X=k) = \Pr(X>k-1)-\Pr(X>k) = \frac{b(b-1)\dots(b-k+2)(k-1)}{b^k}.
 \]
 Można teraz obliczyć wartość oczekiwaną zmiennej losowej $X$:
 \[
-    \E(X) = \sum_{k=2}^{b+1}k\Pr(X=k) = \sum_{k=1}^b\frac{(b-1)(b-2)\dots(b-k+1)(k+1)k}{b^k}.
+    \E(X) = \sum_{k=2}^{b+1}k\Pr(X=k) = \sum_{k=1}^b\frac{b(b-1)\dots(b-k+1)(k+1)k}{b^{k+1}}.
 \]
-W pozycji \cite{taocp1} wyprowadzone jest oszacowanie na powyższą sumę, które wynosi $\sqrt{b\pi/2}$.
+W pozycji \cite{taocp1frag} wyprowadzone jest oszacowanie na powyższą sumę, które wynosi $\sqrt{b\pi/2}$.
 
 \exercise %5.4-3
 Podczas rozważania paradoksu dnia urodzin w~pewnym momencie obliczamy prawdopodobieństwo tego, że dwie osoby urodziły się w~pewnym wybranym dniu i~wykorzystując założenie o~tym, że zdarzenia $b_i=r$ oraz $b_j=r$ dla $i\ne j$ są niezależne, dostajemy wynik. W~klasycznym problemie wystarczy zatem, żeby poszczególne zdarzenia były parami niezależne, jednak uogólniając problem celem wyznaczenia potrzebnej liczby osób do tego, aby co najmniej $l$ z~nich miało urodziny tego samego dnia wymagamy, aby każdy \twoparts{$l$}{elementowy} zbiór zdarzeń był niezależny. Jeśli $l=k$, to warunek sprowadza się do tego, że zdarzenia te muszą być wzajemnie niezależne.

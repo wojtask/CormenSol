@@ -169,7 +169,7 @@ dla pewnego $b>0$. Mamy teraz
 co zachodzi dla $b\ge2$. Ponadto, przyjęcie $c\ge b+1$ pozwala przyjąć $T(1)=1$ za podstawę indukcji, co kończy dowód, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
 
 \exercise %4-2.2
-Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $n\to n/3\to n/9\to\dots\to n/3^i\to\dots\to1$. Liść tej gałęzi znajduje się na poziomie $i=\log_3n$. Ponieważ pełne drzewo binarne o~wysokości $\log_3n+1$ wnosi niewiększy koszt niż drzewo rekurencji $T(n)$, to zachodzi $T(n)\ge cn\log_3n$ dla pewnego $c>0$, a stąd $T(n)=\Omega(n\lg n)$.
+Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $n\to n/3\to n/9\to\dots\to n/3^i\to\dots\to1$. Liść tej gałęzi znajduje się na poziomie $i=\log_3n$. Ponieważ pełne drzewo binarne o~wysokości $\log_3n+1$ wnosi koszt nie większy niż drzewo rekurencji $T(n)$, to zachodzi $T(n)\ge cn\log_3n$ dla pewnego $c>0$, a stąd $T(n)=\Omega(n\lg n)$.
 
 \exercise %4-2.3
 Dla uproszczenia pomijamy branie części całkowitych.
@@ -529,94 +529,34 @@ ponieważ dla pewnej stałej $c>0$ i dowolnie dużych $n$ musiałoby zachodzić
 \]
 a ponieważ $n^\epsilon=\omega(\lg n)$, to niezależnie od wyboru $\epsilon$, dla dużych wartości $n$ licznik będzie dowolnie większy od mianownika i ułamka nie da się z tego powodu ograniczyć stałą.
 
-Skorzystajmy zatem z innego sposobu na obliczenie $T(n)$, rozważając ogólną rekurencję
+Skorzystajmy zatem z innego sposobu na obliczenie $T(n)$, rozważając rodzinę rekurencji postaci
 \[
 	T_a(n) = \begin{cases}
 		\Theta(1), & \text{jeśli $1\le n<a$}, \\
 		aT_a(n/a)+n/\!\lg n, & \text{jeśli $n\ge a$},
 	\end{cases}
 \]
-dla pewnego całkowitego $a\ge2$, której drzewo przedstawia rys.~\ref{fig:4-4b}.
-\begin{figure}[ht]
-	\begin{center}
-		\includegraphics{fig04.5}
-	\end{center}
-	\caption{Drzewo rekursji $T_a(n)=aT_a(n/a)+n/\!\lg n$} \label{fig:4-4b}
-\end{figure}
-Na \twoparts{$i$}{tym} poziomie tego drzewa $a^i$ węzłów wnosi koszt równy $n/(a^i\lg(n/a^i))$, a cały poziom $n/(\lg n-i\lg a)$. Ponieważ drzewo to posiada $\log_an+1$ poziomów, to kosztem ostatniego poziomu jest $\Theta(a^{\log_an})=\Theta(n)$, skąd dostajemy
+dla pewnego całkowitego $a\ge2$. Skorzystamy teraz z techniki zamiany zmiennych, podstawiając $m=\log_an$, skąd $n=a^m$ i otrzymując
+\[
+    T_a(a^m) = aT_a(a^{m-1})+\frac{a^m}{m\lg a}.
+\]
+Możemy teraz podstawić $S_a(m)=T_a(a^m)$, otrzymując nową rekurencję
+\[
+    S_a(m) = aS_a(m-1)+\frac{a^m}{m\lg a},
+\]
+którą rozwiązujemy następująco (po przyjęciu $S_a(0)=T_a(1)=d$):
 \begin{align*}
-	T_a(n) &= \sum_{i=0}^{\log_an-1}\frac{n}{\lg n-i\lg a}+\Theta(n) \\
-	&= \frac{n}{\lg a}\sum_{i=0}^{\log_an-1}\frac{1}{\log_an-i}+\Theta(n) \\
-	&= \frac{n}{\lg a}\sum_{i=1}^{\log_an}\frac{1}{i}+\Theta(n) \\
-	&= \frac{nH_{\log_an}}{\lg a}+\Theta(n) \\
-	&= \Theta(n\lg\lg n),
+    S_a(m) &= \frac{1}{\lg a}\left(\frac{a^m}{m}+a\cdot\frac{a^{m-1}}{m-1}+a^2\cdot\frac{a^{m-2}}{m-2}+\cdots+a^{m-1}\cdot\frac{a^1}{1}+a^md\right) \\[1mm]
+	&= \frac{1}{\lg a}\biggl(\sum_{k=1}^m\frac{a^m}{k}+a^md\biggr) \\[1mm]
+	&= \frac{a^m(H_m+d)}{\lg a} \\[1mm]
+	&= \Theta(a^m\lg m).
 \end{align*}
-przy czym ostatnia równość wynika z wzoru~(A.7).
+Zamieniając z powrotem $S_a(m)$ na $T_a(n)$, otrzymujemy rozwiązanie
+\[
+    T_a(n) = T_a(a^m) = S_a(m) = \Theta(a^m\lg m) = \Theta(n\lg\log_a n) = \Theta(n\lg\lg n).
+\]
 
-Wykażemy teraz otrzymane oszacowanie przy pomocy metody podstawiania. Jednak przyjęcie narzucającego się oszacowania przysparza wielu kłopotów w samym dowodzie w postaci skomplikowanych przekształceń algebraicznych. Zamiast tego wykażemy, że $T_a(n)\le n(1+H_{\lfloor\log_an\rfloor})$ oraz $T_a(n)\ge nH_{\lceil\log_an\rceil}$, przy czym dla uproszczenia dowodu definiujemy dodatkowo $H_0=0$. Ponieważ $H_k=\Theta(\lg k)$, to zachodzi $H_{\lfloor\log_an\rfloor}=\Theta(\lg\lfloor\log_an\rfloor)=\Theta(\lg\lg n)$ oraz $H_{\lceil\log_an\rceil}=\Theta(\lg\lceil\log_an\rceil)=\Theta(\lg\lg n)$, a więc nasz dowód rzeczywiście wykaże, że $T_a(n)=\Theta(n\lg\lg n)$.
-\begin{align*}
-	T_a(n) &= aT_a(n/a)+\frac{n}{\lg n} \\
-	&\le a(n/a)(1+H_{\lfloor\log_a(n/a)\rfloor})+\frac{n\log_a2}{\log_an} \\
-	&\le n(1+H_{\lfloor\log_an-1\rfloor})+\frac{n}{\log_an} \\
-	&= n\left(1+H_{\lfloor\log_an\rfloor-1}+\frac{1}{\log_an}\right) \\
-	&\le n\left(1+H_{\lfloor\log_an\rfloor-1}+\frac{1}{\lfloor\log_an\rfloor}\right) \\
-	&= n(1+H_{\lfloor\log_an\rfloor})
-\end{align*}
-W dowodzie dolnego oszacowania, mamy
-\begin{align*}
-	T_a(n) &= aT_a(n/a)+\frac{n}{\lg n} \\
-	&\ge a(n/a)H_{\lceil\log_a(n/a)\rceil}+\frac{n\log_a2}{\log_an} \\
-	&\ge nH_{\lceil\log_an-1\rceil}+\frac{n}{\log_an} \\
-	&= n\left(H_{\lceil\log_an\rceil-1}+\frac{1}{\log_an}\right) \\
-	&\ge n\left(H_{\lceil\log_an\rceil-1}+\frac{1}{\lceil\log_an\rceil}\right) \\
-	&= nH_{\lceil\log_an\rceil}.
-\end{align*}
-
-Za podstawę indukcji możemy przyjąć warunek brzegowy rekurencji $T_a(1)=1$, gdyż wtedy $\log_a1=0$ i zachodzą $T_a(1)\le 1+H_0$ oraz $T_a(1)\ge H_0$, skąd $T_a(n)=\Theta(n\lg\lg n)$.
-
-% Dla górnego oszacowania przyjmijmy założenie
-% \[
-% 	T_a(n/a) \le c_1(n/a)\lg\lg(n/a).
-% \]
-% Mamy zatem
-% \begin{align*}
-% 	T_a(n) &= aT_a(n/a)+\frac{n}{\lg n} \\
-% 	&\le ac_1(n/a)\lg\lg(n/a)+\frac{n}{\lg n} \\
-% 	&= c_1n\lg\lg n+c_1n\lg\frac{\lg(n/a)}{\lg n}+\frac{n}{\lg n} \\
-% 	&\le c_1n\lg\lg n,
-% \end{align*}
-% gdzie ostatnia nierówność zachodzi, o ile
-% \[
-% 	c_1n\lg\frac{\lg(n/a)}{\lg n}+\frac{n}{\lg n} \le 0,
-% \]
-% skąd
-% \[
-% 	c_1 \ge -\frac{1}{\lg n\lg(1-\log_na)} > 0, %zle
-% \]
-% dla każdego $n>a$, a więc $T_a(n)=O(n\lg\lg n)$.
-% 
-% W dowodzie dolnego oszacowania skorzystajmy z
-% \[
-% 	T_a(n/a) \ge c_2(n/a)\lg\lg(n/a)-b\lg(n/a),
-% \]
-% i po podstawieniu, mamy
-% \begin{align*}
-% 	T_a(n) &= aT_a(n/a)+\frac{n}{\lg n} \\
-% 	&\ge c_2(n/a)\lg\lg(n/a)-ab\lg(n/a)+\frac{n}{\lg n} \\
-% 	&\ge c_2n\lg\lg n+c_2n\lg\frac{\lg(n/a)}{\lg n}-ab\lg n+ab\lg a+\frac{n}{\lg n} \\
-% 	&\ge c_2n\lg\lg n-b\lg n,
-% \end{align*}
-% co jest prawdą dla
-% \[
-% 	c_2n\lg\frac{\lg(n/a)}{\lg n}-(a-1)b\lg n+ab\lg a+\frac{n}{\lg n} \ge 0,
-% \]
-% czyli
-% \[
-% 	c_2 \le \frac{(a-1)b\lg n-ab\lg a-\frac{n}{\lg n}}{n\lg(1-\log_na)}, %wtf
-% \]
-% skąd mamy, że $T_a(n)=\Omega(n\lg\lg n)$ i oszacowanie dokładne na $T_a(n)$ zostało ostatecznie wykazane.
-
-Stosując wykazane oszacowanie do rekurencji $T(n)\equiv T_5(n)$ z treści zadania, dostajemy oczywiście $T(n)=\Theta(n\lg\lg n)$.
+Stosując znalezione oszacowanie do rekurencji $T(n)\equiv T_5(n)$ z treści zadania, dostajemy oczywiście $T(n)=\Theta(n\lg\lg n)$.
 
 \subproblem %4-4(c)
 Z twierdzenia o rekurencji uniwersalnej,
@@ -677,7 +617,7 @@ Mamy do czynienia z rekurencją $T_a(n)$ dla $a=2$, którą rozważaliśmy w pun
 W celu rozwiązania rekurencji wykorzystamy metodę drzewa rekursji. Drzewo to zostało przedstawione na rys.~\ref{fig:4-4f}.
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics{fig04.6}
+		\includegraphics{fig04.5}
 	\end{center}
 	\caption{Drzewo rekursji $T(n)=T(n/2)+T(n/4)+T(n/8)+n$} \label{fig:4-4f}
 \end{figure}
@@ -748,7 +688,7 @@ Na \twoparts{$i$}{tym} poziomie drzewa rekursji $T(n)$ przedstawionego na rys.~\
 przy czym musi być $d\le\sqrt{n}$. Jest zatem w~drzewie $\Theta(\lg\lg n)$ poziomów, skąd dostajemy, że rozwiązaniem rekurencji jest $T(n)=\Theta(n\lg\lg n)$.
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics{fig04.7}
+		\includegraphics{fig04.6}
 	\caption{Drzewo rekursji $T(n)=\sqrt{n}\;T(\!\sqrt{n})+n$} \label{fig:4-4j}
 	\end{center}
 \end{figure}
@@ -781,15 +721,15 @@ a~zatem tożsamość zachodzi.
 
 \subproblem %4-5(b)
 Z~wzoru z~poprzedniego punktu wynika pierwsza równość:
-\begin{align}
-	\mathcal{F}(z) &= z+z\mathcal{F}(z)+z^2\mathcal{F}(z) \nonumber \\
-	(1-z-z^2)\mathcal{F}(z) &= z \nonumber \\
-	\mathcal{F}(z) &= \frac{z}{1-z-z^2}. \label{eq:4-5b_1}
-\end{align}
+\begin{align*}
+	\mathcal{F}(z) &= z+z\mathcal{F}(z)+z^2\mathcal{F}(z) \\
+	(1-z-z^2)\mathcal{F}(z) &= z \\
+	\mathcal{F}(z) &= \frac{z}{1-z-z^2}. \tag{$*$}\label{eq:4-5b_1}
+\end{align*}
 Mianownik prawej strony~(\ref{eq:4-5b_1}) jest trójmianem kwadratowym, który można zapisać w~równoważnej postaci:
-\begin{equation}
-	1-z-z^2 \equiv -(z+\phi)\bigl(z+\widehat\phi\bigr). \label{eq:4-5b_2}
-\end{equation}
+\[
+	1-z-z^2 \equiv -(z+\phi)\bigl(z+\widehat\phi\bigr). \tag{$*$}\label{eq:4-5b_2}
+\]
 Trójmian~(\ref{eq:4-5b_2}) przyjmuje wartość~0 dla $z=-\phi$ lub $z=-\widehat\phi$. Ponieważ zachodzi ciekawa własność $\phi\cdot\widehat\phi=-1$, zatem można zapisać trójmian w~postaci $(1-\phi z)\bigl(1-\widehat\phi z\bigr)$, skąd wynika druga równość.
 
 Ostatnią z~nich dowodzimy dokonując pewnych przekształceń:
@@ -831,12 +771,12 @@ Rozpatrzmy graf $G=(V,E)$, w~którym $V$ jest zbiorem układów, a~$(u,v)\in E$ 
 Zauważmy, że możemy traktować $G$ jako hipergraf pełny $H=(V_H,E_H)$, gdzie $V_H$ jest zbiorem klik. Ponieważ dla każdej pary $(U,V)\in V_H^2$ co najmniej jedna z~klik $U$ lub $V$ zawiera złe elementy, to złymi są elementy należące do klik z~$V_H$ z wyjątkiem jednej. Układy z~tej kliki są dobre, co gwarantuje nam założenie, że zawsze będzie istnieć w~$V_H$ taka klika, która zawiera więcej niż $n/2$ układów. Pozostawiając ją jako dobrą, a oznaczając inne jako złe, będziemy mieć wyznaczone jednoznacznie wszystkie dobre układy spośród $n$ badanych. Istnienie większej ilości złych układów nie pozwoliłoby na wyznaczenie ``największego'' elementu z~$V_H$.
 
 \subproblem %4-6(b)
-Utwórzmy ciąg układów $u_1,u_2,\dots,u_n$ i wykonajmy $\lfloor n/2\rfloor$ testów -- między układami $u_1$ i $u_2$, $u_2$ i $u_3$, itd.\ aż do $u_{\lfloor n/2\rfloor}$ i $u_{\lfloor n/2\rfloor+1}$. Pozostałe układy pozostaną nieprzetestowane w danym etapie. Tak jak w poprzednim punkcie zakładamy, że nie możemy dostać wyniku $({\scriptstyle\rm D},{\scriptstyle\rm Z})$ lub $({\scriptstyle\rm Z},{\scriptstyle\rm D})$.
+Podzielmy zbiór układów na pary i przetestujmy wzajemnie układy w każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów. Zauważmy, że otrzymując dla pewnej pary wynik różny niż $({\scriptstyle\rm D},{\scriptstyle\rm D})$, możemy odrzucić tę parę, gdyż co najmniej jeden układ ją tworzący jest zły, ale w wśród nie odrzuconych układów nadal pozostanie więcej dobrych niż złych. Otrzymamy w wyniku od jednej do $\lfloor n/2\rfloor$ par o tej własności, że w każdej z nich oba układy są dobre albo oba są złe. Odrzucając zatem po jednym układzie z każdej pozostawionej pary, nadal zachowujemy własność o większej liczbie dobrych układów w pozostawionym zbiorze układów, który ma rozmiar co najwyżej $\lfloor n/2\rfloor$.
 
-Rozważmy ciągi układów, dla których zaszło $({\scriptstyle\rm D},{\scriptstyle\rm D})$ między każdą parą sąsiadów. 
+Powyżej opisany proces przeprowadzamy rekurencyjnie na otrzymywanych podproblemach, dostając w końcu zbiór jednoelementowy, który na mocy założenia, zawiera dobry układ.
 
 \subproblem %4-6(c)
-Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu:
+Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w pesymistycznym przypadku (każda para zwraca wynik $({\scriptstyle\rm D},{\scriptstyle\rm D})$):
 \[
 	T(n) =
 	\begin{cases}
@@ -844,7 +784,7 @@ Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję o
 		T(\lfloor n/2\rfloor) + \lfloor n/2\rfloor, & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Ignorując podłogi i~stosując twierdzenie o~rekurencji uniwersalnej, dostajemy jej rozwiązanie: $T(n)=\Theta(n)$.
+Ignorując podłogi i~stosując twierdzenie o~rekurencji uniwersalnej, dostajemy jej rozwiązanie: $T(n)=\Theta(n)$. Wynik ten jest prawdziwy także w przypadku optymistycznym -- tylko jedna para zwraca $({\scriptstyle\rm D},{\scriptstyle\rm D})$, a więc dobry układ znajdziemy w jednym zejściu rekurencyjnym, jednak wcześniej należało wykonać $\Theta(n)$ testów.
 
 Ponieważ w~poprzednim punkcie znaleźliśmy dobry układ $u$, to wykorzystajmy go do znalezienia kolejnych. Testujemy tenże układ z~pozostałymi $n-1$. Wynikiem testu $u$ z~pewnym innym układem $v$, nie może być $({\scriptstyle\rm D},{\scriptstyle\rm Z})$, a~więc możliwe są trzy sytuacje. Jeśli otrzymamy $({\scriptstyle\rm D},{\scriptstyle\rm D})$, to oznacza to, że oba układy są tak samo dobre, a więc $v$ również jest dobry. Uzyskując wynik $({\scriptstyle\rm Z},{\scriptstyle\rm D})$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $({\scriptstyle\rm Z},{\scriptstyle\rm Z})$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$. Wynika stąd, że sprawdzając $u$ z~$n-1$ innymi układami, wykonamy $n-1$ testów, a~ponieważ stwierdziliśmy, że $u$ jest dobre za pomocą $\Theta(n)$ testów, to znalezienie wszystkich dobrych układów można wykonać przeprowadzając również $\Theta(n)$ testów.
 
@@ -859,9 +799,9 @@ W~szczególności zaś może być $k=i+1$ oraz $l=j+1$, zatem implikacja zachodz
 \bigskip
 
 \noindent\emph{Dowód $\Leftarrow$.} Dowodzimy przez indukcję względem liczby wierszy $m$. Zauważmy, że warunek tablicy Monge'a nie ma większego sensu dla tablic o~jednej kolumnie lub jednym wierszu, zatem przyjmijmy $m=2$ za podstawę indukcji. Wtedy $i=1$ oraz $k=2$ i~przyjmując $l=j+1$ mamy
-\begin{equation}
-	A[1,j]+A[2,j+1] \le A[1,j+1]+A[2,j], \label{eq:4-7a}
-\end{equation}
+\[
+	A[1,j]+A[2,j+1] \le A[1,j+1]+A[2,j], \tag{$*$}\label{eq:4-7a}
+\]
 dla $1\le j<n$. Dodajmy teraz powyższą nierówność dla pewnego $j<n-1$ (przy założeniu, że $n>2$) do niej samej ale z~$l=j+1$ w~miejscu $j$. Po zredukowaniu zbędnych składników, dostajemy
 \[
 	A[1,j]+A[2,j+2] \le A[1,j+2]+A[2,j].
@@ -889,14 +829,14 @@ jest fałszywa, co zaburza właściwość tablicy Monge'a. By przywrócić włas
 
 \subproblem %4-7(c)
 Korzystając z~poniższej nierówności, prawdziwej dla tablicy Monge'a $A$:
-\begin{equation}
-	A[i,j]+A[i+1,j+r] \le A[i,j+r]+A[i+1,j] \label{eq:4-7c}
-\end{equation}
+\[
+	A[i,j]+A[i+1,j+r] \le A[i,j+r]+A[i+1,j] \tag{$*$}\label{eq:4-7c}
+\]
 dla $0<r\le n-j$, wnioskujemy w~następujący sposób. Znajdujemy w~pierwszym wierszu tablicy $A$ pierwsze minimum z~lewej strony, które oznaczmy przez $\mu$. Indeksem $\mu$ jest oczywiście $f(1)$. Stwierdzamy teraz, że dla $1\le j<f(1)$ spełnione jest~(\ref{eq:4-7c}), czyli
 \[
     A[1,j]+A[2,f(1)] \le \mu+A[2,j].
 \]
-Z~drugiej strony, $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, otrzymujemy $A[2,f(1)]<A[2,j]$, a~to oznacza, że pierwsze z~lewej strony minimum wiersza~2 występuje w~nim na indeksie niemniejszym niż $f(1)$, skąd $f(1)\le f(2)$.
+Z~drugiej strony, $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, otrzymujemy $A[2,f(1)]<A[2,j]$, a~to oznacza, że pierwsze z~lewej strony minimum wiersza~2 występuje w~nim na indeksie nie mniejszym niż $f(1)$, skąd $f(1)\le f(2)$.
 
 Dowód kolejnych nierówności przebiega analogicznie, skąd dostajemy tezę.
 
