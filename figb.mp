@@ -387,4 +387,19 @@ beginfig(10);
 	draw point 6 of p28 -- point 2 of p25;
 endfig;
 
+beginfig(11);
+	scale := .5cm;
+	shift := 2scale;
+	
+	path p[];
+	p0 = graphnode(scale, (0, shift));
+	p1 = graphnode(scale, (0, 0));
+	p2 = graphnode(scale, (-.866shift, -.5shift));
+	p3 = graphnode(scale, (.866shift, -.5shift));
+
+	draw point 6 of p0 -- point 2 of p1;
+	draw point .65 of p2 -- point 4.65 of p1;
+	draw point 3.35 of p3 -- point 7.35 of p1;
+endfig;
+
 end.

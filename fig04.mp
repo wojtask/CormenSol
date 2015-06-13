@@ -32,7 +32,7 @@ beginfig(1);
 	label(btex \dots etex, .5[center p7, center p8]);
 
 	for i:=9 upto 11:
-		p[i] := unitsquare scaled scale shifted (0.73i*span+leftspan, -.1levelspan);
+		p[i] := unitsquare scaled scale shifted (.73i*span+leftspan, -.1levelspan);
 		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, lowerspan)) dashed evenly;
 	endfor;
@@ -100,58 +100,78 @@ beginfig(2);
 	levelspan := 2span;
 	path p[];
 	
-	drawarrow (0, 2levelspan+.4span) -- (0, 3.2levelspan);
-	drawarrow (0, 2levelspan-.4span) -- (0, .6levelspan);
-	label(btex $\lg n$ etex, (0, 2levelspan));
+	drawarrow (-.5leftspan, 1.5levelspan+.4span) -- (-.5leftspan, 3.2levelspan);
+	drawarrow (-.5leftspan, 1.5levelspan-.4span) -- (-.5leftspan, -.1levelspan);
+	label(btex $\lg n$ etex, (-.5leftspan, 1.5levelspan));
+
+	for i:=0 upto 7:
+		p[i] := unitsquare scaled scale shifted (1.15i*span+leftspan, -.2levelspan);
+		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		draw (point 2.5 of p[i]) -- (center p[i] + (0, 1.5lowerspan)) dashed evenly;
+	endfor;
+
+	p8 := unitsquare scaled scale shifted (1.15*8*span+leftspan, -.2levelspan);
+	p9 := unitsquare scaled scale shifted (1.15*9*span+leftspan, -.2levelspan);
+	label(btex \dots etex, .5[center p8, center p9]);
+
+	for i:=10 upto 13:
+		p[i] := unitsquare scaled scale shifted (1.15i*span+leftspan, -.2levelspan);
+		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		draw (point 2.5 of p[i]) -- (center p[i] + (0, 1.5lowerspan)) dashed evenly;
+	endfor;
 
 	for i:=0 upto 15:
-		p[i] := unitsquare scaled scale shifted (i*span+leftspan, levelspan);
-		label(btex $\frac{cn}{4}$ etex, center p[i]);
+		p[i+14] := unitsquare scaled scale shifted (i*span+leftspan, levelspan);
+		label(btex $\frac{cn}{4}$ etex, center p[i+14]);
 	endfor;
 
 	for i:=0 upto 3:
-		label(btex \vdots etex, (.5[center p[4i+1], center p[4i+2]] - (0, .4levelspan)));
+		label(btex \vdots etex, (.5[center p[4i+15], center p[4i+16]] - (0, .4levelspan)));
 	endfor;
 
 	for i:=0 upto 3:
-		p[i+16] := unitsquare scaled scale shifted ((4i+1.5)*span+leftspan, 2levelspan);
-		label(btex $\frac{cn}{2}$ etex, center p[i+16]);
+		p[i+30] := unitsquare scaled scale shifted ((4i+1.5)*span+leftspan, 2levelspan);
+		label(btex $\frac{cn}{2}$ etex, center p[i+30]);
 	endfor;
 
 	for i:=0 upto 3:
-		draw (point .15 of p[i+16]) -- (point 2.5 of p[4i]);
-		draw (point .35 of p[i+16]) -- (point 2.5 of p[4i+1]);
-		draw (point .65 of p[i+16]) -- (point 2.5 of p[4i+2]);
-		draw (point .85 of p[i+16]) -- (point 2.5 of p[4i+3]);
+		draw (point .15 of p[i+30]) -- (point 2.5 of p[4i+14]);
+		draw (point .35 of p[i+30]) -- (point 2.5 of p[4i+15]);
+		draw (point .65 of p[i+30]) -- (point 2.5 of p[4i+16]);
+		draw (point .85 of p[i+30]) -- (point 2.5 of p[4i+17]);
 	endfor;
 
-	p20 := unitsquare scaled scale shifted (7.5span+leftspan, 3levelspan);
-	label(btex $cn$ etex, center p20);
+	p34 := unitsquare scaled scale shifted (7.5span+leftspan, 3levelspan);
+	label(btex $cn$ etex, center p34);
 
-	draw (point .15 of p20) -- (point 2.5 of p16);
-	draw (point .35 of p20) -- (point 2.5 of p17);
-	draw (point .65 of p20) -- (point 2.5 of p18);
-	draw (point .85 of p20) -- (point 2.5 of p19);
+	draw (point .15 of p34) -- (point 2.5 of p30);
+	draw (point .35 of p34) -- (point 2.5 of p31);
+	draw (point .65 of p34) -- (point 2.5 of p32);
+	draw (point .85 of p34) -- (point 2.5 of p33);
 
-	p21 := unitsquare scaled scale shifted (rightcol, levelspan);
-	label(btex $4cn$ etex, center p21);
+	p35 := unitsquare scaled scale shifted (rightcol, -.2levelspan);
+	label(btex $\Theta(n^2)$ etex, center p35);
 
-	label(btex \vdots etex, center p21 - (0, .4levelspan));
+	p36 := unitsquare scaled scale shifted (rightcol, levelspan);
+	label(btex $4cn$ etex, center p36);
 
-	p22 := unitsquare scaled scale shifted (rightcol, 2levelspan);
-	label(btex $2cn$ etex, center p22);
+	label(btex \vdots etex, center p36 - (0, .4levelspan));
 
-	p23 := unitsquare scaled scale shifted (rightcol, 3levelspan);
-	label(btex $cn$ etex, center p23);
+	p37 := unitsquare scaled scale shifted (rightcol, 2levelspan);
+	label(btex $2cn$ etex, center p37);
 
-	drawarrow (center p15) shifted (.5span, 0) -- (center p21) shifted (-.8span, 0) dashed evenly;
-	drawarrow (center p19) shifted (.5span, 0) -- (center p22) shifted (-.8span, 0) dashed evenly;
-	drawarrow (center p20) shifted (.5span, 0) -- (center p23) shifted (-.8span, 0) dashed evenly;
+	p38 := unitsquare scaled scale shifted (rightcol, 3levelspan);
+	label(btex $cn$ etex, center p38);
 
-	draw ((point 0 of p0){dir 340} .. center p3 - (0, .4span){right} .. .5[center p7, center p8] - (0, span)) shifted (0, -.5levelspan);
-	draw ((point 1 of p15){dir 200} .. {left}center p12 - (0, .4span) .. .5[center p7, center p8] - (0, span)) shifted (0, -.5levelspan);
+	drawarrow (center p13) shifted (.8span, 0) -- (center p35) shifted (-span, 0) dashed evenly;
+	drawarrow (center p29) shifted (.8span, 0) -- (center p36) shifted (-.8span, 0) dashed evenly;
+	drawarrow (center p33) shifted (.8span, 0) -- (center p37) shifted (-.8span, 0) dashed evenly;
+	drawarrow (center p34) shifted (.8span, 0) -- (center p38) shifted (-.8span, 0) dashed evenly;
+	
+	draw ((point 0 of p14) .. center p17 - (0, .6span){right} .. .5[center p21, center p22] - (0, 1.2span)) shifted (0, -1.3levelspan);
+	draw ((point 1 of p29) .. {left}center p26 - (0, .6span) .. .5[center p21, center p22] - (0, 1.2span)) shifted (0, -1.3levelspan);
 
-	label(btex $n$ etex, .5[center p7, center p8] - (0, 1.25levelspan));
+	label(btex $n^2$ etex, .5[center p21, center p22] - (0, 2.2levelspan));
 endfig;
 
 beginfig(3);
@@ -481,9 +501,9 @@ beginfig(7);
 		b[3i+2] := (point .8 of p[i+9]) -- (point 2.5 of p[3i+2]); draw b[3i+2];
 	endfor;
 	
-	b12 := (point .4 of b0){dir -30} .. {dir 30}(point .4 of b2); draw b12;
-	b13 := (point .4 of b3){dir -30} .. {dir 30}(point .4 of b5); draw b13;
-	b14 := (point .4 of b6){dir -30} .. {dir 30}(point .4 of b8); draw b14;
+	b12 := (point .55 of b0){dir -30} .. {dir 30}(point .55 of b2); draw b12;
+	b13 := (point .55 of b3){dir -30} .. {dir 30}(point .53 of b5); draw b13;
+	b14 := (point .55 of b6){dir -30} .. {dir 30}(point .55 of b8); draw b14;
 	b15 := (point .3 of b9){dir -25} .. {dir 25}(point .3 of b11); draw b15;
 	label.top(btex ${\scriptstyle n^{1/4}}$ etex, (point .7 of b12));
 	label.top(btex ${\scriptstyle n^{1/4}}$ etex, (point .7 of b13));
@@ -504,10 +524,10 @@ beginfig(7);
 	p16 := unitsquare scaled scale shifted (rightcol, 3levelspan);
 	label(btex $n$ etex, center p16);
 
-	drawarrow (center pp) shifted (.5span, 0) -- (center p13) shifted (-.8span, 0) dashed evenly;
-	drawarrow (center p8) shifted (.5span, 0) -- (center p14) shifted (-.8span, 0) dashed evenly;
-	drawarrow (center p11) shifted (.5span, 0) -- (center p15) shifted (-.8span, 0) dashed evenly;
-	drawarrow (center p12) shifted (.5span, 0) -- (center p16) shifted (-.8span, 0) dashed evenly;
+	drawarrow (center pp) shifted (.6span, 0) -- (center p13) shifted (-.7span, 0) dashed evenly;
+	drawarrow (center p8) shifted (.6span, 0) -- (center p14) shifted (-.5span, 0) dashed evenly;
+	drawarrow (center p11) shifted (.6span, 0) -- (center p15) shifted (-.5span, 0) dashed evenly;
+	drawarrow (center p12) shifted (.6span, 0) -- (center p16) shifted (-.5span, 0) dashed evenly;
 	
 	label(btex \dots etex, .5[center p1, center p2] - (0, .05levelspan));
 	label(btex \dots etex, .5[center p4, center p5] - (0, .05levelspan));

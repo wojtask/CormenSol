@@ -13,6 +13,9 @@
 	\DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
+\let\@afterindenttrue\@afterindentfalse
+\@afterindentfalse
+
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{3}
 
@@ -39,7 +42,7 @@
 	{3}
 	{0mm}
 	{\baselineskip}
-	{0pt}
+	{0mm}
 	{\sffamily\bfseries}
 }
 
@@ -48,7 +51,24 @@
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
 \def\thesubsubsection{(\alph{subsubsection})}
 
-\def\theequation{\arabic{equation}}
+\def\@removefromreset#1#2{{
+	\expandafter\let\csname c@#1\endcsname\@removefromreset
+	\def\@elt##1{
+		\expandafter
+		\ifx
+			\csname c@##1\endcsname\@removefromreset
+		\else
+			\noexpand\@elt{##1}
+		\fi
+	}
+	\expandafter\xdef\csname cl@#2\endcsname{\csname cl@#2\endcsname}}
+}
+
+\@removefromreset{equation}{chapter}
+\@removefromreset{figure}{chapter}
+\@removefromreset{table}{chapter}
+
+\def\theequation{{\sffamily\arabic{equation}}}
 \def\thefigure{\arabic{figure}}
 \def\thetable{\arabic{table}}
 
@@ -68,7 +88,8 @@
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
 }
 
-\newtheorem{definicja}{Definicja}
+\newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
+\theoremstyle{csthm}
 \newtheorem{twierdzenie}{Twierdzenie}
 \newtheorem{lemat}[twierdzenie]{Lemat}
 

@@ -8,13 +8,13 @@
 \]
 
 \exercise{} %A.1-2
-\noindent Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
+Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 \begin{align*}
 	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
 	&= H_{2n-1}-\frac{1}{2}H_{n-1} \\
 	&= \ln (2n-1)+O(1)-\left(\frac{1}{2}\ln(n-1)+O(1)\right) \\
 	&= \ln (2n-2)+\underbrace{\ln\frac{2n-1}{2n-2}}_{O(1)}-\ln\sqrt{n-1}+O(1) \\
-	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\
+	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\[1mm]
 	&= \ln\left(2\sqrt{n-1}\right)+O(1) \\
 	&= \ln 2+\ln\sqrt{n}+\underbrace{\ln\frac{\sqrt{n-1}}{\sqrt{n}}}_{O(1)}+\,O(1) \\
 	&= \ln\sqrt{n}+O(1).
@@ -44,7 +44,7 @@ Skorzystano z~wzoru~(A.8), a~następnie~(A.6), w~obu przypadkach biorąc $x=1/2$
 W~drugiej równości zastosowano wzory~(A.6) i~(A.8). Otrzymany wynik jest wartością sumy, gdy $|x^2|<1$. W~pozostałych przypadkach suma jest rozbieżna do $\infty$.
 
 \exercise{} %A.1-6
-\noindent Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
+Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
 \[
 	0\le F(n)\le c\sum_{k=1}^n f_k(n).
 \]
@@ -93,21 +93,21 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 \subchapter{Szacowanie sum}
 
 \exercise{} %A.2-1
-\noindent Z~kryterium d'Alemberta zbieżności szeregów mamy
+Z~kryterium d'Alemberta zbieżności szeregów mamy
 \[
 	\frac{1}{(k+1)^2}\bigg/\frac{1}{k^2} \le 1 \quad\text{dla wszystkich $k\ge1$},
 \]
 a~to oznacza, że suma $\sum_{k=1}^n(1/k^2)$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=\infty$.
 
 \exercise{} %A.2-2
-\noindent Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\left\lceil\frac{2^m}{2^k}\right\rceil = 2^m+2^{m-1}+\cdots+2^0 = 2^{m+1}-1 = 2n-1,
 \]
 z~czego wynika, że $F(n)=O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
 
 \exercise{} %A.2-3
-\noindent Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Ustawmy wyrazy tej sumy malejąco i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami~2. Umieszczamy pierwszy składnik w~grupie 1 o~rozmiarze~1, dwa kolejne w~grupie~2 o~rozmiarze~2, cztery kolejne w~grupie~3 o~rozmiarze~4, itd. aż do grupy~$s$, jak to widać poniżej:
+Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Ustawmy wyrazy tej sumy malejąco i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami~2. Umieszczamy pierwszy składnik w~grupie 1 o~rozmiarze~1, dwa kolejne w~grupie~2 o~rozmiarze~2, cztery kolejne w~grupie~3 o~rozmiarze~4, itd. aż do grupy~$s$, jak to widać poniżej:
 \[
 	\underbrace{\frac{1}{1}}_{\text{\scriptsize grupa 1}}\!\!+\;\;\underbrace{\frac{1}{2}+\frac{1}{3}}_{\text{\scriptsize grupa 2}}\;\;+\;\;\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\text{\scriptsize grupa 3}}\;\;+\cdots+\;\;\underbrace{\cdots +\frac{1}{n}}_{\text{\scriptsize grupa $s$}}.
 \]
@@ -117,7 +117,7 @@ Wszystkie składniki w~grupie~2 przyjmują wartości od $1/3$ do~$1/2$, zatem su
 \]
 
 \exercise{} %A.2-4
-\noindent Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności~(A.11):
+Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności~(A.11):
 \[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
 \]
@@ -132,7 +132,7 @@ a~zatem
 \]
 
 \exercise{} %A.2-5
-\noindent Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażenia niezdefiniowanego
+Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażenia niezdefiniowanego
 \[
 	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln 0,
 \]
@@ -141,7 +141,7 @@ ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowan
 \problems
 
 \exercise{Szacowanie sum} %A-1
-\noindent Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge0$ i~$s\ge0$. Pozwala to na wykorzystanie nierówności~(A.11) we wszystkich poniższych punktach.
+Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge0$ i~$s\ge0$. Pozwala to na wykorzystanie nierówności~(A.11) we wszystkich poniższych punktach.
 
 \subexercise{} %A-1(a)
 Z~wzoru~(A.11) dostajemy

@@ -11,14 +11,14 @@
 \end{figure}
 
 \exercise{} %2.1-2
-\noindent Aby sortować w~odwrotnym porządku, wystarczy zmienić znak drugiej nierówności na przeciwny w~warunku pętli \kw{while} w~linii~\ref{li:ins-sort-while-cond} algorytmu \proc{Insertion-Sort}:
+Aby sortować w~odwrotnym porządku, wystarczy zmienić znak drugiej nierówności na przeciwny w~warunku pętli \kw{while} w~linii~\ref{li:ins-sort-while-cond} algorytmu \proc{Insertion-Sort}:
 \begin{codebox}
 \setcounter{codelinenumber}{4}
 \li	\While $i>0$ i~$A[i]<\id{key}$
 \end{codebox}
 
 \exercise{} %2.1-3
-\noindent Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
+Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
 \begin{codebox}
 \Procname{$\proc{Linear-Search}(A,v)$}
 \li	$i\gets 1$
@@ -44,7 +44,7 @@ Na początku każdej iteracji pętli \kw{while} w~wierszach \ref{li:search-while
 \end{description}
 
 \exercise{} %2.1-4
-\noindent\textbf{Dane wejściowe:} \twoparts{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \twoparts{$n$}{bitowych} liczb całkowitych $a$ i~$b$ (w~kolejności od najbardziej do najmniej znaczącego bitu). \\
+\textbf{Dane wejściowe:} \twoparts{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \twoparts{$n$}{bitowych} liczb całkowitych $a$ i~$b$ (w~kolejności od najbardziej do najmniej znaczącego bitu). \\
 \textbf{Wynik:} \twoparts{$(n+1)$}{elementowa} tablica $C$ zawierająca reprezentację binarną \twoparts{$(n+1)$}{bitowej} liczby całkowitej $c$ takiej, że $c=a+b$.
 \begin{codebox}
 \Procname{$\proc{Binary-Addition}(A,B)$}
@@ -76,7 +76,7 @@ Jeśli potraktujemy tablice $A$ i~$B$ jako reprezentacje liczb $a$ i~$b$ w~kodzi
 \]
 
 \exercise{} %2.2-2
-\noindent Poniższy algorytm implementuje sortowanie przez wybieranie.
+Poniższy algorytm implementuje sortowanie przez wybieranie.
 \begin{codebox}
 \Procname{$\proc{Selection-Sort}(A)$}
 \li	$n\gets\id{length}[A]$
@@ -106,10 +106,10 @@ Ponieważ mamy $n-1$ przebiegów zewnętrznej pętli \kw{for}, a~wewnętrzna pę
 \]
 
 \exercise{} %2.2-3
-\noindent Wykorzystując wynik \zad{C.3-2} mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
+Wykorzystując wynik \zad{C.3-2} mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
 
 \exercise{} %2.2-4
-\noindent Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymistyczny, można wykrywać na początku jego działania i~bezpośrednio zwracać dla tych danych wynik wyznaczony wcześniej innymi sposobami, zamiast obliczania go za pomocą tego algorytmu.
+Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymistyczny, można wykrywać na początku jego działania i~bezpośrednio zwracać dla tych danych wynik wyznaczony wcześniej innymi sposobami, zamiast obliczania go za pomocą tego algorytmu.
 
 \subchapter{Projektowanie algorytmów}
 
@@ -122,7 +122,7 @@ Ponieważ mamy $n-1$ przebiegów zewnętrznej pętli \kw{for}, a~wewnętrzna pę
 \end{figure}
 
 \exercise{} %2.3-2
-\noindent Poniższa procedura implementuje operację łączenia bez wykorzystania wartowników.
+Poniższa procedura implementuje operację łączenia bez wykorzystania wartowników.
 \begin{codebox}
 \Procname{$\proc{Merge'}(A,p,q,r)$}
 \li	$n_1\gets q-p+1$
@@ -167,14 +167,14 @@ Ponieważ mamy $n-1$ przebiegów zewnętrznej pętli \kw{for}, a~wewnętrzna pę
 Po zakończeniu pętli \kw{while} z~wierszy \ref{li:merge-while-begin}\nobreakdash--\ref{li:merge-while-end} wszystkie elementy z~co najmniej jednej tablicy $L$ lub $R$ zostały przekopiowane do $A$, więc w~kolejnych dwóch pętlach \kw{while} realizujemy kopiowanie pozostałej części $L$ lub $R$ na koniec $A$. Tylko co najwyżej jedna z~tych pętli wykona swój kod więcej niż raz.
 
 \exercise{} %2.3-3
-\noindent Przeprowadzimy dowód przez indukcję względem $k$. Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi. Załóżmy teraz, że $k>1$, czyli $n>2$ i~że zachodzi $T(n/2)=(n/2)\lg(n/2)$. Mamy
+Przeprowadzimy dowód przez indukcję względem $k$. Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi. Załóżmy teraz, że $k>1$, czyli $n>2$ i~że zachodzi $T(n/2)=(n/2)\lg(n/2)$. Mamy
 \[
 	T(n) = 2T(n/2)+n = 2(n/2)\lg(n/2)+n = n(\lg n-1)+n = n\lg n,
 \]
 co dowodzi rozwiązania rekurencji dla $n$ będącego potęgą~2.
 
 \exercise{} %2.3-4
-\noindent Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$. Ponieważ wstawienie $A[n]$ w~posortowaną podtablicę $A[1\twodots n-1]$ odbywa się w~najgorszym przypadku w~czasie $\Theta(n)$, to stąd
+Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$. Ponieważ wstawienie $A[n]$ w~posortowaną podtablicę $A[1\twodots n-1]$ odbywa się w~najgorszym przypadku w~czasie $\Theta(n)$, to stąd
 \[
 	T(n) =
 	\begin{cases}
@@ -189,7 +189,7 @@ Rozwiązując rekurencję dostajemy
 \end{align*}
 
 \exercise{} %2.3-5
-\noindent Procedura \proc{Binary-Search} przyjmuje na wejście posortowaną niemalejąco tablicę $A$, szukaną wartość $v$ i~zakres $[\,\id{low}, \id{high}\,]$ tablicy $A$, w~którym będzie szukane $v$. Procedura porównuje $v$ z~elementem środkowym zakresu tablicy $A[\id{mid}]$ i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę zakresu.
+Procedura \proc{Binary-Search} przyjmuje na wejście posortowaną niemalejąco tablicę $A$, szukaną wartość $v$ i~zakres $[\,\id{low}, \id{high}\,]$ tablicy $A$, w~którym będzie szukane $v$. Procedura porównuje $v$ z~elementem środkowym zakresu tablicy $A[\id{mid}]$ i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę zakresu.
 
 Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego. W~przypadku odnalezienia wartości $v$ w~tablicy $A$, zwracany jest taki indeks $i$, że $A[i]=v$. Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}.
 
@@ -242,10 +242,10 @@ Obie wersje algorytmu \proc{Binary-Search} kończą swe działanie znajdując $v
 Jej rozwiązaniem (patrz \zad{4.3-3}) jest $T(n)=\Theta(\lg n)$.
 
 \exercise{} %2.3-6
-\noindent Stosując wyszukiwanie binarne można znaleźć pozycję tablicy, na którą należy wstawić kolejny element z~nieposortowanego fragmentu, jednak umieszczenie go na tej pozycji wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, a~to w~najgorszym przypadku może wymagać czasu $\Theta(n)$. Nie można zatem obniżyć czasu działania sortowania przez wstawianie poprzez zastosowanie wyszukiwania binarnego.
+Stosując wyszukiwanie binarne można znaleźć pozycję tablicy, na którą należy wstawić kolejny element z~nieposortowanego fragmentu, jednak umieszczenie go na tej pozycji wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, a~to w~najgorszym przypadku może wymagać czasu $\Theta(n)$. Nie można zatem obniżyć czasu działania sortowania przez wstawianie poprzez zastosowanie wyszukiwania binarnego.
 
 \exercise{} %2.3-7
-\noindent Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\zad{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
+Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\zad{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Sum-Search}(S,x)$}
 \li	$n\gets\id{length}[S]$

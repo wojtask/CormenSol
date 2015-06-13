@@ -3,7 +3,7 @@
 \subchapter{Notacja asymptotyczna}
 
 \exercise{} %3.1-1
-\noindent Zbadajmy, czy dla pewnych stałych $c_1$,~$c_2$,~$n_0>0$ i~dla każdego $n\ge n_0$ prawdą jest
+Zbadajmy, czy dla pewnych stałych $c_1$,~$c_2$,~$n_0>0$ i~dla każdego $n\ge n_0$ prawdą jest
 \begin{equation}
 	0 \le c_1(f(n)+g(n)) \le \max(f(n),g(n)) \le c_2(f(n)+g(n)). \label{eq:3.1-1}
 \end{equation}
@@ -16,7 +16,7 @@ Wybierając dowolne $0<c_1\le1/2$ i~$n_0$ równe minimum zbioru $S$, spełniamy 
 Z~przedstawionej argumentacji wnioskujemy, że $\max(f(n),g(n))=\Theta(f(n)+g(n))$.
 
 \exercise{} %3.1-2
-\noindent Aby pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1$,~$c_2$,~$n_0>0$ takie, że
+Aby pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1$,~$c_2$,~$n_0>0$ takie, że
 \[
 	0 \le c_1n^b \le (n+a)^b \le c_2n^b
 \]
@@ -32,15 +32,15 @@ Ponieważ $b>0$, to powyższa nierówność jest spełniona również wtedy, gdy
 Widać zatem, że szukanym stałym można nadać wartości $c_1=(1/2)^b$, $c_2=2^b$ oraz $n_0=2|a|$ i~prawdą jest, że $(n+a)^b=\Theta(n^b)$.
 
 \exercise{} %3.1-3
-\noindent Niech $T(n)$ będzie czasem działania algorytmu. $T(n)\ge O(n^2)$ oznacza, że $T(n)\ge f(n)$ dla pewnej funkcji $f(n)$ z~klasy $O(n^2)$. Stwierdzenie pozostaje prawdziwe dla każdego $T(n)$, wystarczy bowiem wybrać funkcję $f(n)=0$, która oczywiście jest w~$O(n^2)$. Widać więc, że takie określenie nic nam nie mówi o~oszacowaniu czasu działania algorytmu.
+Niech $T(n)$ będzie czasem działania algorytmu. $T(n)\ge O(n^2)$ oznacza, że $T(n)\ge f(n)$ dla pewnej funkcji $f(n)$ z~klasy $O(n^2)$. Stwierdzenie pozostaje prawdziwe dla każdego $T(n)$, wystarczy bowiem wybrać funkcję $f(n)=0$, która oczywiście jest w~$O(n^2)$. Widać więc, że takie określenie nic nam nie mówi o~oszacowaniu czasu działania algorytmu.
 
 \exercise{} %3.1-4
-\noindent Znajdźmy stałe $c$,~$n_0>0$ takie, że $0\le2^{n+1}\le c2^n$ dla każdego $n\ge n_0$. Ponieważ $2^{n+1}=2\cdot2^n$ dla każdego $n\ge0$, to można przyjąć $c=2$ oraz $n_0=1$. A~zatem $2^{n+1}=O(2^n)$.
+Znajdźmy stałe $c$,~$n_0>0$ takie, że $0\le2^{n+1}\le c2^n$ dla każdego $n\ge n_0$. Ponieważ $2^{n+1}=2\cdot2^n$ dla każdego $n\ge0$, to można przyjąć $c=2$ oraz $n_0=1$. A~zatem $2^{n+1}=O(2^n)$.
 
 Wyznaczmy teraz te same stałe, ale spełniające zależność $0\le2^{2n}\le c2^n$ dla wszystkich $n\ge n_0$. Mamy $2^{2n}=2^n\cdot2^n\le c2^n$, z~czego wynika, że $c\ge2^n$, co jednak uzależnia $c$ od $n$, a~zatem $c$ musiałoby być dowolnie duże i~nie może w~takim wypadku być stałą. Stąd otrzymujemy, że $2^{2n}\ne O(2^n)$.
 
 \exercise{} %3.1-5
-\noindent Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$,~$c_2$,~$n_0>0$, że
+Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$,~$c_2$,~$n_0>0$, że
 \[
 	0 \le c_1g(n) \le f(n) \le c_2g(n)
 \]
@@ -56,12 +56,12 @@ Pierwsza z~nich stanowi definicję $f(n)=\Omega(g(n))$, a~druga -- $f(n)=O(g(n))
 Dowód przeprowadzony w~odwrotnej kolejności pozwala wykazać implikację w~drugą stronę, gdyż koniunkcja~(\ref{eq:3.1-5}) doprowadza do nierówności z~definicji $f(n)=\Theta(g(n))$.
 
 \exercise{} %3.1-6
-\noindent Jeżeli pesymistyczny czas działania algorytmu wynosi $O(g(n))$, to dla dowolnych danych wejściowych oszacowanie czasu jego działania jest nie większe niż $c_1g(n)$ dla pewnej stałej $c_1>0$. Z~kolei optymistyczny czas $\Omega(g(n))$ oznacza, że dla dowolnych danych wejściowych oszacowanie czasu działania algorytmu jest nie mniejsze niż $c_2g(n)$ dla stałej $c_2>0$. Widać zatem, że dla dowolnych danych mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, gdzie $f(n)$ stanowi czas działania algorytmu, a~stąd otrzymujemy, że $f(n)=\Theta(g(n))$.
+Jeżeli pesymistyczny czas działania algorytmu wynosi $O(g(n))$, to dla dowolnych danych wejściowych oszacowanie czasu jego działania jest nie większe niż $c_1g(n)$ dla pewnej stałej $c_1>0$. Z~kolei optymistyczny czas $\Omega(g(n))$ oznacza, że dla dowolnych danych wejściowych oszacowanie czasu działania algorytmu jest nie mniejsze niż $c_2g(n)$ dla stałej $c_2>0$. Widać zatem, że dla dowolnych danych mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, gdzie $f(n)$ stanowi czas działania algorytmu, a~stąd otrzymujemy, że $f(n)=\Theta(g(n))$.
 
 Przeprowadzenie powyższego rozumowania w~odwrotnej kolejności pozwala wykazać przeciwną implikację.
 
 \exercise{} %3.1-7
-\noindent Załóżmy, że twierdzenie jest fałszywe i~że istnieje pewna funkcja $f(n)$, która należy do zbioru $o(g(n))\cap\omega(g(n))$. Zachodzi zatem zarówno $f(n)=o(g(n))$ jak i~$f(n)=\omega(g(n))$, co oznacza, że dla każdych dodatnich stałych $c_1$ i~$c_2$ istnieje pewne dodatnie $n_0$, że
+Załóżmy, że twierdzenie jest fałszywe i~że istnieje pewna funkcja $f(n)$, która należy do zbioru $o(g(n))\cap\omega(g(n))$. Zachodzi zatem zarówno $f(n)=o(g(n))$ jak i~$f(n)=\omega(g(n))$, co oznacza, że dla każdych dodatnich stałych $c_1$ i~$c_2$ istnieje pewne dodatnie $n_0$, że
 \[
 	c_1g(n) < f(n) < c_2g(n)
 \]
@@ -82,7 +82,7 @@ Dzięki pustości tej klasy, nie ma potrzeby definiowania notacji $\theta$ odpow
 \subchapter{Standardowe notacje i~typowe funkcje}
 
 \exercise{} %3.2-1
-\noindent Z~założenia, jeśli $n_1\le n_2$, to zachodzi
+Z~założenia, jeśli $n_1\le n_2$, to zachodzi
 \begin{equation}
 	f(n_1) \le f(n_2) \quad\text{oraz}\quad g(n_1) \le g(n_2), \label{eq:3.2-1}
 \end{equation}
@@ -93,7 +93,7 @@ Ponieważ $g(n_1)\le g(n_2)$, to traktując wartości funkcji $g$ jako argumenty
 Jeśli ponadto założymy, że $f$ i~$g$ są nieujemne, to nierówności~(\ref{eq:3.2-1}) można pomnożyć stronami bez konieczności zmiany znaku nierówności, co daje $f(n_1)f(n_2)\le g(n_1)g(n_2)$, a~to oznacza, że również funkcja $f\cdot g$ jest monotonicznie rosnąca.
 
 \exercise{} %3.2-2
-\noindent Wykorzystując podstawowe własności logarytmów otrzymujemy
+Wykorzystując podstawowe własności logarytmów otrzymujemy
 \[
 	\log_ba^{\log_bc} = \log_bc\cdot\log_ba = \log_bc^{\log_ba}.
 \]
@@ -165,7 +165,7 @@ Na podstawie różnowartościowości funkcji logarytmicznej wynika tożsamość
 \end{proof}
 
 \exercise{} %3.2-4
-\noindent Jeśli pewna funkcja $f(n)$ jest ograniczona wielomianowo, to istnieją stałe $c$,~$k$,~$n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$. Stąd $\lg f(n)\le k\lg n+\lg c\le(k+1)\lg n$, o~ile $n\ge c$, a~więc $\lg f(n)=O(\lg n)$. Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest przez to równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
+Jeśli pewna funkcja $f(n)$ jest ograniczona wielomianowo, to istnieją stałe $c$,~$k$,~$n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$. Stąd $\lg f(n)\le k\lg n+\lg c\le(k+1)\lg n$, o~ile $n\ge c$, a~więc $\lg f(n)=O(\lg n)$. Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest przez to równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
 
 Zanim przejdziemy do głównego dowodu, zauważmy, że $\lceil\lg n\rceil=\Theta(\lg n)$. Zachodzi bowiem $\lceil\lg n\rceil\ge\lg n$ oraz $\lceil\lg n\rceil<\lg n+1\le2\lg n$ dla każdego $n\ge2$.
 
@@ -187,13 +187,13 @@ Dla drugiej funkcji mamy
 Ostatni krok wynika z~tożsamości $\lg^bn=o(n^a)$, w~której podstawiono $\lg n$ w~miejsce $n$ oraz przyjęto $b=2$ i~$a=1$. Otrzymany rezultat potwierdza, że $\lg(\lceil\lg\lg n\rceil!)=O(\lg n)$, a~zatem $\lceil\lg\lg n\rceil$ jest ograniczone wielomianowo.
 
 \exercise{} %3.2-5
-\noindent Zachodzi równość $\lg^*\lg n=\lg^*n-1$. Jej prawa strona jest funkcją liniową $h(n)-1$ dla $h=\lg^*$, podczas gdy $\lg\lg^*n\equiv\lg h(n)$ to funkcja logarytmiczna względem $h(n)$. Ponieważ $\lg h(n)=o(h(n)-1)$, to stąd mamy
+Zachodzi równość $\lg^*\lg n=\lg^*n-1$. Jej prawa strona jest funkcją liniową $h(n)-1$ dla $h=\lg^*$, podczas gdy $\lg\lg^*n\equiv\lg h(n)$ to funkcja logarytmiczna względem $h(n)$. Ponieważ $\lg h(n)=o(h(n)-1)$, to stąd mamy
 \[
 	\lg\lg^*n = o(\lg^*\lg n).
 \]
 
 \exercise{} %3.2-6
-\noindent Dla $i=0$ twierdzenie zachodzi trywialnie. Dla $i=1$ mamy $F_1=\bigl(\phi-\widehat\phi\bigr)/\sqrt{5}=1$. Załóżmy teraz, że zachodzi
+Dla $i=0$ twierdzenie zachodzi trywialnie. Dla $i=1$ mamy $F_1=\bigl(\phi-\widehat\phi\bigr)/\sqrt{5}=1$. Załóżmy teraz, że zachodzi
 \[
 	F_i = \frac{\phi^i-\widehat\phi^i}{\sqrt{5}} \quad\text{oraz}\quad F_{i+1} = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}
 \]
@@ -204,7 +204,7 @@ dla pewnego $i\ge0$. Ponieważ liczby Fibonacciego dla wszystkich $n\ge0$ spełn
 a~zatem zależność jest prawdziwa dla każdego $i\ge0$.
 
 \exercise{} %3.2-7
-\noindent Korzystając z~wyniku z~poprzedniego zadania, dostajemy
+Korzystając z~wyniku z~poprzedniego zadania, dostajemy
 \begin{align*}
 	F_{i+2} &\ge \phi^i \\
 	\frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}} &\ge \phi^i \\
@@ -217,7 +217,7 @@ Ponieważ $|\phi|>|\widehat\phi|$, to otrzymana nierówność jest spełniona dl
 \problems
 
 \exercise{Asymptotyczne zachowanie wielomianów} %3-1
-\noindent Udowodnimy najpierw fakt, że $p(n)=\Theta(n^d)$. Należy znaleźć stałe $c_1$,~$c_2$,~$n_0>0$ takie, że dla $n>n_0$ będzie prawdą
+Udowodnimy najpierw fakt, że $p(n)=\Theta(n^d)$. Należy znaleźć stałe $c_1$,~$c_2$,~$n_0>0$ takie, że dla $n>n_0$ będzie prawdą
 \[
 	0 \le c_1n^d \le a_dn^d+a_{d-1}n^{d-1}+\dots+a_0 \le c_2n^d.
 \]
@@ -537,7 +537,7 @@ Pierwsza nierówność w~tej koniunkcji stanowi definicję $f(n)=\overset{\sim}{
 Podobnie jak w~oryginalnym dowodzie, przeprowadzenie rozumowania w~odwrotnej kolejności wykazuje prawdziwość odwrotnej implikacji.
 
 \exercise{Funkcje iterowane} %3-6
-\noindent W~każdym punkcie za dziedzinę funkcji $f_c^*$ przyjęto dziedzinę $f$. By wyznaczyć oszacowanie $f_c^*(n)$, należy znaleźć najmniejsze $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
+W~każdym punkcie za dziedzinę funkcji $f_c^*$ przyjęto dziedzinę $f$. By wyznaczyć oszacowanie $f_c^*(n)$, należy znaleźć najmniejsze $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
 
 \subexercise{} %3-6(a)
 $\lg^{(i)}(n)\le2$, logarytmując obustronnie otrzymujemy $\lg^{(i+1)}(n)\le1$, skąd wynika, że $i=\lg^*n-1$, a~zatem:

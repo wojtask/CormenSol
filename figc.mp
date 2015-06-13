@@ -29,6 +29,7 @@ beginfig(1);
 	draw p;
 	fill pa withcolor lightgray;
 	fill pb withcolor medgray;
+	z0 = 
 	fill buildcycle(pa, pb) withcolor darkgray;
 	draw pa; draw pb;
 	

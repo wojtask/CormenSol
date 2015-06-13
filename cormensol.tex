@@ -1,18 +1,15 @@
 \documentclass[a4paper,10pt,twoside,openany,titlepage]{book}
-\usepackage{indentfirst}
 \usepackage[MeX,plmath]{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{bm}
 \usepackage{epsf}
 \usepackage[pdftex]{graphicx}
 \usepackage{geometry}
 \usepackage{calc}
 \usepackage{clrscode}
-\usepackage{mathdots}
 \usepackage{url}
 \usepackage{sectsty}
 \usepackage{tocloft}
@@ -20,7 +17,7 @@
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true]{hyperref}
 \usepackage{cormensol}
 
-\allowdisplaybreaks[4]
+\allowdisplaybreaks[1]
 
 \begin{document}
 
@@ -62,10 +59,13 @@
 	\mychapter{#1}
 	\setcounter{subsection}{0}
 	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
-	\lhead[\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\thepage}]{
-		\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\rightmark}
-	}
+	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
 }
+
+\makeatletter
+  \@afterindentfalse
+  \@afterheading
+\makeatother
 
 \mainmatter
 
@@ -135,12 +135,10 @@
 
 \backmatter
 
-% \bibliographystyle{plalpha}
-% \bibliography{manual,btxdoc}
-% 
-% \begin{thebibliography}{Xxx99}
-% 	\bibitem[Clr04]{cormen}
-% 	{\sl Wprowadzenie do algorytmów}, Wydawnictwa Naukowo-Techniczne, Warszawa 2004
-% \end{thebibliography}
+\let\chapter=\mychapter
+
+\bibliographystyle{plplain}
+\bibliography{cormensol}
+\nocite{*}
 
 \end{document}
