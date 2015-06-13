@@ -153,7 +153,7 @@ Rozważmy spiralę numerującą pary o~elementach całkowitych poczynając od pu
 \end{figure}
 Ponieważ każdemu punktowi o~współrzędnych całkowitych przypisywana jest unikalna liczba naturalna, to możemy tę spiralę potraktować jako opis funkcji~$g$. Po dokładniejszej analizie wyprowadzamy jej formalną definicję:
 \[
-    g(x,y) =
+	g(x,y) =
 	\begin{cases}
 		D+d+y, & \text{jeśli $x=d$}, \\
 		D+3d-x, & \text{jeśli $y=d$}, \\
@@ -334,7 +334,7 @@ W~optymalnym kolorowaniu grafu (czyli takim, które wykorzystuje możliwie najmn
 
 Wszystkich możliwych par wierzchołków w~różnych kolorach spośród $k$ jest $\binom{k}{2}$, zachodzi więc
 \[
-    \binom{k}{2} = \frac{k(k-1)}{2} \ge |E|,
+	\binom{k}{2} = \frac{k(k-1)}{2} \ge |E|,
 \]
 skąd $k=O\bigl(\!\sqrt{|E|}\bigr)$, a~z~założenia, że $|E|=O(|V|)$ natychmiast otrzymujmy tezę.
 
@@ -426,7 +426,7 @@ Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, ja
 \subproblem %B-3(c)
 Rozważmy następującą strategię podziału zbioru wierzchołków. Usuwając jedną krawędź możemy podzielić $n$ wierzchołków drzewa na dwa zbiory, z~których mniejszy będzie składać się z~$n/4$ wierzchołków, na podstawie części (a) i~(b). Kolejne krawędzie będą usuwane rekurencyjnie z~większego poddrzewa. Oczywiście w~pewnym momencie może istnieć krawędź, której usunięcie pozostawi mniej więcej równoliczne zbiory, jednak rozważmy pesymistyczny przypadek, w~którym po każdym podziale dostajemy zbiory wierzchołków o~rozmiarach odpowiednio $1/4$ i~$3/4$ rozmiaru zbioru przed podziałem. Niech $k$ oznacza liczbę krawędzi potrzebną do uzyskania zbiorów o~rozmiarach równych $\lfloor n/2\rfloor$ i~$\lceil n/2\rceil$. Wtedy zachodzi zależność
 \[
-    (3/4)^kn = 1,
+	(3/4)^kn = 1,
 \]
 ponieważ zbioru jednoelementowego nie trzeba dalej dzielić. Stąd $k=\log_{4/3}n$, a~zatem musimy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
 

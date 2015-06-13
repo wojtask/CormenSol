@@ -454,44 +454,28 @@ Ponieważ $c+1>1$, to można $f(n)+o(f(n))$ ograniczyć od góry przez $c_2f(n)$
 \problem{Wariacje na temat notacji $O$ i~$\Omega$} %3-5
 
 \subproblem %3-5(a)
-
-A function is in $O'$ of some other function if both the function and its negation are in $O$ of that other function. The direction beginning with $f(n) = O'(g(n))$ and $f(n) = \Omega(g(n))$ is easy since $f(n)$ must also be $O(g(n))$. The other direction does not automatically follow since $-f(n)$ is not necessarily $O(g(n))$ when $f(n)$ is.
-
 Niech $c>0$ będzie pewną stałą. Załóżmy, że $f(n)\ge cg(n)$ w~pewnym skończonym zbiorze, w~przeciwnym razie zachodzi bowiem $f(n)=\overset{\infty}{\Omega}(g(n))$. Ponieważ zbiór ten jest skończony, to wybierzmy największe $n$, dla którego nierówność ta jest spełniona i~oznaczmy je przez $n_0$. Mamy zatem $0\le f(n)\le cg(n)$ dla $n\ge n_0+1$, czyli $f(n)=O(g(n))$.
 
 Nie jest natomiast prawdą podobne twierdzenie, gdyby zastosować notację $\Omega$ zamiast $\overset{\infty}{\Omega}$; jeśli np.\ $f(n)=n$ oraz $g(n)=n^{1+\sin n}$, to $f(n)=\overset{\infty}{\Omega}(g(n))$, ale $f(n)\ne\Omega(g(n))$ i~$f(n)\ne O(g(n))$.
 
 \subproblem %3-5(b)
-\textbf{Zalety:}
-\begin{itemize}
-	\item wiadomo, że jeśli czas działania algorytmu nie jest $O(f(n))$, to jest $\overset{\infty}{\Omega}(f(n))$ (z~poprzedniego punktu),
-	\item nie istnieją funkcje, których nie da się porównać z~innymi przy pomocy notacji $O$ i~$\overset{\infty}{\Omega}$.
-\end{itemize}
-\textbf{Wady:}
-\begin{itemize}
-	\item dowód, że $f(n)=\overset{\infty}{\Omega}(g(n))$ jest nieco trudniejszy do przeprowadzenia niż w~przypadku $f(n)=\Omega(g(n))$,
-	\item nowa notacja w~wielu przypadkach nie uwypukla faktu, że pewna funkcja jest asymptotycznie większa od innej, gdyż mimo że przynależność do klasy złożoności jest spełniona, to wartości tej funkcji mogą być w~pewnych przedziałach znacząco mniejsze od wartości innej, należącej do tej samej klasy.
-\end{itemize}
+Zaletą nowej notacji jest fakt, że jeśli o~pewnej funkcji $f(n)$ wiemy, że nie jest $O(g(n))$, to jest $\overset{\infty}{\Omega}(g(n))$ (z~poprzedniego punktu), nie istnieją zatem funkcje, których nie da się porównać z~innymi przy pomocy pary notacji $O$ i~$\overset{\infty}{\Omega}$.
+
+Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie dominuje nad funkcją $g(n)$, gdyż w~nieskończenie wielu punktach może przyjmować wartości mniejsze od $g(n)$. Nieskończenie wiele punktów, o~których mowa w~definicji nowej notacji może też występować daleko ponad maksymalnym rozmiarem danych wejściowych. Wady te sprawiają, że użycie nowej notacji ma słabe zastosowanie praktyczne i~ma większe znaczenie w~teorii.
 
 \subproblem %3-5(c)
-Definicja $O'$ dopuszcza badanie funkcji, które nie są asymptotycznie nieujemne, np.\ prawdziwe są następujące tożsamości:
-\begin{align*}
-	-n^2 &= O'(n^2), \\
-	-\frac{n^3}{2}+\frac{n^2}{6}-3n &= O'(n^4).
-\end{align*}
+W~przypadku implikacji w~lewą stronę, z~warunku $f(n)=\Theta(g(n))$ wynika, że $f(n)\ge0$, a~więc $f$ jest funkcją nieujemną i~twierdzenie stosuje się bez zmian, czyli implikacja zachodzi.
 
-Z~równości $f(n)=\Theta(g(n))$ wynika, że $f(n)\ge0$, a~więc $f$ jest funkcją nieujemną i~twierdzenie stosuje się bez zmian, czyli implikacja w~lewą stronę zachodzi.
-
-Zbadajmy teraz drugą implikację. Wprost z~definicji, jeśli $f(n)=O'(g(n))$, to istnieją takie stałe $c$,~$n_0>0$, że zachodzi
+Zbadajmy teraz drugą z~nich. Wprost z~definicji, jeśli $f(n)=O'(g(n))$, to istnieją takie stałe $c$,~$n_0>0$, że zachodzi
 \[
 	\begin{cases}
 		0 \le f(n) \le cg(n), & \text{jeśli $f(n)\ge0$,} \\
 		0 \le -f(n) \le cg(n), & \text{jeśli $f(n)<0$,}
 	\end{cases}
 \]
-dla wszystkich $n\ge n_0$. Załóżmy, że $f(n_1)<0$ dla pewnego $n_1\ge n_0$, ponieważ w przeciwnym przypadku mamy do czynienia z~funkcją nieujemną, dla której jest $f(n)=O(g(n))$. Teraz jednak warunek $0\le c_1g(n)\le f(n)$ nie zajdzie dla żadnej stałej $c_1>0$, co jest konieczne do tego, by $f(n)=\Omega(g(n))$ oraz $f(n)=\Theta(g(n))$. To nie przeszkadza jednak, aby implikacja zachodziła, ponieważ w~takim przypadku z~fałszu wyniknie fałsz.
+dla wszystkich $n\ge n_0$. Załóżmy, że istnieje nieskończenie wiele takich $n_1\ge n_0$, że $f(n_1)<0$, ponieważ w~przeciwnym przypadku mielibyśmy do czynienia z~funkcją asymptotycznie nieujemną, dla której jest $f(n)=O(g(n))$. Teraz jednak nierówność $0\le c_1g(n)\le f(n)$ wynikająca z~założenia $f(n)=\Omega(g(n))$, nie jest spełniona dla żadnej stałej $c_1>0$ i~dowolnego $n\ge n_0$. To nie przeszkadza jednak, aby implikacja zachodziła, ponieważ wtedy nie może być także prawdą, że $f(n)=\Theta(g(n))$.
 
-Widać, że zastosowanie notacji $O'$ w miejsce $O$, nie pozbawia prawdziwości twierdzenia~3.1.
+Widać, że zastosowanie notacji $O'$ w~miejsce $O$, nie pozbawia prawdziwości twierdzenia~3.1.
 
 \subproblem %3-5(d)
 Oto definicje notacji $\overset{\sim}{\Omega}$ i $\overset{\sim}{\Theta}$:
