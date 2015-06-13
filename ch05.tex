@@ -87,14 +87,14 @@ Niech teraz zmienna losowa $X$ oznacza sumę oczek na $n$ kostkach. Mamy $X=X_1+
 \]
 
 \exercise %5.2-4
-Niech $S_i$ będzie zdarzeniem oznaczającym, że \twoparts{$i$}{ta} osoba otrzymała swój kapelusz ($1\le i\le n$). Definiujemy teraz zmienne losowe $X_i=I(S_i)$ oraz $X=X_1+X_2+\cdots+X_n$, przy czym $X$ oznacza liczbę osób, którym zwrócono właściwe kapelusze. Mamy
+Niech $S_i$ będzie zdarzeniem oznaczającym, że \twoparts{$i$}{ta} osoba otrzymała swój kapelusz ($1\le i\le n$). Definiujemy teraz zmienne losowe $X_i=\I(S_i)$ oraz $X=X_1+X_2+\cdots+X_n$, przy czym $X$ oznacza liczbę osób, którym zwrócono właściwe kapelusze. Mamy
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(X_i=1) = \sum_{i=1}^n\frac{1}{n} = 1,
 \]
 a~zatem swój kapelusz otrzyma średnio tylko jedna osoba.
 
 \exercise %5.2-5
-Dla wszystkich $i$,~$j$ takich, że $1\le i<j\le n$ zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $(i,j)$. Szanse, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$. Definiujemy zmienne losowe $X_{ij}=I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$. Jej wartością oczekiwaną jest
+Dla wszystkich $i$,~$j$ takich, że $1\le i<j\le n$ zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $(i,j)$. Szanse, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$. Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$. Jej wartością oczekiwaną jest
 \begin{align*}
 	\E(X) &= \E\biggl(\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}\biggr) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\E(X_{ij}) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{ij}=1) \\[1mm]
 	&= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{2} = \sum_{i=1}^{n-1}\frac{n-i}{2} = \frac{1}{2}\sum_{i=1}^{n-1}i = \frac{n(n-1)}{4}.
@@ -261,7 +261,7 @@ Wszystkich możliwych \twoparts{$k$}{słów} nad zbiorem \twoparts{$n$}{elemento
 Problem jest analogiczny do pytania o~prawdopodobieństwo zdarzenia, że wśród $k$ osób nie ma dwóch takich, które urodziły się tego samego dnia roku, gdzie $n$ jest liczbą dni w~roku.
 
 \exercise %5.4-6
-Obliczmy najpierw oczekiwaną liczbę pustych urn. Niech $S_i$ dla $i=1$, 2,~\dots,~$n$ będzie zdarzeniem, że \twoparts{$i$}{ta} urna jest pusta po wykonaniu $n$ rzutów i~zdefiniujmy zmienną losową $X_i=I(S_i)$ oraz $X=\sum_{i=1}^nX_i$ oznaczającą liczbę pustych urn. Wtedy
+Obliczmy najpierw oczekiwaną liczbę pustych urn. Niech $S_i$ dla $i=1$, 2,~\dots,~$n$ będzie zdarzeniem, że \twoparts{$i$}{ta} urna jest pusta po wykonaniu $n$ rzutów i~zdefiniujmy zmienną losową $X_i=\I(S_i)$ oraz $X=\sum_{i=1}^nX_i$ oznaczającą liczbę pustych urn. Wtedy
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(S_i).
 \]
