@@ -1,5 +1,5 @@
 O CZYM NALEŻY PAMIĘTAĆ:
-- używamy następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
+- używa się następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
 	\chapter{Nazwa}
 		\subchapter{Nazwa}
 			\exercise %numer
@@ -31,71 +31,98 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - w \note stosować $$ dla tekstu matematycznego, nawet dla pojedynczych liczb, a \/ przed tekstem złożonym czcionką zwykłą lub matematyczną
 - przy składaniu zależności rekurencyjnych w warunkach używa się słowa 'jeżeli', a nie 'dla'
 - kontrolne spacje po skrótach (np., tzn., itd.) jeśli nie kończą zdania i bezpośrednio po nich nie ma spacji
-- jednolite kolory szarości w rysunkach (jasnoszary = .8white, szary = .6white, ciemnoszary = .4white)
+- jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white)
 - nie używać numerowania równań, stosować zawsze środowiska equation* (\[ \]) lub gather* lub align* w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$})
 - http://exlover.wordpress.com/
-- czy elementy zbiorów rozdzielać między $?
+- partykułę ``nie'' z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: nie większy, nie mniejszy
+- oddzielać przecinkiem imiesłów zakończony na -ąc, -łszy, -wszy od dalszej części zdania
+- nie numerować wiersza w procedurach jednolinijkowych (\zi zamiast \li) (?) -- d-ary-Parent, d-ary-Child, Heap-Minimum
+- wyliczane elementy zbiorów rozdzielać między $ (?)
+- w ostateczności, aby zniwelować underfull vbox, można zastosować \medskip (jak przed 4.2-4) lub \bigskip (jak przed 3.2)
 
-MOŻLIWOŚĆ ZOPTYMALIZOWANIA:
-- 1.1-1
-- 1.1-3
-- 1.1-4
+MOŻLIWOŚĆ ZOPTYMALIZOWANIA, POPRAWIENIA:
+- 1.1-1 -- dokładniej opisać po przerobieniu tych problemów
+- 1.1-3 -- dopisać coś jeszcze?
+- 1.1-4 -- dopisać coś jeszcze?
 - 2.1-4 -- jak traktujemy bity?
 - 3.2-3 -- dwie ostatnie tożsamości, bez użycia wzoru Stirlinga byłoby prościej
 - 3-5(c) -- czy na pewno?
 - 3-6(h) -- podobno da się zejść do \Theta(\lg^*n)
+- 5.4-2 -- udowodnić przejście między sumami (A063169), z TAoCP (1.2.11.3): E(X) = 1+Q(b) \approx 1+\sqrt{\pi b/2}
 - 5.4-7 -- czy nie przejmować się watościami całkowitymi?
 - 5-2(a) -- czy wektor bool to wektor bitowy?
 - A.2-3 -- prostsze rozwiązanie w exlover
 - B.1-3 -- czy da się prościej?
+- B-3(a) -- czy da się prościej?
+- C.4-9 -- czy da się prościej?
+- C.5-6 -- uzasadnić że pe^a(1-a-p)+(a+p)(p-1)<0 albo znaleźć prostszy dowód lematu (łatwo udowodnić gdy a\ge2)
 
 PRZED v0.4:
 - we wstępie napisać o (La)TeX i METAPOST
 - akapit wstępu mówiący o numeracji rysunków, tożsamości i jak się to odróżnia od tych z książki
+- (a), (b), ... w rysunkach zamiast odnoszenia się do lewej lub prawej strony rysunku
 - zrobić hyperrefy w \zad
-- zbyt duże stopki (?)
 - numerek podrozdziału lub zadania przesunąć na margines (?)
 - dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
 - napisać we wstępie, że czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w tekście
+- w BibTeXu w pozycji taocp1frag sprawić aby pokazywało zakres stron
 
-PRZED v0.3:
-- sprawdzić całość __BARDZO_KRYTYCZNIE__, ew. dorobić rysunki
-- warningi, przepełnione hboxy i vboxy (underfull \vbox można zabić \raggedbottom)
-- przecinki przed czasownikiem wystepujacym po imieslowie (?)
+PO v1.0:
+- rozwiązania zadań i problemów wydania 3
+- clrscode3e zamiast clrscode
+- tłumaczenie na język angielski
 
 ETAPY ODDAWANIA ROZDZIAŁÓW:
 poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
 poziom 2. -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca)
 poziom 3. -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna)
 
-
 ROZDZIAŁ 1 (3)
 ROZDZIAŁ 2 (3)
 ROZDZIAŁ 3 (3)
 ROZDZIAŁ 4 (3)
+ROZDZIAŁ 5 (3)
 
-ROZDZIAŁ 5 (3 oprócz poniższych)
-- 5.3-5 -- dokończyć
-- 5.4.1 -- co z tymi b_i
-- 5.4-2 -- niedokończone, wynik w postaci sumy, z Knutha i A063170, E(X) = 1+Q(b) \approx 1+\sqrt{\pi b/2}
-- 5.4-3 -- wskazać że korzysta się z wzoru z zad.C.2-6, który nie przejmuje się tym, aby zdarzenia były niezależne
-- 5.4-4 -- obliczyć i zweryfikować te oszacowania
+ROZDZIAŁ 6 (0)
+- 6.4-5
+- 6.5-4 -- przemyśleć
+- 6-3(c)
+- 6-3(d) -- źle
+- 6-3(f) -- sprawdzić procedurę
+
+ROZDZIAŁ 7 (0)
+- 7.1-2 -- sprawdzić, ew. uprościć algorytm
+- 7.2-1 -- sprawdzić czy jest tak jak w ch04
+- 7.2
+- 7.3
+- 7.4
+- 7-1
+- 7-2
+- 7-3
+- 7-4
+- 7-5
+- 7-6
+
+ROZDZIAŁ 8 (0)
+- 8.1
+- 8.2
+- 8.3
+- 8.4
+- 8-1
+- 8-2
+- 8-3
+- 8-4
+- 8-5
+- 8-6
+
+ROZDZIAŁ 9 (0)
+- 9.1
+- 9.2
+- 9.3
+- 9-1
+- 9-2
+- 9-3
 
 DODATEK A (3)
-
-DODATEK B (3 oprócz poniższych)
-- B-1(b) -- ostatni dowód zmodyfikować, środkowy dowód można znacznie uprościć:/
-- B-1(d) -- może da się łatwiej to rozwiązanie napisać? kolorowanie zachłanne
-- B-3(a) -- czy da się prościej?
-- B-3(c) -- metoda dobra, ale opisać jaśniej, rysunek (?)
-
-DODATEK C (3 oprócz poniższych)
-- C.1-8 -- co z tym trójkątem Pascala?
-- C.1-12 -- czemu (n+1)/2 ?
-- C.2-4 -- poprawić
-- C.2-7
-- C.2-8 -- zmniejszyć liczby (?)
-- C.4-8 -- pierwsze przekształcenie mi się nie podoba
-- C.4-9 -- do akceptacji, ew. uproszczenia
-- C.5-3 -- musi byc k<np a jest k<n
-- C.5-6 -- pierwszy czynnik nie jest <0
+DODATEK B (3)
+DODATEK C (3)

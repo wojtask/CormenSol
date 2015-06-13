@@ -25,7 +25,7 @@ beginfig(1);
 	scale := 1.3cm;
 	shift := 2.5scale;
 	descshift := -scale;
-	color gray; gray := .6white;
+	color gray; gray := .8white;
 
 	venn_base(scale, 0);
 	fill pa withcolor gray;
@@ -70,7 +70,7 @@ beginfig(1);
 endfig;
 
 vardef graphnode(expr scale, shift) =
-	color gray; gray := .6white;
+	color gray; gray := .8white;
 	path pnd;
 	pnd = fullcircle scaled scale shifted shift;
 	fill pnd withcolor gray;
@@ -348,6 +348,39 @@ beginfig(10);
 endfig;
 
 beginfig(11);
+	scale := .5cm;
+	shift := 2scale;
+	
+	path p[];
+	p0 = graphnode(scale, (0, 0)); label(btex $u_1$ etex, center p0);
+	p1 = graphnode(scale, (4scale, 2scale)); label(btex $u_2$ etex, center p1);
+	p2 = (-1.4scale, -2scale);
+	p3 = (1.4scale, -2scale);
+
+	draw point .5 of p0 -- point 4.5 of p1;
+	draw point 5.25 of p0 -- point 1.25 of p2;
+	draw point 6.75 of p0 -- point 2.75 of p3;
+	draw point .5 of p1 -- center p1 shifted (scale, .5scale);
+	draw point 7.5 of p1 -- center p1 shifted (scale, -.5scale);
+
+	draw center p2 -- (center p2 shifted (-scale, -2.5scale)) -- (center p2 shifted (scale, -2.5scale)) -- cycle;
+	draw center p3 -- (center p3 shifted (-scale, -2.5scale)) -- (center p3 shifted (scale, -2.5scale)) -- cycle;
+
+	p3 := graphnode(scale, (1.4scale, -2scale)); label(btex $w$ etex, center p3);
+
+	label.ulft(btex $e$ etex, .5[center p0, center p1]);
+	label.urt(btex $e'$ etex, .5[center p0, center p3]);
+	label(btex $T_1$ etex, center p2 + (0, -2scale));
+	label(btex $T_2$ etex, center p3 + (0, -2scale));
+
+	draw center p1 shifted (-1.5scale, 0) .. center p1 shifted (2scale, 2scale) .. center p1 shifted (5.5scale, 0) .. center p1 shifted (2scale, -2scale) .. cycle;
+	draw center p0 shifted (0, 1.5scale) .. center p0 shifted (1.5scale, 0) .. center p3 shifted (1.5scale, 0) .. center p3 shifted (2scale, -3scale) .. center p0 shifted (0, -6.5scale) .. center p2 shifted (-2scale, -3scale) .. center p2 shifted (-1.5scale, 0) .. center p0 shifted (-1.5scale, 0) .. cycle;
+
+	label(btex $A'$ etex, center p1 shifted (3scale, 0));
+	label(btex $B'$ etex, center p0 shifted (0, -5.5scale));
+endfig;
+
+beginfig(12);
 	scale := .5cm;
 	shift := 2scale;
 	

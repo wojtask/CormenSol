@@ -100,7 +100,7 @@ Wykorzystując własności szeregu teleskopowego, dostajemy:
 	&= 1+1-\frac{1}{n} \\
 	&< 2,
 \end{align*}
-a~zatem badana suma jest ograniczona przez stałą. Okazuje się, że dla coraz większych $n$, jej wartość zbliża się do liczby $\pi^2\!/6$.
+a~zatem badana suma jest ograniczona przez stałą. Okazuje się, że dla coraz większych $n$ jej wartość zbliża się do liczby $\pi^2\!/6$.
 
 \exercise %A.2-2
 Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
@@ -114,7 +114,7 @@ Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Ustawm
 \[
 	\underbrace{\frac{1}{1}}_{\text{\scriptsize grupa 1}}\!\!+\;\;\underbrace{\frac{1}{2}+\frac{1}{3}}_{\text{\scriptsize grupa 2}}\;\;+\;\;\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\text{\scriptsize grupa 3}}\;\;+\cdots+\;\;\underbrace{\cdots +\frac{1}{n}}_{\text{\scriptsize grupa $s$}}.
 \]
-Wszystkie składniki w~grupie~2 przyjmują wartości od $1/3$ do~$1/2$, zatem suma składników tejże grupy mieści się pomiędzy $2\cdot1/3=2/3$ a~$2\cdot1/2=1$. Wszystkie składniki w~grupie~3 przyjmują wartości od $1/7$ do~$1/4$, więc ich suma jest między $4/7$ a~1. W~ogólności, każdy z~$2^{k-1}$ składników w~grupie~$k$ jest zawarty w~przedziale $\bigl(2^{-k},2^{1-k}\,\bigr]$, a~stąd suma składników w~każdej grupie znajduje się w~przedziale $(1/2,1\,]$. W~końcu, jeśli umieściliśmy składnik $1/n$ w~grupie $s = \lfloor\lg n\rfloor+1$, to zachodzi $s/2<H_n\le s$. Zatem $\lim_{n\to\infty}H_n=\infty$ i~istotnie
+Wszystkie składniki w~grupie~2 przyjmują wartości od $1/3$ do~$1/2$, zatem suma składników tejże grupy mieści się pomiędzy $2\cdot1/3=2/3$ a~$2\cdot1/2=1$. Wszystkie składniki w~grupie~3 przyjmują wartości od $1/7$ do~$1/4$, więc ich suma jest między $4/7$ a~1. W~ogólności, każdy z~$2^{k-1}$ składników w~grupie~$k$ jest zawarty w~przedziale $\bigl(2^{-k},2^{1-k}\,\bigr]$, a~stąd suma składników w~każdej grupie znajduje się w~przedziale $(1/2,1\,]$. W~końcu, jeśli umieściliśmy składnik $1/n$ w~grupie $s=\lfloor\lg n\rfloor+1$, to zachodzi $s/2<H_n\le s$. Zatem $\lim_{n\to\infty}H_n=\infty$ i~istotnie
 \[
 	\frac{\lfloor\lg n\rfloor+1}{2} < H_n \le \lfloor\lg n\rfloor+1, \quad\text{więc $H_n=\Theta(\lg n)$}.
 \]
@@ -139,7 +139,7 @@ Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażeni
 \[
 	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln0,
 \]
-ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie sumy $\sum_{k=1}^n(1/k)$ jako $1+\sum_{k=2}^n(1/k)$ pozwala na zastosowanie wzoru~(A.12) do drugiego składnika wprowadzając jedynie stałą różnicę.
+ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie sumy $\sum_{k=1}^n(1/k)$ jako $1+\sum_{k=2}^n(1/k)$ pozwala na zastosowanie wzoru~(A.12) do drugiego składnika, wprowadzając jedynie stałą różnicę.
 
 \problems
 
@@ -166,7 +166,7 @@ Stosujemy wzór~(A.11) do sumy $\sum_{k=2}^n\lg^sk$, która jest równoważna su
 \[
 	\int_1^n\lg^sx\,dx \le \sum_{k=2}^n\lg^sk \le \int_2^{n+1}\lg^sx\,dx.
 \]
-Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=dx$. Pomijając stałe całkowania otrzymujemy
+Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=dx$. Pomijając stałe całkowania, otrzymujemy
 \[
 	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = x,
 \]
@@ -192,7 +192,7 @@ Po zastosowaniu wzoru~(A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$, dostajemy
 \[
 	\int_1^nx^r\lg^sx\,dx \le \sum_{k=2}^nk^r\lg^sk \le \int_2^{n+1}x^r\lg^sx\,dx.
 \]
-Analogicznie jak w~poprzednim punkcie, obliczmy całkę $I(x) = \int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
+Analogicznie jak w~poprzednim punkcie obliczmy całkę $I(x) = \int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
 \[
 	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = \frac{x^{r+1}}{r+1},
 \]
