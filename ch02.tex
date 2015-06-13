@@ -1,8 +1,8 @@
 \chapter{Zaczynamy}
 
-\section{Sortowanie przez wstawianie}
+\subchapter{Sortowanie przez wstawianie}
 
-\subsection{} %2.1-1
+\exercise{} %2.1-1
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics{fig02.1}
@@ -10,15 +10,15 @@
 	\caption{Symulacja algorytmu \proc{Insertion-Sort}}
 \end{figure}
 
-\subsection{} %2.1-2
-Aby sortować w~odwrotnym porządku, wystarczy zmienić znak drugiej nierówności na przeciwny w~warunku pętli \kw{while} w~linii \ref{li:ins-sort-while-cond} algorytmu \proc{Insertion-Sort}:
+\exercise{} %2.1-2
+\noindent Aby sortować w~odwrotnym porządku, wystarczy zmienić znak drugiej nierówności na przeciwny w~warunku pętli \kw{while} w~linii~\ref{li:ins-sort-while-cond} algorytmu \proc{Insertion-Sort}:
 \begin{codebox}
 \setcounter{codelinenumber}{4}
 \li	\While $i>0$ i~$A[i]<\id{key}$
 \end{codebox}
 
-\subsection{} %2.1-3
-Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
+\exercise{} %2.1-3
+\noindent Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
 \begin{codebox}
 \Procname{$\proc{Linear-Search}(A,v)$}
 \li	$i\gets 1$
@@ -40,10 +40,10 @@ Na początku każdej iteracji pętli \kw{while} w~wierszach \ref{li:search-while
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc fragment $A[1\twodots i-1]$ jest pusty.
 	\item[Utrzymanie:] Załóżmy, że podtablica $A[1\twodots i-1]$ nie zawiera elementu $v$. W~warunku pętli \kw{while} sprawdzamy, czy $A[i]$ jest różne od $v$. Jeśli tak, to $i$ jest zwiększane o~1, więc niezmiennik jest zachowany. W~przeciwnym przypadku (odnaleziono $v$), przerywamy pętlę.
-	\item[Zakończenie:] Algorytm kończy swe działanie, kiedy znajdzie indeks $i$ taki, że $A[i]=v$ lub $i=\id{length}[A]+1$. Pierwszy przypadek oznacza oczywiście odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę, nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
+	\item[Zakończenie:] Algorytm kończy swe działanie, kiedy znajdzie indeks $i$ taki, że $A[i]=v$ lub $i=\id{length}[A]+1$. Pierwszy przypadek oznacza oczywiście odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
 \end{description}
 
-\subsection{} %2.1-4
+\exercise{} %2.1-4
 \noindent\textbf{Dane wejściowe:} \twoparts{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \twoparts{$n$}{bitowych} liczb całkowitych $a$ i~$b$ (w~kolejności od najbardziej do najmniej znaczącego bitu). \\
 \textbf{Wynik:} \twoparts{$(n+1)$}{elementowa} tablica $C$ zawierająca reprezentację binarną \twoparts{$(n+1)$}{bitowej} liczby całkowitej $c$ takiej, że $c=a+b$.
 \begin{codebox}
@@ -64,19 +64,19 @@ Na początku każdej iteracji pętli \kw{while} w~wierszach \ref{li:search-while
 \li	\Return $C$
 \end{codebox}
 
-W~pętli \kw{for} w~wierszach \ref{li:bin-add-for-begin}\nobreakdash--\ref{li:bin-add-for-end} realizowane jest dodawanie poszczególnych bitów liczb $a$ i~$b$ od najmniej do najbardziej znaczącego. Jest to tak naprawdę użycie operacji \kw{xor}, czyli alternatywy wykluczającej -- wynik takiej operacji na dwóch bitach jest ich sumą modulo~2. Instrukcja warunkowa z~wiersza \ref{li:bin-add-if} wykrywa przepełnienie i~odpowiednio ustawia nową wartość bitu przeniesienia \id{carry} także za pomocą operacji logicznych -- \kw{or} i~\kw{and}.
+W~pętli \kw{for} w~wierszach \ref{li:bin-add-for-begin}\nobreakdash--\ref{li:bin-add-for-end} realizowane jest dodawanie poszczególnych bitów liczb $a$ i~$b$ od najmniej do najbardziej znaczącego. Jest to tak naprawdę użycie operacji \kw{xor}, czyli alternatywy wykluczającej -- wynik takiej operacji na dwóch bitach jest ich sumą modulo~2. Instrukcja warunkowa z~wiersza~\ref{li:bin-add-if} wykrywa przepełnienie i~odpowiednio ustawia nową wartość bitu przeniesienia \id{carry}, także za pomocą operacji logicznych -- \kw{or} i~\kw{and}.
 
-Jeśli potraktujemy tablice $A$ i~$B$ jako reprezentacje liczb $a$ i~$b$ wkodzie uzupełnień do dwóch, to przedstawiona procedura działa także dla liczb ujemnych -- wynikiem dodawania jest tablica $C$ stanowiąca reprezentację liczby $c$ wkodzie uzupełnień do dwóch.
+Jeśli potraktujemy tablice $A$ i~$B$ jako reprezentacje liczb $a$ i~$b$ w~kodzie uzupełnień do dwóch, to przedstawiona procedura działa także dla liczb ujemnych -- wynikiem dodawania jest tablica $C$ stanowiąca reprezentację liczby $c$ w~kodzie uzupełnień do dwóch.
 
-\section{Analiza algorytmów}
+\subchapter{Analiza algorytmów}
 
-\subsection{} %2.2-1
+\exercise{} %2.2-1
 \[
-	n^3\!/1000-100n^2-100n+32 = \Theta(n^3).
+	n^3\!/1000-100n^2-100n+3 = \Theta(n^3).
 \]
 
-\subsection{} %2.2-2
-Poniższy algorytm implementuje sortowanie przez wybieranie.
+\exercise{} %2.2-2
+\noindent Poniższy algorytm implementuje sortowanie przez wybieranie.
 \begin{codebox}
 \Procname{$\proc{Selection-Sort}(A)$}
 \li	$n\gets\id{length}[A]$
@@ -85,7 +85,7 @@ Poniższy algorytm implementuje sortowanie przez wybieranie.
 			$\id{min}\gets j$
 \li			\For $i\gets j+1$ \To $n$
 \li				\Do
-					\If $A[\id{min}]>A[i]$
+					\If $A[i]<A[\id{min}]$
 \li						\Then
 							$\id{min}\gets i$
 						\End
@@ -105,15 +105,15 @@ Ponieważ mamy $n-1$ przebiegów zewnętrznej pętli \kw{for}, a~wewnętrzna pę
 	T(n) = \sum_{i=1}^{n-1}(n-i) = \sum_{i=1}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2).
 \]
 
-\subsection{} %2.2-3
-Wykorzystując wynik \zad{C.3-2} otrzymujemy, że w~średnim przypadku należy sprawdzić $\frac{n+1}{2}$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
+\exercise{} %2.2-3
+\noindent Wykorzystując wynik \zad{C.3-2} mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
 
-\subsection{} %2.2-4
-Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymistyczny, można wykrywać na początku jego działania i~bezpośrednio zwracać dla tych danych wynik wyznaczony wcześniej innymi sposobami, zamiast obliczania go za pomocą tego algorytmu.
+\exercise{} %2.2-4
+\noindent Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymistyczny, można wykrywać na początku jego działania i~bezpośrednio zwracać dla tych danych wynik wyznaczony wcześniej innymi sposobami, zamiast obliczania go za pomocą tego algorytmu.
 
-\section{Projektowanie algorytmów}
+\subchapter{Projektowanie algorytmów}
 
-\subsection{} %2.3-1
+\exercise{} %2.3-1
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics{fig02.2}
@@ -121,8 +121,8 @@ Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymi
 	\caption{Symulacja algorytmu \proc{Merge-Sort}}
 \end{figure}
 
-\subsection{} %2.3-2
-Poniższa procedura implementuje operację łączenia bez wykorzystania wartowników.
+\exercise{} %2.3-2
+\noindent Poniższa procedura implementuje operację łączenia bez wykorzystania wartowników.
 \begin{codebox}
 \Procname{$\proc{Merge'}(A,p,q,r)$}
 \li	$n_1\gets q-p+1$
@@ -166,15 +166,15 @@ Poniższa procedura implementuje operację łączenia bez wykorzystania wartowni
 \end{codebox}
 Po zakończeniu pętli \kw{while} z~wierszy \ref{li:merge-while-begin}\nobreakdash--\ref{li:merge-while-end} wszystkie elementy z~co najmniej jednej tablicy $L$ lub $R$ zostały przekopiowane do $A$, więc w~kolejnych dwóch pętlach \kw{while} realizujemy kopiowanie pozostałej części $L$ lub $R$ na koniec $A$. Tylko co najwyżej jedna z~tych pętli wykona swój kod więcej niż raz.
 
-\subsection{} %2.3-3
-Przeprowadzimy dowód przez indukcję względem $k$. Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi. Załóżmy teraz, że $k\ge1$, czyli $n\ge2$ i~że zachodzi $T(n)=n\lg n$. Mamy
+\exercise{} %2.3-3
+\noindent Przeprowadzimy dowód przez indukcję względem $k$. Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi. Załóżmy teraz, że $k>1$, czyli $n>2$ i~że zachodzi $T(n/2)=(n/2)\lg(n/2)$. Mamy
 \[
-	T(2n) = 2T(n)+2n = 2n\lg n+2n = 2n(\lg n+\lg 2) = 2n\lg(2n),
+	T(n) = 2T(n/2)+n = 2(n/2)\lg(n/2)+n = n(\lg n-1)+n = n\lg n,
 \]
-a~zatem $n\lg n$ jest rozwiązaniem rekurencji dla $n$ będącym potęgą 2.
+co dowodzi rozwiązania rekurencji dla $n$ będącego potęgą~2.
 
-\subsection{} %2.3-4
-Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$. Ponieważ wstawienie $A[n]$ w~posortowaną tablicę $A[1\twodots n-1]$ odbywa się w~najgorszym przypadku w~czasie $\Theta(n)$, to stąd
+\exercise{} %2.3-4
+\noindent Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$. Ponieważ wstawienie $A[n]$ w~posortowaną podtablicę $A[1\twodots n-1]$ odbywa się w~najgorszym przypadku w~czasie $\Theta(n)$, to stąd
 \[
 	T(n) =
 	\begin{cases}
@@ -184,12 +184,12 @@ Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$.
 \]
 Rozwiązując rekurencję dostajemy
 \begin{align*}
-	T(n) &= T(n-1)+\Theta(n) = T(n-2)+\Theta(n-1)+\Theta(n) = \ldots \\
-	&= \sum_{i=1}^n\Theta(i) = \Theta\biggl(\sum_{i=1}^ni\biggr) = \Theta\left(\frac{n(n+1)}{2}\right) = \Theta(n^2).
+	T(n) &= T(n-1)+\Theta(n) = T(n-2)+\Theta(n-1)+\Theta(n) = \dots \\
+	&= \sum_{i=1}^n\Theta(i) = \Theta\biggl(\sum_{i=1}^ni\biggr) = \Theta\biggl(\frac{n(n+1)}{2}\biggr) = \Theta(n^2).
 \end{align*}
 
-\subsection{} %2.3-5
-Procedura \proc{Binary-Search} przyjmuje na wejście posortowaną niemalejąco tablicę $A$, szukaną wartość $v$ i~zakres $[\id{low}, \id{high}]$ tablicy $A$, w~którym będzie szukane $v$. Procedura porównuje $v$ z~elementem środkowym zakresu tablicy $A[\id{mid}]$ i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę zakresu.
+\exercise{} %2.3-5
+\noindent Procedura \proc{Binary-Search} przyjmuje na wejście posortowaną niemalejąco tablicę $A$, szukaną wartość $v$ i~zakres $[\,\id{low}, \id{high}\,]$ tablicy $A$, w~którym będzie szukane $v$. Procedura porównuje $v$ z~elementem środkowym zakresu tablicy $A[\id{mid}]$ i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę zakresu.
 
 Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego. W~przypadku odnalezienia wartości $v$ w~tablicy $A$, zwracany jest taki indeks $i$, że $A[i]=v$. Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}.
 
@@ -228,10 +228,10 @@ Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiw
 					$\id{high}\gets\id{mid}-\,1$
 				\End
 		\End
-\li	\Return \const{nil}
+\li	\Return\const{nil}
 \end{codebox}
 
-Obie wersje procedury \proc{Binary-Search} kończą swe działanie znajdując $v$ na pewnej pozycji tablicy $A$ lub nie znajdując go, w~przypadku gdy zakres poszukiwań okaże się pusty (czyli $\id{low}>\id{high}$). Po przyrównaniu $v$ do środkowego elementu zakresu, procedura odrzuca połowę zakresu i~poszukuje $v$ w~drugiej połowie. Rekurencja opisująca czas jej działania jest postaci
+Obie wersje algorytmu \proc{Binary-Search} kończą swe działanie znajdując $v$ na pewnej pozycji tablicy $A$ lub nie znajdując go, w~przypadku gdy zakres poszukiwań okaże się pusty (czyli $\id{low}>\id{high}$). Po przyrównaniu $v$ do środkowego elementu zakresu, procedura odrzuca połowę zakresu i~poszukuje $v$ w~drugiej połowie. Rekurencja opisująca czas jej działania jest postaci
 \[
 	T(n) =
 	\begin{cases}
@@ -241,11 +241,11 @@ Obie wersje procedury \proc{Binary-Search} kończą swe działanie znajdując $v
 \]
 Jej rozwiązaniem (patrz \zad{4.3-3}) jest $T(n)=\Theta(\lg n)$.
 
-\subsection{} %2.3-6
-Stosując wyszukiwanie binarne można znaleźć pozycję tablicy, na którą należy wstawić kolejny element z~nieposortowanego fragmentu, jednak umieszczenie go na tej pozycji wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, a~to w~najgorszym przypadku może wymagać czasu $\Theta(n)$. Nie można zatem obniżyć czasu działania sortowania przez wstawianie przez zastosowanie wyszukiwania binarnego.
+\exercise{} %2.3-6
+\noindent Stosując wyszukiwanie binarne można znaleźć pozycję tablicy, na którą należy wstawić kolejny element z~nieposortowanego fragmentu, jednak umieszczenie go na tej pozycji wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, a~to w~najgorszym przypadku może wymagać czasu $\Theta(n)$. Nie można zatem obniżyć czasu działania sortowania przez wstawianie poprzez zastosowanie wyszukiwania binarnego.
 
-\subsection{} %2.3-7
-Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\zad{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu można pominąć. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
+\exercise{} %2.3-7
+\noindent Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\zad{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Sum-Search}(S,x)$}
 \li	$n\gets\id{length}[S]$
@@ -260,7 +260,7 @@ Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, któ
 \li	\Return\const{false}
 \end{codebox}
 
-Procedura \proc{Merge-Sort} działa w~czasie $\Theta(n\lg n)$, a~\proc{Binary-Search} jest wykonywane dla każdego elementu $S$ z~wyjątkiem ostatniego, zatem pesymistyczny czas algorytmu \proc{Sum-Search} wynosi
+Procedura \proc{Merge-Sort} działa w~czasie $\Theta(n\lg n)$, a~\proc{Binary-Search} jest wykonywane dla tablic o~rozmiarach 1, 2,~\dots,~$n-1$, zatem pesymistyczny czas algorytmu \proc{Sum-Search} wynosi
 \[
 	\Theta(n\lg n)+\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(n\lg n)+\Theta(\lg(n!))-\Theta(\lg n) = \Theta(n\lg n),
 \]
@@ -268,68 +268,68 @@ ponieważ $\lg(n!)=\Theta(n\lg n)$ (patrz \zad{3.2-3}).
 
 \problems
 
-\subsection{Sortowanie przez wstawianie dla małych tablic podczas sortowania przez scalanie} %2-1
+\exercise{Sortowanie przez wstawianie dla małych tablic podczas sortowania przez scalanie} %2-1
 
-\subsubsection{} %2-1(a)
+\subexercise{} %2-1(a)
 Sortowanie przez wstawianie podlisty o~długości $k$ działa w~czasie pesymistycznym $\Theta(k^2)$, a~zastosowane do $n/k$ takich podlist zajmuje czas równy $(n/k)\cdot\Theta(k^2)=\Theta(nk)$.
 
-\subsubsection{} %2-1(b)
-Uogólniając procedurę scalania dwóch podlist na scalanie $n/k$ podlist w~jedną, można osiągnąć czas $\Theta(n^2\!/k)$ (kopiujemy $n$ elementów, dla każdego sprawdzając która z~$n/k$ podlist jest tą, w~której element powinien się znaleźć).
+\subexercise{} %2-1(b)
+Uogólniając procedurę scalania dwóch podlist na scalanie $n/k$ podlist w~jedną, można osiągnąć czas $\Theta(n^2\!/k)$ (kopiujemy $n$ elementów, dla każdego sprawdzając, która z~$n/k$ podlist jest tą, w~której element powinien się znaleźć).
 
 Lepszy czas można uzyskać dzięki scalaniu podlist parami, następnie otrzymane większe podlisty również scalając parami itd., aż do uzyskania pojedynczej listy wynikowej. Na każdym poziomie scalanie wymaga czasu $\Theta(n)$, jest $\lceil\lg(n/k)\rceil$ poziomów, a~zatem czas działania scalania $n/k$ podlist wynosi $\Theta(n\lg(n/k))$.
 
-\subsubsection{} %2-1(c)
+\subexercise{} %2-1(c)
 Czas działania zmodyfikowanego algorytmu ma ten sam rząd złożoności co czas działania sortowania przez scalanie, o~ile zachodzi $\Theta(nk+n\lg(n/k))=\Theta(n\lg n)$. Zauważmy, że jeśli $k=o(\lg n)$, to czas działania algorytmu zmodyfikowanego wynosi $o(n\lg n)$. Zbadajmy zatem, czy czasy obu algorytmów są równe dla $k=\Theta(\lg n)$.
 \begin{align*}
 	\Theta(nk+n\lg(n/k)) &= \Theta(nk+n\lg n-n\lg k) \\
 	&= \Theta(2n\lg n-n\lg\lg n) \\
 	&= \Theta(n\lg n),
 \end{align*}
-dzięki opuszczeniu składników niższego rzędu i~pominięciu stałych współczynników. Maksymalnym rzędem $k$, dla którego czas zmodyfikowanego algorytmu jest równy czasowi zwykłego sortowania przez scalanie, jest zatem $\Theta(\lg n)$.
+dzięki opuszczeniu składnika niższego rzędu i~pominięciu stałego współczynnika. Maksymalnym rzędem $k$, dla którego czas zmodyfikowanego algorytmu jest równy czasowi zwykłego sortowania przez scalanie, jest zatem $\Theta(\lg n)$.
 
-\subsubsection{} %2-1(d)
+\subexercise{} %2-1(d)
 W~praktyce, $k$ powinno być największą długością listy, dla której sortowanie przez wstawianie działa szybciej od sortowania przez scalanie.
 
-\subsection{Poprawność sortowania bąbelkowego} %2-2
+\exercise{Poprawność sortowania bąbelkowego} %2-2
 
-\subsubsection{} %2-2(a)
+\subexercise{} %2-2(a)
 Należy jeszcze pokazać, że tablica $A'$ stanowi permutację tablicy $A$.
 
-\subsubsection{} %2-2(b)
+\subexercise{} %2-2(b)
 Niezmiennik wewnętrznej pętli \kw{for}:
 \begin{quote}
 Przed każdą iteracją pętli \kw{for} w~wierszach 2\nobreakdash--4 najmniejszy element z~podtablicy $A[j\twodots n]$ znajduje się w~$A[j]$.
 \end{quote}
 \begin{description}
-	\item[Inicjowanie:] Przed pierwszą iteracją $j=n$, więc podtablica $A[j\twodots n]$ zawiera jeden element, który oczywiście jest najmniejszym elementem tej podtablicy i~znajduje się w~$A[j]$.
-	\item[Utrzymanie:] Załóżmy, że $A[j]$ jest najmniejszym elementem w~$A[j\twodots n]$. Jeżeli $A[j-1]$ jest większe od $A[j]$, to $A[j]$ jest zamieniane z~$A[j-1]$ w~wierszu 4, więc teraz podtablica $A[j-1\twodots n]$ posiada swój najmniejszy element w~$A[j-1]$. Uaktualnienie $j$ powoduje odtworzenie niezmiennika. W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmniejszy element $A[j-1\twodots n]$ i~aktualizacja $j$ powoduje, że teraz również niezmiennik pozostaje spełniony.
-	\item[Zakończenie:] Po zakończeniu wykonywania pętli $j=i$, więc $A[i]$ jest najmniejszym elementem podtablicy $A[i\twodots n]$, gdyż jeśli podczas ostatniej iteracji pętli zachodziłoby $A[i]>A[j]$ czyli $A[i]>A[i+1]$, to elementy te byłyby z~sobą zamienione.
+	\item[Inicjowanie:] Przed pierwszą iteracją $j=n$, więc $A[j\twodots n]$ zawiera jeden element, który oczywiście jest najmniejszy w~tej podtablicy i~znajduje się w~$A[j]$.
+	\item[Utrzymanie:] Załóżmy, że $A[j]$ jest najmniejszym elementem w~$A[j\twodots n]$. Jeżeli $A[j-1]$ jest większe od $A[j]$, to $A[j]$ jest zamieniane z~$A[j-1]$ w~wierszu~4, więc w~tym momencie podtablica $A[j-1\twodots n]$ posiada swój najmniejszy element w~$A[j-1]$. Uaktualnienie $j$ powoduje odtworzenie niezmiennika. W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmniejszy element $A[j-1\twodots n]$ i~aktualizacja $j$ powoduje, że niezmiennik także pozostaje spełniony.
+	\item[Zakończenie:] Po zakończeniu wykonywania pętli $j=i$, więc $A[i]$ jest najmniejszym elementem podtablicy $A[i\twodots n]$, gdyż jeśli podczas ostatniej iteracji pętli, kiedy to $j=i+1$, zachodziłoby $A[i]>A[j]$, czyli $A[i]>A[i+1]$, to elementy te byłyby z~sobą zamienione.
 \end{description}
 
-\subsubsection{} %2-2(c)
+\subexercise{} %2-2(c)
 Niezmiennik zewnętrznej pętli \kw{for}:
 \begin{quote}
 Przed każdą iteracją pętli \kw{for} w~wierszach 1\nobreakdash--4 podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc podtablica $A[1\twodots i-1]$ jest pusta, a~jako taka jest oczywiście posortowana niemalejąco.
-	\item[Utrzymanie:] Z~założenia, że $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy. Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots n]$ najmniejszy element i~umieszcza go na pozycji $A[i]$ (dowód w~poprzednim punkcie). W~podtablicy $A[i\twodots n]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem będzie zachodzić $A[i-1]\le A[i]$. Na podstawie założenia wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
+	\item[Utrzymanie:] Z~założenia, że $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy. Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots n]$ najmniejszy element i~umieszcza go na pozycji $A[i]$ (dowód w~poprzednim punkcie). W~podtablicy $A[i\twodots n]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem będzie w~szczególności zachodzić $A[i-1]\le A[i]$. Na podstawie założenia wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
 	\item[Zakończenie:] Na końcu mamy $i=n+1$. Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco, a~zatem algorytm sortuje poprawnie.
 \end{description}
 
-\subsubsection{} %2-2(d)
-Pętla \kw{for} z~wierszy 2\nobreakdash--4 wykonuje $n-i$ iteracji dla każdego $i=1$, $2$,~$\dots$,~$n$. Czasem działania sortowania bąbelkowego dla wszystkich przypadków danych wejściowych jest zatem
+\subexercise{} %2-2(d)
+Pętla \kw{for} z~wierszy 2\nobreakdash--4 wykonuje $n-i$ iteracji dla każdego $i=1$, 2,~\dots,~$n$. Czasem działania sortowania bąbelkowego dla wszystkich przypadków danych wejściowych jest zatem
 \[
 	T(n) = \sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2).
 \]
 Pesymistyczny czas działania sortowania bąbelkowego jest więc równy pesymistycznemu czasowi sortowania przez wstawianie.
 
-\subsection{Poprawność schematu Hornera} %2-3
+\exercise{Poprawność schematu Hornera} %2-3
 
-\subsubsection{} %2-3(a)
+\subexercise{} %2-3(a)
 Pętla \kw{while} w~wierszach 3\nobreakdash--5 wykonuje $n+1$ iteracji, więc czas działania tego fragmentu kodu wynosi $\Theta(n)$.
 
-\subsubsection{} %2-3(b)
+\subexercise{} %2-3(b)
 Niech ciąg $A=(a_0,a_1,\dots,a_n)$ zawiera kolejne współczynniki wielomianu $P$. Następujący algorytm oblicza wartość $P(x)$:
 \begin{codebox}
 \Procname{$\proc{Naive-Polynomial-Evaluation}(A,x)$}
@@ -345,12 +345,16 @@ Niech ciąg $A=(a_0,a_1,\dots,a_n)$ zawiera kolejne współczynniki wielomianu $
 		\End
 \li	\Return $y$
 \end{codebox}
-Pętla \kw{for} w~wierszach \ref{li:naive-pol-eval-for-begin}\nobreakdash--\ref{li:naive-pol-eval-for-end} wykonuje się $i$ razy dla każdego $i=0$, $1$,~$\dots$,~$n$, a~zatem czas działania powyższego algorytmu (pomijając czas stały spędzony na przypisaniach) wynosi $T(n)=\sum_{i=0}^ni=\frac{n(n+1)}{2}=\Theta(n^2)$, zatem jest to mniej efektywny algorytm od schematu Hornera.
+Pętla \kw{for} w~wierszach \ref{li:naive-pol-eval-for-begin}\nobreakdash--\ref{li:naive-pol-eval-for-end} wykonuje się $i$ razy dla każdego $i=0$, 1,~\dots,~$n$, a~zatem czas działania powyższego algorytmu (pomijając czas stały spędzony na przypisaniach) wynosi
+\[
+	T(n) = \sum_{i=0}^ni = \frac{n(n+1)}{2} = \Theta(n^2),
+\]
+jest to więc mniej efektywny algorytm od schematu Hornera.
 
-\subsubsection{} %2-3(c)
+\subexercise{} %2-3(c)
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=n$, więc $y=\sum_{k=0}^{-1}a_{k+n+1}x^k=0$, co zgadza się z~bieżącą wartością $y$.
-	\item[Utrzymanie:] Podczas kolejnych iteracji do poprzedniej wartości $y$ przypisywana jest wartość $a_i+xy$. Mamy zatem
+	\item[Utrzymanie:] Podczas kolejnych iteracji $y$ przyjmuje wartość $a_i+xy$. Mamy zatem
 	\[
 		y = a_i+\sum_{k=0}^{n-(i+1)}a_{k+i+1}x^{k+1} = a_ix^0+\sum_{k=1}^{n-i}a_{k+i}x^k = \sum_{k=0}^{n-i}a_{k+i}x^k,
 	\]
@@ -362,27 +366,27 @@ Pętla \kw{for} w~wierszach \ref{li:naive-pol-eval-for-begin}\nobreakdash--\ref{
 	a to jest wartość $P(x)$, zatem algorytm poprawnie oblicza wynik.
 \end{description}
 
-\subsubsection{} %2-3(d)
-Algorytm zwraca poprawny wynik, gdyż ustawia prawidłowe początkowe wartości $y=0$ i~$i=n$, a~poprawność pętli \kw{while} została wykazana w~poprzednim punkcie. Procedura posiada własność stopu, ponieważ zmienna $i$ jest zmniejszana w~kolejnych obiegach pętli, zatem po skończonej liczbie obiegów i~po skończonej liczbie kroków algorytmu, będzie zachodzić $i=0$, co jest warunkiem zakończenia pętli. Algorytm działa więc poprawnie.
+\subexercise{} %2-3(d)
+Algorytm zwraca poprawny wynik, gdyż ustawia prawidłowe początkowe wartości $y=0$ oraz $i=n$, a~poprawność pętli \kw{while} została wykazana w~poprzednim punkcie. Procedura posiada własność stopu, ponieważ zmienna $i$ jest zmniejszana w~kolejnych obiegach pętli, zatem po skończonej liczbie obiegów i~po skończonej liczbie kroków algorytmu, będzie zachodzić $i=0$, co jest warunkiem zakończenia pętli. Algorytm działa więc poprawnie.
 
-\subsection{Inwersje} %2-4
+\exercise{Inwersje} %2-4
 
-\subsubsection{} %2-4(a)
+\subexercise{} %2-4(a)
 $(1,5)$, $(2,5)$, $(3,4)$, $(3,5)$, $(4,5)$.
 
-\subsubsection{} %2-4(b)
-Największą możliwą liczbę inwersji posiada tablica o~różnych elementach posortowana malejąco. Każdy element na pozycji $i$ tworzy inwersję z~każdym z~$n-i$ elementów na prawo od niego w~tej tablicy. Liczba inwersji wynosi zatem
+\subexercise{} %2-4(b)
+Największą możliwą liczbę inwersji posiada tablica o~różnych elementach, posortowana malejąco. Każdy element na pozycji $i$ tworzy inwersję z~każdym z~$n-i$ elementów na prawo od niego w~tej tablicy. Liczba inwersji wynosi zatem
 \[
 	\sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2}.
 \]
 
-\subsubsection{} %2-4(c)
-Załóżmy, że tablica $A$ posiada inwersję $(i,j)$. To znaczy, że $i<j$ oraz $A[i]>A[j]$. Wtedy w~procedurze \proc{Insertion-Sort} pewna iteracja pętli \kw{while} w~wierszach 5\nobreakdash--7 przesunie $A[i]$ o~jedną pozycję w~prawo, podczas gdy element będący pierwotnie w~$A[j]$ będzie znajdował się na lewo od niego, przez co wyeliminowana zostanie jedna z~inwersji. Tak więc każda iteracja pętli \kw{while} usuwa jedną inwersję tablicy $A$ i~liczba inwersji $A$ jest tego samego rzędu, co czas algorytmu sortowania przez wstawianie wykonanego na $A$.
+\subexercise{} %2-4(c)
+Załóżmy, że tablica $A$ posiada inwersję $(i,j)$. To znaczy, że $i<j$ oraz $A[i]>A[j]$. Wtedy w~procedurze \proc{Insertion-Sort} pewna iteracja pętli \kw{while} w~wierszach 5\nobreakdash--7 przesunie $A[i]$ o~jedną pozycję w~prawo, podczas gdy element będący pierwotnie w~$A[j]$ będzie znajdował się na lewo od niego, przez co wyeliminowana zostanie jedna z~inwersji. Tak więc każda iteracja pętli \kw{while} usuwa jedną inwersję tablicy $A$, skąd wnioskujemy, że ich liczba jest tego samego rzędu, co czas działania algorytmu sortowania przez wstawianie wykonanego na $A$.
 
-\subsubsection{} %2-4(d)
-Załóżmy, że podczas sortowania procedurą \proc{Merge-Sort} w~pewnym momencie jedna ze scalanych podtablic, $L$ zawiera element $a_x$ znajdujący się początkowo w~$A[x]$, a~$R$ -- element $a_y$ będący początkowo w~$A[y]$. W~wierszu $14$ dokonujemy sprawdzenia, który z~tych elementów jest większy. Jeśli warunek ten zachodzi, to znaczy, że $a_x$ i~$a_y$ nie tworzą inwersji. W~przeciwnym przypadku $a_x>a_y$, a~ponieważ scalane podtablice są posortowane, to $a_y$ jest mniejsze od każdego dotychczas nieprzetworzonego elementu podtablicy $L$. Liczba elementów $A$ należących do $L$ wynosi $n_1$, zatem w~momencie przetwarzania $a_y$, jest w~niej $n_1-i+1$ nieskopiowanych elementów, a~więc tyle inwersji tworzy z~nimi $a_x$. Ponieważ od tego momentu element ten będzie z~nimi w~jednej podtablicy, to gwarantuje to, że nie policzymy żadnej inwersji dwukrotnie.
+\subexercise{} %2-4(d)
+Załóżmy, że podczas sortowania procedurą \proc{Merge-Sort} w~pewnym momencie jedna ze~scalanych podtablic $L$ zawiera element $a_x$ znajdujący się początkowo w~$A[x]$, a~druga podtablica $R$ -- element $a_y$ będący początkowo w~$A[y]$. W~wierszu~14 dokonujemy sprawdzenia, który z~tych elementów jest większy. Jeśli warunek ten zachodzi, to znaczy, że $a_x$ i~$a_y$ nie tworzą inwersji. W~przeciwnym przypadku $a_x>a_y$, a~ponieważ scalane podtablice są posortowane, to $a_y$ jest mniejsze od każdego dotychczas nieprzetworzonego elementu podtablicy $L$. Liczba elementów $A$ należących do $L$ wynosi $n_1$, zatem w~momencie przetwarzania $a_y$, jest w~niej $n_1-i+1$ nieskopiowanych elementów, a~więc tyle inwersji tworzy z~nimi $a_x$. Ponieważ od tego momentu element ten będzie z~nimi w~jednej podtablicy, to nie policzymy żadnej inwersji dwukrotnie.
 
-W~ten sposób, modyfikując algorytm sortowania przez scalanie, policzymy liczbę wszystkich inwersji tablicy $A$. W~procedurze \proc{Merge-Sort} wystarczy początkowo wyzerować liczbę inwersji i~następnie sumować częściowe wyniki po wywołaniach rekurencyjnych, a~w \proc{Merge} przy niespełnieniu warunku z~wiersza 14, doliczać odpowiednią liczbę inwersji tworzonych przez element $a_y$. Przeprowadzone rozumowanie prowadzi to do następujących algorytmów:
+W~ten sposób, modyfikując algorytm sortowania przez scalanie, policzymy liczbę wszystkich inwersji tablicy $A$. W~procedurze \proc{Merge-Sort} wystarczy początkowo wyzerować licznik inwersji i~następnie sumować częściowe wyniki zwracane z~wywołań rekurencyjnych, a~w \proc{Merge} przy niespełnieniu warunku z~wiersza~14, doliczać odpowiednią liczbę inwersji tworzonych przez element $a_y$. Przeprowadzone rozumowanie prowadzi do następujących algorytmów:
 
 \begin{codebox}
 \Procname{$\proc{Count-Inversions}(A,p,r)$}
@@ -414,6 +418,7 @@ W~ten sposób, modyfikując algorytm sortowania przez scalanie, policzymy liczb�
 \li	$R[n_2+1]\gets\infty$
 \li	$i\gets1$
 \li	$j\gets1$
+\li	$\id{inversions}\gets0$
 \li	\For $k\gets p$ \To $r$
 \li		\Do
 \li			\If $L[i]\le R[j]$

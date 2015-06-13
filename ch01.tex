@@ -1,15 +1,15 @@
 \chapter{Rola algorytmów w~obliczeniach}
 
-\section{Algorytmy}
+\subchapter{Algorytmy}
 
-\subsection{} %1.1-1
+\exercise{} %1.1-1
 \begin{description}
-	\item[sortowanie:] porządkowanie kart otrzymanych w~rozdaniu względem ich wartości,
+	\item[sortowanie:] jest to problem na tyle powszechny, że znajduje zastosowanie w~ogromnej większości zagadnień obliczeniowych, najczęstszym powodem sortowania danych jest przygotowanie ich do dalszego przetwarzania, które jest wtedy na ogół dużo bardziej efektywne,
 	\item[optymalna kolejność mnożenia macierzy:] wyznaczanie transformacji graficznych (np. skalowań, obrotów); przekształcenia te opisane są za pomocą macierzy, a~ich składanie oznacza obliczanie iloczynu tych macierzy,
 	\item[otoczka wypukła:] mając zbiór wbitych w~ziemię palików, chcemy otoczyć pewien obszar siatką ogrodzeniową opierając ją na niektórych palikach tak, by obszar ten zmaksymalizować.
 \end{description}
 
-\subsection{} %1.1-2
+\exercise{} %1.1-2
 \begin{itemize}
 	\item minimalizacja zużycia pamięci (operacyjnej i~masowej)
 	\item minimalizacja wykorzystania systemu operacyjnego
@@ -19,8 +19,8 @@
 	\item efektywność działania w~architekturze równoległej lub rozproszonej
 \end{itemize}
 
-\subsection{} %1.1-3
-W~następującym zestawieniu porównano listę dwukierunkową ze zwykłą tablicą.
+\exercise{} %1.1-3
+\noindent W~następującym zestawieniu porównano listę dwukierunkową ze zwykłą tablicą.
 
 \bigskip
 \noindent\textbf{Zalety:}
@@ -36,7 +36,7 @@ W~następującym zestawieniu porównano listę dwukierunkową ze zwykłą tablic
 	\item w~przeciwieństwie do tablicy, lista nie zajmuje ciągłego obszaru pamięci, przez co kompilator nie ma możliwości dokonania pewnych optymalizacji przez przechowanie jej w~pamięci podręcznej.
 \end{itemize}
 
-\subsection{} %1.1-4
+\exercise{} %1.1-4
 \noindent\textbf{Podobieństwa:}
 \begin{itemize}
 	\item oba są problemami grafowymi,
@@ -45,55 +45,58 @@ W~następującym zestawieniu porównano listę dwukierunkową ze zwykłą tablic
 \textbf{Różnice:}
 \begin{itemize}
 	\item problem najkrótszej ścieżki poszukuje minimalnej ścieżki między dwoma wierzchołkami, a~problem komiwojażera -- minimalny cykl uwzględniający wszystkie wierzchołki (minimalny cykl Hamiltona),
-	\item problem najkrótszej ścieżki jest wielomianowy (łatwo znaleźć dla niego efektywny algorytm), podczas gdy problem komiwojażera jest \mbox{NP-zupełny} (prawdopodobnie nie istnieje dla niego efektywny algorytm).
+	\item problem najkrótszej ścieżki jest wielomianowy (łatwo znaleźć dla niego efektywny algorytm), podczas gdy problem komiwojażera jest \twoparts{NP}{zupełny} (prawdopodobnie nie istnieje dla niego efektywny algorytm).
 \end{itemize}
 
-\subsection{} %1.1-5
-Problemem, którego pożądanym rozwiązaniem jest rozwiązanie dokładne, jest np. wyszukiwanie w~nieuporządkowanej tablicy. Obecność jednego elementu w~tej tablicy jest na ogół niezależna od obecności innych, zatem po sprawdzeniu kilku z~nich, nie znajdując poszukiwanego elementu, nadal dysponujemy taką samą wiedzą jak przed rozpoczęciem szukania.
+\exercise{} %1.1-5
+\noindent Problemem, którego pożądanym rozwiązaniem jest rozwiązanie dokładne, jest np. wyszukiwanie w~nieuporządkowanej tablicy. Obecność jednego elementu w~tej tablicy jest na ogół niezależna od obecności innych, zatem po sprawdzeniu kilku z~nich, nie znajdując poszukiwanego elementu, nadal dysponujemy taką samą wiedzą jak przed rozpoczęciem szukania.
 
 Znalezienie rozwiązania przybliżonego jest natomiast wystarczające w~wielu praktycznych zastosowaniach dla problemu komiwojażera.
 
-\section{Algorytmy jako technologia}
+\subchapter{Algorytmy jako technologia}
 
-\subsection{} %1.2-1
-Przykładem aplikacji, w~której wykorzystywanych jest wiele różnorodnych algorytmów jest współczesna gra komputerowa. Jej silnik grafiki trójwymiarowej może być zaawansowanym środowiskiem, w~którym zastosowano algorytmy geometrii obliczeniowej i~renderowania grafiki 3D, jak również wiele algorytmów numerycznych do wyznaczania interpolacji oraz algorytmy grafowe. Także w~dziedzinie sztucznej inteligencji opracowano wiele zaawansowanych algorytmów. Ponadto często spotykane problemy, takie jak wyszukiwanie elementu w~tablicy czy sortowanie są rozwiązywane w~takiej aplikacji.
+\exercise{} %1.2-1
+\noindent Przykładem aplikacji, w~której wykorzystywane są różnorodne algorytmy jest współczesna gra komputerowa. Jej silnik grafiki trójwymiarowej może być zaawansowanym środowiskiem, w~którym zastosowano algorytmy geometrii obliczeniowej i~renderowania grafiki 3D, jak również wiele algorytmów numerycznych do wyznaczania interpolacji oraz algorytmy grafowe. Także w~dziedzinie sztucznej inteligencji opracowano wiele zaawansowanych algorytmów. Ponadto często spotykane problemy, takie jak wyszukiwanie elementu w~tablicy czy sortowanie są rozwiązywane w~takiej aplikacji.
 
-\subsection{} %1.2-2
-Nierówność $8n^2<64n\lg n$ jest spełniona dla $0<n\le43$, zatem sortowanie przez wstawianie uporządkuje tablicę o~rozmiarze nie przekraczającym 43 szybciej niż sortowanie przez scalanie.
+\exercise{} %1.2-2
+\noindent Nierówność $8n^2<64n\lg n$ jest spełniona dla $2\le n\le43$, zatem sortowanie przez wstawianie uporządkuje tablicę o~rozmiarze nie przekraczającym~43 szybciej niż sortowanie przez scalanie.
 
-\subsection{} %1.2-3
-Najmniejszym dodatnim $n$ spełniającym nierówność $100n^2<2^n$ jest $n=14$.
+\exercise{} %1.2-3
+\noindent Najmniejszym dodatnim $n$ spełniającym nierówność $100n^2<2^n$ jest $n=14$.
 
 \problems
 
-\subsection{Porównanie czasów działania} %1-1
-
-Dla uproszczenia obliczeń przyjęto, że na każdy miesiąc przypada 30 dni; nie uwzględniono też lat przestępnych.
+\exercise{Porównanie czasów działania} %1-1
+\noindent W~tabeli~\ref{tab:1-1} zebrano wyznaczone wartości. Dla uproszczenia obliczeń przyjęto, że na każdy miesiąc przypada 30 dni; nie uwzględniono też lat przestępnych.
 
 \begin{table}[ht]
-	\[
-		\begin{array}{c|c|c|c|c|c|c|c}
-			&1&1&1&1&1&1&1 \\
-			f(n) & \text{sekunda} & \text{minuta} & \text{godzina} & \text{dzień} & \text{miesiąc} & \text{rok} & \text{wiek} \\
-			\hline
-			\lg n~& 2^{10^6} & 2^{6\cdot 10^7} & 2^{3{,}6\cdot 10^9} & 2^{8{,}64\cdot 10^{10}} & 2^{2{,}59\cdot 10^{12}} & 2^{3{,}15\cdot 10^{13}} & 2^{3{,}15\cdot 10^{15}} \\
-			\hline
-			\sqrt{n} & 10^{12} & 3{,}6\cdot 10^{15} & 1{,}3\cdot 10^{19} & 7{,}47\cdot 10^{21} & 6{,}72\cdot 10^{24} & 9{,}95\cdot 10^{26} & 9{,}95\cdot 10^{30} \\
-			\hline
-			n & 10^6 & 6\cdot 10^7 & 3{,}6\cdot 10^9 & 8{,}64\cdot 10^{10} & 2{,}59\cdot 10^{12} & 3{,}15\cdot 10^{13} & 3{,}15\cdot 10^{15} \\
-			\hline
-			n\lg n~& 62746 & 2{,}8\cdot 10^6 & 1{,}3\cdot 10^8 & 2{,}75\cdot 10^9 & 7{,}18\cdot 10^{10} & 7{,}97\cdot 10^{11} & 6{,}86\cdot 10^{13} \\
-			\hline
-			n^2 & 1000 & 7745 & 60000 & 293938 & 1{,}61\cdot 10^6 & 5{,}62\cdot 10^6 & 5{,}62\cdot 10^7 \\
-			\hline
-			n^3 & 100 & 391 & 1532 & 4420 & 13736 & 31736 & 146645 \\
-			\hline
-			2^n & 19 & 25 & 31 & 36 & 41 & 44 & 51 \\
-			\hline
-			n! & 9~& 11 & 12 & 13 & 15 & 16 & 17
-		\end{array}
-	\]
-	\caption{Ograniczenia rozmiaru problemów} \label{tab:1-1}
+	\begin{center}
+		\[
+			\begin{array}{c|c|c|c|c|c|c|c}
+				&1&1&1&1&1&1&1 \\
+				f(n) & \text{sekunda} & \text{minuta} & \text{godzina} & \text{dzień} & \text{miesiąc} & \text{rok} & \text{wiek} \\
+				\hline
+				\lg n & 2^{10^6} & 2^{6\cdot10^7} & 2^{3{,}6\cdot10^9} & 2^{8{,}64\cdot10^{10}} & 2^{2{,}59\cdot10^{12}} & 2^{3{,}15\cdot10^{13}} & 2^{3{,}15\cdot10^{15}} \\
+				\hline
+				\sqrt{n} & 10^{12} & 3{,}6\cdot10^{15} & 1{,}3\cdot10^{19} & 7{,}47\cdot10^{21} & 6{,}72\cdot10^{24} & 9{,}95\cdot10^{26} & 9{,}95\cdot10^{30} \\
+				\hline
+				n & 10^6 & 6\cdot10^7 & 3{,}6\cdot10^9 & 8{,}64\cdot10^{10} & 2{,}59\cdot10^{12} & 3{,}15\cdot10^{13} & 3{,}15\cdot10^{15} \\
+				\hline
+				n\lg n & 62746 & 2{,}8\cdot10^6 & 1{,}3\cdot10^8 & 2{,}75\cdot10^9 & 7{,}18\cdot10^{10} & 7{,}97\cdot10^{11} & 6{,}86\cdot10^{13} \\
+				\hline
+				n^2 & 1000 & 7745 & 60000 & 293938 & 1{,}61\cdot10^6 & 5{,}62\cdot10^6 & 5{,}62\cdot10^7 \\
+				\hline
+				n^3 & 100 & 391 & 1532 & 4420 & 13736 & 31736 & 146645 \\
+				\hline
+				2^n & 19 & 25 & 31 & 36 & 41 & 44 & 51 \\
+				\hline
+				n! & 9 & 11 & 12 & 13 & 15 & 16 & 17
+			\end{array}
+		\]
+	\end{center}
+	\caption{Ograniczenia rozmiarów problemów} \label{tab:1-1}
 \end{table}
+
+\phantom{.} %zaślepka, bez tego tabelka układa się na środku strony
 
 \endinput

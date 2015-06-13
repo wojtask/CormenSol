@@ -14,39 +14,21 @@
 \usepackage{clrscode}
 \usepackage{mathdots}
 \usepackage{url}
-\usepackage{cormensol}
+\usepackage{sectsty}
+\usepackage{tocloft}
+\usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true]{hyperref}
+\usepackage{cormensol}
 
-%\id dla identyfikatorow
-%\proc dla procedur
-%\const dla stalych
-%\func dla ustalonych funkcji typu sin
-%\twodots dla .. (tylko w mathmode)
-
-% \begin{codebox}...\end{codebox} dla blokow pseudokodu
-% \Procname dla nazw procedury z parametrami (\Procname{$\proc{Dupa-Alfa}(A)$})
-% \li \zi do numerowanych i nienumerowanych linii
-% \kw do slow kluczowych w tekscie
-% \For \To \Downto \By \While \If \Return \Goto \Error \Comment \Repeat \Until nie wplywaja na wciecia
-% \Do \End \Then \Else \ElseIf \ElseNoIf wplywaja na wciecia
-% \> tab (np do komentarza w tej samej linii)
-% \ElseNoIf dla ostatniego else'a po ciagu else'ow
-% \Indentmore wcina bardziej linie
-% \RComment komentarz wyrownany do prawej strony
-% \Flushright wyrownuje kod do prawej
-% \label{li:nazwa} zakotwiczenie w danej linii, potem \ref{li:nazwa}
-% \setlinenumber (z liczba lub li:nazwa) ustawia biezacy licznik numeracji linii
-% \setlinenumberplus to samo co wyzej ale drugi parametr dodaje offset
+\allowdisplaybreaks[4]
 
 \begin{document}
 
 \frontmatter
 
-\include{title}
+\allsectionsfont{\sffamily\bfseries}
 
-\ifpdf
-	\addtocontents{toc}{\protect\pdfbookmark{Spis tre\'sci}{Tableofcont}}
-\fi
+\include{title}
 
 \ifpdf
 	\def\DelBookmark{\def\@writetorep##1##2##3##4{\relax}}
@@ -59,48 +41,80 @@
 	\include{intro}
 \endgroup
 
+\ifpdf
+	\addtocontents{toc}{\protect\pdfbookmark{Spis treści}{Tableofcont}}
+\fi
+
+\renewcommand{\cfttoctitlefont}{\Huge\sffamily\bfseries}
+\renewcommand{\cftpartfont}{\large\sffamily\bfseries}
+\renewcommand{\cftpartpagefont}{\large\sffamily\bfseries}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftchapfont}{\sffamily\bfseries}
+\renewcommand{\cftchappagefont}{\sffamily\bfseries}
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsecleader}{\sffamily\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsecpagefont}{\sffamily}
+
 \tableofcontents
 
-%\newpage\pagenumbering{roman}
-
-%\listoffigures
-%\listoftables
-
-\let\mychapter = \chapter
+\let\mychapter=\chapter
 \renewcommand{\chapter}[1]{
-	\mychapter{\sffamily{\bfseries{#1}}}
+	\mychapter{#1}
 	\setcounter{subsection}{0}
 	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
+	\lhead[\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\thepage}]{
+		\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\rightmark}
+	}
 }
 
 \mainmatter
+
+\part{Podstawy}
 
 \include{ch01}
 \include{ch02}
 \include{ch03}
 \include{ch04}
 \include{ch05}
+
+%\part{Sortowanie i statystyki pozycyjne}
+
 %\include{ch06}
 %\include{ch07}
 %\include{ch08}
 %\include{ch09}
+
+%\part{Struktury danych}
+
 %\include{ch10}
 %\include{ch11}
 %\include{ch12}
 %\include{ch13}
 %\include{ch14}
+
+%\part{Zaawansowane metody konstruowania i analizowania algorytmów}
+
 %\include{ch15}
 %\include{ch16}
 %\include{ch17}
+
+%\part{Złożone struktury danych}
+
 %\include{ch18}
 %\include{ch19}
 %\include{ch20}
 %\include{ch21}
+
+%\part{Algorytmy grafowe}
+
 %\include{ch22}
 %\include{ch23}
 %\include{ch24}
 %\include{ch25}
 %\include{ch26}
+
+%\part{Wybrane zagadnienia}
+
 %\include{ch27}
 %\include{ch28}
 %\include{ch29}
@@ -111,13 +125,22 @@
 %\include{ch34}
 %\include{ch35}
 
-\appendix
-%\def\thechapter{\sffamily\bfseries\Alph{chapter}}
+\setcounter{part}{7}
+\part{Dodatek: Podstawy matematyczne}
 
+\appendix
 \include{appa}
 \include{appb}
 \include{appc}
 
 \backmatter
+
+% \bibliographystyle{plalpha}
+% \bibliography{manual,btxdoc}
+% 
+% \begin{thebibliography}{Xxx99}
+% 	\bibitem[Clr04]{cormen}
+% 	{\sl Wprowadzenie do algorytmów}, Wydawnictwa Naukowo-Techniczne, Warszawa 2004
+% \end{thebibliography}
 
 \end{document}

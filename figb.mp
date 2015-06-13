@@ -1,3 +1,11 @@
+verbatimtex
+%&latex
+\documentclass{minimal}
+\usepackage[MeX]{polski}
+\usepackage[utf8]{inputenc}
+\begin{document}
+etex
+
 prologues := 2;
 
 def venn_base (expr u, v) =
@@ -73,12 +81,12 @@ beginfig(2);
 	shift := 4scale;
 
 	path p[];
-	p4 = graphnode(scale, (0, 0)); label(btex $4$ etex, center p4);
-	p1 = graphnode(scale, (0, shift)); label(btex $1$ etex, center p1);
-	p5 = graphnode(scale, (shift, 0)); label(btex $5$ etex, center p5);
-	p2 = graphnode(scale, (shift, shift)); label(btex $2$ etex, center p2);
-	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex $6$ etex, center p6);
-	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex $3$ etex, center p3);
+	p4 = graphnode(scale, (0, 0)); label(btex 4 etex, center p4);
+	p1 = graphnode(scale, (0, shift)); label(btex 1 etex, center p1);
+	p5 = graphnode(scale, (shift, 0)); label(btex 5 etex, center p5);
+	p2 = graphnode(scale, (shift, shift)); label(btex 2 etex, center p2);
+	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex 6 etex, center p6);
+	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex 3 etex, center p3);
 
 	draw point 0 of p1 -- point 4 of p2;
 	draw point 6 of p1 -- point 2 of p4;
@@ -94,12 +102,12 @@ beginfig(3);
 	curlshift := .5scale;
 
 	path p[];
-	p4 = graphnode(scale, (0, 0)); label(btex $4$ etex, center p4);
-	p1 = graphnode(scale, (0, shift)); label(btex $1$ etex, center p1);
-	p5 = graphnode(scale, (shift, 0)); label(btex $5$ etex, center p5);
-	p2 = graphnode(scale, (shift, shift)); label(btex $2$ etex, center p2);
-	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex $6$ etex, center p6);
-	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex $3$ etex, center p3);
+	p4 = graphnode(scale, (0, 0)); label(btex 4 etex, center p4);
+	p1 = graphnode(scale, (0, shift)); label(btex 1 etex, center p1);
+	p5 = graphnode(scale, (shift, 0)); label(btex 5 etex, center p5);
+	p2 = graphnode(scale, (shift, shift)); label(btex 2 etex, center p2);
+	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex 6 etex, center p6);
+	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex 3 etex, center p3);
 
 	drawarrow point .5 of p1 {curl 1} .. (.5shift, shift + curlshift) .. {curl 1} point 3.5 of p2;
 	drawarrow point 4.5 of p2 {curl 1} .. (.5shift, shift - curlshift) .. {curl 1} point 7.5 of p1;

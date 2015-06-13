@@ -9,16 +9,14 @@
 \addtolength{\voffset}{-0.5cm}
 \addtolength{\textheight}{3cm}
 
-\DeclareGraphicsRule{*}{mps}{*}{}
-
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\E}{E}
-\DeclareMathOperator{\Var}{Var}
+\ifpdf
+	\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
 
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{3}
 
-\renewcommand\section{\@startsection
+\newcommand\subchapter{\@startsection
 	{section}
 	{1}
 	{-1.5mm}
@@ -27,7 +25,7 @@
 	{\Large\sffamily\bfseries}
 }
 
-\renewcommand\subsection{\@startsection
+\newcommand\exercise{\@startsection
 	{subsection}
 	{2}
 	{-1.5mm}
@@ -36,7 +34,7 @@
 	{\sffamily\bfseries}
 }
 
-\renewcommand\subsubsection{\@startsection
+\newcommand\subexercise{\@startsection
 	{subsubsection}
 	{3}
 	{0mm}
@@ -50,39 +48,34 @@
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
 \def\thesubsubsection{(\alph{subsubsection})}
 
-\def\problems{
-	\section{Problemy}
-	%\addcontentsline{toc}{section}{Problemy}
-	\setcounter{subsection}{0}
-	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}
-	\def\thesection{\thechapter.\arabic{section}.}
-}
-
-\def\refname{\sffamily\bfseries Literatura}
-\def\bibname{\sffamily\bfseries Bibliografia}
-\def\chaptername{\sffamily\bfseries Rozdzia\PLSlash l}
-\def\appendixname{\sffamily\bfseries Dodatek}
-\def\contentsname{\sffamily\bfseries Spis tre\'sci}
-\def\listfigurename{\sffamily\bfseries Spis rysunk\'ow}
-\def\listtablename{\sffamily\bfseries Spis tabel}
+\def\theequation{\arabic{equation}}
+\def\thefigure{\arabic{figure}}
+\def\thetable{\arabic{table}}
 
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
-\lhead[\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\thepage}]{
-	\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\rightmark}
-}
-\rhead[\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\leftmark}]{
-	\fancyplain{}{\renewcommand\familydefault{\rmdefault}\sffamily\small\bfseries\thepage}
-}
+\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
+\rhead[\fancyplain{}{\small\sffamily\bfseries\leftmark}]{\fancyplain{}{\small\sffamily\bfseries\thepage}}
 \cfoot[]{}
 \addtolength{\headheight}{1.6pt}
 
-\newtheorem{definicja}{Definicja}[section]
-\newtheorem{twierdzenie}{Twierdzenie}[section]
-\newtheorem{twierdzenie*}{Twierdzenie}
-\newtheorem{lemat}{Lemat}[twierdzenie]
-\newtheorem{lemat*}{Lemat}
+\newcommand\problems{
+	\section*{\hspace{-1.5mm}Problemy}
+	\addcontentsline{toc}{section}{Problemy}
+	\setcounter{subsection}{0}
+	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}
+	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
+}
+
+\newtheorem{definicja}{Definicja}
+\newtheorem{twierdzenie}{Twierdzenie}
+\newtheorem{lemat}[twierdzenie]{Lemat}
 
 \newcommand{\twoparts}[2]{#1\nobreakdash-#2}
 \newcommand{\zad}[1]{zad.~\hbox{#1}}
+\newcommand{\note}[1]{\noindent\emph{#1}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}

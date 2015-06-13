@@ -1,85 +1,83 @@
-OGÓLNE
+DO ZROBIENIA:
+- pozostałe rozdziały
+- rozwiązania zadań z wydania 1 (?) i wydania 3
+- numerować algorytmy tak jak rysunki i tabele, spis algorytmów
+- jakie strony końcowe?
+- ciągi w \langle, \rangle (?)
+- przerobić MetaPost na Asymptote (?)
+- czy da się w hyperrefach pdfowych uzyskać polskie litery?
+
+PRZED WYDANIEM v0.2:
+-- czy zmienić layout strony, która zawiera nagłówek części?
+-- numery rysunkow, tabel i równań zmienić na globalne
+-- bibliografia
+
+PRZED WYDANIEM v0.3:
+-- ogólnie, więcej rysunków tłumaczących zawiłe rozumowanie w niektórych zadaniach
+-- ile jest poziomow w drzewie? lg n czy lg n+1?
+-- drzewa z ch04
+-- warningi, przepełnione hboxy i vboxy
+
+O CZYM NALEŻY PAMIĘTAĆ:
+- \noindent przed pierwszym paragrafem w sekcji
+- używamy następującego sekcjonowania: \chapter{Nazwa} \exercise{} %numer ... \problems \exercise{} \subexercise{} ...
+- tyldy po sierotkach i w miejscach, w których nie chcemy łamać
+- używać \twoparts, \zad, \E, \Pr, \Var, \note
+- preferować \bigl, \bigr i pozostałe zamiast \left, \right
+- formuły matematyczne składane są tak, jak radzi Knuth w TeXbook
+- poza tym jeśli piszemy o ciągach, parach itd. to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki naley umieszczać poza tym trybem
+- numery tożsamości wewnątrz ( )
+- po \E, \Pr, \Var używamy nawiasów okrągłych
+- rysunki i tabele wewnątrz otoczenia figure[ht] i potem center
+- preferujemy \text{jakis tekst $jakas formula$} zamiast \text{jakis tekst }jakas formula
 - komentarze w pseudokodach
-- pobawic sie rozmiarem i rodziną czcionki
-- tyldy po sierotach i po zad. rys. itd.
-- strona tytulowa
-- rozw zadan z wydania 1 (?), i wydania 3
-- indukcja od n-1 do n
-- numeracja twierdzen i lematow
-- numeracja rownan (labele i refy) tak jak w 3.2-4
-- spis algorytmów
-- bibliografia
-- jakie obramowanie tabel?
-- wyroznienia tekstu nie bedacego rozwiazaniem zadania, jak po problemie 3-4
-- ciągi w \langle, \rangle
-- \noindent w kazdym subsection (?)
-- warningi, przepełnione hboxy i vboxy
-- sprawdzic z cormen solutions
-- wypisać różnice w notacji (E, Pr)
-- w redefinicji chapter i section, pozwolic na argument opcjonalny
-- przerobić MetaPost na Asymptote
-- ujednolicić style formuł wewnątrz tego samego paragrafu
-- ile jest poziomow w drzewie? lg n czy lg n+1?
-- problemy mają nie mieć numeru sekcji, numery rozdziałów i dodatków w spisie treści nową czcionką, ale normalna czcionka przy numerach rysunków i tabel, numery stron w spisie treści nową czcionką
-- przeredagować jeszcze wstęp
-- odstępy między formułami w gather*
-- czy po liczebnikach porzadkowych dawac kropke? np. pierwsza linijka 5.1-1
+- wewnątrz paragrafu stosujemy zwykły tryb matematyczny, displaystyle tylko jeśli trzeba coś wyróżnić
+- unikać formuł które są rozdzielone między liniami
+- równania w equation lub gather lub w align, a jeśli mają być dzielone, to split wewnątrz align
+- indukcję prowadzimy tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
+- przyjmujemy, że poziomy drzewa rekursji liczy się od 0
+- jeśli w wielolinijkowych formułach jest zbyt mały odstęp, to można go skorygować poprzez \\[x mm]
 
-ROZDZIAŁ 1
-- 1-1 -- tabelke podniesc na gore strony
+ETAPY ODDAWANIA ROZDZIAŁÓW:
+poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
+poziom 2. -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca)
+poziom 3. -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna)
 
-ROZDZIAŁ 2
-- 2.2-1 -- zbyt duży odstęp
-- 2.3-1 -- \c a zamiast \k a w rysunku
+ROZDZIAŁ 1 (3)
+ROZDZIAŁ 2 (3)
+ROZDZIAŁ 3 (3)
 
-ROZDZIAŁ 3
-- 3.1-8 -- zbyt duży odstęp
-- 3.2-3 -- konflikt (3.1) z książki i mojego oznaczenia
-- 3-3(a) -- liczba dwójek, objąć klamerką
-- 3.5(c)
-- 3-5(d) -- pilnować żeby odstęp nie był zbyt duży
-
-ROZDZIAŁ 4
-- 4.1-4 -- podlogi i sufity
+ROZDZIAŁ 4 -- sprawdzic wszedzie epsilony
+- 4-1(d)
+- 4.4-1 -- wejsc w szczegoly
 - 4.4-3 -- dokonczyc
-- 4-4(d) -- ograniczenie górne wykonać, b sie zmieni w przypadkach brzegowych
-- 4-4(f) -- poprawic drzewo
+- 4-4(b) -- nie zachodzi dla dolnego oszacowania
+- 4-4(f) -- poprawic drzewo, wys. z drugiej strony
 - 4-6(b)
-- 4-6(c) -- opisać rozwiązanie rekurencji
-- 4-7(a) -- dokończyć, poprawić
-- 4-7(d) -- dlaczego m+n, wiersze brzegowe
-- 4-7(e) -- liczba poziomów, sprawdzić
+- 4-7(a) -- poprawić dowod w lewo
 
 ROZDZIAŁ 5
+- 5.2-2 CS
 - 5.3-2 CS
 - 5.4-1
 - 5.4-2
 - 5.4-3
 - 5.4-4
 - 5.4-5
-- 5.4-6
 - 5.4-7
-- 5-1
-- 5-2(b),(c),(d) -- sprawdzić
-- 5-2(e),(f),(g) -- rozwinąć
 
-DODATEK A
+DODATEK A (3)
 
 DODATEK B
-- B.2-2 -- inaczej niż parboxami
-- B.4-5 -- konfilkt numerów rysunków moich i oryginalnych
+- B.2-2 -- inaczej niż parboxami (?)
 - B-1(d) -- inaczej opisać procedurę maksymalizacji c
-- B-2 -- poprawic paragrafy zeby byly w jednej linii z twierdzeniem (sprawa środowiska theorem)
 - B-2(c)
+- B-3(a) -- sprawdzić pod kątem indukcji, od n-1 do n
 - B-3(b)
 - B-3(c)
 
 DODATEK C
-- C.1-12 k<=(n-1)/2
-- C.2-7
-- C.2-8
+- C.2-8 -- w rysunku: kolor darkgray nie wypelnia
 - C.4-8
-- C.4-9
-- C.5-4
-- C.5-6
-- C-1(b) -- zmienic na bardziej podobne do hinta
+- C.4-9 -- not sure if it is ok
+- C.5-6 -- dowod nierownosci ze wskazowki
