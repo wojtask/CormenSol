@@ -23,7 +23,7 @@ beginfig(1);
 
 	for i:=0 upto 6:
 		p[i] := unitsquare scaled scale shifted (.73i*span+leftspan, -.1levelspan);
-		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		label(btex ${\scriptstyle T'\!(1)}$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, lowerspan)) dashed evenly;
 	endfor;
 
@@ -33,7 +33,7 @@ beginfig(1);
 
 	for i:=9 upto 11:
 		p[i] := unitsquare scaled scale shifted (.73i*span+leftspan, -.1levelspan);
-		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		label(btex ${\scriptstyle T'\!(1)}$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, lowerspan)) dashed evenly;
 	endfor;
 
@@ -182,6 +182,10 @@ beginfig(3);
 	lowerspan := .5span;
 	levelspan := span;
 	path p[];
+
+	drawarrow (-.5leftspan, 1.5levelspan+.3span) -- (-.5leftspan, 3.4levelspan);
+	drawarrow (-.5leftspan, 1.5levelspan-.3span) -- (-.5leftspan, -.3levelspan);
+	label(btex $\lfloor n/a\rfloor$ etex, (-.5leftspan, 1.5levelspan));
 
 	p0 := unitsquare scaled scale shifted (leftspan, 0);
 	p1 := unitsquare scaled scale shifted (leftspan+span, 0);
