@@ -37,17 +37,17 @@ Poniżej znajduje się pseudokod operacji analogicznej do \proc{Stack-Empty}, al
 
 Następujące wiersze należy dodać na początek procedury \proc{Enqueue}:
 \begin{codebox}
-\li	\If $\id{head}[Q]=\id{tail}[Q]+1$
-\li		\Then \Error ,,nadmiar''
+\zi	\If $\id{head}[Q]=\id{tail}[Q]+1$
+\zi		\Then \Error ,,nadmiar''
 		\End
-\li	\If $\id{head}[Q]=1$ i~$\id{tail}[Q]=\id{length}[Q]$
-\li		\Then \Error ,,nadmiar''
+\zi	\If $\id{head}[Q]=1$ i~$\id{tail}[Q]=\id{length}[Q]$
+\zi		\Then \Error ,,nadmiar''
 		\End
 \end{codebox}
 Z~kolei poniższy fragment kodu umieszczamy na początku procedury \proc{Dequeue}:
 \begin{codebox}
-\li	\If $\proc{Queue-Empty}(Q)$
-\li		\Then \Error ,,niedomiar''
+\zi	\If $\proc{Queue-Empty}(Q)$
+\zi		\Then \Error ,,niedomiar''
 		\End
 \end{codebox}
 
@@ -129,7 +129,13 @@ Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzys
 \end{codebox}
 
 \exercise %10.2-2
-Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie. Dzięki takiemu rozwiązaniu operacje dodawania i~usuwania elementów będą działać w~czasie $\Theta(1)$. Sprawdzenie pustości stosu sprowadza się do sprawdzenia pustości listy $L$, natomiast operacja \proc{Push} to wywołanie na dodawanym elemencie $x$ procedury $\proc{Singly-Linked-List-Insert}(L,x)$ (\refExercise{10.2-1}). Pseudokod operacji \proc{Pop} prezentujemy poniżej.
+Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie. Dzięki takiemu rozwiązaniu operacje dodawania i~usuwania elementów będą działać w~czasie $\Theta(1)$. Sprawdzenie pustości stosu sprowadza się do sprawdzenia pustości listy $L$. Pseudokody operacji \proc{Push} i~\proc{Pop} prezentujemy poniżej.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Push}(L,k)$}
+\li	$\id{key}[x]\gets k$
+\li $\proc{Singly-Linked-List-Insert}(L,x)$
+\end{codebox}
+
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Pop}(L)$}
 \li	\If $\id{head}[L]=\const{nil}$
@@ -137,14 +143,15 @@ Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokie
 		\End
 \li	$x\gets\id{head}[L]$
 \li	$\id{head}[L]\gets\id{next}[x]$
-\li	\Return $x$
+\li	\Return $\id{key}[x]$
 \end{codebox}
 
 \exercise %10.2-3
-Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolejności od głowy kolejki do jej ogona. Aby jednak operacja dodawania była wykonalna w~czasie $\Theta(1)$, wymagane jest związanie z~listą $L$ dodatkowego atrybutu $\id{tail}[L]$, który będzie wskazywał na ogon listy $L$ albo na \const{nil}, jeżeli lista $L$ jest pusta. Oczywiście testowanie pustości kolejki polega na sprawdzeniu, czy pusta jest lista $L$. Pseudokody operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
+Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolejności od głowy kolejki do jej ogona. Aby jednak operacja dodawania była wykonalna w~czasie $\Theta(1)$, wymagane jest związanie z~listą $L$ dodatkowego atrybutu $\id{tail}[L]$, który będzie wskazywał na ogon listy $L$ albo na \const{nil}, jeżeli lista $L$ jest pusta. Oczywiście testowanie pustości kolejki polega na sprawdzeniu, czy pusta jest lista $L$. Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
 \begin{codebox}
-\Procname{$\proc{Singly-Linked-List-Enqueue}(L,x)$}
+\Procname{$\proc{Singly-Linked-List-Enqueue}(L,k)$}
 \li	$\id{next}[x]\gets\const{nil}$
+\li	$\id{key}[x]\gets k$
 \li	\If $\id{tail}[L]\ne\const{nil}$
 \li		\Then $\id{next}[\id{tail}[L]]\gets x$
 \li		\Else $\id{head}[L]\gets x$
@@ -162,14 +169,16 @@ Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolej
 \li	\If $\id{tail}[L]=x$
 \li		\Then $\id{tail}[L]\gets\const{nil}$
 		\End
-\li	\Return $x$
+\li	\Return $\id{key}[x]$
 \end{codebox}
 
 \exercise %10.2-4
 Zauważmy, że pole $\id{key}[\id{nil}[L]]$ jest niewykorzystywane w~implementacji listy z~wartownikami. Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$. Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej procedury zatrzyma się na elemencie $\id{nil}[L]$, po czym zostanie on zwrócony.
 
 \exercise %10.2-5
-Poniższe procedury stanowią implementacje operacji słownikowych na jednokierunkowych listach cyklicznych.
+Operacja wstawiania nowego elementu na jednokierunkową listę cykliczną $L$ umieszcza go jako następnik głowy listy $L$. Podczas operacji usuwania znajdowany jest poprzednik $y$ usuwanego elementu $x$, po czym $\id{next}[y]$ zostaje uaktualnione. Jeśli $x$ jest głową listy, to atrybut $\id{head}[L]$ zostaje ustawiony na następnik $x$ albo na \const{nil}, w~przypadku gdy $x$ stanowi jedyny element listy~$L$. Wreszcie operacja wyszukiwania przechodzi całą listę $L$, począwszy od jej głowy, zatrzymując się w~momencie odnalezienia elementu o~szukanym kluczu bądź w~chwili ponownego dotarcia do głowy listy $L$.
+
+Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 \begin{codebox}
 \Procname{$\proc{Cyclic-List-Insert}(L,x)$}
 \li	\If $\id{head}[L]=\const{nil}$
@@ -182,13 +191,17 @@ Poniższe procedury stanowią implementacje operacji słownikowych na jednokieru
 
 \begin{codebox}
 \Procname{$\proc{Cyclic-List-Delete}(L,x)$}
-\li	$y\gets x$
+\li	$y\gets\id{head}[L]$
 \li	\While $\id{next}[y]\ne x$
-\li		\Do $y\gets\id{next}[x]$
+\li		\Do $y\gets\id{next}[y]$
 		\End
 \li	$\id{next}[y]\gets\id{next}[x]$
 \li	\If $\id{head}[L]=x$
-\li		\Then $\id{head}[L]\gets\id{next}[x]$
+\li		\Then
+			\If $\id{next}[x]=x$
+\li				\Then $\id{head}[L]\gets\const{nil}$
+\li				\Else $\id{head}[L]\gets\id{next}[x]$
+				\End
 		\End
 \end{codebox}
 
@@ -214,7 +227,7 @@ Poniższe procedury stanowią implementacje operacji słownikowych na jednokieru
 Łatwo sprawdzić, że procedura implementująca operację \proc{Insert} działa w~czasie stałym, natomiast pozostałe dwie procedury dla listy o~$n$ elementach w~pesymistycznym przypadku potrzebują czasu $\Theta(n)$.
 
 \exercise %10.2-6
-Zbiory można zaimplementować jako listy cykliczne. Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji zbioru $S_1\cup S_2$ nie pojawią się powtarzające się elementy. Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$. Podczas działania tej operacji następnikiem ogona pierwszej listy staje się głowa drugiej listy, a~następnikiem ogona drugiej listy staje się głowa pierwszej listy. Wykonując stałą liczbę operacji, otrzymujemy w~wyniku listę cykliczną reprezentującą zbiór $S_1\cup S_2$.
+Zbiory można zaimplementować jako jednokierunkowe listy cykliczne. Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy. Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$. Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej. Oczywiście działania te są wykonywane tylko wtedy, gdy obie listy są niepuste. Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolnym jej element) reprezentującą zbiór $S_1\cup S_2$.
 
 \exercise %10.2-7
 W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy umieszczać kolejno usuwane elementy z~głowy listy $L$. Łatwo zauważyć, że pod koniec operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$. Nadanie atrybutowi $\id{head}[L]$ wartości $\id{head}[L']$ wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
@@ -233,23 +246,22 @@ W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą b
 Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zostały przedstawione w~\refExercise{10.2-1}. Ich wywołania w~powyższym algorytmie zajmują czas stały. Stąd czasem działania algorytmu jest $\Theta(n)$.
 
 \exercise %10.2-8
-Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np} będący alternatywą wykluczającą tych dwóch adresów. Załóżmy, że znamy adres pewnego elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$. Niech $z$ będzie następnikiem $x$. Wówczas $\id{np}[x]=z\BitXor y$, zatem aby dostać się do następnika $x$, wystarczy obliczyć wartość:
+Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników. Załóżmy, że znamy adres elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$. Niech $z$ będzie następnikiem $x$ na tej liście. Wówczas $\id{np}[x]=z\func{xor}y$, zatem na podstawie własności operacji \func{xor}, aby dostać się do $z$, wystarczy obliczyć wartość
 \[
-    z = z\BitXor0 = z\BitXor(y\BitXor y) = (z\BitXor y)\BitXor y = \id{np}[x]\BitXor y.
+    z = z\func{xor}0 = z\func{xor}(y\func{xor}y) = (z\func{xor}y)\func{xor}y = \id{np}[x]\func{xor}y.
 \]
-Podobnie ma się rzecz podczas przechodzenia listy w~przeciwnym kierunku -- oblicza się wtedy $y=\id{np}[x]\BitXor z$. Zauważmy, że jeśli element $x$ jest ogonem listy, to $\id{np}[x]=0\BitXor y=y$, czyli $z=\id{np}[x]\BitXor y=0=\const{nil}$ i~analogicznie dla głowy listy: $\id{np}[x]=z\BitXor0=z$, więc $y=0=\const{nil}$. Podobnie jak w~zwykłych listach przyjmujemy, że atrybut $\id{head}[L]$ przechowuje wskaźnik do głowy listy.
+Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\id{np}[x]\func{xor}z$. Zauważmy, że jeśli element $x$ jest ogonem listy, to $\id{np}[x]=\const{nil}\func{xor}y=0\func{xor}y=y$, skąd mamy $z=\id{np}[x]\func{xor}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\id{np}[x]=z\func{xor}0=z$ wynika $y=\const{nil}$. Podobnie jak w~zwykłych listach przyjmujemy, że atrybut $\id{head}[L]$ przechowuje wskaźnik do głowy listy~$L$. Ponadto z~listą związujemy atrybut $\id{tail}[L]$, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
 
-Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy. Nowe elementy są dodawane na początek listy.
-
+Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy.
 \begin{codebox}
 \Procname{$\proc{Xor-List-Search}(L,k)$}
 \li	$x\gets\id{head}[L]$
 \li	$y\gets\const{nil}$
 \li	\While $x\ne\const{nil}$ i~$\id{key}[x]\ne k$
 \li		\Do
-			$x'\gets x$
-\li			$x\gets\id{np}[x]\BitXor y$
-\li			$y\gets x'$
+			$z\gets\id{np}[x]\func{xor}y$
+\li			$y\gets x$
+\li			$x\gets z$
 		\End
 \li	\Return $x$
 \end{codebox}
@@ -258,25 +270,40 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \Procname{$\proc{Xor-List-Insert}(L,x)$}
 \li	$\id{np}[x]\gets\id{head}[L]$
 \li	\If $\id{head}[L]\ne\const{nil}$
-\li		\Then $\id{np}[\id{head}[L]]\gets\id{np}[\id{head}[L]]\BitXor x$
+\li		\Then $\id{np}[\id{head}[L]]\gets\id{np}[\id{head}[L]]\func{xor}x$
 		\End
 \li	$\id{head}[L]\gets x$
+\li	\If $\id{tail}[L]=\const{nil}$
+\li		\Then $\id{tail}[L]\gets x$
+		\End
 \end{codebox}
 
-% \begin{codebox}
-% \Procname{$\proc{Xor-List-Delete}(L,x)$}
-% % \li	\If $x=\id{head}[L]$
-% % \li		\Then
-% % 			\If $\id{np}[x]\ne\const{nil}$
-% % \li				\Then $\id{np}[\id{np}[x]]\gets$
-% \li	$y\gets\id{head}[L]$
-% \li	$y'\gets\const{nil}$
-% \li	\While $y\ne x$
-% \li		\Do
-% 			$$
-% \end{codebox}
+\begin{codebox}
+\Procname{$\proc{Xor-List-Delete}(L,x)$}
+\li	$x'\gets\id{head}[L]$
+\li	$y\gets\const{nil}$
+\li	\While $x'\ne x$
+\li		\Do
+			$z\gets\id{np}[x']\func{xor}y$
+\li			$y\gets x'$
+\li			$x'\gets z$
+		\End
+\li	$z\gets\id{np}[x]\func{xor}y$
+\li	\If $y\ne\const{nil}$
+\li		\Then $\id{np}[y]\gets\id{np}[y]\func{xor}x\func{xor}z$
+		\End
+\li	\If $z\ne\const{nil}$
+\li		\Then $\id{np}[z]\gets\id{np}[z]\func{xor}x\func{xor}y$
+		\End
+\li	\If $x=\id{head}[L]$
+\li		\Then $\id{head}[L]\gets z$
+		\End
+\li	\If $x=\id{tail}[L]$
+\li		\Then $\id{tail}[L]\gets y$
+		\End
+\end{codebox}
 
-Procedury \proc{Xor-List-Search} i~\proc{Xor-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$. W~procedurze \proc{Xor-List-Delete} należy odszukać na liście poprzednika elementu $x$, aby uaktualnić jego pole \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$. Odwracanie kolejności elementów -- zarówno w~zwykłej liście dwukierunkowej, jak i~w~tak zmodyfikowanej liście -- jest możliwe w~czasie $\Theta(1)$, o~ile wykorzystywany jest atrybut $\id{tail}[L]$. W~tym celu wystarczy zamienić z~sobą wartości atrybutów $\id{head}[L]$ i~$\id{tail}[L]$. 
+Procedury \proc{Xor-List-Search} i~\proc{Xor-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$. W~procedurze \proc{Xor-List-Delete} należy odszukać na liście poprzednika i~następnika elementu $x$, aby uaktualnić ich pola \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$. Odwracanie kolejności elementów -- zarówno w~zwykłej liście dwukierunkowej, jak i~w~tak zmodyfikowanej liście -- jest możliwe w~czasie $\Theta(1)$. W~tym celu wystarczy zamienić ze sobą wartości atrybutów $\id{head}[L]$ i~$\id{tail}[L]$. 
 
 \subchapter{Reprezentowanie struktur wskaźnikowych za pomocą tablic}
 
@@ -290,9 +317,9 @@ Rys.~\ref{fig:10.3-1} przedstawia przykładowe rozmieszczenie elementów ciągu 
 \end{figure}
 
 \exercise %10.3-2
-Zakładamy, że właściwa lista oraz lista wolnych pozycji znajduje się w~pojedynczej tablicy $A$. Poniższe procedury implementują alokację i~zwalnianie pamięci dla elementów na tej liście przy wykorzystaniu faktu, że polu \id{next} odpowiada przesunięcie~1.
+Załóżmy, że właściwa lista oraz lista wolnych pozycji znajdują się w~pojedynczej tablicy $A$. Poniższe procedury są adaptacjami operacji przydzielania i~zwalniania pamięci dla list dwukierunkowych w~reprezentacji jednotablicowej. Wykorzystujemy tutaj fakt, że polu \id{next} odpowiada przesunięcie~1 względem początku fragmentu tablicy $A$ przechowującego dany element listy.
 \begin{codebox}
-\Procname{$\proc{Allocate-Object}'$}
+\Procname{$\proc{Single-Array-Allocate-Object}(A)$}
 \li	\If $\id{free}=\const{nil}$
 \li		\Then \Error ,,brak pamięci''
 		\End
@@ -302,7 +329,7 @@ Zakładamy, że właściwa lista oraz lista wolnych pozycji znajduje się w~poje
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{Free-Object}'(i)$}
+\Procname{$\proc{Single-Array-Free-Object}(A,i)$}
 \li	$A[i+1]\gets\id{free}$
 \li	$\id{free}\gets i$
 \end{codebox}
@@ -311,27 +338,73 @@ Zakładamy, że właściwa lista oraz lista wolnych pozycji znajduje się w~poje
 Lista wolnych pozycji jest listą jednokierunkową -- nie są więc wykorzystywane w~niej pola \id{prev}.
 
 \exercise %10.3-4
-% \begin{codebox}
-% \Procname{$\proc{Compact-Allocate-Object}$}
-% \li	\If $\id{free}=\const{nil}$
-% \li		\Then \Error ,,brak pamięci''
-% 		\End
-% \li	$x\gets\id{free}$
-% \li	$\id{free}\gets A[x+1]$
-% \li	\Return $x$
-% \end{codebox}
-% 
-% \begin{codebox}
-% \Procname{$\proc{Compact-Free-Object}(x)$}
-% \li	$A[x+1]\gets\id{free}$
-% \li	$\id{free}\gets x$
-% \end{codebox}
+Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych pozycji jako stos. Będzie on zajmował wszystkie pozycje na prawo od tej wskazywanej przez \id{free} -- jego wierzchołka. Stos jest pusty wtedy i~tylko wtedy, gdy $\id{free}=\const{nil}$. Przydzielanie pamięci polega na wywołaniu na stosie wolnych pozycji operacji \proc{Pop}, a~więc nie różni się od oryginalnej wersji. Z~kolei zwalnianie pamięci to wywołanie na tym stosie operacji \proc{Push}. Wcześniej jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu.
+\begin{codebox}
+\Procname{$\proc{Compact-List-Free-Object}(x)$}
+\li	\If $\id{free}=\const{nil}$
+\li		\Then $y\gets n$
+\li		\Else $y\gets\id{free}-\,1$
+		\End
+\li	skopiuj wartości pól \id{key}, \id{next} i~\id{prev} elementu $y$ do pól elementu $x$
+\li	\If $\id{next}[y]\ne\const{nil}$
+\li		\Then $\id{prev}[\id{next}[y]]\gets x$
+		\End
+\li	\If $\id{prev}[y]\ne\const{nil}$
+\li		\Then $\id{next}[\id{prev}[y]]\gets x$
+		\End
+\li	\If $L=y$
+\li		\Then $L\gets x$
+		\End
+\li	$\proc{Free-Object}(y)$
+\end{codebox}
 
 \exercise %10.3-5
-% \begin{codebox}
-% \Procname{$\proc{Compactify-List}(L,F)$}
-% 
-% \end{codebox}
+Ogólny zarys procedury \proc{Compactify-List} jest następujący. Podczas przechodzenia listy $L$ wyznaczane są te elementy, które zajmują pozycje na prawo od $m$. Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się na pozycjach do $m$ włącznie. Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów. Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji. Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}. Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana pewna specjalna wartość, np.\ $n+1$. Przechodząc później przez listę $L$, wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
+\begin{codebox}
+\Procname{$\proc{Compactify-List}(L,F)$}
+\li	$n\gets\id{length}[\id{key}]$
+\li	wpisz $n+1$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
+\li $x\gets L$
+\li	$x'\gets\const{nil}$
+\li	$y\gets1$
+\li	\While $x\ne\const{nil}$ \label{li:compactify-list-while-begin}
+\li		\Do
+			\If $x\le m$
+\li				\Then
+					$x'\gets x$
+\li					$x\gets\id{next}[x]$
+\li				\Else
+					\While $\id{prev}[y]=n+1$ \label{li:compactify-list-while2-begin}
+\li						\Do $y\gets y+1$
+						\End \label{li:compactify-list-while2-end}
+\li					zamień wartości pól \id{key}, \id{next} i~\id{prev} elementu $x$ z~polami elementu $y$ \label{li:compactify-list-swap}
+\li					\If $\id{next}[x]\ne\const{nil}$ \label{li:compactify-list-fix-neighbors-begin}
+\li						\Then $\id{prev}[\id{next}[x]]\gets x$
+						\End
+\li					\If $\id{prev}[x]\ne\const{nil}$
+\li						\Then $\id{next}[\id{prev}[x]]\gets x$
+						\End \label{li:compactify-list-fix-neighbors-end}
+\li					\If $x'\ne\const{nil}$ \label{li:compactify-list-fix-predecessor-begin}
+\li						\Then $\id{next}[x']\gets y$
+						\End \label{li:compactify-list-fix-predecessor-end}
+\li					\If $L=x$ \label{li:compactify-list-fix-heads-begin}
+\li						\Then $L\gets y$
+						\End
+\li					\If $F=y$
+\li						\Then $F\gets x$
+						\End \label{li:compactify-list-fix-heads-end}
+\li					$x'\gets y$
+\li					$x\gets\id{next}[y]$
+				\End
+		\End \label{li:compactify-list-while-end}
+\li	przywróć poprawne wartości w~polach \id{prev} elementów listy $L$ \label{li:compactify-list-postprocess}
+\end{codebox}
+
+Procedura przechodzi listę $L$ trzy razy. Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na wartość $n+1$. W~tym samym kroku można przy okazji wyznaczyć $m$ -- rozmiar listy $L$.
+
+Kolejne przejście po liście to właściwe kompaktowanie. Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo. Pętla \kw{while} w~wierszach \twodashes{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu~\ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje. Należy jeszcze uaktualnić wartości pól \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \twodashes{\ref{li:compactify-list-fix-neighbors-begin}}{\ref{li:compactify-list-fix-neighbors-end}}), wartość pola \id{next} poprzednika $x$ na liście $L$ (wiersze \twodashes{\ref{li:compactify-list-fix-predecessor-begin}}{\ref{li:compactify-list-fix-predecessor-end}}), jak również wartości wskaźników $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \twodashes{\ref{li:compactify-list-fix-heads-begin}}{\ref{li:compactify-list-fix-heads-end}}).
+
+Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu~\ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
 
 \subchapter{Reprezentowanie drzew (ukorzenionych)}
 
@@ -341,111 +414,123 @@ Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys
 	\begin{center}
 		\includegraphics{fig10.4}
 	\end{center}
-	\caption{Drzewo binarne o~korzeniu z~indeksem~6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
+	\caption{Drzewo binarne o~korzeniu o~indeksie~6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
 \end{figure}
 
 \exercise %10.4-2
-Algorytm, który potrzebujemy, został opisany w~Podręczniku w~podrozdziale 12.1 i~zapisany jako pseudokod \proc{Inorder-Tree-Walk}. Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
+Szukany algorytm został opisany w~Podręczniku w~podrozdziale~12.1 jako procedura \proc{Inorder-Tree-Walk}. Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
 
 \exercise %10.4-3
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział~12.1 z~Podręcznika). Do emulowania rekursji wykorzystywany jest stos. Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
 \begin{codebox}
-\Procname{$\proc{Iterative-Inorder-Tree-Walk}(T)$}
+\Procname{$\proc{Iterative-Preorder-Tree-Walk}(T)$}
 \li	\If $\id{root}[T]=\const{nil}$
 \li		\Then \Return
 		\End
-\li	$x\gets\id{root}[T]$
-\li	$\proc{Push}(S,x)$
-\li	\While $\proc{Stack-Empty(S)}$
+\li	$\proc{Push}(S,\id{root}[T])$
+\li	\While $\proc{Stack-Empty}(S)=\const{false}$
 \li		\Do
-			\If $\id{left}[x]\ne\const{nil}$
-\li				\Then
-					$x\gets\id{left}[x]$
-\li					$\proc{Push}(S,x)$
-\li				\Else
-					wypisz $\id{key}[x]$
-\li					\If $\id{right}[x]\ne\const{nil}$
-\li						\Then
-							$x\gets\id{right}[x]$
-\li							$\proc{Push}(S,x)$
-						\End
+			$x\gets\proc{Pop}(S)$
+\li			wypisz $\id{key}[x]$
+\li			\If $\id{right}[x]\ne\const{nil}$
+\li				\Then $\proc{Push}(S,\id{right}[x])$
 				\End
-\li			$\proc{Pop}(S)$
+\li			\If $\id{left}[x]\ne\const{nil}$
+\li				\Then $\proc{Push}(S,\id{left}[x])$
+				\End
 		\End
 \end{codebox}
 
 \exercise %10.4-4
+Nasza procedura będzie przyjmować węzeł $x$ drzewa w~reprezentacji ,,na lewo syn, na prawo brat'' i~wypisywać wszystkie klucze z~poddrzewa o~korzeniu w~$x$. Najpierw zostanie wypisany klucz węzła $x$, a~następnie procedura zostanie wywołana rekurencyjnie kolejno dla każdego syna węzła $x$.
 \begin{codebox}
-\Procname{$\proc{Tree-Walk}(x)$}
-\li	\If $x\ne\const{nil}$
-\li		\Then
-			wypisz $\id{key}[x]$
-\li			$y\gets\id{left-child}[x]$
-\li			\While $y\ne\const{nil}$
-\li				\Do
-					$\proc{Tree-Walk}(y)$
-\li					$y\gets\id{right-sibling}[y]$
-				\End
+\Procname{$\proc{Rooted-Tree-Walk}(x)$}
+\li	\If $x=\const{nil}$
+\li		\Then \Return
+		\End
+\li	wypisz $\id{key}[x]$
+\li	$y\gets\id{left-child}[x]$
+\li	\While $y\ne\const{nil}$
+\li		\Do
+			$\proc{Rooted-Tree-Walk}(y)$
+\li			$y\gets\id{right-sibling}[y]$
 		\End
 \end{codebox}
-Aby przejść całe drzewo w~celu wypisania jego elementów, należy wywołać $\proc{Tree-Walk}(\id{root}[T])$. Procedura odwiedza każdy węzeł drzewa dokładnie raz, wypisuje jego klucz, po czym rekurencyjnie odwiedza jego potomków. Widać zatem, że czasem działania tej procedury jest $\Theta(n)$ dla drzewa o~$n$ węzłach.
+Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', należy wywołać $\proc{Rooted-Tree-Walk}(\id{root}[T])$.
+
+Każdy klucz drzewa zostaje wypisany dokładnie raz, a~na każdym poziomie rekursji (być może z~wyjątkiem pierwszego) przetwarzane jest niepuste poddrzewo. Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
-W~poniższej procedurze wykorzystujemy zmienną \id{direction} wyznaczającą kierunek, w~którym obecnie poruszamy się po drzewie: \const{sw} -- w~dół drzewa do lewego potomka, \const{se} -- w~dół drzewa do prawego potomka, \const{ne} -- w~górę drzewa z~lewego potomka albo \const{nw} -- w~górę drzewa z~prawego potomka.
+W~procedurze wykorzystamy zmienną \id{direction} wyznaczającą ,,kierunek'', w~którym obecnie poruszamy się po drzewie, wypisując jego klucze. Zmienna ta będzie przyjmować jedną z~czterech wartości:
+\begin{itemize}
+    \item \const{sw} -- kierunek w~dół drzewa do lewego syna;
+    \item \const{se} -- kierunek w~dół drzewa do prawego syna;
+    \item \const{ne} -- kierunek w~górę drzewa z~lewego syna;
+    \item \const{nw} -- kierunek w~górę drzewa z~prawego syna.
+\end{itemize}
+W~zależności od wartości tej zmiennej kolejnym odwiedzanym węzłem będzie lewy syn, prawy syn albo ojciec bieżącego węzła i~wartość tej zmiennej zostanie zaktualizowana.
 
-Zaczynając od korzenia drzewa, początkowo poruszamy się w~dół, aż osiągniemy najbardziej lewy liść drzewa. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzeł wypisywany jest podczas jego odwiedzania, kiedy poruszamy się w~dół. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas odwiedzania jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
+Zaczynając od korzenia drzewa, początkowo poruszamy się w~dół, aż osiągniemy najbardziej lewy liść drzewa. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzeł wypisywany jest podczas jego odwiedzania, kiedy poruszamy się w~dół drzewa. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas odwiedzania jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
 \begin{codebox}
 \Procname{$\proc{Binary-Tree-Walk}(T)$}
 \li	$x\gets\id{root}[T]$
 \li	$\id{direction}\gets\const{sw}$
 \li	\While $x\ne\const{nil}$
 \li		\Do
-			\If $\id{direction}=\const{sw}$ lub $\id{direction}=\const{se}$
-\li				\Then wypisz $x$
-				\End
-\li			\If $\id{direction}=\const{sw}$
+			\If $\id{direction}=\const{sw}$
 \li				\Then
-					\If $\id{left}[x]\ne\const{nil}$
+					wypisz $\id{key}[x]$
+\li					\If $\id{left}[x]\ne\const{nil}$
 \li						\Then $x\gets\id{left}[x]$
 \li					\ElseIf $\id{right}[x]\ne\const{nil}$
 \li						\Then
 							$x\gets\id{right}[x]$
 \li							$\id{direction}\gets\const{se}$
-\li					\ElseNoIf $\id{direction}\gets\const{ne}$
+\li					\ElseNoIf $x\gets\id{p}[x]$
 						\End
+\li						\phantom{\kw{else}} $\id{direction}\gets\const{ne}$
 \li			\ElseIf $\id{direction}=\const{se}$
 \li				\Then
-					\If $\id{left}[x]\ne\const{nil}$
+					wypisz $\id{key}[x]$
+\li					\If $\id{left}[x]\ne\const{nil}$
 \li						\Then
 							$x\gets\id{left}[x]$
 \li							$\id{direction}\gets\const{sw}$
 \li					\ElseIf $\id{right}[x]\ne\const{nil}$
 \li						\Then $x\gets\id{right}[x]$
-\li					\ElseNoIf $\id{direction}\gets\const{nw}$
+\li					\ElseNoIf $x\gets\id{p}[x]$
 						\End
+\li						\phantom{\kw{else}} $\id{direction}\gets\const{nw}$
 \li			\ElseIf $\id{direction}=\const{ne}$
 \li				\Then
 					\If $\id{right}[x]\ne\const{nil}$
 \li						\Then
 							$x\gets\id{right}[x]$
 \li							$\id{direction}\gets\const{se}$
-\li						\Else $x\gets\id{p}[x]$
+\li						\Else
+							\If $\id{p}[x]\ne\const{nil}$ i~$\id{right}[\id{p}[x]]=x$
+\li								\Then $\id{direction}\gets\const{nw}$
+								\End
+\li							$x\gets\id{p}[x]$
 						\End
-\li			\ElseNoIf $x\gets\id{p}[x]$
+\li			\ElseNoIf \If $\id{p}[x]\ne\const{nil}$ i~$\id{left}[\id{p}[x]]=x$
 				\End
+\li				\phantom{\kw{else} \kw{if}} \kw{then} $\id{direction}\gets\const{ne}$
+\li				\phantom{\kw{else}} $x\gets\id{p}[x]$
 		\End
 \end{codebox}
 
 \exercise %10.4-6
-Ponieważ w~nowej reprezentacji nie wymagamy dostępu do ojca każdego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$. Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest najbardziej prawym synem swojego ojca, to wskaźnik $\id{right-sibling}[x]=\const{nil}$. Możemy więc wykorzystać go, aby wskazywał na ojca węzła $x$. To, czy wskaźnik ten w~danym węźle wskazuje na kolejnego brata, czy na ojca, jest determinowane przez dodatkowy atrybut -- zmienną boolowską.
+Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$. Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest najbardziej prawym synem swojego ojca, to $\id{right-sibling}[x]=\const{nil}$. Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na ojca $x$. Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy ojcem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską -- określającą parzystość poziomu zajmowanego w~drzewie przez dany węzeł.
 
 Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
 \begin{itemize}
-	\item $\id{child}[x]$ -- wskazuje na najbardziej lewego syna $x$;
-    \item $\id{last}[x]$ -- zmienna boolowska przechowująca informację o~tym, czy węzeł $x$ jest najbardziej prawym synem swojego ojca;
-	\item $\id{next}[x]$ -- jeśli $\id{last}[x]=\const{false}$, to wskazuje na najbliższego, znajdującego się na prawo brata węzła $x$, a~jeśli $\id{last}[x]=\const{true}$, to wskazuje na ojca węzła $x$.
+	\item $\id{child}[x]$ -- wskazuje na najbardziej lewego syna $x$ (identyczny z~$\id{left-child}[x]$ z~reprezentacji ,,na lewo syn, na prawo brat'');
+	\item $\id{next}[x]$ -- wskazuje na kolejnego brata węzła $x$ albo na ojca węzła $x$, jeśli $x$ jest najbardziej prawym synem swojego ojca;
+	\item $\id{level-parity}[x]$ -- zmienna boolowska przyjmująca wartość \const{true}, jeżeli węzeł $x$ znajduje się w~drzewie na poziomie parzystym, albo \const{false} w~przeciwnym przypadku.
 \end{itemize}
 
-Łatwo zauważyć, że każdy węzeł $x$ tworzy wraz ze swoimi synami jednokierunkową listę cykliczną. Następnikiem każdego węzła $y\ne x$ na tej liście jest $\id{next}[y]$, a~następnikiem węzła $x$ jest $\id{child}[x]$. Węzeł $x$ jest wyznaczony jednoznacznie, ponieważ jest następnikiem jedynego węzła $y\ne x$ na tej liście, dla którego $\id{last}[y]=\const{true}$.
+Oczywiście dla dowolnego węzła i~jego ojca wartości ich atrybutów \id{level-parity} różnią się. Dzięki temu, mając dany węzeł $x$, można przechodzić po jego braciach, poruszając się po wskaźnikach \id{next}, aż dotrze się do ojca $x$, którego rozróżnimy od braci $x$ na podstawie wartości atrybutu \id{level-parity}. Wyznaczenie ojca $x$ wymaga więc w~najgorszym przypadku czasu proporcjonalnego do liczby braci węzła $x$, a~wyznaczenie wszystkich synów $x$ -- czasu proporcjonalnego do ilości jego synów.
 
 \problems
 
@@ -478,6 +563,7 @@ Tabela~\ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słow
 	\end{center}
 	\caption{Porównanie złożoności operacji słownikowych dla różnych typów list.} \label{tab:10-1}
 \end{table}
+Jeśli będziemy utrzymywać atrybut \id{tail} wskazujący na ogon listy, to operację \proc{Maximum} dla list posortowanych możemy wykonywać w~czasie stałym.
 
 \problem{Listowa reprezentacja kopców złączalnych} %10-2
 
@@ -486,6 +572,7 @@ Tabela~\ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słow
 \subproblem %10-2(c)
 
 \problem{Wyszukiwanie na posortowanej liście zajmującej spójny obszar pamięci (liście upakowanej)} %10-3
+\note{W~tłumaczeniu w~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast sprawdzania, czy\/ $\id{key}[j]<k$ powinno być sprawdzanie, czy\/ $\id{key}[j]\le k$.}
 
 \subproblem %10-3(a)
 \subproblem %10-3(b)

@@ -1,11 +1,6 @@
 WYMAGANIA DLA 0.5:
 - poprawić 9-3(a)
 - part III
-- poprawić implementacje:
-	- WeightedMedian: 2/1000
-	- PostOfficeLocation2D: 2/1000
-	- InPlaceCountingSortTest: 2/1000
-	- BigNumbersSort: 993/1000
 - A może przenieść wszystkie definicje funkcji jako inline do plików nagłówkowych?
 - Czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (http://en.wikipedia.org/wiki/Bit_complexity).
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
@@ -61,8 +56,8 @@ PRYSZŁE WERSJE:
 DO POPRAWY/WERYFIKACJI W PRZYSZŁOŚCI:
 (zadania zaznaczane jako rozwiązane poprawnie, ale w których można dokonać poprawek/ulepszeń po przerobieniu większej ilości materiału)
 1 -- sprawdzić cały rozdział po zrobieniu wszystkich pozostałych
-6.5-6 -- zaimplementować kolejkę FIFO i stos na kolejce priorytetowej (po ch10)
-6.5-8 -- zaimplementować procedurę na listach (po ch10)
+6.5-6 -- zaimplementować kolejkę FIFO i stos na kolejce priorytetowej (po ch10) -- dopisać operację porównania par elementów, znaleźć sposób na szablonowe MaxHeapInsert, MinHeapInsert
+6.5-8 -- zaimplementować procedurę na listach (po ch10) -- ok, ale usprawnić znajdowanie listy zawierającej dany element poprzez pamiętanie jej indeksu razem z elementem w kolejce
 6-3(c) -- wymyślić prostszy pseudokod
 8.3-2 -- jak obliczać złożoność pamięciową? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
 9-2(e) -- opisać ThreeWayPartition i Select' (jeśli nigdzie indziej nie będą rozważane)
@@ -84,24 +79,11 @@ ROZDZIAŁ 9
 9.3(a) -- czy opisywać kruczki implementacyjne? poprawić algorytm: co z zamianami elementu A[r]? nie działa dla rozmiarów innych niż potęgi 2
 
 ROZDZIAŁ 10
--- co z atrybutem tail w listach jednokierunkowych (dwukierunkowych)?
--- po zakończeniu pisania implementacji zamienić jak najwięcej "non testable" na "used by ..."
-10.2-2 -- implementacja, Push ma raczej przyjmować klucz, Pop ma raczej zwracać klucz
-10.2-3 -- implementacja, Enqueue ma raczej przyjmować klucz, Dequeue ma raczej zwracać klucz
-10.2-4 -- implementacja
-10.2-5 -- implementacja
-10.2-6 -- implementacja
-10.2-7 -- implementacja, tyle że SinglyLinkedListDelete nie zwraca żadnej wartości (implementacja jest chyba ok, przepisać do pseudokodu)
-10.2-8 -- dopisać Xor-List-Delete, czy na pewno potrzebny tail[L] ? jak reprezentować xor? sprawdzić, implementacja
-10.3-2 -- czy może być?, implementacja
-10.3-4
-10.3-5 -- manipulacja nieużywanymi polami prev na liście F (?)
-10.4-2 -- czy może być tak?
-10.4-3 -- poprawić, w Podręczniku w niektórych pseudokodach nie skracają warunków z funkcjami boolowskimi, np. algorytm Johnsona na str. 651, a w niektórych skracają, np. Pop na str. 199 (ustalić czego się trzymamy), napisać wstęp, że korzystamy z metody inorder opisanej w Podręczniku w 12.1, sprawdzić, implementacja
-10.4-4 -- wstęp, sprawdzić, implementacja
-10.4-5 -- sprawdzić, implementacja
-10.4-6 -- sprawdzić, implementacja
-10-1 -- ok, ale czy na pewno \Theta a nie O? Wprowadzenie atrybutu tail zmieni kilka złożoności.
+-- ERRATA: In seven places in the text of Problem 10-3, calls to the procedures COMPACT-LIST-SEARCH and COMPACT-LIST-SEARCH´ should have the parameter n inserted as the second parameter of the call.
+10.4-5 -- sprawdzić, rozszerzyć drugi paragraf (3 wiersze wystarczą), implementacja ok
+10.4-6 -- sprawdzić, czy wyznaczenie ojca x nie ma być proporcjonalne do liczby synów x?
+10-1 -- czy zostawić ostatnie zdanie?
+10-2 -- czy (a) i (b) nie są praktycznie rozwiązane w 10-1 i tylko wystarczy znaleźć złożoność Make-Heap (która wynosi \Theta(1)) i Union?
 10-2(a)
 10-2(b)
 10-2(c)

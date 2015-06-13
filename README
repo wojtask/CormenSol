@@ -94,12 +94,14 @@ W pseudokodach po znaku operatora występującym po \id{} należy dać odstęp \
 Etykiety w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
 Jeśli wywołujemy algorytm, to nie musimy koniecznie pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
 Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
+Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
 Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to ostatnie.
-Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest: \addtocounter{indent}{-1}
-\li	\phantom{\kw{else}} linijka_2
-\li	\phantom{\kw{else}} linijka_3
+Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
+\li	\ElseNoIf linijka_1
+		\End
+\li		\phantom{\kw{else}} linijka_2
+\li		\phantom{\kw{else}} linijka_3
 ...
-\addtocounter{indent}{1}
 
 
 VI Rysunki i tabele
@@ -120,7 +122,7 @@ Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w Podręcznik
 Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w rozwiązaniach.
 Implementujemy i testujemy każdy algorytm, który jest opisany słownie w rozwiązaniach, o ile polecenie zadania/problemu mówi wyraźnie "podaj/zaprojektuj/skonstruuj algorytm/procedurę/implementację" itp.
 Polecenie służące do testowania większości algorytmów:
-	for ((n=1; n<=1000; n++)); do ./algotest $n; done | grep '^OK!$' | wc -l
+	for ((n=1; n<=1000; n++)); do ./algotest $n; done | grep '^OK$' | wc -l
 Można pominąć testowanie, jeśli poprawność algorytmu jest oczywista (np. Extract-Max) lub nie ma innego szybkiego i naturalnego sposobu testowania poprawności oprócz powtórzenia operacji z kodu testowanej procedury (np. List-Insert).
 Procedury pomocnicze, np. Partition, testujemy poprzez uruchomienie testów dla algorytmów wywołujących te procedury, np. Quicksort -- czasami trzeba tymczasowo zmienić implementację głównego algorytmu, aby wykorzystywał nową wersję procedury pomocniczej.
 Algorytmy implementujemy w podejściu proceduralnym, ale wykorzystując struktury danych z najważniejszymi operacjami (np. struktura array implementuje tablicę i zawiera m.in. operator dostępu do komórki [] lub operację sprawdzania czy jest posortowana), które umieszczamy w plikach util.h i util.cpp.
