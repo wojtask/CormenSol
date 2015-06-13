@@ -141,7 +141,7 @@ W~uzasadnieniu korzystamy z~funkcji odwrotnej do dystrybuanty $P_X$, jednak ta o
 \]
 Pokazaliśmy, że $P_Y$ jest identycznością na $(0,1)$, a~zatem $Y$ jest zmienną losową o~ciągłym rozkładzie jednostajnym w~tym przedziale.
 
-W~naszym problemie dla każdej zmiennej losowej $X_i$ o~dystrybuancie $P$, gdzie $i=1$, 2,~\dots,~$n$, wyznaczamy nową zmienną losową $Y_i=P(X_i)$. Zgodnie z~powyższym opisem każda nowa zmienna ma rozkład jednostajny w~przedziale $(0,1)$, możemy zatem posortować je, stosując sortowanie kubełkowe o~$n$ kubełkach. W~wyniku dostaniemy pewną permutację $\langle Y_{\pi(1)},Y_{\pi(2)},\dots,Y_{\pi(n)}\rangle$. Rozwiązanie problemu stanowi wówczas ciąg $\langle X_{\pi(1)},X_{\pi(2)},\dots,X_{\pi(n)}\rangle$.
+W~naszym problemie dla każdej zmiennej losowej $X_i$ o~dystrybuancie $P$, gdzie $i=1$, 2,~\dots,~$n$, wyznaczamy nową zmienną losową $Y_i=P(X_i)$. Zgodnie z~powyższym opisem każda nowa zmienna ma rozkład jednostajny w~przedziale $(0,1)$, możemy zatem posortować je, stosując sortowanie kubełkowe o~$n$ kubełkach. Jako wynik dostaniemy pewną permutację $\langle Y_{\pi(1)},Y_{\pi(2)},\dots,Y_{\pi(n)}\rangle$. Rozwiązanie problemu stanowi wówczas ciąg $\langle X_{\pi(1)},X_{\pi(2)},\dots,X_{\pi(n)}\rangle$.
 
 Wyznaczenie nowego ciągu zmiennych losowych zabiera czas $\Theta(n)$, gdyż zakładamy, że wartości dystrybuanty $P$ można obliczać w~czasie stałym. Również sortowanie kubełkowe $n$ elementów działa średnio w~czasie $\Theta(n)$, zatem w~średnim przypadku cała procedura zajmuje czas liniowy.
 
@@ -150,7 +150,7 @@ Wyznaczenie nowego ciągu zmiennych losowych zabiera czas $\Theta(n)$, gdyż zak
 \problem{Dolne ograniczenia na średni czas działania sortowania za pomocą porównań} %8-1
 
 \subproblem %8-1(a)
-Podczas sortowania algorytmem $A$ żadne dwie różne permutacje wejściowe nie prowadzą do tego samego liścia w~drzewie $T_A$ -- jest w~nim zatem co najmniej $n!$ liści. Ponieważ algorytm $A$ jest deterministyczny, to dla każdej permutacji wejściowej osiągany jest zawsze ten sam liść, a~więc w~$T_A$ jest co najwyżej $n!$ osiągalnych liści. Wynika stąd, że algorytm $A$ może dotrzeć do dokładnie $n!$ liści. Ponieważ każda permutacja ma szanse pojawić się na wejściu z~równym prawdopodobieństwem, to szansa na dotarcie do dowolnego osiągalnego liścia wynosi $1/n!$. Pozostałe liście nigdy nie zostaną odwiedzone podczas działania algorytmu $A$.
+Podczas sortowania algorytmem $A$ żadne dwie różne permutacje wejściowe nie prowadzą do tego samego liścia w~drzewie $T_A$ -- jest w~nim zatem co najmniej $n!$ liści. Ponieważ algorytm $A$ jest deterministyczny, to dla każdej permutacji wejściowej osiągany jest zawsze ten sam liść, a~więc w~$T_A$ jest co najwyżej $n!$ osiągalnych liści. Wynika stąd, że algorytm $A$ może dotrzeć do dokładnie $n!$ liści. Ponieważ każda permutacja ma szanse pojawić się na wejściu z~równym prawdopodobieństwem, to szanse na dotarcie do dowolnego osiągalnego liścia wynoszą $1/n!$. Pozostałe liście nigdy nie zostaną odwiedzone podczas działania algorytmu $A$.
 
 \subproblem %8-1(b)
 Oznaczmy przez $L(T)$ zbiór liści drzewa $T$, a~przez $d_T(x)$ -- głębokość węzła $x$ w~drzewie $T$. Ponieważ $k>1$, to korzeń drzewa $T$ nie jest jego liściem, więc $L(T)=L(LT)\cup L(RT)$. Głębokość każdego liścia w~poddrzewie $LT$ jest o~1 mniejsza niż głębokość tego samego liścia w~drzewie $T$ i~analogicznie dla liści w~poddrzewie $RT$. Mamy zatem
@@ -273,12 +273,12 @@ W~tablicy wejściowej może znaleźć się maksymalnie $n$ liczb, zatem pierwsza
 \[
     \sum_{i=1}^n\Theta(im_i) = \Theta\biggl(\sum_{i=1}^nim_i\biggr) = \Theta(n).
 \]
-Stąd mamy, że algorytm działa w~czasie $O(n)$.
+Stąd oczywiście wynika, że algorytm działa w~czasie $O(n)$.
 
 \subproblem %8-3(b)
-Skorzystajmy z~obserwacji, że jeśli pierwsza litera napisu $x$ jest leksykograficznie mniejsza od pierwszej litery napisu $y$, to $x$ wystąpi w~wynikowej tablicy przed $y$. Można zatem sortować napisy przez zliczanie według ich pierwszych liter, a~następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej, sortować napisy według ich drugiej litery itd. Pamiętajmy jednak, że napisy mają różną długość, dlatego po posortowaniu słów po \onedash{$i$}{tej} literze, przed wykonaniem kolejnej fazy, należy umieścić na początku każdej grupy słów o~tym samym prefiksie \onedash{$i$}{literowym} te z~nich, które składają się z~dokładnie $i$ liter. Pozostałe słowa będą przetwarzane w~kolejnej fazie sortowania.
+Skorzystajmy z~obserwacji, że jeśli pierwsza litera napisu $x$ jest leksykograficznie mniejsza od pierwszej litery napisu $y$, to $x$ wystąpi w~wynikowej tablicy przed $y$. Można zatem sortować napisy przez zliczanie według ich pierwszych liter, a~następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej, sortować napisy według ich drugiej litery itd. Pamiętajmy jednak, że napisy mają różną długość, dlatego po ich posortowaniu względem \onedash{$i$}{tych} liter, przed wykonaniem kolejnej fazy, należy umieścić na początku każdej grupy napisów o~tym samym prefiksie \onedash{$i$}{literowym} te z~nich, które składają się z~dokładnie $i$ liter. Pozostałe słowa będą przetwarzane w~kolejnej fazie sortowania.
 
-Zauważmy, że napis $x$ składający się z~$i$ liter będzie brał udział w~co najwyżej $i$ fazach sortowania. Niech $m_i$ oznacza liczbę napisów posiadających $i$ liter. Wówczas operacje odpowiedzialne za sortowanie napisów \onedash{$i$}{literowych} wymagają czasu $O(im_i)$. Korzystając z~faktu, że $\sum_{i=1}^nim_i=n$, otrzymujemy, że czasem działania algorytmu jest
+Zauważmy, że napis $x$ składający się z~$i$ liter będzie brał udział w~co najwyżej $i$ fazach sortowania. Niech $m_i$ oznacza liczbę napisów na wejściu posiadających dokładnie $i$ liter. Wówczas operacje odpowiedzialne za sortowanie napisów \onedash{$i$}{literowych} wymagają czasu $O(im_i)$. Korzystając z~faktu, że $\sum_{i=1}^nim_i=n$, otrzymujemy, że czasem działania algorytmu jest
 \[
     \sum_{i=1}^nO(im_i) = O\biggl(\sum_{i=1}^nim_i\biggr) = O(n).
 \]
@@ -336,7 +336,7 @@ Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przy
 
 Procedura wybiera najpierw losowo element rozdzielający $x$ z~tablicy $R[p\twodots r]$. Elementy równe $x$ są dla uproszczenia późniejszych kroków przenoszone na ostatnie pozycje swoich tablic. Następnie pętla \kw{for} z~wierszy \twodashes{\ref{li:jugs-partition-for1-begin}}{\ref{li:jugs-partition-for1-end}} dokonuje podziału tablicy $B[p\twodots r]$ względem $x$. Po zakończeniu pętli $B[r]=x$, podtablica $B[p\twodots i]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r-1]$ -- elementy większe niż $x$. Wystarczy jeszcze zamienić element rozdzielający z~$B[i+1]$, aby zakończyć podział tablicy $B$. W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \twodashes{\ref{li:jugs-partition-first-partition-begin}}{\ref{li:jugs-partition-first-partition-end}}, uprzednio nadając zmiennej $x$ wartość dotychczasowego elementu rozdzielającego, ale pobranego z~tablicy $B$.
 
-Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Sort} wynosi $O(n\lg n)$. Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort. Niech $\langle r_1,r_2,\dots,r_n\rangle$ będzie ciągiem dzbanków czerwonych uporządkowanym rosnąco, a~$\langle b_1,b_2,\dots,b_n\rangle$ -- rosnącym ciągiem dzbanków niebieskich. Zdefiniujemy zmienną losową wskaźnikową
+Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Sort} wynosi $O(n\lg n)$. Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort. Niech $\langle r_1,r_2,\dots,r_n\rangle$ będzie ciągiem dzbanków czerwonych uporządkowanym rosnąco, a~$\langle b_1,b_2,\dots,b_n\rangle$ -- rosnącym ciągiem dzbanków niebieskich. Definiujemy zmienną losową wskaźnikową
 \[
     X_{ij} = \I(\text{$r_i$ jest porównywane z~$b_j$}).
 \]
@@ -388,15 +388,10 @@ Po zakończeniu działania algorytmu mamy, że $A[i]\le A[i+k]$ dla każdego $i=
 W~\refExercise{7.4-5} pokazaliśmy, że quicksort po takiej modyfikacji działa w~oczekiwanym czasie $O(n\lg(n/k))$. Aby było to oszacowanie na czas w~przypadku pesymistycznym, musimy zagwarantować najlepszy przypadek wyboru elementów rozdzielających. Można to zrealizować poprzez wybieranie do tej roli mediany bieżącej podtablicy, jak to opisano w~\refExercise{9.3-3}.
 
 \subproblem %8-5(e)
-W~\onedash{$k$}{posortowanej} tablicy każdy z~ciągów postaci $\langle A[j],A[j+k],A[j+2k],\dots,A[j+m_jk]\rangle$, gdzie $j=1$, 2~\dots,~$k$ i~$j+m_jk\le n$, jest uporządkowany niemalejąco i~wszystkie zawierają łącznie $n$ elementów. Wystarczy więc scalić je w~jedną posortowaną tablicę, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
+W~\onedash{$k$}{posortowanej} tablicy każdy z~ciągów postaci $\langle A[j],A[j+k],A[j+2k],\dots,A[j+m_jk]\rangle$, gdzie $j=1$, 2~\dots,~$k$ i~$j+m_jk\le n$, jest uporządkowany niemalejąco i~wszystkie one zawierają łącznie $n$ elementów. Wystarczy więc scalić je w~jedną posortowaną tablicę, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
 
 \subproblem %8-5(f)
 Przyjmiemy dla wygody, że $n$ jest podzielne przez $k$ -- nie spowoduje to zmniejszenia ogólności naszej analizy.
-
-% Dla dowodu dolnego ograniczenia czasowego tego problemu wykorzystamy model drzew decyzyjnych. Niech $T$ będzie drzewem decyzyjnym pewnego algorytmu \onedash{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach. Drzewo $T$ jest podobne do drzewa decyzyjnego algorytmu zwykłego sortowania za pomocą porównań, ale jego liście powiązane są ze sposobem podzielenia elementów z~tablicy wejściowej na $n/k$ kolejnych grup po $k$ elementów każda. Liczba możliwości takiego podziału i~zarazem liczba osiągalnych liści w~drzewie $T$ wynosi
-% \[
-%     \binom{n}{k}\binom{n-k}{k}\dots\binom{k}{k} = \frac{n!}{k!\,(n-k)!}\cdot\frac{(n-k)!}{k!\,(n-2k)!}\cdot\ldots\cdot\frac{k!}{k!\,0!} = \frac{n!}{(k!)^{n/k}}.
-% \]
 
 W~dowodzie dolnego ograniczenia czasowego tego problemu wykorzystamy model drzew decyzyjnych. Niech $T$ będzie drzewem decyzyjnym pewnego algorytmu \onedash{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach. Drzewo $T$ jest podobne do drzewa decyzyjnego algorytmu zwykłego sortowania za pomocą porównań -- każdy jego liść odpowiada pewnej permutacji tablicy wejściowej. Jednak liczba osiągalnych liści jest na ogół mniejsza niż w~drzewie zwykłego sortowania. Wynikowa tablica składa się z~$n/k$ podtablic \onedash{$k$}{elementowych}, w~których uporządkowanie elementów nie ma znaczenia. Osiągalnych liści w~tym drzewie jest zatem
 \[
@@ -421,9 +416,9 @@ Działanie algorytmu scalania list można przedstawić, korzystając z~drzewa de
 \]
 
 \subproblem %8-6(c)
-Niech $\langle a_1,a_2,\dots,a_n\rangle$ oraz $\langle b_1,b_2,\dots,b_n\rangle$ będą listami wejściowymi. Załóżmy, że w~liście wynikowej element $a_i$ sąsiaduje z~elementem $b_j$, $1\le i,j\le n$. Jeśli algorytm, scalając obie listy wejściowe, porównywałby $a_i$ z~elementem $b_k$, gdzie $1\le k\le j-1$, to wynikiem porównania byłoby $b_k<a_i$, ale stąd nie wynikałoby ani $b_j<a_i$, ani $a_i<b_j$. Analogicznie dla porównań $a_i$ z~elementem $b_k$, gdzie $j+1\le k\le n$. A~zatem, aby rozstrzygnąć, w~jakiej kolejności powinny wystąpić $a_i$ i~$b_j$ w~liście wynikowej, algorytm musi porównać te dwa elementy ze sobą.
+Niech $\langle a_1,a_2,\dots,a_n\rangle$ oraz $\langle b_1,b_2,\dots,b_n\rangle$ będą listami wejściowymi. Załóżmy, że w~liście wynikowej element $a_i$ sąsiaduje z~elementem $b_j$ dla $1\le i$, $j\le n$. Jeśli algorytm, scalając obie listy wejściowe, porównywałby $a_i$ z~elementem $b_k$, gdzie $1\le k\le j-1$, to wynikiem porównania byłoby $b_k<a_i$, ale stąd nie wynikałoby ani $b_j<a_i$, ani $a_i<b_j$. Analogicznie przy porównaniu $a_i$ z~elementem $b_k$, gdzie $j+1\le k\le n$. A~zatem, aby rozstrzygnąć, w~jakiej kolejności powinny wystąpić $a_i$ i~$b_j$ w~liście wynikowej, algorytm musi porównać te dwa elementy ze sobą.
 
 \subproblem %8-6(d)
-Jeśli do~wynikowej listy będą trafiać elementy z~pierwszej listy na przemian z~elementami z~drugiej, to każde dwa sąsiednie elementy w~wynikowej liście będą pochodzić z~dwóch różnych list wejściowych. Takich par sąsiadujących elementów będzie w~sumie $2n-1$. Na mocy poprzedniego punktu wnioskujemy, że w~tym przypadku algorytm scalania list wykonana tyleż porównań.
+Jeśli do~wynikowej listy będą trafiać elementy z~pierwszej listy na przemian z~elementami z~drugiej, to każde dwa sąsiednie elementy w~wynikowej liście będą pochodzić z~dwóch różnych list wejściowych. Takich par sąsiadujących elementów będzie w~sumie $2n-1$. Na mocy poprzedniego punktu wnioskujemy, że w~tym przypadku algorytm scalania list wykona tyleż porównań.
 
 \endinput

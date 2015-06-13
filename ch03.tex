@@ -42,12 +42,12 @@ Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, 
 \[
 	0 \le c_1g(n) \le f(n) \le c_2g(n)
 \]
-zachodzą dla wszystkich $n\ge n_0$. Możemy je zapisać w~formie układu nierówności
+zachodzą dla wszystkich $n\ge n_0$. Możemy je zapisać w~formie układu
 \[
 	\begin{cases}
-		0 \le c_1g(n) \le f(n), \\
-		0 \le f(n) \le c_2g(n).
-	\end{cases}
+		0 \le c_1g(n) \le f(n) \\
+		0 \le f(n) \le c_2g(n)
+	\end{cases}.
 \]
 Z~pierwszej nierówności układu dostajemy, że $f(n)=\Omega(g(n))$, a~z~drugiej, że $f(n)=O(g(n))$.
 
@@ -176,7 +176,7 @@ dla pewnego $i\ge0$. Po wykorzystaniu zależności $\phi+1=\phi^2$ i~$\widehat\p
 a~zatem wzór jest spełniony dla każdego $i\ge0$.
 
 \exercise %3.2-7
-Korzystając z~wyniku z~poprzedniego zadania, mamy:
+Korzystając z~wyniku z~poprzedniego zadania, mamy
 \begin{align*}
     F_{i+2}-\phi^i &= \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}}-\phi^i \\[1mm]
 	&= \frac{\phi^i(\phi^2-\sqrt{5})-\widehat\phi^{i+2}}{\sqrt{5}} \\[1mm]
@@ -301,7 +301,7 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 \item $n^{\lg\lg n}=\Omega\bigl((\lg n)^{\lg n}\bigr)$ \\
 	Na mocy tożsamości~(3.15) funkcje są równoważne.
 \item $(\lg n)^{\lg n}=\Omega((\lg n)!)$ \\
-	Jeśli podstawimy $n=2^h$, to otrzymamy wzór $h^h=\Omega(h!)$, który jest prawdziwy na podstawie zależności $n!=o(n^n)$, zaprezentowanej w~podręczniku.
+	Jeśli podstawimy $n=2^h$, to otrzymamy wzór $h^h=\Omega(h!)$, który jest prawdziwy na podstawie zależności $n!=o(n^n)$, zaprezentowanej w~Podręczniku.
 \item $(\lg n)!=\Omega(n^3)$ \\
 	Korzystając z~logarytmu pierwszej funkcji oszacowanego w~poprzednim uzasadnieniu oraz z~tego, że $\lg n^3=\Theta(\lg n)$, dostajemy żądany wynik, ponieważ $\lg\lg n=\omega(1)$.
 \item $n^3=\Omega(n^2)$ \\
@@ -331,7 +331,7 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 \item $\ln n=\Omega\bigl(\!\sqrt{\lg n}\bigr)$ \\
 	Wystarczy przyjąć $n=e^h$, aby otrzymać tożsamość $h=\Omega\bigl(\!\sqrt{h}\bigr)$, która zachodzi na mocy tego, że $\sqrt{h}=\omega(1)$.
 \item $\sqrt{\lg n}=\Omega(\ln\ln n)$ \\
-	Prawa strona jest równoważna $\Omega(\lg\lg n)$, zatem przyjmując $n=2^{4^h}$, dostajemy tożsamość $2^h=\Omega(h)$.
+	Prawa strona jest identyczna z~$\Omega(\lg\lg n)$, zatem przyjmując $n=2^{4^h}$, dostajemy tożsamość $2^h=\Omega(h)$.
 \item $\ln\ln n=\Omega\bigl(2^{\lg^*n}\bigr)$ \\
 	Logarytmując funkcje, dostajemy
 	\[
@@ -421,7 +421,7 @@ Fałsz. Dla $f(n)=1/n$ mamy $f^2(n)=1/n^2$. Ponieważ nie istnieje żadna dodatn
 Prawda. Z~definicji notacji $O$, jeśli $f(n)=O(g(n))$, to istnieją stałe $c$,~$n_0>0$, że dla każdego $n\ge n_0$ zachodzi $0\le f(n)\le cg(n)$. Dzieląc nierówność przez $c$, otrzymujemy $0\le f(n)/c\le g(n)$, przy czym $1/c>0$, a~więc $g(n)=\Omega(f(n))$.
 
 \subproblem %3-4(g)
-Fałsz. Niech np.\ $f(n)=2^n$ i~wtedy $f(n/2)=2^{n/2}=\sqrt{2^n}$. Gdyby zachodziło $2^n=O\bigl(\!\sqrt{2^n}\bigr)$, to dla pewnej stałej $c>0$ i~odpowiednio dużych $n$ mielibyśmy $2^n\le c\sqrt{2^n}$. Ale wówczas $c\ge\sqrt{2^n}$ nie mogłoby być stałą.
+Fałsz. Niech np.\ $f(n)=2^n$. Wtedy $f(n/2)=2^{n/2}=\sqrt{2^n}$. Gdyby zachodziło $2^n=O\bigl(\!\sqrt{2^n}\bigr)$, to dla pewnej stałej $c>0$ i~odpowiednio dużych $n$ mielibyśmy $2^n\le c\sqrt{2^n}$. Ale wówczas $c\ge\sqrt{2^n}$ nie mogłoby być stałą.
 
 \subproblem %3-4(h)
 Prawda. Niech $h(n)=o(f(n))$. Wtedy, na podstawie definicji notacji $o$ mamy, że dla każdej stałej $c>0$ istnieje stała $n_0>0$ taka, że nierówności $0\le h(n)<cf(n)$ zachodzą dla wszystkich $n\ge n_0$. To znaczy, że
@@ -440,7 +440,7 @@ Natomiast nie jest prawdą podobne twierdzenie, gdyby zastosować notację $\Ome
 \subproblem %3-5(b)
 Zaletą nowej notacji jest fakt, że jeśli o~pewnej funkcji $f(n)$ wiemy, że nie jest klasy $O(g(n))$, to jest klasy $\overset{\infty}{\Omega}(g(n))$ (z~poprzedniego punktu) -- nie istnieją zatem funkcje, których nie da się porównać z~innymi za pomocą pary notacji $O$ i~$\overset{\infty}{\Omega}$.
 
-Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie dominuje nad funkcją $g(n)$, gdyż w~nieskończenie wielu punktach może przyjmować wartości mniejsze od wartości $g(n)$ w~tychże punktach. Nieskończenie wiele punktów, o~których mowa w~definicji $\overset{\infty}{\Omega}$, może też występować daleko ponad maksymalnym rozmiarem danych wejściowych algorytmu, którego czas działania opisujemy przy użyciu nowej notacji. Wady te sprawiają, że nowa notacja ma małe zastosowanie praktyczne i~większe jest jej znaczenie w~rozważaniach teoretycznych.
+Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie dominuje nad funkcją $g(n)$, gdyż w~nieskończenie wielu punktach może przyjmować wartości mniejsze od wartości $g(n)$. Nieskończenie wiele punktów, o~których mowa w~definicji $\overset{\infty}{\Omega}$, może też występować daleko ponad maksymalnym rozmiarem danych wejściowych algorytmu, którego czas działania opisujemy przy użyciu nowej notacji. Wady te sprawiają, że nowa notacja ma niewielkie zastosowanie praktyczne i~jest użyteczna głównie w~rozważaniach teoretycznych.
 
 \subproblem %3-5(c)
 W~przypadku implikacji w~lewą stronę z~warunku $f(n)=\Theta(g(n))$ wynika, że $f(n)\ge0$ od pewnego dodatniego $n_0$, a~więc $f(n)$ jest funkcją asymptotycznie nieujemną i~twierdzenie stosuje się bez zmian, czyli implikacja zachodzi.
@@ -467,21 +467,21 @@ Oto definicje notacji $\widetilde{\Omega}$ i~$\widetilde{\Theta}$:
 	\end{split}
 \]
 
-Dowód twierdzenia~3.1 dla notacji $\widetilde{O}$, $\widetilde{\Omega}$ i~$\widetilde{\Theta}$ przebiega analogicznie do dowodu jego oryginalnego odpowiednika przeprowadzony w~\refExercise{3.1-5}. Z~definicji notacji $\widetilde{\Theta}$ mamy, że $f(n)=\widetilde{\Theta}(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$,~$c_2$,~$k_1$,~$k_2$,~$n_0>0$, że nierówności
+Dowód twierdzenia~3.1 dla notacji $\widetilde{O}$, $\widetilde{\Omega}$ i~$\widetilde{\Theta}$ przebiega analogicznie do dowodu jego oryginalnego odpowiednika przeprowadzonego w~\refExercise{3.1-5}. Z~definicji notacji $\widetilde{\Theta}$ mamy, że $f(n)=\widetilde{\Theta}(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$,~$c_2$,~$k_1$,~$k_2$,~$n_0>0$, że nierówności
 \[
 	0 \le c_1g(n)\lg^{k_1}n \le f(n) \le c_2g(n)\lg^{k_2}n
 \]
 zachodzą dla wszystkich $n\ge n_0$. Zapiszmy je w~postaci układu
 \[
 	\begin{cases}
-		0 \le c_1g(n)\lg^{k_1}n \le f(n), \\
-		0 \le f(n) \le c_2g(n)\lg^{k_2}n.
-	\end{cases}
+		0 \le c_1g(n)\lg^{k_1}n \le f(n) \\
+		0 \le f(n) \le c_2g(n)\lg^{k_2}n
+	\end{cases}.
 \]
 Z~pierwszej nierówności mamy, że $f(n)=\widetilde{\Omega}(g(n))$, a~z~drugiej, że $f(n)=\widetilde{O}(g(n))$.
 
 \problem{Funkcje iterowane} %3-6
-W~każdym punkcie tego problemu za dziedzinę funkcji $f_c^*(n)$ przyjęto dziedzinę $f(n)$. W~celu wyznaczenia $f_c^*(n)$, szukamy najmniejszego $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
+W~każdym punkcie tego problemu za dziedzinę funkcji $f_c^*(n)$ przyjęto dziedzinę $f(n)$. W~celu wyznaczenia $f_c^*(n)$ szukamy najmniejszego $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
 
 \subproblem %3-6(a)
 Nierówność $\lg^{(i)}n\le0$ można przekształcić do postaci $\lg^{(i-1)}n\le1$. Wówczas z~definicji logarytmu iterowanego mamy $\lg^*n=i-1$, a~zatem $f_0^*(n)=\lg^*n+1=\Theta(\lg^*n)$.
@@ -551,6 +551,6 @@ Jeśli $n\ge4$, to zachodzi $n/\!\lg n\le n/2$. Niech $g(n)=n/2$. Wówczas z~pun
 
 Jeśli z~kolei $n\ge16$, to prawdziwa jest nierówność $n/\!\lg n\ge\sqrt{n}$. Definiując $h(n)=\sqrt{n}$ i~wykorzystując wynik z~punktu~(e), otrzymujemy $h_{16}^*(n)=h_2^*(n)-2=\Theta(\lg\lg n)$, a~zatem $f_2^*(n)=f_{16}^*(n)+2\ge h_{16}^*(n)+2=\Omega(\lg\lg n)$.
 
-Tempo wzrostu funkcji $f_2^*(n)$ mieści się zatem pomiędzy $\Omega(\lg\lg n)$ a~$O(\lg n)$. Niestety na tej podstawie nie można podać dokładnego oszacowania tej funkcji.
+Tempo wzrostu funkcji $f_2^*(n)$ znajduje się zatem pomiędzy $\Omega(\lg\lg n)$ a~$O(\lg n)$. Niestety na tej podstawie nie można podać dokładnego oszacowania tej funkcji.
 
 \endinput

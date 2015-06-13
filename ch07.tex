@@ -35,7 +35,7 @@ Niech $c_1$, $d_1>0$ będą stałymi. Korzystając z~założenia, że $T(n-1)\le
 \]
 Ostatnia nierówność jest spełniona dla każdego $n\ge1$, jeśli np.\ $c_1=d_1=1$.
 
-Weźmy teraz inne stałe $c_2$, $d_2>0$. Dolnego oszacowania na $T(n)$ dowodzimy analogicznie, wychodząc z~założenia $T(n-1)\ge c_2(n-1)^2$:
+Weźmy teraz inne stałe $c_2$, $d_2>0$. Dolnego oszacowania na $T(n)$ dowodzimy analogicznie, wychodząc z~założenia, że $T(n-1)\ge c_2(n-1)^2$:
 \[
 	T(n) = T(n-1)+\Theta(n) \ge c_2(n-1)^2+d_2n = c_2n^2+(d_2-2c_2)n+c_2 \ge c_2n^2.
 \]
@@ -52,7 +52,7 @@ W~tym przypadku podczas każdego wywołania rekurencyjnego procedury \proc{Parti
 \exercise %7.2-4
 Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort. W~wielu wywołaniach rekurencyjnych na element rozdzielający wybierany jest bowiem największy element przetwarzanej podtablicy. Wykonywane są wówczas niezrównoważone podziały, przez co czas działania procedury \proc{Quicksort} zbliża się do kwadratowego.
 
-Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt~(c) problemu~\refProblem{2-4}). Liczba inwersji w~ciągu prawie posortowanym jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
+Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt~(c) problemu~\refProblem{2-4}). W~ciągu prawie posortowanym ilość inwersji jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
 
 \exercise %7.2-5
 Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \onedash{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej gałęzi. Mamy wtedy $\alpha^hn=1$, skąd
@@ -73,7 +73,7 @@ Załóżmy, że procedura \proc{Partition} utworzyła podział w~stosunku $1-\be
 \subchapter{Randomizowana wersja algorytmu quicksort}
 
 \exercise %7.3-1
-Randomizacja algorytmu sprawia, że żadne dane wejściowe nie stanowią przypadku pesymistycznego. Można więc przyjąć, że dla każdych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
+Randomizacja algorytmu sprawia, że żadne jego dane wejściowe nie stanowią przypadku pesymistycznego. Można więc przyjąć, że dla każdych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
 
 \exercise %7.3-2
 W~przypadku pesymistycznym generator liczb losowych za każdym razem wybiera wartości, które tworzą najbardziej niezrównoważony podział podtablicy, czyli $p$ lub $r$. W~takiej sytuacji liczba wywołań generatora jest rzędu $\Theta(n)$.
@@ -134,7 +134,7 @@ Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$
 Ponieważ druga pochodna jest dodatnia, to funkcja $f$ nie posiada maksimum lokalnego i~jej największej wartości należy szukać w~punktach brzegowych dziedziny. Mamy $f(0)=f(n-1)=(n-1)^2$, więc maksimum jest osiągane w~obu tych punktach.
 
 \exercise %7.4-4
-Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu quicksort korzystamy z~analizy przedstawionej w~podręczniku dla górnego oszacowania. Zauważmy, że lemat~7.1 pozostaje prawdziwy, gdyby zamiast notacji $O$ zastosować $\Omega$. Prowadząc rozumowanie analogicznie, dochodzimy w~końcu do wartości oczekiwanej zmiennej losowej $X$, którą następnie ograniczamy od dołu:
+Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu quicksort korzystamy z~analizy przedstawionej w~Podręczniku dla górnego oszacowania. Zauważmy, że lemat~7.1 pozostaje prawdziwy, gdyby zamiast notacji $O$ zastosować $\Omega$. Prowadząc rozumowanie analogicznie, dochodzimy w~końcu do wartości oczekiwanej zmiennej losowej $X$, którą następnie ograniczamy od dołu:
 \[
 	\E(X) = \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{k+1} \ge \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{2k} = \sum_{i=1}^{n-1}H_{n-i} = \sum_{i=1}^{n-1}H_i = \sum_{i=1}^{n-1}\Omega(\lg i) = \Omega(n\lg n).
 \]
@@ -243,12 +243,12 @@ Wykorzystując teraz wynik z~punktu~(d), dostajemy
 \]
 gdyż możemy wybrać $a$ wystarczająco duże, by wyrażenie $an/4$ dominowało nad składnikiem $\Theta(n)$.
 
-Jeśli przyjmiemy, że $\E(T(2))=1$, to wówczas będziemy mieć $1\le a\cdot2\cdot\lg2=2a$, skąd $a\ge1/2$. A~zatem można przyjąć $n=2$ na podstawę indukcji i~dowód faktu, że $\E(T(n))=O(n\lg n)$, jest zakończony. Łącząc ten wynik z~oszacowaniem $\Omega(n\lg n)$ dla przypadku optymistycznego, które zostało wyznaczone w~\refExercise{7.4-2}, dostajemy, że oczekiwanym czasem działania algorytmu quicksort jest $\Theta(n\lg n)$.
+Jeśli przyjmiemy, że $\E(T(2))=1$, to wówczas będziemy mieć $1\le a\cdot2\cdot\lg2=2a$, skąd $a\ge1/2$. A~zatem można przyjąć $n=2$ na podstawę indukcji i~dowód faktu, że $\E(T(n))=O(n\lg n)$ jest zakończony. Łącząc ten wynik z~oszacowaniem $\Omega(n\lg n)$ dla przypadku optymistycznego, które zostało wyznaczone w~\refExercise{7.4-2}, dostajemy, że oczekiwanym czasem działania algorytmu quicksort jest $\Theta(n\lg n)$.
 
 \problem{Nieefektywne sortowanie} %7-3
 
 \subproblem %7-3(a)
-Udowodnimy poprawność algorytmu przez indukcję względem rozmiaru tablicy $n$. Łatwo sprawdzić, że algorytm działa poprawnie w~przypadku, gdy $n\le2$. Załóżmy więc, że $n>2$ i~że poprawnie sortowane są tablice o~rozmiarach mniejszych niż $n$. W~wyniku wykonania wiersza~6 na pozycjach $\lfloor n/3\rfloor+1\twodots n-\lfloor n/3\rfloor$ znajdują się elementy nie mniejsze od tych z~pozycji $1\twodots\lfloor n/3\rfloor$. A~zatem, po wykonaniu wiersza~7, $\lfloor n/3\rfloor$ największych elementów tablicy $A$ znajduje się w~obszarze $A[n-\lfloor n/3\rfloor+1\twodots n]$. Aby zakończyć sortowanie tablicy $A$, wystarczy posortować fragment $A[1\twodots n-\lfloor n/3\rfloor]$, co realizuje wiersz~8.
+Udowodnimy poprawność algorytmu przez indukcję względem rozmiaru tablicy $n$. Łatwo sprawdzić, że algorytm działa poprawnie w~przypadku, gdy $n\le2$. Załóżmy więc, że $n>2$ i~że poprawnie sortowane są tablice o~rozmiarach mniejszych niż $n$. W~wyniku wykonania wiersza~6 na pozycjach $\lfloor n/3\rfloor+1\twodots n-\lfloor n/3\rfloor$ znajdują się elementy nie mniejsze od tych z~pozycji $1\twodots\lfloor n/3\rfloor$. A~zatem, po wykonaniu wiersza~7, $\lfloor n/3\rfloor$ największych elementów tablicy $A$ znajduje się w~obszarze $A[n-\lfloor n/3\rfloor+1\twodots n]$. Aby zakończyć sortowanie tablicy $A$, wystarczy uporządkować fragment $A[1\twodots n-\lfloor n/3\rfloor]$, co realizuje wiersz~8.
 
 \subproblem %7-3(b)
 Procedura jest wywoływana rekurencyjnie 3~razy, zaś każde wywołanie otrzymuje tablicę o~rozmiarze około $2/3$ rozmiaru oryginalnej tablicy. Ponadto praca poza wywołaniami rekurencyjnymi jest wykonywana w~czasie stałym. Stąd dostajemy równanie rekurencyjne
@@ -340,7 +340,7 @@ Dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego szanse na 
 \]
 
 \subproblem %7-5(d)
-Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyskanie podziału zrównoważonego, co z~kolei obniża prawdopodobieństwo, że algorytm quicksort będzie działał w~czasie kwadratowym. Jednakże dolne oszacowanie na czas działania algorytmu pozostaje bez zmian i~wynosi nadal $\Omega(n\lg n)$ -- można sobie wyobrazić sytuację, w~której oryginalny sposób wyboru elementu rozdzielającego wprowadza za każdym razem najbardziej zrównoważony podział, a~dolnym ograniczeniem czasu działania oryginalnego algorytmu jest właśnie $\Omega(n\lg n)$.
+Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyskanie podziału zrównoważonego, co z~kolei obniża prawdopodobieństwo, że algorytm quicksort będzie działał w~czasie kwadratowym. Jednakże dolne oszacowanie na czas działania algorytmu pozostaje bez zmian i~wynosi nadal $\Omega(n\lg n)$ -- można sobie wyobrazić sytuację, w~której oryginalny sposób wyboru elementu rozdzielającego generuje za każdym razem najbardziej zrównoważony podział.
 
 \problem{Rozmyte sortowanie przedziałów} %7-6
 
@@ -387,6 +387,6 @@ Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twod
 Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$. Po wykonaniu wiersza~\ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$. Następnie, w~wierszach \twodashes{\ref{li:fuzzy-partition-q-init}}{\ref{li:fuzzy-partition-for-end}}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy. W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania. Na końcu zwracane są indeksy początku i~końca tego obszaru.
 
 \subproblem %7-6(b)
-Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \onedash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta. Na~każdym poziomie rekursji będzie więc sortowany tylko jeden obszar. Randomizacja zapewnia, że element rozdzielający wypada średnio w~połowie podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
+Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \onedash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta. Na~każdym poziomie rekursji będzie więc sortowany tylko jeden obszar. Randomizacja zapewnia, że oczekiwaną pozycją elementu rozdzielającego jest środek podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
 
 \endinput

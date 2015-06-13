@@ -1,25 +1,7 @@
-PRZED v0.4:
-- poprawić part I
-- poprawić part II
-- zaimplementować i przetestować algorytmy, również te bez pseudokodów, które są wystarczająco szczegółowo opisane
-- Czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
-- wstęp: (La)TeX i MetaPost
-- wstęp: numeracja rysunków, wzorów i jak się to odróżnia od tych z podręcznika
-- wstęp: czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w podręczniku
-- wstęp: napisać, że czasem odnosimy się do późniejszych zadań i problemów
-- wstęp: używane oznaczenia, E, Pr, itd.
-- wstęp: napisać o tym, że używamy czasem innych nazw niż w podręczniku, np. "funkcja niemalejąca" zamiast "funkcja monotonicznie rosnąca" (?)
-- wstęp: o konwencjach przejętych z podręcznika i tych, które zmieniliśmy (również o tym, że piszemy w skrócie np. "indeksy i<j<k" w znaczeniu "indeksy i,j,k, gdzie i<j<k")
-- wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne (???) i ogólnie mniejsza koncentracja na szczegółach w miarę postępu materiału
-- wstęp: napisać, że rozwiązania opierają się na treści zadań z polskiego tłumaczenia, ale mamy na uwadze erratę oryginału (http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php), tzn. jeśli w erracie jest wpis o pewnej poprawce, to zaznaczamy, że w tłumaczeniu jest błąd. Wpis o erracie będzie tylko we wstępie, w notkach będą wyłącznie informacje o błędach tłumaczenia i ew. zwrócenie uwagi, że błąd jest też w oryginale.
-- wstęp: opisać pozostałe ważne konwencje z pliku README
-- sprawdzić pisownię
-- odblokować właściwe definicje \refExercise i \refProblem
-- co z kwojtas.pl?
-
-PRZED v0.5:
+WYMAGANIA DLA 0.5:
 - part III
 - Czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (poczytać: http://en.wikipedia.org/wiki/Bit_complexity).
+- Czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
 - zaimplementować i przetestować algorytmy
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
 - sprawdzić dwustronność, czy rozdziały lub części mają rozpoczynać się zawsze od nieparzystej/parzystej strony?
@@ -29,48 +11,54 @@ PRZED v0.5:
 - ostateczne zmiany w layoucie, konwencjach itd. -- takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
 - ostateczne strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
 - uporządkować cormensol.tex, cormensol.sty (poprawić polecenia wyświetlające liczniki)
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - Asymptote, TikZ, PGF jako narzędzia do tworzenia rysunków?
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v0.6:
+WYMAGANIA DLA 0.6:
 - part IV
 - zaimplementować i przetestować algorytmy
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v0.7:
+WYMAGANIA DLA 0.7:
 - part V
 - zaimplementować i przetestować algorytmy
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v0.8:
+WYMAGANIA DLA 0.8:
 - part VI
 - zaimplementować i przetestować algorytmy
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v0.9:
+WYMAGANIA DLA 0.9:
 - ch27, ch28, ch29, ch30
 - zaimplementować i przetestować algorytmy
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v1.0:
+WYMAGANIA DLA 1.0:
 - ch31, ch32, ch33, ch34, ch35
 - zaimplementować i przetestować algorytmy
+- uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRZED v2.0:
+PRYSZŁE WERSJE:
 - rozwiązania zadań i problemów wydania 3
 - clrscode3e zamiast clrscode
 - przerobić na stronę WWW wykorzystującą MathJax
 - przetłumaczyć na język angielski
 - zaprojektować bibliotekę algorytmów i struktur danych pojawiających się w podręczniku i w rozwiązaniach
 
-DO POPRAWY/WERYFIKACJI W PÓŹNIEJSZYCH ETAPACH:
+DO POPRAWY/WERYFIKACJI W PRZYSZŁOŚCI:
 (zadania zaznaczane jako rozwiązane poprawnie, ale w których można dokonać poprawek/ulepszeń po przerobieniu większej ilości materiału)
 1 -- sprawdzić cały rozdział po zrobieniu wszystkich pozostałych
 6.5-6 -- zaimplementować kolejkę FIFO i stos na kolejce priorytetowej (po ch10)
@@ -86,19 +74,12 @@ ROZDZIAŁ 1
 ROZDZIAŁ 2
 ROZDZIAŁ 3
 ROZDZIAŁ 4
-
 ROZDZIAŁ 5
-5.3-6 -- zamiast ponownego wywoływania Permute-By-Sorting można wywoływać np. Randomize-In-Place ALBO dokonać zmiany w algorytmie sortującym -- zakładając, że jest on oparty o porównania, jeśli natrafi na elementy równe, to wybiera losowo, którą gałęzią drzewa porównań iść
-5-2(f) -- błędna analiza przypadku średniego, powinno wyjść (n+1)/(k+1)
 
 ROZDZIAŁ 6
 ROZDZIAŁ 7
-
 ROZDZIAŁ 8
-8-3(b) -- przetestować implementację, sprawdzić -- może trzeba opisać jawnie, że wywołujemy sortowanie rekurencyjnie z tymczasowymi tablicami i o pustych znakach?
-
 ROZDZIAŁ 9
-9-3(a) -- sprawdzić, zaimplementować algorytm
 
 DODATEK A
 DODATEK B

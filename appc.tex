@@ -36,7 +36,7 @@ Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby p
 \]
 
 \exercise %C.1-7
-Niech $S$ będzie zbiorem \onedash{$n$}{elementowym} oraz niech $s\in S$. Ze zbioru $S$ można wybrać $\binom{n}{k}$ \onedash{$k$}{podzbiorów}. Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które go zawierają. Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$. Stąd wnioskujemy, że
+Niech $S$ będzie zbiorem \onedash{$n$}{elementowym} oraz niech $s\in S$. Ze zbioru $S$ można wybrać $\binom{n}{k}$ \onedash{$k$}{podzbiorów}. Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które zawierają $s$. Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$. Stąd wnioskujemy, że
 \[
     \binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.
 \]
@@ -54,7 +54,7 @@ Kilka początkowych wierszy trójkąta Pascala:
 		1 && 6 && 15 && 20 && 15 && 6 && 1
 	\end{array}
 \]
-Pierwszy wiersz składa się z~jednego elementu: $\binom{0}{0}=1$. Na krańcach kolejnych wierszy występują jedynki, a~pozostałe elementy obliczane są z~tożsamości z~\refExercise{C.1-7}, czyli poprzez zsumowanie liczb występujących bezpośrednio nad wyznaczanym elementem.
+Pierwszy wiersz składa się z~elementu $\binom{0}{0}=1$. Na krańcach kolejnych wierszy występują jedynki, a~pozostałe elementy obliczane są z~tożsamości z~\refExercise{C.1-7}, czyli poprzez zsumowanie liczb występujących bezpośrednio nad wyznaczanym elementem.
 
 \exercise %C.1-9
 Z~definicji współczynnika dwumianowego i~z~tożsamości~(A.1) mamy
@@ -77,16 +77,16 @@ W~przypadku gdy $n$ jest liczbą parzystą, maksymalna wartość funkcji $b_n$ j
 \[
     \frac{b_n(n/2)}{b_n(n/2-1)} = \frac{\binom{n}{n/2}}{\binom{n}{n/2-1}} = \frac{n!}{(n/2)!\,(n/2)!}\cdot\frac{(n/2-1)!\,(n/2+1)!}{n!} = \frac{n/2+1}{n/2} > 1.
 \]
-Stąd $b_n$ przyjmuje maksimum dla $k=n/2=\lfloor n/2\rfloor=\lceil n/2\rceil$.
+Mamy więc, że $b_n$ przyjmuje maksimum dla $k=n/2=\lfloor n/2\rfloor=\lceil n/2\rceil$.
 
 \exercise %C.1-11
 Dla liczb naturalnych $n$, $j$,~$k$ takich, że $j+k\le n$, sprawdzamy zachowanie stosunku
 \[
 	\frac{\binom{n}{j+k}}{\binom{n}{j}\binom{n-j}{k}} = \frac{n!}{(j+k)!\,(n-j-k)!}\cdot\frac{j!\,(n-j)!}{n!}\cdot\frac{k!\,(n-j-k)!}{(n-j)!} = \frac{j!\,k!}{(j+k)!} = \frac{\prod_{i=1}^ki}{\prod_{i=1}^k(j+i)}.
 \]
-Oczywistym jest, że iloczyn liczb całkowitych od 1 do $k$ nie przekracza iloczynu liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1. Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
+Oczywistym jest, że iloczyn kolejnych liczb całkowitych od 1 do $k$ nie przekracza iloczynu kolejnych liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1. Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
 
-Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \onedash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze. W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów. Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście. Można mianowicie dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
+Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \onedash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze. W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów. Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście. Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
 
 \exercise %C.1-12
 Łatwo sprawdzić, że dla $k=0$ nierówność zachodzi. Przyjmijmy zatem, że $k\ge1$ i~załóżmy, że
@@ -243,7 +243,7 @@ Wybieramy losowo jedną osobę z~całej grupy. Oznaczmy następujące zdarzenia:
 	\item[$B$] -- wybrano programistę,
 	\item[$C$] -- wybrano matematyka.
 \end{itemize}
-Obliczamy ich prawdopodobieństwa:
+Ich prawdopodobieństwa wynoszą:
 \[
 	\Pr(A) = \frac{1}{3}, \quad \Pr(B) = \frac{1}{10}, \quad \Pr(C) = \frac{2}{25}.
 \]
@@ -326,7 +326,7 @@ Zgodnie z~definicją niezależnych zmiennych losowych $X$ i~$Y$ mamy
 \[
 	\Pr(X=x\;\;\text{i}\;\;Y=y) = \Pr(X=x)\Pr(Y=y).
 \]
-Niech $f$ i~$g$ będą dowolnymi funkcjami rzeczywistymi. Jeśli $X$ przyjmuje pewną wartość $x$, to zmienna losowa $f(X)$ przyjmuje wartość $f(x)$. Analogicznie dla $Y$: jeśli $Y=y$, to $g(Y)=g(y)$. Powyższy wzór przyjmuje zatem postać
+Niech $f$ i~$g$ będą dowolnymi funkcjami rzeczywistymi. Jeśli $X$ przyjmuje wartość $x$, to zmienna losowa $f(X)$ przyjmuje wartość $f(x)$. Analogicznie dla $Y$: jeśli $Y=y$, to $g(Y)=g(y)$. Powyższy wzór możemy więc zapisać w~postaci
 \[
 	\Pr\bigl(f(X)=f(x)\;\;\text{i}\;\;g(Y)=g(y)\bigr) = \Pr\bigl(f(X)=f(x)\bigr)\Pr\bigl(g(Y)=g(y)\bigr),
 \]
@@ -376,7 +376,7 @@ Wprost z~definicji wariancji oraz ze wzoru~(C.21):
 \subchapter{Rozkłady: geometryczny i~dwumianowy}
 
 \exercise %C.4-1
-Rodzina zdarzeń elementarnych $S$ składa się ze zdarzeń oznaczających, że należy wykonać $k$ prób zanim nastąpi pierwszy sukces, przy czym $k=1$, 2,~\dots. Niech zmienna losowa $X$ będzie liczbą prób potrzebnych do osiągnięcia sukcesu. Wówczas
+Rodzina zdarzeń elementarnych $S$ składa się ze zdarzeń oznaczających, że należy wykonać $k$ prób, zanim nastąpi pierwszy sukces, przy czym $k=1$, 2,~\dots. Niech zmienna losowa $X$ będzie liczbą prób potrzebnych do osiągnięcia sukcesu. Wówczas
 \[
 	\Pr(S) = \sum_{k=1}^\infty\Pr(X=k) = \sum_{k=1}^\infty q^{k-1}p = p\sum_{k=0}^\infty(1-p)^k = \frac{p}{1-(1-p)} \\[1mm] = 1.
 \]
@@ -449,7 +449,7 @@ wynikającą ze wzoru~(C.6), otrzymujemy
 \]
 
 \exercise %C.4-8
-\note{Znak nierówności, której prawdziwość należy udowodnić w~tym zadaniu, powinien być skierowany przeciwnie.}
+\note{Znak nierówności, którą należy udowodnić w~tym zadaniu, powinien być skierowany przeciwnie.}
 
 \noindent Niech $X'$ będzie zmienną losową przyjmującą liczbę sukcesów w~serii prób Bernoulliego, każda o~prawdopodobieństwie sukcesu równym $p$. Z~\refExercise{C.4-9}, po zdefiniowaniu $p_i'=p$ dla każdego $i=1$, 2,~\dots,~$n$, wynika wzór
 \[
@@ -549,7 +549,7 @@ przeprowadzimy, opierając się na dowodzie tw.~C.8. Dla pewnego $\alpha>0$ mamy
 \[
 	\Pr(\mu-X\ge r) = \Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr),
 \]
-a~z~nierówności Markowa dostajemy
+a~z~nierówności Markowa (\refExercise{C.3-6}) dostajemy
 \[
 	\Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(\mu-X)}\bigr)e^{-\alpha r}.
 \]
@@ -581,15 +581,15 @@ Prawą stronę nierówności~(C.45) minimalizuje $\alpha=\ln(r/\mu)$ (\refExerci
 	&= \biggl(\frac{(n-\mu)e}{r}\biggr)^r.
 \end{align*}
 
-W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np$ i~na mocy nierówności udowodnionej w~pierwszej części, dostajemy
+W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np$ i~na mocy nierówności udowodnionej w~pierwszej części otrzymujemy
 \[
     \Pr(np-X\ge r) \le \biggl(\frac{(n-np)e}{r}\biggr)^r = \biggl(\frac{nqe}{r}\biggr)^r.
 \]
 
 \exercise %C.5-6
-\note{W treści zadania w~polskim tłumaczeniu występuje błąd. Wskazówka podpowiada, aby udowodnić pewną nierówność, jednak jej prawa strona powinna mieć postać\/ $e^{\alpha^2\!/2}$.}
+\note{W treści zadania w~polskim tłumaczeniu występuje błąd.  Prawa strona nierówności ze wskazówki powinna mieć postać\/ $e^{\alpha^2\!/2}$.}
 
-\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych $\alpha>0$,~\/$p$,~\/$q\ge0$ spełniających\/ $p+q=1$, prawdziwa jest nierówność}
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych $\alpha>0$,~\/$p$,~\/$q\ge0$, spełniających\/ $p+q=1$, prawdziwa jest nierówność}
 	\[
 		pe^{\alpha q}+qe^{-\alpha p} \le e^{\alpha^2\!/2}.
 	\]
@@ -635,7 +635,7 @@ Początek głównego rozumowania prowadzimy w~oparciu o~dowód twierdzenia~C.8:
 \[
 	\Pr(X-\mu\ge r) = \Pr\bigl(e^{\alpha(X-\mu)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(X-\mu)}\bigr)e^{-\alpha r}.
 \]
-Następnie, przy tych samych oznaczeniach z~oryginalnego dowodu, zachodzi
+Następnie, przy tych samych oznaczeniach jak w~oryginalnym dowodzie, zachodzi
 \[
 	\E\bigl(e^{\alpha(X-\mu)}\bigr) = \prod_{i=1}^n\E\bigl(e^{\alpha(X_i-p_i)}\bigr).
 \]
@@ -657,11 +657,7 @@ Należy teraz wybrać taką wartość $\alpha$, która minimalizuje ostatnie wyr
 \]
 
 \exercise %C.5-7
-Potraktujmy wyrażenie jak funkcję $f$ zmiennej $\alpha$,
-\[
-	f(\alpha) = \exp(\mu e^\alpha-\alpha r).
-\]
-W~celu wyznaczenia jej minimum obliczmy pierwszą i~drugą pochodną:
+Potraktujmy wyrażenie jak funkcję $f$ zmiennej $\alpha$, $f(\alpha)=\exp(\mu e^\alpha-\alpha r).$ W~celu wyznaczenia jej minimum obliczmy pierwszą i~drugą pochodną:
 \begin{align*}
 	\frac{df}{d\alpha}(\alpha) &= (\mu e^\alpha-r)\exp(\mu e^\alpha-\alpha r), \\
 	\frac{d^2\!f}{d\alpha^2}(\alpha) &= \bigl(\mu e^\alpha+(\mu e^\alpha-r)^2\bigr)\exp(\mu e^\alpha-\alpha r).

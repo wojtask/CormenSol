@@ -48,7 +48,7 @@ A~zatem zasada zachodzi dla dowolnej skończonej rodziny zbiorów.
 \exercise %B.1-4
 \note{Poniższe rozwiązanie dowodzi przeliczalności zbioru nieparzystych liczb naturalnych, czego dotyczy oryginalna treść zadania. Tłumaczenie pyta natomiast o~przeliczalność zbioru wszystkich liczb nieparzystych.}
 
-\noindent Aby wykazać ten fakt, należy znaleźć wzajemnie jednoznaczne odwzorowanie zbioru $\mathbb{N}$ w~zbiór $\bigl\{\,2n+1:n\in\mathbb{N}\,\bigr\}$. Każdej liczbie naturalnej $n$ możemy przyporządkowywać liczbę $2n+1$. Bijektywność tego odwzorowania jest oczywista, wnioskujemy zatem, że zbiór nieparzystych liczb naturalnych jest przeliczalny.
+\noindent Aby wykazać ten fakt, należy znaleźć wzajemnie jednoznaczne odwzorowanie zbioru $\mathbb{N}$ w~zbiór $\bigl\{\,2n+1:n\in\mathbb{N}\,\bigr\}$. Każdej liczbie naturalnej $n$ przyporządkujmy liczbę $2n+1$. Bijektywność tego odwzorowania jest oczywista, wnioskujemy zatem, że zbiór nieparzystych liczb naturalnych jest przeliczalny.
 
 \exercise %B.1-5
 Dowodzimy przez indukcję względem liczby elementów zbioru $S$. Jeśli $|S|=0$, czyli $S=\emptyset$, to $|2^S|=2^{|S|}=1$, bo $S$ ma tylko jeden podzbiór -- zbiór pusty. Niech teraz $|S|>0$ i~załóżmy, że $|2^S|=2^{|S|}$. Ustalmy $p\notin S$ i~rozważmy zbiór $S'=S\cup\{p\}$. Podzbiory zbioru $S'$ można podzielić na takie, które zawierają $p$ i~na takie, które nie zawierają $p$. Tych ostatnich jest $|2^S|=\bigl|2^{S'\setminus\{p\}}\bigr|=2^{|S'\setminus\{p\}|}$ na mocy założenia indukcyjnego. Okazuje się, że podzbiorów zawierających $p$ jest tyle samo, ponieważ każdy powstaje przez zsumowanie singletonu $\{p\}$ z~pewnym podzbiorem niezawierającym $p$. Mamy zatem
@@ -94,7 +94,7 @@ Relacja porządku $\le$ określona w~zbiorze liczb rzeczywistych.
 Relacja $R=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle a,b\rangle,\langle b,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
 
 \exercise %B.2-4
-Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$. Na mocy antysymetrii $R$, jeśli zachodzi $s'\,R\,s$ oraz $s\,R\,s'$, to $s=s'$, a~więc nie istnieją takie elementy $s'$, że $s'\in[s]\setminus\{s\}$, zatem klasy abstrakcji $S$ względem relacji $R$ są singletonami.
+Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$. Na mocy antysymetrii $R$, jeśli zachodzi $s'\,R\,s$ oraz $s\,R\,s'$, to $s=s'$, a~więc nie istnieją takie elementy $s'$, że $s'\in[s]\setminus\{s\}$. To oznacza, że klasy abstrakcji $S$ względem relacji $R$ są singletonami.
 
 \exercise %B.2-5
 Symetria i~przechodniość relacji zdefiniowane są za pomocą implikacji, do spełnienia których nie jest konieczne spełnienie ich poprzedników. Relacja pozostanie symetryczna i~przechodnia, jeśli w~zbiorze, w~którym jest określona, istnieje element niebędący w~relacji z~żadnym elementem z~tego zbioru. Zwrotność wymaga natomiast, aby każdy element był w~relacji z~samym sobą. Istnieją zatem relacje symetryczne i~przechodnie, ale nie zwrotne (patrz punkt~(c) \refExercise{B.2-3}).
@@ -259,7 +259,7 @@ Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozo
 $1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwoma barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \onedash{2}{kolorowanie}.
 \medskip
 
-$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \onedash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności niech $c(v_1)=0$ i~wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$. Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \onedash{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
+$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \onedash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności niech $c(v_1)=0$. Wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$. Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \onedash{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
 \medskip
 
 $3.\Rightarrow 1.$: Ustalmy pewne $v\in V$. Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$. Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
@@ -297,7 +297,7 @@ Problem rozważany w~tym punkcie jest związany z~\emph{liczbami Ramseya} $R(m,n
 \begin{proof}
 Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą liczbie jego sąsiadów spoza jego zbioru pomniejszoną o~liczbę sąsiadów ze zbioru, do którego $v$ należy. Dowód sprowadza się do pokazania, że istnieje taki podział zbioru wierzchołków, że $d(v)\ge0$ dla każdego $v\in V$\!.
 
-Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$. Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$. Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie. Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby się na liczbę przeciwną. Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2. W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$. Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach. Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
+Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$. Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$. Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie. Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny. Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2. W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$. Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach. Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
 \end{proof}
 
 \subproblem %B-2(d)
