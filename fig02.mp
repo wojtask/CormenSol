@@ -232,8 +232,8 @@ beginfig(2);
 	label("Scal", (4.75scale, 7scale));
 	label("Scal", (15.75scale, 7scale));
 	label("Scal", (10.25scale, 10scale));
-	label(btex Ci\c{a}g pocz\c{a}tkowy etex, (10.25scale, scale));
-	label(btex Ci\c{a}g posortowany etex, (10.25scale, 13scale));
+	label(btex Ci\c ag pocz\c atkowy etex, (10.25scale, scale));
+	label(btex Ci\c ag posortowany etex, (10.25scale, 13scale));
 	
 endfig;
 
