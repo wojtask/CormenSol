@@ -61,6 +61,7 @@ Numery wyrażeń (odnośniki) zapisuje się w nawiasach okrągłych.
 Indukcję matematyczną prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy.
 Podstawą indukcji przy dowodzeniu oszacowania rekurencji T nie jest np. T(1), ale np. n=1.
 Poziomy drzew ukorzenionych liczy się od 0.
+Wszędzie gdzie tylko możliwe stosujemy zapis \Theta(1) zamiast O(1).
 
 
 IV Język
@@ -115,10 +116,12 @@ Pilnujemy, aby w opisie pod rysunkiem nie było sytuacji, w której odniesienie 
 
 VII Implementacje
 
-Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w Podręczniku, chyba że jest celowo błędny (w zadaniach na sprawdzenie poprawności tego algorytmu, np. Permute-With-All) lub nie rozwiązuje realnego problemu i służy jako ilustracja pewnej metody (np. Hire-Assistant).
+Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w Podręczniku, chyba że jest celowo błędny (w zadaniach na sprawdzenie poprawności tego algorytmu, np. Permute-With-All), niekompletny (uzupełnienie tego algorytmu stanowi polecenie jednego z zadań, np. Enqueue - wówczas implementujemy kompletną wersję) lub nie rozwiązuje realnego problemu i służy jako ilustracja pewnej metody (np. Hire-Assistant).
 Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w rozwiązaniach.
 Implementujemy i testujemy każdy algorytm, który jest opisany słownie w rozwiązaniach, o ile polecenie zadania/problemu mówi wyraźnie "podaj/zaprojektuj/skonstruuj algorytm/procedurę/implementację" itp.
-Można pominąć testowanie, jeśli poprawność algorytmu jest oczywista (np. Extract-Max).
+Polecenie służące do testowania większości algorytmów:
+	for ((n=1; n<=1000; n++)); do ./algotest $n; done | grep '^OK!$' | wc -l
+Można pominąć testowanie, jeśli poprawność algorytmu jest oczywista (np. Extract-Max) lub nie ma innego szybkiego i naturalnego sposobu testowania poprawności oprócz powtórzenia operacji z kodu testowanej procedury (np. List-Insert).
 Procedury pomocnicze, np. Partition, testujemy poprzez uruchomienie testów dla algorytmów wywołujących te procedury, np. Quicksort -- czasami trzeba tymczasowo zmienić implementację głównego algorytmu, aby wykorzystywał nową wersję procedury pomocniczej.
 Algorytmy implementujemy w podejściu proceduralnym, ale wykorzystując struktury danych z najważniejszymi operacjami (np. struktura array implementuje tablicę i zawiera m.in. operator dostępu do komórki [] lub operację sprawdzania czy jest posortowana), które umieszczamy w plikach util.h i util.cpp.
 Implementacje algorytmów umieszczamy w plikach ch??.h i ch??.cpp, a testy -- w plikach ch??Test.h i ch??Test.cpp.

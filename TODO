@@ -1,12 +1,17 @@
 WYMAGANIA DLA 0.5:
+- poprawić 9-3(a)
 - part III
-- Czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (poczytać: http://en.wikipedia.org/wiki/Bit_complexity).
-- Czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
-- zaimplementować i przetestować algorytmy
+- poprawić implementacje:
+	- WeightedMedian: 2/1000
+	- PostOfficeLocation2D: 2/1000
+	- InPlaceCountingSortTest: 2/1000
+	- BigNumbersSort: 993/1000
+- A może przenieść wszystkie definicje funkcji jako inline do plików nagłówkowych?
+- Czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (http://en.wikipedia.org/wiki/Bit_complexity).
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
 - sprawdzić dwustronność, czy rozdziały lub części mają rozpoczynać się zawsze od nieparzystej/parzystej strony?
-- sprawdzić bibliografię -- czy właściwe dotychczasowe pozycje i czy taki wygląd może zostać
-- jak poradzić sobie z problemem coraz większej ilości pseudokodów w rozdziale i underfull vboxami przez nie generowanymi? (pakiet float i zdefiniowanie otoczenia \begin{pseudocode}\vspace{-.5cm} ... \vspace{-.8cm}\end{pseudocode} (?))
+- sprawdzić bibliografię -- czy taki wygląd może zostać?
+- jak poradzić sobie z problemem coraz większej ilości pseudokodów w rozdziale i underfull vboxami przez nie generowanymi? (pakiet float i zdefiniowanie otoczenia \begin{pseudocode}\vspace{-.5cm} ... \vspace{-.8cm}\end{pseudocode} (?)) -- na str. 215 i 216 w Podręczniku jest podzielony pseudokod na dwie strony
 - zmniejszyć odstęp między numerem problemu a jego nazwą (?)
 - ostateczne zmiany w layoucie, konwencjach itd. -- takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
 - ostateczne strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
@@ -18,35 +23,30 @@ WYMAGANIA DLA 0.5:
 
 WYMAGANIA DLA 0.6:
 - part IV
-- zaimplementować i przetestować algorytmy
 - uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
 WYMAGANIA DLA 0.7:
 - part V
-- zaimplementować i przetestować algorytmy
 - uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
 WYMAGANIA DLA 0.8:
 - part VI
-- zaimplementować i przetestować algorytmy
 - uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
 WYMAGANIA DLA 0.9:
 - ch27, ch28, ch29, ch30
-- zaimplementować i przetestować algorytmy
 - uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
 WYMAGANIA DLA 1.0:
 - ch31, ch32, ch33, ch34, ch35
-- zaimplementować i przetestować algorytmy
 - uaktualnić wstęp i stronę tytułową
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
@@ -79,7 +79,196 @@ ROZDZIAŁ 5
 ROZDZIAŁ 6
 ROZDZIAŁ 7
 ROZDZIAŁ 8
+
 ROZDZIAŁ 9
+9.3(a) -- czy opisywać kruczki implementacyjne? poprawić algorytm: co z zamianami elementu A[r]? nie działa dla rozmiarów innych niż potęgi 2
+
+ROZDZIAŁ 10
+-- co z atrybutem tail w listach jednokierunkowych (dwukierunkowych)?
+-- po zakończeniu pisania implementacji zamienić jak najwięcej "non testable" na "used by ..."
+10.2-2 -- implementacja, Push ma raczej przyjmować klucz, Pop ma raczej zwracać klucz
+10.2-3 -- implementacja, Enqueue ma raczej przyjmować klucz, Dequeue ma raczej zwracać klucz
+10.2-4 -- implementacja
+10.2-5 -- implementacja
+10.2-6 -- implementacja
+10.2-7 -- implementacja, tyle że SinglyLinkedListDelete nie zwraca żadnej wartości (implementacja jest chyba ok, przepisać do pseudokodu)
+10.2-8 -- dopisać Xor-List-Delete, czy na pewno potrzebny tail[L] ? jak reprezentować xor? sprawdzić, implementacja
+10.3-2 -- czy może być?, implementacja
+10.3-4
+10.3-5 -- manipulacja nieużywanymi polami prev na liście F (?)
+10.4-2 -- czy może być tak?
+10.4-3 -- poprawić, w Podręczniku w niektórych pseudokodach nie skracają warunków z funkcjami boolowskimi, np. algorytm Johnsona na str. 651, a w niektórych skracają, np. Pop na str. 199 (ustalić czego się trzymamy), napisać wstęp, że korzystamy z metody inorder opisanej w Podręczniku w 12.1, sprawdzić, implementacja
+10.4-4 -- wstęp, sprawdzić, implementacja
+10.4-5 -- sprawdzić, implementacja
+10.4-6 -- sprawdzić, implementacja
+10-1 -- ok, ale czy na pewno \Theta a nie O? Wprowadzenie atrybutu tail zmieni kilka złożoności.
+10-2(a)
+10-2(b)
+10-2(c)
+10-3(a)
+10-3(b)
+10-3(c)
+10-3(d)
+10-3(e)
+10-3(f)
+10-3(g)
+10-3(h)
+
+ROZDZIAŁ 11
+11.1-1 -- sprawdzić
+11.1-2 -- sprawdzić
+11.1-3 -- metoda łańcuchowa na tablicy z adresowaniem bezpośrednim?
+11.1-4
+11.2-1 -- sprawdzić
+11.2-2 -- rysunek
+11.2-3 -- analiza wyszukiwania, porażka jest identyczna z sukcesem -- wystarczy szukać aż do elementu większego lub równego
+11.2-4
+11.2-5 -- przeformułować
+11.3-1
+11.3-2
+11.3-3
+11.3-4
+11.3-5
+11.3-6
+11.4-1
+11.4-2
+11.4-3
+11.4-4
+11.4-5
+11.5-1
+11-1(a)
+11-1(b)
+11-1(c)
+11-1(d)
+11-2(a)
+11-2(b)
+11-2(c)
+11-2(d)
+11-2(e)
+11-3(a)
+11-3(b)
+11-4(a)
+11-4(b)
+11-4(c)
+
+ROZDZIAŁ 12
+12.1-1
+12.1-2
+12.1-3
+12.1-4
+12.1-5
+12.2-1
+12.2-2
+12.2-3
+12.2-4
+12.2-5
+12.2-6
+12.2-7
+12.2-8
+12.2-9
+12.3-1
+12.3-2
+12.3-3
+12.3-4
+12.3-5
+12.3-6
+12.4-1
+12.4-2
+12.4-3
+12.4-4
+12.4-5
+12-1(a)
+12-1(b)
+12-1(c)
+12-1(d)
+12-3(a)
+12-3(b)
+12-3(c)
+12-3(d)
+12-3(e)
+12-3(f)
+12-4(a)
+12-4(b)
+12-4(c)
+12-4(d)
+
+ROZDZIAŁ 13
+13.1-1
+13.1-2
+13.1-3
+13.1-4
+13.1-5
+13.1-6
+13.1-7
+13.2-1
+13.2-2
+13.2-3
+13.2-4
+13.2-5
+13.3-1
+13.3-2
+13.3-3
+13.3-4
+13.3-5
+13.3-6
+13.4-1
+13.4-2
+13.4-3
+13.4-4
+13.4-5
+13.4-6
+13.4-7
+13-1(a)
+13-1(b)
+13-1(c)
+13-1(d)
+13-1(e)
+13-2(a)
+13-2(b)
+13-2(c)
+13-2(d)
+13-2(e)
+13-2(f)
+13-3(a)
+13-3(b)
+13-3(c)
+13-3(d)
+13-4(a)
+13-4(b)
+13-4(c)
+13-4(d)
+13-4(e)
+13-4(f)
+13-4(g)
+13-4(h)
+13-4(i)
+13-4(j)
+
+ROZDZIAŁ 14
+14.1-1
+14.1-2
+14.1-3
+14.1-4
+14.1-5
+14.1-6
+14.1-7
+14.1-8
+14.2-1
+14.2-2
+14.2-3
+14.2-4
+14.2-5
+14.3-1
+14.3-2
+14.3-3
+14.3-4
+14.3-5
+14.3-6
+14.3-7
+14-1(a)
+14-1(b)
+14-2(a)
+14-2(b)
 
 DODATEK A
 DODATEK B

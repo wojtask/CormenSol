@@ -1,0 +1,499 @@
+\chapter{Elementarne struktury danych}
+
+\subchapter{Stosy i~kolejki}
+
+\exercise %10.1-1
+Ciąg operacji na stosie $S$ został przedstawiony na rys.~\ref{fig:10.1-1}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig10.1}
+	\end{center}
+	\caption{Operacje wstawiania i~usuwania elementów na stosie $S$. {\sffamily\bfseries(a)} Pusty stos $S$ reprezentowany jako tablica $S[1\twodots6]$. {\sffamily\bfseries\twodashes{(b)}{(d)}} Stos $S$ po wykonaniu na nim kolejnych operacji \proc{Push}. {\sffamily\bfseries(e)} Po usunięciu elementu ze stosu $S$ zmieniana jest jedynie pozycja atrybutu $\id{top}[S]$, natomiast sam element pozostaje w~tablicy. {\sffamily\bfseries(f)} Wstawienie nowego elementu na stos $S$ nadpisuje stary element, który został usunięty w~poprzednim kroku. {\sffamily\bfseries(g)} Stos $S$ po wykonaniu ostatniej operacji \proc{Pop}.} \label{fig:10.1-1}
+\end{figure}
+
+\exercise %10.1-2
+Z~tablicą $A$ związujemy atrybuty $\id{top_1}[A]$ i~$\id{top}_2[A]$, które będą wskazywać na pozycje wierzchołków, odpowiednio, pierwszego i~drugiego stosu. Pierwszy będzie składał się z~elementów $A[1\twodots\id{top}_1[A]]$, a~drugi -- z~elementów $A[\id{top}_2[A]\twodots n]$. Początkowo $\id{top}_1[A]=0$ i~$\id{top}_2[A]=n+1$. Dodawanie i~usuwanie elementów w~pierwszym stosie działa identycznie jak dla pojedynczego stosu znajdującego się w~tablicy $A$, którego wierzchołek zajmuje pozycję $\id{top}_1[A]$. Drugi stos zachowuje się symetrycznie do pierwszego -- podczas dodawania do niego nowego elementu atrybut $\id{top}_2[A]$ będzie inkrementowany, a~podczas usuwania -- dekrementowany. Operacje dodawania i~usuwania elementów działają oczywiście w~czasie stałym. Jeśli $\id{top}_1[A]=0$, to pierwszy stos jest pusty, a~jeśli $\id{top}_2[A]=n+1$, to drugi stos jest pusty. Przepełnienie ma miejsce tylko wtedy, gdy $\id{top}_1[A]=\id{top}_2[A]-1$ i~usiłujemy dodać nowy element do któregokolwiek stosu, czyli wówczas, gdy łączna liczba elementów na obu stosach wynosi $n$.
+
+\exercise %10.1-3
+Ciąg operacji na kolejce $Q$ ilustruje rys.~\ref{fig:10.1-3}.
+
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig10.2}
+	\end{center}
+	\caption{Operacje wstawiania i~usuwania elementów na kolejce $Q$. {\sffamily\bfseries(a)} Pusta kolejka $Q$ reprezentowana jako tablica $Q[1\twodots6]$. {\sffamily\bfseries\twodashes{(b)}{(d)}} Kolejka $Q$ po wykonaniu na niej kolejnych operacji \proc{Enqueue}. {\sffamily\bfseries(e)} Po usunięciu elementu z~kolejki $Q$ zmieniana jest jedynie pozycja atrybutu $\id{head}[Q]$, natomiast sam element pozostaje w~tablicy. {\sffamily\bfseries(f)} Wstawienie nowego elementu do kolejki $Q$ nadpisuje stary element, który został usunięty w~poprzednim kroku. {\sffamily\bfseries(g)} Kolejka $Q$ po wykonaniu ostatniej operacji \proc{Dequeue}.} \label{fig:10.1-3}
+\end{figure}
+
+\exercise %10.1-4
+Poniżej znajduje się pseudokod operacji analogicznej do \proc{Stack-Empty}, ale testującej pustość kolejki. Wykorzystujemy ją podczas wykrywania błędów niedomiaru.
+
+\begin{codebox}
+\Procname{$\proc{Queue-Empty}(Q)$}
+\li	\If $\id{head}[Q]=\id{tail}[Q]$
+\li		\Then \Return \const{true}
+\li		\Else \Return \const{false}
+\End
+\end{codebox}
+
+Następujące wiersze należy dodać na początek procedury \proc{Enqueue}:
+\begin{codebox}
+\li	\If $\id{head}[Q]=\id{tail}[Q]+1$
+\li		\Then \Error ,,nadmiar''
+		\End
+\li	\If $\id{head}[Q]=1$ i~$\id{tail}[Q]=\id{length}[Q]$
+\li		\Then \Error ,,nadmiar''
+		\End
+\end{codebox}
+Z~kolei poniższy fragment kodu umieszczamy na początku procedury \proc{Dequeue}:
+\begin{codebox}
+\li	\If $\proc{Queue-Empty}(Q)$
+\li		\Then \Error ,,niedomiar''
+		\End
+\end{codebox}
+
+\exercise %10.1-5
+Kolejkę dwustronną implementujemy przy użyciu tablicy $D[1\twodots n]$. Podobnie jak w~zwykłej kolejce atrybut $\id{head}[D]$ wskazuje na początek kolejki, natomiast~atrybut $\id{tail}[D]$ wyznacza następną wolną pozycję, na którą można wstawić nowy element. Procedury \proc{Head-Enqueue} oraz \proc{Head-Dequeue} mają na celu, odpowiednio, dodanie nowego elementu na początek kolejki i~usunięcie elementu z~początku kolejki. Z~kolei procedury \proc{Tail-Enqueue} oraz \proc{Tail-Dequeue} implementują dodawanie i~usuwanie elementów na końcu kolejki. Dla skrócenia zapisu pominięto sprawdzanie błędów niedomiaru i~przepełnienia.
+
+\begin{codebox}
+\Procname{$\proc{Head-Enqueue}(D,x)$}
+\li	\If $\id{head}[D]=1$
+\li		\Then $\id{head}[D]\gets\id{length}[D]$
+\li		\Else $\id{head}[D]\gets\id{head}[D]-1$
+		\End
+\li	$D[\id{head}[D]]\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Head-Dequeue}(D)$}
+\li	$x\gets D[\id{head[D]}]$
+\li	\If $\id{head}[D]=\id{length}[D]$
+\li		\Then $\id{head}[D]\gets1$
+\li		\Else $\id{head}[D]\gets\id{head}[D]+1$
+		\End
+\li	\Return $x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Tail-Enqueue}(D,x)$}
+\li	$D[\id{tail[D]}]\gets x$
+\li	\If $\id{tail}[D]=\id{length}[D]$
+\li		\Then $\id{tail}[D]\gets1$
+\li		\Else $\id{tail}[D]\gets\id{tail}[D]+1$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Tail-Dequeue}(D,x)$}
+\li	\If $\id{tail}[D]=1$
+\li		\Then $\id{tail}[D]\gets\id{length}[D]$
+\li		\Else $\id{tail}[D]\gets\id{tail}[D]-1$
+		\End
+\li	\Return $D[\id{tail[D]}]$
+\end{codebox}
+
+Wszystkie powyższe operacje działają w~czasie $\Theta(1)$.
+
+\exercise %10.1-6
+Wszystkie elementy kolejki będą trzymane na jednym stosie -- drugi stos będzie pełnił funkcję pomocniczą. Dodawanie nowego elementu do kolejki oraz sprawdzanie czy kolejka jest pusta, nie różnią się od analogicznych operacji wykonywanych na pierwszym stosie. Usuwanie elementu z~kolejki jest już operacją nieco bardziej skomplikowaną, gdyż należy pobrać element znajdujący się najgłębiej na tym stosie. Ściągamy wpierw z~niego wszystkie elementy za pomocą operacji \proc{Pop} i~umieszczamy kolejno na drugim stosie, wywołując ciąg operacji \proc{Push}. W~rezultacie drugi stos będzie zawierał wszystkie elementy kolejki w~odwrotnej kolejności. Teraz pobieramy i zapamiętujemy element ze szczytu drugiego stosu, gdyż za chwilę zwrócimy go jako wynik procedury. Wcześniej trzeba bowiem przenieść pozostałą zawartość drugiego stosu z~powrotem do pierwszego, co przy okazji przywróci początkową kolejność elementów.
+
+Łatwo sprawdzić, że testowanie pustości kolejki oraz dodawanie do niej nowego elementu, są wykonywane w~czasie stałym, natomiast usuwanie wymaga czasu proporcjonalnego do liczby elementów kolejki.
+
+\exercise %10.1-7
+Rozwiązanie jest analogiczne do rozwiązania poprzedniego zadania. Sprawdzanie czy stos jest pusty, jak również dodawanie nowego elementu, to identyczne operacje wywoływane na pierwszej kolejce. Usuwanie elementu ze stosu odbywa się poprzez pobranie wszystkich elementów z~wyjątkiem ostatniego z~pierwszej kolejki i~dodanie tych elementów do drugiej. Ostatni z~nich także usuwamy z~kolejki, zapamiętawszy go w~celu późniejszego zwrócenia jako wyniku operacji. Ostatnim krokiem jest przeniesienie reszty elementów z~powrotem do pierwszej kolejki.
+
+Podobnie jak w~poprzednim zadaniu operacja odpowiedzialna za sprawdzenie czy stos jest pusty oraz dodawanie elementu działają w~czasie stałym, a~operacja usuwania -- w~czasie liniowym względem liczby elementów na stosie.
+
+\subchapter{Listy}
+
+\exercise %10.2-1
+Operację \proc{Insert}, dodającą nowy element $x$ na początek listy jednokierunkowej $L$, można zaimplementować w~czasie stałym -- wystarczy ustawić pole $\id{next}[x]$ na głowę listy $L$ (albo na \const{nil}, jeśli lista $L$ jest pusta) i~uaktualnić wskaźnik $\id{head}[L]$. Operacja \proc{Delete}, czyli usuwanie z~listy jednokierunkowej elementu wskazywanego przez $x$, wymaga jednak czasu wyższego niż stały. Jest tak dlatego, że jedynym sposobem na dotarcie do elementu poprzedzającego $x$ na liście $L$ w~celu aktualizacji jego pola \id{next}, jest przejście tej listy od głowy aż do tegoż elementu. Czynność ta w~najgorszym przypadku zajmuje czas proporcjonalny do liczby elementów listy $L$.
+
+Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzystać w~późniejszych zadaniach.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Insert}(L,x)$}
+\li	$\id{next}[x]\gets\id{head}[L]$
+\li	$\id{head}[L]\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Delete}(L,x)$}
+\li	\If $x=\id{head}[L]$
+\li		\Then $\id{head}[L]\gets\id{next}[\id{head}[L]]$
+\li		\Else
+			$y\gets\id{head}[L]$
+\li			\While $\id{next}[y]\ne x$
+\li				\Do $y\gets\id{next}[y]$
+				\End
+\li			$\id{next}[y]\gets\id{next}[x]$
+		\End
+\end{codebox}
+
+\exercise %10.2-2
+Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie. Dzięki takiemu rozwiązaniu operacje dodawania i~usuwania elementów będą działać w~czasie $\Theta(1)$. Sprawdzenie pustości stosu sprowadza się do sprawdzenia pustości listy $L$, natomiast operacja \proc{Push} to wywołanie na dodawanym elemencie $x$ procedury $\proc{Singly-Linked-List-Insert}(L,x)$ (\refExercise{10.2-1}). Pseudokod operacji \proc{Pop} prezentujemy poniżej.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Pop}(L)$}
+\li	\If $\id{head}[L]=\const{nil}$
+\li		\Then \Error ,,niedomiar''
+		\End
+\li	$x\gets\id{head}[L]$
+\li	$\id{head}[L]\gets\id{next}[x]$
+\li	\Return $x$
+\end{codebox}
+
+\exercise %10.2-3
+Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolejności od głowy kolejki do jej ogona. Aby jednak operacja dodawania była wykonalna w~czasie $\Theta(1)$, wymagane jest związanie z~listą $L$ dodatkowego atrybutu $\id{tail}[L]$, który będzie wskazywał na ogon listy $L$ albo na \const{nil}, jeżeli lista $L$ jest pusta. Oczywiście testowanie pustości kolejki polega na sprawdzeniu, czy pusta jest lista $L$. Pseudokody operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Enqueue}(L,x)$}
+\li	$\id{next}[x]\gets\const{nil}$
+\li	\If $\id{tail}[L]\ne\const{nil}$
+\li		\Then $\id{next}[\id{tail}[L]]\gets x$
+\li		\Else $\id{head}[L]\gets x$
+		\End
+\li	$\id{tail}[L]\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Dequeue}(L)$}
+\li	\If $\id{head}[L]=\const{nil}$
+\li		\Then \Error ,,niedomiar''
+		\End
+\li	$x\gets\id{head}[L]$
+\li	$\id{head}[L]\gets\id{next}[x]$
+\li	\If $\id{tail}[L]=x$
+\li		\Then $\id{tail}[L]\gets\const{nil}$
+		\End
+\li	\Return $x$
+\end{codebox}
+
+\exercise %10.2-4
+Zauważmy, że pole $\id{key}[\id{nil}[L]]$ jest niewykorzystywane w~implementacji listy z~wartownikami. Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$. Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej procedury zatrzyma się na elemencie $\id{nil}[L]$, po czym zostanie on zwrócony.
+
+\exercise %10.2-5
+Poniższe procedury stanowią implementacje operacji słownikowych na jednokierunkowych listach cyklicznych.
+\begin{codebox}
+\Procname{$\proc{Cyclic-List-Insert}(L,x)$}
+\li	\If $\id{head}[L]=\const{nil}$
+\li		\Then $\id{head}[L]\gets\id{next}[x]\gets x$
+\li		\Else
+			$\id{next}[x]\gets\id{next}[\id{head}[L]]$
+\li			$\id{next}[\id{head}[L]]\gets x$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Cyclic-List-Delete}(L,x)$}
+\li	$y\gets x$
+\li	\While $\id{next}[y]\ne x$
+\li		\Do $y\gets\id{next}[x]$
+		\End
+\li	$\id{next}[y]\gets\id{next}[x]$
+\li	\If $\id{head}[L]=x$
+\li		\Then $\id{head}[L]\gets\id{next}[x]$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Cyclic-List-Search}(L,k)$}
+\li	\If $\id{head}[L]=\const{nil}$
+\li		\Then \Return \const{nil}
+		\End
+\li	\If $\id{key}[\id{head}[L]]=k$
+\li		\Then \Return $\id{head}[L]$
+		\End
+\li	$x\gets\id{next}[\id{head}[L]]$
+\li	\While $x\ne\id{head}[L]$
+\li		\Do
+			\If $\id{key}[x]=k$
+\li				\Then \Return $x$
+				\End
+\li			$x\gets\id{next}[x]$
+		\End
+\li	\Return \const{nil}
+\end{codebox}
+
+Łatwo sprawdzić, że procedura implementująca operację \proc{Insert} działa w~czasie stałym, natomiast pozostałe dwie procedury dla listy o~$n$ elementach w~pesymistycznym przypadku potrzebują czasu $\Theta(n)$.
+
+\exercise %10.2-6
+Zbiory można zaimplementować jako listy cykliczne. Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji zbioru $S_1\cup S_2$ nie pojawią się powtarzające się elementy. Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$. Podczas działania tej operacji następnikiem ogona pierwszej listy staje się głowa drugiej listy, a~następnikiem ogona drugiej listy staje się głowa pierwszej listy. Wykonując stałą liczbę operacji, otrzymujemy w~wyniku listę cykliczną reprezentującą zbiór $S_1\cup S_2$.
+
+\exercise %10.2-7
+W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy umieszczać kolejno usuwane elementy z~głowy listy $L$. Łatwo zauważyć, że pod koniec operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$. Nadanie atrybutowi $\id{head}[L]$ wartości $\id{head}[L']$ wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Reverse}(L)$}
+\li	$\id{head}[L']\gets\const{nil}$
+\li	\While $\id{head}[L]\ne\const{nil}$
+\li		\Do
+			$x\gets\id{head[L]}$
+\li			$\proc{Singly-Linked-List-Delete}(L,\id{head[L]})$
+\li			$\proc{Singly-Linked-List-Insert}(L',x)$
+		\End
+\li	$\id{head}[L]\gets\id{head}[L']$
+\end{codebox}
+
+Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zostały przedstawione w~\refExercise{10.2-1}. Ich wywołania w~powyższym algorytmie zajmują czas stały. Stąd czasem działania algorytmu jest $\Theta(n)$.
+
+\exercise %10.2-8
+Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np} będący alternatywą wykluczającą tych dwóch adresów. Załóżmy, że znamy adres pewnego elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$. Niech $z$ będzie następnikiem $x$. Wówczas $\id{np}[x]=z\BitXor y$, zatem aby dostać się do następnika $x$, wystarczy obliczyć wartość:
+\[
+    z = z\BitXor0 = z\BitXor(y\BitXor y) = (z\BitXor y)\BitXor y = \id{np}[x]\BitXor y.
+\]
+Podobnie ma się rzecz podczas przechodzenia listy w~przeciwnym kierunku -- oblicza się wtedy $y=\id{np}[x]\BitXor z$. Zauważmy, że jeśli element $x$ jest ogonem listy, to $\id{np}[x]=0\BitXor y=y$, czyli $z=\id{np}[x]\BitXor y=0=\const{nil}$ i~analogicznie dla głowy listy: $\id{np}[x]=z\BitXor0=z$, więc $y=0=\const{nil}$. Podobnie jak w~zwykłych listach przyjmujemy, że atrybut $\id{head}[L]$ przechowuje wskaźnik do głowy listy.
+
+Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy. Nowe elementy są dodawane na początek listy.
+
+\begin{codebox}
+\Procname{$\proc{Xor-List-Search}(L,k)$}
+\li	$x\gets\id{head}[L]$
+\li	$y\gets\const{nil}$
+\li	\While $x\ne\const{nil}$ i~$\id{key}[x]\ne k$
+\li		\Do
+			$x'\gets x$
+\li			$x\gets\id{np}[x]\BitXor y$
+\li			$y\gets x'$
+		\End
+\li	\Return $x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Xor-List-Insert}(L,x)$}
+\li	$\id{np}[x]\gets\id{head}[L]$
+\li	\If $\id{head}[L]\ne\const{nil}$
+\li		\Then $\id{np}[\id{head}[L]]\gets\id{np}[\id{head}[L]]\BitXor x$
+		\End
+\li	$\id{head}[L]\gets x$
+\end{codebox}
+
+% \begin{codebox}
+% \Procname{$\proc{Xor-List-Delete}(L,x)$}
+% % \li	\If $x=\id{head}[L]$
+% % \li		\Then
+% % 			\If $\id{np}[x]\ne\const{nil}$
+% % \li				\Then $\id{np}[\id{np}[x]]\gets$
+% \li	$y\gets\id{head}[L]$
+% \li	$y'\gets\const{nil}$
+% \li	\While $y\ne x$
+% \li		\Do
+% 			$$
+% \end{codebox}
+
+Procedury \proc{Xor-List-Search} i~\proc{Xor-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$. W~procedurze \proc{Xor-List-Delete} należy odszukać na liście poprzednika elementu $x$, aby uaktualnić jego pole \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$. Odwracanie kolejności elementów -- zarówno w~zwykłej liście dwukierunkowej, jak i~w~tak zmodyfikowanej liście -- jest możliwe w~czasie $\Theta(1)$, o~ile wykorzystywany jest atrybut $\id{tail}[L]$. W~tym celu wystarczy zamienić z~sobą wartości atrybutów $\id{head}[L]$ i~$\id{tail}[L]$. 
+
+\subchapter{Reprezentowanie struktur wskaźnikowych za pomocą tablic}
+
+\exercise %10.3-1
+Rys.~\ref{fig:10.3-1} przedstawia przykładowe rozmieszczenie elementów ciągu w~reprezentacji wielotablicowej listy dwukierunkowej i~jednokierunkowej.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig10.3}
+	\end{center}
+	\caption{Reprezentacja wielotablicowa ciągu $\langle13,4,8,19,5,11\rangle$. {\sffamily\bfseries(a)} Ciąg przechowywany w~tablicach \id{key}, \id{next} oraz \id{prev} jako lista dwukierunkowa. {\sffamily\bfseries(b)} To samo rozmieszczenie elementów ciągu, ale bez wykorzystania tablicy \id{prev}, czyli w~postaci listy jednokierunkowej.} \label{fig:10.3-1}
+\end{figure}
+
+\exercise %10.3-2
+Zakładamy, że właściwa lista oraz lista wolnych pozycji znajduje się w~pojedynczej tablicy $A$. Poniższe procedury implementują alokację i~zwalnianie pamięci dla elementów na tej liście przy wykorzystaniu faktu, że polu \id{next} odpowiada przesunięcie~1.
+\begin{codebox}
+\Procname{$\proc{Allocate-Object}'$}
+\li	\If $\id{free}=\const{nil}$
+\li		\Then \Error ,,brak pamięci''
+		\End
+\li	$i\gets\id{free}$
+\li	$\id{free}\gets A[i+1]$
+\li	\Return $i$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Free-Object}'(i)$}
+\li	$A[i+1]\gets\id{free}$
+\li	$\id{free}\gets i$
+\end{codebox}
+
+\exercise %10.3-3
+Lista wolnych pozycji jest listą jednokierunkową -- nie są więc wykorzystywane w~niej pola \id{prev}.
+
+\exercise %10.3-4
+% \begin{codebox}
+% \Procname{$\proc{Compact-Allocate-Object}$}
+% \li	\If $\id{free}=\const{nil}$
+% \li		\Then \Error ,,brak pamięci''
+% 		\End
+% \li	$x\gets\id{free}$
+% \li	$\id{free}\gets A[x+1]$
+% \li	\Return $x$
+% \end{codebox}
+% 
+% \begin{codebox}
+% \Procname{$\proc{Compact-Free-Object}(x)$}
+% \li	$A[x+1]\gets\id{free}$
+% \li	$\id{free}\gets x$
+% \end{codebox}
+
+\exercise %10.3-5
+% \begin{codebox}
+% \Procname{$\proc{Compactify-List}(L,F)$}
+% 
+% \end{codebox}
+
+\subchapter{Reprezentowanie drzew (ukorzenionych)}
+
+\exercise %10.4-1
+Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.~\ref{fig:10.4-1}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig10.4}
+	\end{center}
+	\caption{Drzewo binarne o~korzeniu z~indeksem~6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
+\end{figure}
+
+\exercise %10.4-2
+Algorytm, który potrzebujemy, został opisany w~Podręczniku w~podrozdziale 12.1 i~zapisany jako pseudokod \proc{Inorder-Tree-Walk}. Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
+
+\exercise %10.4-3
+\begin{codebox}
+\Procname{$\proc{Iterative-Inorder-Tree-Walk}(T)$}
+\li	\If $\id{root}[T]=\const{nil}$
+\li		\Then \Return
+		\End
+\li	$x\gets\id{root}[T]$
+\li	$\proc{Push}(S,x)$
+\li	\While $\proc{Stack-Empty(S)}$
+\li		\Do
+			\If $\id{left}[x]\ne\const{nil}$
+\li				\Then
+					$x\gets\id{left}[x]$
+\li					$\proc{Push}(S,x)$
+\li				\Else
+					wypisz $\id{key}[x]$
+\li					\If $\id{right}[x]\ne\const{nil}$
+\li						\Then
+							$x\gets\id{right}[x]$
+\li							$\proc{Push}(S,x)$
+						\End
+				\End
+\li			$\proc{Pop}(S)$
+		\End
+\end{codebox}
+
+\exercise %10.4-4
+\begin{codebox}
+\Procname{$\proc{Tree-Walk}(x)$}
+\li	\If $x\ne\const{nil}$
+\li		\Then
+			wypisz $\id{key}[x]$
+\li			$y\gets\id{left-child}[x]$
+\li			\While $y\ne\const{nil}$
+\li				\Do
+					$\proc{Tree-Walk}(y)$
+\li					$y\gets\id{right-sibling}[y]$
+				\End
+		\End
+\end{codebox}
+Aby przejść całe drzewo w~celu wypisania jego elementów, należy wywołać $\proc{Tree-Walk}(\id{root}[T])$. Procedura odwiedza każdy węzeł drzewa dokładnie raz, wypisuje jego klucz, po czym rekurencyjnie odwiedza jego potomków. Widać zatem, że czasem działania tej procedury jest $\Theta(n)$ dla drzewa o~$n$ węzłach.
+
+\exercise %10.4-5
+W~poniższej procedurze wykorzystujemy zmienną \id{direction} wyznaczającą kierunek, w~którym obecnie poruszamy się po drzewie: \const{sw} -- w~dół drzewa do lewego potomka, \const{se} -- w~dół drzewa do prawego potomka, \const{ne} -- w~górę drzewa z~lewego potomka albo \const{nw} -- w~górę drzewa z~prawego potomka.
+
+Zaczynając od korzenia drzewa, początkowo poruszamy się w~dół, aż osiągniemy najbardziej lewy liść drzewa. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzeł wypisywany jest podczas jego odwiedzania, kiedy poruszamy się w~dół. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas odwiedzania jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
+\begin{codebox}
+\Procname{$\proc{Binary-Tree-Walk}(T)$}
+\li	$x\gets\id{root}[T]$
+\li	$\id{direction}\gets\const{sw}$
+\li	\While $x\ne\const{nil}$
+\li		\Do
+			\If $\id{direction}=\const{sw}$ lub $\id{direction}=\const{se}$
+\li				\Then wypisz $x$
+				\End
+\li			\If $\id{direction}=\const{sw}$
+\li				\Then
+					\If $\id{left}[x]\ne\const{nil}$
+\li						\Then $x\gets\id{left}[x]$
+\li					\ElseIf $\id{right}[x]\ne\const{nil}$
+\li						\Then
+							$x\gets\id{right}[x]$
+\li							$\id{direction}\gets\const{se}$
+\li					\ElseNoIf $\id{direction}\gets\const{ne}$
+						\End
+\li			\ElseIf $\id{direction}=\const{se}$
+\li				\Then
+					\If $\id{left}[x]\ne\const{nil}$
+\li						\Then
+							$x\gets\id{left}[x]$
+\li							$\id{direction}\gets\const{sw}$
+\li					\ElseIf $\id{right}[x]\ne\const{nil}$
+\li						\Then $x\gets\id{right}[x]$
+\li					\ElseNoIf $\id{direction}\gets\const{nw}$
+						\End
+\li			\ElseIf $\id{direction}=\const{ne}$
+\li				\Then
+					\If $\id{right}[x]\ne\const{nil}$
+\li						\Then
+							$x\gets\id{right}[x]$
+\li							$\id{direction}\gets\const{se}$
+\li						\Else $x\gets\id{p}[x]$
+						\End
+\li			\ElseNoIf $x\gets\id{p}[x]$
+				\End
+		\End
+\end{codebox}
+
+\exercise %10.4-6
+Ponieważ w~nowej reprezentacji nie wymagamy dostępu do ojca każdego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$. Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest najbardziej prawym synem swojego ojca, to wskaźnik $\id{right-sibling}[x]=\const{nil}$. Możemy więc wykorzystać go, aby wskazywał na ojca węzła $x$. To, czy wskaźnik ten w~danym węźle wskazuje na kolejnego brata, czy na ojca, jest determinowane przez dodatkowy atrybut -- zmienną boolowską.
+
+Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
+\begin{itemize}
+	\item $\id{child}[x]$ -- wskazuje na najbardziej lewego syna $x$;
+    \item $\id{last}[x]$ -- zmienna boolowska przechowująca informację o~tym, czy węzeł $x$ jest najbardziej prawym synem swojego ojca;
+	\item $\id{next}[x]$ -- jeśli $\id{last}[x]=\const{false}$, to wskazuje na najbliższego, znajdującego się na prawo brata węzła $x$, a~jeśli $\id{last}[x]=\const{true}$, to wskazuje na ojca węzła $x$.
+\end{itemize}
+
+Łatwo zauważyć, że każdy węzeł $x$ tworzy wraz ze swoimi synami jednokierunkową listę cykliczną. Następnikiem każdego węzła $y\ne x$ na tej liście jest $\id{next}[y]$, a~następnikiem węzła $x$ jest $\id{child}[x]$. Węzeł $x$ jest wyznaczony jednoznacznie, ponieważ jest następnikiem jedynego węzła $y\ne x$ na tej liście, dla którego $\id{last}[y]=\const{true}$.
+
+\problems
+
+\problem{Porównanie list} %10-1
+Tabela~\ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słownikowych dla danych czterech typów list. Przyjmujemy, że operacje wykonywane są na listach o~rozmiarach $n$.
+
+\begin{table}[ht]
+	\begin{center}
+		\[
+			\begin{array}{l|c|c|c|c}
+				& \text{Nieposortowana} & \text{Posortowana} & \text{Nieposortowana} & \text{Posortowana} \\
+				& \text{jedno-} & \text{jedno-} & \text{dwu-} & \text{dwu-} \\
+				& \text{kierunkowa} & \text{kierunkowa} & \text{kierunkowa} & \text{kierunkowa} \\
+				\hline
+				\proc{Search}(L,k) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(n) \\
+				\hline
+				\proc{Insert}(L,x) & \Theta(1) & \Theta(n) & \Theta(1) & \Theta(n) \\
+				\hline
+				\proc{Delete}(L,x) & \Theta(n) & \Theta(n) & \Theta(1) & \Theta(1) \\
+				\hline
+				\proc{Successor}(L,x) & \Theta(n) & \Theta(1) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Predecessor}(L,x) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Minimum}(L) & \Theta(n) & \Theta(1) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Maximum}(L) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(n)
+			\end{array}
+		\]
+	\end{center}
+	\caption{Porównanie złożoności operacji słownikowych dla różnych typów list.} \label{tab:10-1}
+\end{table}
+
+\problem{Listowa reprezentacja kopców złączalnych} %10-2
+
+\subproblem %10-2(a)
+\subproblem %10-2(b)
+\subproblem %10-2(c)
+
+\problem{Wyszukiwanie na posortowanej liście zajmującej spójny obszar pamięci (liście upakowanej)} %10-3
+
+\subproblem %10-3(a)
+\subproblem %10-3(b)
+\subproblem %10-3(c)
+\subproblem %10-3(d)
+\subproblem %10-3(e)
+\subproblem %10-3(f)
+\subproblem %10-3(g)
+\subproblem %10-3(h)
+
+\endinput

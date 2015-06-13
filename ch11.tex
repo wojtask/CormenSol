@@ -1,0 +1,85 @@
+\chapter{Tablice z~haszowaniem}
+
+\subchapter{Tablice z~adresowaniem bezpośrednim}
+
+\exercise %11.1-1
+Procedura poszukująca największego elementu zbioru $S$ przegląda tablicę $T$ od końca, to znaczy od indeksu $m-1$ w~dół, zatrzymując się na pierwszej niepustej pozycji. Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ jest wartość \const{nil} -- jesteśmy wtedy zmuszeni przejść przez całą tablicę $T$. Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
+
+\exercise %11.1-2
+Elementy składają się tylko z~kluczy, więc wystarczy pamiętać, czy dany klucz należy do zbioru, czy nie. Na \onedash{$k$}{tej} pozycji wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero, jeśli element taki nie należy do zbioru. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \onedash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu na tę pozycję zera.
+
+\exercise %11.1-3
+
+\exercise %11.1-4
+
+\subchapter{Tablice z~haszowaniem}
+
+\exercise %11.2-1
+Dla kluczy $k$, $l$ ($k\ne l$), definiujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$. Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu~5.1 otrzymujemy $\E(X_{kl})=1/m$. Niech $X$ będzie zmienną losową oznaczającą liczbę kolizji w~tablicy $T$, czyli
+\[
+    X = \sum_{k=1}^{n-1}\sum_{l=k+1}^nX_{kl}.
+\]
+Mamy zatem
+\begin{align*}
+	\E(X) &= \E\biggl(\sum_{k=1}^{n-1}\sum_{l=k+1}^nX_{kl}\biggr) = \sum_{k=1}^{n-1}\sum_{l=k+1}^n\E(X_{kl}) \\[1mm]
+	&= \sum_{k=1}^{n-1}\sum_{l=k+1}^n\frac{1}{m} = \frac{1}{m}\sum_{k=1}^{n-1}(n-k) = \frac{1}{m}\sum_{k=1}^{n-1}k = \frac{n(n-1)}{2m}.
+\end{align*}
+
+\exercise %11.2-2
+\exercise %11.2-3
+Załóżmy, że listy są dwukierunkowe. Na podstawie wyników z~problemu~\refProblem{10-1} usuwanie elementu działa w~czasie $O(1)$. Podczas wstawiania elementu na listę musimy znaleźć pozycję, na którą należy wstawić nowy element i~zachować przy tym uporządkowanie listy. W~średnim przypadku ta pozycja jest pośrodku listy, więc potrzebujemy czasu $\Theta(1+\alpha/2)=\Theta(1+\alpha)$ (wliczając koszt obliczenia wartości funkcji haszującej).
+
+\exercise %11.2-4
+\exercise %11.2-5
+Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$. Z~tego powodu nie może być sytuacji, w~której każdy podzbiór elementów odwzorowywanych na pozycję tablicy ma mniej niż $n$ elementów.
+
+\subchapter{Funkcje haszujące}
+
+\exercise %11.3-1
+\exercise %11.3-2
+\exercise %11.3-3
+\exercise %11.3-4
+\exercise %11.3-5
+\exercise %11.3-6
+
+\subchapter{Adresowanie otwarte}
+
+\exercise %11.4-1
+\exercise %11.4-2
+\exercise %11.4-3
+\exercise %11.4-4
+\exercise %11.4-5
+
+\subchapter{Haszowanie doskonałe}
+
+\exercise %11.5-1
+
+\problems
+
+\problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
+
+\subproblem %11-1(a)
+\subproblem %11-1(b)
+\subproblem %11-1(c)
+\subproblem %11-1(d)
+
+\problem{Długość listy w~metodzie łańcuchowej} %11-2
+
+\subproblem %11-2(a)
+\subproblem %11-2(b)
+\subproblem %11-2(c)
+\subproblem %11-2(d)
+\subproblem %11-2(d)
+
+\problem{Adresowanie kwadratowe} %11-3
+
+\subproblem %11-3(a)
+\subproblem %11-3(b)
+
+\problem{Haszowanie \onedash{$k$}{uniwersalne} i~uwierzytelnianie} %11-4
+
+\subproblem %11-4(a)
+\subproblem %11-4(b)
+\subproblem %11-4(c)
+
+\endinput
