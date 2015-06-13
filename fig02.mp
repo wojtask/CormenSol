@@ -18,7 +18,7 @@ beginfig(1);
 		p[i] := unitsquare scaled scale shifted (i*scale, 0);
 	endfor;
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, center p0 + (-1.5scale, vspace));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, center p0 + (-1.5scale, vspace));
 	fill p0 shifted (0, vspace) withcolor gray;
 	fill p1 shifted (0, vspace) withcolor black;
 	label("31", center p0 + (0, vspace));
@@ -33,7 +33,7 @@ beginfig(1);
 	endfor;
 	drawarrow point .75 of p1 shifted (0, vspace){down} .. {up}point .25 of p1 shifted (0, vspace);
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, center p0 + (7.5scale, vspace));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, center p0 + (7.5scale, vspace));
 	fill p1 shifted (9scale, vspace) withcolor gray;
 	fill p2 shifted (9scale, vspace) withcolor black;
 	label("31", center p0 + (9scale, vspace));
@@ -48,7 +48,7 @@ beginfig(1);
 	endfor;
 	drawarrow point .75 of p[2]{down} shifted (9scale, vspace) .. {up}point .25 of p2 shifted (9scale, vspace);
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (c)} etex, center p0 + (16.5scale, vspace));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, center p0 + (16.5scale, vspace));
 	fill p0 shifted (18scale, vspace) withcolor gray;
 	fill p1 shifted (18scale, vspace) withcolor gray;
 	fill p2 shifted (18scale, vspace) withcolor gray;
@@ -68,7 +68,7 @@ beginfig(1);
 	drawarrow point .75 of p1{down} shifted (18scale, vspace) .. {up}point .25 of p2 shifted (18scale, vspace) withcolor gray;
 	drawarrow point .75 of p2{down} shifted (18scale, vspace) .. {up}point .25 of p3 shifted (18scale, vspace) withcolor gray;
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (d)} etex, center p0 + (-1.5scale, 0));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, center p0 + (-1.5scale, 0));
 	fill p2 shifted (0, 0) withcolor gray;
 	fill p3 shifted (0, 0) withcolor gray;
 	fill p4 shifted (0, 0) withcolor black;
@@ -85,7 +85,7 @@ beginfig(1);
 	drawarrow point .75 of p4{dir -100} .. {dir 100}point .25 of p3;
 	drawarrow point .75 of p3{down} .. {up}point .25 of p4 withcolor gray;
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (e)} etex, center p0 + (7.5scale, 0));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(e)} etex, center p0 + (7.5scale, 0));
 	fill p3 shifted (9scale, 0) withcolor gray;
 	fill p4 shifted (9scale, 0) withcolor gray;
 	fill p5 shifted (9scale, 0) withcolor black;
@@ -102,7 +102,7 @@ beginfig(1);
 	drawarrow point .75 of p5{dir -100} shifted (9scale, 0) .. {dir 100}point .25 of p4 shifted (9scale, 0);
 	drawarrow point .75 of p4{down} shifted (9scale, 0) .. {up}point .25 of p5 shifted (9scale, 0) withcolor gray;
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (f)} etex, center p0 + (16.5scale, 0));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(f)} etex, center p0 + (16.5scale, 0));
 	label("26", center p0 + (18scale, 0));
 	label("31", center p1 + (18scale, 0));
 	label("41", center p2 + (18scale, 0));

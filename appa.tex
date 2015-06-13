@@ -41,34 +41,36 @@ Załóżmy, że $|x^2|<1$, czyli $-1<x<1$. Wówczas na podstawie wzorów~(A.6) i
 W~przypadku, gdy $|x^2|\ge1$, badana suma jest rozbieżna do $\infty$.
 
 \exercise %A.1-6
-Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F(n)$ zachodzi $F(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego całkowitego $n\ge n_0$ prawdą jest
+\note{W~rozwiązaniu dopuszczamy inną zmienną jako parametr funkcji $f_k$ po obu stronach nierówności.}
+
+\noindent Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F(i)$ zachodzi $F(i)=O\bigl(\sum_{k=1}^nf_k(i)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $i_0$, $c>0$ takie, że dla każdego całkowitego $i\ge i_0$ prawdą jest
 \[
-	0 \le F(n) \le c\sum_{k=1}^n f_k(n).
+	0 \le F(i) \le c\sum_{k=1}^nf_k(i).
 \]
 
-Ustalmy dodatnie stałe $n_0$ i~$c$. Niech $F_1(n)$, $F_2(n)$,~\dots,~$F_n(n)$ będą funkcjami, które dla każdego całkowitego $n\ge n_0$ spełniają układ nierówności
+Ustalmy dodatnie stałe $i_0$ i~$c$. Niech $F_1(i)$, $F_2(i)$,~\dots,~$F_n(i)$ będą funkcjami, które dla każdego całkowitego $i\ge i_0$ spełniają układ nierówności
 \[
 	\begin{cases}
-		0 \le F_1(n) \le cf_1(n), \\
-		0 \le F_2(n) \le cf_1(n)+cf_2(n), \\
+		0 \le F_1(i) \le cf_1(i), \\
+		0 \le F_2(i) \le cf_1(i)+cf_2(i), \\
 		\phantom{0 \le F_2} \vdots \\
-		0 \le F_n(n) \le \sum_{k=1}^ncf_k(n). \\
+		0 \le F_n(i) \le \sum_{k=1}^ncf_k(i). \\
 	\end{cases}
 \]
 Wprost z~definicji notacji $O$ mamy:
 \begin{align*}
-	F_1(n) &= O(f_1(n)), \\
-	F_2(n)-F_1(n) &= O(f_2(n)), \\
+	F_1(i) &= O(f_1(i)), \\
+	F_2(i)-F_1(i) &= O(f_2(i)), \\
 	& \,\,\,\vdots \\
-	F_n(n)-F_{n-1}(n) &= O(f_n(n)).
+	F_n(i)-F_{n-1}(i) &= O(f_n(i)).
 \end{align*}
 Dodając powyższe równania stronami, otrzymujemy
 \[
-	F_1(n)+(F_2(n)-F_1(n))+\dots+(F_n(n)-F_{n-1}(n)) = \sum_{k=1}^nO(f_k(n)).
+	F_1(i)+(F_2(i)-F_1(i))+\dots+(F_n(i)-F_{n-1}(i)) = \sum_{k=1}^nO(f_k(i)).
 \]
-Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu wynika, że $F_n(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$, skąd dostajemy tożsamość
+Wartość po lewej stronie jest równa $F_n(i)$. Ale z~ostatniej nierówności układu wynika, że $F_n(i)=O\bigl(\sum_{k=1}^nf_k(i)\bigr)$, skąd dostajemy tożsamość
 \[
-	\sum_{k=1}^nO(f_k(n)) = O\biggl(\sum_{k=1}^nf_k(n)\biggr).
+	\sum_{k=1}^nO(f_k(i)) = O\biggl(\sum_{k=1}^nf_k(i)\biggr).
 \]
 
 \exercise %A.1-7
@@ -99,7 +101,7 @@ Zauważmy, że gdy $n$ osiąga wartość będącą potęgą~2, to zwiększa się
 z~czego wynika, że $F(n)=O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
 
 \exercise %A.2-3
-Postępując podobnie jak podczas badania oszacowania górnego \onedash{$n$}{tej} liczby harmonicznej, dzielimy zakres indeksów od 1 od $n$ na $\lfloor\lg n\rfloor$ części i~ograniczamy sumę każdej części przez $1/2$:
+Postępując podobnie jak podczas badania oszacowania górnego \onedash{$n$}{tej} liczby harmonicznej, dzielimy zakres indeksów od 1 do $n$ na $\lfloor\lg n\rfloor$ części i~ograniczamy sumę każdej części przez $1/2$:
 \[
     \sum_{k=1}^n\frac{1}{k} \ge \sum_{i=0}^{\lfloor\lg n\rfloor-1}\sum_{j=0}^{2^i-1}\frac{1}{2^i+j} \ge \sum_{i=0}^{\lfloor\lg n\rfloor-1}\sum_{j=0}^{2^i-1}\frac{1}{2^{i+1}} = \sum_{i=0}^{\lfloor\lg n\rfloor-1}\frac{1}{2} = \frac{\lfloor\lg n\rfloor}{2} = \Omega(\lg n).
 \]

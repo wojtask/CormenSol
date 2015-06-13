@@ -2,22 +2,21 @@ PRZED v0.4:
 - poprawić part I
 - poprawić part VIII
 - dokończyć part II
-- sprawdzić interpunkcję (szczególnie wokół imiesłowów przymiotnikowych)
-- sprawdzić zakresy: k=1,2,\dots,n -- k jest całkowite, k\in[1,n] -- k jest rzeczywiste, 1\le k\le n -- k jest rzeczywiste (w ostatnich dwóch przypadkach należy jawnie napisać, jeśli k ma być całkowite, chyba że wynika to z treści zadania)
-- co z notacją dla zakresów a\twodots b ALBO [a\twodots b] stosowaną w podręczniku?
-- zaimplementować i przetestować algorytmy, również te bez pseudokodów, które są wystarczająco szczegółowo opisane (nie trzeba testować procedur pomocniczych)
+- zaimplementować i przetestować algorytmy, również te bez pseudokodów, które są wystarczająco szczegółowo opisane
 - bigskipy czy medskipy? np. B-1(b) lepiej wygląda z medskipami
-- co z przynależnością zmiennych do zbiorów, liczb całkowitych i liczb rzeczywistych? (propozycja: jawnie pisać tylko wtedy, gdy to jest ważne, a np. przyjmować, że literki n,m,k,l oznaczają liczby całkowite i napisać we wstępie o tym)
-- wygenerować rysunek fig06.5 za pomocą MetaPost w wersji wcześniejszej niż 1.504
-- wstęp: (La)TeX i METAPOST
-- wstęp: numeracja rysunków, wzorów i jak się to odróżnia od tych z książki
+- jeszcze raz sprawdzić, czy notki, które mówią o błędach w oryginale uwzględniają poprawki z erraty
+- wstęp: (La)TeX i MetaPost
+- wstęp: numeracja rysunków, wzorów i jak się to odróżnia od tych z podręcznika
 - wstęp: czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w podręczniku
 - wstęp: napisać, że czasem odnosimy się do późniejszych zadań i problemów
 - wstęp: używane oznaczenia, E, Pr, itd.
-- wstęp: napisać o tym, że liczby, o ile nie jest powiedziane inaczej, są całkowite
-- wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne (???)
+- wstęp: o konwencjach przejętych z podręcznika i tych, które zmieniliśmy (również o tym, że piszemy w skrócie np. "indeksy i<j<k" w znaczeniu "indeksy i,j,k, gdzie i<j<k")
+- wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne (???) i ogólnie mniejsza koncentracja na szczegółach w miarę postępu materiału
+- wstęp: napisać, że rozwiązania opierają się na treści zadań z polskiego tłumaczenia, ale mamy na uwadze erratę oryginału (http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php), tzn. jeśli w erracie jest wpis o pewnej poprawce, to zaznaczamy, że w tłumaczeniu jest błąd. Wpis o erracie będzie tylko we wstępie, w notkach będą wyłącznie informacje o błędach tłumaczenia.
+- wstęp: opisać pozostałe ważne konwencje z pliku README
+- sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
-- co z kwojtas.pl ?
+- co z kwojtas.pl?
 
 PRZED v0.5:
 - part III
@@ -26,6 +25,8 @@ PRZED v0.5:
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
 - sprawdzić dwustronność, czy rozdziały lub części mają rozpoczynać się zawsze od nieparzystej/parzystej strony?
 - sprawdzić bibliografię -- czy właściwe dotychczasowe pozycje i czy taki wygląd może zostać
+- jak poradzić sobie z problemem coraz większej ilości pseudokodów w rozdziale i underfull vboxami przez nie generowanymi?
+- zmniejszyć odstęp między numerem problemu a jego nazwą (?)
 - ostateczne zmiany w layoucie, konwencjach itd. -- takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
 - ostateczne strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
 - uporządkować cormensol.tex, cormensol.sty (poprawić polecenia wyświetlające liczniki)
@@ -66,105 +67,76 @@ PRZED v1.0:
 PRZED v2.0:
 - rozwiązania zadań i problemów wydania 3
 - clrscode3e zamiast clrscode
-- przerobić na stronę WWW wykorzystującą MathJax do LaTeXa
-- tłumaczenie na język angielski
+- przerobić na stronę WWW wykorzystującą MathJax
+- przetłumaczyć na język angielski
+- zaprojektować bibliotekę algorytmów i struktur danych pojawiających się w podręczniku i w rozwiązaniach
 
-DO POPRAWY/WERYFIKACJI PRZED 1.0:
+DO POPRAWY/WERYFIKACJI W PÓŹNIEJSZYCH ETAPACH:
+(zadania zaznaczane jako rozwiązane poprawnie, ale w których można dokonać poprawek/ulepszeń po przerobieniu większej ilości materiału)
 1.1-1 -- dokładniej opisać po przerobieniu problemu optymalnego mnożenia macierzy i otoczki wypukłej
-2.1-4 -- czy operacje or, and, xor są odpowiednio stylizowane w pseudokodzie?
-
-ETAPY ODDAWANIA ROZDZIAŁÓW:
-etap 0 -- w trakcie pisania (tekst niepełny) --> wersje alpha
-etap 1 -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna) --> wersja beta
-etap 2 -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca) --> wersja rc
-etap 3 -- zaimplementowane i przetestowane algorytmy, sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna) --> wersja final
+2.1-4 -- czy operacje or, and, xor są poprawnie stylizowane w pseudokodzie?
+6.5-6 -- zaimplementować kolejkę FIFO i stos na kolejce priorytetowej (po ch10)
+6.5-8 -- zaimplementować procedurę na listach (po ch10)
+6-3(c) -- wymyślić prostszy pseudokod
+8.3-2 -- jak obliczać złożoność pamięciową? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
 
 ################################################################################
 
-ROZDZIAŁ 1 (2)
-1.1-5 -- przepisać pierwszy paragraf, problem ma być "z życia", a nie problem teoretyczny (http://answers-by-me.blogspot.com/)
+ROZDZIAŁ 1
 
-ROZDZIAŁ 2 (2)
-2.1-4 -- czy zostawić to określenie "reprezentacja binarna"? może dokładniej zdefiniować reprezentację binarną? czy można w ostatnim paragrafie mówić o problemie, który formalnie odbiega od bieżącego?
+ROZDZIAŁ 2
+2.1-4
+	-- Czy zostawić to określenie "reprezentacja binarna"?
+	-- Może dokładniej zdefiniować reprezentację binarną?
+	-- Czy można w ostatnim paragrafie mówić o problemie, który formalnie odbiega od bieżącego?
+	-- Aby algorytm działał dla liczb ujemnych, musiałby implementować specjalną obsługę bitu znaku. Dla liczb nieujemnych działa poprawnie.
+	-- Napisać, że definiujemy reprezentację binarną jako zapis liczb naturalnych w systemie dwójkowym i że tylko takie obsługujemy w algorytmie.
+	-- A może taki algorytm:
+	C ← [1 ... n + 1]    ▹ C is zero-filled.
+	for i ← 1 to n
+		do sum ← A[i] + B[i] + C[i]
+			C[i] ← sum % 2
+			C[i + 1] ← sum / 2    ▹ Integer division.
+	output C
+	który porzuca operacje bitowe na rzecz operacji arytmetycznych (tylko czy możemy takie wykonywać na "tablicach bitów"?) i w którym kolejność trzymania bitów liczb jest od najmniej znaczącego do najbardziej znaczącego?
 
-ROZDZIAŁ 3 (2)
-3-3(a) -- w dowodzie e^n=\Omega(n\cdot2^n) korzystamy z tego, że (e/2)^n=\omega(n), a nie z coś=\omega(1), czy (\lg n)^{\lg n}=\Theta((\lg n)!)?, czy istotnie \lg f(n)=\omega(\lg g(n)) implikuje f(n)=\omega(g(n))?
-3-5(c) -- sprawdzić dokładnie jeszcze raz, poprawić underfull vbox
+ROZDZIAŁ 3
 
-ROZDZIAŁ 4 (2)
-4-7(a) -- sprawdzić, poprawić, usunąć (*) (?)
-4-7(c) -- sprawdzić, poprawić, usunąć (*) (?)
-Nie używamy numerowania równań, stosujemy zawsze środowiska equation* (\[ \]) lub gather* lub align*, w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$}) (UWAGA! Jendak rezygnujemy z \tag).
+ROZDZIAŁ 4
+4-7(a) -- sprawdzić, przepisać, usunąć (*)
 
-ROZDZIAŁ 5 (2)
-5.3-6 -- czy można zostawić tak, aby teoretycznie algorytm nie posiadał własności stopu? dokończyć
+ROZDZIAŁ 5
+5.3-6 -- zamiast ponownego wywoływania Permute-By-Sorting można wywoływać np. Randomize-In-Place ALBO dokonać zmiany w algorytmie sortującym -- zakładając, że jest on oparty o porównania, jeśli natrafi na elementy równe, to wybiera losowo, którą gałęzią drzewa porównań iść
 5-2(f) -- wyprowadzić oczekiwany czas działania, powinno wyjść (n+1)/(k+1)
 
-ROZDZIAŁ 6 (2)
-6.3-2 -- sprawdzić z http://rightwayman.blogspot.com/2010/06/algo-exercise-63.html
-6.3-3 -- sprawdzić z http://rightwayman.blogspot.com/2010/06/algo-exercise-63.html
+ROZDZIAŁ 6
+-- poprawić underfull vbox
 
-ROZDZIAŁ 7 (2)
-7.2-6 -- sprawdzić
-7.4-5 -- sprawdzić pierwszy paragraf
+ROZDZIAŁ 7
 
-ROZDZIAŁ 8 (1)
-8.2-4 -- przedział [a..b] (czy to nie kłóci się z konwencją [a,b]? narzucić swój zapis?), sprawdzić
-8.3-2 -- co z tą pamięcią? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
-8.3-5 -- zastanowić się nad liczbą tymczasowych stosów (http://rightwayman.blogspot.com/2010_09_01_archive.html)
-8.4-5 -- przecież dystrybuanta P_X (i każda inna) może nie mieć funkcji odwrotnej (jest niemalejąca, ale nie rosnąca), sprawdzić całość jeszcze raz
-8-1(a)
-8-1(b)
-8-1(c)
-8-1(d)
-8-1(e)
-8-1(f)
-8-2(b) -- napisać pseudokod (?)
-8-2(d)
-8-2(e) -- sprawdzić algorytm
-8-3(a)
-8-3(b)
-8-4(a)
-8-4(b)
-8-4(c) -- sprawdzić algorytmy
-8-5(d) -- sprawdzić czy działa z tą modyfikacją
-8-5(e) -- czy obszar tablicy, który jest nieciągły można nazywać podtablicą?
-8-5(f) -- nie korzystamy z rozwiązania z poprzedniej części? czy na pewno n/k grup po k elementów każda, czy na odwrót?
+ROZDZIAŁ 8
+-- poprawić underfull vbox
+8-2(e) -- błędny algorytm, sprawdzić
+8-3(b) -- przetestować implementację, sprawdzić -- może trzeba opisać jawnie, że wywołujemy sortowanie rekurencyjnie z tymczasowymi tablicami i o pustych znakach?
+8-4(c) -- algorytm jest poprawny, ale może jakoś uprościć jego zapis?, sprawdzić
 
-ROZDZIAŁ 9 (0)
-9.1-1
-9.1-2
-9.2-1
-9.2-2
-9.2-3 -- sprawdzić algorytm, skomentować
-9.2-4 -- sprawdzić rysunek
-9.3-1 -- \left, \right
-9.3-2 -- \left, \right
-9.3-3
-9.3-4 -- coś z drzewem porównań z rozdziału 8?
-9.3-5 -- analogicznie DO
-9.3-6
-9.3-7 -- czy przez ``najbliższe'' rozumieć najmniej różniące się, czy pozostające najbliżej w porządku rosnącym?
-9.3-8 -- sprawdzić algorytm, para \langle q_X,q_Y\rangle zamiast luźnych q_X, q_Y (?)
+ROZDZIAŁ 9
+9.3-4 -- coś z drzewem porównań z rozdziału 8? zauważmy, że znamy kolejność i-tego elementu z każdym innym, w przeciwnym przypadku bowiem nie wiedzielibyśmy, czy i-ty rzeczywiście jest i-tym, dzięki tym informacjom można podzielić elementy na 2 zbiory
+9.3-6 -- opisać, sprawdzić, zaimplementować algorytm (Quantiles)
+9.3-7 -- czy przez ``najbliższe'' rozumieć najmniej różniące się, czy pozostające najbliżej w porządku rosnącym? w tym pierwszym pomysł z szukaniem mediany, odejmowaniem jej od wszystkich elementów i braniem modułu? w tym drugim analiza rozdzielona na parzystości n i k, zaimplementować algorytm
 9.3-9
-9-1(a)
-9-1(b)
-9-1(c)
-9-2(a)
-9-2(b)
-9-2(c)
+9-2(c) -- opisać, sprawdzić, zaimplementować algorytm (Weighted-Median)
 9-2(d)
-9-2(e)
-9-3(a) -- sprawdzić notkę, dokończyć
-9-3(b) -- podłogi, sufity..., czy T na pewno jest niemalejące? sprawdzić, \left, \right
-9-3(c)
-9-3(d)
+9-2(e) -- opisać, sprawdzić, zaimplementować algorytm (Post-Office-Location-2D)
+9-3(a) -- tak naprawdę Select będzie działał na co najwyżej 2i-1 elementach, uwzględnić to?, napisać, że jeśli i\ge n/2, to oczywiście będzie zwykła delegacja do Select, sprawdzić <<<< inaczej! skonfrontować z manualem!
+9-3(b) -- skonfrontować z manualem
 
-DODATEK A (3)
+DODATEK A
 
-DODATEK B (2)
-B.5-4 -- to powinna być raczej indukcja po n
-B-3(a) -- sprawdzić, rysunek zaktualizować, może (a) przed i (b) po zmianie krawędzi? opis pod rysunkiem
+DODATEK B
+B.5-4 -- to powinna być indukcja po n
+B-3(a) -- przepisać dowód (?)
 
-DODATEK C (2)
-C.2-4 -- przepisać, skrócić, sprawdzić, poprawić underfull vbox
+DODATEK C
+-- poprawić underfull vbox
+C.2-4 -- przepisać, skrócić, sprawdzić

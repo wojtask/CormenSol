@@ -3,25 +3,27 @@
 \subchapter{Minimum i~maksimum}
 
 \exercise %9.1-1
-Wyznaczmy najpierw najmniejszą spośród $n$ liczb w~następujący sposób. W~każdym etapie testujemy liczby parami, odrzucając te, które były większe w~swoich parach. Procedurę wykonujemy na pozostawionych liczbach, aż do uzyskania jednej liczby -- będącej oczywiście minimum początkowego zbioru. Przyjmujemy, że w~razie nieparzystej liczby elementów na danym etapie, element bez pary nie jest testowany z~żadnym i~przechodzi do kolejnego etapu. Ponieważ po każdym etapie z~$k$ liczb zostaje $\lceil k/2\rceil$, to będzie $\lceil\lg n\rceil$ etapów i~tyle razy testowi będzie poddawany element najmniejszy. Zauważmy, że każdy test odrzuca jedną liczbę, wykonamy zatem dokładnie $n-1$ testów.
+Wyznaczmy najpierw $\mu$ -- najmniejszą spośród $n$ liczb -- w~następujący sposób. Łączymy liczby w~pary i~odrzucamy te, które są większe w~swoich parach, po czym wykonujemy te operacje rekurencyjnie dla zbioru pozostawionych liczb, aż do uzyskania jednej liczby, którą oczywiście będzie~$\mu$. Przyjmujemy, że w~razie nieparzystej liczby elementów w~danym wywołaniu rekurencyjnym, element bez pary zawsze przechodzi do kolejnego wywołania. Ponieważ po każdym wywołaniu z~$k$ liczb zostaje $\lceil k/2\rceil$, to będzie $\lceil\lg n\rceil$ wywołań rekurencyjnych tej procedury i~co najwyżej tylu testom będzie poddawany element $\mu$. Zauważmy, że każdy test odrzuca jedną liczbę, wykonamy zatem dokładnie $n-1$ testów.
 
-Zastanówmy się teraz, która z~odrzuconych liczb może być drugą najmniejszą w~zbiorze. Ponieważ zostanie ona odrzucona tylko w~teście z~elementem najmniejszym, to problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~elementem najmniejszym. Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
+Zastanówmy się teraz, która z~pozostałych liczb może być drugą najmniejszą w~zbiorze. Liczba ta została odrzucona po porównaniu jej z~elementem $\mu$, więc problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~$\mu$. Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
 
 Ostatecznie dostajemy, że drugą najmniejszą spośród $n$ liczb można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
 
 \exercise %9.1-2
-Zadanie rozwiążemy prostszą metodą niż sugeruje nam to wskazówka.
+Zadanie rozwiążemy prostszą metodą, niż sugeruje nam to wskazówka.
 
-Jeśli $n$ jest parzyste, to zgodnie z~podaną w~podręczniku informacją, wykonywanych jest $3n/2-2$ porównań. Ale dla parzystego $n$ prawdą jest, że $3n/2=\lceil3n/2\rceil$, więc wzór na liczbę koniecznych porównań przyjmuje postać $\lceil3n/2\rceil-2$. Niech teraz $n$ będzie liczbą nieparzystą, czyli $n=2k+1$ dla pewnego całkowitego $k$. Chcemy wykazać, że potrzebnych jest $\lceil3n/2\rceil-2$ porównań, czyli $\lceil3k+3/2\rceil-2=3k+2-2=3k$. Ale wynik ten zgadza się z~opisanym w~podręczniku dolnym oszacowaniem na liczbę porównań dla nieparzystego $n$, bo $3\lfloor n/2\rfloor=3\lfloor k+1/2\rfloor=3k$.
+Jeśli $n$ jest parzyste, to zgodnie z~podaną w~podręczniku informacją, wykonywanych jest $3n/2-2$ porównań. Ale dla parzystego $n$ zachodzi $3n/2=\lceil3n/2\rceil$, więc wzór na liczbę potrzebnych porównań przyjmuje postać $\lceil3n/2\rceil-2$. Niech teraz $n$ będzie liczbą nieparzystą, czyli $n=2k+1$ dla pewnego całkowitego $k$. Chcemy wykazać, że koniecznych jest $\lceil3n/2\rceil-2$ porównań, czyli $\lceil3k+3/2\rceil-2=3k+2-2=3k$. Ale wynik ten zgadza się z~opisanym w~podręczniku dolnym oszacowaniem na liczbę porównań dla nieparzystego $n$, bo $3\lfloor n/2\rfloor=3\lfloor k+1/2\rfloor=3k$.
 
 \subchapter{Wybór w~oczekiwanym czasie liniowym}
 
 \exercise %9.2-1
-Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą warunek $1\le i\le r-p+1$. Wywołanie z~wiersza~3 procedury \proc{Randomized-Partition} zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$. Dla liczby całkowitej $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$. Wywołanie rekurencyjne w~wierszu~8 nastąpi dla tablicy długości~0, jeśli $i<k$ i~$q=p$, ale wtedy $k=1$ i~taki przypadek nie ma prawa zajść. Podobnie w~wierszu~9 funkcja zostanie wywołana rekurencynie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$.
+Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą nierówności $1\le i\le r-p+1$. Wywołanie procedury \proc{Randomized-Partition} w~wierszu~3 zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$. Dla liczby $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$. Wywołanie rekurencyjne w~wierszu~8 nastąpi dla tablicy długości~0, jeśli $i<k$ i~$q=p$, ale wówczas $k=1$, co jest sprzeczne z~założeniem o~wartościach parametru $i$. Podobnie w~wierszu~9 funkcja zostanie wywołana rekurencyjnie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$ i~również w~tym przypadku dochodzimy do sprzeczności.
 
 \exercise %9.2-2
+Czas działania procedury \proc{Randomized-Partition} dla tablicy o~mniej niż $n$ elementach jest niezależny od tego, jak została podzielona tablica o~$n$ elementach w~poprzednim wywołaniu rekurencyjnym. Jest tak między innymi dlatego, że żaden poziom rekursji nie przekazuje do następnego poziomu informacji o~tym, na jakim fragmencie tablicy działa.
 
 \exercise %9.2-3
+Po dokonaniu oczywistych zmian w~oryginalnej procedurze, otrzymujemy następujący pseudokod:
 \begin{codebox}
 \Procname{$\proc{Iterative-Randomized-Select}(A,p,r,i)$}
 \li	\While $p<r$
@@ -42,32 +44,25 @@ Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą warunek $1\
 \end{codebox}
 
 \exercise %9.2-4
-W~przypadku szukania elementu najmniejszego pesymistyczny przypadek dzielenia podtablicy występuje, gdy na element rozdzielający wybierany jest za każdym razem jej największy element. Kolejne wywołania rekurencyjne zmniejszają obszar poszukiwań o~1, w~wyniku czego efektem ubocznym jest posortowanie tablicy w~czasie kwadratowym. Ciąg tak wyznaczonych podziałów dla tablicy $A$ przedstawia rys.~\ref{fig:9.2-4}.
-
-\begin{figure}[ht]
-	\begin{center}
-		\includegraphics{fig09.1}
-	\end{center}
-	\caption{Ciąg pesymistycznych podziałów tablicy $A$ podczas szukania elementu najmniejszego.} \label{fig:9.2-4}
-\end{figure}
+W~przypadku szukania elementu najmniejszego pesymistyczny przypadek dzielenia podtablicy występuje, gdy na element rozdzielający wybierany jest za każdym razem jej największy element. Kolejne wywołania rekurencyjne zmniejszają wówczas obszar poszukiwań o~1, jednocześnie umieszczając na końcu tablicy elementy w~kolejności rosnącej, w~wyniku czego, jako efekt uboczny, tablica zostaje posortowana.
 
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 
 \exercise %9.3-1
-Dokonajmy analogicznej analizy algorytmu \proc{Select} w~przypadku, gdy podział następuje na grupy \onedash{7}{elementowe}. W~co najmniej $\lceil n/7\rceil$ grupach są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez~7, i~jednej grupy zawierającej sam element $x$. Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
+Dokonajmy analogicznej analizy algorytmu \proc{Select} w~przypadku, gdy podział następuje na grupy \onedash{7}{elementowe}. Wówczas w~co najmniej połowie spośród $\lceil n/7\rceil$ grup są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez~7, i~jednej grupy zawierającej sam element $x$. Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
 \[
-	4\left(\left\lceil\frac{1}{2}\left\lceil\frac{n}{7}\right\rceil\right\rceil-2\right) \ge \frac{2n}{7}-8.
+	4\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{7}\Bigr\rceil\biggr\rceil-2\biggr) \ge \frac{2n}{7}-8.
 \]
-Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$. Stąd wywołanie rekurencyjne nastąpi dla zbioru \onedash{$(5n/7+8)$}{elementowego}. Rekurencja przyjmuje więc postać
+Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$. Stąd procedura wywoła się rekurencyjnie dla zbioru co najwyżej \onedash{$(5n/7+8)$}{elementowego}. Rekurencja przyjmuje więc postać
 \[
 	T(n) \le \begin{cases}
-		\Theta(1), & \text{jeśli $n\le d$}, \\
-		T(\lceil n/7\rceil)+T(5n/7+8)+O(n), & \text{jeśli $n>d$},
+		\Theta(1), & \text{jeśli $n<d$}, \\
+		T(\lceil n/7\rceil)+T(5n/7+8)+O(n), & \text{jeśli $n\ge d$},
 	\end{cases}
 \]
-przy czym $d$ jest pewną stałą, którą wyznaczymy później.
+przy czym $d>0$ jest pewną stałą, którą wyznaczymy później.
 
-Wykażemy metodą przez podstawienie, że $T(n)=O(n)$. Zachodzi oczywiście $T(n)\le cn$ dla pewnej stałej $c>0$ oraz wszystkich $n\le d$. Niech teraz $n>d$ i~załóżmy, że $T(k)\le ck$ dla pewnej stałej $c>0$ i~wszystkich $k<n$. Dla pewnej stałej $a>0$ zachodzi
+Wykażemy metodą przez podstawianie, że $T(n)=O(n)$. Zachodzi oczywiście $T(n)\le cn$ dla pewnej stałej $c>0$ oraz wszystkich $n<d$. Załóżmy teraz, że $n\ge d$ i~że $T(k)\le ck$ dla pewnej stałej $c>0$ i~wszystkich $k<n$. Dla pewnej stałej $a>0$ zachodzi wówczas
 \begin{align*}
 	T(n) &\le c\lceil n/7\rceil+c(5n/7+8)+an \\
 	&\le cn/7+c+5cn/7+8c+an \\
@@ -75,88 +70,106 @@ Wykażemy metodą przez podstawienie, że $T(n)=O(n)$. Zachodzi oczywiście $T(n
 	&= cn+(-cn/7+9c+an) \\
 	&\le cn,
 \end{align*}
-o~ile składnik $-cn/7+9c+an$ jest niedodatni. Dla $n>63$ warunek ten zachodzi, gdy $c\ge7a(n/(n-63))$. Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~dostajemy, że $c\ge14a$. Można zatem przyjąć za $d$ wartość 126.
+o~ile składnik $-cn/7+9c+an$ jest niedodatni. Dla $n>63$ warunek ten zachodzi, o~ile $c\ge7a(n/(n-63))$. Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~wtedy musi być $c\ge14a$. Można zatem przyjąć za $d$ wartość 126, co kończy dowód.
 
-Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \onedash{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} jest wyższy od liniowego. Rozważmy przypadek, w~którym jest dokładnie $\left\lceil\frac{1}{2}\left\lceil\frac{n}{3}\right\rceil\right\rceil$ grup o~medianach większych lub równych $x$, a~ostatnia, niepełna grupa, zawiera dokładnie 2 elementy większe niż $x$. Stąd liczba elementów większych od $x$ wynosi
+Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \onedash{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} jest wyższy od liniowego. Rozważmy w~szczególności przypadek, kiedy jest dokładnie $\bigl\lceil\frac{1}{2}\bigl\lceil\frac{n}{3}\bigr\rceil\bigr\rceil$ grup o~medianach większych lub równych $x$, w~tym ostatnia, niepełna grupa, która zawiera 2 elementy większe niż $x$. Stąd całkowita liczba elementów większych od $x$ wynosi
 \[
-	2\left(\left\lceil\frac{1}{2}\left\lceil\frac{n}{3}\right\rceil\right\rceil-1\right)+1 = 2\left\lceil\frac{n}{6}\right\rceil-1.
+	2\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{3}\Bigr\rceil\biggr\rceil-1\biggr)+1 = 2\Bigl\lceil\frac{n}{6}\Bigr\rceil-1.
 \]
-Procedura może zostać zatem wywołana rekurencyjne dla co najmniej $n-(2\left\lceil n/6\right\rceil-1)\ge n-(2(n/6+1)-1)=2n/3-1$ elementów nieprzekraczających $x$. Zauważmy też, że sortowanie elementów w~kroku 2 algorytmu \proc{Select} zabiera czas nie tylko $O(n)$, ale dokładnie $\Theta(n)$. Rekurencja opisująca czas działania algorytmu w~tym przypadku ma postać
+Procedura jest wywoływana rekurencyjne dla co najmniej $n-(2\lceil n/6\rceil-1)\ge n-(2(n/6+1)-1)=2n/3-1$ elementów nieprzekraczających $x$. Na mocy faktu, że sortowanie elementów w~kroku 2 algorytmu \proc{Select} zabiera czas dokładnie $\Theta(n)$, otrzymujemy rekurencję opisującą czas działania algorytmu w~tym przypadku:
 \[
 	T(n) \ge \begin{cases}
-		\Theta(1), & \text{jeśli $n\le d$}, \\
-		T(\lceil n/3\rceil)+T(2n/3-1)+\Theta(n), & \text{jeśli $n>d$},
+		\Theta(1), & \text{jeśli $n<d$}, \\
+		T(\lceil n/3\rceil)+T(2n/3-1)+\Theta(n), & \text{jeśli $n\ge d$},
 	\end{cases}
 \]
-dla pewnej stałej $d>0$. Można wykazać, stosując metodę przez podstawienie, że rozwiązaniem powyższej rekurencji jest $T(n)=\Omega(n\lg n)$, w~związku z~czym algorytm po takiej modyfikacji nie działa w~czasie liniowym.
+gdzie $d>0$ jest pewną stałą. Można wykazać, stosując metodę przez podstawianie, że rozwiązaniem powyższej rekurencji jest $T(n)=\Omega(n\lg n)$, co oznacza, że algorytm w~tym wariancie nie działa w~czasie liniowym.
 
 \exercise %9.3-2
-Z~analizy algorytmu \proc{Select} wynika, że liczba elementów większych od $x$ wynosi co najmniej $3n/10-6$ i~podobnie dla liczby elementów mniejszych od $x$. Mamy teraz
+Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większych od $x$, jak i~liczba elementów mniejszych od $x$, wynoszą co najmniej $3n/10-6$. Na mocy założenia, że $n\ge140$, mamy
 \[
-	\frac{3n}{10}-6-\left\lceil\frac{n}{4}\right\rceil \ge \frac{3n}{10}-6-\left(\frac{n}{4}+1\right) = \frac{n-140}{20} \ge 0,
+	\frac{3n}{10}-6-\Bigl\lceil\frac{n}{4}\Bigr\rceil \ge \frac{3n}{10}-6-\Bigl(\frac{n}{4}+1\Bigr) = \frac{n-140}{20} \ge 0,
 \]
-ponieważ mieliśmy założenie, że $n\ge140$. A~zatem obie te wartości są nie mniejsze niż $\lceil n/4\rceil$.
+skąd wnioskujemy, że obie badane liczby wynoszą co najmniej $\lceil n/4\rceil$.
 
 \exercise %9.3-3
-Można wymusić dokonywanie najbardziej zrównoważonych podziałów przez procedurę \proc{Partition} dzięki zastosowaniu algorytmu \proc{Select} do wyboru mediany sortowanej podtablicy na element rozdzielający. Ponieważ pesymistyczny czas algorytmu \proc{Select} wynosi $O(n)$, to pesymistyczny czas algorytmu quicksort sprowadza się po takiej modyfikacji do rekurencji $T(n)\le2T(n/2)+\Theta(n)$, której rozwiązaniem jest $O(n\lg n)$.
+\note{W~rozwiązaniu przyjmujemy założenie, że elementy tablicy wejściowej są parami różne. Założenia tego zabrakło w~polskim tłumaczeniu.}
+
+\noindent Wykorzystamy algorytm \proc{Select} do znalezienia mediany $x$ elementów z~tablicy wejściowej. Przy okazji tablica wejściowa zostanie podzielona względem $x$. Można więc w~algorytmie quicksort zastąpić wywołanie procedury \proc{Partition} wywołaniem \proc{Select} szukającym mediany. W~rezultacie wykonywane będą najbardziej zrównoważone podziały i~pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
 
 \exercise %9.3-4
 
 \exercise %9.3-5
-Problem rozwiązujemy analogicznie jak w~\refExercise{9.3-3} ale dla algorytmu wyboru. Algorytm jest podobny do \proc{Randomized-Select}, w~wierszu~3 wywołujemy jednak procedurę \proc{Partition}, wewnątrz której elementem rozdzielającym czynimy medianę przetwarzanej podtablicy wyznaczoną za pomocą ``czarnej skrzynki''. W~każdym wywołaniu rekurencyjnym będzie dokonywany najbardziej zrównoważony podział podtablicy, więc czas działania algorytmu w~przypadku pesymistycznym jest postaci
-\[
-	T(n) \le
-	\begin{cases}
-		O(1), & \text{jeśli $n=1$}, \\
-		T(\lfloor n/2\rfloor)+O(n), & \text{jeśli $n>1$}.
-	\end{cases}
-\]
-Rozwiązaniem powyższej rekurencji jest $T(n)=O(n)$.
+Zmodyfikujemy procedurę \proc{Randomized-Select}, dokonując zmiany w~wierszu~3. Zamiast wywoływać \proc{Randomized-Partition}, znajdziemy medianę $x$ elementów z~tablicy wejściowej za pomocą danej ``czarnej skrzynki'', po czym podzielimy tablicę względem $x$. W~każdym wywołaniu rekurencyjnym będzie wówczas dokonywany najbardziej zrównoważony podział, więc czas działania algorytmu wyboru w~przypadku pesymistycznym przyjmie postać $T(n)=T(\lfloor n/2\rfloor)+O(n)$. Rozwiązaniem tej rekurencji jest $T(n)=O(n)$.
 
 \exercise %9.3-6
-Załóżmy, że badany zbiór przechowujemy w~tablicy \onedash{$n$}{elementowej}. Podzielmy ją na $\lfloor n/k\rfloor$ podtablic i~posortujmy każdą z~nich. Wszystkie te podtablice składają się z~$k$ elementów (z~dokładnością do~1), więc ich sortowanie algorytmem quicksort zajmuje łącznie czas $\lfloor n/k\rfloor\cdot O(k\lg k)=O(n\lg k)$. %Zauważmy, że najmniejszy kwantyl rzędu $k$ początkowej tablicy jest największym elemente
+\begin{codebox}
+\Procname{$\proc{Quantiles}(A,p,r,k)$}
+\li	\If $k<2$
+\li		\Then \Return $\emptyset$
+		\End
+\li	\If $k\bmod2=0$
+\li		\Then
+			$q\gets\lfloor(p+r)/2\rfloor$
+\li			$\proc{Partition}(A,p,r,q)$
+\li			$L=\proc{Quantiles}(A,p,q-1,k/2)$
+\li			$R=\proc{Quantiles}(A,q+1,r,k/2)$
+\li		\Else
+			$q\gets\lfloor\lfloor k/2\rfloor(p+r)/k\rfloor$
+\li			$\proc{Partition}(A,p,r,q)$
+\li			$L=\proc{Quantiles}(A,p,q-1,(k-1)/2)$
+\li			$R=\proc{Quantiles}(A,q+1,r,(k+1)/2)$
+		\End
+\li	\Return $L\cup\{A[q]\}\cup R$
+\end{codebox}
+
+% Załóżmy, że badany zbiór przechowujemy w~tablicy \onedash{$n$}{elementowej}. Podzielmy ją na $\lfloor n/k\rfloor$ podtablic i~posortujmy każdą z~nich. Wszystkie te podtablice składają się z~$k$ elementów (z~dokładnością do~1), więc ich sortowanie algorytmem quicksort zajmuje łącznie czas $\lfloor n/k\rfloor\cdot O(k\lg k)=O(n\lg k)$. Zauważmy, że najmniejszy kwantyl rzędu $k$ początkowej tablicy jest największym elementem
 
 \exercise %9.3-7
-Znajdujemy elementy $i_1=\lfloor n/2\rfloor-\lfloor k/2\rfloor$ oraz $i_2=\lfloor n/2\rfloor+\lfloor k/2\rfloor$ wejściowej tablicy w~porządku rosnącym za pomocą dwóch wywołań algorytmu \proc{Select} w~czasie $O(n)$. Szukane elementy są większe od \onedash{$i_1$}{tego} i~mniejsze od \onedash{$i_2$}{tego} -- wyznaczamy je przeglądając liniowo tablicę i~testując czy znajdują się w~wyznaczonym przedziale.
+Znajdujemy elementy $i=\lfloor n/2\rfloor-\lfloor k/2\rfloor$ oraz $j=\lfloor n/2\rfloor+\lfloor k/2\rfloor$ wejściowej tablicy w~porządku rosnącym za pomocą dwóch wywołań algorytmu \proc{Select} w~czasie $O(n)$. Szukane elementy są większe od \onedash{$i$}{tego} i~mniejsze od \onedash{$j$}{tego} -- wyznaczamy je przeglądając liniowo tablicę i~testując, czy znajdują się w~wyznaczonym przedziale.
 
 \exercise %9.3-8
-Porównajmy mediany każdej z~tablic. Jeśli są one równe, to wśród wszystkich $2n$ elementów $n$ jest większych od tych median -- $n/2$ z~tablicy $X$ i~$n/2$ z~tablicy $Y$. Załóżmy teraz, że mediany są różne i~bez utraty ogólności, niech mniejsza będzie mediana tablicy $X$. Pomijając teraz elementy $X$ mniejsze od jej mediany i~elementy $Y$ większe od jej mediany, sprowadzamy problem do identycznego ale o~połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród $n$ pozostawionych elementów.
+Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$. Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (bądź równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych). Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb. Załóżmy teraz, że $m_X\ne m_Y$ i~bez utraty ogólności, niech $m_X<m_Y$. Pomijając teraz około $n/2$ elementów $X$ mniejszych lub równych $m_X$ i~około $n/2$ elementów $Y$ większych lub równych $m_Y$, sprowadzamy problem do identycznego, ale o~około połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów. Dokładniej, podproblem będzie operował na tablicach o~rozmiarach $\lfloor n/2\rfloor+1$.
+
+W~celu wyznaczenia mediany $2n$ liczb nasz algorytm będzie wykorzystywał rekurencję o~przypadku brzegowym, gdy $n\le2$. Jeśli $n=1$, to jako wynik algorytmu wystarczy zwrócić mniejszy z~dwóch wejściowych elementów (zgodnie z~konwencją, że interesuje nas mediana dolna). W~przypadku zaś, gdy $n=2$, wyznaczamy większy z~elementów znajdujących się w~pierwszych komórkach tablic oraz mniejszy z~elementów zajmujących drugie komórki. Łatwo sprawdzić, że jeden z~nich to mediana dolna, a~drugi to mediana górna czterech liczb wejściowych. Jako wynik podajemy zatem minimum z~obu tych liczb.
+
+Poniższy pseudokod implementuje opisany algorytm. Po sprawdzeniu warunku brzegowego obliczane są indeksy median dolnych elementów z~każdej tablicy, jak również indeksy ich median górnych. Te ostatnie przekazywane są w~wywołaniach rekurencyjnych w~celu zapewnienia jednakowych rozmiarów obu tablic na kolejnym poziomie rekursji. Aby odnaleźć medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, wywołujemy $\proc{Two-Array-Median}(X,1,n,Y,1,n)$.
+
 \begin{codebox}
 \Procname{$\proc{Two-Array-Median}(X,p_X,r_X,Y,p_Y,r_Y)$}
-\li	\If $p_X=r_X$
-\li		\Then \Return $\min(X[p_X],Y[p_Y])$
+\li	$n\gets r_X-p_X+1$
+\li	\If $n\le2$
+\li		\Then \Return $\min(\max(X[p_X],Y[p_Y]),\min(X[r_X],Y[r_Y]))$
 		\End
 \li	$q_X\gets\lfloor(p_X+r_X)/2\rfloor$
+\li	$q_X'\gets\lceil(p_X+r_X)/2\rceil$
 \li	$q_Y\gets\lfloor(p_Y+r_Y)/2\rfloor$
+\li	$q_Y'\gets\lceil(p_Y+r_Y)/2\rceil$
 \li	\If $X[q_X]=Y[q_Y]$
 \li		\Then \Return $X[q_X]$
 		\End
-\li	\If $X[q_X]>Y[q_Y]$
-\li		\Then \Return $\proc{Two-Array-Median}(X,p_X,q_X-1,Y,q_Y+1,r_Y)$
-\li		\Else \Return $\proc{Two-Array-Median}(X,q_X+1,r_X,Y,p_Y,q_Y-1)$
+\li	\If $X[q_X]<Y[q_Y]$
+\li		\Then \Return $\proc{Two-Array-Median}(X,q_X,r_X,Y,p_Y,q_Y')$
+\li		\Else \Return $\proc{Two-Array-Median}(X,p_X,q_X',Y,q_Y,r_Y)$
 		\End
 \end{codebox}
 
-Czas działania algorytmu jest opisany przez rekurencję z~\refExercise{2.3-5}, ponieważ jego działanie jest analogiczne do wyszukiwania binarnego -- na każdym poziomie rekursji po wykonaniu jednego porównania odrzucana jest połowa problemu.
+Czas działania podanego algorytmu w~przypadku pesymistycznym jest opisany przez rekurencję z~\refExercise{2.3-5}, ponieważ na każdym poziomie rekursji po wykonaniu stałej liczby operacji odrzucana jest w~przybliżeniu połowa problemu.
 
 \exercise %9.3-9
 
 \problems
 
-\problem{Sortowanie $i$ największych elementów} %9-1
+\problem{Sortowanie największych $i$ elementów} %9-1
 
 \subproblem %9-1(a)
-Liczby można posortować algorytmem sortowania przez scalanie, który w~najgorszym przypadku potrzebuje czasu $\Theta(n\lg n)$. Następnie zwracamy $i$ największych liczb poprzez proste przejście po prawym końcu tablicy, co zajmuje czas $\Theta(i)$, więc całkowity czas algorytmu w~najgorszym przypadku wynosi $\Theta(n\lg n+i)$.
+Liczby można posortować algorytmem sortowania przez scalanie, który w~najgorszym przypadku potrzebuje czasu $\Theta(n\lg n)$. Wypisanie $i$ największych liczb otrzymanej tablicy poprzez zwyczajne przeglądnięcie jej $i$ ostatnich elementów, zajmuje czas $\Theta(i)$. Całkowity czas algorytmu w~najgorszym przypadku wynosi zatem $\Theta(n\lg n+i)$.
 
 \subproblem %9-1(b)
-Zbudowanie kopca typu max dla kolejki priorytetowej wymaga czasu $\Theta(n)$. Wykonanie $i$ operacji \proc{Extract-Max} zajmuje czas
-\[
-	\sum_{k=1}^i\Theta(\lg(n-k)) = \sum_{k=n-i}^n\Theta(\lg k) = \Theta(n\lg n-(n-i-1)\lg n) = \Theta(i\lg n)
-\]
-na podstawie punktu~(b) problemu~\refProblem{A-1}, a~zatem całkowitym czasem algorytmu w~przypadku pesymistycznym jest $\Theta(n+i\lg n)$.
+Zbudowanie kopca typu max dla kolejki priorytetowej algorytmem \proc{Build-Max-Heap} wymaga czasu $\Theta(n)$. Wykonanie kolejno $i$ operacji \proc{Extract-Max} na kopcu o~co najwyżej $n$ elementach wymaga czasu $i\cdot O(\lg n)=O(i\lg n)$. Z~kolei połowa tych operacji będzie wykonywana na kopcu o~co najmniej $n/2$ elementach. Zajmą one czas $(i/2)\cdot\Omega(\lg(n/2))=\Omega(i\lg n)$ w~najgorszym przypadku. Stąd mamy, że wszystkie operacje ekstrakcji zostaną wykonane w~czasie $\Theta(i\lg n)$ w~przypadku pesymistycznym, a~zatem całkowitym czasem algorytmu jest $\Theta(n+i\lg n)$.
 
 \subproblem %9-1(c)
-Aby osiągnąć najlepszy czas w~przypadku pesymistycznym, użyjemy procedury \proc{Select} do znalezienia \onedash{$i$}{tej} statystyki pozycyjnej. Sortowanie $i$ największych liczb można wykonać algorytmem sortowania przez scalanie, które w~najgorszym przypadku zajmuje czas $\Theta(i\lg i)$, skąd całkowity czas działania algorytmu wynosi $\Theta(n+i\lg i)$, co czyni go najbardziej efektywnym spośród wszystkich rozważanych algorytmów w~obecnym problemie.
+Aby osiągnąć najlepszy czas w~przypadku pesymistycznym, użyjemy procedury \proc{Select} do znalezienia \onedash{$i$}{tej} statystyki pozycyjnej. Jednocześnie tablica wejściowa zostanie podzielona względem znalezionego elementu. Sortowanie $i$ największych liczb można wykonać algorytmem sortowania przez scalanie, które w~najgorszym przypadku zajmuje czas $\Theta(i\lg i)$. Stąd całkowity czas działania algorytmu wynosi $\Theta(n+i\lg i)$, co czyni go najbardziej efektywnym spośród wszystkich rozważanych algorytmów w~niniejszym problemie.
 
 \problem{Mediana ważona} %9-2
 
@@ -165,12 +178,32 @@ Dla tak przyjętych wag elementów mamy
 \[
 	\sum_{x_i<x_k}w_i = \frac{k-1}{n} \quad\text{oraz}\quad \sum_{x_i>x_k}w_i = \frac{n-k}{n}.
 \]
-Jeśli ograniczymy obie sumy od góry przez $1/2$, to dostaniemy, że medianą ważoną jest element $x_k$, gdzie $n/2\le k\le n/2+1$, czyli $k=\lfloor(n+1)/2\rfloor$ lub $k=\lceil(n+1)/2\rceil$, a~to jest warunek na to, aby $x_k$ było zwykłą medianą.
+Jeśli ograniczymy obie sumy od góry przez $1/2$, to dostaniemy, że medianą ważoną elementów $x_1$, $x_2$,~\dots,~$x_n$ jest $x_k$, gdzie $n/2\le k\le n/2+1$, czyli $k=\lfloor(n+1)/2\rfloor$ lub $k=\lceil(n+1)/2\rceil$. A~zatem $x_k$ jest również zwykłą medianą elementów $x_1$, $x_2$,~\dots,~$x_n$.
 
 \subproblem %9-2(b)
-Po posortowaniu elementów wyznaczenie mediany ważonej odbywa się w~prosty sposób -- wystarczy sumować wagi elementów, poruszając się w~ich porządku rosnącym i~zwrócić pierwszy element, dla którego suma wag osiągnie lub przekroczy $1/2$. Złożoność tej procedury zależy od efektywności sortowania, które w~pesymistycznym czasie zajmuje $O(n\lg n)$ dla $n$ elementów.
+Po posortowaniu elementów wyznaczenie mediany ważonej odbywa się w~prosty sposób -- wystarczy sumować wagi coraz większych elementów, począwszy od najmniejszego, aż suma ta osiągnie lub przekroczy $1/2$. Wówczas wystarczy zwrócić ostatni przeglądany element.
+
+Złożoność tej procedury zależy od efektywności sortowania, ale używając odpowiedniego algorytmu, jesteśmy w~stanie osiągnąć czas $O(n\lg n)$ w~pesymistycznym przypadku.
 
 \subproblem %9-2(c)
+\begin{codebox}
+\Procname{$\proc{Weighted-Median}(A,p,r,w)$}
+\li	$q\gets\lfloor(p+r)/2\rfloor$
+\li	$\proc{Partition-Around}(A,p,r,q)$
+\li	$W\gets0$
+\li	\For $i=1$ \To $q-1$
+\li		\Do $W\gets W+w_i$
+		\End
+\li	\If $W<1/2$
+\li		\Then
+			\If $W+w_q\ge1/2$
+\li				\Then \Return $A[q]$
+\li				\Else \Return $\proc{Weighted-Median}(A,q+1,r,w+W+w_q)$
+				\End
+\li		\Else \Return $\proc{Weighted-Median}(A,p,q+1,w)$
+		\End
+\end{codebox}
+
 \subproblem %9-2(d)
 \subproblem %9-2(e)
 
@@ -179,30 +212,31 @@ Po posortowaniu elementów wyznaczenie mediany ważonej odbywa się w~prosty spo
 \subproblem %9-3(a)
 \note{W~tłumaczeniu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$. Wartość\/ $T(n)$ powinna być zwracana nie dla\/ $i\le n/2$, lecz dla\/ $i\ge n/2$.}
 
-\noindent Postępując za podaną wskazówką, grupujemy najpierw elementy w~pary i~wyznaczamy mniejsze w~każdej parze. Zauważmy, że \onedash{$i$}{ty} w~kolejności element całego zbioru, gdzie $i<n/2$, znajduje się wśród elementów mniejszych w~parach lub wśród 
+\noindent Postępując za podaną wskazówką, grupujemy najpierw elementy w~pary i~wyznaczamy zbiór mniejszych z~każdej pary. Zauważmy, że \onedash{$i$}{ta} statystyka pozycyjna całego zbioru, gdzie $i<n/2$, jest mniejsza lub równa \onedash{$i$}{tej} statystyce pozycyjnej ze zbioru elementów mniejszych w~swoich parach. Możemy więc uruchomić algorytm rekurencyjnie dla tegoż zbioru w~celu jej znalezienia, po czym użyć algorytmu \proc{Select} na zbiorze elementów, które nie przekraczają tej wartości.
+
+Wykonując $\lfloor n/2\rfloor$ porównań, wyznaczymy zbiór elementów mniejszych w~każdej z~par. Ewentualny element bez pary włączamy także do tego zbioru, który składa się teraz z~$\lceil n/2\rceil$ elementów. Rekurencyjne wywołanie algorytmu wprowadza więc składnik $U_i(\lceil n/2\rceil)$. Ostatni etap, czyli uruchomienie zwykłego algorytmu wyboru na co najwyżej $2i$ elementach, zajmuje czas $T(2i)$.
 
 \subproblem %9-3(b)
-Załóżmy, że $n/2^k\le i<n/2^{k-1}$ i~rozwińmy rekurencję $U_i(n)$ w~przypadku, gdy $i<n/2$:
+Załóżmy, że $\lceil n/2^{k+1}\rceil\le i<\lceil n/2^k\rceil$ i~rozwińmy rekurencję $U_i(n)$ w~przypadku, gdy $i<n/2$:
 \[
-	U_i(n) = \left\lfloor\frac{n}{2}\right\rfloor+T(2i)+\left\lfloor\frac{1}{2}\left\lceil\frac{n}{2}\right\rceil\right\rfloor+T(2i)+\dots+\left\lfloor\frac{1}{2}\left\lceil\frac{n}{2^{k-1}}\right\rceil\right\rfloor+T(2i)+T\Bigl(\left\lceil\frac{n}{2^k}\right\rceil\Bigr).
+	U_i(n) = \Bigl\lfloor\frac{n}{2}\Bigr\rfloor+T(2i)+\biggl\lfloor\frac{1}{2}\Bigl\lceil\frac{n}{2}\Bigr\rceil\biggr\rfloor+T(2i)+\dots+\biggl\lfloor\frac{1}{2}\Bigl\lceil\frac{n}{2^{k-1}}\Bigr\rceil\biggr\rfloor+T(2i)+T\Bigl(\Bigl\lceil\frac{n}{2^k}\Bigr\rceil\Bigr).
 \]
-Na mocy tego, że $k\ge\lg(n/i)$ oraz $T(\lceil n/2^k\rceil)\le T(n/2^k+1)\le T(i+1)\le T(2i)$, mamy
+Z~warunku nałożonego na $i$ otrzymujemy, że $k=O(\lg(n/i))$. Z~kolei wykorzystując monotoniczność $T(n)$, mamy $T(\lceil n/2^k\rceil)=T(2\lceil n/2^{k+1}\rceil)\le T(2i)$. Stąd
 \begin{align*}
-	U_i(n) &\le \frac{n}{2}+\frac{n}{4}+\dots+\frac{n}{2^k}+(k-1)T(2i)+T\Bigl(\left\lceil\frac{n}{2^k}\right\rceil\Bigr) \\
+	U_i(n) &\le \frac{n}{2}+\frac{n}{4}+\dots+\frac{n}{2^k}+(k-1)T(2i)+T\Bigl(\Bigl\lceil\frac{n}{2^k}\Bigr\rceil\Bigr) \\
 	&< n\sum_{j=1}^\infty\frac{1}{2^j}+kT(2i) \\
 	&= n+O(T(2i)\lg(n/i)).
 \end{align*}
 
 \subproblem %9-3(c)
-Ponieważ $i$ jest stałą, to $T(2i)$ również można potraktować jako wartość stałą. Wykorzystując poprzedni punkt, mamy
+Ponieważ $i$ jest stałą, to $T(2i)$ również można potraktować jako wartość stałą. Na mocy poprzedniego punktu mamy
 \[
-	U_i(n) = n+O(T(2i)\lg(n/i)) = n+O(\lg n-\lg i) = n+O(\lg n),
+	U_i(n) = n+O(T(2i)\lg(n/i)) = n+O(\lg n-\lg i) = n+O(\lg n).
 \]
-co należało dowieść.
 
 \subproblem %9-3(d)
 Dla $k>2$ oszacowanie wynika natychmiast z~części~(b) po podstawieniu $i=n/k$, bo wtedy oczywiście $i<n/2$.
 
-Jeśli $k=2$, to rozwiązaniem rekurencji $U_i(n)$ jest $T(n)$, czyli $O(n)$. Zauważmy, że teza w~tym przypadku sprowadza się do $U_i(n)=n+O(T(n))$ i~rzeczywiście zachodzi, ponieważ $n+O(T(n))=O(n)$.
+Jeśli $k=2$, to $i=n/2$ i~rozwiązaniem rekurencji $U_i(n)$ jest $U_i(n)=T(n)=O(n)$. Teza w~tym przypadku przyjmuje postać $U_i(n)=n+O(T(n))$, co oczywiście zachodzi, ponieważ $n+O(T(n))=O(n)$.
 
 \endinput

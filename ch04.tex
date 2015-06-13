@@ -766,7 +766,7 @@ Implikację w~przeciwną stronę dowodzimy przez indukcję względem liczby wier
 \[
 	A[1,j]+A[2,j+1] \le A[1,j+1]+A[2,j] \tag{$*$}\label{eq:4-7a}
 \]
-dla $1\le j<n$. Dodajmy teraz powyższą nierówność dla pewnego $j<n-1$ (przy założeniu, że $n>2$) do niej samej ale z~$l=j+1$ w~miejscu $j$. Po zredukowaniu zbędnych składników dostajemy
+dla $1\le j<n$. Dodajmy teraz powyższą nierówność dla pewnego $j<n-1$ (przy założeniu, że $n>2$) do niej samej, ale z~$l=j+1$ w~miejscu $j$. Po zredukowaniu zbędnych składników dostajemy
 \[
 	A[1,j]+A[2,j+2] \le A[1,j+2]+A[2,j].
 \]
@@ -794,15 +794,15 @@ jest fałszywa, przez co własność tablicy Monge'a jest zaburzona. By przywró
 \subproblem %4-7(c)
 Korzystając z~poniższej nierówności prawdziwej dla tablicy Monge'a $A$:
 \[
-	A[i,j]+A[i+1,j+r] \le A[i,j+r]+A[i+1,j], \tag{$*$}\label{eq:4-7c}
+	A[i,j]+A[i+1,j+r] \le A[i,j+r]+A[i+1,j],
 \]
-gdzie $0<r\le n-j$, wnioskujemy w~następujący sposób. Znajdujemy w~pierwszym wierszu tablicy $A$ pierwsze minimum z~lewej strony, które oznaczymy przez $\mu$. Indeksem $\mu$ jest oczywiście $f(1)$. Stwierdzamy teraz, że dla $1\le j<f(1)$ spełnione jest~(\ref{eq:4-7c}), czyli
+gdzie $0<r\le n-j$, wnioskujemy w~następujący sposób. Znajdujemy w~pierwszym wierszu tablicy $A$ pierwsze minimum z~lewej strony, które oznaczymy przez $\mu$. Indeksem $\mu$ jest oczywiście $f(1)$. Wstawiając teraz $i=1$ oraz $r=f(1)-j$ do powyższej nierówności, otrzymujemy
 \[
 	A[1,j]+A[2,f(1)] \le \mu+A[2,j].
 \]
-Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, otrzymujemy, że $A[2,f(1)]<A[2,j]$, a~to oznacza, że pierwsze z~lewej strony minimum wiersza~2 występuje w~nim na indeksie nie mniejszym niż $f(1)$, skąd $f(1)\le f(2)$.
+Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, otrzymujemy, że $A[2,f(1)]<A[2,j]$, a~to oznacza, że pierwsze z~lewej strony minimum wiersza~2 występuje w~nim na pozycji nie mniejszej niż $f(1)$, skąd $f(1)\le f(2)$.
 
-Dowód kolejnych nierówności przebiega analogicznie, skąd dostajemy tezę.
+Dowód kolejnych nierówności przebiega analogicznie.
 
 \subproblem %4-7(d)
 Aby odnaleźć minimum wiersza \onedash{$i$}{tego}, sprawdzamy indeksy minimów wierszy \onedash{$(i-1)$}{szego} oraz \onedash{$(i+1)$}{szego}. Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$. Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$. Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
@@ -814,7 +814,7 @@ Poszukując minimum wiersza \onedash{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ ko
 	&= \lceil m/2\rceil+f(2\lceil m/2\rceil)-f(0) \\[2mm]
 	&\le \lceil m/2\rceil+n-1
 \end{align*}
-komórek, a~to jest rzędu $O(m+n)$.
+komórek, co jest rzędu $O(m+n)$.
 
 \subproblem %4-7(e)
 Na ostatnim poziomie rekursji wyznaczenie minimum jednego wiersza tablicy wymaga sprawdzenia co najwyżej $O(n)$ komórek. Na podstawie tego faktu i oszacowania pokazanego w~poprzednim punkcie formułujemy następującą rekurencję opisującą pesymistyczny czas działania algorytmu:

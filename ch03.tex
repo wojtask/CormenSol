@@ -64,12 +64,15 @@ dla wszystkich $n\ge n_0$. Dochodzimy do sprzeczności, bowiem nieprawdą jest, 
 Udowodniona własność pokazuje, że nie ma potrzeby definiowania notacji $\theta$ odpowiadającej $\Theta$ i~analogicznej do $o$ i~$\omega$.
 
 \exercise %3.1-8
+\note{Notacja\/ $O$ dla funkcji dwóch zmiennych jest błędnie zdefiniowana -- warunek powinien zachodzić dla wszystkich\/ $n\ge n_0$ lub\/ $m\ge m_0$.}
+
+\noindent Definicje notacji $\Omega$ i~$\Theta$ dla funkcji dwóch zmiennych:
 \[
 	\begin{split}
 		\Omega(g(n,m)) &= \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c$,~$n_0$,~$m_0$ takie, że} \\
-		&\qquad 0 \le cg(n,m) \le f(n,m) \text{ dla wszystkich $n \ge n_0$ oraz $m \ge m_0$}\,\bigr\} \\[3mm]
+		&\qquad 0 \le cg(n,m) \le f(n,m) \text{ dla wszystkich $n \ge n_0$ lub $m \ge m_0$}\,\bigr\}, \\[2mm]
 		\Theta(g(n,m)) &= \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c_1$,~$c_2$,~$n_0$,~$m_0$ takie, że} \\
-		&\qquad 0 \le c_1g(n,m) \le f(n,m) \le c_2g(n,m) \text{ dla wszystkich $n \ge n_0$ oraz $m \ge m_0$}\,\bigr\}
+		&\qquad 0 \le c_1g(n,m) \le f(n,m) \le c_2g(n,m) \text{ dla wszystkich $n \ge n_0$ lub $m \ge m_0$}\,\bigr\}.
 	\end{split}
 \]
 
@@ -260,7 +263,7 @@ Ze wzoru~(3.18) mamy $\lg(n!)=\Theta(n\lg n)$, z~kolei $\lg n^n=n\lg n=\Theta(n\
 \problem{Porządkowanie ze względu na rząd wielkości funkcji} %3-3
 
 \subproblem %3-3(a)
-Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=1$, 2,~\dots,~29, gdzie $g_i(n)$ to rozważane kolejno funkcje. Zauważmy, że $f(n)=\omega(g(n))$ jest warunkiem wystarczającym na to, aby $f(n)=\Omega(g(n))$. W~kilku dowodach korzystamy z~obserwacji, że jeśli $f(n)=g(n)h(n)$ i~$h(n)=\omega(1)$, to $f(n)=\omega(g(n))$. Ponadto wykorzystujemy fakt, że $\lg f(n)=\omega(\lg g(n))$ implikuje $f(n)=\omega(g(n))$, co można łatwo wykazać.
+Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=1$, 2,~\dots,~29, gdzie $g_i(n)$ to rozważane kolejno funkcje. W~niektórych dowodach korzystamy z~obserwacji, że jeśli $f(n)=g(n)h(n)$ i~$h(n)=\omega(1)$, to $f(n)=\omega(g(n))$. Ponadto wykorzystujemy fakt, że $\lg f(n)=\omega(\lg g(n))$ implikuje $f(n)=\omega(g(n))$, co można łatwo wykazać.
 \begin{itemize}
 \item $2^{2^{n+1}}=\Omega\bigl(2^{2^n}\bigr)$
 	\[
@@ -271,13 +274,13 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 	\[
 		\lg 2^{2^n} = 2^n \quad\text{oraz}\quad \lg((n+1)!) = \Theta((n+1)\lg(n+1)) = \Theta(n\lg n).
 	\]
-	Ponieważ $2^n=\omega(n^2)$ oraz $n^2=\omega(n\lg n)$, to mamy, że $2^n=\omega(n\lg n)$. Powracając do początkowych funkcji, dostajemy $2^{2^n}=\omega((n+1)!)$, skąd wynika prawdziwość dowodzonej zależności.
+	Ponieważ $2^n=\omega(n^2)$ i~$n^2=\omega(n\lg n)$, to mamy, że $2^n=\omega(n\lg n)$. Powracając do początkowych funkcji, dostajemy $2^{2^n}=\omega((n+1)!)$, skąd wynika prawdziwość dowodzonej zależności.
 \item $(n+1)!=\Omega(n!)$
 	\[
 		(n+1)! = (n+1)\cdot n! = \omega(n!), \quad\text{bo $n+1 = \omega(1)$}.
 	\]
 \item $n!=\Omega(e^n)$ \\
-	Zbadajmy logarytmy obu funkcji. Zachodzi $\lg e^n=\Theta(n)$, a~ze wzoru~(3.18) otrzymujemy $\lg(n!)=\Theta(n\lg n)=\omega(n)$. Prawdą jest zatem, że $\lg(n!)=\omega(\lg e^n)$, a~stąd wynika zależność $n!=\omega(e^n)$.
+	Zbadajmy logarytmy obu funkcji. Ze wzoru~(3.18) otrzymujemy $\lg(n!)=\Theta(n\lg n)=\omega(n)$, a~$\lg e^n=\Theta(n)$. Prawdą jest zatem, że $\lg(n!)=\omega(\lg e^n)$ i~stąd wynika zależność $n!=\omega(e^n)$.
 \item $e^n=\Omega(n\cdot2^n)$
 	\[
 		e^n = (e/2)^n2^n = \omega(n\cdot2^n), \quad\text{bo $(e/2)^n = \omega(n)$},
@@ -298,13 +301,9 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 \item $n^{\lg\lg n}=\Omega\bigl((\lg n)^{\lg n}\bigr)$ \\
 	Na mocy tożsamości~(3.15) funkcje są równoważne.
 \item $(\lg n)^{\lg n}=\Omega((\lg n)!)$ \\
-	Badając logarytmy obu funkcji, dostajemy
-	\[
-	    \lg(\lg n)^{\lg n} = \Theta(\lg n\lg\lg n) \quad\text{oraz}\quad \lg((\lg n)!) = \Theta(\lg n\lg\lg n) \quad\text{(ze wzoru~(3.18))},
-	\]
-	a~zatem zależność jest prawdziwa.
+	Jeśli podstawimy $n=2^h$, to otrzymamy wzór $h^h=\Omega(h!)$, który jest prawdziwy na podstawie zależności $n!=o(n^n)$, zaprezentowanej w~podręczniku.
 \item $(\lg n)!=\Omega(n^3)$ \\
-	Korzystając z~logarytmu pierwszej funkcji, oszacowanego w~poprzednim uzasadnieniu oraz z~tego, że $\lg n^3=\Theta(\lg n)$, dostajemy żądany wynik, ponieważ $\lg\lg n=\omega(1)$.
+	Korzystając z~logarytmu pierwszej funkcji oszacowanego w~poprzednim uzasadnieniu oraz z~tego, że $\lg n^3=\Theta(\lg n)$, dostajemy żądany wynik, ponieważ $\lg\lg n=\omega(1)$.
 \item $n^3=\Omega(n^2)$ \\
 	Tożsamość zachodzi wprost z~punktu~(b) problemu~\refProblem{3-1}.
 \item $n^2=\Omega\bigl(4^{\lg n}\bigr)$ \\
@@ -312,15 +311,15 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 \item $4^{\lg n}=\Omega(n\lg n)$ \\
 	Wzór zachodzi, bo $4^{\lg n}=n^2$, a~$n=\omega(\lg n)$.
 \item $n\lg n=\Omega(\lg(n!))$ \\
-	Prawdziwość tożsamości wynika ze wzoru~(3.18).
+	Obie funkcje są asymptotycznie równoważne na podstawie wzoru~(3.18).
 \item $\lg(n!)=\Omega(n)$ \\
 	Ze wzoru~(3.18) mamy, że $\lg(n!)=\Theta(n\lg n)$, więc tożsamość jest prawdziwa, bo $\lg n=\omega(1)$.
 \item $n=\Omega\bigl(2^{\lg n}\bigr)$ \\
-	Funkcje są tożsame, bo $2^{\lg n}=n^{\lg2}=n$ na mocy wzoru~(3.15).
-\item $2^{\lg n}=\Omega\bigl(\bigl(\!\sqrt{2}\bigr)^{\lg n}\bigr)$ \\
+	Na mocy wzoru~(3.15) zachodzi $2^{\lg n}=n^{\lg2}=n$, a~więc funkcje są tożsame.
+\item $2^{\lg n}=\Omega\bigl(\!\bigl(\!\sqrt{2}\bigr)^{\lg n}\bigr)$ \\
 	Z~poprzedniego uzasadnienia mamy, że $2^{\lg n}=n$, a~$\bigl(\!\sqrt{2}\bigr)^{\lg n}=n^{\lg\sqrt{2}}=\sqrt{n}$ (ze wzoru~(3.15)), więc tożsamość zachodzi, ponieważ $\sqrt{n}=\omega(1)$.
-\item $\sqrt{2}^{\lg n}=\Omega\bigl(2^{\sqrt{2\lg n}}\bigr)$ \\
-	Rozważmy tożsamość $2^{\lg n}=n$ i~podnieśmy ją do potęgi $\sqrt{2/\!\lg n}$. Otrzymujemy $2^{\sqrt{2\lg n}}=n^{\sqrt{2/\!\lg n}}$, a~zatem $2^{\sqrt{2\lg n}}=\Theta\bigl(n^{\sqrt{2/\!\lg n}}\bigr)$. Ponieważ $\bigl(\!\sqrt{2}\bigr)^{\lg n}=n^{1/2}$, to wystarczy pokazać, że $1/2=\Omega\bigl(\!\sqrt{2/\!\lg n}\bigr)$. Tożsamość oczywiście zachodzi, gdyż funkcja z~prawej strony jest malejąca i~dąży do 0 wraz ze wzrostem $n$.
+\item $\bigl(\!\sqrt{2}\bigr)^{\lg n}=\Omega\bigl(2^{\sqrt{2\lg n}}\bigr)$ \\
+	Rozważmy tożsamość $2^{\lg n}=n$ i~podnieśmy ją do potęgi $\sqrt{2/\!\lg n}$. Otrzymujemy $2^{\sqrt{2\lg n}}=n^{\sqrt{2/\!\lg n}}$, a~zatem $2^{\sqrt{2\lg n}}=\Theta\bigl(n^{\sqrt{2/\!\lg n}}\bigr)$. Ponieważ $\bigl(\!\sqrt{2}\bigr)^{\lg n}=n^{1/2}$, to wystarczy pokazać, że $1/2=\Omega\bigl(\!\sqrt{2/\!\lg n}\bigr)$. Wzór oczywiście zachodzi, gdyż funkcja z~prawej strony jest malejąca i~dąży do 0 wraz ze wzrostem $n$.
 \item $2^{\sqrt{2\lg n}}=\Omega(\lg^2 n)$ \\
 	Biorąc logarytmy obu funkcji, dostajemy
 	\[
@@ -346,7 +345,7 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 	\[
 		\lg^{(3)}n = 2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k-3$}\kern0pt} \quad\text{oraz}\quad \lg^*n=k.
 	\]
-	Oczywistym jest, że pierwsza wartość jest większa od drugiej dla dostatecznie dużych $n$, zatem zależność zachodzi.
+	Oczywistym jest, że funkcja po lewej stronie jest asymptotycznie większa od funkcji po prawej stronie.
 \item $2^{\lg^*n}=\Omega(\lg^*n)$ \\
 	Po zlogarytmowaniu obu funkcji i~wykorzystaniu wzoru~(3.15), otrzymujemy
 	\[
@@ -358,7 +357,7 @@ Poniższe uzasadnienia stanowią dowody, że $g_i(n)=\Omega(g_{i+1}(n))$ dla $i=
 \item $\lg^*\lg n=\Omega(\lg\lg^*n)$ \\
 	Tożsamość zachodzi na podstawie rozwiązania \refExercise{3.2-5}.
 \item $\lg\lg^*n=\Omega\bigl(n^{1/\!\lg n}\bigr)$ \\
-	Z własności logarytmów mamy, że $1/\!\lg n=\log_n2$, a~więc wykorzystując wzór~(3.15), dostajemy $n^{1/\!\lg n}=n^{\log_n2}=2^{\log_nn}=2=\Theta(1)$, skąd wynika prawdziwość zależności.
+	Z~własności logarytmów mamy, że $1/\!\lg n=\log_n2$, a~więc wykorzystując wzór~(3.15), dostajemy $n^{1/\!\lg n}=n^{\log_n2}=2^{\log_nn}=2=\Theta(1)$, skąd wynika prawdziwość zależności.
 \item $n^{1/\!\lg n}=\Omega(1)$ \\
 	Tożsamość zachodzi, gdyż z~poprzedniego uzasadnienia $n^{1/\!\lg n}=\Theta(1)$.
 \end{itemize}
@@ -376,7 +375,7 @@ Tabela~\ref{tab:3-3} przedstawia badane funkcje uporządkowane względem notacji
 				g_6(n)= & n\cdot2^n & g_{16}(n)= & \lg(n!) & g_{26}(n)= & \lg^*n \\ \cline{1-4}
 				g_7(n)= & 2^n & g_{17}(n)= & n & g_{27}(n)= & \lg^*\lg n \\ \cline{1-2}\cline{5-6}
 				g_8(n)= & (3/2)^n & g_{18}(n)= & 2^{\lg n} & g_{28}(n)= & \lg\lg^*n \\ \hline
-				g_9(n)= & n^{\lg\lg n} & g_{19}(n)= & \sqrt{2}^{\lg n} & g_{29}(n)= & n^{1/\!\lg n} \\ \cline{3-4}
+				g_9(n)= & n^{\lg\lg n} & g_{19}(n)= & \bigl(\!\sqrt{2}\bigr)^{\lg n} & g_{29}(n)= & n^{1/\!\lg n} \\ \cline{3-4}
 				g_{10}(n)= & (\lg n)^{\lg n} & g_{20}(n)= & 2^{\sqrt{2\lg n}} & g_{30}(n)= & 1 \\ \hline
 			\end{array}
 		\]
@@ -416,7 +415,7 @@ Prawda. Z~faktu, że $f(n)=O(g(n))$, wynika $f(n)\le cg(n)$ dla $n\ge n_0$, gdzi
 Fałsz. Niech $f(n)=2n$ oraz $g(n)=n$. Zachodzi $f(n)=O(g(n))$, jednak $2^{f(n)}\ne O\bigl(2^{g(n)}\bigr)$ (z~\refExercise{3.1-4}).
 
 \subproblem %3-4(e)
-Fałsz. Dla $f(n)=1/n$ mamy $f^2(n)=1/n^2$. Ponieważ nie istnieje żadna dodatnia stała spełniająca nierówność $1/n\le c/n^2$ dla dowolnie dużych $n$, to stąd $f(n)\ne O\bigl(f^2(n)\bigr)$.
+Fałsz. Dla $f(n)=1/n$ mamy $f^2(n)=1/n^2$. Ponieważ nie istnieje żadna dodatnia stała $c$ spełniająca nierówność $1/n\le c/n^2$ dla dowolnie dużych $n$, to stąd $f(n)\ne O\bigl(f^2(n)\bigr)$.
 
 \subproblem %3-4(f)
 Prawda. Z~definicji notacji $O$, jeśli $f(n)=O(g(n))$, to istnieją stałe $c$,~$n_0>0$, że dla każdego $n\ge n_0$ zachodzi $0\le f(n)\le cg(n)$. Dzieląc nierówność przez $c$, otrzymujemy $0\le f(n)/c\le g(n)$, przy czym $1/c>0$, a~więc $g(n)=\Omega(f(n))$.
@@ -430,9 +429,6 @@ Prawda. Niech $h(n)=o(f(n))$. Wtedy, na podstawie definicji notacji $o$ mamy, ż
 	f(n) \le f(n)+o(f(n)) = f(n)+h(n) < (c+1)f(n).
 \]
 Ponieważ $c+1>1$, to można wyrażenie $f(n)+o(f(n))$ ograniczyć od góry przez $c_2f(n)$, wybierając np.\ $c_2=2$. Jego dolnym ograniczeniem jest $f(n)$, więc ustalamy $c_1=1$. Stałe $c_1$,~$c_2$,~$n_0$ spełniają założenia definicji notacji $\Theta$, więc wnioskujemy, że $f(n)+o(f(n))=\Theta(f(n))$.
-
-\bigskip
-\note{Od tego momentu podczas wyznaczania oszacowań czasów działania algorytmów nie będziemy odwoływać się do definicji notacji asymptotycznych. Będziemy natomiast wykorzystywać własności, które udowodniliśmy w~powyższym problemie.}
 
 \problem{Wariacje na temat notacji $O$ i~$\Omega$} %3-5
 
@@ -456,7 +452,7 @@ Zbadajmy teraz implikację w~prawo. Wprost z~definicji, jeśli $f(n)=O'(g(n))$, 
 		0 \le -f(n) \le cg(n), & \text{jeśli $f(n)<0$.}
 	\end{cases}
 \]
-Załóżmy, że istnieje nieskończenie wiele takich $n\ge n_0$, że $f(n)<0$, ponieważ w~przeciwnym przypadku mielibyśmy do czynienia z~funkcją asymptotycznie nieujemną, dla której jest $f(n)=O(g(n))$. Teraz jednak nierówności $0\le c_1g(n)\le f(n)$ wynikające z~założenia, że $f(n)=\Omega(g(n))$ nie są spełnione dla pewnych $n\ge n_0$ i~stałej $c_1>0$. Wynika stąd wniosek, że jeśli spełnione są założenia, to funkcja $f(n)$ jest asymptotycznie nieujemna i~implikacja stosuje się bez zmian.
+Załóżmy, że istnieje nieskończenie wiele takich $n\ge n_0$, że $f(n)<0$, ponieważ w~przeciwnym przypadku mielibyśmy do czynienia z~funkcją asymptotycznie nieujemną, dla której jest $f(n)=O(g(n))$. Teraz jednak nierówności $0\le c_1g(n)\le f(n)$ wynikające z~założenia, że $f(n)=\Omega(g(n))$ nie są spełnione dla nieskończenie wielu $n\ge n_0$ i~dowolnej stałej $c_1>0$. Wynika stąd wniosek, że jeśli spełnione są założenia, to funkcja $f(n)$ jest asymptotycznie nieujemna i~implikacja stosuje się bez zmian.
 
 Widać, że zastosowanie notacji $O'$ w~miejsce $O$ nie pozbawia prawdziwości twierdzenia~3.1.
 

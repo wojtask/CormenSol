@@ -3,18 +3,22 @@
 \subchapter{Opis algorytmu}
 
 \exercise %7.1-1
-Rys.~\ref{fig:7.1-1} przedstawia działanie procedury \proc{Partition} dla tablicy~$A$.
+\note{Rozwiązanie dotyczy przykładu z~tekstu oryginalnego.}
+
+\noindent Rys.~\ref{fig:7.1-1} przedstawia działanie procedury \proc{Partition} dla tablicy~$A$.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig07.1}
 	\end{center}
-	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries\twodashes{(b)}{(l)}} Kolejne iteracje pętli \kw{for} w~wierszach \twodashes{3}{6}. {\sffamily\bfseries(m)} Tablica $A$ po wykonaniu zamiany z~wiersza~7. Element rozdzielający nie zmienił swojego położenia.} \label{fig:7.1-1}
+	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,21,2,6,11\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries\twodashes{(b)}{(l)}} Kolejne iteracje pętli \kw{for} w~wierszach \twodashes{3}{6}. {\sffamily\bfseries(m)} Wynikowa tablica $A$ po wykonaniu zamiany z~wiersza~7.} \label{fig:7.1-1}
 \end{figure}
 
 \exercise %7.1-2
-Zauważmy, że jeśli wszystkie elementy podtablicy $A[p\twodots r]$ mają taką samą wartość, to warunek z~wiersza~4 procedury \proc{Partition} jest spełniony w~każdej iteracji pętli \kw{for}. Oznacza to, że po wykonaniu tej pętli będzie $i=r-1$ i~procedura zwróci $q=r$.
+\note{Poprawną wartością dla\/ $q$ z~treści zadania powinno być\/ $\lfloor(p+r)/2\rfloor$.}
 
-Odpowiedniej modyfikacji procedury dokonujemy poprzez wprowadzenie licznika elementów równych elementowi rozdzielającemu w~badanej podtablicy. W~każdej iteracji pętli \kw{for} sprawdzamy dodatkowo, czy $A[j]=x$ i~jeśli tak, to licznik ten inkrementujemy. Jeśli na końcu procedury jego wartość jest równa $r-p+1$, czyli rozmiarowi podtablicy, to zwracamy $q=(p+r)/2$.
+\noindent Zauważmy, że jeśli wszystkie elementy podtablicy $A[p\twodots r]$ mają taką samą wartość, to warunek z~wiersza~4 procedury \proc{Partition} jest spełniony w~każdej iteracji pętli \kw{for}. Oznacza to, że po wykonaniu tej pętli będzie $i=r-1$ i~procedura zwróci $q=r$.
+
+Odpowiedniej modyfikacji procedury dokonujemy poprzez wprowadzenie licznika elementów równych elementowi rozdzielającemu w~badanej podtablicy. W~każdej iteracji pętli \kw{for} sprawdzamy dodatkowo, czy $A[j]=x$ i~jeśli tak, to licznik ten inkrementujemy. Jeśli na końcu procedury jego wartość jest równa $r-p+1$, czyli rozmiarowi podtablicy, to zwracamy $q=\lfloor(p+r)/2\rfloor$.
 
 \exercise %7.1-3
 Podczas przetwarzania podtablicy $A[p\twodots r]$ o~rozmiarze $n=r-p+1$ wykonywanych jest $n-1$ iteracji pętli \kw{for}, a~każda z~nich przeprowadza operacje zajmujące czas stały. Stąd czas działania procedury \proc{Partition} wynosi $\Theta(n)$.
@@ -29,13 +33,13 @@ Niech $c_1$, $d_1>0$ będą stałymi. Korzystając z~założenia, że $T(n-1)\le
 \[
 	T(n) = T(n-1)+\Theta(n) \le c_1(n-1)^2+d_1n = c_1n^2+(d_1-2c_1)n+c_1 \le c_1n^2.
 \]
-Ostatnia nierówność zachodzi dla każdego $n\ge1$, jeśli odpowiednio dobierzemy wartości stałych $c_1$ i~$d_1$, np.\ $c_1=d_1=1$.
+Ostatnia nierówność jest spełniona dla każdego $n\ge1$, jeśli np.\ $c_1=d_1=1$.
 
 Weźmy teraz inne stałe $c_2$, $d_2>0$. Dolnego oszacowania na $T(n)$ dowodzimy analogicznie, wychodząc z~założenia $T(n-1)\ge c_2(n-1)^2$:
 \[
 	T(n) = T(n-1)+\Theta(n) \ge c_2(n-1)^2+d_2n = c_2n^2+(d_2-2c_2)n+c_2 \ge c_2n^2.
 \]
-Przyjmujemy wartościowanie $c_2=1/2$, $d_2=2$, dzięki któremu ostatnia nierówność jest spełniona dla wszystkich $n\ge1$.
+Przyjmujemy $c_2=1/2$, $d_2=2$, dzięki czemu ostatnia nierówność zachodzi dla wszystkich $n\ge1$.
 
 Przypadek brzegowy $n=1$ można przyjąć za podstawę obu powyższych indukcji dla podanych wartości stałych, co kończy dowód, że $T(n)=\Theta(n^2)$.
 
@@ -61,9 +65,9 @@ Jeśli przez $H$ oznaczymy głębokość liścia na gałęzi najdłuższej, to m
 \]
 
 \exercise %7.2-6
-Równoważnie należy wykazać, że procedura \proc{Partition} utworzy podział mniej zrównoważony niż $1-\alpha$ do $\alpha$ z~prawdopodobieństwem około $2\alpha$. Załóżmy, że dokonano podziału w~stosunku $1-\beta$ do $\beta$, gdzie $0<\beta\le1/2$. Pozostaje obliczyć szanse na to, aby $\beta<\alpha$. Zdarzenie to można modelować za pomocą ciągłego rozkładu jednostajnego dla przedziału $(0,\alpha)$ w~przestrzeni $(0,1/2]$. Wykorzystując definicję prawdopodobieństwa o~ciągłym rozkładzie jednostajnym, dostajemy
+Załóżmy, że procedura \proc{Partition} utworzyła podział w~stosunku $1-\beta$ do $\beta$, gdzie $0<\beta\le1/2$. Aby był to podział bardziej zrównoważony niż $1-\alpha$ do $\alpha$, to musi być $\alpha<\beta$. Zdarzenie to można modelować za pomocą ciągłego rozkładu jednostajnego dla przedziału $(\alpha,1/2]$ w~przestrzeni $(0,1/2]$. Wykorzystując definicję prawdopodobieństwa o~ciągłym rozkładzie jednostajnym, dostajemy
 \[
-	\Pr((0,\alpha)) = \frac{\alpha}{1/2} = 2\alpha.
+	\Pr((\alpha,1/2]) = \frac{1/2-\alpha}{1/2-0} = 1-2\alpha.
 \]
 
 \subchapter{Randomizowana wersja algorytmu quicksort}
@@ -137,7 +141,7 @@ Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu qui
 Skorzystaliśmy tutaj z~\refExercise{A.2-3} oraz z~punktu~(b) problemu~\refProblem{A-1} dla $s=1$, skąd otrzymaliśmy ostatnie dwie równości.
 
 \exercise %7.4-5
-W~rozważanej modyfikacji rekursja w~algorytmie quicksort zatrzymuje się dla podtablic o~długości $n/2^i=k$. Drzewo rekursji ma zatem $i=\lg(n/k)$ poziomów, z~których każdy wnosi koszt $O(n)$. W~przypadku średnim czas wykonania tego kroku wynosi $O(n\lg(n/k))$. Liczba fragmentów o~mniej niż $k$ elementach pozostawionych nieposortowanymi po pierwszej fazie jest rzędu $O(n/k)$. Drugi krok polega na posortowaniu ich przez wstawianie i~zajmuje czas $O(n/k\cdot k^2)=O(nk)$. Stąd całkowitym oczekiwanym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
+W~rozważanej modyfikacji drzewo rekursji w~algorytmie quicksort ma około $\lg(n/k)$ poziomów, z~których każdy wnosi koszt $O(n)$. W~przypadku średnim czas wykonania tego kroku wynosi $O(n\lg(n/k))$. Liczba fragmentów o~mniej niż $k$ elementach, których nie uporządkowano w~pierwszej fazie, jest rzędu $O(n/k)$. Drugi krok polega na posortowaniu ich przez wstawianie i~zajmuje czas $O(n/k\cdot k^2)=O(nk)$. Stąd całkowitym oczekiwanym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
 
 Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy złożoność czasowa tego algorytmu nie przewyższa złożoności czasowej sortowania szybkiego. W~praktyce jednak $k$ powinno być tak dobrane, aby sortowanie przez wstawianie tablicy o~długości $k$ było wykonywane szybciej od sortowania takiej tablicy algorytmem quicksort.
 
@@ -168,10 +172,12 @@ Działanie procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ zosta�
 W~pierwszej iteracji pętli \kw{while} zmienna $j$ zatrzyma się na pewnym indeksie $q\ge p$, a~zmienna $i$ pozostanie na indeksie $p$, pod którym przechowywana jest wartość $x$. Jeśli $i=j$, to procedura kończy działanie, załóżmy więc, że $i<j$. Element $A[i]=A[p]=x$ zostanie zamieniony z~$A[q]$. W~kolejnych iteracjach pętli \kw{while} zmienna $i$ może dotrzeć najdalej na indeks $q$, natomiast $j$ nie będzie nigdy mniejsze niż $p$, bo $A[p]$ zawiera teraz wartość mniejszą bądź równą $x$. Ponieważ $q>p$, to w~pewnym momencie podczas działania pętli indeksy $i$ i~$j$ miną się, czyli będzie $i\ge j$, co spowoduje przerwanie pętli w~wierszu~11.
 
 \subproblem %7-1(c)
-Fakt udowodniony w~punkcie~(b) mówi o~tym, że $p\le j\le r$. Załóżmy, że $A[r]\le x$, bowiem w~przeciwnym przypadku $j<r$ już po pierwszej iteracji pętli \kw{while}. W~pierwszej iteracji element $A[p]$ jest zamieniany z~$A[r]$, po czym w~kolejnych iteracjach indeks $j$ jest zmniejszany i~również w~tym przypadku mamy $j<r$.
+\note{Zakładamy, że podtablica\/ $A[p\twodots r]$ składa się z~co najmniej dwóch elementów.}
+
+\noindent Fakt udowodniony w~punkcie~(b) mówi o~tym, że $p\le j\le r$. Załóżmy, że $A[r]\le x$, bowiem w~przeciwnym przypadku $j<r$ już po pierwszej iteracji pętli \kw{while}. W~pierwszej iteracji element $A[p]$ jest zamieniany z~$A[r]$, po czym w~kolejnych iteracjach indeks $j$ jest zmniejszany i~również w~tym przypadku mamy $j<r$.
 
 \subproblem %7-1(d)
-Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza~9. Każda para elementów tablicy, która tworzyła inwersję, jest odwracana, dzięki czemu elementy, które naruszały warunek posortowania, po zamianie będą znajdować się w~odpowiednich obszarach tablicy. W~momencie, gdy indeksy $i$ i~$j$ miną się, każdy element z~podtablicy $A[p\twodots j]$ jest równy bądź mniejszy od każdego elementu z~$A[j+1\twodots r]$.
+Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza~9. Każda para elementów tablicy, która tworzyła inwersję, jest odwracana, dzięki czemu elementy, które naruszały warunek posortowania, po zamianie będą znajdować się w~odpowiednich obszarach tablicy. Jak tylko indeksy $i$ i~$j$ miną się, każdy element z~podtablicy $A[p\twodots j]$ będzie równy bądź mniejszy od każdego elementu z~$A[j+1\twodots r]$.
 
 \subproblem %7-1(e)
 Jedyną różnicą w~porównaniu z~procedurą \proc{Quicksort} jest to, że element rozdzielający nie znajduje się w~$A[q]$ po wykonaniu \proc{Hoare-Partition}, musimy więc sortować rekurencyjnie fragment $A[p\twodots q]$ zamiast $A[p\twodots q-1]$. Pseudokod procedury został przedstawiony poniżej.
@@ -198,14 +204,18 @@ Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~r
 Biorąc wartości oczekiwane skrajnych wyrażeń, otrzymujemy wzór~(7.5) na oczekiwany czas działania algorytmu quicksort.
 
 \subproblem %7-2(c)
-Wykorzystując części~(a) i~(b) oraz liniowość wartości oczekiwanej, otrzymujemy
+\note{Przyjmiemy, że we wzorze~(7.6) sumowanie przebiega od\/ $q=2$ do\/ $q=n-1$.}
+
+\noindent Wykorzystując części~(a) i~(b) oraz liniowość wartości oczekiwanej, otrzymujemy
 \begin{align*}
 	\E(T(n)) &= \sum_{q=1}^n\E\bigl(X_q(T(q-1)+T(n-q)+\Theta(n))\bigr) \\
 	&= \sum_{q=1}^n\E(X_q)\bigl(\E(T(q-1))+\E(T(n-q))+\E(\Theta(n))\bigr) \\
 	&= \sum_{q=1}^n\frac{1}{n}\bigl(\E(T(q-1))+\E(T(n-q))+\Theta(n)\bigr) \\
 	&= \frac{1}{n}\sum_{q=0}^{n-1}2\E(T(q))+\frac{1}{n}\sum_{q=1}^n\Theta(n) \\
-	&= \frac{2}{n}\sum_{q=0}^{n-1}\E(T(q))+\Theta(n)
+	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\frac{2}{n}\bigl(\E(T(0))+\E(T(1))\bigr)+\Theta(n) \\
+	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n).
 \end{align*}
+Skorzystaliśmy z~faktu, że $\E(T(0))$ i~$\E(T(1))$ są stałymi i~mogą zostać wchłonięte przez $\Theta(n)$.
 
 \subproblem %7-2(d)
 Rozdzielamy sumę na dwie części:
@@ -216,29 +226,24 @@ po czym zauważamy, że czynnik $\lg k$ w~pierwszej sumie po prawej stronie znak
 \begin{align*}
 	\sum_{k=1}^{n-1}k\lg k &\le (\lg n-1)\sum_{k=1}^{\lceil n/2\rceil-1}k+\lg n\sum_{k=\lceil n/2\rceil}^{n-1}k \\
 	&= \lg n\sum_{k=1}^{n-1}k-\sum_{k=1}^{\lceil n/2\rceil-1}k \\[2mm]
-	&\le \frac{n(n-1)\lg n}{2}-\frac{n}{4}\biggl(\frac{n}{2}-1\biggr) \\[1mm]
+	&\le \frac{n(n-1)\lg n}{2}-\frac{n}{4}\biggl(\frac{n}{2}-1\biggr) \\
+	&= \frac{n^2\lg n}{2}-\frac{n\lg n}{2}-\frac{n^2}{8}+\frac{n}{4} \\[1mm]
 	&\le \frac{n^2\lg n}{2}-\frac{n^2}{8},
 \end{align*}
-przy czym ostatnia nierówność zachodzi, gdy $n\ge2$.
+przy czym ostatnia nierówność zachodzi, gdy $n\ge\sqrt{2}$.
 
 \subproblem %7-2(e)
-Korzystając ze wskazówki, przyjmijmy założenie indukcyjne $\E(T(q))\le aq\lg q-bq$ dla $q=1$, 2,~\dots~$n-1$ oraz pewnych stałych $a$,~$b>0$. Oczywiście $\E(T(0))=0$, bo dla pustej tablicy nie trzeba wykonywać żadnej pracy. Z~punktu~(c) mamy
-\begin{align*}
-	\E(T(n)) &= \frac{2}{n}\sum_{q=1}^{n-1}\E(T(q))+\Theta(n) \\
-	&\le \frac{2}{n}\sum_{q=1}^{n-1}(aq\lg q-bq)+\Theta(n) \\
-	&= \frac{2a}{n}\sum_{q=1}^{n-1}q\lg q-b(n-1)+\Theta(n).
-\end{align*}
+Załóżmy, że $n>2$ i~przyjmijmy założenie indukcyjne $\E(T(q))\le aq\lg q$ dla każdego $q=2$, 3,~\dots,~$n-1$ oraz pewnej stałej $a>0$. Z~punktu~(c) mamy
+\[
+	\E(T(n)) = \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n) \le \frac{2}{n}\sum_{q=2}^{n-1}aq\lg q+\Theta(n) = \frac{2a}{n}\sum_{q=1}^{n-1}q\lg q+\Theta(n).
+\]
 Wykorzystując teraz wynik z~punktu~(d), dostajemy
-\begin{align*}
-	\E(T(n)) &\le \frac{2a}{n}\biggl(\frac{n^2\lg n}{2}-\frac{n^2}{8}\biggr)-b(n-1)+\Theta(n) \\
-	&= an\lg n-\frac{an}{4}-bn+b+\Theta(n) \\
-	&\le an\lg n-bn,
-\end{align*}
-ponieważ możemy wybrać $a$ wystarczająco duże, by wyrażenie $an/4-b$ dominowało nad składnikiem $\Theta(n)$.
+\[
+	\E(T(n)) \le \frac{2a}{n}\biggl(\frac{n^2\lg n}{2}-\frac{n^2}{8}\biggr)+\Theta(n) = an\lg n-\frac{an}{4}+\Theta(n) \le an\lg n,
+\]
+gdyż możemy wybrać $a$ wystarczająco duże, by wyrażenie $an/4$ dominowało nad składnikiem $\Theta(n)$.
 
-Pozostaje zbadać, czy oszacowanie to zachodzi dla podstawy indukcji. Przyjmijmy w~tym celu, że $\E(T(1))=1$. Niestety, aby oszacowanie było spełnione dla $\E(T(1))$, musiałoby być $b\le-1$, co przeczy założeniu. Rozważmy więc $\E(T(2))$, które na mocy punktu~(c) jest równe $1+c$, gdzie $c$ jest stałą ukrytą w~notacji~$\Theta$. Nierówność $1+c\le2a-2b$ łatwo spełnić, dobierając odpowiednio duże~$a$. Aby móc przyjąć $n=2$ na podstawę indukcji, musimy uniezależnić dalsze wyrazy rekurencji od $\E(T(1))$, które nie spełnia oszacowania. Dokonamy tego przez modyfikację wzoru~(7.6) tak, aby sumowanie przebiegało od $q=2$, podczas gdy pierwsze dwa składniki będziemy traktować jak wchłonięte przez składnik $\Theta(n)$. W~założeniu indukcyjnym także pomijamy $E(T(1))$. Dowód jest zakończony -- mamy ostatecznie, że $\E(T(n))=O(n\lg n)$.
-
-Łącząc ten wynik z~oszacowaniem $\Omega(n\lg n)$ dla przypadku optymistycznego, które zostało wyznaczone w~\refExercise{7.4-2}, dostajemy, że oczekiwanym czasem działania algorytmu quicksort jest $\Theta(n\lg n)$.
+Jeśli przyjmiemy, że $\E(T(2))=1$, to wówczas będziemy mieć $1\le a\cdot2\cdot\lg2=2a$, skąd $a\ge1/2$. A~zatem można przyjąć $n=2$ na podstawę indukcji i~dowód faktu, że $\E(T(n))=O(n\lg n)$, jest zakończony. Łącząc ten wynik z~oszacowaniem $\Omega(n\lg n)$ dla przypadku optymistycznego, które zostało wyznaczone w~\refExercise{7.4-2}, dostajemy, że oczekiwanym czasem działania algorytmu quicksort jest $\Theta(n\lg n)$.
 
 \problem{Nieefektywne sortowanie} %7-3
 
@@ -311,7 +316,7 @@ więc granica stosunku wynosi
 \[
     \lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3(n-1)}{2(n-2)} = \frac{3}{2}.
 \]
-A zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
+A~zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
 
 \subproblem %7-5(c)
 W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału jest bliska $1/3$. Szanse na dobry podział w~metodzie mediany trzech wartości wynoszą

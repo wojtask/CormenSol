@@ -154,7 +154,7 @@ beginfig(3);
 	draw point 0 of p4 -- point 4 of p5;
 	draw point 6 of p3 -- point 2 of p6;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (.5shift + scale, -2scale));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (.5shift + scale, -2scale));
 
 	curlshift := .5scale;
 	hshift := 3.5shift;
@@ -176,7 +176,7 @@ beginfig(3);
 	drawarrow point 7 of p1 {curl 1} .. (hshift + .5shift + .5curlshift, .5shift + .5curlshift) .. {curl 1} point 3 of p5;
 	drawarrow point 3.5 of p5 {curl 1} .. (hshift + .5shift - curlshift, .5shift - curlshift) .. {curl 1} point 6.5 of p1;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (hshift + .5shift + scale, -2scale));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (hshift + .5shift + scale, -2scale));
 endfig;
 
 beginfig(4);
@@ -204,7 +204,7 @@ beginfig(4);
 	draw point 6 of p6 -- point 2 of p7;
 	draw point 6 of p7 -- point 2 of p8;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (hshift, -3vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (hshift, -3vshift));
 
 	hspace := 2hshift+5scale;
 	
@@ -226,7 +226,7 @@ beginfig(4);
 	draw point 5 of p15 -- point 1 of p16;
 	draw point 7 of p15 -- point 3 of p17;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (hspace + 1.3hshift + .35hshift, -3vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (hspace + 1.3hshift + .35hshift, -3vshift));
 
 	hspace2 := hspace+3hshift+5scale;
 
@@ -254,7 +254,7 @@ beginfig(4);
 	draw point 5 of p27 -- point 1 of p28;
 	draw point 7 of p27 -- point 3 of p29;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (c)} etex, (hspace2 + 1.3hshift + .35hshift, -3vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (hspace2 + 1.3hshift + .35hshift, -3vshift));
 
 	totshift := 3.4scale;
 
@@ -336,7 +336,7 @@ beginfig(4);
 	draw point 5 of p57 -- point 1 of p58;
 	draw point 7 of p57 -- point 3 of p59;
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (d)} etex, (13.3scale, -9.4vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (13.3scale, -9.4vshift));
 endfig;
 
 beginfig(5);
