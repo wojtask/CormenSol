@@ -3,23 +3,30 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{calc}
 
+% do stron początkowych, gdzie potrzebny jest język angielski
 \newcommand{\TPSwitchToEnglish}{\language0\exhyphenpenalty50\relax}
 
-\addtolength{\hoffset}{-0.5cm}
-\addtolength{\voffset}{-0.5cm}
-\addtolength{\textheight}{3cm}
+% tuning odstępów na stronie
+%\addtolength{\hoffset}{-0.5cm}
+%\addtolength{\voffset}{-0.5cm}
+%\addtolength{\textheight}{3cm}
 
+% potrzebne do odpowiedniego traktowania rysunków
 \ifpdf
 	\DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
+% zapobiega wcinaniu pierwszej linii pierwszego paragrafu
 \let\@afterindenttrue\@afterindentfalse
 \@afterindentfalse
 
+% ustawienia numerowania wewnątrz spisu treści
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{3}
 
-\newcommand\subchapter{\@startsection
+% definicja polecenia tworzenia podrozdziału
+\newcommand\subchapter{%
+\@startsection
 	{section}
 	{1}
 	{-1.5mm}
@@ -28,7 +35,9 @@
 	{\Large\sffamily\bfseries}
 }
 
-\newcommand\exercise{\@startsection
+% definicja polecenia tworzenia (rozwiązania) zadania
+\newcommand\ex@rcise{%
+\@startsection
 	{subsection}
 	{2}
 	{-1.5mm}
@@ -36,8 +45,11 @@
 	{0.5\baselineskip}
 	{\sffamily\bfseries}
 }
+\newcommand{\exercise}{\ex@rcise{}}
 
-\newcommand\subexercise{\@startsection
+% definicja polecenia tworzenia (rozwiązania) punktu zadania
+\newcommand\subex@rcise{%
+\@startsection
 	{subsubsection}
 	{3}
 	{0mm}
@@ -45,13 +57,16 @@
 	{0mm}
 	{\sffamily\bfseries}
 }
+\newcommand{\subexercise}{\subex@rcise{}}
 
+% odpowiedni wygląd liczników
 \def\thechapter{\arabic{chapter}}
 \def\thesection{\thechapter.\arabic{section}.}
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
 \def\thesubsubsection{(\alph{subsubsection})}
 
-\def\@removefromreset#1#2{{
+% kod odpowiedzialny za uczynienie numerów równań, rysunków i tabel globalnych
+\def\@removefromreset#1#2{{%
 	\expandafter\let\csname c@#1\endcsname\@removefromreset
 	\def\@elt##1{
 		\expandafter
@@ -63,15 +78,16 @@
 	}
 	\expandafter\xdef\csname cl@#2\endcsname{\csname cl@#2\endcsname}}
 }
-
 \@removefromreset{equation}{chapter}
 \@removefromreset{figure}{chapter}
 \@removefromreset{table}{chapter}
 
+% odpowiednie wyświetlanie liczników równań, rysunków i tabel
 \def\theequation{{\sffamily\arabic{equation}}}
 \def\thefigure{\arabic{figure}}
 \def\thetable{\arabic{table}}
 
+% odpowiedni wygląd nagłówków stron
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
@@ -80,7 +96,8 @@
 \cfoot[]{}
 \addtolength{\headheight}{1.6pt}
 
-\newcommand\problems{
+% definicja polecenia rozpoczynającego sekcję problemów
+\newcommand\problems{%
 	\section*{\hspace{-1.5mm}Problemy}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
@@ -88,15 +105,29 @@
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
 }
 
+% definicja poleceń wstawiających problem i punkt problemu
+\newcommand{\problem}[1]{\ex@rcise{#1}}
+\newcommand{\subproblem}{\subexercise}
+
+% definicje stylów twierdzenia i lematu
 \newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
 \theoremstyle{csthm}
 \newtheorem{twierdzenie}{Twierdzenie}
 \newtheorem{lemat}[twierdzenie]{Lemat}
 
-\newcommand{\twoparts}[2]{#1\nobreakdash-#2}
-\newcommand{\zad}[1]{zad.~\hbox{#1}}
-\newcommand{\note}[1]{\noindent\emph{#1}}
+% niełamliwy dywiz
+\newcommand{\twoparts}[2]{{#1}\nobreakdash-{#2}}
 
+% odnośnik do zadania
+\newcommand{\zad}[1]{zad.~\hbox{#1}}
+
+% informacja poboczna w tekście rozwiązania
+\newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}
+
+\newcommand{\wrong}{\marginpar{\Large{$\star$}}}
+\newcommand{\improve}{\marginpar{\hfill{\sc CS}}}
+
+% definicja nowych operatorów matematycznych
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\E}{E}
 \DeclareMathOperator{\Var}{Var}

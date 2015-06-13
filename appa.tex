@@ -2,12 +2,12 @@
 
 \subchapter{Wzory i~własności dotyczące sum}
 
-\exercise{} %A.1-1
+\exercise %A.1-1
 \[
 	\sum_{k=1}^n(2k-1) = 2\sum_{k=1}^nk-\sum_{k=1}^n1 = \frac{2n(n+1)}{2}-n = n^2.
 \]
 
-\exercise{} %A.1-2
+\exercise %A.1-2
 Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 \begin{align*}
 	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
@@ -20,13 +20,13 @@ Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 	&= \ln\sqrt{n}+O(1).
 \end{align*}
 
-\exercise{} %A.1-3
+\exercise %A.1-3
 \[
 	\sum_{k=0}^\infty k^2x^k = x\frac{d}{dx}\sum_{k=0}^\infty kx^k = \frac{x(x+1)}{(1-x)^3}.
 \]
 W~ostatniej równości wykorzystano wzór~(A.8).
 
-\exercise{} %A.1-4
+\exercise %A.1-4
 \begin{align*}
 	\sum_{k=0}^\infty\frac{k-1}{2^k} &= \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} \\
 	&= \frac{\frac{1}{2}}{\left(1-\frac{1}{2}\right)^2}+\sum_{k=0}^\infty\left(\frac{1}{2}\right)^k \\
@@ -35,7 +35,7 @@ W~ostatniej równości wykorzystano wzór~(A.8).
 \end{align*}
 Skorzystano z~wzoru~(A.8), a~następnie~(A.6), w~obu przypadkach biorąc $x=1/2$.
 
-\exercise{} %A.1-5
+\exercise %A.1-5
 \begin{align*}
 	\sum_{k=1}^\infty(2k+1)x^{2k} &= 2\sum_{k=0}^\infty kx^{2k}+\sum_{k=0}^\infty x^{2k}-1 \\
 	&= \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 \\[1mm]
@@ -43,7 +43,7 @@ Skorzystano z~wzoru~(A.8), a~następnie~(A.6), w~obu przypadkach biorąc $x=1/2$
 \end{align*}
 W~drugiej równości zastosowano wzory~(A.6) i~(A.8). Otrzymany wynik jest wartością sumy, gdy $|x^2|<1$. W~pozostałych przypadkach suma jest rozbieżna do $\infty$.
 
-\exercise{} %A.1-6
+\exercise %A.1-6
 Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
 \[
 	0\le F(n)\le c\sum_{k=1}^n f_k(n).
@@ -74,12 +74,12 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 	\sum_{k=1}^nO(f_k(n)) = O\biggl(\sum_{k=1}^nf_k(n)\biggr).
 \]
 
-\exercise{} %A.1-7
+\exercise %A.1-7
 \[
 	\prod_{k=1}^n2\cdot 4^k = 2^n\cdot 4^{1+2+\cdots+n} = 2^n\cdot 4^{\frac{n(n+1)}{2}} = 2^{n^2\!+2n}.
 \]
 
-\exercise{} %A.1-8
+\exercise %A.1-8
 \begin{align*}
 	\prod_{k=2}^n\left(1-\frac{1}{k^2}\right) &= \prod_{k=2}^n\frac{k^2-1}{k^2} \\[2mm]
 	&= \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} \\[2mm]
@@ -92,22 +92,22 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 
 \subchapter{Szacowanie sum}
 
-\exercise{} %A.2-1
+\exercise %A.2-1
 Z~kryterium d'Alemberta zbieżności szeregów mamy
 \[
 	\frac{1}{(k+1)^2}\bigg/\frac{1}{k^2} \le 1 \quad\text{dla wszystkich $k\ge1$},
 \]
 a~to oznacza, że suma $\sum_{k=1}^n(1/k^2)$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=\infty$.
 
-\exercise{} %A.2-2
+\exercise %A.2-2
 Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\left\lceil\frac{2^m}{2^k}\right\rceil = 2^m+2^{m-1}+\cdots+2^0 = 2^{m+1}-1 = 2n-1,
 \]
 z~czego wynika, że $F(n)=O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
 
-\exercise{} %A.2-3
-Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Ustawmy wyrazy tej sumy malejąco i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami~2. Umieszczamy pierwszy składnik w~grupie 1 o~rozmiarze~1, dwa kolejne w~grupie~2 o~rozmiarze~2, cztery kolejne w~grupie~3 o~rozmiarze~4, itd. aż do grupy~$s$, jak to widać poniżej:
+\exercise %A.2-3
+Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Ustawmy wyrazy tej sumy malejąco i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami~2. Umieszczamy pierwszy składnik w~grupie 1 o~rozmiarze~1, dwa kolejne w~grupie~2 o~rozmiarze~2, cztery kolejne w~grupie~3 o~rozmiarze~4, itd.\ aż do grupy~$s$, jak to widać poniżej:
 \[
 	\underbrace{\frac{1}{1}}_{\text{\scriptsize grupa 1}}\!\!+\;\;\underbrace{\frac{1}{2}+\frac{1}{3}}_{\text{\scriptsize grupa 2}}\;\;+\;\;\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\text{\scriptsize grupa 3}}\;\;+\cdots+\;\;\underbrace{\cdots +\frac{1}{n}}_{\text{\scriptsize grupa $s$}}.
 \]
@@ -116,7 +116,7 @@ Wszystkie składniki w~grupie~2 przyjmują wartości od $1/3$ do~$1/2$, zatem su
 	\frac{\lfloor\lg n\rfloor+1}{2} < H_n \le \lfloor\lg n\rfloor+1, \quad\text{więc $H_n=\Theta(\lg n)$}.
 \]
 
-\exercise{} %A.2-4
+\exercise %A.2-4
 Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności~(A.11):
 \[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
@@ -131,7 +131,7 @@ a~zatem
 	\sum_{k=0}^nk^3 = \Theta(n^4).
 \]
 
-\exercise{} %A.2-5
+\exercise %A.2-5
 Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażenia niezdefiniowanego
 \[
 	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln 0,
@@ -140,10 +140,10 @@ ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Potraktowan
 
 \problems
 
-\exercise{Szacowanie sum} %A-1
+\problem{Szacowanie sum} %A-1
 Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge0$ i~$s\ge0$. Pozwala to na wykorzystanie nierówności~(A.11) we wszystkich poniższych punktach.
 
-\subexercise{} %A-1(a)
+\subproblem %A-1(a)
 Z~wzoru~(A.11) dostajemy
 \[
 	\int_0^nx^r\,dx \le \sum_{k=1}^nk^r \le \int_1^{n+1}x^r\,dx.
@@ -158,7 +158,7 @@ zatem oszacowaniem sumy jest
 	\sum_{k=1}^nk^r = \Theta(n^{r+1}).
 \]
 
-\subexercise{} %A-1(b)
+\subproblem %A-1(b)
 Stosujemy wzór~(A.11) do sumy $\sum_{k=2}^n\lg^sk$, która jest równoważna sumie badanej:
 \[
 	\int_1^n\lg^sx\,dx \le \sum_{k=2}^n\lg^sk \le \int_2^{n+1}\lg^sx\,dx.
@@ -184,7 +184,7 @@ ponieważ wyrażenie $s\lg e$ jest stałe, a~zatem oszacowaniem sumy jest
 	\sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
 \]
 
-\subexercise{} %A-1(c)
+\subproblem %A-1(c)
 Po zastosowaniu wzoru~(A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$, dostajemy
 \[
 	\int_1^nx^r\lg^sx\,dx \le \sum_{k=2}^nk^r\lg^sk \le \int_2^{n+1}x^r\lg^sx\,dx.

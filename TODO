@@ -4,36 +4,58 @@ DO ZROBIENIA:
 - tłumaczenie na angielski
 
 LAYOUT:
-- czy zmienić layout strony, która zawiera nagłówek części?
+- dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
+- zmienić layout strony, która zawiera nagłówek części i ew. rozdziału
 - numerować algorytmy tak jak rysunki i tabele, zrobić spis algorytmów
 - jakie strony końcowe?
 - ciągi w \langle, \rangle (?)
 - przerobić MetaPost na Asymptote (?)
-- czy da się w hyperrefach pdfowych uzyskać polskie litery?
+- w hyperrefach pdfowych uzyskać polskie litery
+- ujednolicić czcionkę w refach, albo taka jak w labelach albo regularna
+- rysunki drzew (przejścia do T(1)) ujednolicić w fig04.1 fig04.2
+- krótsze krawędzie w fig04.5
+- rysunki fig04.3 i fig04.4 czy ok?
+- jednolite kolory szarości w rysunkach (wzór: figc)
+
+PRZED WYDANIEM v0.4:
+- we wstępie napisać o (La)TeX i METAPOST
 
 PRZED WYDANIEM v0.3:
 - więcej rysunków tłumaczących zawiłe rozumowanie w niektórych zadaniach
-- warningi, przepełnione hboxy i vboxy
+- warningi, przepełnione hboxy i vboxy (underfull \vbox można chyba zabić \raggedbottom)
+- czy linie są zbyt długie? (do 75 znaków wraz ze spacjami i przestankowymi)
+- bibliografia: linki do manuali, inne pozycje?
 
 O CZYM NALEŻY PAMIĘTAĆ:
-- używamy następującego sekcjonowania: \chapter{Nazwa} \exercise{} %numer ... \problems \exercise{} \subexercise{} ...
+- używamy następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
+	\chapter{Nazwa}
+		\subchapter{Nazwa}
+			\exercise %numer
+				[\subexercise %numer]
+	\problems
+	\problem{Nazwa} %numer
+		[\subproblem %numer]
+	\endinput
 - tyldy po sierotkach i w miejscach, w których nie chcemy łamać
-- używać \twoparts, \zad, \E, \Pr, \Var, \note
-- po użyciu \note na początku zadania, należy użyć \bigskip i \noindent
+- stosować makra \twoparts, \zad, \E, \Pr, \Var, \note
+- po użyciu \note na początku zadania, należy użyć \noindent na początku następnego paragrafu
 - preferować \bigl, \bigr i pozostałe zamiast \left, \right (głównie do ułamków) (\biggl, \biggr do dużych operatorów np. \sum)
-- formuły matematyczne składane są tak, jak radzi Knuth w TeXbook
-- poza tym jeśli piszemy o ciągach, parach itd. to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki naley umieszczać poza tym trybem
+- formuły matematyczne składane są tak, jak radzi Knuth w The TeXbook
+- poza tym jeśli piszemy o ciągach, parach itd. to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki należy umieszczać poza tym trybem
 - numery tożsamości wewnątrz ( )
 - po \E, \Pr, \Var używamy nawiasów okrągłych
 - rysunki i tabele wewnątrz otoczenia figure[ht] i potem center
-- preferujemy \text{jakis tekst $jakas formula$} zamiast \text{jakis tekst }jakas formula
+- \text{jakis tekst $jakas formula$} zamiast \text{jakis tekst }jakas formula
 - komentarze w pseudokodach
-- wewnątrz paragrafu stosujemy zwykły tryb matematyczny, displaystyle tylko jeśli trzeba coś wyróżnić
+- wewnątrz paragrafu zwykły tryb matematyczny, displaystyle tylko jeśli trzeba coś wyróżnić
 - unikać formuł które są rozdzielone między liniami
 - równania w equation lub gather lub w align, a jeśli mają być dzielone, to split wewnątrz align
-- indukcję prowadzimy tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
-- przyjmujemy, że poziomy drzewa rekursji liczy się od 0
+- indukcję prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
+- poziomy drzewa rekursji liczy się od 0
 - jeśli w wielolinijkowych formułach jest zbyt mały odstęp, to można go skorygować poprzez \\[x mm]
+- jeśli w środku zdania wystąpi kropka lub wykrzyknik lub pytajnik, który nie kończy zdania, to po tym znaku należy umieścić \ 
+- jeśli kropka lub wykrzyknik lub pytajnik wystąpi po dużej literze i kończy zdanie, to przed tym znakiem należy umieścić \@
+- wstawiać \/ na końcu składu czcionką pochyłą i początku składu czcionką zwykłą (z wyjątkiem gdy zaczyna się on kropką lub przecinkiem)
 
 ETAPY ODDAWANIA ROZDZIAŁÓW:
 poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
@@ -46,24 +68,18 @@ ROZDZIAŁ 3 (3)
 
 ROZDZIAŁ 4
 --- 4-4(b) -- nie zachodzi dla dolnego oszacowania
-- 4-4(f) -- poprawic drzewo, wys. z drugiej strony tak jak na rys. 7.4
 --- 4-6(b)
 
 ROZDZIAŁ 5
---- 5.4-1 -- druga część
 --- 5.4-2 -- niedokończone, wynik w postaci sumy
---- 5.4-4 -- ma wyjść \ge88
 
 DODATEK A (3)
 
 DODATEK B
-- B-1(d) -- inaczej opisać procedurę maksymalizacji c
 --- B-2(c)
 - B-3(a) -- sprawdzić ostatnie zdania
 --- B-3(c)
 
 DODATEK C
-- C.2-8 -- zmienić liczby? w rysunku: kolor darkgray nie wypelnia
 --- C.4-8
 --- C.4-9 -- przerobić
---- C.5-6 -- dowod nierownosci ze wskazowki

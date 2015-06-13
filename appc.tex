@@ -196,10 +196,10 @@ Utwórzmy skończoną lub przeliczalną rodzinę zdarzeń,
 \begin{align*}
 	C_1 &= A_1 \\
 	C_2 &= A_2\setminus A_1 \\
-	C_3 &= A_3\setminus (A_1\cup A_2) \\
-	C_4 &= A_4\setminus (A_1\cup A_2\cup A_3) \\
+	C_3 &= A_3\setminus(A_1\cup A_2) \\
+	C_4 &= A_4\setminus(A_1\cup A_2\cup A_3) \\
 	& \,\,\vdots \\
-	C_k &= A_k\setminus \bigcup_{i=1}^{k-1}A_i \\
+	C_k &= A_k\setminus\bigcup_{i=1}^{k-1}A_i \\
 	& \,\,\vdots
 \end{align*}
 Korzystając z tożsamości
@@ -224,9 +224,9 @@ Każde z tych zdarzeń zachodzi z prawdopodobieństwem równym $1/8$, w szczegó
 
 \exercise{} %C.2-3
 Jeśli kolejno wyciągane karty mają mieć rosnące numery, to pierwsza z nich musi mieć numer od~1 do~8, druga -- od~2 do~9, a trzecia -- od~3 do~10. Oznaczmy zdarzenia: \\
-\hspace*{\parindent}$A$ -- numer drugiej karty jest większy od numeru pierwszej karty, \\
-\hspace*{\parindent}$B$ -- numer trzeciej karty jest większy od numeru drugiej karty. \\
-Jeśli numer drugiej karty wynosi $k$, to liczba zdarzeń sprzyjających $A$ wynosi $k-1$, a sprzyjających $B$ -- $10-k$.
+\hspace*\parindent$A$ -- numer drugiej karty jest większy od numeru pierwszej karty, \\
+\hspace*\parindent$B$ -- numer trzeciej karty jest większy od numeru drugiej karty. \\
+Jeśli numer drugiej karty wynosi $k$, to liczba zdarzeń sprzyjających $A$ wynosi $k-1$, a sprzyjających $B$ jest równa $10-k$.
 
 Mamy obliczyć $\Pr(A\cap B)$. Korzystając z reguły iloczynu dostajemy, że liczba zdarzeń sprzyjających $A\cap B$ wynosi $\sum_{k=2}^9(k-1)(10-k)=120$. Liczba możliwych sposobów wyboru trzech kart spośród dziesięciu wynosi $10!/7!=720$ (liczba wszystkich \twoparts{3}{permutacji} zbioru \twoparts{10}{elementowego}), dostajemy zatem wynik $\Pr(A\cap B)=120/720=1/6$.
 
@@ -692,13 +692,66 @@ Ponieważ we wzorze~(C.45) wybranie $\alpha=\ln(r/\mu)$ minimalizuje prawą stro
 \end{align*}
 
 \exercise{} %C.5-6
-\note{W treści zadania w polskim tłumaczeniu występuje błąd. Wskazówka podaje, że należy udowodnić pewną nierówność, jednak jej prawa strona powinna mieć postać $e^{\alpha^2\!/2}$.}
-\bigskip
+\note{W treści zadania w polskim tłumaczeniu występuje błąd. Wskazówka podpowiada, aby udowodnić pewną nierówność, jednak wyrażenie po prawej stronie znaku nierówności powinno mieć postać $e^{\alpha^2\!/2}$.}
 
+\noindent Zanim przeprowadzimy główny dowód, wykażemy tożsamość
 \begin{equation}
-	\mathcal{TEX} \label{eq:C.5-7_1}
+	p_ie^{\alpha q_i}+q_ie^{-\alpha p_i} \le e^{\alpha^2\!/2}, \label{eq:C.5-7_1}
 \end{equation}
-Początek rozumowania prowadzimy identycznie jak w dowodzie twierdzenia~C.8:
+gdzie $\alpha>0$,~$p_i$,~$q_i\ge0$ oraz $p_i+q_i=1$.
+
+\begin{proof}
+	Przekształćmy nierówność do alternatywnej postaci:
+	\begin{align*}
+		p_ie^{\alpha q_i}+q_ie^{-\alpha p_i} &\le e^{\alpha^2\!/2} \\[1mm]
+		p_ie^{\alpha(1-p_i)}+(1-p_i)e^{-\alpha p_i} &\le e^{\alpha^2\!/2} \\[2mm]
+		\frac{p_ie^\alpha+(1-p_i)}{e^{\alpha p_i}} &\le e^{\alpha^2\!/2} \\[1mm]
+		p_ie^\alpha-p_i+1 &\le e^{\alpha^2\!/2+\alpha p_i} \\[1mm]
+		\ln(p_ie^\alpha-p_i+1) &\le \alpha^2\!/2+\alpha p_i \\[1mm]
+		\ln(p_ie^\alpha-p_i+1)-\alpha^2\!/2-\alpha p_i &\le 0
+	\end{align*}
+	Wystarczy teraz wykazać, że funkcja $f(\alpha,p_i)$ po lewej stronie znaku ostatniej nierówności przyjmuje wartości niedodatnie.
+
+	Zauważmy, że granicą funkcji $f$ w punkcie $(0,p_i)$ jest 0. Udowodnimy, że $f$ maleje wraz ze wzrostem $\alpha$. Dla $p_i=0$ oraz $p_i=1$ mamy
+	\begin{align*}
+	    f_0(\alpha) \equiv f(\alpha,0) = -\alpha^2\!/2, \\
+		f_1(\alpha) \equiv f(\alpha,1) = -\alpha^2\!/2,
+	\end{align*}
+	które są funkcjami malejącymi ze względu na $\alpha>0$. Przyjmijmy teraz, że $0<p_i<1$ i potraktujmy $f_{p_i}(\alpha)$ jako $f(\alpha,p_i)$ dla ustalonego $p_i$. Obliczmy pochodną funkcji $f_{p_i}$ i zbadajmy jej znak dla dowolnej wartości argumentu $\alpha>0$:
+	\begin{align*}
+	    \frac{df_{p_i}}{d\alpha}(\alpha) &= \frac{p_ie^\alpha}{p_ie^\alpha-p_i+1}-\alpha-p_i \\[1mm]
+		&= \frac{p_ie^\alpha-\alpha p_ie^\alpha+\alpha p_i-\alpha-p_i^2e^\alpha+p_i^2-p_i}{p_ie^\alpha-p_i+1} \\[1mm]
+		&= \frac{\overbrace{p_ie^\alpha(1-\alpha-p_i)}^{<0}+\overbrace{\alpha(p_i-1)}^{<0}+\overbrace{p_i(p_i-1)}^{<0}}{\underbrace{p_ie^\alpha-p_i+1}_{>0}} \\
+		&< 0.
+	\end{align*}
+	Otrzymany wynik potwierdza, że dla każdego $0\le p_i\le1$, $f_{p_i}(\alpha)$ jest malejące w zbiorze liczb dodatnich, wartości funkcji $f$ są zatem ujemne, a więc nierówność (\ref{eq:C.5-7_1}) jest prawdziwa.
+
+% 	Spróbujmy znaleźć ekstrema lokalne tej funkcji w jej dziedzinie $D_f=(0,\infty)\times[\,0,1\,]$. Obliczamy pochodne pierwszego rzędu funkcji $f$:
+% 	\begin{align*}
+% 	    \frac{\partial\!f}{\partial\alpha}(\alpha,p_i) &= \frac{p_ie^\alpha}{p_ie^\alpha-p_i+1}-\alpha-p_i, \\
+% 		\frac{\partial\!f}{\partial p_i}(\alpha,p_i) &= \frac{e^\alpha-1}{p_ie^\alpha-p_i+1}-\alpha
+% 	\end{align*}
+% 	i przyrównujemy je do zera, otrzymując układ równań:
+% 	\[
+% 	    \begin{cases}
+% 	        p_ie^\alpha-\alpha p_ie^\alpha+\alpha p_i-\alpha-p_i^2e^\alpha+p_i^2-p_i = 0 \\
+% 			e^\alpha-1-\alpha p_ie^\alpha+\alpha p_i-\alpha = 0.
+% 	    \end{cases}
+% 	\]
+% 	Po odjęciu drugiej równości od pierwszej mamy
+% 	\begin{align*}
+% 	    p_ie^\alpha-p_i^2e^\alpha+p_i^2-p_i-e^\alpha+1 &= 0 \\
+% 		(e^\alpha-1)(p_i-p_i^2-1) &= 0,
+% 	\end{align*}
+% 	skąd dostajemy, że ekstremum, o ile istnieje, znajduje się w punktach $(0,p_i)$. Obliczając wartość funkcji $f$ w tych punktach, otrzymujemy $f(0,p_i)=0$. Analiza na podstawie pochodnych $f$ drugiego rzędu nie rozstrzyga jednak, czy jest to ekstremum funkcji $f$. Możemy jednak wykazać, że $f$ jest malejące wraz ze wzrostem $\alpha$. Biorąc pewne $0<\alpha_1\le\alpha_2$ mamy
+% 	\[
+% 	    f(\alpha_1,p_i)-f(\alpha_2,p_i) = \ln\biggl(\frac{p_ie^{\alpha_1}-p_i+1}{p_ie^{\alpha_2}-p_i+1}\biggr)+(\alpha_2^2/2-\alpha_1^2/2)+(\alpha_2p_i-\alpha_1p_i),
+% 	\]
+
+	
+\end{proof}
+
+Początek głównego rozumowania prowadzimy identycznie jak w dowodzie twierdzenia~C.8:
 \begin{equation}
 	\Pr(X-\mu\ge r) = \Pr\bigl(e^{\alpha(X-\mu)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(X-\mu)}\bigr)e^{-\alpha r}. \label{eq:C.5-7_2}
 \end{equation}
@@ -733,34 +786,34 @@ Potraktujmy wyrażenie jako funkcję $f$ zmiennej $\alpha$:
 \]
 W celu wyznaczenia jej minimum, obliczmy pierwszą i drugą pochodną:
 \begin{align*}
-	\frac{df(\alpha)}{d\alpha} &= (\mu e^\alpha-r)\exp(\mu e^\alpha-\alpha r), \\
-	\frac{d^2f(\alpha)}{d\alpha^2} &= \left(\mu e^\alpha+(\mu e^\alpha-r)^2\right)\exp(\mu e^\alpha-\alpha r).
+	\frac{df}{d\alpha}(\alpha) &= (\mu e^\alpha-r)\exp(\mu e^\alpha-\alpha r), \\
+	\frac{d^2\!f}{d\alpha^2}(\alpha) &= \left(\mu e^\alpha+(\mu e^\alpha-r)^2\right)\exp(\mu e^\alpha-\alpha r).
 \end{align*}
 Przyrównując pierwszą pochodną do~0, otrzymujemy, że w punkcie $\alpha_0=\ln(r/\mu)$ może istnieć ekstremum $f$. Po obliczeniu wartości drugiej pochodnej w tym punkcie dostajemy
 \[
-	\frac{d^2f(\alpha_0)}{d\alpha^2} = r\exp(r-r\ln(r/\mu)) > 0,
+	\frac{d^2\!f}{d\alpha^2}(\alpha_0) = r\exp(r-r\ln(r/\mu)) > 0,
 \]
 ponieważ $\exp(x)$ jest rosnące oraz $r>\mu\ge0$, a zatem w punkcie $\ln(r/\mu)$ istnieje minimum funkcji~$f$.
 
 \problems
 
-\exercise{Kule i urny} %C-1
+\problem{Kule i urny} %C-1
 
-\subexercise{} %C-1(a)
+\subproblem %C-1(a)
 Każda kula trafia do jednej z $b$ urn. Jest $b$ sposobów umieszczenia pierwszej kuli, na każdy z nich przypada $b$ sposobów umieszczenia drugiej kuli, itd. Jest zatem $b^n$ sposobów rozmieszczenia $n$ różnych kul w $b$ różnych urnach.
 
-\subexercise{} %C-1(b)
+\subproblem %C-1(b)
 Ponieważ dysponujemy $n$ rozróżnialnymi kulami oraz $b$ nierozróżnialnymi urnami, to nasz problem jest równoważny policzeniu wszystkich możliwych ciągów $n$ różnych kul i $b-1$ identycznych patyków. Patyki dzielą ciąg kul na części, z których każda odpowiada zbiorowi kul w kolejnej urnie, a każdy spójny podciąg kul reprezentuje pewne ich uporządkowanie względem siebie wewnątrz pewnej urny.
 
 Wszystkich takich ciągów jest $(b+n-1)!$, ale ponieważ nie rozróżniamy urn, to musimy podzielić ich liczbę przez liczbę możliwych rozmieszczeń urn między sobą, czyli $(b-1)!$. Istnieje zatem $\frac{(b+n-1)!}{(b-1)!}$ różnych rozmieszczeń kul w urnach.
 
-\subexercise{} %C-1(c)
+\subproblem %C-1(c)
 Sytuacja jest podobna jak w punkcie~(b) z tą różnicą, że nie rozróżniamy kul między sobą, a więc również każda permutacja $n$ kul między sobą opisuje ten sam sposób rozmieszczenia kul w urnach. Mamy zatem $\frac{(b+n-1)!}{n!\,(b-1)!}=\binom{b+n-1}{n}$ możliwości rozmieszczenia kul.
 
-\subexercise{} %C-1(d)
+\subproblem %C-1(d)
 Zakładając, że $n\le b$, wybieramy spośród $b$ urn $n$ takich, które będą zawierać po jednej kuli. Jest $\binom{b}{n}$ sposobów ich wyboru.
 
-\subexercise{} %C-1(e)
+\subproblem %C-1(e)
 Zakładamy, że $n\ge b$. Najpierw umieszczamy $b$ kul, po jednej w każdej urnie tak, aby żadna urna nie była pusta. Pozostałe $n-b$ kul możemy umieścić w $b$ urnach, zgodnie z punktem~(c), na $\binom{b+(n-b)-1}{n-b}=\binom{n-1}{n-b}=\binom{n-1}{b-1}$ sposobów.
 
 \endinput

@@ -14,10 +14,10 @@
 \usepackage{sectsty}
 \usepackage{tocloft}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
-\usepackage[pdfborder={0 0 0},pdftex,bookmarks=true]{hyperref}
+\usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false]{hyperref}
 \usepackage{cormensol}
 
-\allowdisplaybreaks[1]
+\allowdisplaybreaks[1] % to modify
 
 \begin{document}
 
@@ -55,7 +55,7 @@
 \tableofcontents
 
 \let\mychapter=\chapter
-\renewcommand{\chapter}[1]{
+\renewcommand{\chapter}[1]{%
 	\mychapter{#1}
 	\setcounter{subsection}{0}
 	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
@@ -63,8 +63,8 @@
 }
 
 \makeatletter
-  \@afterindentfalse
-  \@afterheading
+	\@afterindentfalse
+	\@afterheading
 \makeatother
 
 \mainmatter
@@ -125,7 +125,7 @@
 %\include{ch34}
 %\include{ch35}
 
-\setcounter{part}{7}
+\setcounter{part}{7} % remove if all parts present
 \part{Dodatek: Podstawy matematyczne}
 
 \appendix
