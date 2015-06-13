@@ -152,7 +152,7 @@ Załóżmy, że algorytm heapsort działa na tablicy $A$ o~rozmiarze $n=2^{h+1}-
 \medskip
 \noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ \onedash{$j$}{tego} etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii~9 procedury \proc{Max-Heapify},\/ $m_j$, jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
 \begin{proof}
-Niech $j=0$. Bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$. Liczbę $k$ będziemy nazywać \emph{dużą}, jeśli $k\ge(n+1)/2$. Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
+Niech $j=0$. Bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$. Liczbę $k$ będziemy nazywać \textbf{dużą}, jeśli $k\ge(n+1)/2$. Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
 \[
     S = \biggl\{\,i\in\Bigl\{1,2,\dots,\frac{n-1}{2}\Bigr\}:A[i]\ge\frac{n+1}{2}\,\biggr\}.
 \]
@@ -162,7 +162,7 @@ Zauważmy, że wszystkie elementy, których pozycjami w~$A$ są indeksy ze zbior
 \]
 gdzie $d_i$ oznacza głębokość węzła o~początkowej pozycji $i$ w~kopcu $A$.
 
-Węzły o~indeksach ze zbioru $S$ tworzą w~kopcu $A$ poddrzewo $T$ o~korzeniu w~$A[1]$. Jest tak dlatego, że jeśli węzeł $A[i]$ jest duży, to $A[\proc{parent}(i)]$ również jest duży, a~więc także wszystkie węzły na ścieżce od $A[i]$ do korzenia kopca, czyli $A[1]$. Jeśli zastąpimy każde puste poddrzewo w~$T$ pojedynczym węzłem, to dostaniemy regularne drzewo binarne, którego długość ścieżki wewnętrznej (patrz \refExercise{B.5-5}) wynosi $m_0$. W~zbiorze wszystkich drzew binarnych o~$|S|$ węzłach wewnętrznych najmniejsza możliwa długość ścieżki wewnętrznej jest osiągana dla pełnego drzewa binarnego (przy czym ostatni poziom tego drzewa może nie być wypełniony) i~wynosi $\sum_{k=1}^{|S|}\lfloor\lg k\rfloor$. Korzystając ze wzoru~(3.3) i~\refExercise{8.1-2}, mamy
+Węzły o~indeksach ze zbioru $S$ tworzą w~kopcu $A$ poddrzewo $T$ o~korzeniu w~$A[1]$. Jest tak dlatego, że jeśli węzeł $A[i]$ jest duży, to $A[\proc{Parent}(i)]$ również jest duży, a~więc także wszystkie węzły na ścieżce od $A[i]$ do korzenia kopca, czyli $A[1]$. Jeśli zastąpimy każde puste poddrzewo w~$T$ pojedynczym węzłem, to dostaniemy regularne drzewo binarne, którego długość ścieżki wewnętrznej (patrz \refExercise{B.5-5}) wynosi $m_0$. W~zbiorze wszystkich drzew binarnych o~$|S|$ węzłach wewnętrznych najmniejsza możliwa długość ścieżki wewnętrznej jest osiągana dla pełnego drzewa binarnego (przy czym ostatni poziom tego drzewa może nie być wypełniony) i~wynosi $\sum_{k=1}^{|S|}\lfloor\lg k\rfloor$. Korzystając ze wzoru~(3.3) i~\refExercise{8.1-2}, mamy
 \[
     m_0 \ge \sum_{k=1}^{|S|}\lfloor\lg k\rfloor > \sum_{k=1}^{|S|}(\lg k-1) = \sum_{k=1}^{|S|}\lg k-|S| \ge \frac{|S|}{2}\lg\frac{|S|}{2}-|S| = \frac{|S|}{2}\lg|S|-\frac{3}{2}|S|.
 \]
@@ -281,7 +281,7 @@ Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej t
 \li	\Return $A[\id{heap-size}[A]+1]$
 \end{codebox}
 
-Zarówno wywołanie z~wiersza~\ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \twodashes{\ref{li:max-heap-delete-while-begin}}{\ref{li:max-heap-delete-while-end}} zajmują czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
+Zarówno wywołanie z~wiersza~\ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \twodashes{\ref{li:max-heap-delete-while-begin}}{\ref{li:max-heap-delete-while-end}} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
 
 \exercise %6.5-8
 W~algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą. Na początku działania do kolejki zostaną przeniesione pierwsze elementy z~każdej listy. Jest oczywiste, że wśród tych elementów znajduje się najmniejszy element listy wynikowej. Aby go uzyskać, wystarczy wywołać na kolejce operację \proc{Extract-Min}. Kolejnego elementu należy szukać wśród aktualnych węzłów kolejki lub na pierwszej pozycji listy, do której początkowo należało pobrane przed chwilą minimum. Element tej listy, o~ile istnieje, przenosimy do kolejki. W~kolejnych krokach powtarzamy te operacje -- pobieramy najmniejszy element kolejki i~wstawiamy na listę wynikową, po czym uzupełniamy kolejkę pierwszym elementem z~listy, do której należał pobrany element, o~ile lista ta nie jest jeszcze pusta. Algorytm wykonujemy aż do opróżnienia kolejki, co następuje po przetworzeniu zawartości wszystkich list.
@@ -359,7 +359,7 @@ Na każdym poziomie rekursji (z~wyjątkiem być może ostatniego) wykonywanych j
 Procedura \proc{d-ary-Heap-Extract-Max}, która implementuje operację \proc{Extract-Max} dla \onedash{$d$}{kopca}, przyjmuje jako parametry kopiec $A$ oraz jego rząd $d$. Działa ona identyczne jak operacja \proc{Extract-Max} dla zwykłego kopca, jednak w~wierszu~6 zamiast procedury \proc{Max-Heapify} wywołuje procedurę \proc{d-ary-Max-Heapify} przedstawioną powyżej. Czas działania tej operacji wynosi $\Theta(d\log_dn)$.
 
 \subproblem %6-2(d)
-Procedura \proc{d-ary-Max-Heap-Insert} implementująca operację \proc{Insert} dla \onedash{$d$}{kopca} przyjmuje na wejściu kopiec $A$, rząd kopca $d$ oraz wartość \id{key}, która będzie wstawiana do $A$. Jej działanie jest analogiczne do działania procedury wstawiania węzła do kopca binarnego. Jedyną różnicą jest wiersz~\ref{li:d-ary-max-heap-insert-increase-key}, który zamiast $\proc{Heap-Increase-Key}$ zawiera analogiczne wywołanie procedury \proc{d-ary-Heap-Increase-Key} zwiększającej wartość węzła w~kopcu rzędu $d$.
+Procedura \proc{d-ary-Max-Heap-Insert} implementująca operację \proc{Insert} dla \onedash{$d$}{kopca} przyjmuje na wejściu kopiec $A$, rząd kopca $d$ oraz wartość \id{key}, która będzie wstawiana do $A$. Jej działanie jest analogiczne do działania procedury wstawiania węzła do kopca binarnego. Jedyną różnicą jest wiersz~\ref{li:d-ary-max-heap-insert-increase-key}, który zamiast \proc{Heap-Increase-Key} zawiera analogiczne wywołanie procedury \proc{d-ary-Heap-Increase-Key} zwiększającej wartość węzła w~kopcu rzędu $d$.
 \begin{codebox}
 \Procname{$\proc{d-ary-Max-Heap-Insert}(A,d,\id{key})$}
 \li	$\id{heap-size}[A]\gets\id{heap-size}[A]+1$

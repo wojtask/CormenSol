@@ -13,7 +13,6 @@
 \usepackage{tocloft}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
-\usepackage{todonotes}
 \usepackage{cormensol}
 
 % zapobiega pojawianiu się dziwnych znaków w zakładkach PDFowych
@@ -21,6 +20,9 @@
 
 % decyduje, jak chętnie będą łamane wielowierszowe bloki
 \allowdisplaybreaks[1]
+
+% definiuje lokalizację rysunków
+\graphicspath{{figures/}}
 
 \begin{document}
 
@@ -47,124 +49,72 @@
 
 \mainmatter
 
-\part{Podstawy}
-% 
-\include{ch01}
-% \setcounter{chapter}{1}
-\include{ch02}
-% \setcounter{chapter}{2}
-\include{ch03}
-% \setcounter{chapter}{3}
-% \setcounter{figure}{2}
-\include{ch04}
-% \setcounter{chapter}{4}
-% \setcounter{figure}{7}
-\include{ch05}
+\setcounter{part}{0}\part{Podstawy}
 
-% \setcounter{part}{1}
-\part{Sortowanie i~statystyki pozycyjne}
+\setcounter{chapter}{0}\setcounter{figure}{0}\setcounter{table}{0}\include{ch01}
+\setcounter{chapter}{1}\setcounter{figure}{0}\setcounter{table}{1}\include{ch02}
+\setcounter{chapter}{2}\setcounter{figure}{0}\setcounter{table}{1}\include{ch03}
+\setcounter{chapter}{3}\setcounter{figure}{2}\setcounter{table}{3}\include{ch04}
+\setcounter{chapter}{4}\setcounter{figure}{7}\setcounter{table}{3}\include{ch05}
 
-% \setcounter{chapter}{5}
-% \setcounter{figure}{7}
-\include{ch06}
-% \setcounter{chapter}{6}
-% \setcounter{figure}{13}
-\include{ch07}
-% \setcounter{chapter}{7}
-% \setcounter{figure}{15}
-\include{ch08}
-% \setcounter{chapter}{8}
-% \setcounter{figure}{18}
-\include{ch09}
+\setcounter{part}{1}\part{Sortowanie i~statystyki pozycyjne}
 
-% \setcounter{part}{2}
-\part{Struktury danych}
+\setcounter{chapter}{5}\setcounter{figure}{7}\setcounter{table}{3}\include{ch06}
+\setcounter{chapter}{6}\setcounter{figure}{13}\setcounter{table}{3}\include{ch07}
+\setcounter{chapter}{7}\setcounter{figure}{15}\setcounter{table}{3}\include{ch08}
+\setcounter{chapter}{8}\setcounter{figure}{18}\setcounter{table}{3}\include{ch09}
 
-% \setcounter{chapter}{9}
-% \setcounter{figure}{18}
-\include{ch10}
-% \setcounter{chapter}{10}
-% \include{ch11}
-% \setcounter{chapter}{11}
-% \include{ch12}
-% \setcounter{chapter}{12}
-% \include{ch13}
-% \setcounter{chapter}{13}
-% \include{ch14}
-% 
-% \setcounter{part}{3}
-% \part{Zaawansowane metody konstruowania i~analizowania algorytmów}
-% 
-% \setcounter{chapter}{14}
-% \include{ch15}
-% \setcounter{chapter}{15}
-% \include{ch16}
-% \setcounter{chapter}{16}
-% \include{ch17}
-% 
-% \setcounter{part}{4}
-% \part{Złożone struktury danych}
-% 
-% \setcounter{chapter}{17}
-% \include{ch18}
-% \setcounter{chapter}{18}
-% \include{ch19}
-% \setcounter{chapter}{19}
-% \include{ch20}
-% \setcounter{chapter}{20}
-% \include{ch21}
-% 
-% \setcounter{part}{5}
-% \part{Algorytmy grafowe}
-% 
-% \setcounter{chapter}{21}
-% \include{ch22}
-% \setcounter{chapter}{22}
-% \include{ch23}
-% \setcounter{chapter}{23}
-% \include{ch24}
-% \setcounter{chapter}{24}
-% \include{ch25}
-% \setcounter{chapter}{25}
-% \include{ch26}
-% 
-% \setcounter{part}{6}
-% \part{Wybrane zagadnienia}
-% 
-% \setcounter{chapter}{26}
-% \include{ch27}
-% \setcounter{chapter}{27}
-% \include{ch28}
-% \setcounter{chapter}{28}
-% \include{ch29}
-% \setcounter{chapter}{29}
-% \include{ch30}
-% \setcounter{chapter}{30}
-% \include{ch31}
-% \setcounter{chapter}{31}
-% \include{ch32}
-% \setcounter{chapter}{32}
-% \include{ch33}
-% \setcounter{chapter}{33}
-% \include{ch34}
-% \setcounter{chapter}{34}
-% \include{ch35}
+\setcounter{part}{2}\part{Struktury danych}
 
-\setcounter{part}{7}
-\part{Dodatek: Podstawy matematyczne}
+\setcounter{chapter}{9}\setcounter{figure}{18}\setcounter{table}{3}\include{ch10}
+\setcounter{chapter}{10}\setcounter{figure}{22}\setcounter{table}{4}\include{ch11}
+%\setcounter{chapter}{11}\include{ch12}
+%\setcounter{chapter}{12}\include{ch13}
+%\setcounter{chapter}{13}\include{ch14}
+
+%\setcounter{part}{3}\part{Zaawansowane metody konstruowania i~analizowania algorytmów}
+
+%\setcounter{chapter}{14}\include{ch15}
+%\setcounter{chapter}{15}\include{ch16}
+%\setcounter{chapter}{16}\include{ch17}
+
+%\setcounter{part}{4}\part{Złożone struktury danych}
+
+%\setcounter{chapter}{17}\include{ch18}
+%\setcounter{chapter}{18}\include{ch19}
+%\setcounter{chapter}{19}\include{ch20}
+%\setcounter{chapter}{20}\include{ch21}
+
+%\setcounter{part}{5}\part{Algorytmy grafowe}
+
+%\setcounter{chapter}{21}\include{ch22}
+%\setcounter{chapter}{22}\include{ch23}
+%\setcounter{chapter}{23}\include{ch24}
+%\setcounter{chapter}{24}\include{ch25}
+%\setcounter{chapter}{25}\include{ch26}
+
+%\setcounter{part}{6}\part{Wybrane zagadnienia}
+
+%\setcounter{chapter}{26}\include{ch27}
+%\setcounter{chapter}{27}\include{ch28}
+%\setcounter{chapter}{28}\include{ch29}
+%\setcounter{chapter}{29}\include{ch30}
+%\setcounter{chapter}{30}\include{ch31}
+%\setcounter{chapter}{31}\include{ch32}
+%\setcounter{chapter}{32}\include{ch33}
+%\setcounter{chapter}{33}\include{ch34}
+%\setcounter{chapter}{34}\include{ch35}
+
+\setcounter{part}{7}\part{Dodatek: Podstawy matematyczne}
 
 \appendix
 \makeatletter
 	\@appendixtrue
 \makeatother
 
-\include{appa}
-% \setcounter{chapter}{1}
-% \setcounter{figure}{99} % dla potrzeb testowych, czy dobrze wygląda z trzycyfrowymi numerami rysunków
-\include{appb}
-% \setcounter{chapter}{2}
-% \setcounter{figure}{105}
-\include{appc}
+\setcounter{chapter}{0}\setcounter{figure}{99}\setcounter{table}{9}\include{appa}
+\setcounter{chapter}{1}\setcounter{figure}{99}\setcounter{table}{9}\include{appb}
+\setcounter{chapter}{2}\setcounter{figure}{105}\setcounter{table}{9}\include{appc}
 
 \backmatter
 

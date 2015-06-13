@@ -5,7 +5,7 @@
 \exercise %10.1-1
 Ciąg operacji na stosie $S$ został przedstawiony na rys.~\ref{fig:10.1-1}.
 \begin{figure}[ht]
-	\begin{center}
+    \begin{center}
 		\includegraphics{fig10.1}
 	\end{center}
 	\caption{Operacje wstawiania i~usuwania elementów na stosie $S$. {\sffamily\bfseries(a)} Pusty stos $S$ reprezentowany jako tablica $S[1\twodots6]$. {\sffamily\bfseries\twodashes{(b)}{(d)}} Stos $S$ po wykonaniu na nim kolejnych operacji \proc{Push}. {\sffamily\bfseries(e)} Po usunięciu elementu ze stosu $S$ zmieniana jest jedynie pozycja atrybutu $\id{top}[S]$, natomiast sam element pozostaje w~tablicy. {\sffamily\bfseries(f)} Wstawienie nowego elementu na stos $S$ nadpisuje stary element, który został usunięty w~poprzednim kroku. {\sffamily\bfseries(g)} Stos $S$ po wykonaniu ostatniej operacji \proc{Pop}.} \label{fig:10.1-1}
@@ -227,7 +227,7 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 Łatwo sprawdzić, że procedura implementująca operację \proc{Insert} działa w~czasie stałym, natomiast pozostałe dwie procedury dla listy o~$n$ elementach w~pesymistycznym przypadku potrzebują czasu $\Theta(n)$.
 
 \exercise %10.2-6
-Zbiory można zaimplementować jako jednokierunkowe listy cykliczne. Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy. Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$. Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej. Oczywiście działania te są wykonywane tylko wtedy, gdy obie listy są niepuste. Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolnym jej element) reprezentującą zbiór $S_1\cup S_2$.
+Zbiory można zaimplementować jako jednokierunkowe listy cykliczne. Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy. Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$. Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej. Oczywiście działania te są wykonywane tylko wtedy, gdy obie listy są niepuste. Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolny jej element) reprezentującą zbiór $S_1\cup S_2$.
 
 \exercise %10.2-7
 W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy umieszczać kolejno usuwane elementy z~głowy listy $L$. Łatwo zauważyć, że pod koniec operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$. Nadanie atrybutowi $\id{head}[L]$ wartości $\id{head}[L']$ wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
@@ -421,7 +421,7 @@ Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys
 Szukany algorytm został opisany w~Podręczniku w~podrozdziale~12.1 jako procedura \proc{Inorder-Tree-Walk}. Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
 
 \exercise %10.4-3
-Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział~12.1 z~Podręcznika). Do emulowania rekursji wykorzystywany jest stos. Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział~12.1). Do emulowania rekursji wykorzystywany jest stos. Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
 \begin{codebox}
 \Procname{$\proc{Iterative-Preorder-Tree-Walk}(T)$}
 \li	\If $\id{root}[T]=\const{nil}$
@@ -461,16 +461,18 @@ Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo
 Każdy klucz drzewa zostaje wypisany dokładnie raz, a~na każdym poziomie rekursji (być może z~wyjątkiem pierwszego) przetwarzane jest niepuste poddrzewo. Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
-W~procedurze wykorzystamy zmienną \id{direction} wyznaczającą ,,kierunek'', w~którym obecnie poruszamy się po drzewie, wypisując jego klucze. Zmienna ta będzie przyjmować jedną z~czterech wartości:
+W~procedurze wykorzystamy zmienną \id{direction} przyjmującą ,,kierunek'', w~którym obecnie poruszamy się po drzewie, wypisując jego klucze. Zmienna ta będzie przyjmować jedną z~czterech wartości:
 \begin{itemize}
     \item \const{sw} -- kierunek w~dół drzewa do lewego syna;
     \item \const{se} -- kierunek w~dół drzewa do prawego syna;
     \item \const{ne} -- kierunek w~górę drzewa z~lewego syna;
     \item \const{nw} -- kierunek w~górę drzewa z~prawego syna.
 \end{itemize}
-W~zależności od wartości tej zmiennej kolejnym odwiedzanym węzłem będzie lewy syn, prawy syn albo ojciec bieżącego węzła i~wartość tej zmiennej zostanie zaktualizowana.
+W~zależności od wartości tej zmiennej kolejnym odwiedzanym węzłem będzie lewy syn, prawy syn albo ojciec bieżącego węzła, po czym wartość tej zmiennej zostanie odpowiednio zaktualizowana, gdyż przejście do nowego węzła mogło być w~innym kierunku od tego, po którym dotychczas przechodziliśmy po drzewie.
 
-Zaczynając od korzenia drzewa, początkowo poruszamy się w~dół, aż osiągniemy najbardziej lewy liść drzewa. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzeł wypisywany jest podczas jego odwiedzania, kiedy poruszamy się w~dół drzewa. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas odwiedzania jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
+Zaczynając od korzenia, początkowo poruszamy się w~dół drzewa ($\id{direction}=\const{sw}$), aż osiągniemy jego najbardziej lewy liść. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzły wypisywane są podczas ich odwiedzania, gdy $\id{direction}=\const{sw}$ lub $\id{direction}=\const{se}$. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas przechodzenia do jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
+
+Opisany algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Binary-Tree-Walk}(T)$}
 \li	$x\gets\id{root}[T]$
@@ -563,24 +565,61 @@ Tabela~\ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słow
 	\end{center}
 	\caption{Porównanie złożoności operacji słownikowych dla różnych typów list.} \label{tab:10-1}
 \end{table}
-Jeśli będziemy utrzymywać atrybut \id{tail} wskazujący na ogon listy, to operację \proc{Maximum} dla list posortowanych możemy wykonywać w~czasie stałym.
+Jeśli w~implementacjach list będziemy dodatkowo utrzymywać atrybut \id{tail} wskazujący na ogon listy, to operację \proc{Maximum} dla list posortowanych możemy wykonywać w~czasie stałym.
 
 \problem{Listowa reprezentacja kopców złączalnych} %10-2
 
 \subproblem %10-2(a)
+Kopiec zaimplementujemy jako posortowaną listę dwukierunkową. Operacja \proc{Make-Heap} tworzy pustą listę, co zajmuje oczywiście czas stały. Dodanie elementu do kopca polega na dodaniu go do listy. Aby zachować jej uporządkowanie, jak również sprawdzić, czy klucz wstawianego elementu nie znajduje się już w~kopcu, musimy odnaleźć miejsce, które ewentualnie zajmie nowy element, co w~pesymistycznym przypadku wymaga czasu $\Theta(n)$. Dzięki uporządkowaniu listy można podać implementacje operacji \proc{Minimum} i~\proc{Extract-Min} działające w~czasie $\Theta(1)$. Łączenie kopców sprowadza się do scalenia dwóch posortowanych list przy jednoczesnym usunięciu zduplikowanych elementów. Stosując w~tym celu procedurę \proc{Merge} z~rozdziału~2 (dostosowaną do list dwukierunkowych), jesteśmy w~stanie zaimplementować operację \proc{Union}, aby działała w~czasie $\Theta(n)$, gdzie $n$ jest liczbą elementów na wynikowej liście.
+
 \subproblem %10-2(b)
+W~tym przypadku użyjemy kopca Fibonacciego (patrz rozdział~20), którego implementacja korzysta z~list cyklicznych (nieposortowanych). Należy jednak pamiętać, że w~danym momencie w~kopcu powinny znajdować się elementy parami różne, dlatego w~operacjach \proc{Insert} i~\proc{Union} musimy wykrywać przypadki, gdy w~kopcu może pojawić się duplikat.
+
+Zarówno utworzenie pustego kopca, jak i~odczytanie jego minimalnego elementu zajmuje czas stały, natomiast usunięcie minimalnego elementu -- czas $\Theta(\lg n)$. Dodanie nowego elementu zostanie poprzedzone przeglądnięciem wszystkich elementów kopca i~porównaniu ich z~tym, który zamierzamy dodać -- implementacja \proc{Insert} wymaga więc czasu $\Theta(n)$. Operacja \proc{Union} będzie tworzyć nowy kopiec, pobierając aktualne minimalne elementy z~kopców wejściowych operacją \proc{Extract-Min}, aż do opróżnienia obu kopców. Jeśli podczas działania procedury w~danym momencie aktualne minima będą sobie równe, to do wynikowego kopca wstawiony zostanie tylko jeden egzemplarz. \proc{Union} można zatem zrealizować w~czasie $\Theta(n\lg n)$, gdzie $n$ jest sumą rozmiarów kopców wejściowych.
+
 \subproblem %10-2(c)
+Przypadek jest identyczny z~poprzednim, ale tym razem nie jest wymagane wykrywanie powtórzeń w~operacjach \proc{Insert} i~\proc{Union}. Z~tego powodu wszystkie omawiane operacje kopca działają w~zamortyzowanym koszcie $\Theta(1)$ oprócz \proc{Extract-Min}, która działa w~zamortyzowanym koszcie $\Theta(\lg n)$.
 
 \problem{Wyszukiwanie na posortowanej liście zajmującej spójny obszar pamięci (liście upakowanej)} %10-3
-\note{W~tłumaczeniu w~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast sprawdzania, czy\/ $\id{key}[j]<k$ powinno być sprawdzanie, czy\/ $\id{key}[j]\le k$.}
+\note{W~tłumaczeniu w~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast testowania, czy\/ $\id{key}[j]<k$ powinno być sprawdzenie, czy\/ $\id{key}[j]\le k$. Ponadto w~wywołaniach procedur \proc{Compact-List-Search} i~\proc{Compact-List-Search}$'$ na liście ich argumentów brakuje\/ $n$ jako drugiego argumentu.}
 
 \subproblem %10-3(a)
+
 \subproblem %10-3(b)
+Niech $Y$ będzie zmienną losową oznaczającą ilość wykonanych iteracji pętli \kw{for} w~procedurze \proc{Compact-List-Search}$'$. Zauważmy, że $Y=q$ wtedy i~tylko wtedy, gdy pierwszym losowo wybranym indeksem $j$ równym indeksowi klucza $k$ na liście $L$ jest ten uzyskany w~\onedash{$q$}{tej} iteracji. Mamy zatem, że oczekiwaną liczbą iteracji pętli \kw{for} jest
+\[
+	\sum_{q=1}^tq\Pr(Y=q) = \sum_{q=1}^tq\biggl(1-\frac{1}{n}\biggr)^{q-1}\frac{1}{n} < \sum_{q=1}^tn\cdot1\cdot\frac{1}{n} = t.
+\]
+Na podstawie definicji zmiennej losowej $X_t$ otrzymujemy z~kolei, że średnia liczba wykonanych iteracji pętli \kw{while} wynosi $\E(X_t)$. A~zatem oczekiwanym czasem działania procedury \proc{Compact-List-Search}$'$ jest $O(t+\E(X_t))$.
+
 \subproblem %10-3(c)
+Oznaczmy przez $s$ pozycję klucza $k$ na liście $L$, a~przez $j_1$, $j_2$,~\dots,~$j_t$ -- ciąg liczb całkowitych wyznaczonych przez $t$ wywołań $\proc{Random}(1,n)$. Po $t$ iteracjach pętli \kw{for} odległość od pozycji $i$ do pozycji $s$ na liście $L$ będzie większa lub równa $r$, jeśli dla każdego $q=1$, 2,~\dots,~$t$, $j_q\le s-r$ lub $j_q>s$. Mamy więc
+\[
+	\Pr(X_t\ge r) = \prod_{q=1}^t\Pr(j_q\le s-r\;\;\text{lub}\;\;j_q>s) = \prod_{q=1}^t\frac{n-r}{n} = \biggl(1-\frac{r}{n}\biggr)^t.
+\]
+Korzystając z~tożsamości~(C.24) i~z~powyższego oszacowania, otrzymujemy
+\[
+	\E(X_t) = \sum_{r=1}^n\Pr(X_t\ge r) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t.
+\]
+
 \subproblem %10-3(d)
+Sumę po lewej stronie ograniczamy całką, otrzymując:
+\[
+	\sum_{r=0}^{n-1}r^t \le \int_0^nx^t\,dx = \biggl[\frac{x^{t+1}}{t+1}\biggr]_0^n = \frac{n^{t+1}}{t+1}.
+\]
+
 \subproblem %10-3(e)
+Na podstawie punktów~(c) i~(d) mamy:
+\[
+	\E(X_t) \le \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{n-r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{r}{n}\biggr)^t = \frac{\sum_{r=0}^{n-1}r^t}{n^t} \le \frac{\frac{n^{t+1}}{t+1}}{n^t} = \frac{n}{t+1}.
+\]
+
 \subproblem %10-3(f)
+Na mocy punktów~(b) i~(e) dostajemy, że oczekiwany czas działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ wynosi $O(t+\E(X_t))=O(t+n/(t+1))=O(t+n/t)$.
+
 \subproblem %10-3(g)
+
 \subproblem %10-3(h)
+Jeśli dopuścimy, aby elementy na liście powtarzały się, to może dojść do sytuacji, w~której procedura próbuje wykonać skok na pozycję $j>i$, ale nie wykonuje go, gdyż stwierdza w~linii~4, że $\id{key}[i]=\id{key}[j]$. Jeśli każdy losowy skok będzie eliminowany na tej podstawie, to działanie procedury sprowadzi się do działania zwykłego algorytmu wyszukiwania na posortowanej liście.
 
 \endinput

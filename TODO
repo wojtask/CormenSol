@@ -1,6 +1,8 @@
 WYMAGANIA DLA 0.5:
 - poprawić 9-3(a)
 - part III
+- ujednolicić duże nawiasy (może jednak przejść na \left, \right?) -> 11-1(a) średnio wygląda...
+- podzielić strukturę katalogową projektu na części (?)
 - A może przenieść wszystkie definicje funkcji jako inline do plików nagłówkowych?
 - Czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (http://en.wikipedia.org/wiki/Bit_complexity).
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
@@ -46,7 +48,7 @@ WYMAGANIA DLA 1.0:
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
 
-PRYSZŁE WERSJE:
+PRZYSZŁE WERSJE:
 - rozwiązania zadań i problemów wydania 3
 - clrscode3e zamiast clrscode
 - przerobić na stronę WWW wykorzystującą MathJax
@@ -61,6 +63,8 @@ DO POPRAWY/WERYFIKACJI W PRZYSZŁOŚCI:
 6-3(c) -- wymyślić prostszy pseudokod
 8.3-2 -- jak obliczać złożoność pamięciową? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
 9-2(e) -- opisać ThreeWayPartition i Select' (jeśli nigdzie indziej nie będą rozważane)
+10-2(b) -- które operacje działają w czasach zamortyzowanych, a które w "zwykłych"? (po ch20)
+10-2 -- czy można zaimplementować kopiec złączalny szybciej? (po ch21)
 B-3(a) -- uprościć dowód
 
 ################################################################################
@@ -79,59 +83,30 @@ ROZDZIAŁ 9
 9.3(a) -- czy opisywać kruczki implementacyjne? poprawić algorytm: co z zamianami elementu A[r]? nie działa dla rozmiarów innych niż potęgi 2
 
 ROZDZIAŁ 10
--- ERRATA: In seven places in the text of Problem 10-3, calls to the procedures COMPACT-LIST-SEARCH and COMPACT-LIST-SEARCH´ should have the parameter n inserted as the second parameter of the call.
-10.4-5 -- sprawdzić, rozszerzyć drugi paragraf (3 wiersze wystarczą), implementacja ok
-10.4-6 -- sprawdzić, czy wyznaczenie ojca x nie ma być proporcjonalne do liczby synów x?
-10-1 -- czy zostawić ostatnie zdanie?
-10-2 -- czy (a) i (b) nie są praktycznie rozwiązane w 10-1 i tylko wystarczy znaleźć złożoność Make-Heap (która wynosi \Theta(1)) i Union?
-10-2(a)
-10-2(b)
-10-2(c)
+10.4-6 -- są 2 podejścia:
+	1. najbardziej prawy syn węzła x wskazuje na x i wówczas, aby znaleźć ojca x, należy przejść po braciach x (złożoność czasowa zależy nie od synów ale od braci x)
+	2. najbardziej prawy syn węzła x wskazuje na węzła x, czyli swojego dziadka, ale wówczas musimy dodać węzłów-wartowników jako synów węzłów-liści drzewa; wartowniki te będą miały na celu jedynie przechowywanie wskaźnika do ojca x (pamięć może wzrosnąć prawie dwukrotnie, gdy każdy węzeł drzewa z wyjątkiem jego korzenia jest liściem)
+	Można zamienić zmienną boolowską (dwuwartościową) na zmienną trójwartościową -- wówczas można rozróżniać ojca x od jego synów.
 10-3(a)
-10-3(b)
-10-3(c)
-10-3(d)
-10-3(e)
-10-3(f)
 10-3(g)
-10-3(h)
 
 ROZDZIAŁ 11
-11.1-1 -- sprawdzić
-11.1-2 -- sprawdzić
-11.1-3 -- metoda łańcuchowa na tablicy z adresowaniem bezpośrednim?
-11.1-4
-11.2-1 -- sprawdzić
-11.2-2 -- rysunek
-11.2-3 -- analiza wyszukiwania, porażka jest identyczna z sukcesem -- wystarczy szukać aż do elementu większego lub równego
-11.2-4
-11.2-5 -- przeformułować
-11.3-1
-11.3-2
-11.3-3
-11.3-4
-11.3-5
-11.3-6
-11.4-1
-11.4-2
+-- implementacje
+-- przejrzeć notki, uściślić zasady stosowania określeń 'w tłumaczeniu', 'w oryginale'
+11.2-4 -- sprawdzić, dopisać kilka zdań
+11.3-5 >>> http://ripcrixalis.blog.com/2011/02/08/clrs-11-3-hash-functions/
+11.3-6 >>> http://ripcrixalis.blog.com/2011/02/08/clrs-11-3-hash-functions/
 11.4-3
-11.4-4
-11.4-5
-11.5-1
-11-1(a)
-11-1(b)
-11-1(c)
-11-1(d)
-11-2(a)
-11-2(b)
-11-2(c)
-11-2(d)
-11-2(e)
-11-3(a)
-11-3(b)
+11.4-5 >>> sprowadza się do rozwiązania równania x-1=2\ln n dla x>1, gdzie x=1-1/\alpha
+11.5-1 >>> http://ripcrixalis.blog.com/2011/02/08/clrs-11-4-open-addressing-11-5-perfect-hashing/
+11-1 -- co z notką? zostawić/zmienić/usunąć?
+11-2(d) -- napisać, sprawdzić
+11-4 -- nowa treść problemu ok, ale sprawdzić/przepisać notki, zmienić odstępy drugiej notki, zmienić \setlength\labelsep{4mm} na coś elastyczniejszego
+>>> http://ripcrixalis.blog.com/2011/02/08/clrs-chapter-11/
 11-4(a)
 11-4(b)
 11-4(c)
+11-4(d)
 
 ROZDZIAŁ 12
 12.1-1

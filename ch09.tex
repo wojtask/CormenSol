@@ -86,7 +86,7 @@ Procedura jest wywoływana rekurencyjne dla co najmniej $n-(2\lceil n/6\rceil-1)
 gdzie $d>0$ jest pewną stałą. Można wykazać, stosując metodę przez podstawianie, że rozwiązaniem powyższej rekurencji jest $T(n)=\Omega(n\lg n)$, co oznacza, że algorytm w~tym wariancie nie działa w~czasie liniowym.
 
 \exercise %9.3-2
-Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większych od $x$, jak i~liczba elementów mniejszych od $x$, wynoszą co najmniej $3n/10-6$. Na mocy założenia, że $n\ge140$, mamy
+Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większych od $x$, jak i~liczba elementów mniejszych od $x$, wynosi co najmniej $3n/10-6$. Na mocy założenia, że $n\ge140$, mamy
 \[
 	\frac{3n}{10}-6-\Bigl\lceil\frac{n}{4}\Bigr\rceil \ge \frac{3n}{10}-6-\Bigl(\frac{n}{4}+1\Bigr) = \frac{n-140}{20} \ge 0,
 \]
@@ -162,7 +162,7 @@ Poniższy algorytm implementuje opisane podejście:
 		\End
 \li	\Return $L$
 \end{codebox}
-Zbiór wejściowy $S$ traktujemy jak tablicę o~$n$ elementach. W~czasie $O(n)$ wyznaczana jest mediana $x$ tego zbioru, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \onedash{$k$}{ta} najmniejsza wartość $y$ tej tablicy. W~pozostałej części algorytmu budowany jest zbiór $L$ złożony z~$k$ elementów najbliższych $x$. Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały. Założenia te można łatwo spełnić, implementując zbiór $L$ np.\ jako listę dwukierunkową (patrz podrozdział~10.2 w~Podręczniku). Wówczas czasem działania algorytmu jest $O(n)$.
+Zbiór wejściowy $S$ traktujemy jak tablicę o~$n$ elementach. W~czasie $O(n)$ wyznaczana jest mediana $x$ tego zbioru, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \onedash{$k$}{ta} najmniejsza wartość $y$ tej tablicy. W~pozostałej części algorytmu budowany jest zbiór $L$ złożony z~$k$ elementów najbliższych $x$. Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały. Założenia te można łatwo spełnić, implementując zbiór $L$ np.\ jako listę dwukierunkową (patrz podrozdział~10.2). Wówczas czasem działania algorytmu jest $O(n)$.
 
 \exercise %9.3-8
 Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$. Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (bądź równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych). Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb. Załóżmy teraz, że $m_X\ne m_Y$ i~bez utraty ogólności, niech $m_X<m_Y$. Pomijając teraz około $n/2$ elementów $X$ mniejszych lub równych $m_X$ i~około $n/2$ elementów $Y$ większych lub równych $m_Y$, sprowadzamy problem do identycznego, ale o~około połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów. Dokładniej, podproblem będzie operował na tablicach o~rozmiarach $\lfloor n/2\rfloor+1$.

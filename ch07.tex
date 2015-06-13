@@ -148,6 +148,7 @@ Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy 
 \exercise %7.4-6
 Niech $P$ będzie szukaną funkcją zmiennej $0<\alpha<1$. Zauważmy, że funkcja ta spełnia własność $P(\alpha)=P(1-\alpha)$, w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$. Niech $i<j<k$ będą indeksami elementów losowo wybranych z~$A$. Utworzenie w~najgorszym przypadku podziału $\alpha$ do $1-\alpha$ jest równoważne temu, że $\alpha n\le j\le(1-\alpha)n$. Możliwe są następujące przypadki ze względu na wartości przyjmowane przez pozostałe indeksy:
 \begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
 	\item $i<\alpha n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $6\alpha^2(1-2\alpha)$;
 	\item $i<\alpha n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
 	\item $\alpha n\le i\le(1-\alpha)n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
@@ -325,7 +326,7 @@ W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału jest bliska $1/3$
 \]
 Ostatnią sumę przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
 \begin{align*}
-    \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]\bigg|_0^{n/3-1} \\[1mm]
+    \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]_0^{n/3-1} \\[1mm]
 	&= \frac{(n-1)(n/3-1)^2}{2}-\frac{(n/3-1)^3}{3} \\[1mm]
 	&= \frac{(n-1)(n-3)^2}{18}-\frac{(n-3)^3}{81}.
 \end{align*}
