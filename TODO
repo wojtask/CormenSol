@@ -1,8 +1,10 @@
 PRZED v0.4:
 - poprawić part I
+- poprawić part II
 - poprawić part VIII
-- dokończyć part II
 - zaimplementować i przetestować algorytmy, również te bez pseudokodów, które są wystarczająco szczegółowo opisane
+- czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
+- zamienić cudzysłowy na polskie wersje czyli ,,...''
 - bigskipy czy medskipy? np. B-1(b) lepiej wygląda z medskipami
 - jeszcze raz sprawdzić, czy notki, które mówią o błędach w oryginale uwzględniają poprawki z erraty
 - wstęp: (La)TeX i MetaPost
@@ -25,7 +27,7 @@ PRZED v0.5:
 - uściślić konwencje stosowania ~ w sytuacjach innych niż sieroty (liczby, zakresy, zmienne, niektóre wyrażenia językowe, ...)
 - sprawdzić dwustronność, czy rozdziały lub części mają rozpoczynać się zawsze od nieparzystej/parzystej strony?
 - sprawdzić bibliografię -- czy właściwe dotychczasowe pozycje i czy taki wygląd może zostać
-- jak poradzić sobie z problemem coraz większej ilości pseudokodów w rozdziale i underfull vboxami przez nie generowanymi?
+- jak poradzić sobie z problemem coraz większej ilości pseudokodów w rozdziale i underfull vboxami przez nie generowanymi? (pakiet float i zdefiniowanie otoczenia \begin{pseudocode}\vspace{-.5cm} ... \vspace{-.8cm}\end{pseudocode} (?))
 - zmniejszyć odstęp między numerem problemu a jego nazwą (?)
 - ostateczne zmiany w layoucie, konwencjach itd. -- takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
 - ostateczne strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
@@ -79,6 +81,7 @@ DO POPRAWY/WERYFIKACJI W PÓŹNIEJSZYCH ETAPACH:
 6.5-8 -- zaimplementować procedurę na listach (po ch10)
 6-3(c) -- wymyślić prostszy pseudokod
 8.3-2 -- jak obliczać złożoność pamięciową? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
+9-2(e) -- opisać ThreeWayPartition i Select' (jeśli nigdzie indziej nie będą rozważane)
 
 ################################################################################
 
@@ -86,8 +89,9 @@ ROZDZIAŁ 1
 
 ROZDZIAŁ 2
 2.1-4
-	-- Czy zostawić to określenie "reprezentacja binarna"?
-	-- Może dokładniej zdefiniować reprezentację binarną?
+	-- Czy zostawić określenie "reprezentacja binarna"?
+	-- Może dokładniej zdefiniować "reprezentację binarną"?
+	-- Wektor bitowy -- definicja w zad. 11.1-2.
 	-- Czy można w ostatnim paragrafie mówić o problemie, który formalnie odbiega od bieżącego?
 	-- Aby algorytm działał dla liczb ujemnych, musiałby implementować specjalną obsługę bitu znaku. Dla liczb nieujemnych działa poprawnie.
 	-- Napisać, że definiujemy reprezentację binarną jako zapis liczb naturalnych w systemie dwójkowym i że tylko takie obsługujemy w algorytmie.
@@ -98,12 +102,12 @@ ROZDZIAŁ 2
 			C[i] ← sum % 2
 			C[i + 1] ← sum / 2    ▹ Integer division.
 	output C
-	który porzuca operacje bitowe na rzecz operacji arytmetycznych (tylko czy możemy takie wykonywać na "tablicach bitów"?) i w którym kolejność trzymania bitów liczb jest od najmniej znaczącego do najbardziej znaczącego?
+	który porzuca operacje bitowe na rzecz operacji arytmetycznych (tylko czy możemy takie wykonywać na "tablicach bitów"? TAK wg definicji z zad. 11.1-2 -- bity to zera lub jedynki) i w którym kolejność trzymania bitów liczb jest od najmniej znaczącego do najbardziej znaczącego?
 
 ROZDZIAŁ 3
 
 ROZDZIAŁ 4
-4-7(a) -- sprawdzić, przepisać, usunąć (*)
+4-7(a) -- usunąć (*), przepisać, sprawdzić
 
 ROZDZIAŁ 5
 5.3-6 -- zamiast ponownego wywoływania Permute-By-Sorting można wywoływać np. Randomize-In-Place ALBO dokonać zmiany w algorytmie sortującym -- zakładając, że jest on oparty o porównania, jeśli natrafi na elementy równe, to wybiera losowo, którą gałęzią drzewa porównań iść
@@ -121,20 +125,14 @@ ROZDZIAŁ 8
 8-4(c) -- algorytm jest poprawny, ale może jakoś uprościć jego zapis?, sprawdzić
 
 ROZDZIAŁ 9
-9.3-4 -- coś z drzewem porównań z rozdziału 8? zauważmy, że znamy kolejność i-tego elementu z każdym innym, w przeciwnym przypadku bowiem nie wiedzielibyśmy, czy i-ty rzeczywiście jest i-tym, dzięki tym informacjom można podzielić elementy na 2 zbiory
-9.3-6 -- opisać, sprawdzić, zaimplementować algorytm (Quantiles)
-9.3-7 -- czy przez ``najbliższe'' rozumieć najmniej różniące się, czy pozostające najbliżej w porządku rosnącym? w tym pierwszym pomysł z szukaniem mediany, odejmowaniem jej od wszystkich elementów i braniem modułu? w tym drugim analiza rozdzielona na parzystości n i k, zaimplementować algorytm
-9.3-9
-9-2(c) -- opisać, sprawdzić, zaimplementować algorytm (Weighted-Median)
-9-2(d)
-9-2(e) -- opisać, sprawdzić, zaimplementować algorytm (Post-Office-Location-2D)
-9-3(a) -- tak naprawdę Select będzie działał na co najwyżej 2i-1 elementach, uwzględnić to?, napisać, że jeśli i\ge n/2, to oczywiście będzie zwykła delegacja do Select, sprawdzić <<<< inaczej! skonfrontować z manualem!
+-- poprawić underfull vbox
+9-3(a) -- skonfrontować z manualem, zaimplementować algorytm
 9-3(b) -- skonfrontować z manualem
 
 DODATEK A
 
 DODATEK B
-B.5-4 -- to powinna być indukcja po n
+B.5-4 -- to powinna być indukcja po n (?)
 B-3(a) -- przepisać dowód (?)
 
 DODATEK C
