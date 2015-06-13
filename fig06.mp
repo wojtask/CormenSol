@@ -532,6 +532,7 @@ beginfig(5);
 	label("2", (-hshift, -3vshift));
 	label("1", (hshift, -3vshift));
 	label(btex \fontsize{7}{9}\selectfont $-\infty$ etex, (3hshift, -3vshift));
+	%jest bug w MetaPost 1.504, na powyższej etykiecie nie wyświetla się znak nieskończoności
 
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (0, -3.75vshift));
 

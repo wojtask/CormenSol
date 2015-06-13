@@ -54,11 +54,11 @@ W~przypadku szukania elementu najmniejszego pesymistyczny przypadek dzielenia po
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 
 \exercise %9.3-1
-Dokonajmy analogicznej analizy algorytmu \proc{Select} w~przypadku, gdy podział następuje na grupy \compound{7}{elementowe}. W~co najmniej $\lceil n/7\rceil$ grupach są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez~7, i~jednej grupy zawierającej sam element $x$. Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
+Dokonajmy analogicznej analizy algorytmu \proc{Select} w~przypadku, gdy podział następuje na grupy \onedash{7}{elementowe}. W~co najmniej $\lceil n/7\rceil$ grupach są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez~7, i~jednej grupy zawierającej sam element $x$. Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
 \[
 	4\left(\left\lceil\frac{1}{2}\left\lceil\frac{n}{7}\right\rceil\right\rceil-2\right) \ge \frac{2n}{7}-8.
 \]
-Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$. Stąd wywołanie rekurencyjne nastąpi dla zbioru \compound{$(5n/7+8)$}{elementowego}. Rekurencja przyjmuje więc postać
+Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$. Stąd wywołanie rekurencyjne nastąpi dla zbioru \onedash{$(5n/7+8)$}{elementowego}. Rekurencja przyjmuje więc postać
 \[
 	T(n) \le \begin{cases}
 		\Theta(1), & \text{jeśli $n\le d$}, \\
@@ -77,7 +77,7 @@ Wykażemy metodą przez podstawienie, że $T(n)=O(n)$. Zachodzi oczywiście $T(n
 \end{align*}
 o~ile składnik $-cn/7+9c+an$ jest niedodatni. Dla $n>63$ warunek ten zachodzi, gdy $c\ge7a(n/(n-63))$. Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~dostajemy, że $c\ge14a$. Można zatem przyjąć za $d$ wartość 126.
 
-Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \compound{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} jest wyższy od liniowego. Rozważmy przypadek, w~którym jest dokładnie $\left\lceil\frac{1}{2}\left\lceil\frac{n}{3}\right\rceil\right\rceil$ grup o~medianach większych lub równych $x$, a~ostatnia, niepełna grupa, zawiera dokładnie 2 elementy większe niż $x$. Stąd liczba elementów większych od $x$ wynosi
+Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \onedash{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} jest wyższy od liniowego. Rozważmy przypadek, w~którym jest dokładnie $\left\lceil\frac{1}{2}\left\lceil\frac{n}{3}\right\rceil\right\rceil$ grup o~medianach większych lub równych $x$, a~ostatnia, niepełna grupa, zawiera dokładnie 2 elementy większe niż $x$. Stąd liczba elementów większych od $x$ wynosi
 \[
 	2\left(\left\lceil\frac{1}{2}\left\lceil\frac{n}{3}\right\rceil\right\rceil-1\right)+1 = 2\left\lceil\frac{n}{6}\right\rceil-1.
 \]
@@ -114,10 +114,10 @@ Problem rozwiązujemy analogicznie jak w~\refExercise{9.3-3} ale dla algorytmu w
 Rozwiązaniem powyższej rekurencji jest $T(n)=O(n)$.
 
 \exercise %9.3-6
-Załóżmy, że badany zbiór przechowujemy w~tablicy \compound{$n$}{elementowej}. Podzielmy ją na $\lfloor n/k\rfloor$ podtablic i~posortujmy każdą z~nich. Wszystkie te podtablice składają się z~$k$ elementów (z~dokładnością do~1), więc ich sortowanie algorytmem quicksort zajmuje łącznie czas $\lfloor n/k\rfloor\cdot O(k\lg k)=O(n\lg k)$. %Zauważmy, że najmniejszy kwantyl rzędu $k$ początkowej tablicy jest największym elemente
+Załóżmy, że badany zbiór przechowujemy w~tablicy \onedash{$n$}{elementowej}. Podzielmy ją na $\lfloor n/k\rfloor$ podtablic i~posortujmy każdą z~nich. Wszystkie te podtablice składają się z~$k$ elementów (z~dokładnością do~1), więc ich sortowanie algorytmem quicksort zajmuje łącznie czas $\lfloor n/k\rfloor\cdot O(k\lg k)=O(n\lg k)$. %Zauważmy, że najmniejszy kwantyl rzędu $k$ początkowej tablicy jest największym elemente
 
 \exercise %9.3-7
-Znajdujemy elementy $i_1=\lfloor n/2\rfloor-\lfloor k/2\rfloor$ oraz $i_2=\lfloor n/2\rfloor+\lfloor k/2\rfloor$ wejściowej tablicy w~porządku rosnącym za pomocą dwóch wywołań algorytmu \proc{Select} w~czasie $O(n)$. Szukane elementy są większe od \compound{$i_1$}{tego} i~mniejsze od \compound{$i_2$}{tego} -- wyznaczamy je przeglądając liniowo tablicę i~testując czy znajdują się w~wyznaczonym przedziale.
+Znajdujemy elementy $i_1=\lfloor n/2\rfloor-\lfloor k/2\rfloor$ oraz $i_2=\lfloor n/2\rfloor+\lfloor k/2\rfloor$ wejściowej tablicy w~porządku rosnącym za pomocą dwóch wywołań algorytmu \proc{Select} w~czasie $O(n)$. Szukane elementy są większe od \onedash{$i_1$}{tego} i~mniejsze od \onedash{$i_2$}{tego} -- wyznaczamy je przeglądając liniowo tablicę i~testując czy znajdują się w~wyznaczonym przedziale.
 
 \exercise %9.3-8
 Porównajmy mediany każdej z~tablic. Jeśli są one równe, to wśród wszystkich $2n$ elementów $n$ jest większych od tych median -- $n/2$ z~tablicy $X$ i~$n/2$ z~tablicy $Y$. Załóżmy teraz, że mediany są różne i~bez utraty ogólności, niech mniejsza będzie mediana tablicy $X$. Pomijając teraz elementy $X$ mniejsze od jej mediany i~elementy $Y$ większe od jej mediany, sprowadzamy problem do identycznego ale o~połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród $n$ pozostawionych elementów.
@@ -156,7 +156,7 @@ Zbudowanie kopca typu max dla kolejki priorytetowej wymaga czasu $\Theta(n)$. Wy
 na podstawie punktu~(b) problemu~\refProblem{A-1}, a~zatem całkowitym czasem algorytmu w~przypadku pesymistycznym jest $\Theta(n+i\lg n)$.
 
 \subproblem %9-1(c)
-Aby osiągnąć najlepszy czas w~przypadku pesymistycznym, użyjemy procedury \proc{Select} do znalezienia \compound{$i$}{tej} statystyki pozycyjnej. Sortowanie $i$ największych liczb można wykonać algorytmem sortowania przez scalanie, które w~najgorszym przypadku zajmuje czas $\Theta(i\lg i)$, skąd całkowity czas działania algorytmu wynosi $\Theta(n+i\lg i)$, co czyni go najbardziej efektywnym spośród wszystkich rozważanych algorytmów w~obecnym problemie.
+Aby osiągnąć najlepszy czas w~przypadku pesymistycznym, użyjemy procedury \proc{Select} do znalezienia \onedash{$i$}{tej} statystyki pozycyjnej. Sortowanie $i$ największych liczb można wykonać algorytmem sortowania przez scalanie, które w~najgorszym przypadku zajmuje czas $\Theta(i\lg i)$, skąd całkowity czas działania algorytmu wynosi $\Theta(n+i\lg i)$, co czyni go najbardziej efektywnym spośród wszystkich rozważanych algorytmów w~obecnym problemie.
 
 \problem{Mediana ważona} %9-2
 
@@ -179,7 +179,7 @@ Po posortowaniu elementów wyznaczenie mediany ważonej odbywa się w~prosty spo
 \subproblem %9-3(a)
 \note{W~tłumaczeniu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$. Wartość\/ $T(n)$ powinna być zwracana nie dla\/ $i\le n/2$, lecz dla\/ $i\ge n/2$.}
 
-\noindent Postępując za podaną wskazówką, grupujemy najpierw elementy w~pary i~wyznaczamy mniejsze w~każdej parze. Zauważmy, że \compound{$i$}{ty} w~kolejności element całego zbioru, gdzie $i<n/2$, znajduje się wśród elementów mniejszych w~parach lub wśród 
+\noindent Postępując za podaną wskazówką, grupujemy najpierw elementy w~pary i~wyznaczamy mniejsze w~każdej parze. Zauważmy, że \onedash{$i$}{ty} w~kolejności element całego zbioru, gdzie $i<n/2$, znajduje się wśród elementów mniejszych w~parach lub wśród 
 
 \subproblem %9-3(b)
 Załóżmy, że $n/2^k\le i<n/2^{k-1}$ i~rozwińmy rekurencję $U_i(n)$ w~przypadku, gdy $i<n/2$:

@@ -13,9 +13,9 @@
 \exercise %B.1-2
 Przeprowadzimy dowód pierwszego wzoru przez indukcję względem $n$. Dla $n=1$ dowód jest trywialny, a~dla $n=2$ wzór stanowi pierwsze prawo de~Morgana. Załóżmy więc, że $n>2$ i~że wzór zachodzi dla rodziny $n-1$ zbiorów. Mamy
 \begin{align*}
-	\overline{A_1\cap A_2\cap\cdots\cap A_{n-1}\cap A_n} &= \overline{(A_1\cap A_2\cap\cdots\cap A_{n-1})\cap A_n} \\
-	&= \overline{A_1\cap A_2\cap\cdots\cap A_{n-1}}\cup\overline{A_n} \\
-	&= \overline{A_1}\cup\overline{A_2}\cup\cdots\cup\overline{A_{n-1}}\cup\overline{A_n}.
+	\overline{A_1\cap A_2\cap\dots\cap A_{n-1}\cap A_n} &= \overline{(A_1\cap A_2\cap\dots\cap A_{n-1})\cap A_n} \\
+	&= \overline{A_1\cap A_2\cap\dots\cap A_{n-1}}\cup\overline{A_n} \\
+	&= \overline{A_1}\cup\overline{A_2}\cup\dots\cup\overline{A_{n-1}}\cup\overline{A_n}.
 \end{align*}
 W~drugiej równości skorzystano z~pierwszego prawa de~Morgana, a~w~trzeciej -- z~założenia indukcyjnego.
 
@@ -81,7 +81,7 @@ Oznaczmy przez $R_n$, dla $n\in\mathbb{N}\setminus\{0\}$, relację ``przystaje m
 
 Dla dowolnego $a\in\mathbb{Z}$ mamy $a\equiv a\pmod{n}$, bo $a-a=0$, więc relacja $R_n$ jest zwrotna. Dla dowolnych $a$, $b\in\mathbb{Z}$, jeśli istnieje $q\in\mathbb{Z}$, że $a-b=qn$, to $b-a=-qn$, a~zatem z~faktu, że $a\equiv b\pmod{n}$ wynika, że $b\equiv a\pmod{n}$, co dowodzi symetrii $R_n$. Dla dowodu przechodniości wybierzmy dowolne $a$, $b$, $c\in\mathbb{Z}$ i~załóżmy, że zachodzi $a\equiv b\pmod{n}$ oraz $b\equiv c\pmod{n}$. Oznacza to, że istnieją $q$, $r\in\mathbb{Z}$, że $a-b=qn$ oraz $b-c=rn$. Stąd $a-c=a-b+b-c=qn+rn=(q+r)n$, a~zatem $a\equiv c\pmod{n}$.
 
-Na mocy powyższych faktów $R_n$ jest relacją równoważności i~dzieli zbiór $\mathbb{Z}$ na $n$ klas abstrakcji; \compound{$i$}{ta} klasa, gdzie $i=1$, 2,~\dots,~$n$, jest zbiorem takich liczb całkowitych, które przy dzieleniu przez $n$ dają resztę $i-1$.
+Na mocy powyższych faktów $R_n$ jest relacją równoważności i~dzieli zbiór $\mathbb{Z}$ na $n$ klas abstrakcji; \onedash{$i$}{ta} klasa, gdzie $i=1$, 2,~\dots,~$n$, jest zbiorem takich liczb całkowitych, które przy dzieleniu przez $n$ dają resztę $i-1$.
 
 \exercise %B.2-3
 \subexercise
@@ -192,7 +192,7 @@ Hipergraf $H=\langle V_H,E_H\rangle$ można reprezentować jako graf dwudzielny 
 \end{figure}
 
 \exercise %B.5-2
-Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\refExercise{B.4-2}). Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem. Graf $G$ jest acykliczny, zatem dla pewnego $l=1$, 2,~\dots,~$k$ istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym $v_{k+1}$ utożsamiamy z~$v_1$, a~$v_{k+2}$ z~$v_2$. Wiemy z~założenia, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$:
+Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\refExercise{B.4-2}). Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem. Graf $G$ jest acykliczny, zatem dla pewnego całkowitego $l$, gdzie $1\le l\le k$, istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym $v_{k+1}$ utożsamiamy z~$v_1$, a~$v_{k+2}$ z~$v_2$. Wiemy z~założenia, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$:
 \[
 	\langle v_0,\dots,v_l,v_{l+1}\rangle \quad\text{oraz}\quad \langle v_0,\dots,v_{l+2},v_{l+1}\rangle.
 \]
@@ -256,16 +256,16 @@ Zamiast dowolnych drzew rozważmy bez straty ogólności drzewa ukorzenione. Kra
 Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozostaną równoważne, jeżeli zostaną zastosowane osobno dla każdej składowej.
 \medskip
 
-$1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwoma barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \compound{2}{kolorowanie}.
+$1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwoma barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \onedash{2}{kolorowanie}.
 \medskip
 
-$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \compound{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności niech $c(v_1)=0$ i~wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$. Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \compound{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
+$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \onedash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności niech $c(v_1)=0$ i~wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$. Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \onedash{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
 \medskip
 
 $3.\Rightarrow 1.$: Ustalmy pewne $v\in V$. Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$. Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
 
 \subproblem %B-1(c)
-Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$. Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor. Załóżmy więc, że $|V|\ge2$. Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$. Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$. Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów. Ponieważ wierzchołek $v$ ma co najwyżej $d$ sąsiadów, to wśród $d+1$ kolorów użytych w~kolorowaniu podgrafu $G'$ jest jeden nieprzypisany żadnemu sąsiadowi wierzchołka $v$. Wybierając ten kolor dla $v$, uzyskujemy poprawne \compound{$(d+1)$}{kolorowanie} grafu $G$.
+Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$. Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor. Załóżmy więc, że $|V|\ge2$. Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$. Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$. Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów. Ponieważ wierzchołek $v$ ma co najwyżej $d$ sąsiadów, to wśród $d+1$ kolorów użytych w~kolorowaniu podgrafu $G'$ jest jeden nieprzypisany żadnemu sąsiadowi wierzchołka $v$. Wybierając ten kolor dla $v$, uzyskujemy poprawne \onedash{$(d+1)$}{kolorowanie} grafu $G$.
 
 \subproblem %B-1(d)
 Jeżeli $k$ barw wystarcza do optymalnego pokolorowania grafu $G$ (czyli takiego, które wykorzystuje możliwie najmniej kolorów), to dla każdych dwóch różnych barw istnieje krawędź w~$E$ incydentna z~wierzchołkami o~takich barwach. W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać. Do pokolorowania grafu wystarczyłoby ich zatem $k-1$, co przeczyłoby optymalności kolorowania.
@@ -365,7 +365,7 @@ Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, ja
 \end{figure}
 
 \subproblem %B-3(c)
-Rozważmy następującą procedurę podziału zbioru wierzchołków. Na początku przyjmujemy, że wynikowe zbiory $A$ i~$B$ są puste. Usuwając jedną krawędź, możemy podzielić \compound{$n$}{elementowy} zbiór~wierzchołków drzewa na dwa podzbiory, z~których większy będzie składać się z~co najwyżej $3n/4$ wierzchołków, co wynika na podstawie punktu~(a). Mniejszy podzbiór sumujemy z~jednym ze zbiorów wynikowych, natomiast większy z~nich będzie podlegał dalszemu podziałowi. Podczas działania procedury pilnujemy, aby rozmiary zbiorów $A$ i~$B$ nie przekroczyły $\lceil n/2\rceil$. Procedurę podziału zakończymy w~momencie, gdy jeden z~tych zbiorów będzie zawierał $\lceil n/2\rceil$ elementów, gdyż drugi zbiór zawiera wtedy $\lfloor n/2\rfloor$ elementów.
+Rozważmy następującą procedurę podziału zbioru wierzchołków. Na początku przyjmujemy, że wynikowe zbiory $A$ i~$B$ są puste. Usuwając jedną krawędź, możemy podzielić \onedash{$n$}{elementowy} zbiór~wierzchołków drzewa na dwa podzbiory, z~których większy będzie składać się z~co najwyżej $3n/4$ wierzchołków, co wynika na podstawie punktu~(a). Mniejszy podzbiór sumujemy z~jednym ze zbiorów wynikowych, natomiast większy z~nich będzie podlegał dalszemu podziałowi. Podczas działania procedury pilnujemy, aby rozmiary zbiorów $A$ i~$B$ nie przekroczyły $\lceil n/2\rceil$. Procedurę podziału zakończymy w~momencie, gdy jeden z~tych zbiorów będzie zawierał $\lceil n/2\rceil$ elementów, gdyż drugi zbiór zawiera wtedy $\lfloor n/2\rfloor$ elementów.
 
 Zauważmy, że maksymalną liczbę podziałów dla zadanego drzewa wykonamy w~przypadku, gdy po~każdym kroku zostanie do podziału zbiór o~rozmiarze $3/4$ rozmiaru zbioru z~poprzedniego kroku. Niech $k$ będzie taką maksymalną liczbą podziałów drzewa o~$n$ wierzchołkach. Zachodzi wtedy $(3/4)^kn=1$, ponieważ zbioru jednoelementowego nie trzeba już dalej dzielić. Stąd mamy $k=\log_{4/3}n$, a~zatem należy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
 

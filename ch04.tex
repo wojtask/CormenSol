@@ -140,7 +140,7 @@ Dokonamy pewnego uproszczenia, pomijając podłogę w~argumencie rekurencji i~ro
 	\end{center}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=3T(n/2)+n$.} \label{fig:4.2-1}
 \end{figure}
-Drzewo tej rekusji przedstawione na rys.~\ref{fig:4.2-1} ma wysokość równą $\lg n$, czyli jest w~nim $\lg n+1$ poziomów. Na \compound{$i$}{tym} poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści. Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \compound{$i$}{tej} głębokości jest równy $(3/2)^in$. Przyjmujemy, że $T(1)=1$, a~więc na ostatnim poziomie jest $\Theta(n^{\lg3})$. Na podstawie tych wartości rozwiązujemy rekurencję:
+Drzewo tej rekusji przedstawione na rys.~\ref{fig:4.2-1} ma wysokość równą $\lg n$, czyli jest w~nim $\lg n+1$ poziomów. Na \onedash{$i$}{tym} poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści. Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \onedash{$i$}{tej} głębokości jest równy $(3/2)^in$. Przyjmujemy, że $T(1)=1$, a~więc na ostatnim poziomie jest $\Theta(n^{\lg3})$. Na podstawie tych wartości rozwiązujemy rekurencję:
 \begin{align*}
 	T(n) &= n+\frac{3}{2}\,n+\biggl(\frac{3}{2}\biggr)^2n+\dots+\biggl(\frac{3}{2}\biggr)^{\lg n-1}n+\Theta(n^{\lg3}) \\
 	&= \sum_{i=0}^{\lg n-1}\biggl(\frac{3}{2}\biggr)^in+\Theta(n^{\lg3}) \\
@@ -171,7 +171,7 @@ gdzie $b\ge0$ jest nową stałą. Korzystając ze wzoru~(3.3), mamy teraz:
 co zachodzi dla $n\ge7$, o~ile $b\ge14$. Przyjmujemy wszystkie $n=3$, 4,~5,~6 na podstawę indukcji, ponieważ dla dowolnie ustalonego $b$ można dobrać stałej $c$ odpowiednią wartość tak, aby pokazane oszacowanie zachodziło dla takich $n$. To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
 
 \exercise %4.2-2
-Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$. Liść tej gałęzi znajduje się na poziomie $h=\log_3n$. Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej \compound{$h$}{tego}, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$. Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
+Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$. Liść tej gałęzi znajduje się na poziomie $h=\log_3n$. Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej \onedash{$h$}{tego}, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$. Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
 
 \exercise %4.2-3
 W~metodzie drzewa rekursji dla uproszczenia pomijamy branie części całkowitych.
@@ -181,7 +181,7 @@ W~metodzie drzewa rekursji dla uproszczenia pomijamy branie części całkowityc
 	\end{center}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=4T(n/2)+cn$.} \label{fig:4.2-3}
 \end{figure}
-W~drzewie rekursji z~rys.~\ref{fig:4.2-3} na \compound{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$. Stąd kosztem całego poziomu jest $2^icn$. Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz z~głębokością drzewa, więc jego wysokością jest $\lg n$. Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$. Sumując koszty z~każdego poziomu, otrzymujemy:
+W~drzewie rekursji z~rys.~\ref{fig:4.2-3} na \onedash{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$. Stąd kosztem całego poziomu jest $2^icn$. Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz z~głębokością drzewa, więc jego wysokością jest $\lg n$. Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$. Sumując koszty z~każdego poziomu, otrzymujemy:
 \begin{align*}
 	T(n) &= cn+2cn+2^2cn+\dots+2^{\lg n-1}cn+\Theta(n^2) \\
 	&= cn\sum_{i=0}^{\lg n-1}2^i+\Theta(n^2) \\
@@ -223,7 +223,7 @@ Dla uproszczenia przyjmijmy, że $T(n)=ca$ w~przypadku, gdy $n\le a$, czyli że 
 	\end{center}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n-a)+T(a)+cn$.} \label{fig:4.2-4}
 \end{figure}
-Wysokością tego drzewa jest $n/a$. Koszt wnoszony przez \compound{$i$}{ty} poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$. Mamy zatem:
+Wysokością tego drzewa jest $n/a$. Koszt wnoszony przez \onedash{$i$}{ty} poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$. Mamy zatem:
 \begin{align*}
 	T(n) &= cn+\sum_{i=1}^{n/a-1}c(n-a(i-1))+\Theta(1) \\
 	&= cn+c\sum_{i=0}^{n/a-2}(n-ai)+\Theta(1) \\
@@ -241,7 +241,7 @@ Zauważmy, że drzewo rekurencji $T(n)$ z~rys.~\ref{fig:4.2-5} dla parametru $\a
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(\alpha n)+T((1-\alpha)n)+cn$, gdzie $0<\alpha\le1/2$.} \label{fig:4.2-5}
 \end{figure}
 
-Wyznaczmy najpierw oszacowanie dolne rekurencji. Na \compound{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi. Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$. Oznaczmy przez $h$ głębokość tego poziomu. Wówczas $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$. Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$. Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż \compound{$h$}{ty}, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
+Wyznaczmy najpierw oszacowanie dolne rekurencji. Na \onedash{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi. Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$. Oznaczmy przez $h$ głębokość tego poziomu. Wówczas $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$. Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$. Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż \onedash{$h$}{ty}, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
 
 Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt na każdym poziomie, możemy dojść do oszacowania górnego dla $T(n)$. Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)=\Theta(\lg n)$, a~więc $T(n)\le cn(H+1)=O(n\lg n)$. Asymptotycznie dokładnym oszacowaniem rekurencji jest zatem $\Theta(n\lg n)$.
 
@@ -284,7 +284,7 @@ Kolejne poziomy wywołań kosztują:
 	16T(n/4) = 16(n/4)^2\lg(n/4) = n^2\lg n-2n^2, \qquad\phantom{\text{itd.}} \\
 	64T(n/8) = 64(n/8)^2\lg(n/8) = n^2\lg n-3n^2 \qquad\text{itd.}
 \end{gather*}
-Z~otrzymanych wyników wnioskujemy, że \compound{$i$}{ty} poziom wprowadza koszt równy $n^2\lg n-in^2$. Liście o~koszcie stałym znajdują się na poziomie $\lg n$ i~jest ich $4^{\lg n}=n^2$, więc dostajemy:
+Z~otrzymanych wyników wnioskujemy, że \onedash{$i$}{ty} poziom wprowadza koszt równy $n^2\lg n-in^2$. Liście o~koszcie stałym znajdują się na poziomie $\lg n$ i~jest ich $4^{\lg n}=n^2$, więc dostajemy:
 \begin{align*}
 	T(n) &= \sum_{i=0}^{\lg n-1}(n^2\lg n-in^2)+\Theta(n^2) \\
 	&= n^2\lg^2n-n^2\sum_{i=0}^{\lg n-1}i+\Theta(n^2) \\[1mm]
@@ -306,7 +306,7 @@ dla pewnej stałej $c>0$. Mamy teraz:
 Ostatnią nierówność dla wszystkich $n\ge4$ spełniamy, dobierając $c\ge2/3$. Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji, zaś $n=2$ oraz $n=3$ jako podstawę indukcji, ponieważ dla $n\ge4$ rekurencja nie zależy już bezpośrednio od $T(1)$, a~otrzymane oszacowanie dla $T(2)=8$ i~$T(3)=4+9\lg3$ jest spełnione, o~ile $c\ge2$. Rozwiązaniem rekurencji $T(n)$ jest zatem $O(n^2\lg^2n)$.
 
 \exercise %4.3-5
-Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla pewnego $0<\epsilon\le1$. Jednak dla $n=2(2k+1)\pi$, gdzie $k=0$,~1,~\dots, mamy
+Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla pewnego $0<\epsilon\le1$. Jednak dla $n=2(2k+1)\pi$, gdzie $k=0$, 1,~\dots, mamy
 \[
 	af(n/b) = 3(2k+1)\pi \quad\text{oraz}\quad f(n) = 2(2k+1)\pi,
 \]
@@ -389,7 +389,7 @@ co należało wykazać.
 \problems
 
 \problem{Przykłady rekurencji} %4-1
-W~punktach~(a)\nobreakdash--(f) skorzystano z~twierdzenia o~rekurencji uniwersalnej.
+W~punktach \twodashes{(a)}{(f)} skorzystano z~twierdzenia o~rekurencji uniwersalnej.
 
 \subproblem %4-1(a)
 Mamy $n^{\log_ba}=n^{\log_22}=n$ oraz $f(n)=n^3=\Omega(n^{1+\epsilon})$ dla $\epsilon\le2$. Ponieważ warunek regularności jest spełniony:
@@ -599,12 +599,12 @@ W~celu rozwiązania rekurencji wykorzystamy metodę drzewa rekursji do odgadnię
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n/2)+T(n/4)+T(n/8)+n$.} \label{fig:4-4f}
 \end{figure}
 
-Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi. Niech $T(1)=1$. Ponieważ koszt węzła z~tej gałęzi znajdującego się na \compound{$i$}{tym} poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$. Łącznym kosztem na \compound{$i$}{tym} poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \compound{$h$}{tego}, otrzymujemy oszacowanie rekurencji od dołu:
+Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi. Niech $T(1)=1$. Ponieważ koszt węzła z~tej gałęzi znajdującego się na \onedash{$i$}{tym} poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$. Łącznym kosztem na \onedash{$i$}{tym} poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \onedash{$h$}{tego}, otrzymujemy oszacowanie rekurencji od dołu:
 \[
 	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-(7/8)n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
 \]
 
-Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi. Węzły te wnoszą koszt równy $n/2^i$ na \compound{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\lg n$. Mamy
+Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi. Węzły te wnoszą koszt równy $n/2^i$ na \onedash{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\lg n$. Mamy
 \[
 	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-7/8} = O(n),
 \]
@@ -805,9 +805,9 @@ Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, o
 Dowód kolejnych nierówności przebiega analogicznie, skąd dostajemy tezę.
 
 \subproblem %4-7(d)
-Aby odnaleźć minimum wiersza \compound{$i$}{tego}, sprawdzamy indeksy minimów wierszy \compound{$(i-1)$}{szego} oraz \compound{$(i+1)$}{szego}. Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$. Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$. Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
+Aby odnaleźć minimum wiersza \onedash{$i$}{tego}, sprawdzamy indeksy minimów wierszy \onedash{$(i-1)$}{szego} oraz \onedash{$(i+1)$}{szego}. Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$. Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$. Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
 
-Poszukując minimum wiersza \compound{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu. Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
+Poszukując minimum wiersza \onedash{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu. Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
 \begin{align*}
 	\sum_{\substack{1\le i\le m\\2\,\nmid\,i}}(f(i+1)-f(i-1)+1) &= \sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)+1) \\[-4mm]
 	&= \lceil m/2\rceil+\sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)) \\[1mm]
@@ -825,7 +825,7 @@ Na ostatnim poziomie rekursji wyznaczenie minimum jednego wiersza tablicy wymaga
 		T(\lceil m/2\rceil,n)+O(m+n), & \text{jeśli $m>1$}.
 	\end{cases}
 \]
-Dla uproszczenia pominiemy sufit w~argumencie rekurencji. Na \compound{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$. Łatwo zauważyć, że jest $\lg m+1$ poziomów, a~zatem całkowity koszt wynosi
+Dla uproszczenia pominiemy sufit w~argumencie rekurencji. Na \onedash{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$. Łatwo zauważyć, że jest $\lg m+1$ poziomów, a~zatem całkowity koszt wynosi
 \begin{align*}
 	T(m,n) &= \sum_{i=0}^{\lg m-1}O\biggl(\frac{m}{2^i}+n\biggr)+O(n) \\
 	&= O\biggl(m\sum_{i=0}^{\lg m-1}\frac{1}{2^i}\biggr)+O(n\lg m) \\

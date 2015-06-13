@@ -3,15 +3,15 @@
 \subchapter{Zliczanie}
 
 \exercise %C.1-1
-Załóżmy, że $k=1$, 2,~$\dots$,~$n$, to znaczy nie roważamy podsłów pustych. Pierwsze \compound{$k$}{podsłowo} zajmuje w~\compound{$n$}{słowie} pozycje 1, 2,~\dots,~$k$, drugie -- 2, 3,~\dots,~$k+1$ itd. Ostatnie \compound{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$,~\dots,~$n$. Istnieje zatem $n-k+1$ wszystkich \compound{$k$}{podsłów} \compound{$n$}{słowa}.
+Załóżmy, że $k=1$, 2,~\dots,~$n$, to znaczy nie roważamy podsłów pustych. Pierwsze \onedash{$k$}{podsłowo} zajmuje w~\onedash{$n$}{słowie} pozycje 1, 2,~\dots,~$k$, drugie -- 2, 3,~\dots,~$k+1$ itd. Ostatnie \onedash{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$,~\dots,~$n$. Istnieje zatem $n-k+1$ wszystkich \onedash{$k$}{podsłów} \onedash{$n$}{słowa}.
 
-By obliczyć łączną ilość podsłów \compound{$n$}{słowa}, należy zsumować liczby \compound{$k$}{podsłów} po wszystkich $k=1$, 2,~\dots,~$n$, co daje
+By obliczyć łączną ilość podsłów \onedash{$n$}{słowa}, należy zsumować liczby \onedash{$k$}{podsłów} po wszystkich $k=1$, 2,~\dots,~$n$, co daje
 \[
 	\sum_{k=1}^n(n-k+1) = \sum_{k=1}^nk = \frac{n(n+1)}{2}.
 \]
 
 \exercise %C.1-2
-Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \compound{$n$}{bitowych} i~\compound{$m$}{bitowych}. Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$. Zagadnienie sprowadza się zatem do pytania o~liczbę wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$. Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$. Jest zatem $2^{m2^n}\!$ funkcji logicznych o~$n$ wejściach i~$m$ wyjściach, a~stąd $2^{2^n}\!$ funkcji logicznych o~$n$ wejściach i~1 wyjściu.
+Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \onedash{$n$}{bitowych} i~\onedash{$m$}{bitowych}. Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$. Zagadnienie sprowadza się zatem do pytania o~liczbę wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$. Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$. Jest zatem $2^{m2^n}\!$ funkcji logicznych o~$n$ wejściach i~$m$ wyjściach, a~stąd $2^{2^n}\!$ funkcji logicznych o~$n$ wejściach i~1 wyjściu.
 
 \exercise %C.1-3
 Niech $S_n$ oznacza szukaną liczbę sposobów ustawienia $n$ osób przy okrągłym stole. Każdy sposób jest nierozróżnialny z~$n-1$ innymi, które powstają przez przesunięcie wszystkich osób o~pewną ilość miejsc bez zmiany ich kolejności. Istnieje $n!$ możliwych permutacji $n$ osób, zatem $nS_n$ jest równe $n!$. Mamy zatem
@@ -36,7 +36,7 @@ Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby p
 \]
 
 \exercise %C.1-7
-Niech $S$ będzie zbiorem \compound{$n$}{elementowym} oraz niech $s\in S$. Ze zbioru $S$ można wybrać $\binom{n}{k}$ \compound{$k$}{podzbiorów}. Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które go zawierają. Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$. Stąd wnioskujemy, że
+Niech $S$ będzie zbiorem \onedash{$n$}{elementowym} oraz niech $s\in S$. Ze zbioru $S$ można wybrać $\binom{n}{k}$ \onedash{$k$}{podzbiorów}. Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które go zawierają. Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$. Stąd wnioskujemy, że
 \[
     \binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.
 \]
@@ -86,7 +86,7 @@ Dla liczb naturalnych $n$, $j$,~$k$ takich, że $j+k\le n$, sprawdzamy zachowani
 \]
 Oczywistym jest, że iloczyn liczb całkowitych od 1 do $k$ nie przekracza iloczynu liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1. Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
 
-Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \compound{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze. W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów. Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście. Można mianowicie dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
+Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \onedash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze. W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów. Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście. Można mianowicie dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
 
 \exercise %C.1-12
 Łatwo sprawdzić, że dla $k=0$ nierówność zachodzi. Przyjmijmy zatem, że $k\ge1$ i~załóżmy, że
@@ -165,7 +165,7 @@ Ponieważ $\Pr(C_i)\le\Pr(A_i)$ dla każdego $i=1$, 2,~\dots, to prawdą jest, �
 \]
 
 \exercise %C.2-2
-Zdefiniujmy \compound{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób. Pierwszy symbol tego słowa będzie oznaczać wynik rzutu monetą profesora Rosencrantza, drugi symbol -- wynik rzutu pierwszą monetą profesora Guildensterna, a~trzeci -- wynik rzutu jego drugą monetą, przy czym $\scriptstyle\rm O$ oznacza uzyskanie orła, a~$\scriptstyle\rm R$ -- uzyskanie reszki. Tworzymy przestrzeń zdarzeń elementarnych:
+Zdefiniujmy \onedash{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób. Pierwszy symbol tego słowa będzie oznaczać wynik rzutu monetą profesora Rosencrantza, drugi symbol -- wynik rzutu pierwszą monetą profesora Guildensterna, a~trzeci -- wynik rzutu jego drugą monetą, przy czym $\scriptstyle\rm O$ oznacza uzyskanie orła, a~$\scriptstyle\rm R$ -- uzyskanie reszki. Tworzymy przestrzeń zdarzeń elementarnych:
 \[
 	S = \{{\scriptstyle\rm OOO},{\scriptstyle\rm OOR},{\scriptstyle\rm ORO},{\scriptstyle\rm ORR},{\scriptstyle\rm ROO},{\scriptstyle\rm ROR},{\scriptstyle\rm RRO},{\scriptstyle\rm RRR}\}.
 \]
@@ -181,14 +181,14 @@ Jeśli numer drugiej wybranej karty wynosi $k$, to liczba zdarzeń sprzyjającyc
 \[
     \sum_{k=1}^{10}(k-1)(10-k) = 120.
 \]
-Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \compound{3}{permutacji} zbioru \compound{10}{elementowego}). Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
+Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \onedash{3}{permutacji} zbioru \onedash{10}{elementowego}). Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
 
 \exercise %C.2-4
 Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa binarnego rozwinięcia ilorazu $a/b$ jest nieskończonym ciągiem zer i~jedynek $\beta_1,\beta_2,\dots$ takim, że
 \[
     \frac{a}{b} = \sum_{i=1}^\infty\frac{\beta_i}{2^i}.
 \]
-Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek, $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \compound{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=1$, a~dla reszki $\alpha_i=0$. Rzuty wykonujemy, dopóki $\alpha_i=\beta_i$. Natychmiast po wystąpieniu pierwszej różnicy, kończymy procedurę, zwracając ostatnio uzyskany wynik, czyli orła, jeśli $\alpha_k=1$, albo reszkę w~przeciwnym przypadku, przy czym $k$ jest najmniejszą liczbą, dla której $\alpha_k\ne\beta_k$.
+Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek, $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \onedash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=1$, a~dla reszki $\alpha_i=0$. Rzuty wykonujemy, dopóki $\alpha_i=\beta_i$. Natychmiast po wystąpieniu pierwszej różnicy, kończymy procedurę, zwracając ostatnio uzyskany wynik, czyli orła, jeśli $\alpha_k=1$, albo reszkę w~przeciwnym przypadku, przy czym $k$ jest najmniejszą liczbą, dla której $\alpha_k\ne\beta_k$.
 
 Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła. Kolejne rzuty są niezależne od siebie, zatem szanse uzyskania $k-1$ wyników zgodnych z~kolejnymi cyframi rozwinięcia ułamka $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$. A~zatem orzeł zostanie zwrócony z~prawdopodobieństwem równym
 \[
@@ -225,7 +225,7 @@ dla wszystkich $1\le i_1<i_2\le n$ oraz
 \[
 	\Pr\biggl(\bigcap_{j=1}^kA_{i_j}\biggr) = 0 \ne \prod_{j=1}^k\Pr(A_{i_j})
 \]
-dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$,~\dots, $i_k\le n$. Zdarzenia $A_1$, $A_2$,~\dots,~$A_n$ są więc parami niezależne, ale żaden ich \compound{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
+dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$,~\dots, $i_k\le n$. Zdarzenia $A_1$, $A_2$,~\dots,~$A_n$ są więc parami niezależne, ale żaden ich \onedash{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
 
 \exercise %C.2-8
 Rozważmy pewną grupę 300 osób, z~których 100 osiągnęło już wiek 50 lat. Wśród młodszych osób jest 22 programistów i~15 matematyków, przy czym tylko 5 osób jednocześnie programuje i~zajmuje się matematyką. W~skład grupy seniorów wchodzi 8 programistów oraz 9 matematyków, a~3 jednocześnie jest programistami i~matematykami. Rysunek~\ref{fig:C.2-8} stanowi ilustrację przedstawionego opisu.
@@ -422,7 +422,7 @@ Analogicznie,
 co także dąży do $1/e$, bo mianownik zbliża się do~1 wraz ze wzrostem $n$.
 
 \exercise %C.4-6
-Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów. W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \compound{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna. Wszystkich takich ciągów jest $2^{2n}=4^n$. Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki. Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów. Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces. Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
+Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów. W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \onedash{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna. Wszystkich takich ciągów jest $2^{2n}=4^n$. Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki. Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów. Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces. Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
 \[
 	\frac{\binom{2n}{n}}{4^n}.
 \]
@@ -467,7 +467,7 @@ skąd, po wykorzystaniu wzoru~(C.35), dostajemy
 Aby dokończyć dowód, wystarczy od obu stron nierówności odjąć jedynki i~obustronnie pomnożyć przez $-1$.
 
 \exercise %C.4-9
-Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \compound{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces. Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$. Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$. Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~\compound{$i$}{tej} próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~\compound{$i$}{tej} próbie w~ciągu $A'$. Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$. W~przeciwnym przypadku będziemy generować sukces w~\compound{$i$}{tej} próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$. Ze wzoru Bayesa~(C.17) wynika, że
+Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \onedash{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces. Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$. Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$. Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~\onedash{$i$}{tej} próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~\onedash{$i$}{tej} próbie w~ciągu $A'$. Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$. W~przeciwnym przypadku będziemy generować sukces w~\onedash{$i$}{tej} próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$. Ze wzoru Bayesa~(C.17) wynika, że
 \[
     p_i' = \Pr(A_i') = \Pr(A_i)\Pr(A_i'\mid A_i)+\Pr(\overline{A_i})\Pr(A_i'\mid\overline{A_i}) = p_i\cdot1+(1-p_i)\cdot r_i,
 \]
@@ -554,7 +554,7 @@ a~z~nierówności Markowa dostajemy
 \[
 	\Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(\mu-X)}\bigr)e^{-\alpha r}.
 \]
-Niech $X_i$, dla $i=1$, 2,~\dots,~$n$, będzie zmienną losową przyjmującą~1, jeśli wynikiem \compound{$i$}{tej} próby Bernoulliego jest sukces i~0 w~przeciwnym przypadku. Wtedy
+Niech $X_i$, dla $i=1$, 2,~\dots,~$n$, będzie zmienną losową przyjmującą~1, jeśli wynikiem \onedash{$i$}{tej} próby Bernoulliego jest sukces i~0 w~przeciwnym przypadku. Wtedy
 \[
 	X = \sum_{i=1}^nX_i \quad\text{oraz}\quad \mu-X = \sum_{i=1}^n(p_i-X_i),
 \]

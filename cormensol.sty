@@ -208,15 +208,18 @@
 \renewcommand{\bibname}{\sffamily\bfseries Bibliografia}
 
 % niełamliwy dywiz
-\newcommand{\compound}[2]{{#1}\nobreakdash-{#2}}
+\newcommand{\onedash}[2]{{#1}\protect\nobreakdash-{#2}}
+
+% niełamliwy podwójny dywiz
+\newcommand{\twodashes}[2]{{#1}\protect\nobreakdash--{#2}}
 
 % odnośnik do zadania --> odblokować w publikowanej wersji!
-% \newcommand{\refExercise}[1]{zad.~\ref{ex:#1}}
-\newcommand{\refExercise}[1]{zad.~#1}
+\newcommand{\refExercise}[1]{zad.~\mbox{\ref{ex:#1}}}
+% \newcommand{\refExercise}[1]{zad.~\mbox{#1}}
 
 % odnośnik do problemu --> odblokować w publikowanej wersji!
-% \newcommand{\refProblem}[1]{\ref{ex:#1}}
-\newcommand{\refProblem}[1]{#1}
+\newcommand{\refProblem}[1]{\mbox{\ref{ex:#1}}}
+% \newcommand{\refProblem}[1]{\mbox{#1}}
 
 % informacja poboczna w tekście rozwiązania
 \newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}

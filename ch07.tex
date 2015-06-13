@@ -8,7 +8,7 @@ Rys.~\ref{fig:7.1-1} przedstawia działanie procedury \proc{Partition} dla tabli
 	\begin{center}
 		\includegraphics{fig07.1}
 	\end{center}
-	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries(b)}--{\sffamily\bfseries(l)} Kolejne iteracje pętli \kw{for} w~wierszach 3--6. {\sffamily\bfseries(m)} Tablica $A$ po wykonaniu zamiany z~wiersza~7. Element rozdzielający nie zmienił swojego położenia.} \label{fig:7.1-1}
+	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries\twodashes{(b)}{(l)}} Kolejne iteracje pętli \kw{for} w~wierszach \twodashes{3}{6}. {\sffamily\bfseries(m)} Tablica $A$ po wykonaniu zamiany z~wiersza~7. Element rozdzielający nie zmienił swojego położenia.} \label{fig:7.1-1}
 \end{figure}
 
 \exercise %7.1-2
@@ -46,10 +46,12 @@ Procedura \proc{Partition} w~takim przypadku zwraca wartość $q=r$ (\refExercis
 W~tym przypadku podczas każdego wywołania rekurencyjnego procedury \proc{Partition} elementem rozdzielającym jest najmniejszy element przetwarzanej podtablicy $A[p\twodots r]$. W~każdym wywołaniu jedyne elementy, które zostaną zamienione, to element rozdzielający i~$A[p]$, po czym zwrócona zostanie wartość $q=r$. Przypadek ten jest zatem analogiczny do rozważanego w~poprzednim zadaniu, a~więc czasem działania procedury \proc{Quicksort} dla tablicy posortowanej malejąco jest $\Theta(n^2)$.
 
 \exercise %7.2-4
-Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort. Wykonywane są bowiem niezrównoważone podziały, przez co czas działania sortowania zbliża się do kwadratowego względem rozmiaru tablicy. Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt~(c) problemu~\refProblem{2-4}). Liczba inwersji w~ciągu prawie posortowanym jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
+Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort. W~wielu wywołaniach rekurencyjnych na element rozdzielający wybierany jest bowiem największy element przetwarzanej podtablicy. Wykonywane są wówczas niezrównoważone podziały, przez co czas działania procedury \proc{Quicksort} zbliża się do kwadratowego.
+
+Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt~(c) problemu~\refProblem{2-4}). Liczba inwersji w~ciągu prawie posortowanym jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
 
 \exercise %7.2-5
-Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \compound{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej gałęzi. Mamy wtedy $\alpha^hn=1$, skąd
+Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \onedash{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej gałęzi. Mamy wtedy $\alpha^hn=1$, skąd
 \[
 	h = \log_\alpha\frac{1}{n} = -\frac{\lg n}{\lg\alpha}.
 \]
@@ -67,7 +69,7 @@ Równoważnie należy wykazać, że procedura \proc{Partition} utworzy podział 
 \subchapter{Randomizowana wersja algorytmu quicksort}
 
 \exercise %7.3-1
-Randomizacja algorytmu sprawia, że szanse osiągnięcia przypadku pesymistycznego są znikome. Można więc przyjąć, że dla każdych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
+Randomizacja algorytmu sprawia, że żadne dane wejściowe nie stanowią przypadku pesymistycznego. Można więc przyjąć, że dla każdych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
 
 \exercise %7.3-2
 W~przypadku pesymistycznym generator liczb losowych za każdym razem wybiera wartości, które tworzą najbardziej niezrównoważony podział podtablicy, czyli $p$ lub $r$. W~takiej sytuacji liczba wywołań generatora jest rzędu $\Theta(n)$.
@@ -77,7 +79,7 @@ W~przypadku optymistycznym generator za każdym razem zwraca liczbę bliską $(p
 \subchapter{Analiza algorytmu quicksort}
 
 \exercise %7.4-1
-Niech $n\ge1$. Zgadujemy, że $T(q)\ge dq^2$ dla pewnej stałej $d>0$ i~wszystkich $0\le q\le n-1$. Podstawiamy do wzoru na $T(n)$ i~na podstawie \refExercise{7.4-3} otrzymujemy:
+Niech $n\ge1$. Zgadujemy, że $T(q)\ge dq^2$ dla pewnej stałej $d>0$ i~wszystkich $q=0$, 1,~\dots,~$n-1$. Podstawiamy do wzoru na $T(n)$ i~na podstawie \refExercise{7.4-3} otrzymujemy:
 \begin{align*}
 	T(n) &\ge \max_{0\le q\le n-1}(dq^2+d(n-q-1)^2)+\Theta(n) \\
 	&= d\cdot\!\!\!\max_{0\le q\le n-1}(q^2+(n-q-1)^2)+\Theta(n) \\
@@ -91,22 +93,22 @@ Czas algorytmu quicksort w~przypadku optymistycznym jest opisany przez rekurencj
 \[
     T(n) = \min_{0\le q\le n-1}(T(q)+T(n-q-1))+\Theta(n).
 \]
-Niech $c>0$ będzie stałą. Zgadujemy, że $T(q)\ge cq\lg q$ dla każdego $0\le q\le n-1$ (przyjmujemy dla wygody, że $0\lg0=0$) i~podstawiamy:
+Niech $c>0$ będzie stałą. Zgadujemy, że $T(q)\ge cq\lg q$ dla każdego $q=0$, 1,~\dots,~$n-1$ (przyjmujemy dla wygody, że $0\lg0=0$) i~podstawiamy:
 \begin{align*}
     T(n) &\ge \min_{0\le q\le n-1}(cq\lg q+c(n-q-1)\lg(n-q-1))+\Theta(n) \\
 	&= c\cdot\!\!\!\min_{0\le q\le n-1}(q\lg q+(n-q-1)\lg(n-q-1))+\Theta(n).
 \end{align*}
 
-Obliczymy teraz minimum wyrażenia $q\lg q+(n-q-1)\lg(n-q-1)$, gdy $0\le q\le n-1$. Potraktujmy je jako funkcję $f$ zmiennej $q\in(0,n-1)$ i~obliczmy obie pochodne tej funkcji:
+Obliczymy teraz minimum wyrażenia $q\lg q+(n-q-1)\lg(n-q-1)$, gdy $0\le q\le n-1$. Jeśli $q=0$ lub $q=n-1$, to wyrażenie ma wartość $(n-1)\lg(n-1)$. W~pozostałych przypadkach potraktujmy je jako funkcję $f$ zmiennej $q$. Pochodne $f$ są postaci:
 \begin{align*}
     \frac{df}{dq}(q) &= \frac{d}{dq}\biggl(\frac{q\ln q+(n-q-1)\ln(n-q-1)}{\ln2}\biggr) = \frac{\ln q-\ln(n-q-1)}{\ln2}, \\[1mm]
 	\frac{d^2\!f}{dq^2}(q) &= \frac{d}{dq}\biggl(\frac{\ln q-\ln(n-q-1)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q}+\frac{1}{n-q-1}\biggr).
 \end{align*}
-Pierwsza pochodna zeruje się tylko wtedy, gdy $q=(n-1)/2$. Obliczamy wartość drugiej pochodnej w~tym punkcie:
+Pierwsza pochodna zeruje się tylko wtedy, gdy $q=(n-1)/2$. Wyznaczamy drugą pochodną w~tym punkcie:
 \[
     \frac{d^2\!f}{dq^2}\biggl(\frac{n-1}{2}\biggr) = \frac{1}{\ln2}\biggl(\frac{2}{n-1}+\frac{2}{2n-(n-1)-2}\biggr) = \frac{4}{\ln2\cdot(n-1)}.
 \]
-Wartość ta jest dodatnia, o~ile $n>1$. Mamy zatem, że minimum funkcji $f$ znajduje się w~punkcie $q=(n-1)/2$ i~wynosi $(n-1)\lg((n-1)/2)$. Widać, że jeśli $q$ dąży do 0 lub, analogicznie, do $n-1$, to wartość $f(q)$ dąży do $(n-1)\lg(n-1)$, zatem badane wyrażenie osiąga najmniejszą wartość tylko dla $q=(n-1)/2$.
+Liczba ta jest dodatnia, o~ile $n>1$. Mamy zatem, że minimum funkcji $f$ znajduje się w~punkcie $q=(n-1)/2$ i~wynosi $(n-1)\lg((n-1)/2)$. Wartość ta stanowi tym samym minimum szukanego wyrażenia.
 
 Powracamy do oszacowania rekurencji $T(n)$, przyjmując $n\ge2$:
 \begin{align*}
@@ -114,11 +116,10 @@ Powracamy do oszacowania rekurencji $T(n)$, przyjmując $n\ge2$:
 	&= c(n-1)\lg(n-1)-c(n-1)+\Theta(n) \\
 	&= cn\lg(n-1)-c\lg(n-1)-c(n-1)+\Theta(n) \\
 	&\ge cn\lg(n/2)-c\lg(n-1)-c(n-1)+\Theta(n) \\
-	&= cn\lg n-cn-c\lg(n-1)-cn+c+\Theta(n) \\
 	&= cn\lg n-c(2n+\lg(n-1)-1)+\Theta(n) \\
 	&\ge cn\lg n.
 \end{align*}
-Ostatnia nierówność zachodzi, o~ile stała $c$ jest na tyle mała, że wyrażenie $c(2n+\lg(n-1)-1)$ jest zdominowane przez składnik $\Theta(n)$. Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(1)=1$, który spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
+Ostatnia nierówność zachodzi, o~ile stała $c$ jest na tyle mała, że wyrażenie $c(2n+\lg(n-1)-1)$ jest zdominowane przez składnik $\Theta(n)$. Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(1)=1$. Na podstawę indukcji możemy więc przyjąć $n=1$, dla którego $T(n)$ spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
 
 \exercise %7.4-3
 Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$. W~celu znalezienia maksimum globalnego tej funkcji obliczmy jej pierwszą i~drugą pochodną:
@@ -126,7 +127,7 @@ Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$
     \frac{df}{dq}(q) &= 2q-2(n-q-1), \\
 	\frac{d^2\!f}{dq^2}(q) &= 4.
 \end{align*}
-Ponieważ druga pochodna jest dodatnia, to funkcja $f$ przyjmuje maksimum w~pewnym punkcie brzegowym swojej dziedziny. Mamy $f(0)=f(n-1)=(n-1)^2$, więc maksimum jest w~punktach $q=0$ i~$q=n-1$. 
+Ponieważ druga pochodna jest dodatnia, to funkcja $f$ nie posiada maksimum lokalnego i~jej największej wartości należy szukać w~punktach brzegowych dziedziny. Mamy $f(0)=f(n-1)=(n-1)^2$, więc maksimum jest osiągane w~obu tych punktach.
 
 \exercise %7.4-4
 Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu quicksort korzystamy z~analizy przedstawionej w~podręczniku dla górnego oszacowania. Zauważmy, że lemat~7.1 pozostaje prawdziwy, gdyby zamiast notacji $O$ zastosować $\Omega$. Prowadząc rozumowanie analogicznie, dochodzimy w~końcu do wartości oczekiwanej zmiennej losowej $X$, którą następnie ograniczamy od dołu:
@@ -136,19 +137,19 @@ Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu qui
 Skorzystaliśmy tutaj z~\refExercise{A.2-3} oraz z~punktu~(b) problemu~\refProblem{A-1} dla $s=1$, skąd otrzymaliśmy ostatnie dwie równości.
 
 \exercise %7.4-5
-W~rozważanej modyfikacji rekursja w~algorytmie quicksort zatrzymuje się dla podtablic o~długości mniejszej niż $k$, więc liczba fragmentów o~mniej niż $k$ elementach pozostawionych nieposortowanymi przez quicksort jest rzędu $O(n/k)$. Czas wykonywania tego kroku jest więc czasem działania pełnego sortowania szybkiego dla tablicy \compound{$n$}{elementowej} pomniejszonym o~czas działania wszystkich wywołań zastosowanych do tych małych podtablic. W~przypadku średnim koszt tego kroku wynosi $O(n\lg n-n/k\cdot k\lg k)=O(n\lg(n/k))$. Drugi krok polega na sortowaniu przez wstawianie wszystkich nieposortowanych fragmentów i~zajmuje czas $O(n/k\cdot k^2)=O(nk)$. Stąd całkowitym oczekiwanym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
+W~rozważanej modyfikacji rekursja w~algorytmie quicksort zatrzymuje się dla podtablic o~długości $n/2^i=k$. Drzewo rekursji ma zatem $i=\lg(n/k)$ poziomów, z~których każdy wnosi koszt $O(n)$. W~przypadku średnim czas wykonania tego kroku wynosi $O(n\lg(n/k))$. Liczba fragmentów o~mniej niż $k$ elementach pozostawionych nieposortowanymi po pierwszej fazie jest rzędu $O(n/k)$. Drugi krok polega na posortowaniu ich przez wstawianie i~zajmuje czas $O(n/k\cdot k^2)=O(nk)$. Stąd całkowitym oczekiwanym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
 
 Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy złożoność czasowa tego algorytmu nie przewyższa złożoności czasowej sortowania szybkiego. W~praktyce jednak $k$ powinno być tak dobrane, aby sortowanie przez wstawianie tablicy o~długości $k$ było wykonywane szybciej od sortowania takiej tablicy algorytmem quicksort.
 
 \exercise %7.4-6
-Przyjmijmy dla uproszczenia, że możemy pozwolić sobie na pewną niedbałość przy wyznaczaniu indeksów tablicy. Oznaczmy fragmenty tablicy $A$: $X=A[1\twodots\alpha n]$, $Y=A[\alpha n\twodots(1-\alpha)n]$, $Z=A[(1-\alpha)n\twodots n]$ i~zauważmy, że utworzenie podziału w~najgorszym przypadku $\alpha$ do $1-\alpha$ wymaga, aby element rozdzielający, czyli mediana trzech elementów $a$, $b$,~$c$ losowo wybranych z~$A[1\twodots n]$, należał do $Y$. Możliwe są następujące przypadki (podtablice traktujemy jak zbiory ich komórek):
+Niech $P$ będzie szukaną funkcją zmiennej $0<\alpha<1$. Zauważmy, że funkcja ta spełnia własność $P(\alpha)=P(1-\alpha)$, w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$. Niech $i<j<k$ będą indeksami elementów losowo wybranych z~$A$. Utworzenie w~najgorszym przypadku podziału $\alpha$ do $1-\alpha$ jest równoważne temu, że $\alpha n\le j\le(1-\alpha)n$. Możliwe są następujące przypadki ze względu na wartości przyjmowane przez pozostałe indeksy:
 \begin{enumerate}
-	\item $a\in X$, $b\in Y$, $c\in Z$, co zachodzi z~prawdopodobieństwem $6\alpha^2(1-2\alpha)$;
-	\item $a\in X$, $b\in Y$, $c\in Y$, co zachodzi z~prawdopodobieństwem $3\alpha(1-2\alpha)^2$;
-	\item $a\in Y$, $b\in Y$, $c\in Z$, co zachodzi z~prawdopodobieństwem $3\alpha(1-2\alpha)^2$;
-	\item $a\in Y$, $b\in Y$, $c\in Y$, co zachodzi z~prawdopodobieństwem $(1-2\alpha)^3$.
+	\item $i<\alpha n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $6\alpha^2(1-2\alpha)$;
+	\item $i<\alpha n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
+	\item $\alpha n\le i\le(1-\alpha)n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
+	\item $\alpha n\le i\le(1-\alpha)n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $(1-2\alpha)^3$.
 \end{enumerate}
-Sumując cząstkowe prawdopodobieństwa, otrzymujemy wynik $4\alpha^3-6\alpha^2+1$.
+Sumując prawdopodobieństwa z~wszystkich przypadków, otrzymujemy $P(\alpha)\approx4\alpha^3-6\alpha^2+1$.
 
 \problems
 
@@ -160,7 +161,7 @@ Działanie procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ zosta�
 	\begin{center}
 		\includegraphics{fig07.2}
 	\end{center}
-	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$. Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$. {\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych. {\sffamily\bfseries(b)}--{\sffamily\bfseries(d)} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach~4--11.} \label{fig:7-1a}
+	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$. Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$. {\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych. {\sffamily\bfseries\twodashes{(b)}{(d)}} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach \twodashes{4}{11}.} \label{fig:7-1a}
 \end{figure}
 
 \subproblem %7-1(b)
@@ -190,7 +191,7 @@ Jedyną różnicą w~porównaniu z~procedurą \proc{Quicksort} jest to, że elem
 W~procedurze \proc{Randomized-Partition} element $A[r]$ jest zamieniany z~elementem losowo wybranym z~tablicy $A$ o~rozmiarze $n$. Stąd szanse, że pewien ustalony element tablicy $A$ zostanie elementem rozdzielającym, wynoszą $1/n$. Wobec tego wartość oczekiwana zmiennej $X_i$, gdzie $i=1$, 2,~\dots,~$n$, wynosi $\E(X_i)=\Pr(X_i=1)=1/n$.
 
 \subproblem %7-2(b)
-Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy. Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$. Zmienna losowa $X_i$ zdefiniowana w~punkcie~(a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0. Stąd czas potrzebny na posortowanie \compound{$n$}{elementowej} tablicy wyraża się wzorem
+Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy. Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$. Zmienna losowa $X_i$ zdefiniowana w~punkcie~(a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0. Stąd czas potrzebny na posortowanie \onedash{$n$}{elementowej} tablicy wyraża się wzorem
 \[
 	T(n) = T(q-1)+T(n-q)+\Theta(n) = \sum_{i=1}^nX_i(T(i-1)+T(n-i)+\Theta(n)).
 \]
@@ -267,7 +268,7 @@ Pesymistyczny czas działania algorytmu \proc{Stooge-Sort} jest wyższego rzędu
 Stos rekurencji może urosnąć do rozmiaru $\Theta(n)$ w~sytuacji, gdy będzie $\Theta(n)$ wywołań rekurencyjnych \proc{Quicksort}$'$. Dzieje się tak wtedy, gdy na każdym poziomie rekursji procedura \proc{Partition} zwraca $q=r$. Do wywołania rekurencyjnego przekazywana jest wtedy podtablica o~1 mniejsza w~porównaniu z~początkową tablicą. Algorytm zachowuje się w~ten sposób, jeśli na wejście dostanie tablicę posortowaną niemalejąco.
 
 \subproblem %7-4(c)
-Wykorzystamy pomysł, aby wywoływać procedurę rekurencyjnie dla mniejszej podtablicy, natomiast większą przetwarzać w~bieżącym wywołaniu. Po wywołaniu \proc{Partition} wystarczy sprawdzać rozmiary podtablic i~mniejszą z~nich przekazywać do wywołania rekurencyjnego. Dzięki temu na kolejnym poziomie rekursji rozważany będzie problem mniejszy co najmniej o~połowę, więc w~najgorszym przypadku głębokość stosu rekurencji wyniesie $\Theta(\lg n)$. Oczekiwany czas działania algorytmu nie zmieni się -- tworzone podziały będą takie same jak przed dokonaniem usprawnienia. Zmodyfikowany kod procedury \proc{Quicksort}$'$ został przedstawiony poniżej.
+Wykorzystamy pomysł, aby wywoływać procedurę rekurencyjnie dla mniejszej podtablicy, natomiast większą przetwarzać w~bieżącym wywołaniu. Dzięki temu na kolejnym poziomie rekursji rozważany będzie problem mniejszy co najmniej o~połowę, więc w~najgorszym przypadku głębokość stosu rekurencji wyniesie $\Theta(\lg n)$. Tworzone podziały będą takie same jak przed dokonaniem usprawnienia, zatem oczekiwany czas działania algorytmu nie zmieni się. Zmodyfikowany kod procedury \proc{Quicksort}$'$ został przedstawiony poniżej.
 \begin{codebox}
 \Procname{$\proc{Quicksort}''(A,p,r)$}
 \li	\While $p<r$
@@ -288,46 +289,50 @@ Wykorzystamy pomysł, aby wywoływać procedurę rekurencyjnie dla mniejszej pod
 \problem{Podział względem mediany trzech wartości} %7-5
 
 \subproblem %7-5(a)
-Aby element $x$ znajdował się na pozycji $i$ w~tablicy $A'$, drugi z~wybranych elementów powinien znajdować się na lewo od $i$ w~tej tablicy, a~trzeci wybrany element -- na prawo od $i$ w~tej tablicy. Dla pierwszego mamy $i-1$ możliwości wyboru jego pozycji, a~dla drugiego liczbą możliwości jest $n-i$. Otrzymujemy zatem
+Element rozdzielający $x$ znajdzie się na pozycji $i$ w~tablicy $A'$, jeżeli drugi z~wybranych elementów będzie na lewo od $i$ w~tej tablicy, a~trzeci wybrany element -- na prawo od $i$. Liczby możliwych pozycji, jakie mogą zająć drugi i~trzeci element, wynoszą, odpowiednio, $i-1$ i~$n-i$. Otrzymujemy zatem
 \[
 	p_i = \frac{(i-1)(n-i)}{\binom{n}{3}}.
 \]
 
 \subproblem %7-5(b)
-W~zwykłej implementacji szanse wyboru dowolnego elementu z~tablicy $A[1\twodots n]$ na element rozdzielający są równe $1/n$ (z~części~(a) problemu~\refProblem{7-2}). Natomiast przy wyborze mediany wynoszą one
+W~zwykłej implementacji szanse wyboru mediany tablicy $A[1\twodots n]$ na element rozdzielający są równe $1/n$ (z~części~(a) problemu~\refProblem{7-2}), natomiast w~metodzie mediany trzech wartości wynoszą one $p_{\lfloor(n+1)/2\rfloor}$. Jeśli $n$ jest parzyste, to
 \[
-	p_{\lfloor(n+1)/2\rfloor} \approx \frac{(n/2)(n/2)}{\binom{n}{3}} = \frac{3n}{2(n-1)(n-2)}.
+	p_{\lfloor(n+1)/2\rfloor} = p_{n/2} = \frac{\bigl(\frac{n}{2}-1\bigr)\bigl(n-\frac{n}{2}\bigr)}{\binom{n}{3}} = \frac{3}{2(n-1)}.
 \]
-Możemy sobie pozwolić na obliczenie powyższej wartości w~przybliżeniu, gdyż niedokładność zostanie zniwelowana przez fakt, że $n\to\infty$. Stosunek tych prawdopodobieństw wynosi
+Stosunek prawdopodobieństw z~obu metod dąży do
 \[
-	\lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3n^2}{2(n-1)(n-2)} = \frac{3}{2},
+    \lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3n}{2(n-2)} = \frac{3}{2}.
 \]
-czyli szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, zwiększą się o~50\% dla dostatecznie dużych $n$.
+Dla $n$ nieparzystego mamy
+\[
+	p_{\lfloor(n+1)/2\rfloor} = p_{(n+1)/2} = \frac{\bigl(\frac{n+1}{2}-1\bigr)\bigl(n-\frac{n+1}{2}\bigr)}{\binom{n}{3}} = \frac{3(n-1)}{2n(n-2)},
+\]
+więc granica stosunku wynosi
+\[
+    \lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3(n-1)}{2(n-2)} = \frac{3}{2}.
+\]
+A zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
 
 \subproblem %7-5(c)
-W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału wynosi około $1/3$. Obliczmy teraz szanse na dobry podział przy wyborze mediany z~trzech:
+W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału jest bliska $1/3$. Szanse na dobry podział w~metodzie mediany trzech wartości wynoszą
 \[
-	\sum_{i=n/3}^{2n/3}p_i = \sum_{i=n/3}^{2n/3}\frac{(i-1)(n-i)}{\binom{n}{3}} = \frac{6}{n(n-1)(n-2)}\sum_{i=n/3}^{2n/3}(i-1)(n-i).
+	\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-2\sum_{i=1}^{n/3}\frac{(i-1)(n-i)}{\binom{n}{3}} = 1-\frac{12}{n(n-1)(n-2)}\sum_{i=1}^{n/3}(i-1)(n-i).
 \]
-Ostatnią sumę można oszacować następująco:
-\[
-	\sum_{i=n/3}^{2n/3}(i-1)(n-i) \approx \sum_{i=n/3}^{2n/3}i(n-i) \approx 2\sum_{i=n/3}^{n/2}i(n-i),
-\]
-co następnie przybliżamy za pomocą całki:
+Ostatnią sumę przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
 \begin{align*}
-	2\sum_{i=n/3}^{n/2}i(n-i) &\approx 2\int_{n/3}^{n/2}x(n-x)\,dx = 2\biggl[x^2\biggl(\frac{n}{2}-\frac{x}{3}\biggr)\biggr]\bigg|_{n/3}^{n/2} \\
-	&= 2\biggl(\frac{n}{2}\biggr)^2\biggl(\frac{n}{2}-\frac{n}{6}\biggr)-2\biggl(\frac{n}{3}\biggr)^2\biggl(\frac{n}{2}-\frac{n}{9}\biggr) = \frac{13n^3}{6\cdot27}.
+    \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]\bigg|_0^{n/3-1} \\[1mm]
+	&= \frac{(n-1)(n/3-1)^2}{2}-\frac{(n/3-1)^3}{3} \\[1mm]
+	&= \frac{(n-1)(n-3)^2}{18}-\frac{(n-3)^3}{81}.
 \end{align*}
-Powracając teraz do oszacowania szans dobrego podziału, otrzymujemy
+Wracając do oszacowania prawdopodobieństwa uzyskania dobrego podziału, otrzymujemy
 \[
-	\sum_{i=n/3}^{2n/3}p_i \approx \frac{6}{n(n-1)(n-2)}\cdot\frac{13n^3}{6\cdot27} = \frac{13n^2}{27(n-1)(n-2)}.
+    \sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-\frac{2(n-3)^2}{3n(n-2)}+\frac{4(n-3)^3}{27n(n-1)(n-2)}.
 \]
 
-Wzrost szans na uzyskanie dobrego podziału po zastosowaniu nowej strategii wyboru elementu rozdzielającego wyznaczymy, obliczając stosunek prawdopodobieństw z~obu metod, który wynosi
+Dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego szanse na utworzenie dobrego podziału wzrastają o~czynnik
 \[
-	\frac{\sum_{i=n/3}^{2n/3}p_i}{1/3} \approx \frac{13n^2}{9(n-1)(n-2)},
+	\lim_{n\to\infty}\frac{\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i}{1/3} \approx \frac{1-2/3+4/27}{1/3} = \frac{13}{9}.
 \]
-co przy $n\to\infty$ jest bliskie $13/9$ -- wzrost wynosi więc około 50\%.
 
 \subproblem %7-5(d)
 Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyskanie podziału zrównoważonego, co z~kolei obniża prawdopodobieństwo, że algorytm quicksort będzie działał w~czasie kwadratowym. Jednakże dolne oszacowanie na czas działania algorytmu pozostaje bez zmian i~wynosi nadal $\Omega(n\lg n)$ -- można sobie wyobrazić sytuację, w~której oryginalny sposób wyboru elementu rozdzielającego wprowadza za każdym razem najbardziej zrównoważony podział, a~dolnym ograniczeniem czasu działania oryginalnego algorytmu jest właśnie $\Omega(n\lg n)$.
@@ -335,9 +340,9 @@ Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyska
 \problem{Rozmyte sortowanie przedziałów} %7-6
 
 \subproblem %7-6(a)
-Niech $A$ będzie tablicą wejściową algorytmu, gdzie $A[i]=[a_i,b_i]$ dla $i=1$, 2,~\dots,~$n$. Zauważmy, że jeśli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$, czyli przedziały $A[i]$ i~$A[j]$ nachodzą na siebie, to mogą wystąpić w~tablicy wynikowej w~dowolnej kolejności. Algorytm działa podobnie jak quicksort, ale wykorzystuje tę obserwację, znajdując zbiór przedziałów nachodzących na przedział stanowiący element rozdzielający i~pomijając wywołanie rekurencyjne dla podtablicy utworzonej przez ten zbiór przedziałów.
+Niech $A$ będzie tablicą wejściową, przy czym $A[i]=[a_i,b_i]$ dla $i=1$, 2,~\dots,~$n$. Zauważmy, że jeśli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$, czyli przedziały $A[i]$ i~$A[j]$ nachodzą na siebie, to mogą wystąpić w~tablicy wynikowej w~dowolnej kolejności. Algorytm działa podobnie jak quicksort, ale wykorzystuje tę obserwację, znajdując zbiór przedziałów nachodzących na przedział stanowiący element rozdzielający i~pomijając wywołanie rekurencyjne dla podtablicy utworzonej przez ten zbiór przedziałów.
 
-Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów; aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\id{length}[A])$.
+Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów. Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\id{length}[A])$.
 \begin{codebox}
 \Procname{$\proc{Fuzzy-Sort}(A,p,r)$}
 \li	\If $p<r$
@@ -347,7 +352,8 @@ Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów; aby p
 \li			$\proc{Fuzzy-Sort}(A,q_2+1,r)$ \label{li:fuzzy-sort-recursion2}
 		\End
 \end{codebox}
-Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twodots r]$ na 3 podtablice: $A[q_1\twodots q_2]$, która nie musi być dalej sortowana, oraz $A[p\twodots q_1-1]$ i~$A[q_2+1\twodots r]$, które następnie sortowane są w~wywołaniach rekurencyjnych w~wierszach~\ref{li:fuzzy-sort-recursion1} i~\ref{li:fuzzy-sort-recursion2}. Pseudokod procedury pomocniczej został przedstawiony poniżej.
+
+Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twodots r]$ na 3 podtablice: $A[q_1\twodots q_2]$, która nie musi być dalej sortowana, oraz $A[p\twodots q_1-1]$ i~$A[q_2+1\twodots r]$, które następnie sortowane są w~wywołaniach rekurencyjnych w~wierszach~\ref{li:fuzzy-sort-recursion1} i~\ref{li:fuzzy-sort-recursion2}. Pseudokod tej procedury pomocniczej został przedstawiony poniżej.
 \begin{codebox}
 \Procname{$\proc{Fuzzy-Partition}(A,p,r)$}
 \li	zamień $A[r]\leftrightarrow A[\proc{Random}(p,r)]$
@@ -373,9 +379,9 @@ Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twod
 		\End \label{li:fuzzy-partition-for-end}
 \li	\Return $\langle q,i+1\rangle$
 \end{codebox}
-Po wykonaniu wiersza~\ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem lewego końca $x$ przedziału stanowiącego element rozdzielający wybrany losowo spośród wszystkich elementów $A[p\twodots r]$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$. Następnie, w~wierszach~\ref{li:fuzzy-partition-q-init}\nobreakdash--\ref{li:fuzzy-partition-for-end}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy. W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania. Na końcu zwracane zostają indeksy początku i~końca tego obszaru.
+Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$. Po wykonaniu wiersza~\ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$. Następnie, w~wierszach \twodashes{\ref{li:fuzzy-partition-q-init}}{\ref{li:fuzzy-partition-for-end}}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy. W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania. Na końcu zwracane są indeksy początku i~końca tego obszaru.
 
 \subproblem %7-6(b)
-Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \compound{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to w~każdym wywołaniu rekurencyjnym będzie sortowana tylko podtablica zawierająca elementy leżące na prawo od elementu rozdzielającego. Randomizacja zapewnia, że wartość oczekiwana pozycji elementu rozdzielającego wypada pośrodku podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnych wywołaniach rekurencyjnych sortowany będzie fragment o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
+Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \onedash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta. Na~każdym poziomie rekursji będzie więc sortowany tylko jeden obszar. Randomizacja zapewnia, że element rozdzielający wypada średnio w~połowie podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
 
 \endinput
