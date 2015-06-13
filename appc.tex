@@ -184,18 +184,19 @@ Jeśli numer drugiej wybranej karty wynosi $k$, to liczba zdarzeń sprzyjającyc
 Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \onedash{3}{permutacji} zbioru \onedash{10}{elementowego}). Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
 
 \exercise %C.2-4
-Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa binarnego rozwinięcia ilorazu $a/b$ jest nieskończonym ciągiem zer i~jedynek $\beta_1,\beta_2,\dots$ takim, że
+Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa rozwinięcia binarnego ilorazu $a/b$ jest ciągiem zer i~jedynek $\beta_1,\beta_2,\dots$ zawierającym co najmniej jedno zero i~co najmniej jedną jedynkę oraz spełniającym równość
 \[
     \frac{a}{b} = \sum_{i=1}^\infty\frac{\beta_i}{2^i}.
 \]
-Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek, $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \onedash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=1$, a~dla reszki $\alpha_i=0$. Rzuty wykonujemy, dopóki $\alpha_i=\beta_i$. Natychmiast po wystąpieniu pierwszej różnicy, kończymy procedurę, zwracając ostatnio uzyskany wynik, czyli orła, jeśli $\alpha_k=1$, albo reszkę w~przeciwnym przypadku, przy czym $k$ jest najmniejszą liczbą, dla której $\alpha_k\ne\beta_k$.
 
-Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła. Kolejne rzuty są niezależne od siebie, zatem szanse uzyskania $k-1$ wyników zgodnych z~kolejnymi cyframi rozwinięcia ułamka $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$. A~zatem orzeł zostanie zwrócony z~prawdopodobieństwem równym
+Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \onedash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=0$, a~dla reszki $\alpha_i=1$. Rzuty wykonujemy, dopóki zachodzi $\alpha_i=\beta_i$. Natychmiast po wystąpieniu pierwszej różnicy kończymy proces i~zwracamy wynik ostatnio wykonanego rzutu. Dokładniej, jeśli $k$ jest najmniejszym indeksem, dla którego $\alpha_k\ne\beta_k$, to zwrócimy orła, jeżeli $\alpha_k=0$, a~reszkę w~przeciwnym przypadku.
+
+Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła. Wynik każdego rzutu monetą nie zależy od wyników pozostałych rzutów, zatem szanse uzyskania dokładnie $k-1$ rezultatów zgodnych z~kolejnymi bitami części ułamkowej $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$. Stąd mamy, że orzeł zostanie zwrócony z~prawdopodobieństwem równym
 \[
-    \sum_{\substack{k=1,2,\dots\\\beta_k=1}}\frac{1}{2^k} = \sum_{\substack{k=1,2,\dots\\\beta_k=0}}0+\sum_{\substack{k=1,2,\dots\\\beta_k=1}}\frac{1}{2^k} = \sum_{k=1}^\infty\frac{\beta_k}{2^k} = \frac{a}{b}.
+    \sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{\substack{k=1,2,\dots\\\beta_k=0}}\!\frac{0}{2^k}+\sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{k=1}^\infty\frac{\beta_k}{2^k} = \frac{a}{b}.
 \]
 
-Oczekiwana liczba rzutów monetą potrzebnych do wyznaczenia wyniku jest oczekiwaną liczbą rzutów aż do pierwszej różnicy w~porównaniu z~rozwinięciem binarnym części ułamkowej $a/b$. Jeśli przyjmiemy, że sukcesem jest wynik rzutu monetą niepasujący do bieżącego elementu rozwinięcia, to liczba rzutów $n$ aż do pierwszego sukcesu jest zmienną losową $X$ o~rozkładzie geometrycznym. Ponieważ prawdopodobieństwo sukcesu wynosi $p=1/2$, to ze wzoru~(C.31) otrzymujemy $\E(X)=1/p=2$. Widać zatem, że oczekiwana liczba rzutów monetą w~opisanej procedurze jest stała.
+Oczekiwana liczba rzutów monetą potrzebnych do wyznaczenia wyniku jest oczekiwaną liczbą rzutów, aż do uzyskania pierwszej niezgodności między wynikiem rzutu a~odpowiednim bitem rozwinięcia binarnego części ułamkowej liczby $a/b$. Jeśli przyjmiemy, że sukcesem jest wynik rzutu monetą niezgodny z~bieżącym bitem rozwinięcia, to liczba potrzebnych rzutów $n$ zanim pojawi się pierwszy sukces jest zmienną losową $X$ o~rozkładzie geometrycznym. Prawdopodobieństwo sukcesu wynosi $p=1/2$, więc ze wzoru~(C.31) otrzymujemy $\E(X)=1/p=2$. Widać zatem, że oczekiwana liczba rzutów monetą w~opisanej procedurze jest stała.
 
 \exercise %C.2-5
 Korzystając z~obserwacji, że $(A\cap B)\cup(\overline{A}\cap B)=B$ oraz z~tego, że zdarzenia $A\cap B$ i~$\overline{A}\cap B$ wzajemnie się wykluczają, otrzymujemy
@@ -282,11 +283,9 @@ Niech $X$ będzie zmienną losową oznaczającą sumę oczek na obu kostkach. Ma
 	&= 7.
 \end{align*}
 Niech $Y$ będzie zmienną losową oznaczającą większą z~liczb oczek na obu kostkach. Zachodzi
-\begin{align*}
-	\E(Y) &= \sum_{y=1}^{6}y\Pr(Y=y) \\
-	&= 1\cdot\frac{1}{36}+2\cdot\frac{3}{36}+3\cdot\frac{5}{36}+4\cdot\frac{7}{36}+5\cdot\frac{9}{36}+6\cdot\frac{11}{36} \\[2mm]
-	&\approx 4{,}47.
-\end{align*}
+\[
+	\E(Y) = \sum_{y=1}^{6}y\Pr(Y=y) = 1\cdot\frac{1}{36}+2\cdot\frac{3}{36}+3\cdot\frac{5}{36}+4\cdot\frac{7}{36}+5\cdot\frac{9}{36}+6\cdot\frac{11}{36} \approx 4{,}47.
+\]
 
 \exercise %C.3-2
 Niech $X$ będzie zmienną losową przyjmującą wartość indeksu największego elementu tablicy $A$. Jeśli w~tej tablicy znajduje się $n$ liczb, to $\Pr(X=i)=1/n$ dla każdego $i=1$, 2,~\dots,~$n$, a~zatem
@@ -485,7 +484,7 @@ Zanim przejdziemy do porównywania prawdopodobieństw, udowodnimy pomocniczą ni
 \[
     \binom{4n}{n-1} > 8^n
 \]
-dla $n\ge20$, stosując indukcję matematyczną. Przypadek bazowy indukcji można zweryfikować, obliczając wartości obu stron nierówności. Załóżmy teraz, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
+dla $n\ge20$, stosując indukcję matematyczną. Przypadek bazowy indukcji można zweryfikować, obliczając wartości obu stron nierówności. Załóżmy zatem, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
 \[
     \binom{4n}{n-1} = \frac{4n}{n-1}\cdot\binom{4n-1}{n-2} = \frac{4n}{n-1}\cdot\frac{4n-1}{3n+1}\cdot\frac{4n-2}{3n}\cdot\frac{4n-3}{3n-1}\cdot\binom{4(n-1)}{n-2}.
 \]

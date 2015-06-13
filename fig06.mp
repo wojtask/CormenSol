@@ -177,7 +177,7 @@ beginfig(2);
 	hshift := .7scale;
 	vshift := 2scale;
 	bighshift := 20hshift;
-	bigvshift := -4.7vshift;
+	bigvshift := -4.5vshift;
 	color lightgray; lightgray := .8white;
 	color medgray; medgray := .6white;
 	path p[];
@@ -211,7 +211,7 @@ beginfig(2);
 	label("22", (-7hshift, -3vshift));
 	label("9", (-5hshift, -3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3.5vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3.3vshift));
 
 	drawemptyheap(bighshift, 0, 9, 2, 1);
 
@@ -225,7 +225,7 @@ beginfig(2);
 	label("10", (bighshift-7hshift, -3vshift));
 	label("9", (bighshift-5hshift, -3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -3.5vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -3.3vshift));
 
 	drawemptyheap(0, bigvshift, 9, 1, 1);
 
@@ -239,7 +239,7 @@ beginfig(2);
 	label("10", (-7hshift, bigvshift-3vshift));
 	label("9", (-5hshift, bigvshift-3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (0, bigvshift-3.5vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (0, bigvshift-3.3vshift));
 
 	drawemptyheap(bighshift, bigvshift, 9, 0, 1);
 
@@ -253,7 +253,7 @@ beginfig(2);
 	label("10", (bighshift-7hshift, bigvshift-3vshift));
 	label("9", (bighshift-5hshift, bigvshift-3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (bighshift, bigvshift-3.5vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (bighshift, bigvshift-3.3vshift));
 
 	drawemptyheap(0, 2bigvshift, 9, -1, 1);
 
@@ -267,7 +267,7 @@ beginfig(2);
 	label("5", (-7hshift, 2bigvshift-3vshift));
 	label("9", (-5hshift, 2bigvshift-3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(e)} etex, (0, 2bigvshift-3.5vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(e)} etex, (0, 2bigvshift-3.3vshift));
 endfig;
 
 beginfig(3);
@@ -489,7 +489,7 @@ beginfig(4);
 	label("2", (-hshift, -3vshift));
 	label("1", (hshift, -3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -4vshift));
 
 	drawemptyheap(bighshift, 0, 11, -1, 0);
 
@@ -505,7 +505,7 @@ beginfig(4);
 	label("1", (bighshift-3hshift, -3vshift));
 	label("2", (bighshift-hshift, -3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -4vshift));
 endfig;
 
 beginfig(5);
@@ -535,7 +535,7 @@ beginfig(5);
 	%jest bug w MetaPost 1.504, nie wyświetla się znak nieskończoności jeśli jest poprzedzony minusem
 	%dlatego musi być takie obejście
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -4vshift));
 
 	drawemptyheap(bighshift, 0, 13, 12, 0);
 
@@ -553,7 +553,7 @@ beginfig(5);
 	label("1", (bighshift+hshift, -3vshift));
 	label(btex 10 etex, (bighshift+3hshift, -3vshift)); label(btex \fontsize{8}{10}\selectfont$i$ etex, (bighshift+2hshift, -3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -4vshift));
 
 	drawemptyheap(0, bigvshift, 13, 5, 0);
 
@@ -571,7 +571,7 @@ beginfig(5);
 	label("1", (hshift, bigvshift-3vshift));
 	label("8", (3hshift, bigvshift-3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (0, bigvshift-3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (0, bigvshift-4vshift));
 
 	drawemptyheap(bighshift, bigvshift, 13, 2, 0);
 
@@ -589,7 +589,7 @@ beginfig(5);
 	label("1", (bighshift+hshift, bigvshift-3vshift));
 	label("8", (bighshift+3hshift, bigvshift-3vshift));
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (bighshift, bigvshift-3.75vshift));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (bighshift, bigvshift-4vshift));
 endfig;
 
 beginfig(6);

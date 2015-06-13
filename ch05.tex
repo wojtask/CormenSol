@@ -365,13 +365,13 @@ Niech $X$ będzie zmienną losową oznaczającą ilość wybranych indeksów tab
 Rozważmy ponownie zmienną losową $X$ i~analogiczną serię prób Bernoulliego z~poprzedniego punktu. Jednak w~tym przypadku sukces następuje z~prawdopodobieństwem $p=k/n$, a~zatem średnią liczbą wybranych indeksów przed odnalezieniem $x$ jest $\E(X)=1/p=n/k$.
 
 \subproblem %5-2(d)
-Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów. Pozycje tablicy $A$ reprezentują kupony, których skompletowanie (odpowiadające sprawdzeniu wszystkich pozycji tablicy) jest celem problemu. Zgodnie z~uzasadnieniem podanym w~podręczniku, aby uzbierać pełny zestaw $n$ kuponów pojawiających się losowo, należy zdobyć ich około $n\lg n$.
+Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów. Pozycje tablicy $A$ reprezentują kupony, których skompletowanie (odpowiadające sprawdzeniu wszystkich pozycji tablicy) jest celem problemu. Zgodnie z~uzasadnieniem podanym w~podręczniku, aby uzbierać pełny zestaw $n$ kuponów pojawiających się losowo, należy zdobyć ich około $n\ln n$.
 
 \subproblem %5-2(e)
 Procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania liniowego opisanego w~\refExercise{2.1-3}. Z~rozwiązania \refExercise{2.2-3} wynika zatem, że czas tego algorytmu -- wyrażony jako liczba sprawdzanych indeksów tablicy -- wynosi w~średnim przypadku $(n+1)/2$, a~w~pesymistycznym $n$.
 
 \subproblem %5-2(f)
-% Analiza przypadku średniego dla tego algorytmu nie różni się od tej przeprowadzonej w~punkcie~(c). Także tutaj poszukiwanie elementu $x$ można traktować jako wykonywanie prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=k/n$. Algorytm wykona więc średnio $n/k$ porównań.
+Analiza przypadku średniego dla tego algorytmu nie różni się od tej przeprowadzonej w~punkcie~(c). Także tutaj poszukiwanie elementu $x$ można traktować jako wykonywanie prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=k/n$. Algorytm wykona więc średnio $n/k$ porównań.
 
 % W~tablicy \onedash{$n$}{elementowej} o~przypadkowym rozkładzie elementów prawdopodobieństwo wybrania jednego z~$k$ identycznych elementów wynosi $k/n$. Zanim trafimy na jeden z~nich, sprawdzimy około $n/k$ indeksów, więc oczekiwanym czasem działania jest $\Theta(n/k)$.
 

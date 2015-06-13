@@ -195,7 +195,7 @@ Pokażemy oszacowanie na $d(k)$ przez indukcję, zakładając w~tym celu, że $d
 Podstawa indukcji zachodzi trywialnie, bo $d(1)=0\ge 1\lg1$, a~zatem $d(k)=\Omega(k\lg k)$.
 
 \subproblem %8-1(e)
-Zauważmy, że możemy usunąć z~drzewa $T_A$ wszystkie ścieżki, które prowadzą tylko do nieosiągalnych liści, ponieważ nie wpływają one na czas działania algorytmu $A$. A~zatem, na mocy punktu~(a), po ich usunięciu $T_A$ zawiera dokładnie $n!$ liści. Wykorzystując definicję $d(k)$ oraz wynik z~poprzedniej części, mamy
+Zauważmy, że możemy usunąć wszystkie nieosiągalne węzły z~drzewa $T_A$, ponieważ nie wpływają one na czas działania algorytmu $A$. A~zatem, na mocy punktu~(a), po ich usunięciu $T_A$ zawiera dokładnie $n!$ liści. Wykorzystując definicję $d(k)$ oraz wynik z~poprzedniej części, mamy
 \[
 	D(T_A) \ge d(n!) = \Omega(n!\lg(n!)).
 \]
@@ -239,34 +239,28 @@ Sortowanie przez wstawianie.
 Do posortowania $n$ rekordów \onedash{$b$}{bitowych} w~czasie $O(bn)$ za pomocą algorytmu sortowania pozycyjnego, potrzebna jest pomocnicza procedura, która sortuje stabilnie i~działa w~czasie $O(n)$. Takie warunki spełnia jedynie algorytm z~części~(a). W~każdej kolejnej fazie sortowania rekordy powinny być porządkowane względem coraz bardziej znaczących bitów.
 
 \subproblem %8-2(e)
-W~algorytmie wykorzystujemy tablicę pomocniczą $C[0\twodots k]$, którą tworzymy identycznie jak w~wierszach \twodashes{1}{7} procedury \proc{Counting-Sort}. Ponadto będziemy używać dodatkowej tablicy $P[0\twodots k]$, w~której początkowo $P[i]$ będzie ustawiane na najniższą pozycję elementu o~wartości~$i$ w~tablicy wynikowej. Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należałoby przenieść na inne pozycje w~celu uporządkowania tablicy, po czym dokonanie ich wymiany z~odpowiednimi elementami.
+W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identycznie jak w~wierszach \twodashes{1}{7} procedury \proc{Counting-Sort}. Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwego obszaru tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zawartych w~tablicy $C$.
 \begin{codebox}
 \Procname{$\proc{In-Place-Counting-Sort}(A,k)$}
-\li	utwórz tablicę $C[0\twodots k]$ jak w~procedurze \proc{Counting-Sort} 
-\li	$P[0]\gets1$ \label{li:in-place-counting-sort-preprocessing-begin}
-\li	\For $i\gets1$ \To $k$
-\li		\Do $P[i]\gets C[i-1]+1$
-		\End \label{li:in-place-counting-sort-preprocessing-end}
-\li	\For $i\gets0$ \To $k$ \label{li:in-place-counting-sort-for-begin}
+\li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach \twodashes{1}{7} procedury \proc{Counting-Sort} 
+\li	\For $i\gets0$ \To $k-1$ \label{li:in-place-counting-sort-for-begin}
 \li		\Do
-			\While $P[i]\le C[i]$ \label{li:in-place-counting-sort-while-begin}
+			$j\gets C[i]$
+\li			\While $j>0$ i~$A[j]\ge i$ \label{li:in-place-counting-sort-while1-begin}
 \li				\Do
-					$\id{key}\gets A[P[i]]$
-\li					\If $\id{key}=i$
-\li						\Then $P[i]\gets P[i]+1$ \label{li:in-place-counting-sort-increment}
-\li						\Else
-							\While $A[P[\id{key}]]=\id{key}$
-\li								\Do $P[\id{key}]\gets P[\id{key}]+1$
-								\End
-\li							zamień $A[P[i]]\leftrightarrow A[P[\id{key}]]$ \label{li:in-place-counting-sort-swap}
+					\While $A[j]>i$
+\li						\Do
+							$C[A[j]]\gets C[A[j]]-1$ \label{li:in-place-counting-sort-decrement}
+\li							zamień $A[j]\leftrightarrow A[C[A[j]]+1]$ \label{li:in-place-counting-sort-swap}
 						\End
-				\End \label{li:in-place-counting-sort-while-end}
+\li					$j\gets j-1$
+				\End \label{li:in-place-counting-sort-while1-end}
 		\End \label{li:in-place-counting-sort-for-end}
 \end{codebox}
 
-Algorytm sortuje tablicę wejściową w~miejscu, wykorzystując $O(k)$ dodatkowej pamięci. Czas potrzebny na utworzenie tablicy $C$ wynosi $O(n+k)$, a wykonanie wierszy \twodashes{\ref{li:in-place-counting-sort-preprocessing-begin}}{\ref{li:in-place-counting-sort-preprocessing-end}} zajmuje czas $O(k)$.
+Pętla \kw{for} w~wierszach \twodashes{\ref{li:in-place-counting-sort-for-begin}}{\ref{li:in-place-counting-sort-for-end}} przegląda kolejne fragmenty tablicy, które po zakończeniu działania algorytmu będą przechowywać elementy o~tej samej wartości. Dany fragment jest następnie przetwarzany w~kolejności malejących indeksów i~wszystkie elementy, które nie powinny znajdować się w~tym obszarze tablicy, są umieszczane na właściwych pozycjach. Wraz z~każdą zamianą elementów, w~wierszu~\ref{li:in-place-counting-sort-decrement} zmniejszana jest odpowiednia wartość w~tablicy $C$.
 
-Wyznaczymy teraz czas działania pozostałej części algorytmu. Zauważmy, że w~każdej iteracji pętli \kw{while} w~wierszach \twodashes{\ref{li:in-place-counting-sort-while-begin}}{\ref{li:in-place-counting-sort-while-end}} wykonywana jest inkrementacja jednej z~komórek tablicy $P$ w~wierszu~\ref{li:in-place-counting-sort-increment} lub zamiana elementów w~wierszu~\ref{li:in-place-counting-sort-swap}. W~trakcie działania algorytmu może być wykonanych co najwyżej $n$ zamian, gdyż każda z~nich umieszcza przynajmniej jeden element na prawidłowej pozycji i~od tego momentu element ten nie jest przenoszony. Na początku $P[i]$ wynosi $C[i-1]+1$ (dla $i=1$, 2,~\dots,~$k$ oraz $P[0]=1$) i~jest później zwiększane do $C[i]+1$, a~więc każda wartość od 1 do~$n$ zostanie przypisana pewnej komórce tablicy $P$ co najwyżej 2 razy. Wynika stąd, że łącznie wykonanych zostanie maksymalnie $2n$ inkrementacji komórek tablicy $P$. A~zatem pętla \kw{for} z~wierszy \twodashes{\ref{li:in-place-counting-sort-for-begin}}{\ref{li:in-place-counting-sort-for-end}} działa w~czasie $O(n)$, więc czasem działania całego algorytmu jest $O(n+k)$.
+Algorytm sortuje tablicę wejściową w~miejscu, wykorzystując $O(k)$ dodatkowej pamięci. Czas potrzebny na utworzenie tablicy $C$ wynosi $O(n+k)$. Zauważmy, że element, który zostanie umieszczony na swojej poprawnej pozycji, już jej nie zmieni aż do zakończenia działania algorytmu -- zostanie więc wykonanych co najwyżej $n-1$ zamian z~wiersza~\ref{li:in-place-counting-sort-swap}. Podobnie sumaryczna liczba iteracji pętli \kw{while} w~wierszach \twodashes{\ref{li:in-place-counting-sort-while1-begin}}{\ref{li:in-place-counting-sort-while1-end}} jest ograniczona przez $n-1$, jako że w~każdej z~nich przetwarzana jest inna komórka tablicy wejściowej. Czas działania algorytmu wynosi zatem $O(n+k)$.
 
 \problem{Sortowanie obiektów zmiennej długości} %8-3
 
@@ -304,7 +298,7 @@ Zilustrujemy za pomocą drzewa decyzyjnego działanie algorytmu wyznaczającego 
 A~zatem dowolny algorytm rozwiązujący ten problem wykonuje co najmniej $\Omega(n\lg n)$ porównań.
 
 \subproblem %8-4(c)
-Rozwiązanie tego problemu będzie opierać się na idei algorytmu quicksort. Zauważmy, że posortowanie obu ciągów dzbanków względem ich pojemności natychmiast prowadzi do rozwiązania problemu -- grupujemy wówczas w~pary dzbanek czerwony z~dzbankiem niebieskim stojące na tych samych pozycjach w~swoich ciągach. Niech $R$ będzie tablicą dzbanków czerwonych, a~$B$ -- tablicą dzbanków niebieskich. Poniższa procedura sortuje podtablice $R[p\twodots r]$ i~$B[p\twodots r]$, nie wykonując porównań dzbanków z~tej samej tablicy.
+Rozwiązanie tego problemu będzie opierać się na idei algorytmu quicksort. Zauważmy, że posortowanie obu ciągów dzbanków względem ich pojemności natychmiast prowadzi do rozwiązania problemu -- grupujemy wówczas w~pary dzbanek czerwony z~dzbankiem niebieskim stojące na tych samych pozycjach w~swoich ciągach. Niech $R$ będzie tablicą dzbanków czerwonych, a~$B$ tablicą dzbanków niebieskich. Poniższa procedura stanowi adaptację algorytmu quicksort do omawianego problemu.
 \begin{codebox}
 \Procname{$\proc{Jugs-Sort}(R,B,p,r)$}
 \li	\If $p<r$
@@ -315,7 +309,7 @@ Rozwiązanie tego problemu będzie opierać się na idei algorytmu quicksort. Za
 		\End
 \end{codebox}
 
-Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przyjmuje ona dwie tablice $R$ i~$B$, z~których jedna jest permutacją drugiej i~w~każdej z~nich wszystkie elementy są różne. Procedura dokonuje podziału obu tablic na podstawie losowo wybranego elementu rozdzielającego, przy czym nie porównuje elementów z~tej samej tablicy. Zwracanym wynikiem jest pozycja elementu rozdzielającego w~wynikowych tablicach (pozycja ta jest identyczna dla obu tablic).
+Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przyjmuje ona dwie tablice $R$ i~$B$, z~których jedna jest permutacją drugiej i~w~każdej z~nich wszystkie elementy są parami różne. Przyjmujemy, że operacja porównania dwóch dzbanków jest w~rzeczywistości porównaniem ich pojemności. Procedura dokonuje podziału obu tablic na podstawie losowo wybranego elementu rozdzielającego, przy czym nie porównuje elementów z~tej samej tablicy. Zwracanym wynikiem jest pozycja elementu rozdzielającego (która jest identyczna w~obu wynikowych tablicach).
 \begin{codebox}
 \Procname{$\proc{Jugs-Partition}(R,B,p,r)$}
 \li	zamień $R[r]\leftrightarrow R[\proc{Random}(p,r)]$
@@ -325,7 +319,7 @@ Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przy
 \li		\Do $i\gets i+1$
 		\End
 \li	zamień $B[i]\leftrightarrow B[r]$
-\li	$i\gets p-1$
+\li	$i\gets p-1$ \label{li:jugs-partition-first-partition-begin}
 \li	\For $j\gets p$ \To $r-1$ \label{li:jugs-partition-for1-begin}
 \li		\Do
 			\If $B[j]<x$
@@ -334,27 +328,19 @@ Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przy
 \li					zamień $B[i]\leftrightarrow B[j]$
 				\End
 		\End \label{li:jugs-partition-for1-end}
-\li	$x\gets B[r]$ \label{li:jugs-partition-change-x}
-\li	$i\gets p-1$
-\li	\For $j\gets p$ \To $r-1$ \label{li:jugs-partition-for2-begin}
-\li		\Do
-			\If $R[j]<x$
-\li				\Then
-					$i\gets i+1$
-\li					zamień $R[i]\leftrightarrow R[j]$
-				\End
-		\End \label{li:jugs-partition-for2-end}
-\li	zamień $B[i+1]\leftrightarrow B[r]$
-\li	zamień $R[i+1]\leftrightarrow R[r]$
+\li	zamień $B[i+1]\leftrightarrow B[r]$ \label{li:jugs-partition-first-partition-end}
+\li	$x\gets B[i+1]$
+\li	powtórz kroki z~wierszy \twodashes{\ref{li:jugs-partition-first-partition-begin}}{\ref{li:jugs-partition-first-partition-end}} dla tablicy $R$ \label{li:jugs-partition-second-partition}
 \li	\Return $i+1$
 \end{codebox}
-Najpierw losowo wybierany jest element rozdzielający $x$ z~tablicy $R[p\twodots r]$. Następnie pętla \kw{for} z~wierszy \twodashes{\ref{li:jugs-partition-for1-begin}}{\ref{li:jugs-partition-for1-end}} dokonuje podziału tablicy $B[p\twodots r]$ względem elementu $x$. Po zakończeniu pętli $B[i]=x$, podtablica $B[p\twodots i-1]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r]$ -- elementy większe niż $x$. Teraz w~wierszu~\ref{li:jugs-partition-change-x} $x$ staje się dzbankiem niebieskim o~pojemności takiej jak dotychczas. Wykonanie tej operacji jest konieczne, gdyż będziemy teraz dokonywać podziału tablicy $R[p\twodots r]$, porównując jej elementy z~$x$. Odbywa się to w~drugiej pętli \kw{for} w~wierszach \twodashes{\ref{li:jugs-partition-for2-begin}}{\ref{li:jugs-partition-for2-end}} w~podobny sposób jak w~pierwszej części procedury. Jedyną różnicą jest fakt, że element równy $x$ w~tablicy $R$ znajduje się na pozycji $r$, zatem przed zakończeniem procedury wstawiany jest na właściwą pozycję.
+
+Procedura wybiera najpierw losowo element rozdzielający $x$ z~tablicy $R[p\twodots r]$. Elementy równe $x$ są dla uproszczenia późniejszych kroków przenoszone na ostatnie pozycje swoich tablic. Następnie pętla \kw{for} z~wierszy \twodashes{\ref{li:jugs-partition-for1-begin}}{\ref{li:jugs-partition-for1-end}} dokonuje podziału tablicy $B[p\twodots r]$ względem $x$. Po zakończeniu pętli $B[r]=x$, podtablica $B[p\twodots i]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r-1]$ -- elementy większe niż $x$. Wystarczy jeszcze zamienić element rozdzielający z~$B[i+1]$, aby zakończyć podział tablicy $B$. W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \twodashes{\ref{li:jugs-partition-first-partition-begin}}{\ref{li:jugs-partition-first-partition-end}}, uprzednio nadając zmiennej $x$ wartość dotychczasowego elementu rozdzielającego, ale pobranego z~tablicy $B$.
 
 Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Sort} wynosi $O(n\lg n)$. Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort. Niech $\langle r_1,r_2,\dots,r_n\rangle$ będzie ciągiem dzbanków czerwonych uporządkowanym rosnąco, a~$\langle b_1,b_2,\dots,b_n\rangle$ -- rosnącym ciągiem dzbanków niebieskich. Zdefiniujemy zmienną losową wskaźnikową
 \[
     X_{ij} = \I(\text{$r_i$ jest porównywane z~$b_j$}).
 \]
-Zauważmy, że dane elementy $r_i$ i~$b_j$ są porównywane ze sobą co najwyżej raz. Po porównaniu $r_i$ z~każdym elementem fragmentu $B$ w~pewnym wywołaniu procedury \proc{Jugs-Partition}, $r_i$ jest umieszczane na właściwym miejscu w~tablicy $R$ i~nie uczestniczy w~późniejszych wywołaniach. Podobnie w~drugiej części procedury $b_j$ jest porównywane z~każdym elementem fragmentu $R$ z~wyjątkiem $r_i$, po czym nie uczestniczy już w~później w~sortowaniu.
+Zauważmy, że dane elementy $r_i$ i~$b_j$ są porównywane ze sobą co najwyżej raz. Po porównaniu $r_i$ z~elementami fragmentu $B$ (w~tym być może z~$b_j$) $r_i$ jest umieszczane na właściwym miejscu w~tablicy $R$ i~nie uczestniczy w~późniejszych wywołaniach procedury \proc{Jugs-Partition}. Analogiczne rozumowanie stosuje się do $b_j$.
 
 Z~powyższej obserwacji wynika, że całkowita liczba porównań wykonywanych w~algorytmie wynosi
 \[
@@ -365,9 +351,7 @@ Biorąc wartości oczekiwane obu stron, dostajemy
     \E(X) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(\text{$r_i$ jest porównywane z~$b_j$}).
 \]
 
-Pozostaje tylko obliczyć $\Pr(\text{$r_i$ jest porównywane z~$b_j$})$. Jeśli jako element rozdzielający wybrane zostanie $x$ takie, że $r_i<x<b_j$, to $r_i$ zostanie umieszczony w~lewej części podziału podtablicy $R$, a~$b_j$ -- w~prawej części podziału podtablicy $B$. A~więc elementy $r_i$ i~$b_j$ nigdy więcej nie będą porównywane. Oznaczmy przez $R_{ij}$ zbiór $\{r_i,r_{i+1},\dots,r_j\}$. Wówczas elementy $r_i$ i~$b_j$ są porównywane wtedy i~tylko wtedy, gdy pierwszym elementem wybranym jako rozdzielający ze zbioru $R_{ij}$ jest $r_i$ albo $r_j$.
-
-Każdy element zbioru $R_{ij}$ może z~jednakowym prawdopodobieństwem być wybrany jako pierwszy element rozdzielający. Ponieważ $|R_{ij}|=j-i+1$, to szanse na to, że dowolny ustalony element zbioru $R_{ij}$ będzie pierwszym wybranym jako rozdzielający, wynoszą $1/(j-i+1)$. Mamy zatem
+Pozostaje teraz tylko obliczyć $\Pr(\text{$r_i$ jest porównywane z~$b_j$})$. Jeśli jako element rozdzielający wybrane zostanie $x$ takie, że $r_i<x<b_j$, to $r_i$ zostanie umieszczone w~lewej części podziału podtablicy $R$, a~$b_j$ -- w~prawej części podziału podtablicy $B$. A~więc elementy $r_i$ i~$b_j$ nigdy więcej nie będą porównywane. Oznaczmy przez $R_{ij}$ zbiór $\{r_i,r_{i+1},\dots,r_j\}$. Wówczas elementy $r_i$ i~$b_j$ są porównywane wtedy i~tylko wtedy, gdy pierwszym elementem wybranym jako rozdzielający ze zbioru $R_{ij}$ jest $r_i$ albo $r_j$. To, że zostanie nim dowolny ustalony element zbioru $R_{ij}$, zachodzi z~jednakowym prawdopodobieństwem i~na mocy faktu, że $|R_{ij}|=j-i+1$, szanse na zajście tego zdarzenia wynoszą $1/(j-i+1)$. Mamy zatem
 \begin{align*}
     \Pr(\text{$r_i$ jest porównywane z~$b_j$}) &= \Pr(\text{$r_i$ lub $r_j$ jest pierwszym elementem rozdzielającym z~$R_{ij}$}) \\
 	&= \Pr(\text{$r_i$ jest pierwszym elementem rozdzielającym z~$R_{ij}$}) \\
@@ -377,7 +361,7 @@ Każdy element zbioru $R_{ij}$ może z~jednakowym prawdopodobieństwem być wybr
 \end{align*}
 Wstawiając obliczony wynik do wzoru na $\E(X)$ i~ograniczając tę wartość od góry, dostajemy $\E(X)=O(n\lg n)$, co stanowi oczekiwaną liczbę porównań wykonywaną przez algorytm \proc{Jugs-Sort}.
 
-Pesymistyczny przypadek zachodzi wtedy, gdy elementy rozdzielające są wybierane tak, że tworzą się podziały najbardziej niezrównoważone, czyli z~tablicy o~$n$ elementach zostaje utworzona w~wyniku podziału podtablica o~$n-1$ elementach i~podtablica pusta. Wówczas algorytm wykonuje $O(n^2)$ porównań.
+Pesymistyczny przypadek zachodzi wtedy, gdy na każdym poziomie rekursji elementy rozdzielające są wybierane tak, że tworzą się podziały najbardziej niezrównoważone, czyli z~tablicy o~$n$ elementach zostaje utworzona w~wyniku podziału podtablica o~$n-1$ elementach i~podtablica pusta. Wówczas algorytm wykonuje $O(n^2)$ porównań.
 
 \problem{Sortowanie względem średnich} %8-5
 

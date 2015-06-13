@@ -95,7 +95,7 @@ Ilustracja działania procedury \proc{Build-Max-Heap} dla tablicy $A$ znajduje s
 	\begin{center}
 		\includegraphics{fig06.2}
 	\end{center}
-	\caption{Działanie procedury \proc{Build-Max-Heap} dla tablicy $A=\langle5,3,17,10,84,19,6,22,9\rangle$. {\sffamily\bfseries(a)} Tablica $A$ i~reprezentowane przez nią drzewo binarne przed pierwszym wywołaniem \proc{Max-Heapify} z~wiersza~3. {\sffamily\bfseries\twodashes{(b)}{(d)}} Drzewo przed każdym kolejnym wywołaniem \proc{Max-Heapify}. {\sffamily\bfseries(e)} Wynikowy kopiec typu max.} \label{fig:6.3-1}
+	\caption{Działanie procedury \proc{Build-Max-Heap} dla tablicy $A=\langle5,3,17,10,84,19,6,22,9\rangle$. {\sffamily\bfseries(a)} Tablica $A$ i~reprezentowane przez nią drzewo binarne przed pierwszym wywołaniem \proc{Max-Heapify} z~wiersza~3. {\sffamily\bfseries\twodashes{(b)}{(d)}} Drzewo przed każdym kolejnym wywołaniem \proc{Max-Heapify}. {\sffamily\bfseries(e)} Wynikowy kopiec typu max} \label{fig:6.3-1}
 \end{figure}
 
 \exercise %6.3-2
@@ -221,7 +221,7 @@ Zakładamy, że tablica $A$ stanowi kopiec typu min. Poniższe procedury stanowi
 \begin{codebox}
 \Procname{$\proc{Heap-Extract-Min}(A)$}
 \li	\If $\id{heap-size}[A]<1$
-\li		\Then \Error ``kopiec pusty''
+\li		\Then \Error ,,kopiec pusty''
 		\End
 \li	$\id{min}\gets A[1]$
 \li	$A[1]\gets A[\id{heap-size}[A]]$
@@ -232,7 +232,7 @@ Zakładamy, że tablica $A$ stanowi kopiec typu min. Poniższe procedury stanowi
 \begin{codebox}
 \Procname{$\proc{Heap-Decrease-Key}(A,i,\id{key})$}
 \li	\If $\id{key}>A[i]$
-\li		\Then \Error ``nowy klucz jest większy niż klucz aktualny''
+\li		\Then \Error ,,nowy klucz jest większy niż klucz aktualny''
 		\End
 \li	$A[i]\gets\id{key}$
 \li	\While $i>1$ i~$A[\proc{Parent}(i)]>A[i]$
@@ -249,13 +249,13 @@ Zakładamy, że tablica $A$ stanowi kopiec typu min. Poniższe procedury stanowi
 \end{codebox}
 
 \exercise %6.5-4
-Po wykonaniu wiersza~1 procedury \proc{Max-Heap-Insert} wartość $A[\id{heap-size}[A]]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}, a~wówczas wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem. Omijamy ten problem poprzez nadanie elementowi wartości $-\infty$.
+Po wykonaniu wiersza~1 procedury \proc{Max-Heap-Insert} wartość $A[\id{heap-size}[A]]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}. Wówczas jednak wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem. Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
 
 \exercise %6.5-5
 \begin{description}
 	\item[Inicjowanie:] Przed wykonaniem wiersza~3 tablica $A[1\twodots\id{heap-size}[A]]$ jest kopcem typu max. Zwiększenie wartości $A[i]$ może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
 	\item[Utrzymanie:] Dokonując zamiany elementów w~wierszu~5 w~bieżącej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$. Jednak operacja ta może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$. Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która może naruszać własność kopca.
-	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W~pierwszym przypadku $i$ nie odnosi się do poprawnego indeksu tablicy, natomiast w~drugim przypadku jedyna para, która mogłaby naruszać własność kopca, w~rzeczywistości ją spełnia. A~zatem po zakończeniu wykonywania pętli tablica $A[1\twodots\id{heap-size}[A]]$ stanowi kopiec typu max.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W~pierwszym przypadku $\proc{Parent}(i)\le0$, co jest niepoprawną wartością dla indeksów tablicy $A$. W~drugim natomiast jedyna para, która mogłaby naruszać własność kopca, w~rzeczywistości ją spełnia. A~zatem po zakończeniu wykonywania pętli tablica $A[1\twodots\id{heap-size}[A]]$ stanowi kopiec typu max.
 \end{description}
 Z~prawdziwości niezmiennika pętli wynika, że procedura \proc{Heap-Increase-Key} poprawnie zwiększa wartość węzła $i$, pozostawiając kopiec typu max.
 

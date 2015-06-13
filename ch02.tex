@@ -43,26 +43,28 @@ Na początku każdej iteracji pętli \kw{while} w~wierszach \twodashes{\ref{li:l
 \end{description}
 
 \exercise %2.1-4
-\textbf{Dane wejściowe:} \onedash{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \onedash{$n$}{bitowych} liczb całkowitych $a$ i~$b$ (w~kolejności od najbardziej do najmniej znaczącego bitu).\\
+W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które są reprezentowane przez tablice bitów w~kolejności od najmniej do najbardziej znaczącego.
+
+\bigskip
+\noindent\textbf{Dane wejściowe:} \onedash{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \onedash{$n$}{bitowych} liczb całkowitych nieujemnych $a$ i~$b$.\\
 \textbf{Wynik:} \onedash{$(n+1)$}{elementowa} tablica $C$ zawierająca reprezentację binarną \onedash{$(n+1)$}{bitowej} liczby całkowitej $c$ takiej, że $c=a+b$.
+
 \begin{codebox}
 \Procname{$\proc{Binary-Add}(A,B)$}
-\li	$\id{carry}\gets0$ \>\>\>\>\Comment bit przeniesienia
-\li	\For $i\gets\id{length}[A]$ \Downto $1$ \label{li:binary-add-for-begin}
+\li	$n\gets\id{length}[A]$
+\li	\For $i\gets1$ \To $n+1$
+\li		\Do $C[i]\gets0$
+		\End
+\li	\For $i\gets1$ \To $n$ \label{li:binary-add-for-begin}
 \li		\Do
-			$C[i+1]\gets A[i]\BitXor B[i]\BitXor\id{carry}$ \label{li:binary-add-xor}
-\li			\If $\id{carry}=1$ \label{li:binary-add-if}
-\li				\Then $\id{carry}\gets A[i]\BitOr B[i]$
-\li				\Else $\id{carry}\gets A[i]\BitAnd B[i]$
-				\End
+			$\id{sum}\gets A[i]+B[i]+C[i]$
+\li			$C[i]\gets\id{sum}\bmod\,2$
+\li			$C[i+1]\gets\lfloor\id{sum}/\,2\rfloor$
 		\End \label{li:binary-add-for-end}
-\li	$C[1]\gets\id{carry}$
 \li	\Return $C$
 \end{codebox}
 
-W~pętli \kw{for} w~wierszach \twodashes{\ref{li:binary-add-for-begin}}{\ref{li:binary-add-for-end}} realizowane jest dodawanie poszczególnych bitów liczb nieujemnych $a$ i~$b$ od najmniej do najbardziej znaczącego z~uwzględnieniem przeniesienia. Jest to w~istocie użycie operacji \kw{xor}, czyli alternatywy wykluczającej -- wynik takiej operacji na dwóch bitach jest ich sumą modulo~2. Instrukcja warunkowa z~wiersza~\ref{li:binary-add-if} wykrywa przepełnienie i~odpowiednio ustawia nową wartość bitu \id{carry} także za pomocą operacji logicznych -- \kw{or} i~\kw{and}.
-
-Jeśli potraktujemy tablice $A$ i~$B$ jako reprezentacje liczb $a$ i~$b$ w~kodzie uzupełnień do dwóch na $n$ bitach, to przedstawiona procedura poprawnie działa również dla liczb ujemnych -- wynikiem dodawania jest tablica $C$ stanowiąca reprezentację liczby $c$ w~kodzie uzupełnień do dwóch na $n+1$ bitach.
+Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wierszach \twodashes{\ref{li:binary-add-for-begin}}{\ref{li:binary-add-for-end}} procedura dodaje poszczególne bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego. W~istocie przeprowadzane jest dodawanie modulo~2, a~bit przeniesienia jest zapamiętywany na kolejnej pozycji w~tablicy wynikowej i~uczestniczy w kolejnej iteracji pętli (zakładając, że obecna iteracja nie jest ostatnią).
 
 \subchapter{Analiza algorytmów}
 

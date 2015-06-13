@@ -13,7 +13,11 @@
 \usepackage{tocloft}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
+\usepackage{todonotes}
 \usepackage{cormensol}
+
+% po to, aby notki z todonotes nie wychodziły poza margines
+\setlength{\marginparwidth}{3.5cm}
 
 % zapobiega pojawianiu się dziwnych znaków w zakładkach PDFowych
 \hypersetup{pdfencoding=auto}
@@ -49,36 +53,38 @@
 \part{Podstawy}
 
 \include{ch01}
-% \setcounter{chapter}{1}
+\setcounter{chapter}{1}
 \include{ch02}
-% \setcounter{chapter}{2}
+\setcounter{chapter}{2}
 \include{ch03}
-% \setcounter{chapter}{3}
+\setcounter{chapter}{3}
+\setcounter{figure}{2}
 \include{ch04}
-% \setcounter{chapter}{4}
+\setcounter{chapter}{4}
+\setcounter{figure}{7}
 \include{ch05}
 
-% \setcounter{part}{1}
+\setcounter{part}{1}
 \part{Sortowanie i~statystyki pozycyjne}
 
-% \setcounter{chapter}{5}
-% \setcounter{figure}{7}
+\setcounter{chapter}{5}
+\setcounter{figure}{7}
 \include{ch06}
-% \setcounter{chapter}{6}
-% \setcounter{figure}{13}
+\setcounter{chapter}{6}
+\setcounter{figure}{13}
 \include{ch07}
-% \setcounter{chapter}{7}
-% \setcounter{figure}{15}
+\setcounter{chapter}{7}
+\setcounter{figure}{15}
 \include{ch08}
-% \setcounter{chapter}{8}
-% \setcounter{figure}{18}
+\setcounter{chapter}{8}
+\setcounter{figure}{18}
 \include{ch09}
 
 % \setcounter{part}{2}
 % \part{Struktury danych}
 % 
 % \setcounter{chapter}{9}
-% \setcounter{figure}{19}
+% \setcounter{figure}{18}
 % \include{ch10}
 % \include{ch11}
 % \include{ch12}
@@ -122,7 +128,7 @@
 % \include{ch34}
 % \include{ch35}
 
-% \setcounter{part}{7}
+\setcounter{part}{7}
 \part{Dodatek: Podstawy matematyczne}
 
 \appendix
@@ -131,11 +137,11 @@
 \makeatother
 
 \include{appa}
-% \setcounter{chapter}{1}
-% \setcounter{figure}{99} % dla potrzeb testowych, czy dobrze wygląda z trzycyfrowymi numerami rysunków
+\setcounter{chapter}{1}
+\setcounter{figure}{99} % dla potrzeb testowych, czy dobrze wygląda z trzycyfrowymi numerami rysunków
 \include{appb}
-% \setcounter{chapter}{2}
-% \setcounter{figure}{105}
+\setcounter{chapter}{2}
+\setcounter{figure}{105}
 \include{appc}
 
 \backmatter

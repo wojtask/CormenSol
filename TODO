@@ -1,20 +1,17 @@
 PRZED v0.4:
 - poprawić part I
 - poprawić part II
-- poprawić part VIII
 - zaimplementować i przetestować algorytmy, również te bez pseudokodów, które są wystarczająco szczegółowo opisane
-- czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
-- zamienić cudzysłowy na polskie wersje czyli ,,...''
-- bigskipy czy medskipy? np. B-1(b) lepiej wygląda z medskipami
-- jeszcze raz sprawdzić, czy notki, które mówią o błędach w oryginale uwzględniają poprawki z erraty
+- Czy zamienić więcej algorytmów na template'y? Jeśli tak, to kilka pomocniczych procedur da się wyeliminować.
 - wstęp: (La)TeX i MetaPost
 - wstęp: numeracja rysunków, wzorów i jak się to odróżnia od tych z podręcznika
 - wstęp: czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w podręczniku
 - wstęp: napisać, że czasem odnosimy się do późniejszych zadań i problemów
 - wstęp: używane oznaczenia, E, Pr, itd.
+- wstęp: napisać o tym, że używamy czasem innych nazw niż w podręczniku, np. "funkcja niemalejąca" zamiast "funkcja monotonicznie rosnąca" (?)
 - wstęp: o konwencjach przejętych z podręcznika i tych, które zmieniliśmy (również o tym, że piszemy w skrócie np. "indeksy i<j<k" w znaczeniu "indeksy i,j,k, gdzie i<j<k")
 - wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne (???) i ogólnie mniejsza koncentracja na szczegółach w miarę postępu materiału
-- wstęp: napisać, że rozwiązania opierają się na treści zadań z polskiego tłumaczenia, ale mamy na uwadze erratę oryginału (http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php), tzn. jeśli w erracie jest wpis o pewnej poprawce, to zaznaczamy, że w tłumaczeniu jest błąd. Wpis o erracie będzie tylko we wstępie, w notkach będą wyłącznie informacje o błędach tłumaczenia.
+- wstęp: napisać, że rozwiązania opierają się na treści zadań z polskiego tłumaczenia, ale mamy na uwadze erratę oryginału (http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php), tzn. jeśli w erracie jest wpis o pewnej poprawce, to zaznaczamy, że w tłumaczeniu jest błąd. Wpis o erracie będzie tylko we wstępie, w notkach będą wyłącznie informacje o błędach tłumaczenia i ew. zwrócenie uwagi, że błąd jest też w oryginale.
 - wstęp: opisać pozostałe ważne konwencje z pliku README
 - sprawdzić pisownię
 - odblokować właściwe definicje \refExercise i \refProblem
@@ -75,66 +72,34 @@ PRZED v2.0:
 
 DO POPRAWY/WERYFIKACJI W PÓŹNIEJSZYCH ETAPACH:
 (zadania zaznaczane jako rozwiązane poprawnie, ale w których można dokonać poprawek/ulepszeń po przerobieniu większej ilości materiału)
-1.1-1 -- dokładniej opisać po przerobieniu problemu optymalnego mnożenia macierzy i otoczki wypukłej
-2.1-4 -- czy operacje or, and, xor są poprawnie stylizowane w pseudokodzie?
+1 -- sprawdzić cały rozdział po zrobieniu wszystkich pozostałych
 6.5-6 -- zaimplementować kolejkę FIFO i stos na kolejce priorytetowej (po ch10)
 6.5-8 -- zaimplementować procedurę na listach (po ch10)
 6-3(c) -- wymyślić prostszy pseudokod
 8.3-2 -- jak obliczać złożoność pamięciową? w manualu jest analiza na bitach i wychodzi O(n\lg n) zamiast O(n)
 9-2(e) -- opisać ThreeWayPartition i Select' (jeśli nigdzie indziej nie będą rozważane)
+B-3(a) -- uprościć dowód
 
 ################################################################################
 
 ROZDZIAŁ 1
-
 ROZDZIAŁ 2
-2.1-4
-	-- Czy zostawić określenie "reprezentacja binarna"?
-	-- Może dokładniej zdefiniować "reprezentację binarną"?
-	-- Wektor bitowy -- definicja w zad. 11.1-2.
-	-- Czy można w ostatnim paragrafie mówić o problemie, który formalnie odbiega od bieżącego?
-	-- Aby algorytm działał dla liczb ujemnych, musiałby implementować specjalną obsługę bitu znaku. Dla liczb nieujemnych działa poprawnie.
-	-- Napisać, że definiujemy reprezentację binarną jako zapis liczb naturalnych w systemie dwójkowym i że tylko takie obsługujemy w algorytmie.
-	-- A może taki algorytm:
-	C ← [1 ... n + 1]    ▹ C is zero-filled.
-	for i ← 1 to n
-		do sum ← A[i] + B[i] + C[i]
-			C[i] ← sum % 2
-			C[i + 1] ← sum / 2    ▹ Integer division.
-	output C
-	który porzuca operacje bitowe na rzecz operacji arytmetycznych (tylko czy możemy takie wykonywać na "tablicach bitów"? TAK wg definicji z zad. 11.1-2 -- bity to zera lub jedynki) i w którym kolejność trzymania bitów liczb jest od najmniej znaczącego do najbardziej znaczącego?
-
 ROZDZIAŁ 3
-
 ROZDZIAŁ 4
-4-7(a) -- usunąć (*), przepisać, sprawdzić
 
 ROZDZIAŁ 5
 5.3-6 -- zamiast ponownego wywoływania Permute-By-Sorting można wywoływać np. Randomize-In-Place ALBO dokonać zmiany w algorytmie sortującym -- zakładając, że jest on oparty o porównania, jeśli natrafi na elementy równe, to wybiera losowo, którą gałęzią drzewa porównań iść
-5-2(f) -- wyprowadzić oczekiwany czas działania, powinno wyjść (n+1)/(k+1)
+5-2(f) -- błędna analiza przypadku średniego, powinno wyjść (n+1)/(k+1)
 
 ROZDZIAŁ 6
--- poprawić underfull vbox
-
 ROZDZIAŁ 7
 
 ROZDZIAŁ 8
--- poprawić underfull vbox
-8-2(e) -- błędny algorytm, sprawdzić
 8-3(b) -- przetestować implementację, sprawdzić -- może trzeba opisać jawnie, że wywołujemy sortowanie rekurencyjnie z tymczasowymi tablicami i o pustych znakach?
-8-4(c) -- algorytm jest poprawny, ale może jakoś uprościć jego zapis?, sprawdzić
 
 ROZDZIAŁ 9
--- poprawić underfull vbox
-9-3(a) -- skonfrontować z manualem, zaimplementować algorytm
-9-3(b) -- skonfrontować z manualem
+9-3(a) -- sprawdzić, zaimplementować algorytm
 
 DODATEK A
-
 DODATEK B
-B.5-4 -- to powinna być indukcja po n (?)
-B-3(a) -- przepisać dowód (?)
-
 DODATEK C
--- poprawić underfull vbox
-C.2-4 -- przepisać, skrócić, sprawdzić
