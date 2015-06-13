@@ -93,7 +93,7 @@ Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większ
 skąd wnioskujemy, że obie badane liczby są nie mniejsze niż $\lceil n/4\rceil$.
 
 \exercise %9.3-3
-\note{W~rozwiązaniu przyjmujemy założenie, że elementy tablicy wejściowej są parami różne. Założenia tego zabrakło w~polskim tłumaczeniu.}
+\note{W~rozwiązaniu przyjmujemy założenie, że elementy tablicy wejściowej są parami różne.}
 
 \noindent Wykorzystamy algorytm \proc{Select} do znalezienia mediany $x$ elementów z~tablicy wejściowej. Przy okazji tablica wejściowa zostanie podzielona względem $x$. Można więc w~algorytmie quicksort zastąpić wywołanie procedury \proc{Partition} wywołaniem \proc{Select} szukającym mediany. W~rezultacie wykonywane będą najbardziej zrównoważone podziały i~pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
 
@@ -311,7 +311,7 @@ Zauważmy, że oba ciągi współrzędnych, które przeszukujemy celem znalezien
 \problem{Małe statystyki pozycyjne} %9-3
 
 \subproblem %9-3(a)
-\note{W~tłumaczeniu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$. Wartość\/ $T(n)$ powinna być zwracana dla\/ $i\ge n/2$, a~część rekurencyjna -- dla pozostałych wartości\/ $i$.}
+\note{W~treści problemu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$. Wartość\/ $T(n)$ powinna być zwracana dla\/ $i\ge n/2$, a~część rekurencyjna -- dla pozostałych wartości\/ $i$.}
 
 \noindent Jeśli $i\ge n/2$, to w~celu znalezienia \onedash{$i$}{tej} statystyki pozycyjnej tablicy wejściowej wywołujemy algorytm \proc{Select}. Stąd $U_i(n)=T(n)$.
 

@@ -388,7 +388,7 @@ Oto przykład funkcji, która nie jest ani $O(g_i(n))$, ani $\Omega(g_i(n))$, gd
 \[
 	f(n) =
 	\begin{cases}
-		2^{2^{n+2}}, & \text{jeśli $n$ jest parzyste,} \\
+		2^{2^{n+2}}, & \text{jeśli $n$ jest parzyste}, \\
 		0, & \text{jeśli $n$ jest nieparzyste}.
 	\end{cases}
 \]
@@ -448,8 +448,8 @@ W~przypadku implikacji w~lewą stronę z~warunku $f(n)=\Theta(g(n))$ wynika, że
 Zbadajmy teraz implikację w~prawo. Wprost z~definicji, jeśli $f(n)=O'(g(n))$, to istnieją takie stałe $c$,~$n_0>0$, że dla wszystkich $n\ge n_0$ zachodzi
 \[
 	\begin{cases}
-		0 \le f(n) \le cg(n), & \text{jeśli $f(n)\ge0$,} \\
-		0 \le -f(n) \le cg(n), & \text{jeśli $f(n)<0$.}
+		0 \le f(n) \le cg(n), & \text{jeśli $f(n)\ge0$}, \\
+		0 \le -f(n) \le cg(n), & \text{jeśli $f(n)<0$}.
 	\end{cases}
 \]
 Załóżmy, że istnieje nieskończenie wiele takich $n\ge n_0$, że $f(n)<0$, ponieważ w~przeciwnym przypadku mielibyśmy do czynienia z~funkcją asymptotycznie nieujemną, dla której jest $f(n)=O(g(n))$. Teraz jednak nierówności $0\le c_1g(n)\le f(n)$ wynikające z~założenia, że $f(n)=\Omega(g(n))$ nie są spełnione dla nieskończenie wielu $n\ge n_0$ i~dowolnej stałej $c_1>0$. Wynika stąd wniosek, że jeśli spełnione są założenia, to funkcja $f(n)$ jest asymptotycznie nieujemna i~implikacja stosuje się bez zmian.

@@ -16,7 +16,7 @@ Opisane rozwiązanie można traktować jak tablicę z~haszowaniem z~identycznoś
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
 
-\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu $\id{top}[S]$ wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ walidują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy zachodzi $1\le T[k]\le\id{top}[S]$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
+\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu $\id{top}[S]$ wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ walidują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\id{top}[S]$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
 
 Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$. Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\id{top}[S]$ i~$S[T[k]]=k$. Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}. W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć $\id{top}[S]$ o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\id{top}[S]]$ i~$S'[\id{top}[S]]$. Dokładniej, wykonywany jest następujący ciąg instrukcji:
 \begin{codebox}
@@ -62,18 +62,18 @@ Ciąg wstawień elementów do tablicy z~haszowaniem został zobrazowany na rys.~
 Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można wyznaczać w~czasie stałym. Na podstawie wyników z~problemu~\refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$. Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania. W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
 
 \exercise %11.2-4
-Każda pozycja tablicy $T$ w~takiej reprezentacji będzie przechowywać znacznik (zmienną boolowską) rozstrzygający, czy pozycja jest wolna, czy zajęta. Zajęta pozycja będzie przechowywać element oraz wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ (lub wartość \const{nil}). Zajęte pozycje będą formować się w~listy jednokierunkowe, natomiast wolne pozycje tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej takiej pozycji.
+Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską) orzekający o~jej zajętości. Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe. Wolne pozycje natomiast tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
 
-Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, sprawdzamy, czy pozycja $T[h(k)]$ jest wolna. Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnikowi $\id{next}[T[h(k)]]$ nadajemy wartość \const{nil}. W~przeciwnym przypadku na pozycji o~indeksie $h(k)$ znajduje się już element $y$ o~kluczu $l$. Usuwamy wówczas wolną pozycję z~listy $F$ -- oznaczmy ją przez $j$ -- i~na nią przenosimy element $y$ wraz ze wskaźnikiem $\id{next}[T[h(k)]]$. Na pozycji $h(k)$ zostaje następnie umieszczony element $x$.
+Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna. Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik $\id{next}[T[h(k)]]$ ustawiamy na \const{nil}. W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$. Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem $\id{next}[T[h(k)]]$, a~do komórki $h(k)$ wstawiamy element $x$.
 
-Rozważmy teraz jedną z~dwóch sytuacji. W~pierwszej z~nich elementowi $y$ odpowiadała pozycja $T[h(k)]$, czyli $h(k)=h(l)$ i~wówczas wskaźnikiem $\id{next}[T[h(k)]]$ należy pokazać na pozycję $j$. W~drugiej sytuacji element $y$ stanowił fragment listy zajętych pozycji rozpoczynającej się na pozycji $h(l)$. Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ na tej liście pokazywał teraz na pozycję $j$. Element $x$ będzie wówczas tworzyć listę jednoelementową, więc ustawiamy $\id{next}[T[h(k)]]$ na \const{nil}.
+Pozostaje uaktualnić wskaźnik $\id{next}[T[h(k)]]$. W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje. W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$. Wówczas wskaźnikiem $\id{next}[T[h(k)]]$ należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji. W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$. Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$. Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do $\id{next}[T[h(k)]]$ wartość \const{nil}.
 
-Jeśli potraktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$T[h(k)]$. Należy pamiętać jednak o~tym, aby zwolnioną pozycję wstawić do listy $F$. Z~kolei wyszukiwanie elementu o~kluczu $k$ polega na przejrzeniu listy pozycji o~głowie na pozycji $T[h(k)]$.
+Ponieważ traktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$. Należy pamiętać jednak o~tym, aby następnie wstawić zwolnioną pozycję na listę $F$. Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
 
-Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą. W~naszej reprezentacji mamy dodatkowo $\alpha\le1$. Operacje \proc{Insert}, \proc{Delete} i~\proc{Search} działają więc tutaj w~czasie $\Theta(1+\alpha)=\Theta(1)$. Aby uzyskać taki czas musieliśmy założyć, że lista wolnych pozycji $F$ jest listą dwukierunkową -- w~przeciwnym przypadku bowiem nie można byłoby usuwać z~tej listy w~czasie stałym.
+Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą. Ponadto w~opisanej reprezentacji mamy zawsze $\alpha\le1$. Operacje \proc{Insert}, \proc{Delete} i~\proc{Search} działają więc tutaj w~oczekiwanym czasie $\Theta(1+\alpha)=\Theta(1)$. Aby go uzyskać, musieliśmy założyć, że lista wolnych pozycji $F$ jest listą dwukierunkową -- w~przeciwnym przypadku bowiem nie można byłoby usuwać z~niej w~czasie stałym.
 
 \exercise %11.2-5
-Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$. Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ elementom ze zbioru $U$. Fakt ten wynika z~nieco zmodyfikowanej wersji zasady szufladkowej Dirichleta \cite{pigeonholeprinciple}.
+Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$. Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ elementom ze zbioru $U$. Fakt ten wynika z~nieco zmodyfikowanej wersji \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
 
 \subchapter{Funkcje haszujące}
 
@@ -194,33 +194,68 @@ W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza~3 na nast�
 Wykorzystując tw.~11.8 otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$. Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
 
 \exercise %11.4-5
+Z~tw.~11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
+\[
+	\frac{1}{1-\alpha} = \frac{2}{\alpha}\ln\frac{1}{1-\alpha}.
+\]
+Niech $\beta=1/(1-\alpha)$. Wówczas $\alpha=1-1/\beta$ i~powyższy wzór przyjmuje postać
+\[
+	\beta = \frac{2\beta}{\beta-1}\ln\beta,
+\]
+co jest równoważne
+\[
+	\beta-2\ln\beta = 1.
+\]
+Mamy dalej:
+\begin{align*}
+	e^{\beta-2\ln\beta} &= e, \\
+	\beta^{-2}e^\beta &= e, \\
+	\beta e^{-\beta/2} &= e^{-1/2}, \\
+	(-\beta/2)e^{-\beta/2} &= -e^{-1/2}\!/2.
+\end{align*}
+Skorzystamy teraz z~\textbf{funkcji $W$ Lamberta} \cite{lambertwfunction} zdefiniowanej jako wielowartościowe odwzorowanie odwrotne do funkcji $f(x)=xe^x$. Innymi słowy, dla każdej liczby rzeczywistej $x\ge-1/e$ spełniony jest wzór
+\[
+	x = W(x)e^{W(x)}.
+\]
+Nasze równanie sprowadza się zatem do
+\[
+	W(-e^{-1/2}\!/2) = -\beta/2,
+\]
+skąd
+\[
+	\beta = -2W(-e^{-1/2}\!/2).
+\]
+Dla argumentu $-e^{-1/2}\!/2$ odwzorowanie $W$ przyjmuje dwie wartości. Jedną z~nich jest oczywiście $-1/2$. Ale wówczas $\beta=1$ i~$\alpha=0$, co jest sprzeczne z~założeniem. Drugą wartość $W(-e^{-1/2}\!/2)$ można uzyskać, stosując metody numeryczne -- wynosi ona w~przybliżeniu $-1{,}756$, skąd $\beta\approx3{,}513$ i~$\alpha\approx0{,}715$.
 
 \subchapter{Haszowanie doskonałe}
 
 \exercise %11.5-1
+\note{W~treści zadania zamiast haszowania uniwersalnego powinno być haszowanie równomierne.}
+
+\noindent Rozważmy prawdopodobieństwo $q(n,m)$, że wystąpi przynajmniej jedna kolizja. Jest $\binom{n}{2}$ par kluczy, które mogą tworzyć kolizję z~prawdopodobieństwem $1/m$ każda. Mamy więc
+\[
+	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
+\]
+i~teraz, po skorzystaniu ze wzoru~(3.11), otrzymujemy
+\[
+	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
+\]
 
 \problems
 
 \problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
-\note{W~części~(b) powinno być do pokazania, że prawdopodobieństwo to wynosi\/ $O(1/n^2)$. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) powinno być do pokazania, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
+\note{W~części~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 
 \subproblem %11-1(a)
-Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \onedash{$i$}{tego} elementu. Zauważmy, że $X_i=j$ wtedy i~tylko wtedy, gdy było $j-1$ odwołań do zajętej pozycji tablicy (każde z~prawdopodobieństwem $n/m$) oraz jedno odwołanie do wolnej pozycji (z~prawdopodobieństwem $1-n/m$). Stąd
-\[
-	\Pr(X_i>k) = \sum_{j=k+1}^\infty\Pr(X_i=j) = (1-n/m)\sum_{j=k}^\infty(n/m)^j = (1-n/m)\biggl(\sum_{j=0}^\infty(n/m)^j-\sum_{j=0}^{k-1}(n/m)^j\biggr).
-\]
-Korzystając ze wzorów~(A.5) i~(A.6) oraz z~warunku $n\le m/2$, otrzymujemy
-\[
-	\Pr(X_i>k) = (1-n/m)\biggl(\frac{1}{1-n/m}-\frac{1-(n/m)^k}{1-n/m}\biggr) = (n/m)^k \le 2^{-k}.
-\]
+Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \onedash{$i$}{tego} elementu. Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem. Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$. Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
 
 \subproblem %11-1(b)
 Wynik otrzymujemy natychmiast po podstawieniu $k=2\lg n$ do oszacowania z~poprzedniego punktu.
 
 \subproblem %11-1(c)
-Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2,~\dots,~$n$, zdarzenie, że $X_i>2\lg n$. Zauważmy, że $A=\bigcup_{i=1}^nA_i$. Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu~(b), w~którym pokazaliśmy, że $\Pr(A_i)\le1/n^2$, otrzymujemy
+Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2,~\dots,~$n$, zdarzenie, że $X_i>2\lg n$. Zauważmy, że $A=\bigcup_{i=1}^nA_i$. Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu~(b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
 \[
-	\Pr(A) = \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) \le n\cdot1/n^2 = 1/n.
+	\Pr(A) = \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = n\cdot O(1/n^2) = O(1/n).
 \]
 
 \subproblem %11-1(d)
@@ -230,8 +265,8 @@ Na podstawie oszacowania z~poprzedniej części otrzymujemy
 	&= \sum_{k=1}^{\lfloor2\lg n\rfloor}k\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nk\Pr(X=k) \\
 	&\le \sum_{k=1}^{\lfloor2\lg n\rfloor}\lfloor2\lg n\rfloor\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nn\Pr(X=k) \\
 	&= \lfloor2\lg n\rfloor\Pr(X\le2\lg n)+n\Pr(X>2\lg n) \\
-	&\le \lfloor2\lg n\rfloor\cdot1+n\cdot1/n \\
-	&= \lfloor2\lg n\rfloor+1 \\
+	&= \lfloor2\lg n\rfloor\cdot1+n\cdot O(1/n) \\
+	&= \lfloor2\lg n\rfloor+O(1) \\
 	&= O(\lg n).
 \end{align*}
 
@@ -331,11 +366,11 @@ Na mocy tożsamości $j(j+1)/2-i(i+1)/2=(j-i)(j+i+1)/2$ dostajemy
 Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(j-i)(j+i+1)=2rm$. Przy założeniu, że $m$ jest potęgą 2, $m=2^p$, sprowadza się to do postaci $(j-i)(j+i+1)=r2^{p+1}$. Nietrudno zauważyć, że tylko jeden z~czynników, $j-i$ albo $j+i+1$, jest parzysty, zatem $2^{p+1}$ dzieli tylko jeden z~nich. Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$. Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$. Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.
 
 \problem{Haszowanie \onedash{$k$}{uniwersalne} i~uwierzytelnianie} %11-4
-\note{W~tekście oryginalnym wprowadzono na tyle znaczące poprawki do treści tego problemu, że został on sformułowany na nowo. Poniżej prezentujemy tłumaczenie treści problemu w~jego nowej wersji.}
+\note{Poprawki wprowadzone w~angielskiej treści tego problemu okazały się na tyle duże, że problem został napisany od nowa. Poniżej prezentujemy polskie tłumaczenie jego nowej wersji.}
 
-\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$.  Powiemy, że $\mathcal{H}$ jest {\bfseries\onedash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
+\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$. Powiemy, że $\mathcal{H}$ jest \textbf{\onedash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
 \begin{description}
-	\setlength\labelsep{4mm}
+	\setlength\labelsep{11pt}
 	\item[{\sffamily\bfseries(a)}] Wykaż, że jeśli rodzina funkcji haszujących $\mathcal{H}$ jest \onedash{2}{uniwersalna}, to jest uniwersalna.
 	\item[{\sffamily\bfseries(b)}] Załóżmy, że $U$ jest zbiorem \onedash{$n$}{tek} o~wartościach z~$\mathbb{Z}_p=\{0,1,\dots,p-1\}$, gdzie $p$ jest liczbą pierwszą. Rozważmy element $x=\langle x_0,x_1,\dots,x_{n-1}\rangle\in U$. Dla każdej \onedash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ definiujemy funkcję haszującą $h_a$ jako
 	\[
@@ -350,6 +385,7 @@ Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(
 	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\onedash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
 \end{description}
 
+\bigskip
 \note{Poniżej znajduje się rozwiązanie nowej wersji problemu.}
 
 \subproblem %11-4(a)
