@@ -747,20 +747,20 @@ Tożsamość została udowodniona w~\zad{3.2-7}.
 Niech $D$ i~$Z$ będą zbiorami, odpowiednio, układów dobrych i~układów złych. Podczas testowania każdy zły układ może twierdzić, że każdy inny układ ze zbioru $Z$ jest dobry, a~każdy układ ze zbioru $D$ jest zły. Z~kolei dobry układ będzie orzekał o~każdym układzie z~$Z$, że jest zły, natomiast o~każdym innym z~$D$, że jest dobry. Inaczej ujmując, zbiór $Z$ wskazuje, że sam jest zbiorem układów dobrych, a~zbiór $D$ złych i~symetrycznie dla zbioru $D$. W~ogólności, $Z$ może składać się z~podzbiorów, które o~sobie samych będą twierdzić, że składają się z~dobrych układów, a~pozostałe zbiory ze złych. Nie da się natomiast rozdzielić w~taki sposób zbioru $D$, ponieważ jego układy zawsze orzekają prawdziwie. Musi przez to być $|D|>|Z|$, wtedy bowiem niezależnie od utworzonego w~wyniku testowania podziału zbioru $Z$, zbiór $D$ będzie wyznaczony jednoznacznie.
 
 \subproblem %4-6(b)
-Potraktujmy wynik każdego testu dwóch układów jako parę $(r_1,r_2)\in\{{\scriptstyle\rm D},{\scriptstyle\rm Z}\}^2$. Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza pozytywny wynik testu, a~${\scriptstyle\rm Z}$ -- negatywny. Możliwe jest uzyskanie jednego z~czterech wyników:
+Potraktujmy wynik każdego testu dwóch układów jako parę $\langle r_1,r_2\rangle\in\{{\scriptstyle\rm D},{\scriptstyle\rm Z}\}^2$. Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza pozytywny wynik testu, a~${\scriptstyle\rm Z}$ -- negatywny. Możliwe jest uzyskanie jednego z~czterech wyników:
 \begin{itemize}
-	\item $({\scriptstyle\rm D},{\scriptstyle\rm D})$ -- implikuje, że oba układy są dobre albo oba są złe,
-	\item $({\scriptstyle\rm D},{\scriptstyle\rm Z})$ -- zachodzi tylko wtedy, gdy pierwszy z~układów jest zły,
-	\item $({\scriptstyle\rm Z},{\scriptstyle\rm D})$ -- zachodzi tylko wtedy, gdy drugi z~układów jest zły,
-	\item $({\scriptstyle\rm Z},{\scriptstyle\rm Z})$ -- co najmniej jeden z~układów jest zły.
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$ -- implikuje, że oba układy są dobre albo oba są złe,
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$ -- zachodzi tylko wtedy, gdy pierwszy z~układów jest zły,
+	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$ -- zachodzi tylko wtedy, gdy drugi z~układów jest zły,
+	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- co najmniej jeden z~układów jest zły.
 \end{itemize}
 
-Podzielmy zbiór układów na pary i~przetestujmy wzajemnie układy w~każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów. Zauważmy, że otrzymując dla pewnej pary wynik różny niż $({\scriptstyle\rm D},{\scriptstyle\rm D})$, możemy ją odrzucić, gdyż co najmniej jeden układ ją tworzący jest zły, ale w~wśród nieodrzuconych układów nadal pozostanie więcej dobrych niż złych. Otrzymamy w~wyniku od jednej do $\lfloor n/2\rfloor$ par o~tej własności, że w~każdej z~nich oba układy są dobre albo oba są złe. Odrzucając zatem po jednym układzie z~każdej pozostawionej pary, nadal zachowujemy własność o~większej liczbie dobrych układów w~pozostawionym zbiorze układów, który ma rozmiar co najwyżej $\lfloor n/2\rfloor$.
+Podzielmy zbiór układów na pary i~przetestujmy wzajemnie układy w~każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów. Zauważmy, że otrzymując dla pewnej pary wynik różny niż $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, możemy ją odrzucić, gdyż co najmniej jeden układ ją tworzący jest zły, ale w~wśród nieodrzuconych układów nadal pozostanie więcej dobrych niż złych. Otrzymamy w~wyniku od jednej do $\lfloor n/2\rfloor$ par o~tej własności, że w~każdej z~nich oba układy są dobre albo oba są złe. Odrzucając zatem po jednym układzie z~każdej pozostawionej pary, nadal zachowujemy własność o~większej liczbie dobrych układów w~pozostawionym zbiorze układów, który ma rozmiar co najwyżej $\lfloor n/2\rfloor$.
 
 Powyżej opisany proces przeprowadzamy rekurencyjnie na otrzymywanych podproblemach, dostając w~końcu zbiór jednoelementowy, który na mocy założenia zawiera dobry układ.
 
 \subproblem %4-6(c)
-Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w~pesymistycznym przypadku (każda para zwraca wynik $({\scriptstyle\rm D},{\scriptstyle\rm D})$):
+Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w~pesymistycznym przypadku (każda para zwraca wynik $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$):
 \[
 	T(n) =
 	\begin{cases}
@@ -768,9 +768,9 @@ Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję o
 		T(\lfloor n/2\rfloor) + \lfloor n/2\rfloor, & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Ignorując podłogi i~stosując twierdzenie o~rekurencji uniwersalnej, dostajemy jej rozwiązanie: $T(n)=\Theta(n)$. Wynik ten jest prawdziwy także w~przypadku optymistycznym -- tylko jedna para zwraca $({\scriptstyle\rm D},{\scriptstyle\rm D})$, a~więc dobry układ znajdziemy w~jednym zejściu rekurencyjnym, jednak wcześniej należało wykonać $\Theta(n)$ testów.
+Ignorując podłogi i~stosując twierdzenie o~rekurencji uniwersalnej, dostajemy jej rozwiązanie: $T(n)=\Theta(n)$. Wynik ten jest prawdziwy także w~przypadku optymistycznym -- tylko jedna para zwraca $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, a~więc dobry układ znajdziemy w~jednym zejściu rekurencyjnym, jednak wcześniej należało wykonać $\Theta(n)$ testów.
 
-Ponieważ w~poprzednim punkcie znaleźliśmy dobry układ $u$, to wykorzystajmy go do znalezienia kolejnych. Testujemy tenże układ z~pozostałymi $n-1$. Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $({\scriptstyle\rm D},{\scriptstyle\rm Z})$, a~więc możliwe są trzy sytuacje. Jeśli otrzymamy $({\scriptstyle\rm D},{\scriptstyle\rm D})$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry. Uzyskując wynik $({\scriptstyle\rm Z},{\scriptstyle\rm D})$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $({\scriptstyle\rm Z},{\scriptstyle\rm Z})$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$. Wynika stąd, że sprawdzając $u$ z~$n-1$ innymi układami, wykonamy $n-1$ testów, a~ponieważ stwierdziliśmy, że $u$ jest dobre za pomocą $\Theta(n)$ testów, to znalezienie wszystkich dobrych układów można wykonać, przeprowadzając również $\Theta(n)$ testów.
+Ponieważ w~poprzednim punkcie znaleźliśmy dobry układ $u$, to wykorzystajmy go do znalezienia kolejnych. Testujemy tenże układ z~pozostałymi $n-1$. Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje. Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry. Uzyskując wynik $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$. Wynika stąd, że sprawdzając $u$ z~$n-1$ innymi układami, wykonamy $n-1$ testów, a~ponieważ stwierdziliśmy, że $u$ jest dobre za pomocą $\Theta(n)$ testów, to znalezienie wszystkich dobrych układów można wykonać, przeprowadzając również $\Theta(n)$ testów.
 
 \problem{Tablice Monge'a} %4-7
 

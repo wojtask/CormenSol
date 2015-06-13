@@ -35,7 +35,7 @@ Dowodzimy przez indukcję względem liczby zbiorów $n$. Dla $n=1$ dowód jest t
 \]
 Z~wzoru~(B.3) mamy, że $|A\cup B|=|A|+|B|-|A\cap B|$, a~więc aby wyrazić moc sumy $n$ zbiorów, czyli $|A\cup B|$, należy do mocy sumy $n-1$ zbiorów $|A|$ dodać $|B|=|A_n|$ i~odjąć powyższe $|A\cap B|$. Niech $s_{k,l}$ dla $1<k\le l$ oznacza sumę mocy iloczynów wszystkich \twoparts{$k$}{krotek} różnych zbiorów wybranych spośród $A_1$, $A_2$,~\dots,~$A_l$,
 \[
-	s_{k,l} = \bigl|\underbrace{A_{i_1}\cap A_{i_2}\cap\cdots\cap A_{i_l}}_{\text{\scriptsize iloczyn $k$ zbiorów}}\bigr|+\bigl|\underbrace{A_{j_1}\cap A_{j_2}\cap\cdots\cap A_{j_l}}_{\text{\scriptsize iloczyn $k$ zbiorów}}\bigr|+\cdots{}.
+ 	s_{k,l} = \bigl|\underbrace{A_{i_1}\cap A_{i_2}\cap\cdots\cap A_{i_l}}_{\text{\scriptsize iloczyn $k$ zbiorów}}\bigr|+\bigl|\underbrace{A_{j_1}\cap A_{j_2}\cap\cdots\cap A_{j_l}}_{\text{\scriptsize iloczyn $k$ zbiorów}}\bigr|+\cdots{}.
 \]
 Wykorzystując ponownie założenie indukcyjne, mamy
 \[
@@ -80,7 +80,7 @@ Porządek częściowy jest relacją zwrotną, antysymetryczną i~przechodnią. Z
 \exercise %B.2-2
 Oznaczmy przez $R_n$ dla $n\in\mathbb{N}\setminus\{0\}$ relację ``przystaje modulo $n$'',
 \[
-	R_n = \bigl\{\,(a,b)\in\mathbb{Z}\times\mathbb{Z}\;:\;a\equiv b\!\!\!\pmod{n}\,\bigr\}.
+	R_n = \bigl\{\,\langle a,b\rangle\in\mathbb{Z}\times\mathbb{Z}\;:\;a\equiv b\!\!\!\pmod{n}\,\bigr\}.
 \]
 Niech $q$,~$r\in\mathbb{Z}$ będą pewnymi stałymi. Relacja ta jest:
 \begin{itemize}
@@ -103,13 +103,13 @@ Na mocy powyższych faktów, $R_n$ jest relacją równoważności i~dzieli zbió
 
 \exercise %B.2-3
 \subexercise
-$R=\bigl\{(a,a),(b,b),(c,c),(a,b),(b,a),(a,c),(c,a)\bigr\}$ określona w~$\{a,b,c\}$.
+Relacja $R=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle c,c\rangle,\langle a,b\rangle,\langle b,a\rangle,\langle a,c\rangle,\langle c,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
 
 \subexercise
 Relacja $\le$ określona w~zbiorze liczb rzeczywistych.
 
 \subexercise
-$T=\bigl\{(a,a),(b,b),(a,b),(b,a)\bigr\}$ określona w~$\{a,b,c\}$.
+Relacja $T=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle a,b\rangle,\langle b,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
 
 \exercise %B.2-4
 Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$. Korzystając z~antysymetrii $R$, jeśli prawdą jest $s'\!Rs$ oraz $sRs'$, to $s=s'$, a~więc nie istnieją takie elementy $s$, że $s\in[s]\setminus\{s\}$, zatem klasy abstrakcji są singletonami.
@@ -144,7 +144,7 @@ Ponieważ każda bijekcja posiada funkcję odwrotną, która także jest bijekcj
 
 Dokonajmy pewnego uproszczenia -- zamiast numerować pary liczbami całkowitymi, ograniczmy się do liczb naturalnych. Niech $g\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{N}$ oraz $h\colon\mathbb{N}\to\mathbb{Z}$ będą pewnymi bijekcjami oraz niech $F=h\circ g$. Łatwo wykazać, że $h(n)=(-1)^n\lceil n/2\rceil$ jest bijekcją, pozostaje zatem znaleźć funkcję $g$.
 
-Rozważmy spiralę numerującą pary o~elementach całkowitych, poczynając od punktu $(0,0)$, przedstawioną na rys.~\ref{fig:B.3-4}.
+Rozważmy spiralę numerującą pary o~elementach całkowitych, poczynając od punktu $\langle0,0\rangle$, przedstawioną na rys.~\ref{fig:B.3-4}.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{figb.2}
@@ -161,25 +161,25 @@ Ponieważ każdemu punktowi o~współrzędnych całkowitych przypisywana jest un
 		D+7d+x, & \text{jeśli $y=-d$},
 	\end{cases}
 \]
-przy czym $d=\max(|x|,|y|)$ oraz $D=(2d-1)^2-1$. Nieformalnie, obie te liczby oznaczają, odpowiednio, numer ``okrążenia'' punktu $(0,0)$ pokonywanego przez spiralę w momencie przechodzenia przez punkt $(x,y)$ oraz największą wartość przyjmowaną przez spiralę podczas pokonywania poprzedniego ``okrążenia''.
+przy czym $d=\max(|x|,|y|)$ oraz $D=(2d-1)^2-1$. Nieformalnie, obie te liczby oznaczają, odpowiednio, numer ``okrążenia'' punktu $\langle0,0\rangle$ pokonywanego przez spiralę w momencie przechodzenia przez punkt $\langle x,y\rangle$ oraz największą wartość przyjmowaną przez spiralę podczas pokonywania poprzedniego ``okrążenia''.
 
 Zaprezentowana tutaj spirala jest podobna do znanej w~literaturze \emph{spirali Ulama}, opisanej w~\cite{ulamspiral} i~wykorzystywanej do znajdowania pewnych własności liczb pierwszych.
 
 \subchapter{Grafy}
 
 \exercise %B.4-1
-Jeśli będziemy reprezentować zbiór pracowników przez zbiór wierzchołków $V$, a~relację ``pracownik $u$ podał rękę pracownikowi $v$'' przez zbiór krawędzi $E$, to otrzymamy graf nieskierowany $G=(V,E)$. Sumując stopnie wszystkich wierzchołków tego grafu, otrzymamy podwojoną liczbę krawędzi, gdyż każdą krawędź policzymy dwa razy (każda krawędź jest incydentna z~dokładnie dwoma wierzchołkami). Mamy więc
+Jeśli będziemy reprezentować zbiór pracowników przez zbiór wierzchołków $V$, a~relację ``pracownik $u$ podał rękę pracownikowi $v$'' przez zbiór krawędzi $E$, to otrzymamy graf nieskierowany $G=\langle V,E\rangle$. Sumując stopnie wszystkich wierzchołków tego grafu, otrzymamy podwojoną liczbę krawędzi, gdyż każdą krawędź policzymy dwa razy (każda krawędź jest incydentna z~dokładnie dwoma wierzchołkami). Mamy więc
 \[
 	\sum_{v\in V}\deg(v) = 2|E|.
 \]
 
 \exercise %B.4-2
-Ścieżkę od wierzchołka $u$ do wierzchołka $v$ w~pewnym grafie $G$ można opisać przy pomocy ciągu wierzchołków kolejno odwiedzanych na tej ścieżce, $v_0,v_1,\dots,v_n$, przy czym $v_0=u$ i~$v_n=v$. Jeśli ścieżka jest prosta, to wyrazy w~tym ciągu nie powtarzają się. W~każdej ścieżce można wyeliminować pewne spójne podciągi, otrzymując w~wyniku ścieżkę prostą. Jeśli podciągiem ścieżki z~$u$ do $v$ jest pewien ciąg postaci $v_i,v_{i+1},\dots,v_{i+k},v_i$, to eliminując podciąg $v_i,v_{i+1},\dots,v_{i+k}$, odrzucimy jedno powtórzenie $v_i$, a~tym samym podcykl ścieżki, który sprawia, że nie jest ona prosta. Po eliminacji wszystkich takich podcykli otrzymamy ścieżkę prostą. Oznacza to, że każda ścieżka zawiera ścieżkę prostą reprezentowaną przez ciąg wierzchołków pozostałych z~początkowego ciągu po eliminacji podcykli. Procedura wyznaczania ścieżki prostej jest poprawna, gdyż jeśli z~$v_i$ istnieje krawędź do $v_{i+k+1}$, to możemy wcześniej przejść tą krawędzią, zapobiegając ponownemu odwiedzeniu $v_i$.
+Ścieżkę od wierzchołka $u$ do wierzchołka $v$ w~pewnym grafie $G$ można opisać przy pomocy ciągu wierzchołków kolejno odwiedzanych na tej ścieżce, $\langle v_0,v_1,\dots,v_n\rangle$, przy czym $v_0=u$ i~$v_n=v$. Jeśli ścieżka jest prosta, to wyrazy w~tym ciągu nie powtarzają się. W~każdej ścieżce można wyeliminować pewne spójne podciągi, otrzymując w~wyniku ścieżkę prostą. Jeśli podciągiem ścieżki z~$u$ do $v$ jest pewien ciąg postaci $\langle v_i,v_{i+1},\dots,v_{i+k},v_i\rangle$, to eliminując podciąg $\langle v_i,v_{i+1},\dots,v_{i+k}\rangle$, odrzucimy jedno powtórzenie $v_i$, a~tym samym podcykl ścieżki, który sprawia, że nie jest ona prosta. Po eliminacji wszystkich takich podcykli otrzymamy ścieżkę prostą. Oznacza to, że każda ścieżka zawiera ścieżkę prostą reprezentowaną przez ciąg wierzchołków pozostałych z~początkowego ciągu po eliminacji podcykli. Procedura wyznaczania ścieżki prostej jest poprawna, gdyż jeśli z~$v_i$ istnieje krawędź do $v_{i+k+1}$, to możemy wcześniej przejść tą krawędzią, zapobiegając ponownemu odwiedzeniu $v_i$.
 
 Dowód dla cykli przeprowadza się analogicznie z~$v_n=u$, pamiętając jednak, by nie eliminować ostatniego powtórzenia $u$, które jest wymagane do tego, by ścieżka stanowiła cykl.
 
 \exercise %B.4-3
-Z~twierdzenia~B.2 mamy, że graf $G=(V,E)$ będący drzewem jest spójny i~acykliczny oraz że ma $|E|=|V|-1$ krawędzi. Gdy dodamy do $E$ nową krawędź, to nie będzie już drzewem, ale nadal będzie spójny -- może być zatem $|E|\ge|V|-1$. Z~kolei, gdy usuniemy z~$E$ jakąkolwiek krawędź, to rozspójnimy graf, przez co nie może zachodzić $|E|<|V|-1$.
+Z~twierdzenia~B.2 mamy, że graf $G=\langle V,E\rangle$ będący drzewem jest spójny i~acykliczny oraz że ma $|E|=|V|-1$ krawędzi. Gdy dodamy do $E$ nową krawędź, to nie będzie już drzewem, ale nadal będzie spójny -- może być zatem $|E|\ge|V|-1$. Z~kolei, gdy usuniemy z~$E$ jakąkolwiek krawędź, to rozspójnimy graf, przez co nie może zachodzić $|E|<|V|-1$.
 
 \exercise %B.4-4
 Każdy wierzchołek grafu skierowanego lub nieskierowanego jest osiągalny z~samego siebie, ponieważ istnieje ścieżka o~długości równej 1 zawierająca tylko ten wierzchołek, zatem relacja osiągalności jest zwrotna.
@@ -203,7 +203,7 @@ Jedynie w~grafie nieskierowanym zachodzi symetria relacji osiągalności, poniew
 \end{figure}
 
 \exercise %B.4-6
-Reprezentacją hipergrafu $H=(V_H,E_H)$ jest graf dwudzielny $G=(V_1\cup V_2,E)$, w~którym $V_1=V_H$ oraz $V_2=E_H$. Krawędź $(u,v)\in V_1\times V_2$ w~grafie $G$ istnieje wtedy i~tylko wtedy, gdy hiperkrawędź $v$ jest incydentna z~$u$ (hiperkrawędzie mogą być incydentne z~więcej niż dwoma wierzchołkami). Graf $G$ rzeczywiście jest dwudzielny, ponieważ nie~istnieją krawędzie pomiędzy elementami $V_1$ ani pomiędzy elementami $V_2$.
+Reprezentacją hipergrafu $H=\langle V_H,E_H\rangle$ jest graf dwudzielny $G=\langle V_1\cup V_2,E\rangle$, w~którym $V_1=V_H$ oraz $V_2=E_H$. Krawędź $\langle u,v\rangle\in V_1\times V_2$ w~grafie $G$ istnieje wtedy i~tylko wtedy, gdy hiperkrawędź $v$ jest incydentna z~$u$ (hiperkrawędzie mogą być incydentne z~więcej niż dwoma wierzchołkami). Graf $G$ rzeczywiście jest dwudzielny, ponieważ nie~istnieją krawędzie pomiędzy elementami $V_1$ ani pomiędzy elementami $V_2$.
 
 \subchapter{Drzewa}
 
@@ -237,9 +237,9 @@ Reprezentacją hipergrafu $H=(V_H,E_H)$ jest graf dwudzielny $G=(V_1\cup V_2,E)$
 \end{itemize}
 
 \exercise %B.5-2
-Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\zad{B.4-2}). Niech $v_1,v_2,\dots,v_k,v_1$ będzie takim cyklem. Graf $G$ jest acykliczny, zatem dla pewnego $1\le l\le k$ istnieją krawędzie $(v_l,v_{l+1})$, $(v_{l+2},v_{l+1})\in E$, przy czym dla $l>k$ utożsamiamy $v_l$ z~$v_{l\bmod k+1}$. Wiemy, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$,
+Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\zad{B.4-2}). Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem. Graf $G$ jest acykliczny, zatem dla pewnego $1\le l\le k$ istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym dla $l>k$ utożsamiamy $v_l$ z~$v_{l\bmod k+1}$. Wiemy, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$,
 \[
-	v_0,\dots,v_l,v_{l+1} \quad\text{oraz}\quad v_0,\dots,v_{l+2},v_{l+1}.
+	\langle v_0,\dots,v_l,v_{l+1}\rangle \quad\text{oraz}\quad \langle v_0,\dots,v_{l+2},v_{l+1}\rangle.
 \]
 Otrzymana sprzeczność prowadzi do wniosku, że wersja nieskierowana grafu $G$ istotnie stanowi drzewo.
 
@@ -249,7 +249,7 @@ W~drzewie o~jednym węźle jest jeden liść i~brak węzłów wewnętrznych, wi�
 	Niepuste regularne drzewo binarne ma nieparzystą liczbę węzłów.
 \end{lemat}
 \begin{proof}
-Niech $T=(V,E)$ będzie niepustym regularnym drzewem binarnym, a~$L\subseteq V$ -- zbiorem liści tego drzewa. Obliczmy sumę wszystkich stopni węzłów $T$ (w sensie grafowym, czyli uwzględniając ojca węzła):
+Niech $T=\langle V,E\rangle$ będzie niepustym regularnym drzewem binarnym, a~$L\subseteq V$ -- zbiorem liści tego drzewa. Obliczmy sumę wszystkich stopni węzłów $T$ (w sensie grafowym, czyli uwzględniając ojca węzła):
 \[
 	\sum_{v\in V}\deg(v) = \sum_{v\in L}1+\sum_{v\in V\setminus L}\!\!\!3\;-1=3|V|-2|L|-1.
 \]
@@ -308,13 +308,13 @@ Przyjmijmy bez straty ogólności, że będziemy rozważać tylko grafy spójne,
 $1.\Rightarrow 2.\!\!:$ W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwoma barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \twoparts{2}{kolorowanie}.
 \bigskip
 
-$2.\Rightarrow 3.\!\!:$ Niech $G$ będzie grafem \twoparts{2}{kolorowalnym} i~niech zawiera pewien cykl nieparzysty $v_1,v_2,\dots,v_{2k+1},v_1$ dla pewnego $k\ge1$. Bez utraty ogólności, niech $c(v_1)=0$ i~wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $1\le i\le k$. Zauważmy jednak, że dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_{2k+1})=c(v_1)=0$, co przeczy założeniu o~tym, że $G$ jest \twoparts{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
+$2.\Rightarrow 3.\!\!:$ Niech $G$ będzie grafem \twoparts{2}{kolorowalnym} i~niech zawiera pewien cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności, niech $c(v_1)=0$ i~wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $1\le i\le k$. Zauważmy jednak, że dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_{2k+1})=c(v_1)=0$, co przeczy założeniu o~tym, że $G$ jest \twoparts{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
 \bigskip
 
-$3.\Rightarrow 1.\!\!:$ Wybierzmy pewien wierzchołek $v\in V$ i~uczyńmy elementami zbioru $V_1$ wszystkie wierzchołki o~odległości parzystej od $v$ (w~sensie najkrótszej ścieżki) wraz z~nim samym. Pozostałe niech tworzą zbiór $V_2$. Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=(V_1\cup V_2,E)$ jest dwudzielny.
+$3.\Rightarrow 1.\!\!:$ Wybierzmy pewien wierzchołek $v\in V$ i~uczyńmy elementami zbioru $V_1$ wszystkie wierzchołki o~odległości parzystej od $v$ (w~sensie najkrótszej ścieżki) wraz z~nim samym. Pozostałe niech tworzą zbiór $V_2$. Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
 
 \subproblem %B-1(c)
-Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$. Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor. Załóżmy więc, że $|V|\ge2$. Wybierzmy dowolny wierzchołek $v\in V$ i~rozważmy graf $G'=\bigl(V\setminus\{v\},E\bigr)$. Na mocy założenia indukcyjnego da się go pokolorować $d+1$ barwami. Zauważmy, że $v$ ma co najwyżej $d$ sąsiadów. Wśród $d+1$ kolorów użytych w~kolorowaniu grafu $G'$ jest więc kolor nieprzypisany żadnemu sąsiadowi wierzchołka $v$. Wybieramy więc ten kolor jako barwę dla $v$. Udało się pokolorować graf $G$ zbiorem $d+1$ kolorów, co kończy dowód.
+Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$. Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor. Załóżmy więc, że $|V|\ge2$. Wybierzmy dowolny wierzchołek $v\in V$ i~rozważmy graf $G'=\bigl\langle V\setminus\{v\},E\bigr\rangle$. Na mocy założenia indukcyjnego da się go pokolorować $d+1$ barwami. Zauważmy, że $v$ ma co najwyżej $d$ sąsiadów. Wśród $d+1$ kolorów użytych w~kolorowaniu grafu $G'$ jest więc kolor nieprzypisany żadnemu sąsiadowi wierzchołka $v$. Wybieramy więc ten kolor jako barwę dla $v$. Udało się pokolorować graf $G$ zbiorem $d+1$ kolorów, co kończy dowód.
 
 \subproblem %B-1(d)
 W~optymalnym kolorowaniu grafu (czyli takim, które wykorzystuje możliwie najmniej kolorów), jeżeli $k$ barw wystarcza do pokolorowania grafu $G$, to dla każdej pary różnych barw muszą istnieć wierzchołki sąsiednie o~takich barwach. W~przeciwnym przypadku istniałyby dwa różne kolory, które nie miałyby sąsiednich wierzchołków, a~zatem można byłoby potraktować je jako jeden kolor, co przeczyłoby minimalności $k$. Wszystkich możliwych par wierzchołków o~różnych kolorach spośród $k$ jest zatem nie mniej niż
@@ -327,7 +327,7 @@ skąd $k=O\bigl(\!\sqrt{|E|}\bigr)$, a~ponieważ $|E|=O(|V|)$, to twierdzenie je
 
 \subproblem %B-2(a)
 \begin{twierdzenie}
-	W~prostym grafie nieskierowanym $G=(V,E)$, w~którym $|V|=n\ge2$, istnieją dwa wierzchołki o~tym samym stopniu.
+	W~prostym grafie nieskierowanym $G=\langle V,E\rangle$, w~którym $|V|=n\ge2$, istnieją dwa wierzchołki o~tym samym stopniu.
 \end{twierdzenie}
 \begin{proof}
 W~grafie $G$ o~$n\ge2$ wierzchołkach możliwymi stopniami wierzchołków są liczby 0, 1,~\dots,~$n-1$. Jeśli jednak pewien wierzchołek ma stopień równy~0, to żaden z~pozostałych nie ma stopnia $n-1$. Oznacza to, że jest $n$ wierzchołków, ale tylko co najwyżej $n-1$ liczb mogących jednocześnie być stopniami wierzchołków w~$G$, zatem istnieją pewne dwa wierzchołki o~tym samym stopniu.
@@ -335,7 +335,7 @@ W~grafie $G$ o~$n\ge2$ wierzchołkach możliwymi stopniami wierzchołków są li
 
 \subproblem %B-2(b)
 \begin{twierdzenie}
-	Graf pełny $K_3$ jest podgrafem dowolnego prostego grafu nieskierowanego $G=(V,E)$, w~którym $|V|=6$ lub jego dopełnienia $\overline{G}$.
+	Graf pełny $K_3$ jest podgrafem dowolnego prostego grafu nieskierowanego $G=\langle V,E\rangle$, w~którym $|V|=6$ lub jego dopełnienia $\overline{G}$.
 \end{twierdzenie}
 \begin{proof}
 Wybierzmy z~$V$ pewien wierzchołek $v$. Istnieją wtedy w~$V$ trzy inne wierzchołki $v_1$, $v_2$,~$v_3$ sąsiednie z~$v$ albo niesąsiednie z~nim. Ponieważ przypadki te są symetryczne, rozważmy pierwszy z~nich. Jeśli nie istnieje wśród $v_1$, $v_2$,~$v_3$ para wierzchołków sąsiednich, to twierdzenie zachodzi. Załóżmy więc, że istnieje krawędź między pewnymi dwoma. Wtedy jednak tworzą one wraz z~$v$ graf $K_3$, co kończy dowód.
@@ -345,7 +345,7 @@ Problem rozważany w~tym punkcie jest związany z~\emph{liczbami Ramseya} $R(q_1
 
 \subproblem %B-2(c)
 \begin{twierdzenie}
-	Zbiór wierzchołków $V$ dowolnego prostego grafu nieskierowanego $G=(V,E)$, można podzielić na dwa rozłączne zbiory tak, żeby co najmniej połowa wierzchołków sąsiednich z~wierzchołkiem $v\in V$ nie należała do zbioru, do którego należy $v$.
+	Zbiór wierzchołków $V$ dowolnego prostego grafu nieskierowanego $G=\langle V,E\rangle$, można podzielić na dwa rozłączne zbiory tak, żeby co najmniej połowa wierzchołków sąsiednich z~wierzchołkiem $v\in V$ nie należała do zbioru, do którego należy $v$.
 \end{twierdzenie}
 \begin{proof}
 Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą różnicy liczby wierzchołków ze zbioru, do którego należy $v$ sąsiednich z~nim i~liczby wierzchołków sąsiednich z~$v$ spoza jego zbioru. Dowód sprowadza się do pokazania, że $d(v)\ge0$ dla każdego $v\in V$\!.
@@ -355,20 +355,20 @@ Zdefiniujmy teraz liczbę $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się jak moż
 
 \subproblem %B-2(d)
 \begin{twierdzenie}[Dirac]
-	Jeśli dla każdego wierzchołka $v$ prostego grafu nieskierowanego $G=(V,E)$, w~którym $|V|=n\ge3$, zachodzi $\deg(v)\ge n/2$, to $G$ jest hamiltonowski.
+	Jeśli dla każdego wierzchołka $v$ prostego grafu nieskierowanego $G=\langle V,E\rangle$, w~którym $|V|=n\ge3$, zachodzi $\deg(v)\ge n/2$, to $G$ jest hamiltonowski.
 \end{twierdzenie}
 Zanim zajmiemy się dowodem twierdzenia, udowodnimy następujący lemat.
 \begin{lemat}[Ore]
-	Jeśli w~prostym grafie nieskierowanym $G=(V,E)$ o~$|V|=n\ge3$ wierzchołkach zachodzi nierówność $\deg(u)+\deg(v)\ge n$ dla każdej pary niesąsiednich wierzchołków $u$ i~$v$, to $G$ jest hamiltonowski.
+	Jeśli w~prostym grafie nieskierowanym $G=\langle V,E\rangle$ o~$|V|=n\ge3$ wierzchołkach zachodzi nierówność $\deg(u)+\deg(v)\ge n$ dla każdej pary niesąsiednich wierzchołków $u$ i~$v$, to $G$ jest hamiltonowski.
 \end{lemat}
 \begin{proof}
-Przypuśćmy, że lemat jest fałszywy, czyli dla pewnego $n$ istnieje kontrprzykład -- graf $G$, który spełnia założenie lematu, ale nie jest hamiltonowski. Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne. Jest to podgraf pełnego grafu hamiltonowskiego $K_n$. Dodanie do $G$ krawędzi z~grafu $K_n$ daje w~wyniku graf, który nadal spełnia założenie lematu i~który ma więcej niż $|E|$ krawędzi, a~więc ze względu na wybór grafu $G$, tak powstały graf będzie miał cykl Hamiltona. To znaczy, że $G$ musi mieć przynajmniej drogę Hamiltona określoną przez pewien ciąg wierzchołków $v_1,v_2,\dots,v_n$. Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$. Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
+Przypuśćmy, że lemat jest fałszywy, czyli dla pewnego $n$ istnieje kontrprzykład -- graf $G$, który spełnia założenie lematu, ale nie jest hamiltonowski. Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne. Jest to podgraf pełnego grafu hamiltonowskiego $K_n$. Dodanie do $G$ krawędzi z~grafu $K_n$ daje w~wyniku graf, który nadal spełnia założenie lematu i~który ma więcej niż $|E|$ krawędzi, a~więc ze względu na wybór grafu $G$, tak powstały graf będzie miał cykl Hamiltona. To znaczy, że $G$ musi mieć przynajmniej drogę Hamiltona określoną przez pewien ciąg wierzchołków $\langle v_1,v_2,\dots,v_n\rangle$. Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$. Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
 
-Można teraz zdefiniować podzbiory zbioru $\{2,3,\dots,n\}$ takie, że
+Można teraz zdefiniować podzbiory $S_1$ i~$S_n$ zbioru $\{2,3,\dots,n\}$ takie, że
 \[
 	S_1 = \bigl\{\,i:\{v_1,v_i\}\in E\,\bigr\} \quad\text{oraz}\quad S_n = \bigl\{\,i:\{v_{i-1},v_n\}\in E\,\bigr\}.
 \]
-Wtedy $|S_1|=\deg(v_1)$ i~$|S_n|=\deg(v_n)$. Ponieważ $|S_1|+|S_n|\ge n$ i~zbiór $S_1\cup S_n$ ma co najwyżej $n-1$ elementów, to zbiór $S_1\cap S_n$ musi być niepusty. Istnieje więc $i$, dla którego istnieją krawędzie $\{v_1,v_i\}$ oraz $\{v_{i-1},v_n\}$. Wtedy droga $v_1,\dots,v_{i-1},v_n,v_{n-1},\dots,v_i,v_1$ jest cyklem Hamiltona w~grafie $G$. Sprzeczność -- lemat jest prawdziwy.
+Wtedy $|S_1|=\deg(v_1)$ i~$|S_n|=\deg(v_n)$. Ponieważ $|S_1|+|S_n|\ge n$ i~zbiór $S_1\cup S_n$ ma co najwyżej $n-1$ elementów, to zbiór $S_1\cap S_n$ musi być niepusty. Istnieje więc $i$, dla którego istnieją krawędzie $\{v_1,v_i\}$ oraz $\{v_{i-1},v_n\}$. Wtedy droga $\langle v_1,\dots,v_{i-1},v_n,v_{n-1},\dots,v_i,v_1\rangle$ jest cyklem Hamiltona w~grafie $G$. Sprzeczność -- lemat jest prawdziwy.
 \end{proof}
 
 Można teraz udowodnić główne twierdzenie.
@@ -379,7 +379,7 @@ Jeśli dla każdego $v\in V$ zachodzi $\deg(v)\ge n/2$, to $\deg(u)+\deg(v)\ge n
 \problem{Podziały drzew} %B-3
 
 \subproblem %B-3(a)
-Przez \emph{krawędź dzielącą} będziemy rozumieć krawędź, po usunięciu której zbiór wierzchołków drzewa o~mocy $n\ge2$ dzieli się na zbiory $A$ i~$B$ takie, że $|A|\le3n/4$ oraz $|B|\le3n/4$. Udowodnimy twierdzenie przez indukcję względem liczby wierzchołków drzewa $T=(V,E)$.
+Przez \emph{krawędź dzielącą} będziemy rozumieć krawędź, po usunięciu której zbiór wierzchołków drzewa o~mocy $n\ge2$ dzieli się na zbiory $A$ i~$B$ takie, że $|A|\le3n/4$ oraz $|B|\le3n/4$. Udowodnimy twierdzenie przez indukcję względem liczby wierzchołków drzewa $T=\langle V,E\rangle$.
 
 Dla $n=2$ twierdzenie zachodzi, ponieważ w~drzewie istnieje tylko jedna krawędź, po usunięciu której dostajemy zbiory jednoelementowe. Niech zatem $n>2$ i~załóżmy, że w~drzewie o~$n-1$ wierzchołkach wybraliśmy krawędź dzielącą $e\in E$ taką, że po podziale zbiory $A$ i~$B$ spełniają twierdzenie, czyli każdy z~nich ma co najwyżej $3(n-1)/4$ elementów. Przyjmijmy bez utraty ogólności, że $|A|\le|B|$, co implikuje $|A|\le(n-1)/2$. Utwórzmy teraz nowe drzewo $T'$, dodając do $V$ nowy wierzchołek $v'$ oraz nową krawędź $\{v',v\}$ do $E$ dla pewnego $v\in V$. Niech teraz $A'$ oraz $B'$ będą zbiorami wierzchołków w~nowym drzewie utworzonymi w~wyniku podziału krawędzią $e$. Jeśli $v\in A$, to $A'=A\cup\{v'\}$ oraz $B'=B$. Oczywiście $|B'|<3n/4$, zbadajmy więc drugi zbiór:
 \[
@@ -389,7 +389,7 @@ co jest prawdą, o~ile $n\ge2$, zatem w~tym przypadku twierdzenie zachodzi.
 
 Niech teraz $v\in B$. Stąd $A'=A$ i~$B'=B\cup \{v'\}$, ale z~założenia $|B'|=|B|+1\le(3n+1)/4$, a~zatem $|B'|$ może przekroczyć $3n/4$, co oznacza, że musimy znaleźć inną krawędź dzielącą dla nowo powstałego drzewa. Zmiana krawędzi dzielącej powinna zatem nastąpić, gdy spełnione będzie $(3n-4)/4<|B|\le(3n-3)/4$.
 
-Niech $e=\{u_1,u_2\}$ i~rozważmy poddrzewo o~korzeniu w~$u_1\in B$. Niech z~kolei $T_1=(V_1,E_1)$ i~$T_2=(V_2,E_2)$ będą poddrzewami tegoż poddrzewa i~bez straty ogólności załóżmy, że $|V_1|\le|V_2|$, skąd $|V_1|\le(|B'|-1)/2=|B|/2$. Zauważmy, że $T_2$ jest niepuste, gdyż $|B'|\ge2$, istnieje zatem krawędź $e'=\{u_1,w\}$ dla $w$ będącego korzeniem $T_2$. Drzewo $T'$ wraz z~wprowadzonymi oznaczeniami zostało przedstawione na rys.~\ref{fig:B-3a}.
+Niech $e=\{u_1,u_2\}$ i~rozważmy poddrzewo o~korzeniu w~$u_1\in B$. Niech z~kolei $T_1=\langle V_1,E_1\rangle$ i~$T_2=\langle V_2,E_2\rangle$ będą poddrzewami tegoż poddrzewa i~bez straty ogólności załóżmy, że $|V_1|\le|V_2|$, skąd $|V_1|\le(|B'|-1)/2=|B|/2$. Zauważmy, że $T_2$ jest niepuste, gdyż $|B'|\ge2$, istnieje zatem krawędź $e'=\{u_1,w\}$ dla $w$ będącego korzeniem $T_2$. Drzewo $T'$ wraz z~wprowadzonymi oznaczeniami zostało przedstawione na rys.~\ref{fig:B-3a}.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{figb.11}

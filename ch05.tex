@@ -94,7 +94,7 @@ Niech $S_i$ będzie zdarzeniem oznaczającym, że \twoparts{$i$}{ta} osoba otrzy
 a~zatem swój kapelusz otrzyma średnio tylko jedna osoba.
 
 \exercise %5.2-5
-Dla wszystkich $i$,~$j$ takich, że $1\le i<j\le n$ zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $(i,j)$. Szanse, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$. Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$. Jej wartością oczekiwaną jest
+Dla wszystkich $i$,~$j$ takich, że $1\le i<j\le n$ zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $\langle i,j\rangle$. Szanse, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$. Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$. Jej wartością oczekiwaną jest
 \begin{align*}
 	\E(X) &= \E\biggl(\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}\biggr) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\E(X_{ij}) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{ij}=1) \\[1mm]
 	&= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{2} = \sum_{i=1}^{n-1}\frac{n-i}{2} = \frac{1}{2}\sum_{i=1}^{n-1}i = \frac{n(n-1)}{4}.
@@ -198,7 +198,7 @@ To czego poszukujemy, to najmniejsze $k$ takie, że $\Pr(B_k)<1/2$. Analiza powy
 a~więc widać, że potrzeba co najmniej $k=613$ osób.
 
 \exercise %5.4-2
-Niech $X$ oznacza liczbę potrzebnych rzutów zanim w~pewnej urnie znajdą się dwie kule. Załóżmy, że po $k-1$ rzutach ($2\le k\le b+1$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po \twoparts{$k$}{tym} rzucie nie będzie kolizji. Ponieważ jest zajętych $k-1$ urn, to \twoparts{$k$}{ta} kula wpada do pustej urny z~prawdopodobieństwem równym
+Niech $X$ oznacza liczbę potrzebnych rzutów, zanim w~pewnej urnie znajdą się dwie kule. Załóżmy, że po $k-1$ rzutach ($2\le k\le b+1$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po \twoparts{$k$}{tym} rzucie nie będzie kolizji. Ponieważ jest zajętych $k-1$ urn, to \twoparts{$k$}{ta} kula wpada do pustej urny z~prawdopodobieństwem równym
 \[
 	\Pr(X>k\mid X>k-1) = \frac{b-k+1}{b}.
 \]
@@ -221,7 +221,7 @@ przy czym dowodzi się, że sprowadza się ona do
 W~\cite{taocp1frag} wyprowadzona jest przybliżona wartość powyższej sumy, która wynosi $\sqrt{b\pi/2}$.
 
 \exercise %5.4-3
-Podczas analizy paradoksu urodzin zakładamy, że $b_i=r_i$ ma jednakowe szanse zajścia niezależnie od ustalonych wartości $b_j$ dla $j<i$, z~czego korzystamy przy obliczaniu $\Pr(A_i\mid B_{i-1})$, sumując prawdopodobieństwa pojawienia się wszystkich ciągów $(b_1,b_2,\dots,b_i)$ spełniających warunki nałożone przez zdarzenia $A_i$ oraz $B_{i-1}$. Jest to równoważne potraktowaniu urodzin jako zdarzeń wzajemnie niezależnych.
+Podczas analizy paradoksu urodzin zakładamy, że $b_i=r_i$ ma jednakowe szanse zajścia niezależnie od ustalonych wartości $b_j$ dla $j<i$, z~czego korzystamy przy obliczaniu $\Pr(A_i\mid B_{i-1})$, sumując prawdopodobieństwa pojawienia się wszystkich ciągów $\langle b_1,b_2,\dots,b_i\rangle$ spełniających warunki nałożone przez zdarzenia $A_i$ oraz $B_{i-1}$. Jest to równoważne potraktowaniu urodzin jako zdarzeń wzajemnie niezależnych.
 
 Słabszy warunek, mówiący że zdarzenia te są tylko parami niezależne, był podstawą przedstawionej w~tekście metody wykorzystującej zmienne losowe wskaźnikowe, dając w~wyniku wyższą liczbę wymaganych osób, a~więc nieco mniej dokładne oszacowanie.
 

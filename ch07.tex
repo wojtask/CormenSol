@@ -4,7 +4,7 @@
 
 \exercise %7.1-1
 Rys.~\ref{fig:7.1-1} przedstawia działanie procedury \proc{Partition} dla tablicy~$A$.
-\begin{figure}[!h]
+\begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig07.1}
 	\end{center}
@@ -45,7 +45,7 @@ Procedura \proc{Partition} w~takim przypadku zwróci wartość $r$ (z~\zad{7.1-2
 W~tym przypadku elementem rozdzielającym $x$ w~procedurze \proc{Partition} będzie element najmniejszy w~przetwarzanej podtablicy $A[p\twodots r]$. Jedyna dokonana zamiana to wymiana elementu rozdzielającego z~$A[p]$ i wartością zwracaną jest $r$. Przypadek jest zatem analogiczny do rozważanego w~poprzednim zadaniu, a~więc czasem działania \proc{Quicksort} jest $\Theta(n^2)$.
 
 \exercise %7.2-4
-Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu \proc{Quicksort}, wykonywane są bowiem niezrównoważone podziały, przez co czas działania sortowania zbliża się do kwadratowego względem rozmiaru tablicy. Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym, a ta dla ciągu prawie posortowanego jest na tyle mała, że sortowanie przez wstawianie może działać w~czasie liniowym.
+Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort, wykonywane są bowiem niezrównoważone podziały, przez co czas działania sortowania zbliża się do kwadratowego względem rozmiaru tablicy. Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym, a ta dla ciągu prawie posortowanego jest na tyle mała, że sortowanie przez wstawianie może działać w~czasie liniowym.
 
 \exercise %7.2-5
 Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza ścieżka w~drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa ścieżka na \twoparts{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej krawędzi. Mamy wtedy $\alpha^hn=1$, skąd
@@ -147,6 +147,12 @@ Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$
 Widać, że funkcja przyjmuje maksimum dla $q=0$ lub $q=n-1$; trzecia obliczona wartość stanowi jej minimum.
 
 \exercise %7.4-4
+Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu quicksort, korzystamy z~analizy przedstawionej w~tekście dla górnego oszacowania. Zauważmy, że lemat~7.1 pozostaje prawdziwy, gdyby zamiast notacji $O$ zastosować $\Omega$. Prowadząc rozumowanie analogicznie, dochodzimy w~końcu do wartości oczekiwanej zmiennej losowej $X$, którą następnie ograniczamy od dołu:
+\[
+	\E(X) = \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{k+1} \ge \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{2k} = \sum_{i=1}^{n-1}H_{n-i} = \sum_{i=1}^{n-1}H_i = \sum_{i=1}^{n-1}\Omega(\lg i) = \Omega(n\lg n).
+\]
+Skorzystaliśmy tutaj z~\zad{A.2-3} oraz z~problemu~A.1(b) dla $s=1$, dzięki czemu zachodzi ostatnia równość.
+
 \exercise %7.4-5
 Zauważmy, że liczba fragmentów mniej niż \twoparts{$k$}{elementowych} pozostawionych nieposortowanymi przez quicksort wynosi $O(n/k)$. Stąd czas wykonywany przez sortowanie przez wstawianie, który jest tego samego rzędu, co liczba inwersji pozostawionych w~całej tablicy, wynosi $O(n/k\cdot k^2)=O(nk)$. Czas wykonywania pozostałej części algorytmu obliczmy następująco. Jest to wywołanie oryginalnego quicksorta, który jednak zatrzymuje się na tablicy o~długości mniejszej niż $k$. Od czasu pełnego sortowania szybkiego należy zatem odjąć czas działania wszystkich wywołań zastosowanych do tych małych podtablic. Mamy stąd $O(n\lg n-(n/k)k\lg k)=O(n\lg(n/k))$ i~całkowitym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
 
@@ -160,7 +166,7 @@ Załóżmy dla uproszczenia, że $n$ jest dowolnie duże, przez co możemy pozwo
 	\item $a\in Y$, $b\in Y$, $c\in Z$, co zachodzi z~prawdopodobieństwem $3\alpha(1-2\alpha)^2$,
 	\item $a\in Y$, $b\in Y$, $c\in Y$, co zachodzi z~prawdopodobieństwem $(1-2\alpha)^3$.
 \end{itemize}
-Sumując cząstkowe prawdopodobieństwa, otrzymujemy $4\alpha^3-6\alpha^2+1$.
+Sumując cząstkowe prawdopodobieństwa, otrzymujemy wynik $4\alpha^3-6\alpha^2+1$.
 
 \problems
 
@@ -168,7 +174,7 @@ Sumując cząstkowe prawdopodobieństwa, otrzymujemy $4\alpha^3-6\alpha^2+1$.
 
 \subproblem %7-1(a)
 Symulacja procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ została przedstawiona na rys.~\ref{fig:7-1a}. Pierwsza część rysunku przestawia wejściową tablicę i~początkowe ustawienie zmiennych, kolejne części obrazują stan tablicy i~zmienne po każdej iteracji pętli \kw{while}.
-\begin{figure}[!h]
+\begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig07.2}
 	\end{center}
@@ -181,7 +187,7 @@ Symulacja procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ został
 Prawdziwość stwierdzenia wynika z~faktu udowodnionego w punkcie~(b) oraz stąd, że procedura kończy działanie dopiero, gdy $i>j$. Zauważmy, że musi nastąpić przynajmniej jedna zamiana elementów z~linii~10, co powoduje, że po tej zamianie $j<r$. Skoro $i\le r$, to musi zachodzić $p\le j<r$.
 
 \subproblem %7-1(d)
-Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza~9. Każda para elementów $(A[i],A[j])$, gdzie $i<j$ oraz $A[i]\ge x$ i~$A[j]\le x$, jest odwracana; sprawia to, że elementy, które naruszały warunek, po zamianie znajdują się w~odpowiednich częściach tablicy. W~momencie, gdy indeksy $i$ oraz $j$ miną się, wszystkie elementy w~podtablicy $A[p\twodots j]$ są mniejsze od każdego elementu z~$A[j+1\twodots r]$.
+Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza~9. Każda para elementów $\langle A[i],A[j]\rangle$, gdzie $i<j$ oraz $A[i]\ge x$ i~$A[j]\le x$, jest odwracana; sprawia to, że elementy, które naruszały warunek, po zamianie znajdują się w~odpowiednich częściach tablicy. W~momencie, gdy indeksy $i$ oraz $j$ miną się, wszystkie elementy w~podtablicy $A[p\twodots j]$ są mniejsze od każdego elementu z~$A[j+1\twodots r]$.
 
 \subproblem %7-1(e)
 Jedyną różnicą w~porównaniu z~algorytmem quicksort jest to, że element rozdzielający nie znajduje się w~$A[q]$ po wykonaniu \proc{Hoare-Partition}, musimy więc sortować rekurencyjnie fragment $A[p\twodots q]$ zamiast $A[p\twodots q-1]$. Pseudokod procedury został przedstawiony poniżej.
@@ -331,6 +337,14 @@ Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyska
 \problem{Rozmyte sortowanie przedziałów} %7-6
 
 \subproblem %7-6(a)
+Zauważmy na wstępie, że jeśli dla przedziałów $[a_1,b_1]$ i~$[a_2,b_2]$ zachodzi warunek $a_1\le a_2\le b_1$ albo $a_2\le a_1\le b_2$, to można je ustawić w~dowolnej kolejności w~wynikowej tablicy. Zaprojektujemy algorytm, który działa podobnie jak quicksort sortujący po lewych krańcach przedziałów. Po wyborze elementu rozdzielającego $x=[a_0,b_0]$ sprawdzamy kolejne przedziały i~umieszczamy je w~różnych częściach tablicy -- podczas sprawdzania przedziału $i_j=[a_j,b_j]$, jeśli $a_j>a_0$, to przedział $i_j$ zostanie umieszczony na prawo od $x$. W~przeciwnym przypadku sprawdzamy jeszcze, czy $b_j>a_0$, a~więc czy przedziały $x$ oraz $i_j$ nachodzą na siebie. W~zależności od wyniku tego testu, $i_j$ umieszczamy w~innej podtablicy. Wyznaczone przedziały nachodzące na $x$ możemy, według wcześniej zauważonego warunku, uporządkować w~dowolnej kolejności; podtablica do której one należą nie wymaga zatem dalszego sortowania. Natomiast pozostałe podtablice sortowane są rekursywnie tak jak w~algorytmie quicksort.
+
+Przedstawione rozumowanie zapiszmy w~postaci pseudokodu:
+\begin{codebox}
+\Procname{$\proc{Fuzzy-Quicksort}(A,p,r)$}
+\end{codebox}
+
 \subproblem %7-6(b)
+Oczekiwany czas $\Theta(n\lg n)$ wynika z~oczekiwanego czasu działania sortowania szybkiego -- może się zdarzyć, że podtablica zawierająca przedziały nachodzące na $x$ będzie za każdym razem pusta.
 
 \endinput

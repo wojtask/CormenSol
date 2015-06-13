@@ -69,12 +69,12 @@ dla wszystkich $n\ge n_0$. Dochodzimy do sprzeczności, bowiem nieprawdą jest, 
 \[
 	\begin{split}
 		\Omega(g(n,m)) &\stackrel{\text{\scriptsize def}}{=} \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c$,~$n_0$,~$m_0$ takie, że} \\
-		&\qquad 0 \le cg(n,m) \le f(n,m) \text{ dla wszystkich $n \ge n_0$ oraz $m \ge m_0$}\,\bigr\} \\%[3mm]
-		\Theta(g(n,m)) &\stackrel{\text{\scriptsize def}}{=} \bigl\{f(n,m):\text{istnieją dodatnie stałe $c_1$,~$c_2$,~$n_0$,~$m_0$ takie, że} \\
+		&\qquad 0 \le cg(n,m) \le f(n,m) \text{ dla wszystkich $n \ge n_0$ oraz $m \ge m_0$}\,\bigr\} \\[3mm]
+		\Theta(g(n,m)) &\stackrel{\text{\scriptsize def}}{=} \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c_1$,~$c_2$,~$n_0$,~$m_0$ takie, że} \\
 		&\qquad 0 \le c_1g(n,m) \le f(n,m) \le c_2g(n,m) \text{ dla wszystkich $n \ge n_0$ oraz $m \ge m_0$}\,\bigr\}
 	\end{split}
 \]
-\bigskip %korekcja underfull vboxa
+\smallskip %korekcja underfull vboxa
 
 \subchapter{Standardowe notacje i~typowe funkcje}
 
@@ -352,11 +352,11 @@ Poniższe uzasadnienia stanowią dowody $g_i=\Omega(g_{i+1})$ dla $i=1$, 2,~\dot
 	\]
 	By wykazać prawdziwość tożsamości, dokonajmy podstawienia
 	\[
-		n = 2^{2^{2^{\cdot^{\cdot^{\cdot^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k$}\kern0pt},
+		n = 2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k$}\kern0pt},
 	\]
 	gdzie $0<\epsilon\le1$ i~$k>3$. Wyliczając wartości obu funkcji dla takiego argumentu, otrzymujemy
 	\[
-		\lg^{(3)}n = 2^{2^{\cdot^{\cdot^{\cdot^\epsilon}}}}\vbox{\hbox{$\Big\}\scriptstyle k-3$}\kern0pt} \quad\text{oraz}\quad \lg^*n=k.
+		\lg^{(3)}n = 2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k-3$}\kern0pt} \quad\text{oraz}\quad \lg^*n=k.
 	\]
 	Oczywistym jest, że pierwsza wartość jest większa od drugiej dla dostatecznie dużych $n$, zatem zależność zachodzi.
 \item $2^{\lg^*n}=\Omega(\lg^*n)$ \\

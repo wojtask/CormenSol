@@ -12,8 +12,8 @@ Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 \begin{align*}
 	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
 	&= H_{2n-1}-\frac{1}{2}H_{n-1} \\
-	&= \ln (2n-1)+O(1)-\left(\frac{1}{2}\ln(n-1)+O(1)\right) \\
-	&= \ln (2n-2)+\underbrace{\ln\frac{2n-1}{2n-2}}_{O(1)}-\ln\sqrt{n-1}+O(1) \\
+	&= \ln(2n-1)+O(1)-\left(\frac{1}{2}\ln(n-1)+O(1)\right) \\
+	&= \ln(2n-2)+\underbrace{\ln\frac{2n-1}{2n-2}}_{O(1)}-\ln\sqrt{n-1}+O(1) \\
 	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\[1mm]
 	&= \ln\left(2\sqrt{n-1}\right)+O(1) \\
 	&= \ln 2+\ln\sqrt{n}+\underbrace{\ln\frac{\sqrt{n-1}}{\sqrt{n}}}_{O(1)}+\,O(1) \\
@@ -44,9 +44,9 @@ Skorzystano z~wzoru~(A.8), a~następnie~(A.6), w~obu przypadkach biorąc $x=1/2$
 W~drugiej równości zastosowano wzory~(A.6) i~(A.8). Otrzymany wynik jest wartością sumy, gdy $|x^2|<1$. W~pozostałych przypadkach suma jest rozbieżna do $\infty$.
 
 \exercise %A.1-6
-Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
+Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
 \[
-	0\le F(n)\le c\sum_{k=1}^n f_k(n).
+	0 \le F(n) \le c\sum_{k=1}^n f_k(n).
 \]
 
 Niech $(F_i(n))_{1\le i\le n}$ będzie ciągiem funkcji, który spełnia układ nierówności
@@ -103,7 +103,7 @@ Wykorzystując własności szeregu teleskopowego, dostajemy:
 a~zatem badana suma jest ograniczona przez stałą. Okazuje się, że dla coraz większych $n$ jej wartość zbliża się do liczby $\pi^2\!/6$.
 
 \exercise %A.2-2
-Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą~2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\left\lceil\frac{2^m}{2^k}\right\rceil = 2^m+2^{m-1}+\cdots+2^0 = 2^{m+1}-1 = 2n-1,
 \]
@@ -166,7 +166,7 @@ Stosujemy wzór~(A.11) do sumy $\sum_{k=2}^n\lg^sk$, która jest równoważna su
 \[
 	\int_1^n\lg^sx\,dx \le \sum_{k=2}^n\lg^sk \le \int_2^{n+1}\lg^sx\,dx.
 \]
-Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=dx$. Pomijając stałe całkowania, otrzymujemy
+Obliczmy całkę nieoznaczoną $I(x)=\int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=dx$. Pomijając stałe całkowania, otrzymujemy
 \[
 	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = x,
 \]
@@ -192,7 +192,7 @@ Po zastosowaniu wzoru~(A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$, dostajemy
 \[
 	\int_1^nx^r\lg^sx\,dx \le \sum_{k=2}^nk^r\lg^sk \le \int_2^{n+1}x^r\lg^sx\,dx.
 \]
-Analogicznie jak w~poprzednim punkcie obliczmy całkę $I(x) = \int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
+Analogicznie jak w~poprzednim punkcie obliczmy całkę $I(x)=\int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
 \[
 	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = \frac{x^{r+1}}{r+1},
 \]

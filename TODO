@@ -14,7 +14,8 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - preferować \bigl, \bigr i pozostałe zamiast \left, \right (głównie do ułamków) (\biggl, \biggr do dużych operatorów np. \sum)
 - formuły matematyczne składane są tak, jak radzi Knuth w The TeXbook
 - poza tym jeśli piszemy o ciągach, parach itd. to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki należy umieszczać poza tym trybem
-- numery tożsamości wewnątrz ( )
+- n-tki, ciągi w nawiasach kątowych
+- numery tożsamości w nawiasach okrągłych
 - po \E, \Pr, \Var używa się nawiasów okrągłych
 - w przypadku zmiennych losowych wskaźnikowych używa się \I po czym nawiasów okrągłych
 - rysunki i tabele wewnątrz otoczenia figure[ht] i potem center
@@ -23,8 +24,8 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - wewnątrz paragrafu zwykły tryb matematyczny, displaystyle tylko jeśli trzeba coś wyróżnić
 - unikać formuł które są rozdzielone między liniami
 - równania w equation lub gather lub w align, a jeśli mają być dzielone, to split wewnątrz align
-- indukcję prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
-- poziomy drzewa rekursji liczy się od 0
+- indukcję matematyczną prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
+- poziomy drzew rekursji liczy się od 0
 - jeśli w wielolinijkowych formułach jest zbyt mały odstęp, to można go skorygować poprzez \\[x mm]
 - jeśli w środku zdania wystąpi kropka lub wykrzyknik lub pytajnik, który nie kończy zdania, to po tym znaku należy umieścić \ 
 - jeśli kropka lub wykrzyknik lub pytajnik wystąpi po dużej literze i kończy zdanie, to przed tym znakiem należy umieścić \@
@@ -34,31 +35,34 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - kontrolne spacje po skrótach (np., tzn., itd.) jeśli nie kończą zdania i bezpośrednio po nich nie ma spacji
 - jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white)
 - nie używać numerowania równań, stosować zawsze środowiska equation* (\[ \]) lub gather* lub align* w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$})
-- http://exlover.wordpress.com/
 - partykułę ``nie'' z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: nie większy, nie mniejszy
 - oddzielać przecinkiem imiesłów zakończony na -ąc, -łszy, -wszy od dalszej części zdania
 - nie numerować wiersza w procedurach jednolinijkowych (\zi zamiast \li) (?) -- d-ary-Parent, d-ary-Child, Heap-Minimum
 - wyliczane elementy zbiorów rozdzielać między $ (?)
 - w ostateczności, aby zniwelować underfull vbox, można zastosować \medskip (jak przed 4.2-4) lub \bigskip (jak przed 3.2)
+- http://exlover.wordpress.com/
 
 MOŻLIWOŚĆ ZOPTYMALIZOWANIA, POPRAWIENIA:
 - 1.1-1 -- dokładniej opisać po przerobieniu tych problemów
 - 1.1-3 -- dopisać coś jeszcze?
-- 1.1-4 -- dopisać coś jeszcze?
+- 1.1-4 -- dopisać coś jeszcze? NP-trudny zamiast NP-zupełny?
 - 2.1-4 -- jak traktujemy bity?
 - 3.2-3 -- dwie ostatnie tożsamości, bez użycia wzoru Stirlinga byłoby prościej
+- 3-3(a) -- w piętrowych potęgach, napisać co to k
 - 3-5(c) -- czy na pewno?
 - 3-6(h) -- podobno da się zejść do \Theta(\lg^*n)
 - 5.4-2 -- udowodnić przejście między sumami (A063169), z TAoCP (1.2.11.3): E(X) = 1+Q(b) \approx 1+\sqrt{\pi b/2}
-- 5.4-7 -- czy nie przejmować się watościami całkowitymi?
+- 5.4-7 -- czy nie przejmować się wartościami całkowitymi?
 - 5-2(a) -- czy wektor bool to wektor bitowy?
 - A.2-3 -- prostsze rozwiązanie w exlover
 - B.1-3 -- czy da się prościej?
 - B-3(a) -- czy da się prościej?
+- C.2-1 -- rodzinę inaczej zapisać?
 - C.4-9 -- czy da się prościej?
 - C.5-6 -- uzasadnić że pe^a(1-a-p)+(a+p)(p-1)<0 albo znaleźć prostszy dowód lematu (łatwo udowodnić gdy a\ge2)
 
 PRZED v0.4:
+- part 2
 - we wstępie napisać o (La)TeX i METAPOST
 - akapit wstępu mówiący o numeracji rysunków, tożsamości i jak się to odróżnia od tych z książki
 - (a), (b), ... w rysunkach zamiast odnoszenia się do lewej lub prawej strony rysunku
@@ -66,9 +70,29 @@ PRZED v0.4:
 - numerek podrozdziału lub zadania przesunąć na margines (?)
 - dorysować linie dla gilotynki (jak się nazywają?, falc?) (?)
 - napisać we wstępie, że czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w tekście
+- napisać we wstępie o używanych oznaczeniach
 - w BibTeXu w pozycji taocp1frag sprawić aby pokazywało zakres stron
 
-PO v1.0:
+PRZED v0.5:
+- part 3
+- ostateczne zmiany w layoucie, konwencjach itd., czyli takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
+
+PRZED v0.6:
+- part 4
+
+PRZED v0.7:
+- part 5
+
+PRZED v0.8:
+- part 6
+
+PRZED v0.9:
+- ch{27,28,29,30}
+
+PRZED v1.0:
+- ch{31,32,33,34,35}
+
+PRZED v2.0:
 - rozwiązania zadań i problemów wydania 3
 - clrscode3e zamiast clrscode
 - tłumaczenie na język angielski
@@ -77,9 +101,10 @@ ROZWIĄZANYCH ZADAŃ: 170
 ROZWIĄZANYCH PROBLEMÓW: 25
 
 ETAPY ODDAWANIA ROZDZIAŁÓW:
-poziom 1. -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna)
-poziom 2. -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury, zaimplementowane i przetestowane algorytmy (pełny tekst, wersja kandydująca)
-poziom 3. -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna)
+poziom 0 -- w trakcie pisania (tekst niepełny) --> wersje alpha
+poziom 1 -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna) --> wersje beta
+poziom 2 -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury, zaimplementowane i przetestowane algorytmy (pełny tekst, wersja kandydująca) --> wersje rc
+poziom 3 -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna) --> wersja final
 
 ROZDZIAŁ 1 (3)
 ROZDZIAŁ 2 (3)
@@ -88,85 +113,50 @@ ROZDZIAŁ 4 (3)
 ROZDZIAŁ 5 (3)
 
 ROZDZIAŁ 6 (0)
-- 6.4-5
+- 6.4-5 -- see Schaffer's disertation
 - 6.5-4 -- przemyśleć
-- 6-3(c)
-- 6-3(d) -- źle
-- 6-3(f) -- sprawdzić procedurę
+- 6-3(c) -- najpierw chyba trzeba wymienić minimum z elementem Y[m,n]
 
 ROZDZIAŁ 7 (0)
-- 7.4-4
-- 7-1 -- gruntownie sprawdzić!
-- 7-1(a) -- nierówno ułożone i oraz p na rysunku, poprawić rysunek, przenieść opis do podpisu rysunku, podpunkty w rysunku
+- 7.4-2 -- obecne rozwiązanie czy to zakomentowane?
 - 7-1(b)
 - 7-2(e) -- co z podstawą indukcji T(1)? w jaki sposób można dowieść oszacowania dokładnego, przy tylko ograniczeniu górnym?
-- 7-6(a)
-- 7-6(b)
+- 7-6(a) -- dokończyć, sprawdzić, napisać ogólny quicksort (?)
+- 7-6(b) -- dopiero tutaj odwołać się do wyboru mediany i pesymistycznego $\Theta(n)$
 
 ROZDZIAŁ 8 (0)
-- 8.1-1
-- 8.1-2
-- 8.1-3
-- 8.1-4
-- 8.2-1
-- 8.2-2
-- 8.2-3
-- 8.2-4
-- 8.3-1
-- 8.3-2
-- 8.3-3
-- 8.3-4
-- 8.3-5
-- 8.4-1
-- 8.4-2
-- 8.4-3
-- 8.4-4
-- 8.4-5
-- 8-1(a)
-- 8-1(b)
-- 8-1(c)
-- 8-1(d)
-- 8-1(e)
-- 8-2(a)
-- 8-2(b)
-- 8-2(c)
-- 8-2(d)
-- 8-2(e)
-- 8-3(a)
+- 8.3-2 -- czy udowodnić, że jedne algorytmy są stabilne a drugie nie? druga część zadania -- dlaczego pamięć O(n\lg n)? i jak dokładnie przechowywane i wyszukiwane są te indeksy?
+- 8.3-5*
+- 8.4-4*
+- 8.4-5*
+- 8-1(c) -- inaczej, zgodnie z CS
+- 8-1(f)
+- 8-2(e) -- sprawdzić
 - 8-3(b)
-- 8-4(a)
-- 8-4(b)
+- 8-4(a) -- ok, sprawdzić z tłumaczeniem
 - 8-4(c)
-- 8-5(a)
-- 8-5(b)
-- 8-5(c)
-- 8-5(d)
-- 8-5(e)
+- 8-5(d) -- chyba źle
+- 8-5(e) -- wyjaśnić
 - 8-5(f)
-- 8-6(a)
 - 8-6(b)
 - 8-6(c)
 - 8-6(d)
 
 ROZDZIAŁ 9 (0)
-- 9.1-1
-- 9.1-2
+- 9.1-1 -- dokończyć
+- 9.1-2*
 - 9.2-1
 - 9.2-2
 - 9.2-3
 - 9.2-4
 - 9.3-1
 - 9.3-2
-- 9.3-3
-- 9.3-4
-- 9.3-5
+- 9.3-4*
+- 9.3-5 -- podłogi?
 - 9.3-6
-- 9.3-7
-- 9.3-8
+- 9.3-7 -- czy dobre wartości dla i_1 i i_2?
+- 9.3-8 -- sprawdzić
 - 9.3-9
-- 9-1(a)
-- 9-1(b)
-- 9-1(c)
 - 9-2(a)
 - 9-2(b)
 - 9-2(c)
@@ -174,8 +164,52 @@ ROZDZIAŁ 9 (0)
 - 9-2(e)
 - 9-3(a)
 - 9-3(b)
-- 9-3(c)
-- 9-3(d)
+- 9-3(d) -- dokończyć dla i=n/2?
+
+ROZDZIAŁ 34 (0) -- rozdział niezależny od głównego planu, sprawdzić po przerobieniu rozdziałów z grafami
+- 34.1-1 -- co to jest n?, sprawdzić ostatnie zdanie
+- 34.1-2 -- sprawdzić
+- 34.1-3 -- czy odpowiedni poziom szczegółowości?
+- 34.1-4 -- zostaje do rozdziału 16
+- 34.1-5 -- dokończyć
+- 34.1-6 -- dopisać operacje konkatenacji i domknięcia
+- 34.2-4
+- 34.2-11
+- 34.3-1 -- rysunek taki jak 34.8(b)
+- 34.3-8
+- 34.4-1
+- 34.4-2 -- sprawdzić, odstęp po \wedge
+- 34.4-3
+- 34.4-4 -- sprawdzić
+- 34.4-5
+- 34.4-6
+- 34.4-7
+- 34.5-1
+- 34.5-2
+- 34.5-3
+- 34.5-4
+- 34.5-5
+- 34.5-6
+- 34.5-7
+- 34.5-8
+- 34-1(a)
+- 34-1(b)
+- 34-1(c)
+- 34-1(d)
+- 34-2(a)
+- 34-2(b)
+- 34-2(c)
+- 34-2(d)
+- 34-3(a)
+- 34-3(b)
+- 34-3(c)
+- 34-3(d)
+- 34-3(e)
+- 34-3(f)
+- 34-4(a)
+- 34-4(b)
+- 34-4(c)
+- 34-4(d)
 
 DODATEK A (3)
 DODATEK B (3)

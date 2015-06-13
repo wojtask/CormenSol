@@ -117,7 +117,7 @@ beginfig(2);
 
 	label(btex ${\scriptstyle p}$ etex, center p0 + (0, scale));
 	label(btex ${\scriptstyle r}$ etex, center p11 + (0, scale));
-	label(btex ${\scriptstyle i}$ etex, center p0 + (-scale, scale));
+	label(btex ${\scriptstyle \phantom{p}i\phantom{p}}$ etex, center p0 + (-scale, scale));
 	label(btex ${\scriptstyle j}$ etex, center p11 + (scale, scale));
 
 	for i:=0 upto 11:
@@ -167,7 +167,7 @@ beginfig(2);
 
 	label(btex ${\scriptstyle p}$ etex, center p0 + (0, -6scale + scale));
 	label(btex ${\scriptstyle r}$ etex, center p11 + (0, -6scale + scale));
-	label(btex ${\scriptstyle i}$ etex, center p1 + (0, -6scale + scale));
+	label(btex ${\scriptstyle \phantom{p}i\phantom{p}}$ etex, center p1 + (0, -6scale + scale));
 	label(btex ${\scriptstyle j}$ etex, center p9 + (0, -6scale + scale));
 
 	for i:=0 upto 11:
@@ -194,7 +194,7 @@ beginfig(2);
 
 	label(btex ${\scriptstyle p}$ etex, center p0 + (0, -9scale + scale));
 	label(btex ${\scriptstyle r}$ etex, center p11 + (0, -9scale + scale));
-	label(btex ${\scriptstyle i}$ etex, center p9 + (0, -9scale + scale));
+	label(btex ${\scriptstyle \phantom{p}i\phantom{p}}$ etex, center p9 + (0, -9scale + scale));
 	label(btex ${\scriptstyle j}$ etex, center p8 + (0, -9scale + scale));
 
 	for i:=0 upto 3:

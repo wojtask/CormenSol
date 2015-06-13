@@ -3,6 +3,8 @@
 \subchapter{Minimum i~maksimum}
 
 \exercise %9.1-1
+Potraktujmy testowanie dwóch elementów jako turniej, który wygrywa mniejszy z~elementów. Testując w~pierwszym kroku elementy parami, dostaniemy $\lfloor n/2\rfloor$ zwycięzców, wśród których należy szukać minimum. Kolejne kroki przeprowadzamy podobnie, za każdym razem odrzucając około połowy elementów aż do pozostawienia jednego, który stanowi minimum. Wykonane testy można rozważać jak drzewo binarne, które na każdym poziomie zawiera zwycięzców z~kolejnego etapu, mając minimum w~jego korzeniu.
+
 \exercise %9.1-2
 
 \subchapter{Wybór w~oczekiwanym czasie liniowym}
@@ -11,17 +13,54 @@
 \exercise %9.2-2
 \exercise %9.2-3
 \exercise %9.2-4
+%Najgorszy przypadek dzielenia podtablicy występuje, gdy na element rozdzielający wybierany będzie największy element podtablicy.
 
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 
 \exercise %9.3-1
 \exercise %9.3-2
+
 \exercise %9.3-3
+Można wymusić dokonywanie najbardziej zrównoważonych podziałów przez procedurę \proc{Partition} dzięki zastosowaniu algorytmu \proc{Select} do wyboru mediany sortowanej podtablicy na element rozdzielający. Ponieważ pesymistyczny czas algorytmu \proc{Select} wynosi $O(n)$, to pesymistyczny czas algorytmu quicksort sprowadza się po takiej modyfikacji $O(n\lg n)$.
+
 \exercise %9.3-4
+
 \exercise %9.3-5
+Problem rozwiązujemy analogicznie jak w~\zad{9.3-3} ale dla algorytmu wyboru. Algorytm jest podobny do \proc{Randomized-Select}, w~wierszu~3 wywołujemy jednak procedurę \proc{Partition}, wewnątrz której na element dzielący wyznaczamy medianę przetwarzanej podtablicy za pomocą ``czarnej skrzynki''. W~każdym wywołaniu rekurencyjnym będzie dokonywany najbardziej zrównoważony podział podtablicy, skąd czasem działania algorytmu w~przypadku pesymistycznym jest
+\[
+	T(n) =
+	\begin{cases}
+		O(1), & \text{jeśli $n=1$}, \\
+		T(n/2)+O(n), & \text{jeśli $n>1$},
+	\end{cases}
+\]
+co rozwiązujemy przy użyciu twierdzenia o~rekurencji uniwersalnej, otrzymując $T(n)=O(n)$.
+
 \exercise %9.3-6
+
 \exercise %9.3-7
+Znajdujemy elementy $i_1=\lfloor n/2\rfloor-\lfloor k/2\rfloor$ oraz $i_2=\lfloor n/2\rfloor+\lfloor k/2\rfloor$ wejściowej tablicy w~porządku rosnącym za pomocą dwóch wywołań algorytmu \proc{Select} w~czasie $O(n)$. Szukane elementy są większe od \twoparts{$i_1$}{tego} i~mniejsze od \twoparts{$i_2$}{tego} -- wyznaczamy je przeglądając liniowo tablicę i~testując czy znajdują się w~wyznaczonym przedziale.
+
 \exercise %9.3-8
+Porównajmy mediany każdej z~tablic. Jeśli są one równe, to wśród wszystkich $2n$ elementów $n$ jest większych od tych median -- $n/2$ z~tablicy $X$ i~$n/2$ z~tablicy $Y$. Załóżmy teraz, że mediany są różne i~bez utraty ogólności, niech mniejsza będzie mediana tablicy $X$. Pomijając teraz elementy $X$ mniejsze od jej mediany i~elementy $Y$ większe od jej mediany, sprowadzamy problem do identycznego ale o~połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród $n$ pozostawionych elementów.
+\begin{codebox}
+\Procname{$\proc{Two-Array-Median}(X,\id{p_X},\id{r_X},Y,\id{p_Y},\id{r_Y})$}
+\li	\If $\id{p_X}=\id{r_X}$
+\li		\Then \Return $\min(X[\id{p_X}],Y[\id{p_Y}])$
+		\End
+\li	$\id{q_X}\gets\lfloor(\id{p_X}+\id{r_X})/2\rfloor$
+\li	$\id{q_Y}\gets\lfloor(\id{p_Y}+\id{r_Y})/2\rfloor$
+\li	\If $X[\id{q_X}]=Y[\id{q_Y}]$
+\li		\Then \Return $X[\id{q_X}]$
+		\End
+\li	\If $X[\id{q_X}]>Y[\id{q_Y}]$
+\li		\Then \Return $\proc{Two-Array-Median}(X,\id{p_X},\id{q_X}-1,Y,\id{q_Y}+1,\id{r_Y})$
+\li		\Else \Return $\proc{Two-Array-Median}(X,\id{q_X}+1,\id{r_X},Y,\id{p_Y},\id{q_Y}-1)$
+		\End
+\end{codebox}
+
+Czas działania algorytmu jest opisany przez rekurencję z~\zad{2.3-5}, ponieważ jego działanie jest analogiczne do wyszukiwania binarnego -- na każdym poziomie rekursji po wykonaniu jednego porównania odrzucana jest połowa problemu.
+
 \exercise %9.3-9
 
 \problems
@@ -29,8 +68,17 @@
 \problem{Sortowanie $i$ największych elementów} %9-1
 
 \subproblem %9-1(a)
+Liczby można posortować algorytmem sortowania przez scalanie, który w~najgorszym przypadku potrzebuje czasu $\Theta(n\lg n)$. Następnie zwracamy $i$ największych liczb poprzez proste przejście po prawym końcu tablicy, co zajmuje czas $\Theta(i)$, więc całkowity czas algorytmu w~najgorszym przypadku wynosi $\Theta(n\lg n+i)$.
+
 \subproblem %9-1(b)
+Zbudowanie kopca typu max dla kolejki priorytetowej wymaga czasu $\Theta(n)$. Wykonanie $i$ operacji \proc{Extract-Max} zajmuje czas
+\[
+	\sum_{k=1}^i\Theta(\lg(n-k)) = \sum_{k=n-i}^n\Theta(\lg k) = \Theta(n\lg n-(n-i-1)\lg n) = \Theta(i\lg n)
+\]
+na podstawie problemu~A-1(b), a~zatem całkowitym czasem algorytmu w~przypadku pesymistycznym jest $\Theta(n+i\lg n)$.
+
 \subproblem %9-1(c)
+Aby osiągnąć najlepszy czas w~przypadku pesymistycznym, użyjemy procedury \proc{Select} do znalezienia \twoparts{$i$}{tej} statystyki pozycyjnej. Sortowanie $i$ największych liczb można wykonać algorytmem sortowania przez scalanie, które w~najgorszym przypadku zajmuje czas $\Theta(i\lg i)$, skąd całkowity czas działania algorytmu wynosi $\Theta(n+i\lg i)$, co czyni go najbardziej efektywnym spośród wszystkich rozważanych algorytmów w~obecnym problemie.
 
 \problem{Mediana ważona} %9-2
 
@@ -44,7 +92,17 @@
 
 \subproblem %9-3(a)
 \subproblem %9-3(b)
+
 \subproblem %9-3(c)
+Ponieważ $i$ jest stałą, to $T(2i)$ można potraktować jako czas stały. Wykorzystując poprzednią część, mamy
+\[
+	U_i(n) = n+O(T(2i)\lg(n/i)) = n+O(\lg n-\lg i) = n+O(\lg n),
+\]
+co należało dowieść.
+
 \subproblem %9-3(d)
+Dla $k>2$ oszacowanie wynika natychmiast z~części~(b) po podstawieniu $i=n/k$, bo wtedy oczywiście $i<n/2$.
+
+Jeśli $k=2$, to rozwiązaniem rekurencji $U_i(n)$ jest $T(n)$.
 
 \endinput
