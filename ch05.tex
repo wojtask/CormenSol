@@ -1,53 +1,222 @@
-\section*{Rozdział 5: Analiza probabilistyczna i algorytmy randomizowane}
+\chapter{Analiza probabilistyczna i~algorytmy randomizowane}
 
-\subsection*{5.1. Problem zatrudnienia sekretarki}
+\section{Problem zatrudnienia sekretarki}
 
-\paragraph{5.1-1.}
-\paragraph{5.1-2.}
-\paragraph{5.1-3.}
+\subsection{} %5.1-1
+Stwierdzenie w wierszu 4 algorytmu \proc{Hire-Assistant}, która kandydatka jest lepsza spośród dwóch testowanych, jest równoważne rozstrzygnięciu czy $\id{rank}(\id{best})\le\id{rank}(i)$ dla każdego $i=1,2,\dots,n$. Ponieważ każda permutacja kandydatek może pojawić się na wejściu, to jesteśmy w stanie przetestować każdą parę kandydatek, a zatem znamy relację $R$ określoną na zbiorze rang kandydatek taką, że zachodzi $aRb$ albo $bRa$ dla dowolnych rang $a$ i $b$. $R$ jest więc porządkiem liniowym.
 
-\subsection*{5.2. Zmienne losowe wskaźnikowe}
+\subsection{} %5.1-2
+\begin{codebox}
+\Procname{$\proc{Random}(a,b)$}
+\li	\If $a=b$
+\li		\Then
+			\Return $a$
+		\End
+\li	$\id{mid}\gets\lfloor(a+b)/2\rfloor$
+\li	\If $\proc{Random}(0,1)=0$
+\li		\Then
+			\Return $\proc{Random}(a,\id{mid})$
+\li		\Else
+			\Return $\proc{Random}(\id{mid}+1,b)$
+		\End
+\end{codebox}
+Niech $n=b-a+1$. Czas działania powyższej procedury jest opisany za pomocą rekurencji $T(n)=T(n/2)+\Theta(1)$, gdyż jej działanie jest analogiczne do wyszukiwania binarnego w $n$-elementowej tablicy -- w każdym wywołaniu rekurencyjnym odrzucamy połowę tablicy z dalszej analizy. Rozwiązaniem rekurencji jest $T(n)=\Theta(\lg n)$, a więc czasem działania procedury \proc{Random} w zależności od $a$ i $b$ jest $\Theta(\lg (b/a))$.
 
-\paragraph{5.2-1.}
-\paragraph{5.2-2.}
-\paragraph{5.2-3.}
-\paragraph{5.2-4.}
-\paragraph{5.2-5.}
+\subsection{} %5.1-3
+\begin{codebox}
+\Procname{$\proc{Unbiased-Random}$}
+\li	\Repeat
+		$x\gets\proc{Biased-Random}$
+\li		$y\gets\proc{Biased-Random}$
+\li	\Until $x\ne y$ \label{li:unbiased-repeat-end}
+\li \Return $x$
+\end{codebox}
+Zauważmy, że prawdopodobieństwo zwrócenia przez powyższy algorytm wyniku równego $0$ jest równe:
+\[
+	\Pr(x=0\mbox{ i }y=1) = (1-p)p,
+\]
+a zwrócenia $1$:
+\[
+	\Pr(x=1\mbox{ i }y=0) = p(1-p).
+\]
+Wykorzystano tutaj fakt, że kolejne wywołania procedury \proc{Biased-Random} zwracają wynik niezależnie od poprzednich wywołań. Ponieważ są to jedyne wartości jakie algorytm może zwrócić, to wnioskujemy, że każde z nich będzie zwrócone z prawdopodobieństwem równym $1/2$.
 
-\subsection*{5.3. Algorytmy randomizowane}
+Załóżmy, że każda iteracja pętli algorytmu odbywa się w czasie stałym. Algorytm kończy działanie, gdy zajdzie warunek z wiersza \ref{li:unbiased-repeat-end}, co zachodzi z prawdopodobieństwem $2p(1-p)$. Iteracje pętli tworzą ciąg prób Bernoulliego o rozkładzie geometrycznym, a zatem liczba prób aż do osiągnięcia sukcesu jest zadana tożsamością (C.31). Stąd wnioskujemy, że oczekiwanym czasem działania algorytmu jest $\Theta(1/(2p(1-p)))$.
 
-\paragraph{5.3-1.}
-\paragraph{5.3-2.}
-\paragraph{5.3-3.}
-\paragraph{5.3-4.}
-\paragraph{5.3-5.}
-\paragraph{5.3-6.}
+\section{Zmienne losowe wskaźnikowe}
 
-\subsection*{5.4. Analiza probabilistyczna i dalsze zastosowania zmiennych losowych wskaźnikowych}
+\subsection{} %5.2-1
+Zatrudnienie tylko jednej kandydatki jest równoważne przyjęciu pierwszej z nich i tylko jej. Zauważmy, że pierwszą kandydatkę przyjmiemy w każdym wypadku. Jeśli ma ona być jedyną zatrudnioną osobą, to powinna być najbardziej wykwalifikowaną w zbiorze wszystkich kandydatek (czyli mieć największą wartość $\id{rank}$). Najlepsza kandydatka może znajdować się na każdym z $n$ miejsc w ciągu wejściowym, zatem prawdopodobieństwo tego, że zatrudnimy dokładnie jedną jest równe $\frac{1}{n}$.
 
-\paragraph{5.4-1.}
-\paragraph{5.4-2.}
-\paragraph{5.4-3.}
-\paragraph{5.4-4.}
-\paragraph{5.4-5.}
-\paragraph{5.4-6.}
-\paragraph{5.4-7.}
+By dokonać zatrudnienia wszystkich $n$ kandydatek, ich rangi muszą tworzyć ciąg rosnący. Jest tylko jedna taka permutacja, zatem prawdopodobieństwo tego zdarzenia wynosi $\frac{1}{n!}$. 
 
-\subsection*{Problemy}
+\subsection{} %5.2-2
+Pierwsza w ciągu kandydatek powinna być taka, której ranga jest mniejsza tylko od rangi najlepszej z kandydatek. W pozostałym $(n-1)$-elementowym ciągu kandydatka o najwyższej randze może być na jednym z $n-1$ miejsc. Pozostałe $n-2$ elementy tworzą $(n-2)!$ permutacji. Stąd prawdopodobieństwo wybrania dokładnie dwóch kandydatek wynosi
+\[
+	\frac{(n-1)(n-2)!}{n!} = \frac{(n-1)!}{n!} = \frac{1}{n}.
+\]
 
-\paragraph{5-1. Zliczanie probabilistyczne}
+\subsection{} %5.2-3
+Obliczmy wartość oczekiwaną liczby oczek w jednym rzucie kostką. Definiując zmienną losową $X_i$ jako liczbę oczek na $i$-tej kostce ($1\le i\le n$), obliczamy $\mathrm{E}(X_i)$ przyjmując, że zmienne $X_i$ posiadają rozkład jednostajny (prawdopodobieństwo każdego wyniku jest równe $\frac{1}{6}$).
+\[
+	\mathrm{E}(X_i) = \sum_x\Pr(X_i=x) = \frac{1+2+3+4+5+6}{6} = 3.5.
+\]
+Niech teraz zmienna losowa $X$ oznacza sumę oczek na $n$ kostkach. Mamy $X=X_1+X_2+\cdots+X_n$, więc z liniowości wartości oczekiwanej:
+\[
+	\mathrm{E}[X] = \mathrm{E}\left(\sum_{i=0}^nX_i\right) = \sum_{i=0}^n\mathrm{E}(X_i) = 3.5n.
+\]
 
-\subparagraph{(a)}
-\subparagraph{(b)}
+\subsection{} %5.2-4
+Niech $S_i$ będzie zdarzeniem oznaczającym, że $i$-ta osoba otrzymała swój kapelusz ($1\le i\le n$). Definiujemy teraz zmienne losowe $X_i=I(S_i)$ oraz $X=X_1+X_2+\cdots+X_n$, z których ostatnia oznacza liczbę osób, którym zwrócono właściwe kapelusze. Mamy
+\[
+	\mathrm{E}[X] = \mathrm{E}\left(\sum_{i=0}^nX_i\right) = \sum_{i=0}^n\mathrm{E}(X_i) = \sum_{i=0}^n\Pr(X_i=1) = \sum_{i=0}^n\frac{1}{n} = 1,
+\]
+a zatem swój kapelusz otrzyma średnio tylko jedna osoba.
 
-\paragraph{5-2. Wyszukiwanie w nieposortowanej tablicy}
+\subsection{} %5.2-5
+Dla każdych $i,j$ takich, że $1\le i<j\le n$, zdefiniujmy zdarzenia $S_{ij}$ -- w tablicy $A$ występuje inwersja $(i,j)$. Definiujemy zmienne losowe $X_{ij}=I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$. Zmienna $X$ jest liczbą inwersji tablicy $A$. Jej wartością oczekiwaną jest
+\begin{eqnarray*}
+	\mathrm{E}(X) &=& \sum_{i=1}^{n-1}\sum_{j=i+1}^n\mathrm{E}(X_{ij}) \\
+	&=& \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{ij}=1) \\
+	&=& \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{2} \\
+	&=& \sum_{i=1}^{n-1}\frac{n-i}{2} \\
+	&=& \frac{\sum_{i=1}^{n-1}n-\sum_{i=1}^{n-1}i}{2} \\
+	&=& \frac{n(n-1)-\frac{n(n-1)}{2}}{2} \\
+	&=& \frac{n(n-1)}{4}.
+\end{eqnarray*}
 
-\subparagraph{(a)}
-\subparagraph{(b)}
-\subparagraph{(c)}
-\subparagraph{(d)}
-\subparagraph{(e)}
-\subparagraph{(f)}
-\subparagraph{(g)}
-\subparagraph{(h)}
-\subparagraph{(i)}
+\section{Algorytmy randomizowane}
+
+\subsection{} %5.3-1
+\begin{codebox}
+\Procname{$\proc{Randomize-In-Place'}(A)$}
+\li	$n\gets\id{length}[A]$
+\li	zamień $A[1]\leftrightarrow A[\proc{Random}(1,n)]$
+\li	\For $i\gets 2$ \To $n$
+\li		\Do
+			zamień $A[i]\leftrightarrow A[\proc{Random}(i,n)]$
+		\End
+\end{codebox}
+Niezmiennik pętli pozostaje niezmodyfikowany, zmienia się jedynie dowód inicjowania pętli.
+\begin{quote}
+	Gdy $i=2$, niezmiennik pętli mówi, że dla każdej $1$-permutacji, fragment tablicy $A[1\twodots 1]\equiv A[1]$ zawiera tę permutację z prawdopodobieństwem $\frac{(n-1)!}{n!}=\frac{1}{n}$, co jest prawdą, gdyż spośród $n$ elementów tablicy, prawdopodobieństwo tego, że w $A[1]$ znajdzie się pewien ustalony, wynosi $\frac{1}{n}$.
+\end{quote}
+
+\subsection{} %5.3-2
+\subsection{} %5.3-3
+Rozważmy permutację identycznościową $\pi_0$ i oznaczmy zdarzenia $S_i$ -- element na pozycji $i$ w tablicy $A$ ($1\le i\le n$) zostanie na swoim miejscu po wykonaniu procedury. Obliczmy prawdopodobieństwo uzyskania permutacji $\pi_0$:
+\[
+	\Pr\left(\bigcap_{i=1}^nS_i\right) = \prod_{i=1}^n\Pr\left(S_i\bigg|\bigcap_{j=1}^nS_j\right).
+\]
+Zachodzi oczywiście $\Pr(S_1)=\frac{1}{n}$. Dalej, $\Pr(S_2|S_1)=\frac{1}{n}$, ponieważ jeśli wiemy, że element $A[1]$ został na swoim miejscu, to prawdopodobieństwo tego, że $A[2]$ również nie zostanie przeniesiony, jest równe $\frac{1}{n}$. Ogólnie, dla $i=1,2,\dots,n$, zachodzi
+\[
+	\Pr\left(S_i\bigg|\bigcap_{j=1}^nS_j\right) = \frac{1}{n},
+\]
+a stąd mamy
+\[
+	\Pr\left(\bigcap_{i=1}^nS_i\right) = \left(\frac{1}{n}\right)^n = \frac{1}{n^n}.
+\]
+Widać zatem, że permutację identycznościową otrzymujemy z prawdopodobieństwem mniejszym od $\frac{1}{n!}$, co oznacza, że procedura \proc{Permute-With-All} nie generuje permutacji losowych zgodnych z rozkładem jednostajnym.
+
+\subsection{} %5.3-4
+Procedura na początku swego działania losuje liczbę, o jaką ma przesunąć elementy tablicy $A$ w prawo (jest to przesunięcie cykliczne). Nie jest zatem zmieniana wzajemna kolejność elementów, więc nie każdą permutację da się otrzymać w wyniku działania tej procedury, nie dostaniemy np. permutacji będącej odwróceniem tablicy wejściowej, o ile jej rozmiar jest większy niż 2.
+
+Prawdopodobieństwo, że dany element znajdzie się na ustalonej pozycji w~tablicy wynikowej, wynosi $\frac{1}{n}$, bo każda z nich jest wyznaczona przez liczbę wylosowaną z zakresu $1\twodots n$.
+
+\subsection{} %5.3-5
+Zauważmy, że dla $n=1$ analiza nie ma sensu, gdyż procedura \proc{Permute-By-Sorting} w tym przypadku staje się bezużyteczna. Załóżmy zatem, że $n>1$. Mamy wykazać, że
+\[
+	\mathrm{E}\left(\sum_{i=1}^n\sum_{j=i+1}^nI_{ij}\right) \ge 1-\frac{1}{n},
+\]
+gdzie $I_{ij}$ jest zmienną losową wskaźnikową zdarzenia $A$ -- elementy $i$ oraz $j$ są różne. Nierówność przyjmuje postać
+\[
+	\sum_{i=1}^n\sum_{j=i+1}^n\Pr(A)\ge 1-\frac{1}{n},
+\]
+dzięki liniowości wartości oczekiwanej i własności zmiennych losowych wskaźnikowych. Zauważmy, że prawdopodobieństwo tego, by elementy $i$ oraz $j$ były równe, wynosi $\frac{1}{n^3}$, a więc $A$, czyli zdarzenie przeciwne do niego, zachodzi z prawdopodobieństwem $1-\frac{1}{n^3}$. Mamy stąd
+\begin{eqnarray*}
+	\sum_{i=1}^n\sum_{j=i+1}^n\left(1-\frac{1}{n^3}\right) &\ge& 1-\frac{1}{n} \\
+	\left(1-\frac{1}{n^3}\right)\sum_{i=1}^n\sum_{j=i+1}^nj &\ge& 1-\frac{1}{n} \\
+	\left(1-\frac{1}{n^3}\right)\sum_{i=0}^{n-1}i &\ge& 1-\frac{1}{n} \\
+	\left(1-\frac{1}{n^3}\right)\left(\frac{n^2-n}{2}\right) &\ge& 1-\frac{1}{n}.
+\end{eqnarray*}
+Po przekształceniach dostajemy $n^3-2n-1\ge 0$, co zachodzi dla $n\ge\phi$, gdzie $\phi$ to złota liczba, a więc jest prawdą także dla $n\ge 2$, co spełnia założenie że $n>1$.
+
+\subsection{} %5.3-6
+Użyjemy wektora bitowego o rozmiarze $n^3$ do przechowania informacji, czy dana liczba wystąpiła już wcześniej jako priorytet, czy nie. Pozycja $i$ tego wektora przyjmuje wartość $1$, jeśli liczba $i$ została wylosowana jako priorytet oraz $0$ w przeciwnym przypadku. Jeśli w późniejszych losowaniach ponownie zostanie wybrane $i$, to losujemy jeszcze raz aż do natrafienia liczby niewykorzystanej dotąd jako priorytet. W ten sposób pozbywamy się powtarzających się priorytetów. Opisany algorytm wymaga $O(n^3)$ dodatkowej pamięci i $O(1)$ dodatkowego czasu.
+
+\section{Analiza probabilistyczna i dalsze zastosowania zmiennych losowych wskaźnikowych}
+
+\subsection{} %5.4-1
+
+\subsection{} %5.4-2
+\subsection{} %5.4-3
+\subsection{} %5.4-4
+\subsection{} %5.4-5
+\subsection{} %5.4-6
+\subsection{} %5.4-7
+
+\problems
+
+\subsection{} %5-1
+
+\subsubsection{} %5-1(a)
+\subsubsection{} %5-1(b)
+
+\subsection{} %5-2
+
+%sprawdzic
+\subsubsection{} %5-2(a)
+\begin{codebox}
+\Procname{$\proc{Random-Search}(A,x)$}
+\li	\For $k\gets 1$ \To $n$
+\li	 \Do
+			$B[k]\gets\const{false}$
+		\End
+\li	$b\gets 0$
+\li	\While $b<n$
+\li		\Do
+			$i\gets\proc{Random}(1,n)$
+\li			\If $A[i]=x$
+\li				\Then
+					\Return $i$
+\li				\ElseIf $B[i]=\const{false}$
+\li					\Then
+						$B[i]\gets\const{true}$
+\li						$b\gets b+1$
+					\End
+				\End
+		\End
+\li	\Return \const{nil}
+\end{codebox}
+
+\subsubsection{} %5-2(b)
+Niech $X$ będzie zmienną losową oznaczającą ilość sprawdzonych indeksów tablicy $A$ zanim odnaleziono $x$. Zachodzi $\mathrm{E}[X]=1/p=n$, gdzie $p=1/n$ to prawdopodobieństwo sukcesu w próbie Bernoulliego w rozkładzie geometrycznym.
+
+\subsubsection{} %5-2(c)
+Przy tych samych oznaczeniach i tym samym rozkładzie, co w poprzednim punkcie, mamy $\mathrm{E}[X]=1/p=n/k$.
+
+\subsubsection{} %5-2(d)
+
+\subsubsection{} %5-2(e)
+\begin{itemize}
+	\item czas oczekiwany: $O(n)$
+	\item czas pesymistyczny: $O(n)$
+\end{itemize}
+
+\subsubsection{} %5-2(f)
+\begin{itemize}
+	\item czas oczekiwany: $O(n/k)$
+	\item czas pesymistyczny: $O(n-k)$
+\end{itemize}
+
+\subsubsection{} %5-2(g)
+\begin{itemize}
+	\item czas oczekiwany: $O(n)$
+	\item czas pesymistyczny: $O(n)$
+\end{itemize}
+
+\subsubsection{} %5-2(h)
+Permutowanie losowe tablicy (np. procedurą \proc{Randomize-In-Place}) zajmuje czas $O(n)$, zatem dla każdego $k$ czas działania procedury, zarówno oczekiwany jak i pesymistyczny, wynosi $O(n)$.
+
+\subsubsection{} %5-2(i)
+Najlepszym wyborem jest procedura \proc{Deterministic-Search}, gdyż w~niektórych przypadkach zużywa mniej czasu niż pozostałe algorytmy (np. gdy w tablicy jest dużo wystąpień szukanej wartości). Permutowanie losowe tablicy nie jest konieczne, gdyż nie wpływa na obniżenie rzędu wielkości czasu pesymistycznego.

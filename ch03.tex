@@ -1,447 +1,603 @@
-\section*{Rozdział 3: Rzędy wielkości funkcji}
+\chapter{Rzędy wielkości funkcji}
 
-\subsection*{3.1. Notacja asymptotyczna}
+\section{Notacja asymptotyczna}
 
-\paragraph{3.1-1.}
+\subsection{} %3.1-1
 Zbadajmy, czy dla pewnych stałych $c_1,c_2,n_0>0$, dla każdego $n\ge n_0$ prawdą jest
 \[
-  0\le c_1(f(n)+g(n))\le\max(f(n),g(n))\le c_2(f(n)+g(n)).
+	0\le c_1(f(n)+g(n))\le\max(f(n),g(n))\le c_2(f(n)+g(n)).
 \]
-Jeśli w pewnym zbiorze $S$ zachodzi $f(n)\le g(n)$, to $\max(f(n), g(n)) = g(n)$, więc
+Jeśli w~pewnym zbiorze $S$ zachodzi $f(n)\le g(n)$, to $\max(f(n), g(n)) = g(n)$, więc
 \[
-  c_1f(n)+c_1g(n)\le c_1g(n)+c_1g(n) = 2c_1g(n) = 2c_1\max(f(n), g(n)).
+	c_1f(n)+c_1g(n)\le c_1g(n)+c_1g(n) = 2c_1g(n) = 2c_1\max(f(n), g(n)).
 \]
-Wybierając dowolne $0<c_1\le 1/2$ i $n_0$ równe minimum zbioru $S$, spełniamy pierwsze dwie nierówności dla wszystkich $n\ge n_0$ należących do $S$. Identyczny rezultat otrzymujemy w przypadku przeciwnym, gdy $\max(f(n), g(n)) = f(n)$. Ostatnia z nierówności jest oczywiście spełniona jeśli przyjmiemy $c_2=1$.
+Wybierając dowolne $0<c_1\le 1/2$ i~$n_0$ równe minimum zbioru $S$, spełniamy pierwsze dwie nierówności dla wszystkich $n\ge n_0$ należących do $S$. Identyczny rezultat otrzymujemy w~przypadku przeciwnym, gdy $\max(f(n), g(n)) = f(n)$. Ostatnia z~nierówności jest oczywiście spełniona, jeśli przyjmiemy $c_2=1$.
 
-Wszystkie stałe zostały wyznaczone, wnioskujemy zatem, że $\max(f(n), g(n))$ $= \Theta(f(n)+g(n))$ zgodnie z definicją notacji $\Theta$.
+Wszystkie stałe zostały wyznaczone, wnioskujemy zatem, że $\max(f(n), g(n))$ $= \Theta(f(n)+g(n))$ zgodnie z~definicją notacji $\Theta$.
 
-\paragraph{3.1-2.}
-By pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1,c_2,n_0>0$ takie, że $0\le c_1n^b\le (n+a)^b\le c_2n^b$ dla wszystkich $n\ge n_0$. Zauważmy, że $n+a\le n+|a|\le 2n$, gdy $|a|\le n$ oraz $n+a\ge n-|a|\ge n/2$, o ile $|a|\le n/2$. Stąd, jeśli $n\ge 2|a|$, to zachodzi
+\subsection{} %3.1-2
+By pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1,c_2,n_0>0$ takie, że $0\le c_1n^b\le (n+a)^b\le c_2n^b$ dla wszystkich $n\ge n_0$. Zauważmy, że $n+a\le n+|a|\le 2n$, gdy $|a|\le n$ oraz $n+a\ge n-|a|\ge n/2$, o~ile $|a|\le n/2$. Stąd, jeśli $n\ge 2|a|$, to zachodzi
 
 \[
-  0\le n/2\le n+a\le 2n.
+	0\le n/2\le n+a\le 2n.
 \]
 Ponieważ $b>0$, to powyższa nierówność jest spełniona również wtedy, gdy podniesiemy wszystkie jej składowe do potęgi $b$:
 \[
-  0\le (n/2)^b\le (n+a)^b\le (2n)^b,
+	0\le (n/2)^b\le (n+a)^b\le (2n)^b,
 \]
 \[
-  0\le (1/2)^bn^b\le (n+a)^b\le 2^bn^b.
+	0\le (1/2)^bn^b\le (n+a)^b\le 2^bn^b.
 \]
 Widać zatem, że szukanym stałym można nadać wartości $c_1=(1/2)^b$, $c_2=2^b$ oraz $n_0=2|a|$ i~prawdą jest, że $(n+a)^b=\Theta(n^b)$.
 
-\paragraph{3.1-3.}
-Niech $T(n)$ będzie czasem działania algorytmu. $T(n)\ge O(n^2)$ oznacza, że $T(n)\ge f(n)$ dla pewnej funkcji $f(n)$ z klasy $O(n^2)$. Stwierdzenie pozostaje prawdziwe dla każdego $T(n)$, wystarczy bowiem wybrać funkcję $f(n)=0$, która oczywiście jest w $O(n^2)$. Widać więc, że takie określenie nic nam nie mówi o~oszacowaniu czasu działania algorytmu.
+\subsection{} %3.1-3
+Niech $T(n)$ będzie czasem działania algorytmu. $T(n)\ge O(n^2)$ oznacza, że $T(n)\ge f(n)$ dla pewnej funkcji $f(n)$ z~klasy $O(n^2)$. Stwierdzenie pozostaje prawdziwe dla każdego $T(n)$, wystarczy bowiem wybrać funkcję $f(n)=0$, która oczywiście jest w~$O(n^2)$. Widać więc, że takie określenie nic nam nie mówi o~oszacowaniu czasu działania algorytmu.
 
-\paragraph{3.1-4.}
-Znajdźmy stałe $c,n_0>0$ takie, że $0\le 2^{n+1}\le c2^n$ dla każdego $n\ge n_0$. Ponieważ $2^{n+1}=2\cdot 2^n$ dla każdego $n\ge 0$, to można przyjąć $c=2$ oraz $n_0=1$. A zatem $2^{n+1} = O(2^n)$.
+\subsection{} %3.1-4
+Znajdźmy stałe $c,n_0>0$ takie, że $0\le 2^{n+1}\le c2^n$ dla każdego $n\ge n_0$. Ponieważ $2^{n+1}=2\cdot 2^n$ dla każdego $n\ge 0$, to można przyjąć $c=2$ oraz $n_0=1$. A~zatem $2^{n+1} = O(2^n)$.
 
-Wyznaczmy teraz te same stałe, ale spełniające zależność $0\le 2^{2n}\le c2^n$ dla wszystkich $n\ge n_0$. Mamy $2^{2n}=2^n\cdot 2^n\le c2^n$, z czego wynika, że $c\ge 2^n$, co jednak uzależnia $c$ od $n$, a zatem $c$ musiałoby być dowolnie duże i nie może w~takim wypadku być stałą. Stąd otrzymujemy, że $2^{2n}\ne O(2^n)$.
+Wyznaczmy teraz te same stałe, ale spełniające zależność $0\le 2^{2n}\le c2^n$ dla wszystkich $n\ge n_0$. Mamy $2^{2n}=2^n\cdot 2^n\le c2^n$, z~czego wynika, że $c\ge 2^n$, co jednak uzależnia $c$ od $n$, a~zatem $c$ musiałoby być dowolnie duże i~nie może w~takim wypadku być stałą. Stąd otrzymujemy, że $2^{2n}\ne O(2^n)$.
 
-\paragraph{3.1-5.}
-Z definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i tylko wtedy, gdy istnieją takie stałe $c_1,c_2,n_0>0$, że
+\subsection{} %3.1-5
+Z definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1,c_2,n_0>0$, że
 \[
-  0\le c_1g(n)\le f(n)\le c_2g(n)
+	0\le c_1g(n)\le f(n)\le c_2g(n)
 \]
 zachodzi dla wszystkich $n\ge n_0$. Rozdzielając nierówność otrzymujemy
 \[
-  \left\{\begin{array}{r}
-	0\le c_1g(n)\le f(n), \\
-	0\le f(n)\le c_2g(n).
-  \end{array}\right.
+	\left\{\begin{array}{c}
+		0\le c_1g(n)\le f(n), \\
+		0\le f(n)\le c_2g(n).
+	\end{array}\right.
 \]
-Pierwsze wyrażenie stanowi definicję $f(n)=\Omega(g(n))$, a drugie -- $f(n)=O(g(n))$.
+Pierwsze wyrażenie stanowi definicję $f(n)=\Omega(g(n))$, a~drugie -- $f(n)=O(g(n))$.
 
-Dowód przeprowadzony w odwrotnej kolejności pozwala wykazać implikację w drugą stronę, gdyż koniunkcja dwóch składowych nierówności doprowadza do nierówności z definicji $f(n)=\Theta(g(n))$.
+Dowód przeprowadzony w~odwrotnej kolejności pozwala wykazać implikację w~drugą stronę, gdyż koniunkcja dwóch składowych nierówności doprowadza do nierówności z~definicji $f(n)=\Theta(g(n))$.
 
-\paragraph{3.1-6.}
-Jeżeli pesymistyczny czas działania algorytmu wynosi $O(g(n))$, to dla dowolnych danych wejściowych oszacowanie czasu działania tego algorytmu jest nie większe niż $c_1g(n)$ dla pewnej stałej $c_1>0$. Z kolei optymistyczny czas $\Omega(g(n))$ oznacza, że dla dowolnych danych wejściowych oszacowanie czasu działania algorytmu jest nie mniejsze niż $c_2g(n)$ dla stałej $c_2>0$. Widać zatem, że dla dowolnych danych mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, gdzie $f(n)$ jest czasem działania algorytmu, a stąd otrzymujemy, że $f(n) = \Theta(g(n))$.
+\subsection{} %3.1-6
+Jeżeli pesymistyczny czas działania algorytmu wynosi $O(g(n))$, to dla dowolnych danych wejściowych oszacowanie czasu działania tego algorytmu jest nie większe niż $c_1g(n)$ dla pewnej stałej $c_1>0$. Z~kolei optymistyczny czas $\Omega(g(n))$ oznacza, że dla dowolnych danych wejściowych oszacowanie czasu działania algorytmu jest nie mniejsze niż $c_2g(n)$ dla stałej $c_2>0$. Widać zatem, że dla dowolnych danych mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, gdzie $f(n)$ jest czasem działania algorytmu, a~stąd otrzymujemy, że $f(n) = \Theta(g(n))$.
 
-Przeprowadzenie powyższego rozumowania w odwrotnej kolejności pozwala wykazać przeciwną implikację.
+Przeprowadzenie powyższego rozumowania w~odwrotnej kolejności pozwala wykazać przeciwną implikację.
 
-\paragraph{3.1-7.}
-Załóżmy, że twierdzenie jest fałszywe i że istnieje pewna funkcja $f(n)$ należąca do $o(g(n))\cap\omega(g(n))$. Zachodzi zatem zarówno $f(n)=o(g(n))$ jak i~$f(n)=\omega(g(n))$, co oznacza, że dla każdych dodatnich stałych $c_1$ i $c_2$ istnieje pewne dodatnie $n_0$, że
+\subsection{} %3.1-7
+Załóżmy, że twierdzenie jest fałszywe i~że istnieje pewna funkcja $f(n)$ należąca do $o(g(n))\cap\omega(g(n))$. Zachodzi zatem zarówno $f(n)=o(g(n))$ jak i~$f(n)=\omega(g(n))$, co oznacza, że dla każdych dodatnich stałych $c_1$ i~$c_2$ istnieje pewne dodatnie $n_0$, że
 \[
-  c_1g(n)<f(n)<c_2g(n)
+	c_1g(n)<f(n)<c_2g(n)
 \]
-dla wszystkich $n\ge n_0$. Dochodzimy do sprzeczności, bowiem nieprawdą jest, że $c_1<c_2$ dla każdych liczb $c_1$ i $c_2$, skąd wnioskujemy, że zbiór $o(g(n))\cap\omega(g(n))$ jest pusty.
+dla wszystkich $n\ge n_0$. Dochodzimy do sprzeczności, bowiem nieprawdą jest, że $c_1<c_2$ dla każdych liczb $c_1$ i~$c_2$, skąd wnioskujemy, że zbiór $o(g(n))\cap\omega(g(n))$ jest pusty.
 
-Dzięki pustości tej klasy, nie ma potrzeby definiowania notacji $\theta$ odpowiadającej $\Theta$ i analogicznej do $o$ i~$\omega$.
+Dzięki pustości tej klasy, nie ma potrzeby definiowania notacji $\theta$ odpowiadającej $\Theta$ i~analogicznej do $o$ i~$\omega$.
 
-\paragraph{3.1-8.}
+\subsection{} %3.1-8
 \begin{eqnarray*}
-  \Omega(g(n,m)) &=& \left\{f(n,m):\;\mbox{istnieją dodatnie stałe }c,n_0,m_0\mbox{ takie, że}\right. \\
-  && \quad 0\le cg(n,m)\le f(n,m)\mbox{ dla wszystkich }n\ge n_0 \\
-  && \left.\quad\mbox{oraz }m\ge m_0\right\} \\\\
-  \Theta(g(n,m)) &=& \left\{f(n,m):\;\mbox{istnieją dodatnie stałe }c_1,c_2,n_0,m_0\mbox{ takie, że}\right. \\
-  && \quad 0\le c_1g(n,m)\le f(n,m)\le c_2g(n,m)\mbox{ dla wszystkich }n\ge n_0 \\
-  && \left.\quad\mbox{oraz }m\ge m_0\right\}
+	\Omega(g(n,m)) &=& \left\{f(n,m):\;\mbox{istnieją dodatnie stałe }c,n_0,m_0\mbox{ takie, że}\right. \\
+	&& \quad 0\le cg(n,m)\le f(n,m)\mbox{ dla wszystkich }n\ge n_0 \\
+	&& \left.\quad\mbox{oraz }m\ge m_0\right\} \\\\
+	\Theta(g(n,m)) &=& \left\{f(n,m):\;\mbox{istnieją dodatnie stałe }c_1,c_2,n_0,m_0\mbox{ takie, że}\right. \\
+	&& \quad 0\le c_1g(n,m)\le f(n,m)\le c_2g(n,m)\mbox{ dla wszystkich }n\ge n_0 \\
+	&& \left.\quad\mbox{oraz }m\ge m_0\right\}
 \end{eqnarray*}
 
-\subsection*{3.2. Standardowe notacje i typowe funkcje}
+\section{Standardowe notacje i~typowe funkcje}
 
-\paragraph{3.2-1.}
-Z założenia, jeśli $n_1\le n_2$, to $f(n_1)\le f(n_2)$ i $g(n_1)\le g(n_2)$, więc po dodadaniu nierówności stronami otrzymujemy $f(n_1)+g(n_1)\le f(n_2)+g(n_2)$, czyli że $(f+g)(n)$ jest funkcją monotonicznie rosnącą. Ponieważ $g(n_1)\le g(n_2)$, to traktując wartości funkcji $g$ jako argumenty funkcji $f$, otrzymamy $f(g(n_1))\le f(g(n_2))$, zatem $(f\circ g)(n)\equiv f(g(n))$ jest funkcją monotonicznie rosnącą. Jeśli ponadto założymy, że $f$ i $g$ są nieujemne, to nierówności można pomnożyć stronami bez zmiany znaku nierówności, co daje $f(n_1)f(n_2)\le g(n_1)g(n_2)$, a to oznacza, że również funkcja $(f\cdot g)(n)$ jest monotonicznie rosnąca.
+\subsection{} %3.2-1
+Z założenia, jeśli $n_1\le n_2$, to $f(n_1)\le f(n_2)$ i~$g(n_1)\le g(n_2)$, więc po dodadaniu nierówności stronami otrzymujemy $f(n_1)+g(n_1)\le f(n_2)+g(n_2)$, czyli że $(f+g)(n)$ jest funkcją monotonicznie rosnącą. Ponieważ $g(n_1)\le g(n_2)$, to traktując wartości funkcji $g$ jako argumenty funkcji $f$, otrzymamy $f(g(n_1))\le f(g(n_2))$, zatem $(f\circ g)(n)\equiv f(g(n))$ jest funkcją monotonicznie rosnącą. Jeśli ponadto założymy, że $f$ i~$g$ są nieujemne, to nierówności można pomnożyć stronami bez zmiany znaku nierówności, co daje $f(n_1)f(n_2)\le g(n_1)g(n_2)$, a~to oznacza, że również funkcja $(f\cdot g)(n)$ jest monotonicznie rosnąca.
 
-\paragraph{3.2-2.}
+\subsection{} %3.2-2
 Wykorzystując podstawowe własności logarytmów otrzymujemy
 \[
-  \log_ba^{\log_bc} = \log_bc\cdot\log_ba = \log_bc^{\log_ba}.
+	\log_ba^{\log_bc} = \log_bc\cdot\log_ba = \log_bc^{\log_ba}.
 \]
 Na podstawie różnowartościowości funkcji logarytmicznej wynika tożsamość
 \[
-  a^{\log_bc}=c^{\log_ba}.
+	a^{\log_bc}=c^{\log_ba}.
 \]
 
-%poprawic
-\paragraph{3.2-3.}
-Dowód wzoru (3.18). Z wzoru Stirlinga dostajemy
+\subsection{} %3.2-3
+Dowód wzoru (3.18). Z~wzoru Stirlinga dostajemy
 \[
-  \lg(n!) = \lg\left(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)\right).
+	\lg(n!) = \lg\left(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)\right).
 \]
-Wykorzystując teraz definicję notacji $\Theta$ oraz twierdzenie 3.1 i wybierając pewną stałą $c>0$ ograniczamy $\lg(n!)$ od dołu:
+Wykorzystując teraz definicję notacji $\Theta$ oraz twierdzenie 3.1 i~wybierając pewną stałą $c_1>0$ ograniczamy $\lg(n!)$ od dołu:
 \begin{eqnarray*}
-  \lg(n!) &\ge& \lg\left(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\frac{c}{n}\right)\right) \\
-  &=& \lg\sqrt{2\pi} + \lg\sqrt{n} + \lg\left(\frac{n}{e}\right)^n + \lg\left(1+\frac{c}{n}\right) \\
-  &=& \underbrace{\lg\sqrt{2\pi}}_{c_1} + \underbrace{\frac{\lg n}{2}}_{c_2\lg n} + n\lg n - \underbrace{n\lg e}_{c_3n} + \underbrace{\lg(n+c)}_{c_4\lg n} - \lg n \\
-  &=& \Omega(n\lg n).
+	\lg(n!) &\ge& \lg\left(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\frac{c_1}{n}\right)\right) \\
+	&=& \lg\sqrt{2\pi} + \lg\sqrt{n} + \lg\left(\frac{n}{e}\right)^n + \lg\left(1+\frac{c_1}{n}\right) \\
+	&=& \lg\sqrt{2\pi} + \frac{\lg n}{2} + n\lg n~- n\lg e~+ \lg\left(1+\frac{c_1}{n}\right) \\
+	&\ge& n\lg n~- n\lg e~\\
+	&\ge& n\lg n~- \frac{n\lg n}{2} \\
+	&=& \frac{n\lg n}{2}.
 \end{eqnarray*}
-Wybierając inną stałą i ograniczając $\lg(n!)$ od góry w analogiczny sposób otrzymamy $\lg(n!)=O(n\lg n)$, a więc po kolejnym zastosowaniu twierdzenia 3.1 dostaniemy $\lg(n!)=\Theta(n\lg n)$.
+Przedostatnia nierówność zachodzi dla $n\ge e^2$. Otrzymany wynik pozwala twierdzić, że $\lg(n!)=\Omega(n\lg n)$. Wybierając inną stałą $c_2>0$ znajdujemy ograniczenie górne:
+\begin{eqnarray*}
+	\lg(n!) &\le& \lg\left(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\frac{c_2}{n}\right)\right) \\
+	&=& \lg\sqrt{2\pi} + \lg\sqrt{n} + \lg\left(\frac{n}{e}\right)^n + \lg\left(1+\frac{c_2}{n}\right) \\
+	&=& \lg\sqrt{2\pi} + \frac{\lg n}{2} + n\lg n~- n\lg e~+ \lg (n+c_2) - \lg n~\\
+	&\le& \lg\sqrt{2\pi}\cdot n\lg n~+ \frac{n\lg n}{2} + n\lg n~+ n\lg n~\\
+	&=& \left(\lg\sqrt{2\pi}+\frac{5}{2}\right)\cdot n\lg n,
+\end{eqnarray*}
+przy czym w~przedostatnim kroku wykorzystano m.in. zależność $\lg(n+c_2)\le n\lg n$, która zachodzi dla $n$ takich, że $n^n-n\ge c_2$. Mamy zatem $\lg(n!)=O(n\lg n)$. Po ponownym skorzystaniu z~twierdzenia 3.1 dostajemy $\lg(n!)=\Theta(n\lg n)$.
 
 By udowodnić tożsamość $n!=\omega(2^n)$, należy wykazać, że
 \[
-  \lim_{n\to\infty}\frac{n!}{2^n}=\infty.
+	\lim_{n\to\infty}\frac{n!}{2^n}=\infty.
 \]
-Rozwijamy $n!$ wykorzystując wzór Stirlinga i dostajemy:
+Rozwijamy $n!$ wykorzystując wzór Stirlinga i~dostajemy:
 \begin{eqnarray*}
-  \lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)}{2^n} &=& \lim_{n\to\infty}\frac{n^n\sqrt{2\pi n}\left(1+\Theta\left(\frac{1}{n}\right)\right)}{(2e)^n} \\
-  &=& \sqrt{2\pi}\cdot\lim_{n\to\infty}\frac{n^{n+1/2}}{e^n}\cdot\lim_{n\to\infty}\left(1+\Theta\left(\frac{1}{n}\right)\right) \\
-  &=& \infty.
+	\lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)}{2^n} &=& \lim_{n\to\infty}\frac{n^n\sqrt{2\pi n}\left(1+\Theta\left(\frac{1}{n}\right)\right)}{(2e)^n} \\
+	&=& \sqrt{2\pi}\cdot\lim_{n\to\infty}\frac{n^{n+1/2}}{e^n}\cdot\lim_{n\to\infty}\left(1+\Theta\left(\frac{1}{n}\right)\right) \\
+	&=& \infty.
 \end{eqnarray*}
-Ostania równość zachodzi, ponieważ ciąg $\left(\frac{n^{n+1/2}}{e^n}\right)$ jest rosnący, oraz na podstawie obserwacji, że
+Ostania równość zachodzi, ponieważ wyrazy ciągu $a_n=\left(\frac{n^{n+1/2}}{e^n}\right)$ rosną nieograniczenie oraz na podstawie obserwacji, że
 \begin{equation}\label{eq-3.2-3}
   \lim_{n\to\infty}\left(1+\Theta\left(\frac{1}{n}\right)\right)\le \lim_{n\to\infty}\left(1+\frac{c}{n}\right)=1,
 \end{equation}
 gdzie $c>0$ jest dowolną stałą.
 
-Korzystając z (3.1) widać, że dowód tożsamości $n!=o(n^n)$ sprowadza się do pokazania, że
+Korzystając z~(3.1) widać, że dowód tożsamości $n!=o(n^n)$ sprowadza się do pokazania, że
 \[
-  \lim_{n\to\infty}\frac{n!}{n^n}=0.
+	\lim_{n\to\infty}\frac{n!}{n^n}=0.
 \]
-Znajdując oszacowanie $n!$ przy pomocy wzoru Stirlinga dostajemy
+Znajdując oszacowanie $n!$ przy pomocy wzoru Stirlinga otrzymujemy:
 \begin{eqnarray*}
-  \lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)}{n^n} &=& \lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(1+\Theta\left(\frac{1}{n}\right)\right)}{e^n} \\
-  &=& \sqrt{2\pi}\cdot\lim_{n\to\infty}\frac{\sqrt{n}}{e^n}\cdot\lim_{n\to\infty}\left(1+\Theta\left(\frac{1}{n}\right)\right) \\
-  &=& 0.
+	\lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1+\Theta\left(\frac{1}{n}\right)\right)}{n^n} &=& \lim_{n\to\infty}\frac{\sqrt{2\pi n}\left(1+\Theta\left(\frac{1}{n}\right)\right)}{e^n} \\
+	&=& \sqrt{2\pi}\cdot\lim_{n\to\infty}\frac{\sqrt{n}}{e^n}\cdot\lim_{n\to\infty}\left(1+\Theta\left(\frac{1}{n}\right)\right) \\
+	&=& 0.
 \end{eqnarray*}
-W ostatnim kroku korzystamy z (\ref{eq-3.2-3}) oraz z wzoru (3.5) dla $a=e$ i $b=1/2$.
+W ostatnim kroku korzystamy z~(\ref{eq-3.2-3}) oraz z~wzoru (3.5) dla $a=e$ i~$b=\frac{1}{2}$.
 
-\paragraph{3.2-4.}
-Jeśli pewna funkcja $f(n)$ jest ograniczona wielomianowo, to istnieją stałe $c,k,n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$. Stąd $\lg f(n)\le ck\lg n$, a więc $\lg f(n)=O(\lg n)$. Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest przez to  równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
+\subsection{} %3.2-4
+Jeśli pewna funkcja $f(n)$ jest ograniczona wielomianowo, to istnieją stałe $c,k,n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$. Stąd $\lg f(n)\le ck\lg n$, a~więc $\lg f(n)=O(\lg n)$. Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest przez to  równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
 
-Zanim przejdziemy do głównego dowodu, wykażemy, że $\lceil\lg n\rceil=\Theta(\lg n)$. Zachodzi $\lceil\lg n\rceil\ge\lg n$ oraz $\lceil\lg n\rceil<\lg n+1\le 2\lg n$ dla każdego $n\ge 2$, a więc tożsamość jest prawdziwa.
+Zanim przejdziemy do głównego dowodu, wykażemy, że $\lceil\lg n\rceil=\Theta(\lg n)$. Zachodzi $\lceil\lg n\rceil\ge\lg n$ oraz $\lceil\lg n\rceil<\lg n+1\le 2\lg n$ dla każdego $n\ge 2$, a~więc tożsamość jest prawdziwa.
 
-Logarytmując pierwszą badaną funkcję i wykorzystując powyższą tożsamość oraz wzór 3.18 udowodniony w poprzednim zadaniu, dostajemy
+Logarytmując pierwszą badaną funkcję i~wykorzystując powyższą tożsamość oraz wzór 3.18 udowodniony w~poprzednim zadaniu, dostajemy
 \begin{eqnarray*}
-  \lg\left(\lceil\lg n\rceil!\right) &=& \Theta\left(\lceil\lg n\rceil\lg\lceil\lg n\rceil\right) \\
-  &=& \Theta(\lg n\lg\lg n) \\
-  &=& \omega(\lg n),
+	\lg\left(\lceil\lg n\rceil!\right) &=& \Theta\left(\lceil\lg n\rceil\lg\lceil\lg n\rceil\right) \\
+	&=& \Theta(\lg n\lg\lg n) \\
+	&=& \omega(\lg n),
 \end{eqnarray*}
-a zatem $\lg\left(\lceil\lg n\rceil!\right)\ne O(\lg n)$ i $\lceil\lg n\rceil$ nie jest ograniczone wielomianowo.
+a zatem $\lg\left(\lceil\lg n\rceil!\right)\ne O(\lg n)$ i~$\lceil\lg n\rceil$ nie jest ograniczone wielomianowo.
 
 Dla drugiej funkcji mamy
 \begin{eqnarray*}
-  \lg\left(\lceil\lg\lg n\rceil!\right) &=& \Theta\left(\lceil\lg\lg n\rceil\lg\lceil\lg\lg n\rceil\right) \\
-  &=& \Theta(\lg\lg n\lg\lg\lg n) \\
-  &=& o\left(\lg^2(\lg n)\right) \\
-  &=& o(\lg n).
+	\lg\left(\lceil\lg\lg n\rceil!\right) &=& \Theta\left(\lceil\lg\lg n\rceil\lg\lceil\lg\lg n\rceil\right) \\
+	&=& \Theta(\lg\lg n\lg\lg\lg n) \\
+	&=& o\left(\lg^2\lg n\right) \\
+	&=& o(\lg n).
 \end{eqnarray*}
-Ostania krok wynika z tożsamości $\lg^bn=o(n^a)$, w której podstawiono $\lg n$ w miejsce $n$ oraz przyjęto $b=2$ i $a=1$. Otrzymany rezultat potwierdza, że $\lg\left(\lceil\lg\lg n\rceil!\right)=O(\lg n)$, a zatem $\lceil\lg\lg n\rceil$ jest ograniczone wielomianowo.
+Ostatni krok wynika z~tożsamości $\lg^bn=o(n^a)$, w~której podstawiono $\lg n$ w~miejsce $n$ oraz przyjęto $b=2$ i~$a=1$. Otrzymany rezultat potwierdza, że $\lg\left(\lceil\lg\lg n\rceil!\right)=O(\lg n)$, a~zatem $\lceil\lg\lg n\rceil$ jest ograniczone wielomianowo.
 
-\paragraph{3.2-5.}
+\subsection{} %3.2-5
 Zachodzi równość $\lg^*(\lg n) = \lg^*n-1$. Jej prawa strona jest funkcją liniową $m_n-1$ dla $m_n = \lg^*n$, podczas gdy $\lg(\lg^*n) = \lg(m_n)$ ma po prawej stronie funkcję logarytmiczną względem $m_n$. Ponieważ $\lg(m_n)=o(m_n-1)$, to stąd mamy
 \[
-  \lg(\lg^*n) = o(\lg^*(\lg n)).
+	\lg(\lg^*n) = o(\lg^*(\lg n)).
 \]
 
-\paragraph{3.2-6.}
+\subsection{} %3.2-6
 Dla $i=0$ twierdzenie zachodzi trywialnie. Dla $i=1$ mamy $F_1=\frac{\phi-\widehat\phi}{\sqrt{5}}=1$. Załóżmy teraz, że zachodzi
 \[
-  F_i=\frac{\phi^i-\widehat\phi^i}{\sqrt{5}}\quad\mbox{oraz}\quad F_{i+1}=\frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}
+	F_i=\frac{\phi^i-\widehat\phi^i}{\sqrt{5}}\quad\mbox{oraz}\quad F_{i+1}=\frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}
 \]
 dla pewnego $i\ge 0$. Ponieważ liczby Fibonacciego dla wszystkich $n\ge 0$ spełniają zależność $F_{n+2}=F_{n+1}+F_n$, to stąd na mocy założenia indukcyjnego zachodzi
 \[
-  F_{i+2} = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}+\frac{\phi^i-\widehat\phi^i}{\sqrt{5}} = \frac{\phi^i\overbrace{(\phi+1)}^{\phi^2}-\widehat\phi^i\overbrace{\left(\widehat\phi+1\right)}^{\widehat\phi^2}}{\sqrt{5}} = \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}},
+	F_{i+2} = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}+\frac{\phi^i-\widehat\phi^i}{\sqrt{5}} = \frac{\phi^i\overbrace{(\phi+1)}^{\phi^2}-\widehat\phi^i\overbrace{\left(\widehat\phi+1\right)}^{\widehat\phi^2}}{\sqrt{5}} = \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}},
 \]
 a zatem zależność jest prawdziwa dla każdego $i\ge 0$.
 
-\paragraph{3.2-7.}
-Korzystając z wyniku z poprzedniego zadania dostajemy
+\subsection{} %3.2-7
+Korzystając z~wyniku z~poprzedniego zadania dostajemy
 \begin{eqnarray*}
-  F_{i+2} &\ge& \phi^i \\
-  \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}} &\ge& \phi^i \\
-  \phi^i\left(\phi^2-\sqrt{5}\right) &\ge& \widehat\phi^{i+2} \\
-  \phi^i\cdot\frac{3-\sqrt{5}}{2} &\ge& \widehat\phi^i\cdot\frac{3-\sqrt{5}}{2} \\
-  \phi^i &\ge& \widehat\phi^i.
+	F_{i+2} &\ge& \phi^i \\
+	\frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}} &\ge& \phi^i \\
+	\phi^i\left(\phi^2-\sqrt{5}\right) &\ge& \widehat\phi^{i+2} \\
+	\phi^i\cdot\frac{3-\sqrt{5}}{2} &\ge& \widehat\phi^i\cdot\frac{3-\sqrt{5}}{2} \\
+	\phi^i &\ge& \widehat\phi^i.
 \end{eqnarray*}
 Ponieważ $|\phi|>|\widehat\phi|$, to otrzymana nierówność jest spełniona dla każdego $i\ge 0$ i~dowód jest zakończony.
 
-\subsection*{Problemy}
+\problems
 
-\paragraph{3-1. Asymptotyczne zachowanie wielomianów}
+\subsection{} %3-1
+Udowodnimy najpierw fakt, że $p(n)=\Theta(n^d)$. Należy znaleźć stałe $c_1,c_2,n_0>0$ takie, że dla $n>n_0$ zajdzie
+\[
+	0\le c_1n^d\le a_dn^d+a_{d-1}n^{d-1}+\dots +a_0\le c_2n^d.
+\]
+Po podzieleniu nierówności przez $n^d$, dostajemy
+\[
+	0\le c_1\le a_d+\underbrace{\frac{a_{d-1}}{n}+\dots +\frac{a_0}{n^d}}_\epsilon\le c_2,
+\]
+a ponieważ składnik $\epsilon$ można dowolnie zbliżyć do zera zwiększając parametr $n_0$, to stąd obie stałe $c_1,c_2$ mogą być dowolnie bliskie $a_d$. To kończy dowód.
 
-%wykazac dokladnie ze p(n)=\Theta(n^d)
-\subparagraph{(a)}
-Oczywistym jest, że $p(n) = \Theta(n^d)$, zatem na mocy tw. 3.1 zachodzą równości $p(n) = O(n^d)$ oraz $p(n) = \Omega(n^d)$. Pierwsza z nich oznacza, że dla pewnych stałych $c,n_0>0$ prawdą jest $0\le p(n)\le cn^d$ dla wszystkich $n\ge n_0$. Z kolei $k\ge d$ implikuje $cn^k\ge cn^d$, a zatem $0\le p(n)\le cn^k$, skąd natychmiast otrzymujemy $p(n) = O(n^k)$.
- 
-\subparagraph{(b)}
-$k\le d$ implikuje $cn^k\le cn^d$ dla stałej $c$ z poprzedniego punktu, a~korzystając z tego, że $p(n) = \Omega(n^d)$ mamy $0\le cn^k\le p(n)$, skąd wynika $p(n)=\Omega(n^k)$.
+\subsubsection{} %3-1(a)
+$p(n) = \Theta(n^d)$, zatem na mocy tw. 3.1 zachodzą równości $p(n) = O(n^d)$ oraz $p(n) = \Omega(n^d)$. Pierwsza z~nich oznacza, że dla pewnych stałych $c,n_0>0$ prawdą jest $0\le p(n)\le cn^d$ dla wszystkich $n\ge n_0$. Z~kolei $k\ge d$ implikuje $cn^k\ge cn^d$, a~zatem $0\le p(n)\le cn^k$, skąd natychmiast otrzymujemy $p(n) = O(n^k)$.
 
-\subparagraph{(c)}
+\subsubsection{} %3-1(b)
+$k\le d$ implikuje $cn^k\le cn^d$ dla stałej $c$ z~poprzedniego punktu, a~korzystając z~tego, że $p(n) = \Omega(n^d)$ mamy $0\le cn^k\le p(n)$, skąd wynika $p(n)=\Omega(n^k)$.
+
+\subsubsection{} %3-1(c)
 Dla $k=d$, tożsamość $p(n) = \Theta(n^d) = \Theta(n^k)$ trywialnie zachodzi.
 
-\subparagraph{(d)}
-Jeśli $k>d$, to $cn^k>cn^d$ dla wszystkich $c>0$. Idąc dalej mamy, że $0\le p(n)<cn^k$, a to prowadzi do wyniku $p(n)=o(n^k)$.
+\subsubsection{} %3-1(d)
+Jeśli $k>d$, to $cn^k>cn^d$ dla wszystkich $c>0$, skąd wynika, że $0\le p(n)<cn^k$, a~to prowadzi do równości $p(n)=o(n^k)$.
 
-\subparagraph{(e)}
-Analogicznie jak w poprzednim punkcie, $k<d$ implikuje $cn^k<cn^d$ dla wszystkich $c>0$, a zatem $0\le cn^k<p(n)$ i otrzymujemy $p(n)=\omega(n^k)$.
+\subsubsection{} %3-1(e)
+Analogicznie jak w~poprzednim punkcie, $k<d$ implikuje $cn^k<cn^d$ dla wszystkich $c>0$, a~zatem $0\le cn^k<p(n)$ i~otrzymujemy $p(n)=\omega(n^k)$.
 
-\paragraph{3-2. Względny czas asymptotyczny}
+\subsection{} %3-2
 
-\subparagraph{(a)}
-Zostało wykazane w tekście, że każdy wielomian rośnie szybciej niż każda funkcja polilogarytmiczna, czyli że $\lg^kn=o(n^\epsilon)$, a stąd wynika, że również $\lg^kn=O(n^\epsilon)$.
+\subsubsection{} %3-2(a)
+Zostało wykazane w~tekście, że każdy wielomian rośnie szybciej niż każda funkcja polilogarytmiczna, czyli że $\lg^kn=o(n^\epsilon)$, a~stąd wynika, że również $\lg^kn=O(n^\epsilon)$.
 
-\subparagraph{(b)}
-Podobnie, z wzoru (3.9) mamy, że $n^k=o(c^n)$, co implikuje również $n^k=O(c^n)$.
+\subsubsection{} %3-2(b)
+Podobnie, z~wzoru (3.9) mamy, że $n^k=o(c^n)$, co implikuje również $n^k=O(c^n)$.
 
-\subparagraph{(c)}
-Funkcja $\sqrt{n}$ nie jest w żadnej relacji z $n^{\sin n}$, gdyż wartość wykładnika tej ostatniej waha się między $-1$ a $1$ przyjmując wszystkie pośrednie wartości, podczas gdy $\sqrt{n}\equiv n^{1/2}$.
+\subsubsection{} %3-2(c)
+Funkcja $\sqrt{n}$ nie jest w~żadnej relacji z~$n^{\sin n}$, gdyż wartość wykładnika tej ostatniej waha się między $-1$ a~$1$ przyjmując wszystkie pośrednie wartości, podczas gdy $\sqrt{n}\equiv n^{1/2}$.
 
-\subparagraph{(d)}
+\subsubsection{} %3-2(d)
 Zachodzi $2^n=\omega(2^{n/2})$, bo
 \[
-  \lim_{n\to\infty}\frac{2^n}{2^{n/2}}=\lim_{n\to\infty}2^{n/2}=\infty,
+	\lim_{n\to\infty}\frac{2^n}{2^{n/2}}=\lim_{n\to\infty}2^{n/2}=\infty,
 \]
 przez co prawdą jest także $2^n=\Omega(2^{n/2})$.
 
-\subparagraph{(e)}
-Funkcje $n^{\lg c}$ i $c^{\lg n}$ są równe na podstawie tożsamości (3.15).
+\subsubsection{} %3-2(e)
+Funkcje $n^{\lg c}$ i~$c^{\lg n}$ dla $n>0$ są równe na podstawie tożsamości (3.15).
 
-\subparagraph{(f)}
-Z wzoru (3.18), $\lg(n!)=\Theta(n\lg n)$, a $\lg(n^n)=n\lg n=\Theta(n\lg n)$, zatem obie funkcje są asymptotycznie równoważne.
+\subsubsection{} %3-2(f)
+Z wzoru (3.18), $\lg(n!)=\Theta(n\lg n)$, a~$\lg(n^n)=n\lg n=\Theta(n\lg n)$, zatem obie funkcje są asymptotycznie równoważne.
 
 \bigskip
 \noindent Na podstawie powyższych faktów otrzymujemy tabelę:
-\begin{center}
-\begin{tabular}{cc|c|c|c|c|c|}
-  $A$ & $B$ & $O$ & $o$ & $\Omega$ & $\omega$ & $\Theta$ \\
-  \hline
-  $\lg^kn$ & $n^\epsilon$ & tak & tak & nie & nie & nie \\
-  \hline
-  $n^k$ & $c^n$ & tak & tak & nie & nie & nie \\
-  \hline
-  $\sqrt{n}$ & $n^{\sin n}$ & nie & nie & nie & nie & nie \\
-  \hline
-  $2^n$ & $2^{n/2}$ & nie & nie & tak & tak & nie \\
-  \hline
-  $n^{\lg c}$ & $c^{\lg n}$ & tak & nie & tak & nie & tak \\
-  \hline
-  $\lg(n!)$ & $\lg(n^n)$ & tak & nie & tak & nie & tak \\
-  \hline
-\end{tabular}
-\end{center}
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{cc|c|c|c|c|c|}
+			$A$ & $B$ & $O$ & $o$ & $\Omega$ & $\omega$ & $\Theta$ \\
+			\hline
+			$\lg^kn$ & $n^\epsilon$ & tak & tak & nie & nie & nie \\
+			\hline
+			$n^k$ & $c^n$ & tak & tak & nie & nie & nie \\
+			\hline
+			$\sqrt{n}$ & $n^{\sin n}$ & nie & nie & nie & nie & nie \\
+			\hline
+			$2^n$ & $2^{n/2}$ & nie & nie & tak & tak & nie \\
+			\hline
+			$n^{\lg c}$ & $c^{\lg n}$ & tak & nie & tak & nie & tak \\
+			\hline
+			$\lg(n!)$ & $\lg(n^n)$ & tak & nie & tak & nie & tak \\
+			\hline
+		\end{tabular}
+		\caption{Relacje między przykładowymi funkcjami}
+	\end{center}
+\end{table}
 
-\paragraph{3-3. Porządkowanie ze względu na rząd wielkości funkcji}
+\subsection{} %3-3
 
-\subparagraph{(a)}
-Na poniższej liście funkcje występujące w jednym wierszu należą do tej samej klasy równoważności.
+%sprawdzic wszystkie wyprowadzenia
+\subsubsection{} %3-3(a)
+Poniższe uzasadnienia stanowią dowody $g_i=\Omega(g_{i+1})$ dla $i=1,2,\dots,29$, gdzie $g_i$ są rozważanymi funkcjami. Zauważmy, że bycie w relacji $\omega$ jest warunkiem wystarczającym do bycia w relacji $\Omega$. W wielu przypadkach korzystamy z obserwacji, że jeśli $f(n)=g(n)h(n)$ i $g(n)=\omega(1)$, to prawdą jest $f(n)=\omega(h(n))$. Ponadto, jeśli zachodzi $\lg f(n)=\omega(\lg g(n))$, to prawdziwe jest także $f(n)=\omega(g(n))$.
+\begin{itemize}
+\item $2^{2^{n+1}}=\Omega\left(2^{2^n}\right)$ \\
+	\[
+		2^{2^{n+1}} = 2^{2^n}\cdot 2^{2^n} = \omega\left(2^{2^n}\right),\quad\mbox{bo }2^{2^n}=\omega(1).
+	\]
+\item $2^{2^n}=\Omega((n+1)!)$ \\
+	Logarytmując obie funkcje i wykorzystując wzór (3.18), otrzymujemy
+	\[
+		\lg 2^{2^n}=2^n\quad\mbox{oraz}\quad\lg((n+1)!) = \Theta((n+1)\lg(n+1)) = \Theta(n\lg n).
+	\]
+	Ponieważ $2^n=\omega(n^2)$ oraz $n^2=\omega(n\lg n)$, to mamy, że $2^n=\omega(n\lg n)$. Powracając do oryginalnych funkcji dostajemy $2^{2^n}=\omega((n+1)!)$, skąd wynika prawdziwość początkowej zależności.
+\item $(n+1)!=\Omega(n!)$
+	\[
+		(n+1)! = (n+1)\cdot n! = \omega(n!),\quad\mbox{bo }n+1=\omega(1).
+	\]
+\item $n!=\Omega(e^n)$ \\
+	Zbadajmy logarytmy obu funkcji.	Zachodzi $\lg e^n=\Theta(n)$, a z wzoru (3.18) mamy $\lg(n!)=\Theta(n\lg n)=\omega(n)$. Prawdą jest zatem, że $\lg(n!)=\omega(\lg e^n)$, a stąd wynika początkowa zależność.
+\item $e^n=\Omega(n\cdot 2^n)$ \\
+	\[
+		e^n = (e/2)^n2^n = \omega(n\cdot 2^n),\quad\mbox{bo }(e/2)^n=\omega(n),
+	\]
+	ponieważ funkcje wykładnicze rosną szybciej niż wielomiany.
+\item $n\cdot 2^n=\Omega(2^n)$ \\
+	Zachodzi oczywiście $n\cdot 2^n=\Omega(2^n)$, bo $n=\omega(1)$.
+\item $2^n=\Omega((3/2)^n)$ \\
+	\[
+		2^n = (4/3)^n(3/2)^n = \omega((3/2)^n),\quad\mbox{bo }(4/3)^n=\omega(1).
+	\]
+\item $(3/2)^n=\Omega\left(n^{\lg\lg n}\right)$ \\
+	Logarytmując obie funkcje dostajemy
+	\[
+		\lg(3/2)^n = \Theta(n)\quad\mbox{oraz}\quad\lg n^{\lg\lg n} = \lg n\lg\lg n = o\left(\lg^2n\right)
+	\]
+	Wystarczy pokazać, że $n=\omega\left(\lg^2n\right)$. Podstawiając $n=2^h$ dostajemy prawdziwą tożsamość $2^h>ch^2$ dla wszystkich $c>0$ oraz $n\ge 5$, co oznacza, że początkowa zależność jest prawdziwa.
+\item $n^{\lg\lg n}=\Omega\left((\lg n)^{\lg n}\right)$ \\
+	Na mocy tożsamości (3.15), zachodzi $n^{\lg\lg n}=(\lg n)^{\lg n}$.
+\item $(\lg n)^{\lg n}=\Omega((\lg n)!)$ \\
+	Badając logarytmy obu funkcji, dostajemy $\lg\left((\lg n)^{\lg n}\right) = \Theta(\lg n\lg\lg n)$ oraz $\lg((\lg n)!)=\Theta(\lg n\lg\lg n)$ (z wzoru (3.18)), a zatem zależność jest prawdziwa.
+\item $(\lg n)!=\Omega(n^3)$ \\
+	Korzystając z logarytmu pierwszej funkcji obliczonego w poprzednim uzasadnieniu oraz z tego, że $\lg n^3=\Omega(\lg n)$ udowadniamy zależność, ponieważ $\lg\lg n=\omega(1)$.
+\item $n^3=\Omega(n^2)$ \\
+	Tożsamość zachodzi trywialnie, bo $n^3=n\cdot n^2=\omega(n^2)$ oraz $n=\omega(1)$.
+\item $n^2=\Omega\left(4^{\lg n}\right)$ \\
+	Funkcje są tożsame, na podstawie wzoru (3.15) mamy $4^{\lg n}=n^{\lg 4}=n^2$.
+\item $4^{\lg n}=\Omega(n\lg n)$ \\
+	Ponieważ $4^{\lg n}=n^2$, a $n=\omega(\lg n)$, to stąd tożsamość zachodzi.
+\item $n\lg n=\Omega(\lg (n!))$ \\
+	Prawdziwość tożsamości wynika z wzoru (3.18).
+\item $\lg (n!)=\Omega(n)$ \\
+	Z wzoru (3.18) mamy, że $\lg (n!)=\Theta(n\lg n)$, więc tożsamość jest prawdziwa, bo $\lg n=\omega(1)$.
+\item $n=\Omega\left(2^{\lg n}\right)$ \\
+	Funkcje są tożsame, bo $2^{\lg n}=n^{\lg 2}=n$ na mocy wzoru (3.15).
+\item $2^{\lg n}=\Omega\left(\sqrt{2}^{\lg n}\right)$ \\
+	Z poprzedniego uzasadnienia mamy, że $2^{\lg n}=n$, a $\sqrt{2}^{\lg n}=n^{\lg\sqrt{2}}=\sqrt{n}$ z wzoru (3.15), więc tożsamość zachodzi, ponieważ $\sqrt{n}=\omega(1)$.
+\item $\sqrt{2}^{\lg n}=\Omega\left(2^{\sqrt{2\lg n}}\right)$ \\
+	Rozważmy tożsamość $2^{\lg n}=n$ i podnieśmy ją do potęgi $\sqrt{2/\lg n}$. Otrzymujemy $2^{\sqrt{2\lg n}}=n^{\sqrt{2/\lg n}}$, a zatem $2^{\sqrt{2\lg n}}=\Theta\left(n^{\sqrt{2/\lg n}}\right)$. Ponieważ $\sqrt{2}^{\lg n}=\sqrt{n}$, to wystarczy pokazać, że $1/2=\Omega\left(\sqrt{2/\lg n}\right)$. Tożsamość oczywiście zachodzi, gdyż funkcja z prawej strony jest malejąca i dąży do $0$ wraz ze wzrostem $n$.
+\item $2^{\sqrt{2\lg n}}=\Omega\left(\lg^2 n\right)$ \\
+	Biorąc logarytmy obu funkcji, dostajemy
+	\[
+		\lg 2^{\sqrt{2\lg n}} = \sqrt{2\lg n} = \Theta\left(\lg^{1/2}n\right)\quad\mbox{oraz}\quad\lg\lg^2 n = \Theta(\lg\lg n)
+	\]
+	Podstawiając $n=2^{4^h}$, sprowadzamy badaną tożsamość do $2^h=\Omega(h)$, co oczywiście jest prawdą.
+\item $\lg^2 n=\Omega(\ln n)$ \\
+	Zachodzi $\ln n=\Omega(\lg n)=\omega(1)$, więc zależność jest prawdziwa.
+\item $\ln n=\Omega\left(\sqrt{\lg n}\right)$ \\
+	Wystarczy przyjąć $n=e^h$, by otrzymać tożsamość $h=\Omega\left(\sqrt{h}\right)$, która zachodzi na mocy tego, że $\sqrt{h}=\omega(1)$.
+\item $\sqrt{\lg n}=\Omega(\ln\ln n)$ \\
+	$\Omega(\ln\ln n)$ jest równoważne $\Omega(\lg\lg n)$, zatem przyjmując $n=2^{4^h}$ dostajemy tożsamość $2^h=\Omega(h)$.
+\item $\ln\ln n=\Omega\left(2^{\lg^*n}\right)$ \\
+	Logarytmując funkcje, dostajemy
+	\[
+		\lg\ln\ln n = \Theta\left(\lg^{(3)}n\right)\quad\mbox{oraz}\quad\lg\left(2^{\lg^*n}\right) = \lg^*n.
+	\]
+	By wykazać prawdziwość tożsamości, przyjmijmy $n=2^{2^{\dots^\epsilon}}$, gdzie $0<\epsilon\le 1$, a liczba dwójek wynosi $k>3$. Wyliczając wartości obu funkcji dla takiego argumentu, mamy $\lg^{(3)}(n)=2^{2^{\dots^\epsilon}}$, dla takiego samego $\epsilon$ i $k-3$ dwójek oraz $\lg^*(n)=k$. Oczywistym jest że pierwsza wartość jest większa od drugiej dla dostatecznie dużych $n$, zatem wartości funkcji $\ln\ln n$ przewyższają wartości $2^{\lg^*n}$ i zależność zachodzi.
+\item $2^{\lg^*n}=\Omega\left(\lg^*n\right)$ \\
+	Po zlogarytmowaniu obu funkcji i wykorzystaniu wzoru (3.15), mamy
+	\[
+		\lg 2^{\lg^*n} = \lg^*n\quad\mbox{oraz}\quad\lg(\lg^*n).
+	\]
+	Po podstawieniu $h=\lg^*n$, sprowadzamy tożsamość do udowodnionej wcześniej, $h=\Omega(\lg h)$, a zatem początkowa zależność jest prawdziwa.
+\item $\lg^*n=\Omega\left(\lg^*(\lg n)\right)$ \\
+	Pierwsza funkcja jest logarytmem iterowanym $n$, a druga -- logarytmem iterowanym $\lg n$. Zależność zachodzi zatem, gdyż $n=\omega(\lg n)$.
+\item $\lg^*(\lg n)=\Omega\left(\lg(\lg^*n)\right)$ \\
+	Tożsamość zachodzi na podstawie wyniku zad. 3.2-5.
+\item $\lg(\lg^*n)=\Omega\left(n^{1/\lg n}\right)$ \\
+	Z własności logarytmów mamy, że $1/\lg n=\log_n2$, a więc wykorzystując wzór (3.15) dostajemy $n^{1/\lg n}=n^{\log_n2}=2^{\log_nn}=2=\Theta(1)$, a ponieważ pierwsza funkcja nie jest stałą, to stąd wynika prawdziwość zależności.
+\item $n^{1/\lg n}=\Omega(1)$ \\
+	Tożsamość zachodzi, gdyż z poprzedniego uzasadnienia, $n^{1/\lg n}=\Theta(1)$.
+\end{itemize}
+
+Poniższa tabela przedstawia badane funkcje uporządkowane względem relacji $\Omega$ na podstawie powyższych uzasadnień. Funkcje znajdujące się w~tym samym polu należą do tej samej klasy równoważności.
+\begin{table}[h]
+	\begin{center}
+		\[
+			\begin{array}{|lc|} \hline
+				g_1 & 2^{2^{n+1}} \\ \hline
+				g_2 & 2^{2^n} \\ \hline
+				g_3 & (n+1)! \\ \hline
+				g_4 & n! \\ \hline
+				g_5 & e^n \\ \hline
+				g_6 & n\cdot 2^n \\ \hline
+				g_7 & 2^n \\ \hline
+				g_8 & (3/2)^n \\ \hline
+				g_9 & (\lg n)^{\lg n} \\
+				g_{10} & n^{\lg\lg n} \\ \hline
+			\end{array}
+			\quad
+			\begin{array}{|lc|} \hline
+				g_{11} & (\lg n)! \\ \hline
+				g_{12} & n^3 \\ \hline
+				g_{13} & 4^{\lg n} \\
+				g_{14} & n^2 \\ \hline
+				g_{15} & \lg (n!) \\
+				g_{16} & n\lg n \\ \hline
+				g_{17} & 2^{\lg n} \\
+				g_{18} & n \\ \hline
+				g_{19} & \left(\sqrt{2}\right)^{\lg n} \\ \hline
+				g_{20} & 2^{\sqrt{2\lg n}} \\ \hline
+			\end{array}
+			\quad
+			\begin{array}{|lc|} \hline
+				g_{21} & \lg^2n \\ \hline
+				g_{22} & \ln n \\ \hline
+				g_{23} & \sqrt{\lg n} \\ \hline
+				g_{24} & \ln\ln n \\ \hline
+				g_{25} & 2^{\lg^*n} \\ \hline
+				g_{26} & \lg^*(\lg n) \\
+				g_{27} & \lg^*n \\ \hline
+				g_{28} & \lg(\lg^*n) \\ \hline
+				g_{29} & n^{1/\lg n} \\
+				g_{30} & 1 \\ \hline
+			\end{array}
+		\]
+	\end{center}
+	\caption{Uporządkowanie funkcji względem relacji $\Omega$}
+\end{table}
+
+\subsubsection{} %3-3(b)
+Przykładem funkcji nie będącej w relacji $\Omega$ z żadnym z $g_1,\dots,g_{30}$ jest
 \[
-  \begin{array}{ll}
-	2^{2^{n+1}} \\
-	2^{2^n} \\
-	(n+1)! \\
-	n! \\
-	e^n \\
-	n\cdot 2^n \\
-	2^n \\
-	(3/2)^n \\
-	(\lg n)^{\lg n},\quad n^{\lg\lg n} \\
-	(\lg n)! \\
-	n^3 \\
-	4^{\lg n},\quad n^2 \\
-	\lg (n!),\quad n\lg n \\
-	2^{\lg n},\quad n \\
-	\left(\sqrt{2}\right)^{\lg n} \\
-	2^{\sqrt{2\lg n}} \\
-	\lg^2n \\
-	\ln n \\
-	\sqrt{\lg n} \\
-	\ln\ln n \\
-	2^{\lg^*n} \\
-	\lg^*(\lg n),\quad \lg^*n \\
-	\lg(\lg^*n) \\
-	n^{1/\lg n},\quad 1.
-  \end{array}
+	f(n)=\left\{\begin{array}{ll}
+		2^{2^{n+2}}, & \mbox{dla }n\mbox{ parzystych,} \\
+		0, & \mbox{dla }n\mbox{ nieparzystych}.
+	\end{array}\right.
 \]
 
-\subparagraph{(b)}
-Przykładem takiej funkcji jest
+\subsection{} %3-4
+
+\subsubsection{} %3-4(a)
+Fałsz. Niech np. $f(n)=n$ i~$g(n)=n^2$. Wtedy $f(n)=O(g(n))$, ale $g(n)\ne O(f(n))$.
+
+\subsubsection{} %3-4(b)
+Fałsz. Jako kontrprzykład rozważmy $f(n)=n$ i~$g(n)=n^2$. Zachodzi wtedy $\min(f(n),g(n))=f(n)$ oraz $f(n)+g(n)=\Theta(g(n))\ne\Theta(f(n))$.
+
+\subsubsection{} %3-4(c)
+Prawda. Z~faktu, że $f(n)=O(g(n))$ wynika $f(n)\le cg(n)$ dla $n\ge n_0$ i~pewnych stałych $c,n_0>0$. Otrzymujemy
 \[
-  f(n)=\left\{\begin{array}{ll}
-	2^{2^{n+2}}, & \mbox{dla }n\mbox{ parzystych,} \\
-	0, & \mbox{dla }n\mbox{ nieparzystych}.
-  \end{array}\right.
+	\lg f(n)\le\lg c+\lg g(n)\le \lg g(n)+\lg g(n) = 2\lg g(n) = O(\lg g(n)).
 \]
+Ponieważ $c$ jest stałą, to przyjmijmy, że dobrano $n_0$ tak, by $c\le g(n)$ dla wszystkich $n\ge n_0$. Wtedy mamy $\lg c\le\lg g(n)$ i~stąd wynika druga nierówność.
 
-\paragraph{3-4. Własności notacji asymptotycznej}
-
-\subparagraph{(a)}
-Fałsz. Niech np. $f(n)=n$ i $g(n)=n^2$. Wtedy $f(n)=O(g(n))$, ale $g(n)\ne O(f(n))$.
-
-\subparagraph{(b)}
-Fałsz. Jako kontrprzykład rozważmy $f(n)=n$ i $g(n)=n^2$. Zachodzi wtedy $\min(f(n),g(n))=f(n)$ oraz $f(n)+g(n)=\Theta(g(n))\ne\Theta(f(n))$.
-
-\subparagraph{(c)}
-Prawda. Z faktu, że $f(n)=O(g(n))$ wynika $f(n)\le cg(n)$ dla $n\ge n_0$ i~pewnych stałych $c,n_0>0$. Otrzymujemy
-\[
-  \lg f(n)\le\lg c+\lg g(n)\le \lg g(n)+\lg g(n) = 2\lg g(n) = O(\lg g(n)).
-\]
-Ponieważ $c$ jest stałą, to przyjmijmy, że dobrano $n_0$ tak, by $c\le g(n)$ dla wszystkich $n\ge n_0$. Wtedy mamy $\lg c\le\lg g(n)$ i stąd wynika druga nierówność.
-
-\subparagraph{(d)}
+\subsubsection{} %3-4(d)
 Fałsz. Dla funkcji $f(n)=2^n$ oraz $g(n)=2^{n+1}$ zachodzi $f(n)=O(g(n))$, ale $2^{f(n)}\ne O\left(2^{g(n)}\right)$ (z punktu (a) problemu 3-3).
 
-\subparagraph{(e)}
+\subsubsection{} %3-4(e)
 Fałsz. Np. dla $f(n)=2^n$ mamy $f^2(n)=(2^n)^2=4^n$ skąd $f(n)\ne O\left(f^2(n)\right)$.
 
-\subparagraph{(f)}
-Prawda. Z definicji notacji $O$, jeśli $f(n)=O(g(n))$, to istnieją stałe $c,n_0>0$, że dla każdego $n\ge n_0$ zachodzi $0\le f(n)\le cg(n)$. Dzieląc nierówność przez $c$ otrzymujemy $0\le f(n)/c\le g(n)$ dla wszystkich $n\ge n_0$, ale $1/c>0$, a~więc $g(n)=\Omega(f(n))$.
+\subsubsection{} %3-4(f)
+Prawda. Z~definicji notacji $O$, jeśli $f(n)=O(g(n))$, to istnieją stałe $c,n_0>0$, że dla każdego $n\ge n_0$ zachodzi $0\le f(n)\le cg(n)$. Dzieląc nierówność przez $c$ otrzymujemy $0\le f(n)/c\le g(n)$ dla wszystkich $n\ge n_0$, ale $1/c>0$, a~więc $g(n)=\Omega(f(n))$.
 
-\subparagraph{(g)}
+\subsubsection{} %3-4(g)
 Fałsz. Niech np. $f(n)=2^n$, wtedy $f(n/2)=2^{n/2}=\left(\sqrt{2}\right)^n$ oraz $f(n)\ne O(f(n/2))$.
 
-\subparagraph{(h)}
+\subsubsection{} %3-4(h)
 Prawda. Niech $h(n)=o(f(n))$. Wtedy, na podstawie definicji notacji $o$ mamy, że dla każdej stałej $c>0$ istnieje stała $n_0>0$, taka że
 \[
-  0\le h(n)<cf(n)
+	0\le h(n)<cf(n)
 \]
 zachodzi dla wszystkich $n\ge n_0$. To znaczy, że
 \[
-  f(n)\le f(n)+o(f(n))=f(n)+h(n)<(c+1)f(n).
+	f(n)\le f(n)+o(f(n))=f(n)+h(n)<(c+1)f(n).
 \]
 Ponieważ $c+1>1$, to można $f(n)+o(f(n))$ ograniczyć od góry przez $c_2f(n)$ wybierając np. $c_2=2$. Dolnym ograniczeniem sumy jest $f(n)$, więc ustalamy $c_1=1$. Stałe $c_1,c_2,n_0$ spełniają założenia definicji notacji $\Theta$, skąd wnioskujemy, że $f(n)+o(f(n))=\Theta(f(n))$.
 
 \bigskip
-\noindent \emph{Od tego momentu, w rozwiązaniach zadań nie będziemy odwoływać się do definicji notacji asymptotycznych w obliczaniu oszacowań czasów działania algorytmów, ale korzystając z wyżej udowodnionej tożsamości, będziemy opuszczać składniki niższego rzędu w sumach, których oszacowania chcemy otrzymać.}
+\noindent \emph{Od tego momentu, w~rozwiązaniach zadań nie będziemy odwoływać się do definicji notacji asymptotycznych w~obliczaniu oszacowań czasów działania algorytmów, ale korzystając z~wyżej udowodnionej tożsamości, będziemy opuszczać składniki niższego rzędu w~sumach, których oszacowania chcemy otrzymać.}
 
-\paragraph{3-5. Wariacje na temat notacji $O$ i $\Omega$}
+\subsection{} %3-5
 
-%poprawic
-\subparagraph{(a)}
-Niech $c,n_0>0$ będą pewnymi stałymi. Dla $n\ge n_0$ wykres funkcji $f(n)$ może przecinać wykres $cg(n)$ w skończonej (być może zerowej) lub nieskończonej liczbie punktów. W pierwszym przypadku dobierzmy $n_0$ tak, by było ono największym argumentem, dla którego następuje przecięcie wykresów. Wtedy, w zależności od znaku różnicy $f(n)-cg(n)$ dla $n>n_0$, funkcja $f(n)$ należy do $O(g(n))$ albo $\stackrel{\infty}{\Omega}\!\!(g(n))$.
+\subsubsection{} %3-5(a)
+Niech $c>0$ będzie pewną stałą. Jeśli funkcja $f(n)\le cg(n)$ w~pewnym skończonym zbiorze, to można wybrać największe takie $n$, dla którego ta nierówność jest prawdziwa. Oznaczmy go przez $n_0$. Mamy zatem $0\le cg(n)\le f(n)$ dla $n>n_0$, a~więc dla nieskończenie wielu liczb naturalnych, zatem $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$. Jeśli zaś w~tym skończonym zbiorze zachodzi $f(n)\ge cg(n)$, to analogicznie można dowieść, że $f(n)=O(g(n))$.
 
-Jeśli punktów przecięcia jest nieskończenie wiele, to $f(n)$ może być tylko $\stackrel{\infty}{\Omega}\!\!(g(n))$, bo zawsze można dobrać stałą $c$ tak, by dla nieskończonej liczby punktów wykres $f(n)$ znajdował się ponad wykresem $cg(n)$. Nie jest natomiast prawdą podobne twierdzenie, gdyby zastosować notację $\Omega$ zamiast $\stackrel{\infty}{\Omega}$; jeśli np. $f(n)=n$ oraz $g(n)=n^{\sin n+1}$, to $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$, ale $f(n)\ne\Omega(g(n))$.
+W ostatnim przypadku, zachodzi zarówno $f(n)\ge cg(n)$ jak i~$f(n)\le cg(n)$ dla nieskończonej liczby argumentów, a~więc zgodnie z~definicją $\stackrel{\infty}{\Omega}$ prawdziwe jest $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$.
 
-%poprawic
-\subparagraph{(b)}
-\begin{description}
-  \item[Zalety:] wiadomo, kiedy czas działania algorytmu na pewno nie jest $O(g(n))$.
-  \item[Wady:] dowód, że $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$ jest nieco trudniejszy do przeprowadzenia niż w przypadku $f(n)=\Omega(g(n))$.
-\end{description}
+Nie jest natomiast prawdą podobne twierdzenie, gdyby zastosować notację $\Omega$ zamiast $\stackrel{\infty}{\Omega}$; jeśli np. $f(n)=n$ oraz $g(n)=n^{\sin n+1}$, to $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$, ale $f(n)\ne\Omega(g(n))$ i~$f(n)\ne O(g(n))$.
 
-%sprawdzic
-\subparagraph{(c)}
+\subsubsection{} %3-5(b)
+\textbf{Zalety:}
+\begin{itemize}
+	\item wiadomo, że jeśli czas działania algorytmu nie jest $O(f(n))$, to jest $\stackrel{\infty}{\Omega}\!\!(f(n))$ (z poprzedniego punktu),
+	\item nie istnieją funkcje, których nie da się porównać z~innymi przy pomocy notacji $O$ i~$\stackrel{\infty}{\Omega}$.
+\end{itemize}
+\textbf{Wady:}
+\begin{itemize}
+	\item dowód, że $f(n)=\;\stackrel{\infty}{\Omega}\!\!(g(n))$ jest nieco trudniejszy do przeprowadzenia niż w~przypadku $f(n)=\Omega(g(n))$,
+	\item nowa notacja w~wielu przypadkach nie uwypukla tak bardzo, że pewna funkcja jest ``asymptotycznie większa'' od innej, gdyż mimo że fakt przynależności do klasy złożoności jest spełniony, to funkcja może być w~pewnym zbiorze znacząco mniejsza od innej z~tej samej klasy.
+\end{itemize}
+
+\subsubsection{} %3-5(c)
 Definicja $O'$ dopuszcza badanie funkcji, które nie są asymptotycznie nieujemne, zachodzi np.
 \begin{eqnarray*}
-  -n^2 &=& O'(n^2), \\
-  -\frac{n^3}{2}+\frac{n^2}{6}-3n &=& O'(n^4).
+	-n^2 &=& O'(n^2), \\
+	-\frac{n^3}{2}+\frac{n^2}{6}-3n &=& O'(n^4).
 \end{eqnarray*}
-Jeśli przyjmiemy taką definicję $O'$, ale pozostawimy bez zmian definicje $\Omega$ i $\Theta$, to twierdzenie 3.1 nie będzie prawdziwe. Gdy $f(n)=O'(g(n))$, to $g(n)$ jest funkcją asymptotycznie nieujemną. Jeśli jednak $f(n)$ nie jest asymptotycznie nieujemna, to w przypadku gdy $f(n)=\Theta(h(n))$, funkcja $h(n)$ też nie może być nieujemna. Twierdzenie pozostanie prawdziwe, jeśli równoważność zastąpimy implikacją w prawą stronę, tzn. z faktu, że $f(n)=\Theta(g(n))$ wynika, że zachodzą także $f(n)=O(g(n))$ i $f(n)=\Omega(g(n))$.
+Jeśli przyjmiemy taką definicję $O'$, ale pozostawimy bez zmian definicje $\Omega$ i~$\Theta$, to twierdzenie 3.1 nie będzie prawdziwe. Załóżmy zatem, że $f(n)$ nie jest funkcją asymptotycznie nieujemną, gdyż w~przeciwnym przypadku, twierdzenie pozostaje bez zmian. Istnieje zatem $n_0>0$, że dla wszystkich $n\ge n_0$, $f(n)<0$. Jeśli $g(n)$ też jest asymptotycznie ujemna, to z~faktu, że $f(n)=\Theta(g(n))$ wynika $f(n)=\Omega(g(n))$, ale $f(n)=O'(g(n))$ już nie jest prawdą.
 
-\subparagraph{(d)}
+
+% Gdy $f(n)=O'(g(n))$, to $g(n)$ jest funkcją asymptotycznie nieujemną. Jeśli jednak $f(n)$ nie jest asymptotycznie nieujemna, to w~przypadku gdy $f(n)=\Theta(h(n))$, funkcja $h(n)$ też nie może być nieujemna. Twierdzenie pozostanie prawdziwe, jeśli równoważność zastąpimy implikacją w~prawą stronę, tzn. z~faktu, że $f(n)=\Theta(g(n))$ wynika, że zachodzą także $f(n)=O(g(n))$ i~$f(n)=\Omega(g(n))$.
+
+\subsubsection{} %3-5(d)
 \begin{eqnarray*}
-  \stackrel{\sim}{\Omega}\!\!(g(n)) &=& \left\{f(n):\;\mbox{istnieją dodatnie stałe }c,k,n_0\mbox{ takie, że}\right. \\
-  && \quad 0\le cg(n)\lg^kn\le f(n)\mbox{ dla wszystkich }n\ge n_0\left.\right\} \\\\
-  \stackrel{\sim}{\Theta}\!\!(g(n)) &=& \left\{f(n):\;\mbox{istnieją dodatnie stałe }c_1,c_2,k_1,k_2,n_0\mbox{ takie, że}\right. \\
-  && \quad 0\le c_1g(n)\lg^{k_1}n\le f(n)\le c_2g(n)\lg^{k_2}n \\
-  && \left.\quad\mbox{dla wszystkich }n\ge n_0\right\}
+	\stackrel{\sim}{\Omega}\!\!(g(n)) &=& \left\{f(n):\;\mbox{istnieją dodatnie stałe }c,k,n_0\mbox{ takie, że}\right. \\
+	&& \quad 0\le cg(n)\lg^kn\le f(n)\mbox{ dla wszystkich }n\ge n_0\left.\right\} \\\\
+	\stackrel{\sim}{\Theta}\!\!(g(n)) &=& \left\{f(n):\;\mbox{istnieją dodatnie stałe }c_1,c_2,k_1,k_2,n_0\mbox{ takie, że}\right. \\
+	&& \quad 0\le c_1g(n)\lg^{k_1}n\le f(n)\le c_2g(n)\lg^{k_2}n \\
+	&& \left.\quad\mbox{dla wszystkich }n\ge n_0\right\}
 \end{eqnarray*}
 
-Dowód twierdzenia 3.1 dla notacji $\stackrel{\sim}{O}$, $\stackrel{\sim}{\Omega}$ i $\stackrel{\sim}{\Theta}$ przebiega analogicznie jak dowód jego oryginalnego odpowiednika, przeprowadzony w zad. 3.1-5.
+Dowód twierdzenia 3.1 dla notacji $\stackrel{\sim}{O}$, $\stackrel{\sim}{\Omega}$ i~$\stackrel{\sim}{\Theta}$ przebiega analogicznie jak dowód jego oryginalnego odpowiednika, przeprowadzony w~zad. 3.1-5.
 
-Z definicji notacji $\stackrel{\sim}{\Theta}$ mamy, że $f(n)=\;\stackrel{\sim}{\Theta}\!\!(g(n))$ wtedy i tylko wtedy, gdy istnieją takie stałe $c_1,c_2,k_1,k_2,n_0>0$, że
+Z definicji notacji $\stackrel{\sim}{\Theta}$ mamy, że $f(n)=\;\stackrel{\sim}{\Theta}\!\!(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1,c_2,k_1,k_2,n_0>0$, że
 \[
-  0\le c_1g(n)\lg^{k_1}n\le f(n)\le c_2g(n)\lg^{k_2}n
+	0\le c_1g(n)\lg^{k_1}n\le f(n)\le c_2g(n)\lg^{k_2}n
 \]
 zachodzi dla wszystkich $n\ge n_0$. Rozdzielając nierówność otrzymujemy
 \[
-  \left\{\begin{array}{r}
-	0\le c_1g(n)\lg^{k_1}n\le f(n), \\
-	0\le f(n)\le c_2g(n)\lg^{k_2}n.
-  \end{array}\right.
+	\left\{\begin{array}{c}
+		0\le c_1g(n)\lg^{k_1}n\le f(n), \\
+		0\le f(n)\le c_2g(n)\lg^{k_2}n.
+	\end{array}\right.
 \]
-Pierwsze wyrażenie stanowi definicję $f(n)=\;\stackrel{\sim}{\Omega}\!\!(g(n))$, a drugie -- $f(n)=\;\stackrel{\sim}{O}\!\!(g(n))$.
+Pierwsze wyrażenie stanowi definicję $f(n)=\;\stackrel{\sim}{\Omega}\!\!(g(n))$, a~drugie -- $f(n)=\;\stackrel{\sim}{O}\!\!(g(n))$.
 
-Podobnie jak w oryginalnym dowodzie, przeprowadzenie rozumowania w odwrotnej kolejności wykazuje prawdziwość odwrotnej implikacji.
+Podobnie jak w~oryginalnym dowodzie, przeprowadzenie rozumowania w~odwrotnej kolejności wykazuje prawdziwość odwrotnej implikacji.
 
-\paragraph{3-6. Funkcje iterowane}
+\subsection{} %3-6
 
-Za dziedziny funkcji $f_c^*(n)$ przyjęto dziedziny $f(n)$.
+Za dziedzinę funkcji $f_c^*$ w~każdym punkcie przyjęto dziedzinę $f$. By wyznaczyć oszacowanie $f_c^*(n)$, należy znaleźć najmniejsze $i\ge 0$, dla którego $f^{(i)}(n)\le c$.
 
-\subparagraph{(a)}
+\subsubsection{} %3-6(a)
+$\lg^{(i)}(n)\le 2$, logarytmując obustronnie otrzymujemy $\lg^{(i+1)}(n)\le 1$, skąd wynika, że $i=\lg^*n-1$, a~zatem:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lg^*n+1, & \mbox{dla }n\ge 1, \\
-	0, & \mbox{dla }0<n<1.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }0<n<1, \\
+		\lg^*n-1, & \mbox{dla }n\ge 1.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(\lg^* n)$.
 
-\subparagraph{(b)}
+\subsubsection{} %3-6(b)
+Ponieważ $(n-1)^{(i)}\equiv n-i$, więc otrzymujemy:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lceil n\rceil-1, & \mbox{dla }n\ge 1, \\
-	0, & \mbox{dla }n<1.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }n<1, \\
+		\lceil n\rceil-1, & \mbox{dla }n\ge 1.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(n)$.
 
-\subparagraph{(c)}
+\subsubsection{} %3-6(c)
+$(n/2)^{(i)}\equiv n/2^i$, a~stąd:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lceil\lg n\rceil, & \mbox{dla }n\ge 1, \\
-	0, & \mbox{dla }n<1.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }n<1, \\
+		\lceil\lg n\rceil, & \mbox{dla }n\ge 1.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(\lg n)$.
 
-\subparagraph{(d)}
+\subsubsection{} %3-6(d)
+Korzystając z~poprzedniego punktu, ale zmieniając stałą $c$, mamy:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lceil\lg n\rceil-1, & \mbox{dla }n\ge 2, \\
-	0, & \mbox{dla }n<2.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }n<2, \\
+		\lceil\lg n\rceil-1, & \mbox{dla }n\ge 2.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(\lg n)$.
 
-\subparagraph{(e)}
+\subsubsection{} %3-6(e)
+Ponieważ $\sqrt{n}\equiv n^{1/2}$, mamy $\left(\sqrt{n}\right)^{(i)}\equiv n^{1/2^i}$. Rozwiązaniem nierówności $n\le 2^{2^i}$ ze względu na $i$, jest $i\ge\lg\lg n$, dostajemy więc następujący wynik:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lceil\log_4 n\rceil, & \mbox{dla }n>2, \\
-	0, & \mbox{dla }0\le n\le 2.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }0\le n\le 2, \\
+		\lceil\lg\lg n\rceil, & \mbox{dla }n>2.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(\lg\lg n)$.
 
-\subparagraph{(f)}
+\subsubsection{} %3-6(f)
+Bieżący punkt różni się od poprzedniego jedynie stałą $c$, jednak ta drobna zmiana mocno wpływa na postać funkcji $f_c^*$:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\infty, & \mbox{dla }n>1, \\
-	0, & \mbox{dla }0\le n\le 1.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }0\le n\le 1, \\
+		\infty, & \mbox{dla }n>1.
+	\end{array}\right.
 \]
+Nie można podać oszacowania dokładnego, bo $f_c^*(n)=\omega(g(n))$ dla każdej funkcji $g(n)$.
 
-\subparagraph{(g)}
+\subsubsection{} %3-6(g)
+Postępując analogicznie jak w~punkcie (e), mamy $\left(n^{1/3}\right)^{(i)}\equiv n^{1/3^i}$, a~stąd:
 \[
-  f_c^*(n)=\left\{\begin{array}{ll}
-	\lceil\log_8 n\rceil, & \mbox{dla }n>2, \\
-	0, & \mbox{dla }n\le 2.
-  \end{array}\right.
+	f_c^*(n)=\left\{\begin{array}{ll}
+		0, & \mbox{dla }n\le 2, \\
+		\lceil\log_3\lg n\rceil, & \mbox{dla }n>2.
+	\end{array}\right.
 \]
+Oszacowanie dokładne: $f_c^*(n)=\Theta(\lg\lg n)$.
 
-\subparagraph{(h)}
+\subsubsection{} %3-6(h)
+Postać funkcji $f(n)$ jest zbyt skomplikowana, by bezpośrednio badać jej wersje iterowane, a~tym bardziej $f_c^*(n)$. Dlatego znajdziemy jej oszacowanie górne $g(n)$ i~to ono będzie przedmiotem naszej analizy.
+
+Zauważmy, że $n/\lg n\equiv n\log_n 2$. Ponieważ dla $n\le 2$, mamy $f_c^*(n)=0$, to rozważmy $n>2$. W~takim przypadku zachodzi $0<\log_n 2<1$, a~więc możemy przyjąc oszacowanie górne $g(n)=n$. Niestety, jakikolwiek argument, jaki podamy funkcji $g$ nie jest zmniejszany w~kolejnych iteracjach, dlatego nigdy nie osiągniemy wartości $2$.
+
+Można znaleźć nieco lepsze oszacowanie $f(n)$ zauważając, że $f_c^*(n)=1$ dla $3\le n\le 4$. Przyjmijmy zatem, że $n>4$. Zachodzi wtedy $\log_n 2<1/2$, a~zatem nowym oszacowaniem $f(n)$ będzie $g(n)=n/2$. Kolejne iteracje mają postać $g^{(i)}(n)=n/2^i$. Pozostaje obliczyć najmniejsze $i$, dla którego $n/2^i\le 2$. Po kilku przekształceniach otrzymujemy $i\ge\lg n-1$, a~zatem prawdą jest, że $f_c^*(n)=O(\lg n)$.

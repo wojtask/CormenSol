@@ -1,0 +1,40 @@
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{3}
+
+\renewcommand\subsection{\@startsection
+	{subsection}
+	{2}
+	{0mm}
+	{1.5\baselineskip}
+	{0.5\baselineskip}
+	{\bfseries}
+}
+
+\renewcommand\subsubsection{\@startsection
+	{subsubsection}
+	{3}
+	{0mm}
+	{\baselineskip}
+	{0pt}
+	{\bfseries}
+}
+
+\def\thesection{\thechapter.\arabic{section}.}
+\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+
+\def\problems{
+	\section*{Problemy}
+	\addcontentsline{toc}{section}{Problemy}
+	\setcounter{subsection}{0}
+	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}
+}
+
+
+\newtheorem{definicja}{Definicja}[section]
+\newtheorem{twierdzenie}{Twierdzenie}[section]
+\newtheorem{twierdzenie*}{Twierdzenie}
+\newtheorem{lemat}{Lemat}[twierdzenie]
+\newtheorem{lemat*}{Lemat}

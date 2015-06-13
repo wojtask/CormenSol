@@ -1,14 +1,14 @@
-\section*{Dodatek A: Sumy}
+\chapter{Sumy}
 
-\subsection*{A.1. Wzory i własności dotyczące sum}
+\section{Wzory i~własności dotyczące sum}
 
-\paragraph{A.1-1.}
+\subsection{} %A-1.1
 \[
-	\sum_{k=1}^n(2k-1) = 2\sum_{k=1}^nk-\sum_{k=1}^n1 = 2\cdot\frac{n(n+1)}{2}-n = n^2.
+	\sum_{k=1}^n(2k-1) = 2\sum_{k=1}^nk-\sum_{k=1}^n1 = \frac{2n(n+1)}{2}-n = n^2.
 \]
 
-\paragraph{A.1-2.}
-Korzystając z oszacowania na $H_n$ (wzór (A.7)), mamy
+\subsection{} %A-1.2
+Korzystając z~oszacowania na $H_n$ (wzór (A.7)), mamy
 \begin{eqnarray*}
 	\sum_{k=1}^n\frac{1}{2k-1} &=& H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
 	&=& H_{2n-1}-\frac{1}{2}H_{n-1} \\
@@ -20,50 +20,45 @@ Korzystając z oszacowania na $H_n$ (wzór (A.7)), mamy
 	&=& \ln\sqrt{n}+O(1).
 \end{eqnarray*}
 
-\paragraph{A.1-3.}
+\subsection{} %A-1.3
 \[
 	\sum_{k=0}^\infty k^2x^k = x\frac{d}{dx}\sum_{k=0}^\infty kx^k = \frac{x(x+1)}{(1-x)^3}.
 \]
-W obliczeniu ostatniej sumy wykorzystano wzór (A.8).
+W~obliczeniu ostatniej sumy wykorzystano wzór (A.8).
 
-\paragraph{A.1-4.}
+\subsection{} %A-1.4
 \begin{eqnarray*}
 	\sum_{k=0}^\infty\frac{k-1}{2^k} &=& \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} \\
 	&=& \frac{\frac{1}{2}}{\left(1-\frac{1}{2}\right)^2}+\sum_{k=0}^\infty\left(\frac{1}{2}\right)^k \\
 	&=& 2-\frac{1}{1-\frac{1}{2}} \\
 	&=& 0.
 \end{eqnarray*}
-Skorzystano z wzoru (A.8), a następnie (A.6) w obu przypadkach biorąc $x=1/2$.
+Skorzystano z~wzoru (A.8), a~następnie (A.6) w~obu przypadkach biorąc $x=1/2$.
 
-\paragraph{A.1-5.}
+\subsection{} %A-1.5
 \begin{eqnarray*}
 	\sum_{k=1}^\infty(2k+1)x^{2k} &=& 2\sum_{k=0}^\infty kx^{2k}+\sum_{k=0}^\infty x^{2k}-1 \\
 	&=& \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 \\
 	&=& \frac{x^2(3-x^2)}{(1-x^2)^2}.
 \end{eqnarray*}
-W drugiej równości zastosowano wzory (A.6) i (A.8). Otrzymana wartość jest wartością sumy gdy $|x^2|<1$, w pozostałych przypadkach suma jest rozbieżna do $\infty$.
+W~drugiej równości zastosowano wzory (A.6) i~(A.8). Otrzymana wartość jest wartością sumy gdy $|x^2|<1$, w~pozostałych przypadkach suma jest rozbieżna do $\infty$.
 
-\paragraph{A.1-6.}
-Zgodnie z definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\left(\sum_{k=1}^nf_k(n)\right)$ wtedy i tylko wtedy, gdy istnieją stałe $n_0,c>0$, że
+\subsection{} %A-1.6
+Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F$ zachodzi $F(n) = O\left(\sum_{k=1}^nf_k(n)\right)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0,c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
 \[
-0\le F(n)\le c\sum_{k=1}^n f_k(n)
+	0\le F(n)\le c\sum_{k=1}^n f_k(n).
 \]
-zachodzi dla każdego $n\ge n_0$.
 
 Niech $(F_i(n))_{1\le i\le n}$ będzie ciągiem funkcji, który spełnia układ nierówności
-\[
-	\left\{ \begin{array}{ccccl}
+\begin{equation}
+	\left\{\begin{array}{ccccl}
 		0 & \le & F_1(n) & \le & cf_1(n) \\
 		0 & \le & F_2(n) & \le & cf_1(n) + cf_2(n) \\
 		& & \vdots \\
-		0 & \le & F_n(n) & \le & \sum_{k=1}^ncf_k(n) \\
-	\end{array}
-	\right.
-\]
-dla pewnych dodatnich stałych $n_0$ i $c$ oraz dla każdego $n\ge n_0$.
-
-\bigskip
-\noindent Wprost z definicji notacji $O$ mamy
+		0 & \le & F_n(n) & \le & \sum_{k=1}^ncf_k(n), \\
+	\end{array}\right. \label{eq:a.1-6}
+\end{equation}
+dla pewnych dodatnich stałych $n_0$ i~$c$ oraz dla każdego $n\ge n_0$. Wprost z~definicji notacji $O$ mamy
 \begin{eqnarray*}
 	F_1(n) & = & O(f_1(n)),\\
 	F_2(n) - F_1(n) & = & O(f_2(n)),\\
@@ -74,84 +69,84 @@ Dodając powyższe równania stronami, otrzymujemy
 \[
 	F_1(n)+(F_2(n)-F_1(n))+\cdots+(F_n(n)-F_{n-1}(n))=\sum_{k=1}^nO\left(f_k(n)\right).
 \]
-Wartość po lewej stronie jest równa $F_n$. Ale $F_n = O\left(\sum_{k=1}^nf_k(n)\right)$ z ostatniej nierówności układu, a stąd wynika już tożsamość
+Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu (\ref{eq:a.1-6}), $F_n(n) = O\left(\sum_{k=1}^nf_k(n)\right)$, a~stąd wynika już tożsamość
 \[
 	\sum_{k=1}^nO\left(f_k(n)\right) = O\left(\sum_{k=1}^nf_k(n)\right).
 \]
 
-\paragraph{A.1-7.}
+\subsection{} %A-1.7
 \[
-	\prod_{k=1}^n2\cdot 4^k = 2^n\cdot 4^{1+2+\cdots+n} = 2^n\cdot 4^{\frac{n(n+1)}{2}} = 2^{2n+n^2}.
+	\prod_{k=1}^n2\cdot 4^k = 2^n\cdot 4^{1+2+\cdots+n} = 2^n\cdot 4^{\frac{n(n+1)}{2}} = 2^{n^2+2n}.
 \]
 
-\paragraph{A.1-8.}
+\subsection{} %A-1.8
 \begin{eqnarray*}
 	\prod_{k=2}^n\left(1-\frac{1}{k^2}\right) &=& \prod_{k=2}^n\frac{k^2-1}{k^2} \\
 	&=& \frac{\prod_{k=2}^n\left(k^2-1\right)}{\prod_{k=2}^nk^2} \\
-	&=& \frac{\prod_{2\le k\le n}(k-1)\cdot\prod_{2\le k\le n}(k+1)}{(n!)^2} \\
-	&=& \frac{\prod_{1\le k\le n-1}k\cdot\prod_{3\le k\le n+1}k}{(n!)^2} \\
+	&=& \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\prod_{k=1}^nk\cdot\prod_{k=1}^nk} \\
+	&=& \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} \\
 	&=& \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} \\
 	&=& \frac{n(n+1)((n-1)!)^2}{2n^2((n-1)!)^2} \\
 	&=& \frac{n+1}{2n}.
 \end{eqnarray*}
 
-\subsection*{A.2. Szacowanie sum}
+\section{Szacowanie sum}
 
-\paragraph{A.2-1.}
-Z kryterium d'Alemberta zbieżności szeregów mamy
+\subsection{} %A-2.1
+Z~kryterium d'Alemberta zbieżności szeregów mamy
 \[
 	\frac{1}{(k+1)^2}\bigg /\frac{1}{k^2}\le 1\quad\mbox{dla wszystkich }k\ge1,
 \]
-a to oznacza, że suma $\sum_{k=1}^n\frac{1}{k^2}$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=+\infty$.
+a~to oznacza, że suma $\sum_{k=1}^n\frac{1}{k^2}$ jest zbieżna (ograniczona przez stałą) dla dowolnego $n$ naturalnego, bądź dla $n=\infty$.
 
-\paragraph{A.2-2.}
-Zauważmy, że gdy $n$ osiąga wartość będącą potęgą $2$, to zwiększa się o $1$ liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg $2$. Dla $n=2^m$ zachodzi
+\subsection{} %A-2.2
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą $2$, to zwiększa się o~$1$ liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\left\lceil n/2^k\right\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji będzie zatem oszacowanie górne jej wartości przyjmowanych dla potęg $2$. Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\left\lceil\frac{2^m}{2^k}\right\rceil = 2^m+2^{m-1}+\cdots+2^0 = 2^{m+1}-1 = 2n-1,
 \]
-z czego wynika, że $F(n) = O(n)$ i asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
+z~czego wynika, że $F(n) = O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
 
-\paragraph{A.2-3.}
-Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Posortujmy wyrazy tej sumy kolejno po ich mianownikach i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z wyjątkiem ostatniej) były kolejnymi potęgami $2$. Umieszczamy pierwszy składnik w grupie $1$ o~rozmiarze $1$, dwa kolejne w grupie $2$ o~rozmiarze $2$, cztery kolejne w grupie $3$ o~rozmiarze $4$, itd. aż do grupy $s$, jak to widać poniżej:
+\subsection{} %A-2.3
+Załóżmy, że $H_n$ rozwinęliśmy do sumy ułamków od $1/1$ do $1/n$. Posortujmy wyrazy tej sumy kolejno po ich mianownikach i~podzielmy je w~grupy w~taki sposób, by rozmiary kolejnych grup (być może z~wyjątkiem ostatniej) były kolejnymi potęgami $2$. Umieszczamy pierwszy składnik w~grupie $1$ o~rozmiarze $1$, dwa kolejne w~grupie $2$ o~rozmiarze $2$, cztery kolejne w~grupie $3$ o~rozmiarze $4$, itd. aż do grupy $s$, jak to widać poniżej:
 \[
 	\underbrace{\frac{1}{1}}_{\mathrm{grupa\;}1}+\underbrace{\frac{1}{2}+\frac{1}{3}}_{\mathrm{grupa\;} 2}+\underbrace{\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}}_{\mathrm{grupa\;}3}+\cdots+\underbrace{\cdots +\frac{1}{n}}_{\mathrm{grupa\;}s}.
 \]
-Wszystkie składniki w~grupie $2$ są zawarte między $1/4$ a~$1/2$ włącznie, zatem suma składników tejże grupy mieści się pomiędzy $2\cdot 1/4 = 1/2$ a~$2\cdot 1/2 = 1$ włącznie. Wszystkie składniki w~grupie $3$ są zawarte między $1/8$ a~$1/4$ włącznie, więc ich suma jest między $1/2$ a $1$ włącznie. W~ogólności, każdy z~$2^{k+1}$ składników w~grupie~$k$ jest zawarty między $2^{-k}$ a~$2^{1-k}$ włącznie. Stąd suma składników w~każdej grupie znajduje się pomiędzy $1/2$ a~$1$ włącznie. W~końcu, jeśli umieściliśmy składnik $1/n$ w~grupie $s = \lfloor\lg n\rfloor+1$, to zachodzi $s/2<H_n\le s$. Zatem $\lim_{n\to\infty}H_n=\infty$ i~istotnie
+Wszystkie składniki w~grupie $2$ są zawarte między $1/4$ a~$1/2$ włącznie, zatem suma składników tejże grupy mieści się pomiędzy $2\cdot 1/4 = 1/2$ a~$2\cdot 1/2 = 1$ włącznie. Wszystkie składniki w~grupie $3$ są zawarte między $1/8$ a~$1/4$ włącznie, więc ich suma jest między $1/2$ a~$1$ włącznie. W~ogólności, każdy z~$2^{k+1}$ składników w~grupie~$k$ jest zawarty między $2^{-k}$ a~$2^{1-k}$ włącznie. Stąd suma składników w~każdej grupie znajduje się pomiędzy $1/2$ a~$1$ włącznie. W~końcu, jeśli umieściliśmy składnik $1/n$ w~grupie $s = \lfloor\lg n\rfloor+1$, to zachodzi $s/2<H_n\le s$. Zatem $\lim_{n\to\infty}H_n=\infty$ i~istotnie
 \[
 	\frac{\lfloor\lg n\rfloor+1}{2}<H_n\le\lfloor\lg n\rfloor+1,\quad\mbox{więc }H_n=\Theta(\lg n).
 \]
 
-\paragraph{A.2-4.}
+\subsection{} %A-2.4
 Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności (A.11):
 \begin{equation*}
 	\int_0^nx^3\,dx\le\sum_{k=1}^nk^3\le\int_1^{n+1}x^3\,dx.
 \end{equation*}
-Znajdujemy oszacowanie obu całek,
+Znajdujemy oszacowania obu całek:
 \[
 	\int_0^nx^3\,dx = \frac{n^4}{4} = \Theta(n^4),
 \]
 \[
 	\int_1^{n+1}x^3\,dx = \frac{(n+1)^4-1}{4} = \Theta(n^4),
 \]
-a zatem
+a~zatem
 \[
 	\sum_{k=0}^nk^3 = \Theta(n^4).
 \]
 
-\paragraph{A.2-5.}
-Zastosowanie nierówności (A.12) do $\sum_{k=1}^n1/k$ doprowadza do wyrażenia niezdefiniowanego
+\subsection{} %A-2.5
+Zastosowanie nierówności (A.12) do $\sum_{k=1}^n\frac{1}{k}$ doprowadza do wyrażenia niezdefiniowanego
 \[
 	\sum_{k=1}^n\frac{1}{k}\le\int_0^n\frac{dx}{x}=\ln n-\ln 0,
 \]
-gdyż wartości $\ln 0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie sumy $\sum_{k=1}^n1/k$ jako $1+\sum_{k=2}^n1/k$ pozwala na zastosowanie wzoru (A.12) do ostatniej sumy wprowadzając jedynie stałą różnicę.
+gdyż wartości $\ln 0$ nie można wyrazić liczbą rzeczywistą. Potraktowanie sumy $\sum_{k=1}^n\frac{1}{k}$ jako $1+\sum_{k=2}^n\frac{1}{k}$ pozwala na zastosowanie wzoru (A.12) do ostatniej sumy wprowadzając jedynie stałą różnicę.
 
-\subsection*{Problemy}
+\problems
 
-\paragraph{A-1. Szacowanie sum}
-Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge 0$ i $s\ge 0$. Pozwala to na wykorzystanie nierówności (A.11) we wszystkich poniższych punktach.
+\subsection{} %A-1
+Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge 0$ i~$s\ge 0$. Pozwala to na wykorzystanie nierówności (A.11) we wszystkich poniższych punktach.
 
-\subparagraph{(a)}
-Z wzoru (A.11) dostajemy
+\subsubsection{} %A-1(a)
+Z~wzoru (A.11) dostajemy
 \[
 	\int_0^nx^r\,dx\le\sum_{k=1}^nk^r\le\int_1^{n+1}x^r\,dx.
 \]
@@ -167,72 +162,63 @@ zatem oszacowaniem sumy jest
 	\sum_{k=1}^nk^r = \Theta(n^{r+1}).
 \]
 
-\subparagraph{(b)}
+\subsubsection{} %A-1(b)
 Stosujemy wzór (A.11) do sumy $\sum_{k=2}^n\lg^sk$, równoważnej sumie badanej:
 \[
 	\int_1^n\lg^sx\,dx\le\sum_{k=2}^n\lg^sk\le\int_2^{n+1}\lg^sx\,dx.
 \]
-Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=dx$. Wtedy
+Obliczmy całkę nieoznaczoną $I(x) = \int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=dx$. Pomijając stałe całkowania otrzymujemy
 \[
-	\frac{du(x)}{dx} = \frac{s\lg^sx\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^sx\,dx}{x}\quad\mbox{oraz}\quad v(x)=x+c\;\;\mbox{dla dowolnej stałej }c.
+	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x}\quad\mbox{oraz}\quad v(x)=x.
 \]
-Pomijając stałe całkowania, otrzymujemy
+Dostajemy zatem
 \begin{eqnarray*}
 	I(x) &=& u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
-	I(x) &=& x\lg^sx-\int s\lg e\lg^sx\,dx, \\
-	I(x) &=& x\lg^sx-s\lg e\cdot I(x), \\
-	I(x) &=& \frac{x\lg^sx}{1+s\lg e}.
+	I(x) &=& x\lg^sx-\int s\lg e\lg^{s-1}x\,dx, \\
+	I(x) &=& x\lg^sx-\frac{s\lg e}{\lg x}\cdot I(x), \\
+	I(x) &=& \frac{x\lg^{s+1}x}{\lg x+s\lg e}.
 \end{eqnarray*}
-Wykorzystujemy otrzymany wynik do obliczenia całek ograniczających badaną sumę,
+Wykorzystujemy otrzymany wynik do obliczenia całek ograniczających badaną sumę:
 \[
-	\begin{array}{ccccc}
-		{\displaystyle \int_1^n\lg^sx\,dx} &=& \dfrac{n\lg^sn}{1+s\lg e} &=& \Theta(n\lg^sn), \\\\
-	\end{array}
+	{\displaystyle \int_1^n\lg^sx\,dx} = \dfrac{n\lg^{s+1}n}{\lg n+s\lg e} = \Theta(n\lg^sn),
 \]
+\\
 \[
-	\begin{array}{ccccc}
-		{\displaystyle \int_2^{n+1}\lg^sx\,dx} &=& \dfrac{(n+1)\lg^s(n+1)-2}{1+s\lg e} = \Theta(n\lg^sn), \\\\
-	\end{array}
+	{\displaystyle \int_2^{n+1}\lg^sx\,dx} = \dfrac{(n+1)\lg^{s+1}(n+1)}{\lg (n+1)+s\lg e}-\dfrac{2}{1+s\lg e} = \Theta(n\lg^sn),
 \]
-zatem oszacowaniem sumy jest
+\\
+ponieważ wyrażenie $s\lg e$ jest stałe, a~zatem oszacowaniem sumy jest
 \[
 	\sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
 \]
 
-\subparagraph{(c)}
+\subsubsection{} %A-1(c)
 Po zastosowaniu wzoru (A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$, dostajemy
 \[
 	\int_1^nx^r\lg^sx\,dx\le\sum_{k=2}^nk^r\lg^sk\le\int_2^{n+1}x^r\lg^sx\,dx.
 \]
-Postępując analogicznie jak w punkcie (b), obliczamy $I(x) = \int x^r\lg^sx\,dx$,\linebreak całkując przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=x^r\,dx$, a stąd
+Analogicznie jak w~poprzednim punkcie, obliczmy całkę $I(x) = \int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $\frac{dv(x)}{dx}=x^r\,dx$, a~stąd (po zignorowaniu stałych całkowania)
 \[
-	\frac{du(x)}{dx} = \frac{s\lg^sx\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^sx\,dx}{x}\quad\mbox{oraz}
+	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x}\quad\mbox{oraz}\quad v(x)=\frac{x^{r+1}}{r+1},
 \]
-\[
-	v(x)=\frac{x^{r+1}}{r+1}+c\quad\mbox{dla dowolnej stałej }c.
-\]
-Pomijamy stałe całkowania i otrzymujemy
+a~więc otrzymujemy
 \begin{eqnarray*}
 	I(x) &=& u(x)v(x)-\int\frac{du(x)}{dx}v(x), \\
-	I(x) &=& \frac{x^{r+1}\lg^sx}{r+1}-s\lg e\cdot I(x), \\
-	I(x) &=& \frac{x^{r+1}\lg^sx}{r+1+s\lg e}.
+	I(x) &=& \frac{x^{r+1}\lg^sx}{r+1}-\frac{s\lg e}{(r+1)\lg x}\cdot I(x), \\
+	I(x) &=& \frac{x^{r+1}\lg^{s+1}x}{(r+1)\lg x+s\lg e}.
 \end{eqnarray*}
 Całki ograniczające badaną sumę wynoszą zatem
 \[
-	\begin{array}{ccccc}
-		{\displaystyle \int_1^nx^r\lg^sx\,dx} &=& \dfrac{n^{r+1}\lg^sn}{r+1+s\lg e} &=& \Theta(n^{r+1}\lg^sn), \\\\
-	\end{array}
+	{\displaystyle \int_1^nx^r\lg^sx\,dx} = \dfrac{n^{r+1}\lg^{s+1}n}{(r+1)\lg n+s\lg e} = \Theta(n^{r+1}\lg^sn),
 \]
+\\
 \[
-	\begin{array}{ccccc}
-		{\displaystyle \int_2^{n+1}x^r\lg^sx\,dx} &=& \dfrac{(n+1)^{r+1}\lg^s(n+1)-2^{r+1}}{r+1+s\lg e} &=& \Theta(n^{r+1}\lg^sn). \\\\
-	\end{array}
+	{\displaystyle \int_2^{n+1}x^r\lg^sx\,dx} = \dfrac{(n+1)^{r+1}\lg^{s+1}(n+1)}{(r+1)\lg(n+1)+s\lg e}-\dfrac{2^{r+1}}{r+1+s\lg e} = \Theta(n^{r+1}\lg^sn).
 \]
+\\
 Stąd wnioskujemy, że
 \[
 	\sum_{k=1}^nk^r\lg^sk = \Theta(n^{r+1}\lg^sn).
 \]
 
-Przyjmując w oszacowanej sumie odpowiednio $s=0$ i $r=0$, otrzymamy sumy i ich oszacowania z~punktów (a) i~(b).
-
-\endinput
+Przyjmując w~oszacowanej sumie odpowiednio $s=0$ i~$r=0$, otrzymamy sumy i~ich oszacowania z~punktów (a) i~(b).
