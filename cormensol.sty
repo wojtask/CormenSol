@@ -127,7 +127,7 @@
 % odpowiedni wygląd liczników
 \def\thechapter{\arabic{chapter}}
 \def\thesection{{\bfseries\thechapter.\arabic{section}.}}
-\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}.}
+\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
 \def\thesubsubsection{(\alph{subsubsection})}
 
 % kod odpowiedzialny za uczynienie numerów rysunków i tabel globalnych
@@ -165,12 +165,13 @@
 	\section*{{\mdseries Problemy}}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
-	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}.}
+	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}}
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
 }
 
 % definicja polecenia wstawiającego problem wraz z jego etykietą
-\newcommand{\problem}[1]{\ex@rcise{#1}
+\newcommand{\problem}[1]{%
+	\ex@rcise{#1}%
 	\label{ex:%
 	\if@appendix%
 		\Alph{chapter}%
@@ -184,13 +185,13 @@
 \newcommand{\subproblem}{\subex@rcise{}}
 
 % definicje stylów twierdzenia i lematu
-\newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
-\theoremstyle{csthm}
-\newtheorem{twierdzenie}{Twierdzenie}
-\newtheorem{lemat}[twierdzenie]{Lemat}
+% \newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
+% \theoremstyle{csthm}
+% \newtheorem{twierdzenie}{Twierdzenie}
+% \newtheorem{lemat}[twierdzenie]{Lemat}
 
 % niełamliwy dywiz
-\newcommand{\twoparts}[2]{{#1}\nobreakdash-{#2}}
+\newcommand{\compound}[2]{{#1}\nobreakdash-{#2}}
 
 % odnośnik do zadania --> odblokować w publikowanej wersji!
 %\newcommand{\refExercise}[1]{zad.~\ref{ex:#1}}
@@ -208,6 +209,9 @@
 \DeclareMathOperator{\E}{E}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\I}{I}
+\DeclareMathOperator{\BitAnd}{\kw{and}}
+\DeclareMathOperator{\BitOr}{\kw{or}}
+\DeclareMathOperator{\BitXor}{\kw{xor}}
 
 % definicja klas złożoności
 \newcommand{\Pclass}{\text{P}}

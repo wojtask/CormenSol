@@ -23,7 +23,7 @@ beginfig(1);
 
 	for i:=0 upto 6:
 		p[i] := unitsquare scaled scale shifted (.73i*span+leftspan, -.1levelspan);
-		label(btex ${\scriptstyle T'\!(1)}$ etex, center p[i]);
+		label(btex \fontsize{8}{10}\selectfont $T'\!(1)$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, .7lowerspan)) dashed evenly;
 	endfor;
 
@@ -33,7 +33,7 @@ beginfig(1);
 
 	for i:=9 upto 11:
 		p[i] := unitsquare scaled scale shifted (.73i*span+leftspan, -.1levelspan);
-		label(btex ${\scriptstyle T'\!(1)}$ etex, center p[i]);
+		label(btex \fontsize{8}{10}\selectfont $T'\!(1)$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, .7lowerspan)) dashed evenly;
 	endfor;
 
@@ -73,7 +73,7 @@ beginfig(1);
 	label(btex $\Theta(n^{\lg 3})$ etex, center p25);
 
 	p26 := unitsquare scaled scale shifted (rightcol, levelspan);
-	label(btex $\left(\frac{3}{2}\right)^2n$ etex, center p26);
+	label(btex $\bigl(\frac{3}{2}\bigr)^2n$ etex, center p26);
 
 	label(btex \vdots etex, .5[center p25, center p26]);
 	
@@ -109,7 +109,7 @@ beginfig(2);
 
 	for i:=0 upto 7:
 		p[i] := unitsquare scaled scale shifted (1.15i*span+leftspan, -.2levelspan);
-		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, 1.5lowerspan)) dashed evenly;
 	endfor;
 
@@ -119,7 +119,7 @@ beginfig(2);
 
 	for i:=10 upto 13:
 		p[i] := unitsquare scaled scale shifted (1.15i*span+leftspan, -.2levelspan);
-		label(btex ${\scriptstyle T(1)}$ etex, center p[i]);
+		label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p[i]);
 		draw (point 2.5 of p[i]) -- (center p[i] + (0, 1.5lowerspan)) dashed evenly;
 	endfor;
 
@@ -424,12 +424,12 @@ beginfig(5);
 	label(btex $\Theta(1)$ etex, center p16);
 
 	p17 := unitsquare scaled scale shifted (rightcol, 0);
-	label(btex $\le\left(\frac{7}{8}\right)^in$ etex, center p17);
+	label(btex $\le\bigl(\frac{7}{8}\bigr)^in$ etex, center p17);
 
 	label(btex \vdots etex, (center p17 - (0, .5levelspan)));
 
 	p18 := unitsquare scaled scale shifted (rightcol, levelspan);
-	label(btex $\left(\frac{7}{8}\right)^2n$ etex, center p18);
+	label(btex $\bigl(\frac{7}{8}\bigr)^2n$ etex, center p18);
 
 	label(btex \vdots etex, (center p18 - (0, .5levelspan)));
 
@@ -441,19 +441,19 @@ beginfig(5);
 
 	label(btex \vdots etex, center p0 - (0, .6levelspan));
 	p21 := unitsquare scaled scale shifted (-span+leftspan, -levelspan);
-	label(btex ${\scriptstyle T(1)}$ etex, center p21);
+	label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p21);
 
 	label(btex \vdots etex, center p6 - (0, 1.2levelspan));
 	p22 := unitsquare scaled scale shifted (3span+leftspan, -.6levelspan);
-	label(btex ${\scriptstyle T(1)}$ etex, center p22);
+	label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p22);
 
 	label(btex \vdots etex, center p8 - (0, .6levelspan));
 	p23 := unitsquare scaled scale shifted (5span+leftspan, 0);
-	label(btex ${\scriptstyle T(1)}$ etex, center p23);
+	label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p23);
 
 	label(btex \vdots etex, center p11 - (0, .25levelspan));
 	p24 := unitsquare scaled scale shifted (8span+leftspan, .35levelspan);
-	label(btex ${\scriptstyle T(1)}$ etex, center p24);
+	label(btex \fontsize{8}{10}\selectfont $T(1)$ etex, center p24);
 
 	drawarrow (center p21) shifted (.5span, 0) -- (center p16) shifted (-.8span, 0) dashed evenly;
 	drawarrow (center p23) shifted (.5span, 0) -- (center p17) shifted (-.8span, 0) dashed evenly;

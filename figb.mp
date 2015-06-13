@@ -52,7 +52,6 @@ beginfig(1);
 	path area_ab;
 	area_ab = buildcycle(pa, pb);
 	fill area_ab withcolor gray;
-	%fill buildcycle(pa, reverse pc) withcolor gray;
 	draw pa; draw pb; draw pc;
 	venn_labels;
 
@@ -132,12 +131,12 @@ beginfig(3);
 	shift := 4scale;
 
 	path p[];
-	p4 = graphnode(scale, (0, 0)); label(btex 4 etex, center p4);
-	p1 = graphnode(scale, (0, shift)); label(btex 1 etex, center p1);
-	p5 = graphnode(scale, (shift, 0)); label(btex 5 etex, center p5);
-	p2 = graphnode(scale, (shift, shift)); label(btex 2 etex, center p2);
-	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex 6 etex, center p6);
-	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex 3 etex, center p3);
+	p4 = graphnode(scale, (0, 0)); label("4", center p4);
+	p1 = graphnode(scale, (0, shift)); label("1", center p1);
+	p5 = graphnode(scale, (shift, 0)); label("5", center p5);
+	p2 = graphnode(scale, (shift, shift)); label("2", center p2);
+	p6 = graphnode(scale, (shift + 2scale, 0)); label("6", center p6);
+	p3 = graphnode(scale, (shift + 2scale, shift)); label("3", center p3);
 
 	draw point 0 of p1 -- point 4 of p2;
 	draw point 6 of p1 -- point 2 of p4;
@@ -145,209 +144,193 @@ beginfig(3);
 	draw point 6 of p2 -- point 2 of p5;
 	draw point 0 of p4 -- point 4 of p5;
 	draw point 6 of p3 -- point 2 of p6;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (.5shift + scale, -2scale));
+
+	curlshift := .5scale;
+	hshift := 3.5shift;
+
+	path p[];
+	p4 = graphnode(scale, (hshift, 0)); label("4", center p4);
+	p1 = graphnode(scale, (hshift, shift)); label("1", center p1);
+	p5 = graphnode(scale, (hshift + shift, 0)); label("5", center p5);
+	p2 = graphnode(scale, (hshift + shift, shift)); label("2", center p2);
+	p6 = graphnode(scale, (hshift + shift + 2scale, 0)); label("6", center p6);
+	p3 = graphnode(scale, (hshift + shift + 2scale, shift)); label("3", center p3);
+
+	drawarrow point .5 of p1 {curl 1} .. (hshift + .5shift, shift + curlshift) .. {curl 1} point 3.5 of p2;
+	drawarrow point 4.5 of p2 {curl 1} .. (hshift + .5shift, shift - curlshift) .. {curl 1} point 7.5 of p1;
+	drawarrow point 6.5 of p2 {curl 1} .. (hshift + shift + curlshift, .5shift) .. {curl 1} point 1.5 of p5;
+	drawarrow point 2.5 of p5 {curl 1} .. (hshift + shift - curlshift, .5shift) .. {curl 1} point 5.5 of p2;
+	drawarrow point 6.5 of p3 {curl 1} .. (hshift + shift + 2scale + curlshift, .5shift) .. {curl 1} point 1.5 of p6;
+	drawarrow point 2.5 of p6 {curl 1} .. (hshift + shift + 2scale - curlshift, .5shift) .. {curl 1} point 5.5 of p3;
+	drawarrow point 7 of p1 {curl 1} .. (hshift + .5shift + .5curlshift, .5shift + .5curlshift) .. {curl 1} point 3 of p5;
+	drawarrow point 3.5 of p5 {curl 1} .. (hshift + .5shift - curlshift, .5shift - curlshift) .. {curl 1} point 6.5 of p1;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (hshift + .5shift + scale, -2scale));
 endfig;
 
 beginfig(4);
 	scale := .5cm;
-	shift := 4scale;
-	curlshift := .5scale;
-
+	hshift := 2scale;
+	vshift := 2scale;
+	
 	path p[];
-	p4 = graphnode(scale, (0, 0)); label(btex 4 etex, center p4);
-	p1 = graphnode(scale, (0, shift)); label(btex 1 etex, center p1);
-	p5 = graphnode(scale, (shift, 0)); label(btex 5 etex, center p5);
-	p2 = graphnode(scale, (shift, shift)); label(btex 2 etex, center p2);
-	p6 = graphnode(scale, (shift + 2scale, 0)); label(btex 6 etex, center p6);
-	p3 = graphnode(scale, (shift + 2scale, shift)); label(btex 3 etex, center p3);
 
-	drawarrow point .5 of p1 {curl 1} .. (.5shift, shift + curlshift) .. {curl 1} point 3.5 of p2;
-	drawarrow point 4.5 of p2 {curl 1} .. (.5shift, shift - curlshift) .. {curl 1} point 7.5 of p1;
-	drawarrow point 6.5 of p2 {curl 1} .. (shift + curlshift, .5shift) .. {curl 1} point 1.5 of p5;
-	drawarrow point 2.5 of p5 {curl 1} .. (shift - curlshift, .5shift) .. {curl 1} point 5.5 of p2;
-	drawarrow point 6.5 of p3 {curl 1} .. (shift + 2scale + curlshift, .5shift) .. {curl 1} point 1.5 of p6;
-	drawarrow point 2.5 of p6 {curl 1} .. (shift + 2scale - curlshift, .5shift) .. {curl 1} point 5.5 of p3;
-	drawarrow point 7 of p1 {curl 1} .. (.5shift + .5curlshift, .5shift + .5curlshift) .. {curl 1} point 3 of p5;
-	drawarrow point 3.5 of p5 {curl 1} .. (.5shift - curlshift, .5shift - curlshift) .. {curl 1} point 6.5 of p1;
+	p0 = graphnode(scale, (0, 0)); label(btex $A$ etex, center p0);
+	p1 = graphnode(scale, (0, -vshift)); label(btex $B$ etex, center p1);
+	p2 = graphnode(scale, (0, -2vshift)); label(btex $C$ etex, center p2);
+	draw point 6 of p0 -- point 2 of p1;
+	draw point 6 of p1 -- point 2 of p2;
+
+	p3 = graphnode(scale, (hshift, 0)); label(btex $A$ etex, center p3);
+	p4 = graphnode(scale, (hshift, -vshift)); label(btex $C$ etex, center p4);
+	p5 = graphnode(scale, (hshift, -2vshift)); label(btex $B$ etex, center p5);
+	draw point 6 of p3 -- point 2 of p4;
+	draw point 6 of p4 -- point 2 of p5;
+
+	p6 = graphnode(scale, (2hshift, 0)); label(btex $B$ etex, center p6);
+	p7 = graphnode(scale, (2hshift, -vshift)); label(btex $A$ etex, center p7);
+	p8 = graphnode(scale, (2hshift, -2vshift)); label(btex $C$ etex, center p8);
+	draw point 6 of p6 -- point 2 of p7;
+	draw point 6 of p7 -- point 2 of p8;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (hshift, -3vshift));
+
+	hspace := 2hshift+5scale;
+	
+	p9 = graphnode(scale, (hspace, 0)); label(btex $A$ etex, center p9);
+	p10 = graphnode(scale, (hspace, -vshift)); label(btex $B$ etex, center p10);
+	p11 = graphnode(scale, (hspace, -2vshift)); label(btex $C$ etex, center p11);
+	draw point 6 of p9 -- point 2 of p10;
+	draw point 6 of p10 -- point 2 of p11;
+
+	p12 = graphnode(scale, (hspace + hshift, 0)); label(btex $A$ etex, center p12);
+	p13 = graphnode(scale, (hspace + hshift, -vshift)); label(btex $C$ etex, center p13);
+	p14 = graphnode(scale, (hspace + hshift, -2vshift)); label(btex $B$ etex, center p14);
+	draw point 6 of p12 -- point 2 of p13;
+	draw point 6 of p13 -- point 2 of p14;
+	
+	p15 = graphnode(scale, (hspace + 2.6hshift, 0)); label(btex $A$ etex, center p15);
+	p16 = graphnode(scale, (hspace + 2.6hshift - .7hshift, -.7vshift)); label(btex $B$ etex, center p16);
+	p17 = graphnode(scale, (hspace + 2.6hshift + .7hshift, -.7vshift)); label(btex $C$ etex, center p17);
+	draw point 5 of p15 -- point 1 of p16;
+	draw point 7 of p15 -- point 3 of p17;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (hspace + 1.3hshift + .35hshift, -3vshift));
+
+	hspace2 := hspace+3hshift+5scale;
+
+	p18 = graphnode(scale, (hspace2, 0)); label(btex $A$ etex, center p18);
+	p19 = graphnode(scale, (hspace2, -vshift)); label(btex $B$ etex, center p19);
+	p20 = graphnode(scale, (hspace2, -2vshift)); label(btex $C$ etex, center p20);
+	draw point 6 of p18 -- point 2 of p19;
+	draw point 6 of p19 -- point 2 of p20;
+
+	p21 = graphnode(scale, (hspace2 + hshift, 0)); label(btex $A$ etex, center p21);
+	p22 = graphnode(scale, (hspace2 + hshift, -vshift)); label(btex $C$ etex, center p22);
+	p23 = graphnode(scale, (hspace2 + hshift, -2vshift)); label(btex $B$ etex, center p23);
+	draw point 6 of p21 -- point 2 of p22;
+	draw point 6 of p22 -- point 2 of p23;
+	
+	p24 = graphnode(scale, (hspace2 + 2.6hshift, 0)); label(btex $A$ etex, center p24);
+	p25 = graphnode(scale, (hspace2 + 2.6hshift - .7hshift, -.7vshift)); label(btex $B$ etex, center p25);
+	p26 = graphnode(scale, (hspace2 + 2.6hshift + .7hshift, -.7vshift)); label(btex $C$ etex, center p26);
+	draw point 5 of p24 -- point 1 of p25;
+	draw point 7 of p24 -- point 3 of p26;
+
+	p27 = graphnode(scale, (hspace2 + 2.6hshift, -1.3vshift)); label(btex $A$ etex, center p27);
+	p28 = graphnode(scale, (hspace2 + 2.6hshift - .7hshift, -2vshift)); label(btex $C$ etex, center p28);
+	p29 = graphnode(scale, (hspace2 + 2.6hshift + .7hshift, -2vshift)); label(btex $B$ etex, center p29);
+	draw point 5 of p27 -- point 1 of p28;
+	draw point 7 of p27 -- point 3 of p29;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (c)} etex, (hspace2 + 1.3hshift + .35hshift, -3vshift));
+
+	totshift := 3.4scale;
+
+	p30 = graphnode(scale, (totshift + 1.4hshift, -4.6vshift)); label(btex $A$ etex, center p30);
+	p31 = graphnode(scale, (totshift + .7hshift, -5.3vshift)); label(btex $B$ etex, center p31);
+	p32 = graphnode(scale, (totshift, -6vshift)); label(btex $C$ etex, center p32);
+	draw point 5 of p30 -- point 1 of p31;
+	draw point 5 of p31 -- point 1 of p32;
+
+	totshift := totshift + 2.4hshift;
+
+	p33 = graphnode(scale, (totshift + .7hshift, -4.6vshift)); label(btex $A$ etex, center p33);
+	p34 = graphnode(scale, (totshift, -5.3vshift)); label(btex $B$ etex, center p34);
+	p35 = graphnode(scale, (totshift + .7hshift, -6vshift)); label(btex $C$ etex, center p35);
+	draw point 5 of p33 -- point 1 of p34;
+	draw point 7 of p34 -- point 3 of p35;
+	
+	totshift := totshift + 2hshift;
+
+	p36 = graphnode(scale, (totshift, -4.6vshift)); label(btex $A$ etex, center p36);
+	p37 = graphnode(scale, (totshift + .7hshift, -5.3vshift)); label(btex $B$ etex, center p37);
+	p38 = graphnode(scale, (totshift, -6vshift)); label(btex $C$ etex, center p38);
+	draw point 7 of p36 -- point 3 of p37;
+	draw point 5 of p37 -- point 1 of p38;
+
+	totshift := totshift + 1.7hshift;
+
+	p39 = graphnode(scale, (totshift, -4.6vshift)); label(btex $A$ etex, center p39);
+	p40 = graphnode(scale, (totshift + .7hshift, -5.3vshift)); label(btex $B$ etex, center p40);
+	p41 = graphnode(scale, (totshift + 1.4hshift, -6vshift)); label(btex $C$ etex, center p41);
+	draw point 7 of p39 -- point 3 of p40;
+	draw point 7 of p40 -- point 3 of p41;
+
+	totshift := totshift + 2.4hshift;
+
+	p42 = graphnode(scale, (totshift + .7hshift, -4.6vshift)); label(btex $A$ etex, center p42);
+	p43 = graphnode(scale, (totshift, -5.3vshift)); label(btex $B$ etex, center p43);
+	p44 = graphnode(scale, (totshift + 1.4hshift, -5.3vshift)); label(btex $C$ etex, center p44);
+	draw point 5 of p42 -- point 1 of p43;
+	draw point 7 of p42 -- point 3 of p44;
+
+	totshift := 3.4scale;
+
+	p45 = graphnode(scale, (totshift + 1.4hshift, -7vshift)); label(btex $A$ etex, center p45);
+	p46 = graphnode(scale, (totshift + .7hshift, -7.7vshift)); label(btex $C$ etex, center p46);
+	p47 = graphnode(scale, (totshift, -8.4vshift)); label(btex $B$ etex, center p47);
+	draw point 5 of p45 -- point 1 of p46;
+	draw point 5 of p46 -- point 1 of p47;
+
+	totshift := totshift + 2.4hshift;
+
+	p48 = graphnode(scale, (totshift + .7hshift, -7vshift)); label(btex $A$ etex, center p48);
+	p49 = graphnode(scale, (totshift, -7.7vshift)); label(btex $C$ etex, center p49);
+	p50 = graphnode(scale, (totshift + .7hshift, -8.4vshift)); label(btex $B$ etex, center p50);
+	draw point 5 of p48 -- point 1 of p49;
+	draw point 7 of p49 -- point 3 of p50;
+	
+	totshift := totshift + 2hshift;
+
+	p51 = graphnode(scale, (totshift, -7vshift)); label(btex $A$ etex, center p51);
+	p52 = graphnode(scale, (totshift + .7hshift, -7.7vshift)); label(btex $C$ etex, center p52);
+	p53 = graphnode(scale, (totshift, -8.4vshift)); label(btex $B$ etex, center p53);
+	draw point 7 of p51 -- point 3 of p52;
+	draw point 5 of p52 -- point 1 of p53;
+
+	totshift := totshift + 1.7hshift;
+
+	p54 = graphnode(scale, (totshift, -7vshift)); label(btex $A$ etex, center p54);
+	p55 = graphnode(scale, (totshift + .7hshift, -7.7vshift)); label(btex $C$ etex, center p55);
+	p56 = graphnode(scale, (totshift + 1.4hshift, -8.4vshift)); label(btex $B$ etex, center p56);
+	draw point 7 of p54 -- point 3 of p55;
+	draw point 7 of p55 -- point 3 of p56;
+
+	totshift := totshift + 2.4hshift;
+
+	p57 = graphnode(scale, (totshift + .7hshift, -7vshift)); label(btex $A$ etex, center p57);
+	p58 = graphnode(scale, (totshift, -7.7vshift)); label(btex $C$ etex, center p58);
+	p59 = graphnode(scale, (totshift + 1.4hshift, -7.7vshift)); label(btex $B$ etex, center p59);
+	draw point 5 of p57 -- point 1 of p58;
+	draw point 7 of p57 -- point 3 of p59;
+
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (d)} etex, (13.3scale, -9.4vshift));
 endfig;
 
 beginfig(5);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	
-	path p[];
-	p0 = graphnode(scale, (0, 0)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (edgelen, 0)); label(btex $B$ etex, center p1);
-	p2 = graphnode(scale, (2edgelen, 0)); label(btex $C$ etex, center p2);
-	draw point 0 of p0 -- point 4 of p1;
-	draw point 0 of p1 -- point 4 of p2;
-
-	p3 = graphnode(scale, (shift + 2edgelen, 0)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (shift + 3edgelen, 0)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (shift + 4edgelen, 0)); label(btex $B$ etex, center p5);
-	draw point 0 of p3 -- point 4 of p4;
-	draw point 0 of p4 -- point 4 of p5;
-	
-	p6 = graphnode(scale, (2shift + 4edgelen, 0)); label(btex $B$ etex, center p6);
-	p7 = graphnode(scale, (2shift + 5edgelen, 0)); label(btex $A$ etex, center p7);
-	p8 = graphnode(scale, (2shift + 6edgelen, 0)); label(btex $C$ etex, center p8);
-	draw point 0 of p6 -- point 4 of p7;
-	draw point 0 of p7 -- point 4 of p8;
-endfig;
-
-beginfig(6);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	
-	path p[];
-	p0 = graphnode(scale, (0, 2edgelen)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (0, edgelen)); label(btex $B$ etex, center p1);
-	p2 = graphnode(scale, (0, 0)); label(btex $C$ etex, center p2);
-	draw point 6 of p0 -- point 2 of p1;
-	draw point 6 of p1 -- point 2 of p2;
-
-	p3 = graphnode(scale, (shift, 2edgelen)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (shift, edgelen)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (shift, 0)); label(btex $B$ etex, center p5);
-	draw point 6 of p3 -- point 2 of p4;
-	draw point 6 of p4 -- point 2 of p5;
-	
-	p6 = graphnode(scale, (2.3shift, 2edgelen)); label(btex $A$ etex, center p6);
-	p7 = graphnode(scale, (2.3shift - .7edgelen, 1.3edgelen)); label(btex $B$ etex, center p7);
-	p8 = graphnode(scale, (2.3shift + .7edgelen, 1.3edgelen)); label(btex $C$ etex, center p8);
-	draw point 5 of p6 -- point 1 of p7;
-	draw point 7 of p6 -- point 3 of p8;
-endfig;
-
-beginfig(7);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	
-	path p[];
-	p0 = graphnode(scale, (0, 2edgelen)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (0, edgelen)); label(btex $B$ etex, center p1);
-	p2 = graphnode(scale, (0, 0)); label(btex $C$ etex, center p2);
-	draw point 6 of p0 -- point 2 of p1;
-	draw point 6 of p1 -- point 2 of p2;
-
-	p3 = graphnode(scale, (shift, 2edgelen)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (shift, edgelen)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (shift, 0)); label(btex $B$ etex, center p5);
-	draw point 6 of p3 -- point 2 of p4;
-	draw point 6 of p4 -- point 2 of p5;
-	
-	p6 = graphnode(scale, (2.3shift, 2edgelen)); label(btex $A$ etex, center p6);
-	p7 = graphnode(scale, (2.3shift - .7edgelen, 1.3edgelen)); label(btex $B$ etex, center p7);
-	p8 = graphnode(scale, (2.3shift + .7edgelen, 1.3edgelen)); label(btex $C$ etex, center p8);
-	draw point 5 of p6 -- point 1 of p7;
-	draw point 7 of p6 -- point 3 of p8;
-
-	p9 = graphnode(scale, (3.8shift, 2edgelen)); label(btex $A$ etex, center p9);
-	p10 = graphnode(scale, (3.8shift - .7edgelen, 1.3edgelen)); label(btex $C$ etex, center p10);
-	p11 = graphnode(scale, (3.8shift + .7edgelen, 1.3edgelen)); label(btex $B$ etex, center p11);
-	draw point 5 of p9 -- point 1 of p10;
-	draw point 7 of p9 -- point 3 of p11;
-endfig;
-
-beginfig(8);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	totshift := 0;
-
-	path p[];
-	p0 = graphnode(scale, (1.4edgelen, 1.4edgelen)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (.7edgelen, .7edgelen)); label(btex $B$ etex, center p1);
-	p2 = graphnode(scale, (0, 0)); label(btex $C$ etex, center p2);
-	draw point 5 of p0 -- point 1 of p1;
-	draw point 5 of p1 -- point 1 of p2;
-
-	totshift := shift + 1.2edgelen;
-
-	p3 = graphnode(scale, (totshift + .7edgelen, 1.4edgelen)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (totshift, .7edgelen)); label(btex $B$ etex, center p4);
-	p5 = graphnode(scale, (totshift + .7edgelen, 0)); label(btex $C$ etex, center p5);
-	draw point 5 of p3 -- point 1 of p4;
-	draw point 7 of p4 -- point 3 of p5;
-	
-	totshift := totshift + shift + .7edgelen;
-
-	p6 = graphnode(scale, (totshift, 1.4edgelen)); label(btex $A$ etex, center p6);
-	p7 = graphnode(scale, (totshift + .7edgelen, .7edgelen)); label(btex $B$ etex, center p7);
-	p8 = graphnode(scale, (totshift, 0)); label(btex $C$ etex, center p8);
-	draw point 7 of p6 -- point 3 of p7;
-	draw point 5 of p7 -- point 1 of p8;
-
-	totshift := totshift + shift + .5edgelen;
-
-	p9 = graphnode(scale, (totshift, 1.4edgelen)); label(btex $A$ etex, center p9);
-	p10 = graphnode(scale, (totshift + .7edgelen, .7edgelen)); label(btex $B$ etex, center p10);
-	p11 = graphnode(scale, (totshift + 1.4edgelen, 0)); label(btex $C$ etex, center p11);
-	draw point 7 of p9 -- point 3 of p10;
-	draw point 7 of p10 -- point 3 of p11;
-endfig;
-
-beginfig(9);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	totshift := 0;
-
-	path p[];
-	p0 = graphnode(scale, (1.4edgelen, 1.4edgelen)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (.7edgelen, .7edgelen)); label(btex $C$ etex, center p1);
-	p2 = graphnode(scale, (0, 0)); label(btex $B$ etex, center p2);
-	draw point 5 of p0 -- point 1 of p1;
-	draw point 5 of p1 -- point 1 of p2;
-
-	totshift := shift + 1.2edgelen;
-
-	p3 = graphnode(scale, (totshift + .7edgelen, 1.4edgelen)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (totshift, .7edgelen)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (totshift + .7edgelen, 0)); label(btex $B$ etex, center p5);
-	draw point 5 of p3 -- point 1 of p4;
-	draw point 7 of p4 -- point 3 of p5;
-	
-	totshift := totshift + shift + .7edgelen;
-
-	p6 = graphnode(scale, (totshift, 1.4edgelen)); label(btex $A$ etex, center p6);
-	p7 = graphnode(scale, (totshift + .7edgelen, .7edgelen)); label(btex $C$ etex, center p7);
-	p8 = graphnode(scale, (totshift, 0)); label(btex $B$ etex, center p8);
-	draw point 7 of p6 -- point 3 of p7;
-	draw point 5 of p7 -- point 1 of p8;
-
-	totshift := totshift + shift + .5edgelen;
-
-	p9 = graphnode(scale, (totshift, 1.4edgelen)); label(btex $A$ etex, center p9);
-	p10 = graphnode(scale, (totshift + .7edgelen, .7edgelen)); label(btex $C$ etex, center p10);
-	p11 = graphnode(scale, (totshift + 1.4edgelen, 0)); label(btex $B$ etex, center p11);
-	draw point 7 of p9 -- point 3 of p10;
-	draw point 7 of p10 -- point 3 of p11;
-endfig;
-
-beginfig(10);
-	scale := .5cm;
-	edgelen := 2scale;
-	shift := 4scale;
-	totshift := 0;
-
-	path p[];
-	p0 = graphnode(scale, (.7edgelen, 2edgelen)); label(btex $A$ etex, center p0);
-	p1 = graphnode(scale, (0, 1.3edgelen)); label(btex $B$ etex, center p1);
-	p2 = graphnode(scale, (1.4edgelen, 1.3edgelen)); label(btex $C$ etex, center p2);
-	draw point 5 of p0 -- point 1 of p1;
-	draw point 7 of p0 -- point 3 of p2;
-
-	p3 = graphnode(scale, (shift + 1.9edgelen, 2edgelen)); label(btex $A$ etex, center p3);
-	p4 = graphnode(scale, (shift + 1.2edgelen, 1.3edgelen)); label(btex $C$ etex, center p4);
-	p5 = graphnode(scale, (shift + 2.6edgelen, 1.3edgelen)); label(btex $B$ etex, center p5);
-	draw point 5 of p3 -- point 1 of p4;
-	draw point 7 of p3 -- point 3 of p5;
-endfig;
-
-beginfig(11);
 	scale := .5cm;
 	shift := 2scale;
 	
@@ -380,19 +363,21 @@ beginfig(11);
 	label(btex $B'$ etex, center p0 shifted (0, -5.5scale));
 endfig;
 
-beginfig(12);
+beginfig(6);
 	scale := .5cm;
-	shift := 2scale;
+	hshift := .7scale;
+	vshift := 2scale;
 	
 	path p[];
-	p0 = graphnode(scale, (0, shift));
-	p1 = graphnode(scale, (0, 0));
-	p2 = graphnode(scale, (-.866shift, -.5shift));
-	p3 = graphnode(scale, (.866shift, -.5shift));
 
-	draw point 6 of p0 -- point 2 of p1;
-	draw point .65 of p2 -- point 4.65 of p1;
-	draw point 3.35 of p3 -- point 7.35 of p1;
+	p0 = graphnode(scale, (0, 0));
+	p1 = graphnode(scale, (-4hshift, -vshift));
+	p2 = graphnode(scale, (-6hshift, -2vshift));
+	p3 = graphnode(scale, (-2hshift, -2vshift));
+
+	draw point 4.75 of p0 -- point .75 of p1;
+	draw point 5.25 of p1 -- point 1.25 of p2;
+	draw point 6.75 of p1 -- point 2.75 of p3;
 endfig;
 
 end.

@@ -18,7 +18,7 @@ beginfig(1);
 	picture pp;
 	path p, pa, pb;
 	
-	p := (-1.25scale, -.75scale) -- (-1.25scale, scale) -- (.75scale, scale) -- (.75scale, -.75scale) -- cycle;
+	p := (-1.25scale, -scale) -- (-1.25scale, scale) -- (.75scale, scale) -- (.75scale, -scale) -- cycle;
 	pa := fullcircle scaled scale;
 	pb := pa shifted (0, .5scale);
 
@@ -33,25 +33,25 @@ beginfig(1);
 	draw pp;
 	draw pp shifted (2scale, 0);
 	
-	label(btex 277 etex, (-.25scale, .75scale));
-	label(btex 80 etex, (1.75scale, .75scale));
+	label("277", (-.25scale, .75scale));
+	label("80", (1.75scale, .75scale));
 	
-	label(btex 17 etex, (-.75scale, 0));
-	label(btex 3 etex, (-.25scale, 0));
-	label(btex 3 etex, (.25scale, 0));
+	label("17", (-.75scale, 0));
+	label("3", (-.25scale, 0));
+	label("3", (.25scale, 0));
 	
-	label(btex \scriptsize{Programiści} etex, (-.5scale, .25scale));
-	label(btex \scriptsize{Matematycy} etex, (0, -.25scale));
+	label(btex \fontsize{8}{10}\selectfont Programiści etex, (-.5scale, .25scale));
+	label(btex \fontsize{8}{10}\selectfont Matematycy etex, (0, -.25scale));
 	
-	label(btex 15 etex, (1.25scale, 0));
-	label(btex 5 etex, (1.75scale, 0));
-	label(btex 5 etex, (2.25scale, 0));
+	label("15", (1.25scale, 0));
+	label("5", (1.75scale, 0));
+	label("5", (2.25scale, 0));
 	
-	label(btex \scriptsize{Programiści} etex, (1.5scale, .25scale));
-	label(btex \scriptsize{Matematycy} etex, (2scale, -.25scale));
+	label(btex \fontsize{8}{10}\selectfont Programiści etex, (1.5scale, .25scale));
+	label(btex \fontsize{8}{10}\selectfont Matematycy etex, (2scale, -.25scale));
 	
-	label(btex \scriptsize{Osoby poniżej 50.\ roku życia} etex, (-.25scale, -scale));
-	label(btex \scriptsize{Osoby powyżej 50.\ roku życia} etex, (1.75scale, -scale));
+	label(btex \fontsize{8}{10}\selectfont Osoby poniżej 50.\ roku życia etex, (-.25scale, -.8scale));
+	label(btex \fontsize{8}{10}\selectfont Osoby powyżej 50.\ roku życia etex, (1.75scale, -.8scale));
 endfig;
 
 end.
