@@ -16,7 +16,7 @@ Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 	&= \ln(2n-2)+\ln\frac{2n-1}{2n-2}-\ln\sqrt{n-1}+O(1) \\
 	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\[1mm]
 	&= \ln\bigl(2\sqrt{n-1}\bigr)+O(1) \\
-	&= \ln 2+\ln\sqrt{n}+\ln\frac{\sqrt{n-1}}{\sqrt{n}}+\,O(1) \\
+	&= \ln2+\ln\sqrt{n}+\ln\frac{\sqrt{n-1}}{\sqrt{n}}+\,O(1) \\
 	&= \ln\sqrt{n}+O(1).
 \end{align*}
 Wyrażenia $\ln\frac{2n-1}{2n-2}$ i~$\ln\frac{\sqrt{n-1}}{\sqrt{n}}$ zostały potraktowane jak funkcje klasy $O(1)$.
@@ -28,34 +28,34 @@ Wykorzystując wzór~(A.8), dostajemy
 \]
 
 \exercise %A.1-4
-Korzystając z~wzorów~(A.6) oraz~(A.8), mamy
+Korzystając ze wzorów~(A.6) oraz~(A.8), mamy
 \[
-	\sum_{k=0}^\infty\frac{k-1}{2^k} = \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} = \frac{\frac{1}{2}}{\bigl(1-\frac{1}{2}\bigr)^2}-\sum_{k=0}^\infty\biggl(\frac{1}{2}\biggr)^k = 2-\frac{1}{1-\frac{1}{2}} = 0.
+	\sum_{k=0}^\infty\frac{k-1}{2^k} = \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} = \sum_{k=0}^\infty k\biggl(\frac{1}{2}\biggr)^k-\sum_{k=0}^\infty\biggl(\frac{1}{2}\biggr)^k = \frac{\frac{1}{2}}{\bigl(1-\frac{1}{2}\bigr)^2}-\frac{1}{1-\frac{1}{2}} = 0.
 \]
 
 \exercise %A.1-5
-Obliczamy:
+Załóżmy, że $|x^2|<1$, czyli $-1<x<1$. Wówczas na podstawie wzorów~(A.6) i~(A.8) obliczamy:
 \[
-	\sum_{k=1}^\infty(2k+1)x^{2k} = 2\sum_{k=0}^\infty kx^{2k}+\sum_{k=0}^\infty x^{2k}-1 = \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 = \frac{x^2(3-x^2)}{(1-x^2)^2}.
+	\sum_{k=1}^\infty(2k+1)x^{2k} = 2\sum_{k=0}^\infty k(x^2)^k+\sum_{k=0}^\infty(x^2)^k-1 = \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 = \frac{x^2(3-x^2)}{(1-x^2)^2}.
 \]
-W~drugiej równości zastosowano wzory~(A.6) i~(A.8). Otrzymany wynik jest wartością sumy, gdy $|x^2|<1$. W~pozostałych przypadkach suma jest rozbieżna do $\infty$.
+W~przypadku, gdy $|x^2|\ge1$, badana suma jest rozbieżna do $\infty$.
 
 \exercise %A.1-6
-Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F(n)$ zachodzi $F(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego $n\ge n_0$ prawdą jest
+Zgodnie z~definicją notacji $O$, dla dowolnej funkcji $F(n)$ zachodzi $F(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$ wtedy i~tylko wtedy, gdy istnieją stałe $n_0$, $c>0$ takie, że dla każdego całkowitego $n\ge n_0$ prawdą jest
 \[
 	0 \le F(n) \le c\sum_{k=1}^n f_k(n).
 \]
 
-Niech $\{\,F_i(n):i=1,\dots,n\,\}$ będzie zbiorem funkcji spełniających układ nierówności
+Ustalmy dodatnie stałe $n_0$ i~$c$. Niech $F_1(n)$, $F_2(n)$,~\dots,~$F_n(n)$ będą funkcjami, które dla każdego całkowitego $n\ge n_0$ spełniają układ nierówności
 \[
 	\begin{cases}
 		0 \le F_1(n) \le cf_1(n), \\
 		0 \le F_2(n) \le cf_1(n)+cf_2(n), \\
 		\phantom{0 \le F_2} \vdots \\
-		0 \le F_n(n) \le \sum_{k=1}^ncf_k(n) \\
-	\end{cases} \tag{$*$}\label{eq:A.1-6}
+		0 \le F_n(n) \le \sum_{k=1}^ncf_k(n). \\
+	\end{cases}
 \]
-dla pewnych dodatnich stałych $n_0$ i~$c$ oraz dla każdego $n\ge n_0$. Wprost z~definicji notacji $O$ mamy:
+Wprost z~definicji notacji $O$ mamy:
 \begin{align*}
 	F_1(n) &= O(f_1(n)), \\
 	F_2(n)-F_1(n) &= O(f_2(n)), \\
@@ -66,7 +66,7 @@ Dodając powyższe równania stronami, otrzymujemy
 \[
 	F_1(n)+(F_2(n)-F_1(n))+\dots+(F_n(n)-F_{n-1}(n)) = \sum_{k=1}^nO(f_k(n)).
 \]
-Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu~(\ref{eq:A.1-6}) wynika, że $F_n(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$, a~stąd dostajemy tożsamość
+Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności układu wynika, że $F_n(n)=O\bigl(\sum_{k=1}^nf_k(n)\bigr)$, skąd dostajemy tożsamość
 \[
 	\sum_{k=1}^nO(f_k(n)) = O\biggl(\sum_{k=1}^nf_k(n)\biggr).
 \]
@@ -78,26 +78,21 @@ Wartość po lewej stronie jest równa $F_n(n)$. Ale z~ostatniej nierówności u
 
 \exercise %A.1-8
 \begin{align*}
-	\prod_{k=2}^n\biggl(1-\frac{1}{k^2}\biggr) &= \prod_{k=2}^n\frac{k^2-1}{k^2} \\[2mm]
-	&= \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} \\[2mm]
-	&= \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\prod_{k=1}^nk\cdot\prod_{k=1}^nk} \\[2mm]
-	&= \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} \\[2mm]
-	&= \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} \\[2mm]
-	&= \frac{n(n+1)((n-1)!)^2}{2n^2((n-1)!)^2} \\[2mm]
-	&= \frac{n+1}{2n}
+	\prod_{k=2}^n\biggl(1-\frac{1}{k^2}\biggr) &= \prod_{k=2}^n\frac{k^2-1}{k^2} = \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} = \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\bigl(\prod_{k=1}^nk\bigr)^2} \\[2mm]
+	&= \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} = \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} = \frac{n+1}{2n}
 \end{align*}
 
 \subchapter{Szacowanie sum}
 
 \exercise %A.2-1
-Wykorzystując własności szeregu teleskopowego, dostajemy:
+Wykorzystując własności szeregu teleskopowego, dostajemy
 \[
 	\sum_{k=1}^n\frac{1}{k^2} \le 1+\sum_{k=2}^n\frac{1}{k(k-1)} = 1+\sum_{k=2}^n\biggl(\frac{1}{k-1}-\frac{1}{k}\biggr) = 1+1-\frac{1}{n} < 2,
 \]
-a~zatem badana suma jest ograniczona z~góry przez stałą. Okazuje się, że dla coraz większych $n$ wartość tej sumy zbliża się do liczby $\pi^2\!/6$.
+a~zatem badana suma jest ograniczona z~góry przez stałą. Można pokazać, że wraz ze wzrostem $n$ wartość tej sumy zbliża się do $\pi^2\!/6$.
 
 \exercise %A.2-2
-Zauważmy, że gdy $n$ osiąga wartość będącą potęgą~2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\bigl\lceil n/2^k\bigr\rceil$ jest rosnąca w~dziedzinie liczb naturalnych, więc dla pewnego $m$ całkowitego, $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tejże funkcji jest zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2. Dla $n=2^m$ zachodzi
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą~2, to zwiększa się o~1 liczba sumowanych składników. Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\bigl\lceil n/2^k\bigr\rceil$, zdefiniowana dla dodatnich liczb całkowitych, jest niemalejąca, więc jeśli $m$ jest liczbą całkowitą dodatnią, to $F(n)<F(2^m)$ dla wszystkich $n<2^m$. Oszacowaniem górnym tej funkcji jest zatem oszacowanie górne jej wartości przyjmowanych dla potęg~2. Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\biggl\lceil\frac{2^m}{2^k}\biggr\rceil = 2^m+2^{m-1}+\dots+2^0 = 2^{m+1}-1 = 2n-1,
 \]
@@ -110,7 +105,7 @@ Postępując podobnie jak podczas badania oszacowania górnego \compound{$n$}{te
 \]
 
 \exercise %A.2-4
-Funkcja $f(k)=k^3$ jest monotonicznie rosnąca, zatem rozdzielamy sumę za pomocą nierówności~(A.11):
+Funkcja $f(k)=k^3$, gdzie $k$ to dodatnia liczba całkowita, jest monotonicznie rosnąca, zatem szacujemy sumę, korzystając z~nierówności~(A.11):
 \[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
 \]
@@ -121,90 +116,62 @@ Znajdujemy oszacowania obu całek:
 \end{gather*}
 i~otrzymujemy
 \[
-	\sum_{k=0}^nk^3 = \Theta(n^4).
+	\sum_{k=1}^nk^3 = \Theta(n^4).
 \]
 
 \exercise %A.2-5
-Zastosowanie nierówności~(A.12) do $\sum_{k=1}^n(1/k)$ doprowadza do wyrażenia niezdefiniowanego
+Zastosowanie nierówności~(A.12) do sumy $\sum_{k=1}^n1/k$ doprowadza do całki niewłaściwej:
 \[
-	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \ln n-\ln0,
+	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \lim_{a\to0^+}\int_a^n\frac{dx}{x} = \infty.
 \]
-ponieważ wartości $\ln0$ nie można wyrazić liczbą rzeczywistą. Zapisanie sumy $\sum_{k=1}^n(1/k)$ w~postaci $1+\sum_{k=2}^n(1/k)$ pozwala na zastosowanie wzoru~(A.12) do drugiego składnika, wprowadzając jedynie stałą różnicę.
+W~rezultacie nie uzyskujemy żadnej informacji o~oszacowaniu górnym badanej sumy. Dzięki zapisaniu jej w~postaci $1+\sum_{k=2}^n1/k$, można zastosować wzór~(A.12) do drugiego składnika i~otrzymać oszacowanie górne $\ln n+1$ na sumę wyjściową.
 
 \problems
 
 \problem{Szacowanie sum} %A-1
-Wszystkie następujące funkcje: $f(k)=k^r$, $g(k)=\lg^sk$, $h(k)=k^r\lg^sk$, są niemalejące dla każdych stałych $r\ge0$ i~$s\ge0$. Pozwala to na wykorzystanie nierówności~(A.11) we wszystkich poniższych punktach.
+W~celu wyznaczenia asymptotycznych oszacowań dokładnych dla każdej z~sum, znajdziemy ich oszacowania górne i~dolne poprzez zastąpienie odpowiednimi wartościami każdego składnika danej sumy. Ponieważ parzystość $n$ nie ma znaczenia dla postaci oszacowań tych sum, to dla uproszczenia rachunków będziemy przyjmować, że $n$ jest liczbą parzystą.
 
 \subproblem %A-1(a)
-Z~wzoru~(A.11) dostajemy
+Oszacowanie górne:
 \[
-	\int_0^nx^r\,dx \le \sum_{k=1}^nk^r \le \int_1^{n+1}x^r\,dx.
+    \sum_{k=1}^nk^r \le \sum_{k=1}^nn^r = n\cdot n^r = O(n^{r+1}).
 \]
-Wartości obu całek wynoszą:
-\begin{gather*}
-	\int_0^nx^r\,dx = \frac{n^{r+1}}{r+1} = \Theta(n^{r+1}), \\[2mm]
-	\int_1^{n+1}x^r\,dx = \frac{(n+1)^{r+1}-1}{r+1} = \Theta(n^{r+1}),
-\end{gather*}
-zatem oszacowaniem sumy jest
+Oszacowanie dolne:
 \[
-	\sum_{k=1}^nk^r = \Theta(n^{r+1}).
+    \sum_{k=1}^nk^r \ge \sum_{k=n/2+1}^nk^r \ge \sum_{k=n/2+1}^n(n/2)^r = (n/2)\cdot(n/2)^r = \Omega(n^{r+1}).
+\]
+Na podstawie otrzymanych wyników stwierdzamy, że oszacowaniem dokładnym sumy jest
+\[
+    \sum_{k=1}^nk^r = \Theta(n^{r+1}).
 \]
 
 \subproblem %A-1(b)
-Stosujemy wzór~(A.11) do sumy $\sum_{k=2}^n\lg^sk$, która jest równoważna sumie badanej:
+Oszacowanie górne:
 \[
-	\int_1^n\lg^sx\,dx \le \sum_{k=2}^n\lg^sk \le \int_2^{n+1}\lg^sx\,dx.
+    \sum_{k=1}^n\lg^sk \le \sum_{k=1}^n\lg^sn = n\cdot\lg^sn = O(n\lg^sn).
 \]
-Obliczmy całkę nieoznaczoną $I(x)=\int\lg^sx\,dx$ metodą całkowania przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=dx$. Pomijając stałe całkowania, otrzymujemy
+Oszacowanie dolne:
 \[
-	\frac{du(x)}{dx} = \frac{s\lg^{s-1}x\,dx}{x\ln 2} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = x,
+    \sum_{k=1}^n\lg^sk \ge \sum_{k=n/2+1}^n\lg^sk \ge \sum_{k=n/2+1}^n\lg^s(n/2) = (n/2)\cdot\lg^s(n/2) = \Omega(n\lg^sn).
 \]
-a~następnie obliczamy
+Oszacowanie dokładne:
 \[
-	I(x) = u(x)v(x)-\int\frac{du(x)}{dx}v(x) = x\lg^sx-\int s\lg e\lg^{s-1}x\,dx = x\lg^sx-\frac{s\lg e}{\lg x}\cdot I(x),
-\]
-skąd
-\[
-    I(x) = \frac{x\lg^{s+1}x}{\lg x+s\lg e}.
-\]
-Wykorzystujemy otrzymany wynik do obliczenia całek ograniczających badaną sumę:
-\begin{gather*}
-	{\int_1^n\lg^sx\,dx} = \frac{n\lg^{s+1}n}{\lg n+s\lg e} = \Theta(n\lg^sn), \\[2mm]
-	{\int_2^{n+1}\lg^sx\,dx} = \frac{(n+1)\lg^{s+1}(n+1)}{\lg(n+1)+s\lg e}-\dfrac{2}{1+s\lg e} = \Theta(n\lg^sn).
-\end{gather*}
-A~zatem oszacowaniem sumy jest
-\[
-	\sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
+    \sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
 \]
 
 \subproblem %A-1(c)
-Po zastosowaniu wzoru~(A.11) do sumy $\sum_{k=2}^nk^r\lg^sk$ dostajemy
+Oszacowanie górne:
 \[
-	\int_1^nx^r\lg^sx\,dx \le \sum_{k=2}^nk^r\lg^sk \le \int_2^{n+1}x^r\lg^sx\,dx.
+    \sum_{k=1}^nk^r\lg^sk \le \sum_{k=1}^nn^r\lg^sn = n\cdot n^r\lg^sn = O(n^{r+1}\lg^sn).
 \]
-Analogicznie jak w~poprzednim punkcie obliczmy całkę $I(x)=\int x^r\lg^sx\,dx$ przez części. Niech $u(x)=\lg^sx$ oraz $dv(x)/dx=x^r\,dx$, a~stąd (po pominięciu stałych całkowania)
+Oszacowanie dolne:
 \[
-	\frac{du(x)}{dx} = s\lg e\cdot\frac{\lg^{s-1}x\,dx}{x} \quad\text{oraz}\quad v(x) = \frac{x^{r+1}}{r+1},
+    \sum_{k=1}^nk^r\lg^sk \ge \!\!\sum_{k=n/2+1}^n\!\!k^r\lg^sk \ge \!\!\sum_{k=n/2+1}^n\!\!(n/2)^r\lg^s(n/2) = (n/2)\cdot(n/2)^r\lg^s(n/2) = \Omega(n^{r+1}\lg^sn).
 \]
-a~więc mamy
+Oszacowanie dokładne:
 \[
-	I(x) = u(x)v(x)-\int\frac{du(x)}{dx}v(x) = \frac{x^{r+1}\lg^sx}{r+1}-\frac{s\lg e}{(r+1)\lg x}\cdot I(x),
+    \sum_{k=1}^nk^r\lg^sk = \Theta(n^{r+1}\lg^sn).
 \]
-czyli
-\[
-    I(x) = \frac{x^{r+1}\lg^{s+1}x}{(r+1)\lg x+s\lg e}.
-\]
-Całki ograniczające badaną sumę wynoszą zatem
-\begin{gather*}
-	{\int_1^nx^r\lg^sx\,dx} = \frac{n^{r+1}\lg^{s+1}n}{(r+1)\lg n+s\lg e} = \Theta(n^{r+1}\lg^sn), \\[2mm]
-	{\int_2^{n+1}x^r\lg^sx\,dx} = \frac{(n+1)^{r+1}\lg^{s+1}(n+1)}{(r+1)\lg(n+1)+s\lg e}-\dfrac{2^{r+1}}{r+1+s\lg e} = \Theta(n^{r+1}\lg^sn).
-\end{gather*}
-Stąd wnioskujemy, że
-\[
-	\sum_{k=1}^nk^r\lg^sk = \Theta(n^{r+1}\lg^sn).
-\]
-
 Przyjmując w~powyższym oszacowaniu, odpowiednio, $s=0$ i~$r=0$, otrzymujemy sumy i~ich oszacowania z~punktów (a) i~(b).
 
 \endinput

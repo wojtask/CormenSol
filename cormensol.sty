@@ -1,14 +1,13 @@
 \ProvidesPackage{cormensol}
 
 \RequirePackage{fancyhdr}
-\RequirePackage{calc}
 
 % potrzebne do odpowiedniego traktowania rysunków
 \ifpdf
 	\DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
-% definicja flagi mówiącej, czy jesteśmy w sekcji dodatków
+% definicja flagi określającej czy jesteśmy w sekcji dodatków
 \newif\if@appendix
 \@appendixfalse
 
@@ -16,13 +15,27 @@
 \let\@afterindenttrue\@afterindentfalse
 \@afterindentfalse
 
-% zwiększenie pudełka trzymającego numer strony w spisie treści
+% definicje czcionek i separatorów w spisie treści
+\renewcommand{\cfttoctitlefont}{\Huge\sffamily\bfseries}
+\renewcommand{\cftpartfont}{\large\sffamily\bfseries}
+\renewcommand{\cftpartpagefont}{\large\sffamily\bfseries}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftchapfont}{\sffamily\bfseries}
+\renewcommand{\cftchappagefont}{\sffamily\bfseries}
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsecleader}{\sffamily\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsecpagefont}{\sffamily}
+
+% zwiększenie pudełka zawierającego numer strony w spisie treści
 \renewcommand{\@pnumwidth}{1.7em}
 
+% zwiększenie pudełka zawierającego numer rozdziału w spisie treści
 \setlength{\cftchapnumwidth}{1.7em}
+
+% zwiększenie wcięcia numeru podrozdziału w spisie treści
 \setlength{\cftsecindent}{1.7em}
 
-% zwiększenie odstępu między numerem podrozdziału a jego nazwą w spisie treści
+% zwiększenie pudełka zawierającego numer podrozdziału w spisie treści
 \setlength{\cftsecnumwidth}{2.6em}
 
 % głębokość numerowania wewnątrz spisu treści
@@ -91,6 +104,13 @@
 	{\Large\sffamily}
 }
 
+% dodaje kropkę na koniec każdego numerka rozwiązania zadania i problemu
+\renewcommand*{\@seccntformat}[1]{%
+	\csname the#1\endcsname
+	\csname adddot@#1\endcsname\quad
+}
+\newcommand*{\adddot@subsection}{.}
+
 % definicja polecenia tworzenia (rozwiązania) zadania
 \newcommand\ex@rcise{%
 \@startsection
@@ -126,7 +146,7 @@
 
 % odpowiedni wygląd liczników
 \def\thechapter{\arabic{chapter}}
-\def\thesection{{\bfseries\thechapter.\arabic{section}.}}
+\def\thesection{\bfseries\thechapter.\arabic{section}.}
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
 \def\thesubsubsection{(\alph{subsubsection})}
 
@@ -150,7 +170,7 @@
 \def\thefigure{\arabic{figure}}
 \def\thetable{\arabic{table}}
 
-% odpowiedni wygląd nagłówków stron
+% definicja zawartości żywych pagin
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
@@ -162,14 +182,14 @@
 % definicja polecenia rozpoczynającego sekcję problemów
 \newcommand\problems{%
 	\vspace*{1.3\baselineskip}
-	\section*{{\mdseries Problemy}}
+	\section*{\sffamily\mdseries Problemy}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
 	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}}
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
 }
 
-% definicja polecenia wstawiającego problem wraz z jego etykietą
+% definicja polecenia tworzącego problem wraz z jego nazwą
 \newcommand{\problem}[1]{%
 	\ex@rcise{#1}%
 	\label{ex:%
@@ -184,21 +204,18 @@
 % definicja polecenia wstawiającego podproblem
 \newcommand{\subproblem}{\subex@rcise{}}
 
-% definicje stylów twierdzenia i lematu
-% \newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
-% \theoremstyle{csthm}
-% \newtheorem{twierdzenie}{Twierdzenie}
-% \newtheorem{lemat}[twierdzenie]{Lemat}
+% zmienia czcionkę nagłówka bibliografii na pogrubioną bezszeryfową
+\renewcommand{\bibname}{\sffamily\bfseries Bibliografia}
 
 % niełamliwy dywiz
 \newcommand{\compound}[2]{{#1}\nobreakdash-{#2}}
 
 % odnośnik do zadania --> odblokować w publikowanej wersji!
-%\newcommand{\refExercise}[1]{zad.~\ref{ex:#1}}
+% \newcommand{\refExercise}[1]{zad.~\ref{ex:#1}}
 \newcommand{\refExercise}[1]{zad.~#1}
 
 % odnośnik do problemu --> odblokować w publikowanej wersji!
-%\newcommand{\refProblem}[1]{\ref{ex:#1}}
+% \newcommand{\refProblem}[1]{\ref{ex:#1}}
 \newcommand{\refProblem}[1]{#1}
 
 % informacja poboczna w tekście rozwiązania

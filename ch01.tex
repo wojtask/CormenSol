@@ -4,7 +4,7 @@
 
 \exercise %1.1-1
 \begin{description}
-	\item[Sortowanie:] Jest to problem na tyle powszechny, że znajduje zastosowanie w~ogromnej większości zagadnień obliczeniowych; najczęstszym powodem sortowania danych jest przygotowanie ich do dalszego przetwarzania, które jest wtedy na ogół bardziej efektywne.
+	\item[Sortowanie:] Jest to problem bardzo powszechny -- znajduje zastosowanie w~wielu zagadnieniach obliczeniowych. Najczęstszym powodem sortowania danych jest przygotowanie ich do dalszego przetwarzania, które wówczas jest na ogół bardziej efektywne.
 	\item[Najlepsza kolejność mnożenia macierzy:] Problem występuje podczas wyznaczania transformacji graficznych (np.\ skalowań, obrotów); przekształcenia te opisane są za pomocą macierzy, a~ich składanie oznacza obliczanie iloczynu tych macierzy.
 	\item[Otoczka wypukła:] Mając zbiór wbitych w~ziemię palików, chcemy otoczyć pewien obszar siatką ogrodzeniową opierając ją na niektórych palikach tak, by obszar ten zmaksymalizować.
 \end{description}
@@ -33,7 +33,7 @@ Poniżej zestawiono zalety i~wady listy dwukierunkowej w~porównaniu ze zwykłą
 \textbf{Wady:}
 \begin{itemize}
 	\item nie można uzyskać dostępu do dowolnego elementu listy w~stałym czasie;
-	\item lista potrzebuje nieco więcej pamięci niż tablica (narzut na wskaźniki na poprzedni i~następny element);
+	\item lista potrzebuje nieco więcej pamięci niż tablica (oprócz danych pamiętane są wskaźniki na poprzedni i~następny element listy);
 	\item w~przeciwieństwie do tablicy lista na ogół nie zajmuje spójnego obszaru pamięci, co jest istotne na przykład w~systemach ze stronicowaną pamięcią wirtualną.
 \end{itemize}
 
@@ -45,12 +45,13 @@ Poniżej zestawiono zalety i~wady listy dwukierunkowej w~porównaniu ze zwykłą
 \end{itemize}
 \textbf{Różnice:}
 \begin{itemize}
-	\item problem najkrótszej ścieżki poszukuje minimalnej ścieżki między dwoma wierzchołkami, a~problem komiwojażera -- minimalny cykl uwzględniający wszystkie wierzchołki grafu (minimalny cykl Hamiltona);
+	\item w~problemie najkrótszej ścieżki poszukuje się minimalnej ścieżki między dwoma wierzchołkami, a~w~problemie komiwojażera -- minimalnego cyklu uwzględniającego wszystkie wierzchołki grafu (minimalny cykl Hamiltona);
 	\item problem najkrótszej ścieżki jest wielomianowy (istnieje dla niego szybki algorytm), podczas gdy problem komiwojażera jest \NPclass-zupełny (prawdopodobnie nie istnieje efektywny algorytm rozwiązujący ten problem).
 \end{itemize}
 
 \exercise %1.1-5
-Problemem, którego pożądanym rozwiązaniem jest rozwiązanie dokładne, jest np.\ wyszukiwanie w~nieposortowanej tablicy. Obecność jednego elementu w~tablicy jest na ogół niezależna od obecności innych, zatem po sprawdzeniu kilku z~nich, jeśli nie odnaleziono poszukiwanego elementu, nadal nie można przewidzieć czy znajduje się on w~tablicy.
+% W~wielu problemach należy podjąć inne działania w~zależności od obecności ustalonego elementu w~pewnym zbiorze. Oczekujemy zatem dokładnego wyniku od problemu wyszukiwania liniowego lub binarnego.
+Problemem o~pożądanym rozwiązaniu dokładnym jest np.\ wyszukiwanie w~nieposortowanej tablicy. Obecność jednego elementu w~tablicy jest na ogół niezależna od obecności innych, zatem po sprawdzeniu kilku z~nich, jeśli nie odnaleziono poszukiwanego elementu, nadal nie można przewidzieć, czy znajduje się on w~tablicy.
 
 Znalezienie rozwiązania przybliżonego jest natomiast wystarczające w~wielu praktycznych zastosowaniach dla problemu komiwojażera.
 
@@ -60,15 +61,15 @@ Znalezienie rozwiązania przybliżonego jest natomiast wystarczające w~wielu pr
 Przykładem aplikacji, w~której wykorzystywane są różnorodne algorytmy, jest współczesna gra komputerowa. Jej silnik grafiki trójwymiarowej jest zaawansowanym środowiskiem, w~którym stosowane są algorytmy geometrii obliczeniowej i~renderowania grafiki 3D, jak również wiele algorytmów numerycznych do wyznaczania interpolacji oraz algorytmy grafowe. Także w~dziedzinie sztucznej inteligencji opracowano wiele zaawansowanych algorytmów. Ponadto powszechne problemy, takie jak wyszukiwanie elementu w~tablicy czy sortowanie, są rozwiązywane w~niemal każdej aplikacji.
 
 \exercise %1.2-2
-Nierówność $8n^2<64n\lg n$ jest spełniona dla $2\le n\le43$, zatem sortowanie przez wstawianie uporządkuje tablicę o~rozmiarze nieprzekraczającym~43 szybciej niż sortowanie przez scalanie.
+Jeśli $n$ jest liczbą naturalną, to nierówność $8n^2<64n\lg n$ jest spełniona dla $2\le n\le43$. Tablice o~takich rozmiarach porządkowane są przez sortowanie przez wstawianie szybciej niż przez sortowanie przez scalanie.
 
 \exercise %1.2-3
-Najmniejszym dodatnim $n$ spełniającym nierówność $100n^2<2^n$ jest $n=14$.
+Najmniejszą dodatnią liczbą całkowitą $n$ spełniającą nierówność $100n^2<2^n$ jest $n=15$.
 
 \problems
 
 \problem{Porównanie czasów działania} %1-1
-W~tabeli~\ref{tab:1-1} zebrano wyznaczone wartości. Jeśli liczba przekracza $10^7$, to jest podana w~przybliżeniu. Dla uproszczenia obliczeń przyjęto, że na każdy miesiąc przypada 30 dni, a~na każdy rok 365 dni.
+W~tabeli~\ref{tab:1-1} zebrano wyznaczone wartości. Liczby przekraczające $10^7$ zostały podane w~przybliżeniu. Przyjęto, że na każdy miesiąc przypada 30 dni, a~na każdy rok 365 dni.
 
 \begin{table}[ht]
 	\begin{center}

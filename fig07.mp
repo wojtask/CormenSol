@@ -39,8 +39,12 @@ beginfig(1);
 		label("2", center p9 + (shift, -3*(i mod 7)*scale));
 		label("6", center p10 + (shift, -3*(i mod 7)*scale));
 		label("21", center p11 + (shift, -3*(i mod 7)*scale));
-		label(btex \fontsize{8}{10}\selectfont $\phantom{j}r\phantom{j}$ etex, center p11 + (shift, -3*(i mod 7)*scale + scale));
-		
+		if i<>11:
+			label(btex \fontsize{8}{10}\selectfont $\phantom{j}r\phantom{j}$ etex, center p11 + (shift, -3*(i mod 7)*scale + scale));
+		else:
+			label(btex \fontsize{8}{10}\selectfont $j,r$ etex, center p11 + (shift, -3*(i mod 7)*scale + scale));
+		fi;
+
 		pickup pensquare scaled 2;
 		draw point 0 of p[i] + (shift, -3*(i mod 7)*scale) -- point 3 of p[i] + (shift, -3*(i mod 7)*scale);
 		draw point 0 of p11 + (shift, -3*(i mod 7)*scale) -- point 3 of p11 + (shift, -3*(i mod 7)*scale);

@@ -8,52 +8,34 @@
 \usepackage{epsf}
 \usepackage[pdftex]{graphicx}
 \usepackage{geometry}
-\usepackage{calc}
 \usepackage{clrscode}
 \usepackage{url}
-\usepackage{sectsty}
 \usepackage{tocloft}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
 \usepackage{cormensol}
 
-\allowdisplaybreaks[1] % można zmodyfikować przed wydaniem
+% zapobiega pojawianiu się dziwnych znaków w zakładkach PDFowych
+\hypersetup{pdfencoding=auto}
+
+% decyduje, jak chętnie będą łamane wielowierszowe bloki
+\allowdisplaybreaks[1]
 
 \begin{document}
 
 \frontmatter
 
-\allsectionsfont{\sffamily\bfseries}
-
 \include{title}
-
-\ifpdf
-	\def\DelBookmark{\def\@writetorep##1##2##3##4{\relax}}
-\else
-	\def\DelBookmark{\relax}
-\fi
-
-\begingroup
-	\DelBookmark
-	\include{intro}
-\endgroup
+\include{intro}
 
 \ifpdf
 	\addtocontents{toc}{\protect\pdfbookmark{Spis treści}{Tableofcont}}
 \fi
-
-\renewcommand{\cfttoctitlefont}{\Huge\sffamily\bfseries}
-\renewcommand{\cftpartfont}{\large\sffamily\bfseries}
-\renewcommand{\cftpartpagefont}{\large\sffamily\bfseries}
-\renewcommand{\cftchapaftersnum}{.}
-\renewcommand{\cftchapfont}{\sffamily\bfseries}
-\renewcommand{\cftchappagefont}{\sffamily\bfseries}
-\renewcommand{\cftsecfont}{\sffamily}
-\renewcommand{\cftsecleader}{\sffamily\cftdotfill{\cftsecdotsep}}
-\renewcommand{\cftsecpagefont}{\sffamily}
-
 \tableofcontents
 
+% redefinicja rozdziału, która przywraca styl licznika subsekcji na styl numerów zadań
+% i przywraca nazwę podrozdziału na żywej paginie
+% musi być po \include{intro} bo intro używa zwykłego polecenia \chapter
 \let\mychapter=\chapter
 \renewcommand{\chapter}[1]{%
 	\mychapter{#1}
@@ -62,14 +44,10 @@
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
 }
 
-\makeatletter
-	\@afterindentfalse
-	\@afterheading
-\makeatother
-
 \mainmatter
 
 \part{Podstawy}
+
 \include{ch01}
 \include{ch02}
 \include{ch03}
@@ -77,12 +55,12 @@
 \include{ch05}
 
 \part{Sortowanie i~statystyki pozycyjne}
+
 \include{ch06}
 \include{ch07}
 \include{ch08}
 \include{ch09}
 
-% \setcounter{part}{2}
 % \part{Struktury danych}
 % 
 % \setcounter{chapter}{9}
@@ -92,7 +70,6 @@
 % \include{ch13}
 % \include{ch14}
 % 
-% \setcounter{part}{3}
 % \part{Zaawansowane metody konstruowania i~analizowania algorytmów}
 % 
 % \setcounter{chapter}{14}
@@ -100,7 +77,6 @@
 % \include{ch16}
 % \include{ch17}
 % 
-% \setcounter{part}{4}
 % \part{Złożone struktury danych}
 % 
 % \setcounter{chapter}{17}
@@ -109,7 +85,6 @@
 % \include{ch20}
 % \include{ch21}
 % 
-% \setcounter{part}{5}
 % \part{Algorytmy grafowe}
 % 
 % \setcounter{chapter}{21}
@@ -119,7 +94,6 @@
 % \include{ch25}
 % \include{ch26}
 % 
-% \setcounter{part}{6}
 % \part{Wybrane zagadnienia}
 % 
 % \setcounter{chapter}{26}

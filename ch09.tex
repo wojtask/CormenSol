@@ -5,7 +5,7 @@
 \exercise %9.1-1
 Wyznaczmy najpierw najmniejszą spośród $n$ liczb w~następujący sposób. W~każdym etapie testujemy liczby parami, odrzucając te, które były większe w~swoich parach. Procedurę wykonujemy na pozostawionych liczbach, aż do uzyskania jednej liczby -- będącej oczywiście minimum początkowego zbioru. Przyjmujemy, że w~razie nieparzystej liczby elementów na danym etapie, element bez pary nie jest testowany z~żadnym i~przechodzi do kolejnego etapu. Ponieważ po każdym etapie z~$k$ liczb zostaje $\lceil k/2\rceil$, to będzie $\lceil\lg n\rceil$ etapów i~tyle razy testowi będzie poddawany element najmniejszy. Zauważmy, że każdy test odrzuca jedną liczbę, wykonamy zatem dokładnie $n-1$ testów.
 
-Zastanówmy się teraz która z~odrzuconych liczb może być drugą najmniejszą w~zbiorze. Ponieważ zostanie ona odrzucona tylko w~teście z~elementem najmniejszym, to problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~elementem najmniejszym. Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
+Zastanówmy się teraz, która z~odrzuconych liczb może być drugą najmniejszą w~zbiorze. Ponieważ zostanie ona odrzucona tylko w~teście z~elementem najmniejszym, to problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~elementem najmniejszym. Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
 
 Ostatecznie dostajemy, że drugą najmniejszą spośród $n$ liczb można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
 
@@ -17,7 +17,7 @@ Jeśli $n$ jest parzyste, to zgodnie z~podaną w~podręczniku informacją, wykon
 \subchapter{Wybór w~oczekiwanym czasie liniowym}
 
 \exercise %9.2-1
-Zakładamy, że parametr $i$ jest liczbą całkowitą i~spełnia warunek $1\le i\le r-p+1$. Wywołanie z~wiersza~3 procedury \proc{Randomized-Partition} zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$. Dla liczby całkowitej $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$. Wywołanie rekurencyjne w~wierszu~8 nastąpi dla tablicy długości~0, jeśli $i<k$ i~$q=p$, ale wtedy $k=1$ i~taki przypadek nie ma prawa zajść. Podobnie w~wierszu~9 funkcja zostanie wywołana rekurencynie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$.
+Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą warunek $1\le i\le r-p+1$. Wywołanie z~wiersza~3 procedury \proc{Randomized-Partition} zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$. Dla liczby całkowitej $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$. Wywołanie rekurencyjne w~wierszu~8 nastąpi dla tablicy długości~0, jeśli $i<k$ i~$q=p$, ale wtedy $k=1$ i~taki przypadek nie ma prawa zajść. Podobnie w~wierszu~9 funkcja zostanie wywołana rekurencynie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$.
 
 \exercise %9.2-2
 

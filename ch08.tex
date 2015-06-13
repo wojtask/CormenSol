@@ -3,7 +3,7 @@
 \subchapter{Dolne ograniczenia dla problemu sortowania}
 
 \exercise %8.1-1
-Do liścia o~najmniejszej głębokości w~drzewie można dotrzeć, poruszając się po węzłach o~etykietach $1:2$, $2:3$, \dots, $(n-1):n$, czyli testując każde dwa kolejne elementy w~ciągu o~długości $n$. Najmniejszą głębokością liścia jest zatem $n-1$.
+Łatwo zauważyć, że do znalezienia uporządkowania $n$ elementów ciągu wejściowego potrzebnych jest w~najlepszym przypadku $n-1$ porównań. Sytuacja zachodzi np.\ dla ciągu niemalejącego. A~zatem najmniejszą głębokością liścia w~drzewie decyzyjnym jest $n-1$.
 
 \exercise %8.1-2
 Górne oszacowanie znajdujemy w~prosty sposób:
@@ -20,24 +20,24 @@ W~pierwszej sumie ograniczamy $\lg k$ od dołu przez $\lg1$, natomiast w~drugiej
 \]
 
 \exercise %8.1-3
-Jeśli sortowanie działa w~czasie liniowym dla $m$ permutacji wejściowych, to wysokość $h$ drzewa złożonego tylko z~liści odpowiadających tym permutacjom i~ich przodków jest liniowa.
-
-Powtarzając rozumowanie przedstawione w~dowodzie tw.~8.1, dostajemy nierówność $2^h\ge m$, a~stąd $h\ge\lg m$. Pozostaje więc sprawdzić, jakiego rzędu jest $h$ dla poszczególnych wartości przyjmowanych przez $m$:
-\begin{align*}
-	m = n!/2: &\qquad \lg m = \lg(n!/2) = \lg(n!)-1 = \Omega(n\lg n), \\
-	m = n!/n: &\qquad \lg m = \lg(n!/n) = \lg(n!)-\lg n = \Omega(n\lg n), \\
-	m = n!/2^n: &\qquad \lg m = \lg(n!/2^n) = \lg(n!)-n = \Omega(n\lg n).
-\end{align*}
-Widać, że w~każdym testowanym przypadku $h\ge\lg m=\Omega(n\lg n)$, zatem w~żadnym z~nich sortowanie nie jest liniowe dla wszystkich $m$ wejść.
+Jeśli sortowanie działa w~czasie liniowym dla $l$ permutacji wejściowych, to drzewo złożone z~gałęzi zakończonych liśćmi, które odpowiadają tym permutacjom, ma liniową wysokość $h$. Powtarzając rozumowanie przedstawione w~dowodzie tw.~8.1, dostajemy nierówność $2^h\ge l$, a~stąd $h\ge\lg l$. Pozostaje więc sprawdzić, czy $h$ jest liniowe dla poszczególnych wartości przyjmowanych przez $l$:
+\[
+	\begin{array}{ll}
+		l = n!/2: & h \ge \lg l = \lg(n!/2) = \lg(n!)-1 = \Omega(n\lg n), \\[1mm]
+		l = n!/n: & h \ge \lg l = \lg(n!/n) = \lg(n!)-\lg n = \Omega(n\lg n), \\[1mm]
+		l = n!/2^n: & h \ge \lg l = \lg(n!/2^n) = \lg(n!)-n = \Omega(n\lg n).
+	\end{array}
+\]
+W~każdym testowanym przypadku $h=\Omega(n\lg n)$, zatem nie istnieje algorytm sortujący za pomocą porównań i~działający w~czasie liniowym dla testowanych ilości permutacji wejściowych.
 
 \exercise %8.1-4
-Rozważmy drzewo decyzyjne dla takiego częściowo posortowanego ciągu. Mamy $n/k$ podciągów, każdy zawierający po $k$ posortowanych elementów, co daje $(k!)^{n/k}$ możliwych permutacji w~ciągu wejściowym, czyli tyle osiągalnych liści znajduje się w~drzewie decyzyjnym. Modyfikując tw.~8.1, dostajemy nierówność
+Rozważmy drzewo decyzyjne reprezentujące sortowanie takiego częściowo uporządkowanego ciągu. Każdy podciąg może wystąpić na wyjściu w~jednej z~$k!$ możliwych permutacji. Ponieważ jest $n/k$ podciągów, to w~drzewie decyzyjnym znajduje się co najmniej $(k!)^{n/k}$ osiągalnych liści. Drzewo decyzyjne o~wysokości $h$ nie może mieć więcej niż $2^h$ liści. Stąd mamy
 \[
-	2^h \le l \le (k!)^{n/k},
+	2^h \ge (k!)^{n/k},
 \]
-co po zlogarytmowaniu obustronnie daje
+co daje
 \[
-	h \ge (n/k)\lg(k!) = \Omega(n\lg k).
+	h \ge \lg\bigl((k!)^{n/k}\bigr) = (n/k)\lg(k!) = (n/k)\cdot\Omega(k\lg k) = \Omega(n\lg k).
 \]
 
 \subchapter{Sortowanie przez zliczanie}
@@ -55,10 +55,10 @@ Rys.~\ref{fig:8.2-1} przedstawia działanie procedury \proc{Counting-Sort} podcz
 Elementy tablicy wejściowej przetwarzane są od końca, a~wartości w~tablicy $C$ oznaczające indeksy tablicy wynikowej, na które trafią wejściowe elementy, są systematycznie zmniejszane. A~zatem równe sobie elementy będą umieszczane na coraz niższych pozycjach w~tablicy wynikowej, dzięki czemu ich początkowa kolejność zostanie zachowana.
 
 \exercise %8.2-3
-Po takiej modyfikacji przetwarzanie elementów zachodzi w~kolejności ich występowania w~tablicy wejściowej, a~ponieważ elementy równe sobie są  umieszczane na coraz niższych pozycjach tablicy wynikowej, to będą one w~odwrotnej kolejności niż początkowa, co zaburza stabilność algorytmu.
+Po wprowadzeniu takiej modyfikacji tablica $A$ będzie przeglądana od lewej do prawej, a~równe elementy będą umieszczane w~odpowiedniej części tablicy wynikowej na coraz niższych pozycjach. Oczywiście poprawność algorytmu sortowania nie zależy od kolejności przetwarzania tablicy $A$, jednak zastosowanie takiej modyfikacji zaburza jego stabilność.
 
 \exercise %8.2-4
-Algorytm w~czasie $\Theta(n+k)$ zlicza elementy z~wejściowej tablicy, zbierając wyniki do pomocniczej tablicy. Następnie, zapytany o~liczbę elementów z~przedziału $[a\twodots b]$, zwraca liczbę elementów z~zakresu $[0\twodots b]$ pomniejszoną o~liczbę elementów z~$[0\twodots a-1]$. Dokładniej, jego pierwsza faza (preprocessing), jest równoważna utworzeniu tablicy $C$ jak w~\proc{Counting-Sort}. Druga faza, czyli każde pytanie o~przedział $[a\twodots b]$ zwraca liczbę $C[\min(b,k)]-C[\max(a-1,0)]$.
+Algorytm w~czasie $\Theta(n+k)$ będzie zliczać elementy z~wejściowej tablicy, zbierając wyniki do pomocniczej tablicy $C[-1\twodots k]$. Następnie, zapytany o~liczbę elementów z~przedziału $[a\twodots b]$ na podstawie danych z~tablicy pomocniczej, zwróci liczbę elementów z~przedziału $[-1\twodots\min(b,k)]$ pomniejszoną o~liczbę elementów z~$[-1\twodots\max(a,0)-1]$. Dokładniej, jego pierwsza faza jest równoważna wierszom~1\nobreakdash--8 procedury \proc{Counting-Sort}, przy czym dodatkowo $C[-1]$ jest inicjalizowane na 0, natomiast w~drugiej fazie dla każdego zapytania o~przedział $[a\twodots b]$ zwracana jest liczba $C[\min(b,k)]-C[\max(a,0)-1]$.
 
 \subchapter{Sortowanie pozycyjne}
 
@@ -72,22 +72,24 @@ Przebieg działania procedury \proc{Radix-Sort} dla podanej listy słów został
 \end{figure}
 
 \exercise %8.3-2
-Algorytmami stabilnymi są sortowanie przez wstawianie i~sortowanie przez scalanie. W~pierwszym algorytmie, wstawiając element $A[j]$ do~podtablicy $A[1\twodots j-1]$, zatrzymujemy się na pierwszym elemencie z~tej podtablicy, który jest mniejszy lub równy od $A[j]$. Zatem elementy równe sobie nie zostaną wymieszane. Podobnie w~procedurze \proc{Merge}, jeśli porównywane elementy będą sobie równe, to do wynikowej tablicy zostanie wstawiony najpierw element z~tablicy $L$ i~dopiero potem ten z~tablicy $R$. Stabilność algorytmu wynika na podstawie indukcji po scalanych fragmentach. Można natomiast z~łatwością podać przykłady danych wejściowych, które pokażą, że zarówno heapsort jak i~quicksort nie sortują stabilnie.
+Algorytmami stabilnymi są sortowanie przez wstawianie i~sortowanie przez scalanie. W~pierwszym z~nich, wstawiając element $A[j]$ do~podtablicy $A[1\twodots j-1]$, zatrzymujemy się na pierwszym elemencie z~tej podtablicy, który jest mniejszy lub równy od $A[j]$. Zatem elementy równe sobie nie zostaną wymieszane. Podobnie w~procedurze \proc{Merge}, jeśli porównywane elementy będą sobie równe, to do wynikowej tablicy zostanie wstawiony najpierw element z~tablicy $L$ i~dopiero potem ten z~tablicy $R$. Stabilność algorytmu wynika na podstawie indukcji po scalanych fragmentach. Natomiast zarówno heapsort, jak i~quicksort nie sortują stabilnie -- przykładem danych wejściowych, które ilustrują ten fakt w~obu tych algorytmach, jest ciąg $A=\langle2,2,1\rangle$.
 
-Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można zapamiętać z~elementem jego początkowy indeks w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich początkowych indeksów. Niech $n$ będzie rozmiarem sortowanej tablicy. Każda z~liczb od 1 do~$n$ może zostać zapisana przy pomocy co najwyżej $\lfloor\lg n\rfloor+1$ bitów, zatem wykorzystamy dodatkowo $O(n\lg n)$ pamięci. Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyfikowanego sortowania, ponieważ przeprowadzenie dodatkowego testu odbywa się w~czasie stałym.
+Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można zapamiętywać z~każdym elementem jego początkową pozycję w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich początkowych pozycji. Do realizacji takiego podejścia wymagana jest dodatkowa pamięć rzędu $\Theta(n)$, gdzie $n$ jest długością sortowanej tablicy. Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyfikowanego sortowania, ponieważ przeprowadzenie dodatkowego testu odbywa się w~czasie stałym.
 
 \exercise %8.3-3
-Przeprowadźmy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych. Dla $d=1$ algorytm sprowadza się do wywołania sortowania stabilnego na tablicy wejściowej, więc poprawność algorytmu wynika z~poprawności tegoż sortowania.
+Przeprowadzimy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych. Jeśli $d=1$, to algorytm \proc{Radix-Sort} sprowadza się do wywołania pomocniczej procedury do posortowania pojedynczych cyfr, a~zatem poprawność algorytmu wynika z~poprawności pomocniczego sortowania.
 
-Załóżmy teraz, że $d>1$ i~że \proc{Radix-Sort} po $d-1$ przebiegach zwróciło tablicę elementów, które obcięte do $d-1$ najmniej znaczących cyfr wyznaczają porządek rosnący. Teraz elementy sortowane są po \compound{$d$}{tych} najbardziej znaczących cyfrach. Niech $a$ i~$b$ będą pewnymi testowanymi cyframi podczas tego sortowania. Jeśli $a<b$ albo $a>b$, to niezależnie od pozostałych cyfr, elementy testowane są ustawiane w~odpowiednim porządku. Jeśli jednak $a=b$, to elementy nie zostaną zamienione miejscami, bo korzystamy z~założenia, że sortowanie jest stabilne. Elementy te pozostają jednak we właściwym porządku, bo jest on wyznaczony przez ich $d-1$ mniej znaczących cyfr, a~te zostały posortowane w~poprzednim przebiegu sortowania.
+Załóżmy teraz, że $d>1$ i~że wywołanie algorytmu \proc{Radix-Sort} po $d-1$ fazach zwróciło tablicę elementów, które, obcięte do $d-1$ ostatnich pozycji, wyznaczają porządek niemalejący. Teraz elementy sortowane są względem pozycji $d$. Niech $a$ i~$b$ będą pewnymi cyframi testowanymi podczas tej fazy. Jeśli $a\ne b$, to niezależnie od pozostałych cyfr elementów, ktorych częściami są cyfry $a$ i~$b$, elementy te zostaną ustawione w~odpowiedniej kolejności. Jeśli jednak $a=b$, to elementy nie zostaną zamienione miejscami, bo pomocnicza procedura sortuje stabilnie. Elementy pozostają jednak we właściwym porządku, bo jest on wyznaczony przez ich $d-1$ ostatnich pozycji, a~te, na mocy założenia indukcyjnego, zostały poprawnie uporządkowane w~poprzednich fazach algorytmu.
 
 \exercise %8.3-4
-Każdą liczbę z~zakresu od~0 do $n^2$ można traktować jako liczbę dwucyfrową w~systemie o~podstawie $n$. Wykorzystując lemat~8.4, wyznaczmy występujące tam zmienne. Liczby przyjmują $n^2$ możliwych wartości, więc $2^b-1=n^2$, skąd $b=\lg(n^2+1)$. Każda z~dwóch składowych cyfr może być równa jednej z~$n$ wartości, co daje $2^r-1=n$, więc $r=\lg(n+1)$. Zgodnie z~lematem, $n$ takich liczb można posortować w~czasie $\Theta((b/r)(n+2^r))=\Theta(2(n+n))=\Theta(n)$.
+Każdą liczbę z~zakresu $0\twodots n^2-1$ można potraktować jak liczbę dwucyfrową w~systemie o~podstawie $n$. Wystarczy zatem wywołać algorytm \proc{Radix-Sort} o~dwóch fazach dla liczb o~podstawie $n$. Wyznaczmy teraz czas działania takiego algorytmu, korzystając z~lematu~8.3. Mamy $d=2$ oraz $k=n$, zatem opisany algorytm działa w~czasie $\Theta(2(n+n))=\Theta(n)$.
 
 \exercise %8.3-5
-Rozważmy sortowanie pozycyjne w~wersji intuicyjnej dla liczb trzycyfrowych. W~pierwszej fazie sortujemy po najbardziej znaczącej cyfrze wejściowego ciągu liczb. Podczas drugiej fazy dokonujemy sortowania w~obrębie fragmentów tablicy zawierających liczby o~tej samej najbardziej znaczącej cyfrze. W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich fragmentów, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach. Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego fragmentu utworzy się po 10 jeszcze mniejszych fragmentów o~poszczególnych cyfrach najmniej znaczących. Łącznie będzie zatem maksymalnie 100 takich podtablic, których posortowanie będzie wymagało 100 kolejnych faz. W~momencie gdy przechodzimy do sortowania ostatnich cyfr, mamy największą liczbę podtablic pozostawionych do późniejszego przetworzenia -- 9 na podstawie środkowych cyfr i~10, które będziemy sortować po ostatniej cyfrze.
+Rozważmy sortowanie pozycyjne w~wersji intuicyjnej dla liczb trzycyfrowych. W~pierwszej fazie sortujemy po najbardziej znaczącej cyfrze wejściowego ciągu liczb. Podczas drugiej fazy dokonujemy sortowania w~obrębie fragmentów tablicy zawierających liczby o~tej samej najbardziej znaczącej cyfrze. W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich fragmentów, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach. Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego fragmentu utworzy się po 10 jeszcze mniejszych fragmentów o~poszczególnych kombinacjach dwóch pierwszych cyfr. Będzie zatem maksymalnie 100 takich podtablic, których posortowanie będzie wymagało 100 kolejnych faz. Łącznie algorytm wykona zatem 111 faz. 
 
-W~ogólności, jeżeli mamy liczby \compound{$d$}{cyfrowe}, to do ich posortowania tym algorytmem wymaganych jest co najwyżej $\sum_{i=0}^{d-1}10^i=(10^d-1)/9$ faz. Najwięcej tymczasowych fragmentów generuje się podczas faz sortujących po ostatnich cyfrach -- jest ich wtedy maksymalnie $9(d-1)+1$.
+Najwięcej tymczasowych podtablic pozostawionych do późniejszego przetworzenia istnieje wówczas, gdy rozpoczyna się sortowanie ostatnich cyfr. W~przypadku sortowania liczb trzycyfrowych jest łącznie 19 takich podtablic -- 9 powstałych po posortowaniu najbardziej znaczących cyfr i~10 powstałych po posortowaniu środkowych cyfr w~obrębie pierwszego fragmentu; ostatnie podtablice będą teraz sortowane względem ostatniej cyfry.
+
+W~ogólności, jeżeli mamy liczby \compound{$d$}{cyfrowe}, to do ich posortowania tym algorytmem wymaganych jest co najwyżej $\sum_{i=0}^{d-1}10^i=(10^d-1)/9$ faz. Najwięcej tymczasowych fragmentów generuje się przed pierwszą fazą, która sortuje po najmniej znaczącej cyfrze -- jest wtedy maksymalnie $9(d-1)+1$ takich fragmentów.
 
 \subchapter{Sortowanie kubełkowe}
 
@@ -103,137 +105,248 @@ Na rys.~\ref{fig:8.4-1} zostało przedstawione działanie sortowania kubełkoweg
 \exercise %8.4-2
 Pesymistyczny przypadek dla algorytmu sortowania kubełkowego zachodzi, gdy wszystkie elementy z~wejściowej tablicy trafią do tego samego kubełka. Mamy wtedy do posortowania pojedynczą listę o~długości $n$, co zajmuje czas $O(n^2)$.
 
-W~celu uporządkowania kubełków zamiast sortowania przez wstawianie można użyć algorytmu sortującego, który wykonuje $O(n\lg n)$ operacji w~przypadku pesymistycznym, np.\ sortowanie przez scalanie. Średni czas działania procedury \proc{Bucket-Sort} pozostaje liniowy, gdyż podstawiając do wzoru~(8.1) ograniczenie na czas działania sortowania przez scalanie, otrzymujemy
+W~celu uporządkowania kubełków, zamiast sortowania przez wstawianie, można użyć algorytmu sortującego, który wykonuje $O(n\lg n)$ operacji w~przypadku pesymistycznym, np.\ sortowanie przez scalanie. Aby obliczyć średni czas działania sortowania kubełkowego w~takim wariancie, podstawiamy do wzoru~(8.1) ograniczenie na czas działania sortowania przez scalanie:
 \[
-	\E(T(n)) = \Theta(n)+\sum_{i=0}^{n-1}O(\E(n_i\lg n_i)).
+	\E(T(n)) = \Theta(n)+\sum_{i=0}^{n-1}O(\E(n_i\lg n_i)) \le \Theta(n)+\sum_{i=0}^{n-1}O(\E(n_i^2)) = \Theta(n).
 \]
-Ponieważ $O(\E(n_i\lg n_i))\le O(\E(n_i^2))=O(n)$, to $\E(T(n))=\Theta(n)$.
+A~zatem oczekiwany czas działania sortowania kubełkowego po modyfikacji pozostaje liniowy.
 
 \exercise %8.4-3
-Szanse nieuzyskania orła w~dwóch rzutach monetą wynoszą $1/4$, co jest to równe szansie uzyskania 2~orłów w~dwóch rzutach. Dokładnie jeden orzeł można uzyskać z~prawdopodobieństwem równym $1/2$. Mając te wartości, obliczamy:
+Szanse nieuzyskania orła w~dwóch rzutach monetą wynoszą $1/4$, co jest równe szansie uzyskania dwóch orłów w~dwóch rzutach. Dokładnie jednego orła można uzyskać z~prawdopodobieństwem równym $1/2$. Na podstawie tych wartości obliczamy:
 \begin{align*}
 	\E(X^2) &= 0^2\cdot\Pr(X^2=0^2)+1^2\cdot\Pr(X^2=1^2)+2^2\cdot\Pr(X^2=2^2) = 3/2, \\
 	\E^2(X) &= \bigl(0\cdot\Pr(X=0)+1\cdot\Pr(X=1)+2\cdot\Pr(X=2)\bigr)^2 = 1.
 \end{align*}
 
 \exercise %8.4-4
-Algorytm będzie opierał się o~sortowanie kubełkowe -- sortując $n$ punktów, wykorzystujemy $n$ kubełków. Aby punkty trafiały do poszczególnych kubełków z~jednakowym prawdopodobieństwem, należy podzielić koło jednostkowe na $n$ obszarów o~równych polach reprezentujących przedziały odległości od środka koła. Łatwo zauważyć, że będą nimi pierścienie kołowe o~jednakowych powierzchniach równych $\pi/n$. Problemem pozostaje zatem wyznaczenie ich promieni.
+Algorytm będzie opierał się o~sortowanie kubełkowe z~$n$ kubełkami. Podzielimy koło jednostkowe na $n$ obszarów o~równych polach reprezentujących przedziały odległości od środka koła i~z~każdym takim obszarem skojarzymy inny kubełek. Dzięki temu punkty będą umieszczane w~poszczególnych kubełkach z~jednakowym prawdopodobieństwem. Łatwo zauważyć, że obszary te będą pierścieniami kołowymi (z~wyjątkiem jednego, który będzie kołem) o~jednakowych powierzchniach równych $\pi/n$. Problemem pozostaje zatem wyznaczenie ich promieni.
 
-Dla $i=1$, 2,~\dots,~$n$ oznaczmy przez $r_i$ długości promieni zewnętrznych tych pierścieni w~kolejności od środka do brzegu koła jednostkowego. Najbardziej wewnętrzny pierścień jest kołem o~polu $\pi/n$, więc $r_1=\sqrt{1/n}$. Ponieważ suma tego koła z~pierścieniem do niego przylegającym jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$. Rozumowanie przeprowadzamy dla wszystkich pierścieni, otrzymując $r_i=\sqrt{i/n}$ dla każdego $i=1$, 2,~\dots,~$n$.
+Ponumerujmy obszary (kubełki) kolejnymi liczbami całkowitymi od 0 do $n-1$ w~kolejności od środka do brzegu koła jednostkowego i~oznaczmy przez $r_j$ długość promienia wewnętrznego pierścienia kołowego stanowiącego \compound{$j$}{ty} obszar. Obszar zerowy jest kołem o~polu $\pi/n$, więc $r_1=\sqrt{1/n}$. Ponieważ suma tego koła z~pierścieniem do niego przylegającym jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$. Rozumowanie przeprowadzamy dla pozostałych pierścieni, otrzymując $r_j=\sqrt{j/n}$ dla każdego $j=1$, 2,~\dots,~$n-1$. Przyjmijmy ponadto $r_0=0$ oraz $r_n=1$.
 
-Sortowanie punktów przebiega analogicznie jak sortowanie liczb będących ich odległościami od środka koła, przy wykorzystaniu kubełków opisanych w~poprzednim paragrafie. Dla każdego punktu obliczana jest jego odległość $d_i$ i~jeśli zachodzi $r_j<d_i\le r_{j+1}$, to punkt umieszczany jest w~kubełku o~numerze $j$ (przyjmujemy $r_0=0$).
+Punkty sortowane są względem ich odległości od środka koła jednostkowego przy wykorzystaniu opisanych kubełków. Dla każdego punktu obliczane jest $d_i=\sqrt{x_i^2+y_i^2}$ i~jeśli zachodzi $r_j<d_i\le r_{j+1}$, to punkt umieszczany jest w~kubełku o~numerze $j$.
 
 \exercise %8.4-5
-% Wykorzystamy sortowanie kubełkowe, umieszczając liczby w~kubełkach. Ponieważ liczby w~tym ciągu 
+Niech $X$ będzie zmienną losową o~ciągłej dystrybuancie $P_X$. Definiujemy nową zmienną losową $Y=P_X(X)$ o~dystrybuancie $P_Y$. Wówczas, dla $0<y<1$, mamy
+\[
+    P_Y(y) = \Pr(Y\le y) = \Pr(P_X(X)\le y) = \Pr(X\le P_X^{-1}(y)) = P_X(P_X^{-1}(y)) = y.
+\]
+Pokazaliśmy, że $P_Y$ jest identycznością na $(0,1)$, a~zatem $Y$ jest zmienną losową o~ciągłym rozkładzie jednostajnym w~tym przedziale.
+
+W~naszym problemie dla każdej zmiennej losowej $X_i$ o~dystrybuancie $P$, gdzie $i=1$, 2,~\dots,~$n$, wyznaczamy nową zmienną losową $Y_i=P(X_i)$. Zgodnie z~powyższym opisem każda nowa zmienna ma rozkład jednostajny w~przedziale $(0,1)$, możemy zatem posortować je, stosując sortowanie kubełkowe o~$n$ kubełkach. W~wyniku dostaniemy pewną permutację $Y_{\pi(1)}$, $Y_{\pi(2)}$,~\dots,~$Y_{\pi(n)}$. Rozwiązanie problemu stanowi zatem ciąg $X_{\pi(1)}$, $X_{\pi(2)}$,~\dots,~$X_{\pi(n)}$.
+
+Wyznaczenie nowego ciągu zmiennych losowych zabiera czas $\Theta(n)$, gdyż zakładamy, że wartości dystrybuanty $P$ można obliczać w~czasie stałym. Również sortowanie kubełkowe $n$ elementów działa średnio w~czasie $\Theta(n)$, zatem w~średnim przypadku cała procedura zajmuje czas liniowy.
 
 \problems
 
 \problem{Dolne ograniczenia na średni czas działania sortowania za pomocą porównań} %8-1
 
 \subproblem %8-1(a)
-Podczas sortowania żadne dwie różne permutacje wejściowe nie prowadzą do tego samego liścia w~drzewie decyzyjnym -- jest zatem co najmniej $n!$ liści. Ponieważ algorytm $A$ jest deterministyczny, to dla pewnej permutacji wejściowej osiąga zawsze ten sam liść, a~więc w~drzewie decyzyjnym jest co najwyżej $n!$ osiągalnych liści. Wynika stąd, że algorytm $A$ może dotrzeć do dokładnie $n!$ liści. Ponieważ każda permutacja ma szanse pojawić się na wejściu z~równym prawdopodobieństwem, to szansa na dotarcie do dowolnego osiągalnego liścia wynosi $1/n!$. Pozostałe liście nigdy nie zostaną odwiedzone podczas działania algorytmu $A$.
+Podczas sortowania algorytmem $A$ żadne dwie różne permutacje wejściowe nie prowadzą do tego samego liścia w~drzewie $T_A$ -- jest w~nim zatem co najmniej $n!$ liści. Ponieważ algorytm $A$ jest deterministyczny, to dla każdej permutacji wejściowej osiągany jest zawsze ten sam liść, a~więc w~$T_A$ jest co najwyżej $n!$ osiągalnych liści. Wynika stąd, że algorytm $A$ może dotrzeć do dokładnie $n!$ liści. Ponieważ każda permutacja ma szanse pojawić się na wejściu z~równym prawdopodobieństwem, to szansa na dotarcie do dowolnego osiągalnego liścia wynosi $1/n!$. Pozostałe liście nigdy nie zostaną odwiedzone podczas działania algorytmu $A$.
 
 \subproblem %8-1(b)
-W~poddrzewach $LT$ i~$RT$ głębokość każdego liścia jest o~1 mniejsza niż głębokość tego samego liścia w~drzewie $T$. Ponieważ lewe i~prawe poddrzewo $T$ mają w~sumie $k$ liści, to zachodzi wzór $D(T)=D(LT)+D(RT)+k$.
+Oznaczmy przez $L(T)$ zbiór liści drzewa $T$, a~przez $d_T(x)$ -- głębokość węzła $x$ w~drzewie $T$. Ponieważ $k>1$, to korzeń drzewa $T$ nie jest jego liściem, więc $L(T)=L(LT)\cup L(RT)$. Głębokość każdego liścia poddrzewa $LT$ jest o~1 mniejsza niż głębokość tego samego liścia w~drzewie $T$ i~analogicznie dla liści poddrzewa $RT$. Mamy zatem
+\begin{align*}
+    D(T) &= \sum_{x\in L(T)}d_T(x) \\
+	&= \sum_{x\in L(LT)}d_T(x)+\sum_{x\in L(RT)}d_T(x) \\
+	&= \sum_{x\in L(LT)}(d_{LT}(x)+1)+\sum_{x\in L(RT)}(d_{RT}(x)+1) \\
+	&= \sum_{x\in L(LT)}d_{LT}(x)+\sum_{x\in L(RT)}d_{RT}(x)+\sum_{x\in L(T)}1 \\[1mm]
+	&= D(LT)+D(RT)+k.
+\end{align*}
+Zauważmy, że wzór jest także prawdziwy w~przypadku, gdy $T$ posiada tylko jednego liścia.
 
 \subproblem %8-1(c)
-Jeśli $T$ jest drzewem decyzyjnym o~$k$ liściach oraz $i$ jest liczbą liści w~$LT$, to $RT$ posiada $k-i$ liści. Rozważmy minimum po wszystkich wartościach $i$ i~skorzystajmy z~poprzedniego punktu. Otrzymujemy
+\note{W~tekście zadania wykorzystywane jest\/ $d(1)$ mimo braku jego definicji; przyjmujemy zatem\/ $d(1)=0$.}
+
+\noindent Dla dowodu wzoru z~treści zadania pokażemy, że zachodzą nierówności
 \[
-	d(k) = \min_T(D(T)) = \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
+    d(k) \le \min_{1\le i\le k-1}(d(i)+d(k-i)+k) \quad\text{oraz}\quad d(k) \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
+\]
+
+Dla każdego $i=1$, 2,~\dots,~$k-1$ możemy wskazać takie drzewo binarne $LT$ o~$i$ liściach, że $d(i)=D(LT)$ i~takie drzewo binarne $RT$ o~$k-i$ liściach, że $d(k-i)=D(RT)$. Niech $T$ będzie drzewem binarnym, w~którym $LT$ jest jego lewym poddrzewem, a~$RT$ -- jego prawym poddrzewem. Korzystając z~definicji $d(k)$ i~wzoru z~części~(b), mamy
+\[
+    d(k) \le D(T) = D(LT)+D(RT)+k = d(i)+d(k-i)+k.
+\]
+Ponieważ otrzymana nierówność zachodzi dla każdego $i=1$, 2,~\dots,~$k-1$, to możemy napisać $d(k)\le\min_{1\le i\le k-1}(d(i)+d(k-i)+k)$.
+
+Pokażemy teraz, że zachodzi także nierówność przeciwna. Ustalmy w~tym celu drzewo binarne $T$ o~$k$ liściach, dla którego $d(k)=D(T)$. Niech $LT$ i~$RT$ będą poddrzewami drzewa $T$, odpowiednio, lewym i~prawym. Jeśli $LT$ ma $i_0$ liści, to $RT$ ma $k-i_0$ liści. Podobnie jak poprzednio mamy
+\[
+    d(k) = D(T) = D(LT)+D(RT)+k \ge d(i_0)+d(k-i_0)+k \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
 \]
 
 \subproblem %8-1(d)
-Niech $f(i)=i\lg i+(k-i)\lg(k-i)$, gdzie $1\le i\le k-1$ i~wyznaczmy minimum tej funkcji obliczając jej pochodne:
-\begin{align*}
-	\frac{df}{di}(i) &= \frac{df}{di}\left(\frac{i\ln i+(k-i)\ln(k-i)}{\ln2}\right) = \frac{\ln i+1-\ln(k-i)-1}{\ln2} = \frac{\ln i-\ln(k-i)}{\ln2}, \\[2mm]
-	\frac{d^2\!f}{di^2}(i) &= \frac{1}{\ln2}\left(\frac{1}{i}-\frac{1}{k-i}\right).
-\end{align*}
-Pierwsza pochodna zeruje się dla $i=k/2$, a~w~tym punkcie druga pochodna jest dodatnia, czyli $f$ przyjmuje tam minimum wynoszące $k\lg k-k$.
+W~\refExercise{7.4-2} analizowana była funkcja $f(q)=q\lg q+(n-q-1)\lg(n-q-1)$. Zostało tam pokazane, że w~przedziale $(0,n-1)$ funkcja $f$ osiąga minimum dla $q=(n-1)/2$. Wystarczy zatem przyjąć $q=i$ oraz $n=k+1$, aby pokazać stwierdzenie z~treści zadania. Minimalna wartość badanej funkcji wynosi zatem $k\lg k-k$.
 
-Załóżmy teraz, że $d(i)\ge i\lg i$ dla $1\le i\le k-1$ i~wyznaczmy $d(k)$, korzystając z~powyższego wyniku:
+Pokażemy oszacowanie na $d(k)$ przez indukcję, zakładając w~tym celu, że $d(i)\ge i\lg i$ dla $1\le i\le k-1$ i~korzystając z~powyższego rezultatu oraz z~punktu~(c):
 \begin{align*}
 	d(k) &= \min_{1\le i\le k-1}(d(i)+d(k-i)+k) \\
 	&\ge \min_{1\le i\le k-1}(i\lg i+(k-i)\lg(k-i))+k \\
 	&\ge k\lg k-k+k \\
 	&= k\lg k.
 \end{align*}
-Podstawa indukcji zachodzi trywialnie, bo $d(1)=0\ge 1\lg1=0$, a~zatem $d(k)=\Omega(k\lg k)$.
+Podstawa indukcji zachodzi trywialnie, bo $d(1)=0\ge 1\lg1$, a~zatem $d(k)=\Omega(k\lg k)$.
 
 \subproblem %8-1(e)
-Ponieważ drzewo $T_A$ posiada $n!$ liści, to wykorzystując definicję $d(k)$ oraz wynik poprzedniej części, mamy
+Zauważmy, że możemy usunąć z~drzewa $T_A$ wszystkie ścieżki, które prowadzą tylko do nieosiągalnych liści, ponieważ nie wpływają one na czas działania algorytmu $A$. A~zatem, na mocy punktu~(a), $T_A$ zawiera teraz dokładnie $n!$ liści. Wykorzystując definicję $d(k)$ oraz wynik z~poprzedniej części, mamy
 \[
 	D(T_A) \ge d(n!) = \Omega(n!\lg(n!)).
 \]
 
-Zgodnie z~częścią~(a) prawdopodobieństwo osiągnięcia przez algorytm każdego z~$n!$ liści drzewa jest równe $1/n!$, a~korzystając z~tego, że $D(T)$ stanowi sumę długości wszystkich ścieżek drzewa decyzyjnego, a~długości te są proporcjonalne do czasu działania algorytmu, to oczekiwany czas sortowania $n$ elementów za pomocą porównań wynosi
+$D(T_A)$ stanowi sumę głębokości liści drzewa decyzyjnego $T_A$, a~głębokość każdego liścia jest proporcjonalna do czasu działania algorytmu $A$ dla permutacji reprezentowanej przez ten liść. Ponieważ prawdopodobieństwo osiągnięcia każdego z~$n!$ liści drzewa jest równe, to oczekiwany czas algorytmu $A$ wynosi
 \[
 	\frac{D(T_A)}{n!} = \frac{\Omega(n!\lg(n!))}{n!} = \Omega(\lg(n!)) = \Omega(n\lg n).
 \]
 
 \subproblem %8-1(f)
-Dla danego algorytmu randomizowanego $B$ i~jego drzewa decyzyjnego $T_B$, algorytm deterministyczny $A$ działa następująco. Porównania dokonywane są według węzłów drzewa $T_B$, jednak po napotkaniu węzła zrandomizowanego $u$ wybierane jest takie poddrzewo o~korzeniu będącym synem węzła $u$, które posiada możliwie najmniejszą średnią odległość korzenia od liścia. Drzewo decyzyjne $T_A$ odpowiadające algorytmowi $A$ powstaje z~$T_B$ poprzez usunięcie pozostałych poddrzew o~korzeniach w~synach węzłów zrandomizowanych i~poprzez ściągnięcie krawędzi między węzłami zrandomizowanymi a~ich synami. Algorytm $A$ wybiera zatem najlepszą możliwość wszędzie tam, gdzie algorytm $B$ dokonuje losowego wyboru, dlatego w~średnim przypadku $A$ wykonuje co najwyżej tyle porównań co $B$.
+Niech $B$ będzie dowolnym randomizowanym algorytmem sortującym za pomocą porównań, a~$T_B$ -- jego drzewem decyzyjnym. Istnieje wówczas deterministyczny algorytm $A$ sortujący za pomocą porównań, którego drzewo decyzyjne $T_A$ powstaje z~drzewa $T_B$ poprzez zastąpienie każdego węzła zrandomizowanego minimalnym poddrzewem o~korzeniu będącym synem tegoż węzła zrandomizowanego. Przez minimalne poddrzewo rozumiemy tutaj takie, które posiada minimalną średnią odległość od swojego korzenia od liścia. Algorytm $A$ wybiera zatem najlepszą możliwość zawsze wtedy, gdy algorytm $B$ dokonuje losowego wyboru spośród $r$ możliwości. Dlatego w~średnim przypadku $A$ wykonuje co najwyżej tyle porównań, co $B$.
 
 \problem{Sortowanie w~miejscu w~czasie liniowym} %8-2
 
 \subproblem %8-2(a)
-Sortowanie przez zliczanie.
+Sortowanie przez zliczanie dla $k=1$.
 
 \subproblem %8-2(b)
-Sortowanie kubełkowe.
+Algorytm działa następująco. Po inicjalizacji zmiennych $l=1$ i~$r=n$ wykonywany jest ciąg czynności: dopóki $l\le n$ i~wartość na pozycji $l$ jest zerem, zmienna $l$ jest inkrementowana; dopóki $r\ge1$ i~wartość na pozycji $r$ jest jedynką, zmienna $r$ jest dekrementowana; jeśli $l\ge r$, to algorytm kończy działanie; w~przeciwnym przypadku wartości na pozycjach $l$ i~$r$ są zamieniane i~opisany ciąg czynności jest powtarzany. Łatwo pokazać, że podany algorytm sortuje tablicę \compound{$n$}{elementową} w~miejscu w~czasie $O(n)$.
 
 \subproblem %8-2(c)
 Sortowanie przez wstawianie.
 
 \subproblem %8-2(d)
-Można użyć sortowania przez zliczanie, ponieważ działa w~czasie $O(n)$ i~sortuje stabilnie. Używając go do sortowania pozycyjnego, jesteśmy więc w~stanie uzyskać czas $O(bn)$ dla \compound{$b$}{bitowych} liczb.
+Aby posortować $n$ rekordów \compound{$b$}{bitowych} w~czasie $O(bn)$, pomocnicza procedura sortująca w~algorytmie sortowania pozycyjnego musi być stabilna i~działać w~czasie $O(n)$. Takie warunki spełnia jedynie algorytm z~części~(a). W~każdej kolejnej fazie sortowania rekordy będą porządkowane względem coraz bardziej znaczących bitów.
 
 \subproblem %8-2(e)
-Użyjemy pomocniczej tablicy $P[1\twodots k]$, w~której przechowywać będziemy liczbę elementów umieszczonych na właściwej pozycji w~tablicy wynikowej.
+W~algorytmie wykorzystujemy tablicę pomocniczą $C[0\twodots k]$, którą tworzymy identycznie jak w~wierszach~1\nobreakdash--7 procedury \proc{Counting-Sort}. Ponadto będziemy używać dodatkowej tablicy $P[0\twodots k]$, w~której początkowo $P[i]$ będzie ustawiane na najniższą pozycję elementu o~wartości~$i$ w~tablicy wynikowej. Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należałoby przenieść na inne pozycje w~celu uporządkowania tablicy, po czym dokonanie ich wymiany z~odpowiednimi elementami.
 \begin{codebox}
-\Procname{$\proc{k-value-Sort}(A,k)$}
+\Procname{$\proc{In-Place-Counting-Sort}(A,k)$}
+\li	utwórz tablicę $C[0\twodots k]$ jak w~procedurze \proc{Counting-Sort} 
+\li	$P[0]\gets1$ \label{li:in-place-counting-sort-preprocessing-begin}
 \li	\For $i\gets1$ \To $k$
-\li		\Do $P[i]\gets0$
-		\End
-\li	$i\gets1$
-\li	\While $i\ge1$
+\li		\Do $P[i]\gets C[i-1]+1$
+		\End \label{li:in-place-counting-sort-preprocessing-end}
+\li	\For $i\gets0$ \To $k$ \label{li:in-place-counting-sort-for-begin}
 \li		\Do
-			$i\gets i-P[A[i]]$
-\li			$P[A[i]]\gets0$
-\li			$j\gets C[A[i]]$
-\li			zamień $A[j]\leftrightarrow A[i]$
-\li			$C[A[j]]\gets C[A[j]]-1$
-\li			$P[A[j]]\gets P[A[j]]+1$
-		\End
-\li	\Return $A$
+			\While $P[i]\le C[i]$ \label{li:in-place-counting-sort-while-begin}
+\li				\Do
+					$\id{key}\gets A[P[i]]$
+\li					\If $\id{key}=i$
+\li						\Then $P[i]\gets P[i]+1$ \label{li:in-place-counting-sort-increment}
+\li						\Else
+							\While $A[P[\id{key}]]=\id{key}$
+\li								\Do $P[\id{key}]\gets P[\id{key}]+1$
+								\End
+\li							zamień $A[P[i]]\leftrightarrow A[P[\id{key}]]$ \label{li:in-place-counting-sort-swap}
+						\End
+				\End \label{li:in-place-counting-sort-while-end}
+		\End \label{li:in-place-counting-sort-for-end}
 \end{codebox}
 
-Można wykazać, że algorytm używa czasu $O(n)$ oraz $O(k)$ pomocniczej pamięci, sortując tablicę $A$ stabilnie.
+Algorytm sortuje tablicę wejściową w~miejscu, wykorzystując $O(k)$ dodatkowej pamięci. Czas potrzebny na utworzenie tablicy $C$ wynosi $O(n+k)$, a wykonanie wierszy~\ref{li:in-place-counting-sort-preprocessing-begin}\nobreakdash--\ref{li:in-place-counting-sort-preprocessing-end} zajmuje czas $O(k)$.
+
+Wyznaczymy teraz czas działania pozostałej części algorytmu. Zauważmy, że w~każdej iteracji pętli \kw{while} w~wierszach~\ref{li:in-place-counting-sort-while-begin}\nobreakdash--\ref{li:in-place-counting-sort-while-end} wykonywana jest inkrementacja jednej z~komórek tablicy $P$ w~wierszu~\ref{li:in-place-counting-sort-increment} lub zamiana elementów w~wierszu~\ref{li:in-place-counting-sort-swap}. W~trakcie działania algorytmu może być wykonanych co najwyżej $n$ zamian, gdyż każda z~nich umieszcza przynajmniej jeden element na prawidłowej pozycji i~od tego momentu element ten nie jest przenoszony. Na początku $P[i]$ wynosi $C[i-1]+1$ (dla $i=1$, 2,~\dots,~$k$ oraz $P[0]=1$) i~jest później zwiększane do $C[i]+1$, a~więc każda wartość od 1 do~$n$ zostanie przypisana pewnej komórce tablicy $P$ co najwyżej 2 razy. Wynika stąd, że łącznie wykonanych zostanie maksymalnie $2n$ inkrementacji komórek tablicy $P$. A~zatem pętla \kw{for} z~wierszy~\ref{li:in-place-counting-sort-for-begin}\nobreakdash--\ref{li:in-place-counting-sort-for-end} działa w~czasie $O(n)$, więc czasem działania całego algorytmu jest $O(n+k)$.
 
 \problem{Sortowanie obiektów zmiennej długości} %8-3
 
 \subproblem %8-3(a)
-Sortowanie odbywa się w~dwóch fazach. Najpierw porządkujemy liczby według liczby cyfr -- im większa ilość cyfr składająca się na liczbę, tym liczba ta jest większa. Następnie sortujemy pozycyjnie liczby o~tej samej liczbie cyfr. W~tablicy wejściowej może znaleźć się od jednej do $n$ liczb, zatem pierwsza faza zajmuje czas $O(n)$, a~druga faza -- czas proporcjonalny do ilości cyfr we wszystkich liczbach łącznie, czyli również $O(n)$.
+Opiszemy sposób sortowania tylko dla liczb nieujemnych. Jeśli w~tablicy znajdują się liczby ujemne, to wystarczy posortować je osobno analogicznym sposobem jak w~poniższym opisie, a~następnie scalić z~uporządkowaną tablicą liczb nieujemnych.
+
+Sortowanie odbywa się w~dwóch fazach. Najpierw liczby porządkowane są według ilości cyfr, z~których się składają -- im większa ilość cyfr, tym liczba jest większa. Wykorzystywany jest w~tym celu algorytm sortowania przez zliczanie, w~którym $k=n$. Następnie liczby o~tej samej ilości cyfr sortowane są pozycyjnie.
+
+W~tablicy wejściowej może znaleźć się maksymalnie $n$ liczb, zatem pierwsza część algorytmu zajmuje czas $O(n)$. Wyznaczmy teraz czas działania drugiej części. W~tym celu oznaczmy przez $m_i$ ilość liczb w~tablicy o~$i$ cyfrach. Zachodzi wówczas $\sum_{i=1}^nim_i=n$. Sortowanie pozycyjne podtablicy liczb o~$i$ cyfrach zajmuje czas $\Theta(im_i)$, a~więc całkowity czas wymagany przez drugą fazę algorytmu wynosi
+\[
+    \sum_{i=1}^n\Theta(im_i) = \Theta\biggl(\sum_{i=1}^nim_i\biggr) = \Theta(n).
+\]
+Stąd mamy, że algorytm działa w~czasie $O(n)$.
 
 \subproblem %8-3(b)
-Napis $x$ zaczynający się na literę leksykograficznie mniejszą od pierwszej litery napisu $y$ znajdzie się w~tablicy wynikowej przed $y$ niezależnie od długości $x$ i~$y$. Można więc posortować przez zliczanie napisy według ich pierwszych liter. Następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej sortujemy napisy według ich drugiej litery. Jeśli któryś napis składa się tylko z~jednej litery, to umieszczamy go na początku bieżącej grupy i~nie zajmujemy się nim w~kolejnych fazach. Zatem sortowanie odbywa się na podstawie kolejnych liter napisów, a~zbyt krótkie napisy nie uczestniczą w~kolejnych fazach.
+Jeśli pierwsza litera napisu $x$ jest leksykograficznie mniejsza od pierwszej litery napisu $y$, to $x$ wystąpi w~wynikowej tablicy przed $y$. Można zatem sortować napisy przez zliczanie według ich pierwszych liter, a~następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej, sortować napisy według ich drugiej litery itd. Pamiętajmy jednak, że napisy mają różną długość, dlatego po posortowaniu słów po \compound{$i$}{tej} literze, przed wykonaniem kolejnej fazy, należy umieścić na początku każdej grupy słów o~tym samym prefiksie \compound{$i$}{literowym} te z~nich, które składają się z~dokładnie $i$ liter. Pozostałe słowa będą przetwarzane w~kolejnej fazie sortowania.
 
-Zauważmy, że napis $x$ będzie porównywany z~innymi w~sumie co najwyżej $|x|+1$ razy, gdzie $|x|$ oznacza liczbę liter, z~których składa się napis $x$. Przyjmijmy, że w~tablicy wejściowej znajduje się $m\le n$ napisów: $x_1$, $x_2$,~\dots,~$x_m$. Wykonanych zostanie zatem $\sum_{i=1}^m(|x_i|+1)=\sum_{i=1}^m|x_i|+m=n+m$ porównań. Otrzymujemy stąd, że czasem działania tego algorytmu jest $O(n)$.
+Zauważmy, że napis $x$ składający się z~$i$ liter będzie brał udział w~co najwyżej $i$ fazach sortowania. Niech $m_i$ oznacza liczbę napisów posiadających $i$ liter. Wówczas operacje odpowiedzialne za sortowanie napisów \compound{$i$}{literowych} wymagają czasu $O(im_i)$. Korzystając z~faktu, że $\sum_{i=1}^nim_i=n$, otrzymujemy, że czasem działania algorytmu jest
+\[
+    \sum_{i=1}^nO(im_i) = O\biggl(\sum_{i=1}^nim_i\biggr) = O(n).
+\]
 
 \problem{Dzbanki} %8-4
 
 \subproblem %8-4(a)
-Abstrahując od modelu dzbanków, w~tym problemie mamy dwie tablice $n$ różnych liczb całkowitych, z~których pierwsza tablica jest permutacją drugiej. Należy przestawić elementy w~tablicach tak, aby reprezentowały one tę samą permutację, przy czym porównania między elementami w~obrębie jednej tablicy są zabronione.
-
-Można opisać prosty algorytm działający w~czasie $\Theta(n^2)$. Testowanie każdej liczby z~pierwszej tablicy z~każdą liczbą z~drugiej tablicy daje nam pełną wiedzę o~elementach, dzięki której można utworzyć żądaną permutację.
+Wystarczy porównać każdy czerwony dzbanek z~każdym dzbankiem niebieskim. Pozwala to na pogrupowanie wszystkich dzbanków w~pary przy wykorzystaniu $\Theta(n^2)$ porównań.
 
 \subproblem %8-4(b)
-Problem jest analogiczny do problemu sortowania za pomocą porównań. Każde porównanie elementów decyduje o~wynikowej permutacji, których jest $n!$. Ponieważ każda z~nich może pojawić się na wyjściu algorytmu, to rozważamy drzewo decyzyjne o~$n!$ liściach podobne jak podczas analizy czasu działania sortowania za pomocą porównań w~przypadku pesymistycznym, jednak drzewo w~tym przypadku jest \compound{3}{arne}, rozróżniamy bowiem dodatkowo przypadek równości testowanych elementów. Wykorzystując podobne rozumowanie jak w~lemacie~8.1, dostajemy nierówność $3^h\ge n!$, skąd
+Ponumerujmy czerwone dzbanki kolejnymi liczbami całkowitymi od~1 do~$n$ i~analogicznie dzbanki niebieskie. Problem sprowadza się do znalezienia takiej permutacji $\pi$ niebieskich dzbanków, w~której \compound{$i$}{ty} dzbanek czerwony jest tej samej pojemności, co dzbanek niebieski o~numerze $\pi(i)$.
+
+Zilustrujemy za pomocą drzewa decyzyjnego działanie algorytmu wyznaczającego tę permutację. Każdy węzeł w~tym drzewie będzie odpowiadać porównaniu pewnego dzbanka czerwonego z~pewnym dzbankiem niebieskim. Wynikiem każdego takiego porównania jest jedna z~trzech możliwości: dzbanek czerwony ma mniejszą pojemność niż dzbanek niebieski, dzbanek czerwony ma większą pojemność niż dzbanek niebieski albo oba te dzbanki mają równą pojemność. Z~tego powodu drzewo decyzyjne jest drzewem \compound{3}{arnym} o~$n!$ osiągalnych liściach, bo tyle jest permutacji niebieskich dzbanków. Wysokość $h$ tego drzewa oznacza pesymistyczną liczbę porównań wykonywanych przez algorytm. Każdy węzeł w~tym drzewie ma co najwyżej 3 synów, prawdziwa jest zatem nierówność $3^h\ge n!$, skąd
 \[
-	h \ge \log_3(n!) = \lg(n!)/\!\lg3 = \Omega(n\lg n),
+	h \ge \log_3(n!) = \frac{\lg(n!)}{\lg3} = \Omega(n\lg n).
 \]
-co stanowi dolne oszacowanie na liczbę porównań w~tym problemie.
+A~zatem dowolny algorytm rozwiązujący ten problem wykonuje co najmniej $\Omega(n\lg n)$ porównań.
 
 \subproblem %8-4(c)
+Rozwiązanie tego problemu będzie opierać się na idei algorytmu quicksort. Zauważmy, że posortowanie obu ciągów dzbanków względem ich pojemności natychmiast prowadzi do rozwiązania problemu -- grupujemy wówczas w~pary dzbanek czerwony z~dzbankiem niebieskim stojące na tych samych pozycjach w~swoich ciągach. Niech $R$ będzie tablicą dzbanków czerwonych, a~$B$ -- tablicą dzbanków niebieskich. Poniższa procedura sortuje podtablice $R[p\twodots r]$ i~$B[p\twodots r]$, nie wykonując porównań dzbanków z~tej samej tablicy.
+\begin{codebox}
+\Procname{$\proc{Jugs-Sort}(R,B,p,r)$}
+\li	\If $p<r$
+\li		\Then
+			$q\gets\proc{Jugs-Partition}(R,B,p,r)$
+\li			$\proc{Jugs-Sort}(R,B,p,q-1)$
+\li			$\proc{Jugs-Sort}(R,B,q+1,r)$
+		\End
+\end{codebox}
+
+Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}. Przyjmuje ona dwie tablice $R$ i~$B$, z~których jedna jest permutacją drugiej i~w~każdej z~nich wszystkie elementy są różne. Procedura dokonuje podziału obu tablic na podstawie losowo wybranego elementu rozdzielającego, przy czym nie porównuje elementów z~tej samej tablicy. Zwracanym wynikiem jest pozycja elementu rozdzielającego w~wynikowych tablicach (pozycja ta jest identyczna dla obu tablic).
+\begin{codebox}
+\Procname{$\proc{Jugs-Partition}(R,B,p,r)$}
+\li	zamień $R[r]\leftrightarrow R[\proc{Random}(p,r)]$
+\li	$x\gets R[r]$
+\li	$i\gets p-1$
+\li	\For $j\gets p$ \To $r$ \label{li:jugs-partition-for1-begin}
+\li		\Do
+			\If $B[j]\le x$
+\li				\Then
+					$i\gets i+1$
+\li					zamień $B[i]\leftrightarrow B[j]$
+				\End
+		\End \label{li:jugs-partition-for1-end}
+\li	$x\gets B[i]$ \label{li:jugs-partition-change-x}
+\li	$i\gets p-1$
+\li	\For $j\gets p$ \To $r-1$ \label{li:jugs-partition-for2-begin}
+\li		\Do
+			\If $R[j]<x$
+\li				\Then
+					$i\gets i+1$
+\li					zamień $R[i]\leftrightarrow R[j]$
+				\End
+		\End \label{li:jugs-partition-for2-end}
+\li	zamień $R[i+1]\leftrightarrow R[r]$
+\li	\Return $i+1$
+\end{codebox}
+Najpierw losowo wybierany jest element rozdzielający $x$ z~tablicy $R[p\twodots r]$. Następnie pętla \kw{for} z~wierszy~\ref{li:jugs-partition-for1-begin}\nobreakdash--\ref{li:jugs-partition-for1-end} dokonuje podziału tablicy $B[p\twodots r]$ względem elementu $x$. Po zakończeniu pętli $B[i]=x$, podtablica $B[p\twodots i-1]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r]$ -- elementy większe niż $x$. Teraz w~wierszu~\ref{li:jugs-partition-change-x} $x$ staje się dzbankiem niebieskim o~pojemności takiej jak dotychczas. Wykonanie tej operacji jest konieczne, gdyż będziemy teraz dokonywać podziału tablicy $R[p\twodots r]$, porównując jej elementy z~$x$. Odbywa się to w~drugiej pętli \kw{for} w~wierszach~\ref{li:jugs-partition-for2-begin}\nobreakdash--\ref{li:jugs-partition-for2-end} w~podobny sposób jak w~pierwszej części procedury. Jedyną różnicą jest fakt, że element równy $x$ w~tablicy $R$ znajduje się na pozycji $r$, zatem przed zakończeniem procedury wstawiany jest na właściwą pozycję.
+
+Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Sort} wynosi $O(n\lg n)$. Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort. Niech $r_1$, $r_2$,~\dots,~$r_n$ będzie ciągiem dzbanków czerwonych uporządkowanym rosnąco, a~$b_1$, $b_2$,~\dots,~$b_n$ -- rosnącym ciągiem dzbanków niebieskich. Zdefiniujemy zmienną losową wskaźnikową
+\[
+    X_{ij} = \I(\text{$r_i$ jest porównywane z~$b_j$}).
+\]
+Zauważmy, że dane elementy $r_i$ i~$b_j$ są porównywane ze sobą co najwyżej raz. Po porównaniu $r_i$ z~każdym elementem fragmentu $B$ w~pewnym wywołaniu procedury \proc{Jugs-Partition}, $r_i$ jest umieszczane na właściwym miejscu w~tablicy $R$ i~nie uczestniczy w~późniejszych wywołaniach. Podobnie w~drugiej części procedury $b_j$ jest porównywane z~każdym elementem fragmentu $R$ z~wyjątkiem $r_i$, po czym nie uczestniczy już w~później w~sortowaniu.
+
+Z~powyższej obserwacji wynika, że całkowita liczba porównań wykonywanych w~algorytmie wynosi
+\[
+    X = \sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}.
+\]
+Biorąc wartości oczekiwane obu stron, dostajemy
+\[
+    \E(X) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(\text{$r_i$ jest porównywane z~$b_j$}).
+\]
+
+Pozostaje tylko obliczyć $\Pr(\text{$r_i$ jest porównywane z~$b_j$})$. Jeśli jako element rozdzielający wybrane zostanie $x$ takie, że $r_i<x<b_j$, to $r_i$ zostanie umieszczony w~lewej części podziału podtablicy $R$, a~$b_j$ -- w~prawej części podziału podtablicy $B$. A~więc elementy $r_i$ i~$b_j$ nigdy więcej nie będą porównywane. Oznaczmy przez $R_{ij}$ zbiór $\{r_i$, $r_{i+1}$,~\dots,~$r_j\}$. Wówczas elementy $r_i$ i~$b_j$ są porównywane wtedy i~tylko wtedy, gdy pierwszym elementem wybranym jako rozdzielający ze zbioru $R_{ij}$ jest $r_i$ albo $r_j$.
+
+Każdy element zbioru $R_{ij}$ może z~jednakowym prawdopodobieństwem być wybrany jako pierwszy element rozdzielający. Ponieważ $|R_{ij}|=j-i+1$, to szanse na to, że dowolny ustalony element zbioru $R_{ij}$ będzie pierwszym wybranym jako rozdzielający, wynoszą $1/(j-i+1)$. Mamy zatem
+\begin{align*}
+    \Pr(\text{$r_i$ jest porównywane z~$b_j$}) &= \Pr(\text{$r_i$ lub $r_j$ jest pierwszym elementem rozdzielającym z~$R_{ij}$}) \\
+	&= \Pr(\text{$r_i$ jest pierwszym elementem rozdzielającym z~$R_{ij}$}) \\
+	&\quad {}+\Pr(\text{$r_j$ jest pierwszym elementem rozdzielającym z~$R_{ij}$}) \\
+	&= \frac{1}{j-i+1}+\frac{1}{j-i+1} \\
+	&= \frac{2}{j-i+1}.
+\end{align*}
+Wstawiając obliczony wynik do wzoru na $\E(X)$ i~ograniczając tę wartość od góry, dostajemy $\E(X)=O(n\lg n)$, co stanowi oczekiwaną liczbę porównań wykonywaną przez algorytm \proc{Jugs-Sort}.
+
+Pesymistyczny przypadek zachodzi wtedy, gdy elementy rozdzielające są wybierane tak, że tworzą się podziały najbardziej niezrównoważone, czyli z~tablicy o~$n$ elementach zostaje utworzona w~wyniku podziału podtablica o~$n-1$ elementach i~podtablica pusta. Wówczas algorytm wykonuje $O(n^2)$ porównań.
 
 \problem{Sortowanie względem średnich} %8-5
 
@@ -244,37 +357,63 @@ Zgodnie z~definicją tablica $A[1\twodots n]$ jest \compound{1}{posortowana}, je
 Jedną z~takich permutacji jest $\langle2,1,5,3,7,4,8,6,10,9\rangle$.
 
 \subproblem %8-5(c)
-Udowodnijmy implikację w~prawą stronę. Załóżmy, że tablica $A$ jest \compound{$k$}{posortowana}. Wtedy dla każdego $i=1$, 2,~\dots,~$n-k$,
-\begin{align*}
-	\frac{\sum_{j=i}^{i+k-1}A[j]}{k} &\le \frac{\sum_{j=i+1}^{i+k}A[j]}{k} \\[1mm]
-	\sum_{j=i}^{i+k-1}A[j] &\le \sum_{j=i+1}^{i+k}A[j] \\[1mm]
-	A[i] &\le A[i+k].
-\end{align*}
-
-Przeprowadzenie rozumowania w~odwrotnej kolejności stanowi dowód implikacji przeciwnej.
+Tablica $A$ o~$n$ elementach jest \compound{$k$}{posortowana}, gdy dla każdego $i=1$, 2,~\dots,~$n-k$ zachodzi
+\[
+	\frac{\sum_{j=i}^{i+k-1}A[j]}{k} \le \frac{\sum_{j=i+1}^{i+k}A[j]}{k}.
+\]
+Po pomnożeniu nierówności obustronnie przez $k$ i~redukcji tych samych składników w~obu sumach dostajemy, że $A[i]\le A[i+k]$ dla każdego $i=1$, 2,~\dots,~$n-k$, co należało udowodnić.
 
 \subproblem %8-5(d)
-Podzielmy tablicę na $k$ podtablic, o~$\lfloor n/k\rfloor$ elementach każda (być może z~wyjątkiem ostatniej). Po posortowaniu każdej z~nich wystarczy scalić je w~wynikową tablicę w~następujący sposób. Najpierw umieszczamy najmniejsze elementy każdej z~podtablic w~kolejności następowania podtablic. Następnie drugie w~takiej samej kolejności, itd., aż do wyczerpania wszystkich.
+Jednym ze sposobów \compound{$k$}{posortowania} tablicy $A[1\twodots n]$ jest zastosowanie algorytmu quicksort, którego rekursja zatrzymuje się dla podtablic o~rozmiarach nieprzekraczających $k$. Dokładniej, należy zamienić warunek z~wiersza~1 procedury \proc{Quicksort} na następujący:
+\begin{codebox}
+\li	\If $p+k-1<r$
+\end{codebox}
+Na każdym poziomie rekursji tablica dzielona jest na podtablice takie, że każdy element z~lewej podtablicy jest mniejszy niż każdy element z~prawej podtablicy. Wynika stąd, że dla każdego $i=1$, 2,~\dots,~$n-k$ spełniona jest nierówność $A[i]\le A[i+k]$, a~to, na podstawie części~(c), jest równoważne temu, że tablica $A$ jest \compound{$k$}{posortowana}.
 
-Weźmy dowolne całkowite $i$, gdzie $1\le i\le n-k$. Jeśli element $A[i]$ znajdował się w~pewnej posortowanej podtablicy na \compound{$j$}{tej} pozycji, to element $A[i+k]$ zajmował w~tej samej podtablicy pozycję \compound{$(j+1)$}{szą}. Jest zatem spełniony warunek $A[i]\le A[i+k]$ dla każdego $i=1$, 2,~\dots,~$n-k$ i, zgodnie z~poprzednim punktem, wynikowa tablica jest \compound{$k$}{posortowana}.
+W~\refExercise{7.4-5} pokazaliśmy, że quicksort po takiej modyfikacji działa w~oczekiwanym czasie $O(n\lg(n/k))$. Aby było to oszacowanie na czas w~przypadku pesymistycznym, musimy zagwarantować najlepszy przypadek wyboru elementów rozdzielających. Można to zrealizować poprzez wybieranie do tej roli mediany bieżącej podtablicy. Medianę można wyznaczać w~pesymistycznym czasie liniowym ze względu na długość badanej podtablicy (patrz podrozdział~9.3 podręcznika), a~zatem nie wpłynie to na czas działania procedury \proc{Partition}.
 
-Sortowanie każdej podtablicy algorytmem quicksort zajmuje czas $O((n/k)\lg(n/k))$, a~ich scalanie jest liniowe względem $n$, więc algorytm tu opisany działa w~czasie $k\cdot O((n/k)\lg(n/k))+\Theta(n)=O(n\lg(n/k))$.
+% Załóżmy najpierw, że $n$ jest wielokrotnością $k$ i~podzielmy tablicę na $k$ podtablic o~$n/k$ elementach każda. Po posortowaniu każdej z~nich wystarczy scalić je w~wynikową tablicę w~następujący sposób. Na pierwszych $k$ pozycjach wynikowej tablicy umieszczamy pierwsze elementy każdej z~podtablic w~kolejności występowania podtablic. Kolejne $k$ pozycji zajmą drugie elementy podtablic w~takiej samej kolejności, itd., aż do wyczerpania wszystkich elementów.
+% 
+% Niech $i$ będzie liczbą całkowitą, $1\le i\le n-k$. Jeśli element $A[i]$ znajdował się w~pewnej posortowanej podtablicy na \compound{$j$}{tej} pozycji, to element $A[i+k]$ zajmował w~tej samej podtablicy pozycję \compound{$(j+1)$}{szą}. Jest zatem spełniony warunek $A[i]\le A[i+k]$ dla każdego $i=1$, 2,~\dots,~$n-k$ więc, zgodnie z~poprzednim punktem, wynikowa tablica jest \compound{$k$}{posortowana}.
+% 
+% W~przypadku, gdy $k$ nie dzieli $n$, po utworzeniu $k$ podtablic o~$\lfloor n/k\rfloor$ elementach każda pozostanie jeszcze $m<k$ elementów, z~których tworzymy \compound{$(k+1)$}{wszą} podtablicę. Zastosowanie powyższego algorytmu do tak podzielonej tablicy może nie zwrócić poprawnie \compound{$k$}{posortowanej} tablicy wynikowej, ponieważ ostatnia podtablica ma inny rozmiar niż pozostałe. Opiszemy jeden ze sposobów udoskonalenia naszego podejścia. Po podzieleniu tablicy na podtablice wyznaczamy jej $m$ największych elementów i~wymieniamy z~każdym z~$m$ elementów \compound{$(k+1)$}{wszej} podtablicy. Sortujemy teraz $k$ pierwszych podtablic i~scalamy je tak, jak to opisano wcześniej. Następnie umieszczamy wszystkie $m$ elementów ostatniej podtablicy na końcu tablicy wynikowej.
+% 
+% Łatwo sprawdzić, że fragment $A[1\twodots n-m]$ jest poprawnie \compound{$k$}{posortowany}. Każdy element na pozycjach wyższych niż $n-m$ jest większy niż każdy element z~pozycji nieprzekraczających $n-m$. Ponadto elementy na pozycjach wyższych niż $n-m$ mogą występować w~dowolnej kolejności, bo $m<k$.
+% 
+% Aby odnaleźć $m$ największych elementów tablicy \compound{$n$}{elementowej}, można najpierw wyznaczyć jej \compound{$(n-m+1)$}{wszy} najmniejszy element za pomocą algorytmu \proc{Select} z~podrozdziału~9.3, a~następnie przejrzeć tablicę od lewej do prawej i~wybrać elementy od niego większe. Operacja ta wymaga czasu $O(n)$. Sortowanie każdej podtablicy np.\ algorytmem heapsort zajmuje czas $O((n/k)\lg(n/k))$, a~scalenie tych podtablic w~tablicę wynikową można wykonać w~czasie $O(n)$. A zatem, niezależnie od tego, czy $k$ jest wielokrotnością $n$, podany algorytm działa w~czasie $k\cdot O((n/k)\lg(n/k))+O(n)=O(n\lg(n/k))$.
 
 \subproblem %8-5(e)
-Każdy z~ciągów $\bigl\langle A[j],A[j+k],A[j+2k],\dots,A[j+(\lfloor n/k\rfloor-1)k]\bigr\rangle$, gdzie $j=1$, 2~\dots,~$k$, jest posortowany. Wystarczy więc scalić te listy w~jedną o~łącznej liczbie $n$ elementów, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
+W~\compound{$k$}{posortowanej} tablicy każda z~podtablic postaci $\langle A[j],A[j+k],A[j+2k],\dots,A[j+mk]\rangle$, gdzie $j=1$, 2~\dots,~$k$ i~$j+mk\le n$, jest posortowana i~wszystkie zawierają łącznie $n$ elementów. Wystarczy więc scalić je w~jedną tablicę posortowaną, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
 
 \subproblem %8-5(f)
-W~algorytmie \compound{$k$}{sortowania} tablicy z~części~(d) sortujemy za pomocą porównań podtablice o~rozmiarze $\lfloor n/k\rfloor$, więc na podstawie tw.~8.1, czas działania posortowania $k$ takich podtablic wynosi $k\cdot\Omega((n/k)\lg(n/k))=\Omega(n\lg(n/k))$. Ponieważ traktujemy $k$ jako stałą, to w~wyniku dostajemy, że algorytm \compound{$k$}{sortowania} tablicy \compound{$n$}{elementowej} wymaga czasu $\Omega(n\lg n)$.
+Przyjmiemy dla wygody, że $n$ jest podzielne przez $k$ -- nie spowoduje to zmniejszenia ogólności naszej analizy.
+
+Dla dowodu dolnego ograniczenia czasowego tego problemu wykorzystamy model drzew decyzyjnych. Niech $T$ będzie drzewem decyzyjnym pewnego algorytmu \compound{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach. Drzewo $T$ jest podobne do drzewa decyzyjnego algorytmu zwykłego sortowania za pomocą porównań, ale jego liście powiązane są ze sposobem podzielenia elementów z~tablicy wejściowej na $n/k$ kolejnych grup po $k$ elementów każda. Liczba możliwości takiego podziału i~zarazem liczba osiągalnych liści w~drzewie $T$ wynosi
+\[
+    \binom{n}{k}\binom{n-k}{k}\dots\binom{k}{k} = \frac{n!}{k!\,(n-k)!}\cdot\frac{(n-k)!}{k!\,(n-2k)!}\cdot\ldots\cdot\frac{k!}{k!\,0!} = \frac{n!}{(k!)^{n/k}}.
+\]
+
+Niech $h$ oznacza wysokość drzewa $T$. Liczba liści w~$T$ nie przekracza $2^h$, zatem
+\[
+    h \ge \lg\frac{n!}{(k!)^{n/k}} = \lg(n!)-(n/k)\lg(k!) = \Omega(n\lg n),
+\]
+ponieważ traktujemy $k$ jako stałą. Wyznaczone oszacowanie na $h$ stanowi dolne ograniczenie na czas działania dowolnego algorytmu \compound{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach. 
 
 \problem{Dolna granica dla scalania posortowanych list} %8-6
 
 \subproblem %8-6(a)
-Mając $2n$ różnych liczb, możemy wybrać $n$ z~nich do pierwszej listy, pozostałe pozostawiając w~drugiej liście. Ponieważ po takim podziale istnieje tylko jedna możliwa para posortowanych list, to liczba sposobów, na jakie można je utworzyć wynosi $\binom{2n}{n}$.
+Spośród $2n$ różnych liczb możemy wybrać $n$ z~nich do pierwszej listy, a~pozostałe $n$ -- do drugiej listy. Ponieważ każdy taki podział jednoznacznie determinuje parę posortowanych list i~na odwrót, to liczba sposobów utworzenia tej pary list wynosi $\binom{2n}{n}$.
 
 \subproblem %8-6(b)
+Działanie algorytmu scalania list można przedstawić, korzystając z~drzewa decyzyjnego, w~którym każdy węzeł odpowiada jednemu porównaniu elementów list. Wszystkie elementy są różne, mamy więc tylko dwa możliwe wyniki każdego z~porównań, a~zatem drzewo decyzyjne jest drzewem binarnym. Na podstawie poprzedniego punktu mamy, że liczba możliwych układów dwóch \compound{$n$}{elementowych} list wejściowych, z~połączenia których powstaje wynikowa lista o~$2n$ elementach, wynosi $\binom{2n}{n}$. W~drzewie decyzyjnym jest więc tyleż osiągalnych liści. Wyznaczając oszacowanie wysokości $h$ tego drzewa, znajdziemy ograniczenie dla maksymalnej liczby porównań wykonanych przez algorytm scalania list. Mamy $2^h\ge\binom{2n}{n}$, a~korzystając z~\refExercise{C.1-13}, dostajemy
+\[
+    h \ge \lg\binom{2n}{n} = \lg\biggl(\frac{2^{2n}}{\sqrt{\pi n}}(1+O(1/n))\biggr) \ge \lg\frac{2^{2n}}{\sqrt{\pi n}} = 2n-\frac{\lg\pi}{2}-\frac{\lg n}{2} = 2n-o(n).
+\]
+
 \subproblem %8-6(c)
+Niech $\langle a_1,a_2,\dots,a_n\rangle$ oraz $\langle b_1,b_2,\dots,b_n\rangle$ będą listami wejściowymi. Załóżmy, że w~liście wynikowej element $a_i$ sąsiaduje z~elementem $b_j$, $1\le i,j\le n$. Jeśli algorytm, scalając obie listy wejściowe, porównywałby $a_i$ z~elementem $b_k$, gdzie $k=1$, 2,~\dots,~$j-1$, to wynikiem porównania byłoby $b_k<a_i$, ale stąd nie wynikałoby ani $b_j<a_i$, ani $a_i<b_j$. Analogicznie dla porównań $a_i$ z~elementem $b_k$, gdzie $k=j+1$, $j+2$,~\dots,~$n$. A~zatem, aby rozstrzygnąć, w~jakiej kolejności powinny wystąpić $a_i$ i~$b_j$ w~liście wynikowej, algorytm musi porównać te dwa elementy ze sobą.
 
 \subproblem %8-6(d)
-Jeśli do~wynikowej listy będą trafiać elementy z~pierwszej listy na przemian z~elementami z~drugiej listy, to każde dwa sąsiedne elementy w~wynikowej liście będą pochodzić z~dwóch różnych list. Takich par sąsiadujących elementów jest w~sumie $2n-1$. Na podstawie poprzedniego punktu jest to wymagana liczba porównań dla problemu scalania.
+Jeśli do~wynikowej listy będą trafiać elementy z~pierwszej listy na przemian z~elementami z~drugiej listy, to każde dwa sąsiednie elementy w~wynikowej liście będą pochodzić z~dwóch różnych list. Takich par sąsiadujących elementów będzie w~sumie $2n-1$. Na mocy poprzedniego punktu wnioskujemy, że algorytm scalania list musi wykonać co najmniej tyle porównań.
 
 \endinput

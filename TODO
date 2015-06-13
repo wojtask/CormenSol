@@ -14,6 +14,7 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - po użyciu \note na początku zadania, należy użyć \noindent na początku następnego paragrafu
 - używamy \bigl, \bigr i pozostałych zamiast \left, \right (głównie do ułamków) (\biggl, \biggr do dużych operatorów np. \sum)
 - formuły matematyczne składane są tak, jak radzi Knuth w The TeXbook
+- potęgę pierwiastka zapisujemy, obejmując pierwiastek w nawiasy i umieszając wykładnik na zewnątrz tego nawiasu
 - poza tym jeśli piszemy o ciągach, parach itd., to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki należy umieszczać poza tym trybem
 - n-tki, ciągi i tablice w nawiasach kątowych
 - numery tożsamości w nawiasach okrągłych
@@ -26,6 +27,7 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - unikać formuł które są rozdzielone między liniami
 - równania w equation lub gather lub w align, a jeśli mają być dzielone, to split wewnątrz align
 - indukcję matematyczną prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy
+- podstawą indukcji przy dowodzeniu oszacowania rekurencji T nie jest np. T(1), ale np. n=1
 - poziomy drzew rekursji (i nie tylko) liczy się od 0
 - jeśli w wielolinijkowych formułach jest zbyt mały odstęp, to można go skorygować poprzez \\[x mm]
 - jeśli w środku zdania wystąpi kropka lub wykrzyknik lub pytajnik, który nie kończy zdania, to po tym znaku należy umieścić \ 
@@ -35,7 +37,7 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - przy składaniu zależności rekurencyjnych w warunkach używa się słowa 'jeżeli', a nie 'dla'
 - kontrolne spacje po skrótach (np., tzn., itd.) jeśli nie kończą zdania i bezpośrednio po nich nie ma spacji (?)
 - jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white)
-- nie używać numerowania równań, stosować zawsze środowiska equation* (\[ \]) lub gather* lub align* w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$})
+- nie używać numerowania równań, stosować zawsze środowiska equation* (\[ \]) lub gather* lub align* w razie potrzeby dopisując \tag{$*$} (w przypadku trzech gwiazdek \tag{${**}*$}) (UWAGA! Rezygnujemy z \tag)
 - partykułę ``nie'' z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: nie większy, nie mniejszy
 - oddzielać przecinkiem imiesłów zakończony na -ąc, -łszy, -wszy od dalszej części zdania
 - nie numerować wiersza w procedurach jednolinijkowych (\zi zamiast \li) (?) -- d-ary-Parent, d-ary-Child, Heap-Minimum
@@ -56,41 +58,61 @@ O CZYM NALEŻY PAMIĘTAĆ:
 - w pseudokodach po znaku operatora występującym po \id{} należy dać odstęp \, (jak w 2.3-5)
 - jeśli wzór w displaystyle zmieści się w jednej linijce, to nie należy stosować align* tylko zwykłe equation*, a jeśli nie mieści się w linijce ale składa się z krótkich wyrażeń między równościami lub nierównościami, to wzór można podzielić jak w 5.2-5
 - używamy dots zamiast cdots i ldots
-- jeśli piszemy o czymś, co było napisane w Cormenie, to używamy rzeczownika "podręcznik"
-- regexpy do sprawdzania końcowego: [a-zA-Z] , ^[a-zA-Z] , [^%0-9][123]?[0-9ABC]\.[0-9]
+- odnosząc się do tekstu Cormena, używamy wyrazu "podręcznik"
+- regexpy do sprawdzania końcowego: [ (	][a-zA-Z] , ^[a-zA-Z] , [^%0-9][123]?[0-9ABC]\.[0-9]
 - rysunki, które nie są wzorowane na podobnych z podręcznika są opisywane bardzo krótko, aby nie powtarzać objaśnień konwencji z rysunku z podręcznika, natomiast pozostałe rysunki są opisywane nieco bardziej obszernie
 - jeśli jest problem ze zmieszczeniem podpisu rysunku, to można zastosować trik z opuszczeniem trybu matematycznego jak w 6.2-1
 - każdy algorytm powinien być mniej lub bardziej skomentowany
 - w dowodach niezmienników pętli w zakończeniach nie należy dowodzić niezmiennika po zakończeniu pętli ale na podstawie jego prawdziwości podczas działania pętli stwierdzić co się dzieje po zakończeniu pętli
 - konwencja: opis działania algorytmu i analiza jego czasu działania powinny znaleźć się w różnych akapitach
+- labelki w pseudokodach powinny mieć identyfikatory zaczynające się pełną nazwą procedury
+- w odniesieniu do przedmiotów, pojęć, używamy "za pomocą", a nie "przy pomocy"
+- przed "czy" nie stawia się przecinka tylko wtedy, gdy znaczy ono "lub", "albo"
+- przed "itd." i "itp." nie stawia się przecinka
+- nie stawia się przecinka po rozpoczynających zdanie wyrażeniach odnoszących się do wcześniejszych wypowiedzi, takich jak "stąd", "mimo to", "dzięki temu", "w tym celu", "w ten sposób", "z tego powodu", ...
+- nie stawia się przecinka po wyrazach i wyrażeniach wprowadzających typu: "jednak", "w efekcie", "w rezultacie", "dlatego", "a zatem", "na ogół", "dodatkowo", "podobnie", "tym samym", "w szczególności", "ponadto", "na przykład", "wreszcie", ...
+- nie stawia się przecinka przed członem porównawczym wprowadzonym przez wyrazy "jak", "jakby", "jako", "niż" - chyba że mają wyraźnie charakter dopowiedzenia
+- stawia się przecinek przed "jak i"
+- o tym, czy przed imiesłowem przymiotnikowym ("-ący", "-ony") powinien zostać postawiony przecinek, decyduje budowa zdania i intencje autora wypowiedzi
+- słowa "inaczej", "innymi słowy", "dokładniej" występujące na początku zdania oddziela się przecinkiem
+- przyimki "ze", "we" stosuje się przy zbitkach spółgłosek trudnych do wymówienia, np. "we wzorze", "ze sobą"
+- nie ma "przebiegów" i "obiegów", tylko "iteracje" pętli
+- nie "analogiczny z", ani "analogiczny jak", ale "analogiczny do"
+- czy złożoność obliczeniową liczymy względem bitów czy względem liczb? (pozostaje do ch34) (poczytać: http://en.wikipedia.org/wiki/Bit_complexity)
 - Asymptote, TikZ, PGF?
+- http://pl.wikipedia.org/wiki/Pomoc:Powszechne_b%C5%82%C4%99dy_j%C4%99zykowe
 
-MOŻLIWOŚĆ ZOPTYMALIZOWANIA, POPRAWIENIA:
-- 1.1-1 -- dokładniej opisać po przerobieniu problemu optymalnego mnożenia macierzy i otoczki wypukłej
-- 3-6(h) -- górne oszacowanie wydaje się być dość dokładne (sprawdzone programem dla n<=10^100), ale czy da się jeszcze oszacować od dołu?
-- 5.4-2 -- udowodnić przejście między sumami (A063169), z TAoCP (1.2.11.3): E(X) = 1+Q(b) \approx 1+\sqrt{\pi b/2} (ograniczyć sumę od góry przez e^b i skorzystać z wzoru Stirlinga)
-- 7-3(c) -- po przerobieniu kilku zadań z profesorami, czy pisać o profesorach, czy tylko sucho rozwiązywać zadania?
+######################################################################################################################################
 
 PRZED v0.4:
+- sprawdzić zakresy: k=1,2,\dots,n -- k jest całkowite, k\in[1,n] -- k jest rzeczywiste, 0\le k\le n -- k jest rzeczywiste (w ostatnich dwóch przypadkach należy jawnie napisać, jeśli k ma być całkowite, chyba że wynika to z treści zadania)
+- czy zapisu k=1,2,\dots,n można używać z kwantyfikatorem szczegółowym? (B.5-2) (propozycja: pewne k ze zbioru \{1,2,\dots,n\})
+- bigskipy czy medskipy? np. B-1(b) lepiej wygląda z medskipami
+- co z przynależnością zmiennych do zbiorów, liczb całkowitych i liczb rzeczywistych? (propozycja: jawnie pisać tylko wtedy, gdy to jest ważne, a np. przyjmować, że literki n,m,k,l oznaczają liczby całkowite i napisać we wstępie o tym)
+- zaimplementować i sprawdzić algorytmy (czy implementować też te bez pseudokodów?)
+- kiedy pseudokod, kiedy opis?
+- kiedy rysunek, kiedy opis?
 - poprawić part I
 - poprawić part VIII
-- part II
-- rozwiązać kwestię rosnący/niemalejący, malejący/nierosnący
-- dorobić kropki w numerkach zadań i problemów (?)
-- naprawić numery stron w zakładkach pdfowych
-- sprawdzić, czy nobreakdash spełnia swoje zadanie i uzupełnić go w nowych rozdziałach
-- uporządkować TODO
+- dokończyć part II
+- sprawdzić interpunkcję (szczególnie wokół imiesłowów przymiotnikowych)
+- odblokować właściwe definicje \refExercise i \refProblem
+- uporządkować TODO (rozbić na osobne pliki (?))
 - wstęp: (La)TeX i METAPOST
 - wstęp: numeracja rysunków, wzorów i jak się to odróżnia od tych z książki
 - wstęp: czytelnik musi znać treść danego rozdziału, ponieważ w niektórych miejscach powołujemy się implicite na fakty w podręczniku
+- wstęp: napisać, że czasem odnosimy się do późniejszych zadań i problemów
 - wstęp: używane oznaczenia, E, Pr, itd.
-- wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne
+- wstęp: napisać o tym, że liczby, o ile nie jest powiedziane inaczej, są całkowite
+- wstęp: mniejsza ścisłość, jeśli badamy notacje asymptotyczne (???)
 
 PRZED v0.5:
 - part III
+- sprawdzić dwustronność, czy rozdziały lub części mają rozpoczynać się zawsze od nieparzystej/parzystej strony?
+- sprawdzić bibliografię -- czy dobre typy pozycji i czy taki wygląd może zostać
 - ostateczne zmiany w layoucie, konwencjach itd., takie, które dotyczą wszystkich wspólnych aspektów rozdziałów
-- ostateczna strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
-- porządek w cormensol.tex, cormensol.sty
+- ostateczne strony początkowe i końcowe, spis {algorytmów|rysunków|tabel} (?)
+- uporządkować cormensol.tex, cormensol.sty (poprawić polecenia wyświetlające liczniki)
 
 PRZED v0.6:
 - part IV
@@ -102,10 +124,10 @@ PRZED v0.8:
 - part VI
 
 PRZED v0.9:
-- ch{27,28,29,30}
+- ch27, ch28, ch29, ch30
 
 PRZED v1.0:
-- ch{31,32,33,34,35}
+- ch31, ch32, ch33, ch34, ch35
 
 PRZED v2.0:
 - rozwiązania zadań i problemów wydania 3
@@ -113,151 +135,165 @@ PRZED v2.0:
 - przerobić na stronę www wykorzystującą MathJax do LaTeXa
 - tłumaczenie na język angielski
 
-ETAPY ODDAWANIA ROZDZIAŁÓW:
-poziom 0 -- w trakcie pisania (tekst niepełny) --> wersje alpha
-poziom 1 -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna) --> wersja beta
-poziom 2 -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury, zaimplementowane i przetestowane algorytmy (pełny tekst, wersja kandydująca) --> wersja rc
-poziom 3 -- sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna) --> wersja final
+MOŻLIWOŚĆ ZOPTYMALIZOWANIA, POPRAWIENIA:
+1.1-1 -- dokładniej opisać po przerobieniu problemu optymalnego mnożenia macierzy i otoczki wypukłej
+2.1-4 -- czy operacje or, and, xor są odpowiednio stylizowane w pseudokodzie?
 
-ROZDZIAŁ 1 (3)
-ROZDZIAŁ 2 (3)
-ROZDZIAŁ 3 (3)
-ROZDZIAŁ 4 (3)
-ROZDZIAŁ 5 (3)
+ETAPY ODDAWANIA ROZDZIAŁÓW:
+etap 0 -- w trakcie pisania (tekst niepełny) --> wersje alpha
+etap 1 -- wykonane wszystkie zadania i problemy, wraz z notkami itd. (pełny tekst, wersja wstępna) --> wersja beta
+etap 2 -- sprawdzone wszystkie rozwiązania pod kątem merytorycznym i pod względem kompletności, również przy wykorzystaniu literatury (pełny tekst, wersja kandydująca) --> wersja rc
+etap 3 -- zaimplementowane i przetestowane algorytmy, sprawdzony tekst pod względem poprawności typograficznej, występowania literówek, jakości odstępów i innych pomniejszych błędów (pełny tekst, wersja ostateczna) --> wersja final
+
+######################################################################################################################################
+
+ROZDZIAŁ 1 (2)
+1.1-3 -- "co jest istotne na przykład w~systemach ze stronicowaną pamięcią wirtualną." --> "co może prowadzić do fragmentacji pamięci." (?)
+1.1-5 -- przepisać pierwszy paragraf, problem ma być "z życia", a nie problem teoretyczny (http://answers-by-me.blogspot.com/)
+
+ROZDZIAŁ 2 (2)
+2.1-4 -- czy zostawić to określenie "reprezentacja binarna"? może dokładniej zdefiniować reprezentację binarną? czy można w ostatnim paragrafie mówić o problemie, który formalnie odbiega od bieżącego?
+
+ROZDZIAŁ 3 (2)
+3-3(a) -- w dowodzie e^n=\Omega(n\cdot2^n) korzystamy z tego, że (e/2)^n=\omega(n), a nie z coś=\omega(1), czy (\lg n)^{\lg n}=\Theta((\lg n)!)?, czy istotnie \lg f(n)=\omega(\lg g(n)) implikuje f(n)=\omega(g(n))?
+3-5(c) -- sprawdzić dokładnie jeszcze raz, poprawić underfull vbox
+
+ROZDZIAŁ 4 (2)
+4-7(a) -- sprawdzić, poprawić, usunąć (*) (?)
+4-7(c) -- sprawdzić, poprawić, usunąć (*) (?)
+
+ROZDZIAŁ 5 (2)
+5.3-6 -- czy można zostawić tak, aby teoretycznie algorytm nie posiadał własności stopu? dokończyć
+5-2(f) -- wyprowadzić oczekiwany czas działania, powinno wyjść (n+1)/(k+1)
 
 ROZDZIAŁ 6 (2)
-6.3-1 -- czy szara tablica?
-6.4-1 -- czy szara tablica?
-6.4-5 -- czy sformułowanie lematu ok?
-6-2 -- czy w polskim tłumaczeniu występuje nazwa d-kopiec?
-6.2(a) -- wygenerować więcej tekstu
+6.1-3
+6.1-4
+6.3-2
+6.3-3 -- sprawdzić z http://rightwayman.blogspot.com/2010/06/algo-exercise-63.html
+6.4-2
+6.4-3 -- czy potrzebna informacja o tym, że jest to oszacowanie dokładne? (przerobić na analizę tablicy posortowanej malejąco i tablicy posortowanej rosnąco, a nie każdej tablicy)
+6.4-4 -- drugie zdanie jest oderwane od wątku
+6.4-5 -- czy w lemacie może być h<5?
+6.5-1 -- czy tutaj też zastosować ten trik z zapisem ciągu pod rysunkiem, jak w 6.2-1, mimo że nie jest to konieczne?
+6.5-2 -- ok, ale czy -niesk. jest poprawnie wyświetlana na rysunku?
+6.5-3
+6.5-4 -- przeformułować, zrezygnować z drugiego zdania (?)
+6.5-5
+6.5-6
+6.5-7
+6.5-8
+6-1(a)
+6-1(b)
+6-2(a)
+6-2(b)
+6-2(c) -- pętla "przebiegająca"
+6-2(d)
+6-2(e) -- analogicznie DO
+6-3(a)
+6-3(b)
+6-3(c) -- co z tymi 1,1?
+6-3(d) -- analogicznie DO
+6-3(e) -- co z tymi 1,1?
+6-3(f)
 
-ROZDZIAŁ 7 (3)
-7.4-2 -- dlaczego można wyrzucić z rekurencji q=0 i q=n-1?
+ROZDZIAŁ 7 (2)
+7.2-4 -- uzasadnić dlaczego quicksort działa wolno w tym przypadku
+7.2-6 -- sprawdzić
+7.3-1 -- czy ok?
+7.4-2
+7.4-3 -- dodatnia druga pochodna świadczy o istnieniu minimum, sprawdzić czy liczenie pochodnych jest tutaj potrzebne
+7.4-5 -- uzasadnić oszacowanie pierwszej części za pomocą głębokości stosu (http://rightwayman.blogspot.com/2010_08_01_archive.html)
+7.4-6 -- sprawdzić empirycznie
+7-4(c) -- algorytm ok, sprawdzić tekst
+7-5 -- sprawdzić z http://rightwayman.blogspot.com/2010_08_01_archive.html
+7-5(a)
+7-5(b)
+7-5(c)
+7-5(d)
+7-6(a)
+7-6(b)
 
-ROZDZIAŁ 8 (0)
-8.1-1 -- sprawdzić
-8.1-3 -- sprawdzić
-8.1-4 -- sprawdzić
-8.2-1 -- kolor tablic?
-8.2-3 -- sprawdzić
-8.2-4 -- sprawdzić, zakresy czy przedziały, [a..b] czy [a,b]?
-8.3-2 -- dlaczego liczymy bity liczby? sprawdzić, czy tak obliczamy zapotrzebowanie na pamięć w pozostałych przypadkach algorytmów sortowania
-8.3-3 -- sprawdzić
-8.3-4 -- sprawdzić
-8.3-5 -- sprawdzić
-8.4-2 -- sprawdzić ostatni akapit
-8.4-3 -- sprawdzić
-8.4-4 -- sprawdzić
+ROZDZIAŁ 8 (1)
+8.1-1
+8.1-2
+8.1-3
+8.1-4
+8.2-1
+8.2-2
+8.2-3
+8.2-4
+8.3-1
+8.3-2
+8.3-3
+8.3-4
+8.3-5 -- zastanowić się nad liczbą tymczasowych stosów (http://rightwayman.blogspot.com/2010_09_01_archive.html)
+8.4-1
+8.4-2
+8.4-3
+8.4-4
 8.4-5
-8-1(a) -- sprawdzić
-8-1(b) -- sprawdzić
-8-1(c) -- sprawdzić
-8-1(d) -- sprawdzić, wykorzystać analizę z rozdziału 7
-8-1(e) -- sprawdzić
-8-1(f) -- sprawdzić
-8-2(a) -- sprawdzić
-8-2(b) -- sprawdzić
-8-2(c) -- sprawdzić
-8-2(d) -- sprawdzić
-8-2(e) -- sprawdzić, opisać dokładniej dlaczego czas O(n) i pamiec O(k), sprawdzić algorytm
-8-3(a) -- sprawdzić
-8-3(b) -- sprawdzić z CS czy ok
-8-4(a) -- sprawdzić
-8-4(b) -- sprawdzić
+8-1(a)
+8-1(b)
+8-1(c)
+8-1(d)
+8-1(e)
+8-1(f)
+8-2(a)
+8-2(b)
+8-2(c)
+8-2(d)
+8-2(e)
+8-3(a) -- analogicznie DO
+8-3(b)
+8-4(a)
+8-4(b)
 8-4(c)
-8-5(a) -- sprawdzić
-8-5(b) -- sprawdzić
-8-5(c) -- sprawdzić
-8-5(d) -- sprawdzić
-8-5(e) -- sprawdzić
-8-5(f) -- chyba ok, sprawdzić
-8-6(a) -- sprawdzić
+8-5(a)
+8-5(b)
+8-5(c)
+8-5(d) -- sprawdzić czy działa z tą modyfikacją
+8-5(e)
+8-5(f)
+8-6(a)
 8-6(b)
 8-6(c)
-8-6(d) -- sprawdzić
+8-6(d)
 
 ROZDZIAŁ 9 (0)
-9.1-1 -- sprawdzić
-9.1-2 -- sprawdzić
-9.2-1 -- sprawdzić
+9.1-1
+9.1-2
+9.2-1
 9.2-2
 9.2-3 -- sprawdzić algorytm, skomentować
-9.2-4 -- sprawdzić, sprawdzić rysunek
-9.3-1 -- sprawdzić
-9.3-2 -- sprawdzić
-9.3-3 -- sprawdzić
-9.3-4
-9.3-5 -- sprawdzić
-9.3-6 -- dokończyć
-9.3-7 -- sprawdzić, czy przez ``najbliższe'' rozumieć najmniej różniące się, czy pozostające najbliżej w porządku rosnącym?
-9.3-8 -- sprawdzić, sprawdzić algorytm
+9.2-4 -- sprawdzić rysunek
+9.3-1
+9.3-2
+9.3-3
+9.3-4 -- coś z drzewem porównań z rozdziału 8?
+9.3-5 -- analogicznie DO
+9.3-6
+9.3-7 -- czy przez ``najbliższe'' rozumieć najmniej różniące się, czy pozostające najbliżej w porządku rosnącym?
+9.3-8 -- sprawdzić algorytm
 9.3-9
-9-1(a) -- sprawdzić
-9-1(b) -- sprawdzić
-9-1(c) -- sprawdzić
-9-2(a) -- sprawdzić
-9-2(b) -- sprawdzić
+9-1(a)
+9-1(b)
+9-1(c)
+9-2(a)
+9-2(b)
 9-2(c)
 9-2(d)
 9-2(e)
 9-3(a) -- sprawdzić notkę, dokończyć
 9-3(b) -- podłogi, sufity..., czy T na pewno jest niemalejące? sprawdzić
-9-3(c) -- sprawdzić
-9-3(d) -- sprawdzić
-
-ROZDZIAŁ 10 (0) -- co z atrybutem tail?
-10.2-8 -- dopisać Xor-List-Delete, czy na pewno potrzebny tail[L] ?
-10.3-4
-10.3-5 -- manipulacja nieużywanymi polami prev na liście F (?)
-10.4-3 -- poprawić
-10-2(a)
-10-2(b)
-10-2(c)
-10-3(a)
-10-3(b)
-10-3(c)
-10-3(d)
-10-3(e)
-10-3(f)
-10-3(g)
-10-3(h)
-
-ROZDZIAŁ 11 (0)
-11.1-3 -- metoda łańcuchowa na tablicy z adresowaniem bezpośrednim?
-11.1-4
-11.2-2 -- rysunek
-11.2-3 -- analiza wyszukiwania, porażka jest identyczna z sukcesem -- wystarczy szukać aż do elementu większego lub równego
-11.2-4
-11.2-5 -- przeformułować
-11.3-1
-11.3-2
-11.3-3
-11.3-4
-11.3-5
-11.3-6
-11.4-1
-11.4-2
-11.4-3
-11.4-4
-11.4-5
-11.5-1
-11-1(a)
-11-1(b)
-11-1(c)
-11-1(d)
-11-2(a)
-11-2(b)
-11-2(c)
-11-2(d)
-11-2(e)
-11-3(a)
-11-3(b)
-11-4(a)
-11-4(b)
-11-4(c)
+9-3(c)
+9-3(d)
 
 DODATEK A (3)
-DODATEK B (3)
-- B-3(a) -- jeszcze raz sprawdzić, rysunek zaktualizować, może (a) przed i (b) po zmianie krawędzi? podpis pod rysunkiem
-DODATEK C (3)
+
+DODATEK B (2)
+B.5-4 -- to powinna być raczej indukcja po n
+B-3(a) -- sprawdzić, rysunek zaktualizować, może (a) przed i (b) po zmianie krawędzi? podpis pod rysunkiem
+
+DODATEK C (2)
+C.2-4 -- przepisać, skrócić, sprawdzić, poprawić underfull vbox

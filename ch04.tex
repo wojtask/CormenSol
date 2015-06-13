@@ -5,9 +5,9 @@
 \exercise %4.1-1
 Niech $c>0$ będzie stałą. Przyjmujemy założenie, że
 \[
-    T(\lceil n/2\rceil)\le c\lg(\lceil n/2\rceil).
+    T(\lceil n/2\rceil)\le c\lg(\lceil n/2\rceil)
 \]
-Na jego podstawie oraz z~wzoru~(3.3) otrzymujemy:
+i~że $n\ge4$. Na podstawie założeń i~wzoru~(3.3) otrzymujemy:
 \begin{align*}
 	T(n) &\le c\lg(\lceil n/2\rceil)+1 \\
 	&< c\lg(n/2+1)+1 \\
@@ -15,21 +15,21 @@ Na jego podstawie oraz z~wzoru~(3.3) otrzymujemy:
 	&= c\lg n+c\lg(3/4)+1 \\
 	&\le c\lg n,
 \end{align*}
-przy czym ostatnia nierówność wymaga, aby $c\ge\log_{4/3}2$. Ponadto w~wyprowadzeniu założono, że $n\ge4$.
+przy czym ostatnia nierówność jest spełniona, gdy $c\ge\log_{4/3}2$.
 
-Niech $T(1)=1$. Wtedy jednak nie można dobrać stałej $c$ tak, aby $T(1)\le c\lg1=0$. Dla $n>2$ rekurencja nie zależy bezpośrednio od $T(1)$, więc przyjmijmy $T(2)=2$ i~$T(3)=3$ za podstawę indukcji, ponieważ dla dowolnego $c\ge\log_{4/3}2$ zachodzi $T(2)\le c\lg2=c$ oraz $T(3)\le c\lg3$. Mamy więc $T(n)=O(\lg n)$.
+Niech $T(1)=1$. Wówczas $T(2)=2$, $T(3)=3$. Nierówności $T(2)\le c\lg2$ oraz $T(3)\le c\lg3$ zachodzą dla $c\ge2$, a~więc w~szczególności dla $c\ge\log_{4/3}2$. Można zatem przyjąć $n=2$ i~$n=3$ za podstawę indukcji, gdyż dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$. Na mocy dowodu indukcyjnego wynika zatem, że $T(n)=O(\lg n)$.
 
 \exercise %4.1-2
 Przyjmijmy założenie, że
 \[
 	T(\lfloor n/2\rfloor) \ge c\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor)
 \]
-dla pewnej dodatniej stałej~$c$. Korzystając z~wzoru~(3.3), mamy:
+dla pewnej dodatniej stałej~$c$. Korzystając ze wzoru~(3.3), mamy:
 \begin{align*}
 	T(n) &\ge 2c\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor)+n \\
 	&> 2c(n/2-1)\lg(n/4)+n \\
-	&= 2c((n/2)\lg n-\lg n-n+2)+n \\
-	&= cn\lg n-2c\lg n-2cn+4c+n \\
+	&= 2c((n/2)\lg n-n-\lg n+2)+n \\
+	&= cn\lg n-2cn-2c\lg n+4c+n \\
 	&> cn\lg n-2c(n+\lg n)+n \\
 	&\ge cn\lg n.
 \end{align*}
@@ -37,10 +37,10 @@ Ostatni krok uzasadniamy, rozwiązując nierówność $-2c(n+\lg n)+n\ge0$ ze wz
 \[
 	c \le \frac{n}{2(n+\lg n)} \le \frac{n}{2n} = \frac{1}{2},
 \]
-a~zatem, wybierając dowolne $0<c\le1/2$, spełniamy ostatni krok wyprowadzenia. Można przyjąć $T(1)=1$ za podstawę indukcji, bo $T(1)\ge c\lg1=0$. Wykazaliśmy, że $T(n)=\Omega(n\lg n)$, więc na mocy tw.~3.1 mamy $T(n)=\Theta(n\lg n)$.
+a~zatem wybierając dowolne $0<c\le1/2$, spełniamy ostatni krok wyprowadzenia. Można przyjąć $T(1)=1$ i~$n=1$ za podstawę indukcji, bo wówczas $T(1)\ge c\cdot1\cdot\lg1=0$. Wykazaliśmy, że $T(n)=\Omega(n\lg n)$, więc na mocy tw.~3.1 mamy $T(n)=\Theta(n\lg n)$.
 
 \exercise %4.1-3
-Udowodnimy, że $T(n)=O(n^2)$. Przyjmijmy w~tym celu założenie, że
+Udowodnimy, że $T(n)=O(n^2)$. Przyjmijmy w~tym celu założenie dla $n\ge2$, że
 \[
     T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^2
 \]
@@ -48,7 +48,7 @@ dla pewnej stałej $c>0$. Mamy teraz
 \[
 	T(n) \le 2c\lfloor n/2\rfloor^2+n \le 2cn^2\!/4 + n = cn^2\!/2+n \le cn^2,
 \]
-co jest prawdą, jeśli przyjmiemy $c\ge2$. Widać teraz, że z~mocniejszym założeniem warunek brzegowy $T(1)=1$ może stanowić podstawę indukcji, bo $T(1)\le c\cdot1^2=c$.
+co jest prawdą, o~ile $c\ge1$. Definiując $T(1)=1$, dzięki mocniejszemu założeniu indukcyjnemu można przyjąć $n=1$ w~podstawie indukcji, bo $T(1)\le c\cdot1^2=c$.
 
 \exercise %4.1-4
 Rekurencję~(4.2) można przedstawić w~alternatywny sposób:
@@ -59,10 +59,11 @@ Rekurencję~(4.2) można przedstawić w~alternatywny sposób:
 		T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+d_2n, & \text{jeśli $n>1$},
 	\end{cases}
 \]
-dla pewnych stałych $d_1$,~$d_2>0$. Dla innych stałych $c_1$,~$c_2>0$ przyjmujemy założenia
+dla pewnych stałych $d_1$,~$d_2>0$. Udowodnimy oszacowania górne i~dolne dla $T(n)$ przy użyciu indukcji, przy czym założymy, że $n\ge4$ i~skorzystamy z~obserwacji, że $T(n)$ jest funkcją niemalejącą. Dla stałych $c_1$,~$c_2>0$ przyjmijmy założenia
 \[
 	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor) \quad\text{oraz}\quad T(\lceil n/2\rceil) \le c_2\lceil n/2\rceil\lg(\lceil n/2\rceil).
 \]
+
 W~przypadku dolnego oszacowania mamy:
 \begin{align*}
 	T(n) &\ge 2T(\lfloor n/2\rfloor)+d_2n \\
@@ -71,9 +72,9 @@ W~przypadku dolnego oszacowania mamy:
 	&= c_1n\lg n-2c_1n-2c_1\!\lg(n/4)+d_2n \\
 	&\ge c_1n\lg n,
 \end{align*}
-ponieważ zachodzi $\lfloor n/2\rfloor>n/2-1$ i~$\lfloor n/2\rfloor\ge n/4$ oraz można tak dobrać stałą $c_1$, aby prawdziwa była ostatnia nierówność powyższego wyprowadzenia. Po podstawieniu $c_1=d_2/4$ sprowadza się ona do postaci $n\ge\lg(n/4)$, co jest prawdą dla wszystkich $n$ dodatnich. Podstawę indukcji stanowi $T(1)=d_1$, gdyż $T(1)\ge d_2/4\cdot 1\cdot\lg1=0$, a~zatem $T(n)=\Omega(n\lg n)$.
+ponieważ zachodzi $\lfloor n/2\rfloor>n/2-1$ i~$\lfloor n/2\rfloor\ge n/4$ oraz można tak dobrać stałą $c_1$, aby prawdziwa była ostatnia nierówność powyższego wyprowadzenia. Po podstawieniu $c_1=d_2/4$ sprowadza się ona do postaci $n\ge\lg(n/4)$, co jest prawdą dla wszystkich $n$ dodatnich. Podstawę indukcji stanowi $n=1$, gdyż $T(1)\ge c_1\cdot 1\cdot\lg1=0$, a~zatem $T(n)=\Omega(n\lg n)$.
 
-Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$ z~wzoru~(3.3), dowodzimy górnego oszacowania:
+Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$, dowodzimy górnego oszacowania:
 \begin{align*}
 	T(n) &\le 2T(\lceil n/2\rceil)+d_2n \\
 	&\le 2c_2\lceil n/2\rceil\lg(\lceil n/2\rceil)+d_2n \\
@@ -83,7 +84,7 @@ Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$ z~wzoru~(3.3), dowodzimy g
 \end{align*}
 W~ostatniej nierówności skorzystano z~tego, że dla $n\ge2$ wyrażenie $\lg\frac{\lceil n/2\rceil}{n}$ jest ujemne, a~zatem, dobierając odpowiednio duże $c_2$, można uzasadnić nierówność, gdyż funkcja liniowa rośnie szybciej od logarytmicznej. Dokładniej, okazuje się, że przyjęcie $c_2\ge10d_2$ wystarcza, aby spełnić nierówność dla $n\ge4$.
 
-Ponieważ dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$, to za podstawę indukcji można przyjąć $T(2)=2d_1+2d_2$ oraz $T(3)=3d_1+5d_2$. Łatwo sprawdzić, że otrzymane oszacowanie dla nich zachodzi, o~ile $d_1$ jest dostatecznie małe. W~przeciwnym przypadku górne oszacowanie może nie być wystarczające, jednak zwiększenie $c_2$ pozwala na dowolne ograniczenie rekurencji od góry w~zależności od wartości stałych $d_1$ i~$d_2$. Niezależnie od ich doboru oszacowaniem górnym rekurencji $T(n)$ jest $O(n\lg n)$, co na mocy wcześniejszego wyniku dolnego oszacowania implikuje $T(n)=\Theta(n\lg n)$.
+Ponieważ dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$, to za podstawę indukcji można przyjąć $n=2$ i~$n=3$. Mamy $T(2)=2d_1+2d_2$ oraz $T(3)=3d_1+5d_2$. Łatwo sprawdzić, że otrzymane oszacowanie zachodzi dla tych dwóch wartości, o~ile $d_1$ jest dostatecznie małe. W~przeciwnym przypadku górne oszacowanie może nie być wystarczające, jednak zwiększenie $c_2$ pozwala na dowolne ograniczenie rekurencji od góry w~zależności od wartości stałych $d_1$ i~$d_2$. Niezależnie od ich doboru oszacowaniem górnym rekurencji $T(n)$ jest $O(n\lg n)$, co na mocy wcześniejszego wyniku dolnego oszacowania implikuje $T(n)=\Theta(n\lg n)$.
 
 \exercise %4.1-5
 Wykorzystując założenie
@@ -98,15 +99,15 @@ dla pewnej stałej $c>0$, otrzymujemy:
 	&< cn\lg n+cn\lg(11/20)+34c\lg n+n \\
 	&\le cn\lg n,
 \end{align*}
-co zachodzi, o~ile $n/2+17\le 11n/20$, skąd $n\ge340$ oraz
+co zachodzi, o~ile $n/2+17\le 11n/20$, czyli $n\ge340$, oraz
 \[
 	cn\lg(11/20)+34c\lg n+n \le 0.
 \]
-Badając ostatnią nierówność, można dojść do rezultatu, że przyjęcie $c=47$ wystarcza, aby spełnić ją dla wszystkich $n\ge n_0$, gdzie $n_0=340$.
+Badając ostatnią nierówność, można dojść do rezultatu, że przyjęcie $c\ge47$ wystarcza, aby spełnić ją dla wszystkich $n\ge n_0$, gdzie $n_0=340$.
 
-Zauważmy, że stosowanie równania $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le35$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów. Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le35$ i~niech stanowi to przypadek brzegowy rekurencji. Za podstawę indukcji musimy jednak przyjąć wszystkie $T(i)$, gdzie $187\le i\le339$. Posługując się programem komputerowym, można wykazać, że dla $c=47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
+Zauważmy, że stosowanie równania $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le34$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów. Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le34$ i~niech stanowi to przypadek brzegowy rekurencji. Za podstawę indukcji musimy jednak przyjąć wszystkie $n=187$, 188,~\dots,~339. Posługując się programem komputerowym, można wykazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
 
-Analiza rekurencji dla każdej innej stałej w~miejscu~17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
+Analiza tej rekurencji dla każdej innej stałej w~miejscu~17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$ oraz wartości brzegowe rekursji i~podstawa indukcji, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
 
 \exercise %4.1-6
 Przyjmijmy, że $n=2^m$, skąd $m=\lg n$. Rekurencja przyjmuje teraz postać
@@ -117,117 +118,122 @@ Z~kolei podstawiając $S(m)$ za $T(2^m)$, dostajemy nową rekurencję
 \[
 	S(m) = 2S(m/2)+1,
 \]
-dla której udowodnimy rozwiązanie $O(\lg m)$.
+dla której udowodnimy rozwiązanie $\Theta(\lg m)$.
 
-Ponieważ nie dbamy o~to, czy $m/2$ jest całkowite, to możemy sprowadzić rekurencję do postaci $S(m)=S(\lfloor m/2\rfloor)+S(\lceil m/2\rceil)+1$, o~której wiemy, że jej rozwiązanie wynosi $O(m)$.
+Ponieważ całkowitość argumentów nie jest dla nas istotna, to możemy rekurencję potraktować jako $S(m)=S(\lfloor m/2\rfloor)+S(\lceil m/2\rceil)+1$, co, według podręcznika, jest $O(m)$.
 
-Aby uzyskać oszacowanie dokładne pozostaje udowodnić, że $S(m)=\Omega(m)$. Przyjmujemy zatem założenie, że $S(m/2)\ge c(m/2)$ dla $c>0$ i~na jego podstawie otrzymujemy:
+Aby uzyskać oszacowanie dokładne, pozostaje udowodnić, że $S(m)=\Omega(m)$. Przyjmujemy zatem założenie, że $S(m/2)\ge cm/2$ dla $c>0$ i~na jego podstawie otrzymujemy:
 \[
 	S(m) \ge 2cm/2+1 = cm+1 > cm,
 \]
-co zachodzi dla dowolnej wartości $c$. Przyjęcie $S(1)=1$ na podstawę indukcji wystarcza, bo warunek $S(1)\ge c$ spełnia każde $c\le1$, a~zatem $S(m)=\Omega(m)$.
+co zachodzi dla dowolnej wartości $c$. Niech $S(1)=1$. Przyjęcie $m=1$ na podstawę indukcji wystarcza, bo warunek $S(1)\ge c$ spełnia każde $c\le1$, a~zatem $S(m)=\Omega(m)$.
 
 Stosując tw.~3.1, mamy $S(m)=\Theta(m)$. Wracając teraz do oryginalnej rekurencji i~starej zmiennej, dostajemy $T(n)=T(2^m)=S(m)=\Theta(m)=\Theta(\lg n)$.
 
 \subchapter{Metoda drzewa rekursji}
 
 \exercise %4.2-1
-Dokonajmy pewnego uproszczenia, opuszczając podłogę w~rekurencji $T(n)$ i~rozważając zależność $T'(n)=3T'(n/2)+n$.
+Dokonamy pewnego uproszczenia, pomijając podłogę w~argumencie rekurencji i~rozważając zależność $T(n)=3T(n/2)+n$.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig04.1}
 	\end{center}
-	\caption{Drzewo rekursji dla równania rekurencyjnego $T'(n)=3T'(n/2)+n$.} \label{fig:4.2-1}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=3T(n/2)+n$.} \label{fig:4.2-1}
 \end{figure}
-W~drzewie z~rys.~\ref{fig:4.2-1} jest $\lg n+1$ poziomów, a~na \compound{$i$}{tym} z~nich znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści. Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \compound{$i$}{tej} głębokości jest równy $(3/2)^in$. Ponieważ liście wnoszą stały koszt, czyli $T'(1)=\Theta(1)$, to ostatni poziom ma wartość $\Theta(n^{\lg3})$. Na podstawie tych wartości rozwiązujemy rekurencję:
+Drzewo tej rekusji przedstawione na rys.~\ref{fig:4.2-1} ma wysokość równą $\lg n$, czyli jest w~nim $\lg n+1$ poziomów. Na \compound{$i$}{tym} poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści. Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \compound{$i$}{tej} głębokości jest równy $(3/2)^in$. Przyjmujemy, że $T(1)=1$, a~więc na ostatnim poziomie jest $\Theta(n^{\lg3})$. Na podstawie tych wartości rozwiązujemy rekurencję:
 \begin{align*}
-	T'(n) &= n+\frac{3}{2}n+\biggl(\frac{3}{2}\biggr)^2n+\dots+\biggl(\frac{3}{2}\biggr)^{\lg n-1}n+\Theta(n^{\lg3}) \\
+	T(n) &= n+\frac{3}{2}\,n+\biggl(\frac{3}{2}\biggr)^2n+\dots+\biggl(\frac{3}{2}\biggr)^{\lg n-1}n+\Theta(n^{\lg3}) \\
 	&= \sum_{i=0}^{\lg n-1}\biggl(\frac{3}{2}\biggr)^in+\Theta(n^{\lg3}) \\
-	&= \frac{\bigl(\frac{3}{2}\bigr)^{\lg n}-1}{\frac{3}{2}-1}\cdot n+\Theta(n^{\lg3}) \\[1mm]
+	&= \frac{(3/2)^{\lg n}-1}{(3/2)-1}\,n+\Theta(n^{\lg3}) \\[1mm]
 	&= 2n(n^{\lg3-1}-1)+\Theta(n^{\lg3}) \\
 	&= O(n^{\lg3}).
 \end{align*}
 
-Na podstawie otrzymanego wyniku przyjmujemy założenie, że
+Pokażemy teraz, że otrzymany wynik stanowi górne oszacowanie dla oryginalnej rekurencji. Przyjmujemy założenie, że
 \[
-    T(\lfloor n/2\rfloor)\le c(\lfloor n/2\rfloor)^{\lg3}
+    T(\lfloor n/2\rfloor)\le c\lfloor n/2\rfloor^{\lg3}
 \]
-dla pewnej stałej $c>0$. Dowodzimy oszacowania dla oryginalnej rekurencji metodą przez podstawianie:
+dla pewnej stałej $c>0$. Dowodzimy oszacowania dla oryginalnej rekurencji metodą podstawiania:
 \[
-	T(n) \le 3c(\lfloor n/2\rfloor)^{\lg3}+n \le 3c(n/2)^{\lg3}+n = cn^{\lg3}+n.
+	T(n) \le 3c\lfloor n/2\rfloor^{\lg3}+n \le 3c(n/2)^{\lg3}+n = cn^{\lg3}+n.
 \]
 Nie możemy jednak na podstawie tego wyniku wywnioskować szukanego oszacowania. Wzmocnijmy zatem nasze założenie, niech
 \[
-	T(\lfloor n/2\rfloor) \le c(\lfloor n/2\rfloor)^{\lg3}-b\lfloor n/2\rfloor
+	T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^{\lg3}-b\lfloor n/2\rfloor,
 \]
-dla $c>0$ i~nowej stałej $b\ge0$. Korzystając z~wzoru~(3.3), mamy teraz:
+gdzie $b\ge0$ jest nową stałą. Korzystając ze wzoru~(3.3), mamy teraz:
 \begin{align*}
-	T(n) &\le 3c(\lfloor n/2\rfloor)^{\lg3}-3b\lfloor n/2\rfloor+n \\
+	T(n) &\le 3c\lfloor n/2\rfloor^{\lg3}-3b\lfloor n/2\rfloor+n \\
 	&< 3c(n/2)^{\lg3}-3b(n/2-1)+n \\
 	&= cn^{\lg3}-3bn/2+3b+n \\
 	&\le cn^{\lg3}-bn,
 \end{align*}
-co zachodzi dla $b\ge14$ oraz $n\ge7$. Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji oraz wszystkie $T(i)$, gdzie $1\le i\le6$, na podstawę indukcji, ponieważ z~braku dodatkowych ograniczeń na $c$ można dobrać dla $c$ odpowiednią wartość tak, aby udowodnione oszacowania zachodziły dla wszystkich $T(i)$, gdzie $1\le i\le6$. To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
+co zachodzi dla $n\ge7$, o~ile $b\ge14$. Przyjmujemy wszystkie $n=3$, 4,~5,~6 na podstawę indukcji, ponieważ dla dowolnie ustalonego $b$ można dobrać stałej $c$ odpowiednią wartość tak, aby pokazane oszacowanie zachodziło dla takich $n$. To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
 
 \exercise %4.2-2
-Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $n\to n/3\to n/9\to\dots\to n/3^i\to\dots\to1$. Liść tej gałęzi znajduje się na poziomie $i=\log_3n$. Ponieważ pełne drzewo binarne o~wysokości $\log_3n+1$ wnosi koszt nie większy niż drzewo rekurencji $T(n)$, to zachodzi $T(n)\ge cn\log_3n$ dla pewnego $c>0$, a~stąd $T(n)=\Omega(n\lg n)$.
+Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym. Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$. Liść tej gałęzi znajduje się na poziomie $h=\log_3n$. Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej \compound{$h$}{tego}, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$. Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
 
 \exercise %4.2-3
-Dla uproszczenia pomijamy branie części całkowitych.
+W~metodzie drzewa rekursji dla uproszczenia pomijamy branie części całkowitych.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig04.2}
 	\end{center}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=4T(n/2)+cn$.} \label{fig:4.2-3}
 \end{figure}
-W~drzewie rekursji z~rys.~\ref{fig:4.2-3} na \compound{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$. Stąd kosztem całego poziomu jest $2^icn$. Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz ze wzrostem poziomu, więc wysokością drzewa jest $\lg n$. Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$. Sumując koszty z~każdego poziomu, otrzymujemy:
+W~drzewie rekursji z~rys.~\ref{fig:4.2-3} na \compound{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$. Stąd kosztem całego poziomu jest $2^icn$. Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz z~głębokością drzewa, więc jego wysokością jest $\lg n$. Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$. Sumując koszty z~każdego poziomu, otrzymujemy:
 \begin{align*}
 	T(n) &= cn+2cn+2^2cn+\dots+2^{\lg n-1}cn+\Theta(n^2) \\
-	&= \sum_{i=0}^{\lg n-1}2^icn+\Theta(n^2) \\
-	&= (2^{\lg n}-1)cn+\Theta(n^2) \\
-	&= (n-1)cn+\Theta(n^2) \\
+	&= cn\sum_{i=0}^{\lg n-1}2^i+\Theta(n^2) \\
+	&= cn(2^{\lg n}-1)+\Theta(n^2) \\
+	&= cn(n-1)+\Theta(n^2) \\
 	&= \Theta(n^2).
 \end{align*}
 
-Sprawdzimy teraz otrzymany wynik, wykorzystując do tego celu metodę podstawiania. Badamy najpierw oszacowanie dolne $T(n)$, przyjmując założenie
+Sprawdzimy teraz otrzymany wynik, używając do tego celu metody podstawiania dla oryginalnej rekurencji. Przyjmiemy ponadto, że $T(1)=1$ stanowi jej przypadek brzegowy. Badamy najpierw oszacowanie dolne $T(n)$, wykorzystując założenie
 \[
-	T(n/2) \ge c_1(n/2)^2
+	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor^2
 \]
 dla pewnej stałej $c_1>0$. Stąd
 \[
-	T(n) \ge c_1n^2+cn \ge c_1n^2,
+	T(n) \ge 4c_1\lfloor n/2\rfloor^2+cn > 4c_1(n/2-1)^2+cn = c_1n^2-4c_1n+4c_1+cn \ge c_1n^2,
 \]
-bo $c>0$. Podstawą indukcji jest $T(1)=1$, które spełnia oszacowanie dla $c_1\le1$. A~więc istotnie $T(n)=\Omega(n^2)$.
+co jest prawdą dla $n\ge2$, jeśli przyjmiemy, że $c_1\le c/4$. Podstawą indukcji jest $n=1$, bo $T(1)$ spełnia oszacowanie dla $c_1\le1$. A~więc istotnie $T(n)=\Omega(n^2)$.
 
-Pokażemy jeszcze, że $T(n)=O(n^2)$. W~tym celu można przyjąć takie samo założenie indukcyjne jak przy dowodzie dolnego oszacowania, ale z~przeciwnym znakiem nierówności. Niestety założenie to okazuje się być zbyt słabym i~nie prowadzi do żądanego wyniku. Przyjmijmy zatem, że dla stałych $c_2>0$ oraz $c_3\ge0$ zachodzi mocniejszy warunek
+Pokażemy teraz, że $T(n)=O(n^2)$. W~tym celu można przyjąć analogiczne założenie indukcyjne jak przy dowodzie dolnego oszacowania. Niestety założenie to okazuje się zbyt słabe i~nie prowadzi do żądanego wyniku. Przyjmijmy zatem, że dla stałych $c_2>0$ i~$c_3\ge0$ zachodzi mocniejszy warunek
 \[
-	T(n/2) \le c_2(n/2)^2-c_3(n/2).
+	T(\lfloor n/2\rfloor) \le c_2\lfloor n/2\rfloor^2-c_3\lfloor n/2\rfloor.
 \]
 Wówczas
-\[
-	T(n) \le 4(c_2n^2\!/4-c_3n/2)+cn = c_2n^2-2c_3n+cn \le c_2n^2-c_3n,
-\]
-co jest prawdą, jeśli przyjmiemy $c_3\ge c$. Aby można było potraktować $T(1)=1$ jako podstawę indukcji, musimy przyjąć dodatkowo, że $c_3\le c_2-1$. Zachodzi zatem $T(n)=O(n^2)$ i~dowód dokładnego oszacowania na $T(n)$ jest zakończony.
+\begin{align*}
+	T(n) &\le 4(c_2\lfloor n/2\rfloor^2-c_3\lfloor n/2\rfloor)+cn \\
+	&< 4(c_2(n/2)^2-c_3(n/2-1))+cn \\
+	&= c_2n^2-2c_3n+4c_3+cn \\
+	&\le c_2n^2-c_3n.
+\end{align*}
+Ostatnia nierówność jest prawdziwa dla $n\ge5$, o~ile $c_3\ge5c$.
+
+Zajmiemy się teraz ustaleniem stałych $c_2$ i~$c_3$, aby spełnić podstawę tej indukcji. Wyznaczając początkowe wartości rekurencji, mamy $T(1)=1$, $T(2)=4+2c$, $T(3)=4+3c$, $T(4)=16+12c$. Jeśli przyjmiemy $c_3=5c$, to otrzymujemy, że dla dowolnego $c_2\ge5c+1$ wyrażenie $c_2n^2-c_3n$ stanowi oszacowanie górne dla tych wartości. Zachodzi zatem $T(n)=O(n^2)$ i~dowód dokładnego oszacowania na $T(n)$ jest zakończony.
 
 \exercise %4.2-4
-Dla uproszczenia przyjmijmy, że $T(n)=cn$ w~przypadku, gdy $n\le a$, czyli że dla dostatecznie małego $n$ rekurencja przyjmuje wartość stałą. Drzewo rekursji $T(n)$ zostało zilustrowane na rys.~\ref{fig:4.2-4}.
+Dla uproszczenia przyjmijmy, że $T(n)=ca$ w~przypadku, gdy $n\le a$, czyli że dla dostatecznie małego $n$ rekurencja przyjmuje wartość stałą równą $ca$. Drzewo rekursji $T(n)$ zostało zilustrowane na rys.~\ref{fig:4.2-4}.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig04.3}
 	\end{center}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n-a)+T(a)+cn$.} \label{fig:4.2-4}
 \end{figure}
-Wysokością tego drzewa jest $\lfloor n/a\rfloor$. Koszt wnoszony przez \compound{$i$}{ty} poziom (oprócz zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$. Mamy zatem:
+Wysokością tego drzewa jest $n/a$. Koszt wnoszony przez \compound{$i$}{ty} poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$. Mamy zatem:
 \begin{align*}
-	T(n) &= cn+\sum_{i=1}^{\lfloor n/a\rfloor-1}c(n-a(i-1))+\Theta(1) \\
-	&= cn+c\sum_{i=0}^{\lfloor n/a\rfloor-2}(n-ai)+\Theta(1) \\
-	&= cn+cn\sum_{i=0}^{\lfloor n/a\rfloor-2}1-ca\sum_{i=0}^{\lfloor n/a\rfloor-2}i+\Theta(1) \\
-	&= cn+cn(\lfloor n/a\rfloor-1)-\frac{ca(\lfloor n/a\rfloor-2)(\lfloor n/a\rfloor-1)}{2}+\Theta(1) \\[2mm]
+	T(n) &= cn+\sum_{i=1}^{n/a-1}c(n-a(i-1))+\Theta(1) \\
+	&= cn+c\sum_{i=0}^{n/a-2}(n-ai)+\Theta(1) \\
+	&= cn+cn\sum_{i=0}^{n/a-2}1-ca\sum_{i=0}^{n/a-2}i+\Theta(1) \\
+	&= cn+cn(n/a-1)-\frac{ca(n/a-2)(n/a-1)}{2}+\Theta(1) \\
 	&= \Theta(n^2).
 \end{align*}
 
 \exercise %4.2-5
-Zauważmy, że drzewo rekurencji $T(n)$ na rys.~\ref{fig:4.2-5} dla parametru $\alpha$ jest symetryczne do drzewa $T(n)$ z~parametrem $1-\alpha$, przyjmijmy więc, że $0<\alpha\le1/2$.
+Zauważmy, że drzewo rekurencji $T(n)$ z~rys.~\ref{fig:4.2-5} dla parametru $\alpha$ jest symetryczne do tego samego drzewa z~parametrem $1-\alpha$ -- przyjmijmy więc, że $0<\alpha\le1/2$.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig04.4}
@@ -235,33 +241,31 @@ Zauważmy, że drzewo rekurencji $T(n)$ na rys.~\ref{fig:4.2-5} dla parametru $\
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(\alpha n)+T((1-\alpha)n)+cn$, gdzie $0<\alpha\le1/2$.} \label{fig:4.2-5}
 \end{figure}
 
-Wyznaczmy najpierw oszacowanie dolne rekurencji. Na \compound{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą węzły o~wartościach $c\alpha^in$, a~więc elementy ze skrajnie lewej gałęzi. Sprawdzając kiedy osiągną one wartość stałą $d>0$, wyznaczamy najgłębszy poziom o~komplecie węzłów. Niższe poziomy są coraz mniej liczne, zatem sumując koszt węzłów drzewa $T(n)$ od korzenia aż do tego poziomu, uzyskujemy oszacowanie dolne rekurencji. Na pewnej głębokości $h$ będzie $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$. Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$. Każdy poziom o~głębokości nieprzekraczającej $h$ wnosi koszt $cn$, więc oszacowaniem dolnym rekurencji jest $T(n)=\Omega(cn(h+1))=\Omega(n\lg n)$.
+Wyznaczmy najpierw oszacowanie dolne rekurencji. Na \compound{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi. Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$. Oznaczmy przez $h$ głębokość tego poziomu. Wówczas $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$. Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$. Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż \compound{$h$}{ty}, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
 
-Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt wśród wszystkich poziomów, możemy dojść do oszacowania górnego dla $T(n)$. Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)$. Także w~tym przypadku mamy $H=\Theta(\lg n)$, a~więc $T(n)=O(cn(H+1))=O(n\lg n)$, skąd asymptotycznie dokładnym rozwiązaniem rekurencji jest $\Theta(n\lg n)$.
+Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt na każdym poziomie, możemy dojść do oszacowania górnego dla $T(n)$. Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)=\Theta(\lg n)$, a~więc $T(n)\le cn(H+1)=O(n\lg n)$. Asymptotycznie dokładnym oszacowaniem rekurencji jest zatem $\Theta(n\lg n)$.
 
 \subchapter{Metoda rekurencji uniwersalnej}
-
-\note{Zarówno w~wersji oryginalnej jak i~w~tłumaczeniu treści twierdzenia~4.1 znajduje się poważny brak, który uniemożliwia m.in.\ rozwiązanie \refExercise{4.4-3}. Dla stosowanej tam stałej\/ $c$ podany jest warunek, aby była ona mniejsza od\/ $1$, podczas gdy poprawnym zakresem dla niej powinien być przedział\/ $(0,1)$.}
 
 \exercise %4.3-1
 
 \subexercise
-W~równaniu~(4.5) przyjmujemy $a=4$ i~$b=2$ oraz $f(n)=n$. Ponieważ $f(n)=O(n^{2-\epsilon})$ dla $0<\epsilon\le1$, to z~tw.~o~rekurencji uniwersalnej mamy $T(n)=\Theta(n^2)$.
+We wzorze~(4.5) przyjmujemy $a=4$,~$b=2$ oraz $f(n)=n$. Ponieważ $f(n)=O(n^{2-\epsilon})$ dla $\epsilon\le1$, to z~tw.~o~rekurencji uniwersalnej mamy $T(n)=\Theta(n^2)$.
 
 \subexercise
-Postępując analogicznie jak w~poprzednim punkcie, mamy te same wartości $a$ i~$b$, ale teraz $f(n)=n^2$. Z~tego, że $f(n)=\Theta(n^2)$, dostajemy $T(n)=\Theta(n^2\lg n)$.
+Tutaj mamy te same wartości $a$ i~$b$ jak w~poprzednim punkcie, ale $f(n)=n^2$. Z~tego, że $f(n)=\Theta(n^2)$, dostajemy $T(n)=\Theta(n^2\lg n)$.
 
 \subexercise
-Dla tych samych $a$ i~$b$ oraz $f(n)=n^3$ mamy $f(n)=\Omega(n^{2+\epsilon})$, gdzie $0<\epsilon\le1$ oraz
+Dla tych samych $a$ i~$b$ oraz $f(n)=n^3$ mamy $f(n)=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1$ oraz
 \[
 	4f(n/2) = 4n^3\!/8 = n^3\!/2 = f(n)/2 \le cf(n),
 \]
 o~ile $c\ge1/2$, a~zatem warunek regularności jest spełniony i~$T(n)=\Theta(n^3)$.
 
 \exercise %4.3-2
-Rozwiążmy $T(n)$, korzystając z~metody rekurencji uniwersalnej. Ponieważ $n^{\log_ba}=n^{\lg7}$ oraz $f(n)=n^2=O(n^{\lg7-\epsilon})$ dla $0<\epsilon\le\lg7-2$, to zachodzi $T(n)=\Theta(n^{\lg7})$.
+Rozwiążmy $T(n)$, korzystając z~metody rekurencji uniwersalnej. Stosujemy przypadek~1 tw.~4.1 i~stwierdzamy, że $n^2=O(n^{\lg7-\epsilon})$ dla $\epsilon\le\lg7-2$, a~więc zachodzi $T(n)=\Theta(n^{\lg7})$.
 
-Pozostaje teraz zbadanie nierówności $T'(n)<T(n)$ w~zależności od parametru $a$, bo w~rekurencji $T'(n)$ jest $n^{\log_ba}=n^{\log_4a}$ oraz $f(n)=n^2$. Załóżmy, że $f(n)=O(n^{\log_4a-\epsilon})$, co jest prawdą dla $a>16$ i~wtedy $T'(n)=\Theta(n^{\log_4a})$. Algorytm $A'$ jest efektywniejszy od algorytmu $A$, gdy $\log_4a<\lg7$, skąd $16<a<49$. Pozostałe przypadki tw.~4.1 można stosować, o~ile $a\le16$, ale wtedy $A'$ jest wolniejszy od $A$, zatem pomińmy ich sprawdzanie.
+Pozostaje teraz zbadanie nierówności $T'(n)<T(n)$ w~zależności od parametru $a$, bo w~rekurencji $T'(n)$ jest $n^{\log_ba}=n^{\log_4a}$ oraz $f(n)=n^2$. Załóżmy, że dla pewnej stałej $\epsilon>0$, $f(n)=O(n^{\log_4a-\epsilon})$, co jest prawdą dla $a>16$ i~wtedy $T'(n)=\Theta(n^{\log_4a})$. Algorytm $A'$ jest efektywniejszy od algorytmu $A$, gdy $\log_4a<\lg7$, skąd $16<a<49$. Pozostałe przypadki tw.~4.1 można stosować, o~ile $a\le16$, ale pominiemy ich sprawdzanie, bo dążymy do maksymalizacji $a$.
 
 Największym całkowitym $a$, dla którego algorytm $A'$ jest bardziej efektywny od algorytmu $A$, jest~$a=48$.
 
@@ -269,16 +273,16 @@ Największym całkowitym $a$, dla którego algorytm $A'$ jest bardziej efektywny
 Ponieważ $a=1$ oraz $b=2$, to $n^{\log_ba}=n^0=1$ jest funkcją stałą. W~rekurencji tej $f(n)$ także jest stałe, a~więc $f(n)=\Theta(n^{\log_ba})$ i~$T(n)=\Theta(n^{\log_ba}\lg n)=\Theta(\lg n)$.
 
 \exercise %4.3-4
-Dla rekurencji $T(n)$ mamy $a=4$, $b=2$ oraz $f(n)=n^2\lg n$, a~więc $n^{\log_ba}=n^2$, ale nie istnieje takie $\epsilon>0$, że $f(n)=\Omega(n^{2+\epsilon})$. Nie można zatem zastosować w~rozwiązaniu twierdzenia o~rekurencji uniwersalnej, zatem znajdziemy asymptotyczne górne oszacowanie na $T(n)$, zgadując rozwiązanie, a~następnie dowodząc jego poprawności metodą podstawiania.
+Dla rekurencji $T(n)$ mamy $a=4$, $b=2$ oraz $f(n)=n^2\lg n$, a~więc $n^{\log_ba}=n^2$, ale nie istnieje takie $\epsilon>0$, że $f(n)=\Omega(n^{2+\epsilon})$. Nie można zatem zastosować w~rozwiązaniu twierdzenia o~rekurencji uniwersalnej. Asymptotyczne górne oszacowanie na $T(n)$ znajdziemy natomiast, zgadując rozwiązanie, a~następnie dowodząc jego poprawności metodą podstawiania.
 
-W~pierwszym wywołaniu rekurencja wnosi koszt równy $n^2\lg n$. Następnie 4~razy wywołuje się $T(n/2)$, co daje koszt
+W~pierwszym wywołaniu rekurencja wnosi koszt równy $n^2\lg n$. Następnie mamy 4 wywołania $T(n/2)$, co daje koszt
 \[
 	4T(n/2) = 4(n/2)^2\lg(n/2) = n^2\lg n-n^2.
 \]
 Kolejne poziomy wywołań kosztują:
 \begin{gather*}
 	16T(n/4) = 16(n/4)^2\lg(n/4) = n^2\lg n-2n^2, \qquad\phantom{\text{itd.}} \\
-	64T(n/8) = 64(n/8)^2\lg(n/8) = n^2\lg n-3n^2, \qquad\text{itd.}
+	64T(n/8) = 64(n/8)^2\lg(n/8) = n^2\lg n-3n^2 \qquad\text{itd.}
 \end{gather*}
 Z~otrzymanych wyników wnioskujemy, że \compound{$i$}{ty} poziom wprowadza koszt równy $n^2\lg n-in^2$. Liście o~koszcie stałym znajdują się na poziomie $\lg n$ i~jest ich $4^{\lg n}=n^2$, więc dostajemy:
 \begin{align*}
@@ -299,14 +303,14 @@ dla pewnej stałej $c>0$. Mamy teraz:
 	&= cn^2\lg^2n-2cn^2\lg n+cn^2+n^2\lg n \\
 	&\le cn^2\lg^2n.
 \end{align*}
-Ostatnią nierówność dla wszystkich $n\ge2$ spełniamy, dobierając $c\ge1$. Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji, zaś $T(2)=8$ oraz $T(3)=4+9\lg3$ jako podstawę indukcji, ponieważ dla $n>3$ rekurencja nie zależy już bezpośrednio od $T(1)$, a~otrzymane oszacowanie dla $T(2)$ i~$T(3)$ jest spełnione. Rozwiązaniem rekurencji $T(n)$ jest zatem $O(n^2\lg^2n)$.
+Ostatnią nierówność dla wszystkich $n\ge4$ spełniamy, dobierając $c\ge2/3$. Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji, zaś $n=2$ oraz $n=3$ jako podstawę indukcji, ponieważ dla $n\ge4$ rekurencja nie zależy już bezpośrednio od $T(1)$, a~otrzymane oszacowanie dla $T(2)=8$ i~$T(3)=4+9\lg3$ jest spełnione, o~ile $c\ge2$. Rozwiązaniem rekurencji $T(n)$ jest zatem $O(n^2\lg^2n)$.
 
 \exercise %4.3-5
-Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla pewnego $0<\epsilon\le1$. Jednak dla $n=2\pi$ mamy
+Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla pewnego $0<\epsilon\le1$. Jednak dla $n=2(2k+1)\pi$, gdzie $k=0$,~1,~\dots, mamy
 \[
-	af(n/b) = 3\pi \quad\text{oraz}\quad f(n) = 2\pi,
+	af(n/b) = 3(2k+1)\pi \quad\text{oraz}\quad f(n) = 2(2k+1)\pi,
 \]
-a~więc nierówność $af(n/b)\le cf(n)$ z~warunku regularności nie zachodzi dla żadnego $0<c<1$.
+a~więc nierówność $af(n/b)\le cf(n)$ zachodzi dla $c\ge3/2$ i~warunek regularności nie jest spełniony.
 
 \subchapter{Dowód twierdzenia o~rekurencji uniwersalnej}
 
@@ -318,14 +322,14 @@ Wykażemy metodą indukcji, że $n_j=\bigl\lceil n/b^j\bigr\rceil$. Z~definicji~
 co należało pokazać.
 
 \exercise %4.4-2
-Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\Theta(n^{\log_ba}\lg^kn)$ dla $k\ge0$, to zachodzi $T(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$. Dla tak zmodyfikowanego twierdzenia należy przeprowadzić dowód analogicznie zmodyfikowanych lematów~4.3 i~4.4 (oznaczonych poniżej przez 4.3$'$ oraz 4.4$'$).
+Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\Theta(n^{\log_ba}\lg^kn)$ dla $k\ge0$, to zachodzi $T(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$. Dla tak zmodyfikowanego twierdzenia przeprowadzimy dowód analogicznie zmodyfikowanych lematów~4.3 i~4.4 (oznaczonych poniżej przez 4.3$'$ oraz 4.4$'$).
 
 \begin{proof}[Dowód lematu~4.3\/$'$]
 	Przy założeniu, że $f(n)=\Theta(n^{\log_ba}\lg^kn)$, otrzymujemy
 	\[
 		f(n/b^j)=\Theta\bigl((n/b^j)^{\log_ba}\lg^k(n/b^j)\bigr)
 	\]
-	i podstawiamy do wzoru~(4.7):
+	i~podstawiamy do wzoru~(4.7):
 	\[
 		g(n) = \Theta\biggl(\sum_{j=0}^{\log_bn-1}a^j\Bigl(\frac{n}{b^j}\Bigr)^{\log_ba}\lg^k\frac{n}{b^j}\biggr).
 	\]
@@ -336,7 +340,7 @@ Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\T
 		&= n^{\log_ba}\cdot\Theta(\lg^{k+1}n) \\[1mm]
 		&= \Theta(n^{\log_ba}\lg^{k+1}n).
 	\end{align*}
-	Skorzystano z~wzoru~(3.2), podstawiając $\lg n$ w~miejsce $n$, a~następnie korzystając z~tego, że
+	Skorzystano ze wzoru~(3.2), podstawiając $\lg n$ w~miejsce $n$, a~następnie z~tego, że
 	\[
 		\sum_{j=0}^{\log_bn-1}\Theta(\lg^kn) = \log_bn\cdot\Theta(\lg^kn) = \Theta(\lg^{k+1}n).
 	\]
@@ -344,7 +348,7 @@ Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\T
 \end{proof}
 
 \begin{proof}[Dowód lematu~4.4\/$'$]
-	Wystarczy wykazać jedynie drugi przypadek, bo $f(n)=\Theta(n^{\log_ba}\lg^kn)$. Z~lematu~4.2:
+	Wystarczy wykazać jedynie drugi przypadek, bo $f(n)=\Theta(n^{\log_ba}\lg^kn)$. Z~lematu~4.2 i~4.3$'$:
 	\[
 		T(n) = \Theta(n^{\log_ba})+\Theta(n^{\log_ba}\lg^{k+1}n) = \Theta(n^{\log_ba}\lg^{k+1}n),
 	\]
@@ -352,31 +356,35 @@ Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\T
 \end{proof}
 
 \exercise %4.4-3
-Warunek $af(n/b)\le cf(n)$ implikuje
+\note{Aby udowodnić to wynikanie, musimy założyć dodatkowo, że\/ $c>0$ i~że funkcja\/ $f(n)$ jest asymptotycznie dodatnia. W~tw.~4.1 oba te warunki wynikają z~faktu, że\/ $f(n)=\Omega(n^{\log_ba+\epsilon})$.}
+
+\noindent Załóżmy, że danej funkcji asymptotycznie dodatniej $f(n)$ oraz stałych $a\ge1$, $b>1$, zachodzi warunek regularności, tzn.\ istnieje stała $0<c<1$ oraz stała $n_0>0$, że dla każdego $n\ge n_0$ spełnione jest $af(n/b)\le cf(n)$. Będziemy przyjmować, że $n_0$ zostało wybrane w~taki sposób, że dla wszystkich $n\ge n_0/b$ funkcja $f(n)$ przyjmuje wartości dodatnie. Dla $n\ge n_0$ mamy
 \[
 	f(n) \ge (a/c)f(n/b),
 \]
-a~zatem iterując powyższe, dostajemy
+a~zatem, iterując tę nierówność, dostajemy
 \[
-	f(n) \ge (a/c)f(n/b) \ge (a/c)^2f\bigl(n/b^2\bigr) \ge \dots \ge (a/c)^if\bigl(n/b^i\bigr).
+	f(n) \ge (a/c)f(n/b) \ge (a/c)^2f(n/b^2) \ge \dots \ge (a/c)^if(n/b^i).
 \]
-Dla $i=\lceil\log_bn\rceil$ mamy
+Zakładamy, że nie można wykonać większej ilości iteracji, tzn.\ $n/b^{i-1}\ge n_0$ oraz $n/b^i<n_0$. Stąd $\log_b(n/n_0)<i\le\log_b(n/n_0)+1$, czyli, ze wzoru~(3.3), $i=\lfloor\log_b(n/n_0)+1\rfloor$. Zachodzi więc
 \[
-	f(n) \ge (a/c)^{\lceil\log_bn\rceil}f\bigl(n/b^{\lceil\log_bn\rceil}\bigr).
+	f(n) \ge (a/c)^{\lfloor\log_b(n/n_0)+1\rfloor}f\bigl(n/b^{\lfloor\log_b(n/n_0)+1\rfloor}\bigr).
 \]
-Na mocy nierówności~(3.3) zachodzi $\log_bn\le\lceil\log_b n\rceil<\log_bn+1$. Zauważmy, że przy zadanych ograniczeniach na $a$ i~$c$, $f(n)$ nie może być funkcją nierosnącą, a~więc
+Zauważmy, że przy zadanych ograniczeniach na $a$ i~$c$, $a/c>1$, więc $f(n)$ musi być funkcją rosnącą dla $n\ge n_0/b$, skąd
 \[
-	f\bigl(n/b^{\lceil\log_bn\rceil}\bigr) > f(n/b^{\log_bn+1}) = f(1/b).
+	f\bigl(n/b^{\lfloor\log_b(n/n_0)+1\rfloor}\bigr) > f(n/b^{\log_b(n/n_0)+1}) = f(n_0/b).
 \]
 Mamy następnie
+\begin{align*}
+	f(n) &> (a/c)^{\log_b(n/n_0)}\,f(n/b^{\log_b(n/n_0)+1}) \\[1mm]
+	&= \frac{(n/n_0)^{\log_ba}}{(n/n_0)^{\log_bc}}\,f(n_0/b) \\[1mm]
+	&= n^{\log_ba-\log_bc}\cdot n_0^{\log_bc-\log_ba}\cdot f(n_0/b).
+\end{align*}
+Dwa ostatnie czynniki powyższego wyrażenia są dodatnie i~niezależne od $n$, możemy więc potraktować ich iloczyn jako stałą $d>0$. Ponieważ $0<c<1$ oraz $b>1$, to $\log_bc<0$, przyjmijmy więc $\epsilon=-\log_bc$. Otrzymujemy zatem, że dla dowolnego $n\ge n_0$
 \[
-	f(n) > \frac{a^{\log_bn}}{c^{\log_bn+1}}\,f(n/b^{\log_bn+1}) = \frac{n^{\log_ba}}{cn^{\log_bc}}\,f(1/b) = \frac{f(1/b)}{c}\cdot\frac{n^{\log_ba}}{n^{\log_bc}}.
+	f(n) > n^{\log_ba+\epsilon}\cdot d = \Omega(n^{\log_ba+\epsilon}),
 \]
-Ponieważ $0<c<1$ oraz $b>1$, to $\log_bc<0$, przyjmijmy więc $\epsilon=-\log_bc$, skąd
-\[
-	f(n) > \frac{f(1/b)}{c}\cdot\frac{n^{\log_ba}}{n^{-\epsilon}} = \frac{f(1/b)}{c}\,n^{\log_ba+\epsilon},
-\]
-a~zatem $f(n)=\Omega(n^{\log_ba+\epsilon})$, co należało wykazać.
+co należało wykazać.
 
 \problems
 
@@ -384,7 +392,7 @@ a~zatem $f(n)=\Omega(n^{\log_ba+\epsilon})$, co należało wykazać.
 W~punktach~(a)\nobreakdash--(f) skorzystano z~twierdzenia o~rekurencji uniwersalnej.
 
 \subproblem %4-1(a)
-Mamy $n^{\log_ba}=n^{\log_22}=n$ oraz $f(n)=n^3=\Omega(n^{1+\epsilon})$ dla $0<\epsilon\le2$. Ponieważ warunek regularności jest spełniony:
+Mamy $n^{\log_ba}=n^{\log_22}=n$ oraz $f(n)=n^3=\Omega(n^{1+\epsilon})$ dla $\epsilon\le2$. Ponieważ warunek regularności jest spełniony:
 \begin{align*}
 	2f(n/2) &\le cf(n) \\
 	2n^3\!/8 &\le cn^3 \\
@@ -393,7 +401,7 @@ Mamy $n^{\log_ba}=n^{\log_22}=n$ oraz $f(n)=n^3=\Omega(n^{1+\epsilon})$ dla $0<\
 to stąd wnioskujemy, że $T(n)=\Theta(n^3)$.
 
 \subproblem %4-1(b)
-Mamy $n^{\log_ba}=n^{\log_{10/9}1}=1$ oraz $f(n)=n=\Omega(n^\epsilon)$ dla $0<\epsilon\le1$. Badamy warunek regularności:
+Mamy $n^{\log_ba}=n^{\log_{10/9}1}=n^0=1$ oraz $f(n)=n=\Omega(n^\epsilon)$ dla $\epsilon\le1$. Badamy warunek regularności:
 \begin{align*}
 	f(9n/10) &\le cf(n) \\
 	9n/10 &\le cn \\
@@ -405,7 +413,7 @@ i~stwierdzamy, że $T(n)=\Theta(n)$.
 Mamy $n^{\log_ba}=n^{\log_416}=n^2$ oraz $f(n)=n^2=\Theta(n^2)$, a~stąd $T(n)=\Theta(n^2\lg n)$.
 
 \subproblem %4-1(d)
-Mamy $n^{\log_ba}=n^{\log_37}$ oraz $f(n)=n^2=\Omega(n^{\log_37+\epsilon})$ dla $0<\epsilon\le2-\log_37$. Warunek regularności zachodzi:
+Mamy $n^{\log_ba}=n^{\log_37}$ oraz $f(n)=n^2=\Omega(n^{\log_37+\epsilon})$ dla $\epsilon\le2-\log_37$. Warunek regularności zachodzi:
 \begin{align*}
 	7f(n/3) &\le cf(n) \\
 	7n^2\!/9 &\le cn^2 \\
@@ -414,7 +422,7 @@ Mamy $n^{\log_ba}=n^{\log_37}$ oraz $f(n)=n^2=\Omega(n^{\log_37+\epsilon})$ dla 
 a~zatem $T(n)=\Theta(n^2)$.
 
 \subproblem %4-1(e)
-Mamy $n^{\log_ba}=n^{\lg7}$ oraz $f(n)=n^2=O(n^{\lg7-\epsilon})$ dla $0<\epsilon\le\lg7-2$, a~stąd $T(n)=\Theta(n^{\lg7})$.
+Mamy $n^{\log_ba}=n^{\lg7}$ oraz $f(n)=n^2=O(n^{\lg7-\epsilon})$ dla $\epsilon\le\lg7-2$, a~stąd $T(n)=\Theta(n^{\lg7})$.
 
 \subproblem %4-1(f)
 Mamy $n^{\log_ba}=n^{\log_42}=n^{1/2}$ oraz $f(n)=\sqrt{n}=\Theta(n^{1/2})$, a~stąd $T(n)=\Theta\bigl(\!\sqrt{n}\lg n\bigr)$.
@@ -432,7 +440,7 @@ Zauważmy, że rekurencja rozwija się następująco:
 gdzie $c=T(2)$ jest pewną stałą. Otrzymujemy zatem, że $T(n)=\Theta(n^2)$.
 
 \subproblem %4-1(h)
-Niech $n=2^m$, skąd $m=\lg n$. Rekurencja przyjmuje teraz postać
+Niech $n=2^m$, skąd $m=\lg n$. Rekurencja przyjmuje postać
 \[
 	T(2^m) = T(2^{m/2})+1.
 \]
@@ -440,14 +448,14 @@ Podstawiając $S(m)$ za $T(2^m)$, otrzymujemy
 \[
 	S(m) = S(m/2)+1.
 \]
-Ponieważ rozwiązaniem ostatniej rekurencji jest $\Theta(\lg m)$ (co wykazano w~\refExercise{4.3-3}), to stąd mamy, że $T(n)=T(2^m)=S(m)=\Theta(\lg m)=\Theta(\lg\lg n)$.
+Ponieważ rozwiązaniem ostatniej rekurencji jest $\Theta(\lg m)$ (co pokazano w~\refExercise{4.3-3}), to stąd mamy, że $T(n)=T(2^m)=S(m)=\Theta(\lg m)=\Theta(\lg\lg n)$.
 
 \problem{Szukanie brakującej liczby całkowitej} %4-2
 Liczby z~zakresu $0\twodots n$ reprezentowane są binarnie za pomocą $\lfloor\lg n\rfloor+1$ bitów. Można dla wygody przyjąć, że $n$ jest potęgą~2 pomniejszoną o~1. W~przeciwnym przypadku wystarczy zwiększyć $n$, aby było o~1 mniejsze od najbliższej potęgi~2 większej od $n$. Jednocześnie rozszerzamy tablicę $A$, umieszczając w~niej nowe liczby naturalne aż do nowej wartości $n$. Ta modyfikacja sprawia, że wszystkie liczby w~$A$ są reprezentowane tą samą ilością bitów, a~rozmiar problemu zwiększa się co najwyżej dwukrotnie.
 
-Poprzez badanie najmniej znaczących bitów liczb z~tablicy $A$, sprawdzamy parzystość tych liczb. W~zakresie $0\twodots n$ jest $n/2$ liczb parzystych i~tyle samo nieparzystych. Jeśli wśród pobranych bitów jest więcej jedynek, to brakuje liczby parzystej, a~jeśli więcej zer, to brakująca liczba jest nieparzysta. W~zależności od przypadku odrzucamy $n/2$ liczb o~parzystości różnej od brakującej. Wśród pozostałych badamy następnie drugi najmniej znaczący bit i~analogicznie postępując, wyznaczamy $n/4$ kolejnych liczb do wyeliminowania. Po wykonaniu opisanych czynności aż do odrzucenia wszystkich liczb z~tablicy, poznamy tę, której brakuje.
+Poprzez badanie najmniej znaczących bitów liczb z~tablicy $A$ sprawdzamy parzystość tych liczb. W~zakresie $0\twodots n$ jest $(n+1)/2$ liczb parzystych i~tyle samo nieparzystych. Jeśli wśród pobranych bitów jest więcej jedynek, to brakuje liczby parzystej, a~jeśli więcej zer, to brakująca liczba jest nieparzysta. W~zależności od przypadku odrzucamy $(n+1)/2$ liczb o~parzystości różnej od brakującej. Wśród pozostałych $(n-1)/2$ liczb badamy drugi najmniej znaczący bit i~analogicznie postępując, wyznaczamy $(n+1)/4$ kolejnych liczb do wyeliminowania. Po wykonaniu opisanych czynności dla wszystkich bitów, poznamy brakującą liczbę.
 
-Czas działania zaprezentowanego tutaj algorytmu można zapisać w~postaci rekurencji $T(n)=T(n/2)+n$, której rozwiązaniem jest $O(n)$, co można łatwo pokazać przy użyciu twierdzenia~4.1. Widać teraz, że modyfikacja oryginalnego problemu (z~dowolnym $n$) wprowadziła tylko stały czynnik do czasu działania algorytmu.
+Czas działania zaprezentowanego tutaj algorytmu można zapisać w~postaci rekurencji $T(n)=T(\lfloor n/2\rfloor)+n$, której rozwiązaniem jest $O(n)$, co można pokazać, korzystając z~tw.~4.1. Widać teraz, że modyfikacja oryginalnego problemu (z~dowolnym $n$) wprowadziła tylko stały czynnik do czasu działania algorytmu.
 
 \problem{Koszty przekazywania parametrów} %4-3
 
@@ -461,7 +469,7 @@ W~przypadku drugiej strategii na każdym poziomie rekursji należy dodać skład
 		T(\lfloor n/2\rfloor)+\Theta(N), & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Ponieważ $\Theta(N)$ jest stałe ze względu na rozmiar podproblemu $n$, to stąd rozwiązaniem powyższej rekurencji jest $T(n)=\Theta(N\lg n)$, a~więc $T(N)=\Theta(N\lg N)$.
+Ponieważ $\Theta(N)$ nie zależy od rozmiaru podproblemu $n$, to stąd rozwiązaniem powyższej rekurencji jest $T(n)=\Theta(N\lg n)$, a~więc $T(N)=\Theta(N\lg N)$.
 
 W~ostatnim przypadku przekazujemy podtablicę o~rozmiarze równym rozmiarowi podproblemu, co prowadzi do rekurencji
 \[
@@ -470,7 +478,7 @@ W~ostatnim przypadku przekazujemy podtablicę o~rozmiarze równym rozmiarowi pod
 		T(\lfloor n/2\rfloor)+\Theta(\lfloor n/2\rfloor), & \text{jeśli $n>1$},
 	\end{cases}
 \]
-którą można rozwiązać przy użyciu twierdzenia o~rekurencji uniwersalnej po zignorowaniu podłóg. Otrzymujemy wynik $T(n)=\Theta(n)$, skąd $T(N)=\Theta(N)$.
+którą można rozwiązać przy użyciu twierdzenia o~rekurencji uniwersalnej. Otrzymujemy wynik $T(n)=\Theta(n)$, skąd $T(N)=\Theta(N)$.
 
 \subproblem %4-3(b)
 W~przypadku zwykłego przekazywania wskaźnika mamy oryginalną postać rekurencji, której rozwiązaniem dla $n=N$ jest $T(N)=\Theta(N\lg N)$.
@@ -484,19 +492,19 @@ Rekurencja dla drugiej strategii przedstawia się następująco:
 \]
 ponieważ należy przekazać całą tablicę do obu wywołań rekurencyjnych. Na każdym poziomie dodajemy składnik rzędu $\Theta(N)$, zatem rozwiązaniem tej rekurencji jest iloczyn tego składnika i~rozwiązania rekurencji z~pierwszego przypadku, czyli $T(n)=\Theta(Nn\lg n)$, a~stąd mamy $T(N)=\Theta(N^2\lg N)$.
 
-Ostatni przypadek wprowadza narzut w~postaci przekazywania podtablicy o~rozmiarze podproblemu do każdego wywołania rekurencyjnego, jednak czas ten jest pochłaniany przez składnik liniowy odpowiadający za czas przeznaczony na procedurę \proc{Merge}, przez co rozwiązaniem jest identyczny wynik jak w~pierwszej strategii: $T(N)=\Theta(N\lg N)$.
+W~ostatniej strategii do każdego wywołania rekurencyjnego przekazujemy podtablicę o~rozmiarze podproblemu, jednak czas na to poświęcany jest identyczny ze składnikiem liniowym odpowiadającym za czas przeznaczany na procedurę \proc{Merge}. Rekurencja ma zatem identyczną postać jak w~oryginalnej analizie tego algorytmu i~jej rozwiązaniem jest $T(N)=\Theta(N\lg N)$.
 
 \problem{Więcej przykładów rekurencji} %4-4
 
 \subproblem %4-4(a)
-Wykorzystując twierdzenie o~rekurencji uniwersalnej, mamy $n^{\log_ba}=n^{\lg3}$ oraz $f(n)=n\lg n=O(n^{\lg3-\epsilon})$, gdzie $0<\epsilon<\lg3-1$, a~stąd $T(n)=\Theta(n^{\lg3})$.
+Wykorzystując twierdzenie o~rekurencji uniwersalnej, mamy $n^{\log_ba}=n^{\lg3}$ oraz $f(n)=n\lg n=O(n^{\lg3-\epsilon})$, gdzie $\epsilon<\lg3-1$, a~stąd $T(n)=\Theta(n^{\lg3})$.
 
 \subproblem %4-4(b)
 Z~twierdzenia o~rekurencji uniwersalnej obliczamy $n^{\log_ba}=n^{\log_55}=n$, jednak dla żadnego $\epsilon>0$ nie jest prawdą, że
 \[
 	f(n) = \frac{n}{\lg n} = O(n^{1-\epsilon}),
 \]
-ponieważ dla pewnej stałej $c>0$ i~dowolnie dużych $n$ musiałoby zachodzić
+ponieważ dla pewnej stałej $c>0$ i~dostatecznie dużych $n$ musiałoby zachodzić
 \[
 	\frac{n^\epsilon}{\lg n} \le c,
 \]
@@ -509,7 +517,7 @@ Skorzystajmy zatem z~innego sposobu na obliczenie $T(n)$, rozważając rodzinę 
 		aT_a(n/a)+n/\!\lg n, & \text{jeśli $n\ge a$},
 	\end{cases}
 \]
-gdzie $a\ge2$ jest liczbą całkowitą. Skorzystamy teraz z~techniki zamiany zmiennych, podstawiając $m=\log_an$, skąd $n=a^m$ i~otrzymując
+gdzie $a\ge2$ jest liczbą całkowitą. Wykorzystamy technikę zamiany zmiennych, podstawiając $m=\log_an$, skąd $n=a^m$, dzięki czemu otrzymujemy
 \[
 	T_a(a^m) = aT_a(a^{m-1})+\frac{a^m}{m\lg a}.
 \]
@@ -532,7 +540,7 @@ Zamieniając z~powrotem $S_a(m)$ na $T_a(n)$, otrzymujemy rozwiązanie
 Stosując znalezione oszacowanie do rekurencji $T(n)\equiv T_5(n)$ z~treści zadania, dostajemy oczywiście $T(n)=\Theta(n\lg\lg n)$.
 
 \subproblem %4-4(c)
-Z~twierdzenia o~rekurencji uniwersalnej mamy $n^{\log_ba}=n^{\lg4}=n^2$ oraz $f(n)=n^{5/2}=\Omega(n^{2+\epsilon})$, gdzie $0<\epsilon\le1/2$. Badamy warunek regularności:
+Z~twierdzenia o~rekurencji uniwersalnej mamy $n^{\log_ba}=n^{\lg4}=n^2$ oraz $f(n)=n^{5/2}=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1/2$. Badamy warunek regularności:
 \begin{align*}
 	4f(n/2) &\le cf(n) \\
 	\frac{4n^{5/2}}{2^{5/2}} &\le cn^{5/2} \\
@@ -577,7 +585,7 @@ gdzie ostatnia nierówność zachodzi, o~ile
 \]
 co spełniamy poprzez przyjęcie $c_2\le0{,}3$.
 
-Dowód asymptotycznie dokładnego oszacowania dla $T(n)$ kończymy, wybierając odpowiednie wartości dla podstaw obu indukcji. Zauważmy, że obliczanie wartości rekurencji z~wzoru $T(n)=3T(n/3+5)+n/2$ dla $n\le7$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów. Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le7$ będzie przypadkiem brzegowym rekurencji. W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji uczyńmy $T(i)$, gdzie $30\le i\le 74$, od których bezpośrednio zależą wyrazy rekursji dla tego zakresu $n$. Oszacowania weryfikujemy programem komputerowym, uzasadniając poprawny dobór stałych $c_1$ i~$c_2$. A~zatem $T(n)=\Theta(n\lg n)$.
+Dowód asymptotycznie dokładnego oszacowania dla $T(n)$ kończymy, wybierając odpowiednie wartości dla podstaw obu indukcji. Zauważmy, że obliczanie wartości rekurencji ze wzoru $T(n)=3T(n/3+5)+n/2$ dla $n\le7$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów. Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le7$ będzie przypadkiem brzegowym rekurencji. W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji uczyńmy wszystkie $n=30$, 31,~\dots,~74. Oszacowania w~tych przypadkach weryfikujemy programem komputerowym, uzasadniając poprawny dobór stałych $c_1$ i~$c_2$. A~zatem $T(n)=\Theta(n\lg n)$.
 
 \subproblem %4-4(e)
 Mamy do czynienia z~rekurencją $T_a(n)$ dla $a=2$, którą rozważaliśmy w~punkcie~(b). Zgodnie z~przedstawionym tam rozumowaniem wnioskujemy, że $T(n)=\Theta(n\lg\lg n)$.
@@ -591,18 +599,18 @@ W~celu rozwiązania rekurencji wykorzystamy metodę drzewa rekursji do odgadnię
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n/2)+T(n/4)+T(n/8)+n$.} \label{fig:4-4f}
 \end{figure}
 
-Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi, więc na pewnym poziomie $h$ gałąź ta posiada liścia. Ponieważ koszt węzła z~\compound{$i$}{tego} poziomu tej gałęzi wynosi $n/8^i$ oraz $T(1)=\Theta(1)$, to $h=\Theta(\log_8n)$. Kosztem \compound{$i$}{tego} poziomu jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \compound{$h$}{tego}, otrzymujemy przybliżone oszacowanie rekurencji od dołu:
+Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi. Niech $T(1)=1$. Ponieważ koszt węzła z~tej gałęzi znajdującego się na \compound{$i$}{tym} poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$. Łącznym kosztem na \compound{$i$}{tym} poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \compound{$h$}{tego}, otrzymujemy oszacowanie rekurencji od dołu:
 \[
-	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-7/8\cdot n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
+	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-(7/8)n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
 \]
 
-Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są węzły ze skrajnie lewej gałęzi, które wnoszą koszt równy $n/2^i$ na \compound{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\Theta(\lg n)$. Mamy
+Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi. Węzły te wnoszą koszt równy $n/2^i$ na \compound{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\lg n$. Mamy
 \[
-	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-\frac{7}{8}} = O(n),
+	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-7/8} = O(n),
 \]
 co pozwala przypuszczać, że oszacowaniem dokładnym na $T(n)$ jest $\Theta(n)$.
 
-Przeprowadźmy teraz dowód tego wyniku metodą przez podstawianie. Załóżmy, że:
+Przeprowadźmy teraz dowód tego wyniku metodą podstawiania. Załóżmy, że:
 \begin{gather*}
 	c_1(n/2) \le T(n/2) \le c_2(n/2), \\
 	c_1(n/4) \le T(n/4) \le c_2(n/4), \\
@@ -612,40 +620,42 @@ gdzie $c_1$, $c_2>0$ to pewne stałe. Mamy zatem
 \[
 	T(n) \ge c_1n/2+c_1n/4+c_1n/8+n = 7c_1n/8+n \ge c_1n,
 \]
-przy czym $c_1\le8$. Górnego oszacowania dowodzi się analogicznie, zmieniając kierunek znaku nierówności i~zakładając, że $c_2\ge8$. Przyjęcie warunku brzegowego rekurencji $T(1)=1$ na przypadek bazowy indukcji wystarcza w~obu indukcjach. Udowodniliśmy zatem, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
+co jest spełnione dla dowolnego $n$, o~ile $c_1\le8$. Dowód górnego oszacowania przebiega analogicznie, przy czym zakłada, że $c_2\ge8$.
+
+Jako warunek brzegowy rekurencji przyjmijmy $T(1)=T(2)=\dots=T(7)=1$. Aby spełnić przypadek bazowy indukcji dla $n=1$, 2,~\dots,~7, musimy przyjąć dodatkowo, że $c_1\le1/7$. Udowodniliśmy zatem, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
 
 \subproblem %4-4(g)
 Załóżmy dla uproszczenia rachunków, że $T(1)=1$. Rozwijając rekurencję, otrzymujemy
 \[
 	T(n) = \frac{1}{n}+\frac{1}{n-1}+\dots+\frac{1}{2}+\frac{1}{1} = H_n,
 \]
-a~zatem, korzystając z~wzoru~(A.7), mamy $T(n)=\Theta(\lg n)$.
+a~zatem, korzystając ze wzoru~(A.7), mamy $T(n)=\Theta(\lg n)$.
 
 \subproblem %4-4(h)
 Dla ułatwienia przyjmijmy, że $T(1)=0$. Wówczas
 \[
 	T(n) = \lg n+\lg(n-1)+\dots+\lg2+\lg1 = \lg\biggl(\prod_{i=1}^ni\biggr) = \lg(n!)
 \]
-i~z~wzoru~(3.18) dostajemy $T(n)=\Theta(n\lg n)$.
+i~ze wzoru~(3.18) dostajemy $T(n)=\Theta(n\lg n)$.
 
 \subproblem %4-4(i)
 Przyjmijmy, że $T(2)=2$ i~rozważmy przypadek, gdy $n$ jest parzyste. Rozwijamy rekurencję, otrzymując
 \[
-	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg4+2 = 2\lg\biggl(\prod_{i=1}^{n/2}2i\biggr) = 2\bigl(\lg((n/2)!)+n/2\bigr).
+	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg4+2\lg2 = 2\lg\biggl(\prod_{i=1}^{n/2}2i\biggr) = 2\bigl(\lg((n/2)!)+n/2\bigr).
 \]
 Wykorzystując wzór~(3.18), dostajemy
 \[
-	T(n) = 2\Theta((n/2)\lg (n/2))+n = \Theta(n\lg n).
+	T(n) = 2\cdot\Theta((n/2)\lg (n/2))+n = \Theta(n\lg n).
 \]
 
 Dla $n$ nieparzystego, po przyjęciu $T(1)=0$ sprowadzamy rekurencję do sumy
 \[
-	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg3+0 = 2\lg\biggl(\prod_{i=1}^{(n-1)/2}(2i-1)\biggr),
+	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg3+2\lg1 = 2\lg\biggl(\prod_{i=1}^{(n+1)/2}(2i-1)\biggr),
 \]
-którą można ograniczyć od góry przez $2\lg\Bigl(\prod_{i=1}^{n/2}2i\Bigr)$, a~z~dołu przez $2\lg\Bigl(\prod_{i=1}^{(n-1)/2-1}2i\Bigr)$. Obie wartości można z~wzoru~(3.18) sprowadzić do postaci $\Theta(n\lg n)$, a~zatem również w~przypadku nieparzystego argumentu funkcja $T(n)$ jest klasy $\Theta(n\lg n)$.
+którą można ograniczyć z~góry przez $2\lg\Bigl(\prod_{i=1}^{(n+1)/2}2i\Bigr)$, a~z~dołu przez $2\lg\Bigl(\prod_{i=1}^{(n-1)/2}2i\Bigr)$. Po pewnych przekształceniach i~po skorzystaniu ze wzoru~(3.18) oba te wyrażenia sprowadzamy do postaci $\Theta(n\lg n)$. Na podstawie tego faktu i~uzasadnienia z~poprzedniego paragrafu wnioskujemy, że $T(n)$ jest klasy $\Theta(n\lg n)$.
 
 \subproblem %4-4(j)
-Po podzieleniu równania rekurencji $T(n)$ przez $n$ dostajemy
+Po podzieleniu rekurencji $T(n)$ przez $n$ dostajemy
 \[
 	\frac{T(n)}{n} = \frac{T(\!\sqrt{n})}{\sqrt{n}}+1.
 \]
@@ -653,7 +663,7 @@ Podstawmy teraz $S(n)=T(n)/n$, otrzymując nową rekurencję
 \[
 	S(n) = S(\!\sqrt{n})+1.
 \]
-Potraktujmy teraz $n$ jako $2^m$, skąd $m=\lg n$ i~podstawmy $R(m)=S(2^m)$:
+Potraktujmy $n$ jako $2^m$, skąd $m=\lg n$ i~podstawmy $R(m)=S(2^m)$:
 \[
 	R(m) = R(m/2)+1.
 \]
@@ -676,20 +686,17 @@ Wprost z~definicji $\mathcal{F}(z)$ mamy:
 a~zatem tożsamość zachodzi.
 
 \subproblem %4-5(b)
-Z~wzoru z~poprzedniego punktu wynika pierwsza równość:
+Ze wzoru z~poprzedniego punktu wynika pierwsza równość:
 \begin{align*}
 	\mathcal{F}(z) &= z+z\mathcal{F}(z)+z^2\mathcal{F}(z) \\
 	(1-z-z^2)\mathcal{F}(z) &= z \\
-	\mathcal{F}(z) &= \frac{z}{1-z-z^2}. \tag{$*$}\label{eq:4-5b_1}
+	\mathcal{F}(z) &= \frac{z}{1-z-z^2}.
 \end{align*}
-
-Mianownik prawej strony~(\ref{eq:4-5b_1}) jest trójmianem kwadratowym, który zapisujemy w~równoważnej postaci
+Mianownik prawej strony ostatniego wyrażenia jest trójmianem kwadratowym o~miejscach zerowych $\phi$ i~$\widehat\phi$, który zapisujemy w~równoważnej postaci
 \[
-	1-z-z^2 = -(z+\phi)\bigl(z+\widehat\phi\bigr) = (1-\phi z)(1-\widehat\phi z), \label{eq:4-5b_2}
+	1-z-z^2 = -(z+\phi)\bigl(z+\widehat\phi\bigr) = (1-\phi z)\bigl(1-\widehat\phi z\bigr),
 \]
-co można uzasadnić wzorem $\phi\cdot\widehat\phi=-1$ i~tym samym dowieść drugiej równości.
-
-Ostatnią z~nich dowodzimy, zauważając, że
+co można uzasadnić wzorem $\phi\cdot\widehat\phi=-1$ i~tym samym dowieść drugiej równości. Ostatnią z~nich otrzymujemy, zauważając, że
 \[
 	\frac{1}{1-\phi z}-\frac{1}{1-\widehat\phi z} = \frac{1-\widehat\phi z-1+\phi z}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{z\bigl(\phi-\widehat\phi\bigr)}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{z\sqrt{5}}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)},
 \]
@@ -710,46 +717,46 @@ skąd
 \[
 	\frac{\phi^i}{\sqrt{5}}-\frac{1}{2} < F_i < \frac{\phi^i}{\sqrt{5}}+\frac{1}{2},
 \]
-a~zatem $F_i$ jest równe liczbie całkowitej najbliższej wartości $\phi^i/\sqrt{5}$.
+a~zatem $F_i$ jest liczbą całkowitą najbliższą wartości $\phi^i/\sqrt{5}$.
 
 \subproblem %4-5(e)
-Tożsamość została udowodniona w~\refExercise{3.2-7}.
+Nierówność została udowodniona w~\refExercise{3.2-7}.
 
 \problem{Testowanie układów VLSI} %4-6
 
 \subproblem %4-6(a)
-Niech $D$ i~$Z$ będą zbiorami, odpowiednio, układów dobrych i~układów złych. Podczas testowania każdy zły układ może twierdzić, że każdy inny układ ze zbioru $Z$ jest dobry, a~każdy układ ze zbioru $D$ jest zły. Z~kolei dobry układ będzie orzekał o~każdym układzie z~$Z$, że jest zły, natomiast o~każdym innym z~$D$, że jest dobry. Inaczej ujmując, zbiór $Z$ wskazuje, że sam jest zbiorem układów dobrych, a~zbiór $D$ złych i~symetrycznie dla zbioru $D$. W~ogólności, $Z$ może składać się z~podzbiorów, które o~sobie samych będą twierdzić, że składają się z~dobrych układów, a~pozostałe zbiory ze złych. Nie da się natomiast rozdzielić w~taki sposób zbioru $D$, ponieważ jego układy zawsze orzekają prawdziwie. Musi przez to być $|D|>|Z|$, wtedy bowiem niezależnie od utworzonego w~wyniku testowania podziału zbioru $Z$, zbiór $D$ będzie wyznaczony jednoznacznie.
+Niech $D$ i~$Z$ będą zbiorami, odpowiednio, układów dobrych i~układów złych. Podczas testowania każdy zły układ może twierdzić, że każdy inny układ ze zbioru $Z$ jest dobry, a~każdy układ ze zbioru $D$ jest zły. Z~kolei dobry układ może orzekać o~każdym układzie z~$Z$, że jest zły, natomiast o~każdym innym z~$D$, że jest dobry. Inaczej ujmując, zbiór $Z$ będzie wskazywał, że sam jest zbiorem układów dobrych, a~zbiór $D$ złych i~symetrycznie dla zbioru $D$. W~ogólności, $Z$ może składać się z~podzbiorów układów, które będą twierdzić, że wyłącznie one są dobre. Nie da się natomiast rozdzielić w~taki sposób zbioru $D$, ponieważ jego układy zawsze orzekają prawdziwie. Aby zatem jednoznacznie wskazać zbiór dobrych układów, wymagane jest założenie, że $|D|>|Z|$.
 
 \subproblem %4-6(b)
 Potraktujmy wynik każdego testu dwóch układów jako parę $\langle a,b\rangle\in\{{\scriptstyle\rm D},{\scriptstyle\rm Z}\}^2$. Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza pozytywny wynik testu, a~${\scriptstyle\rm Z}$ -- negatywny. Możliwe jest uzyskanie jednego z~czterech wyników:
 \begin{itemize}
-	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$ -- implikuje, że oba układy są dobre albo oba są złe;
-	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$ -- zachodzi tylko wtedy, gdy pierwszy z~układów jest zły;
-	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$ -- zachodzi tylko wtedy, gdy drugi z~układów jest zły;
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$ -- oba układy są dobre albo oba są złe;
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$ -- tylko pierwszy z~układów jest zły;
+	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$ -- tylko drugi z~układów jest zły;
 	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- co najmniej jeden z~układów jest zły.
 \end{itemize}
 
-Podzielmy zbiór układów na pary i~przetestujmy wzajemnie układy w~każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów. Zauważmy, że otrzymując dla pewnej pary wynik różny niż $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, możemy ją odrzucić, gdyż co najmniej jeden układ ją tworzący jest zły i~wśród nieodrzuconych układów będzie nadal więcej dobrych niż złych. Otrzymamy w~wyniku od jednej do $\lfloor n/2\rfloor$ par o~tej własności, że w~każdej z~nich oba układy są dobre albo oba są złe. Odrzucając zatem po jednym układzie z~każdej pozostawionej pary, nadal zachowujemy własność o~większej liczbie dobrych układów w~pozostawionym zbiorze układów, który ma rozmiar co najwyżej $\lfloor n/2\rfloor$.
+Podzielmy zbiór układów na pary i~przetestujmy wzajemnie układy w~każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów. Zauważmy, że otrzymawszy dla pewnej pary wynik inny niż $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, możemy ją odrzucić, gdyż co najmniej jeden układ z~tej pary jest zły i~wśród nieodrzuconych układów będzie nadal więcej dobrych niż złych. Dostaniemy w~rezultacie od jednej do $\lfloor n/2\rfloor$ par o~tej własności, że w~każdej z~nich oba układy są dobre albo oba są złe. Odrzucając zatem po jednym układzie z~każdej pozostawionej pary, nadal zachowujemy własność o~większej liczbie dobrych układów w~pozostawionym zbiorze układów, którego rozmiar wynosi co najwyżej $\lceil n/2\rceil$.
 
 Powyżej opisany proces przeprowadzamy rekurencyjnie, dostając w~końcu zbiór jednoelementowy, który na mocy założenia zawiera dobry układ.
 
 \subproblem %4-6(c)
-Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w~pesymistycznym przypadku (każda para zwraca wynik $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$):
+Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w~pesymistycznym przypadku (tzn.\ kiedy każda para układów zwraca wynik $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$):
 \[
 	T(n) =
 	\begin{cases}
 		\Theta(1), & \text{jeśli $n=1$}, \\
-		T(\lfloor n/2\rfloor)+\lfloor n/2\rfloor, & \text{jeśli $n>1$}.
+		T(\lceil n/2\rceil)+\lfloor n/2\rfloor, & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Ignorując podłogi i~stosując twierdzenie o~rekurencji uniwersalnej, dostajemy jej rozwiązanie: $T(n)=\Theta(n)$. Wynik ten jest prawdziwy także w~przypadku optymistycznym, gdy tylko jedna para zwraca $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, gdyż wtedy dobry układ znajdujemy w~jednym zejściu rekurencyjnym po uprzednim wykonaniu $\Theta(n)$ testów.
+Stosując twierdzenie o~rekurencji uniwersalnej, dostajemy rozwiązanie: $T(n)=\Theta(n)$. Wynik ten jest prawdziwy także w~przypadku optymistycznym -- wówczas dobry układ znajdujemy w~jednym zejściu rekurencyjnym po uprzednim wykonaniu $\Theta(n)$ testów.
 
-Ponieważ w~poprzednim punkcie znaleźliśmy dobry układ $u$, to wykorzystajmy go do znalezienia kolejnych. Testujemy tenże układ z~pozostałymi $n-1$. Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje. Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry. Uzyskując wynik $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$. Wynika stąd, że sprawdzając $u$ z~$n-1$ innymi układami, wykonamy $n-1$ testów, a~ponieważ stwierdziliśmy, że $u$ jest dobre za pomocą $\Theta(n)$ testów, to znalezienie wszystkich dobrych układów można wykonać, przeprowadzając również $\Theta(n)$ testów.
+Potrafimy wyznaczyć dobry układ $u$, wykorzystajmy go więc do znalezienia kolejnych. Testujemy tenże układ z~pozostałymi $n-1$. Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje. Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry. Uzyskując wynik $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$. Wynika stąd, że po wykonaniu $n-1$ takich testów wyznaczymy pozostałe dobre układy. A~zatem łączna liczba testów wymaganych do zidentyfikowania wszystkich dobrych układów wynosi $\Theta(n)$.
 
 \problem{Tablice Monge'a} %4-7
 
 \subproblem %4-7(a)
-Tablica Monge'a $A$ spełnia nierówność
+Elementy tablicy Monge'a $A$ spełniają nierówność
 \[
 	A[i,j]+A[k,l] \le A[i,l]+A[k,j],
 \]
@@ -778,11 +785,11 @@ Podobnie jak wcześniej możemy tak dodawać żądaną ilość razy, przyjmując
 Widać zatem, że implikacja jest prawdziwa dla tablic o~pewnej ustalonej liczbie kolumn. Dowód dla zmiennej liczby kolumn przeprowadza się analogicznie przez indukcję po $n\ge2$, pokazując tym samym, że twierdzenie zachodzi dla tablic o~dowolnych wymiarach.
 
 \subproblem %4-7(b)
-Korzystając z~poprzedniego punktu, można pokazać, że nierówność
+Na podstawie poprzedniego punktu można sprawdzić, że nierówność
 \[
 	A[1,2]+A[2,3] \le A[1,3]+A[2,2]
 \]
-jest fałszywa, co zaburza właściwość tablicy Monge'a. By przywrócić własność, można zamienić $A[1,3]$ na~24.
+jest fałszywa, przez co własność tablicy Monge'a jest zaburzona. By przywrócić tę własność, można zamienić $A[1,3]$ np.\ na~24.
 
 \subproblem %4-7(c)
 Korzystając z~poniższej nierówności prawdziwej dla tablicy Monge'a $A$:
@@ -798,33 +805,32 @@ Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$. Łącząc oba fakty, o
 Dowód kolejnych nierówności przebiega analogicznie, skąd dostajemy tezę.
 
 \subproblem %4-7(d)
-Korzystając z~twierdzenia z~poprzedniego punktu, szukamy minimum wiersza \compound{$i$}{tego}, sprawdzając indeksy minimów wierszy \compound{$(i-1)$}{szego} oraz \compound{$(i+1)$}{szego}. Szukane minimum znajduje się pomiędzy nimi. Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$. Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
+Aby odnaleźć minimum wiersza \compound{$i$}{tego}, sprawdzamy indeksy minimów wierszy \compound{$(i-1)$}{szego} oraz \compound{$(i+1)$}{szego}. Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$. Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$. Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
 
-Po wyznaczeniu $f(i-1)$ oraz $f(i+1)$ sprawdzamy $f(i+1)-f(i-1)+1$ komórek wiersza $i$ w~poszukiwaniu jego minimum. Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
+Poszukując minimum wiersza \compound{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu. Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
 \begin{align*}
-	\sum_{\substack{1\le i\le m\\2\,\nmid\,i}}\bigl(f(i+1)-f(i-1)+1\bigr) &= \sum_{k=0}^{\lceil m/2\rceil-1}\bigl(f(2k+2)-f(2k)+1\bigr) \\[-4mm]
-	&= \lceil m/2\rceil+\sum_{k=0}^{\lceil m/2\rceil-1}\bigl(f(2k+2)-f(2k)) \\[1mm]
+	\sum_{\substack{1\le i\le m\\2\,\nmid\,i}}(f(i+1)-f(i-1)+1) &= \sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)+1) \\[-4mm]
+	&= \lceil m/2\rceil+\sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)) \\[1mm]
 	&= \lceil m/2\rceil+f(2\lceil m/2\rceil)-f(0) \\[2mm]
-	&= \lceil m/2\rceil+n-1
+	&\le \lceil m/2\rceil+n-1
 \end{align*}
-komórek, która to liczba jest rzędu $O(m+n)$.
+komórek, a~to jest rzędu $O(m+n)$.
 
 \subproblem %4-7(e)
-Na ostatnim poziomie rekursji wyznaczenie minimum jednego wiersza tablicy wymaga sprawdzenia co najwyżej $O(n)$ komórek, a~więc na podstawie oszacowania z~poprzedniego punktu formułujemy następującą rekurencję:
+Na ostatnim poziomie rekursji wyznaczenie minimum jednego wiersza tablicy wymaga sprawdzenia co najwyżej $O(n)$ komórek. Na podstawie tego faktu i oszacowania pokazanego w~poprzednim punkcie formułujemy następującą rekurencję opisującą pesymistyczny czas działania algorytmu:
 \[
 	T(m,n) =
 	\begin{cases}
 		O(n), & \text{jeśli $m=1$}, \\
-		T(\lfloor m/2\rfloor,n)+O(m+n), & \text{jeśli $m>1$}.
+		T(\lceil m/2\rceil,n)+O(m+n), & \text{jeśli $m>1$}.
 	\end{cases}
 \]
-Na \compound{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$. Łatwo zauważyć, że jest $\lfloor\lg m\rfloor+1$ poziomów, a~zatem całkowity koszt wynosi
+Dla uproszczenia pominiemy sufit w~argumencie rekurencji. Na \compound{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$. Łatwo zauważyć, że jest $\lg m+1$ poziomów, a~zatem całkowity koszt wynosi
 \begin{align*}
-	T(n) &= \sum_{i=0}^{\lfloor\lg m\rfloor-1}O\biggl(\frac{m}{2^i}+n\biggr)+O(n) \\
-	&= O\biggl(\sum_{i=0}^{\lfloor\lg m\rfloor-1}\frac{m}{2^i}\biggr)+O(n\lg m) \\
-	&= O\biggl(m\sum_{i=0}^{\lfloor\lg m\rfloor-1}\frac{1}{2^i}\biggr)+O(n\lg m) \\[1mm]
-	&= O(m+n\lg m),
+	T(m,n) &= \sum_{i=0}^{\lg m-1}O\biggl(\frac{m}{2^i}+n\biggr)+O(n) \\
+	&= O\biggl(m\sum_{i=0}^{\lg m-1}\frac{1}{2^i}\biggr)+O(n\lg m) \\
+	&\le O\biggl(m\sum_{i=0}^\infty\frac{1}{2^i}\biggr)+O(n\lg m) \\[1mm]
+	&= O(m+n\lg m).
 \end{align*}
-ponieważ suma w~przedostatniej linijce jest ograniczona od góry przez stałą.
 
 \endinput

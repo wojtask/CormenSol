@@ -8,7 +8,7 @@ etex
 
 prologues := 2;
 
-def venn_base (expr u, v) =
+def venn_base(expr u, v) =
 	path pa, pb, pc;
 	pa := (reverse fullcircle) rotated -180 scaled u shifted (v+u, 1.5u);
 	pb := (reverse fullcircle) scaled u shifted (v+1.5u, 1.5u);
@@ -23,18 +23,19 @@ enddef;
 
 beginfig(1);
 	scale := 1.3cm;
-	shift := 2.5scale;
+	shift := 2.4scale;
 	descshift := -scale;
+	innershift := .25scale;
 	color gray; gray := .8white;
 
 	venn_base(scale, 0);
 	fill pa withcolor gray;
 	draw pa; draw pb; draw pc;
 	venn_labels;
-
 	z0 = (1.25scale, scale); z2 = z0 + (shift, 0); z1 = .5[z0, z2];
 	label(btex $A$ etex, (x0, y0 + descshift));
-	label(btex $\cap$ etex, z1);
+	
+	label(btex $\cap$ etex, (x1, y1 + innershift));
 	label(btex $\cap$ etex, (x1, y1 + descshift));
 	
 	venn_base(scale, shift);
@@ -42,30 +43,38 @@ beginfig(1);
 	fill pc withcolor gray;
 	draw pa; draw pb; draw pc;
 	venn_labels;
-
 	z4 = z2 + (shift, 0); z3 = .5[z2, z4];
 	label(btex $(B\cup C)$ etex, (x2, y2 + descshift));
-	label(btex $=$ etex, z3);
-	label(btex $=$ etex, (x3, y3 + descshift));
 	
+	label(btex $=$ etex, (x3, y3 + innershift));
+	label(btex $=$ etex, (x3, y3 + descshift));
+
 	venn_base(scale, 2shift);
-	path area_ab;
-	area_ab = buildcycle(pa, pb);
-	fill area_ab withcolor gray;
-	draw pa; draw pb; draw pc;
-	venn_labels;
-
-	z6 = z4 + (shift, 0); z5 = .5[z4, z6];
-	label(btex $(A\cap B)$ etex, (x4, y4 + descshift));
-	label(btex $\cup$ etex, z5);
-	label(btex $\cup$ etex, (x5, y5 + descshift));
-
-	venn_base(scale, 3shift);
+	fill buildcycle(pa, pb) withcolor gray;
 	fill buildcycle(pa, pc) withcolor gray;
 	draw pa; draw pb; draw pc;
 	venn_labels;
+	z6 = z4 + (shift, 0); z5 = .5[z4, z6];
+	label(btex $A\cap(B\cup C)$ etex, (x4, y4 + descshift));
+	
+	label(btex $=$ etex, (x5, y5 + innershift));
+	label(btex $=$ etex, (x5, y5 + descshift));
 
-	label(btex $(A\cap C)$ etex, (x6, y6 + descshift));
+	venn_base(scale, 3shift);
+	fill buildcycle(pa, pb) withcolor gray;
+	draw pa; draw pb; draw pc;
+	venn_labels;
+	z8 = z6 + (shift, 0); z7 = .5[z6, z8];
+	label(btex $(A\cap B)$ etex, (x6, y6 + descshift));
+
+	label(btex $\cup$ etex, (x7, y7 + innershift));
+	label(btex $\cup$ etex, (x7, y7 + descshift));
+
+	venn_base(scale, 4shift);
+	fill buildcycle(pa, pc) withcolor gray;
+	draw pa; draw pb; draw pc;
+	venn_labels;
+	label(btex $(A\cap C)$ etex, (x8, y8 + descshift));
 endfig;
 
 vardef graphnode(expr scale, shift) =
