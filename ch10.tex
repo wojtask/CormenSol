@@ -248,7 +248,7 @@ Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zo
 \exercise %10.2-8
 Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników. Załóżmy, że znamy adres elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$. Niech $z$ będzie następnikiem $x$ na tej liście. Wówczas $\id{np}[x]=z\func{xor}y$, zatem na podstawie własności operacji \func{xor}, aby dostać się do $z$, wystarczy obliczyć wartość
 \[
-    z = z\func{xor}0 = z\func{xor}(y\func{xor}y) = (z\func{xor}y)\func{xor}y = \id{np}[x]\func{xor}y.
+    z = z\func{xor}0 = z\func{xor}{}(y\func{xor}y) = (z\func{xor}y)\func{xor}y = \id{np}[x]\func{xor}y.
 \]
 Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\id{np}[x]\func{xor}z$. Zauważmy, że jeśli element $x$ jest ogonem listy, to $\id{np}[x]=\const{nil}\func{xor}y=0\func{xor}y=y$, skąd mamy $z=\id{np}[x]\func{xor}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\id{np}[x]=z\func{xor}0=z$ wynika $y=\const{nil}$. Podobnie jak w~zwykłych listach przyjmujemy, że atrybut $\id{head}[L]$ przechowuje wskaźnik do głowy listy~$L$. Ponadto z~listą związujemy atrybut $\id{tail}[L]$, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
 
@@ -421,9 +421,9 @@ Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys
 Szukany algorytm został opisany w~Podręczniku w~podrozdziale~12.1 jako procedura \proc{Inorder-Tree-Walk}. Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
 
 \exercise %10.4-3
-Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział~12.1). Do emulowania rekursji wykorzystywany jest stos. Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą inorder (patrz podrozdział~12.1). Do emulowania rekursji wykorzystywany jest stos. Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
 \begin{codebox}
-\Procname{$\proc{Iterative-Preorder-Tree-Walk}(T)$}
+\Procname{$\proc{Iterative-Inorder-Tree-Walk}(T)$}
 \li	\If $\id{root}[T]=\const{nil}$
 \li		\Then \Return
 		\End
@@ -431,10 +431,10 @@ Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algoryt
 \li	\While $\proc{Stack-Empty}(S)=\const{false}$
 \li		\Do
 			$x\gets\proc{Pop}(S)$
-\li			wypisz $\id{key}[x]$
 \li			\If $\id{right}[x]\ne\const{nil}$
 \li				\Then $\proc{Push}(S,\id{right}[x])$
 				\End
+\li			wypisz $\id{key}[x]$
 \li			\If $\id{left}[x]\ne\const{nil}$
 \li				\Then $\proc{Push}(S,\id{left}[x])$
 				\End
@@ -442,97 +442,67 @@ Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algoryt
 \end{codebox}
 
 \exercise %10.4-4
-Nasza procedura będzie przyjmować węzeł $x$ drzewa w~reprezentacji ,,na lewo syn, na prawo brat'' i~wypisywać wszystkie klucze z~poddrzewa o~korzeniu w~$x$. Najpierw zostanie wypisany klucz węzła $x$, a~następnie procedura zostanie wywołana rekurencyjnie kolejno dla każdego syna węzła $x$.
+Nasza procedura będzie przyjmować węzeł $x$ drzewa w~reprezentacji ,,na lewo syn, na prawo brat'' i~wypisywać wszystkie klucze z~poddrzewa o~korzeniu w~$x$. Jeśli $x\ne\const{nil}$, to zostanie wypisany klucz węzła $x$ i~procedura zostanie wywołana rekurencyjnie najpierw dla najbardziej lewego syna $x$, a~następnie dla kolejnego brata $x$.
 \begin{codebox}
-\Procname{$\proc{Rooted-Tree-Walk}(x)$}
-\li	\If $x=\const{nil}$
-\li		\Then \Return
-		\End
-\li	wypisz $\id{key}[x]$
-\li	$y\gets\id{left-child}[x]$
-\li	\While $y\ne\const{nil}$
-\li		\Do
-			$\proc{Rooted-Tree-Walk}(y)$
-\li			$y\gets\id{right-sibling}[y]$
+\Procname{$\proc{Tree-Walk}(x)$}
+\li	\If $x\ne\const{nil}$
+\li		\Then
+			wypisz $\id{key}[x]$
+\li			$\proc{Tree-Walk}(\id{left-child}[x])$
+\li			$\proc{Tree-Walk}(\id{right-sibling}[x])$
 		\End
 \end{codebox}
-Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', należy wywołać $\proc{Rooted-Tree-Walk}(\id{root}[T])$.
+Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', należy wywołać $\proc{Tree-Walk}(\id{root}[T])$.
 
-Każdy klucz drzewa zostaje wypisany dokładnie raz, a~na każdym poziomie rekursji (być może z~wyjątkiem pierwszego) przetwarzane jest niepuste poddrzewo. Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
+Każdy węzeł drzewa jest wypisywany w~dokładnie jednym wywołaniu rekurencyjnym. Procedura wywoływana jest także dla wszystkich pustych najbardziej lewych synów i~dla wszystkich pustych braci znajdujących się w~drzewie. Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
-W~procedurze wykorzystamy zmienną \id{direction} przyjmującą ,,kierunek'', w~którym obecnie poruszamy się po drzewie, wypisując jego klucze. Zmienna ta będzie przyjmować jedną z~czterech wartości:
-\begin{itemize}
-    \item \const{sw} -- kierunek w~dół drzewa do lewego syna;
-    \item \const{se} -- kierunek w~dół drzewa do prawego syna;
-    \item \const{ne} -- kierunek w~górę drzewa z~lewego syna;
-    \item \const{nw} -- kierunek w~górę drzewa z~prawego syna.
-\end{itemize}
-W~zależności od wartości tej zmiennej kolejnym odwiedzanym węzłem będzie lewy syn, prawy syn albo ojciec bieżącego węzła, po czym wartość tej zmiennej zostanie odpowiednio zaktualizowana, gdyż przejście do nowego węzła mogło być w~innym kierunku od tego, po którym dotychczas przechodziliśmy po drzewie.
-
-Zaczynając od korzenia, początkowo poruszamy się w~dół drzewa ($\id{direction}=\const{sw}$), aż osiągniemy jego najbardziej lewy liść. Wracając w~górę drzewa, odwiedzamy tą samą metodą każde nieodwiedzone prawe poddrzewo. Węzły wypisywane są podczas ich odwiedzania, gdy $\id{direction}=\const{sw}$ lub $\id{direction}=\const{se}$. Struktura drzewa nie jest zmieniana i~łatwo zauważyć, że każdy z~$n$ węzłów jest odwiedzany co najwyżej trzy razy (podczas przechodzenia do jego lewego i~prawego poddrzewa, i~podczas powrotu), zatem procedura działa w~czasie $\Theta(n)$.
-
-Opisany algorytm zapisujemy w~postaci pseudokodu:
+W~algorytmie będziemy symulować przechodzenie drzewa w~porządku inorder, używając 3 wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem. Odwiedzenie danego węzła $x$ będzie realizowane przez pomocniczą procedurę $\proc{Stackless-Inorder-Visit}(x)$. Polega ono na wypisaniu klucza $x$ oraz wyznacza kolejny węzeł do przetworzenia.
 \begin{codebox}
-\Procname{$\proc{Binary-Tree-Walk}(T)$}
-\li	$x\gets\id{root}[T]$
-\li	$\id{direction}\gets\const{sw}$
-\li	\While $x\ne\const{nil}$
+\Procname{$\proc{Stackless-Inorder-Visit}(x)$}
+\li	wypisz $\id{key}[x]$
+\li	\If $\id{right}[x]\ne\const{nil}$
+\li		\Then \Return $\id{right}[x]$
+\li		\Else \Return $p[x]$
+		\End
+\end{codebox}
+
+Algorytm zapisujemy w~postaci pseudokodu:
+\begin{codebox}
+\Procname{$\proc{Stackless-Inorder-Tree-Walk}(T)$}
+\li	$\id{prev}\gets\const{nil}$
+\li	$\id{curr}\gets\id{root}[T]$
+\li	$\id{next}\gets\const{nil}$
+\li	\While $\id{curr}\ne\const{nil}$
 \li		\Do
-			\If $\id{direction}=\const{sw}$
+			\If $\id{prev}=p[\id{curr}]$
 \li				\Then
-					wypisz $\id{key}[x]$
-\li					\If $\id{left}[x]\ne\const{nil}$
-\li						\Then $x\gets\id{left}[x]$
-\li					\ElseIf $\id{right}[x]\ne\const{nil}$
-\li						\Then
-							$x\gets\id{right}[x]$
-\li							$\id{direction}\gets\const{se}$
-\li					\ElseNoIf $x\gets\id{p}[x]$
+					\If $\id{left}[\id{curr}]\ne\const{nil}$
+\li						\Then $\id{next}\gets\id{left}[\id{curr}]$
+\li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
 						\End
-\li						\phantom{\kw{else}} $\id{direction}\gets\const{ne}$
-\li			\ElseIf $\id{direction}=\const{se}$
-\li				\Then
-					wypisz $\id{key}[x]$
-\li					\If $\id{left}[x]\ne\const{nil}$
-\li						\Then
-							$x\gets\id{left}[x]$
-\li							$\id{direction}\gets\const{sw}$
-\li					\ElseIf $\id{right}[x]\ne\const{nil}$
-\li						\Then $x\gets\id{right}[x]$
-\li					\ElseNoIf $x\gets\id{p}[x]$
-						\End
-\li						\phantom{\kw{else}} $\id{direction}\gets\const{nw}$
-\li			\ElseIf $\id{direction}=\const{ne}$
-\li				\Then
-					\If $\id{right}[x]\ne\const{nil}$
-\li						\Then
-							$x\gets\id{right}[x]$
-\li							$\id{direction}\gets\const{se}$
-\li						\Else
-							\If $\id{p}[x]\ne\const{nil}$ i~$\id{right}[\id{p}[x]]=x$
-\li								\Then $\id{direction}\gets\const{nw}$
-								\End
-\li							$x\gets\id{p}[x]$
-						\End
-\li			\ElseNoIf \If $\id{p}[x]\ne\const{nil}$ i~$\id{left}[\id{p}[x]]=x$
+\li				\ElseIf $\id{prev}=\id{left}[\id{curr}]$
+\li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
+\li				\ElseNoIf $\id{next}\gets p[\id{curr}]$	
 				\End
-\li				\phantom{\kw{else} \kw{if}} \kw{then} $\id{direction}\gets\const{ne}$
-\li				\phantom{\kw{else}} $x\gets\id{p}[x]$
+\li			$\id{prev}\gets\id{curr}$
+\li			$\id{curr}\gets\id{next}$
 		\End
 \end{codebox}
 
 \exercise %10.4-6
-Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$. Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest najbardziej prawym synem swojego ojca, to $\id{right-sibling}[x]=\const{nil}$. Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na ojca $x$. Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy ojcem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską -- określającą parzystość poziomu zajmowanego w~drzewie przez dany węzeł.
+\note{W~oryginalnej treści zadania szukana jest taka reprezentacja drzewa, która umożliwi wyznaczanie i~uzyskiwanie dostępu do ojca danego węzła lub wszystkich jego synów w~czasie proporcjonalnym do liczby synów.}
 
-Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
+\noindent Opiszemy modyfikacje, które należy wprowadzić w~reprezentacji ,,na lewo syn, na prawo brat'', aby spełnić wymaganie z~treści zadania. Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$. Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest korzeniem albo najbardziej na prawo położonym synem swojego ojca, to $\id{right-sibling}[x]=\const{nil}$. Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na dziadka $x$ (czyli ojca ojca $x$ albo \const{nil}, jeśli $x$ jest korzeniem lub synem korzenia). Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy dziadkiem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską. Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
 \begin{itemize}
 	\item $\id{child}[x]$ -- wskazuje na najbardziej lewego syna $x$ (identyczny z~$\id{left-child}[x]$ z~reprezentacji ,,na lewo syn, na prawo brat'');
-	\item $\id{next}[x]$ -- wskazuje na kolejnego brata węzła $x$ albo na ojca węzła $x$, jeśli $x$ jest najbardziej prawym synem swojego ojca;
-	\item $\id{level-parity}[x]$ -- zmienna boolowska przyjmująca wartość \const{true}, jeżeli węzeł $x$ znajduje się w~drzewie na poziomie parzystym, albo \const{false} w~przeciwnym przypadku.
+	\item $\id{next}[x]$ -- wskazuje na kolejnego brata węzła $x$ albo na dziadka węzła $x$, jeśli $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca;
+	\item $\id{last}[x]$ -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
 \end{itemize}
 
-Oczywiście dla dowolnego węzła i~jego ojca wartości ich atrybutów \id{level-parity} różnią się. Dzięki temu, mając dany węzeł $x$, można przechodzić po jego braciach, poruszając się po wskaźnikach \id{next}, aż dotrze się do ojca $x$, którego rozróżnimy od braci $x$ na podstawie wartości atrybutu \id{level-parity}. Wyznaczenie ojca $x$ wymaga więc w~najgorszym przypadku czasu proporcjonalnego do liczby braci węzła $x$, a~wyznaczenie wszystkich synów $x$ -- czasu proporcjonalnego do ilości jego synów.
+Dzięki tak zdefiniowanym atrybutom, mając dany węzeł wewnętrzny $x$, możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła $\id{child}[x]$, a~następnie poruszając się po wskaźnikach \id{next} kolejnych węzłów. Każdy napotykany węzeł $y$ pokazuje wskaźnikiem $\id{next}[y]$ na swojego kolejnego brata, o~ile $\id{last}[y]=\const{false}$. Po dotarciu do węzła $y$, dla którego $\id{last}[y]=\const{true}$, wszyscy synowie węzła $x$ zostali wyznaczeni i~możemy teraz ustalić ojca $x$, przechodząc do węzła wskazywanego przez $\id{next}[y]$ (czyli dziadka $y$). Jeśli węzeł ten nie istnieje, to oznacza to, że $x$ jest korzeniem drzewa. Podany opis pozwala na wyznaczenie ojca węzła wewnętrznego $x$ oraz wszystkich jego synów w~czasie proporcjonalnym do liczby synów $x$.
+
+Rozważmy teraz przypadek, gdy $x$ jest liściem. Wtedy $\id{child}[x]=\const{nil}$, co daje nam informację o~braku synów $x$, ale ich nieobecność uniemożliwia nam dotarcie do ojca $x$ tak, jak to robiliśmy dla węzłów wewnętrznych. Można jednak postąpić następująco. Przechodzimy do brata węzła $x$ znajdującego się najbardziej na prawo i~docieramy do ich wspólnego dziadka $z$. Jeśli węzeł $z$ nie istnieje, to ojcem $x$ jest korzeń drzewa (wskazuje na niego atrybut \id{root} drzewa). W~przeciwnym przypadku sprawdzamy wszystkich synów węzła $z$ -- ten z~nich, którego jednym z~synów jest $x$, stanowi oczywiście ojca $x$. Dotarcie do ojca liścia $x$ tym sposobem wymaga w~najgorszym przypadku czasu proporcjonalnego do rozmiaru poddrzewa o~korzeniu będącego dziadkiem $x$.
 
 \problems
 
@@ -581,21 +551,20 @@ Zarówno utworzenie pustego kopca, jak i~odczytanie jego minimalnego elementu za
 Przypadek jest identyczny z~poprzednim, ale tym razem nie jest wymagane wykrywanie powtórzeń w~operacjach \proc{Insert} i~\proc{Union}. Z~tego powodu wszystkie omawiane operacje kopca działają w~zamortyzowanym koszcie $\Theta(1)$ oprócz \proc{Extract-Min}, która działa w~zamortyzowanym koszcie $\Theta(\lg n)$.
 
 \problem{Wyszukiwanie na posortowanej liście zajmującej spójny obszar pamięci (liście upakowanej)} %10-3
-\note{W~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast testowania, czy\/ $\id{key}[j]<k$, powinno być sprawdzenie, czy\/ $\id{key}[j]\le k$. Ponadto w~wywołaniach procedur \proc{Compact-List-Search} i~\proc{Compact-List-Search}$'$ na liście ich argumentów brakuje\/ $n$ jako drugiego argumentu.}
+\note{W~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast testowania, czy\/ $\id{key}[j]<k$, powinno być sprawdzenie, czy\/ $\id{key}[j]\le k$. Ponadto w~wywołaniach procedur \proc{Compact-List-Search} i~\proc{Compact-List-Search}$'$ na listach ich argumentów brakuje\/ $n$ jako drugiego parametru.}
 
 \subproblem %10-3(a)
+W~żadnej z~procedur nigdy nie zostanie wykonany skok na losowo wybraną pozycję bliżej głowy listy ani na pozycję zawierającą element o~kluczu większym niż $k$ -- gwarantują to warunki w~wierszach~4 obu algorytmów. Ponadto w~każdej iteracji w~pętlach \kw{while} obu procedur następuje przesunięcie indeksu $i$ o~jedną pozycję do przodu. Skoki te wykonywane są, dopóki indeks $i$ nie dotrze na pozycję elementu o~kluczu większym lub równym $k$, bądź nie osiągnie końca listy $L$. A~zatem oba wywołania zwrócą ten sam wynik.
+
+Zauważmy, że podczas ustalonej iteracji pętli \kw{while} w~procedurze \proc{Compact-List-Search} indeks $i$ nie jest bliżej głowy listy $L$ niż ten sam indeks podczas tej samej iteracji pętli \kw{for} w~procedurze \proc{Compact-List-Search}$'$. Pętla pierwszego algorytmu nie zakończy się więc później niż pętla drugiego algorytmu, która to wykona dokładnie $t$ iteracji. A~zatem łączna liczba iteracji pętli \kw{for} i~\kw{while} w~procedurze \proc{Compact-List-Search}$'$ wynosi co najmniej $t$.
 
 \subproblem %10-3(b)
-Niech $Y$ będzie zmienną losową oznaczającą ilość wykonanych iteracji pętli \kw{for} w~procedurze \proc{Compact-List-Search}$'$. Zauważmy, że $Y=q$ wtedy i~tylko wtedy, gdy pierwszym losowo wybranym indeksem $j$ równym indeksowi klucza $k$ na liście $L$ jest ten uzyskany w~\onedash{$q$}{tej} iteracji. Mamy zatem, że oczekiwaną liczbą iteracji pętli \kw{for} jest
-\[
-	\sum_{q=1}^tq\Pr(Y=q) = \sum_{q=1}^tq\biggl(1-\frac{1}{n}\biggr)^{q-1}\frac{1}{n} < \sum_{q=1}^tn\cdot1\cdot\frac{1}{n} = t.
-\]
-Na podstawie definicji zmiennej losowej $X_t$ otrzymujemy z~kolei, że średnia liczba wykonanych iteracji pętli \kw{while} wynosi $\E(X_t)$. A~zatem oczekiwanym czasem działania procedury \proc{Compact-List-Search}$'$ jest $O(t+\E(X_t))$.
+W~wywołaniu \proc{Compact-List-Search}$'(L,n,k,t)$ zostanie wykonanych nie więcej niż $t$ iteracji pętli \kw{for}, czyli etap ten wymaga czasu $O(t)$. Na podstawie definicji zmiennej losowej $X_t$ otrzymujemy z~kolei, że średnia liczba wykonanych iteracji pętli \kw{while} wynosi $\E(X_t)$. A~zatem oczekiwanym czasem działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ jest $O(t+\E(X_t))$.
 
 \subproblem %10-3(c)
-Oznaczmy przez $s$ pozycję klucza $k$ na liście $L$, a~przez $j_1$, $j_2$,~\dots,~$j_t$ -- ciąg liczb całkowitych wyznaczonych przez $t$ wywołań $\proc{Random}(1,n)$. Po $t$ iteracjach pętli \kw{for} odległość od pozycji $i$ do pozycji $s$ na liście $L$ będzie większa lub równa $r$, jeśli dla każdego $q=1$, 2,~\dots,~$t$, $j_q\le s-r$ lub $j_q>s$. Mamy więc
+Oznaczmy przez $s$ indeks klucza $k$ na liście $L$, a~przez $j_1$, $j_2$,~\dots,~$j_t$ -- ciąg liczb całkowitych wyznaczonych przez $t$ wywołań $\proc{Random}(1,n)$. Ponadto niech $\pi$ będzie funkcją przypisującą indeksowi elementu na liście $L$ jego rzeczywistą pozycję na tej liście wyznaczoną na podstawie łańcucha wskaźników \id{next}. Po $t$ iteracjach pętli \kw{for} odległość między szukanym kluczem a~elementem o~indeksie $i$ (mierzona długością łańcucha wskaźników \id{next}) będzie większa lub równa $r$, jeśli dla każdego $q=1$, 2,~\dots,~$t$ spełnione będzie $\pi(j_q)\le\pi(s)-r$ lub $\pi(j_q)>\pi(s)$. Mamy więc
 \[
-	\Pr(X_t\ge r) = \prod_{q=1}^t\Pr(j_q\le s-r\;\;\text{lub}\;\;j_q>s) = \prod_{q=1}^t\frac{n-r}{n} = \biggl(1-\frac{r}{n}\biggr)^t.
+	\Pr(X_t\ge r) = \prod_{q=1}^t\Pr(\pi(j_q)\le\pi(s)-r\;\;\text{lub}\;\;\pi(j_q)>\pi(s)) = \prod_{q=1}^t\frac{n-r}{n} = \biggl(1-\frac{r}{n}\biggr)^t.
 \]
 Korzystając z~tożsamości~(C.24) i~z~powyższego oszacowania, otrzymujemy
 \[
@@ -603,7 +572,7 @@ Korzystając z~tożsamości~(C.24) i~z~powyższego oszacowania, otrzymujemy
 \]
 
 \subproblem %10-3(d)
-Sumę po lewej stronie ograniczamy całką, otrzymując:
+Sumę ograniczamy całką, otrzymując:
 \[
 	\sum_{r=0}^{n-1}r^t \le \int_0^nx^t\,dx = \biggl[\frac{x^{t+1}}{t+1}\biggr]_0^n = \frac{n^{t+1}}{t+1}.
 \]
@@ -618,8 +587,11 @@ Na podstawie punktów~(c) i~(d) mamy:
 Na mocy punktów~(b) i~(e) dostajemy, że oczekiwany czas działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ wynosi $O(t+\E(X_t))=O(t+n/(t+1))=O(t+n/t)$.
 
 \subproblem %10-3(g)
+Oznaczmy przez $p$ pozycję listy $L$, na którą został wykonany ostatni skok w~wierszu~5 procedury \proc{Compact-List-Search}. Zauważmy, że w~procedurze \proc{Compact-List-Search} po wykonaniu tego skoku zostanie wykonanych co najwyżej $t$ operacji $i\gets\id{next}[i]$. Z~kolei pozycja na liście $L$, będąca celem ostatniego skoku z~wiersza~5 w~\proc{Compact-List-Search}$'$, nie może znajdować się bliżej głowy listy niż pozycja $p$. Na tej podstawie wnioskujemy, że liczba wykonanych operacji $i\gets\id{next}[i]$ w~pętli \kw{while} algorytmu \proc{Compact-List-Search}$'$ również nie przekroczy $t$. Oznacza to, że etap, który na podstawie poprzedniego punktu zajmuje czas $O(n/t)$, będzie w~rzeczywistości działać w~czasie $O(t)$. Stąd $O(n/t)=O(t)$, czyli $t=O(\!\sqrt{n})$, a~więc czas działania procedury \proc{Compact-List-Search} wynosi $O(\!\sqrt{n})$.
+
+Wynik ten jest prawdziwy także w~przypadku, gdy elementu o~kluczu $k$ nie ma na liście. Wystarczy bowiem zdefiniować zmienną losową $X_t$ jako odległość na liście (mierzoną długością łańcucha wskaźników \id{next}) od pozycji $i$ do pozycji elementu o~kluczu większym niż $k$ albo do pozycji bezpośrednio za ogonem listy, w~przypadku, gdy taki element nie istnieje. Analizę w~punktach \twodashes{(b)}{(g)} dla nowej definicji zmiennej $X_t$ przeprowadza się analogicznie.
 
 \subproblem %10-3(h)
-Jeśli dopuścimy, aby elementy na liście powtarzały się, to może dojść do sytuacji, w~której procedura próbuje wykonać skok na pozycję $j>i$, ale nie wykonuje go, gdyż stwierdza w~linii~4, że $\id{key}[i]=\id{key}[j]$. Jeśli każdy losowy skok będzie eliminowany na tej podstawie, to działanie procedury sprowadzi się do działania zwykłego algorytmu wyszukiwania na posortowanej liście.
+Jeśli dopuścimy, aby elementy na liście powtarzały się, to może dojść do sytuacji, w~której procedura próbuje wykonać skok na pozycję $j$ bliższą szukanemu elementowi niż pozycja $i$, ale nie wykonuje go, gdyż stwierdza w~linii~4, że $\id{key}[i]=\id{key}[j]$. Jeśli każdy losowy skok będzie eliminowany na tej podstawie, to działanie procedury sprowadzi się do działania zwykłego algorytmu wyszukiwania na posortowanej liście.
 
 \endinput

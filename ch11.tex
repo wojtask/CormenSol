@@ -16,7 +16,7 @@ Opisane rozwiązanie można traktować jak tablicę z~haszowaniem z~identycznoś
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
 
-\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu $\id{top}[S]$ wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ walidują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\id{top}[S]$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
+\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu $\id{top}[S]$ wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ weryfikują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\id{top}[S]$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
 
 Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$. Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\id{top}[S]$ i~$S[T[k]]=k$. Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}. W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć $\id{top}[S]$ o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\id{top}[S]]$ i~$S'[\id{top}[S]]$. Dokładniej, wykonywany jest następujący ciąg instrukcji:
 \begin{codebox}
@@ -129,7 +129,30 @@ Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy
 \end{itemize}
 
 \exercise %11.3-5
+Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$. Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które zostały odwzorowane na $j$ przez funkcję $h$. Wówczas liczba kolizji powstałych na danym elemencie $j\in B$ wynosi $\binom{u_j}{2}=u_j(u_j-1)/2$.
+
+Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest minimalna, gdy $u_j=u/b$ dla każdego $j\in B$. Załóżmy, że dla pewnych dwóch różnych $i$, $k\in B$ zachodzi $0<u_i\le u/b\le u_k$. Łączna liczba kolizji na elementach $i$ i~$k$ wynosi $S=u_i(u_i-1)/2+u_k(u_k-1)/2$. Niech teraz $h'$ będzie funkcją identyczną z~$h$ z~jednym wyjątkiem -- dla dokładnie jednego dowolnie wybranego elementu $x\in U$ takiego, że $h(x)=i$, niech zachodzi $h'(x)=k$. Funkcja $h'$ tworzy $S'=(u_i-1)(u_i-2)/2+(u_k+1)u_k/2$ kolizji na elementach $i$ i~$k$. Zbadajmy znak różnicy $S'-S$:
+\begin{align*}
+	S'-S &= (u_i-1)(u_i-2)/2+(u_k+1)u_k/2-u_i(u_i-1)/2-u_k(u_k-1)/2 \\
+	&= (u_i^2-3u_i+2+u_k^2+u_k-u_i^2+u_i-u_k^2+u_k)/2 \\
+	&= (2u_k-2u_i+2)/2 \\
+	&= u_k-u_i+1 \\
+	&> 0.
+\end{align*}
+Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ odbiegają od $u/b$. Stąd wniosek, że liczba kolizji jest możliwie najmniejsza, gdy dla wszystkich elementów $j\in B$ zachodzi $u_j=u/b$.
+
+Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszująca z~$\mathcal{H}$ generuje łącznie co najmniej $b(u/b)(u/b-1)/2$ kolizji. Stąd prawdopodobieństwo $p_{\mathcal{H}}$ wystąpienia kolizji przy losowo wybranej funkcji z~$\mathcal{H}$ można ograniczyć od dołu przez
+\[
+	p_{\mathcal{H}} \ge \frac{b(u/b)(u/b-1)/2}{u(u-1)/2} = \frac{u/b-1}{u-1} > \frac{u/b-1}{u} = \frac{1}{b}-\frac{1}{u}.
+\]
+Jeśli rodzina $\mathcal{H}$ jest \onedash{$\epsilon$}{uniwersalna}, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
+
 \exercise %11.3-6
+Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \onedash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$. Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
+\[
+	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j-\sum_{j=0}^{n-1}y_jb^j = \sum_{j=0}^{n-1}(x_j-y_j)b^j.
+\]
+Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem. Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~zad.31.4-4 mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$. A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$. Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \onedash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
 
 \subchapter{Adresowanie otwarte}
 
@@ -190,8 +213,10 @@ W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza~3 na nast�
 \end{codebox}
 
 \exercise %11.4-3
+Dzięki skorzystaniu z~tw.~31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1,~\dots,~$m-1$ przyjmuje $m/d$ różnych wartości. Podobną własność wykazuje także suma $h_1(k)+ih_2(k)$. A~zatem stosując funkcję haszującą $h$, podczas wyszukiwania klucza $k$, które zakończy się porażką, zostanie sprawdzonych $m/d$ różnych komórek tablicy, co stanowi $(1/d)$-tą część tej tablicy.
+
 \exercise %11.4-4
-Wykorzystując tw.~11.8 otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$. Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
+Wykorzystując tw.~11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$. Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
 
 \exercise %11.4-5
 Z~tw.~11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
@@ -236,15 +261,29 @@ Dla argumentu $-e^{-1/2}\!/2$ odwzorowanie $W$ przyjmuje dwie wartości. Jedną 
 \[
 	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
 \]
-i~teraz, po skorzystaniu ze wzoru~(3.11), otrzymujemy
+i~teraz, dzięki skorzystaniu ze wzoru~(3.11), otrzymujemy
 \[
 	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
 \]
 
+W~drugiej części zadania rozważymy funkcję $f(x)=e^{-x(x-1)/2m}$ zmiennej rzeczywistej $x$, traktując $m$ jak stałą dodatnią. Jak łatwo zauważyć, granicą tej funkcji w~$\infty$ jest 0. Wyznaczając jej pierwszą i~drugą pochodną, mamy
+\[
+	\frac{df}{dx}(x) = e^{-x(x-1)/2m}\cdot\frac{1-2x}{2m}
+\]
+oraz
+\[
+	\frac{d^2\!f}{dx^2}(x) = e^{-x(x-1)/2m}\biggl(\frac{1-2x}{2m}\biggr)^2+e^{-x(x-1)/2m}\cdot\frac{-1}{m} = e^{-x(x-1)/2m}\cdot\frac{4x^2-4x+1-4m}{4m^2}.
+\]
+Czynnik $e^{-x(x-1)/2m}$ jest dodatni niezależnie od wartości $x$ i~$m$. Jeśli $x>\sqrt{m}$, to natychmiast widać, że pierwsza pochodna funkcji $f$ jest ujemna. Do tego samego wniosku dochodzimy dla drugiej pochodnej, ograniczając jej drugi czynnik:
+\[
+	\frac{4x^2-4x+1-4m}{4m^2} < \frac{4m-4\sqrt{m}+1-4m}{4m^2} = \frac{-4\sqrt{m}+1}{4m^2} < 0.
+\]
+A~zatem dla $x>\sqrt{m}$ funkcja $f$ jest malejąca i~wklęsła. Oznacza to, że prawdopodobieństwo $p(n,m)$, które od góry ograniczone jest przez $f(n)$, maleje gwałtownie do zera, gdy $n$ przekracza $\sqrt{m}$.
+
 \problems
 
 \problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
-\note{W~części~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
+\note{W~punkcie~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$. W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 
 \subproblem %11-1(a)
 Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \onedash{$i$}{tego} elementu. Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem. Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$. Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
@@ -308,29 +347,47 @@ Załóżmy teraz, że $k>0$. Wykorzystując nierówności z~poprzedniego paragra
 \]
 
 \subproblem %11-2(d)
-\note{W~drugiej części zadania należy wywnioskować, że\/ $P_k<1/n^2$ dla\/ $k\ge k_0=c\lg n/\lg\lg n$.}
+\note{W~drugiej części zadania należy wywnioskować, że\/ $P_k<1/n^2$ dla\/ $k\ge k_0=c\lg n/\!\lg\lg n$.}
 
-%\noindent Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}/{k_0}^{k_0}$. Sprawdzimy zatem, jakie $c>1$ można wybrać dla $k_0=c\lg n/\lg\lg n$, aby zachodziło $e^{k_0}/{k_0}^{k_0}<1/n^3$.
+\noindent Badając wyrażenie $\lg Q_{k_0}$, wyznaczymy odpowiednie $c$ tak, aby zachodziło $Q_{k_0}<1/n^3$, gdzie $k_0=c\lg n/\!\lg\lg n$. Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
+\begin{align*}
+	\lg Q_{k_0} &< k_0\lg e-k_0\lg k_0 \\
+	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n}{\lg\lg n}\lg\frac{c\lg n}{\lg\lg n} \\[1mm]
+	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n(\lg c+\lg\lg n-\lg\lg\lg n)}{\lg\lg n} \\[1mm]
+	&= \frac{c\lg n(\lg e-\lg c)}{\lg\lg n}+\frac{c\lg n\lg\lg\lg n}{\lg\lg n}-c\lg n.
+\end{align*}
+Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$. Wówczas pierwszy składnik powyższej sumy jest ujemny. Ponadto, jeśli $c'$ jest wystarczająco duże, to dla każdego $n$ zachodzi
+\[
+	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0.
+\]
+Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$. Aby powyższa nierówność była prawdziwa, musi zachodzić $(3+c')m\le c'2^m$, skąd
+\[
+	c' \ge \frac{3m}{2^m-m}.
+\]
+Można pokazać, że wyrażenie po prawej stronie jest mniejsze niż 4 niezależnie od wartości $m$, możemy zatem przyjąć $c'\ge4$.
 
-%Weźmy $n=2^{2^m}$ i~zbadajmy iloraz $n^3e_{k_0}/k_0^{k_0}$ dla $k_0=c\lg n/\lg\lg n$:
-%\[
-%	\frac{2^{2^m+3}e_{cm2^m}}{(cm2^m)^{cm2^m}} = \biggl(\frac{8^{1/cm}e}{cm2^m}\biggr)^{cm2^m}.
-%\]
-%Ponieważ $c>1$, to powyższe wyrażenie będzie mniejsze od 1 niezależnie od wartości $c$, czyli wówczas, gdy ułamek stanowiący podstawę potęgi będzie mniejszy od 1. To daje
-%\[
-%	c > \frac{8^{1/cm}e}{m2^m} > \frac{e}{m2^m} \ge \frac{e}{2} \approx 1{,}359.
-%\]
+Powracając teraz do głównego oszacowania, mamy
+\[
+	\lg Q_{k_0} < \biggl(\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c'-3\biggr)\lg n \le -3\lg n,
+\]
+skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
+
+Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część~(b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$. Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$. Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$. Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$. Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$. Mamy
+\[
+	Q_k < e^k\!/k^k \le e^{k_0}\!/k_0^{k_0} < 1/n^3,
+\]
+a~zatem badane oszacowanie jest spełnione.
 
 \subproblem %11-2(e)
-Niech $k_0=c\lg n/\lg\lg n$. Wówczas
+Niech $k_0=c\lg n/\!\lg\lg n$. Wówczas
 \begin{align*}
 	\E(M) &= \sum_{k=0}^nkP_k = \sum_{k=0}^{k_0}kP_k+\sum_{k=k_0+1}^nkP_k \\
 	&\le k_0\sum_{k=0}^{k_0}P_k+n\sum_{k=k_0+1}^nP_k = k_0\Pr(M\le k_0)+n\Pr(M>k_0).
 \end{align*}
-Aby pokazać, że $\E(M)=O(\lg n/\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie~(d), że $P_k<1/n^2$ dla $k\ge k_0$. Mamy
+Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie~(d), że $P_k<1/n^2$ dla $k\ge k_0$. Mamy
 \begin{align*}
 	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
-	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 < k_0\cdot1+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\lg\lg n).
+	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 < k_0\cdot1+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
 \end{align*}
 
 \problem{Adresowanie kwadratowe} %11-3
@@ -382,15 +439,36 @@ Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(
 		h_{a,b}'(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j+b\biggr)\bmod p
 	\]
 	oraz $\mathcal{H}'=\{h_{a,b}'\}$. Udowodnij, że rodzina $\mathcal{H}'$ jest \onedash{2}{uniwersalna}. (\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$. Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
-	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\onedash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
+	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\onedash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
 \end{description}
 
 \bigskip
 \note{Poniżej znajduje się rozwiązanie nowej wersji problemu.}
 
 \subproblem %11-4(a)
+Niech $\mathcal{H}$ będzie \onedash{2}{uniwersalną} rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$. Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$. A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$. Rodzina $\mathcal{H}$ jest więc uniwersalna.
+
 \subproblem %11-4(b)
+Aby zbadać \onedash{2}{uniwersalność}, wykorzystamy wskazówkę. Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera. To wyklucza \onedash{2}{uniwersalność} rodziny $\mathcal{H}$.
+
+Udowodnimy teraz, że rodzina $\mathcal{H}$ jest uniwersalna. Wybierzmy w~tym celu dowolną parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~pewną funkcję $h_a$ z~$\mathcal{H}$. Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$. Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniony będzie poniższy wzór:
+\[
+	\sum_{j=0}^{n-1}a_j(x_j-y_j) \equiv 0 \pmod p.
+\]
+Niech $S=\sum_{j=1}^{n-1}a_j(x_j-y_j)$. Wówczas wzór przyjmuje postać
+\[
+	a_0(x_0-y_0) \equiv -S \pmod p,
+\]
+którą potraktujemy jak modularne równanie liniowe zmiennej $a_0$. Ponieważ $x_0\ne y_0$, a~$p$ jest liczbą pierwszą, to $\gcd(x_0-y_0,p)=1$ i~na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. A~zatem dla ustalonych $a_1$, $a_2$,~\dots,~$a_{n-1}$ istnieje dokładnie jedno $a_0$, dla którego funkcja $h_a$, gdzie $a=\langle a_0,a_1,\dots,a_{n-1}\rangle$, generuje kolizję między $x$ a~$y$. To oznacza, że dokładnie $p^{n-1}$ spośród $p^n$ funkcji w~$\mathcal{H}$ doprowadzi do kolizji. Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wybrana losowo z~$\mathcal{H}$, wynosi $1/p$, co kończy dowód.
+
 \subproblem %11-4(c)
+Ustalmy parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$. Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$. Wprowadźmy oznaczenia $\alpha=h_{a,b}'(x)$, $\beta=h_{a,b}'(y)$ oraz $X=\sum_{j=1}^{n-1}a_jx_j$, $Y=\sum_{j=1}^{n-1}a_jy_j$. Zachodzi $\alpha=(a_0x_0+X+b)\bmod p$ oraz $\beta=(a_0y_0+Y+b)\bmod p$. Zauważmy, że aby wygenerować każdą możliwą parę $\langle\alpha,\beta\rangle$, wystarczy abyśmy byli w~stanie wygenerować dowolne $\alpha-\beta$ i~dowolne $\beta$. Mamy $\alpha-\beta=(a_0(x_0-y_0)+X-Y)\bmod p$, skąd
+\[
+	a_0(x_0-y_0) \equiv \alpha-\beta-X+Y \pmod p.
+\]
+Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$. Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$. Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$. Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$. Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$. Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$. Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest \onedash{2}{uniwersalna}.
+
 \subproblem %11-4(d)
+Ponieważ rodzina $\mathcal{H}$ jest \onedash{2}{uniwersalna}, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$. W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia. Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba. Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
 
 \endinput

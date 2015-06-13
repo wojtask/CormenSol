@@ -331,11 +331,11 @@ Zastąpmy drugi przypadek tw.~4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\T
 	\]
 	i~podstawiamy do wzoru~(4.7):
 	\[
-		g(n) = \Theta\biggl(\sum_{j=0}^{\log_bn-1}a^j\Bigl(\frac{n}{b^j}\Bigr)^{\log_ba}\lg^k\frac{n}{b^j}\biggr).
+		g(n) = \Theta\biggl(\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j}\biggr).
 	\]
 	Mamy dalej:
 	\begin{align*}
-		\sum_{j=0}^{\log_bn-1}a^j\Bigl(\frac{n}{b^j}\Bigr)^{\log_ba}\lg^k\frac{n}{b^j} &= n^{\log_ba}\sum_{j=0}^{\log_bn-1}\Bigl(\frac{a}{b^{\log_ba}}\Bigr)^j\lg^k\frac{n}{b^j} \\
+		\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j} &= n^{\log_ba}\sum_{j=0}^{\log_bn-1}\biggl(\frac{a}{b^{\log_ba}}\biggr)^j\lg^k\frac{n}{b^j} \\
 		&= n^{\log_ba}\sum_{j=0}^{\log_bn-1}(\lg n-j\lg b)^k \\
 		&= n^{\log_ba}\cdot\Theta(\lg^{k+1}n) \\[1mm]
 		&= \Theta(n^{\log_ba}\lg^{k+1}n).

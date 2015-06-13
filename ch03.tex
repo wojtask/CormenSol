@@ -99,8 +99,8 @@ skąd na podstawie różnowartościowości funkcji logarytmicznej wynika tożsam
 	\]
 	Wykorzystując wzór Stirlinga i~wybierając pewną stałą $c>0$, ograniczamy $\lg(n!)$ od dołu:
 	\begin{align*}
-		\lg(n!) &\ge \lg\Bigl(\sqrt{2\pi n}\Bigl(\frac{n}{e}\Bigr)^n\Bigl(1+\frac{c}{n}\Bigr)\Bigr) \\
-		&= \lg\sqrt{2\pi n}+\lg\Bigl(\frac{n}{e}\Bigr)^n+\lg\Bigl(1+\frac{c}{n}\Bigr) \\
+		\lg(n!) &\ge \lg\biggl(\sqrt{2\pi n}\biggl(\frac{n}{e}\biggr)^n\biggl(1+\frac{c}{n}\biggr)\biggr) \\
+		&= \lg\sqrt{2\pi n}+\lg\biggl(\frac{n}{e}\biggr)^n+\lg\biggl(1+\frac{c}{n}\biggr) \\
 		&> n\lg n-n\lg e \\
 		&\ge n\lg n-\frac{n\lg n}{2} \\
 		&= \frac{n\lg n}{2}.
@@ -484,18 +484,14 @@ Z~pierwszej nierówności mamy, że $f(n)=\widetilde{\Omega}(g(n))$, a~z~drugiej
 W~każdym punkcie tego problemu za dziedzinę funkcji $f_c^*(n)$ przyjęto dziedzinę $f(n)$. W~celu wyznaczenia $f_c^*(n)$ szukamy najmniejszego $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
 
 \subproblem %3-6(a)
-Nierówność $\lg^{(i)}n\le0$ można przekształcić do postaci $\lg^{(i-1)}n\le1$. Wówczas z~definicji logarytmu iterowanego mamy $\lg^*n=i-1$, a~zatem $f_0^*(n)=\lg^*n+1=\Theta(\lg^*n)$.
+\note{Rozwiązanie dotyczy przykładu z~tekstu oryginalnego, w~którym\/ $f(n)=n-1$ oraz\/ $c=0$.}
+
+\noindent Ponieważ $(n-1)^{(i)}\equiv n-i$, to otrzymujemy, że $f_0^*(n)=\max(0,\lceil n\rceil)$ i~oszacowaniem dokładnym jest $f_0^*(n)=\Theta(n)$.
 
 \subproblem %3-6(b)
-Ponieważ $(n-1)^{(i)}\equiv n-i$, to otrzymujemy:
-\[
-	f_1^*(n) =
-	\begin{cases}
-		0, & \text{jeśli $n\le1$}, \\
-		\lceil n\rceil-1, & \text{jeśli $n>1$}.
-	\end{cases}
-\]
-Oszacowanie dokładne: $f_1^*(n)=\Theta(n)$.
+\note{Rozwiązanie dotyczy przykładu z~tekstu oryginalnego, w~którym\/ $f(n)=\lg n$ oraz\/ $c=1$.}
+
+\noindent Z~definicji logarytmu iterowanego mamy $f_1^*(n)=\lg^*n=\Theta(\lg^*n)$.
 
 \subproblem %3-6(c)
 Oczywiście $(n/2)^{(i)}\equiv n/2^i$, więc:

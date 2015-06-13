@@ -36,7 +36,7 @@ Po użyciu \note na początku zadania należy użyć \noindent na początku nast
 W \note stosujemy tryb matematyczny nawet dla pojedynczych liczb, a \/ bezpośrednio przed trybem matematycznym.
 Po \E, \Pr, \Var używa się nawiasów okrągłych.
 Dla zmiennych losowych wskaźnikowych używa się \I, po czym nawiasów okrągłych.
-Używamy \bigl, \bigr i pozostałych zamiast \left, \right (głównie do ułamków) (\biggl, \biggr do dużych operatorów np. \sum).
+Używamy \bigl, \bigr i pozostałych zamiast \left, \right (\biggl, \biggr do nawiasów otaczających ułamki i duże operatory np. \sum).
 Formuły matematyczne składane są wg zasad D. Knutha w "The TeXbook".
 Krotki, ciągi i tablice zapisujemy w nawiasach kątowych \langle i \rangle.
 Jeśli piszemy o zbiorach, ciągach, parach itd., to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach, przecinki należy umieszczać poza tym trybem (wyjątkiem jest trik z opisem pod rysunkiem).
@@ -95,6 +95,7 @@ Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. 
 Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
 Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
 W pseudokodach po znaku operatora występującym po \id{} należy dać odstęp \, (jak w 2.3-5).
+Nie obejmujemy w \id{} identyfikatorów/atrybutów jednoliterowych.
 Etykiety w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
 Jeśli wywołujemy algorytm, to nie musimy koniecznie pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
 Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.

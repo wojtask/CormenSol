@@ -3,17 +3,98 @@
 \subchapter{Co to jest drzewo wyszukiwań binarnych?}
 
 \exercise %12.1-1
+Przykładowe drzewa BST przedstawiono na rys.~\ref{fig:12.1-1}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig12.1}
+	\end{center}
+	\caption{Drzewa BST o~różnych wysokościach zawierające zbiór kluczy $\{1,4,5,10,16,17,21\}$.} \label{fig:12.1-1}
+\end{figure}
+
 \exercise %12.1-2
+\note{Wyrażenie ,,właściwa kolejność'' użyte w~tłumaczeniu oznacza kolejność niemalejącą.}
+
+\noindent Niech $x$ będzie węzłem drzewa $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$. Jeśli drzewo $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\id{key}[y]\le\id{key}[x]\le\id{key}[z]$. Jeśli z~kolei drzewo $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\id{key}[x]\le\id{key}[y]$ oraz $\id{key}[x]\le\id{key}[z]$.
+
+Ta różnica sprawia, że podczas przechodzenia kopca typu min w~kolejności niemalejących węzłów, po odwiedzeniu węzła $x$ nie jest wiadomo, które jego poddrzewo należałoby następnie odwiedzić, ponieważ nie jest znana relacja między $y$ a~$z$. Oznacza to, że wypisanie wszystkich $n$ węzłów kopca typu min w~kolejności niemalejącej zajmuje czas wyższy niż $O(n)$. W~przeciwnym przypadku moglibyśmy zaimplementować algorytm heapsort w~czasie liniowym.
+
 \exercise %12.1-3
+Nierekurencyjna wersja algorytmu przechodzenia drzewa metodą inorder, która wykorzystuje stos, została przedstawiona w~\refExercise{10.4-3}. Nierekurencyjny algorytm o~identycznej funkcjonalności, ale niewykorzystujący stosu, został opisany w~\refExercise{10.4-5}.
+
 \exercise %12.1-4
+Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poniżej. 
+\begin{codebox}
+\Procname{$\proc{Preorder-Tree-Walk}(x)$}
+\li	\If $x\ne\const{nil}$
+\li		\Then
+			wypisz $\id{key}[x]$
+\li			$\proc{Preorder-Tree-Walk}(\id{left}[x])$
+\li			$\proc{Preorder-Tree-Walk}(\id{right}[x])$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Postorder-Tree-Walk}(x)$}
+\li	\If $x\ne\const{nil}$
+\li		\Then
+			$\proc{Postorder-Tree-Walk}(\id{left}[x])$
+\li			$\proc{Postorder-Tree-Walk}(\id{right}[x])$
+\li			wypisz $\id{key}[x]$
+		\End
+\end{codebox}
+
+Dla każdego z~tych algorytmów można udowodnić twierdzenie analogiczne do tw.~12.1, a~więc każdy z~nich działa w~czasie $\Theta(n)$ na drzewie \onedash{$n$}{wierzchołkowym}.
+
 \exercise %12.1-5
+Załóżmy nie-wprost, że istnieje algorytm konstruowania drzewa BST z~dowolnej listy $n$ elementów za pomocą porównań, którego pesymistyczny czas działania wynosi $o(n\lg n)$. Na drzewie BST utworzonym za pomocą tego algorytmu moglibyśmy następnie uruchomić algorytm przechodzenia drzewa metodą inorder i~wypisać wszystkie jego klucze w~kolejności niemalejącej w~czasie $\Theta(n)$. Posortowanie wejściowej listy $n$ elementów można byłoby wtedy przeprowadzić w~czasie niższym niż liniowo-logarytmiczny, co przeczyłoby tw.~8.1.
 
 \subchapter{Wyszukiwanie w~drzewie wyszukiwań binarnych}
 
 \exercise %12.2-1
+Ciągi z~przykładów (a), (b) i~(d) są możliwe do uzyskania podczas wyszukiwania klucza 363 w~drzewie BST. W~przykładzie~(c) po odwiedzeniu węzła o~kluczu 911 przechodzimy do lewego poddrzewa, w~którym znajdują się węzły o~kluczach nie większych niż 911. Jednakże później napotykamy 912, a~to nie jest możliwe w~drzewie BST. W~przykładzie~(e) występuje podobna sytuacja -- po odwiedzeniu węzła o~kluczu 347 przetwarzane jest prawe poddrzewo. Klucz 299 napotykany później jest jednak mniejszy niż 347, co w~drzewie BST nie może mieć miejsca.
+
 \exercise %12.2-2
+Rekurencyjne wersje procedur zostały przedstawione poniżej.
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Minimum}(x)$}
+\li	\If $\id{left}[x]\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Minimum}(\id{left}[x])$
+\li		\Else \Return $x$
+		\End
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Maximum}(x)$}
+\li	\If $\id{right}[x]\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Maximum}(\id{right}[x])$
+\li		\Else \Return $x$
+		\End
+\end{codebox}
+
 \exercise %12.2-3
+Procedura \proc{Tree-Predecessor} jest symetryczna do \proc{Tree-Successor}. Jej pseudokod znajduje się poniżej.
+\begin{codebox}
+\Procname{$\proc{Tree-Predecessor}(x)$}
+\li	\If $\id{left}[x]\ne\const{nil}$
+\li		\Then \Return $\proc{Tree-Maximum}(\id{left}[x])$
+		\End
+\li	$y\gets p[x]$
+\li	\While $y\ne\const{nil}$ i~$x=\id{left}[y]$
+\li		\Do
+			$x\gets y$
+\li			$y\gets p[y]$
+		\End
+\li	\Return $y$
+\end{codebox}
+
 \exercise %12.2-4
+Rys.~\ref{fig:12.2-4} przedstawia najmniejsze drzewo BST, które obala postawioną hipotezę.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig12.2}
+	\end{center}
+	\caption{Najmniejszy kontrprzykład dla rozumowania profesora Bunyana. W~drzewie tym szukano klucza $k=4$. Jasnym kolorem zaznaczono jedyny węzeł o~kluczu należącym do zbioru $A$, a~ciemnym kolorem -- węzły o~kluczach ze zbioru $B$. Zbiór $C$ w~tym przykładzie jest pusty. Klucze 1 i~2 nie spełniają nierówności postawionej w~hipotezie.} \label{fig:12.2-4}
+\end{figure}
+
 \exercise %12.2-5
 \exercise %12.2-6
 \exercise %12.2-7
@@ -23,6 +104,29 @@
 \subchapter{Wstawianie i~usuwanie}
 
 \exercise %12.3-1
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Insert}(T,x,z)$}
+\li	$y\gets\const{nil}$
+\li	\If $x=\const{nil}$
+\li		\Then
+			$p[z]\gets y$
+\li			\If $y=\const{nil}$
+\li				\Then $\id{root}[T]\gets z$
+\li				\Else
+					\If $\id{key}[z]<\id{key}[y]$
+\li						\Then $\id{left}[y]\gets z$
+\li						\Else $\id{right}[y]\gets z$
+						\End
+				\End
+\li		\Else
+			$y\gets x$
+\li			\If $\id{key}[z]<\id{key}[x]$
+\li				\Then $\proc{Recursive-Tree-Insert}(T,\id{left}[x],z)$
+\li				\Else $\proc{Recursive-Tree-Insert}(T,\id{right}[x],z)$
+				\End
+		\End
+\end{codebox}
+
 \exercise %12.3-2
 \exercise %12.3-3
 \exercise %12.3-4
@@ -36,6 +140,7 @@
 \exercise %12.4-3
 \exercise %12.4-4
 \exercise %12.4-5
+\note{Wymagane jest założenie, że elementy tablicy wejściowej algorytmu \proc{Randomized-Quicksort} są parami różne.}
 
 \problems
 
