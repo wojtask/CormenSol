@@ -8,9 +8,22 @@
 	\DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
+% definicja flagi mówiącej, czy jesteśmy w sekcji dodatków
+\newif\if@appendix
+\@appendixfalse
+
 % zapobiega wcinaniu pierwszej linii pierwszego paragrafu
 \let\@afterindenttrue\@afterindentfalse
 \@afterindentfalse
+
+% zwiększenie pudełka trzymającego numer strony w spisie treści
+\renewcommand{\@pnumwidth}{1.7em}
+
+\setlength{\cftchapnumwidth}{1.7em}
+\setlength{\cftsecindent}{1.7em}
+
+% zwiększenie odstępu między numerem podrozdziału a jego nazwą w spisie treści
+\setlength{\cftsecnumwidth}{2.6em}
 
 % głębokość numerowania wewnątrz spisu treści
 \setcounter{tocdepth}{1}
@@ -88,7 +101,16 @@
 	{0.5\baselineskip}
 	{\sffamily\bfseries}
 }
-\newcommand{\exercise}{\ex@rcise{}}
+\newcommand{\exercise}{%
+	\ex@rcise{}%
+	\label{ex:%
+	\if@appendix%
+		\Alph{chapter}%
+	\else%
+		\arabic{chapter}%
+	\fi%
+	.\arabic{section}-\arabic{subsection}}%
+}
 
 % definicja polecenia tworzenia (rozwiązania) punktu zadania
 \newcommand\subex@rcise{%
@@ -147,9 +169,19 @@
 	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
 }
 
-% definicja poleceń wstawiających problem i punkt problemu
-\newcommand{\problem}[1]{\ex@rcise{#1}}
-\newcommand{\subproblem}{\subexercise}
+% definicja polecenia wstawiającego problem wraz z jego etykietą
+\newcommand{\problem}[1]{\ex@rcise{#1}
+	\label{ex:%
+	\if@appendix%
+		\Alph{chapter}%
+	\else%
+		\arabic{chapter}%
+	\fi%
+	-\arabic{subsection}}%
+}
+
+% definicja polecenia wstawiającego podproblem
+\newcommand{\subproblem}{\subex@rcise{}}
 
 % definicje stylów twierdzenia i lematu
 \newtheoremstyle{csthm}{\topsep}{\topsep}{\itshape}{}{\sffamily\bfseries}{.}{.5em}{}
@@ -160,8 +192,13 @@
 % niełamliwy dywiz
 \newcommand{\twoparts}[2]{{#1}\nobreakdash-{#2}}
 
-% odnośnik do zadania
-\newcommand{\zad}[1]{zad.~\hbox{#1}}
+% odnośnik do zadania --> odblokować w publikowanej wersji!
+%\newcommand{\refExercise}[1]{zad.~\ref{ex:#1}}
+\newcommand{\refExercise}[1]{zad.~#1}
+
+% odnośnik do problemu --> odblokować w publikowanej wersji!
+%\newcommand{\refProblem}[1]{\ref{ex:#1}}
+\newcommand{\refProblem}[1]{#1}
 
 % informacja poboczna w tekście rozwiązania
 \newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}

@@ -3,29 +3,29 @@
 \subchapter{Kopce}
 
 \exercise %6.1-1
-Ponieważ dodając kolejne węzły do kopca, wypełniamy go kolejnymi poziomami, to najmniejszą liczbą elementów kopca o wysokości $h$ jest $2^h$, ponieważ kopiec ma wtedy postać pełnego drzewa binarnego o wysokości $h-1$ wraz z jednym tylko wierzchołkiem na głębokości $h$. Jeśli zaś dążymy do maksymalizacji węzłów, to każdy poziom będzie zawierał ich komplet, może być zatem w kopcu maksymalnie $2^{h+1}-1$ węzłów.
+Ponieważ dodając kolejne węzły do kopca, wypełniamy go kolejnymi poziomami, to najmniejszą liczbą elementów kopca o~wysokości $h$ jest $2^h$, ponieważ kopiec ma wtedy postać pełnego drzewa binarnego o~wysokości $h-1$ wraz z~jednym tylko wierzchołkiem na głębokości $h$. Jeśli zaś dążymy do maksymalizacji węzłów, to każdy poziom będzie zawierał ich komplet, może być zatem w~kopcu maksymalnie $2^{h+1}-1$ węzłów.
 
 \exercise %6.1-2
-Z poprzedniego zadania mamy, że $2^h\le n\le 2^{h+1}-1$. Ponieważ
+Z~poprzedniego zadania mamy, że $2^h\le n\le 2^{h+1}-1$. Ponieważ
 \[
 	\lfloor\lg2^h\rfloor = \lfloor\lg(2^h+1)\rfloor = \cdots = \lfloor\lg(2^{h+1}-1)\rfloor = h,
 \]
 to wysokością kopca jest $h=\lfloor\lg n\rfloor$.
 
 \exercise %6.1-3
-Ponieważ korzeń każdego poddrzewa w kopcu typu max nie jest mniejszy od swojego lewego i prawego syna, czyli od korzeni swoich poddrzew, to stąd mamy, że elementy tworzące każdą ścieżkę od liścia w górę drzewa, tworzą ciągi niemalejące. Ponieważ wszystkie ścieżki kończą się w korzeniu kopca, to musi być on największym elementem kopca.
+Ponieważ korzeń każdego poddrzewa w~kopcu typu max nie jest mniejszy od swojego lewego i~prawego syna, czyli od korzeni swoich poddrzew, to stąd mamy, że elementy tworzące każdą ścieżkę od liścia w~górę drzewa, tworzą ciągi niemalejące. Ponieważ wszystkie ścieżki kończą się w~korzeniu kopca, to musi być on największym elementem kopca.
 
 \exercise %6.1-4
-Analizując ścieżki w górę drzewa, jak w poprzednim zadaniu, stwierdzamy, że najmniejsze elementy każdej ścieżki leżą na ich początku, czyli znajdują się w liściach. Ponieważ warunek kopca typu max nie wprowadza żadnej relacji między tymi elementami, to najmniejszy element kopca może być w każdym ze swoich liści.
+Analizując ścieżki w~górę drzewa, jak w~poprzednim zadaniu, stwierdzamy, że najmniejsze elementy każdej ścieżki leżą na ich początku, czyli znajdują się w~liściach. Ponieważ warunek kopca typu max nie wprowadza żadnej relacji między tymi elementami, to najmniejszy element kopca może być w~każdym ze swoich liści.
 
 \exercise %6.1-5
-Z \zad{6.1-3} wynika, że korzeniem kopca jest pierwszy element tablicy posortowanej. Ponieważ dla każdego indeksu tablicy $i$ z wyjątkiem pierwszego zachodzi $\proc{Parent}(i)<i$, to tablica posortowana spełnia własność kopca typu min, a zatem sama stanowi taki kopiec.
+Z~\refExercise{6.1-3} wynika, że korzeniem kopca jest pierwszy element tablicy posortowanej. Ponieważ dla każdego indeksu tablicy $i$ z~wyjątkiem pierwszego zachodzi $\proc{Parent}(i)<i$, to tablica posortowana spełnia własność kopca typu min, a~zatem sama stanowi taki kopiec.
 
 \exercise %6.1-6
 Ciąg ten nie jest kopcem typu max, bo elementy na pozycjach $i=9$ oraz $\proc{Parent}(i)=4$ nie spełniają własności $A[\proc{Parent}(i)]\ge A[i]$.
 
 \exercise %6.1-7
-Jeśli dla pewnego elementu kopca z pozycji $i$ istnieje jego lewy syn, to element taki nie jest liściem. W kopcu o $n$ elementach, wierzchołki wewnętrzne znajdują się zatem na pozycjach $i$ takich, że $\proc{Left}(i)\le n$. Warunek ten sprowadza się do nierówności $2i\le n$, skąd $i\le\lfloor n/2\rfloor$. Pozostałe wierzchołki są liśćmi i zajmują pozycje $\lfloor n/2\rfloor+1$, $\lfloor n/2\rfloor+2$,~\dots,~$n$.
+Jeśli dla pewnego elementu kopca z~pozycji $i$ istnieje jego lewy syn, to element taki nie jest liściem. W~kopcu o~$n$ elementach, wierzchołki wewnętrzne znajdują się zatem na pozycjach $i$ takich, że $\proc{Left}(i)\le n$. Warunek ten sprowadza się do nierówności $2i\le n$, skąd $i\le\lfloor n/2\rfloor$. Pozostałe wierzchołki są liśćmi i~zajmują pozycje $\lfloor n/2\rfloor+1$, $\lfloor n/2\rfloor+2$,~\dots,~$n$.
 
 \subchapter{Przywracanie własności kopca}
 
@@ -39,7 +39,7 @@ Rysunek~\ref{fig:6.2-1} jest symulacją wywołania $\proc{Max-Heapify}(A,3)$ na 
 \end{figure}
 
 \exercise %6.2-2
-Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu min. Ponieważ jedyną zmianą w porównaniu z procedurą \proc{Max-Heapify} jest zmiana nierówności na przeciwne w warunkach wybierających odpowiedni indeks, to czas jej działania jest identyczny z czasem działania \proc{Max-Heapify}, czyli $\Theta(\lg n)$.
+Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu min. Ponieważ jedyną zmianą w~porównaniu z~procedurą \proc{Max-Heapify} jest zmiana nierówności na przeciwne w~warunkach wybierających odpowiedni indeks, to czas jej działania jest identyczny z~czasem działania \proc{Max-Heapify}, czyli $\Theta(\lg n)$.
 \begin{codebox}
 \Procname{$\proc{Min-Heapify}(A,i)$}
 \li	$l\gets\proc{Left}(i)$
@@ -48,7 +48,7 @@ Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu mi
 \li		\Then $\id{smallest}\gets l$
 \li		\Else $\id{smallest}\gets i$
 		\End
-\li	\If $r\le\id{heap-size}[A]$ i $A[r]>A[\id{smallest}]$
+\li	\If $r\le\id{heap-size}[A]$ i~$A[r]>A[\id{smallest}]$
 \li		\Then $\id{smallest}\gets r$
 		\End
 \li	\If $\id{smallest}\ne i$
@@ -59,10 +59,10 @@ Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu mi
 \end{codebox}
 
 \exercise %6.2-3
-Procedura w wierszu 8 sprawdza różność indeksów $\id{largest}$ oraz $i$. Jeśli element $A[i]$ jest większy niż jego synowie, to $\id{largest}=i$, więc procedura zakończy działanie po sprawdzeniu tego warunku.
+Procedura w~wierszu~8 sprawdza różność indeksów $\id{largest}$ oraz $i$. Jeśli element $A[i]$ jest większy niż jego synowie, to $\id{largest}=i$, więc procedura zakończy działanie po sprawdzeniu tego warunku.
 
 \exercise %6.2-4
-Z \zad{6.1-7} mamy, że element o indeksie $i>\id{heap-size}[A]/2$ jest liściem kopca, nie istnieją więc jego synowie. W dwóch pierwszych wierszach procedury \proc{Max-Heapify} obliczone zostaną wartości przekraczające $\id{heap-size}[A]$, więc po wykonaniu wiersza~7 będzie zachodzić $\id{largest}=i$ i~warunek w~kolejnym wierszu będzie fałszywy. Po jego sprawdzeniu procedura zakończy działanie.
+Z~\refExercise{6.1-7} mamy, że element o~indeksie $i>\id{heap-size}[A]/2$ jest liściem kopca, nie istnieją więc jego synowie. W~dwóch pierwszych wierszach procedury \proc{Max-Heapify} obliczone zostaną wartości przekraczające $\id{heap-size}[A]$, więc po wykonaniu wiersza~7 będzie zachodzić $\id{largest}=i$ i~warunek w~kolejnym wierszu będzie fałszywy. Po jego sprawdzeniu procedura zakończy działanie.
 
 \exercise %6.2-5
 Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej:
@@ -76,7 +76,7 @@ Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej:
 \li				\Then $\id{largest}\gets l$
 \li				\Else $\id{largest}\gets i$
 				\End
-\li			\If $r\le\id{heap-size}[A]$ i $A[r]>A[\id{largest}]$
+\li			\If $r\le\id{heap-size}[A]$ i~$A[r]>A[\id{largest}]$
 \li				\Then $\id{largest}\gets r$
 				\End
 \li			\If $\id{largest}\ne i$
@@ -89,12 +89,12 @@ Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej:
 				\End
 		\End
 \end{codebox}
-W~wierszu \ref{li:maxheapify-sentinel} zastosowano pewien trik polegający na przypisaniu specjalnej wartości zmiennej $l$ testowanej w warunku pętli \kw{while}. Wartość ta służy wyłącznie temu, aby przerwać działanie pętli.
+W~wierszu \ref{li:maxheapify-sentinel} zastosowano pewien trik polegający na przypisaniu specjalnej wartości zmiennej $l$ testowanej w~warunku pętli \kw{while}. Wartość ta służy wyłącznie temu, aby przerwać działanie pętli.
 
 \exercise %6.2-6
-Procedura \proc{Max-Heapify} będzie działać najdłużej, jeśli zostanie wywołana dla korzenia kopca i wykona możliwie najwięcej zejść rekurencyjnych. Ponieważ z każdym takim wywołaniem schodzimy o jeden poziom w dół drzewa, to najpóźniej możemy zatrzymać się na liściu, a zatem po wykonaniu $h=\lfloor\lg n\rfloor$ wywołań. Koszt pracy na jeden poziom rekurencji jest stały, a więc procedura będzie działać w czasie $\Omega(\lg n)$.
+Procedura \proc{Max-Heapify} będzie działać najdłużej, jeśli zostanie wywołana dla korzenia kopca i~wykona możliwie najwięcej zejść rekurencyjnych. Ponieważ z~każdym takim wywołaniem schodzimy o~jeden poziom w~dół drzewa, to najpóźniej możemy zatrzymać się na liściu, a~zatem po wykonaniu $h=\lfloor\lg n\rfloor$ wywołań. Koszt pracy na jeden poziom rekurencji jest stały, a~więc procedura będzie działać w~czasie $\Omega(\lg n)$.
 
-Opisane zachowanie procedury można spowodować wywołując ją dla kopca, w którym korzeń jest najmniejszym jego elementem, ponieważ wtedy na każdym poziomie rekursji z wyjątkiem ostatniego będzie $\id{largest}=l$ lub $\id{largest}=r$.
+Opisane zachowanie procedury można spowodować wywołując ją dla kopca, w~którym korzeń jest najmniejszym jego elementem, ponieważ wtedy na każdym poziomie rekursji z~wyjątkiem ostatniego będzie $\id{largest}=l$ lub $\id{largest}=r$.
 
 \subchapter{Budowanie kopca}
 
@@ -108,10 +108,10 @@ Ilustracja działania procedury \proc{Build-Max-Heap} znajduje się na rys.~\ref
 \end{figure}
 
 \exercise %6.3-2
-Powodem takiej kolejności przetwarzania węzłów jest fakt, że wywołania rekurencyjne procedury \proc{Max-Heapify} schodzą na coraz niższe poziomy kopca. Jeżeli węzeł o wysokiej wartości znajduje się na niskich poziomach, to nie byłoby możliwe dostarczenie go do wyższego poziomu tak, aby była spełniona własność kopca, ponieważ w pojedynczym wywołaniu \proc{Max-Heapify} można pewien węzeł przenieść w górę kopca tylko o jeden poziom.
+Powodem takiej kolejności przetwarzania węzłów jest fakt, że wywołania rekurencyjne procedury \proc{Max-Heapify} schodzą na coraz niższe poziomy kopca. Jeżeli węzeł o~wysokiej wartości znajduje się na niskich poziomach, to nie byłoby możliwe dostarczenie go do wyższego poziomu tak, aby była spełniona własność kopca, ponieważ w~pojedynczym wywołaniu \proc{Max-Heapify} można pewien węzeł przenieść w~górę kopca tylko o~jeden poziom.
 
 \exercise %6.3-3
-Na najniższym poziomie kopca, czyli na wysokości 0 znajduje się od 1 do $2^H$ węzłów, $n_0\le2^H$. Z zad.~6.1-1 mamy, że w kopcu o $n$ wierzchołkach i wysokości $H$ zachodzi $n\le2^{H+1}-1$, więc $\lceil n/2^1\rceil\le\lceil2^H-1/2\rceil=2^H$. Każdy poziom o wysokości $0<h\le H$ posiada $n_h=2^{H-h}$ węzłów. Wykorzystując ponownie zad.~6.1-1 mamy $\lceil n/2^{h+1}\rceil\le\lceil2^{H-h}-1/2^{h+1}\rceil=2^{H-h}$, a więc podane ograniczenie jest prawdziwe dla wszystkich poziomów kopca.
+Na najniższym poziomie kopca, czyli na wysokości 0 znajduje się od 1 do $2^H$ węzłów, $n_0\le2^H$. Z~\refExercise{6.1-1} mamy, że w~kopcu o~$n$ wierzchołkach i~wysokości $H$ zachodzi $n\le2^{H+1}-1$, więc $\lceil n/2^1\rceil\le\lceil2^H-1/2\rceil=2^H$. Każdy poziom o~wysokości $0<h\le H$ posiada $n_h=2^{H-h}$ węzłów. Wykorzystując ponownie \refExercise{6.1-1} mamy $\lceil n/2^{h+1}\rceil\le\lceil2^{H-h}-1/2^{h+1}\rceil=2^{H-h}$, a~więc podane ograniczenie jest prawdziwe dla wszystkich poziomów kopca.
 
 \subchapter{Algorytm sortowania przez kopcowanie (heapsort)}
 
@@ -126,20 +126,20 @@ Na rys.~\ref{fig:6.4-1} przedstawiono symulację działania sortowania przez kop
 
 \exercise %6.4-2
 \begin{description}
-	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\id{length}[A]=n$. Fragment tablicy $A[1\twodots i]$ jest więc całą tablicą $A$, która stanowi kopiec typu max, utworzony w wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
-	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli. Ponieważ $A[1\twodots n]$ jest kopcem typu max, to element $A[1]$ jest jego korzeniem, czyli największym elementem w tej podtablicy. Po zamianie z wiersza 3 znajdzie się on na pozycji $i$. Dekrementacja $\id{heap-size}$ powoduje, że element $A[i]$ nie wchodzi teraz w skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z $A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ nie jest większy od wcześniej umieszczonych tam elementów. Uaktualnienie $i$ pozwala odtworzyć tę część niezmiennika.
+	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\id{length}[A]=n$. Fragment tablicy $A[1\twodots i]$ jest więc całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli. Ponieważ $A[1\twodots n]$ jest kopcem typu max, to element $A[1]$ jest jego korzeniem, czyli największym elementem w~tej podtablicy. Po zamianie z~wiersza~3 znajdzie się on na pozycji $i$. Dekrementacja $\id{heap-size}$ powoduje, że element $A[i]$ nie wchodzi teraz w~skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z~$A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ nie jest większy od wcześniej umieszczonych tam elementów. Uaktualnienie $i$ pozwala odtworzyć tę część niezmiennika.
 
-	W tym momencie korzeń kopca może naruszać własność kopca typu max, dlatego w wierszu~5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność.
-	\item[Zakończenie:] Na końcu jest $i=1$, zatem podtablica $A[1\twodots i]$ składa się z jednego elementu, który trywialnie stanowi kopiec typu max i jest najmniejszym elementem tablicy $A$, gdyż każdy większy lub równy od niego element został wcześniej włączony w skład fragmentu $A[i+1\twodots n]$. Stąd mamy, że tablica $A$ jest posortowana.
+	W tym momencie korzeń kopca może naruszać własność kopca typu max, dlatego w~wierszu~5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność.
+	\item[Zakończenie:] Na końcu jest $i=1$, zatem podtablica $A[1\twodots i]$ składa się z~jednego elementu, który trywialnie stanowi kopiec typu max i~jest najmniejszym elementem tablicy $A$, gdyż każdy większy lub równy od niego element został wcześniej włączony w~skład fragmentu $A[i+1\twodots n]$. Stąd mamy, że tablica $A$ jest posortowana.
 \end{description}
 
 \exercise %6.4-3
-W przypadku tablicy posortowanej rosnąco, procedura \proc{Build-Max-Heap} tworzy kopiec typu max w czasie $O(n)$. Pętla w procedurze \proc{Heapsort} powoduje $n-1$ wywołań \proc{Max-Heapify} na kopcu o co najwyżej $n$ elementach, a więc algorytm działa w czasie $O(n\lg n)$.
+W~przypadku tablicy posortowanej rosnąco, procedura \proc{Build-Max-Heap} tworzy kopiec typu max w~czasie $O(n)$. Pętla w~procedurze \proc{Heapsort} powoduje $n-1$ wywołań \proc{Max-Heapify} na kopcu o~co najwyżej $n$ elementach, a~więc algorytm działa w~czasie $O(n\lg n)$.
 
-Dla tablicy posortowanej malejąco kopiec jest już gotowy, jednak mimo to jest wywoływane \proc{Build-Max-Heap}, co zajmuje czas $O(n)$. Ponieważ następnie $O(n)$ razy wywołujemy \proc{Max-Heapify} wykonujące się w czasie $O(\lg n)$, to również w tym przypadku czasem działania algorytmu jest $O(n\lg n)$.
+Dla tablicy posortowanej malejąco kopiec jest już gotowy, jednak mimo to jest wywoływane \proc{Build-Max-Heap}, co zajmuje czas $O(n)$. Ponieważ następnie $O(n)$ razy wywołujemy \proc{Max-Heapify} wykonujące się w~czasie $O(\lg n)$, to również w~tym przypadku czasem działania algorytmu jest $O(n\lg n)$.
 
 \exercise %6.4-4
-Przypadek pesymistyczny występuje wtedy, gdy każde wywołanie \proc{Max-Heapify} z wiersza~5 schodzi rekurencyjnie do ostatniego poziomu kopca. Zgodnie z \zad{6.2-6} czasem działania algorytmu heapsort w takim przypadku jest
+Przypadek pesymistyczny występuje wtedy, gdy każde wywołanie \proc{Max-Heapify} z~wiersza~5 schodzi rekurencyjnie do ostatniego poziomu kopca. Zgodnie z~\refExercise{6.2-6} czasem działania algorytmu heapsort w~takim przypadku jest
 \[
 	\sum_{i=2}^{n}\Omega(\lg i) = \Omega(\lg(n!)) = \Omega(n\lg n).
 \]
@@ -155,12 +155,12 @@ Widać zatem, że dla elementów z~jednego poddrzewa, przywracanie własności k
 \[
 	T(n) = n/2\cdot\Theta(1)+\sum_{i=1}^{n/2}\Theta(\lg i) = \Theta(n)+\Theta((n/2)\lg(n/2)) = \Theta(n\lg n),
 \]
-przy czym wykorzystano problem~A.1(b), w~którym przyjęto $s=1$.
+przy czym wykorzystano punkt~(b) problemu~\refProblem{A-1}, w~którym przyjęto $s=1$.
 
 \subchapter{Kolejki priorytetowe}
 
 \exercise %6.5-1
-Na rys.~\ref{fig:6.5-1} zostały przedstawione kopce wejściowy i wyjściowy po uruchomieniu procedury \proc{Heap-Extract-Max}. Jej działanie dla kopca wejściowego rozpoczyna się od sprawdzenia warunku, czy kopiec jest pusty, który oczywiście jest fałszywy. Następnie, w wierszu 3 do zmiennej $\id{max}$ przypisywana jest wartość 15, natomiast $A[1]$ otrzymuje wartość $1$. Rozmiar kopca jest dekrementowany i po wywołaniu $\proc{Max-Heapify}(A,1)$ dostajemy kopiec wyjściowy. Procedura zwraca wreszcie wartość $\id{max}$ i kończy działanie.
+Na rys.~\ref{fig:6.5-1} zostały przedstawione kopce wejściowy i~wyjściowy po uruchomieniu procedury \proc{Heap-Extract-Max}. Jej działanie dla kopca wejściowego rozpoczyna się od sprawdzenia warunku, czy kopiec jest pusty, który oczywiście jest fałszywy. Następnie, w~wierszu 3 do zmiennej $\id{max}$ przypisywana jest wartość 15, natomiast $A[1]$ otrzymuje wartość $1$. Rozmiar kopca jest dekrementowany i~po wywołaniu $\proc{Max-Heapify}(A,1)$ dostajemy kopiec wyjściowy. Procedura zwraca wreszcie wartość $\id{max}$ i~kończy działanie.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig06.4}
@@ -169,7 +169,7 @@ Na rys.~\ref{fig:6.5-1} zostały przedstawione kopce wejściowy i wyjściowy po 
 \end{figure}
 
 \exercise %6.5-2
-Procedura \proc{Max-Heap-Insert} rozpoczyna swoje działanie od zwiększenia rozmiaru kopca o 1, przy czym nowy element ma wartość początkową równą $-\infty$. Wartość ta jest następnie modyfikowana i umieszczana w odpowiednim miejscu w kopcu dzięki procedurze \proc{Heap-Increase-Key}. Działanie tej ostatniej zostało przedstawione na rys.~\ref{fig:6.5-2}.
+Procedura \proc{Max-Heap-Insert} rozpoczyna swoje działanie od zwiększenia rozmiaru kopca o~1, przy czym nowy element ma wartość początkową równą $-\infty$. Wartość ta jest następnie modyfikowana i~umieszczana w~odpowiednim miejscu w~kopcu dzięki procedurze \proc{Heap-Increase-Key}. Działanie tej ostatniej zostało przedstawione na rys.~\ref{fig:6.5-2}.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig06.5}
@@ -203,7 +203,7 @@ Wszystkie poniższe procedury zostały zaimplementowane analogicznie do oryginal
 			\Error ``nowy klucz jest większy niż klucz aktualny''
 		\End
 \li	$A[i]\gets\id{key}$
-\li	\While $i>1$ i $A[\proc{Parent}(i)]>A[i]$
+\li	\While $i>1$ i~$A[\proc{Parent}(i)]>A[i]$
 \li		\Do
 			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
 \li			$i\gets\proc{Parent}(i)$
@@ -218,21 +218,21 @@ Wszystkie poniższe procedury zostały zaimplementowane analogicznie do oryginal
 \end{codebox}
 
 \exercise %6.5-4
-Dzięki przypisaniu takiej wartości, własność kopca typu max jest spełniona pomiędzy wywołaniami procedur, co może mieć znaczenie przy współdzielonym dostępie do kolejki przez kilka wątków.
+W~rzeczywistości możemy użyć dowolnej wartości nieprzekraczającej \id{key} tak, aby spełnić warunek z~wiersza~1 procedury \proc{Heap-Increase-Key}. Jednak dzięki przypisaniu $-\infty$ spełniamy dodatkowo własność kopca typu max pomiędzy wywołaniami procedur, co może mieć znaczenie przy współdzielonym dostępie do kolejki przez kilka wątków.
 
 \exercise %6.5-5
 \begin{description}
-	\item[Inicjowanie:] Przed przypisaniem w wierszu~3, tablica $A$ jest kopcem typu max. Dokonanie przypisania może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
-	\item[Utrzymanie:] Dokonując zamiany elementów w wierszu~5 w kolejnej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$. Jednak taka operacja może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$. Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która narusza własność i niezmiennik pozostaje spełniony.
-	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W obu tych przypadkach tablica $A$ stanowi kopiec typu max, gdyż albo $A[\proc{Parent}(i)]$ nie odnosi się do elementu kopca albo warunek kopca typu max dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$ jest spełniony.
+	\item[Inicjowanie:] Przed przypisaniem w~wierszu~3, tablica $A$ jest kopcem typu max. Dokonanie przypisania może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
+	\item[Utrzymanie:] Dokonując zamiany elementów w~wierszu~5 w~kolejnej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$. Jednak taka operacja może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$. Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która narusza własność i~niezmiennik pozostaje spełniony.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W~obu tych przypadkach tablica $A$ stanowi kopiec typu max, gdyż albo $A[\proc{Parent}(i)]$ nie odnosi się do elementu kopca albo warunek kopca typu max dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$ jest spełniony.
 \end{description}
-Można więc twierdzić, że procedura \proc{Heap-Increase-Key} poprawnie zwiększa wartość węzła $i$, pozostawiając w tablicy $A$ kopiec typu max.
+Można więc twierdzić, że procedura \proc{Heap-Increase-Key} poprawnie zwiększa wartość węzła $i$, pozostawiając w~tablicy $A$ kopiec typu max.
 
 \exercise %6.5-6
-Wykorzystamy do tego celu kolejkę priorytetową typu max oraz dodatkową zmienną będącą licznikiem wstawianych elementów. Po zainicjalizowaniu licznika pewną wartością początkową można następnie przeprowadzać operacje dodawania i usuwania elementów traktując strukturę jako kolejkę FIFO lub stos. Usuwanie elementów odbywa się poprzez wywołanie \proc{Heap-Extract-Max}, a dodawanie dzięki wywołaniu procedury \proc{Max-Heap-Insert}, której jako wartość klucza dla nowego elementu będziemy podawać bieżącą wartość licznika. Po dodaniu nowego elementu do struktury licznik będzie następnie inkrementowany w przypadku stosu lub dekrementowany w przypadku kolejki FIFO. Takie operowanie zmienną licznikową gwarantuje odpowiednią kolejność usuwania elementów z obu tych struktur danych.
+Wykorzystamy do tego celu kolejkę priorytetową typu max oraz dodatkową zmienną będącą licznikiem wstawianych elementów. Po zainicjalizowaniu licznika pewną wartością początkową można następnie przeprowadzać operacje dodawania i~usuwania elementów traktując strukturę jako kolejkę FIFO lub stos. Usuwanie elementów odbywa się poprzez wywołanie \proc{Heap-Extract-Max}, a~dodawanie dzięki wywołaniu procedury \proc{Max-Heap-Insert}, której jako wartość klucza dla nowego elementu będziemy podawać bieżącą wartość licznika. Po dodaniu nowego elementu do struktury licznik będzie następnie inkrementowany w~przypadku stosu lub dekrementowany w~przypadku kolejki FIFO. Takie operowanie zmienną licznikową gwarantuje odpowiednią kolejność usuwania elementów z~obu tych struktur danych.
 
 \exercise %6.5-7
-Poniżej przedstawiona procedura \proc{Heap-Delete} usuwa węzeł $i$ z \twoparts{$n$}{elementowego} kopca $A$ typu max poprzez uczynienie węzła elementem maksmalnym kopca, a następnie usunięcie go procedurą \proc{Heap-Extract-Max}. Ponieważ obie wywoływane procedury działają w czasie $O(\lg n)$, to czasem działania \proc{Heap-Delete} jest również $O(\lg n)$.
+Poniżej przedstawiona procedura \proc{Heap-Delete} usuwa węzeł $i$ z~\twoparts{$n$}{elementowego} kopca $A$ typu max poprzez uczynienie węzła elementem maksmalnym kopca, a~następnie usunięcie go procedurą \proc{Heap-Extract-Max}. Ponieważ obie wywoływane procedury działają w~czasie $O(\lg n)$, to czasem działania \proc{Heap-Delete} jest również $O(\lg n)$.
 \begin{codebox}
 \Procname{$\proc{Heap-Delete}(A,i)$}
 \li	$\proc{Heap-Increase-Key}(A,i,\infty)$
@@ -240,9 +240,9 @@ Poniżej przedstawiona procedura \proc{Heap-Delete} usuwa węzeł $i$ z \twopart
 \end{codebox}
 
 \exercise %6.5-8
-W algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą. Na początku działania do kolejki zostaną przeniesione pierwsze elementy z każdej listy. Jest oczywiste, że wśród tych elementów znajduje się najmniejszy element listy wynikowej. Aby go uzyskać, wystarczy wywołać na kolejce operację \proc{Extract-Min}. Drugiego najmniejszego elementu należy szukać wśród aktualnych węzłów w kolejce lub na pierwszej pozycji listy, do której należało pobrane przed chwilą minimum. Element tej listy, o ile istnieje, przenosimy do kolejki. W kolejnych krokach pobieramy z kolejki najmniejszy element budując listę wynikową, po czym uzupełniamy kolejkę pierwszym elementem z listy, do której należał pobrany węzeł, jeśli lista ta nie jest jeszcze pusta. Algorytm wykonywany jest aż do opróżnienia kolejki, co następuje po przetworzeniu zawartości wszystkich list.
+W~algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą. Na początku działania do kolejki zostaną przeniesione pierwsze elementy z~każdej listy. Jest oczywiste, że wśród tych elementów znajduje się najmniejszy element listy wynikowej. Aby go uzyskać, wystarczy wywołać na kolejce operację \proc{Extract-Min}. Drugiego najmniejszego elementu należy szukać wśród aktualnych węzłów w~kolejce lub na pierwszej pozycji listy, do której należało pobrane przed chwilą minimum. Element tej listy, o~ile istnieje, przenosimy do kolejki. W~kolejnych krokach pobieramy z~kolejki najmniejszy element budując listę wynikową, po czym uzupełniamy kolejkę pierwszym elementem z~listy, do której należał pobrany węzeł, jeśli lista ta nie jest jeszcze pusta. Algorytm wykonywany jest aż do opróżnienia kolejki, co następuje po przetworzeniu zawartości wszystkich list.
 
-Podczas działania algorytmu wykonamy $n$ razy operację wstawienia węzła do kolejki o co najwyżej $k$ elementach i tyle samo operacji ekstrakcji węzła o najmniejszej wartości, co prowadzi do $O(n\lg k)$ jako górnego oszacowania na czas działania algorytmu, przy założeniu, że kolejka priorytetowa została zaimplementowana w oparciu o kopiec typu min.
+Podczas działania algorytmu wykonamy $n$ razy operację wstawienia węzła do kolejki o~co najwyżej $k$ elementach i~tyle samo operacji ekstrakcji węzła o~najmniejszej wartości, co prowadzi do $O(n\lg k)$ jako górnego oszacowania na czas działania algorytmu, przy założeniu, że kolejka priorytetowa została zaimplementowana w~oparciu o~kopiec typu min.
 
 \problems
 
@@ -262,15 +262,15 @@ Najgorszym przypadkiem dla procedury \proc{Build-Max-Heap'} jest tablica uporzą
 \[
 	\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(\lg(n!)) = \Theta(n\lg n),
 \]
-ponieważ $\lg(n!)=\Theta(n\lg n)$ (z~\zad{3.2-3}).
+ponieważ $\lg(n!)=\Theta(n\lg n)$ (z~\refExercise{3.2-3}).
 
 \problem{Analiza kopców rzędu $d$} %6-2
 
 \subproblem %6-2(a)
-Korzeniem \twoparts{$d$}{kopca} uczyńmy $A[1]$. Synowie korzenia będą znajdować się na pozycjach od 2 do $d+1$ tablicy $A$, ich synowie -- na pozycjach od $d+2$ do $d^2+d+1$ itd.\ Ogólnie, mając dany indeks węzła $i$, można obliczyć indeksy jego ojca i~synów, korzystając z~uogólnienia procedur \proc{Parent} oraz \proc{Left} i~\proc{Right}. Pierwszą pocedurę implementujemy następująco:
+Korzeniem \twoparts{$d$}{kopca} uczyńmy $A[1]$. Synowie korzenia będą znajdować się na pozycjach od 2 do $d+1$ tablicy $A$, ich synowie -- na pozycjach od $d+2$ do $d^2+d+1$ itd.\ Ogólnie, mając dany indeks węzła $i$, można obliczyć indeksy jego ojca i~synów, korzystając z~uogólnienia procedur \proc{Parent} oraz \proc{Left} i~\proc{Right}. Pierwszą z~nich implementujemy następująco:
 \begin{codebox}
 \Procname{$\proc{d-ary-Parent}(d,i)$}
-\li	\Return $\lfloor(i-2)/d+1\rfloor$
+\li	\Return $\lceil(i-1)/d\rceil$
 \end{codebox}
 Druga procedura zwraca pozycję \twoparts{$k$}{tego} syna węzła $i$ dla $k=1$, 2,~\dots,~$d$:
 \begin{codebox}
@@ -280,7 +280,7 @@ Druga procedura zwraca pozycję \twoparts{$k$}{tego} syna węzła $i$ dla $k=1$,
 Można sprawdzić, że zależność $\proc{d-ary-Parent}(d,\proc{d-ary-Child}(d,k,i))=i$ zachodzi dla każdego $1\le k\le d$.
 
 \subproblem %6-2(b)
-Uogólniając rozumowanie z~\zad{6.1-2} na kopce rzędu $d$ wnioskujemy, że wysokością \twoparts{$d$}{kopca} jest $\lfloor\log_dn\rfloor$.
+Uogólniając rozumowanie z~\refExercise{6.1-2} na kopce rzędu $d$ wnioskujemy, że wysokością \twoparts{$d$}{kopca} jest $\lfloor\log_dn\rfloor$.
 
 \subproblem %6-2(c)
 Procedura \proc{d-ary-Heap-Extract-Max} będąca implementacją operacji \proc{Extract-Max} dla \twoparts{$d$}{kopca}, oprócz tablicy $A$ przyjmuje także rząd kopca $d$ i~działa identycznie jak \proc{Heap-Extract-Max} z~wyjątkiem wiersza~6:
@@ -308,7 +308,7 @@ Implementacja wywoływanej powyżej procedury została przedstawiona poniżej.
 \li			$\proc{d-ary-Max-Heapify}(A,d,\id{largest})$
 		\End
 \end{codebox}
-Powyższa procedura działa w~czasie $O(d\log_dn)=O(d\lg n/\!\lg d)$, ponieważ w porównaniu z~oryginalną procedurą \proc{Max-Heapify}, wprowadza dodatkowy narzut w~postaci sprawdzenia co najwyżej $d$ synów węzła $i$ na każdym poziomie rekursji, a~wywołań rekurencyjnych jest co najwyżej tyle, co poziomów kopca, czyli $O(\log_dn)$. Stąd mamy, że również \proc{d-ary-Heap-Extract-Max} działa w czasie $O(d\lg n/\!\lg d)$.
+Powyższa procedura działa w~czasie $O(d\log_dn)=O(d\lg n/\!\lg d)$, ponieważ w~porównaniu z~oryginalną procedurą \proc{Max-Heapify}, wprowadza dodatkowy narzut w~postaci sprawdzenia co najwyżej $d$ synów węzła $i$ na każdym poziomie rekursji, a~wywołań rekurencyjnych jest co najwyżej tyle, co poziomów kopca, czyli $O(\log_dn)$. Stąd mamy, że również \proc{d-ary-Heap-Extract-Max} działa w~czasie $O(d\lg n/\!\lg d)$.
 
 \subproblem %6-2(d)
 Procedura \proc{d-ary-Max-Heap-Insert} implementująca operację \proc{Insert} dla \twoparts{$d$}{kopca} działa podobnie do procedury wstawiania węzła w~kopcu binarnym, jednak przyjmuje dodatkowo parametr $d$ będący rzędem kopca, a~w~ostatnim wierszu znajduje się następujące wywołanie:
@@ -316,7 +316,7 @@ Procedura \proc{d-ary-Max-Heap-Insert} implementująca operację \proc{Insert} d
 \setcounter{codelinenumber}{2}
 \li	$\proc{d-ary-Heap-Increase-Key}(A,d,\id{heap-size}[A],\id{key})$
 \end{codebox}
-Implementacja wykorzystanej powyżej procedury znajduje się w następnym punkcie.
+Implementacja wykorzystanej powyżej procedury znajduje się w~następnym punkcie.
 
 Czas działania operacji \proc{d-ary-Max-Heap-Insert} jest tego samego rzędu co czas wywołania z~wiersza~3, czyli $O(\lg n/\!\lg d)$.
 
@@ -325,7 +325,7 @@ Implementacja operacji jest analogiczna jak w~przypadku kopca binarnego, jednak 
 \begin{codebox}
 \Procname{$\proc{d-ary-Heap-Increase-Key}(A,d,i,k)$}
 \li	$A[i]\gets\max(A[i],k)$
-\li	\While $i>1$ i $A[\proc{d-ary-Parent}(d,i)]<A[i]$
+\li	\While $i>1$ i~$A[\proc{d-ary-Parent}(d,i)]<A[i]$
 \li		\Do
 			zamień $A[i]\leftrightarrow A[\proc{d-ary-Parent}(d,i)]$
 \li			$i\gets\proc{d-ary-Parent}(d,i)$
@@ -352,7 +352,7 @@ Załóżmy, że $Y[1,1]=\infty$ i~tablica $Y$ nie jest pusta, tzn.\ $Y[i,j]\ne\i
 Dowód drugiej własności przebiega analogicznie. Przypuśćmy, że $Y[m,n]\ne\infty$ i~że tablica $Y$ nie jest pełna, tzn.\ $Y[i,j]=\infty$ dla pewnych $i$, $j$, gdzie $1\le i\le m$ oraz $1\le j\le n$. Wtedy jednak $Y[i,j]\le Y[m,j]\le Y[m,n]$, co jest sprzeczne z~założeniem. Tablica Younga $Y$, w~której $Y[m,n]\ne\infty$, musi być pełna.
 
 \subproblem %6-3(c)
-Procedura ekstrakcji elementu najmniejszego z~tablicy Younga $Y$ o~rozmiarach $m\times n$ została luźno oparta o~pomysł z~\proc{Max-Heapify}. Ponieważ minimum tablicy znajduje się w~$Y[1,1]$, to sprawdzamy elementy znajdujące się bezpośrednio na prawo i~bezpośrednio w~dół od niego. Mniejszy z~tych dwóch sąsiadów zamieniany jest następnie z tym minimum, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$ w~zależności od przypadku. Takie postępowanie sprawia, że z~tablicy o~rozmiarach $1\times1$ można usunąć jej jedyny element będący minimum początkowej tablicy (zastępując go wartością $\infty$), w~wyniku dostając tablicę Younga $m\times n$ pozbawioną jej oryginalnego minimum.
+Procedura ekstrakcji elementu najmniejszego z~tablicy Younga $Y$ o~rozmiarach $m\times n$ została luźno oparta o~pomysł z~\proc{Max-Heapify}. Ponieważ minimum tablicy znajduje się w~$Y[1,1]$, to sprawdzamy elementy znajdujące się bezpośrednio na prawo i~bezpośrednio w~dół od niego. Mniejszy z~tych dwóch sąsiadów zamieniany jest następnie z~$Y[1,1]$, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$ w~zależności od przypadku. Dochodząc w~wyniku tego postępowania do tablicy o~rozmiarach $1\times1$, można usunąć jej jedyny element będący minimum początkowej tablicy (zastępując go wartością $\infty$), i~w~wyniku dostając minimum oryginalnej tablicy Younga $m\times n$.
 
 Zaprezentowane rozumowanie zostało zaimplementowane w~poniższym pseudokodzie. Początkowe wywołanie ma postać $\proc{Young-Extract-Min}(Y,m,n,1,1)$.
 
@@ -389,7 +389,7 @@ Niech $T(p)$ będzie czasem działania tego algorytmu dla łącznej liczby kolum
 Łatwo sprawdzić, że rozwiązaniem tej rekurencji jest $T(p)=O(p)=O(m+n)$.
 
 \subproblem %6-3(d)
-Algorytm podzielono na dwie procedury -- pierwsza z~nich zajmuje się wstawieniem nowego elementu do tablicy Younga $Y$, natomiast druga przywraca własność Younga analogicznie, jak działa procedura przywracania własności kopca \proc{Max-Heapify}. Można sprawdzić, że nowy element powinien być wymieniany z~jego górnym lub lewym sąsiadem w~tablicy, w zależności od tego, który sąsiad jest większy. To gwarantuje, że po zakończeniu działania procedury \proc{Youngify}, $Y$ jest istotnie tablicą Younga.
+Algorytm podzielono na dwie procedury -- pierwsza z~nich zajmuje się wstawieniem nowego elementu do tablicy Younga $Y$, natomiast druga przywraca własność Younga analogicznie, jak działa procedura przywracania własności kopca \proc{Max-Heapify}. Można sprawdzić, że nowy element powinien być wymieniany z~jego górnym lub lewym sąsiadem w~tablicy, w~zależności od tego, który sąsiad jest większy. To gwarantuje, że po zakończeniu działania procedury \proc{Youngify}, $Y$ jest istotnie tablicą Younga.
 
 \begin{codebox}
 \Procname{$\proc{Young-Insert}(Y,m,n,\id{key})$}
@@ -438,7 +438,7 @@ Zbadajmy, jak szukana liczba $x$ ma się do pierwszego elementu ostatniej kolumn
 \Procname{$\proc{Young-Search}(Y,m,n,x)$}
 \li	$i\gets1$
 \li	$j\gets n$
-\li	\While $i\le m$ i $j\ge1$
+\li	\While $i\le m$ i~$j\ge1$
 \li		\Do
 			\If $x=Y[i,j]$
 \li				\Then \Return \const{true}

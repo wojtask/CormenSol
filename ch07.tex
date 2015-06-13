@@ -39,7 +39,7 @@ Dolne oszacowanie dowodzimy analogicznie, wychodząc z~założenia $T(n-1)\ge c_
 Przypadek brzegowy $T(1)=1$ można przyjąć za podstawę obu indukcji dla dobranych stałych, a~więc zostało uzasadnione, że $T(n)=\Theta(n^2)$.
 
 \exercise %7.2-2
-Procedura \proc{Partition} w~takim przypadku zwróci wartość $r$ (z~\zad{7.1-2}), a~więc w następnych wywołaniach rekurencyjnych będą przetwarzane podtablice o~rozmiarach, odpowiednio, $n-1$ i~0. Napotykając w~każdym wywołaniu rekurencyjnym na przypadek pesymistyczny, algorytm będzie działał w~czasie opisanym przez rekurencję z~\zad{7.2-1}, czyli $\Theta(n^2)$.
+Procedura \proc{Partition} w~takim przypadku zwróci wartość $r$ (z~\refExercise{7.1-2}), a~więc w następnych wywołaniach rekurencyjnych będą przetwarzane podtablice o~rozmiarach, odpowiednio, $n-1$ i~0. Napotykając w~każdym wywołaniu rekurencyjnym na przypadek pesymistyczny, algorytm będzie działał w~czasie opisanym przez rekurencję z~\refExercise{7.2-1}, czyli $\Theta(n^2)$.
 
 \exercise %7.2-3
 W~tym przypadku elementem rozdzielającym $x$ w~procedurze \proc{Partition} będzie element najmniejszy w~przetwarzanej podtablicy $A[p\twodots r]$. Jedyna dokonana zamiana to wymiana elementu rozdzielającego z~$A[p]$ i wartością zwracaną jest $r$. Przypadek jest zatem analogiczny do rozważanego w~poprzednim zadaniu, a~więc czasem działania \proc{Quicksort} jest $\Theta(n^2)$.
@@ -88,54 +88,14 @@ Zgadujemy, że $T(n)\ge dn^2$ dla pewnej stałej $d>0$ i~podstawiamy:
 przy czym ostatnia nierówność zostaje spełniona, jeśli przyjmiemy $d$ odpowiednio małe tak, aby składnik $\Theta(n)$ zdominował wyrażenie $2dn-1$. W~kroku bazowym indukcji mamy $T(1)=1\ge d$, a więc dla odpowiednio małej wartości $d$ warunek jest spełniony, co kończy dowód, że $T(n)=\Omega(n^2)$.
 
 \exercise %7.4-2
-% Niech $T(n)$ będzie czasem działania algorytmu quicksort w~przypadku optymistycznym. Wtedy
-% \[
-% 	T(n) = \min_{0\le q\le n-1}(T(q)+T(n-q-1))+\Theta(n).
-% \]
-% Zgadujemy, że rozwiązaniem powyższej rekurencji jest $T(n)\ge cn\lg n$ dla pewnej stałej $c>0$. Podstawiając oszacowanie dla $T(q)$ i~$T(n-q-1)$, dostajemy
-% \begin{align*}
-% 	T(n) &\ge \min_{0\le q\le n-1}(cq\lg q+c(n-q-1)\lg(n-q-1))+\Theta(n) \\
-% 	&= c\cdot\min_{0\le q\le n-1}(q\lg q+(n-q-1)\lg(n-q-1))+\Theta(n).
-% \end{align*}
-% 
-% Rozważmy funkcję $f(q)=q\lg q+(n-q-1)\lg(n-q-1)$ i~wyznaczmy jej minimum dla $0\le q\le n-1$. Obliczamy pierwszą pochodną:
-% \begin{align*}
-% 	\frac{df}{dq}(q) &= \frac{d}{dq}\left(\frac{q\ln q+(n-q-1)\ln(n-q-1)}{\ln2}\right) \\
-% 	&= \frac{\ln q+1-\ln(n-q-1)-1}{\ln2} \\
-% 	&= \frac{\ln q-\ln(n-q-1)}{\ln2}
-% \end{align*}
-% i~po przyrównaniu jej do~0, otrzymujemy $q=(n-1)/2$. Aby zweryfikować, że w~tym punkcie $f$ posiada minimum, obliczmy jej drugą pochodną:
-% \[
-% 	\frac{d^2\!f}{dq^2}(q) = \frac{1}{\ln2}\left(\frac{1}{q}-\frac{1}{n-q-1}\right),
-% \]
-% przy czym zachodzi
-% \[
-% 	\frac{d^2\!f}{dq^2}(\frac{n-1}{2}) = \frac{1}{\ln2}\left(\frac{2}{n-1}-\frac{2}{n-1}\right) = \frac{4}{(n-1)\ln2},
-% \]
-% co jest liczbą dodatnią, o~ile $n\ge2$, a~zatem minimum zostało potwierdzone.
-% 
-% Wracając do oszacowania rekurencji, mamy
-% \begin{align*}
-% 	T(n) &\ge c(n-1)\lg\frac{n-1}{2}+\Theta(n) \\
-% 	&= c(n-1)\lg(n-1)-c(n-1)+\Theta(n) \\
-% 	&= cn\lg(n-1)-c\lg(n-1)-c(n-1)+\Theta(n).
-% \end{align*}
-% Zakładając teraz, że $n\ge2$, mamy
-% \begin{align*}
-% 	T(n) &\ge cn\lg(n/2)-c\lg(n-1)-c(n-1)+\Theta(n) \\
-% 	&= cn\lg n-(2cn+c\lg(n-1)-c)+\Theta(n) \\
-% 	&\ge cn\lg n,
-% \end{align*}
-% ponieważ dobierając stałą $c$ odpowiednio małą, spełniamy ostatnią nierówność, bo składnik $\Theta(n)$ dominuje nad wyrażeniem $2cn+c\lg(n-1)-c$. Przyjęcie $T(1)=1$ za podstawę indukcji oczywiście spełnia oszacowanie, bo $T(1)\ge0$, a~zatem pokazaliśmy, że $T(n)=\Omega(n\lg n)$.
-
-Do wyniku można dojść analogicznie jak do górnego oszacowania na czas działania algorytmu w~przypadku pesymistycznym, rozważając w~rekurencji~(7.1) minimum wyrażenia $q^2+(n-q-1)^2$ zamiast jego maksimum. Jednak prościej jest zauważyć, że przypadek optymistyczny występuje wtedy, gdy dokonywane podziały tablicy są zawsze najbardziej zrównoważone, tzn.\ podział następuje mniej więcej na środku tablicy. Czas działania algorytmu sprowadza się zatem do rekurencji
+Do wyniku można dojść bardziej formalnie, rozważając w~rekurencji~(7.1) minimum wyrażenia $q^2+(n-q-1)^2$ zamiast jego maksimum. Jednak prościej jest zauważyć, że przypadek optymistyczny występuje wtedy, gdy dokonywane podziały tablicy są zawsze najbardziej zrównoważone, tzn.\ podział następuje mniej więcej w~środku tablicy. Czas działania algorytmu w~przypadku optymistycznym sprowadza się zatem do rekurencji
 \[
 	T(n) = \begin{cases}
 		\Theta(1), & \text{jeśli $n=1$,} \\
 		2T(\lfloor n/2\rfloor)+\Theta(n), & \text{jeśli $n>1$,}
 	\end{cases}
 \]
-której rozwiązaniem jest $\Omega(n\lg n)$ (z~\zad{4.1-2}).
+której rozwiązaniem jest $\Omega(n\lg n)$ (z~\refExercise{4.1-2}).
 
 \exercise %7.4-3
 Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$. Szukamy jej maksimum globalnego, które może się znajdować w~punkcie, w~którym jej pierwsza pochodna zeruje się lub na krańcach dziedziny $f$. Pierwsza pochodna ma postać $df(q)/dq=2q-2(n-q-1)$ i~zeruje się w~punkcie $(n-1)/2$, a~więc obliczamy wartości:
@@ -151,7 +111,7 @@ Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu qui
 \[
 	\E(X) = \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{k+1} \ge \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{2k} = \sum_{i=1}^{n-1}H_{n-i} = \sum_{i=1}^{n-1}H_i = \sum_{i=1}^{n-1}\Omega(\lg i) = \Omega(n\lg n).
 \]
-Skorzystaliśmy tutaj z~\zad{A.2-3} oraz z~problemu~A.1(b) dla $s=1$, dzięki czemu zachodzi ostatnia równość.
+Skorzystaliśmy tutaj z~\refExercise{A.2-3} oraz z~punktu~(b) problemu~\refProblem{A-1} dla $s=1$, dzięki czemu zachodzi ostatnia równość.
 
 \exercise %7.4-5
 Zauważmy, że liczba fragmentów mniej niż \twoparts{$k$}{elementowych} pozostawionych nieposortowanymi przez quicksort wynosi $O(n/k)$. Stąd czas wykonywany przez sortowanie przez wstawianie, który jest tego samego rzędu, co liczba inwersji pozostawionych w~całej tablicy, wynosi $O(n/k\cdot k^2)=O(nk)$. Czas wykonywania pozostałej części algorytmu obliczmy następująco. Jest to wywołanie oryginalnego quicksorta, który jednak zatrzymuje się na tablicy o~długości mniejszej niż $k$. Od czasu pełnego sortowania szybkiego należy zatem odjąć czas działania wszystkich wywołań zastosowanych do tych małych podtablic. Mamy stąd $O(n\lg n-(n/k)k\lg k)=O(n\lg(n/k))$ i~całkowitym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
@@ -182,6 +142,7 @@ Symulacja procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ został
 \end{figure}
 
 \subproblem %7-1(b)
+Zauważmy, że w~pierwszym przebiegu pętli \kw{while}, zmienna $j$ zatrzyma się na pewnym indeksie $q$, a~zmienna $i$ pozostanie na indeksie $p$, pod którym przechowywana jest wartość $x$. Jeśli $i\ge j$, to procedura kończy działanie; załóżmy więc, że $i<j$ i~wartość $A[i]=A[p]=x$ zostanie zamieniona z~pewnym elementem $A[q]$ na prawo od $x$. Teraz, w~kolejnych przebiegach pętli \kw{while}, zmienna $i$ może dotrzeć najdalej na indeks $q$, natomiast $j$ nie będzie nigdy mniejsze niż $p$, bo $A[p]$ zawiera teraz wartość niewiększą od $x$. Ponieważ $q\ge p$, to w~pewnym momencie podczas działania pętli, indeksy $i$ i~$j$ miną się, co spowoduje przerwanie pętli w~wierszu~11.
 
 \subproblem %7-1(c)
 Prawdziwość stwierdzenia wynika z~faktu udowodnionego w punkcie~(b) oraz stąd, że procedura kończy działanie dopiero, gdy $i>j$. Zauważmy, że musi nastąpić przynajmniej jedna zamiana elementów z~linii~10, co powoduje, że po tej zamianie $j<r$. Skoro $i\le r$, to musi zachodzić $p\le j<r$.
@@ -239,7 +200,9 @@ po czym zauważamy, że funkcja $\lg k$ w~pierwszej sumie po prawej stronie jest
 \end{align*}
 
 \subproblem %7-2(e)
-Korzystając ze wskazówki, przyjmijmy założenie indukcyjne $\E(T(k))\le ak\lg k-bk$ dla $k=1$, 2,~\dots~$n-1$ oraz pewnych stałych $a$, $b>0$. Mamy
+\note{Wykorzystując oszacowanie z~nierówności~(7.7), nie jesteśmy w~stanie wykazać dokładnego oszacowania na\/ $\E(T(n))$, a~jedynie oszacowanie górne.}
+
+\noindent Korzystając ze wskazówki, przyjmijmy założenie indukcyjne $\E(T(k))\le ak\lg k-bk$ dla $k=1$, 2,~\dots~$n-1$ oraz pewnych stałych $a$,~$b>0$. Mamy
 \begin{align*}
 	\E(T(n)) &= \frac{2}{n}\sum_{k=1}^{n-1}\E(T(k))+\Theta(n) \\
 	&\le \frac{2}{n}\sum_{k=1}^{n-1}(ak\lg k-bk)+\Theta(n) \\
@@ -251,7 +214,9 @@ Wykorzystując teraz wynik z~części~(d), dostajemy
 	&\le an\lg n-\frac{an}{4}-bn+b+\Theta(n) \\
 	&\le an\lg n-bn,
 \end{align*}
-ponieważ możemy wybrać $a$ dość duże, żeby wartość wyrażenia $an/4$ dominowała nad wartością wyrażenia $\Theta(n)+b$. Stąd widać, że średni czas działania algorytmu quicksort wynosi $O(n\lg n)$.
+ponieważ możemy wybrać $a$ wystarczająco duże, żeby wartość wyrażenia $an/4$ dominowała nad wartością wyrażenia $\Theta(n)+b$.
+
+Pozostaje zbadać, czy oszacowanie zachodzi dla podstawy indukcji. Przyjmijmy w~tym celu $\E(T(1))=1$ i~zbadajmy oszacowanie dla tej wartości. Niestety, $\E(T(1))\le-b$ implikuje, że $b\le-1$, co przeczy założeniu. Mamy oczywiście $\E(T(0))=0$, bo dla pustej tablicy nie trzeba wykonywać żadnej pracy, więc na mocy (7.6) zachodzi $\E(T(2))=2c+1$, gdzie $c$ jest stałą ukrytą w~notacji~$\Theta$. Aby oszacowanie zachodziło dla tego przypadku, musi być $c+1/2\le a-b$, co łatwo spełnić, dobierając odpowiednio duże~$a$. Za podstawę indukcji można zatem przyjąć $\E(T(2))$. Aby wartość ta nie zależała od poprzednich wyrazów rekurencji, możemy zmodyfikować wzór~(7.6), sumując od $q=2$ -- nie zmieni to bowiem postaci oszacowań poszczególnych wyrazów. Stąd mamy, że średni czas działania algorytmu quicksort wynosi $O(n\lg n)$.
 
 \problem{Nieefektywne sortowanie} %7-3
 
@@ -292,7 +257,7 @@ Załóżmy, że element, który będzie medianą, znajduje się na pozycji $i$ w
 \]
 
 \subproblem %7-5(b)
-W~oryginalnej strategii prawdopodobieństwo wyboru dowolnego elementu z~tablicy $A[1\twodots n]$ na element rozdzielający wynosi $1/n$ (z~części~(a) problemu 7.2). Z~kolei przy wyborze mediany z~trzech mamy
+W~oryginalnej strategii prawdopodobieństwo wyboru dowolnego elementu z~tablicy $A[1\twodots n]$ na element rozdzielający wynosi $1/n$ (z~części~(a) problemu~\refProblem{7-2}). Z~kolei przy wyborze mediany z~trzech mamy
 \[
 	p_{\lfloor(n+1)/2\rfloor} \approx \frac{(n/2)(n/2)}{\binom{n}{3}} = \frac{3n}{2(n-1)(n-2)}.
 \]
@@ -337,14 +302,53 @@ Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyska
 \problem{Rozmyte sortowanie przedziałów} %7-6
 
 \subproblem %7-6(a)
-Zauważmy na wstępie, że jeśli dla przedziałów $[a_1,b_1]$ i~$[a_2,b_2]$ zachodzi warunek $a_1\le a_2\le b_1$ albo $a_2\le a_1\le b_2$, to można je ustawić w~dowolnej kolejności w~wynikowej tablicy. Zaprojektujemy algorytm, który działa podobnie jak quicksort sortujący po lewych krańcach przedziałów. Po wyborze elementu rozdzielającego $x=[a_0,b_0]$ sprawdzamy kolejne przedziały i~umieszczamy je w~różnych częściach tablicy -- podczas sprawdzania przedziału $i_j=[a_j,b_j]$, jeśli $a_j>a_0$, to przedział $i_j$ zostanie umieszczony na prawo od $x$. W~przeciwnym przypadku sprawdzamy jeszcze, czy $b_j>a_0$, a~więc czy przedziały $x$ oraz $i_j$ nachodzą na siebie. W~zależności od wyniku tego testu, $i_j$ umieszczamy w~innej podtablicy. Wyznaczone przedziały nachodzące na $x$ możemy, według wcześniej zauważonego warunku, uporządkować w~dowolnej kolejności; podtablica do której one należą nie wymaga zatem dalszego sortowania. Natomiast pozostałe podtablice sortowane są rekursywnie tak jak w~algorytmie quicksort.
-
-Przedstawione rozumowanie zapiszmy w~postaci pseudokodu:
+Niech $A$ będzie tablicą wejściową algorytmu, gdzie $A[i]=[a_i,b_i]$ dla wszystkich $i=1$, 2,~\dots,~$n$. Zauważmy, że jeśli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$, czyli przedziały te nachodzą na siebie, to mogą wystąpić w~tablicy wynikowej w~dowolnej kolejności. Algorytm działa podobnie jak quicksort, ale wykorzystuje tę obserwację, znajdując dla przedziału rozdzielającego pewien zbiór przedziałów na niego nachodzących i~pomijając wywołanie rekurencyjne dla podtablicy utworzonej przez ten zbiór przedziałów.
 \begin{codebox}
-\Procname{$\proc{Fuzzy-Quicksort}(A,p,r)$}
+\Procname{$\proc{Fuzzy-Sort}(A,p,r)$}
+\li	\If $p<r$
+\li		\Then
+			$\langle q_l,q_r\rangle\gets\proc{Fuzzy-Partition}(A,p,r)$
+\li			$\proc{Fuzzy-Sort}(A,p,q_l)$
+\li			$\proc{Fuzzy-Sort}(A,q_r,r)$
+		\End
 \end{codebox}
 
+W~powyższym algorytmie pomocnicza procedura dzieląca dokonuje podziału tablicy $A[p\twodots r]$ na 3 podtablice: $A[q_l+1\twodots q_r-1]$, która nie musi być dalej sortowana oraz $A[p\twodots q_l]$ i~$A[q_r\twodots r]$ które następnie sortowane są w~wywołaniach rekurencyjnych. Pseudokod procedury dzielącej został przedstawiony poniżej.
+
+\begin{codebox}
+\Procname{$\proc{Fuzzy-Partition}(A,p,r)$}
+\li	$x\gets a_r$
+\li $i\gets p-1$
+\li	\For $j\gets p$ \To $r-1$
+\li		\Do
+			\If $a_j\le x$
+\li				\Then
+					$i\gets i+1$
+\li					zamień $A[i]\leftrightarrow A[j]$
+				\End
+		\End
+\li	zamień $A[i+1]\leftrightarrow A[r]$ \label{li:fuzzy-part1-end}
+\li	$q\gets i+1$ \label{li:fuzzy-part2-begin}
+\li	\For $k\gets i$ \Downto $p$
+\li		\Do
+			\If $b_k\ge x$
+\li				\Then
+					$q\gets q-1$
+\li					zamień $A[q]\leftrightarrow A[k]$
+				\End
+		\End \label{li:fuzzy-part2-end}
+% \li	\For $l\gets p$ \To $q$ \label{li:fuzzy-part3-begin}
+% \li		\Do zamień $A[l]\leftrightarrow A[i-l+p]$
+% 		\End \label{li:fuzzy-part3-end}
+\li	\Return $\langle q-1,i+2\rangle$
+\end{codebox}
+
+Po wykonaniu wiersza~\ref{li:fuzzy-part1-end} tablica $A$ zostaje podzielona na dwie podtablice według lewych końców przedziałów względem przedziału rozdzielającego znajdującego się początkowo w~$A[r]$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}. Następnie, w~wierszach~\ref{li:fuzzy-part2-begin}--\ref{li:fuzzy-part2-end}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na przedział rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na początek tej podtablicy.
+% Końcowa pętla \kw{for} z~wierszy~\ref{li:fuzzy-part3-begin}--\ref{li:fuzzy-part3-end} ma na celu umieszczenie tych przedziałów blisko $A[i+1]$, transportując na początek podtablicy przedziały, które nie nachodzą na przedział rozdzielający.
+%sprawdzić ostatnią pętlę i element zwracany
+%napisać o elementach zwracanych
+
 \subproblem %7-6(b)
-Oczekiwany czas $\Theta(n\lg n)$ wynika z~oczekiwanego czasu działania sortowania szybkiego -- może się zdarzyć, że podtablica zawierająca przedziały nachodzące na $x$ będzie za każdym razem pusta.
+Ponieważ algorytm został oparty o quicksort, to czas jego działania w~przypadku pesymistycznym wynosi $\Theta(n^2)$, a~w~przypadku średnim $\Theta(n\lg n)$ dla tablicy \twoparts{$n$}{elementowej}. Jeśli jednak wszystkie przedziały na siebie nachodzą, to algorytm nie będzie sortował podtablicy z~elementami na lewo od przedziału rozdzielającego, ponieważ można je ustawić w~dowolnej permutacji w~tablicy wynikowej. O~ile przedział rozdzielający będzie za każdym razem wybierany w~środku tablicy lub bliżej jej prawego końca, to złożoność algorytmu w~tym przypadku będzie wynosić $\Theta(n)$. Jest to przypadek optymistyczny algorytmu.
 
 \endinput

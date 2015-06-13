@@ -238,7 +238,7 @@ Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy ko
 
 \subchapter{Metoda rekurencji uniwersalnej}
 
-\note{Zarówno w~wersji oryginalnej jak i~w~tłumaczeniu treści twierdzenia~4.1 znajduje się poważny brak, który uniemożliwia m.in.\ rozwiązanie \zad{4.4-3}. Dla stosowanej tam stałej\/ $c$ podany jest tylko warunek, aby była ona mniejsza od\/ $1$, podczas gdy poprawnym zakresem dla niej powinien być zbiór\/ $(0,1)$.}
+\note{Zarówno w~wersji oryginalnej jak i~w~tłumaczeniu treści twierdzenia~4.1 znajduje się poważny brak, który uniemożliwia m.in.\ rozwiązanie \refExercise{4.4-3}. Dla stosowanej tam stałej\/ $c$ podany jest tylko warunek, aby była ona mniejsza od\/ $1$, podczas gdy poprawnym zakresem dla niej powinien być zbiór\/ $(0,1)$.}
 
 \exercise %4.3-1
 
@@ -454,7 +454,7 @@ Podstawiając $S(m)$ za $T(2^m)$, otrzymujemy
 \[
 	S(m) = S(m/2)+1.
 \]
-Ponieważ rozwiązaniem ostatniej rekurencji jest $\Theta(\lg m)$ (co wykazano w~\zad{4.3-3}), to stąd mamy, że $T(n)=T(2^m)=S(m)=\Theta(\lg m)=\Theta(\lg\lg n)$.
+Ponieważ rozwiązaniem ostatniej rekurencji jest $\Theta(\lg m)$ (co wykazano w~\refExercise{4.3-3}), to stąd mamy, że $T(n)=T(2^m)=S(m)=\Theta(\lg m)=\Theta(\lg\lg n)$.
 
 \problem{Szukanie brakującej liczby całkowitej} %4-2
 Liczby z~zakresu $0\twodots n$ reprezentowane są binarnie za pomocą $\lfloor\lg n\rfloor+1$ bitów. Można dla wygody przyjąć, że $n$ jest potęgą~2 pomniejszoną o~1. W~przeciwnym przypadku wystarczy zwiększyć $n$, aby było o~1 mniejsze od najbliższej potęgi~2 większej od $n$. Jednocześnie rozszerzamy tablicę $A$, umieszczając w~niej nowe liczby naturalne aż do nowej wartości $n$. Ta modyfikacja sprawi, że wszystkie liczby w~$A$ będą reprezentowane tą samą ilością bitów, a~rozmiar problemu urośnie co najwyżej dwukrotnie.
@@ -466,7 +466,7 @@ Czas działania zaprezentowanego tutaj algorytmu można zapisać w~postaci rekur
 \problem{Koszty przekazywania parametrów} %4-3
 
 \subproblem %4-3(a)
-Dla pierwszej strategii rekurencja przyjmuje postać z~\zad{2.3-5}, której rozwiązaniem jest $T(n)=\Theta(\lg n)$. Po przyjęciu $n=N$ dostajemy $T(N)=\Theta(\lg N)$.
+Dla pierwszej strategii rekurencja przyjmuje postać z~\refExercise{2.3-5}, której rozwiązaniem jest $T(n)=\Theta(\lg n)$. Po przyjęciu $n=N$ dostajemy $T(N)=\Theta(\lg N)$.
 
 W~przypadku drugiej strategii na każdym poziomie rekursji należy dodać składnik $\Theta(N)$ odpowiedzialny za przekazywanie tablicy do wywołań rekurencyjnych. Otrzymujemy zatem
 \[
@@ -584,7 +584,7 @@ co zachodzi, o~ile $n/3+5\le2n/5$, skąd $n\ge75$ oraz
 \[
 	c_1n\lg(2/5)+15c_1\!\lg n+n/2 \le 0.
 \]
-Przeprowadzając podobną analizę jak w~\zad{4.1-5} dostajemy, że wybór dowolnego $c_1\ge7$ spełnia nierówność dla $n\ge75$.
+Przeprowadzając podobną analizę jak w~\refExercise{4.1-5} dostajemy, że wybór dowolnego $c_1\ge7$ spełnia nierówność dla $n\ge75$.
 
 Analogicznie dla dolnego oszacowania przyjmując, że
 \[
@@ -683,7 +683,7 @@ Następnie potraktujmy $n$ jako $2^m$, skąd $m=\lg n$ i~podstawmy $R(m)=S(2^m)$
 \[
 	R(m) = R(m/2)+1.
 \]
-Rozwiązanie ostatniej rekurencji zostało wyznaczone w~\zad{4.3-3} i~wynosi $R(m)=\Theta(\lg m)$. Powracamy do oryginalnej rekurencji $T(n)$, dostając ostatecznie
+Rozwiązanie ostatniej rekurencji zostało wyznaczone w~\refExercise{4.3-3} i~wynosi $R(m)=\Theta(\lg m)$. Powracamy do oryginalnej rekurencji $T(n)$, dostając ostatecznie
 \[
 	T(n) = nS(n) = nR(\lg n) = n\cdot\Theta(\lg\lg n) = \Theta(n\lg\lg n).
 \]
@@ -709,11 +709,11 @@ Z~wzoru z~poprzedniego punktu wynika pierwsza równość:
 	\mathcal{F}(z) &= \frac{z}{1-z-z^2}. \tag{$*$}\label{eq:4-5b_1}
 \end{align*}
 
-Mianownik prawej strony~(\ref{eq:4-5b_1}) jest trójmianem kwadratowym, który można zapisać w~równoważnej postaci:
+Mianownik prawej strony~(\ref{eq:4-5b_1}) jest trójmianem kwadratowym, który zapisujemy w~równoważnej postaci:
 \[
-	1-z-z^2 \equiv -(z+\phi)\bigl(z+\widehat\phi\bigr). \tag{$*$}\label{eq:4-5b_2}
+	1-z-z^2 \equiv -(z+\phi)\bigl(z+\widehat\phi\bigr) \equiv (1-\phi z)(1-\widehat\phi z), \label{eq:4-5b_2}
 \]
-Trójmian~(\ref{eq:4-5b_2}) przyjmuje wartość~0 dla $z=-\phi$ lub $z=-\widehat\phi$. Ponieważ zachodzi ciekawa własność $\phi\cdot\widehat\phi=-1$, zatem można zapisać trójmian w~postaci $(1-\phi z)\bigl(1-\widehat\phi z\bigr)$, skąd wynika druga równość.
+co można uzasadnić wzorem $\phi\cdot\widehat\phi=-1$ i~tym samym dowieść drugiej równości.
 
 Ostatnią z~nich dowodzimy zauważając, że:
 \[
@@ -725,7 +725,7 @@ a~stąd mamy
 \]
 
 \subproblem %4-5(c)
-Tezę otrzymujemy natychmiast, jeśli w~definicji $\mathcal{F}(z)$ podstawimy $F_i=\bigl(\phi^i-\widehat\phi^i\bigr)/\sqrt{5}$, co wykazano w~\zad{3.2-6}.
+Tezę otrzymujemy natychmiast, jeśli w~definicji $\mathcal{F}(z)$ podstawimy $F_i=\bigl(\phi^i-\widehat\phi^i\bigr)/\sqrt{5}$, co wykazano w~\refExercise{3.2-6}.
 
 \subproblem %4-5(d)
 Ponieważ $\bigl|\widehat\phi\bigr|<1$, to prawdą jest, że $\bigl|\widehat\phi^i\bigr|<1$ dla $i>0$ oraz $\bigl|\widehat\phi^i\bigr|/\sqrt{5}<1/\sqrt{5}<1/2$. Mamy
@@ -739,7 +739,7 @@ skąd
 a~zatem $F_i$ jest równe liczbie całkowitej najbliższej $\phi^i/\sqrt{5}$.
 
 \subproblem %4-5(e)
-Tożsamość została udowodniona w~\zad{3.2-7}.
+Tożsamość została udowodniona w~\refExercise{3.2-7}.
 
 \problem{Testowanie układów VLSI} %4-6
 

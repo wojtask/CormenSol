@@ -123,7 +123,7 @@ Treść niezmiennika pozostaje niezmieniona (z~wyjątkiem fragmentu, który poda
 \noindent Algorytm ten nie działa zgodnie z~zamierzeniem. Jako przykład weźmy dowolną tablicę o~$n=3$ elementach. Istnieje $n!-1=5$ permutacji tej tablicy różnych niż identycznościowa. Pętla \kw{for} w~pierwszym obiegu wybiera jedną z~dwóch wartości i~zamienia ją z~pierwszym elementem tablicy. W~drugim obiegu może zostać wybrana tylko jedna wartość na drugi element. Przy pomocy tej procedury jesteśmy w~stanie utworzyć tylko dwie permutacje, a~więc mniej niż potrzebujemy. Różnica ta powiększa się wraz ze wzrostem rozmiaru tablicy.
 
 \exercise %5.3-3
-Rozważmy permutację identycznościową $\pi_0$ i~zdefiniujmy zdarzenia $S_i$ -- element na pozycji $i$ w~tablicy $A$ ($1\le i\le n$) pozostanie na swoim miejscu po wykonaniu procedury. Na mocy \zad{C.2-6} prawdopodobieństwo uzyskania permutacji $\pi_0$ wynosi
+Rozważmy permutację identycznościową $\pi_0$ i~zdefiniujmy zdarzenia $S_i$ -- element na pozycji $i$ w~tablicy $A$ ($1\le i\le n$) pozostanie na swoim miejscu po wykonaniu procedury. Na mocy \refExercise{C.2-6} prawdopodobieństwo uzyskania permutacji $\pi_0$ wynosi
 \[
 	\Pr\biggl(\bigcap_{i=1}^nS_i\biggr) = \Pr(S_1)\Pr(S_2\mid S_1)\Pr(S_3\mid S_1\cap S_2)\dots\Pr\biggl(S_n\biggm|\bigcap_{i=1}^{n-1}S_i\biggr) \tag{$*$}\label{eq:5.3-3}
 \]
@@ -395,7 +395,7 @@ Wybór indeksów tablicy $A$ jest serią prób Bernoulliego o~rozkładzie geomet
 co jest czasem działania algorytmu \proc{Random-Search} w~przypadku braku $x$ w~tablicy $A$.
 
 \subproblem %5-2(e)
-Ponieważ procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania liniowego opisanego w~\zad{2.1-3}, to z~rozwiązania \zad{2.2-3} wynika, że zarówno oczekiwany jak i~pesymistyczny czas jej działania wynosi $O(n)$.
+Ponieważ procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania liniowego opisanego w~\refExercise{2.1-3}, to z~rozwiązania \refExercise{2.2-3} wynika, że zarówno oczekiwany jak i~pesymistyczny czas jej działania wynosi $O(n)$.
 
 \subproblem %5-2(f)
 W~tablicy \twoparts{$n$}{elementowej} o~przypadkowym rozkładzie elementów prawdopodobieństwo wybrania jednego z~$k$ identycznych elementów wynosi $k/n$. Zanim trafimy na jeden z~nich, sprawdzimy około $n/k$ indeksów, więc oczekiwanym czasem działania jest $O(n/k)$.

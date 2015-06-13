@@ -96,11 +96,11 @@ Nie trzeba wykonywać $n$ przebiegów pętli \kw{for} z~wierszy \ref{li:sel-sort
 
 Ponieważ mamy $n-1$ przebiegów zewnętrznej pętli \kw{for}, a~wewnętrzna pętla \kw{for} przebiega przez cały nieposortowany fragment tablicy szukając jego minimalnego elementu, zatem zarówno pesymistyczny jak i~optymistyczny czas działania algorytmu wynosi
 \[
-	T(n) = \sum_{i=1}^{n-1}(n-i) = \sum_{i=1}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2).
+	T(n) = \sum_{j=1}^{n-1}(n-j) = \sum_{i=1}^{n-1}j = \frac{n(n-1)}{2} = \Theta(n^2).
 \]
 
 \exercise %2.2-3
-Wykorzystując wynik \zad{C.3-2} mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
+Wykorzystując wynik \refExercise{C.3-2} mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$. W~przypadku pesymistycznym procedura sprawdzi wszystkie $n$ elementów nie znajdując szukanego, a~więc otrzymujemy ten sam wynik: $\Theta(n)$.
 
 \exercise %2.2-4
 Egzemplarze danych wejściowych, które stanowią dla algorytmu przypadek optymistyczny, można wykrywać na początku jego działania i~bezpośrednio zwracać dla tych danych wynik wyznaczony wcześniej innymi sposobami, zamiast obliczania go za pomocą tego algorytmu.
@@ -225,13 +225,13 @@ Obie wersje algorytmu \proc{Binary-Search} kończą swe działanie znajdując $v
 		T(\lfloor n/2\rfloor)+\Theta(1), & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Jej rozwiązaniem (z~\zad{4.3-3}) jest $T(n)=\Theta(\lg n)$.
+Jej rozwiązaniem (z~\refExercise{4.3-3}) jest $T(n)=\Theta(\lg n)$.
 
 \exercise %2.3-6
 Wyszukując binarnie, można odnaleźć pozycję tablicy, gdzie należy umieścić kolejny element z~nieposortowanego fragmentu, jednak wstawienie go wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, na co w~najgorszym przypadku potrzeba $\Theta(n)$ operacji. Nie można zatem obniżyć czasu działania sortowania przez wstawianie poprzez zastosowanie wyszukiwania binarnego.
 
 \exercise %2.3-7
-Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\zad{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
+Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$; procedura wyszukiwania binarnego została opisana w~\refExercise{2.3-5}. Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$, gdzie $n=\id{length}[S]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. Zwracana jest wartość logiczna \const{true} lub \const{false} w~zależności od wyniku wyszukiwania. Algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Sum-Search}(S,x)$}
 \li	$n\gets\id{length}[S]$
@@ -249,7 +249,7 @@ Sortowanie $S$ za pomocą porównań (np.\ procedurą \proc{Merge-Sort}) działa
 \[
 	\Theta(n\lg n)+\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(n\lg n)+\Theta(\lg(n!)) = \Theta(n\lg n),
 \]
-ponieważ $\lg(n!)=\Theta(n\lg n)$ (z~\zad{3.2-3}).
+ponieważ $\lg(n!)=\Theta(n\lg n)$ (z~\refExercise{3.2-3}).
 
 \problems
 

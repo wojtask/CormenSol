@@ -6,7 +6,14 @@
 Do liścia o~najmniejszej głębokości w~drzewie można dotrzeć, poruszając się po węzłach o~etykietach $1:2$, $2:3$, \dots, $(n-1):n$, czyli testując każde dwa kolejne elementy w~ciągu o~długości $n$. Najmniejszą głębokością liścia jest zatem $n-1$.
 
 \exercise %8.1-2
-Ogólna postać tej sumy została wyznaczona w~problemie~A-1(b) przy wykorzystaniu ograniczenia jej za pomocą całek. Po przyjęciu $s=1$ otrzymujemy rozwiązanie $\sum_{k=1}^n\lg k=\Theta(n\lg n)$.
+Górne oszacowanie znajdujemy w~prosty sposób:
+\[
+	\lg(n!) = \sum_{k=1}^n\lg k \le \sum_{k=1}^n\lg n = n\lg n = O(n\lg n).
+\]
+Aby uzyskać oszacowanie dolne, rozdzialamy sumę, przyjmując dla wygody, że $n$ jest parzyste:
+\[
+	\lg(n!) = \sum_{k=1}^n\lg k \ge \sum_{k=1}^{n/2}\lg 1+\sum_{k=n/2+1}^n\lg(n/2) = 0+(n/2)\lg(n/2) = \Omega(n\lg n).
+\]
 
 \exercise %8.1-3
 Jeśli sortowanie działa w~czasie liniowym dla $m$ permutacji wejściowych, to wysokość $h$ drzewa złożonego tylko z~liści odpowiadających tym permutacjom i~ich przodków jest liniowa.
@@ -24,7 +31,7 @@ Rozważmy drzewo decyzyjne dla takiego częściowo posortowanego ciągu. Mamy $n
 \[
 	2^h \le l \le (k!)^{n/k},
 \]
-co po zlogarytmowaniu obustronnie i~skorzystaniu z~\zad{3.1-8} daje
+co po zlogarytmowaniu obustronnie i~skorzystaniu z~\refExercise{3.1-8} daje
 \[
 	h \ge (n/k)\lg(k!) = \Omega(n\lg k).
 \]
@@ -63,7 +70,7 @@ Przebieg działania procedury \proc{Radix-Sort} został przedstawiony na rys.~\r
 \exercise %8.3-2
 Algorytmami stabilnymi są sortowanie przez wstawianie i~sortowanie przez scalanie. Heapsort i~quicksort natomiast nie sortują stabilnie.
 
-Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można posłużyć się pomocniczą tablicą przechowującą początkowe indeksy elementów w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich indeksów. Wprowadza to dodatkową pamięć rzędu $O(n)$, ale nie wpływa na asymptotyczne oszacowanie na czas działania sortowania, ponieważ przeprowadzenie testu odbywa się nadal w~czasie stałym.
+Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można posłużyć się pomocniczą tablicą przechowującą początkowe indeksy elementów w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich indeksów. Wprowadza to dodatkową pamięć rzędu $O(n)$, gdzie $n$ to rozmiar sortowanej tablicy. Nie zmienia się natomiast asymptotyczne oszacowanie na czas działania sortowania, ponieważ przeprowadzenie testu odbywa się nadal w~czasie stałym.
 
 \exercise %8.3-3
 Przeprowadźmy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych. Dla $d=1$ algorytm sprowadza się do wywołania sortowania stabilnego na tablicy wejściowej, więc poprawność algorytmu wynika z~poprawności tegoż sortowania.
@@ -74,6 +81,9 @@ Załóżmy teraz, że $d>1$ i~że \proc{Radix-Sort} po $d-1$ przebiegach zwróci
 Każdą liczbę z~zakresu od~0 do $n^2$ można traktować jako liczbę dwucyfrową w~systemie o~podstawie $n$. Wykorzystując lemat~8.4, wyznaczmy występujące tam zmienne. Liczby przyjmują $n^2$ możliwych wartości, więc $2^b-1=n^2$, skąd $b=\lg(n^2+1)$. Każda z~dwóch składowych cyfr może być równa jednej z~$n$ wartości, co daje $2^r-1=n$, więc $r=\lg(n+1)$. Zgodnie z~lematem, $n$ takich liczb można posortować w~czasie $\Theta((b/r)(n+2^r))=\Theta(2(n+n))=\Theta(n)$.
 
 \exercise %8.3-5
+Rozważmy sortowanie pozycyjne w~wersji intuicyjnej dla liczb trzycyfrowych. W~pierwszej fazie sortujemy po najbardziej znaczącej cyfrze wejściowego ciągu liczb. Podczas drugiej fazy dokonujemy sortowania w~obrębie fragmentów tablicy zawierających liczby o~tej samej najbardziej znaczącej cyfrze. W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich fragmentów, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach. Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego fragmentu utworzy się po 10 jeszcze mniejszych fragmentów o~poszczególnych cyfrach najmniej znaczących. Łącznie będzie zatem maksymalnie 100 takich podtablic, których posortowanie będzie wymagało 100 kolejnych faz. W~momencie gdy przechodzimy do sortowania ostatnich cyfr, mamy największą liczbę podtablic pozostawionych do późniejszego przetworzenia -- 9 na podstawie środkowych cyfr i~10, które będziemy sortować po ostatniej cyfrze.
+
+W~ogólności, jeżeli mamy liczby \twoparts{$d$}{cyfrowe}, to do ich posortowania tym algorytmem wymaganych jest co najwyżej $\sum_{i=0}^{d-1}10^i=(10^d-1)/9$ faz. Najwięcej tymczasowych fragmentów generuje się podczas faz sortujących po ostatnich cyfrach -- jest ich wtedy maksymalnie $9(d-1)+1$.
 
 \subchapter{Sortowanie kubełkowe}
 
@@ -103,7 +113,14 @@ Szanse nieuzyskania orła wynoszą $1/4$, co jest równe szansom uzyskania 2~or�
 \end{align*}
 
 \exercise %8.4-4
+Algorytm będzie opierał się o~sortowanie kubełkowe -- sortując $n$ punktów, wykorzystujemy $n$ kubełków. Aby punkty trafiały do poszczególnych kubełków z~jednakowym prawdopodobieństwem, należy podzielić koło jednostkowe na $n$ obszarów o~równych polach reprezentujących przedziały odległości od środka koła. Łatwo zauważyć, że będą nimi pierścienie kołowe o~jednakowych powierzchniach równych $\pi/n$. Problemem pozostaje zatem wyznaczenie ich promieni.
+
+Dla $i=1$, 2,~\dots,~$n$ oznaczmy przez $r_i$ długości promieni zewnętrznych tych pierścieni w~kolejności od środka do brzegu koła jednostkowego. Najbardziej wewnętrzny pierścień jest kołem o~polu $\pi/n$, więc $r_1=\sqrt{1/n}$. Ponieważ suma tego koła z~pierścieniem do niego przylegającym jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$. Rozumowanie przeprowadzamy dla wszystkich pierścieni, otrzymując $r_i=\sqrt{i/n}$ dla każdego $i=1$, 2,~\dots,~$n$.
+
+Sortowanie punktów przebiega analogicznie jak sortowanie liczb będących ich odległościami od środka koła, przy wykorzystaniu kubełków opisanych w~poprzednim paragrafie. Dla każdego punktu obliczana jest jego odległość $d_i$ i~jeśli zachodzi $r_j<d_i\le r_{j+1}$, to punkt umieszczany jest w~kubełku o~numerze $j$ (przyjmujemy $r_0=0$).
+
 \exercise %8.4-5
+% Wykorzystamy sortowanie kubełkowe, umieszczając liczby w~kubełkach. Ponieważ liczby w~tym ciągu 
 
 \problems
 
@@ -199,7 +216,7 @@ Sortowanie odbywa się w~dwóch fazach. Najpierw porządkujemy liczby według li
 \problem{Dzbanki} %8-4
 
 \subproblem %8-4(a)
-Abstrahując od modelu dzbanków, w~tym problemie mamy dwie tablice $n$ różnych liczb całkowitych, z~których jedna tablica jest permutacją drugiej. Należy przestawić elementy w~tablicach tak, aby reprezentowały one tę samą permutację, przy czym porównania między elementami w~obrębie jednej tablicy są zabronione.
+Abstrahując od modelu dzbanków, w~tym problemie mamy dwie tablice $n$ różnych liczb całkowitych, z~których pierwsza tablica jest permutacją drugiej. Należy przestawić elementy w~tablicach tak, aby reprezentowały one tę samą permutację, przy czym porównania między elementami w~obrębie jednej tablicy są zabronione.
 
 Można opisać prosty algorytm działający w~czasie $\Theta(n^2)$. Testowanie każdej liczby z~pierwszej tablicy z~każdą liczbą z~drugiej tablicy daje nam pełną wiedzę o~elementach, dzięki której można utworzyć żądaną permutację.
 
@@ -231,10 +248,10 @@ Udowodnijmy implikację w~prawą stronę. Załóżmy, że tablica $A$ jest \twop
 Przeprowadzenie rozumowania w~odwrotnej kolejności stanowi dowód implikacji przeciwnej.
 
 \subproblem %8-5(d)
-Zgodnie z~poprzednim punktem musimy spowodować, że wszystkie elementy z~wyjątkiem oddalonych od siebie o~mniej niż $k$ jednostek w~tablicy powinny być uporządkowane. Stosujemy zatem algorytm quicksort, który zatrzymuje się, kiedy otrzyma w~wywołaniu rekurencyjnym tablicę o~rozmiarze krótszym niż $k$. Analiza czasu działania sortowania jest identyczna jak wyznaczanie czasu działania zajmowanego przez quicksort w~\zad{7.4-5} -- tam również quicksort zatrzymuje się na tablicach o~rozmiarach mniejszych niż $k$.
+Zgodnie z~poprzednim punktem musimy spowodować, że wszystkie elementy z~wyjątkiem oddalonych od siebie o~mniej niż $k$ jednostek w~tablicy powinny być uporządkowane. Stosujemy zatem algorytm quicksort, który zatrzymuje się, kiedy otrzyma w~wywołaniu rekurencyjnym tablicę o~rozmiarze krótszym niż $k$. Analiza czasu działania sortowania jest identyczna jak wyznaczanie czasu działania zajmowanego przez quicksort w~\refExercise{7.4-5} -- tam również quicksort zatrzymuje się na tablicach o~rozmiarach mniejszych niż $k$.
 
 \subproblem %8-5(e)
-Podążając za wskazówką z~treści zadania, wykorzystujemy wynik z~\zad{6.5-8} zauważając, że mamy do scalenia $k$ posortowanych list w~jedną listę o~długości $n$. A~zatem czas działania tej operacji wynosi $O(n\lg k)$.
+Podążając za wskazówką z~treści zadania, wykorzystujemy wynik z~\refExercise{6.5-8} zauważając, że mamy do scalenia $k$ posortowanych list w~jedną listę o~długości $n$. A~zatem czas działania tej operacji wynosi $O(n\lg k)$.
 
 \subproblem %8-5(f)
 
