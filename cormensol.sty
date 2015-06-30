@@ -28,6 +28,7 @@
 \renewcommand{\cftsecfont}{\sffamily}
 \renewcommand{\cftsecleader}{\sffamily\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsecpagefont}{\sffamily}
+\renewcommand{\cftaftertoctitleskip}{3cm}
 
 % zwiększenie pudełka zawierającego numer strony w spisie treści
 \renewcommand{\@pnumwidth}{1.7em}
@@ -63,7 +64,7 @@
 		\interlinepenalty \@M
 		\normalfont
 		\ifnum \c@secnumdepth >-2\relax
-			\noindent\hskip0pt\leaders\hrule height1pt \hskip10pt plus1filll \hspace{15pt}\huge\bfseries\sffamily \partname\nobreakspace\thepart
+			\noindent\hskip0pt\leaders\hrule height1pt \hskip10pt plus1filll \hspace{15pt}\huge\sffamily\partname\nobreakspace\bfseries\thepart
 			\par
 			\vskip 40\p@
 		\fi
@@ -80,7 +81,7 @@
 		\parindent \z@ \raggedright \normalfont
 		\ifnum \c@secnumdepth >\m@ne
 			\if@mainmatter
-				\huge\sffamily \@chapapp\space \bfseries\thechapter \hspace{15pt}\null\nobreak\leaders\hrule height1pt \hskip10pt plus1filll\ 
+				\huge\sffamily \@chapapp\nobreakspace\bfseries\thechapter \hspace{15pt}\null\nobreak\leaders\hrule height1pt \hskip10pt plus1filll\ 
 				\par\nobreak
 				\vskip 20\p@
 			\fi
@@ -156,6 +157,19 @@
 \def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
 \def\thesubsubsection{(\alph{subsubsection})}
 
+% redefinicja części, która sprawia, że części rozpoczynają się na nieparzystych stronach
+\let\originalpart=\part
+\def\part{\cleardoublepage\originalpart}
+
+% redefinicja rozdziału, która przywraca styl licznika subsekcji na styl numerów zadań i przywraca nazwę podrozdziału na żywej paginie
+\let\originalchapter=\chapter
+\renewcommand{\chapter}[1]{%
+	\originalchapter{#1}
+	\setcounter{subsection}{0}
+	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
+	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
+}
+
 % kod odpowiedzialny za uczynienie numerów rysunków i tabel globalnych
 \def\@removefromreset#1#2{{%
 	\expandafter\let\csname c@#1\endcsname\@removefromreset
@@ -214,10 +228,10 @@
 \renewcommand{\bibname}{\sffamily\bfseries Bibliografia}
 
 % niełamliwy dywiz
-\newcommand{\onedash}[2]{{#1}\protect\nobreakdash-{#2}}
+\newcommand{\singledash}[2]{{#1}\protect\nobreakdash-{#2}}
 
 % niełamliwy podwójny dywiz
-\newcommand{\twodashes}[2]{{#1}\protect\nobreakdash--{#2}}
+\newcommand{\doubledash}[2]{{#1}\protect\nobreakdash--{#2}}
 
 % odnośnik do zadania --> odblokować w publikowanej wersji!
 \newcommand{\refExercise}[1]{zad.~\mbox{\ref{ex:#1}}}

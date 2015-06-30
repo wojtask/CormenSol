@@ -6,7 +6,7 @@
 Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zatrzymując się na pierwszej niepustej pozycji. Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę. Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
-Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie. Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \onedash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
+Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie. Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
 Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów. Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\id{key}[x]]$. Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\id{key}[x]]$. Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}. Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
@@ -53,7 +53,7 @@ Ciąg wstawień elementów do tablicy z~haszowaniem został zobrazowany na rys.~
 \medskip
 \begin{figure}[ht!]
 	\begin{center}
-		\includegraphics{fig11.1}
+		\includegraphics{fig_11.2-2}
 	\end{center}
 	\caption{Ilustracja wstawiania do tablicy z~haszowaniem $T$ elementów o~kluczach 5,~28, 19, 15, 20, 33, 12, 17,~10. Do rozwiązywania kolizji używana jest metoda łańcuchowa.} \label{fig:11.2-2}
 \end{figure}
@@ -145,14 +145,14 @@ Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszując
 \[
 	p_{\mathcal{H}} \ge \frac{b(u/b)(u/b-1)/2}{u(u-1)/2} = \frac{u/b-1}{u-1} > \frac{u/b-1}{u} = \frac{1}{b}-\frac{1}{u}.
 \]
-Jeśli rodzina $\mathcal{H}$ jest \onedash{$\epsilon$}{uniwersalna}, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
+Jeśli rodzina $\mathcal{H}$ jest \singledash{$\epsilon$}{uniwersalna}, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
 
 \exercise %11.3-6
-Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \onedash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$. Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
+Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \singledash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$. Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
 \[
 	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j-\sum_{j=0}^{n-1}y_jb^j = \sum_{j=0}^{n-1}(x_j-y_j)b^j.
 \]
-Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem. Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~zad.31.4-4 mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$. A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$. Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \onedash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
+Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem. Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$. A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$. Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
 
 \subchapter{Adresowanie otwarte}
 
@@ -194,11 +194,11 @@ Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zer
 \exercise %11.4-2
 Pseudokod procedury \proc{Hash-Delete} przedstawiono poniżej:
 \begin{codebox}
-\Procname{$\proc{Hash-Delete}(T,x)$}
+\Procname{$\proc{Hash-Delete}(T,k)$}
 \li	$i\gets0$
 \li	\Repeat
-		$j\gets h(\id{key}[x],i)$
-\li		\If $T[j]=\id{key}[x]$
+		$j\gets h(k,i)$
+\li		\If $T[j]=k$
 \li			\Then
 				$T[j]\gets\const{deleted}$
 \li				\Return
@@ -286,7 +286,7 @@ A~zatem dla $x>\sqrt{m}$ funkcja $f$ jest malejąca i~wklęsła. Oznacza to, że
 \note{W~punkcie~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$. W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 
 \subproblem %11-1(a)
-Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \onedash{$i$}{tego} elementu. Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem. Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$. Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
+Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu. Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem. Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$. Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
 
 \subproblem %11-1(b)
 Wynik otrzymujemy natychmiast po podstawieniu $k=2\lg n$ do oszacowania z~poprzedniego punktu.
@@ -318,7 +318,7 @@ Potraktujmy odwzorowywanie kluczy jako ciąg prób Bernoulliego, w~których sukc
 \]
 
 \subproblem %11-2(b)
-Niech $A_i$, dla $i=1$, 2,~\dots,~$n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \onedash{$i$}{tą} pozycję tablicy wynosi $k$. Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$. Z~własności prawdopodobieństwa i~z~punktu~(a) mamy
+Niech $A_i$, dla $i=1$, 2,~\dots,~$n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$. Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$. Z~własności prawdopodobieństwa i~z~punktu~(a) mamy
 \[
 	P_k = \Pr(A) \le \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = \sum_{i=1}^nQ_k = nQ_k.
 \]
@@ -399,7 +399,7 @@ Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodn
 }
 
 \subproblem %11-3(a)
-Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$,~\dots,~$\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$. Stąd mamy, że \onedash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1,~\dots,~$m-1$) jest
+Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$,~\dots,~$\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$. Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1,~\dots,~$m-1$) jest
 \[
 	\biggl(h(k)+\sum_{j=0}^ij\biggr)\bmod m = \biggl(h(k)+\frac{i(i+1)}{2}\biggr)\bmod m = \biggl(h(k)+\frac{i}{2}+\frac{i^2}{2}\biggr)\bmod m.
 \]
@@ -422,34 +422,34 @@ Na mocy tożsamości $j(j+1)/2-i(i+1)/2=(j-i)(j+i+1)/2$ dostajemy
 \]
 Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(j-i)(j+i+1)=2rm$. Przy założeniu, że $m$ jest potęgą 2, $m=2^p$, sprowadza się to do postaci $(j-i)(j+i+1)=r2^{p+1}$. Nietrudno zauważyć, że tylko jeden z~czynników, $j-i$ albo $j+i+1$, jest parzysty, zatem $2^{p+1}$ dzieli tylko jeden z~nich. Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$. Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$. Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.
 
-\problem{Haszowanie \onedash{$k$}{uniwersalne} i~uwierzytelnianie} %11-4
+\problem{Haszowanie \singledash{$k$}{uniwersalne} i~uwierzytelnianie} %11-4
 \note{Poprawki wprowadzone w~angielskiej treści tego problemu okazały się na tyle duże, że problem został napisany od nowa. Poniżej prezentujemy polskie tłumaczenie jego nowej wersji.}
 
-\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$. Powiemy, że $\mathcal{H}$ jest \textbf{\onedash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
+\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$. Powiemy, że $\mathcal{H}$ jest \textbf{\singledash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
 \begin{description}
 	\setlength\labelsep{11pt}
-	\item[{\sffamily\bfseries(a)}] Wykaż, że jeśli rodzina funkcji haszujących $\mathcal{H}$ jest \onedash{2}{uniwersalna}, to jest uniwersalna.
-	\item[{\sffamily\bfseries(b)}] Załóżmy, że $U$ jest zbiorem \onedash{$n$}{tek} o~wartościach z~$\mathbb{Z}_p=\{0,1,\dots,p-1\}$, gdzie $p$ jest liczbą pierwszą. Rozważmy element $x=\langle x_0,x_1,\dots,x_{n-1}\rangle\in U$. Dla każdej \onedash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ definiujemy funkcję haszującą $h_a$ jako
+	\item[{\sffamily\bfseries(a)}] Wykaż, że jeśli rodzina funkcji haszujących $\mathcal{H}$ jest \singledash{2}{uniwersalna}, to jest uniwersalna.
+	\item[{\sffamily\bfseries(b)}] Załóżmy, że $U$ jest zbiorem \singledash{$n$}{tek} o~wartościach z~$\mathbb{Z}_p=\{0,1,\dots,p-1\}$, gdzie $p$ jest liczbą pierwszą. Rozważmy element $x=\langle x_0,x_1,\dots,x_{n-1}\rangle\in U$. Dla każdej \singledash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ definiujemy funkcję haszującą $h_a$ jako
 	\[
 		h_a(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j\biggr)\bmod p.
 	\]
-	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \onedash{2}{uniwersalna}. (\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
+	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}. (\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
 	\item[{\sffamily\bfseries(c)}] Załóżmy, że zmodyfikowaliśmy nieco rodzinę $\mathcal{H}$ z~punktu~(b): dla każdego $a\in U$ i~każdego $b\in\mathbb{Z}_p$ definiujemy
 	\[
 		h_{a,b}'(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j+b\biggr)\bmod p
 	\]
-	oraz $\mathcal{H}'=\{h_{a,b}'\}$. Udowodnij, że rodzina $\mathcal{H}'$ jest \onedash{2}{uniwersalna}. (\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$. Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
-	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\onedash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
+	oraz $\mathcal{H}'=\{h_{a,b}'\}$. Udowodnij, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}. (\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$. Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
+	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\singledash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
 \end{description}
 
 \bigskip
 \note{Poniżej znajduje się rozwiązanie nowej wersji problemu.}
 
 \subproblem %11-4(a)
-Niech $\mathcal{H}$ będzie \onedash{2}{uniwersalną} rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$. Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$. A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$. Rodzina $\mathcal{H}$ jest więc uniwersalna.
+Niech $\mathcal{H}$ będzie \singledash{2}{uniwersalną} rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$. Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$. A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$. Rodzina $\mathcal{H}$ jest więc uniwersalna.
 
 \subproblem %11-4(b)
-Aby zbadać \onedash{2}{uniwersalność}, wykorzystamy wskazówkę. Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera. To wyklucza \onedash{2}{uniwersalność} rodziny $\mathcal{H}$.
+Aby zbadać \singledash{2}{uniwersalność}, wykorzystamy wskazówkę. Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera. To wyklucza \singledash{2}{uniwersalność} rodziny $\mathcal{H}$.
 
 Udowodnimy teraz, że rodzina $\mathcal{H}$ jest uniwersalna. Wybierzmy w~tym celu dowolną parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~pewną funkcję $h_a$ z~$\mathcal{H}$. Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$. Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniony będzie poniższy wzór:
 \[
@@ -466,9 +466,9 @@ Ustalmy parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~wybierzmy pewną fun
 \[
 	a_0(x_0-y_0) \equiv \alpha-\beta-X+Y \pmod p.
 \]
-Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$. Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$. Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$. Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$. Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$. Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$. Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest \onedash{2}{uniwersalna}.
+Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$. Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$. Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$. Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$. Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$. Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$. Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}.
 
 \subproblem %11-4(d)
-Ponieważ rodzina $\mathcal{H}$ jest \onedash{2}{uniwersalna}, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$. W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia. Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba. Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
+Ponieważ rodzina $\mathcal{H}$ jest \singledash{2}{uniwersalna}, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$. W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia. Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba. Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
 
 \endinput

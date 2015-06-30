@@ -24,28 +24,19 @@
 % definiuje lokalizację rysunków
 \graphicspath{{figures/}}
 
+% włącza tylko specyficzne rozdziały
+% \includeonly{ch10}
+
 \begin{document}
 
 \frontmatter
 
 \include{title}
-\include{intro}
-
 \ifpdf
 	\addtocontents{toc}{\protect\pdfbookmark{Spis treści}{Tableofcont}}
 \fi
+\include{intro}
 \tableofcontents
-
-% redefinicja rozdziału, która przywraca styl licznika subsekcji na styl numerów zadań
-% i przywraca nazwę podrozdziału na żywej paginie
-% musi być po \include{intro} bo intro używa zwykłego polecenia \chapter
-\let\mychapter=\chapter
-\renewcommand{\chapter}[1]{%
-	\mychapter{#1}
-	\setcounter{subsection}{0}
-	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
-	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
-}
 
 \mainmatter
 
@@ -64,7 +55,7 @@
 \setcounter{chapter}{7}\setcounter{figure}{15}\setcounter{table}{3}\include{ch08}
 \setcounter{chapter}{8}\setcounter{figure}{18}\setcounter{table}{3}\include{ch09}
 
-\setcounter{part}{2}\part{Struktury danych}
+ \setcounter{part}{2}\part{Struktury danych}
 
 \setcounter{chapter}{9}\setcounter{figure}{18}\setcounter{table}{3}\include{ch10}
 \setcounter{chapter}{10}\setcounter{figure}{22}\setcounter{table}{4}\include{ch11}
@@ -112,13 +103,13 @@
 	\@appendixtrue
 \makeatother
 
-\setcounter{chapter}{0}\setcounter{figure}{99}\setcounter{table}{9}\include{appa}
-\setcounter{chapter}{1}\setcounter{figure}{99}\setcounter{table}{9}\include{appb}
-\setcounter{chapter}{2}\setcounter{figure}{105}\setcounter{table}{9}\include{appc}
+\setcounter{chapter}{0}\setcounter{figure}{25}\setcounter{table}{5}\include{appa}
+\setcounter{chapter}{1}\setcounter{figure}{25}\setcounter{table}{5}\include{appb}
+\setcounter{chapter}{2}\setcounter{figure}{31}\setcounter{table}{5}\include{appc}
 
 \backmatter
 
-\let\chapter=\mychapter
+\let\chapter=\originalchapter
 
 \bibliographystyle{plplain}
 \bibliography{cormensol}

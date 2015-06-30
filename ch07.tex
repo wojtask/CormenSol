@@ -8,9 +8,9 @@
 \noindent Rys.~\ref{fig:7.1-1} przedstawia działanie procedury \proc{Partition} dla tablicy~$A$.
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics{fig07.1}
+		\includegraphics{fig_7.1-1}
 	\end{center}
-	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,21,2,6,11\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries\twodashes{(b)}{(l)}} Kolejne iteracje pętli \kw{for} w~wierszach \twodashes{3}{6}. {\sffamily\bfseries(m)} Wynikowa tablica $A$ po wykonaniu zamiany z~wiersza~7.} \label{fig:7.1-1}
+	\caption{Działanie procedury \proc{Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,21,2,6,11\rangle$. {\sffamily\bfseries(a)} Tablica wejściowa z~zaznaczonymi początkowymi wartościami zmiennych. {\sffamily\bfseries\doubledash{(b)}{(l)}} Kolejne iteracje pętli \kw{for} w~wierszach \doubledash{3}{6}. {\sffamily\bfseries(m)} Wynikowa tablica $A$ po wykonaniu zamiany z~wiersza~7.} \label{fig:7.1-1}
 \end{figure}
 
 \exercise %7.1-2
@@ -55,7 +55,7 @@ Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicks
 Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt~(c) problemu~\refProblem{2-4}). W~ciągu prawie posortowanym ilość inwersji jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
 
 \exercise %7.2-5
-Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \onedash{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej gałęzi. Mamy wtedy $\alpha^hn=1$, skąd
+Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów. Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \singledash{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$. Niech $h$ będzie głębokością liścia najkrótszej gałęzi. Mamy wtedy $\alpha^hn=1$, skąd
 \[
 	h = \log_\alpha\frac{1}{n} = -\frac{\lg n}{\lg\alpha}.
 \]
@@ -164,9 +164,9 @@ Sumując prawdopodobieństwa z~wszystkich przypadków, otrzymujemy $P(\alpha)\ap
 Działanie procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ zostało przedstawione na rys.~\ref{fig:7-1a}.
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics{fig07.2}
+		\includegraphics{fig_7-1.a}
 	\end{center}
-	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$. Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$. {\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych. {\sffamily\bfseries\twodashes{(b)}{(d)}} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach \twodashes{4}{11}.} \label{fig:7-1a}
+	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$. Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$. Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$. {\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych. {\sffamily\bfseries\doubledash{(b)}{(d)}} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach \doubledash{4}{11}.} \label{fig:7-1a}
 \end{figure}
 
 \subproblem %7-1(b)
@@ -198,7 +198,7 @@ Jedyną różnicą w~porównaniu z~procedurą \proc{Quicksort} jest to, że elem
 W~procedurze \proc{Randomized-Partition} element $A[r]$ jest zamieniany z~elementem losowo wybranym z~tablicy $A$ o~rozmiarze $n$. Stąd szanse, że pewien ustalony element tablicy $A$ zostanie elementem rozdzielającym, wynoszą $1/n$. Wobec tego wartość oczekiwana zmiennej $X_i$, gdzie $i=1$, 2,~\dots,~$n$, wynosi $\E(X_i)=\Pr(X_i=1)=1/n$.
 
 \subproblem %7-2(b)
-Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy. Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$. Zmienna losowa $X_i$ zdefiniowana w~punkcie~(a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0. Stąd czas potrzebny na posortowanie \onedash{$n$}{elementowej} tablicy wyraża się wzorem
+Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy. Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$. Zmienna losowa $X_i$ zdefiniowana w~punkcie~(a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0. Stąd czas potrzebny na posortowanie \singledash{$n$}{elementowej} tablicy wyraża się wzorem
 \[
 	T(n) = T(q-1)+T(n-q)+\Theta(n) = \sum_{i=1}^nX_i(T(i-1)+T(n-i)+\Theta(n)).
 \]
@@ -385,9 +385,9 @@ Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twod
 		\End \label{li:fuzzy-partition-for-end}
 \li	\Return $\langle q,i+1\rangle$
 \end{codebox}
-Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$. Po wykonaniu wiersza~\ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$. Następnie, w~wierszach \twodashes{\ref{li:fuzzy-partition-q-init}}{\ref{li:fuzzy-partition-for-end}}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy. W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania. Na końcu zwracane są indeksy początku i~końca tego obszaru.
+Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$. Po wykonaniu wiersza~\ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$. Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$. Następnie, w~wierszach \doubledash{\ref{li:fuzzy-partition-q-init}}{\ref{li:fuzzy-partition-for-end}}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy. W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania. Na końcu zwracane są indeksy początku i~końca tego obszaru.
 
 \subproblem %7-6(b)
-Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \onedash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta. Na~każdym poziomie rekursji będzie więc sortowany tylko jeden obszar. Randomizacja zapewnia, że oczekiwaną pozycją elementu rozdzielającego jest środek podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
+Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \singledash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$. Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta. Na~każdym poziomie rekursji będzie więc sortowany tylko jeden obszar. Randomizacja zapewnia, że oczekiwaną pozycją elementu rozdzielającego jest środek podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy. Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
 
 \endinput
