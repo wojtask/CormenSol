@@ -146,7 +146,7 @@ Poniżej przedstawiono implementację procedury \proc{Merge}, w~której nie wyko
 				\End
 		\End
 \end{codebox}
-Zmodyfikowany warunek z~wiersza~\ref{li:merge'-condition} pozwala na poprawne rozmieszczenie elementów z~tablic $L$ i~$R$ w~wynikowej tablicy $A$ pomimo braku wartowników. Wykorzystuje on fakt, że kolejny element zostanie pobrany z~tablicy $L$, gdy wyczerpana zostanie tablica $R$ albo wtedy, gdy z~aktualnie porównywanej pary elementów mniejszym (lub równym) okaże się ten z~tablicy $L$.
+Warunek w~wierszu~\ref{li:merge'-condition} w~powyższej procedurze pozwala na poprawne rozmieszczenie elementów z~tablic $L$ i~$R$ w~wynikowej tablicy $A$ pomimo braku wartowników. Dzięki niemu do \singledash{$k$}{tej} komórki tablicy $A$ zostanie przekopiowana wartość z~tablicy $L$ w~jednym z~dwóch przypadków -- gdy tablica $R$ została już w~całości przeglądnięta, bądź wtedy, gdy w~tablicach $L$ i~$R$ znajdują się jeszcze elementy do przekopiowania, ale mniejsza (lub równa) z~liczb znajduje się na aktualnej pozycji w~tablicy $L$. Gdy indeks $j$ przekroczy $n_2$, to do końca działania procedury do tablicy $A$ będą kopiowane elementy z~tablicy $L$.
 
 \exercise %2.3-3
 Przeprowadzimy dowód przez indukcję względem $k$. Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi. Załóżmy teraz, że $k>1$, czyli $n>2$ i~że zachodzi $T(n/2)=(n/2)\lg(n/2)$. Mamy
