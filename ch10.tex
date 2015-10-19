@@ -319,19 +319,19 @@ Rys.~\ref{fig:10.3-1} przedstawia przykładowe rozmieszczenie elementów ciągu 
 \exercise %10.3-2
 Załóżmy, że właściwa lista oraz lista wolnych pozycji znajdują się w~pojedynczej tablicy $A$. Poniższe procedury są adaptacjami operacji przydzielania i~zwalniania pamięci dla list dwukierunkowych w~reprezentacji jednotablicowej. Wykorzystujemy tutaj fakt, że polu \id{next} odpowiada przesunięcie~1 względem początku fragmentu tablicy $A$ przechowującego dany element listy.
 \begin{codebox}
-\Procname{$\proc{Single-Array-Allocate-Object}(A)$}
+\Procname{$\proc{Single-Array-Allocate-Object}()$}
 \li	\If $\id{free}=\const{nil}$
 \li		\Then \Error ,,brak pamięci''
 		\End
-\li	$i\gets\id{free}$
-\li	$\id{free}\gets A[i+1]$
-\li	\Return $i$
+\li	$x\gets\id{free}$
+\li	$\id{free}\gets A[x+1]$
+\li	\Return $x$
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{Single-Array-Free-Object}(A,i)$}
-\li	$A[i+1]\gets\id{free}$
-\li	$\id{free}\gets i$
+\Procname{$\proc{Single-Array-Free-Object}(x)$}
+\li	$A[x+1]\gets\id{free}$
+\li	$\id{free}\gets x$
 \end{codebox}
 
 \exercise %10.3-3
