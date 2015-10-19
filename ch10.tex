@@ -338,11 +338,11 @@ Załóżmy, że właściwa lista oraz lista wolnych pozycji znajdują się w~poj
 Lista wolnych pozycji jest listą jednokierunkową -- nie są więc wykorzystywane w~niej pola \id{prev}.
 
 \exercise %10.3-4
-Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych pozycji jako stos. Będzie on zajmował wszystkie pozycje na prawo od tej wskazywanej przez \id{free} -- jego wierzchołka. Stos jest pusty wtedy i~tylko wtedy, gdy $\id{free}=\const{nil}$. Przydzielanie pamięci polega na wywołaniu na stosie wolnych pozycji operacji \proc{Pop}, a~więc nie różni się od oryginalnej wersji. Z~kolei zwalnianie pamięci to wywołanie na tym stosie operacji \proc{Push}. Wcześniej jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu.
+Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych pozycji jako stos. Będzie on zajmował wszystkie pozycje na prawo od tej wskazywanej przez \id{free}, na której znajdzie się jego wierzchołek. Stos jest pusty wtedy i~tylko wtedy, gdy $\id{free}=\const{nil}$. Przydzielanie pamięci polega na wywołaniu na stosie wolnych pozycji operacji \proc{Pop}, a~więc procedura \proc{Compact-List-Allocate-Object} jest identyczna z~oryginalną \proc{Allocate-Object}. Z~kolei zwalnianie pamięci to wywołanie na tym stosie operacji \proc{Push}. Wcześniej jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu. Poniższy pseudokod stanowi implementację tej operacji.
 \begin{codebox}
 \Procname{$\proc{Compact-List-Free-Object}(x)$}
 \li	\If $\id{free}=\const{nil}$
-\li		\Then $y\gets n$
+\li		\Then $y\gets\id{length}[\id{key}]$
 \li		\Else $y\gets\id{free}-\,1$
 		\End
 \li	\If $\id{next}[x]\ne\const{nil}$
