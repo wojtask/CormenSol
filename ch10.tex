@@ -483,15 +483,15 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \li	$\id{curr}\gets\attrib{T}{root}$
 \li	\While $\id{curr}\ne\const{nil}$
 \li		\Do
-			\If $\id{prev}=\attrib{\id{curr}}{p}$
+			\If $\id{prev}=\attrib{curr}{p}$
 \li				\Then
-					\If $\attrib{\id{curr}}{left}\ne\const{nil}$
-\li						\Then $\id{next}\gets\attrib{\id{curr}}{left}$
+					\If $\attrib{curr}{left}\ne\const{nil}$
+\li						\Then $\id{next}\gets\attrib{curr}{left}$
 \li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
 						\End
-\li				\ElseIf $\id{prev}=\attrib{\id{curr}}{left}$
+\li				\ElseIf $\id{prev}=\attrib{curr}{left}$
 \li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
-\li				\ElseNoIf $\id{next}\gets\attrib{\id{curr}}{p}$	
+\li				\ElseNoIf $\id{next}\gets\attrib{curr}{p}$
 				\End
 \li			$\id{prev}\gets\id{curr}$
 \li			$\id{curr}\gets\id{next}$
