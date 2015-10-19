@@ -368,11 +368,11 @@ Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych po
 \end{codebox}
 
 \exercise %10.3-5
-Ogólny zarys procedury \proc{Compactify-List} jest następujący. Podczas przechodzenia listy $L$ wyznaczane są te elementy, które zajmują pozycje na prawo od $m$. Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się na pozycjach do $m$ włącznie. Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów. Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji. Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}. Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana pewna specjalna wartość, np.\ $n+1$. Przechodząc później przez listę $L$, wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
+Ogólny zarys procedury \proc{Compactify-List} jest następujący. Podczas przechodzenia listy $L$ wyznaczane są te elementy, które zajmują pozycje na prawo od $m$. Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się na pozycjach do $m$ włącznie. Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów. Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji. Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}. Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, która nie jest poprawnym indeksem tablicy, np.\ $\infty$. Przechodząc później przez listę $L$, wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
 \li	$n\gets\id{length}[\id{key}]$
-\li	wpisz $n+1$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
+\li	wpisz $\infty$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
 \li $x\gets L$
 \li	$x'\gets\const{nil}$
 \li	$y\gets1$
@@ -383,7 +383,7 @@ Ogólny zarys procedury \proc{Compactify-List} jest następujący. Podczas przec
 					$x'\gets x$
 \li					$x\gets\id{next}[x]$
 \li				\Else
-					\While $\id{prev}[y]=n+1$ \label{li:compactify-list-while2-begin}
+					\While $\id{prev}[y]=\infty$ \label{li:compactify-list-while2-begin}
 \li						\Do $y\gets y+1$
 						\End \label{li:compactify-list-while2-end}
 \li					zamień wartości pól \id{key}, \id{next} i~\id{prev} elementu $x$ z~polami elementu $y$ \label{li:compactify-list-swap}
@@ -409,7 +409,7 @@ Ogólny zarys procedury \proc{Compactify-List} jest następujący. Podczas przec
 \li	przywróć poprawne wartości w~polach \id{prev} elementów listy $L$ \label{li:compactify-list-postprocess}
 \end{codebox}
 
-Procedura przechodzi listę $L$ trzy razy. Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na wartość $n+1$. W~tym samym kroku można przy okazji wyznaczyć $m$ -- rozmiar listy $L$.
+Procedura przechodzi przez listę $L$ trzy razy. Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na $\infty$. W~tym samym kroku wyznaczana jest wartość $m$ -- rozmiar listy $L$.
 
 Kolejne przejście po liście to właściwe kompaktowanie. Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo. Pętla \kw{while} w~wierszach \doubledash{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu~\ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje. Należy jeszcze uaktualnić wartości pól \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \doubledash{\ref{li:compactify-list-fix-neighbors-begin}}{\ref{li:compactify-list-fix-neighbors-end}}), wartość pola \id{next} poprzednika $x$ na liście $L$ (wiersze \doubledash{\ref{li:compactify-list-fix-predecessor-begin}}{\ref{li:compactify-list-fix-predecessor-end}}), jak również wartości wskaźników $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \doubledash{\ref{li:compactify-list-fix-heads-begin}}{\ref{li:compactify-list-fix-heads-end}}).
 
