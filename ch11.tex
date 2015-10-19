@@ -3,7 +3,7 @@
 \subchapter{Tablice z~adresowaniem bezpośrednim}
 
 \exercise %11.1-1
-Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zatrzymując się na pierwszej niepustej pozycji. Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę. Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
+Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zwracając element z~pierwszej niepustej pozycji. Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}. Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
 Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie. Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
