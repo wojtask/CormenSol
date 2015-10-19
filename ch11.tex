@@ -9,28 +9,28 @@ Procedura wyszukująca największy element zbioru $S$ będzie przeglądać linio
 Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie. Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
-Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów. Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\id{key}[x]]$. Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\id{key}[x]]$. Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}. Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
+Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów. Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\attrib{x}{key}]$. Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\attrib{x}{key}]$. Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}. Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
 
 Opisane rozwiązanie można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
 
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
 
-\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu $\id{top}[S]$ wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ weryfikują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\id{top}[S]$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
+\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ weryfikują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\attrib{S}{top}$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
 
-Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$. Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\id{top}[S]$ i~$S[T[k]]=k$. Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}. W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć $\id{top}[S]$ o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\id{top}[S]]$ i~$S'[\id{top}[S]]$. Dokładniej, wykonywany jest następujący ciąg instrukcji:
+Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$. Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$S[T[k]]=k$. Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}. W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć \attrib{S}{top} o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\attrib{S}{top}]$ i~$S'[\attrib{S}{top}]$. Dokładniej, wykonywany jest następujący ciąg instrukcji:
 \begin{codebox}
-\zi	$\id{top}[S]\gets\id{top}[S]+1$
-\zi	$T[k]\gets\id{top}[S]$
-\zi	$S[\id{top}[S]]\gets k$
-\zi	$S'[\id{top}[S]]\gets x$
+\zi	$\attrib{S}{top}\gets\attrib{S}{top}+1$
+\zi	$T[k]\gets\attrib{S}{top}$
+\zi	$S[\attrib{S}{top}]\gets k$
+\zi	$S'[\attrib{S}{top}]\gets x$
 \end{codebox}
-Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu wewnątrz $S$ i~$S'$ wartości z~pozycji $\id{top}[S]$ na pozycję $T[k]$, aktualizacji odpowiedniej wartości w~tablicy $T$ i~wreszcie dekrementacji $\id{top}[S]$. Operacja \proc{Delete} sprowadza się zatem do wykonania poniższych instrukcji:
+Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu wewnątrz $S$ i~$S'$ wartości z~pozycji \attrib{S}{top} na pozycję $T[k]$, aktualizacji odpowiedniej wartości w~tablicy $T$ i~wreszcie dekrementacji \attrib{S}{top}. Operacja \proc{Delete} sprowadza się zatem do wykonania poniższych instrukcji:
 \begin{codebox}
-\zi	$S[T[k]]\gets S[\id{top}[S]]$
-\zi	$S'[T[k]]\gets S'[\id{top}[S]]$
+\zi	$S[T[k]]\gets S[\attrib{S}{top}]$
+\zi	$S'[T[k]]\gets S'[\attrib{S}{top}]$
 \zi	$T[S[T[k]]]\gets T[k]$
-\zi	$\id{top}[S]\gets\id{top}[S]-1$
+\zi	$\attrib{S}{top}\gets\attrib{S}{top}-1$
 \end{codebox}
 
 Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element przechowywany w~tablicy $T$ (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
@@ -64,9 +64,9 @@ Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można w
 \exercise %11.2-4
 Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską) orzekający o~jej zajętości. Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe. Wolne pozycje natomiast tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
 
-Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna. Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik $\id{next}[T[h(k)]]$ ustawiamy na \const{nil}. W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$. Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem $\id{next}[T[h(k)]]$, a~do komórki $h(k)$ wstawiamy element $x$.
+Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna. Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}. W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$. Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next}, a~do komórki $h(k)$ wstawiamy element $x$.
 
-Pozostaje uaktualnić wskaźnik $\id{next}[T[h(k)]]$. W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje. W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$. Wówczas wskaźnikiem $\id{next}[T[h(k)]]$ należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji. W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$. Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$. Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do $\id{next}[T[h(k)]]$ wartość \const{nil}.
+Pozostaje uaktualnić wskaźnik \attrib{T[h(k)]}{next}. W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje. W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$. Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji. W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$. Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$. Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość \const{nil}.
 
 Ponieważ traktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$. Należy pamiętać jednak o~tym, aby następnie wstawić zwolnioną pozycję na listę $F$. Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
 

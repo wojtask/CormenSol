@@ -144,7 +144,7 @@ Pojawia się jednak pewna subtelność. O~ile elementy wejściowe z~założenia 
 Poniższy algorytm implementuje opisane podejście:
 \begin{codebox}
 \Procname{$\proc{Median-Proximity}(S,k)$}
-\li	$n\gets\id{length}[S]$
+\li	$n\gets\attrib{S}{length}$
 \li	$x\gets\proc{Select}(S,1,n,\lfloor(n+1)/2\rfloor)$
 \li	\For $i\gets1$ \To $n$
 \li		\Do $\id{dist}[i]\gets|S[i]-x|$

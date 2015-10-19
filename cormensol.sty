@@ -244,6 +244,12 @@
 % informacja poboczna w tekście rozwiązania
 \newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}
 
+% poprawione polecenie \id dla jednoznakowych identyfikatorów
+\renewcommand{\id}[1]{\ensuremath{\mathit{\text@hyphens#1}}}
+
+% atrybut obiektu
+\newcommand{\attrib}[2]{\id{#2}[\id{#1}]}
+
 % definicja nowych operatorów matematycznych
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\E}{E}

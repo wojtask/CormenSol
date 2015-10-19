@@ -14,7 +14,7 @@ Przykładowe drzewa BST przedstawiono na rys.~\ref{fig:12.1-1}.
 \exercise %12.1-2
 \note{Wyrażenie ,,właściwa kolejność'' użyte w~tłumaczeniu oznacza kolejność niemalejącą.}
 
-\noindent Niech $x$ będzie węzłem drzewa $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$. Jeśli drzewo $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\id{key}[y]\le\id{key}[x]\le\id{key}[z]$. Jeśli z~kolei drzewo $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\id{key}[x]\le\id{key}[y]$ oraz $\id{key}[x]\le\id{key}[z]$.
+\noindent Niech $x$ będzie węzłem drzewa $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$. Jeśli drzewo $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\attrib{y}{key}\le\attrib{x}{key}\le\attrib{z}{key}$. Jeśli z~kolei drzewo $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\attrib{x}{key}\le\attrib{y}{key}$ oraz $\attrib{x}{key}\le\attrib{z}{key}$.
 
 Ta różnica sprawia, że podczas przechodzenia kopca typu min w~kolejności niemalejących węzłów, po odwiedzeniu węzła $x$ nie jest wiadomo, które jego poddrzewo należałoby następnie odwiedzić, ponieważ nie jest znana relacja między $y$ a~$z$. Oznacza to, że wypisanie wszystkich $n$ węzłów kopca typu min w~kolejności niemalejącej zajmuje czas wyższy niż $O(n)$. W~przeciwnym przypadku moglibyśmy zaimplementować algorytm heapsort w~czasie liniowym.
 
@@ -27,9 +27,9 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni�
 \Procname{$\proc{Preorder-Tree-Walk}(x)$}
 \li	\If $x\ne\const{nil}$
 \li		\Then
-			wypisz $\id{key}[x]$
-\li			$\proc{Preorder-Tree-Walk}(\id{left}[x])$
-\li			$\proc{Preorder-Tree-Walk}(\id{right}[x])$
+			wypisz \attrib{x}{key}
+\li			$\proc{Preorder-Tree-Walk}(\attrib{x}{left})$
+\li			$\proc{Preorder-Tree-Walk}(\attrib{x}{right})$
 		\End
 \end{codebox}
 
@@ -37,9 +37,9 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni�
 \Procname{$\proc{Postorder-Tree-Walk}(x)$}
 \li	\If $x\ne\const{nil}$
 \li		\Then
-			$\proc{Postorder-Tree-Walk}(\id{left}[x])$
-\li			$\proc{Postorder-Tree-Walk}(\id{right}[x])$
-\li			wypisz $\id{key}[x]$
+			$\proc{Postorder-Tree-Walk}(\attrib{x}{left})$
+\li			$\proc{Postorder-Tree-Walk}(\attrib{x}{right})$
+\li			wypisz \attrib{x}{key}
 		\End
 \end{codebox}
 
@@ -57,15 +57,15 @@ Ciągi z~przykładów (a), (b) i~(d) są możliwe do uzyskania podczas wyszukiwa
 Rekurencyjne wersje procedur zostały przedstawione poniżej.
 \begin{codebox}
 \Procname{$\proc{Recursive-Tree-Minimum}(x)$}
-\li	\If $\id{left}[x]\ne\const{nil}$
-\li		\Then \Return $\proc{Recursive-Tree-Minimum}(\id{left}[x])$
+\li	\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Minimum}(\attrib{x}{left})$
 \li		\Else \Return $x$
 		\End
 \end{codebox}
 \begin{codebox}
 \Procname{$\proc{Recursive-Tree-Maximum}(x)$}
-\li	\If $\id{right}[x]\ne\const{nil}$
-\li		\Then \Return $\proc{Recursive-Tree-Maximum}(\id{right}[x])$
+\li	\If $\attrib{x}{right}\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Maximum}(\attrib{x}{right})$
 \li		\Else \Return $x$
 		\End
 \end{codebox}
@@ -74,14 +74,14 @@ Rekurencyjne wersje procedur zostały przedstawione poniżej.
 Procedura \proc{Tree-Predecessor} jest symetryczna do \proc{Tree-Successor}. Jej pseudokod znajduje się poniżej.
 \begin{codebox}
 \Procname{$\proc{Tree-Predecessor}(x)$}
-\li	\If $\id{left}[x]\ne\const{nil}$
-\li		\Then \Return $\proc{Tree-Maximum}(\id{left}[x])$
+\li	\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then \Return $\proc{Tree-Maximum}(\attrib{x}{left})$
 		\End
-\li	$y\gets p[x]$
-\li	\While $y\ne\const{nil}$ i~$x=\id{left}[y]$
+\li	$y\gets\attrib{x}{p}$
+\li	\While $y\ne\const{nil}$ i~$x=\attrib{y}{left}$
 \li		\Do
 			$x\gets y$
-\li			$y\gets p[y]$
+\li			$y\gets\attrib{y}{p}$
 		\End
 \li	\Return $y$
 \end{codebox}
@@ -96,7 +96,7 @@ Rys.~\ref{fig:12.2-4} przedstawia najmniejsze drzewo BST, które obala postawion
 \end{figure}
 
 \exercise %12.2-5
-Niech $x$ będzie węzłem w~drzewie BST, który ma dwóch synów, a~$y$ -- najniższym przodkiem $x$, którego lewy syn jest także przodkiem $x$. Elementy o~kluczach większych niż $\id{key}[x]$ znajdują się w~prawym poddrzewie $x$, a~także, jeśli $y\ne\const{nil}$, w~$y$ i~,,na prawo'' od $y$. Dla każdego węzła $z$ z~prawego poddrzewa $x$ spełniona jest nierówność $\id{key}[x]<\id{key}[z]<\id{key}[y]$, a~to oznacza, że następnikiem $x$ nie może być ani $y$ ani żaden węzeł na prawo od $y$.
+Niech $x$ będzie węzłem w~drzewie BST, który ma dwóch synów, a~$y$ -- najniższym przodkiem $x$, którego lewy syn jest także przodkiem $x$. Elementy o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także, jeśli $y\ne\const{nil}$, w~$y$ i~,,na prawo'' od $y$. Dla każdego węzła $z$ z~prawego poddrzewa $x$ spełniona jest nierówność $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to oznacza, że następnikiem $x$ nie może być ani $y$ ani żaden węzeł na prawo od $y$.
 
 Analogiczne rozumowanie można przeprowadzić dla poprzednika węzła $x$.
 
@@ -104,7 +104,7 @@ Analogiczne rozumowanie można przeprowadzić dla poprzednika węzła $x$.
 \exercise %12.2-7
 \exercise %12.2-8
 \exercise %12.2-9
-Załóżmy, że $x$ jest prawym synem węzła $y$. Pokażemy, że $y$ jest poprzednikiem $x$, czyli że $\id{key}[y]$ jest największym kluczem w~drzewie $T$, mniejszym niż $\id{key}[x]$. Załóżmy jednak, że istnieje w~$T$ taki węzeł $z$, dla którego spełnione są nierówności $\id{key}[y]<\id{key}[z]<\id{key}[x]$. Bez utraty ogólności można przyjąć, że $z$ jest następnikiem $y$. Na mocy \refExercise{12.2-6} mamy, że $z$ jest najniższym przodkiem $y$, którego lewy syn jest także przodkiem $y$. Ale wówczas $x$ znajduje się w~lewym poddrzewie węzła $z$, a~więc zachodzi $\id{key}[z]>\id{key}[x]$, co stoi w~sprzeczności z~założeniem. Węzeł $y$ jest zatem poprzednikiem węzła $x$.
+Załóżmy, że $x$ jest prawym synem węzła $y$. Pokażemy, że $y$ jest poprzednikiem $x$, czyli że \attrib{y}{key} jest największym kluczem w~drzewie $T$, mniejszym niż \attrib{x}{key}. Załóżmy jednak, że istnieje w~$T$ taki węzeł $z$, dla którego spełnione są nierówności $\attrib{y}{key}<\attrib{z}{key}<\attrib{x}{key}$. Bez utraty ogólności można przyjąć, że $z$ jest następnikiem $y$. Na mocy \refExercise{12.2-6} mamy, że $z$ jest najniższym przodkiem $y$, którego lewy syn jest także przodkiem $y$. Ale wówczas $x$ znajduje się w~lewym poddrzewie węzła $z$, a~więc zachodzi $\attrib{z}{key}>\attrib{x}{key}$, co stoi w~sprzeczności z~założeniem. Węzeł $y$ jest zatem poprzednikiem węzła $x$.
 
 W~przypadku, gdy $x$ jest lewym synem węzła $y$, rozumując analogicznie i~korzystając z~twierdzenia symetrycznego do tego z~\refExercise{12.2-6}, można pokazać, że $y$ jest następnikiem $x$.
 
@@ -116,27 +116,27 @@ Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu 
 \Procname{$\proc{Recursive-Tree-Insert}(T,x,z)$}
 \li	\If $x=\const{nil}$
 \li		\Then
-            $\id{root}[T]\gets z$
+            $\attrib{T}{root}\gets z$
 \li         \Return
 		\End
-\li	\If $\id{key}[z]<\id{key}[x]$
+\li	\If $\attrib{z}{key}<\attrib{x}{key}$
 \li		\Then
-			\If $\id{left}[x]\ne\const{nil}$
-\li				\Then $\proc{Recursive-Tree-Insert}(T,\id{left}[x],z)$
+			\If $\attrib{x}{left}\ne\const{nil}$
+\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{left},z)$
 \li				\Else
-					$\id{left}[x]\gets z$
-\li					$p[z]\gets x$
+					$\attrib{x}{left}\gets z$
+\li					$\attrib{z}{p}\gets x$
 				\End
 \li		\Else
-			\If $\id{right}[x]\ne\const{nil}$
-\li				\Then $\proc{Recursive-Tree-Insert}(T,\id{right}[x],z)$
+			\If $\attrib{x}{right}\ne\const{nil}$
+\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{right},z)$
 \li				\Else
-					$\id{right}[x]\gets z$
-\li					$p[z]\gets x$
+					$\attrib{x}{right}\gets z$
+\li					$\attrib{z}{p}\gets x$
 				\End
 		\End
 \end{codebox}
-Aby wstawić węzeł $z$ do drzewa $T$, należy wywołać $\proc{Recursive-Tree-Insert}(T,\id{root}[T],z)$.
+Aby wstawić węzeł $z$ do drzewa $T$, należy wywołać $\proc{Recursive-Tree-Insert}(T,\attrib{T}{root},z)$.
 
 \exercise %12.3-2
 \exercise %12.3-3

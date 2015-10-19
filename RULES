@@ -93,14 +93,13 @@ V Pseudokody
 2. Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. Mutliary-Parent, Multiary-Child.
 3. Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
 4. Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
-5. W pseudokodach po znaku operatora występującym po \id{} należy dać odstęp \, (jak w 2.3-5).
-6. Nie obejmujemy w \id{} identyfikatorów/atrybutów jednoliterowych.
-7. Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
-8. Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
-9. Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
-10. Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
-11. Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
-12. Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
+5. Do artybutów używamy makra \attrib{obiekt}{atrybut}.
+6. Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
+7. Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
+8. Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
+9. Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
+10. Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
+11. Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
 \li	\ElseNoIf linia_1
 		\End
 \li		\phantom{\kw{else}} linia_2

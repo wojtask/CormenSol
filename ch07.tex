@@ -348,7 +348,7 @@ Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyska
 \subproblem %7-6(a)
 Niech $A$ będzie tablicą wejściową, przy czym $A[i]=[a_i,b_i]$ dla $i=1$, 2,~\dots,~$n$. Zauważmy, że jeśli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$, czyli przedziały $A[i]$ i~$A[j]$ nachodzą na siebie, to mogą wystąpić w~tablicy wynikowej w~dowolnej kolejności. Algorytm działa podobnie jak quicksort, ale wykorzystuje tę obserwację, znajdując zbiór przedziałów nachodzących na przedział stanowiący element rozdzielający i~pomijając wywołanie rekurencyjne dla podtablicy utworzonej przez ten zbiór przedziałów.
 
-Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów. Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\id{length}[A])$.
+Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów. Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\attrib{A}{length})$.
 \begin{codebox}
 \Procname{$\proc{Fuzzy-Sort}(A,p,r)$}
 \li	\If $p<r$

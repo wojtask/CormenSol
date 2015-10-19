@@ -23,10 +23,10 @@ Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
 \begin{codebox}
 \Procname{$\proc{Linear-Search}(A,v)$}
 \li	$i\gets1$
-\li	\While $i\le\id{length}[A]$ i~$A[i]\ne v$ \label{li:linear-search-while-begin}
+\li	\While $i\le\attrib{A}{length}$ i~$A[i]\ne v$ \label{li:linear-search-while-begin}
 \li		\Do $i\gets i+1$
 		\End \label{li:linear-search-while-end}
-\li	\If $i\le\id{length}[A]$
+\li	\If $i\le\attrib{A}{length}$
 \li		\Then \Return $i$
 		\End
 \li	\Return \const{nil}
@@ -39,7 +39,7 @@ Na początku każdej iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc fragment $A[1\twodots i-1]$ jest pusty.
 	\item[Utrzymanie:] Załóżmy, że podtablica $A[1\twodots i-1]$ nie zawiera elementu $v$. W~warunku pętli \kw{while} sprawdzamy, czy $A[i]$ jest różne od $v$. Jeśli tak, to $i$ jest zwiększane o~1, więc niezmiennik jest zachowany. W~przeciwnym przypadku (odnaleziono $v$) przerywamy pętlę.
-	\item[Zakończenie:] Pętla kończy swe działanie, kiedy zostanie odnaleziony indeks $i$ taki, że $A[i]=v$ albo $i=\id{length}[A]+1$. Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę, nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
+	\item[Zakończenie:] Pętla kończy swe działanie, kiedy zostanie odnaleziony indeks $i$ taki, że $A[i]=v$ albo $i=\attrib{A}{length}+1$. Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę, nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
 \end{description}
 
 \exercise %2.1-4
@@ -51,15 +51,15 @@ W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które s
 
 \begin{codebox}
 \Procname{$\proc{Binary-Add}(A,B)$}
-\li	$n\gets\id{length}[A]$
+\li	$n\gets\attrib{A}{length}$
 \li	\For $i\gets1$ \To $n+1$
 \li		\Do $C[i]\gets0$
 		\End
 \li	\For $i\gets1$ \To $n$ \label{li:binary-add-for-begin}
 \li		\Do
 			$\id{sum}\gets A[i]+B[i]+C[i]$
-\li			$C[i]\gets\id{sum}\bmod\,2$
-\li			$C[i+1]\gets\lfloor\id{sum}/\,2\rfloor$
+\li			$C[i]\gets\id{sum}\bmod2$
+\li			$C[i+1]\gets\lfloor\id{sum}/2\rfloor$
 		\End \label{li:binary-add-for-end}
 \li	\Return $C$
 \end{codebox}
@@ -77,7 +77,7 @@ Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wiersza
 Poniższy algorytm implementuje sortowanie przez wybieranie:
 \begin{codebox}
 \Procname{$\proc{Selection-Sort}(A)$}
-\li	$n\gets\id{length}[A]$
+\li	$n\gets\attrib{A}{length}$
 \li	\For $j\gets1$ \To $n-1$ \label{li:selection-sort-for-begin}
 \li		\Do
 			$\id{min}\gets j$
@@ -168,7 +168,7 @@ Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$.
 \exercise %2.3-5
 Algorytm wyszukiwania binarnego przyjmuje na wejściu posortowaną niemalejąco tablicę $A$ oraz szukaną wartość $v$. Podczas wyszukiwania $v$ w~podtablicy $A[\id{low}\twodots\id{high}]$, $v$ jest porównywane z~$A[\lfloor(\id{low}+\id{high})/2\rfloor]$, czyli elementem środkowym tego fragmentu i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę tej podtablicy.
 
-Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego. W~przypadku odnalezienia wartości $v$ w~tablicy $A$ zwracany jest taki indeks $i$, że $A[i]=v$. Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}. Wersja rekurencyjna przyjmuje dodatkowo parametry $\id{low}$ i~$\id{high}$ będące indeksami początku i~końca przetwarzanego fragmentu tablicy $A$. Aby wyszukiwać w~całej tablicy $A$, używając procedury rekurencyjnej, należy wywołać ją z~parametrami $\id{low}=1$ i~$\id{high}=\id{length}[A]$.
+Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego. W~przypadku odnalezienia wartości $v$ w~tablicy $A$ zwracany jest taki indeks $i$, że $A[i]=v$. Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}. Wersja rekurencyjna przyjmuje dodatkowo parametry $\id{low}$ i~$\id{high}$ będące indeksami początku i~końca przetwarzanego fragmentu tablicy $A$. Aby wyszukiwać w~całej tablicy $A$, używając procedury rekurencyjnej, należy wywołać ją z~parametrami $\id{low}=1$ i~$\id{high}=\attrib{A}{length}$.
 
 \begin{codebox}
 \Procname{$\proc{Recursive-Binary-Search}(A,v,\id{low},\id{high})$}
@@ -180,15 +180,15 @@ Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiw
 \li		\Then \Return \id{mid}
 		\End
 \li	\If $v<A[\id{mid}]$
-\li		\Then \Return $\proc{Recursive-Binary-Search}(A,v,\id{low},\id{mid}-\,1)$
-\li		\Else \Return $\proc{Recursive-Binary-Search}(A,v,\id{mid}+\,1,\id{high})$
+\li		\Then \Return $\proc{Recursive-Binary-Search}(A,v,\id{low},\id{mid}-1)$
+\li		\Else \Return $\proc{Recursive-Binary-Search}(A,v,\id{mid}+1,\id{high})$
 		\End
 \end{codebox}
 
 \begin{codebox}
 \Procname{$\proc{Iterative-Binary-Search}(A,v)$}
 \li	$\id{low}\gets1$
-\li	$\id{high}\gets\id{length}[A]$
+\li	$\id{high}\gets\attrib{A}{length}$
 \li	\While $\id{low}\le\id{high}$
 \li		\Do
 			$\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
@@ -196,8 +196,8 @@ Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiw
 \li				\Then \Return \id{mid}
 				\End
 \li			\If $v<A[\id{mid}]$
-\li				\Then $\id{high}\gets\id{mid}-\,1$
-\li				\Else $\id{low}\gets\id{mid}+\,1$
+\li				\Then $\id{high}\gets\id{mid}-1$
+\li				\Else $\id{low}\gets\id{mid}+1$
 				\End
 		\End
 \li	\Return \const{nil}
@@ -220,7 +220,7 @@ Wyszukując binarnie, można odnaleźć pozycję tablicy, na którą należy umi
 Będziemy traktować zbiór $S$ jak tablicę $S[1\twodots n]$. Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$. Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$ (procedura wyszukiwania binarnego została opisana w~\refExercise{2.3-5}). Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$. Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy. W~zależności od wyniku wyszukiwania zwracana jest wartość logiczna \const{true} lub \const{false}. Algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Sum-Search}(S,x)$}
-\li	$n\gets\id{length}[S]$
+\li	$n\gets\attrib{S}{length}$
 \li	$\proc{Merge-Sort}(S,1,n)$ \label{li:sum-search-sort}
 \li	\For $i\gets1$ \To $n-1$
 \li		\Do
@@ -270,9 +270,9 @@ Niezmiennik wewnętrznej pętli \kw{for}:
 Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{2}{4} najmniejszym elementem podtablicy $A[j\twodots\id{length}[A]]$ jest $A[j]$.
 \end{quote}
 \begin{description}
-	\item[Inicjowanie:] Przed pierwszą iteracją $j=\id{length}[A]$, więc $A[j\twodots\id{length}[A]]$ zawiera tylko jeden element, który oczywiście jest najmniejszy w~tej podtablicy i~jest nim $A[j]$.
-	\item[Utrzymanie:] Załóżmy, że $A[j]$ jest najmniejszym elementem w~$A[j\twodots\id{length}[A]]$. Jeżeli $A[j-1]$ jest większe od $A[j]$, to $A[j]$ jest zamieniane z~$A[j-1]$ w~wierszu~4, więc w~tym momencie podtablica $A[j-1\twodots\id{length}[A]]$ posiada swój najmniejszy element w~$A[j-1]$. Uaktualnienie $j$ powoduje odtworzenie niezmiennika. W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmniejszy element $A[j-1\twodots\id{length}[A]]$ i~aktualizacja $j$ także pozwala spełnić niezmiennik.
-	\item[Zakończenie:] Po zakończeniu wykonywania pętli zachodzi $j=i$, a~więc $A[i]$ jest najmniejszym elementem podtablicy $A[i\twodots\id{length}[A]]$.
+	\item[Inicjowanie:] Przed pierwszą iteracją $j=\attrib{A}{length}$, więc $A[j\twodots\attrib{A}{length}]$ zawiera tylko jeden element, który oczywiście jest najmniejszy w~tej podtablicy i~jest nim $A[j]$.
+	\item[Utrzymanie:] Załóżmy, że $A[j]$ jest najmniejszym elementem w~$A[j\twodots\attrib{A}{length}]$. Jeżeli $A[j-1]$ jest większe od $A[j]$, to $A[j]$ jest zamieniane z~$A[j-1]$ w~wierszu~4, więc w~tym momencie podtablica $A[j-1\twodots\attrib{A}{length}]$ posiada swój najmniejszy element w~$A[j-1]$. Uaktualnienie $j$ powoduje odtworzenie niezmiennika. W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmniejszy element $A[j-1\twodots\attrib{A}{length}]$ i~aktualizacja $j$ także pozwala spełnić niezmiennik.
+	\item[Zakończenie:] Po zakończeniu wykonywania pętli zachodzi $j=i$, a~więc $A[i]$ jest najmniejszym elementem podtablicy $A[i\twodots\attrib{A}{length}]$.
 \end{description}
 
 \subproblem %2-2(c)
@@ -282,12 +282,12 @@ Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{1}{4} podtablica
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, czyli podtablica $A[1\twodots i-1]$ jest pusta, a~więc jest trywialnie posortowana.
-	\item[Utrzymanie:] Z~założenia, że podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy. Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots\id{length}[A]]$ najmniejszy element i~umieszcza go na pozycji $i$ (dowód w~poprzednim punkcie). W~podtablicy $A[i\twodots\id{length}[A]]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem w~szczególności zachodzi $A[i-1]\le A[i]$. Stąd wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
-	\item[Zakończenie:] Na końcu mamy $i=\id{length}[A]+1$. Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco, a~zatem algorytm sortuje poprawnie.
+	\item[Utrzymanie:] Z~założenia, że podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy. Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots\attrib{A}{length}]$ najmniejszy element i~umieszcza go na pozycji $i$ (dowód w~poprzednim punkcie). W~podtablicy $A[i\twodots\attrib{A}{length}]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem w~szczególności zachodzi $A[i-1]\le A[i]$. Stąd wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
+	\item[Zakończenie:] Na końcu mamy $i=\attrib{A}{length}+1$. Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco, a~zatem algorytm sortuje poprawnie.
 \end{description}
 
 \subproblem %2-2(d)
-Niech $n=\id{length}[A]$. Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy \doubledash{2}{4} wykonuje $n-i$ iteracji dla każdego $i=1$, 2,~\dots,~$n$. Pesymistyczny czas działania sortowania bąbelkowego wynosi zatem
+Niech $n=\attrib{A}{length}$. Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy \doubledash{2}{4} wykonuje $n-i$ iteracji dla każdego $i=1$, 2,~\dots,~$n$. Pesymistyczny czas działania sortowania bąbelkowego wynosi zatem
 \[
 	T(n) = \sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2),
 \]
@@ -366,9 +366,9 @@ W~ten sposób, modyfikując algorytm sortowania przez scalanie, wyznaczamy liczb
 \li	\If $p<r$
 \li		\Then
 			$q\gets\lfloor(p+r)/2\rfloor$
-\li			$\id{inversions}\gets\id{inversions}+\,\proc{Count-Inversions}(A,p,q)$
-\li			$\id{inversions}\gets\id{inversions}+\,\proc{Count-Inversions}(A,q+1,r)$
-\li			$\id{inversions}\gets\id{inversions}+\,\proc{Merge-Inversions}(A,p,q,r)$
+\li			$\id{inversions}\gets\id{inversions}+\proc{Count-Inversions}(A,p,q)$
+\li			$\id{inversions}\gets\id{inversions}+\proc{Count-Inversions}(A,q+1,r)$
+\li			$\id{inversions}\gets\id{inversions}+\proc{Merge-Inversions}(A,p,q,r)$
 		\End
 \li	\Return \id{inversions}
 \end{codebox}
@@ -396,7 +396,7 @@ W~ten sposób, modyfikując algorytm sortowania przez scalanie, wyznaczamy liczb
 \li				\Else
 					$A[k]\gets R[j]$
 \li					$j\gets j+1$
-\li					$\id{inversions}\gets\id{inversions}+\,n_1-i+1$
+\li					$\id{inversions}\gets\id{inversions}+n_1-i+1$
 				\End
 		\End
 \li	\Return \id{inversions}

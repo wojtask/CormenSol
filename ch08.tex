@@ -218,7 +218,7 @@ Sortowanie przez zliczanie dla $k=1$.
 Poniższy pseudokod implementuje algorytm o~zadanych własnościach:
 \begin{codebox}
 \Procname{$\proc{Bitwise-Sort}(A)$}
-\li	$n\gets\id{length}[A]$
+\li	$n\gets\attrib{A}{length}$
 \li	$i\gets1$
 \li	$j\gets n$
 \li	\While $i<j$
@@ -245,11 +245,11 @@ W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identy
 \Procname{$\proc{Counting-Sort-In-Place}(A,k)$}
 \li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort} 
 \li	$\id{positions}\gets C$
-\li $i\gets\id{length}[A]$
+\li $i\gets\attrib{A}{length}$
 \li \While $i\ge1$
 \li     \Do
             $\id{key}\gets A[i]$
-\li         \If $\id{positions}[\id{key}-\,1]<i\le\id{positions}[\id{key}]$
+\li         \If $\id{positions}[\id{key}-1]<i\le\id{positions}[\id{key}]$
 \li             \Then $i\gets i-1$
 \li             \Else
                     zamień $A[i]\leftrightarrow A[C[\id{key}]]$

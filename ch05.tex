@@ -15,7 +15,7 @@ Poniższy algorytm implementuje generator liczb losowych z~zakresu $a\twodots b$
 \li		\Do
 			$\id{mid}\gets\lfloor(a+b)/2\rfloor$
 \li			\If $\proc{Random}(0,1)=0$
-\li				\Then $a\gets\id{mid}+\,1$
+\li				\Then $a\gets\id{mid}+1$
 \li				\Else $b\gets\id{mid}$
 				\End
 		\End
@@ -96,7 +96,7 @@ Dla wszystkich całkowitych $i$,~$j$ takich, że $1\le i<j\le n$, zdefiniujmy zd
 Oto zmodyfikowana procedura \proc{Randomize-In-Place}:
 \begin{codebox}
 \Procname{$\proc{Randomize-In-Place}'(A)$}
-\li	$n\gets\id{length}[A]$
+\li	$n\gets\attrib{A}{length}$
 \li	zamień $A[1]\leftrightarrow A[\proc{Random}(1,n)]$
 \li	\For $i\gets2$ \To $n$
 \li		\Do zamień $A[i]\leftrightarrow A[\proc{Random}(i,n)]$
@@ -335,7 +335,7 @@ a~stąd
 Oto procedura implementująca opisaną strategię:
 \begin{codebox}
 \Procname{$\proc{Random-Search}(A,x)$}
-\li	$n\gets\id{length}[A]$
+\li	$n\gets\attrib{A}{length}$
 \li	\For $k\gets1$ \To $n$
 \li		\Do $B[k]\gets\const{false}$
 		\End
@@ -349,7 +349,7 @@ Oto procedura implementująca opisaną strategię:
 \li			\If $B[i]=\const{false}$
 \li				\Then
 					$B[i]\gets\const{true}$
-\li					$\id{checked}\gets\id{checked}+\,1$
+\li					$\id{checked}\gets\id{checked}+1$
 				\End
 		\End \label{li:random-search-while-end}
 \li	\Return \const{nil}

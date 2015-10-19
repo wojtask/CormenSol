@@ -40,11 +40,11 @@ Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu mi
 \Procname{$\proc{Min-Heapify}(A,i)$}
 \li	$l\gets\proc{Left}(i)$
 \li	$r\gets\proc{Right}(i)$
-\li	\If $l\le\id{heap-size}[A]$ i~$A[l]<A[i]$ \label{li:min-heapify-check1}
+\li	\If $l\le\attrib{A}{heap-size}$ i~$A[l]<A[i]$ \label{li:min-heapify-check1}
 \li		\Then $\id{smallest}\gets l$
 \li		\Else $\id{smallest}\gets i$
 		\End
-\li	\If $r\le\id{heap-size}[A]$ i~$A[r]<A[\id{smallest}]$ \label{li:min-heapify-check2}
+\li	\If $r\le\attrib{A}{heap-size}$ i~$A[r]<A[\id{smallest}]$ \label{li:min-heapify-check2}
 \li		\Then $\id{smallest}\gets r$
 		\End
 \li	\If $\id{smallest}\ne i$
@@ -58,7 +58,7 @@ Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu mi
 Jeśli element $A[i]$ jest większy niż jego synowie, to \id{largest} jest ustawiane na $i$ i~warunek z~wiersza~8 nie jest spełniony. Procedura zakończy więc działanie, nie dokonując żadnej zamiany elementów.
 
 \exercise %6.2-4
-Z~\refExercise{6.1-7} mamy, że element o~indeksie $i>\id{heap-size}[A]/2$ jest liściem kopca, czyli nie istnieją jego synowie. W~dwóch pierwszych wierszach procedury \proc{Max-Heapify} obliczone zostaną wartości przekraczające $\id{heap-size}[A]$, więc zmienna \id{largest} przyjmie wartość $i$. Warunek w~wierszu~8 będzie więc fałszywy i~natychmiast po jego sprawdzeniu procedura zakończy działanie.
+Z~\refExercise{6.1-7} mamy, że element o~indeksie $i>\attrib{A}{heap-size}/2$ jest liściem kopca, czyli nie istnieją jego synowie. W~dwóch pierwszych wierszach procedury \proc{Max-Heapify} obliczone zostaną wartości przekraczające \attrib{A}{heap-size}, więc zmienna \id{largest} przyjmie wartość $i$. Warunek w~wierszu~8 będzie więc fałszywy i~natychmiast po jego sprawdzeniu procedura zakończy działanie.
 
 \exercise %6.2-5
 Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej.
@@ -68,11 +68,11 @@ Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej.
 \li		\Do
 			$l\gets\proc{Left}(i)$ \label{li:iterative-max-heapify-begin}
 \li			$r\gets\proc{Right}(i)$
-\li			\If $l\le\id{heap-size}[A]$ i~$A[l]>A[i]$
+\li			\If $l\le\attrib{A}{heap-size}$ i~$A[l]>A[i]$
 \li				\Then $\id{largest}\gets l$
 \li				\Else $\id{largest}\gets i$
 				\End
-\li			\If $r\le\id{heap-size}[A]$ i~$A[r]>A[\id{largest}]$
+\li			\If $r\le\attrib{A}{heap-size}$ i~$A[r]>A[\id{largest}]$
 \li				\Then $\id{largest}\gets r$
 				\End \label{li:iterative-max-heapify-end}
 \li			\If $\id{largest}=i$ \label{li:iterative-max-heapify-cond}
@@ -129,8 +129,8 @@ Na rys.~\ref{fig:6.4-1} przedstawiono ilustrację działania sortowania przez ko
 
 \exercise %6.4-2
 \begin{description}
-	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\id{length}[A]=n$. Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
-	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli. Podtablica $A[1\twodots i]$ tworzy więc kopiec typu max, którego korzeniem jest $A[1]$, czyli największy element w~tej podtablicy. Po wykonaniu wiersza~3 znajdzie się on na pozycji $i$. Dekrementacja $\id{heap-size}[A]$ powoduje, że element $A[i]$ nie wchodzi teraz w~skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z~$A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ jest równy lub mniejszy od wcześniej umieszczonych tam elementów. W~tym momencie korzeń może naruszać własność kopca typu max, dlatego w~wierszu~5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność. Uaktualnienie $i$ powoduje odtworzenie niezmiennika.
+	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\attrib{A}{length}=n$. Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli. Podtablica $A[1\twodots i]$ tworzy więc kopiec typu max, którego korzeniem jest $A[1]$, czyli największy element w~tej podtablicy. Po wykonaniu wiersza~3 znajdzie się on na pozycji $i$. Dekrementacja \attrib{A}{heap-size} powoduje, że element $A[i]$ nie wchodzi teraz w~skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z~$A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ jest równy lub mniejszy od wcześniej umieszczonych tam elementów. W~tym momencie korzeń może naruszać własność kopca typu max, dlatego w~wierszu~5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność. Uaktualnienie $i$ powoduje odtworzenie niezmiennika.
 	\item[Zakończenie:] Po zakończeniu działania pętli jest $i=1$, zatem podtablica $A[1\twodots i]$ składa się z~jednego elementu, który jest najmniejszym elementem tablicy $A$. Ponadto $n-1$ pozostałych elementów jest uszeregowanych w~kolejności niemalejącej w~podtablicy $A[2\twodots n]$. Stąd mamy, że tablica $A$ jest posortowana.
 \end{description}
 
@@ -220,12 +220,12 @@ Zakładamy, że tablica $A$ stanowi kopiec typu min. Poniższe procedury stanowi
 \end{codebox}
 \begin{codebox}
 \Procname{$\proc{Heap-Extract-Min}(A)$}
-\li	\If $\id{heap-size}[A]<1$
+\li	\If $\attrib{A}{heap-size}<1$
 \li		\Then \Error ,,kopiec pusty''
 		\End
 \li	$\id{min}\gets A[1]$
-\li	$A[1]\gets A[\id{heap-size}[A]]$
-\li	$\id{heap-size}[A]\gets\id{heap-size}[A]-1$
+\li	$A[1]\gets A[\attrib{A}{heap-size}]$
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
 \li	$\proc{Min-Heapify}(A,1)$
 \li	\Return \id{min}
 \end{codebox}
@@ -243,19 +243,19 @@ Zakładamy, że tablica $A$ stanowi kopiec typu min. Poniższe procedury stanowi
 \end{codebox}
 \begin{codebox}
 \Procname{$\proc{Min-Heap-Insert}(A,\id{key})$}
-\li	$\id{heap-size}[A]\gets\id{heap-size}[A]+1$
-\li	$A[\id{heap-size}[A]]\gets\infty$
-\li	$\proc{Heap-Decrease-Key}(A,\id{heap-size}[A],\id{key})$
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}+1$
+\li	$A[\attrib{A}{heap-size}]\gets\infty$
+\li	$\proc{Heap-Decrease-Key}(A,\attrib{A}{heap-size},\id{key})$
 \end{codebox}
 
 \exercise %6.5-4
-Po wykonaniu wiersza~1 procedury \proc{Max-Heap-Insert} wartość $A[\id{heap-size}[A]]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}. Wówczas jednak wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem. Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
+Po wykonaniu wiersza~1 procedury \proc{Max-Heap-Insert} wartość $A[\attrib{A}{heap-size}]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}. Wówczas jednak wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem. Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
 
 \exercise %6.5-5
 \begin{description}
-	\item[Inicjowanie:] Przed wykonaniem wiersza~3 tablica $A[1\twodots\id{heap-size}[A]]$ jest kopcem typu max. Zwiększenie wartości $A[i]$ może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
+	\item[Inicjowanie:] Przed wykonaniem wiersza~3 tablica $A[1\twodots\attrib{A}{heap-size}]$ jest kopcem typu max. Zwiększenie wartości $A[i]$ może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
 	\item[Utrzymanie:] Dokonując zamiany elementów w~wierszu~5 w~bieżącej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$. Jednak operacja ta może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$. Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która może naruszać własność kopca.
-	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W~pierwszym przypadku $\proc{Parent}(i)\le0$, co jest niepoprawną wartością dla indeksów tablicy $A$. W~drugim natomiast jedyna para, która mogłaby naruszać własność kopca, w~rzeczywistości ją spełnia. A~zatem po zakończeniu wykonywania pętli tablica $A[1\twodots\id{heap-size}[A]]$ stanowi kopiec typu max.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$. W~pierwszym przypadku $\proc{Parent}(i)\le0$, co jest niepoprawną wartością dla indeksów tablicy $A$. W~drugim natomiast jedyna para, która mogłaby naruszać własność kopca, w~rzeczywistości ją spełnia. A~zatem po zakończeniu wykonywania pętli tablica $A[1\twodots\attrib{A}{heap-size}]$ stanowi kopiec typu max.
 \end{description}
 Z~prawdziwości niezmiennika pętli wynika, że procedura \proc{Heap-Increase-Key} poprawnie zwiększa wartość węzła $i$, pozostawiając kopiec typu max.
 
@@ -267,18 +267,18 @@ Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej t
 \exercise %6.5-7
 \note{Zmienimy nazwę operacji z~sugerowanej w~Podręczniku \proc{Heap-Delete} na \proc{Max-Heap-Delete}, aby odróżnić ją od analogicznej procedury dla kopca typu min.}
 
-\noindent Przedstawiona poniżej procedura \proc{Max-Heap-Delete} zamienia element $A[i]$ w~\singledash{$n$}{elementowym} kopcu $A$ typu max z~jego liściem $A[\id{heap-size}[A]]$, po czym dekrementuje $\id{heap-size}[A]$. Po tym kroku własność kopca może być naruszona przez węzeł $A[i]$ na dwa sposoby. W~pierwszym przypadku mamy sytuację, w~której $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}. W~drugim przypadku $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wystarczy wykonać podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}. Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~kopcu pozycję $i$.
+\noindent Przedstawiona poniżej procedura \proc{Max-Heap-Delete} zamienia element $A[i]$ w~\singledash{$n$}{elementowym} kopcu $A$ typu max z~jego liściem $A[\attrib{A}{heap-size}]$, po czym dekrementuje \attrib{A}{heap-size}. Po tym kroku własność kopca może być naruszona przez węzeł $A[i]$ na dwa sposoby. W~pierwszym przypadku mamy sytuację, w~której $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}. W~drugim przypadku $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wystarczy wykonać podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}. Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~kopcu pozycję $i$.
 \begin{codebox}
 \Procname{$\proc{Max-Heap-Delete}(A,i)$}
-\li	zamień $A[i]\leftrightarrow A[\id{heap-size}[A]]$
-\li	$\id{heap-size}[A]\gets\id{heap-size}[A]-1$
+\li	zamień $A[i]\leftrightarrow A[\attrib{A}{heap-size}]$
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
 \li	$\proc{Max-Heapify}(A,i)$ \label{li:max-heap-delete-heapify}
 \li	\While $i>1$ i~$A[\proc{Parent}(i)]<A[i]$ \label{li:max-heap-delete-while-begin}
 \li		\Do
 			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
 \li			$i\gets\proc{Parent}(i)$
 		\End \label{li:max-heap-delete-while-end}
-\li	\Return $A[\id{heap-size}[A]+1]$
+\li	\Return $A[\attrib{A}{heap-size}+1]$
 \end{codebox}
 
 Zarówno wywołanie z~wiersza~\ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \doubledash{\ref{li:max-heap-delete-while-begin}}{\ref{li:max-heap-delete-while-end}} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
@@ -310,7 +310,7 @@ Najgorszym przypadkiem dla procedury \proc{Build-Max-Heap}$'$ jest tablica uporz
 \problem{Analiza kopców rzędu $d$} %6-2
 
 \subproblem %6-2(a)
-\singledash{$d$}{kopiec} będziemy reprezentować w~tablicy w~następujący sposób. Podobnie jak w~reprezentacji tablicowej kopców binarnych tablica $A$ reprezentująca \singledash{$d$}{kopiec} będzie mieć atrybuty $\id{length}[A]$ oraz $\id{heap-size}[A]$. Na pierwszej pozycji tablicy znajdzie się korzeń kopca, a~pozycje $2\twodots d+1$ będą zajmowane przez $d$ synów korzenia. Synowie pierwszego z~lewej syna korzenia zajmą pozycje $d+2\twodots2d+1$, synowie drugiego od lewej syna korzenia -- pozycje $2d+2\twodots3d+1$ itd. Ogólnie, mając dany indeks węzła $i$, można wyznaczyć indeks jego ojca, korzystając ze wzoru $\lceil(i-1)/d\rceil$. Uogólnienie procedury \proc{Parent} dla kopca rzędu~$d$ wygląda zatem następująco:
+\singledash{$d$}{kopiec} będziemy reprezentować w~tablicy w~następujący sposób. Podobnie jak w~reprezentacji tablicowej kopców binarnych tablica $A$ reprezentująca \singledash{$d$}{kopiec} będzie mieć atrybuty \attrib{A}{length} oraz \attrib{A}{heap-size}. Na pierwszej pozycji tablicy znajdzie się korzeń kopca, a~pozycje $2\twodots d+1$ będą zajmowane przez $d$ synów korzenia. Synowie pierwszego z~lewej syna korzenia zajmą pozycje $d+2\twodots2d+1$, synowie drugiego od lewej syna korzenia -- pozycje $2d+2\twodots3d+1$ itd. Ogólnie, mając dany indeks węzła $i$, można wyznaczyć indeks jego ojca, korzystając ze wzoru $\lceil(i-1)/d\rceil$. Uogólnienie procedury \proc{Parent} dla kopca rzędu~$d$ wygląda zatem następująco:
 \begin{codebox}
 \Procname{$\proc{Multiary-Parent}(d,i)$}
 \zi	\Return $\lceil(i-1)/d\rceil$
@@ -338,7 +338,7 @@ Przedstawimy najpierw implementację procedury \proc{Max-Heapify} dla kopców rz
 \li	$\id{largest}\gets i$
 \li	$k\gets1$
 \li	$\id{child}\gets\proc{Multiary-Child}(d,1,i)$
-\li	\While $k\le d$ i~$\id{child}\le\id{heap-size}[A]$ \label{li:multiary-max-heapify-while-begin}
+\li	\While $k\le d$ i~$\id{child}\le\attrib{A}{heap-size}$ \label{li:multiary-max-heapify-while-begin}
 \li		\Do
 			\If $A[\id{child}]>A[\id{largest}]$
 \li				\Then $\id{largest}\gets\id{child}$
@@ -362,9 +362,9 @@ Procedura \proc{Multiary-Heap-Extract-Max}, która implementuje operację \proc{
 Procedura \proc{Multiary-Max-Heap-Insert} implementująca operację \proc{Insert} dla \singledash{$d$}{kopca} przyjmuje na wejściu kopiec $A$, rząd kopca $d$ oraz wartość \id{key}, która będzie wstawiana do $A$. Jej działanie jest analogiczne do działania procedury wstawiania węzła do kopca binarnego. Jedyną różnicą jest wiersz~\ref{li:multiary-max-heap-insert-increase-key}, który zamiast \proc{Heap-Increase-Key} zawiera analogiczne wywołanie procedury \proc{Multiary-Heap-Increase-Key} zwiększającej wartość węzła w~kopcu rzędu $d$.
 \begin{codebox}
 \Procname{$\proc{Multiary-Max-Heap-Insert}(A,d,\id{key})$}
-\li	$\id{heap-size}[A]\gets\id{heap-size}[A]+1$
-\li	$A[\id{heap-size}[A]]\gets-\infty$
-\li	$\proc{Multiary-Heap-Increase-Key}(A,d,\id{heap-size}[A],\id{key})$ \label{li:multiary-max-heap-insert-increase-key}
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}+1$
+\li	$A[\attrib{A}{heap-size}]\gets-\infty$
+\li	$\proc{Multiary-Heap-Increase-Key}(A,d,\attrib{A}{heap-size},\id{key})$ \label{li:multiary-max-heap-insert-increase-key}
 \end{codebox}
 
 Czas działania operacji \proc{Insert} dla \singledash{$d$}{kopca} jest tego samego rzędu co czas działania wywołania z~wiersza~3. Implementacja wywoływanej procedury \proc{Multiary-Heap-Increase-Key} i~analiza jej czasu działania zostały opisane w~następnym punkcie.
@@ -465,7 +465,7 @@ Analiza poprawności i~czasu działania procedury \proc{Youngify} opiera się na
 Niech $A$ będzie tablicą $n^2$ liczb, które należy posortować. Poniższy algorytm buduje tablicę Younga $n\times n$ z~liczb tablicy $A$, wykonując na każdej z~nich operację \proc{Young-Insert}. Następnie liczby te są pobierane w~kolejności niemalejącej dzięki $n^2$ wywołaniom \proc{Young-Extract-Min}.
 \begin{codebox}
 \Procname{$\proc{Young-Sort}(A)$}
-\li	$n\gets\sqrt{\id{length}[A]}$
+\li	$n\gets\sqrt{\attrib{A}{length}}$
 \li	\For $i\gets1$ \To $n^2$
 \li		\Do $\proc{Young-Insert}(Y,n,n,A[i])$
 		\End
