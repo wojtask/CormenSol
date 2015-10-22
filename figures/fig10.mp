@@ -243,7 +243,6 @@ endfig;
 
 beginfig(3);
 	scale := .4cm;
-	hshift := 18scale;
 	color lightgray; lightgray := .8white;
 	color medgray; medgray := .6white;
 	path p[];
@@ -262,19 +261,9 @@ beginfig(3);
 		draw p[j] shifted (0, -2scale);
 	endfor;
 
-	for j:=0 upto 9:
-		label(decimal (j+1) infont "cmr7", center p[j] + (hshift, 2.2scale));
-		fill p[j] shifted (hshift, 0) withcolor if (j=0) or (j=2) or (j=5) or (j=7): medgray else: lightgray fi;
-		fill p[j] shifted (hshift, -scale) withcolor if (j=0) or (j=2) or (j=5) or (j=7): medgray else: lightgray fi;
-		draw p[j] shifted (hshift, 0);
-		draw p[j] shifted (hshift, -scale);
-	endfor;
-
-	label.lft(btex \fontsize{8}{10}\selectfont $\id{next}$ etex, center p0 + (-.5scale, 0));
-	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p0 + (-.5scale, -scale));
-	label.lft(btex \fontsize{8}{10}\selectfont $\phantom{\id{k}}\id{prev}$ etex, center p0 + (-.5scale, -2scale));
-	label.lft(btex \fontsize{8}{10}\selectfont $\id{next}$ etex, center p0 + (hshift - .5scale, 0));
-	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p0 + (hshift - .5scale, -scale));
+	label.lft(btex \fontsize{8}{10}\selectfont $\id{next}$ etex, center p0 + (-scale, 0));
+	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p0 + (-scale, -scale));
+	label.lft(btex \fontsize{8}{10}\selectfont $\phantom{\id{k}}\id{prev}$ etex, center p0 + (-scale, -2scale));
 
 	label("10", center p1 + (0, 0));
 	label("13", center p1 + (0, -scale));
@@ -300,24 +289,6 @@ beginfig(3);
 	label("4", center p9 + (0, -scale));
 	label("2", center p9 + (0, -2scale));
 
-	label("10", center p1 + (hshift, 0));
-	label("13", center p1 + (hshift, -scale));
-
-	label("5", center p3 + (hshift, 0));
-	label("8", center p3 + (hshift, -scale));
-
-	label("9", center p4 + (hshift, 0));
-	label("19", center p4 + (hshift, -scale));
-
-	draw (center p6 shifted (hshift-.3scale, -.3scale)) -- (center p6 shifted (hshift+.3scale, .3scale));
-	label("11", center p6 + (hshift, -scale));
-
-	label("7", center p8 + (hshift, 0));
-	label("5", center p8 + (hshift, -scale));
-
-	label("4", center p9 + (hshift, 0));
-	label("4", center p9 + (hshift, -scale));
-
 	path r;
 	r := unitsquare scaled scale shifted (-2scale, 1.6scale);
 	fill r withcolor lightgray;
@@ -338,20 +309,77 @@ beginfig(3);
 	drawarrow center p3 shifted (-.25scale, -2.5scale) -- center p3 shifted (-.25scale, -3.4scale) -- center p9 shifted (-.25scale, -3.4scale) -- center p9 shifted (-.25scale, -2.5scale);
 	drawarrow center p9 shifted (.25scale, -2.5scale) -- center p9 shifted (.25scale, -3.6scale) -- center p1 shifted (0, -3.6scale) -- center p1 shifted (0, -2.5scale);
 
-	fill r shifted (hshift, 0) withcolor lightgray;
-	draw r shifted (hshift, 0);
-	label("2", center r + (hshift, 0));
-	label(btex $L$ etex, center r + (hshift-1.2scale, 0));
-	drawarrow center r shifted (hshift+.5scale, 0) -- center p1 shifted (hshift-.25scale, 1.6scale) -- center p1 shifted (hshift-.25scale, .5scale);
-
-	drawarrow center p8 shifted (hshift-.25scale, .5scale) -- center p8 shifted (hshift-.25scale, scale) -- center p6 shifted (hshift, scale) -- center p6 shifted (hshift, .5scale);
-	drawarrow center p4 shifted (hshift+.25scale, .5scale) -- center p4 shifted (hshift+.25scale, 1.2scale) -- center p8 shifted (hshift+.25scale, 1.2scale) -- center p8 shifted (hshift+.25scale, .5scale);
-	drawarrow center p3 shifted (hshift+.25scale, .5scale) -- center p3 shifted (hshift+.25scale, 1.2scale) -- center p4 shifted (hshift-.25scale, 1.2scale) -- center p4 shifted (hshift-.25scale, .5scale);
-	drawarrow center p9 shifted (hshift-.25scale, .5scale) -- center p9 shifted (hshift-.25scale, 1.4scale) -- center p3 shifted (hshift-.25scale, 1.4scale) -- center p3 shifted (hshift-.25scale, .5scale);
-	drawarrow center p1 shifted (hshift+.25scale, .5scale) -- center p1 shifted (hshift+.25scale, 1.6scale) -- center p9 shifted (hshift+.25scale, 1.6scale) -- center p9 shifted (hshift+.25scale, .5scale);
-
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (3.25scale, -4.5scale));
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (hshift+3.25scale, -4.5scale));
+	
+	vshift := -10scale;
+	
+	for i:=0 upto 29:
+		p[i] := unitsquare scaled scale shifted (i*scale, vshift);
+	endfor;
+
+	for j:=0 upto 29:
+		label(decimal (j+1) infont "cmr7", center p[j] + (0, 2.2scale));
+		fill p[j] withcolor if ((j>=3) and (j<=5)) or ((j>=12) and (j<=14)) or ((j>=18) and (j<=23)): medgray else: lightgray fi;
+		draw p[j];
+	endfor;
+
+	pickup pensquare scaled 1.5;
+	for j:=0 upto 9:
+		draw unitsquare scaled scale xscaled 3 shifted (3*j*scale, vshift);
+	endfor;
+	pickup pencircle scaled .5;
+	
+	label.lft(btex \fontsize{8}{10}\selectfont $\id{A}$ etex, center p0 + (-scale, 0));
+	
+	label("5", center p0);
+	label("10", center p1);
+	label("16", center p2);
+	label("13", center p6);
+	label("25", center p7);
+	draw (center p8 shifted (-.3scale, -.3scale)) -- (center p8 shifted (.3scale, .3scale));
+	label("11", center p9);
+	draw (center p10 shifted (-.3scale, -.3scale)) -- (center p10 shifted (.3scale, .3scale));
+	label("1", center p11);
+	label("19", center p15);
+	label("1", center p16);
+	label("28", center p17);
+	label("4", center p24);
+	label("28", center p25);
+	label("7", center p26);
+	label("8", center p27);
+	label("16", center p28);
+	label("25", center p29);
+	
+	path r;
+	r := unitsquare scaled scale shifted (-2scale, vshift+1.6scale);
+	fill r withcolor lightgray;
+	draw r;
+	label("7", center r);
+	label(btex $L$ etex, center r + (-1.2scale, 0));
+	drawarrow center r shifted (.5scale, 0) -- center p6 shifted (0, 1.6scale) -- center p6 shifted (0, .5scale);
+	
+	drawarrow center p7 shifted (0, .5scale) -- center p7 shifted (0, scale) -- center p24 shifted (0, scale) -- center p24 shifted (0, .5scale);
+	drawarrow center p25 shifted (0, .5scale) -- center p25 shifted (0, scale) -- center p27 shifted (0, scale) -- center p27 shifted (0, .5scale);
+	drawarrow center p28 shifted (0, .5scale) -- center p28 shifted (0, 1.2scale) -- center p15 shifted (0, 1.2scale) -- center p15 shifted (0, .5scale);
+	drawarrow center p16 shifted (0, .5scale) -- center p16 shifted (0, 1.4scale) -- center p0 shifted (0, 1.4scale) -- center p0 shifted (0, .5scale);
+	drawarrow center p1 shifted (0, .5scale) -- center p1 shifted (0, 1.2scale) -- center p9 shifted (0, 1.2scale) -- center p9 shifted (0, .5scale);
+	
+	drawarrow center p11 shifted (0, -.5scale) -- center p11 + (0, -1.2scale) -- center p0 shifted (0, -1.2scale) -- center p0 shifted (0, -.5scale);
+	drawarrow center p2 shifted (0, -.5scale) -- center p2 + (0, -1.4scale) -- center p15 shifted (0, -1.4scale) -- center p15 shifted (0, -.5scale);
+	drawarrow center p17 shifted (0, -.5scale) -- center p17 + (0, -1.4scale) -- center p27 shifted (0, -1.4scale) -- center p27 shifted (0, -.5scale);
+	drawarrow center p29 shifted (0, -.5scale) -- center p29 + (0, -1.2scale) -- center p24 shifted (0, -1.2scale) -- center p24 shifted (0, -.5scale);
+	drawarrow center p26 + (0, -.5scale) -- center p26 + (0, -scale) -- center p6 + (0, -scale) -- center p6 + (0, -.5scale);
+	
+	draw center p15 shifted (.25scale, -.75scale) -- center p16 shifted (-.5scale, -2scale);
+	draw center p16 shifted (0, -.75scale) -- center p16 shifted (0, -3scale);
+	draw center p17 shifted (-.25scale, -.75scale) -- center p16 shifted (.5scale, -2scale);
+	
+	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p16 + (0, -2.4scale));
+	label.bot(btex \fontsize{8}{10}\selectfont $\id{next}$ etex, center p16 + (0, -3scale));
+	label.rt(btex \fontsize{8}{10}\selectfont $\id{prev}\phantom{\id{k}}$ etex, center p16 + (0, -2.4scale));
+	
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (14.25scale, vshift-5scale));
+	
 endfig;
 
 vardef graphnode(expr scale, shift, col) =
