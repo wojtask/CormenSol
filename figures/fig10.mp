@@ -309,7 +309,7 @@ beginfig(3);
 	drawarrow center p3 shifted (-.25scale, -2.5scale) -- center p3 shifted (-.25scale, -3.4scale) -- center p9 shifted (-.25scale, -3.4scale) -- center p9 shifted (-.25scale, -2.5scale);
 	drawarrow center p9 shifted (.25scale, -2.5scale) -- center p9 shifted (.25scale, -3.6scale) -- center p1 shifted (0, -3.6scale) -- center p1 shifted (0, -2.5scale);
 
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (3.25scale, -4.5scale));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (4scale, -4.5scale));
 	
 	vshift := -10scale;
 	
@@ -374,11 +374,11 @@ beginfig(3);
 	draw center p16 shifted (0, -.75scale) -- center p16 shifted (0, -3scale);
 	draw center p17 shifted (-.25scale, -.75scale) -- center p16 shifted (.5scale, -2scale);
 	
-	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p16 + (0, -2.4scale));
+	label.lft(btex \fontsize{8}{10}\selectfont $\id{key}$ etex, center p16 + (0, -2.5scale));
 	label.bot(btex \fontsize{8}{10}\selectfont $\id{next}$ etex, center p16 + (0, -3scale));
-	label.rt(btex \fontsize{8}{10}\selectfont $\id{prev}\phantom{\id{k}}$ etex, center p16 + (0, -2.4scale));
+	label.rt(btex \fontsize{8}{10}\selectfont $\id{prev}\phantom{\id{k}}$ etex, center p16 + (0, -2.5scale));
 	
-	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (14.25scale, vshift-5scale));
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (b)} etex, (14scale, vshift-4.5scale));
 	
 endfig;
 
