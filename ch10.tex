@@ -574,7 +574,7 @@ Oznaczmy przez $s$ indeks klucza $k$ na liście $L$, a~przez $j_1$, $j_2$,~\dots
 \]
 Korzystając z~tożsamości~(C.24) i~z~powyższego oszacowania, otrzymujemy
 \[
-	\E(X_t) = \sum_{r=1}^n\Pr(X_t\ge r) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t.
+	\E(X_t) = \sum_{r=1}^\infty\Pr(X_t\ge r) = \sum_{r=1}^n\Pr(X_t\ge r) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t.
 \]
 
 \subproblem %10-3(d)
@@ -584,9 +584,9 @@ Sumę ograniczamy całką, otrzymując:
 \]
 
 \subproblem %10-3(e)
-Na podstawie punktów~(c) i~(d) mamy:
+Na podstawie rozwiązań punktów~(c) i~(d) mamy:
 \[
-	\E(X_t) \le \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{n-r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{r}{n}\biggr)^t = \frac{\sum_{r=0}^{n-1}r^t}{n^t} \le \frac{\frac{n^{t+1}}{t+1}}{n^t} = \frac{n}{t+1}.
+	\E(X_t) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{n-r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{r}{n}\biggr)^t = \frac{\sum_{r=0}^{n-1}r^t}{n^t} \le \frac{\frac{n^{t+1}}{t+1}}{n^t} = \frac{n}{t+1}.
 \]
 
 \subproblem %10-3(f)
