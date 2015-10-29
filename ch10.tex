@@ -289,17 +289,13 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \li			$x'\gets z$
 		\End
 \li	$z\gets\attrib{x}{np}\func{xor}y$
-\li	\If $y\ne\const{nil}$
-\li		\Then $\attrib{y}{np}\gets\attrib{y}{np}\func{xor}x\func{xor}z$
-		\End
-\li	\If $z\ne\const{nil}$
-\li		\Then $\attrib{z}{np}\gets\attrib{z}{np}\func{xor}x\func{xor}y$
-		\End
 \li	\If $x=\attrib{L}{head}$
 \li		\Then $\attrib{L}{head}\gets z$
+\li		\Else $\attrib{y}{np}\gets\attrib{y}{np}\func{xor}x\func{xor}z$
 		\End
 \li	\If $x=\attrib{L}{tail}$
 \li		\Then $\attrib{L}{tail}\gets y$
+\li		\Else $\attrib{z}{np}\gets\attrib{z}{np}\func{xor}x\func{xor}y$
 		\End
 \end{codebox}
 
