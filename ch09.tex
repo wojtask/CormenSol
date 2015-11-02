@@ -113,7 +113,7 @@ Oznaczmy przez $S$ badany zbiór, a~przez $Q_k(S)$ -- zbiór jego kwantyli rzęd
 	Q_k(S) = Q_{(k-1)/2}(\{\,x\in S:x<m_1\,\})\cup\{m_1,m_2\}\cup Q_{(k-1)/2}(\{\,x\in S:x>m_2\,\}).
 \]
 
-Zbiór $S$ reprezentujemy jako tablicę $A$ o~parami różnych elementach. Na podstawie powyższego opisu otrzymujemy następujący algorytm oparty o~metodę ,,dziel i~zwyciężaj'':
+Zbiór $S$ reprezentujemy jako tablicę $A$ parami różnych elementów. Na podstawie powyższego opisu otrzymujemy następujący algorytm oparty o~metodę ,,dziel i~zwyciężaj'':
 \begin{codebox}
 \Procname{$\proc{Quantiles}(A,p,r,k)$}
 \li	\If $k=1$
@@ -141,20 +141,20 @@ Wyznaczmy medianę $x$ zbioru $S$, a~następnie dla każdego elementu z~tego zbi
 
 Pojawia się jednak pewna subtelność. O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach. Okazuje się, że algorytm \proc{Select} wykorzystywany do znalezienia $y$ działa w~takim przypadku poprawnie przy tej samej złożoności czasowej. Może się natomiast zdarzyć, że zbiór elementów o~odległościach nieprzekraczających $y$ będzie mieć $k+1$ elementów. Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$. Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
 
-Poniższy algorytm implementuje opisane podejście:
+Poniższy algorytm implementuje opisane podejście. Przyjmuje on na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą wszystkie elementy zbioru $S$ oraz liczbę $k$.
 \begin{codebox}
-\Procname{$\proc{Median-Proximity}(S,k)$}
-\li	$n\gets\attrib{S}{length}$
-\li	$x\gets\proc{Select}(S,1,n,\lfloor(n+1)/2\rfloor)$
+\Procname{$\proc{Median-Proximity}(A,k)$}
+\li	$n\gets\attrib{A}{length}$
+\li	$x\gets\proc{Select}(A,1,n,\lfloor(n+1)/2\rfloor)$
 \li	\For $i\gets1$ \To $n$
-\li		\Do $\id{dist}[i]\gets|S[i]-x|$
+\li		\Do $\id{dist}[i]\gets|A[i]-x|$
 		\End
 \li	$y\gets\proc{Select}(\id{dist},1,n,k)$
 \li	$M\gets\emptyset$
 \li	\For $i\gets1$ \To $n$
 \li		\Do
-			\If $|S[i]-x|\le y$
-\li				\Then $M\gets M\cup\{S[i]\}$
+			\If $|A[i]-x|\le y$
+\li				\Then $M\gets M\cup\{A[i]\}$
 				\End
 		\End
 \li	\If $|M|=k+1$
@@ -162,7 +162,7 @@ Poniższy algorytm implementuje opisane podejście:
 		\End
 \li	\Return $M$
 \end{codebox}
-Zbiór wejściowy $S$ traktujemy jak tablicę o~$n$ elementach. W~czasie $O(n)$ wyznaczana jest mediana $x$ tego zbioru, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \singledash{$k$}{ta} najmniejsza wartość $y$ tej tablicy. W~pozostałej części algorytmu budowany jest zbiór $M$ złożony z~$k$ elementów najbliższych $x$. Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały. Założenia te można łatwo spełnić, implementując zbiór $M$ np.\ jako listę dwukierunkową (patrz podrozdział~10.2). Wówczas czasem działania algorytmu jest $O(n)$.
+W~czasie $O(n)$ wyznaczana jest mediana $x$ zbioru $S$, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \singledash{$k$}{ta} najmniejsza wartość $y$ tej tablicy. W~pozostałej części algorytmu budowany jest zbiór $M$ złożony z~$k$ elementów najbliższych $x$. Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały. Założenia te można łatwo spełnić, implementując zbiór $M$ np.\ jako listę dwukierunkową (patrz podrozdział~10.2). Wówczas czasem działania algorytmu jest $O(n)$.
 
 \exercise %9.3-8
 Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$. Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (bądź równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych). Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb. Załóżmy teraz, że $m_X\ne m_Y$ i~bez utraty ogólności, niech $m_X<m_Y$. Pomijając teraz około $n/2$ elementów $X$ mniejszych lub równych $m_X$ i~około $n/2$ elementów $Y$ większych lub równych $m_Y$, sprowadzamy problem do identycznego, ale o~około połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów. Dokładniej, podproblem będzie operował na tablicach o~rozmiarach $\lfloor n/2\rfloor+1$.
