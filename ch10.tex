@@ -413,6 +413,8 @@ Kolejne przejście po liście to właściwe kompaktowanie. Jeśli dany element $
 
 Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu~\ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
 
+Po wykonaniu procedury elementy z~listy wolnych pozycji nie zawsze będą umieszczone w~tablicach według ich kolejności na tej liście. Z~tego powodu na liście przetworzonej procedurą \proc{Compactify-List} nie możemy korzystać z~procedur \proc{Compact-List-Allocate-Object} i~\proc{Compact-List-Free-Object} z~\refExercise{10.3-4}, które zakładają, że reprezentacja tablicowa listy wolnych pozycji stanowi stos.
+
 \subchapter{Reprezentowanie drzew (ukorzenionych)}
 
 \exercise %10.4-1
