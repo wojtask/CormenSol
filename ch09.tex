@@ -139,7 +139,7 @@ Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisując
 \exercise %9.3-7
 Wyznaczmy medianę $x$ zbioru $S$, a~następnie dla każdego elementu z~tego zbioru obliczmy jego odległość od $x$, czyli wartość bezwzględną z~ich różnicy. Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich \singledash{$k$}{tej} statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
 
-Pojawia się jednak pewna subtelność. O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach. Okazuje się, że algorytm \proc{Select} wykorzystywany do znalezienia $y$ działa w~takim przypadku poprawnie przy tej samej złożoności czasowej. Może się natomiast zdarzyć, że zbiór elementów o~odległościach nieprzekraczających $y$ będzie mieć $k+1$ elementów. Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$. Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
+Pojawiają się jednak dwie subtelności. O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach. Analiza czasu działania algorytmu \proc{Select} przeprowadzona w~Podręczniku pozostaje jednak prawdziwa, gdy rozszerzymy ją na przypadek powtarzających się elementów w~tablicy wejściowej, dlatego oszacowanie na czas działania tego algorytmu nie zmienia się. Może się także zdarzyć, że zbiór elementów o~odległościach nieprzekraczających $y$ będzie mieć $k+1$ elementów. Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$. Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
 
 Poniższy algorytm implementuje opisane podejście. Przyjmuje on na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą wszystkie elementy zbioru $S$ oraz liczbę $k$.
 \begin{codebox}
@@ -205,7 +205,7 @@ W~przypadku, gdy $n$ jest liczbą nieparzystą, rurociąg w~nowym położeniu po
     s' \ge s+d(n+1)/2-d(n-1)/2 = s+d > s.
 \]
 
-A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg \singledash{północ}{południe} -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna. Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$.
+A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg \singledash{północ}{południe} -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna. Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$ mimo braku założenia o~tym, że elementy, spośród których wyznaczamy medianę, są parami różne (co zauważyliśmy w~\refExercise{9.3-7}).
 
 \problems
 
