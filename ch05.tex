@@ -3,9 +3,13 @@
 \subchapter{Problem zatrudnienia sekretarki}
 
 \exercise %5.1-1
-Niech $\preceq$ będzie relacją określoną na zbiorze rang kandydatek, za pomocą której rozstrzygamy, która kandydatka z~dwóch testowanych jest lepsza. Na wejściu procedury \proc{Hire-Assistant} może pojawić się każda permutacja kandydatek, więc jesteśmy w~stanie rozstrzygać o~każdej parze kandydatek. Pozostaje zatem udowodnić, że $\preceq$ jest porządkiem częściowym.
+Niech $\preceq$ będzie relacją określoną na zbiorze rang kandydatek, za pomocą której rozstrzygamy, która kandydatka z~dwóch testowanych jest lepsza.
+Na wejściu procedury \proc{Hire-Assistant} może pojawić się każda permutacja kandydatek, więc jesteśmy w~stanie rozstrzygać o~każdej parze kandydatek.
+Pozostaje zatem udowodnić, że $\preceq$ jest porządkiem częściowym.
 
-Możemy bezpiecznie założyć, że relacja $\preceq$ jest zwrotna, jako że nie testujemy żadnej kandydatki z~nią samą. Jeśli $\preceq$ nie byłoby antysymetryczne, to w~zależności od kolejności pojawienia się na wejściu procedury pewnych dwóch kandydatek, za lepszą mogłaby zostać uznana którakolwiek z~tej pary, co przeczyłoby założeniu. Podobnie można wykazać, że $\preceq$ jest przechodnie, bowiem w~przeciwnym przypadku dla pewnych trzech kandydatek, o~tym, która z~nich jest najlepsza, decydowałaby ich permutacja wejściowa.
+Możemy bezpiecznie założyć, że relacja $\preceq$ jest zwrotna, jako że nie testujemy żadnej kandydatki z~nią samą.
+Jeśli $\preceq$ nie byłoby antysymetryczne, to w~zależności od kolejności pojawienia się na wejściu procedury pewnych dwóch kandydatek, za lepszą mogłaby zostać uznana którakolwiek z~tej pary, co przeczyłoby założeniu.
+Podobnie można wykazać, że $\preceq$ jest przechodnie, bowiem w~przeciwnym przypadku dla pewnych trzech kandydatek, o~tym, która z~nich jest najlepsza, decydowałaby ich permutacja wejściowa.
 
 \exercise %5.1-2
 Poniższy algorytm implementuje generator liczb losowych z~zakresu $a\twodots b$, korzystając jedynie z~pomocniczych wywołań $\proc{Random}(0,1)$.
@@ -22,10 +26,15 @@ Poniższy algorytm implementuje generator liczb losowych z~zakresu $a\twodots b$
 \li	\Return $a$
 \end{codebox}
 
-Niech $n=b-a+1$ będzie długością zakresu generowania. W~każdym wywołaniu rekurencyjnym odrzucana jest połowa zakresu z~dokładnością do jednego elementu. Działanie procedury jest więc analogiczne do pesymistycznego przypadku wyszukiwania binarnego w~\singledash{$n$}{elementowej} tablicy, przez co średnio działa ona w~czasie opisanym przez rekurencję z~\refExercise{4.3-3}. Rozwiązaniem tej rekursji jest $T(n)=\Theta(\lg n)$, a~zatem oczekiwany czas działania procedury $\proc{Random}(a,b)$ w~zależności od $a$ i~$b$ wynosi $\Theta(\lg(b-a))$.
+Niech $n=b-a+1$ będzie długością zakresu generowania.
+W~każdym wywołaniu rekurencyjnym odrzucana jest połowa zakresu z~dokładnością do jednego elementu.
+Działanie procedury jest więc analogiczne do pesymistycznego przypadku wyszukiwania binarnego w~\singledash{$n$}{elementowej} tablicy, przez co średnio działa ona w~czasie opisanym przez rekurencję z~\refExercise{4.3-3}.
+Rozwiązaniem tej rekursji jest $T(n)=\Theta(\lg n)$, a~zatem oczekiwany czas działania procedury $\proc{Random}(a,b)$ w~zależności od $a$ i~$b$ wynosi $\Theta(\lg(b-a))$.
 
 \exercise %5.1-3
-Zauważmy, że prawdopodobieństwo uzyskania najpierw orła, a~potem reszki w~dwóch rzutach monetą jest takie samo, jak uzyskanie najpierw reszki, a~potem orła i~wynosi $p(1-p)$. Będziemy zatem rzucać monetą po dwa razy, aż do uzyskania różnych wyników. Jako wynik procedury przyjmiemy wynik pierwszego rzutu w~ostatniej parze rzutów.
+Zauważmy, że prawdopodobieństwo uzyskania najpierw orła, a~potem reszki w~dwóch rzutach monetą jest takie samo, jak uzyskanie najpierw reszki, a~potem orła i~wynosi $p(1-p)$.
+Będziemy zatem rzucać monetą po dwa razy, aż do uzyskania różnych wyników.
+Jako wynik procedury przyjmiemy wynik pierwszego rzutu w~ostatniej parze rzutów.
 
 Następujący algorytm implementuje powyższy opis:
 \begin{codebox}
@@ -37,19 +46,33 @@ Następujący algorytm implementuje powyższy opis:
 \li	\Return $x$
 \end{codebox}
 
-Załóżmy, że każda iteracja pętli \kw{repeat} odbywa się w~czasie stałym. Kolejne iteracje tworzą ciąg prób Bernoulliego, w~których sukcesem jest warunek z~wiersza~\ref{li:unbiased-random-repeat-end}, zachodzący z~prawdopodobieństwem $2p(1-p)$. Oczekiwana liczba prób aż do osiągnięcia sukcesu jest zadana wzorem~(C.31) i~wynosi $1/(2p(1-p))$. Stąd wnioskujemy, że oczekiwanym czasem działania algorytmu jest $\Theta(1/(p(1-p)))$.
+Załóżmy, że każda iteracja pętli \kw{repeat} odbywa się w~czasie stałym.
+Kolejne iteracje tworzą ciąg prób Bernoulliego, w~których sukcesem jest warunek z~wiersza~\ref{li:unbiased-random-repeat-end}, zachodzący z~prawdopodobieństwem $2p(1-p)$.
+Oczekiwana liczba prób aż do osiągnięcia sukcesu jest zadana wzorem~(C.31) i~wynosi $1/(2p(1-p))$.
+Stąd wnioskujemy, że oczekiwanym czasem działania algorytmu jest $\Theta(1/(p(1-p)))$.
 
 \subchapter{Zmienne losowe wskaźnikowe}
 
 \exercise %5.2-1
-Zatrudnienie tylko jednej kandydatki jest równoważne przyjęciu pierwszej z~nich i~tylko jej. Zauważmy, że pierwszą kandydatkę przyjmujemy w~procedurze \proc{Hire-Assistant} w~każdym przypadku. Jeśli ma ona być jedyną zatrudnioną osobą, to powinna być najbardziej wykwalifikowaną w~zbiorze wszystkich kandydatek (czyli mieć największą wartość \id{rank}). Najlepsza kandydatka może znajdować się na każdym z~$n$ miejsc w~ciągu wejściowym, zatem prawdopodobieństwo tego, że będzie zajmować pierwszą pozycję, jest równe $1/n$.
+Zatrudnienie tylko jednej kandydatki jest równoważne przyjęciu pierwszej z~nich i~tylko jej.
+Zauważmy, że pierwszą kandydatkę przyjmujemy w~procedurze \proc{Hire-Assistant} w~każdym przypadku.
+Jeśli ma ona być jedyną zatrudnioną osobą, to powinna być najbardziej wykwalifikowaną w~zbiorze wszystkich kandydatek (czyli mieć największą wartość \id{rank}).
+Najlepsza kandydatka może znajdować się na każdym z~$n$ miejsc w~ciągu wejściowym, zatem prawdopodobieństwo tego, że będzie zajmować pierwszą pozycję, jest równe $1/n$.
 
-By dokonać zatrudnienia wszystkich $n$ kandydatek, musimy przesłuchiwać je w~kolejności rosnących rang. Jest tylko jedna taka permutacja wejściowa, zatem prawdopodobieństwo tego zdarzenia wynosi $1/n!$.
+By dokonać zatrudnienia wszystkich $n$ kandydatek, musimy przesłuchiwać je w~kolejności rosnących rang.
+Jest tylko jedna taka permutacja wejściowa, zatem prawdopodobieństwo tego zdarzenia wynosi $1/n!$.
 
 \exercise %5.2-2
-Zauważmy, że zarówno kandydatka z~pierwszej pozycji w~ciągu wejściowym, jak również ta o~najwyższej randze, są zatrudniane w~każdym przypadku. Jeśli procedura \proc{Hire-Assistant} ma dokonać dokładnie dwóch zatrudnień, to kandydatka z~numerem~1 powinna mieć rangę $i\le n-1$, a~wszystkie kandydatki o~rangach $i+1$, $i+2$,~\dots,~$n-1$ powinny występować w~ciągu po kandydatce z~rangą równą $n$.
+Zauważmy, że zarówno kandydatka z~pierwszej pozycji w~ciągu wejściowym, jak również ta o~najwyższej randze, są zatrudniane w~każdym przypadku.
+Jeśli procedura \proc{Hire-Assistant} ma dokonać dokładnie dwóch zatrudnień, to kandydatka z~numerem~1 powinna mieć rangę $i\le n-1$, a~wszystkie kandydatki o~rangach $i+1$, $i+2$,~\dots,~$n-1$ powinny występować w~ciągu po kandydatce z~rangą równą $n$.
 
-Oznaczmy przez $E_i$ zdarzenie, że pierwsza kandydatka ma rangę równą $i$. Zachodzi oczywiście $\Pr(E_i)=1/n$ dla każdego $i=1$, 2,~\dots,~$n$. Przyjmijmy, że $j$ jest pozycją najlepszej kandydatki w~ciągu i~niech $F$ będzie zdarzeniem polegającym na tym, że kandydatki o~numerach 2, 3,~\dots,~$j-1$ mają rangi mniejsze od rangi kandydatki numer~1. Jeśli zachodzi $E_i$, to $F$ zachodzi tylko wtedy, gdy $i\ne n$, a~spośród $n-i$ kandydatek, których rangi są większe niż $i$, ta z~rangą równą $n$ przesłuchiwana jest najwcześniej. Stąd mamy $\Pr(F\mid E_i)=1/(n-i)$, o~ile $i\ne n$. Niech w~końcu $A$ oznacza zdarzenie, że w~procedurze \proc{Hire-Assistant} zatrudniane są dokładnie dwie osoby. Ponieważ zdarzenia $E_1$, $E_2$,~\dots,~$E_n$ są rozłączne, to zachodzi
+Oznaczmy przez $E_i$ zdarzenie, że pierwsza kandydatka ma rangę równą $i$.
+Zachodzi oczywiście $\Pr(E_i)=1/n$ dla każdego $i=1$, 2,~\dots,~$n$.
+Przyjmijmy, że $j$ jest pozycją najlepszej kandydatki w~ciągu i~niech $F$ będzie zdarzeniem polegającym na tym, że kandydatki o~numerach 2, 3,~\dots,~$j-1$ mają rangi mniejsze od rangi kandydatki numer~1.
+Jeśli zachodzi $E_i$, to $F$ zachodzi tylko wtedy, gdy $i\ne n$, a~spośród $n-i$ kandydatek, których rangi są większe niż $i$, ta z~rangą równą $n$ przesłuchiwana jest najwcześniej.
+Stąd mamy $\Pr(F\mid E_i)=1/(n-i)$, o~ile $i\ne n$.
+Niech w~końcu $A$ oznacza zdarzenie, że w~procedurze \proc{Hire-Assistant} zatrudniane są dokładnie dwie osoby.
+Ponieważ zdarzenia $E_1$, $E_2$,~\dots,~$E_n$ są rozłączne, to zachodzi
 \[
 	A = F\cap(E_1\cup E_2\cup\dots\cup E_{n-1}) = (F\cap E_1)\cup(F\cap E_2)\cup\dots\cup(F\cap E_{n-1})
 \]
@@ -67,24 +90,31 @@ a~zatem
 \]
 
 \exercise %5.2-3
-Obliczmy wartość oczekiwaną liczby oczek w~jednym rzucie kostką. Definiując zmienną losową $X_i$ jako liczbę oczek na \singledash{$i$}{tej} kostce ($i=1$, 2,~\dots,~$n$), obliczamy $\E(X_i)$, przyjmując, że zmienne $X_i$ mają rozkład jednostajny (prawdopodobieństwo każdego wyniku jest równe $1/6$):
+Obliczmy wartość oczekiwaną liczby oczek w~jednym rzucie kostką.
+Definiując zmienną losową $X_i$ jako liczbę oczek na \singledash{$i$}{tej} kostce ($i=1$, 2,~\dots,~$n$), obliczamy $\E(X_i)$, przyjmując, że zmienne $X_i$ mają rozkład jednostajny (prawdopodobieństwo każdego wyniku jest równe $1/6$):
 \[
 	\E(X_i) = \sum_xx\Pr(X_i=x) = \frac{1+2+3+4+5+6}{6} = 3{,}5.
 \]
-Niech zmienna losowa $X$ oznacza sumę oczek na $n$ kostkach. Mamy $X=X_1+X_2+\dots+X_n$, więc z~liniowości wartości oczekiwanej
+Niech zmienna losowa $X$ oznacza sumę oczek na $n$ kostkach.
+Mamy $X=X_1+X_2+\dots+X_n$, więc z~liniowości wartości oczekiwanej
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = 3{,}5n.
 \]
 
 \exercise %5.2-4
-Niech $S_i$, dla $i=1$, 2,~\dots,~$n$, będzie zdarzeniem oznaczającym, że \singledash{$i$}{ta} osoba otrzymała swój kapelusz. Definiujemy teraz zmienne losowe $X_i=\I(S_i)$ oraz $X=X_1+X_2+\dots+X_n$, przy czym $X$ oznacza liczbę osób, którym zwrócono właściwe kapelusze. Mamy
+Niech $S_i$, dla $i=1$, 2,~\dots,~$n$, będzie zdarzeniem oznaczającym, że \singledash{$i$}{ta} osoba otrzymała swój kapelusz.
+Definiujemy teraz zmienne losowe $X_i=\I(S_i)$ oraz $X=X_1+X_2+\dots+X_n$, przy czym $X$ oznacza liczbę osób, którym zwrócono właściwe kapelusze.
+Mamy
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(X_i=1) = \sum_{i=1}^n\frac{1}{n} = 1,
 \]
 a~zatem swój kapelusz otrzyma średnio tylko jedna osoba.
 
 \exercise %5.2-5
-Dla wszystkich całkowitych $i$,~$j$ takich, że $1\le i<j\le n$, zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $\langle i,j\rangle$. Szanse na to, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$. Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$. Jej wartością oczekiwaną jest
+Dla wszystkich całkowitych $i$,~$j$ takich, że $1\le i<j\le n$, zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $\langle i,j\rangle$.
+Szanse na to, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$.
+Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$.
+Jej wartością oczekiwaną jest
 \begin{align*}
 	\E(X) &= \E\biggl(\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}\biggr) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\E(X_{ij}) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{ij}=1) \\[1mm]
 	&= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{2} = \frac{1}{2}\sum_{i=1}^{n-1}(n-i) = \frac{1}{2}\sum_{i=1}^{n-1}i = \frac{n(n-1)}{4}.
@@ -103,18 +133,31 @@ Oto zmodyfikowana procedura \proc{Randomize-In-Place}:
 		\End
 \end{codebox}
 
-Treść niezmiennika pozostaje taka sama (z~wyjątkiem fragmentu, który podaje linie kodu zawierające ciało pętli). Modyfikacji wymaga jedynie dowód jego pierwszej własności.
+Treść niezmiennika pozostaje taka sama (z~wyjątkiem fragmentu, który podaje linie kodu zawierające ciało pętli).
+Modyfikacji wymaga jedynie dowód jego pierwszej własności.
 \begin{description}
-	\item[Inicjowanie:] Gdy $i=2$, niezmiennik pętli mówi, że dla każdej \singledash{1}{permutacji} fragment tablicy $A[1\twodots1]$ zawiera tę permutację z~prawdopodobieństwem $(n-1)!/n!=1/n$. Podtablica $A[1\twodots1]$ stanowi tylko jeden element $A[1]$, który z~prawdopodobieństwem $1/n$ jest pewnym ustalonym elementem spośród $n$ elementów tablicy. A~więc niezmiennik jest spełniony przed pierwszą iteracją.
+	\item[Inicjowanie:] Gdy $i=2$, niezmiennik pętli mówi, że dla każdej \singledash{1}{permutacji} fragment tablicy $A[1\twodots1]$ zawiera tę permutację z~prawdopodobieństwem $(n-1)!/n!=1/n$.
+Podtablica $A[1\twodots1]$ stanowi tylko jeden element $A[1]$, który z~prawdopodobieństwem $1/n$ jest pewnym ustalonym elementem spośród $n$ elementów tablicy.
+A~więc niezmiennik jest spełniony przed pierwszą iteracją.
 \end{description}
 
 \exercise %5.3-2
-\note{Przedstawiony w~treści zadania algorytm jest podany niepoprawnie, ponieważ wynik wywołania\/ $\proc{Random}(i+1,n)$ jest niezdefiniowany, gdy\/ $i$ przyjmuje wartość\/ $n$. Pętla \kw{for} w~tej procedurze powinna iterować po wszystkich\/ $i$ od\/ $1$ do\/ $n-1$.}
+\note{Przedstawiony w~treści zadania algorytm jest podany niepoprawnie, ponieważ wynik wywołania\/ $\proc{Random}(i+1,n)$ jest niezdefiniowany, gdy\/ $i$ przyjmuje wartość\/ $n$.
+Pętla \kw{for} w~tej procedurze powinna iterować po wszystkich\/ $i$ od\/ $1$ do\/ $n-1$.}
 
-\noindent Algorytm ten nie działa zgodnie z~zamierzeniem. Jako przykład weźmy dowolną tablicę o~$n=3$ elementach. Istnieje $n!-1=5$ permutacji tej tablicy różnych niż identycznościowa. Pętla \kw{for} w~pierwszej iteracji zamienia pierwszy element tablicy z~losowo wybranym z~pozostałych dwóch. W~drugiej iteracji może zostać wybrana tylko jedna wartość na drugi element. Za pomocą tej procedury jesteśmy więc w~stanie utworzyć tylko dwie permutacje wejściowej tablicy.
+\noindent Algorytm ten nie działa zgodnie z~zamierzeniem.
+Jako przykład weźmy dowolną tablicę o~$n=3$ elementach.
+Istnieje $n!-1=5$ permutacji tej tablicy różnych niż identycznościowa.
+Pętla \kw{for} w~pierwszej iteracji zamienia pierwszy element tablicy z~losowo wybranym z~pozostałych dwóch.
+W~drugiej iteracji może zostać wybrana tylko jedna wartość na drugi element.
+Za pomocą tej procedury jesteśmy więc w~stanie utworzyć tylko dwie permutacje wejściowej tablicy.
 
 \exercise %5.3-3
-Zauważmy, że kolejne wywołania generatora liczb losowych w~procedurze \proc{Permute-With-All} generują jeden z~$n^n$ możliwych ciągów pozycji tablicy, podczas gdy istnieje $n!$ możliwych wyników procedury. Załóżmy, że $n>2$ i~że procedura generuje każdą permutację z~jednakowym prawdopodobieństwem. A~zatem każdej permutacji na wyjściu odpowiada stała liczba $c$ ciągów indeksów, czyli $n^n=cn!$. W~tym wzorze $n-1$ dzieli prawą stronę, a~więc powinno dzielić także lewą. Ale to nie jest prawdą, gdyż ze~wzoru~(A.5) dla $x=n$ mamy
+Zauważmy, że kolejne wywołania generatora liczb losowych w~procedurze \proc{Permute-With-All} generują jeden z~$n^n$ możliwych ciągów pozycji tablicy, podczas gdy istnieje $n!$ możliwych wyników procedury.
+Załóżmy, że $n>2$ i~że procedura generuje każdą permutację z~jednakowym prawdopodobieństwem.
+A~zatem każdej permutacji na wyjściu odpowiada stała liczba $c$ ciągów indeksów, czyli $n^n=cn!$.
+W~tym wzorze $n-1$ dzieli prawą stronę, a~więc powinno dzielić także lewą.
+Ale to nie jest prawdą, gdyż ze~wzoru~(A.5) dla $x=n$ mamy
 \[
     \sum_{k=0}^{n-1}n^k = \frac{n^n-1}{n-1},
 \]
@@ -122,15 +165,21 @@ skąd dostajemy
 \[
     n^n = (n-1)\sum_{k=0}^{n-1}n^k+1,
 \]
-czyli $n^n$ daje resztę 1 przy dzieleniu przez $n-1$. Na podstawie otrzymanej sprzeczności wnioskujemy, że procedura \proc{Permute-With-All} nie generuje permutacji losowych zgodnie z~rozkładem jednostajnym.
+czyli $n^n$ daje resztę 1 przy dzieleniu przez $n-1$.
+Na podstawie otrzymanej sprzeczności wnioskujemy, że procedura \proc{Permute-With-All} nie generuje permutacji losowych zgodnie z~rozkładem jednostajnym.
 
 \exercise %5.3-4
-Na początku działania procedury losowana jest liczba \id{offset}, o~jaką zostaną przesunięte elementy tablicy $A$ cyklicznie w~prawo. Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset})\bmod n$ w~tablicy $B$. Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że element $A[i]$ znajdzie się na pewnej ustalonej pozycji w~$B$, są równe $1/n$.
+Na początku działania procedury losowana jest liczba \id{offset}, o~jaką zostaną przesunięte elementy tablicy $A$ cyklicznie w~prawo.
+Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset})\bmod n$ w~tablicy $B$.
+Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że element $A[i]$ znajdzie się na pewnej ustalonej pozycji w~$B$, są równe $1/n$.
 
 Ponieważ nie jest zmieniana wzajemna kolejność elementów, to nie każdą permutację można otrzymać w~wyniku działania tej procedury -- na przykład nie dostaniemy nigdy permutacji będącej odwróceniem tablicy wejściowej, o~ile jej rozmiar jest większy niż~2.
 
 \exercise %5.3-5
-Spróbujmy skonstruować tablicę $P$, w~której wszystkie elementy są różne. Na pierwszy element tej tablicy możemy wybrać jedną z~$n^3$ liczb, drugi element może przyjąć jedną z~$n^3-1$ pozostałych wartości, trzeci -- jedną z~$n^3-2$ pozostałych itd. Ogólnie, \singledash{$i$}{ty} z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach. A~zatem prawdopodobieństwo tego, że wszystkie elementy tablicy $P$ są różne, wynosi
+Spróbujmy skonstruować tablicę $P$, w~której wszystkie elementy są różne.
+Na pierwszy element tej tablicy możemy wybrać jedną z~$n^3$ liczb, drugi element może przyjąć jedną z~$n^3-1$ pozostałych wartości, trzeci -- jedną z~$n^3-2$ pozostałych itd.
+Ogólnie, \singledash{$i$}{ty} z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach.
+A~zatem prawdopodobieństwo tego, że wszystkie elementy tablicy $P$ są różne, wynosi
 \[
 	\prod_{i=1}^n\frac{n^3-i+1}{n^3} = \prod_{i=0}^{n-1}\frac{n^3-i}{n^3} = \prod_{i=0}^{n-1}\biggl(1-\frac{i}{n^3}\biggr) > \prod_{i=0}^{n-1}\biggl(1-\frac{n}{n^3}\biggr) = \biggl(1-\frac{1}{n^2}\biggr)^n.
 \]
@@ -141,18 +190,25 @@ Wykorzystując teraz fakt, że ciąg $e_n={(1-1/n)}^n$ jest rosnący, otrzymujem
 i~po zastosowaniu pierwiastka \singledash{$n$}{tego} stopnia do obu stron nierówności otrzymujemy żądany wynik.
 
 \exercise %5.3-6
-Gdy dwa priorytety powtarzają się, czyli $P[i]=P[j]$ dla pewnych $i\ne j$, to deterministyczny algorytm sortujący szereguje odpowiadające im elementy $A[i]$ oraz $A[j]$ zawsze w~tej samej kolejności. W~skrajnym przypadku, jeśli wszystkie priorytety w~$P$ są identyczne, to generowana będzie tylko jedna permutacja tablicy $A$.
+Gdy dwa priorytety powtarzają się, czyli $P[i]=P[j]$ dla pewnych $i\ne j$, to deterministyczny algorytm sortujący szereguje odpowiadające im elementy $A[i]$ oraz $A[j]$ zawsze w~tej samej kolejności.
+W~skrajnym przypadku, jeśli wszystkie priorytety w~$P$ są identyczne, to generowana będzie tylko jedna permutacja tablicy $A$.
 
-Rozwiązaniem problemu powtarzających się priorytetów jest użycie randomizowanego algorytmu sortującego wykorzystującego porównania. Za każdym razem, gdy porównywane elementy $x$ i~$y$ okażą się równe, algorytm ten będzie losowo -- z~równym prawdopodobieństwem -- wybierał, czy potraktować relację między nimi jako $x<y$, czy jako $x>y$. Dzięki temu każda wejściowa tablica priorytetów z~punktu widzenia algorytmu sortowania będzie zawierała liczby parami różne, których każda permutacja może pojawić się na wejściu z~jednakowym prawdopodobieństwem.
+Rozwiązaniem problemu powtarzających się priorytetów jest użycie randomizowanego algorytmu sortującego wykorzystującego porównania.
+Za każdym razem, gdy porównywane elementy $x$ i~$y$ okażą się równe, algorytm ten będzie losowo -- z~równym prawdopodobieństwem -- wybierał, czy potraktować relację między nimi jako $x<y$, czy jako $x>y$.
+Dzięki temu każda wejściowa tablica priorytetów z~punktu widzenia algorytmu sortowania będzie zawierała liczby parami różne, których każda permutacja może pojawić się na wejściu z~jednakowym prawdopodobieństwem.
 
 \subchapter{Analiza probabilistyczna i~dalsze zastosowania zmiennych losowych wskaźnikowych}
 
 \exercise %5.4-1
-Podobnie jak w~analizie paradoksu dnia urodzin przyjmiemy, że $n$ jest liczbą dni w~roku i~ponumerujemy osoby znajdujące się w~pokoju liczbami całkowitymi 1, 2,~\dots,~$k$. Dla $i=1$, 2,~\dots,~$k$ niech $A_i$ będzie zdarzeniem polegającym na tym, że osoba $i$ ma urodziny kiedy indziej niż ja. Wówczas
+Podobnie jak w~analizie paradoksu dnia urodzin przyjmiemy, że $n$ jest liczbą dni w~roku i~ponumerujemy osoby znajdujące się w~pokoju liczbami całkowitymi 1, 2,~\dots,~$k$.
+Dla $i=1$, 2,~\dots,~$k$ niech $A_i$ będzie zdarzeniem polegającym na tym, że osoba $i$ ma urodziny kiedy indziej niż ja.
+Wówczas
 \[
 	B_k = \bigcap_{i=1}^kA_i
 \]
-jest zdarzeniem, że żadna z~$k$ osób nie ma urodzin wtedy co ja. Dla każdego $i=1$, 2,~\dots,~$k$ zachodzi $\Pr(A_i)=1-1/n$. Przy założeniu, że zdarzenia $A_1$, $A_2$,~\dots,~$A_k$ są wzajemnie niezależne, mamy
+jest zdarzeniem, że żadna z~$k$ osób nie ma urodzin wtedy co ja.
+Dla każdego $i=1$, 2,~\dots,~$k$ zachodzi $\Pr(A_i)=1-1/n$.
+Przy założeniu, że zdarzenia $A_1$, $A_2$,~\dots,~$A_k$ są wzajemnie niezależne, mamy
 \[
 	\Pr(B_k) = \Pr\biggl(\bigcap_{i=1}^kA_i\biggr) = \prod_{i=1}^k\Pr(A_i) = \prod_{i=1}^k\biggl(1-\frac{1}{n}\biggr) = \biggl(1-\frac{1}{n}\biggr)^k.
 \]
@@ -162,11 +218,16 @@ Prawdopodobieństwo zdarzenia, że wśród $k$ osób jest przynajmniej jedna, kt
 \]
 Rozwiązując tę nierówność ze względu na $k$, otrzymujemy $k\ge\log_{1-1/n}(1/2)$ i~po przyjęciu $n=365$ mamy, że najmniejszym całkowitym $k$ spełniającym tę nierówność jest $k=253$.
 
-W~rozwiązaniu drugiej części zadania pozostaniemy przy poprzednim znaczeniu symbolu $n$ i~numeracji osób kolejnymi liczbami całkowitymi. Ponadto przez $r$ oznaczymy dzień 3~maja. Niech teraz $B_k$ będzie zdarzeniem polegającym na tym, że wśród $k$ osób co najwyżej jedna ma urodziny w~dniu $r$ oraz $A_i$, dla $i=1$, 2,~\dots,~$k$, niech będzie zdarzeniem, że osoba $i$ ma urodziny w~inny dzień niż $r$. Podobnie jak w~pierwszej części zadania zachodzi $\Pr(A_1)=\Pr(A_2)=\dots=\Pr(A_k)=1-1/n$. Dla $i=1$, 2,~\dots,~$k$ zdefiniujmy jeszcze
+W~rozwiązaniu drugiej części zadania pozostaniemy przy poprzednim znaczeniu symbolu $n$ i~numeracji osób kolejnymi liczbami całkowitymi.
+Ponadto przez $r$ oznaczymy dzień 3~maja.
+Niech teraz $B_k$ będzie zdarzeniem polegającym na tym, że wśród $k$ osób co najwyżej jedna ma urodziny w~dniu $r$ oraz $A_i$, dla $i=1$, 2,~\dots,~$k$, niech będzie zdarzeniem, że osoba $i$ ma urodziny w~inny dzień niż $r$.
+Podobnie jak w~pierwszej części zadania zachodzi $\Pr(A_1)=\Pr(A_2)=\dots=\Pr(A_k)=1-1/n$.
+Dla $i=1$, 2,~\dots,~$k$ zdefiniujmy jeszcze
 \[
 	C_i = \overline{A_i}\cap\bigcap_{\substack{j=1\\j\ne i}}^kA_j
 \]
-jako zdarzenie polegające na tym, że wśród $k$ osób tylko \singledash{$i$}{ta} obchodzi urodziny dnia $r$. Zachodzi
+jako zdarzenie polegające na tym, że wśród $k$ osób tylko \singledash{$i$}{ta} obchodzi urodziny dnia $r$.
+Zachodzi
 \[
 	B_k = \bigcap_{i=1}^kA_i\cup\bigcup_{i=1}^kC_i.
 \]
@@ -181,10 +242,14 @@ Zdarzenia $\bigcap_{i=1}^kA_i$, $C_1$, $C_2$,~\dots,~$C_k$ wzajemnie się wykluc
 	&= \biggl(1-\frac{1}{n}\biggr)^k+\frac{k}{n}\biggl(1-\frac{1}{n}\biggr)^{k-1} \\
 	&= \biggl(1+\frac{k-1}{n}\biggr)\biggl(1-\frac{1}{n}\biggr)^{k-1}.
 \end{align*}
-To czego poszukujemy, to najmniejsze $k$ takie, że $\Pr(B_k)<1/2$. Można w~tym momencie przyjąć $n=365$ i~obliczać prawdopodobieństwa $B_k$ dla kolejnych naturalnych wartości $k$. W~wyniku takich obliczeń można ustalić, że szukaną wartością jest $k=613$.
+To czego poszukujemy, to najmniejsze $k$ takie, że $\Pr(B_k)<1/2$.
+Można w~tym momencie przyjąć $n=365$ i~obliczać prawdopodobieństwa $B_k$ dla kolejnych naturalnych wartości $k$.
+W~wyniku takich obliczeń można ustalić, że szukaną wartością jest $k=613$.
 
 \exercise %5.4-2
-Niech $X$ oznacza liczbę potrzebnych rzutów, zanim w~pewnej urnie znajdą się dwie kule. Załóżmy, że po $k$ rzutach ($k=1$, 2,~\dots,~$b$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po \singledash{$(k+1)$}{szym} rzucie nie będzie kolizji. Ponieważ jest zajętych $k$ urn, to \singledash{$(k+1)$}{sza} kula wpada do pustej urny z~prawdopodobieństwem równym
+Niech $X$ oznacza liczbę potrzebnych rzutów, zanim w~pewnej urnie znajdą się dwie kule.
+Załóżmy, że po $k$ rzutach ($k=1$, 2,~\dots,~$b$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po \singledash{$(k+1)$}{szym} rzucie nie będzie kolizji.
+Ponieważ jest zajętych $k$ urn, to \singledash{$(k+1)$}{sza} kula wpada do pustej urny z~prawdopodobieństwem równym
 \[
 	\Pr(X>k+1\mid X>k) = \frac{b-k}{b}.
 \]
@@ -192,7 +257,8 @@ Zachodzi
 \[
 	\Pr(X>k+1) = \prod_{i=1}^k\Pr(X>i+1\mid X>i) = \frac{(b-1)(b-2)\dots(b-k)}{b^k}.
 \]
-Oczywiście $\Pr(X=1)=0$ i~$\Pr(X>1)=1$. Dla $k=1$, 2,~\dots,~$b$ mamy
+Oczywiście $\Pr(X=1)=0$ i~$\Pr(X>1)=1$.
+Dla $k=1$, 2,~\dots,~$b$ mamy
 \[
 	\Pr(X=k+1) = \Pr(X>k)-\Pr(X>k-1) = \frac{(b-1)(b-2)\dots(b-k+1)k}{b^k} = \frac{b!\,k}{(b-k)!\,b^{k+1}}.
 \]
@@ -218,7 +284,9 @@ W~analizie paradoksu dnia urodzin niezależność urodzin wykorzystuje się jedy
 Wystarczy zatem założenie, że zdarzenia te są parami niezależne.
 
 \exercise %5.4-4
-Niech $n$ będzie liczbą dni w~roku. Oznaczmy przez $P_1(k,n)$ prawdopodobieństwo tego, że wszystkie osoby z~\singledash{$k$}{osobowej} grupy mają urodziny w~różne dni, a~$P_2(k,n)$ niech będzie prawdopodobieństwem tego, że pewnego dnia w~roku urodziły się dokładnie dwie osoby z~tej grupy. Szanse na to, aby wśród tych $k$ osób co najmniej troje miało urodziny tego samego dnia, są równe
+Niech $n$ będzie liczbą dni w~roku.
+Oznaczmy przez $P_1(k,n)$ prawdopodobieństwo tego, że wszystkie osoby z~\singledash{$k$}{osobowej} grupy mają urodziny w~różne dni, a~$P_2(k,n)$ niech będzie prawdopodobieństwem tego, że pewnego dnia w~roku urodziły się dokładnie dwie osoby z~tej grupy.
+Szanse na to, aby wśród tych $k$ osób co najmniej troje miało urodziny tego samego dnia, są równe
 \[
 	P(k,n) = 1-(P_1(k,n)+P_2(k,n)).
 \]
@@ -228,15 +296,25 @@ W~klasycznym problemie dnia urodzin zostało wyznaczone
 \]
 pozostaje zatem obliczyć $P_2(k,n)$.
 
-Spośród $n$ dni w~roku wybierzmy jeden, który będzie urodzinami pewnych dwóch osób z~naszej grupy. Pozostałe $k-2$ osób możemy rozdzielić między $n-1$ dni oznaczających ich urodziny. Ponieważ rozróżniamy osoby, to liczbę sposobów takiego wyboru należy pomnożyć przez liczbę ich permutacji $k!$ i~podzielić przez~2 z~racji tego, że zmiana kolejności dwóch osób wybranych do tego samego dnia w~roku nie jest odrębnym przypadkiem. Ale takich par może być więcej. Można tak naprawdę wybrać $i\le\lfloor k/2\rfloor$ różnych dni, którym przypiszemy pary osób wtedy urodzonych -- liczba możliwości wynosi $\binom{n}{i}$. Pozostałe osoby rozdzielamy między pozostałe dni w~roku tak, aby każdej przypadł inny dzień, co da się wykonać na $\binom{n-i}{k-2i}$ sposobów. Podobnie jak wcześniej rozróżnianie osób wprowadza czynnik $k!/2^i$ -- kolejność w~parze w~ramach tego samego dnia jest bowiem nieistotna. Ponieważ liczba możliwości przypisania $k$ osób do $n$ różnych dni wynosi $n^k$, to ostatecznie otrzymujemy wzór
+Spośród $n$ dni w~roku wybierzmy jeden, który będzie urodzinami pewnych dwóch osób z~naszej grupy.
+Pozostałe $k-2$ osób możemy rozdzielić między $n-1$ dni oznaczających ich urodziny.
+Ponieważ rozróżniamy osoby, to liczbę sposobów takiego wyboru należy pomnożyć przez liczbę ich permutacji $k!$ i~podzielić przez~2 z~racji tego, że zmiana kolejności dwóch osób wybranych do tego samego dnia w~roku nie jest odrębnym przypadkiem.
+Ale takich par może być więcej.
+Można tak naprawdę wybrać $i\le\lfloor k/2\rfloor$ różnych dni, którym przypiszemy pary osób wtedy urodzonych -- liczba możliwości wynosi $\binom{n}{i}$.
+Pozostałe osoby rozdzielamy między pozostałe dni w~roku tak, aby każdej przypadł inny dzień, co da się wykonać na $\binom{n-i}{k-2i}$ sposobów.
+Podobnie jak wcześniej rozróżnianie osób wprowadza czynnik $k!/2^i$ -- kolejność w~parze w~ramach tego samego dnia jest bowiem nieistotna.
+Ponieważ liczba możliwości przypisania $k$ osób do $n$ różnych dni wynosi $n^k$, to ostatecznie otrzymujemy wzór
 \[
 	P_2(k,n) = \frac{k!}{n^k}\sum_{i=1}^{\lfloor k/2\rfloor}\frac{1}{2^i}\binom{n}{i}\binom{n-i}{k-2i}.
 \]
 
-Ustalając wartość $n$ na 365, można teraz obliczyć prawdopodobieństwa $P(k,n)$ dla wszystkich $k=1$, 2,~\dots,~$n$, po czym wyznaczyć najmniejszą wartość $k$, dla której $P(k,n)\ge1/2$. Okazuje się, że rozwiązaniem jest $k=88$.
+Ustalając wartość $n$ na 365, można teraz obliczyć prawdopodobieństwa $P(k,n)$ dla wszystkich $k=1$, 2,~\dots,~$n$, po czym wyznaczyć najmniejszą wartość $k$, dla której $P(k,n)\ge1/2$.
+Okazuje się, że rozwiązaniem jest $k=88$.
 
 \exercise %5.4-5
-Wszystkich możliwych \singledash{$k$}{słów} nad zbiorem \singledash{$n$}{elementowym} jest $n^k$. Aby \singledash{$k$}{słowo} było w~istocie \singledash{$k$}{permutacją}, na pierwszy z~jego elementów należy wybrać jeden z~$n$ elementów zbioru, na drugi element jeden z~$n-1$ dotychczas niewybranych itd. Istnieje zatem $n(n-1)\dots(n-k+1)$ możliwych \singledash{$k$}{permutacji}, więc prawdopodobieństwo, że dane \singledash{$k$}{słowo} będzie jedną z~nich wynosi
+Wszystkich możliwych \singledash{$k$}{słów} nad zbiorem \singledash{$n$}{elementowym} jest $n^k$.
+Aby \singledash{$k$}{słowo} było w~istocie \singledash{$k$}{permutacją}, na pierwszy z~jego elementów należy wybrać jeden z~$n$ elementów zbioru, na drugi element jeden z~$n-1$ dotychczas niewybranych itd.
+Istnieje zatem $n(n-1)\dots(n-k+1)$ możliwych \singledash{$k$}{permutacji}, więc prawdopodobieństwo, że dane \singledash{$k$}{słowo} będzie jedną z~nich wynosi
 \[
 	\frac{n(n-1)\dots(n-k+1)}{n^k} = \biggl(1-\frac{1}{n}\biggr)\biggl(1-\frac{2}{n}\biggr)\dots\biggl(1-\frac{k-1}{n}\biggr).
 \]
@@ -244,12 +322,17 @@ Wszystkich możliwych \singledash{$k$}{słów} nad zbiorem \singledash{$n$}{elem
 Problem jest analogiczny do pytania o~prawdopodobieństwo zdarzenia, że wśród $k$ osób nie ma dwóch takich, które urodziły się tego samego dnia roku, gdzie $n$ jest liczbą dni w~roku.
 
 \exercise %5.4-6
-Obliczmy najpierw oczekiwaną liczbę pustych urn. Niech $S_i$, dla $i=1$, 2,~\dots,~$n$, będzie zdarzeniem, że \singledash{$i$}{ta} urna jest pusta po wykonaniu $n$ rzutów. Definiujemy zmienną losową $X_i=\I(S_i)$ oraz $X=\sum_{i=1}^nX_i$, która oznacza liczbę pustych urn. Wtedy
+Obliczmy najpierw oczekiwaną liczbę pustych urn.
+Niech $S_i$, dla $i=1$, 2,~\dots,~$n$, będzie zdarzeniem, że \singledash{$i$}{ta} urna jest pusta po wykonaniu $n$ rzutów.
+Definiujemy zmienną losową $X_i=\I(S_i)$ oraz $X=\sum_{i=1}^nX_i$, która oznacza liczbę pustych urn.
+Wtedy
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(S_i).
 \]
 
-Rozważmy teraz \singledash{$i$}{tą} urnę i~potraktujmy każdy rzut kulą jako próbę Bernoulliego, gdzie sukcesem jest trafienie do tej urny. Mamy zatem $n$ niezależnych prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=1/n$. Aby \singledash{$i$}{ta} urna pozostała pusta, nie możemy uzyskać żadnego sukcesu, a~zatem korzystając z~rozkładu dwumianowego, dostajemy
+Rozważmy teraz \singledash{$i$}{tą} urnę i~potraktujmy każdy rzut kulą jako próbę Bernoulliego, gdzie sukcesem jest trafienie do tej urny.
+Mamy zatem $n$ niezależnych prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=1/n$.
+Aby \singledash{$i$}{ta} urna pozostała pusta, nie możemy uzyskać żadnego sukcesu, a~zatem korzystając z~rozkładu dwumianowego, dostajemy
 \[
 	\Pr(S_i) = b(0;n,p) = \binom{n}{0}\biggl(\frac{1}{n}\biggr)^0\biggl(1-\frac{1}{n}\biggr)^n = \biggl(1-\frac{1}{n}\biggr)^n
 \]
@@ -258,7 +341,9 @@ oraz
 	\E(X) = \sum_{i=1}^n\biggl(1-\frac{1}{n}\biggr)^n = n\biggl(1-\frac{1}{n}\biggr)^n.
 \]
 
-Wyznaczmy teraz oczekiwaną liczbę urn z~dokładnie jedną kulą. W~tym celu, podobnie jak poprzednio, dla $i=1$, 2,~\dots,~$n$ zdefiniujemy zdarzenie $S_i$, że \singledash{$i$}{ta} urna po wykonaniu $n$ rzutów zawiera dokładnie jedną kulę. Definicje zmiennych losowych $X_i$ oraz $X$ pozostają bez zmian i, tak jak poprzednio, zachodzi
+Wyznaczmy teraz oczekiwaną liczbę urn z~dokładnie jedną kulą.
+W~tym celu, podobnie jak poprzednio, dla $i=1$, 2,~\dots,~$n$ zdefiniujemy zdarzenie $S_i$, że \singledash{$i$}{ta} urna po wykonaniu $n$ rzutów zawiera dokładnie jedną kulę.
+Definicje zmiennych losowych $X_i$ oraz $X$ pozostają bez zmian i, tak jak poprzednio, zachodzi
 \[
 	\E(X) = \sum_{i=1}^n\Pr(S_i).
 \]
@@ -272,7 +357,8 @@ oraz
 \]
 
 \exercise %5.4-7
-W~zadaniu przyjmujemy, że $n>16$, ponieważ wtedy wyrażenie $\lg n-2\lg\lg n$ jest dodatnie. Ponadto dla uproszczenia rachunków nie dbamy o~to, aby niektóre liczby były całkowite.
+W~zadaniu przyjmujemy, że $n>16$, ponieważ wtedy wyrażenie $\lg n-2\lg\lg n$ jest dodatnie.
+Ponadto dla uproszczenia rachunków nie dbamy o~to, aby niektóre liczby były całkowite.
 
 Korzystając z~przedstawionego w~Podręczniku wyprowadzenia, mamy, że prawdopodobieństwo zdarzenia, że ciąg orłów długości co najmniej $\lg n-2\lg\lg n$ rozpoczyna się na pozycji $i$, jest równe
 \[
@@ -283,7 +369,8 @@ a~zatem prawdopodobieństwo, że ciąg orłów o~długości co najmniej $\lg n-2
 	1-\frac{\lg^2n}{n}.
 \]
 
-Podzielmy ciąg $n$ rzutów monetą na $n/(\lg n-2\lg\lg n)$ grup po $\lg n-2\lg\lg n$ kolejnych rzutów każda. Grupy te złożone są z~różnych i~wzajemnie niezależnych rzutów, a~zatem prawdopodobieństwo, że żadna z~nich nie będzie ciągiem orłów o~długości $\lg n-2\lg\lg n$, wynosi
+Podzielmy ciąg $n$ rzutów monetą na $n/(\lg n-2\lg\lg n)$ grup po $\lg n-2\lg\lg n$ kolejnych rzutów każda.
+Grupy te złożone są z~różnych i~wzajemnie niezależnych rzutów, a~zatem prawdopodobieństwo, że żadna z~nich nie będzie ciągiem orłów o~długości $\lg n-2\lg\lg n$, wynosi
 \begin{align*}
 	\biggl(1-\frac{\lg^2n}{n}\biggr)^{n/(\lg n-2\lg\lg n)} &\le \bigl(e^{-(\lg^2n)/n}\bigr)^{n/(\lg n-2\lg\lg n)} \\
 	&= e^{-(\lg^2n)/(\lg n-2\lg\lg n)} \\
@@ -300,12 +387,16 @@ Skorzystaliśmy tutaj z~nierówności~(3.11) oraz z~tego, że dla $n>16$ zachodz
 \problem{Zliczanie probabilistyczne} %5-1
 
 \subproblem %5-1(a)
-Zdefiniujmy $X_j$, dla $j=1$, 2,~\dots,~$n$, jako zmienną losową oznaczającą liczbę, o~jaką zwiększy się wartość reprezentowana przez licznik po \singledash{$j$}{tym} wykonaniu operacji \proc{Increment}. Ponadto niech zmienna losowa $X$ przyjmuje wartość reprezentowaną przez licznik po wykonaniu $n$ operacji \proc{Increment}. Zachodzi $X=\sum_{j=1}^nX_j$ oraz, ze względu na liniowość wartości oczekiwanej,
+Zdefiniujmy $X_j$, dla $j=1$, 2,~\dots,~$n$, jako zmienną losową oznaczającą liczbę, o~jaką zwiększy się wartość reprezentowana przez licznik po \singledash{$j$}{tym} wykonaniu operacji \proc{Increment}.
+Ponadto niech zmienna losowa $X$ przyjmuje wartość reprezentowaną przez licznik po wykonaniu $n$ operacji \proc{Increment}.
+Zachodzi $X=\sum_{j=1}^nX_j$ oraz, ze względu na liniowość wartości oczekiwanej,
 \[
 	\E(X) = \E\biggl(\sum_{j=1}^nX_j\biggr) = \sum_{j=1}^n\E(X_j).
 \]
 
-Załóżmy teraz, że przed wykonaniem \singledash{$j$}{tej} operacji \proc{Increment} licznik przechowuje wartość $i$, co stanowi reprezentację $n_i$. Jeśli inkrementacja powiedzie się, co zdarzy się z~prawdopodobieństwem równym $1/(n_{i+1}-n_i)$, to wartość reprezentowana na liczniku zwiększy się o~$n_{i+1}-n_i$. Dla każdego $j=1$, 2,~\dots,~$n$ mamy zatem
+Załóżmy teraz, że przed wykonaniem \singledash{$j$}{tej} operacji \proc{Increment} licznik przechowuje wartość $i$, co stanowi reprezentację $n_i$.
+Jeśli inkrementacja powiedzie się, co zdarzy się z~prawdopodobieństwem równym $1/(n_{i+1}-n_i)$, to wartość reprezentowana na liczniku zwiększy się o~$n_{i+1}-n_i$.
+Dla każdego $j=1$, 2,~\dots,~$n$ mamy zatem
 \[
 	\E(X_j) = 0\cdot\biggl(1-\frac{1}{n_{i+1}-n_i}\biggr)+(n_{i+1}-n_i)\cdot\biggl(\frac{1}{n_{i+1}-n_i}\biggr) = 1,
 \]
@@ -320,7 +411,9 @@ Dla zmiennych losowych $X_j$ oraz $X$ zdefiniowanych w~poprzednim punkcie mamy
 \[
 	\Var(X) = \Var\biggl(\sum_{j=1}^nX_j\biggr) = \sum_{j=1}^n\Var(X_j),
 \]
-co zachodzi na mocy wzoru~(C.28), ponieważ zmienne $X_1$, $X_2$,~\dots,~$X_n$ są parami niezależne. Mamy $n_i=100i$, a~więc zwiększenie wartości reprezentowanej przez licznik o~$n_{i+1}-n_i=100$ odbędzie się z~prawdopodobieństwem $1/(n_{i+1}-n_i)=1/100$. Ze wzoru~(C.26) otrzymujemy, że dla każdego $j=1$, 2,~\dots,~$n$ zachodzi
+co zachodzi na mocy wzoru~(C.28), ponieważ zmienne $X_1$, $X_2$,~\dots,~$X_n$ są parami niezależne.
+Mamy $n_i=100i$, a~więc zwiększenie wartości reprezentowanej przez licznik o~$n_{i+1}-n_i=100$ odbędzie się z~prawdopodobieństwem $1/(n_{i+1}-n_i)=1/100$.
+Ze wzoru~(C.26) otrzymujemy, że dla każdego $j=1$, 2,~\dots,~$n$ zachodzi
 \[
 	\Var(X_j) = \E(X_j^2)-\E^2(X_j) = 0^2\cdot\biggl(1-\frac{1}{100}\biggr)+100^2\cdot\frac{1}{100}-1^2 = 99,
 \]
@@ -354,22 +447,37 @@ Oto procedura implementująca opisaną strategię:
 		\End \label{li:random-search-while-end}
 \li	\Return \const{nil}
 \end{codebox}
-Algorytm korzysta z~pomocniczej tablicy wartości logicznych $B[1\twodots n]$, która na pozycji $i$ przechowuje informację o~tym, czy wybrana była już \singledash{$i$}{ta} pozycja tablicy $A$. Ponadto zmienna \id{checked} przechowuje liczbę testowanych dotychczas komórek. W~każdej iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:random-search-while-begin}}{\ref{li:random-search-while-end}} algorytm sprawdza losowo wybrany indeks tablicy $A$. W~przypadku odnalezienia $x$ natychmiast zwracana jest jego pozycja. Jeśli jednak element $x$ nie zostanie odnaleziony, a~bieżąca komórka tablicy $A$ nie była jeszcze wcześniej sprawdzana, to informacja ta zostaje odnotowana w~tablicy $B$, a~zmienna \id{checked} jest inkrementowana. Jeśli elementu $x$ nie ma w~tablicy $A$, to po sprawdzeniu wszystkich indeksów co najmniej raz, algorytm zwróci specjalną wartość \const{nil}.
+Algorytm korzysta z~pomocniczej tablicy wartości logicznych $B[1\twodots n]$, która na pozycji $i$ przechowuje informację o~tym, czy wybrana była już \singledash{$i$}{ta} pozycja tablicy $A$.
+Ponadto zmienna \id{checked} przechowuje liczbę testowanych dotychczas komórek.
+W~każdej iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:random-search-while-begin}}{\ref{li:random-search-while-end}} algorytm sprawdza losowo wybrany indeks tablicy $A$.
+W~przypadku odnalezienia $x$ natychmiast zwracana jest jego pozycja.
+Jeśli jednak element $x$ nie zostanie odnaleziony, a~bieżąca komórka tablicy $A$ nie była jeszcze wcześniej sprawdzana, to informacja ta zostaje odnotowana w~tablicy $B$, a~zmienna \id{checked} jest inkrementowana.
+Jeśli elementu $x$ nie ma w~tablicy $A$, to po sprawdzeniu wszystkich indeksów co najmniej raz, algorytm zwróci specjalną wartość \const{nil}.
 
 \subproblem %5-2(b)
-Niech $X$ będzie zmienną losową oznaczającą ilość wybranych indeksów tablicy $A$ zanim odnaleziono $x$. Szukanie $x$ realizowane przez procedurę \proc{Random-Search} jest serią prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=1/n$. Stosując wzór~(C.31), otrzymujemy, że zostanie wybranych średnio $\E(X)=1/p=n$ indeksów tablicy $A$.
+Niech $X$ będzie zmienną losową oznaczającą ilość wybranych indeksów tablicy $A$ zanim odnaleziono $x$.
+Szukanie $x$ realizowane przez procedurę \proc{Random-Search} jest serią prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=1/n$.
+Stosując wzór~(C.31), otrzymujemy, że zostanie wybranych średnio $\E(X)=1/p=n$ indeksów tablicy $A$.
 
 \subproblem %5-2(c)
-Rozważmy ponownie zmienną losową $X$ i~analogiczną serię prób Bernoulliego do tej z~poprzedniego punktu. Jednak w~tym przypadku sukces następuje z~prawdopodobieństwem $p=k/n$, a~zatem średnią liczbą wybranych indeksów przed odnalezieniem $x$ jest $\E(X)=1/p=n/k$.
+Rozważmy ponownie zmienną losową $X$ i~analogiczną serię prób Bernoulliego do tej z~poprzedniego punktu.
+Jednak w~tym przypadku sukces następuje z~prawdopodobieństwem $p=k/n$, a~zatem średnią liczbą wybranych indeksów przed odnalezieniem $x$ jest $\E(X)=1/p=n/k$.
 
 \subproblem %5-2(d)
-Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów. Pozycje tablicy $A$ reprezentują kupony, których skompletowanie (odpowiadające sprawdzeniu wszystkich pozycji tablicy) jest celem problemu. Zgodnie z~uzasadnieniem podanym w~Podręczniku, aby uzbierać pełny zestaw $n$ kuponów pojawiających się losowo, należy zdobyć ich około $n\ln n$.
+Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów.
+Pozycje tablicy $A$ reprezentują kupony, których skompletowanie (odpowiadające sprawdzeniu wszystkich pozycji tablicy) jest celem problemu.
+Zgodnie z~uzasadnieniem podanym w~Podręczniku, aby uzbierać pełny zestaw $n$ kuponów pojawiających się losowo, należy zdobyć ich około $n\ln n$.
 
 \subproblem %5-2(e)
-Procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania liniowego opisanego w~\refExercise{2.1-3}. Z~rozwiązania \refExercise{2.2-3} wynika zatem, że czas tego algorytmu -- wyrażony jako liczba sprawdzanych indeksów tablicy -- wynosi w~średnim przypadku $(n+1)/2$, a~w~pesymistycznym $n$.
+Procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania liniowego opisanego w~\refExercise{2.1-3}.
+Z~rozwiązania \refExercise{2.2-3} wynika zatem, że czas tego algorytmu -- wyrażony jako liczba sprawdzanych indeksów tablicy -- wynosi w~średnim przypadku $(n+1)/2$, a~w~pesymistycznym $n$.
 
 \subproblem %5-2(f)
-Oznaczmy przez $X$ zmienną losową przyjmującą liczbę wybranych indeksów tablicy $A$ przed odnalezieniem $x$. Zdarzenie $X=i$ zachodzi wtedy i~tylko wtedy, gdy pierwsza z~lewej wartość $x$ zajmuje w~$A$ pozycję $i$. Pozostałe $k-1$ elementów o~wartości $x$ można rozmieścić w~obszarze $A[i+1\twodots n]$ na $\binom{n-i}{k-1}$ sposobów. Stąd $\Pr(X=i)=\binom{n-i}{k-1}/\binom{n}{k}$. Wartość oczekiwana $X$ wynosi zatem
+Oznaczmy przez $X$ zmienną losową przyjmującą liczbę wybranych indeksów tablicy $A$ przed odnalezieniem $x$.
+Zdarzenie $X=i$ zachodzi wtedy i~tylko wtedy, gdy pierwsza z~lewej wartość $x$ zajmuje w~$A$ pozycję $i$.
+Pozostałe $k-1$ elementów o~wartości $x$ można rozmieścić w~obszarze $A[i+1\twodots n]$ na $\binom{n-i}{k-1}$ sposobów.
+Stąd $\Pr(X=i)=\binom{n-i}{k-1}/\binom{n}{k}$.
+Wartość oczekiwana $X$ wynosi zatem
 \[
     \E(X) = \sum_{i=1}^{n-k+1}i\Pr(X=i) = \frac{1}{\binom{n}{k}}\sum_{i=1}^{n-k+1}i\binom{n-i}{k-1}.
 \]
@@ -379,7 +487,9 @@ Pokażemy przez indukcję po $n$, że dla dowolnego $k=1$, 2,~\dots,~$n$ zachodz
     \binom{n+1}{k+1} = \sum_{i=1}^{n-k+1}i\binom{n-i}{k-1}.
 \]
 
-Jeśli $k=n$, to po lewej stronie powyższego wzoru mamy $\binom{n+1}{n+1}=1$, a~po prawej stronie $\sum_{i=1}^1i\binom{n-i}{n-1}=\binom{n-1}{n-1}=1$. A~więc w~tym przypadku wzór jest prawdziwy. Pokazaliśmy przy okazji, że spełniony jest pierwszy krok indukcji, gdy $n=1$.
+Jeśli $k=n$, to po lewej stronie powyższego wzoru mamy $\binom{n+1}{n+1}=1$, a~po prawej stronie $\sum_{i=1}^1i\binom{n-i}{n-1}=\binom{n-1}{n-1}=1$.
+A~więc w~tym przypadku wzór jest prawdziwy.
+Pokazaliśmy przy okazji, że spełniony jest pierwszy krok indukcji, gdy $n=1$.
 
 W~drugim kroku zakładamy, że $n>1$ i~że dla każdego $k=1$, 2,~\dots,~$n$ zachodzi
 \[
@@ -395,16 +505,21 @@ Korzystając dwukrotnie z~\refExercise{C.1-7}, dla dowolnego $k=1$, 2,~\dots,~$n
 \end{align*}
 Wzór jest zatem prawdziwy dla wszystkich $n$ naturalnych i~wszystkich $k=1$, 2,~\dots,~$n$.
 
-Pesymistyczny przypadek dla algorytmu \proc{Deterministic-Search} ma miejsce wtedy, gdy wszystkie egzemplarze $x$ zajmują w~tablicy $k$ końcowych pozycji. Algorytm sprawdzi wówczas $n-k$ komórek tablicy, zanim odnajdzie pierwsze wystąpienie $x$.
+Pesymistyczny przypadek dla algorytmu \proc{Deterministic-Search} ma miejsce wtedy, gdy wszystkie egzemplarze $x$ zajmują w~tablicy $k$ końcowych pozycji.
+Algorytm sprawdzi wówczas $n-k$ komórek tablicy, zanim odnajdzie pierwsze wystąpienie $x$.
 
 \subproblem %5-2(g)
 Przypadek średni i~pesymistyczny są równoważne przy braku $x$ w~tablicy $A$, bowiem w~obu tych przypadkach algorytm przegląda całą tablicę, co zajmuje czas $n$.
 
 \subproblem %5-2(h)
-Załóżmy, że do permutowania tablicy używany jest algorytm \proc{Randomize-In-Place}, który generuje permutację losową zgodnie z~rozkładem jednostajnym, wykonując przy tym $n$ zamian elementów. Czas algorytmu \proc{Scramble-Search} jest wtedy sumą $n$ oraz liczby porównań wykonywanych podczas deterministycznego wyszukiwania liniowego. Wartości te -- w~zależności od przypadku -- zostały wyznaczone w~punktach (e), (f) i~(g).
+Załóżmy, że do permutowania tablicy używany jest algorytm \proc{Randomize-In-Place}, który generuje permutację losową zgodnie z~rozkładem jednostajnym, wykonując przy tym $n$ zamian elementów.
+Czas algorytmu \proc{Scramble-Search} jest wtedy sumą $n$ oraz liczby porównań wykonywanych podczas deterministycznego wyszukiwania liniowego.
+Wartości te -- w~zależności od przypadku -- zostały wyznaczone w~punktach (e), (f) i~(g).
 
 \subproblem %5-2(i)
-W~przypadku gdy tablica nie zawiera szukanego elementu, czasy działania algorytmów \proc{Deterministic-Search} i~\proc{Scramble-Search} są asymptotycznie mniejsze od czasu działania \proc{Random-Search}, a~w~pozostałych przypadkach są one tego samego rzędu (o~ile traktujemy $k$ jako stałą). Jest to wystarczający powód, aby odrzucić algorytm \proc{Random-Search} z~praktycznych zastosowań. Spośród pozostałych dwóch \proc{Deterministic-Search} jest bardziej efektywny, ponieważ nie wprowadza narzutu w~postaci permutowania losowego tablicy i~w~efekcie działa szybciej.
+W~przypadku gdy tablica nie zawiera szukanego elementu, czasy działania algorytmów \proc{Deterministic-Search} i~\proc{Scramble-Search} są asymptotycznie mniejsze od czasu działania \proc{Random-Search}, a~w~pozostałych przypadkach są one tego samego rzędu (o~ile traktujemy $k$ jako stałą).
+Jest to wystarczający powód, aby odrzucić algorytm \proc{Random-Search} z~praktycznych zastosowań.
+Spośród pozostałych dwóch \proc{Deterministic-Search} jest bardziej efektywny, ponieważ nie wprowadza narzutu w~postaci permutowania losowego tablicy i~w~efekcie działa szybciej.
 
 Okazuje się więc, że w~problemie wyszukiwania zastosowanie randomizacji nie jest szczególnie pomocne i~zwykłe wyszukiwanie liniowe jest algorytmem optymalnym.
 

@@ -3,7 +3,10 @@
 \subchapter{Zliczanie}
 
 \exercise %C.1-1
-Załóżmy, że $k=1$, 2,~\dots,~$n$, to znaczy nie rozważamy podsłów pustych. Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje 1, 2,~\dots,~$k$, drugie -- 2, 3,~\dots,~$k+1$ itd. Ostatnie \singledash{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$,~\dots,~$n$. Istnieje zatem $n-k+1$ wszystkich \singledash{$k$}{podsłów} \singledash{$n$}{słowa}.
+Załóżmy, że $k=1$, 2,~\dots,~$n$, to znaczy nie rozważamy podsłów pustych.
+Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje 1, 2,~\dots,~$k$, drugie -- 2, 3,~\dots,~$k+1$ itd.
+Ostatnie \singledash{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$,~\dots,~$n$.
+Istnieje zatem $n-k+1$ wszystkich \singledash{$k$}{podsłów} \singledash{$n$}{słowa}.
 
 By obliczyć łączną ilość podsłów \singledash{$n$}{słowa}, należy zsumować liczby \singledash{$k$}{podsłów} po wszystkich $k=1$, 2,~\dots,~$n$, co daje
 \[
@@ -11,16 +14,25 @@ By obliczyć łączną ilość podsłów \singledash{$n$}{słowa}, należy zsumo
 \]
 
 \exercise %C.1-2
-Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \singledash{$n$}{bitowych} i~\singledash{$m$}{bitowych}. Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$. Zagadnienie sprowadza się zatem do pytania o~liczbę wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$. Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$. Jest zatem $2^{m2^n}\!$ funkcji logicznych o~$n$ wejściach i~$m$ wyjściach, a~stąd $2^{2^n}\!$ funkcji logicznych o~$n$ wejściach i~1 wyjściu.
+Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \singledash{$n$}{bitowych} i~\singledash{$m$}{bitowych}.
+Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$.
+Zagadnienie sprowadza się zatem do pytania o~liczbę wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$.
+Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$.
+Jest zatem $2^{m2^n}\!$ funkcji logicznych o~$n$ wejściach i~$m$ wyjściach, a~stąd $2^{2^n}\!$ funkcji logicznych o~$n$ wejściach i~1 wyjściu.
 
 \exercise %C.1-3
-Niech $S_n$ oznacza szukaną liczbę sposobów ustawienia $n$ osób przy okrągłym stole. Każdy sposób jest nierozróżnialny z~$n-1$ innymi, które powstają przez przesunięcie wszystkich osób o~pewną ilość miejsc bez zmiany ich kolejności. Istnieje $n!$ możliwych permutacji $n$ osób, zatem $nS_n$ jest równe $n!$. Mamy zatem
+Niech $S_n$ oznacza szukaną liczbę sposobów ustawienia $n$ osób przy okrągłym stole.
+Każdy sposób jest nierozróżnialny z~$n-1$ innymi, które powstają przez przesunięcie wszystkich osób o~pewną ilość miejsc bez zmiany ich kolejności.
+Istnieje $n!$ możliwych permutacji $n$ osób, zatem $nS_n$ jest równe $n!$.
+Mamy zatem
 \[
 	S_n = \frac{n!}{n} = (n-1)!.
 \]
 
 \exercise %C.1-4
-Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby parzystej, można postąpić według jednej z~dwóch strategii -- wybrać trzy liczby parzyste albo wybrać dwie liczby nieparzyste i~jedną liczbę parzystą. W~pierwszym przypadku możemy dokonać wyboru na $\binom{50}{3}$ sposobów, a~w drugim -- na $\binom{50}{2}\binom{50}{1}$ sposobów. Łączna liczba możliwości wyboru liczb wynosi zatem
+Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby parzystej, można postąpić według jednej z~dwóch strategii -- wybrać trzy liczby parzyste albo wybrać dwie liczby nieparzyste i~jedną liczbę parzystą.
+W~pierwszym przypadku możemy dokonać wyboru na $\binom{50}{3}$ sposobów, a~w drugim -- na $\binom{50}{2}\binom{50}{1}$ sposobów.
+Łączna liczba możliwości wyboru liczb wynosi zatem
 \[
 	\binom{50}{3}+\binom{50}{2}\binom{50}{1} = 80850.
 \]
@@ -36,7 +48,11 @@ Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby p
 \]
 
 \exercise %C.1-7
-Niech $S$ będzie zbiorem \singledash{$n$}{elementowym} oraz niech $s\in S$. Ze zbioru $S$ można wybrać $\binom{n}{k}$ \singledash{$k$}{podzbiorów}. Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które zawierają $s$. Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$. Stąd wnioskujemy, że
+Niech $S$ będzie zbiorem \singledash{$n$}{elementowym} oraz niech $s\in S$.
+Ze zbioru $S$ można wybrać $\binom{n}{k}$ \singledash{$k$}{podzbiorów}.
+Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które zawierają $s$.
+Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$.
+Stąd wnioskujemy, że
 \[
     \binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.
 \]
@@ -54,7 +70,8 @@ Kilka początkowych wierszy trójkąta Pascala:
 		1 && 6 && 15 && 20 && 15 && 6 && 1
 	\end{array}
 \]
-Pierwszy wiersz składa się z~elementu $\binom{0}{0}=1$. Na krańcach kolejnych wierszy występują jedynki, a~pozostałe elementy obliczane są z~tożsamości z~\refExercise{C.1-7}, czyli poprzez zsumowanie liczb występujących bezpośrednio nad wyznaczanym elementem.
+Pierwszy wiersz składa się z~elementu $\binom{0}{0}=1$.
+Na krańcach kolejnych wierszy występują jedynki, a~pozostałe elementy obliczane są z~tożsamości z~\refExercise{C.1-7}, czyli poprzez zsumowanie liczb występujących bezpośrednio nad wyznaczanym elementem.
 
 \exercise %C.1-9
 Z~definicji współczynnika dwumianowego i~z~tożsamości~(A.1) mamy
@@ -63,17 +80,22 @@ Z~definicji współczynnika dwumianowego i~z~tożsamości~(A.1) mamy
 \]
 
 \exercise %C.1-10
-Potraktujmy współczynnik dwumianowy jak funkcję $b_n(k)=\binom{n}{k}$ dla $k=0$, 1,~\dots,~$n$ i~sprawdźmy, dla jakich $k$ wartość $b_n(k)$ jest największa. Badamy stosunek
+Potraktujmy współczynnik dwumianowy jak funkcję $b_n(k)=\binom{n}{k}$ dla $k=0$, 1,~\dots,~$n$ i~sprawdźmy, dla jakich $k$ wartość $b_n(k)$ jest największa.
+Badamy stosunek
 \[
 	\frac{b_n(k+1)}{b_n(k)} = \frac{\binom{n}{k+1}}{\binom{n}{k}} = \frac{n!}{(k+1)!\,(n-k-1)!}\cdot\frac{k!\,(n-k)!}{n!} = \frac{n-k}{k+1}.
 \]
-Jeśli $n-k\ge k+1$, czyli $k\le(n-1)/2$, to funkcja $b_n$ jest niemalejąca. Z~kolei gdy $k\ge(n-1)/2$, to $b_n$ jest nierosnące. A~zatem gdy $n$ jest nieparzyste, to $b_n$ przyjmuje największą wartość dla $k=(n-1)/2=\lfloor n/2\rfloor$. Ponadto ze wzoru~(C.3) mamy
+Jeśli $n-k\ge k+1$, czyli $k\le(n-1)/2$, to funkcja $b_n$ jest niemalejąca.
+Z~kolei gdy $k\ge(n-1)/2$, to $b_n$ jest nierosnące.
+A~zatem gdy $n$ jest nieparzyste, to $b_n$ przyjmuje największą wartość dla $k=(n-1)/2=\lfloor n/2\rfloor$.
+Ponadto ze wzoru~(C.3) mamy
 \[
     b_n((n-1)/2) = \binom{n}{(n-1)/2} = \binom{n}{n-(n-1)/2} = \binom{n}{(n+1)/2} = b_n((n+1)/2),
 \]
 a~więc wartość największa jest przyjmowana również dla $k=(n+1)/2=\lceil n/2\rceil$.
 
-W~przypadku gdy $n$ jest liczbą parzystą, maksymalna wartość funkcji $b_n$ jest osiągana dla $k=n/2$ lub $k=n/2-1$. Sprawdźmy, która wartość jest większa:
+W~przypadku gdy $n$ jest liczbą parzystą, maksymalna wartość funkcji $b_n$ jest osiągana dla $k=n/2$ lub $k=n/2-1$.
+Sprawdźmy, która wartość jest większa:
 \[
     \frac{b_n(n/2)}{b_n(n/2-1)} = \frac{\binom{n}{n/2}}{\binom{n}{n/2-1}} = \frac{n!}{(n/2)!\,(n/2)!}\cdot\frac{(n/2-1)!\,(n/2+1)!}{n!} = \frac{n/2+1}{n/2} > 1.
 \]
@@ -84,12 +106,17 @@ Dla liczb naturalnych $n$, $j$,~$k$ takich, że $j+k\le n$, sprawdzamy zachowani
 \[
 	\frac{\binom{n}{j+k}}{\binom{n}{j}\binom{n-j}{k}} = \frac{n!}{(j+k)!\,(n-j-k)!}\cdot\frac{j!\,(n-j)!}{n!}\cdot\frac{k!\,(n-j-k)!}{(n-j)!} = \frac{j!\,k!}{(j+k)!} = \frac{\prod_{i=1}^ki}{\prod_{i=1}^k(j+i)}.
 \]
-Oczywistym jest, że iloczyn kolejnych liczb całkowitych od 1 do $k$ nie przekracza iloczynu kolejnych liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1. Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
+Oczywistym jest, że iloczyn kolejnych liczb całkowitych od 1 do $k$ nie przekracza iloczynu kolejnych liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1.
+Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
 
-Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze. W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów. Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście. Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
+Lewą stronę nierówności~(C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
+W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów.
+Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście.
+Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
 
 \exercise %C.1-12
-Łatwo sprawdzić, że dla $k=0$ nierówność zachodzi. Przyjmijmy zatem, że $k\ge1$ i~załóżmy, że
+Łatwo sprawdzić, że dla $k=0$ nierówność zachodzi.
+Przyjmijmy zatem, że $k\ge1$ i~załóżmy, że
 \[
 	\binom{n}{k-1} \le \frac{n^n}{(k-1)^{k-1}(n-k+1)^{n-k+1}}.
 \]
@@ -105,9 +132,11 @@ co zrobimy poprzez sprawdzenie ilorazu
 \[
 	\frac{\frac{n^n}{k(k-1)^{k-1}(n-k+1)^{n-k}}}{\frac{n^n}{k^k(n-k)^{n-k}}} = \frac{k^{k-1}(n-k)^{n-k}}{(k-1)^{k-1}(n-k+1)^{n-k}} = \frac{\bigl(\frac{k}{k-1}\bigr)^{k-1}}{\bigl(\frac{n-k+1}{n-k}\bigr)^{n-k}} = \frac{\bigl(1+\frac{1}{k-1}\bigr)^{k-1}}{\bigl(1+\frac{1}{n-k}\bigr)^{n-k}}.
 \]
-Ciąg $e_n={(1+1/n)}^n$ jest rosnący, skąd dostajemy, że powyższy iloraz nie przekracza 1, o~ile $k-1\le n-k$, czyli $k\le(n+1)/2$, a~więc tym bardziej, gdy $k\le n/2$. Pokazaliśmy tym samym, że nierówność~(C.6) jest spełniona dla $k\le n/2$.
+Ciąg $e_n={(1+1/n)}^n$ jest rosnący, skąd dostajemy, że powyższy iloraz nie przekracza 1, o~ile $k-1\le n-k$, czyli $k\le(n+1)/2$, a~więc tym bardziej, gdy $k\le n/2$.
+Pokazaliśmy tym samym, że nierówność~(C.6) jest spełniona dla $k\le n/2$.
 
-Ze wzoru~(C.3) mamy $\binom{n}{k}=\binom{n}{n-k}$. Gdy $n/2<k\le n$, to $0\le n-k<n/2$ i~dowód sprowadza się do pokazania, że
+Ze wzoru~(C.3) mamy $\binom{n}{k}=\binom{n}{n-k}$.
+Gdy $n/2<k\le n$, to $0\le n-k<n/2$ i~dowód sprowadza się do pokazania, że
 \[
 	\binom{n}{n-k} \le \frac{n^n}{k^k(n-k)^{n-k}}.
 \]
@@ -119,7 +148,9 @@ Wykorzystując wzór Stirlinga, mamy
 	\binom{2n}{n} = \frac{(2n)!}{(n!)^2} = \frac{\sqrt{4\pi n}\,\bigl(\frac{2n}{e}\bigr)^{2n}(1+\Theta(1/n))}{2\pi n\,\bigl(\frac{n}{e}\bigr)^{2n}(1+\Theta(1/n))^2} = \frac{2^{2n}}{\sqrt{\pi n}}\cdot\frac{1+\Theta(1/n)}{(1+\Theta(1/n))^2}.
 \]
 
-Zajmiemy się teraz ostatnim ułamkiem, którego celowo nie skracaliśmy, ponieważ funkcja w~mianowniku nie musi być równa kwadratowi funkcji z~licznika. Niech $c$, $d$ będą stałymi takimi, że $c\ge d>0$ i~funkcja $1+c/n$ ogranicza licznik ułamka od góry, a~funkcja $1+d/n$ -- mianownik ułamka od dołu. Mamy
+Zajmiemy się teraz ostatnim ułamkiem, którego celowo nie skracaliśmy, ponieważ funkcja w~mianowniku nie musi być równa kwadratowi funkcji z~licznika.
+Niech $c$, $d$ będą stałymi takimi, że $c\ge d>0$ i~funkcja $1+c/n$ ogranicza licznik ułamka od góry, a~funkcja $1+d/n$ -- mianownik ułamka od dołu.
+Mamy
 \[
     \frac{1+\Theta(1/n)}{(1+\Theta(1/n))^2} \le \frac{1+c/n}{(1+d/n)^2} < \frac{1+c/n}{1+d/n} = \frac{n+c}{n+d} = 1+\frac{c-d}{n+d} = 1+O(1/n).
 \]
@@ -135,14 +166,16 @@ Obliczamy pierwszą pochodną funkcji entropii $H$:
 	&= -\lg\lambda-\lg e+\lg(1-\lambda)+\lg e \\[1mm]
 	&= \lg\frac{1-\lambda}{\lambda}.
 \end{align*}
-Powyższe wyrażenie przyjmuje wartość 0, gdy $\lambda=1/2$. Należy jeszcze zbadać drugą pochodną:
+Powyższe wyrażenie przyjmuje wartość 0, gdy $\lambda=1/2$.
+Należy jeszcze zbadać drugą pochodną:
 \[
 	\frac{d^2\!H}{d\lambda^2}(\lambda) = \frac{\lambda}{(1-\lambda)\ln2}\cdot\frac{-\lambda-(1-\lambda)}{\lambda^2} = -\frac{\lg e}{\lambda(1-\lambda)}.
 \]
 W~punkcie $\lambda=1/2$ druga pochodna jest ujemna, czyli binarna funkcja entropii $H$ osiąga maksimum wynoszące $H(1/2)=1$.
 
 \exercise %C.1-15
-Dla $n=0$ równość jest trywialna, przyjmijmy więc, że $n\ge1$. Wówczas
+Dla $n=0$ równość jest trywialna, przyjmijmy więc, że $n\ge1$.
+Wówczas
 \[
 	\sum_{k=1}^n\binom{n}{k}k = \sum_{k=1}^n\binom{n-1}{k-1}n = n\sum_{k=0}^{n-1}\binom{n-1}{k} = n2^{n-1}.
 \]
@@ -155,7 +188,8 @@ Utwórzmy skończoną lub przeliczalną rodzinę zdarzeń $\{C_1,C_2,\dots\}$, g
 \[
 	C_i = A_i\setminus\bigcup_{j=1}^{i-1}A_j
 \]
-dla każdego $i=1$, 2,~\dots. Korzystając z~faktu, że $\bigcup_iA_i = \bigcup_iC_i$ oraz z~tego, że każde dwa zdarzenia z~rodziny $\{C_1,C_2,\dots\}$ wzajemnie się wykluczają, otrzymujemy
+dla każdego $i=1$, 2,~\dots.
+Korzystając z~faktu, że $\bigcup_iA_i = \bigcup_iC_i$ oraz z~tego, że każde dwa zdarzenia z~rodziny $\{C_1,C_2,\dots\}$ wzajemnie się wykluczają, otrzymujemy
 \[
 	\Pr\biggl(\bigcup_iA_i\biggr) = \Pr\biggl(\bigcup_iC_i\biggr) = \sum_i\Pr(C_i).
 \]
@@ -165,7 +199,9 @@ Ponieważ $\Pr(C_i)\le\Pr(A_i)$ dla każdego $i=1$, 2,~\dots, to prawdą jest, �
 \]
 
 \exercise %C.2-2
-Zdefiniujmy \singledash{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób. Pierwszy symbol tego słowa będzie oznaczać wynik rzutu monetą profesora Rosencrantza, drugi symbol -- wynik rzutu pierwszą monetą profesora Guildensterna, a~trzeci -- wynik rzutu jego drugą monetą, przy czym $\scriptstyle\rm O$ oznacza uzyskanie orła, a~$\scriptstyle\rm R$ -- uzyskanie reszki. Tworzymy przestrzeń zdarzeń elementarnych:
+Zdefiniujmy \singledash{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób.
+Pierwszy symbol tego słowa będzie oznaczać wynik rzutu monetą profesora Rosencrantza, drugi symbol -- wynik rzutu pierwszą monetą profesora Guildensterna, a~trzeci -- wynik rzutu jego drugą monetą, przy czym $\scriptstyle\rm O$ oznacza uzyskanie orła, a~$\scriptstyle\rm R$ -- uzyskanie reszki.
+Tworzymy przestrzeń zdarzeń elementarnych:
 \[
 	S = \{{\scriptstyle\rm OOO},{\scriptstyle\rm OOR},{\scriptstyle\rm ORO},{\scriptstyle\rm ORR},{\scriptstyle\rm ROO},{\scriptstyle\rm ROR},{\scriptstyle\rm RRO},{\scriptstyle\rm RRR}\}.
 \]
@@ -177,11 +213,14 @@ Oznaczmy zdarzenia:
 	\item[$A$] -- numer drugiej karty jest większy od numeru pierwszej karty,
 	\item[$B$] -- numer trzeciej karty jest większy od numeru drugiej karty.
 \end{itemize}
-Jeśli numer drugiej wybranej karty wynosi $k$, to liczba zdarzeń sprzyjających $A$ wynosi $k-1$, a~liczba zdarzeń sprzyjających $B$ wynosi $10-k$. Mamy obliczyć $\Pr(A\cap B)$. Korzystając z~reguły iloczynu, dostajemy, że liczba zdarzeń sprzyjających $A\cap B$ wynosi
+Jeśli numer drugiej wybranej karty wynosi $k$, to liczba zdarzeń sprzyjających $A$ wynosi $k-1$, a~liczba zdarzeń sprzyjających $B$ wynosi $10-k$.
+Mamy obliczyć $\Pr(A\cap B)$.
+Korzystając z~reguły iloczynu, dostajemy, że liczba zdarzeń sprzyjających $A\cap B$ wynosi
 \[
     \sum_{k=1}^{10}(k-1)(10-k) = 120.
 \]
-Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \singledash{3}{permutacji} zbioru \singledash{10}{elementowego}). Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
+Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \singledash{3}{permutacji} zbioru \singledash{10}{elementowego}).
+Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
 
 \exercise %C.2-4
 Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa rozwinięcia binarnego ilorazu $a/b$ jest ciągiem zer i~jedynek $\beta_1,\beta_2,\dots$ zawierającym co najmniej jedno zero i~co najmniej jedną jedynkę oraz spełniającym równość
@@ -189,14 +228,22 @@ Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa rozwinięcia binarnego
     \frac{a}{b} = \sum_{i=1}^\infty\frac{\beta_i}{2^i}.
 \]
 
-Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \singledash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=0$, a~dla reszki $\alpha_i=1$. Rzuty wykonujemy, dopóki zachodzi $\alpha_i=\beta_i$. Natychmiast po wystąpieniu pierwszej różnicy kończymy proces i~zwracamy wynik ostatnio wykonanego rzutu. Dokładniej, jeśli $k$ jest najmniejszym indeksem, dla którego $\alpha_k\ne\beta_k$, to zwrócimy orła, jeżeli $\alpha_k=0$, a~reszkę w~przeciwnym przypadku.
+Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \singledash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=0$, a~dla reszki $\alpha_i=1$.
+Rzuty wykonujemy, dopóki zachodzi $\alpha_i=\beta_i$.
+Natychmiast po wystąpieniu pierwszej różnicy kończymy proces i~zwracamy wynik ostatnio wykonanego rzutu.
+Dokładniej, jeśli $k$ jest najmniejszym indeksem, dla którego $\alpha_k\ne\beta_k$, to zwrócimy orła, jeżeli $\alpha_k=0$, a~reszkę w~przeciwnym przypadku.
 
-Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła. Wynik każdego rzutu monetą nie zależy od wyników pozostałych rzutów, zatem szanse uzyskania dokładnie $k-1$ rezultatów zgodnych z~kolejnymi bitami części ułamkowej $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$. Stąd mamy, że orzeł zostanie zwrócony z~prawdopodobieństwem równym
+Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła.
+Wynik każdego rzutu monetą nie zależy od wyników pozostałych rzutów, zatem szanse uzyskania dokładnie $k-1$ rezultatów zgodnych z~kolejnymi bitami części ułamkowej $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$.
+Stąd mamy, że orzeł zostanie zwrócony z~prawdopodobieństwem równym
 \[
     \sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{\substack{k=1,2,\dots\\\beta_k=0}}\!\frac{0}{2^k}+\sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{k=1}^\infty\frac{\beta_k}{2^k} = \frac{a}{b}.
 \]
 
-Oczekiwana liczba rzutów monetą potrzebnych do wyznaczenia wyniku jest oczekiwaną liczbą rzutów, aż do uzyskania pierwszej niezgodności między wynikiem rzutu a~odpowiednim bitem rozwinięcia binarnego części ułamkowej liczby $a/b$. Jeśli przyjmiemy, że sukcesem jest wynik rzutu monetą niezgodny z~bieżącym bitem rozwinięcia, to liczba potrzebnych rzutów $n$ zanim pojawi się pierwszy sukces jest zmienną losową $X$ o~rozkładzie geometrycznym. Prawdopodobieństwo sukcesu wynosi $p=1/2$, więc ze wzoru~(C.31) otrzymujemy $\E(X)=1/p=2$. Widać zatem, że oczekiwana liczba rzutów monetą w~opisanej procedurze jest stała.
+Oczekiwana liczba rzutów monetą potrzebnych do wyznaczenia wyniku jest oczekiwaną liczbą rzutów, aż do uzyskania pierwszej niezgodności między wynikiem rzutu a~odpowiednim bitem rozwinięcia binarnego części ułamkowej liczby $a/b$.
+Jeśli przyjmiemy, że sukcesem jest wynik rzutu monetą niezgodny z~bieżącym bitem rozwinięcia, to liczba potrzebnych rzutów $n$ zanim pojawi się pierwszy sukces jest zmienną losową $X$ o~rozkładzie geometrycznym.
+Prawdopodobieństwo sukcesu wynosi $p=1/2$, więc ze wzoru~(C.31) otrzymujemy $\E(X)=1/p=2$.
+Widać zatem, że oczekiwana liczba rzutów monetą w~opisanej procedurze jest stała.
 
 \exercise %C.2-5
 Korzystając z~obserwacji, że $(A\cap B)\cup(\overline{A}\cap B)=B$ oraz z~tego, że zdarzenia $A\cap B$ i~$\overline{A}\cap B$ wzajemnie się wykluczają, otrzymujemy
@@ -205,7 +252,9 @@ Korzystając z~obserwacji, że $(A\cap B)\cup(\overline{A}\cap B)=B$ oraz z~tego
 \]
 
 \exercise %C.2-6
-Dowodzimy przez indukcję względem liczby zdarzeń $n$. Dla $n=1$ dowód jest trywialny, załóżmy zatem, że $n\ge2$. Otrzymujemy
+Dowodzimy przez indukcję względem liczby zdarzeń $n$.
+Dla $n=1$ dowód jest trywialny, załóżmy zatem, że $n\ge2$.
+Otrzymujemy
 \begin{align*}
 	\Pr\biggl(\bigcap_{i=1}^nA_i\biggr) &= \Pr\biggl(A_n\cap\bigcap_{i=1}^{n-1}A_i\biggr) \\
 	&= \Pr\biggl(\bigcap_{i=1}^{n-1}A_i\biggr)\Pr\biggl(A_n\biggm|\bigcap_{i=1}^{n-1}A_i\biggr) \\
@@ -214,9 +263,14 @@ Dowodzimy przez indukcję względem liczby zdarzeń $n$. Dla $n=1$ dowód jest t
 Druga równość wynika z~definicji prawdopodobieństwa warunkowego, a~trzecia -- z~założenia indukcyjnego.
 
 \exercise %C.2-7
-Niech $n\ge3$ i~niech $S=\{s_1,s_2,\dots,s_{n^2}\}$ będzie przestrzenią zdarzeń, przy czym $\Pr(s_i)=1/n^2$ dla każdego $i=1$, 2,~\dots,~$n^2$. Pokażemy teraz, jak skonstruować zdarzenia $A_1$, $A_2$,~\dots,~$A_n\subseteq S$, które spełniają warunek z~treści zadania.
+Niech $n\ge3$ i~niech $S=\{s_1,s_2,\dots,s_{n^2}\}$ będzie przestrzenią zdarzeń, przy czym $\Pr(s_i)=1/n^2$ dla każdego $i=1$, 2,~\dots,~$n^2$.
+Pokażemy teraz, jak skonstruować zdarzenia $A_1$, $A_2$,~\dots,~$A_n\subseteq S$, które spełniają warunek z~treści zadania.
 
-Będziemy dążyć do tego, by dla każdych indeksów $1\le i_1$, $i_2$, $i_3\le n$, zachodziło $|A_{i_1}\cap A_{i_2}|=1$ oraz $|A_{i_1}\cap A_{i_2}\cap A_{i_3}|=0$. Jest dokładnie $n(n-1)/2$ przecięć $A_i\cap A_j$, gdzie $1\le i<j\le n$. Wybierzmy zatem tyle samo zdarzeń elementarnych i~umieśćmy po jednym w~każdym takim przecięciu, tzn.\ dane zdarzenie elementarne będzie wchodzić w~skład obu zdarzeń tworzących dane przecięcie. Każde zdarzenie $A_i$ składa się teraz z~$n-1$ zdarzeń elementarnych i~spełnione są powyższe warunki dotyczące rozmiarów przecięć. Spośród pozostałych $n(n+1)/2$ zdarzeń elementarnych wybieramy jeszcze $n$ i~umieszczamy po jednym w~każdym zdarzeniu $A_i$.
+Będziemy dążyć do tego, by dla każdych indeksów $1\le i_1$, $i_2$, $i_3\le n$, zachodziło $|A_{i_1}\cap A_{i_2}|=1$ oraz $|A_{i_1}\cap A_{i_2}\cap A_{i_3}|=0$.
+Jest dokładnie $n(n-1)/2$ przecięć $A_i\cap A_j$, gdzie $1\le i<j\le n$.
+Wybierzmy zatem tyle samo zdarzeń elementarnych i~umieśćmy po jednym w~każdym takim przecięciu, tzn.\ dane zdarzenie elementarne będzie wchodzić w~skład obu zdarzeń tworzących dane przecięcie.
+Każde zdarzenie $A_i$ składa się teraz z~$n-1$ zdarzeń elementarnych i~spełnione są powyższe warunki dotyczące rozmiarów przecięć.
+Spośród pozostałych $n(n+1)/2$ zdarzeń elementarnych wybieramy jeszcze $n$ i~umieszczamy po jednym w~każdym zdarzeniu $A_i$.
 
 Z~opisanej konstrukcji zdarzeń $A_1$, $A_2$,~\dots,~$A_n$ wynika, że $|A_i|=n$, czyli $\Pr(A_i)=1/n$ dla $i=1$, 2,~\dots,~$n$, a~zatem
 \[
@@ -226,18 +280,24 @@ dla wszystkich $1\le i_1<i_2\le n$ oraz
 \[
 	\Pr\biggl(\bigcap_{j=1}^kA_{i_j}\biggr) = 0 \ne \prod_{j=1}^k\Pr(A_{i_j})
 \]
-dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$,~\dots, $i_k\le n$. Zdarzenia $A_1$, $A_2$,~\dots,~$A_n$ są więc parami niezależne, ale żaden ich \singledash{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
+dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$,~\dots, $i_k\le n$.
+Zdarzenia $A_1$, $A_2$,~\dots,~$A_n$ są więc parami niezależne, ale żaden ich \singledash{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
 
 \exercise %C.2-8
-Rozważmy pewną grupę 300 osób, z~których 100 osiągnęło już wiek 50 lat. Wśród młodszych osób jest 22 programistów i~15 matematyków, przy czym tylko 5 osób jednocześnie programuje i~zajmuje się matematyką. W~skład grupy seniorów wchodzi 8 programistów oraz 9 matematyków, a~3 jednocześnie jest programistami i~matematykami. Rys.~\ref{fig:C.2-8} stanowi ilustrację przedstawionego opisu.
+Rozważmy pewną grupę 300 osób, z~których 100 osiągnęło już wiek 50 lat.
+Wśród młodszych osób jest 22 programistów i~15 matematyków, przy czym tylko 5 osób jednocześnie programuje i~zajmuje się matematyką.
+W~skład grupy seniorów wchodzi 8 programistów oraz 9 matematyków, a~3 jednocześnie jest programistami i~matematykami.
+Rys.~\ref{fig:C.2-8} stanowi ilustrację przedstawionego opisu.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_c.2-8}
 	\end{center}
-	\caption{Diagramy Venna ilustrujące rozważaną grupę ludzi. Liczby w~poszczególnych obszarach oznaczają liczby osób o~danej profesji lub z~danej grupy wiekowej.} \label{fig:C.2-8}
+	\caption{Diagramy Venna ilustrujące rozważaną grupę ludzi.
+Liczby w~poszczególnych obszarach oznaczają liczby osób o~danej profesji lub z~danej grupy wiekowej.} \label{fig:C.2-8}
 \end{figure}
 
-Wybieramy losowo jedną osobę z~całej grupy. Oznaczmy następujące zdarzenia:
+Wybieramy losowo jedną osobę z~całej grupy.
+Oznaczmy następujące zdarzenia:
 \begin{itemize}
 	\item[$A$] -- wybrano osobę w~wieku powyżej 50 lat,
 	\item[$B$] -- wybrano programistę,
@@ -257,14 +317,24 @@ Są jednak warunkowo zależne od zdarzenia $C$:
 \]
 
 \exercise %C.2-9
-Rozważmy zdarzenie $A$ oznaczające, że wybraliśmy zasłonę, za którą znajduje się nagroda. Oczywiście $\Pr(A)=1/3$ i~ze wzoru Bayesa~(C.17) wynika, że prawdopodobieństwo wygranej $W$ wynosi
+Rozważmy zdarzenie $A$ oznaczające, że wybraliśmy zasłonę, za którą znajduje się nagroda.
+Oczywiście $\Pr(A)=1/3$ i~ze wzoru Bayesa~(C.17) wynika, że prawdopodobieństwo wygranej $W$ wynosi
 \[
 	\Pr(W) = \Pr(W\mid A)\Pr(A)+\Pr(W\mid\overline{A})\Pr(\overline{A}).
 \]
-Obliczmy wartość powyższego prawdopodobieństwa w~zależności od podjętej decyzji po podniesieniu przez prowadzącego jednej z~zasłon. W~pierwszej strategii decydujemy się na pozostanie przy aktualnym wyborze, więc mamy $\Pr(W\mid A)=1$ i~$\Pr(W\mid\overline{A})=0$ i~wygrywamy z~prawdopodobieństwem $\Pr(W)=1/3$. Jeśli teraz rozważymy drugą strategię, to będziemy mieć $\Pr(W\mid A)=0$ i~$\Pr(W\mid\overline{A})=1$, ponieważ zamieniliśmy wybraną zasłonę na inną, dotychczas nieodkrytą. W~tym przypadku prawdopodobieństwo wygranej wynosi $\Pr(W)=2/3$. Widać zatem, że zmiana decyzji jest opłacalna, ponieważ podwaja szanse na wygraną.
+Obliczmy wartość powyższego prawdopodobieństwa w~zależności od podjętej decyzji po podniesieniu przez prowadzącego jednej z~zasłon.
+W~pierwszej strategii decydujemy się na pozostanie przy aktualnym wyborze, więc mamy $\Pr(W\mid A)=1$ i~$\Pr(W\mid\overline{A})=0$ i~wygrywamy z~prawdopodobieństwem $\Pr(W)=1/3$.
+Jeśli teraz rozważymy drugą strategię, to będziemy mieć $\Pr(W\mid A)=0$ i~$\Pr(W\mid\overline{A})=1$, ponieważ zamieniliśmy wybraną zasłonę na inną, dotychczas nieodkrytą.
+W~tym przypadku prawdopodobieństwo wygranej wynosi $\Pr(W)=2/3$.
+Widać zatem, że zmiana decyzji jest opłacalna, ponieważ podwaja szanse na wygraną.
 
 \exercise %C.2-10
-Niech $A_X$, $A_Y$ i~$A_Z$ będą zdarzeniami oznaczającymi wyjście na wolność, odpowiednio, więźnia $X$, $Y$ i~$Z$. Ponadto niech $B$ będzie zdarzeniem polegającym na tym, że strażnik wskazał więźnia $Y$ jako tego, który zostanie ścięty. Strażnik nie może zdradzić, który z~więźniów będzie wolny, mamy więc $\Pr(B\mid A_X)=1/2$, $\Pr(B\mid A_Y)=0$ i~$\Pr(B\mid A_Z)=1$. Przed rozmową ze strażnikiem prawdopodobieństwo, że więzień $X$ będzie wolny, wynosi $\Pr(A_X)=1/3$. Jego sytuację po rozmowie opisuje zdarzenie $A_X\mid B$. Korzystając z~obserwacji, że $B=(B\cap A_X)\cup(B\cap A_Y)\cup(B\cap A_Z)$ i~ze wzoru Bayesa~(C.17), mamy
+Niech $A_X$, $A_Y$ i~$A_Z$ będą zdarzeniami oznaczającymi wyjście na wolność, odpowiednio, więźnia $X$, $Y$ i~$Z$.
+Ponadto niech $B$ będzie zdarzeniem polegającym na tym, że strażnik wskazał więźnia $Y$ jako tego, który zostanie ścięty.
+Strażnik nie może zdradzić, który z~więźniów będzie wolny, mamy więc $\Pr(B\mid A_X)=1/2$, $\Pr(B\mid A_Y)=0$ i~$\Pr(B\mid A_Z)=1$.
+Przed rozmową ze strażnikiem prawdopodobieństwo, że więzień $X$ będzie wolny, wynosi $\Pr(A_X)=1/3$.
+Jego sytuację po rozmowie opisuje zdarzenie $A_X\mid B$.
+Korzystając z~obserwacji, że $B=(B\cap A_X)\cup(B\cap A_Y)\cup(B\cap A_Z)$ i~ze wzoru Bayesa~(C.17), mamy
 \begin{align*}
     \Pr(A_X\mid B) &= \frac{\Pr(A_X)\Pr(B\mid A_X)}{\Pr(A_X)\Pr(B\mid A_X)+\Pr(A_Y)\Pr(B\mid A_Y)+\Pr(A_Z)\Pr(B\mid A_Z)} \\
 	&= \frac{\frac{1}{3}\cdot\frac{1}{2}}{\frac{1}{3}\cdot\frac{1}{2}+\frac{1}{3}\cdot0+\frac{1}{3}\cdot1} \\[2mm]
@@ -275,31 +345,36 @@ A~zatem informacja, jaką uzyskał od strażnika więzień $X$, nie zmienia jego
 \subchapter{Dyskretne zmienne losowe}
 
 \exercise %C.3-1
-Niech $X$ będzie zmienną losową oznaczającą sumę oczek na obu kostkach. Mamy
+Niech $X$ będzie zmienną losową oznaczającą sumę oczek na obu kostkach.
+Mamy
 \begin{align*}
 	\E(X) &= \sum_{x=2}^{12}x\Pr(X=x) \\
 	&= 2\cdot\frac{1}{36}+3\cdot\frac{2}{36}+4\cdot\frac{3}{36}+5\cdot\frac{4}{36}+6\cdot\frac{5}{36}+7\cdot\frac{6}{36} \\
 	&\quad {}+8\cdot\frac{5}{36}+9\cdot\frac{4}{36}+10\cdot\frac{3}{36}+11\cdot\frac{2}{36}+12\cdot\frac{1}{36} \\[1mm]
 	&= 7.
 \end{align*}
-Niech $Y$ będzie zmienną losową oznaczającą większą z~liczb oczek na obu kostkach. Zachodzi
+Niech $Y$ będzie zmienną losową oznaczającą większą z~liczb oczek na obu kostkach.
+Zachodzi
 \[
 	\E(Y) = \sum_{y=1}^{6}y\Pr(Y=y) = 1\cdot\frac{1}{36}+2\cdot\frac{3}{36}+3\cdot\frac{5}{36}+4\cdot\frac{7}{36}+5\cdot\frac{9}{36}+6\cdot\frac{11}{36} \approx 4{,}47.
 \]
 
 \exercise %C.3-2
-Niech $X$ będzie zmienną losową przyjmującą wartość indeksu największego elementu tablicy $A$. Jeśli w~tej tablicy znajduje się $n$ liczb, to $\Pr(X=i)=1/n$ dla każdego $i=1$, 2,~\dots,~$n$, a~zatem
+Niech $X$ będzie zmienną losową przyjmującą wartość indeksu największego elementu tablicy $A$.
+Jeśli w~tej tablicy znajduje się $n$ liczb, to $\Pr(X=i)=1/n$ dla każdego $i=1$, 2,~\dots,~$n$, a~zatem
 \[
 	\E(X) = \sum_{i=1}^ni\Pr(X=i) = \frac{1}{n}\sum_{i=1}^ni = \frac{1}{n}\cdot\frac{n(n+1)}{2} = \frac{n+1}{2}.
 \]
 W~rzeczywistości wynik ten jest identyczny dla każdego elementu tablicy, w~szczególności dla elementów największego i~najmniejszego.
 
 \exercise %C.3-3
-Zdefiniujmy zmienną losową $X$ przyjmującą wielkość wygranej w~opisanej grze. Mamy obliczyć
+Zdefiniujmy zmienną losową $X$ przyjmującą wielkość wygranej w~opisanej grze.
+Mamy obliczyć
 \[
 	\E(X) = -\Pr(A_0)+\Pr(A_1)+2\Pr(A_2)+3\Pr(A_3),
 \]
-przy czym $A_k$, dla $k=0$, 1,~2,~3, oznacza zdarzenie, że obstawiona przez gracza liczba oczek pojawiła się dokładnie na $k$ kostkach. Prawdopodobieństwa tych zdarzeń wynoszą:
+przy czym $A_k$, dla $k=0$, 1,~2,~3, oznacza zdarzenie, że obstawiona przez gracza liczba oczek pojawiła się dokładnie na $k$ kostkach.
+Prawdopodobieństwa tych zdarzeń wynoszą:
 \[
 	\begin{array}{ccccc}
 	\Pr(A_0) &=& \dfrac{5^3}{6^3} &=& \dfrac{125}{216}, \\[3mm]
@@ -315,7 +390,9 @@ Dostajemy zatem
 a~więc gracz straci w~tej grze średnio około 8~gr.
 
 \exercise %C.3-4
-Niech $S$ będzie przestrzenią zdarzeń, w~której określone są zmienne losowe $X$ i~$Y$. Załóżmy, że w~pewnym podzbiorze zbioru $S$ zachodzi $X\ge Y$. Ponieważ $Y\ge0$, więc także $\E(Y)\ge0$, skąd
+Niech $S$ będzie przestrzenią zdarzeń, w~której określone są zmienne losowe $X$ i~$Y$.
+Załóżmy, że w~pewnym podzbiorze zbioru $S$ zachodzi $X\ge Y$.
+Ponieważ $Y\ge0$, więc także $\E(Y)\ge0$, skąd
 \[
     \E(\max(X,Y)) = \E(X) \le \E(X)+\E(Y).
 \]
@@ -326,24 +403,31 @@ Zgodnie z~definicją niezależnych zmiennych losowych $X$ i~$Y$ mamy
 \[
 	\Pr(X=x\;\;\text{i}\;\;Y=y) = \Pr(X=x)\Pr(Y=y).
 \]
-Niech $f$ i~$g$ będą dowolnymi funkcjami rzeczywistymi. Jeśli $X$ przyjmuje wartość $x$, to zmienna losowa $f(X)$ przyjmuje wartość $f(x)$. Analogicznie dla $Y$: jeśli $Y=y$, to $g(Y)=g(y)$. Powyższy wzór możemy więc zapisać w~postaci
+Niech $f$ i~$g$ będą dowolnymi funkcjami rzeczywistymi.
+Jeśli $X$ przyjmuje wartość $x$, to zmienna losowa $f(X)$ przyjmuje wartość $f(x)$.
+Analogicznie dla $Y$: jeśli $Y=y$, to $g(Y)=g(y)$.
+Powyższy wzór możemy więc zapisać w~postaci
 \[
 	\Pr\bigl(f(X)=f(x)\;\;\text{i}\;\;g(Y)=g(y)\bigr) = \Pr\bigl(f(X)=f(x)\bigr)\Pr\bigl(g(Y)=g(y)\bigr),
 \]
 na podstawie której wnioskujemy, że $f(X)$ i~$g(Y)$ są niezależnymi zmiennymi losowymi.
 
 \exercise %C.3-6
-Niech $t\in\mathbb{R}$. Wartość oczekiwaną $\E(X)$ zapisujemy w~następujący sposób:
+Niech $t\in\mathbb{R}$.
+Wartość oczekiwaną $\E(X)$ zapisujemy w~następujący sposób:
 \[
     \E(X) = \sum_xx\Pr(X=x) = \sum_{x<t}x\Pr(X=x)+\sum_{x\ge t}x\Pr(X=x).
 \]
-Ponieważ zmienna losowa $X$ jest nieujemna, to można ograniczyć $E(X)$ od dołu, opuszczając pierwszą sumę w~ostatnim wyrażeniu. Zachodzi więc
+Ponieważ zmienna losowa $X$ jest nieujemna, to można ograniczyć $E(X)$ od dołu, opuszczając pierwszą sumę w~ostatnim wyrażeniu.
+Zachodzi więc
 \[
     \E(X) \ge \sum_{x\ge t}x\Pr(X=x) \ge t\sum_{x\ge t}\Pr(X=x) = t\Pr(X\ge t).
 \]
 
 \exercise %C.3-7
-Ustalmy $t\in\mathbb{R}$. Niech $A=\{\,s\in S:X(s)\ge t\,\}$ oraz $A'=\{\,s\in S:X'(s)\ge t\,\}$. Wprost z~definicji zmiennej losowej mamy
+Ustalmy $t\in\mathbb{R}$.
+Niech $A=\{\,s\in S:X(s)\ge t\,\}$ oraz $A'=\{\,s\in S:X'(s)\ge t\,\}$.
+Wprost z~definicji zmiennej losowej mamy
 \[
 	\Pr(X\ge t) = \sum_{s\in A}\Pr(s) \quad\text{oraz}\quad \Pr(X'\ge t) = \sum_{s\in A'}\Pr(s).
 \]
@@ -351,17 +435,21 @@ Dowodzimy, że
 \[
 	\sum_{s\in A}\Pr(s) \ge \sum_{s\in A'}\Pr(s).
 \]
-Z~założenia wynika, że jeśli $X'(s)\ge t$, to $X(s)\ge t$, lub równoważnie, $A'\subseteq A$. A~zatem suma po lewej stronie powyższej nierówności zawiera o~$|A\setminus A'|$ więcej składników niż suma po prawej stronie. Wszystkie te składniki są liczbami nieujemnymi, więc nierówność jest spełniona.
+Z~założenia wynika, że jeśli $X'(s)\ge t$, to $X(s)\ge t$, lub równoważnie, $A'\subseteq A$.
+A~zatem suma po lewej stronie powyższej nierówności zawiera o~$|A\setminus A'|$ więcej składników niż suma po prawej stronie.
+Wszystkie te składniki są liczbami nieujemnymi, więc nierówność jest spełniona.
 
 \exercise %C.3-8
 Wariancja zmiennej losowej $X$ jest liczbą nieujemną, a~więc po skorzystaniu ze wzoru~(C.26) otrzymujemy, że $\E(X^2)\ge\E^2(X)$.
 
 \exercise %C.3-9
-Niech $\Pr(X=0)=1-p$ oraz $\Pr(X=1)=p$. Stąd
+Niech $\Pr(X=0)=1-p$ oraz $\Pr(X=1)=p$.
+Stąd
 \[
     \E(X)=0\cdot(1-p)+1\cdot p=p.
 \]
-Zauważmy ponadto, że $\E(X^2)=\E(X)$. Wariancja zmiennej losowej $X$ jest równa
+Zauważmy ponadto, że $\E(X^2)=\E(X)$.
+Wariancja zmiennej losowej $X$ jest równa
 \[
 	\Var(X) = \E(X^2)-\E^2(X) = p(1-p) = \E(X)(1-\E(X)) = \E(X)\E(1-X),
 \]
@@ -376,14 +464,19 @@ Wprost z~definicji wariancji oraz ze wzoru~(C.21):
 \subchapter{Rozkłady: geometryczny i~dwumianowy}
 
 \exercise %C.4-1
-Rodzina zdarzeń elementarnych $S$ składa się ze zdarzeń oznaczających, że należy wykonać $k$ prób, zanim nastąpi pierwszy sukces, przy czym $k=1$, 2,~\dots. Niech zmienna losowa $X$ będzie liczbą prób potrzebnych do osiągnięcia sukcesu. Wówczas
+Rodzina zdarzeń elementarnych $S$ składa się ze zdarzeń oznaczających, że należy wykonać $k$ prób, zanim nastąpi pierwszy sukces, przy czym $k=1$, 2,~\dots.
+Niech zmienna losowa $X$ będzie liczbą prób potrzebnych do osiągnięcia sukcesu.
+Wówczas
 \[
 	\Pr(S) = \sum_{k=1}^\infty\Pr(X=k) = \sum_{k=1}^\infty q^{k-1}p = p\sum_{k=0}^\infty(1-p)^k = \frac{p}{1-(1-p)} \\[1mm] = 1.
 \]
 Wykorzystano wzór~(A.6) przy założeniu, że $p>0$.
 
 \exercise %C.4-2
-Niech sukcesem w~tym doświadczeniu będzie uzyskanie trzech orłów i~trzech reszek, a~porażką -- każdy inny wynik. Spośród wszystkich sześciu monet możemy wybrać dowolne trzy takie, na których wypadnie orzeł -- mamy zatem $\binom{6}{3}=20$ sposobów osiągnięcia sukcesu. Jest $2^6=64$ wszystkich możliwych wyników, zatem prawdopodobieństwo sukcesu wynosi $p=20/64=5/16$. Ze wzoru~(C.31) otrzymujemy, że musimy wykonać średnio $1/p=3{,}2$ rzutów.
+Niech sukcesem w~tym doświadczeniu będzie uzyskanie trzech orłów i~trzech reszek, a~porażką -- każdy inny wynik.
+Spośród wszystkich sześciu monet możemy wybrać dowolne trzy takie, na których wypadnie orzeł -- mamy zatem $\binom{6}{3}=20$ sposobów osiągnięcia sukcesu.
+Jest $2^6=64$ wszystkich możliwych wyników, zatem prawdopodobieństwo sukcesu wynosi $p=20/64=5/16$.
+Ze wzoru~(C.31) otrzymujemy, że musimy wykonać średnio $1/p=3{,}2$ rzutów.
 
 \exercise %C.4-3
 Z~definicji rodziny rozkładów dwumianowych mamy
@@ -393,7 +486,9 @@ Z~definicji rodziny rozkładów dwumianowych mamy
 Ponieważ $\binom{n}{n-k}=\binom{n}{k}$ (ze wzoru~(C.3)) oraz $q=1-p$, to zachodzi $b(k;n,p)=b(n-k;n,q)$.
 
 \exercise %C.4-4
-Rozkład dwumianowy przyjmuje maksimum dla pewnego $k$, gdzie $np-q\le k\le(n+1)p$, więc dobrym przybliżeniem wartości maksymalnej jest wartość przyjmowana dla $k=np$. Ponieważ nie interesuje nas dokładny wynik, to pozwolimy sobie na pewną niedbałość w~rachunkach (wartość $np$ oraz argumenty silni mogą być niecałkowite). Mamy
+Rozkład dwumianowy przyjmuje maksimum dla pewnego $k$, gdzie $np-q\le k\le(n+1)p$, więc dobrym przybliżeniem wartości maksymalnej jest wartość przyjmowana dla $k=np$.
+Ponieważ nie interesuje nas dokładny wynik, to pozwolimy sobie na pewną niedbałość w~rachunkach (wartość $np$ oraz argumenty silni mogą być niecałkowite).
+Mamy
 \[
 	b(np;n,p) = \binom{n}{np}p^{np}(1-p)^{n-np} = \frac{n!}{(np)!\,(n-np)!}\cdot p^{np}(1-p)^{n-np} = \frac{n!}{(np)!\,(nq)!}\cdot p^{np}q^{nq}.
 \]
@@ -408,7 +503,8 @@ Stąd dostajemy przybliżenie
 na maksymalną wartość rozkładu dwumianowego $b(k;n,p)$.
 
 \exercise %C.4-5
-Niech $X$ będzie zmienną losową przyjmującą liczbę sukcesów w~$n$ próbach Bernoulliego. Wówczas
+Niech $X$ będzie zmienną losową przyjmującą liczbę sukcesów w~$n$ próbach Bernoulliego.
+Wówczas
 \[
 	\Pr(X=0) = b(0;n,1/n) = \biggl(1-\frac{1}{n}\biggr)^n.
 \]
@@ -421,12 +517,20 @@ Analogicznie,
 co także dąży do $1/e$, bo mianownik zbliża się do~1 wraz ze wzrostem $n$.
 
 \exercise %C.4-6
-Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów. W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \singledash{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna. Wszystkich takich ciągów jest $2^{2n}=4^n$. Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki. Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów. Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces. Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
+Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów.
+W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \singledash{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna.
+Wszystkich takich ciągów jest $2^{2n}=4^n$.
+Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki.
+Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów.
+Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces.
+Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
 \[
 	\frac{\binom{2n}{n}}{4^n}.
 \]
 
-Drugi sposób polega na zdefiniowaniu $X$ i~$Y$ jako zmiennych losowych przyjmujących liczby orłów uzyskane kolejno przez obu profesorów. Obie te zmienne są rozkładu dwumianowego $b(k;n,1/2)$. Zdarzenia $X=k$ i~$Y=k$ są niezależne, zatem prawdopodobieństwo uzyskania przez obu profesorów równej ilości orłów wynosi
+Drugi sposób polega na zdefiniowaniu $X$ i~$Y$ jako zmiennych losowych przyjmujących liczby orłów uzyskane kolejno przez obu profesorów.
+Obie te zmienne są rozkładu dwumianowego $b(k;n,1/2)$.
+Zdarzenia $X=k$ i~$Y=k$ są niezależne, zatem prawdopodobieństwo uzyskania przez obu profesorów równej ilości orłów wynosi
 \begin{align*}
 	\sum_{k=0}^n\Pr(X=k\;\;\text{i}\;\;Y=k) &= \sum_{k=0}^n\Pr(X=k)\Pr(Y=k) \\
 	&= \sum_{k=0}^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n \\
@@ -439,7 +543,8 @@ Przyrównując do siebie wyniki otrzymane w~obu sposobach, dostajemy tożsamoś�
 \]
 
 \exercise %C.4-7
-Niech $0\le\lambda\le1$. Wykorzystując nierówność
+Niech $0\le\lambda\le1$.
+Wykorzystując nierówność
 \[
 	\binom{n}{\lambda n} \le 2^{nH(\lambda)},
 \]
@@ -451,7 +556,8 @@ wynikającą ze wzoru~(C.6), otrzymujemy
 \exercise %C.4-8
 \note{Znak nierówności, którą należy udowodnić w~tym zadaniu, powinien być skierowany przeciwnie.}
 
-\noindent Niech $X'$ będzie zmienną losową przyjmującą liczbę sukcesów w~serii prób Bernoulliego, każda o~prawdopodobieństwie sukcesu równym $p$. Z~\refExercise{C.4-9}, po zdefiniowaniu $p_i'=p$ dla każdego $i=1$, 2,~\dots,~$n$, wynika wzór
+\noindent Niech $X'$ będzie zmienną losową przyjmującą liczbę sukcesów w~serii prób Bernoulliego, każda o~prawdopodobieństwie sukcesu równym $p$.
+Z~\refExercise{C.4-9}, po zdefiniowaniu $p_i'=p$ dla każdego $i=1$, 2,~\dots,~$n$, wynika wzór
 \[
     \Pr(X\ge k) \le \Pr(X'\ge k).
 \]
@@ -466,7 +572,13 @@ skąd, po wykorzystaniu wzoru~(C.35), dostajemy
 Aby dokończyć dowód, wystarczy od obu stron nierówności odjąć jedynki i~obustronnie pomnożyć przez $-1$.
 
 \exercise %C.4-9
-Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \singledash{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces. Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$. Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$. Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~\singledash{$i$}{tej} próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~\singledash{$i$}{tej} próbie w~ciągu $A'$. Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$. W~przeciwnym przypadku będziemy generować sukces w~\singledash{$i$}{tej} próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$. Ze wzoru Bayesa~(C.17) wynika, że
+Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \singledash{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces.
+Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$.
+Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$.
+Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~\singledash{$i$}{tej} próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~\singledash{$i$}{tej} próbie w~ciągu $A'$.
+Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$.
+W~przeciwnym przypadku będziemy generować sukces w~\singledash{$i$}{tej} próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$.
+Ze wzoru Bayesa~(C.17) wynika, że
 \[
     p_i' = \Pr(A_i') = \Pr(A_i)\Pr(A_i'\mid A_i)+\Pr(\overline{A_i})\Pr(A_i'\mid\overline{A_i}) = p_i\cdot1+(1-p_i)\cdot r_i,
 \]
@@ -475,7 +587,9 @@ więc
     r_i = \frac{p_i'-p_i}{1-p_i}.
 \]
 
-Operując na tej samej przestrzeni $S$, przyjmujemy, że $X'(s)$ oznacza liczbę sukcesów w~serii $n$ prób otrzymanych powyższą procedurą z~ciągu $A$ na podstawie przyjmowanych sukcesów opisanych przez słowo $s$. Dla dowolnego $s\in S$ oczywistym jest, że przy takiej konstrukcji ciągu $A'$ nie zdarzy się, aby w~jego próbach było sumarycznie mniej sukcesów niż w~początkowym ciągu prób $A$, to znaczy $X'(s)\ge X(s)$. Korzystając teraz z~\refExercise{C.3-7}, otrzymujemy żądany wynik.
+Operując na tej samej przestrzeni $S$, przyjmujemy, że $X'(s)$ oznacza liczbę sukcesów w~serii $n$ prób otrzymanych powyższą procedurą z~ciągu $A$ na podstawie przyjmowanych sukcesów opisanych przez słowo $s$.
+Dla dowolnego $s\in S$ oczywistym jest, że przy takiej konstrukcji ciągu $A'$ nie zdarzy się, aby w~jego próbach było sumarycznie mniej sukcesów niż w~początkowym ciągu prób $A$, to znaczy $X'(s)\ge X(s)$.
+Korzystając teraz z~\refExercise{C.3-7}, otrzymujemy żądany wynik.
 
 \subchapter{Krańce rozkładu dwumianowego}
 
@@ -484,7 +598,9 @@ Zanim przejdziemy do porównywania prawdopodobieństw, udowodnimy pomocniczą ni
 \[
     \binom{4n}{n-1} > 8^n
 \]
-dla $n\ge20$, stosując indukcję matematyczną. Przypadek bazowy indukcji można zweryfikować, obliczając wartości obu stron nierówności. Załóżmy zatem, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
+dla $n\ge20$, stosując indukcję matematyczną.
+Przypadek bazowy indukcji można zweryfikować, obliczając wartości obu stron nierówności.
+Załóżmy zatem, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
 \[
     \binom{4n}{n-1} = \frac{4n}{n-1}\cdot\binom{4n-1}{n-2} = \frac{4n}{n-1}\cdot\frac{4n-1}{3n+1}\cdot\frac{4n-2}{3n}\cdot\frac{4n-3}{3n-1}\cdot\binom{4(n-1)}{n-2}.
 \]
@@ -498,7 +614,8 @@ Okazuje się, że dla $n\ge2$, a~więc w~szczególności dla $n\ge20$ spełnione
 \]
 co dowodzi tezy.
 
-Zdefiniujmy teraz $X$ i~$Y$ jako zmienne losowe przyjmujące liczby uzyskanych orłów, odpowiednio, w~pierwszym i~w~drugim doświadczeniu. Mamy zatem
+Zdefiniujmy teraz $X$ i~$Y$ jako zmienne losowe przyjmujące liczby uzyskanych orłów, odpowiednio, w~pierwszym i~w~drugim doświadczeniu.
+Mamy zatem
 \begin{align*}
 	\Pr(X=0) &= b(0;n,1/2) = \binom{n}{0}\biggl(\frac{1}{2}\biggr)^0\biggl(\frac{1}{2}\biggr)^n = \biggl(\frac{1}{2}\biggr)^n, \\
 	\Pr(Y<n) &= \sum_{i=0}^{n-1}b(i;4n,1/2) = \sum_{i=0}^{n-1}\binom{4n}{i}\biggl(\frac{1}{2}\biggr)^i\biggl(\frac{1}{2}\biggr)^{4n-i} = \biggl(\frac{1}{2}\biggr)^{4n}\sum_{i=0}^{n-1}\binom{4n}{i}.
@@ -507,21 +624,29 @@ Dzięki uprzednio udowodnionej nierówności pokazujemy, że jeśli $n\ge20$, to
 \[
     \frac{\Pr(Y<n)}{\Pr(X=0)} = \frac{\bigl(\frac{1}{2}\bigr)^{4n}\sum_{i=0}^{n-1}\binom{4n}{i}}{\bigl(\frac{1}{2}\bigr)^n} = \frac{\sum_{i=0}^{n-1}\binom{4n}{i}}{8^n} > \frac{\binom{4n}{n-1}}{8^n} > 1.
 \]
-Wartości obu prawdopodobieństw w~przypadku, gdy $n<20$, obliczamy bezpośrednio. Otrzymujemy ostatecznie, że $\Pr(X=0)>\Pr(Y<n)$, gdy $n\le17$, oraz $\Pr(X=0)<\Pr(Y<n)$ w~przeciwnym przypadku. A~zatem, dla odpowiednio dużych $n$, prawdopodobieństwo uzyskania mniej niż $n$ orłów w~$4n$ rzutach monetą jest większe niż nieuzyskanie żadnego orła w~$n$ rzutach.
+Wartości obu prawdopodobieństw w~przypadku, gdy $n<20$, obliczamy bezpośrednio.
+Otrzymujemy ostatecznie, że $\Pr(X=0)>\Pr(Y<n)$, gdy $n\le17$, oraz $\Pr(X=0)<\Pr(Y<n)$ w~przeciwnym przypadku.
+A~zatem, dla odpowiednio dużych $n$, prawdopodobieństwo uzyskania mniej niż $n$ orłów w~$4n$ rzutach monetą jest większe niż nieuzyskanie żadnego orła w~$n$ rzutach.
 
 \exercise %C.5-2
 \begin{proof}[Dowód wniosku~C.6]
-	Ponieważ uzyskanie więcej niż $k$ sukcesów w~$n$ próbach jest równoważne uzyskaniu mniej niż $n-k$ porażek, to zachodzi $\Pr(X>k)=\Pr(Y<n-k)$, gdzie $Y$ jest zmienną losową oznaczającą liczbę porażek uzyskanych w~tym doświadczeniu. Mamy $np<k<n$, skąd $0<n-k<nq$, a~zatem możemy zastosować tw.~C.4 dla zmiennej losowej $Y$, zamieniając ze sobą role sukcesu i~porażki, dzięki czemu uzyskujemy żądaną nierówność.
+	Ponieważ uzyskanie więcej niż $k$ sukcesów w~$n$ próbach jest równoważne uzyskaniu mniej niż $n-k$ porażek, to zachodzi $\Pr(X>k)=\Pr(Y<n-k)$, gdzie $Y$ jest zmienną losową oznaczającą liczbę porażek uzyskanych w~tym doświadczeniu.
+Mamy $np<k<n$, skąd $0<n-k<nq$, a~zatem możemy zastosować tw.~C.4 dla zmiennej losowej $Y$, zamieniając ze sobą role sukcesu i~porażki, dzięki czemu uzyskujemy żądaną nierówność.
 \end{proof}
 
 \begin{proof}[Dowód wniosku~C.7]
-	Jeśli $k=n$, to wniosek jest oczywiście prawdziwy, bo szanse uzyskania więcej niż $n$ sukcesów są zerowe. Załóżmy więc, że $k<n$. Analogicznie do poprzedniego dowodu potraktujmy prawdopodobieństwo uzyskania więcej niż $k$ sukcesów jako prawdopodobieństwo uzyskania mniej niż $n-k$ porażek. Ponieważ $(np+n)/2<k<n$, to $0<n-k<nq/2$ i~po zamianie sukcesu z~porażką stosujemy wniosek~C.5.
+	Jeśli $k=n$, to wniosek jest oczywiście prawdziwy, bo szanse uzyskania więcej niż $n$ sukcesów są zerowe.
+Załóżmy więc, że $k<n$.
+Analogicznie do poprzedniego dowodu potraktujmy prawdopodobieństwo uzyskania więcej niż $k$ sukcesów jako prawdopodobieństwo uzyskania mniej niż $n-k$ porażek.
+Ponieważ $(np+n)/2<k<n$, to $0<n-k<nq/2$ i~po zamianie sukcesu z~porażką stosujemy wniosek~C.5.
 \end{proof}
 
 \exercise %C.5-3
-\note{W~rzeczywistości nierówność nie zachodzi dla podanego warunku. Powinno być\/ $0<k<\frac{a}{a+1}n$, bo tylko wtedy można zastosować twierdzenie~C.4.}
+\note{W~rzeczywistości nierówność nie zachodzi dla podanego warunku.
+Powinno być\/ $0<k<\frac{a}{a+1}n$, bo tylko wtedy można zastosować twierdzenie~C.4.}
 
-\noindent Niech $p=\frac{a}{a+1}$, skąd mamy, że $q=\frac{1}{a+1}$ oraz $a=\frac{p}{1-p}$. Zachodzi
+\noindent Niech $p=\frac{a}{a+1}$, skąd mamy, że $q=\frac{1}{a+1}$ oraz $a=\frac{p}{1-p}$.
+Zachodzi
 \[
 	\sum_{i=0}^{k-1}\binom{n}{i}a^i = \sum_{i=0}^{k-1}\binom{n}{i}\biggl(\frac{p}{1-p}\biggr)^i = \frac{\sum_{i=0}^{k-1}\binom{n}{i}p^i(1-p)^{n-i}}{(1-p)^n} = \frac{\sum_{i=0}^{k-1}b(i;n,p)}{q^n},
 \]
@@ -545,7 +670,8 @@ Dowód nierówności
 \[
     \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r
 \]
-przeprowadzimy, opierając się na dowodzie tw.~C.8. Dla pewnego $\alpha>0$ mamy
+przeprowadzimy, opierając się na dowodzie tw.~C.8.
+Dla pewnego $\alpha>0$ mamy
 \[
 	\Pr(\mu-X\ge r) = \Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr),
 \]
@@ -553,7 +679,8 @@ a~z~nierówności Markowa (\refExercise{C.3-6}) dostajemy
 \[
 	\Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(\mu-X)}\bigr)e^{-\alpha r}.
 \]
-Niech $X_i$, dla $i=1$, 2,~\dots,~$n$, będzie zmienną losową przyjmującą~1, jeśli wynikiem \singledash{$i$}{tej} próby Bernoulliego jest sukces i~0 w~przeciwnym przypadku. Wtedy
+Niech $X_i$, dla $i=1$, 2,~\dots,~$n$, będzie zmienną losową przyjmującą~1, jeśli wynikiem \singledash{$i$}{tej} próby Bernoulliego jest sukces i~0 w~przeciwnym przypadku.
+Wtedy
 \[
 	X = \sum_{i=1}^nX_i \quad\text{oraz}\quad \mu-X = \sum_{i=1}^n(p_i-X_i),
 \]
@@ -561,7 +688,8 @@ otrzymujemy zatem
 \[
 	\E\bigl(e^{\alpha(\mu-X)}\bigr) = \E\biggl(\prod_{i=1}^ne^{\alpha(p_i-X_i)}\biggr) = \prod_{i=1}^n\E\bigl(e^{\alpha(p_i-X_i)}\bigr),
 \]
-co wynika na mocy wzoru~(C.23), gdyż ze wzajemnej niezależności zmiennych losowych $X_i$ wynika wzajemna niezależność zmiennych losowych $e^{\alpha(p_i-X_i)}$ (\refExercise{C.3-5}). Z~definicji wartości oczekiwanej mamy
+co wynika na mocy wzoru~(C.23), gdyż ze wzajemnej niezależności zmiennych losowych $X_i$ wynika wzajemna niezależność zmiennych losowych $e^{\alpha(p_i-X_i)}$ (\refExercise{C.3-5}).
+Z~definicji wartości oczekiwanej mamy
 \[
 	\E\bigl(e^{\alpha(p_i-X_i)}\bigr) = e^{\alpha(p_i-1)}p_i+e^{\alpha(p_i-0)}q_i = p_ie^{-\alpha q_i}+q_ie^{\alpha p_i} \le q_ie^{\alpha}+1 \le \exp(q_ie^\alpha),
 \]
@@ -569,11 +697,14 @@ skąd zachodzi
 \[
 	\E\bigl(e^{\alpha(\mu-X)}\bigr) \le \prod_{i=1}^n\exp(q_ie^\alpha) = \exp\biggl(\sum_{i=1}^nq_ie^\alpha\biggr) = \exp((n-\mu)e^\alpha),
 \]
-bo $\sum_{i=1}^nq_i=\sum_{i=1}^n1-\sum_{i=1}^np_i=n-\mu$. Wracając do oszacowania prawdopodobieństwa, dostajemy
+bo $\sum_{i=1}^nq_i=\sum_{i=1}^n1-\sum_{i=1}^np_i=n-\mu$.
+Wracając do oszacowania prawdopodobieństwa, dostajemy
 \[
 	\Pr(\mu-X\ge r) \le \exp((n-\mu)e^\alpha-\alpha r).
 \]
-Prawą stronę nierówności~(C.45) minimalizuje $\alpha=\ln(r/\mu)$ (\refExercise{C.5-7}). W~naszym przypadku po prawej stronie znaku nierówności zamiast $\mu$ mamy $n-\mu$, a~więc wyrażenie po prawej stronie będzie minimalizowane przez $\alpha=\ln(r/(n-\mu))$. Dostajemy ostatecznie
+Prawą stronę nierówności~(C.45) minimalizuje $\alpha=\ln(r/\mu)$ (\refExercise{C.5-7}).
+W~naszym przypadku po prawej stronie znaku nierówności zamiast $\mu$ mamy $n-\mu$, a~więc wyrażenie po prawej stronie będzie minimalizowane przez $\alpha=\ln(r/(n-\mu))$.
+Dostajemy ostatecznie
 \begin{align*}
 	\Pr(\mu-X\ge r) &\le \exp\biggl((n-\mu)e^{\ln\frac{r}{n-\mu}}-r\ln\frac{r}{n-\mu}\biggr) \\
 	&= \exp\biggl(r-r\ln\frac{r}{n-\mu}\biggr) \\
@@ -587,7 +718,8 @@ W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np
 \]
 
 \exercise %C.5-6
-\note{W treści zadania występuje błąd. Prawa strona nierówności ze wskazówki powinna mieć postać\/ $e^{\alpha^2\!/2}$.}
+\note{W treści zadania występuje błąd.
+Prawa strona nierówności ze wskazówki powinna mieć postać\/ $e^{\alpha^2\!/2}$.}
 
 \noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych $\alpha>0$,~\/$p$,~\/$q\ge0$, spełniających\/ $p+q=1$, prawdziwa jest nierówność}
 	\[
@@ -602,16 +734,22 @@ W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np
 		\ln(pe^\alpha-p+1) &\le \alpha^2\!/2+\alpha p, \\
 		\ln(pe^\alpha-p+1)-\alpha^2\!/2-\alpha p &\le 0.
 	\end{align*}
-	Ustalmy $p$ i~potraktujmy wyrażenie po lewej stronie znaku ostatniej nierówności jako funkcję $f_p$ zmiennej $\alpha$. Zauważmy, że granicą prawostronną tej funkcji w~punkcie~0 dla dowolnego $0\le p\le1$ jest~0. Udowodnimy, że wraz ze wzrostem $\alpha$ funkcja $f_p$ maleje, co będzie oznaczać, że przyjmuje ona wyłącznie wartości niedodatnie i~uzasadni nierówność. Obliczmy w~tym celu pochodną $f_p$:
+	Ustalmy $p$ i~potraktujmy wyrażenie po lewej stronie znaku ostatniej nierówności jako funkcję $f_p$ zmiennej $\alpha$.
+Zauważmy, że granicą prawostronną tej funkcji w~punkcie~0 dla dowolnego $0\le p\le1$ jest~0.
+Udowodnimy, że wraz ze wzrostem $\alpha$ funkcja $f_p$ maleje, co będzie oznaczać, że przyjmuje ona wyłącznie wartości niedodatnie i~uzasadni nierówność.
+Obliczmy w~tym celu pochodną $f_p$:
 	\[
 	    \frac{df_p}{d\alpha}(\alpha) = \frac{pe^\alpha}{pe^\alpha-p+1}-\alpha-p = \frac{pe^\alpha(1-\alpha-p)+(\alpha+p)(p-1)}{pe^\alpha-p+1}.
 	\]
-	Mianownik ostatniego ułamka jest dodatni. Wystarczy wykazać, że licznik jest ujemny dla każdych $\alpha>0$, $0\le p\le1$, czyli, równoważnie,
+	Mianownik ostatniego ułamka jest dodatni.
+Wystarczy wykazać, że licznik jest ujemny dla każdych $\alpha>0$, $0\le p\le1$, czyli, równoważnie,
 	\[
 	    (\alpha+p)(p-1) < pe^\alpha(\alpha+p-1).
 	\]
 
-	Rozważmy dwa przypadki w~zależności od znaku wyrażenia $\alpha+p-1$. Jeśli $\alpha+p-1\ge0$, to $\alpha\ge1-p$. Zachodzi
+	Rozważmy dwa przypadki w~zależności od znaku wyrażenia $\alpha+p-1$.
+Jeśli $\alpha+p-1\ge0$, to $\alpha\ge1-p$.
+Zachodzi
 	\[
 	    (\alpha+p)(p-1)-p(1+\alpha)(\alpha+p-1) = -\alpha(\alpha p+p^2-p+1) < 0.
 	\]
@@ -628,7 +766,8 @@ W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np
 		(\alpha+p)(p-1) < p(1+\alpha+\alpha^2)(\alpha+p-1) < pe^\alpha(\alpha+p-1).
 	\]
 
-	Otrzymaliśmy ostatecznie, że pochodna funkcji $f_p$, gdzie $0\le p\le1$, jest ujemna dla każdego $\alpha>0$. A~zatem funkcja $f_p$ jest malejąca.
+	Otrzymaliśmy ostatecznie, że pochodna funkcji $f_p$, gdzie $0\le p\le1$, jest ujemna dla każdego $\alpha>0$.
+A~zatem funkcja $f_p$ jest malejąca.
 \end{proof}
 
 Początek głównego rozumowania prowadzimy w~oparciu o~dowód twierdzenia~C.8:
@@ -651,7 +790,9 @@ Wobec tego
 \[
 	\Pr(X-\mu\ge r) \le \E\bigl(e^{\alpha(X-\mu)}\bigr)e^{-\alpha r} \le \exp(\alpha^2n/2-\alpha r).
 \]
-Należy teraz wybrać taką wartość $\alpha$, która minimalizuje ostatnie wyrażenie. Argumentem funkcji wykładniczej w~tym wyrażeniu jest funkcja kwadratowa zmiennej $\alpha$, w~prosty sposób można więc sprawdzić, że osiąga ona minimum dla argumentu $\alpha=r/n$. Dostajemy ostatecznie
+Należy teraz wybrać taką wartość $\alpha$, która minimalizuje ostatnie wyrażenie.
+Argumentem funkcji wykładniczej w~tym wyrażeniu jest funkcja kwadratowa zmiennej $\alpha$, w~prosty sposób można więc sprawdzić, że osiąga ona minimum dla argumentu $\alpha=r/n$.
+Dostajemy ostatecznie
 \[
 	\Pr(X-\mu\ge r) \le \exp\bigl((r/n)^2n/2-(r/n)r\bigr) = e^{-r^2\!/{2n}}.
 \]
@@ -662,31 +803,41 @@ Potraktujmy wyrażenie jak funkcję $f$ zmiennej $\alpha$, $f(\alpha)=\exp(\mu e
 	\frac{df}{d\alpha}(\alpha) &= (\mu e^\alpha-r)\exp(\mu e^\alpha-\alpha r), \\
 	\frac{d^2\!f}{d\alpha^2}(\alpha) &= \bigl(\mu e^\alpha+(\mu e^\alpha-r)^2\bigr)\exp(\mu e^\alpha-\alpha r).
 \end{align*}
-Pierwsza pochodna zeruje się dla $\alpha=\ln(r/\mu)$. Po obliczeniu wartości drugiej pochodnej w~tym punkcie, dostajemy
+Pierwsza pochodna zeruje się dla $\alpha=\ln(r/\mu)$.
+Po obliczeniu wartości drugiej pochodnej w~tym punkcie, dostajemy
 \[
 	\frac{d^2\!f}{d\alpha^2}(\ln(r/\mu)) = r\exp(r-r\ln(r/\mu)) > 0,
 \]
-ponieważ funkcja wykładnicza jest dodatnia oraz $r>\mu\ge0$. A~zatem w~punkcie $\alpha=\ln(r/\mu)$ istnieje minimum funkcji~$f$.
+ponieważ funkcja wykładnicza jest dodatnia oraz $r>\mu\ge0$.
+A~zatem w~punkcie $\alpha=\ln(r/\mu)$ istnieje minimum funkcji~$f$.
 
 \problems
 
 \problem{Kule i~urny} %C-1
 
 \subproblem %C-1(a)
-Każda kula trafia do jednej z~$b$ urn. Jest $b$ sposobów umieszczenia pierwszej kuli, na każdy z~nich przypada $b$ sposobów umieszczenia drugiej kuli itd. Jest zatem $b^n$ sposobów rozmieszczenia $n$ różnych kul w~$b$ różnych urnach.
+Każda kula trafia do jednej z~$b$ urn.
+Jest $b$ sposobów umieszczenia pierwszej kuli, na każdy z~nich przypada $b$ sposobów umieszczenia drugiej kuli itd.
+Jest zatem $b^n$ sposobów rozmieszczenia $n$ różnych kul w~$b$ różnych urnach.
 
 \subproblem %C-1(b)
-Ponieważ dysponujemy $n$ rozróżnialnymi kulami oraz $b$ nierozróżnialnymi urnami, to nasz problem jest równoważny policzeniu wszystkich możliwych ciągów $n$ różnych kul i~$b-1$ identycznych patyków. Patyki dzielą ciąg kul na spójne podciągi, z~których każdy odpowiada ciągowi kul w~kolejnej urnie, reprezentując wzajemne uporządkowanie kul wewnątrz urny.
+Ponieważ dysponujemy $n$ rozróżnialnymi kulami oraz $b$ nierozróżnialnymi urnami, to nasz problem jest równoważny policzeniu wszystkich możliwych ciągów $n$ różnych kul i~$b-1$ identycznych patyków.
+Patyki dzielą ciąg kul na spójne podciągi, z~których każdy odpowiada ciągowi kul w~kolejnej urnie, reprezentując wzajemne uporządkowanie kul wewnątrz urny.
 
-Wszystkich takich ciągów jest $(b+n-1)!$, ale ponieważ nie rozróżniamy urn, to musimy podzielić tę liczbę przez liczbę możliwych rozmieszczeń urn między sobą, czyli $(b-1)!$. Istnieje zatem $\frac{(b+n-1)!}{(b-1)!}$ różnych rozmieszczeń kul w~urnach.
+Wszystkich takich ciągów jest $(b+n-1)!$, ale ponieważ nie rozróżniamy urn, to musimy podzielić tę liczbę przez liczbę możliwych rozmieszczeń urn między sobą, czyli $(b-1)!$.
+Istnieje zatem $\frac{(b+n-1)!}{(b-1)!}$ różnych rozmieszczeń kul w~urnach.
 
 \subproblem %C-1(c)
-Sytuacja jest podobna jak w~punkcie~(b) z~tą różnicą, że nie rozróżniamy kul między sobą, a~więc również każda permutacja $n$ kul między sobą opisuje ten sam sposób rozmieszczenia kul w~urnach. Mamy zatem $\frac{(b+n-1)!}{n!\,(b-1)!}=\binom{b+n-1}{n}$ możliwości rozmieszczenia kul.
+Sytuacja jest podobna jak w~punkcie~(b) z~tą różnicą, że nie rozróżniamy kul między sobą, a~więc również każda permutacja $n$ kul między sobą opisuje ten sam sposób rozmieszczenia kul w~urnach.
+Mamy zatem $\frac{(b+n-1)!}{n!\,(b-1)!}=\binom{b+n-1}{n}$ możliwości rozmieszczenia kul.
 
 \subproblem %C-1(d)
-Zakładając, że $n\le b$, wybieramy spośród $b$ urn $n$ takich, które będą zawierać po jednej kuli. Jest $\binom{b}{n}$ sposobów ich wyboru.
+Zakładając, że $n\le b$, wybieramy spośród $b$ urn $n$ takich, które będą zawierać po jednej kuli.
+Jest $\binom{b}{n}$ sposobów ich wyboru.
 
 \subproblem %C-1(e)
-Zakładamy, że $n\ge b$. Najpierw umieszczamy po jednej kuli w~każdej z~$b$ urn, dzięki czemu żadna urna nie jest pusta. Na mocy punktu~(c) pozostałe $n-b$ kul możemy umieścić w~$b$ urnach na $\binom{b+(n-b)-1}{n-b}=\binom{n-1}{n-b}=\binom{n-1}{b-1}$ sposobów.
+Zakładamy, że $n\ge b$.
+Najpierw umieszczamy po jednej kuli w~każdej z~$b$ urn, dzięki czemu żadna urna nie jest pusta.
+Na mocy punktu~(c) pozostałe $n-b$ kul możemy umieścić w~$b$ urnach na $\binom{b+(n-b)-1}{n-b}=\binom{n-1}{n-b}=\binom{n-1}{b-1}$ sposobów.
 
 \endinput

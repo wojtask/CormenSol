@@ -11,7 +11,10 @@
 \end{figure}
 
 \exercise %B.1-2
-Przeprowadzimy dowód pierwszego wzoru przez indukcję względem $n$. Dla $n=1$ dowód jest trywialny, a~dla $n=2$ wzór stanowi pierwsze prawo de~Morgana. Załóżmy więc, że $n>2$ i~że wzór zachodzi dla rodziny $n-1$ zbiorów. Mamy
+Przeprowadzimy dowód pierwszego wzoru przez indukcję względem $n$.
+Dla $n=1$ dowód jest trywialny, a~dla $n=2$ wzór stanowi pierwsze prawo de~Morgana.
+Załóżmy więc, że $n>2$ i~że wzór zachodzi dla rodziny $n-1$ zbiorów.
+Mamy
 \begin{align*}
 	\overline{A_1\cap A_2\cap\dots\cap A_{n-1}\cap A_n} &= \overline{(A_1\cap A_2\cap\dots\cap A_{n-1})\cap A_n} \\
 	&= \overline{A_1\cap A_2\cap\dots\cap A_{n-1}}\cup\overline{A_n} \\
@@ -19,10 +22,13 @@ Przeprowadzimy dowód pierwszego wzoru przez indukcję względem $n$. Dla $n=1$ 
 \end{align*}
 W~drugiej równości skorzystano z~pierwszego prawa de~Morgana, a~w~trzeciej -- z~założenia indukcyjnego.
 
-Dowód drugiego wzoru przebiega analogicznie. Jeśli $n=2$, to wzór jest drugim prawem de~Morgana, a~jeśli $n>2$, to wystarczy zastosować powyższe rozumowanie z~zamienionymi symbolami sumy i~przecięcia zbiorów oraz skorzystać z~drugiego prawa de~Morgana.
+Dowód drugiego wzoru przebiega analogicznie.
+Jeśli $n=2$, to wzór jest drugim prawem de~Morgana, a~jeśli $n>2$, to wystarczy zastosować powyższe rozumowanie z~zamienionymi symbolami sumy i~przecięcia zbiorów oraz skorzystać z~drugiego prawa de~Morgana.
 
 \exercise %B.1-3
-Udowodnimy zasadę włączania i~wyłączania przez indukcję względem $n$. Dla $n=1$ dowód jest trywialny, a~dla $n=2$ zasada stanowi wzór~(B.3). Jeśli $n>2$, to na mocy tegoż wzoru, jak i~uogólnionego pierwszego prawa rozdzielności, mamy
+Udowodnimy zasadę włączania i~wyłączania przez indukcję względem $n$.
+Dla $n=1$ dowód jest trywialny, a~dla $n=2$ zasada stanowi wzór~(B.3).
+Jeśli $n>2$, to na mocy tegoż wzoru, jak i~uogólnionego pierwszego prawa rozdzielności, mamy
 \begin{align*}
     |A_1\cup A_2\cup\dots\cup A_n| &= \bigl|(A_1\cup A_2\cup\dots\cup A_{n-1})\cup A_n\bigr| \\
 	&= |A_1\cup A_2\cup\dots\cup A_{n-1}|+|A_n|-\bigl|(A_1\cup A_2\cup\dots\cup A_{n-1})\cap A_n\bigr| \\
@@ -46,12 +52,22 @@ Wystarczy wstawić otrzymane wyrażenia do początkowego wzoru:
 A~zatem zasada zachodzi dla dowolnej skończonej rodziny zbiorów.
 
 \exercise %B.1-4
-\note{Poniższe rozwiązanie dowodzi przeliczalności zbioru nieparzystych liczb naturalnych, czego dotyczy oryginalna treść zadania. Tłumaczenie pyta natomiast o~przeliczalność zbioru wszystkich liczb nieparzystych.}
+\note{Poniższe rozwiązanie dowodzi przeliczalności zbioru nieparzystych liczb naturalnych, czego dotyczy oryginalna treść zadania.
+Tłumaczenie pyta natomiast o~przeliczalność zbioru wszystkich liczb nieparzystych.}
 
-\noindent Aby wykazać ten fakt, należy znaleźć wzajemnie jednoznaczne odwzorowanie zbioru $\mathbb{N}$ w~zbiór $\bigl\{\,2n+1:n\in\mathbb{N}\,\bigr\}$. Każdej liczbie naturalnej $n$ przyporządkujmy liczbę $2n+1$. Bijektywność tego odwzorowania jest oczywista, wnioskujemy zatem, że zbiór nieparzystych liczb naturalnych jest przeliczalny.
+\noindent Aby wykazać ten fakt, należy znaleźć wzajemnie jednoznaczne odwzorowanie zbioru $\mathbb{N}$ w~zbiór $\bigl\{\,2n+1:n\in\mathbb{N}\,\bigr\}$.
+Każdej liczbie naturalnej $n$ przyporządkujmy liczbę $2n+1$.
+Bijektywność tego odwzorowania jest oczywista, wnioskujemy zatem, że zbiór nieparzystych liczb naturalnych jest przeliczalny.
 
 \exercise %B.1-5
-Dowodzimy przez indukcję względem liczby elementów zbioru $S$. Jeśli $|S|=0$, czyli $S=\emptyset$, to $|2^S|=2^{|S|}=1$, bo $S$ ma tylko jeden podzbiór -- zbiór pusty. Niech teraz $|S|>0$ i~załóżmy, że $|2^S|=2^{|S|}$. Ustalmy $p\notin S$ i~rozważmy zbiór $S'=S\cup\{p\}$. Podzbiory zbioru $S'$ można podzielić na takie, które zawierają $p$ i~na takie, które nie zawierają $p$. Tych ostatnich jest $|2^S|=\bigl|2^{S'\setminus\{p\}}\bigr|=2^{|S'\setminus\{p\}|}$ na mocy założenia indukcyjnego. Okazuje się, że podzbiorów zawierających $p$ jest tyle samo, ponieważ każdy powstaje przez zsumowanie singletonu $\{p\}$ z~pewnym podzbiorem niezawierającym $p$. Mamy zatem
+Dowodzimy przez indukcję względem liczby elementów zbioru $S$.
+Jeśli $|S|=0$, czyli $S=\emptyset$, to $|2^S|=2^{|S|}=1$, bo $S$ ma tylko jeden podzbiór -- zbiór pusty.
+Niech teraz $|S|>0$ i~załóżmy, że $|2^S|=2^{|S|}$.
+Ustalmy $p\notin S$ i~rozważmy zbiór $S'=S\cup\{p\}$.
+Podzbiory zbioru $S'$ można podzielić na takie, które zawierają $p$ i~na takie, które nie zawierają $p$.
+Tych ostatnich jest $|2^S|=\bigl|2^{S'\setminus\{p\}}\bigr|=2^{|S'\setminus\{p\}|}$ na mocy założenia indukcyjnego.
+Okazuje się, że podzbiorów zawierających $p$ jest tyle samo, ponieważ każdy powstaje przez zsumowanie singletonu $\{p\}$ z~pewnym podzbiorem niezawierającym $p$.
+Mamy zatem
 \[
 	\bigl|2^{S'}\bigr|=2\cdot2^{|S'\setminus\{p\}|} = 2^{|S'\setminus\{p\}|+1} = 2^{|S'|}.
 \]
@@ -71,7 +87,12 @@ Na mocy indukcji twierdzenie jest spełnione dla dowolnego zbioru skończonego.
 \subchapter{Relacje}
 
 \exercise %B.2-1
-Porządek częściowy to relacja zwrotna, antysymetryczna i~przechodnia. Zauważmy, że relacja $\subseteq$ w~$2^\mathbb{Z}$ posiada każdą z~tych własności. Dla zbioru $A\in2^\mathbb{Z}$ zachodzi $A\subseteq A$ (zwrotność). Dla zbiorów $A$, $B\in2^\mathbb{Z}$, jeśli zachodzi $A\subseteq B$ i~$B\subseteq A$, to $A=B$ (antysymetria). Wreszcie dla zbiorów $A$, $B$, $C\in2^\mathbb{Z}$, jeżeli $A\subseteq B$ i~$B\subseteq C$, to $A\subseteq C$ (przechodniość). Jednak w~$2^\mathbb{Z}$ porządek $\subseteq$ nie jest liniowy, bo np.\ $\{0,1\}\nsubseteq\{1,2\}$ i~$\{1,2\}\nsubseteq\{0,1\}$.
+Porządek częściowy to relacja zwrotna, antysymetryczna i~przechodnia.
+Zauważmy, że relacja $\subseteq$ w~$2^\mathbb{Z}$ posiada każdą z~tych własności.
+Dla zbioru $A\in2^\mathbb{Z}$ zachodzi $A\subseteq A$ (zwrotność).
+Dla zbiorów $A$, $B\in2^\mathbb{Z}$, jeśli zachodzi $A\subseteq B$ i~$B\subseteq A$, to $A=B$ (antysymetria).
+Wreszcie dla zbiorów $A$, $B$, $C\in2^\mathbb{Z}$, jeżeli $A\subseteq B$ i~$B\subseteq C$, to $A\subseteq C$ (przechodniość).
+Jednak w~$2^\mathbb{Z}$ porządek $\subseteq$ nie jest liniowy, bo np.\ $\{0,1\}\nsubseteq\{1,2\}$ i~$\{1,2\}\nsubseteq\{0,1\}$.
 
 \exercise %B.2-2
 Oznaczmy przez $R_n$, dla $n\in\mathbb{N}\setminus\{0\}$, relację ,,przystaje modulo $n$'':
@@ -79,7 +100,11 @@ Oznaczmy przez $R_n$, dla $n\in\mathbb{N}\setminus\{0\}$, relację ,,przystaje m
 	R_n = \bigl\{\,\langle a,b\rangle\in\mathbb{Z}\times\mathbb{Z}\;:\;a\equiv b\!\!\!\pmod{n}\,\bigr\}.
 \]
 
-Dla dowolnego $a\in\mathbb{Z}$ mamy $a\equiv a\pmod{n}$, bo $a-a=0$, więc relacja $R_n$ jest zwrotna. Dla dowolnych $a$, $b\in\mathbb{Z}$, jeśli istnieje $q\in\mathbb{Z}$, że $a-b=qn$, to $b-a=-qn$, a~zatem z~faktu, że $a\equiv b\pmod{n}$ wynika, że $b\equiv a\pmod{n}$, co dowodzi symetrii $R_n$. Dla dowodu przechodniości wybierzmy dowolne $a$, $b$, $c\in\mathbb{Z}$ i~załóżmy, że zachodzi $a\equiv b\pmod{n}$ oraz $b\equiv c\pmod{n}$. Oznacza to, że istnieją $q$, $r\in\mathbb{Z}$, że $a-b=qn$ oraz $b-c=rn$. Stąd $a-c=a-b+b-c=qn+rn=(q+r)n$, a~zatem $a\equiv c\pmod{n}$.
+Dla dowolnego $a\in\mathbb{Z}$ mamy $a\equiv a\pmod{n}$, bo $a-a=0$, więc relacja $R_n$ jest zwrotna.
+Dla dowolnych $a$, $b\in\mathbb{Z}$, jeśli istnieje $q\in\mathbb{Z}$, że $a-b=qn$, to $b-a=-qn$, a~zatem z~faktu, że $a\equiv b\pmod{n}$ wynika, że $b\equiv a\pmod{n}$, co dowodzi symetrii $R_n$.
+Dla dowodu przechodniości wybierzmy dowolne $a$, $b$, $c\in\mathbb{Z}$ i~załóżmy, że zachodzi $a\equiv b\pmod{n}$ oraz $b\equiv c\pmod{n}$.
+Oznacza to, że istnieją $q$, $r\in\mathbb{Z}$, że $a-b=qn$ oraz $b-c=rn$.
+Stąd $a-c=a-b+b-c=qn+rn=(q+r)n$, a~zatem $a\equiv c\pmod{n}$.
 
 Na mocy powyższych faktów $R_n$ jest relacją równoważności i~dzieli zbiór $\mathbb{Z}$ na $n$ klas abstrakcji; \singledash{$i$}{ta} klasa, gdzie $i=1$, 2,~\dots,~$n$, jest zbiorem takich liczb całkowitych, które przy dzieleniu przez $n$ dają resztę $i-1$.
 
@@ -94,10 +119,15 @@ Relacja porządku $\le$ określona w~zbiorze liczb rzeczywistych.
 Relacja $R=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle a,b\rangle,\langle b,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
 
 \exercise %B.2-4
-Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$. Na mocy antysymetrii $R$, jeśli zachodzi $s'\,R\,s$ oraz $s\,R\,s'$, to $s=s'$, a~więc nie istnieją takie elementy $s'$, że $s'\in[s]\setminus\{s\}$. To oznacza, że klasy abstrakcji $S$ względem relacji $R$ są singletonami.
+Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$.
+Na mocy antysymetrii $R$, jeśli zachodzi $s'\,R\,s$ oraz $s\,R\,s'$, to $s=s'$, a~więc nie istnieją takie elementy $s'$, że $s'\in[s]\setminus\{s\}$.
+To oznacza, że klasy abstrakcji $S$ względem relacji $R$ są singletonami.
 
 \exercise %B.2-5
-Symetria i~przechodniość relacji zdefiniowane są za pomocą implikacji, do spełnienia których nie jest konieczne spełnienie ich poprzedników. Relacja pozostanie symetryczna i~przechodnia, jeśli w~zbiorze, w~którym jest określona, istnieje element niebędący w~relacji z~żadnym elementem z~tego zbioru. Zwrotność wymaga natomiast, aby każdy element był w~relacji z~samym sobą. Istnieją zatem relacje symetryczne i~przechodnie, ale nie zwrotne (patrz punkt~(c) \refExercise{B.2-3}).
+Symetria i~przechodniość relacji zdefiniowane są za pomocą implikacji, do spełnienia których nie jest konieczne spełnienie ich poprzedników.
+Relacja pozostanie symetryczna i~przechodnia, jeśli w~zbiorze, w~którym jest określona, istnieje element niebędący w~relacji z~żadnym elementem z~tego zbioru.
+Zwrotność wymaga natomiast, aby każdy element był w~relacji z~samym sobą.
+Istnieją zatem relacje symetryczne i~przechodnie, ale nie zwrotne (patrz punkt~(c) \refExercise{B.2-3}).
 
 \subchapter{Funkcje}
 
@@ -107,33 +137,47 @@ Zbiór wartości funkcji $f\colon A\to B$, czyli obraz jej dziedziny, jest zdefi
 \[
 	f(A) = \bigl\{\,b\in B:b=f(a)\text{ dla pewnego $a\in A$}\,\bigr\}.
 \]
-Z~tego, że $f$ jest injekcją, mamy, że $|A|=|f(A)|$. Z~kolei $|f(A)|\le|B|$, bo w~$B$ mogą być takie elementy $b$, dla których nie istnieje $a\in A$ takie, że $b=f(a)$. Stąd $|A|\le|B|$.
+Z~tego, że $f$ jest injekcją, mamy, że $|A|=|f(A)|$.
+Z~kolei $|f(A)|\le|B|$, bo w~$B$ mogą być takie elementy $b$, dla których nie istnieje $a\in A$ takie, że $b=f(a)$.
+Stąd $|A|\le|B|$.
 
 \subexercise
-Dla surjekcji $f\colon A\to B$ zachodzi $f(A)=B$, więc $|f(A)|=|B|$. Dla pewnych elementów $a_1$,~$a_2\in A$ może zachodzić $f(a_1)=f(a_2)$, mamy zatem $|A|\ge|f(A)|$, a~stąd $|A|\ge|B|$.
-\bigskip
+Dla surjekcji $f\colon A\to B$ zachodzi $f(A)=B$, więc $|f(A)|=|B|$.
+Dla pewnych elementów $a_1$,~$a_2\in A$ może zachodzić $f(a_1)=f(a_2)$, mamy zatem $|A|\ge|f(A)|$, a~stąd $|A|\ge|B|$.
 
+\bigskip
 \noindent Z~powyższych faktów wynika, że jeśli $f\colon A\to B$ jest bijekcją, to $|A|=|B|$.
 
 \exercise %B.3-2
-Funkcja $f(x)=x+1$ o~dziedzinie i~przeciwdziedzinie $\mathbb{N}$ nie jest bijekcją, gdyż dla żadnego $x\in\mathbb{N}$ nie zachodzi $f(x)=0$. Jeśli zamiast $\mathbb{N}$ rozważymy $\mathbb{Z}$, to $f$ będzie bijekcją -- każda liczba całkowita jest wartością funkcji $f$ dla pewnej jednoznacznie wyznaczonej liczby całkowitej.
+Funkcja $f(x)=x+1$ o~dziedzinie i~przeciwdziedzinie $\mathbb{N}$ nie jest bijekcją, gdyż dla żadnego $x\in\mathbb{N}$ nie zachodzi $f(x)=0$.
+Jeśli zamiast $\mathbb{N}$ rozważymy $\mathbb{Z}$, to $f$ będzie bijekcją -- każda liczba całkowita jest wartością funkcji $f$ dla pewnej jednoznacznie wyznaczonej liczby całkowitej.
 
 \exercise %B.3-3
-Niech $R$ będzie relacją binarną w~zbiorze $A$. Relację $R^{-1}$ w~zbiorze $A$ nazywamy relacją odwrotną do $R$, jeżeli dla dowolnych $a$,~$b\in A$, $a\,R^{-1}\,b$ wtedy i~tylko wtedy, gdy $b\,R\,a$. Łatwo sprawdzić, że jeśli $R$ jest bijekcją, to $R^{-1}$ jest jej funkcją odwrotną.
+Niech $R$ będzie relacją binarną w~zbiorze $A$.
+Relację $R^{-1}$ w~zbiorze $A$ nazywamy relacją odwrotną do $R$, jeżeli dla dowolnych $a$,~$b\in A$, $a\,R^{-1}\,b$ wtedy i~tylko wtedy, gdy $b\,R\,a$.
+Łatwo sprawdzić, że jeśli $R$ jest bijekcją, to $R^{-1}$ jest jej funkcją odwrotną.
 
 \exercise %B.3-4
-Ponieważ każda bijekcja posiada funkcję odwrotną, która także jest bijekcją, to znajdziemy funkcję $F\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}$ będącą odwrotnością szukanego odwzorowania. Wyznaczenie $F$ jest równoważne znalezieniu sposobu ponumerowania kolejnymi liczbami całkowitymi każdej pary o~elementach całkowitych tak, aby każda liczba całkowita była wykorzystana jako numer pewnej pary. Opiszemy teraz konstrukcję jednej z~takich funkcji.
+Ponieważ każda bijekcja posiada funkcję odwrotną, która także jest bijekcją, to znajdziemy funkcję $F\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}$ będącą odwrotnością szukanego odwzorowania.
+Wyznaczenie $F$ jest równoważne znalezieniu sposobu ponumerowania kolejnymi liczbami całkowitymi każdej pary o~elementach całkowitych tak, aby każda liczba całkowita była wykorzystana jako numer pewnej pary.
+Opiszemy teraz konstrukcję jednej z~takich funkcji.
 
-Dokonajmy pewnego uproszczenia -- zamiast numerować pary liczbami całkowitymi, ograniczymy się do liczb naturalnych. Niech $g\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{N}$ oraz $h\colon\mathbb{N}\to\mathbb{Z}$ będą takimi bijekcjami, że $F=h\circ g$. Łatwo wykazać, że $h(n)=(-1)^n\lceil n/2\rceil$ jest bijekcją, pozostaje więc znaleźć funkcję $g$.
+Dokonajmy pewnego uproszczenia -- zamiast numerować pary liczbami całkowitymi, ograniczymy się do liczb naturalnych.
+Niech $g\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{N}$ oraz $h\colon\mathbb{N}\to\mathbb{Z}$ będą takimi bijekcjami, że $F=h\circ g$.
+Łatwo wykazać, że $h(n)=(-1)^n\lceil n/2\rceil$ jest bijekcją, pozostaje więc znaleźć funkcję $g$.
 
 Rozważmy numerację par o~elementach całkowitych przedstawioną na rys.~\ref{fig:B.3-4} w~formie spirali.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_b.3-4}
 	\end{center}
-	\caption{Bijekcja ze zbioru $\mathbb{Z}\times\mathbb{Z}$ w~zbiór $\mathbb{N}$. Poszczególne liczby naturalne oznaczają wartości tej bijekcji dla punktów o~współrzędnych całkowitych w~kartezjańskim układzie współrzędnych.} \label{fig:B.3-4}
+	\caption{Bijekcja ze zbioru $\mathbb{Z}\times\mathbb{Z}$ w~zbiór $\mathbb{N}$.
+	Poszczególne liczby naturalne oznaczają wartości tej bijekcji dla punktów o~współrzędnych całkowitych w~kartezjańskim układzie współrzędnych.} \label{fig:B.3-4}
 \end{figure}
-Ponieważ każdej takiej parze $\langle x,y\rangle$ przypisywana jest unikalna liczba naturalna, to możemy tę spiralę potraktować jak opis funkcji~$g$. Przyjmijmy wpierw oznaczenia: $d=\max(|x|,|y|)$ oraz $D=(2d-1)^2-1$. Nieformalnie liczby te oznaczają, odpowiednio, numer ,,okrążenia'' punktu $\langle0,0\rangle$ pokonywanego przez spiralę w~momencie przechodzenia przez punkt $\langle x,y\rangle$ oraz największą wartość przyjmowaną przez spiralę podczas pokonywania poprzedniego ,,okrążenia''. Można przyjąć następującą definicję funkcji~$g$:
+Ponieważ każdej takiej parze $\langle x,y\rangle$ przypisywana jest unikalna liczba naturalna, to możemy tę spiralę potraktować jak opis funkcji~$g$.
+Przyjmijmy wpierw oznaczenia: $d=\max(|x|,|y|)$ oraz $D=(2d-1)^2-1$.
+Nieformalnie liczby te oznaczają, odpowiednio, numer ,,okrążenia'' punktu $\langle0,0\rangle$ pokonywanego przez spiralę w~momencie przechodzenia przez punkt $\langle x,y\rangle$ oraz największą wartość przyjmowaną przez spiralę podczas pokonywania poprzedniego ,,okrążenia''.
+Można przyjąć następującą definicję funkcji~$g$:
 \[
 	g(x,y) =
 	\begin{cases}
@@ -150,36 +194,50 @@ Zaprezentowana tutaj spirala przypomina znaną w~literaturze \textbf{spiralę Ul
 \subchapter{Grafy}
 
 \exercise %B.4-1
-Jeśli będziemy reprezentować zbiór pracowników przez zbiór wierzchołków $V$, a~dla każdych $u$, $v\in V$ relację ,,pracownik $u$ podał rękę pracownikowi $v$'' przez zbiór krawędzi $E$, to otrzymamy graf nieskierowany $G=\langle V,E\rangle$. Sumując stopnie wszystkich wierzchołków tego grafu, otrzymamy podwojoną liczbę krawędzi, gdyż każdą krawędź policzymy dwa razy (każda krawędź jest incydentna z~dokładnie dwoma wierzchołkami). Mamy więc
+Jeśli będziemy reprezentować zbiór pracowników przez zbiór wierzchołków $V$, a~dla każdych $u$, $v\in V$ relację ,,pracownik $u$ podał rękę pracownikowi $v$'' przez zbiór krawędzi $E$, to otrzymamy graf nieskierowany $G=\langle V,E\rangle$.
+Sumując stopnie wszystkich wierzchołków tego grafu, otrzymamy podwojoną liczbę krawędzi, gdyż każdą krawędź policzymy dwa razy (każda krawędź jest incydentna z~dokładnie dwoma wierzchołkami).
+Mamy więc
 \[
 	\sum_{v\in V}\deg(v) = 2|E|.
 \]
 
 \exercise %B.4-2
-Ścieżka z~wierzchołka $u$ do wierzchołka $v$ w~dowolnym grafie jest skończonym ciągiem wierzchołków kolejno odwiedzanych na tej ścieżce, $\langle v_0,v_1,\dots,v_n\rangle$, przy czym $v_0=u$ i~$v_n=v$. Jeśli ścieżka jest prosta, to wyrazy tego ciągu nie powtarzają się. W~przeciwnym przypadku, jeśli podciągiem spójnym ścieżki z~$u$ do $v$ jest $\langle v_i,v_{i+1},\dots,v_{i+k},v_i\rangle$, to eliminując jego podciąg $\langle v_i,v_{i+1},\dots,v_{i+k}\rangle$, odrzucamy jedno powtórzenie $v_i$, a~tym samym podcykl ścieżki, który sprawia, że nie jest ona prosta. Po eliminacji wszystkich takich podcykli otrzymujemy ścieżkę prostą. Oznacza to, że każda ścieżka zawiera ścieżkę prostą reprezentowaną przez ciąg wierzchołków pozostawiony z~początkowego ciągu po zastosowaniu opisanej procedury.
+Ścieżka z~wierzchołka $u$ do wierzchołka $v$ w~dowolnym grafie jest skończonym ciągiem wierzchołków kolejno odwiedzanych na tej ścieżce, $\langle v_0,v_1,\dots,v_n\rangle$, przy czym $v_0=u$ i~$v_n=v$.
+Jeśli ścieżka jest prosta, to wyrazy tego ciągu nie powtarzają się.
+W~przeciwnym przypadku, jeśli podciągiem spójnym ścieżki z~$u$ do $v$ jest $\langle v_i,v_{i+1},\dots,v_{i+k},v_i\rangle$, to eliminując jego podciąg $\langle v_i,v_{i+1},\dots,v_{i+k}\rangle$, odrzucamy jedno powtórzenie $v_i$, a~tym samym podcykl ścieżki, który sprawia, że nie jest ona prosta.
+Po eliminacji wszystkich takich podcykli otrzymujemy ścieżkę prostą.
+Oznacza to, że każda ścieżka zawiera ścieżkę prostą reprezentowaną przez ciąg wierzchołków pozostawiony z~początkowego ciągu po zastosowaniu opisanej procedury.
 
 Dowód dla cykli przeprowadzamy analogicznie z~$v_n=u$, pamiętając jednak, by nie eliminować ostatniego powtórzenia $u$, które jest wymagane do tego, by ścieżka stanowiła cykl.
 
 \exercise %B.4-3
-Z~twierdzenia~B.2 mamy, że graf $G=\langle V,E\rangle$ będący drzewem, jest spójny i~acykliczny oraz że ma $|E|=|V|-1$ krawędzi. Gdy dodamy do $E$ nową krawędź, to $G$ nie będzie już drzewem, ale nadal będzie spójny -- może być zatem $|E|>|V|-1$. Z~kolei gdy usuniemy z~$E$ jakąkolwiek krawędź, to rozspójnimy $G$, przez co nie może zachodzić $|E|<|V|-1$.
+Z~twierdzenia~B.2 mamy, że graf $G=\langle V,E\rangle$ będący drzewem, jest spójny i~acykliczny oraz że ma $|E|=|V|-1$ krawędzi.
+Gdy dodamy do $E$ nową krawędź, to $G$ nie będzie już drzewem, ale nadal będzie spójny -- może być zatem $|E|>|V|-1$.
+Z~kolei gdy usuniemy z~$E$ jakąkolwiek krawędź, to rozspójnimy $G$, przez co nie może zachodzić $|E|<|V|-1$.
 
 \exercise %B.4-4
 Każdy wierzchołek grafu skierowanego lub nieskierowanego jest osiągalny z~samego siebie, ponieważ istnieje ścieżka o~długości równej 1 zawierająca tylko ten wierzchołek, zatem relacja osiągalności jest zwrotna.
 
-Dla dowolnych wierzchołków $u$, $v$ i~$w$ grafu skierowanego lub nieskierowanego z~faktu, że $u\leadsto v$ i~$v\leadsto w$ wynika, że $u\leadsto w$. Istnieje bowiem ścieżka z~$u$ do $w$ będąca konkatenacją ciągów reprezentujących ścieżki z~$u$ do $v$ i~z~$v$ do $w$ (z~pominięciem powtórzenia $v$ między nimi).
+Dla dowolnych wierzchołków $u$, $v$ i~$w$ grafu skierowanego lub nieskierowanego z~faktu, że $u\leadsto v$ i~$v\leadsto w$ wynika, że $u\leadsto w$.
+Istnieje bowiem ścieżka z~$u$ do $w$ będąca konkatenacją ciągów reprezentujących ścieżki z~$u$ do $v$ i~z~$v$ do $w$ (z~pominięciem powtórzenia $v$ między nimi).
 
-Relacja osiągalności jest symetryczna jedynie w~grafach nieskierowanych, gdyż dla dowolnych wierzchołków $u$ i~$v$, jeśli $u\leadsto v$, to $v\leadsto u$. Ścieżka z~$v$ do $u$ powstaje przez lustrzane odbicie ścieżki z~$u$ do $v$; powstały ciąg reprezentuje poprawną ścieżkę, bo każdą krawędzią można poruszać się w~obie strony. W~grafie skierowanym krawędzie są jednokierunkowe, więc symetria nie zachodzi.
+Relacja osiągalności jest symetryczna jedynie w~grafach nieskierowanych, gdyż dla dowolnych wierzchołków $u$ i~$v$, jeśli $u\leadsto v$, to $v\leadsto u$.
+Ścieżka z~$v$ do $u$ powstaje przez lustrzane odbicie ścieżki z~$u$ do $v$; powstały ciąg reprezentuje poprawną ścieżkę, bo każdą krawędzią można poruszać się w~obie strony.
+W~grafie skierowanym krawędzie są jednokierunkowe, więc symetria nie zachodzi.
 
 \exercise %B.4-5
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_b.4-5}
 	\end{center}
-	\caption{{\sffamily\bfseries(a)} Wersja nieskierowana grafu skierowanego z~rysunku~B.2(a). {\sffamily\bfseries(b)} Wersja skierowana grafu nieskierowanego z~rysunku~B.2(b).} \label{fig:B.4-5}
+	\caption{{\sffamily\bfseries(a)} Wersja nieskierowana grafu skierowanego z~rysunku~B.2(a).
+{\sffamily\bfseries(b)} Wersja skierowana grafu nieskierowanego z~rysunku~B.2(b).} \label{fig:B.4-5}
 \end{figure}
 
 \exercise %B.4-6
-Hipergraf $H=\langle V_H,E_H\rangle$ można reprezentować jako graf dwudzielny $G=\langle V_1\cup V_2,E\rangle$, w~którym $V_1=V_H$ oraz $V_2=E_H$. Krawędź $\langle u,v\rangle\in V_1\times V_2$ w~grafie $G$ istnieje wtedy i~tylko wtedy, gdy hiperkrawędź $v$ jest incydentna z~$u$ (hiperkrawędzie mogą być incydentne z~więcej niż dwoma wierzchołkami). W~grafie $G$ nie~istnieją krawędzie pomiędzy elementami z~$V_1$ ani pomiędzy elementami z~$V_2$, zatem $G$ istotnie jest dwudzielny.
+Hipergraf $H=\langle V_H,E_H\rangle$ można reprezentować jako graf dwudzielny $G=\langle V_1\cup V_2,E\rangle$, w~którym $V_1=V_H$ oraz $V_2=E_H$.
+Krawędź $\langle u,v\rangle\in V_1\times V_2$ w~grafie $G$ istnieje wtedy i~tylko wtedy, gdy hiperkrawędź $v$ jest incydentna z~$u$ (hiperkrawędzie mogą być incydentne z~więcej niż dwoma wierzchołkami).
+W~grafie $G$ nie~istnieją krawędzie pomiędzy elementami z~$V_1$ ani pomiędzy elementami z~$V_2$, zatem $G$ istotnie jest dwudzielny.
 
 \subchapter{Drzewa}
 
@@ -188,23 +246,33 @@ Hipergraf $H=\langle V_H,E_H\rangle$ można reprezentować jako graf dwudzielny 
 	\begin{center}
 		\includegraphics{fig_b.5-1}
 	\end{center}
-	\caption{{\sffamily\bfseries(a)} Drzewa wolne o~3 wierzchołkach $A$, $B$ i~$C$. {\sffamily\bfseries(b)} Drzewa ukorzenione o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem. {\sffamily\bfseries(c)} Drzewa uporządkowane o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem. {\sffamily\bfseries(d)} Drzewa binarne o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.} \label{fig:B.5-1}
+	\caption{{\sffamily\bfseries(a)} Drzewa wolne o~3 wierzchołkach $A$, $B$ i~$C$.
+{\sffamily\bfseries(b)} Drzewa ukorzenione o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.
+{\sffamily\bfseries(c)} Drzewa uporządkowane o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.
+{\sffamily\bfseries(d)} Drzewa binarne o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.} \label{fig:B.5-1}
 \end{figure}
 
 \exercise %B.5-2
-Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\refExercise{B.4-2}). Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem. Graf $G$ jest acykliczny, zatem dla pewnego całkowitego $l$, gdzie $1\le l\le k$, istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym $v_{k+1}$ utożsamiamy z~$v_1$, a~$v_{k+2}$ z~$v_2$. Wiemy z~założenia, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$:
+Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\refExercise{B.4-2}).
+Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem.
+Graf $G$ jest acykliczny, zatem dla pewnego całkowitego $l$, gdzie $1\le l\le k$, istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym $v_{k+1}$ utożsamiamy z~$v_1$, a~$v_{k+2}$ z~$v_2$.
+Wiemy z~założenia, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$:
 \[
 	\langle v_0,\dots,v_l,v_{l+1}\rangle \quad\text{oraz}\quad \langle v_0,\dots,v_{l+2},v_{l+1}\rangle.
 \]
 Otrzymana sprzeczność prowadzi do wniosku, że wersja nieskierowana grafu $G$ jest acykliczna, zatem istotnie stanowi drzewo.
 
 \exercise %B.5-3
-W~drzewie o~jednym węźle jest jeden liść i~brak węzłów wewnętrznych, więc krok bazowy indukcji zachodzi. Zauważmy, że drzewo można ściągnąć wzdłuż wszystkich krawędzi pomiędzy węzłami stopnia~1, a~ich synami, nie powodując zmian w~liczbie węzłów stopnia~2. Wykonanie tej operacji pozbawia drzewo wszystkich węzłów stopnia~1. W~dalszej części dowodu będziemy zatem rozważać tylko drzewa regularne.
+W~drzewie o~jednym węźle jest jeden liść i~brak węzłów wewnętrznych, więc krok bazowy indukcji zachodzi.
+Zauważmy, że drzewo można ściągnąć wzdłuż wszystkich krawędzi pomiędzy węzłami stopnia~1, a~ich synami, nie powodując zmian w~liczbie węzłów stopnia~2.
+Wykonanie tej operacji pozbawia drzewo wszystkich węzłów stopnia~1.
+W~dalszej części dowodu będziemy zatem rozważać tylko drzewa regularne.
 
 \medskip
 \noindent\textsf{\textbf{Lemat.}} \textit{Niepuste regularne drzewo binarne ma nieparzystą liczbę węzłów.}
 \begin{proof}
-Niech $T=\langle V,E\rangle$ będzie niepustym regularnym drzewem binarnym, a~$L\subseteq V$ -- zbiorem liści tego drzewa. Obliczmy sumę stopni wszystkich węzłów $T$ (w~sensie grafowym, czyli uwzględniając ojca węzła):
+Niech $T=\langle V,E\rangle$ będzie niepustym regularnym drzewem binarnym, a~$L\subseteq V$ -- zbiorem liści tego drzewa.
+Obliczmy sumę stopni wszystkich węzłów $T$ (w~sensie grafowym, czyli uwzględniając ojca węzła):
 \[
 	\sum_{v\in V}\deg(v) = \sum_{v\in L}1+\sum_{v\in V\setminus L}\!\!\!3\;-1=3|V|-2|L|-1.
 \]
@@ -215,42 +283,77 @@ Z~lematu o~podawaniu rąk (\refExercise{B.4-1}) mamy, że $\sum_{v\in V}\deg(v) 
 Licznik ułamka jest nieparzysty, zatem liczba węzłów $T$ także jest nieparzysta.
 \end{proof}
 
-Korzystając z~powyższego lematu, założymy, że twierdzenie jest prawdziwe dla drzewa o~$2k-1$ węzłach ($k\ge1$) i~wykażemy jego prawdziwość dla drzewa o~$2k+1$ węzłach. Mamy, że liczba węzłów $w$ stopnia 2 w~regularnym drzewie binarnym o~$2k-1$ węzłach jest o~1 mniejsza od liczby jego liści $l$. Wybierając dowolny liść i~czyniąc z~niego węzeł wewnętrzny, poprzez dołączenie do niego dwóch synów, tworzymy regularne drzewo binarne o~$2k+1$ węzłach. W~nowym drzewie mamy $w'=w+1$ węzłów stopnia 2 oraz $l'=(l-1)+2=l+1$ liści, więc z~założenia indukcyjnego dostajemy $w'=w+1=(l-1)+1=l'-1$, a~zatem twierdzenie jest prawdziwe.
+Korzystając z~powyższego lematu, założymy, że twierdzenie jest prawdziwe dla drzewa o~$2k-1$ węzłach ($k\ge1$) i~wykażemy jego prawdziwość dla drzewa o~$2k+1$ węzłach.
+Mamy, że liczba węzłów $w$ stopnia 2 w~regularnym drzewie binarnym o~$2k-1$ węzłach jest o~1 mniejsza od liczby jego liści $l$.
+Wybierając dowolny liść i~czyniąc z~niego węzeł wewnętrzny, poprzez dołączenie do niego dwóch synów, tworzymy regularne drzewo binarne o~$2k+1$ węzłach.
+W~nowym drzewie mamy $w'=w+1$ węzłów stopnia 2 oraz $l'=(l-1)+2=l+1$ liści, więc z~założenia indukcyjnego dostajemy $w'=w+1=(l-1)+1=l'-1$, a~zatem twierdzenie jest prawdziwe.
 
 \exercise %B.5-4
-Udowodnimy nierówność $h\ge\lfloor\lg n\rfloor$ przez indukcję względem $n$. Jeśli $n=1$, to drzewo posiada tylko jeden węzeł, więc $h=0$ i~nierówność oczywiście zachodzi. Załóżmy teraz, że $n\ge2$ oraz że nierówność jest spełniona dla wszystkich drzew binarnych o~$n-1$ węzłach i~wysokości $h$. Niech~$T$ będzie jednym z~nich. Dodając do niego nowy węzeł, tworzymy nowe drzewo $T'$ o~wysokości $h'$. Rozważmy dwa przypadki w~zależności od położenia tego węzła w~drzewie $T'$.
+Udowodnimy nierówność $h\ge\lfloor\lg n\rfloor$ przez indukcję względem $n$.
+Jeśli $n=1$, to drzewo posiada tylko jeden węzeł, więc $h=0$ i~nierówność oczywiście zachodzi.
+Załóżmy teraz, że $n\ge2$ oraz że nierówność jest spełniona dla wszystkich drzew binarnych o~$n-1$ węzłach i~wysokości $h$.
+Niech~$T$ będzie jednym z~nich.
+Dodając do niego nowy węzeł, tworzymy nowe drzewo $T'$ o~wysokości $h'$.
+Rozważmy dwa przypadki w~zależności od położenia tego węzła w~drzewie $T'$.
 
-Przyjmijmy najpierw, że nowy węzeł został umieszczony na co najwyżej \singledash{$h$}{tym} poziomie. Wówczas $h'=h$. Jedyny przypadek, gdy nierówność $h'\ge\lfloor\lg n\rfloor$ nie jest spełniona, występuje wówczas, gdy $n=2^{h+1}$, czyli gdy $T$ jest pełnym drzewem binarnym. Ale każdy poziom takiego drzewa ma komplet węzłów, dlatego nowy węzeł może zostać umieszczony jedynie na \singledash{$(h+1)$}{szym} poziomie, co przeczy założeniu. A~zatem nierówność jest spełniona.
+Przyjmijmy najpierw, że nowy węzeł został umieszczony na co najwyżej \singledash{$h$}{tym} poziomie.
+Wówczas $h'=h$.
+Jedyny przypadek, gdy nierówność $h'\ge\lfloor\lg n\rfloor$ nie jest spełniona, występuje wówczas, gdy $n=2^{h+1}$, czyli gdy $T$ jest pełnym drzewem binarnym.
+Ale każdy poziom takiego drzewa ma komplet węzłów, dlatego nowy węzeł może zostać umieszczony jedynie na \singledash{$(h+1)$}{szym} poziomie, co przeczy założeniu.
+A~zatem nierówność jest spełniona.
 
-W~przypadku, gdy nowy węzeł zajął w~$T'$ poziom $h+1$, jest $h'=h+1$. Z~założenia indukcyjnego mamy $h\ge\lfloor\lg(n-1)\rfloor$, zatem wystarczy pokazać, że $\lfloor\lg(n-1)\rfloor+1\ge\lfloor\lg n\rfloor$. Zauważmy, że dla dowolnej liczby rzeczywistej $x$ i~dowolnej liczby całkowitej $k$ zachodzi $\lfloor x\rfloor+k=\lfloor x+k\rfloor$. Mamy więc
+W~przypadku, gdy nowy węzeł zajął w~$T'$ poziom $h+1$, jest $h'=h+1$.
+Z~założenia indukcyjnego mamy $h\ge\lfloor\lg(n-1)\rfloor$, zatem wystarczy pokazać, że $\lfloor\lg(n-1)\rfloor+1\ge\lfloor\lg n\rfloor$.
+Zauważmy, że dla dowolnej liczby rzeczywistej $x$ i~dowolnej liczby całkowitej $k$ zachodzi $\lfloor x\rfloor+k=\lfloor x+k\rfloor$.
+Mamy więc
 \[
     \lfloor\lg(n-1)\rfloor+1 = \lfloor\lg(n-1)+1\rfloor = \lfloor\lg(n-1)+\lg2\rfloor = \lfloor\lg(2n-2)\rfloor.
 \]
-Podłoga oraz logarytm przy podstawie 2 są funkcjami niemalejącymi, a~więc $\lfloor\lg(2n-2)\rfloor\ge\lfloor\lg n\rfloor$, o~ile $2n-2\ge n$, czyli gdy $n\ge2$. Nierówność zachodzi zatem dla dowolnego drzewa binarnego.
+Podłoga oraz logarytm przy podstawie 2 są funkcjami niemalejącymi, a~więc $\lfloor\lg(2n-2)\rfloor\ge\lfloor\lg n\rfloor$, o~ile $2n-2\ge n$, czyli gdy $n\ge2$.
+Nierówność zachodzi zatem dla dowolnego drzewa binarnego.
 
 \exercise %B.5-5
-Dowodzimy przez indukcję względem $n$. Gdy $n=0$, to drzewo jest puste, więc $i=e=0$ i~baza zachodzi. Załóżmy więc, że $n>0$ i~że równanie $e=i+2(n-1)$ jest spełnione przez drzewo regularne o~$n-1$ węzłach wewnętrznych. W~wyniku dołączenia dwóch nowych węzłów do pewnego liścia, ten staje się węzłem wewnętrznym. Zwiększamy przez to zarówno liczbę liści, jak i~liczbę węzłów wewnętrznych drzewa o~1.
+Dowodzimy przez indukcję względem $n$.
+Gdy $n=0$, to drzewo jest puste, więc $i=e=0$ i~baza zachodzi.
+Załóżmy więc, że $n>0$ i~że równanie $e=i+2(n-1)$ jest spełnione przez drzewo regularne o~$n-1$ węzłach wewnętrznych.
+W~wyniku dołączenia dwóch nowych węzłów do pewnego liścia, ten staje się węzłem wewnętrznym.
+Zwiększamy przez to zarówno liczbę liści, jak i~liczbę węzłów wewnętrznych drzewa o~1.
 
-Zbadajmy, co się dzieje z~długościami ścieżek wewnętrznej i~zewnętrznej po takiej modyfikacji. Oznaczmy przez $e'$ oraz $i'$, odpowiednio, długość nowej ścieżki zewnętrznej i~długość nowej ścieżki wewnętrznej, a~przez $d$ -- głębokość nowego węzła wewnętrznego. Zachodzi $e'=e-d+2(d+1)=i+2(n-1)+d+2$ oraz $i'=i+d$, a~zatem $e'=i'+2n$ i~twierdzenie jest spełnione, gdyż teraz w~drzewie jest $n$ węzłów wewnętrznych.
+Zbadajmy, co się dzieje z~długościami ścieżek wewnętrznej i~zewnętrznej po takiej modyfikacji.
+Oznaczmy przez $e'$ oraz $i'$, odpowiednio, długość nowej ścieżki zewnętrznej i~długość nowej ścieżki wewnętrznej, a~przez $d$ -- głębokość nowego węzła wewnętrznego.
+Zachodzi $e'=e-d+2(d+1)=i+2(n-1)+d+2$ oraz $i'=i+d$, a~zatem $e'=i'+2n$ i~twierdzenie jest spełnione, gdyż teraz w~drzewie jest $n$ węzłów wewnętrznych.
 
 \exercise %B.5-6
-Niech $h$ będzie wysokością drzewa binarnego $T$. Zauważmy, że badana suma wag liści drzewa $T$ nie zmniejszy się, jeśli do każdego węzła o~stopniu~1 w~tym drzewie dołączymy jego brakującego syna. Nowe węzły są nowymi liśćmi drzewa, zatem powiększają one sumę wag liści. Wagą liścia $x$ na głębokości $d$ jest $2^{-d}=2\cdot2^{-(d+1)}$, więc jeśli uczynimy z~$x$ ojca dwóch nowych węzłów, to suma wag liści pozostanie niezmieniona. Powtarzając tę czynność dla każdego liścia $x$ (również dla tych, które powstają w~wyniku tej procedury) o~głębokości mniejszej niż $h$, otrzymamy w~końcu pełne drzewo binarne $T'$ o~wysokości $h$. Suma wag liści drzewa $T$ nie przekracza sumy wag liści drzewa $T'$, która wynosi
+Niech $h$ będzie wysokością drzewa binarnego $T$.
+Zauważmy, że badana suma wag liści drzewa $T$ nie zmniejszy się, jeśli do każdego węzła o~stopniu~1 w~tym drzewie dołączymy jego brakującego syna.
+Nowe węzły są nowymi liśćmi drzewa, zatem powiększają one sumę wag liści.
+Wagą liścia $x$ na głębokości $d$ jest $2^{-d}=2\cdot2^{-(d+1)}$, więc jeśli uczynimy z~$x$ ojca dwóch nowych węzłów, to suma wag liści pozostanie niezmieniona.
+Powtarzając tę czynność dla każdego liścia $x$ (również dla tych, które powstają w~wyniku tej procedury) o~głębokości mniejszej niż $h$, otrzymamy w~końcu pełne drzewo binarne $T'$ o~wysokości $h$.
+Suma wag liści drzewa $T$ nie przekracza sumy wag liści drzewa $T'$, która wynosi
 \[
 	\sum_{x}w(x) = 2^h\cdot2^{-h} = 1,
 \]
 gdzie sumujemy względem wszystkich liści $x$ z~$T'$.
 
 \exercise %B.5-7
-\note{W~tekście zadania występuje błąd. Twierdzenie nie zachodzi bowiem dla drzew o~jednym liściu, dlatego w~rozwiązaniu zakładamy, że\/ $L\ge2$.}
+\note{W~tekście zadania występuje błąd.
+Twierdzenie nie zachodzi bowiem dla drzew o~jednym liściu, dlatego w~rozwiązaniu zakładamy, że\/ $L\ge2$.}
 
-\noindent Niech $T$ będzie drzewem binarnym o~$L\ge2$ liściach oraz niech $LT$ i~$RT$ będą, odpowiednio, jego lewym i~prawym poddrzewem. Niech ponadto $L_1$ i~$L_2$ stanowią, odpowiednio, liczbę liści $LT$ i~liczbę liści $RT$. Bez straty ogólności załóżmy, że $L_1\le L_2$. Jeśli $L_2\le2L/3$, to zarówno $LT$, jak i~$RT$ stanowi szukane poddrzewo. W~przeciwnym przypadku zachodzi $L_2>2L/3$, więc szukane poddrzewo będzie częścią drzewa $RT$. Po skończonej liczbie kroków dojdziemy do drzewa $T'$, którego większe poddrzewo $RT'$ będzie mieć nie więcej niż $2L/3$ liści. Ale ponieważ $T'$ ma więcej niż $2L/3$ liści, to liczba liści $RT'$ jest większa niż $L/3$, zatem $RT'$ jest szukanym poddrzewem.
+\noindent Niech $T$ będzie drzewem binarnym o~$L\ge2$ liściach oraz niech $LT$ i~$RT$ będą, odpowiednio, jego lewym i~prawym poddrzewem.
+Niech ponadto $L_1$ i~$L_2$ stanowią, odpowiednio, liczbę liści $LT$ i~liczbę liści $RT$.
+Bez straty ogólności załóżmy, że $L_1\le L_2$.
+Jeśli $L_2\le2L/3$, to zarówno $LT$, jak i~$RT$ stanowi szukane poddrzewo.
+W~przeciwnym przypadku zachodzi $L_2>2L/3$, więc szukane poddrzewo będzie częścią drzewa $RT$.
+Po skończonej liczbie kroków dojdziemy do drzewa $T'$, którego większe poddrzewo $RT'$ będzie mieć nie więcej niż $2L/3$ liści.
+Ale ponieważ $T'$ ma więcej niż $2L/3$ liści, to liczba liści $RT'$ jest większa niż $L/3$, zatem $RT'$ jest szukanym poddrzewem.
 
 \problems
 
 \problem{Kolorowanie grafów} %B-1
 
 \subproblem %B-1(a)
-Zamiast dowolnych drzew rozważmy bez straty ogólności drzewa ukorzenione. Krawędzie w~takim drzewie są incydentne z~węzłami z~sąsiednich poziomów, a~więc można węzłom nadać kolory na podstawie parzystości ich głębokości w~drzewie.
+Zamiast dowolnych drzew rozważmy bez straty ogólności drzewa ukorzenione.
+Krawędzie w~takim drzewie są incydentne z~węzłami z~sąsiednich poziomów, a~więc można węzłom nadać kolory na podstawie parzystości ich głębokości w~drzewie.
 
 \subproblem %B-1(b)
 Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozostaną równoważne, jeżeli zostaną zastosowane osobno dla każdej składowej.
@@ -259,18 +362,34 @@ Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozo
 $1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwiema barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \singledash{2}{kolorowanie}.
 \medskip
 
-$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \singledash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$. Bez utraty ogólności niech $c(v_1)=0$. Wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$. Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \singledash{2}{kolorowalny}. Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
+$2.\Rightarrow 3.$: Załóżmy, że $G$ jest \singledash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$.
+Bez utraty ogólności niech $c(v_1)=0$.
+Wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2,~\dots,~$k$.
+Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \singledash{2}{kolorowalny}.
+Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
 \medskip
 
-$3.\Rightarrow 1.$: Ustalmy pewne $v\in V$. Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$. Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
+$3.\Rightarrow 1.$: Ustalmy pewne $v\in V$.
+Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$.
+Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
 
 \subproblem %B-1(c)
-Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$. Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor. Załóżmy więc, że $|V|\ge2$. Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$. Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$. Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów. Ponieważ wierzchołek $v$ ma co najwyżej $d$ sąsiadów, to wśród $d+1$ kolorów użytych w~kolorowaniu podgrafu $G'$ jest jeden nieprzypisany żadnemu sąsiadowi wierzchołka $v$. Wybierając ten kolor dla $v$, uzyskujemy poprawne \singledash{$(d+1)$}{kolorowanie} grafu $G$.
+Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$.
+Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor.
+Załóżmy więc, że $|V|\ge2$.
+Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$.
+Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$.
+Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów.
+Ponieważ wierzchołek $v$ ma co najwyżej $d$ sąsiadów, to wśród $d+1$ kolorów użytych w~kolorowaniu podgrafu $G'$ jest jeden nieprzypisany żadnemu sąsiadowi wierzchołka $v$.
+Wybierając ten kolor dla $v$, uzyskujemy poprawne \singledash{$(d+1)$}{kolorowanie} grafu $G$.
 
 \subproblem %B-1(d)
-Jeżeli $k$ barw wystarcza do optymalnego pokolorowania grafu $G$ (czyli takiego, które wykorzystuje możliwie najmniej kolorów), to dla każdych dwóch różnych barw istnieje krawędź w~$E$ incydentna z~wierzchołkami o~takich barwach. W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać. Do pokolorowania grafu wystarczyłoby ich zatem $k-1$, co przeczyłoby optymalności kolorowania.
+Jeżeli $k$ barw wystarcza do optymalnego pokolorowania grafu $G$ (czyli takiego, które wykorzystuje możliwie najmniej kolorów), to dla każdych dwóch różnych barw istnieje krawędź w~$E$ incydentna z~wierzchołkami o~takich barwach.
+W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać.
+Do pokolorowania grafu wystarczyłoby ich zatem $k-1$, co przeczyłoby optymalności kolorowania.
 
-Na podstawie powyższego rozumowania mamy $\binom{k}{2}\le|E|$. Korzystamy z~tego, że dla $k\ge2$ zachodzi $k/2\le k-1$ i~stąd
+Na podstawie powyższego rozumowania mamy $\binom{k}{2}\le|E|$.
+Korzystamy z~tego, że dla $k\ge2$ zachodzi $k/2\le k-1$ i~stąd
 \[
     k^2 = 4\cdot\frac{k\cdot k}{2\cdot2} \le 4\cdot\frac{k(k-1)}{2} = 4\binom{k}{2} \le 4|E| = O(|V|),
 \]
@@ -281,13 +400,20 @@ czyli $k=O\bigl(\!\sqrt{|V|}\bigr)$.
 \subproblem %B-2(a)
 \textsf{\textbf{Twierdzenie.}} \textit{W~grafie nieskierowanym\/ $G=\langle V,E\rangle$, w~którym\/ $|V|\ge2$, istnieją dwa wierzchołki o~tym samym stopniu.}
 \begin{proof}
-W~grafie $G$ o~$n\ge2$ wierzchołkach możliwymi stopniami wierzchołków są liczby 0, 1,~\dots,~$n-1$. Jeśli jednak pewien wierzchołek ma stopień równy~0, to żaden z~pozostałych nie ma stopnia $n-1$. Oznacza to, że jest $n$ wierzchołków, ale tylko co najwyżej $n-1$ liczb mogących jednocześnie być ich stopniami w~$G$, zatem pewne dwa wierzchołki mają równe stopnie.
+W~grafie $G$ o~$n\ge2$ wierzchołkach możliwymi stopniami wierzchołków są liczby 0, 1,~\dots,~$n-1$.
+Jeśli jednak pewien wierzchołek ma stopień równy~0, to żaden z~pozostałych nie ma stopnia $n-1$.
+Oznacza to, że jest $n$ wierzchołków, ale tylko co najwyżej $n-1$ liczb mogących jednocześnie być ich stopniami w~$G$, zatem pewne dwa wierzchołki mają równe stopnie.
 \end{proof}
 
 \subproblem %B-2(b)
 \textsf{\textbf{Twierdzenie.}} \textit{Graf pełny posiadający\/ $3$ wierzchołki jest podgrafem dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$, w~którym\/ $|V|=6$, lub jego dopełnienia\/ $\overline{G}$.}
 \begin{proof}
-Wybierzmy pewne $v\in V$. Istnieją wtedy w~$V$ trzy inne wierzchołki $v_1$, $v_2$,~$v_3$ wszystkie sąsiednie z~$v$ albo wszystkie niesąsiednie z~$v$. Ponieważ przypadki te są symetryczne, rozważmy pierwszy z~nich. Jeśli nie istnieje wśród $v_1$, $v_2$,~$v_3$ para wierzchołków sąsiednich, to twierdzenie zachodzi. Załóżmy więc, że istnieje krawędź między pewnymi dwoma. Wtedy jednak tworzą one wraz z~$v$ graf pełny, a~więc również w~tym przypadku twierdzenie jest prawdziwe.
+Wybierzmy pewne $v\in V$.
+Istnieją wtedy w~$V$ trzy inne wierzchołki $v_1$, $v_2$,~$v_3$ wszystkie sąsiednie z~$v$ albo wszystkie niesąsiednie z~$v$.
+Ponieważ przypadki te są symetryczne, rozważmy pierwszy z~nich.
+Jeśli nie istnieje wśród $v_1$, $v_2$,~$v_3$ para wierzchołków sąsiednich, to twierdzenie zachodzi.
+Załóżmy więc, że istnieje krawędź między pewnymi dwoma.
+Wtedy jednak tworzą one wraz z~$v$ graf pełny, a~więc również w~tym przypadku twierdzenie jest prawdziwe.
 \end{proof}
 
 Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m,n)$ \cite{ramseynumber}; powyższe twierdzenie pokazuje, że $R(3,3)\le6$.
@@ -295,9 +421,17 @@ Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m
 \subproblem %B-2(c)
 \textsf{\textbf{Twierdzenie.}} \textit{Zbiór wierzchołków dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$ można podzielić na dwa rozłączne zbiory tak, aby dla dowolnego wierzchołka\/ $v\in V$ co najmniej połowa jego sąsiadów nie należała do zbioru, do którego należy\/ $v$.}
 \begin{proof}
-Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą liczbie jego sąsiadów spoza jego zbioru pomniejszoną o~liczbę sąsiadów ze zbioru, do którego $v$ należy. Dowód sprowadza się do pokazania, że istnieje taki podział zbioru wierzchołków, że $d(v)\ge0$ dla każdego $v\in V$\!.
+Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą liczbie jego sąsiadów spoza jego zbioru pomniejszoną o~liczbę sąsiadów ze zbioru, do którego $v$ należy.
+Dowód sprowadza się do pokazania, że istnieje taki podział zbioru wierzchołków, że $d(v)\ge0$ dla każdego $v\in V$\!.
 
-Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$. Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$. Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie. Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny. Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2. W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$. Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach. Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
+Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$.
+Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$.
+Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie.
+Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny.
+Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2.
+W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$.
+Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach.
+Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
 \end{proof}
 
 \subproblem %B-2(d)
@@ -309,13 +443,22 @@ Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość mo�
 \medskip
 \noindent\textsf{\textbf{Lemat} (Ore)\textbf{.}} \textit{Jeśli w~grafie nieskierowanym\/ $G=\langle V,E\rangle$, gdzie\/ $|V|\ge3$, dla każdej pary niesąsiednich wierzchołków\/ $u$ i~\/$v$ zachodzi nierówność\/ $\deg(u)+\deg(v)\ge|V|$, to\/ $G$ jest hamiltonowski.}
 \begin{proof}
-Oznaczmy przez $n$ liczbę wierzchołków grafu $G$. Przypuśćmy, że lemat jest fałszywy, czyli że dla pewnego $n$ istnieje kontrprzykład -- graf $G=\langle V,E\rangle$, w~którym $|V|=n$ i~który spełnia założenie lematu, ale nie jest hamiltonowski. Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne. Wówczas $G$ musi mieć ścieżkę Hamiltona $\langle v_1,v_2,\dots,v_n\rangle$ -- w~przeciwnym przypadku moglibyśmy uzupełnić go o~pewne brakujące krawędzie, nie naruszając warunku z~założenia lematu i~otrzymując w~wyniku graf o~więcej niż $|E|$ krawędziach. Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$. Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
+Oznaczmy przez $n$ liczbę wierzchołków grafu $G$.
+Przypuśćmy, że lemat jest fałszywy, czyli że dla pewnego $n$ istnieje kontrprzykład -- graf $G=\langle V,E\rangle$, w~którym $|V|=n$ i~który spełnia założenie lematu, ale nie jest hamiltonowski.
+Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne.
+Wówczas $G$ musi mieć ścieżkę Hamiltona $\langle v_1,v_2,\dots,v_n\rangle$ -- w~przeciwnym przypadku moglibyśmy uzupełnić go o~pewne brakujące krawędzie, nie naruszając warunku z~założenia lematu i~otrzymując w~wyniku graf o~więcej niż $|E|$ krawędziach.
+Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$.
+Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
 
 Można teraz zdefiniować podzbiory $S_1$ i~$S_n$ zbioru $\{2,3,\dots,n\}$ takie, że
 \[
 	S_1 = \bigl\{\,i:\{v_1,v_i\}\in E\,\bigr\} \quad\text{oraz}\quad S_n = \bigl\{\,i:\{v_{i-1},v_n\}\in E\,\bigr\}.
 \]
-Wtedy $|S_1|=\deg(v_1)$ i~$|S_n|=\deg(v_n)$. Ponieważ $|S_1|+|S_n|\ge n$ i~zbiór $S_1\cup S_n$ ma co najwyżej $n-1$ elementów, to zbiór $S_1\cap S_n$ musi być niepusty. Istnieje więc $i$, dla którego istnieją krawędzie $\{v_1,v_i\}$ oraz $\{v_{i-1},v_n\}$. Stąd ścieżka $\langle v_1,\dots,v_{i-1},v_n,v_{n-1},\dots,v_i,v_1\rangle$ jest cyklem Hamiltona w~grafie $G$. Sprzeczność -- lemat jest prawdziwy.
+Wtedy $|S_1|=\deg(v_1)$ i~$|S_n|=\deg(v_n)$.
+Ponieważ $|S_1|+|S_n|\ge n$ i~zbiór $S_1\cup S_n$ ma co najwyżej $n-1$ elementów, to zbiór $S_1\cap S_n$ musi być niepusty.
+Istnieje więc $i$, dla którego istnieją krawędzie $\{v_1,v_i\}$ oraz $\{v_{i-1},v_n\}$.
+Stąd ścieżka $\langle v_1,\dots,v_{i-1},v_n,v_{n-1},\dots,v_i,v_1\rangle$ jest cyklem Hamiltona w~grafie $G$.
+Sprzeczność -- lemat jest prawdziwy.
 \end{proof}
 
 Można teraz udowodnić główne twierdzenie.
@@ -326,15 +469,24 @@ Jeśli dla każdego $v\in V$ zachodzi $\deg(v)\ge|V|/2$, to $\deg(u)+\deg(v)\ge|
 \problem{Podziały drzew} %B-3
 
 \subproblem %B-3(a)
-Niech $T=\langle V,E\rangle$ będzie drzewem binarnym, w~którym $|V|=n\ge2$. Przez \textbf{krawędź dzielącą} będziemy rozumieć krawędź, po usunięciu której zbiór wierzchołków drzewa $T$ dzieli się na zbiory $A$ i~$B$ takie, że $|A|\le3n/4$ oraz $|B|\le3n/4$. Udowodnimy przez indukcję względem $n$, że w~każdym takim drzewie istnieje krawędź dzieląca.
+Niech $T=\langle V,E\rangle$ będzie drzewem binarnym, w~którym $|V|=n\ge2$.
+Przez \textbf{krawędź dzielącą} będziemy rozumieć krawędź, po usunięciu której zbiór wierzchołków drzewa $T$ dzieli się na zbiory $A$ i~$B$ takie, że $|A|\le3n/4$ oraz $|B|\le3n/4$.
+Udowodnimy przez indukcję względem $n$, że w~każdym takim drzewie istnieje krawędź dzieląca.
 
-Dla $n=2$ twierdzenie zachodzi, ponieważ w~drzewie $T$ istnieje tylko jedna krawędź, po usunięciu której dostajemy zbiory jednoelementowe. Niech zatem $n>2$ i~załóżmy, że w~drzewie o~$n-1$ wierzchołkach istnieje krawędź dzieląca $e\in E$ taka, że po podziale każdy ze zbiorów $A$ i~$B$ ma co najwyżej $3(n-1)/4$ elementów. Przyjmijmy bez utraty ogólności, że $|A|\le|B|$, co oznacza, że $|A|\le(n-1)/2$. Utwórzmy teraz nowe drzewo $T'$, dodając do $V$ nowy wierzchołek $v'$ oraz nową krawędź $\{v',v\}$ do $E$ dla pewnego $v\in V$. Niech teraz $A'$ oraz $B'$ będą zbiorami wierzchołków w~nowym drzewie utworzonymi w~wyniku podziału krawędzią $e$. Jeśli $v\in A$, to $A'=A\cup\{v'\}$ oraz $B'=B$. Oczywiście $|B'|<3n/4$, zbadajmy zatem $A'$:
+Dla $n=2$ twierdzenie zachodzi, ponieważ w~drzewie $T$ istnieje tylko jedna krawędź, po usunięciu której dostajemy zbiory jednoelementowe.
+Niech zatem $n>2$ i~załóżmy, że w~drzewie o~$n-1$ wierzchołkach istnieje krawędź dzieląca $e\in E$ taka, że po podziale każdy ze zbiorów $A$ i~$B$ ma co najwyżej $3(n-1)/4$ elementów.
+Przyjmijmy bez utraty ogólności, że $|A|\le|B|$, co oznacza, że $|A|\le(n-1)/2$.
+Utwórzmy teraz nowe drzewo $T'$, dodając do $V$ nowy wierzchołek $v'$ oraz nową krawędź $\{v',v\}$ do $E$ dla pewnego $v\in V$.
+Niech teraz $A'$ oraz $B'$ będą zbiorami wierzchołków w~nowym drzewie utworzonymi w~wyniku podziału krawędzią $e$.
+Jeśli $v\in A$, to $A'=A\cup\{v'\}$ oraz $B'=B$.
+Oczywiście $|B'|<3n/4$, zbadajmy zatem $A'$:
 \[
 	|A'| = |A|+1 \le \frac{n-1}{2}+1 = \frac{n+1}{2} \le \frac{3n}{4},
 \]
 co jest prawdą, o~ile $n\ge2$, zatem w~tym przypadku twierdzenie zachodzi.
 
-Niech teraz $v\in B$. Stąd $A'=A$ i~$B'=B\cup \{v'\}$, ale z~założenia $|B'|=|B|+1\le(3n+1)/4$, a~zatem $|B'|$ może przekroczyć $3n/4$, co oznacza, że musimy znaleźć inną krawędź dzielącą dla drzewa $T'$ w~przypadku, gdy $|B|=(3n-3)/4$, przy czym $n\ge5$.
+Niech teraz $v\in B$.
+Stąd $A'=A$ i~$B'=B\cup \{v'\}$, ale z~założenia $|B'|=|B|+1\le(3n+1)/4$, a~zatem $|B'|$ może przekroczyć $3n/4$, co oznacza, że musimy znaleźć inną krawędź dzielącą dla drzewa $T'$ w~przypadku, gdy $|B|=(3n-3)/4$, przy czym $n\ge5$.
 
 Rozważmy drzewo $T'$ przedstawione na rys.~\ref{fig:B-3a}.
 \begin{figure}[ht]
@@ -343,7 +495,13 @@ Rozważmy drzewo $T'$ przedstawione na rys.~\ref{fig:B-3a}.
 	\end{center}
 	\caption{Drzewo $T'$ z~drugiego przypadku dowodu.} \label{fig:B-3a}
 \end{figure}
-Niech $u_1\in B$ oraz $e=\{u_1,u_2\}$. Oprócz $u_1$ do zbioru $B$ należą wierzchołki ze zbiorów $V_1$ i~$V_2$, a~do zbioru $A$ -- wierzchołek $u_2$ oraz wierzchołki ze zbiorów $V_3$ i~$V_4$. Załóżmy bez straty ogólności, że $|V_1|\le|V_2|$. Zbiór $V_2$ jest niepusty, gdyż $|B'|\ge4$, istnieje zatem krawędź $e'=\{u_1,w\}$, gdzie $w\in V_2$. Pokażemy, że jest to krawędź dzieląca drzewa $T'$. Rozważmy w~tym celu zbiory $A''$ i~$B''$, na które krawędź $e'$ dzieli zbiór $V\cup\{v'\}$. Mamy
+Niech $u_1\in B$ oraz $e=\{u_1,u_2\}$.
+Oprócz $u_1$ do zbioru $B$ należą wierzchołki ze zbiorów $V_1$ i~$V_2$, a~do zbioru $A$ -- wierzchołek $u_2$ oraz wierzchołki ze zbiorów $V_3$ i~$V_4$.
+Załóżmy bez straty ogólności, że $|V_1|\le|V_2|$.
+Zbiór $V_2$ jest niepusty, gdyż $|B'|\ge4$, istnieje zatem krawędź $e'=\{u_1,w\}$, gdzie $w\in V_2$.
+Pokażemy, że jest to krawędź dzieląca drzewa $T'$.
+Rozważmy w~tym celu zbiory $A''$ i~$B''$, na które krawędź $e'$ dzieli zbiór $V\cup\{v'\}$.
+Mamy
 \[
 	|B''| = |V_2| \le |B| = \frac{3n-3}{4} < \frac{3n}{4}
 \]
@@ -351,12 +509,15 @@ oraz
 \[
 	|A''| = \bigl|A\cup\{u_1\}\cup V_1\bigr| \le (n-1-|B|)+1+\frac{|B|}{2} = n-\frac{|B|}{2} = \frac{5n+4}{8}.
 \]
-Skorzystaliśmy z~tego, że $|A|+|B|=n-1$ oraz $|V_1|\le|B|/2$. Nierówność $|A''|\le3n/4$ zachodzi, o~ile $n\ge4$, więc istotnie $e'$ jest krawędzią dzielącą drzewa $T'$.
+Skorzystaliśmy z~tego, że $|A|+|B|=n-1$ oraz $|V_1|\le|B|/2$.
+Nierówność $|A''|\le3n/4$ zachodzi, o~ile $n\ge4$, więc istotnie $e'$ jest krawędzią dzielącą drzewa $T'$.
 
 Rozpatrzyliśmy wszystkie przypadki, zatem na mocy indukcji twierdzenie zachodzi dla każdego drzewa binarnego $T$.
 
 \subproblem %B-3(b)
-Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, jak to wykazaliśmy w~punkcie~(a). Przykład drzewa binarnego z~rys.~\ref{fig:B-3b} pokazuje, że nie można przyjąć na jej miejsce mniejszej wartości. Usuwając dowolną krawędź tego drzewa, dzielimy zbiór jego wierzchołków na podzbiory, z~których jeden ma trzy elementy.
+Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, jak to wykazaliśmy w~punkcie~(a).
+Przykład drzewa binarnego z~rys.~\ref{fig:B-3b} pokazuje, że nie można przyjąć na jej miejsce mniejszej wartości.
+Usuwając dowolną krawędź tego drzewa, dzielimy zbiór jego wierzchołków na podzbiory, z~których jeden ma trzy elementy.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_b-3.b}
@@ -365,8 +526,16 @@ Stała $3/4$ jest wystarczająca do dokonywania zrównoważonych podziałów, ja
 \end{figure}
 
 \subproblem %B-3(c)
-Rozważmy następującą procedurę podziału zbioru wierzchołków. Na początku przyjmujemy, że wynikowe zbiory $A$ i~$B$ są puste. Usuwając jedną krawędź, możemy podzielić \singledash{$n$}{elementowy} zbiór~wierzchołków drzewa na dwa podzbiory, z~których większy będzie składać się z~co najwyżej $3n/4$ wierzchołków, co wynika na podstawie punktu~(a). Mniejszy podzbiór sumujemy z~jednym ze zbiorów wynikowych, natomiast większy z~nich będzie podlegał dalszemu podziałowi. Podczas działania procedury pilnujemy, aby rozmiary zbiorów $A$ i~$B$ nie przekroczyły $\lceil n/2\rceil$. Procedurę podziału zakończymy w~momencie, gdy jeden z~tych zbiorów będzie zawierał $\lceil n/2\rceil$ elementów, gdyż drugi zbiór zawiera wtedy $\lfloor n/2\rfloor$ elementów.
+Rozważmy następującą procedurę podziału zbioru wierzchołków.
+Na początku przyjmujemy, że wynikowe zbiory $A$ i~$B$ są puste.
+Usuwając jedną krawędź, możemy podzielić \singledash{$n$}{elementowy} zbiór~wierzchołków drzewa na dwa podzbiory, z~których większy będzie składać się z~co najwyżej $3n/4$ wierzchołków, co wynika na podstawie punktu~(a).
+Mniejszy podzbiór sumujemy z~jednym ze zbiorów wynikowych, natomiast większy z~nich będzie podlegał dalszemu podziałowi.
+Podczas działania procedury pilnujemy, aby rozmiary zbiorów $A$ i~$B$ nie przekroczyły $\lceil n/2\rceil$.
+Procedurę podziału zakończymy w~momencie, gdy jeden z~tych zbiorów będzie zawierał $\lceil n/2\rceil$ elementów, gdyż drugi zbiór zawiera wtedy $\lfloor n/2\rfloor$ elementów.
 
-Zauważmy, że maksymalną liczbę podziałów dla zadanego drzewa wykonamy w~przypadku, gdy po~każdym kroku zostanie do podziału zbiór o~rozmiarze $3/4$ rozmiaru zbioru z~poprzedniego kroku. Niech $k$ będzie taką maksymalną liczbą podziałów drzewa o~$n$ wierzchołkach. Zachodzi wtedy $(3/4)^kn=1$, ponieważ zbioru jednoelementowego nie trzeba już dalej dzielić. Stąd mamy $k=\log_{4/3}n$, a~zatem należy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
+Zauważmy, że maksymalną liczbę podziałów dla zadanego drzewa wykonamy w~przypadku, gdy po~każdym kroku zostanie do podziału zbiór o~rozmiarze $3/4$ rozmiaru zbioru z~poprzedniego kroku.
+Niech $k$ będzie taką maksymalną liczbą podziałów drzewa o~$n$ wierzchołkach.
+Zachodzi wtedy $(3/4)^kn=1$, ponieważ zbioru jednoelementowego nie trzeba już dalej dzielić.
+Stąd mamy $k=\log_{4/3}n$, a~zatem należy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
 
 \endinput

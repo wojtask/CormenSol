@@ -3,29 +3,47 @@
 \subchapter{Tablice z~adresowaniem bezpośrednim}
 
 \exercise %11.1-1
-Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zwracając element z~pierwszej niepustej pozycji. Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}. Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
+Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zwracając element z~pierwszej niepustej pozycji.
+Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}.
+Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
-Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie. Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku. Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
+Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie.
+Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku.
+Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
-Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów. Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\attrib{x}{key}]$. Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\attrib{x}{key}]$. Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}. Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
+Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów.
+Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\attrib{x}{key}]$.
+Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\attrib{x}{key}]$.
+Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}.
+Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
 
 Opisane rozwiązanie można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
 
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
 
-\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$. Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$. Tablice $S$ i~$T$ weryfikują się wzajemnie. To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$. Innymi słowy, zachodzi $1\le T[k]\le\attrib{S}{top}$, $S[T[k]]=k$ oraz $T[S[j]]=j$. Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
+\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$.
+Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$.
+Tablice $S$ i~$T$ weryfikują się wzajemnie.
+To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$.
+Innymi słowy, zachodzi $1\le T[k]\le\attrib{S}{top}$, $S[T[k]]=k$ oraz $T[S[j]]=j$.
+Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
 
-Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$. Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$S[T[k]]=k$. Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}. W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć \attrib{S}{top} o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\attrib{S}{top}]$ i~$S'[\attrib{S}{top}]$. Dokładniej, wykonywany jest następujący ciąg instrukcji:
+Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$.
+Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$S[T[k]]=k$.
+Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}.
+W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć \attrib{S}{top} o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\attrib{S}{top}]$ i~$S'[\attrib{S}{top}]$.
+Dokładniej, wykonywany jest następujący ciąg instrukcji:
 \begin{codebox}
 \zi	$\attrib{S}{top}\gets\attrib{S}{top}+1$
 \zi	$T[k]\gets\attrib{S}{top}$
 \zi	$S[\attrib{S}{top}]\gets k$
 \zi	$S'[\attrib{S}{top}]\gets x$
 \end{codebox}
-Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu wewnątrz $S$ i~$S'$ wartości z~pozycji \attrib{S}{top} na pozycję $T[k]$, aktualizacji odpowiedniej wartości w~tablicy $T$ i~wreszcie dekrementacji \attrib{S}{top}. Operacja \proc{Delete} sprowadza się zatem do wykonania poniższych instrukcji:
+Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu wewnątrz $S$ i~$S'$ wartości z~pozycji \attrib{S}{top} na pozycję $T[k]$, aktualizacji odpowiedniej wartości w~tablicy $T$ i~wreszcie dekrementacji \attrib{S}{top}.
+Operacja \proc{Delete} sprowadza się zatem do wykonania poniższych instrukcji:
 \begin{codebox}
 \zi	$S[T[k]]\gets S[\attrib{S}{top}]$
 \zi	$S'[T[k]]\gets S'[\attrib{S}{top}]$
@@ -38,7 +56,9 @@ Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element p
 \subchapter{Tablice z~haszowaniem}
 
 \exercise %11.2-1
-Dla kluczy $k$, $l$ ($k\ne l$), definiujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$. Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu~5.1 otrzymujemy $\E(X_{kl})=1/m$. Niech $X$ będzie zmienną losową oznaczającą liczbę kolizji w~tablicy $T$, czyli
+Dla kluczy $k$, $l$ ($k\ne l$), definiujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$.
+Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu~5.1 otrzymujemy $\E(X_{kl})=1/m$.
+Niech $X$ będzie zmienną losową oznaczającą liczbę kolizji w~tablicy $T$, czyli
 \[
     X = \sum_{k=1}^{n-1}\sum_{l=k+1}^nX_{kl}.
 \]
@@ -55,46 +75,78 @@ Ciąg wstawień elementów do tablicy z~haszowaniem został zobrazowany na rys.~
 	\begin{center}
 		\includegraphics{fig_11.2-2}
 	\end{center}
-	\caption{Ilustracja wstawiania do tablicy z~haszowaniem $T$ elementów o~kluczach 5,~28, 19, 15, 20, 33, 12, 17,~10. Do rozwiązywania kolizji używana jest metoda łańcuchowa.} \label{fig:11.2-2}
+	\caption{Ilustracja wstawiania do tablicy z~haszowaniem $T$ elementów o~kluczach 5,~28, 19, 15, 20, 33, 12, 17,~10.
+Do rozwiązywania kolizji używana jest metoda łańcuchowa.} \label{fig:11.2-2}
 \end{figure}
 
 \exercise %11.2-3
-Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można wyznaczać w~czasie stałym. Na podstawie wyników z~problemu~\refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$. Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania. W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
+Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można wyznaczać w~czasie stałym.
+Na podstawie wyników z~problemu~\refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$.
+Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania.
+W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
 
 \exercise %11.2-4
-Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską) orzekający o~jej zajętości. Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe. Wolne pozycje natomiast tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
+Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską) orzekający o~jej zajętości.
+Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe.
+Wolne pozycje natomiast tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
 
-Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna. Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}. W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$. Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next}, a~do komórki $h(k)$ wstawiamy element $x$.
+Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna.
+Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}.
+W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$.
+Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next}, a~do komórki $h(k)$ wstawiamy element $x$.
 
-Pozostaje uaktualnić wskaźnik \attrib{T[h(k)]}{next}. W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje. W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$. Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji. W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$. Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$. Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość \const{nil}.
+Pozostaje uaktualnić wskaźnik \attrib{T[h(k)]}{next}.
+W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje.
+W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$.
+Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji.
+W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
+Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$.
+Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość \const{nil}.
 
-Ponieważ traktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$. Należy pamiętać jednak o~tym, aby następnie wstawić zwolnioną pozycję na listę $F$. Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
+Ponieważ traktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
+Należy pamiętać jednak o~tym, aby następnie wstawić zwolnioną pozycję na listę $F$.
+Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
 
-Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą. Ponadto w~opisanej reprezentacji mamy zawsze $\alpha\le1$. Operacje \proc{Insert}, \proc{Delete} i~\proc{Search} działają więc tutaj w~oczekiwanym czasie $\Theta(1+\alpha)=\Theta(1)$. Aby go uzyskać, musieliśmy założyć, że lista wolnych pozycji $F$ jest listą dwukierunkową -- w~przeciwnym przypadku bowiem nie można byłoby usuwać z~niej w~czasie stałym.
+Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą.
+Ponadto w~opisanej reprezentacji mamy zawsze $\alpha\le1$.
+Operacje \proc{Insert}, \proc{Delete} i~\proc{Search} działają więc tutaj w~oczekiwanym czasie $\Theta(1+\alpha)=\Theta(1)$.
+Aby go uzyskać, musieliśmy założyć, że lista wolnych pozycji $F$ jest listą dwukierunkową -- w~przeciwnym przypadku bowiem nie można byłoby usuwać z~niej w~czasie stałym.
 
 \exercise %11.2-5
-Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$. Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ elementom ze zbioru $U$. Fakt ten wynika z~nieco zmodyfikowanej wersji \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
+Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$.
+Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ elementom ze zbioru $U$.
+Fakt ten wynika z~nieco zmodyfikowanej wersji \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
 
 \subchapter{Funkcje haszujące}
 
 \exercise %11.3-1
-W~celu odnalezienia elementu o~kluczu $k$ obliczamy $h(k)$ i~przeglądamy listę, porównując jedynie wartości funkcji haszującej, co jest znacznie szybsze od porównywania kluczy (długich ciągów znaków). Gdy znajdziemy element, dla którego wartość funkcji haszującej jest równa $h(k)$, to dopiero wówczas sprawdzamy, czy kluczem tego elementu jest $k$.
+W~celu odnalezienia elementu o~kluczu $k$ obliczamy $h(k)$ i~przeglądamy listę, porównując jedynie wartości funkcji haszującej, co jest znacznie szybsze od porównywania kluczy (długich ciągów znaków).
+Gdy znajdziemy element, dla którego wartość funkcji haszującej jest równa $h(k)$, to dopiero wówczas sprawdzamy, czy kluczem tego elementu jest $k$.
 
 \exercise %11.3-2
-Reprezentacją napisu $x=x_0x_1\dots x_{r-1}$ jest liczba $\sum_{i=0}^{r-1}x_i128^i$ (dla uproszczenia zapisu utożsamiamy znak z~odpowiadającą mu wartością w~kodzie ASCII). Obliczenie $h(x)$ polega na wyznaczeniu reszty z~dzielenia reprezentacji napisu $x$ przez $m$. W~tym celu przedstawimy $h(x)$ w~postaci
+Reprezentacją napisu $x=x_0x_1\dots x_{r-1}$ jest liczba $\sum_{i=0}^{r-1}x_i128^i$ (dla uproszczenia zapisu utożsamiamy znak z~odpowiadającą mu wartością w~kodzie ASCII).
+Obliczenie $h(x)$ polega na wyznaczeniu reszty z~dzielenia reprezentacji napisu $x$ przez $m$.
+W~tym celu przedstawimy $h(x)$ w~postaci
 \[
 	h(x) = x_0+128(x_1+128(x_2+\dots+128(x_{r-2}+128x_{r-1})\cdots)),
 \]
-przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\{0,1,\dots,m-1\}$. Następnie stosujemy schemat Hornera (patrz problem~\refProblem{2-3}). Ciągłe obliczanie reszt z~dzielenia przez $m$ pozwala utrzymać pośrednie wyniki w~co najwyżej dwóch słowach maszynowych.
+przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\{0,1,\dots,m-1\}$.
+Następnie stosujemy schemat Hornera (patrz problem~\refProblem{2-3}).
+Ciągłe obliczanie reszt z~dzielenia przez $m$ pozwala utrzymać pośrednie wyniki w~co najwyżej dwóch słowach maszynowych.
 
 \exercise %11.3-3
-Jeśli napis $x=x_0x_1\dots x_{r-1}$ jest permutacją napisu $y=y_0y_1\dots y_{r-1}$, to $x$ możemy uzyskać z~$y$, zamieniając ze sobą znaki występujące na tych samych pozycjach w~obu napisach, dopóki oba napisy są różne. Można pokazać, że zawsze istnieje skończony ciąg pozycji, na których należy zamieniać znaki w~celu przekształcenia jednego napisu w~drugi. Założymy zatem, że napis $x$ można uzyskać z~$y$, dokonując tylko jednej takiej zamiany, tzn.\ $x_a=y_b$ oraz $y_a=x_b$ dla pewnych $0\le a<b\le r-1$ oraz $x_i=y_i$ dla $i\ne a$ i~$i\ne b$. Łatwo pokazać przez indukcję, że jeśli występuje kolizja dla takiej pary napisów, to ma ona miejsce również dla par napisów różniących się więcej niż jedną parą znaków.
+Jeśli napis $x=x_0x_1\dots x_{r-1}$ jest permutacją napisu $y=y_0y_1\dots y_{r-1}$, to $x$ możemy uzyskać z~$y$, zamieniając ze sobą znaki występujące na tych samych pozycjach w~obu napisach, dopóki oba napisy są różne.
+Można pokazać, że zawsze istnieje skończony ciąg pozycji, na których należy zamieniać znaki w~celu przekształcenia jednego napisu w~drugi.
+Założymy zatem, że napis $x$ można uzyskać z~$y$, dokonując tylko jednej takiej zamiany, tzn.\ $x_a=y_b$ oraz $y_a=x_b$ dla pewnych $0\le a<b\le r-1$ oraz $x_i=y_i$ dla $i\ne a$ i~$i\ne b$.
+Łatwo pokazać przez indukcję, że jeśli występuje kolizja dla takiej pary napisów, to ma ona miejsce również dla par napisów różniących się więcej niż jedną parą znaków.
 
-Podobnie jak w~poprzednim zadaniu będziemy traktować zamiennie znak oraz jego reprezentację w~kodzie ASCII\@. Pokażemy, że $h(x)=h(y)$, czyli że różnica
+Podobnie jak w~poprzednim zadaniu będziemy traktować zamiennie znak oraz jego reprezentację w~kodzie ASCII\@.
+Pokażemy, że $h(x)=h(y)$, czyli że różnica
 \[
 	h(x)-h(y) = \biggl(\sum_{i=0}^{r-1}x_i2^{ip}\biggr)\bmod(2^p-1)-\biggl(\sum_{i=0}^{r-1}y_i2^{ip}\biggr)\bmod(2^p-1)
 \]
-jest zerem. Mamy:
+jest zerem.
+Mamy:
 \begin{align*}
 	h(x)-h(y) &= \bigl((x_a2^{ap}+x_b2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
 	&= \bigl((y_b2^{ap}+y_a2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
@@ -116,10 +168,13 @@ i~ostatecznie
 \]
 ponieważ jeden z~czynników jest równy $2^p-1$.
 
-Jeśli napisami będą np.\ sekwencje DNA, to użycie $h$ jako funkcji haszującej może doprowadzić do powstania dużej ilości kolizji. Każda sekwencja DNA stanowi bowiem ciąg nukleotydów czterech typów (reprezentowanych jako symbole \texttt{A}, \texttt{C}, \texttt{G} i~\texttt{T}), zatem prawdopodobieństwo, że jakaś sekwencja jest permutacją innej, jest stosunkowo duże.
+Jeśli napisami będą np.\ sekwencje DNA, to użycie $h$ jako funkcji haszującej może doprowadzić do powstania dużej ilości kolizji.
+Każda sekwencja DNA stanowi bowiem ciąg nukleotydów czterech typów (reprezentowanych jako symbole \texttt{A}, \texttt{C}, \texttt{G} i~\texttt{T}), zatem prawdopodobieństwo, że jakaś sekwencja jest permutacją innej, jest stosunkowo duże.
 
 \exercise %11.3-4
-Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy zatem $p=9$. Założymy, że słowo maszynowe ma długość $w=32$ bity i~przybliżymy stałą $A$ wartością $s/2^w=2654435769/2^{32}$. Wówczas:
+Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy zatem $p=9$.
+Założymy, że słowo maszynowe ma długość $w=32$ bity i~przybliżymy stałą $A$ wartością $s/2^w=2654435769/2^{32}$.
+Wówczas:
 \begin{itemize}
 	\item jeśli $k=61$, to $k\cdot s=161920581909=37\cdot2^{32}+3006791957$, więc $h(61)=358$;
 	\item jeśli $k=62$, to $k\cdot s=164575017678=38\cdot2^{32}+1366260430$, więc $h(62)=162$;
@@ -129,9 +184,16 @@ Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy
 \end{itemize}
 
 \exercise %11.3-5
-Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$. Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które zostały odwzorowane na $j$ przez funkcję $h$. Wówczas liczba kolizji powstałych na danym elemencie $j\in B$ wynosi $\binom{u_j}{2}=u_j(u_j-1)/2$.
+Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$.
+Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które zostały odwzorowane na $j$ przez funkcję $h$.
+Wówczas liczba kolizji powstałych na danym elemencie $j\in B$ wynosi $\binom{u_j}{2}=u_j(u_j-1)/2$.
 
-Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest minimalna, gdy $u_j=u/b$ dla każdego $j\in B$. Załóżmy, że dla pewnych dwóch różnych $i$, $k\in B$ zachodzi $0<u_i\le u/b\le u_k$. Łączna liczba kolizji na elementach $i$ i~$k$ wynosi $S=u_i(u_i-1)/2+u_k(u_k-1)/2$. Niech teraz $h'$ będzie funkcją identyczną z~$h$ z~jednym wyjątkiem -- dla dokładnie jednego dowolnie wybranego elementu $x\in U$ takiego, że $h(x)=i$, niech zachodzi $h'(x)=k$. Funkcja $h'$ tworzy $S'=(u_i-1)(u_i-2)/2+(u_k+1)u_k/2$ kolizji na elementach $i$ i~$k$. Zbadajmy znak różnicy $S'-S$:
+Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest minimalna, gdy $u_j=u/b$ dla każdego $j\in B$.
+Załóżmy, że dla pewnych dwóch różnych $i$, $k\in B$ zachodzi $0<u_i\le u/b\le u_k$.
+Łączna liczba kolizji na elementach $i$ i~$k$ wynosi $S=u_i(u_i-1)/2+u_k(u_k-1)/2$.
+Niech teraz $h'$ będzie funkcją identyczną z~$h$ z~jednym wyjątkiem -- dla dokładnie jednego dowolnie wybranego elementu $x\in U$ takiego, że $h(x)=i$, niech zachodzi $h'(x)=k$.
+Funkcja $h'$ tworzy $S'=(u_i-1)(u_i-2)/2+(u_k+1)u_k/2$ kolizji na elementach $i$ i~$k$.
+Zbadajmy znak różnicy $S'-S$:
 \begin{align*}
 	S'-S &= (u_i-1)(u_i-2)/2+(u_k+1)u_k/2-u_i(u_i-1)/2-u_k(u_k-1)/2 \\
 	&= (u_i^2-3u_i+2+u_k^2+u_k-u_i^2+u_i-u_k^2+u_k)/2 \\
@@ -139,25 +201,32 @@ Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest mi
 	&= u_k-u_i+1 \\
 	&> 0.
 \end{align*}
-Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ odbiegają od $u/b$. Stąd wniosek, że liczba kolizji jest możliwie najmniejsza, gdy dla wszystkich elementów $j\in B$ zachodzi $u_j=u/b$.
+Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ odbiegają od $u/b$.
+Stąd wniosek, że liczba kolizji jest możliwie najmniejsza, gdy dla wszystkich elementów $j\in B$ zachodzi $u_j=u/b$.
 
-Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszująca z~$\mathcal{H}$ generuje łącznie co najmniej $b(u/b)(u/b-1)/2$ kolizji. Stąd prawdopodobieństwo $p_{\mathcal{H}}$ wystąpienia kolizji przy losowo wybranej funkcji z~$\mathcal{H}$ można ograniczyć od dołu przez
+Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszująca z~$\mathcal{H}$ generuje łącznie co najmniej $b(u/b)(u/b-1)/2$ kolizji.
+Stąd prawdopodobieństwo $p_{\mathcal{H}}$ wystąpienia kolizji przy losowo wybranej funkcji z~$\mathcal{H}$ można ograniczyć od dołu przez
 \[
 	p_{\mathcal{H}} \ge \frac{b(u/b)(u/b-1)/2}{u(u-1)/2} = \frac{u/b-1}{u-1} > \frac{u/b-1}{u} = \frac{1}{b}-\frac{1}{u}.
 \]
 Jeśli rodzina $\mathcal{H}$ jest \singledash{$\epsilon$}{uniwersalna}, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
 
 \exercise %11.3-6
-Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \singledash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$. Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
+Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \singledash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$.
+Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
 \[
 	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j-\sum_{j=0}^{n-1}y_jb^j = \sum_{j=0}^{n-1}(x_j-y_j)b^j.
 \]
-Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem. Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$. A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$. Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
+Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem.
+Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$.
+A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$.
+Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
 
 \subchapter{Adresowanie otwarte}
 
 \exercise %11.4-1
-\note{Funkcja\/ $h'$ nie jest pierwotną funkcją haszującą, tylko pomocniczą funkcją haszującą. Zakładamy, że pierwszą pomocniczą funkcją haszującą w~haszowaniu dwukrotnym jest\/ $h_1=h'$.}
+\note{Funkcja\/ $h'$ nie jest pierwotną funkcją haszującą, tylko pomocniczą funkcją haszującą.
+Zakładamy, że pierwszą pomocniczą funkcją haszującą w~haszowaniu dwukrotnym jest\/ $h_1=h'$.}
 
 \noindent Tabela~\ref{tab:11-1} przedstawia pozycje tablicy, które są obliczane dla poszczególnych kluczy przy zastosowaniu różnych sposobów obliczania ciągów kontrolnych.
 
@@ -188,7 +257,8 @@ Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zer
 			\end{array}
 		\]
 	\end{center}
-	\caption{Pozycje obliczane dla podanego ciągu kluczy w~różnych metodach adresowania otwartego. Dany klucz trafia ostatecznie na pierwszą wolną pozycję ze swojego ciągu kontrolnego.} \label{tab:11-1}
+	\caption{Pozycje obliczane dla podanego ciągu kluczy w~różnych metodach adresowania otwartego.
+Dany klucz trafia ostatecznie na pierwszą wolną pozycję ze swojego ciągu kontrolnego.} \label{tab:11-1}
 \end{table}
 
 \exercise %11.4-2
@@ -213,17 +283,21 @@ W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza~3 na nast�
 \end{codebox}
 
 \exercise %11.4-3
-Dzięki skorzystaniu z~tw.~31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1,~\dots,~$m-1$ przyjmuje $m/d$ różnych wartości. Podobną własność wykazuje także suma $h_1(k)+ih_2(k)$. A~zatem stosując funkcję haszującą $h$, podczas wyszukiwania klucza $k$, które zakończy się porażką, zostanie sprawdzonych $m/d$ różnych komórek tablicy, co stanowi $(1/d)$-tą część tej tablicy.
+Dzięki skorzystaniu z~tw.~31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1,~\dots,~$m-1$ przyjmuje $m/d$ różnych wartości.
+Podobną własność wykazuje także suma $h_1(k)+ih_2(k)$.
+A~zatem stosując funkcję haszującą $h$, podczas wyszukiwania klucza $k$, które zakończy się porażką, zostanie sprawdzonych $m/d$ różnych komórek tablicy, co stanowi $(1/d)$-tą część tej tablicy.
 
 \exercise %11.4-4
-Wykorzystując tw.~11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$. Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
+Wykorzystując tw.~11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$.
+Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
 
 \exercise %11.4-5
 Z~tw.~11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
 \[
 	\frac{1}{1-\alpha} = \frac{2}{\alpha}\ln\frac{1}{1-\alpha}.
 \]
-Niech $\beta=1/(1-\alpha)$. Wówczas $\alpha=1-1/\beta$ i~powyższy wzór przyjmuje postać
+Niech $\beta=1/(1-\alpha)$.
+Wówczas $\alpha=1-1/\beta$ i~powyższy wzór przyjmuje postać
 \[
 	\beta = \frac{2\beta}{\beta-1}\ln\beta,
 \]
@@ -238,7 +312,8 @@ Mamy dalej:
 	\beta e^{-\beta/2} &= e^{-1/2}, \\
 	(-\beta/2)e^{-\beta/2} &= -e^{-1/2}\!/2.
 \end{align*}
-Skorzystamy teraz z~\textbf{funkcji $W$ Lamberta} \cite{lambertwfunction} zdefiniowanej jako wielowartościowe odwzorowanie odwrotne do funkcji $f(x)=xe^x$. Innymi słowy, dla każdej liczby rzeczywistej $x\ge-1/e$ spełniony jest wzór
+Skorzystamy teraz z~\textbf{funkcji $W$ Lamberta} \cite{lambertwfunction} zdefiniowanej jako wielowartościowe odwzorowanie odwrotne do funkcji $f(x)=xe^x$.
+Innymi słowy, dla każdej liczby rzeczywistej $x\ge-1/e$ spełniony jest wzór
 \[
 	x = W(x)e^{W(x)}.
 \]
@@ -250,14 +325,19 @@ skąd
 \[
 	\beta = -2W(-e^{-1/2}\!/2).
 \]
-Dla argumentu $-e^{-1/2}\!/2$ odwzorowanie $W$ przyjmuje dwie wartości. Jedną z~nich jest oczywiście $-1/2$. Ale wówczas $\beta=1$ i~$\alpha=0$, co jest sprzeczne z~założeniem. Drugą wartość $W(-e^{-1/2}\!/2)$ można uzyskać, stosując metody numeryczne -- wynosi ona w~przybliżeniu $-1{,}756$, skąd $\beta\approx3{,}513$ i~$\alpha\approx0{,}715$.
+Dla argumentu $-e^{-1/2}\!/2$ odwzorowanie $W$ przyjmuje dwie wartości.
+Jedną z~nich jest oczywiście $-1/2$.
+Ale wówczas $\beta=1$ i~$\alpha=0$, co jest sprzeczne z~założeniem.
+Drugą wartość $W(-e^{-1/2}\!/2)$ można uzyskać, stosując metody numeryczne -- wynosi ona w~przybliżeniu $-1{,}756$, skąd $\beta\approx3{,}513$ i~$\alpha\approx0{,}715$.
 
 \subchapter{Haszowanie doskonałe}
 
 \exercise %11.5-1
 \note{W~treści zadania zamiast haszowania uniwersalnego powinno być haszowanie równomierne.}
 
-\noindent Rozważmy prawdopodobieństwo $q(n,m)$, że wystąpi przynajmniej jedna kolizja. Jest $\binom{n}{2}$ par kluczy, które mogą tworzyć kolizję z~prawdopodobieństwem $1/m$ każda. Mamy więc
+\noindent Rozważmy prawdopodobieństwo $q(n,m)$, że wystąpi przynajmniej jedna kolizja.
+Jest $\binom{n}{2}$ par kluczy, które mogą tworzyć kolizję z~prawdopodobieństwem $1/m$ każda.
+Mamy więc
 \[
 	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
 \]
@@ -266,7 +346,9 @@ i~teraz, dzięki skorzystaniu ze wzoru~(3.11), otrzymujemy
 	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
 \]
 
-W~drugiej części zadania rozważymy funkcję $f(x)=e^{-x(x-1)/2m}$ zmiennej rzeczywistej $x$, traktując $m$ jak stałą dodatnią. Jak łatwo zauważyć, granicą tej funkcji w~$\infty$ jest 0. Wyznaczając jej pierwszą i~drugą pochodną, mamy
+W~drugiej części zadania rozważymy funkcję $f(x)=e^{-x(x-1)/2m}$ zmiennej rzeczywistej $x$, traktując $m$ jak stałą dodatnią.
+Jak łatwo zauważyć, granicą tej funkcji w~$\infty$ jest 0.
+Wyznaczając jej pierwszą i~drugą pochodną, mamy
 \[
 	\frac{df}{dx}(x) = e^{-x(x-1)/2m}\cdot\frac{1-2x}{2m}
 \]
@@ -274,25 +356,37 @@ oraz
 \[
 	\frac{d^2\!f}{dx^2}(x) = e^{-x(x-1)/2m}\biggl(\frac{1-2x}{2m}\biggr)^2+e^{-x(x-1)/2m}\cdot\frac{-1}{m} = e^{-x(x-1)/2m}\cdot\frac{4x^2-4x+1-4m}{4m^2}.
 \]
-Czynnik $e^{-x(x-1)/2m}$ jest dodatni niezależnie od wartości $x$ i~$m$. Jeśli $x>\sqrt{m}$, to natychmiast widać, że pierwsza pochodna funkcji $f$ jest ujemna. Do tego samego wniosku dochodzimy dla drugiej pochodnej, ograniczając jej drugi czynnik:
+Czynnik $e^{-x(x-1)/2m}$ jest dodatni niezależnie od wartości $x$ i~$m$.
+Jeśli $x>\sqrt{m}$, to natychmiast widać, że pierwsza pochodna funkcji $f$ jest ujemna.
+Do tego samego wniosku dochodzimy dla drugiej pochodnej, ograniczając jej drugi czynnik:
 \[
 	\frac{4x^2-4x+1-4m}{4m^2} < \frac{4m-4\sqrt{m}+1-4m}{4m^2} = \frac{-4\sqrt{m}+1}{4m^2} < 0.
 \]
-A~zatem dla $x>\sqrt{m}$ funkcja $f$ jest malejąca i~wklęsła. Oznacza to, że prawdopodobieństwo $p(n,m)$, które od góry ograniczone jest przez $f(n)$, maleje gwałtownie do zera, gdy $n$ przekracza $\sqrt{m}$.
+A~zatem dla $x>\sqrt{m}$ funkcja $f$ jest malejąca i~wklęsła.
+Oznacza to, że prawdopodobieństwo $p(n,m)$, które od góry ograniczone jest przez $f(n)$, maleje gwałtownie do zera, gdy $n$ przekracza $\sqrt{m}$.
 
 \problems
 
 \problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
-\note{W~punkcie~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$. W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania. W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$. W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$. Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
+\note{W~punkcie~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$.
+W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania.
+W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$.
+W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$.
+Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 
 \subproblem %11-1(a)
-Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu. Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem. Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$. Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
+Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu.
+Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem.
+Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$.
+Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
 
 \subproblem %11-1(b)
 Wynik otrzymujemy natychmiast po podstawieniu $k=2\lg n$ do oszacowania z~poprzedniego punktu.
 
 \subproblem %11-1(c)
-Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2,~\dots,~$n$, zdarzenie, że $X_i>2\lg n$. Zauważmy, że $A=\bigcup_{i=1}^nA_i$. Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu~(b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
+Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2,~\dots,~$n$, zdarzenie, że $X_i>2\lg n$.
+Zauważmy, że $A=\bigcup_{i=1}^nA_i$.
+Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu~(b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
 \[
 	\Pr(A) = \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = n\cdot O(1/n^2) = O(1/n).
 \]
@@ -312,13 +406,17 @@ Na podstawie oszacowania z~poprzedniej części otrzymujemy
 \problem{Długość listy w~metodzie łańcuchowej} %11-2
 
 \subproblem %11-2(a)
-Potraktujmy odwzorowywanie kluczy jako ciąg prób Bernoulliego, w~których sukcesem jest odwzorowanie klucza na ustaloną pozycję tablicy. Prawdopodobieństwo sukcesu każdej takiej próby jest równe $1/n$. Z~rozkładu dwumianowego wynika, że uzyskanie dokładnie $k$ sukcesów w~tej serii prób jest równe
+Potraktujmy odwzorowywanie kluczy jako ciąg prób Bernoulliego, w~których sukcesem jest odwzorowanie klucza na ustaloną pozycję tablicy.
+Prawdopodobieństwo sukcesu każdej takiej próby jest równe $1/n$.
+Z~rozkładu dwumianowego wynika, że uzyskanie dokładnie $k$ sukcesów w~tej serii prób jest równe
 \[
 	Q_k = b(k;n,1/n) = \binom{n}{k}\biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k}.
 \]
 
 \subproblem %11-2(b)
-Niech $A_i$, dla $i=1$, 2,~\dots,~$n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$. Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$. Z~własności prawdopodobieństwa i~z~punktu~(a) mamy
+Niech $A_i$, dla $i=1$, 2,~\dots,~$n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$.
+Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$.
+Z~własności prawdopodobieństwa i~z~punktu~(a) mamy
 \[
 	P_k = \Pr(A) \le \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = \sum_{i=1}^nQ_k = nQ_k.
 \]
@@ -328,7 +426,8 @@ Zauważmy, że dla całkowitych $n$, $k$ spełniających $0<k\le n$ zachodzi
 \[
 	(n-k+1)(n-k+2)\dots n(n-1)^{n-k} < n^n,
 \]
-gdyż po lewej stronie jest iloczyn $n$ czynników nieprzekraczających $n$. Mnożąc tę nierówność obustronnie przez $(n-k)!$, dostajemy
+gdyż po lewej stronie jest iloczyn $n$ czynników nieprzekraczających $n$.
+Mnożąc tę nierówność obustronnie przez $(n-k)!$, dostajemy
 \[
 	n!\,(n-1)^{n-k} < (n-k)!\,n^n.
 \]
@@ -341,7 +440,8 @@ Jeśli $k=0$, to oczywiście
 \[
 	Q_0 = \biggl(1-\frac{1}{n}\biggr)^n < 1 = \frac{e^0}{0^0}.
 \]
-Załóżmy teraz, że $k>0$. Wykorzystując nierówności z~poprzedniego paragrafu, mamy
+Załóżmy teraz, że $k>0$.
+Wykorzystując nierówności z~poprzedniego paragrafu, mamy
 \[
 	Q_k = \frac{n!}{k!\,(n-k)!}\biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k} = \frac{n!\,(n-1)^{n-k}}{k!\,(n-k)!\,n^n} < \frac{1}{k!} < \frac{e^k}{k^k}.
 \]
@@ -349,18 +449,22 @@ Załóżmy teraz, że $k>0$. Wykorzystując nierówności z~poprzedniego paragra
 \subproblem %11-2(d)
 \note{W~drugiej części zadania należy wywnioskować, że\/ $P_k<1/n^2$ dla\/ $k\ge k_0=c\lg n/\!\lg\lg n$.}
 
-\noindent Badając wyrażenie $\lg Q_{k_0}$, wyznaczymy odpowiednie $c$ tak, aby zachodziło $Q_{k_0}<1/n^3$, gdzie $k_0=c\lg n/\!\lg\lg n$. Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
+\noindent Badając wyrażenie $\lg Q_{k_0}$, wyznaczymy odpowiednie $c$ tak, aby zachodziło $Q_{k_0}<1/n^3$, gdzie $k_0=c\lg n/\!\lg\lg n$.
+Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
 \begin{align*}
 	\lg Q_{k_0} &< k_0\lg e-k_0\lg k_0 \\
 	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n}{\lg\lg n}\lg\frac{c\lg n}{\lg\lg n} \\[1mm]
 	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n(\lg c+\lg\lg n-\lg\lg\lg n)}{\lg\lg n} \\[1mm]
 	&= \frac{c\lg n(\lg e-\lg c)}{\lg\lg n}+\frac{c\lg n\lg\lg\lg n}{\lg\lg n}-c\lg n.
 \end{align*}
-Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$. Wówczas pierwszy składnik powyższej sumy jest ujemny. Ponadto, jeśli $c'$ jest wystarczająco duże, to dla każdego $n$ zachodzi
+Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$.
+Wówczas pierwszy składnik powyższej sumy jest ujemny.
+Ponadto, jeśli $c'$ jest wystarczająco duże, to dla każdego $n$ zachodzi
 \[
 	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0.
 \]
-Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$. Aby powyższa nierówność była prawdziwa, musi zachodzić $(3+c')m\le c'2^m$, skąd
+Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$.
+Aby powyższa nierówność była prawdziwa, musi zachodzić $(3+c')m\le c'2^m$, skąd
 \[
 	c' \ge \frac{3m}{2^m-m}.
 \]
@@ -372,19 +476,26 @@ Powracając teraz do głównego oszacowania, mamy
 \]
 skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
 
-Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część~(b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$. Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$. Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$. Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$. Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$. Mamy
+Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część~(b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
+Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$.
+Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
+Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$.
+Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$.
+Mamy
 \[
 	Q_k < e^k\!/k^k \le e^{k_0}\!/k_0^{k_0} < 1/n^3,
 \]
 a~zatem badane oszacowanie jest spełnione.
 
 \subproblem %11-2(e)
-Niech $k_0=c\lg n/\!\lg\lg n$. Wówczas
+Niech $k_0=c\lg n/\!\lg\lg n$.
+Wówczas
 \begin{align*}
 	\E(M) &= \sum_{k=0}^nkP_k = \sum_{k=0}^{k_0}kP_k+\sum_{k=k_0+1}^nkP_k \\
 	&\le k_0\sum_{k=0}^{k_0}P_k+n\sum_{k=k_0+1}^nP_k = k_0\Pr(M\le k_0)+n\Pr(M>k_0).
 \end{align*}
-Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie~(d), że $P_k<1/n^2$ dla $k\ge k_0$. Mamy
+Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie~(d), że $P_k<1/n^2$ dla $k\ge k_0$.
+Mamy
 \begin{align*}
 	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
 	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 < k_0\cdot1+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
@@ -394,21 +505,26 @@ Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodn
 \note{Krok~3 opisanego algorytmu wyszukiwania powinien mieć następującą treść:
 \begin{enumerate}
 	\setcounter{enumi}{2}
-	\item Wykonaj\/ $j\gets j+1$. Jeśli\/ $j=m$, to tablica jest pełna, więc zakończ wyszukiwanie. W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kroku~2.
+	\item Wykonaj\/ $j\gets j+1$.
+Jeśli\/ $j=m$, to tablica jest pełna, więc zakończ wyszukiwanie.
+W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kroku~2.
 \end{enumerate}
 }
 
 \subproblem %11-3(a)
-Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$,~\dots,~$\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$. Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1,~\dots,~$m-1$) jest
+Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$,~\dots,~$\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$.
+Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1,~\dots,~$m-1$) jest
 \[
 	\biggl(h(k)+\sum_{j=0}^ij\biggr)\bmod m = \biggl(h(k)+\frac{i(i+1)}{2}\biggr)\bmod m = \biggl(h(k)+\frac{i}{2}+\frac{i^2}{2}\biggr)\bmod m.
 \]
 Jest to zatem przykład adresowania kwadratowego, w~którym $c_1=c_2=1/2$.
 
 \subproblem %11-3(b)
-Niech $h'(k,i)=(h(k)+i/2+i^2\!/2)\bmod m$. Dowód sprowadza się do pokazania, że wyrazy ciągu $\langle h'(k,0),h'(k,1),\dots,h'(k,m-1)\rangle$ dla dowolnego klucza $k$ są parami różne.
+Niech $h'(k,i)=(h(k)+i/2+i^2\!/2)\bmod m$.
+Dowód sprowadza się do pokazania, że wyrazy ciągu $\langle h'(k,0),h'(k,1),\dots,h'(k,m-1)\rangle$ dla dowolnego klucza $k$ są parami różne.
 
-Załóżmy nie-wprost, że istnieje klucz $k$ oraz liczby całkowite $i$, $j$ spełniające $0\le i<j<m$ takie, że $h'(k,i)=h'(k,j)$. Wówczas
+Załóżmy nie-wprost, że istnieje klucz $k$ oraz liczby całkowite $i$, $j$ spełniające $0\le i<j<m$ takie, że $h'(k,i)=h'(k,j)$.
+Wówczas
 \[
 	h(k)+i(i+1)/2 \equiv h(k)+j(j+1)/2 \pmod m,
 \]
@@ -420,55 +536,101 @@ Na mocy tożsamości $j(j+1)/2-i(i+1)/2=(j-i)(j+i+1)/2$ dostajemy
 \[
 	(j-i)(j+i+1)/2 \equiv 0 \pmod m.
 \]
-Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(j-i)(j+i+1)=2rm$. Przy założeniu, że $m$ jest potęgą 2, $m=2^p$, sprowadza się to do postaci $(j-i)(j+i+1)=r2^{p+1}$. Nietrudno zauważyć, że tylko jeden z~czynników, $j-i$ albo $j+i+1$, jest parzysty, zatem $2^{p+1}$ dzieli tylko jeden z~nich. Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$. Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$. Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.
+Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(j-i)(j+i+1)=2rm$.
+Przy założeniu, że $m$ jest potęgą 2, $m=2^p$, sprowadza się to do postaci $(j-i)(j+i+1)=r2^{p+1}$.
+Nietrudno zauważyć, że tylko jeden z~czynników, $j-i$ albo $j+i+1$, jest parzysty, zatem $2^{p+1}$ dzieli tylko jeden z~nich.
+Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$.
+Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$.
+Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.
 
 \problem{Haszowanie \singledash{$k$}{uniwersalne} i~uwierzytelnianie} %11-4
-\note{Poprawki wprowadzone w~angielskiej treści tego problemu okazały się na tyle duże, że problem został napisany od nowa. Poniżej prezentujemy polskie tłumaczenie jego nowej wersji.}
+\note{Poprawki wprowadzone w~angielskiej treści tego problemu okazały się na tyle duże, że problem został napisany od nowa.
+Poniżej prezentujemy polskie tłumaczenie jego nowej wersji.}
 
-\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$. Powiemy, że $\mathcal{H}$ jest \textbf{\singledash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
+\noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$.
+Powiemy, że $\mathcal{H}$ jest \textbf{\singledash{$k$}{uniwersalna}}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
 \begin{description}
 	\setlength\labelsep{11pt}
 	\item[{\sffamily\bfseries(a)}] Wykaż, że jeśli rodzina funkcji haszujących $\mathcal{H}$ jest \singledash{2}{uniwersalna}, to jest uniwersalna.
-	\item[{\sffamily\bfseries(b)}] Załóżmy, że $U$ jest zbiorem \singledash{$n$}{tek} o~wartościach z~$\mathbb{Z}_p=\{0,1,\dots,p-1\}$, gdzie $p$ jest liczbą pierwszą. Rozważmy element $x=\langle x_0,x_1,\dots,x_{n-1}\rangle\in U$. Dla każdej \singledash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ definiujemy funkcję haszującą $h_a$ jako
+	\item[{\sffamily\bfseries(b)}] Załóżmy, że $U$ jest zbiorem \singledash{$n$}{tek} o~wartościach z~$\mathbb{Z}_p=\{0,1,\dots,p-1\}$, gdzie $p$ jest liczbą pierwszą.
+Rozważmy element $x=\langle x_0,x_1,\dots,x_{n-1}\rangle\in U$.
+Dla każdej \singledash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ definiujemy funkcję haszującą $h_a$ jako
 	\[
 		h_a(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j\biggr)\bmod p.
 	\]
-	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}. (\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
+	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}.
+(\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
 	\item[{\sffamily\bfseries(c)}] Załóżmy, że zmodyfikowaliśmy nieco rodzinę $\mathcal{H}$ z~punktu~(b): dla każdego $a\in U$ i~każdego $b\in\mathbb{Z}_p$ definiujemy
 	\[
 		h_{a,b}'(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j+b\biggr)\bmod p
 	\]
-	oraz $\mathcal{H}'=\{h_{a,b}'\}$. Udowodnij, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}. (\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$. Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
-	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\singledash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$. Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą. Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$. Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$. Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$. Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
+	oraz $\mathcal{H}'=\{h_{a,b}'\}$.
+Udowodnij, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}.
+(\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$.
+Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
+	\item[{\sffamily\bfseries(d)}] Przypuśćmy, że Alicja i~Bob uzgodnili w~sekrecie funkcję haszującą $h$ z~\singledash{2}{uniwersalnej} rodziny funkcji haszujących $\mathcal{H}$.
+Każda funkcja $h\in\mathcal{H}$ odwzorowuje uniwersum kluczy $U$ w~$\mathbb{Z}_p$, gdzie $p$ jest liczbą pierwszą.
+Następnie Alicja przesyła do Boba przez Internet komunikat $m\in U$.
+Alicja uwierzytelnia komunikat, przesyłając dodatkowo znacznik $t=h(m)$, a~Bob sprawdza, czy para $\langle m,t\rangle$, którą otrzymuje, faktycznie spełnia $t=h(m)$.
+Załóżmy, że przeciwnik przechwytuje przesyłaną parę $\langle m,t\rangle$ i~próbuje oszukać Boba, zamieniając ją na inną parę $\langle m',t'\rangle$.
+Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że zaakceptuje on parę $\langle m',t'\rangle$, wynosi co najwyżej $1/p$, niezależnie od tego, jak wielką mocą obliczeniową przeciwnik dysponuje, i~nawet wówczas, gdy przeciwnik zna rodzinę funkcji haszujących $\mathcal{H}$.
 \end{description}
 
 \bigskip
 \note{Poniżej znajduje się rozwiązanie nowej wersji problemu.}
 
 \subproblem %11-4(a)
-Niech $\mathcal{H}$ będzie \singledash{2}{uniwersalną} rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$. Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$. A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$. Rodzina $\mathcal{H}$ jest więc uniwersalna.
+Niech $\mathcal{H}$ będzie \singledash{2}{uniwersalną} rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$.
+Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$.
+A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$.
+Rodzina $\mathcal{H}$ jest więc uniwersalna.
 
 \subproblem %11-4(b)
-Aby zbadać \singledash{2}{uniwersalność}, wykorzystamy wskazówkę. Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera. To wyklucza \singledash{2}{uniwersalność} rodziny $\mathcal{H}$.
+Aby zbadać \singledash{2}{uniwersalność}, wykorzystamy wskazówkę.
+Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera.
+To wyklucza \singledash{2}{uniwersalność} rodziny $\mathcal{H}$.
 
-Udowodnimy teraz, że rodzina $\mathcal{H}$ jest uniwersalna. Wybierzmy w~tym celu dowolną parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~pewną funkcję $h_a$ z~$\mathcal{H}$. Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$. Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniony będzie poniższy wzór:
+Udowodnimy teraz, że rodzina $\mathcal{H}$ jest uniwersalna.
+Wybierzmy w~tym celu dowolną parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~pewną funkcję $h_a$ z~$\mathcal{H}$.
+Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$.
+Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniony będzie poniższy wzór:
 \[
 	\sum_{j=0}^{n-1}a_j(x_j-y_j) \equiv 0 \pmod p.
 \]
-Niech $S=\sum_{j=1}^{n-1}a_j(x_j-y_j)$. Wówczas wzór przyjmuje postać
+Niech $S=\sum_{j=1}^{n-1}a_j(x_j-y_j)$.
+Wówczas wzór przyjmuje postać
 \[
 	a_0(x_0-y_0) \equiv -S \pmod p,
 \]
-którą potraktujemy jak modularne równanie liniowe zmiennej $a_0$. Ponieważ $x_0\ne y_0$, a~$p$ jest liczbą pierwszą, to $\gcd(x_0-y_0,p)=1$ i~na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. A~zatem dla ustalonych $a_1$, $a_2$,~\dots,~$a_{n-1}$ istnieje dokładnie jedno $a_0$, dla którego funkcja $h_a$, gdzie $a=\langle a_0,a_1,\dots,a_{n-1}\rangle$, generuje kolizję między $x$ a~$y$. To oznacza, że dokładnie $p^{n-1}$ spośród $p^n$ funkcji w~$\mathcal{H}$ doprowadzi do kolizji. Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wybrana losowo z~$\mathcal{H}$, wynosi $1/p$, co kończy dowód.
+którą potraktujemy jak modularne równanie liniowe zmiennej $a_0$.
+Ponieważ $x_0\ne y_0$, a~$p$ jest liczbą pierwszą, to $\gcd(x_0-y_0,p)=1$ i~na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
+A~zatem dla ustalonych $a_1$, $a_2$,~\dots,~$a_{n-1}$ istnieje dokładnie jedno $a_0$, dla którego funkcja $h_a$, gdzie $a=\langle a_0,a_1,\dots,a_{n-1}\rangle$, generuje kolizję między $x$ a~$y$.
+To oznacza, że dokładnie $p^{n-1}$ spośród $p^n$ funkcji w~$\mathcal{H}$ doprowadzi do kolizji.
+Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wybrana losowo z~$\mathcal{H}$, wynosi $1/p$, co kończy dowód.
 
 \subproblem %11-4(c)
-Ustalmy parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$. Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$. Wprowadźmy oznaczenia $\alpha=h_{a,b}'(x)$, $\beta=h_{a,b}'(y)$ oraz $X=\sum_{j=1}^{n-1}a_jx_j$, $Y=\sum_{j=1}^{n-1}a_jy_j$. Zachodzi $\alpha=(a_0x_0+X+b)\bmod p$ oraz $\beta=(a_0y_0+Y+b)\bmod p$. Zauważmy, że aby wygenerować każdą możliwą parę $\langle\alpha,\beta\rangle$, wystarczy abyśmy byli w~stanie wygenerować dowolne $\alpha-\beta$ i~dowolne $\beta$. Mamy $\alpha-\beta=(a_0(x_0-y_0)+X-Y)\bmod p$, skąd
+Ustalmy parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$.
+Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$.
+Wprowadźmy oznaczenia $\alpha=h_{a,b}'(x)$, $\beta=h_{a,b}'(y)$ oraz $X=\sum_{j=1}^{n-1}a_jx_j$, $Y=\sum_{j=1}^{n-1}a_jy_j$.
+Zachodzi $\alpha=(a_0x_0+X+b)\bmod p$ oraz $\beta=(a_0y_0+Y+b)\bmod p$.
+Zauważmy, że aby wygenerować każdą możliwą parę $\langle\alpha,\beta\rangle$, wystarczy abyśmy byli w~stanie wygenerować dowolne $\alpha-\beta$ i~dowolne $\beta$.
+Mamy $\alpha-\beta=(a_0(x_0-y_0)+X-Y)\bmod p$, skąd
 \[
 	a_0(x_0-y_0) \equiv \alpha-\beta-X+Y \pmod p.
 \]
-Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$. Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$. Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$. Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$. Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$. Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$. Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$. Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}.
+Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$.
+Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
+Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$.
+Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$.
+Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$.
+Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$.
+Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$.
+Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}.
 
 \subproblem %11-4(d)
-Ponieważ rodzina $\mathcal{H}$ jest \singledash{2}{uniwersalna}, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$. W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia. Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba. Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
+Ponieważ rodzina $\mathcal{H}$ jest \singledash{2}{uniwersalna}, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$.
+W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia.
+Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba.
+Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
 
 \endinput
