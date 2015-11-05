@@ -666,6 +666,19 @@ Z~kolei na mocy lematu~C.1 dostajemy
 \]
 
 \exercise %C.5-5
+%Niech $\nu$ będzie wartością oczekiwaną zmiennej losowej $Y=n-X$.
+%Wówczas
+%\[
+%        \nu = \E(Y) = \E(n-X) = n-\E(X) = n-\mu.
+%\]
+%Na mocy tw.~C.8 mamy, że
+%\[
+%        \Pr(Y-\nu\ge r) \le \biggl(\frac{\nu e}{r}\biggr)^r,
+%\]
+%skąd dostajemy nierówność
+%\[
+%        \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r.
+%\]
 Dowód nierówności
 \[
     \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r
@@ -798,12 +811,12 @@ Dostajemy ostatecznie
 \]
 
 \exercise %C.5-7
-Potraktujmy wyrażenie jak funkcję $f$ zmiennej $\alpha$, $f(\alpha)=\exp(\mu e^\alpha-\alpha r).$ W~celu wyznaczenia jej minimum obliczmy pierwszą i~drugą pochodną:
+Potraktujmy wyrażenie jak funkcję $f$ zmiennej $\alpha>0$, $f(\alpha)=\exp(\mu e^\alpha-\alpha r).$ W~celu wyznaczenia jej minimum obliczmy pierwszą i~drugą pochodną:
 \begin{align*}
 	\frac{df}{d\alpha}(\alpha) &= (\mu e^\alpha-r)\exp(\mu e^\alpha-\alpha r), \\
 	\frac{d^2\!f}{d\alpha^2}(\alpha) &= \bigl(\mu e^\alpha+(\mu e^\alpha-r)^2\bigr)\exp(\mu e^\alpha-\alpha r).
 \end{align*}
-Pierwsza pochodna zeruje się dla $\alpha=\ln(r/\mu)$.
+Pierwsza pochodna zeruje się dla $\alpha=\ln(r/\mu)$, co wymaga założenia $r>\mu$, ale warunek ten stanowi jedno z~założeń tw.~C.8.
 Po obliczeniu wartości drugiej pochodnej w~tym punkcie, dostajemy
 \[
 	\frac{d^2\!f}{d\alpha^2}(\ln(r/\mu)) = r\exp(r-r\ln(r/\mu)) > 0,
