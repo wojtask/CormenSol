@@ -666,64 +666,21 @@ Z~kolei na mocy lematu~C.1 dostajemy
 \]
 
 \exercise %C.5-5
-%Niech $\nu$ będzie wartością oczekiwaną zmiennej losowej $Y=n-X$.
-%Wówczas
-%\[
-%        \nu = \E(Y) = \E(n-X) = n-\E(X) = n-\mu.
-%\]
-%Na mocy tw.~C.8 mamy, że
-%\[
-%        \Pr(Y-\nu\ge r) \le \biggl(\frac{\nu e}{r}\biggr)^r,
-%\]
-%skąd dostajemy nierówność
-%\[
-%        \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r.
-%\]
-Dowód nierówności
+\note{Aby udowodnić nierówność, wymagane jest założenie, że $r>n-\mu$, którego brak w~treści zadania (także w~oryginale).}
+
+\noindent Niech $\nu$ będzie wartością oczekiwaną zmiennej losowej $Y=n-X$.
+Wówczas
 \[
-    \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r
+        \nu = \E(Y) = \E(n-X) = n-\E(X) = n-\mu.
 \]
-przeprowadzimy, opierając się na dowodzie tw.~C.8.
-Dla pewnego $\alpha>0$ mamy
+Na mocy tw.~C.8 mamy, że
 \[
-	\Pr(\mu-X\ge r) = \Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr),
+        \Pr(Y-\nu\ge r) \le \biggl(\frac{\nu e}{r}\biggr)^r,
 \]
-a~z~nierówności Markowa (\refExercise{C.3-6}) dostajemy
+skąd dostajemy nierówność
 \[
-	\Pr\bigl(e^{\alpha(\mu-X)}\ge e^{\alpha r}\bigr) \le \E\bigl(e^{\alpha(\mu-X)}\bigr)e^{-\alpha r}.
+        \Pr(\mu-X\ge r) \le \biggl(\frac{(n-\mu)e}{r}\biggr)^r.
 \]
-Niech $X_i$, dla $i=1$, 2,~\dots,~$n$, będzie zmienną losową przyjmującą~1, jeśli wynikiem \singledash{$i$}{tej} próby Bernoulliego jest sukces i~0 w~przeciwnym przypadku.
-Wtedy
-\[
-	X = \sum_{i=1}^nX_i \quad\text{oraz}\quad \mu-X = \sum_{i=1}^n(p_i-X_i),
-\]
-otrzymujemy zatem
-\[
-	\E\bigl(e^{\alpha(\mu-X)}\bigr) = \E\biggl(\prod_{i=1}^ne^{\alpha(p_i-X_i)}\biggr) = \prod_{i=1}^n\E\bigl(e^{\alpha(p_i-X_i)}\bigr),
-\]
-co wynika na mocy wzoru~(C.23), gdyż ze wzajemnej niezależności zmiennych losowych $X_i$ wynika wzajemna niezależność zmiennych losowych $e^{\alpha(p_i-X_i)}$ (\refExercise{C.3-5}).
-Z~definicji wartości oczekiwanej mamy
-\[
-	\E\bigl(e^{\alpha(p_i-X_i)}\bigr) = e^{\alpha(p_i-1)}p_i+e^{\alpha(p_i-0)}q_i = p_ie^{-\alpha q_i}+q_ie^{\alpha p_i} \le q_ie^{\alpha}+1 \le \exp(q_ie^\alpha),
-\]
-skąd zachodzi
-\[
-	\E\bigl(e^{\alpha(\mu-X)}\bigr) \le \prod_{i=1}^n\exp(q_ie^\alpha) = \exp\biggl(\sum_{i=1}^nq_ie^\alpha\biggr) = \exp((n-\mu)e^\alpha),
-\]
-bo $\sum_{i=1}^nq_i=\sum_{i=1}^n1-\sum_{i=1}^np_i=n-\mu$.
-Wracając do oszacowania prawdopodobieństwa, dostajemy
-\[
-	\Pr(\mu-X\ge r) \le \exp((n-\mu)e^\alpha-\alpha r).
-\]
-Prawą stronę nierówności~(C.45) minimalizuje $\alpha=\ln(r/\mu)$ (\refExercise{C.5-7}).
-W~naszym przypadku po prawej stronie znaku nierówności zamiast $\mu$ mamy $n-\mu$, a~więc wyrażenie po prawej stronie będzie minimalizowane przez $\alpha=\ln(r/(n-\mu))$.
-Dostajemy ostatecznie
-\begin{align*}
-	\Pr(\mu-X\ge r) &\le \exp\biggl((n-\mu)e^{\ln\frac{r}{n-\mu}}-r\ln\frac{r}{n-\mu}\biggr) \\
-	&= \exp\biggl(r-r\ln\frac{r}{n-\mu}\biggr) \\
-	&= \frac{e^r}{\bigl(\frac{r}{n-\mu}\bigr)^r} \\
-	&= \biggl(\frac{(n-\mu)e}{r}\biggr)^r.
-\end{align*}
 
 W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np$ i~na mocy nierówności udowodnionej w~pierwszej części otrzymujemy
 \[
