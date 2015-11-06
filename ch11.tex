@@ -13,13 +13,15 @@ Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka
 Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
-Zmodyfikujemy tablicę $T$ tak, aby przechowywała dwukierunkowe listy elementów.
-Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy $T[\attrib{x}{key}]$.
-Dzięki temu, że operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy $T[\attrib{x}{key}]$.
-Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$, która jest głową listy albo wartością \const{nil}.
-Każda z~trzech opisanych operacji działa w~czasie $\Theta(1)$.
+W~naszej implementacji elementy przechowywane w~tablicy $T$, oprócz klucza i~dodatkowych danych, zawierać będą wskaźniki \id{prev} i~\id{next}, dzięki którym elementy będą mogły zostać uszeregowane w~listy dwukierunkowe.
+Komórka o~indeksie $k$ w~tablicy $T$ będzie zawierać głowę listy elementów o~kluczu $k$ znajdujących się aktualnie w~tablicy albo \const{nil}, jeżeli lista ta będzie pusta.
 
-Opisane rozwiązanie można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
+Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy znajdującej się w~$T[\attrib{x}{key}]$.
+Ponieważ operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy w~$T[\attrib{x}{key}]$.
+Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$.
+Każda z~opisanych operacji działa w~czasie $\Theta(1)$.
+
+Opisaną strukturę danych można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
 
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
