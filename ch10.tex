@@ -554,7 +554,7 @@ Procedura wywoływana jest także dla wszystkich pustych najbardziej lewych syn�
 Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
-W~algorytmie będziemy symulować przechodzenie drzewa w~porządku inorder, używając 3 wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem.
+W~algorytmie będziemy symulować przechodzenie drzewa w~porządku inorder, używając trzech wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem.
 Odwiedzenie danego węzła $x$ będzie realizowane przez pomocniczą procedurę $\proc{Stackless-Inorder-Visit}(x)$.
 Polega ono na wypisaniu klucza $x$ oraz wyznacza kolejny węzeł do przetworzenia.
 \begin{codebox}
@@ -576,17 +576,27 @@ Algorytm zapisujemy w~postaci pseudokodu:
 			\If $\id{prev}=\attrib{curr}{p}$
 \li				\Then
 					\If $\attrib{curr}{left}\ne\const{nil}$
-\li						\Then $\id{next}\gets\attrib{curr}{left}$
-\li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
+\li						\Then $\id{next}\gets\attrib{curr}{left}$ \label{li:stackless-inorder-tree-walk-go-left}
+\li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit1}
 						\End
 \li				\ElseIf $\id{prev}=\attrib{curr}{left}$
-\li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$
-\li				\ElseNoIf $\id{next}\gets\attrib{curr}{p}$
+\li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit2}
+\li				\ElseNoIf $\id{next}\gets\attrib{curr}{p}$ \label{li:stackless-inorder-tree-walk-go-up}
 				\End
-\li			$\id{prev}\gets\id{curr}$
-\li			$\id{curr}\gets\id{next}$
+\li			$\id{prev}\gets\id{curr}$ \label{li:stackless-inorder-tree-walk-update-prev}
+\li			$\id{curr}\gets\id{next}$ \label{li:stackless-inorder-tree-walk-update-curr}
 		\End
 \end{codebox}
+Kolejne węzły, przez które przechodzimy w~algorytmie, wyznaczane są na podstawie wzajemnej relacji między węzłami \id{prev} i~\id{curr}.
+Gdy \id{prev} jest ojcem \id{curr}, to aktualnie schodzimy w~dół drzewa po lewych synach (wiersz~\ref{li:stackless-inorder-tree-walk-go-left}).
+W~przypadku osiągnięcia liścia, odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz~\ref{li:stackless-inorder-tree-walk-visit1}).
+Gdy \id{prev} jest lewym synem \id{curr}, to wracamy w~górę drzewa, odwiedzając napotykane węzły i~przechodząc ich prawe poddrzewa (wiersz~\ref{li:stackless-inorder-tree-walk-visit2}).
+Jeśli wreszcie \id{prev} jest prawym synem węzła \id{curr}, to wracamy w~górę drzewa z~właśnie odwiedzonego prawego poddrzewa (wiersz~\ref{li:stackless-inorder-tree-walk-go-up}).
+W~wierszach \ref{li:stackless-inorder-tree-walk-update-prev} i~\ref{li:stackless-inorder-tree-walk-update-curr} następuje aktualizacja wskaźników \id{prev} i~\id{curr}, po czym algorytm kontynuuje swoje działanie, aż $\id{curr}=\const{nil}$.
+
+Każdą krawędzią drzewa przejdziemy dokładnie 2 razy -- poruszając się najpierw w~dół, a~później w~górę drzewa.
+Odwiedzenie węzła $x$ następuje w~dwóch przypadkach -- gdy docieramy do niego od jego ojca i~$x$ nie ma lewego syna lub wtedy, gdy wracamy w~górę drzewa z~lewego syna $x$.
+Algorytm odwiedzi zatem każdy węzeł dokładnie raz, działając w~czasie $\Theta(n)$.
 
 \exercise %10.4-6
 \note{W~oryginalnej treści zadania szukana jest taka reprezentacja drzewa, która umożliwi wyznaczanie i~uzyskiwanie dostępu do ojca danego węzła \textbf{lub} wszystkich jego synów w~czasie proporcjonalnym do liczby synów.}
