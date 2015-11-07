@@ -439,13 +439,13 @@ Poniższy pseudokod stanowi implementację tej operacji.
 \end{codebox}
 
 \exercise %10.3-5
-Ogólny zarys procedury \proc{Compactify-List} jest następujący.
+Ogólna idea procedury \proc{Compactify-List} wygląda następująco.
 Podczas przechodzenia po liście $L$ wyznaczane są te elementy, które zajmują pozycje na prawo od $m$.
 Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się na pozycjach do $m$ włącznie.
 Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów.
 Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji.
 Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}.
-Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.\ $-1$.
+Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.~$-1$.
 Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
@@ -465,21 +465,17 @@ Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właś
 \li						\Do $y\gets y+1$
 						\End \label{li:compactify-list-while2-end}
 \li					zamień wartości pól \id{key}, \id{next} i~\id{prev} elementu $x$ z~polami elementu $y$ \label{li:compactify-list-swap}
-\li					\If $\id{next}[x]\ne\const{nil}$ \label{li:compactify-list-fix-neighbors-begin}
-\li						\Then $\id{prev}[\id{next}[x]]\gets x$
+\li					\If $\id{next}[x]\ne\const{nil}$
+\li						\Then $\id{prev}[\id{next}[x]]\gets x$ \label{li:compactify-list-update-prev-next}
 						\End
 \li					\If $\id{prev}[x]\ne\const{nil}$
-\li						\Then $\id{next}[\id{prev}[x]]\gets x$
-						\End \label{li:compactify-list-fix-neighbors-end}
-\li					\If $x'\ne\const{nil}$ \label{li:compactify-list-fix-predecessor-begin}
-\li						\Then $\id{next}[x']\gets y$
-						\End \label{li:compactify-list-fix-predecessor-end}
-\li					\If $L=x$ \label{li:compactify-list-fix-heads-begin}
-\li						\Then $L\gets y$
+\li						\Then $\id{next}[\id{prev}[x]]\gets x$ \label{li:compactify-list-update-next-prev}
+\li						\Else $F\gets x$ \label{li:compactify-free-list-head-update}
 						\End
-\li					\If $F=y$
-\li						\Then $F\gets x$
-						\End \label{li:compactify-list-fix-heads-end}
+\li					\If $x'\ne\const{nil}$
+\li						\Then $\id{next}[x']\gets y$ \label{li:compactify-list-update-predecessor-next}
+\li						\Else $L\gets y$ \label{li:compactify-list-head-update}
+						\End
 \li					$x'\gets y$
 \li					$x\gets\id{next}[y]$
 				\End
@@ -488,13 +484,13 @@ Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właś
 \end{codebox}
 
 Procedura przechodzi przez listę $L$ trzy razy.
-Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na $-1$.
+Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na~$-1$.
 W~tym samym kroku wyznaczana jest wartość $m$ -- rozmiar listy $L$.
 
 Kolejne przejście po liście to właściwe kompaktowanie.
 Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo.
 Pętla \kw{while} w~wierszach \doubledash{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu~\ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
-Należy jeszcze uaktualnić wartości pól \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \doubledash{\ref{li:compactify-list-fix-neighbors-begin}}{\ref{li:compactify-list-fix-neighbors-end}}), wartość pola \id{next} poprzednika $x$ na liście $L$ (wiersze \doubledash{\ref{li:compactify-list-fix-predecessor-begin}}{\ref{li:compactify-list-fix-predecessor-end}}), jak również wartości wskaźników $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \doubledash{\ref{li:compactify-list-fix-heads-begin}}{\ref{li:compactify-list-fix-heads-end}}).
+Należy jeszcze uaktualnić pola \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \ref{li:compactify-list-update-prev-next} i~\ref{li:compactify-list-update-next-prev}), pole \id{next} poprzednika $x$ na liście $L$ (wiersz~\ref{li:compactify-list-update-predecessor-next}), jak również wskaźniki $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \ref{li:compactify-free-list-head-update} oraz~\ref{li:compactify-list-head-update}).
 
 Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu~\ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
 
@@ -504,7 +500,7 @@ Z~tego powodu na liście przetworzonej procedurą \proc{Compactify-List} nie mo�
 \subchapter{Reprezentowanie drzew (ukorzenionych)}
 
 \exercise %10.4-1
-Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.~\ref{fig:10.4-1}.
+Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.~\ref{fig:10.4-1}. Węzły o~kluczach 14 i~15 nie należą do drzewa.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_10.4-1}
