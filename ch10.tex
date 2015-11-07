@@ -589,33 +589,28 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \end{codebox}
 
 \exercise %10.4-6
-\note{W~oryginalnej treści zadania szukana jest taka reprezentacja drzewa, która umożliwi wyznaczanie i~uzyskiwanie dostępu do ojca danego węzła lub wszystkich jego synów w~czasie proporcjonalnym do liczby synów.}
+\note{W~oryginalnej treści zadania szukana jest taka reprezentacja drzewa, która umożliwi wyznaczanie i~uzyskiwanie dostępu do ojca danego węzła \textbf{lub} wszystkich jego synów w~czasie proporcjonalnym do liczby synów.}
 
-\noindent Opiszemy modyfikacje, które należy wprowadzić w~reprezentacji ,,na lewo syn, na prawo brat'', aby spełnić wymaganie z~treści zadania.
-Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy wyeliminować atrybut $p$.
-Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest korzeniem albo najbardziej na prawo położonym synem swojego ojca, to $\attrib{x}{right-sibling}=\const{nil}$.
-Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na dziadka $x$ (czyli ojca ojca $x$ albo \const{nil}, jeśli $x$ jest korzeniem lub synem korzenia).
-Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy dziadkiem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską.
+\noindent Opiszemy modyfikacje, jakie należy wprowadzić w~reprezentacji ,,na lewo syn, na prawo brat'', aby spełnić wymaganie z~treści zadania.
+Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy zrezygnować z~atrybutu $p$.
+Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest korzeniem drzewa albo najbardziej na prawo położonym synem swojego ojca, to $\attrib{x}{right-sibling}=\const{nil}$.
+Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na ojca $x$ (albo \const{nil}, jeśli $x$ jest korzeniem).
+Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy ojcem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską.
 Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
 \begin{itemize}
-	\item \attrib{x}{child} -- wskazuje na najbardziej lewego syna $x$ (identyczny z~\attrib{x}{left-child} z~reprezentacji ,,na lewo syn, na prawo brat'');
-	\item \attrib{x}{next} -- wskazuje na kolejnego brata węzła $x$ albo na dziadka węzła $x$, jeśli $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca;
-	\item \attrib{x}{last} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
+	\item \attrib{x}{left-child} -- wskazuje na najbardziej lewego syna $x$ albo \const{nil}, jeśli $x$ jest liściem (identyczny z~\attrib{x}{left-child} z~reprezentacji ,,na lewo syn, na prawo brat'');
+	\item \attrib{x}{next} -- wskazuje na kolejnego brata $x$ albo na ojca $x$, jeśli $x$ jest korzeniem drzewa lub najbardziej na prawo wysuniętym synem swojego ojca;
+	\item \attrib{x}{last-sibling} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
 \end{itemize}
 
-Dzięki tak zdefiniowanym atrybutom, mając dany węzeł wewnętrzny $x$, możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{child}, a~następnie poruszając się po wskaźnikach \id{next} kolejnych węzłów.
-Każdy napotykany węzeł $y$ pokazuje wskaźnikiem \attrib{y}{next} na swojego kolejnego brata, o~ile $\attrib{y}{last}=\const{false}$.
-Po dotarciu do węzła $y$, dla którego $\attrib{y}{last}=\const{true}$, wszyscy synowie węzła $x$ zostali wyznaczeni i~możemy teraz ustalić ojca $x$, przechodząc do węzła wskazywanego przez \attrib{y}{next} (czyli dziadka $y$).
-Jeśli węzeł ten nie istnieje, to oznacza to, że $x$ jest korzeniem drzewa.
-Podany opis pozwala na wyznaczenie ojca węzła wewnętrznego $x$ oraz wszystkich jego synów w~czasie proporcjonalnym do liczby synów $x$.
+Dzięki tak zdefiniowanym atrybutom, dla danego węzła $x$ możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{left-child}, a~następnie poruszając się po wskaźnikach \id{next} kolejnych synów $x$.
+Każdy napotykany węzeł $y$ pokazuje wskaźnikiem \attrib{y}{next} na swojego brata po prawej stronie, o~ile $\attrib{y}{last-sibling}=\const{false}$.
+W~momencie dotarcia do węzła $y$, dla którego $\attrib{y}{last-sibling}=\const{true}$, odwiedzimy wszystkich synów węzła $x$.
+Podobnie, aby ustalić ojca $x$, przechodzimy po wskaźnikach \id{next} braci $x$ znajdujących się po jego prawej stronie, aż do napotkania węzła $z$, dla którego $\attrib{z}{last-sibling}=\const{true}$.
+Warunek ten oznacza, że węzeł $\attrib{z}{next}$, o~ile istnieje, jest ojcem zarówno $z$, jak i~$x$.
+Jeśli z~kolei $\attrib{z}{next}=\const{nil}$, to $x$ jest korzeniem drzewa.
 
-Rozważmy teraz przypadek, gdy $x$ jest liściem.
-Wtedy $\attrib{x}{child}=\const{nil}$, co daje nam informację o~braku synów $x$, ale ich nieobecność uniemożliwia nam dotarcie do ojca $x$ tak, jak to robiliśmy dla węzłów wewnętrznych.
-Można jednak postąpić następująco.
-Przechodzimy do brata węzła $x$ znajdującego się najbardziej na prawo i~docieramy do ich wspólnego dziadka $z$.
-Jeśli węzeł $z$ nie istnieje, to ojcem $x$ jest korzeń drzewa (wskazuje na niego atrybut \id{root} drzewa).
-W~przeciwnym przypadku sprawdzamy wszystkich synów węzła $z$ -- ten z~nich, którego jednym z~synów jest $x$, stanowi oczywiście ojca $x$.
-Dotarcie do ojca liścia $x$ tym sposobem wymaga w~najgorszym przypadku czasu proporcjonalnego do rozmiaru poddrzewa o~korzeniu będącego dziadkiem $x$.
+Podana implementacja pozwala na wyznaczenie wszystkich synów danego węzła w~czasie proporcjonalnym do ich liczby oraz jego ojca w~czasie proporcjonalnym do liczby braci danego węzła.
 
 \problems
 
