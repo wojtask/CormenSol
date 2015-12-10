@@ -126,10 +126,10 @@ Nierówności zachodzą, o~ile $n/2+17\le 11n/20$, czyli $n\ge340$, oraz
 \]
 Badając ostatnią nierówność, można dojść do rezultatu, że przyjęcie $c\ge47$ wystarcza, aby spełnić ją dla wszystkich $n\ge n_0$, gdzie $n_0=340$.
 
-Zauważmy, że stosowanie równania $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le34$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
+Zauważmy, że stosowanie wzoru $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le34$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
 Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le34$ i~niech stanowi to przypadek brzegowy rekurencji.
-Za podstawę indukcji musimy jednak przyjąć wszystkie $n=187$, 188,~\dots,~339.
-Posługując się programem komputerowym, można wykazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
+Za podstawę indukcji musimy wtedy przyjąć wszystkie $n=187$, 188,~\dots,~339.
+Można pokazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
 
 Analiza tej rekurencji z~każdą inną stałą w~miejscu~17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$ oraz wartości brzegowe rekursji i~podstawa indukcji, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
 
@@ -706,8 +706,8 @@ Warunek ten spełniamy poprzez przyjęcie $c_2\le0{,}3$.
 Dowód asymptotycznie dokładnego oszacowania dla $T(n)$ kończymy, wybierając odpowiednie wartości dla podstaw obu indukcji.
 Zauważmy, że obliczanie wartości rekurencji ze wzoru $T(n)=3T(n/3+5)+n/2$ dla $n\le7$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
 Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le7$ będzie przypadkiem brzegowym rekurencji.
-W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji uczyńmy wszystkie $n=30$, 31,~\dots,~74.
-Oszacowania w~tych przypadkach weryfikujemy programem komputerowym, uzasadniając poprawny dobór stałych $c_1$ i~$c_2$.
+W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji możemy uczynić wszystkie $n=30$, 31,~\dots,~74.
+Można sprawdzić, że dla takich wartości oba oszacowania są spełnione, co uzasadnia poprawny dobór stałych $c_1$ i~$c_2$.
 A~zatem $T(n)=\Theta(n\lg n)$.
 
 \subproblem %4-4(e)
@@ -906,7 +906,7 @@ Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję o
 Stosując twierdzenie o~rekurencji uniwersalnej, dostajemy rozwiązanie: $T(n)=\Theta(n)$.
 Wynik ten jest prawdziwy także w~przypadku optymistycznym -- wówczas dobry układ znajdujemy w~jednym zejściu rekurencyjnym po uprzednim wykonaniu $\Theta(n)$ testów.
 
-Potrafimy wyznaczyć dobry układ $u$, wykorzystajmy go więc do znalezienia kolejnych.
+Potrafimy wyznaczyć dobry układ $u$ -- wykorzystajmy go więc do znalezienia kolejnych.
 Testujemy tenże układ z~pozostałymi $n-1$.
 Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje.
 Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry.
