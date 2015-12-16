@@ -203,10 +203,10 @@ Przez \singledash{$j$}{ty} etap działania algorytmu heapsort, gdzie $j=0$, 1,~\
 Inaczej mówiąc, \singledash{$j$}{ty} etap pozbawia kopiec \singledash{$(h-j)$}{tego} poziomu.
 
 \medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ \singledash{$j$}{tego} etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii~9 procedury \proc{Max-Heapify},\/ $m_j$, jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
+\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ \singledash{$j$}{tego} etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii~9 procedury \proc{Max-Heapify} jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
 \begin{proof}
-Niech $j=0$.
-Bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$.
+Oznaczmy przez $m_j$ badaną liczbę zamian elementów wykonywanych w~\singledash{$j$}{tym} etapie.
+Niech $j=0$ i~bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$.
 Liczbę $k$ będziemy nazywać \textbf{dużą}, jeśli $k\ge(n+1)/2$.
 Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
 \[
@@ -246,8 +246,8 @@ czyli lemat jest prawdziwy, gdy $j=0$.
 Na początku \singledash{$j$}{tego} etapu kopiec ma wysokość $h-j$, więc dowód lematu dla \singledash{$j$}{tego} etapu, gdzie $1\le j\le h-1$, sprowadza się do dowodu oszacowania $m_0$ dla kopca o~rozmiarze $n=2^{h-j+1}-1$.
 \end{proof}
 
-Załóżmy teraz, że $h\ge5$.
-Sumaryczną liczbę zamian elementów podczas sortowania $n$ liczb możemy, dzięki powyższemu lematowi, ograniczyć od dołu:
+Załóżmy teraz, że $h\ge5$ i~wykorzystajmy oznaczenie $m_j$ z~powyższego dowodu.
+Sumaryczną liczbę zamian elementów podczas sortowania $n$ liczb, na podstawie lematu, ograniczamy od dołu:
 \[
     \sum_{j=0}^{h-1}m_j > \sum_{j=0}^{h-5}m_j > \sum_{j=0}^{h-5}(h-j-5)2^{h-j-3} = \sum_{j=0}^{h-5}j2^{j+2} = 4\sum_{j=0}^{h-5}j2^j.
 \]
