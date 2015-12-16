@@ -334,14 +334,14 @@ W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identy
 Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwego obszaru tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zawartych w~tablicy $C$.
 \begin{codebox}
 \Procname{$\proc{Counting-Sort-In-Place}(A,k)$}
-\li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort} 
-\li	$\id{positions}\gets C$
-\li $i\gets\attrib{A}{length}$
-\li \While $i\ge1$
+\li utwórz tablicę $C[0\twodots k]$ jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort} 
+\li skopiuj zawartość tablicy $C$ do tablicy \id{positions}
+\li $i\gets1$
+\li \While $i\le\attrib{A}{length}$
 \li     \Do
             $\id{key}\gets A[i]$
 \li         \If $\id{positions}[\id{key}-1]<i\le\id{positions}[\id{key}]$
-\li             \Then $i\gets i-1$
+\li             \Then $i\gets i+1$
 \li             \Else
                     zamień $A[i]\leftrightarrow A[C[\id{key}]]$
 \li                 $C[\id{key}]\gets C[\id{key}]-1$
