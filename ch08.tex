@@ -22,9 +22,9 @@ W~pierwszej sumie po prawej ograniczamy $\lg k$ od dołu przez $\lg1$, a~w~drugi
 \]
 
 \exercise %8.1-3
-Jeśli sortowanie działa w~czasie $\Theta(n)$ dla $l$ permutacji wejściowych danych długości $n$, to drzewo decyzyjne składające się z~gałęzi odpowiadających tylko tym permutacjom, ma wysokość $h=\Theta(n)$.
+Jeśli sortowanie działa w~czasie $\Theta(n)$ dla $l$ permutacji wejściowych długości $n$, to drzewo decyzyjne składające się z~gałęzi odpowiadających tylko tym permutacjom, ma wysokość $h=\Theta(n)$.
 Powtarzając rozumowanie z~dowodu tw.~8.1, dostajemy nierówność $2^h\ge l$, a~stąd $h\ge\lg l$.
-Pozostaje więc sprawdzić, czy $h$ jest liniowe dla poszczególnych wartości przyjmowanych przez $l$:
+Pozostaje więc sprawdzić, czy $h$ jest asymptotycznie ograniczone funkcją liniową względem $n$ dla poszczególnych wartości przyjmowanych przez $l$:
 \begin{itemize}
 	\item jeśli $l=n!/2$, to $h\ge\lg l=\lg(n!/2)=\lg(n!)-1=\Omega(n\lg n)$;
 	\item jeśli $l=n!/n$, to $h\ge\lg l=\lg(n!/n)=\lg(n!)-\lg n=\Omega(n\lg n)$;
@@ -106,7 +106,7 @@ Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyf
 
 \exercise %8.3-3
 Przeprowadzimy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych.
-Jeśli $d=1$, to algorytm \proc{Radix-Sort} sprowadza się do wywołania pomocniczej procedury do posortowania pojedynczych cyfr, a~zatem poprawność algorytmu wynika z~poprawności pomocniczego sortowania.
+Dla $d=1$ algorytm \proc{Radix-Sort} sprowadza się do wywołania pomocniczej procedury do posortowania pojedynczych cyfr, a~zatem poprawność algorytmu wynika z~poprawności pomocniczego sortowania.
 
 Załóżmy teraz, że $d>1$ i~że wywołanie algorytmu \proc{Radix-Sort} po $d-1$ fazach zwróciło tablicę elementów, które, obcięte do $d-1$ ostatnich pozycji, wyznaczają porządek niemalejący.
 Teraz elementy sortowane są względem pozycji $d$.
