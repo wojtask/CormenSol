@@ -3,7 +3,7 @@
 \subchapter{Stosy i~kolejki}
 
 \exercise %10.1-1
-Ciąg operacji na stosie $S$ został przedstawiony na rys.~\ref{fig:10.1-1}.
+Ciąg operacji na stosie $S$ został przedstawiony na rys.\ \ref{fig:10.1-1}.
 \begin{figure}[ht]
     \begin{center}
 		\includegraphics{fig_10.1-1}
@@ -27,7 +27,7 @@ Jeśli $\attrib{A}{left-top}=0$, to pierwszy stos jest pusty, a~jeśli $\attrib{
 Przepełnienie ma miejsce tylko wtedy, gdy $\attrib{A}{left-top}=\attrib{A}{right-top}-1$ i~usiłujemy dodać nowy element do któregokolwiek stosu, czyli wówczas, gdy łączna liczba elementów na obu stosach wynosi $n$.
 
 \exercise %10.1-3
-Ciąg operacji na kolejce $Q$ ilustruje rys.~\ref{fig:10.1-3}.
+Ciąg operacji na kolejce $Q$ ilustruje rys.\ \ref{fig:10.1-3}.
 
 \begin{figure}[ht]
 	\begin{center}
@@ -71,7 +71,7 @@ Z~kolei poniższy fragment kodu umieszczamy na początku procedury \proc{Dequeue
 
 \exercise %10.1-5
 Kolejkę dwustronną implementujemy przy użyciu tablicy $D[1\twodots n]$.
-Podobnie jak w~zwykłej kolejce atrybut \attrib{D}{head} wskazuje na początek kolejki, natomiast~atrybut \attrib{D}{tail} wyznacza następną wolną pozycję, na którą można wstawić nowy element.
+Podobnie jak w~zwykłej kolejce atrybut \attrib{D}{head} wskazuje na początek kolejki, natomiast atrybut \attrib{D}{tail} wyznacza następną wolną pozycję, na którą można wstawić nowy element.
 Procedury \proc{Head-Enqueue} oraz \proc{Head-Dequeue} mają na celu, odpowiednio, dodanie nowego elementu na początek kolejki i~usunięcie elementu z~początku kolejki.
 Z~kolei procedury \proc{Tail-Enqueue} oraz \proc{Tail-Dequeue} implementują dodawanie i~usuwanie elementów na końcu kolejki.
 Dla skrócenia zapisu pominięto sprawdzanie błędów niedomiaru i~przepełnienia.
@@ -121,7 +121,7 @@ Dodawanie nowego elementu do kolejki oraz sprawdzanie czy kolejka jest pusta, ni
 Usuwanie elementu z~kolejki jest już operacją nieco bardziej skomplikowaną, gdyż należy pobrać element znajdujący się najgłębiej na tym stosie.
 Ściągamy wpierw z~niego wszystkie elementy za pomocą operacji \proc{Pop} i~umieszczamy kolejno na drugim stosie, wywołując ciąg operacji \proc{Push}.
 W~rezultacie drugi stos będzie zawierał wszystkie elementy kolejki w~odwrotnej kolejności.
-Teraz pobieramy i zapamiętujemy element ze szczytu drugiego stosu, gdyż za chwilę zwrócimy go jako wynik procedury.
+Teraz pobieramy i~zapamiętujemy element ze szczytu drugiego stosu, gdyż za chwilę zwrócimy go jako wynik procedury.
 Wcześniej trzeba bowiem przenieść pozostałą zawartość drugiego stosu z~powrotem do pierwszego, co przy okazji przywróci początkową kolejność elementów.
 
 Łatwo sprawdzić, że testowanie pustości kolejki oraz dodawanie do niej nowego elementu, są wykonywane w~czasie stałym, natomiast usuwanie wymaga czasu proporcjonalnego do liczby elementów kolejki.
@@ -221,7 +221,7 @@ Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej proced
 \exercise %10.2-5
 Operacja wstawiania nowego elementu na jednokierunkową listę cykliczną $L$ umieszcza go jako następnik głowy listy $L$.
 Podczas operacji usuwania znajdowany jest poprzednik $y$ usuwanego elementu $x$, po czym \attrib{y}{next} zostaje uaktualnione.
-Jeśli $x$ jest głową listy, to atrybut \attrib{L}{head} zostaje ustawiony na następnik $x$ albo na \const{nil}, w~przypadku gdy $x$ stanowi jedyny element listy~$L$.
+Jeśli $x$ jest głową listy, to atrybut \attrib{L}{head} zostaje ustawiony na następnik $x$ albo na \const{nil}, w~przypadku gdy $x$ stanowi jedyny element listy $L$.
 Wreszcie operacja wyszukiwania przechodzi całą listę $L$, począwszy od jej głowy, zatrzymując się w~momencie odnalezienia elementu o~szukanym kluczu bądź w~chwili ponownego dotarcia do głowy listy $L$.
 
 Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
@@ -309,7 +309,7 @@ Wówczas $\attrib{x}{np}=z\func{xor}y$, zatem na podstawie własności operacji 
 \]
 Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\attrib{x}{np}\func{xor}z$.
 Zauważmy, że jeśli element $x$ jest ogonem listy, to $\attrib{x}{np}=\const{nil}\func{xor}y=0\func{xor}y=y$, skąd mamy $z=\attrib{x}{np}\func{xor}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\attrib{x}{np}=z\func{xor}0=z$ wynika $y=\const{nil}$.
-Podobnie jak w~zwykłych listach przyjmujemy, że atrybut \attrib{L}{head} przechowuje wskaźnik do głowy listy~$L$.
+Podobnie jak w~zwykłych listach przyjmujemy, że atrybut \attrib{L}{head} przechowuje wskaźnik do głowy listy $L$.
 Ponadto z~listą związujemy atrybut \attrib{L}{tail}, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
 
 Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy.
@@ -369,7 +369,7 @@ W~tym celu wystarczy zamienić ze sobą wartości atrybutów \attrib{L}{head} i~
 \exercise %10.3-1
 \note{Oryginalna treść drugiej części zadania żąda, aby podany ciąg zilustrować jako listę dwukierunkową w~reprezentacji jednotablicowej.}
 
-\noindent Rys.~\ref{fig:10.3-1} przedstawia przykładowe rozmieszczenie elementów ciągu jako listy dwukierunkowej w~reprezentacji wielotablicowej i~jednotablicowej.
+\noindent Rys.\ \ref{fig:10.3-1} przedstawia przykładowe rozmieszczenie elementów ciągu jako listy dwukierunkowej w~reprezentacji wielotablicowej i~jednotablicowej.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_10.3-1}
@@ -382,7 +382,7 @@ W~tym celu wystarczy zamienić ze sobą wartości atrybutów \attrib{L}{head} i~
 \exercise %10.3-2
 Załóżmy, że właściwa lista oraz lista wolnych pozycji znajdują się w~pojedynczej tablicy $A$.
 Poniższe procedury są adaptacjami operacji przydzielania i~zwalniania pamięci dla list dwukierunkowych w~reprezentacji jednotablicowej.
-Wykorzystujemy tutaj fakt, że polu \id{next} odpowiada przesunięcie~1 względem początku fragmentu tablicy $A$ przechowującego dany element listy.
+Wykorzystujemy tutaj fakt, że polu \id{next} odpowiada przesunięcie 1 względem początku fragmentu tablicy $A$ przechowującego dany element listy.
 \begin{codebox}
 \Procname{$\proc{Single-Array-Allocate-Object}()$}
 \li	\If $\id{free}=\const{nil}$
@@ -445,7 +445,7 @@ Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się n
 Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów.
 Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji.
 Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}.
-Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.~$-1$.
+Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.\ $-1$.
 Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
@@ -484,15 +484,15 @@ Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właś
 \end{codebox}
 
 Procedura przechodzi przez listę $L$ trzy razy.
-Najpierw w~wierszu~\ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na~$-1$.
+Najpierw w~wierszu \ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na $-1$.
 W~tym samym kroku wyznaczana jest wartość $m$ -- rozmiar listy $L$.
 
 Kolejne przejście po liście to właściwe kompaktowanie.
 Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo.
-Pętla \kw{while} w~wierszach \doubledash{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu~\ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
-Należy jeszcze uaktualnić pola \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \ref{li:compactify-list-update-prev-next} i~\ref{li:compactify-list-update-next-prev}), pole \id{next} poprzednika $x$ na liście $L$ (wiersz~\ref{li:compactify-list-update-predecessor-next}), jak również wskaźniki $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \ref{li:compactify-free-list-head-update} oraz~\ref{li:compactify-list-head-update}).
+Pętla \kw{while} w~wierszach \doubledash{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu \ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
+Należy jeszcze uaktualnić pola \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \ref{li:compactify-list-update-prev-next} i~\ref{li:compactify-list-update-next-prev}), pole \id{next} poprzednika $x$ na liście $L$ (wiersz \ref{li:compactify-list-update-predecessor-next}), jak również wskaźniki $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \ref{li:compactify-free-list-head-update} oraz \ref{li:compactify-list-head-update}).
 
-Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu~\ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
+Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu \ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
 
 Po wykonaniu procedury elementy z~listy wolnych pozycji nie zawsze będą umieszczone w~tablicach według ich kolejności na tej liście.
 Z~tego powodu na liście przetworzonej procedurą \proc{Compactify-List} nie możemy korzystać z~procedur \proc{Compact-List-Allocate-Object} i~\proc{Compact-List-Free-Object} z~\refExercise{10.3-4}, które zakładają, że reprezentacja tablicowa listy wolnych pozycji stanowi stos.
@@ -500,20 +500,21 @@ Z~tego powodu na liście przetworzonej procedurą \proc{Compactify-List} nie mo�
 \subchapter{Reprezentowanie drzew (ukorzenionych)}
 
 \exercise %10.4-1
-Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.~\ref{fig:10.4-1}. Węzły o~kluczach 14 i~15 nie należą do drzewa.
+Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.\ \ref{fig:10.4-1}.
+Węzły o~kluczach 14 i~15 nie należą do drzewa.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_10.4-1}
 	\end{center}
-	\caption{Drzewo binarne o~korzeniu o~indeksie~6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
+	\caption{Drzewo binarne o~korzeniu o~indeksie 6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
 \end{figure}
 
 \exercise %10.4-2
-Szukany algorytm został opisany w~Podręczniku w~podrozdziale~12.1 jako procedura \proc{Inorder-Tree-Walk}.
-Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.~12.1 z~Podręcznika.
+Szukany algorytm został opisany w~Podręczniku w~podrozdziale 12.1 jako procedura \proc{Inorder-Tree-Walk}.
+Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.\ 12.1 z~Podręcznika.
 
 \exercise %10.4-3
-Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział~12.1).
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział 12.1).
 Do emulowania rekursji wykorzystywany jest stos.
 Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
 \begin{codebox}
@@ -588,10 +589,10 @@ Algorytm zapisujemy w~postaci pseudokodu:
 		\End
 \end{codebox}
 Kolejne węzły, przez które przechodzimy w~algorytmie, wyznaczane są na podstawie wzajemnej relacji między węzłami \id{prev} i~\id{curr}.
-Gdy \id{prev} jest ojcem \id{curr}, to aktualnie schodzimy w~dół drzewa po lewych synach (wiersz~\ref{li:stackless-inorder-tree-walk-go-left}).
-W~przypadku osiągnięcia liścia, odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz~\ref{li:stackless-inorder-tree-walk-visit1}).
-Gdy \id{prev} jest lewym synem \id{curr}, to wracamy w~górę drzewa, odwiedzając napotykane węzły i~przechodząc ich prawe poddrzewa (wiersz~\ref{li:stackless-inorder-tree-walk-visit2}).
-Jeśli wreszcie \id{prev} jest prawym synem węzła \id{curr}, to wracamy w~górę drzewa z~właśnie odwiedzonego prawego poddrzewa (wiersz~\ref{li:stackless-inorder-tree-walk-go-up}).
+Gdy \id{prev} jest ojcem \id{curr}, to aktualnie schodzimy w~dół drzewa po lewych synach (wiersz \ref{li:stackless-inorder-tree-walk-go-left}).
+W~przypadku osiągnięcia liścia, odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz \ref{li:stackless-inorder-tree-walk-visit1}).
+Gdy \id{prev} jest lewym synem \id{curr}, to wracamy w~górę drzewa, odwiedzając napotykane węzły i~przechodząc ich prawe poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-visit2}).
+Jeśli wreszcie \id{prev} jest prawym synem węzła \id{curr}, to wracamy w~górę drzewa z~właśnie odwiedzonego prawego poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-go-up}).
 W~wierszach \ref{li:stackless-inorder-tree-walk-update-prev} i~\ref{li:stackless-inorder-tree-walk-update-curr} następuje aktualizacja wskaźników \id{prev} i~\id{curr}, po czym algorytm kontynuuje swoje działanie, aż $\id{curr}=\const{nil}$.
 
 Każdą krawędzią drzewa przejdziemy dokładnie 2 razy -- poruszając się najpierw w~dół, a~później w~górę drzewa.
@@ -625,7 +626,7 @@ Podana implementacja pozwala na wyznaczenie wszystkich synów danego węzła w~c
 \problems
 
 \problem{Porównanie list} %10-1
-Tabela~\ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słownikowych dla danych czterech typów list.
+Tabela \ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słownikowych dla danych czterech typów list.
 Przyjmujemy, że operacje wykonywane są na listach o~rozmiarach $n$.
 
 \begin{table}[ht]
@@ -675,7 +676,7 @@ Podczas dodawania nowego elementu wystarczy porównać ten element z~głową lis
 Operacja \proc{Extract-Min} po usunięciu głowy nadal jednak musi przeszukać całą listę w~celu odszukania aktualnego minimum i~umieszczenia go w~głowie listy.
 
 Podczas operacji \proc{Union}, musimy pamiętać o~tym, że łączone listy nie zawsze reprezentują rozłączne zbiory, a~także o~tym, że w~głowie wynikowej listy powinien znaleźć się najmniejszy element z~obu łączonych list.
-Efektywna implementacja spełniająca oba warunki będzie polegać na wywołaniu operacji \proc{Union} z~punktu~(a) po uprzednim posortowaniu obu list, co zrealizujemy za pomocą algorytmu sortowania przez scalanie w~wersji dla list jednokierunkowych.
+Efektywna implementacja spełniająca oba warunki będzie polegać na wywołaniu operacji \proc{Union} z~punktu (a) po uprzednim posortowaniu obu list, co zrealizujemy za pomocą algorytmu sortowania przez scalanie w~wersji dla list jednokierunkowych.
 Do zaimplementowania pomocniczej procedury \proc{Merge} możemy użyć algorytmu przedstawionego w~\refExercise{6.5-8}.
 Ostatecznie łączenie list jesteśmy w~stanie zaimplementować w~czasie $\Theta(n\lg n)$, gdzie $n$ jest rozmiarem wynikowej listy.
 
@@ -686,7 +687,7 @@ To, w~jakiej kolejności skleimy listy, będzie zależeć od tego, której głow
 Operację łączenia możemy zrealizować w~czasie stałym, jeśli dla listy w~tej reprezentacji kopca będziemy pamiętać wskaźnik na jej ogon.
 
 \bigskip
-\noindent Zestawienie czasów działania poszczególnych operacji w~przypadkach pesymistycznych dla omawianych reprezentacji listowych kopców złączalnych przedstawiono w~tabeli~\ref{tab:10-2}.
+\noindent Zestawienie czasów działania poszczególnych operacji w~przypadkach pesymistycznych dla omawianych reprezentacji listowych kopców złączalnych przedstawiono w~tabeli \ref{tab:10-2}.
 
 \begin{table}[ht]
 	\begin{center}
@@ -712,11 +713,11 @@ Dla operacji \proc{Union} $n$ oznacza rozmiar zbioru po połączeniu.} \label{ta
 \end{table}
 
 \problem{Wyszukiwanie na posortowanej liście zajmującej spójny obszar pamięci (liście upakowanej)} %10-3
-\note{W~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w linijce~4 zamiast testowania, czy\/ $\id{key}[j]<k$, powinno być sprawdzenie, czy\/ $\id{key}[j]\le k$.
+\note{W~pseudokodzie procedury \proc{Compact-List-Search} jest błąd -- w~linijce 4 zamiast testowania, czy\/ $\id{key}[j]<k$, powinno być sprawdzenie, czy\/ $\id{key}[j]\le k$.
 Ponadto w~wywołaniach procedur \proc{Compact-List-Search} i~\proc{Compact-List-Search}$'$ na listach ich argumentów brakuje\/ $n$ jako drugiego parametru.}
 
 \subproblem %10-3(a)
-W~żadnej z~procedur nigdy nie zostanie wykonany skok na losowo wybraną pozycję bliżej głowy listy ani na pozycję zawierającą element o~kluczu większym niż $k$ -- gwarantują to warunki w~wierszach~4 obu algorytmów.
+W~żadnej z~procedur nigdy nie zostanie wykonany skok na losowo wybraną pozycję bliżej głowy listy ani na pozycję zawierającą element o~kluczu większym niż $k$ -- gwarantują to warunki w~wierszach 4 obu algorytmów.
 Ponadto w~każdej iteracji w~pętlach \kw{while} obu procedur następuje przesunięcie indeksu $i$ o~jedną pozycję do przodu.
 Skoki te wykonywane są, dopóki indeks $i$ nie dotrze na pozycję elementu o~kluczu większym lub równym $k$, bądź nie osiągnie końca listy $L$.
 A~zatem oba wywołania zwrócą ten sam wynik.
@@ -731,14 +732,14 @@ Na podstawie definicji zmiennej losowej $X_t$ otrzymujemy z~kolei, że średnia 
 A~zatem oczekiwanym czasem działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ jest $O(t+\E(X_t))$.
 
 \subproblem %10-3(c)
-Oznaczmy przez $s$ indeks klucza $k$ na liście $L$, a~przez $j_1$, $j_2$,~\dots,~$j_t$ -- ciąg liczb całkowitych wyznaczonych przez $t$ wywołań $\proc{Random}(1,n)$.
+Oznaczmy przez $s$ indeks klucza $k$ na liście $L$, a~przez $j_1$, $j_2$, \dots, $j_t$ -- ciąg liczb całkowitych wyznaczonych przez $t$ wywołań $\proc{Random}(1,n)$.
 Ponadto niech $\pi$ będzie funkcją przypisującą indeksowi elementu na liście $L$ jego rzeczywistą pozycję na tej liście wyznaczoną na podstawie łańcucha wskaźników \id{next}.
-Po $t$ iteracjach pętli \kw{for} odległość między szukanym kluczem a~elementem o~indeksie $i$ (mierzona długością łańcucha wskaźników \id{next}) będzie większa lub równa $r$, jeśli dla każdego $q=1$, 2,~\dots,~$t$ spełnione będzie $\pi(j_q)\le\pi(s)-r$ lub $\pi(j_q)>\pi(s)$.
+Po $t$ iteracjach pętli \kw{for} odległość między szukanym kluczem a~elementem o~indeksie $i$ (mierzona długością łańcucha wskaźników \id{next}) będzie większa lub równa $r$, jeśli dla każdego $q=1$, 2, \dots, $t$ spełnione będzie $\pi(j_q)\le\pi(s)-r$ lub $\pi(j_q)>\pi(s)$.
 Mamy więc
 \[
 	\Pr(X_t\ge r) = \prod_{q=1}^t\Pr(\pi(j_q)\le\pi(s)-r\;\;\text{lub}\;\;\pi(j_q)>\pi(s)) = \prod_{q=1}^t\frac{n-r}{n} = \biggl(1-\frac{r}{n}\biggr)^t.
 \]
-Korzystając z~tożsamości~(C.24) i~z~powyższego oszacowania, otrzymujemy
+Korzystając z~tożsamości (C.24) i~z~powyższego oszacowania, otrzymujemy
 \[
 	\E(X_t) = \sum_{r=1}^\infty\Pr(X_t\ge r) = \sum_{r=1}^n\Pr(X_t\ge r) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t.
 \]
@@ -750,18 +751,18 @@ Sumę ograniczamy całką, otrzymując:
 \]
 
 \subproblem %10-3(e)
-Na podstawie rozwiązań punktów~(c) i~(d) mamy:
+Na podstawie rozwiązań punktów (c) i~(d) mamy:
 \[
 	\E(X_t) = \sum_{r=1}^n\biggl(1-\frac{r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{n-r}{n}\biggr)^t = \sum_{r=1}^{n-1}\biggl(\frac{r}{n}\biggr)^t = \frac{\sum_{r=0}^{n-1}r^t}{n^t} \le \frac{\frac{n^{t+1}}{t+1}}{n^t} = \frac{n}{t+1}.
 \]
 
 \subproblem %10-3(f)
-Na mocy punktów~(b) i~(e) dostajemy, że oczekiwany czas działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ wynosi $O(t+\E(X_t))=O(t+n/(t+1))=O(t+n/t)$.
+Na mocy punktów (b) i~(e) dostajemy, że oczekiwany czas działania procedury \proc{Compact-List-Search}$'(L,n,k,t)$ wynosi $O(t+\E(X_t))=O(t+n/(t+1))=O(t+n/t)$.
 
 \subproblem %10-3(g)
-Oznaczmy przez $p$ pozycję listy $L$, na którą został wykonany ostatni skok w~wierszu~5 procedury \proc{Compact-List-Search}.
+Oznaczmy przez $p$ pozycję listy $L$, na którą został wykonany ostatni skok w~wierszu 5 procedury \proc{Compact-List-Search}.
 Zauważmy, że w~procedurze \proc{Compact-List-Search} po wykonaniu tego skoku zostanie wykonanych co najwyżej $t$ operacji $i\gets\id{next}[i]$.
-Z~kolei pozycja na liście $L$, będąca celem ostatniego skoku z~wiersza~5 w~\proc{Compact-List-Search}$'$, nie może znajdować się bliżej głowy listy niż pozycja $p$.
+Z~kolei pozycja na liście $L$, będąca celem ostatniego skoku z~wiersza 5 w~\proc{Compact-List-Search}$'$, nie może znajdować się bliżej głowy listy niż pozycja $p$.
 Na tej podstawie wnioskujemy, że liczba wykonanych operacji $i\gets\id{next}[i]$ w~pętli \kw{while} algorytmu \proc{Compact-List-Search}$'$ również nie przekroczy $t$.
 Oznacza to, że etap, który na podstawie poprzedniego punktu zajmuje czas $O(n/t)$, będzie w~rzeczywistości działać w~czasie $O(t)$.
 Stąd $O(n/t)=O(t)$, czyli $t=O(\!\sqrt{n})$, a~więc czas działania procedury \proc{Compact-List-Search} wynosi $O(\!\sqrt{n})$.
@@ -771,7 +772,7 @@ Wystarczy bowiem zdefiniować zmienną losową $X_t$ jako odległość na liści
 Analizę w~punktach \doubledash{(b)}{(g)} dla nowej definicji zmiennej $X_t$ przeprowadza się analogicznie.
 
 \subproblem %10-3(h)
-Jeśli dopuścimy, aby elementy na liście powtarzały się, to może dojść do sytuacji, w~której procedura próbuje wykonać skok na pozycję $j$ bliższą szukanemu elementowi niż pozycja $i$, ale nie wykonuje go, gdyż stwierdza w~linii~4, że $\id{key}[i]=\id{key}[j]$.
+Jeśli dopuścimy, aby elementy na liście powtarzały się, to może dojść do sytuacji, w~której procedura próbuje wykonać skok na pozycję $j$ bliższą szukanemu elementowi niż pozycja $i$, ale nie wykonuje go, gdyż stwierdza w~linii 4, że $\id{key}[i]=\id{key}[j]$.
 Jeśli każdy losowy skok będzie eliminowany na tej podstawie, to działanie procedury sprowadzi się do działania zwykłego algorytmu wyszukiwania na posortowanej liście.
 
 \endinput

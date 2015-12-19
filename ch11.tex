@@ -59,7 +59,7 @@ Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element p
 
 \exercise %11.2-1
 Dla kluczy $k$, $l$ ($k\ne l$), definiujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$.
-Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu~5.1 otrzymujemy $\E(X_{kl})=1/m$.
+Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu 5.1 otrzymujemy $\E(X_{kl})=1/m$.
 Niech $X$ będzie zmienną losową oznaczającą liczbę kolizji w~tablicy $T$, czyli
 \[
     X = \sum_{k=1}^{n-1}\sum_{l=k+1}^nX_{kl}.
@@ -71,19 +71,19 @@ Oczekiwana liczba kolizji wynosi
 \end{align*}
 
 \exercise %11.2-2
-Ciąg wstawień elementów do tablicy z~haszowaniem został zobrazowany na rys.~\ref{fig:11.2-2}.
+Ciąg wstawień elementów do tablicy z~haszowaniem został zobrazowany na rys.\ \ref{fig:11.2-2}.
 \medskip
 \begin{figure}[ht!]
 	\begin{center}
 		\includegraphics{fig_11.2-2}
 	\end{center}
-	\caption{Ilustracja wstawiania do tablicy z~haszowaniem $T$ elementów o~kluczach 5,~28, 19, 15, 20, 33, 12, 17,~10.
+	\caption{Ilustracja wstawiania do tablicy z~haszowaniem $T$ elementów o~kluczach 5, 28, 19, 15, 20, 33, 12, 17, 10.
 Do rozwiązywania kolizji używana jest metoda łańcuchowa.} \label{fig:11.2-2}
 \end{figure}
 
 \exercise %11.2-3
 Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można wyznaczać w~czasie stałym.
-Na podstawie wyników z~problemu~\refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$.
+Na podstawie wyników z~problemu \refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$.
 Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania.
 W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
 
@@ -133,7 +133,7 @@ W~tym celu przedstawimy $h(x)$ w~postaci
 	h(x) = x_0+128(x_1+128(x_2+\dots+128(x_{r-2}+128x_{r-1})\cdots)),
 \]
 przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\{0,1,\dots,m-1\}$.
-Następnie stosujemy schemat Hornera (patrz problem~\refProblem{2-3}).
+Następnie stosujemy schemat Hornera (patrz problem \refProblem{2-3}).
 Ciągłe obliczanie reszt z~dzielenia przez $m$ pozwala utrzymać pośrednie wyniki w~co najwyżej dwóch słowach maszynowych.
 
 \exercise %11.3-3
@@ -156,7 +156,7 @@ Mamy:
 	&= \bigl((y_a-y_b)(2^{bp}-2^{ap})\bigr)\bmod(2^p-1) \\
 	&= \bigl((y_a-y_b)2^{ap}(2^{(b-a)p}-1)\bigr)\bmod(2^p-1).
 \end{align*}
-Ze~wzoru~(A.5) zachodzi
+Ze wzoru (A.5) zachodzi
 \[
 	\sum_{i=0}^{b-a-1}2^{pi} = \frac{2^{(b-a)p}-1}{2^p-1},
 \]
@@ -230,7 +230,7 @@ Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal
 \note{Funkcja\/ $h'$ nie jest pierwotną funkcją haszującą, tylko pomocniczą funkcją haszującą.
 Zakładamy, że pierwszą pomocniczą funkcją haszującą w~haszowaniu dwukrotnym jest\/ $h_1=h'$.}
 
-\noindent Tabela~\ref{tab:11-1} przedstawia pozycje tablicy, które są obliczane dla poszczególnych kluczy przy zastosowaniu różnych sposobów obliczania ciągów kontrolnych.
+\noindent Tabela \ref{tab:11-1} przedstawia pozycje tablicy, które są obliczane dla poszczególnych kluczy przy zastosowaniu różnych sposobów obliczania ciągów kontrolnych.
 
 \begin{table}[ht]
 	\begin{center}
@@ -278,23 +278,23 @@ Pseudokod procedury \proc{Hash-Delete} przedstawiono poniżej:
 \li		$i\gets i+1$
 \li	\Until $T[j]=\const{nil}$ lub $i=m$
 \end{codebox}
-W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza~3 na następujący:
+W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza 3 na następujący:
 \begin{codebox}
 \setcounter{codelinenumber}{2}
 \li	\If $T[j]=\const{nil}$ lub $T[j]=\const{deleted}$
 \end{codebox}
 
 \exercise %11.4-3
-Dzięki skorzystaniu z~tw.~31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1,~\dots,~$m-1$ przyjmuje $m/d$ różnych wartości.
+Dzięki skorzystaniu z~tw.\ 31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1, \dots, $m-1$ przyjmuje $m/d$ różnych wartości.
 Podobną własność wykazuje także suma $h_1(k)+ih_2(k)$.
 A~zatem stosując funkcję haszującą $h$, podczas wyszukiwania klucza $k$, które zakończy się porażką, zostanie sprawdzonych $m/d$ różnych komórek tablicy, co stanowi $(1/d)$-tą część tej tablicy.
 
 \exercise %11.4-4
-Wykorzystując tw.~11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$.
+Wykorzystując tw.\ 11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$.
 Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
 
 \exercise %11.4-5
-Z~tw.~11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
+Z~tw.\ 11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
 \[
 	\frac{1}{1-\alpha} = \frac{2}{\alpha}\ln\frac{1}{1-\alpha}.
 \]
@@ -343,7 +343,7 @@ Mamy więc
 \[
 	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
 \]
-i~teraz, dzięki skorzystaniu ze wzoru~(3.11), otrzymujemy
+i~teraz, dzięki skorzystaniu ze wzoru (3.11), otrzymujemy
 \[
 	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
 \]
@@ -370,25 +370,25 @@ Oznacza to, że prawdopodobieństwo $p(n,m)$, które wynosi co najwyżej $f(n)$,
 \problems
 
 \problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
-\note{W~punkcie~(b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$.
+\note{W~punkcie (b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$.
 W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania.
-W~paragrafie między częścią~(b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$.
-W~punkcie~(c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$.
+W~paragrafie między częścią (b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$.
+W~punkcie (c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$.
 Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 
 \subproblem %11-1(a)
 Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu.
 Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem.
-Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.~11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$.
+Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.\ 11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$.
 Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
 
 \subproblem %11-1(b)
 Wynik otrzymujemy natychmiast po podstawieniu $k=2\lg n$ do oszacowania z~poprzedniego punktu.
 
 \subproblem %11-1(c)
-Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2,~\dots,~$n$, zdarzenie, że $X_i>2\lg n$.
+Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2, \dots, $n$, zdarzenie, że $X_i>2\lg n$.
 Zauważmy, że $A=\bigcup_{i=1}^nA_i$.
-Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu~(b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
+Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu (b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
 \[
 	\Pr(A) = \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = n\cdot O(1/n^2) = O(1/n).
 \]
@@ -416,9 +416,9 @@ Z~rozkładu dwumianowego wynika, że uzyskanie dokładnie $k$ sukcesów w~tej se
 \]
 
 \subproblem %11-2(b)
-Niech $A_i$, dla $i=1$, 2,~\dots,~$n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$.
+Niech $A_i$, dla $i=1$, 2, \dots, $n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$.
 Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$.
-Z~własności prawdopodobieństwa i~z~punktu~(a) mamy
+Z~własności prawdopodobieństwa i~z~punktu (a) mamy
 \[
 	P_k = \Pr(A) \le \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = \sum_{i=1}^nQ_k = nQ_k.
 \]
@@ -478,7 +478,7 @@ Powracając teraz do głównego oszacowania, mamy
 \]
 skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
 
-Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część~(b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
+Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część (b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
 Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$.
 Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
 Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$.
@@ -496,7 +496,7 @@ Wówczas
 	\E(M) &= \sum_{k=0}^nkP_k = \sum_{k=0}^{k_0}kP_k+\sum_{k=k_0+1}^nkP_k \\
 	&\le k_0\sum_{k=0}^{k_0}P_k+n\sum_{k=k_0+1}^nP_k = k_0\Pr(M\le k_0)+n\Pr(M>k_0).
 \end{align*}
-Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie~(d), że $P_k<1/n^2$ dla $k\ge k_0$.
+Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie (d), że $P_k<1/n^2$ dla $k\ge k_0$.
 Mamy
 \begin{align*}
 	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
@@ -504,18 +504,18 @@ Mamy
 \end{align*}
 
 \problem{Adresowanie kwadratowe} %11-3
-\note{Krok~3 opisanego algorytmu wyszukiwania powinien mieć następującą treść:
+\note{Krok 3 opisanego algorytmu wyszukiwania powinien mieć następującą treść:
 \begin{enumerate}
 	\setcounter{enumi}{2}
 	\item Wykonaj\/ $j\gets j+1$.
 Jeśli\/ $j=m$, to tablica jest pełna, więc zakończ wyszukiwanie.
-W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kroku~2.
+W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kroku 2.
 \end{enumerate}
 }
 
 \subproblem %11-3(a)
-Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$,~\dots,~$\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$.
-Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1,~\dots,~$m-1$) jest
+Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$, \dots, $\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$.
+Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1, \dots, $m-1$) jest
 \[
 	\biggl(h(k)+\sum_{j=0}^ij\biggr)\bmod m = \biggl(h(k)+\frac{i(i+1)}{2}\biggr)\bmod m = \biggl(h(k)+\frac{i}{2}+\frac{i^2}{2}\biggr)\bmod m.
 \]
@@ -562,7 +562,7 @@ Dla każdej \singledash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ 
 	\]
 	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}.
 (\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
-	\item[{\sffamily\bfseries(c)}] Załóżmy, że zmodyfikowaliśmy nieco rodzinę $\mathcal{H}$ z~punktu~(b): dla każdego $a\in U$ i~każdego $b\in\mathbb{Z}_p$ definiujemy
+	\item[{\sffamily\bfseries(c)}] Załóżmy, że zmodyfikowaliśmy nieco rodzinę $\mathcal{H}$ z~punktu (b): dla każdego $a\in U$ i~każdego $b\in\mathbb{Z}_p$ definiujemy
 	\[
 		h_{a,b}'(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j+b\biggr)\bmod p
 	\]
@@ -605,8 +605,8 @@ Wówczas wzór przyjmuje postać
 	a_0(x_0-y_0) \equiv -S \pmod p,
 \]
 którą potraktujemy jak modularne równanie liniowe zmiennej $a_0$.
-Ponieważ $x_0\ne y_0$, a~$p$ jest liczbą pierwszą, to $\gcd(x_0-y_0,p)=1$ i~na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
-A~zatem dla ustalonych $a_1$, $a_2$,~\dots,~$a_{n-1}$ istnieje dokładnie jedno $a_0$, dla którego funkcja $h_a$, gdzie $a=\langle a_0,a_1,\dots,a_{n-1}\rangle$, generuje kolizję między $x$ a~$y$.
+Ponieważ $x_0\ne y_0$, a~$p$ jest liczbą pierwszą, to $\gcd(x_0-y_0,p)=1$ i~na podstawie wniosku 31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
+A~zatem dla ustalonych $a_1$, $a_2$, \dots, $a_{n-1}$ istnieje dokładnie jedno $a_0$, dla którego funkcja $h_a$, gdzie $a=\langle a_0,a_1,\dots,a_{n-1}\rangle$, generuje kolizję między $x$ a~$y$.
 To oznacza, że dokładnie $p^{n-1}$ spośród $p^n$ funkcji w~$\mathcal{H}$ doprowadzi do kolizji.
 Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wybrana losowo z~$\mathcal{H}$, wynosi $1/p$, co kończy dowód.
 
@@ -621,7 +621,7 @@ Mamy $\alpha-\beta=(a_0(x_0-y_0)+X-Y)\bmod p$, skąd
 	a_0(x_0-y_0) \equiv \alpha-\beta-X+Y \pmod p.
 \]
 Ustalmy dowolną wartość wyrażenia $\alpha-\beta$ i~potraktujmy powyższy wzór jak modularne równanie liniowe zmiennej $a_0$.
-Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku~31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
+Oczywiście $\gcd(x_0-y_0,p)=1$, więc na podstawie wniosku 31.25 $a_0$ jest wyznaczone jednoznacznie modulo $p$.
 Istnieje zatem jednoznaczna odpowiedniość między wartością $a_0$ a~wartością $\alpha-\beta$.
 Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei wygenerować każde $\beta$.
 Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$.

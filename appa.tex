@@ -8,7 +8,7 @@
 \]
 
 \exercise %A.1-2
-Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
+Korzystając z~oszacowania na $H_n$ (wzór (A.7)), mamy
 \begin{align*}
 	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
 	&= H_{2n-1}-\frac{H_{n-1}}{2} \\
@@ -22,20 +22,20 @@ Korzystając z~oszacowania na $H_n$ (wzór~(A.7)), mamy
 Wyrażenia $\ln\frac{2n-1}{2n-2}$ i~$\ln\frac{\sqrt{n-1}}{\sqrt{n}}$ zostały potraktowane jak funkcje klasy $O(1)$.
 
 \exercise %A.1-3
-Wykorzystując wzór~(A.8), dostajemy
+Wykorzystując wzór (A.8), dostajemy
 \[
 	\sum_{k=0}^\infty k^2x^k = x\cdot\frac{d}{dx}\sum_{k=0}^\infty kx^k = \frac{x(x+1)}{(1-x)^3}.
 \]
 
 \exercise %A.1-4
-Korzystając ze wzorów~(A.6) oraz~(A.8), mamy
+Korzystając ze wzorów (A.6) oraz (A.8), mamy
 \[
 	\sum_{k=0}^\infty\frac{k-1}{2^k} = \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} = \sum_{k=0}^\infty k\biggl(\frac{1}{2}\biggr)^k-\sum_{k=0}^\infty\biggl(\frac{1}{2}\biggr)^k = \frac{\frac{1}{2}}{\bigl(1-\frac{1}{2}\bigr)^2}-\frac{1}{1-\frac{1}{2}} = 0.
 \]
 
 \exercise %A.1-5
 Załóżmy, że $|x^2|<1$, czyli $-1<x<1$.
-Wówczas na podstawie wzorów~(A.6) i~(A.8) obliczamy:
+Wówczas na podstawie wzorów (A.6) i~(A.8) obliczamy:
 \[
 	\sum_{k=1}^\infty(2k+1)x^{2k} = 2\sum_{k=0}^\infty k(x^2)^k+\sum_{k=0}^\infty(x^2)^k-1 = \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 = \frac{x^2(3-x^2)}{(1-x^2)^2}.
 \]
@@ -50,7 +50,7 @@ W~przypadku, gdy $|x^2|\ge1$, badana suma jest rozbieżna do $\infty$.
 \]
 
 Ustalmy dodatnie stałe $i_0$ i~$c$.
-Niech $F_1(i)$, $F_2(i)$,~\dots,~$F_n(i)$ będą funkcjami, które dla każdego całkowitego $i\ge i_0$ spełniają układ nierówności
+Niech $F_1(i)$, $F_2(i)$, \dots, $F_n(i)$ będą funkcjami, które dla każdego całkowitego $i\ge i_0$ spełniają układ nierówności
 \[
 	\begin{cases}
 		0 \le F_1(i) \le cf_1(i) \\
@@ -98,9 +98,9 @@ a~zatem badana suma jest ograniczona z~góry przez stałą.
 Można pokazać, że wraz ze wzrostem $n$ wartość tej sumy zbliża się do $\pi^2\!/6$.
 
 \exercise %A.2-2
-Zauważmy, że gdy $n$ osiąga wartość będącą potęgą~2, to zwiększa się o~1 liczba sumowanych składników.
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników.
 Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\bigl\lceil n/2^k\bigr\rceil$, zdefiniowana dla dodatnich liczb całkowitych, jest niemalejąca, więc jeśli $m$ jest liczbą całkowitą dodatnią, to $F(n)<F(2^m)$ dla wszystkich $n<2^m$.
-Oszacowaniem górnym tej funkcji jest zatem oszacowanie górne jej wartości przyjmowanych dla potęg~2.
+Oszacowaniem górnym tej funkcji jest zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2.
 Dla $n=2^m$ zachodzi
 \[
 	F(n) = F(2^m) = \sum_{k=0}^m\biggl\lceil\frac{2^m}{2^k}\biggr\rceil = 2^m+2^{m-1}+\dots+2^0 = 2^{m+1}-1 = 2n-1,
@@ -114,7 +114,7 @@ Postępując podobnie jak podczas badania oszacowania górnego \singledash{$n$}{
 \]
 
 \exercise %A.2-4
-Funkcja $f(k)=k^3$, gdzie $k$ to dodatnia liczba całkowita, jest monotonicznie rosnąca, zatem szacujemy sumę, korzystając z~nierówności~(A.11):
+Funkcja $f(k)=k^3$, gdzie $k$ to dodatnia liczba całkowita, jest monotonicznie rosnąca, zatem szacujemy sumę, korzystając z~nierówności (A.11):
 \[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
 \]
@@ -129,12 +129,12 @@ i~otrzymujemy
 \]
 
 \exercise %A.2-5
-Zastosowanie nierówności~(A.12) do sumy $\sum_{k=1}^n1/k$ doprowadza do całki niewłaściwej:
+Zastosowanie nierówności (A.12) do sumy $\sum_{k=1}^n1/k$ doprowadza do całki niewłaściwej:
 \[
 	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \lim_{a\to0^+}\int_a^n\frac{dx}{x} = \infty.
 \]
 W~rezultacie nie uzyskujemy żadnej informacji o~oszacowaniu górnym badanej sumy.
-Dzięki zapisaniu jej w~postaci $1+\sum_{k=2}^n1/k$, można zastosować wzór~(A.12) do drugiego składnika i~otrzymać oszacowanie górne $\ln n+1$ na sumę wyjściową.
+Dzięki zapisaniu jej w~postaci $1+\sum_{k=2}^n1/k$, można zastosować wzór (A.12) do drugiego składnika i~otrzymać oszacowanie górne $\ln n+1$ na sumę wyjściową.
 
 \problems
 

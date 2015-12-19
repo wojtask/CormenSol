@@ -3,7 +3,7 @@
 \subchapter{Co to jest drzewo wyszukiwań binarnych?}
 
 \exercise %12.1-1
-Przykładowe drzewa BST przedstawiono na rys.~\ref{fig:12.1-1}.
+Przykładowe drzewa BST przedstawiono na rys.\ \ref{fig:12.1-1}.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_12.1-1}
@@ -49,20 +49,20 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni�
 		\End
 \end{codebox}
 
-Dla każdego z~tych algorytmów można udowodnić twierdzenie analogiczne do tw.~12.1, a~więc każdy z~nich działa w~czasie $\Theta(n)$ na drzewie \singledash{$n$}{wierzchołkowym}.
+Dla każdego z~tych algorytmów można udowodnić twierdzenie analogiczne do tw.\ 12.1, a~więc każdy z~nich działa w~czasie $\Theta(n)$ na drzewie \singledash{$n$}{wierzchołkowym}.
 
 \exercise %12.1-5
 Załóżmy nie-wprost, że istnieje algorytm konstruowania drzewa BST z~dowolnej listy $n$ elementów za pomocą porównań, którego pesymistyczny czas działania wynosi $o(n\lg n)$.
 Na drzewie BST utworzonym za pomocą tego algorytmu moglibyśmy następnie uruchomić algorytm przechodzenia drzewa metodą inorder i~wypisać wszystkie jego klucze w~kolejności niemalejącej w~czasie $\Theta(n)$.
-Posortowanie wejściowej listy $n$ elementów można byłoby wtedy przeprowadzić w~czasie niższym niż liniowo-logarytmiczny, co przeczyłoby tw.~8.1.
+Posortowanie wejściowej listy $n$ elementów można byłoby wtedy przeprowadzić w~czasie niższym niż liniowo-logarytmiczny, co przeczyłoby tw.\ 8.1.
 
 \subchapter{Wyszukiwanie w~drzewie wyszukiwań binarnych}
 
 \exercise %12.2-1
 Ciągi z~przykładów (a), (b) i~(d) są możliwe do uzyskania podczas wyszukiwania klucza 363 w~drzewie BST.
-W~przykładzie~(c) po odwiedzeniu węzła o~kluczu 911 przechodzimy do lewego poddrzewa, w~którym znajdują się węzły o~kluczach nie większych niż 911.
+W~przykładzie (c) po odwiedzeniu węzła o~kluczu 911 przechodzimy do lewego poddrzewa, w~którym znajdują się węzły o~kluczach nie większych niż 911.
 Jednakże później napotykamy 912, a~to nie jest możliwe w~drzewie BST.
-W~przykładzie~(e) występuje podobna sytuacja -- po odwiedzeniu węzła o~kluczu 347 przetwarzane jest prawe poddrzewo.
+W~przykładzie (e) występuje podobna sytuacja -- po odwiedzeniu węzła o~kluczu 347 przetwarzane jest prawe poddrzewo.
 Klucz 299 napotykany później jest jednak mniejszy niż 347, co w~drzewie BST nie może mieć miejsca.
 
 \exercise %12.2-2
@@ -100,7 +100,7 @@ Jej pseudokod znajduje się poniżej.
 \end{codebox}
 
 \exercise %12.2-4
-Rys.~\ref{fig:12.2-4} przedstawia najmniejsze drzewo BST, które obala postawioną hipotezę.
+Rys.\ \ref{fig:12.2-4} przedstawia najmniejsze drzewo BST, które obala postawioną hipotezę.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{fig_12.2-4}
