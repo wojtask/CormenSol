@@ -331,33 +331,35 @@ W~każdej kolejnej fazie sortowania rekordy powinny być porządkowane względem
 
 \subproblem %8-2(e)
 W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identycznie jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort}.
-Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwego obszaru tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zawartych w~tablicy $C$.
+Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwych obszarów tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zebranych w~tablicy $C$ na początku działania algorytmu.
 \begin{codebox}
 \Procname{$\proc{Counting-Sort-In-Place}(A,k)$}
 \li utwórz tablicę $C[0\twodots k]$ jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort} 
-\li skopiuj zawartość tablicy $C$ do tablicy \id{positions}
+\li skopiuj zawartość tablicy $C$ do tablicy $C'$
 \li $i\gets1$
-\li \While $i\le\attrib{A}{length}$
+\li \While $i\le\attrib{A}{length}-1$ \label{li:counting-sort-in-place-while-begin}
 \li     \Do
             $\id{key}\gets A[i]$
-\li         \If $\id{positions}[\id{key}-1]<i\le\id{positions}[\id{key}]$
+\li         \If $C'[\id{key}-1]<i\le C'[\id{key}]$ \label{li:counting-sort-in-place-test}
 \li             \Then $i\gets i+1$
 \li             \Else
-                    zamień $A[i]\leftrightarrow A[C[\id{key}]]$
+                    zamień $A[i]\leftrightarrow A[C[\id{key}]]$ \label{li:counting-sort-in-place-swap}
 \li                 $C[\id{key}]\gets C[\id{key}]-1$
                 \End
-        \End
+        \End \label{li:counting-sort-in-place-while-end}
 \end{codebox}
 
-Pętla \kw{for} w~wierszach \doubledash{\ref{li:counting-sort-in-place-for-begin}}{\ref{li:counting-sort-in-place-for-end}} przegląda kolejne fragmenty tablicy, które po zakończeniu działania algorytmu będą przechowywać elementy o~tej samej wartości.
-Dany fragment jest następnie przetwarzany w~kolejności malejących indeksów i~wszystkie elementy, które nie powinny znajdować się w~tym obszarze tablicy, są umieszczane na właściwych pozycjach.
-Wraz z~każdą zamianą elementów, w~wierszu~\ref{li:counting-sort-in-place-decrement} zmniejszana jest odpowiednia wartość w~tablicy $C$.
+Początkowy stan tablicy $C$ zostaje zapamiętany w~tablicy $C'$.
+Następnie pętla \kw{while} w~wierszach \doubledash{\ref{li:counting-sort-in-place-while-begin}}{\ref{li:counting-sort-in-place-while-end}} przegląda tablicę wejściową w~poszukiwaniu elementów, które nie powinny znajdować się w~posortowanej tablicy na aktualnej pozycji.
+Do sprawdzenia, czy element znajduje się we właściwym miejscu, używany jest test z~wiersza~\ref{li:counting-sort-in-place-test}.
+W~przypadku negatywnego wyniku tego testu element z~aktualnej pozycji zostaje przeniesiony na swoją docelową pozycję po zamianie z~elementem, który tam się znajduje.
+Ten ostatni będzie sprawdzany w~następnej iteracji pętli \kw{while}.
 
 Algorytm sortuje tablicę wejściową w~miejscu (niekoniecznie stabilnie), wykorzystując $O(k)$ dodatkowej pamięci.
-Czas potrzebny na utworzenie tablicy $C$ wynosi $O(n+k)$.
-Zauważmy, że element, który zostanie umieszczony na swojej poprawnej pozycji, już jej nie zmieni aż do zakończenia działania algorytmu -- zostanie więc wykonanych co najwyżej $n-1$ zamian z~wiersza~\ref{li:counting-sort-in-place-swap}.
-Podobnie sumaryczna liczba iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:counting-sort-in-place-while1-begin}}{\ref{li:counting-sort-in-place-while1-end}} jest ograniczona przez $n-1$, jako że w~każdej z~nich przetwarzana jest inna komórka tablicy wejściowej.
-Czas działania algorytmu wynosi zatem $O(n+k)$.
+Czas potrzebny na utworzenie tablic $C$ i~$C'$ wynosi $O(n+k)$.
+Zauważmy, że element, który zostanie umieszczony na swojej docelowej pozycji, nie zmieni jej aż do zakończenia działania algorytmu -- zostanie więc wykonanych co najwyżej $n-1$ zamian w~wierszu~\ref{li:counting-sort-in-place-swap}.
+W~iteracjach pętli \kw{while}, w~których zamiany nie są dokonywane, jest inkrementowana zmienna $i$ -- sumaryczna liczba iteracji jest więc ograniczona przez $2(n-1)$.
+Stąd czas działania algorytmu wynosi $O(n+k)$.
 
 \problem{Sortowanie obiektów zmiennej długości} %8-3
 
