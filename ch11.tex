@@ -88,25 +88,26 @@ Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej
 W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
 
 \exercise %11.2-4
-Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską) orzekający o~jej zajętości.
+Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską, którą oznaczymy przez \id{free}), przechowujący informację o~tym, czy pozycja ta jest wolna.
 Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe.
-Wolne pozycje natomiast tworzyć będą pojedynczą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
+Wolne pozycje natomiast tworzyć będą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
 
 Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna.
-Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}.
+Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, przestawiamy znacznik \id{free} na \const{false}, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}.
 W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$.
-Wówczas z~listy $F$ usuwamy dowolną komórkę i~przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next}, a~do komórki $h(k)$ wstawiamy element $x$.
+Wówczas z~listy $F$ usuwamy dowolną komórkę, przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next} i~ustawiamy znacznik \id{free} tej pozycji na \const{false}.
+Następnie do komórki $h(k)$ wstawiamy element $x$.
 
 Pozostaje uaktualnić wskaźnik \attrib{T[h(k)]}{next}.
 W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje.
 W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(k)$, tzn.\ $h(l)=h(k)$.
 Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji.
-W~drugiej sytuacji element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
+W~drugim przypadku element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
 Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$.
 Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość \const{nil}.
 
-Ponieważ traktujemy zajęte pozycje tablicy $T$ jak fragmenty list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
-Należy pamiętać jednak o~tym, aby następnie wstawić zwolnioną pozycję na listę $F$.
+Ponieważ traktujemy zajęte pozycje tablicy $T$ jak węzły list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
+Należy pamiętać jeszcze o~tym, aby wstawić zwolnioną pozycję na listę $F$ i~przestawić znacznik \id{free} na \const{true}.
 Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
 
 Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą.
