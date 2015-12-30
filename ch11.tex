@@ -27,33 +27,33 @@ Opisaną strukturę danych można traktować jak tablicę z~haszowaniem z~identy
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
 
 \noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$.
-Tablicę $S$ będziemy traktować jak stos o~rozmiarze równym liczbie elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$.
+Tablicę $S$ będziemy traktować jak stos elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$.
+Rozmiar tablicy $S$, jaki ustalimy podczas jej tworzenia, określa pojemność ogromnej tablicy -- próba umieszczenia w~tej strukturze większej ilości elementów zakończy się błędem nadmiaru wykrywanym przez odpowiednią implementację operacji \proc{Push}.
+
 Tablice $S$ i~$T$ weryfikują się wzajemnie.
-To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera klucz $k$.
-Innymi słowy, zachodzi $1\le T[k]\le\attrib{S}{top}$, $S[T[k]]=k$ oraz $T[S[j]]=j$.
-Do zapamiętania dodatkowych danych związanych z~elementami użyjemy dodatkowej tablicy $S'$ o~tym samym rozmiarze co $S$, która na pozycji $j$ przechowuje wskaźnik do elementu o~kluczu $S[j]$.
+To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera element o~kluczu $k$.
+Innymi słowy, zachodzą zależności: $1\le T[k]\le\attrib{S}{top}$, $\attrib{S[T[k]]}{key}=k$ oraz $T[\attrib{S[j]}{key}]=j$.
 
-Inicjowanie tablicy $T$ sprowadza się do utworzenia pustych tablic $S$ i~$S'$.
-Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$S[T[k]]=k$.
-Jeśli warunki te są spełnione, to zwracamy $S'[T[k]]$, w~przeciwnym przypadku zaś zwracamy \const{nil}.
-W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy zwiększyć \attrib{S}{top} o~1, po czym wpisać odpowiednie wartości do $T[k]$, $S[\attrib{S}{top}]$ i~$S'[\attrib{S}{top}]$.
-Dokładniej, wykonywany jest następujący ciąg instrukcji:
+Inicjowanie tablicy $T$ sprowadza się do utworzenia tablicy $S$.
+Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$\attrib{S[T[k]]}{key}=k$.
+Jeśli warunki te są spełnione, to zwrócony zostanie element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
+W~celu wstawienia elementu $x$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy umieścić $x$ na stosie $S$, po czym zaktualizować $T[\attrib{x}{key}]$:
 \begin{codebox}
-\zi	$\attrib{S}{top}\gets\attrib{S}{top}+1$
-\zi	$T[k]\gets\attrib{S}{top}$
-\zi	$S[\attrib{S}{top}]\gets k$
-\zi	$S'[\attrib{S}{top}]\gets x$
+\Procname{$\proc{Huge-Array-Insert}(S,T,x)$}
+\li	$\proc{Push}(S,x)$
+\li	$T[\attrib{x}{key}]\gets\attrib{S}{top}$
 \end{codebox}
-Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu wewnątrz $S$ i~$S'$ wartości z~pozycji \attrib{S}{top} na pozycję $T[k]$, aktualizacji odpowiedniej wartości w~tablicy $T$ i~wreszcie dekrementacji \attrib{S}{top}.
-Operacja \proc{Delete} sprowadza się zatem do wykonania poniższych instrukcji:
+Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu elementu usuniętego ze szczytu stosu $S$ na pozycję $T[k]$ w~tym stosie oraz aktualizacji odpowiedniej wartości w~tablicy $T$.
+Dokładniej, operacja ta sprowadza się do poniższego pseudokodu:
 \begin{codebox}
-\zi	$S[T[k]]\gets S[\attrib{S}{top}]$
-\zi	$S'[T[k]]\gets S'[\attrib{S}{top}]$
-\zi	$T[S[T[k]]]\gets T[k]$
-\zi	$\attrib{S}{top}\gets\attrib{S}{top}-1$
+\Procname{$\proc{Huge-Array-Delete}(S,T,x)$}
+\li	$k\gets\attrib{x}{key}$
+\li	$y\gets\proc{Pop}(S)$
+\li	$S[T[k]]\gets y$
+\li	$T[\attrib{y}{key}]\gets T[k]$
 \end{codebox}
 
-Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element przechowywany w~tablicy $T$ (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
+Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element przechowywany w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
 
 \subchapter{Tablice z~haszowaniem}
 
