@@ -89,11 +89,14 @@ W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n
 
 \exercise %11.2-4
 Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik (zmienną boolowską, którą oznaczymy przez \id{free}), przechowujący informację o~tym, czy pozycja ta jest wolna.
-Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub o~wartości \const{nil}, dzięki czemu komórki te będą mogły formować listy jednokierunkowe.
-Wolne pozycje natomiast tworzyć będą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) z~każdej wolnej pozycji.
+Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub wskaźnik pusty, dzięki czemu komórki te będą mogły formować listy jednokierunkowe.
+Wolne pozycje natomiast tworzyć będą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki (na następnik i~poprzednik) na każdej wolnej pozycji.
+Do zapamiętania, gdzie znajduje się głowa listy $F$, zostanie użyty dodatkowy wskaźnik będący atrybutem tablicy $T$.
+Pamiętajmy, że wskaźnikami tutaj są tak naprawdę liczby całkowite oznaczające indeksy tablicy $T$.
+Przez pusty wskaźnik (odpowiednik \const{nil}) będziemy rozumieć wartość $-1$.
 
 Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna.
-Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, przestawiamy znacznik \id{free} na \const{false}, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na \const{nil}.
+Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, przestawiamy znacznik \id{free} na \const{false}, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na $-1$.
 W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$.
 Wówczas z~listy $F$ usuwamy dowolną komórkę, przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next} i~ustawiamy znacznik \id{free} tej pozycji na \const{false}.
 Następnie do komórki $h(k)$ wstawiamy element $x$.
@@ -104,7 +107,7 @@ W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(
 Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji.
 W~drugim przypadku element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
 Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$.
-Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość \const{nil}.
+Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość $-1$.
 
 Ponieważ traktujemy zajęte pozycje tablicy $T$ jak węzły list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
 Należy pamiętać jeszcze o~tym, aby wstawić zwolnioną pozycję na listę $F$ i~przestawić znacznik \id{free} na \const{true}.
