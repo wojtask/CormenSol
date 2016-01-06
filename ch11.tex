@@ -53,7 +53,7 @@ Dokładniej, operacja ta sprowadza się do poniższego pseudokodu:
 \li	$T[\attrib{y}{key}]\gets T[k]$
 \end{codebox}
 
-Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element przechowywany w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
+Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element znajdujący się w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
 
 \subchapter{Tablice z~haszowaniem}
 
@@ -95,6 +95,11 @@ Do zapamiętania, gdzie znajduje się głowa listy $F$, zostanie użyty dodatkow
 Pamiętajmy, że wskaźnikami tutaj są tak naprawdę liczby całkowite oznaczające indeksy tablicy $T$.
 Przez pusty wskaźnik (odpowiednik \const{nil}) będziemy rozumieć wartość $-1$.
 
+Według powyższego opisu tablica $T$ nie jest strukturą homogeniczną, tzn.\ składa się z~elementów różnego typu.
+Możemy jednak elementy przechowywać w~dodatkowej tablicy $A$ o~długości identycznej z~długością tablicy $T$, a~na zajętych pozycjach w~$T$ zamiast samego elementu przechowywać wskaźnik (indeks) do odpowiedniej komórki tablicy $A$ zawierającej ten element.
+Dzięki temu zarówno wolne, jak i~zajęte pozycje w~$T$ będą składać się ze znacznika oraz dwóch wskaźników.
+Elementy co prawda nie znajdują się w~samej tablicy z~haszowaniem, ale każda jej pozycja odpowiada dokładnie jednej pozycji w~dodatkowej tablicy na elementy.
+
 Aby dodać do tablicy $T$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna.
 Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, przestawiamy znacznik \id{free} na \const{false}, a~wskaźnik \attrib{T[h(k)]}{next} ustawiamy na $-1$.
 W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$.
@@ -107,7 +112,7 @@ W~pierwszej z~nich elementowi $y$ przed przeniesieniem odpowiadała komórka $h(
 Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji.
 W~drugim przypadku element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
 Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$.
-Element $x$ będzie wówczas jedynym na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość $-1$.
+Element $x$ będzie wówczas jedyny na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość $-1$.
 
 Ponieważ traktujemy zajęte pozycje tablicy $T$ jak węzły list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
 Należy pamiętać jeszcze o~tym, aby wstawić zwolnioną pozycję na listę $F$ i~przestawić znacznik \id{free} na \const{true}.
