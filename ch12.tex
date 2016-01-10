@@ -136,15 +136,10 @@ W~przypadku, gdy $x$ jest lewym synem węzła $y$, rozumując analogicznie i~kor
 \subchapter{Wstawianie i~usuwanie}
 
 \exercise %12.3-1
-Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu drzewo $T$, korzeń $x$ poddrzewa $T$, w~którym będziemy dokonywać wstawiania, i~wreszcie nowy węzeł $z$.
+Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu korzeń $x$ poddrzewa $T$, w~którym będziemy dokonywać wstawiania oraz nowy węzeł $z$.
 Procedura będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odpowiednią ścieżką tak, aby na końcu tego procesu uczynić $z$ synem bieżącego węzła na tej ścieżce.
 \begin{codebox}
-\Procname{$\proc{Recursive-Tree-Insert}(T,x,z)$}
-\li	\If $x=\const{nil}$
-\li		\Then
-            $\attrib{T}{root}\gets z$
-\li         \Return
-		\End
+\Procname{$\proc{Recursive-Tree-Insert}(x,z)$}
 \li	\If $\attrib{z}{key}<\attrib{x}{key}$
 \li		\Then
 			\If $\attrib{x}{left}\ne\const{nil}$
@@ -162,7 +157,15 @@ Procedura będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odp
 				\End
 		\End
 \end{codebox}
-Aby wstawić węzeł $z$ do drzewa $T$, należy wywołać $\proc{Recursive-Tree-Insert}(T,\attrib{T}{root},z)$.
+Procedura ta wywoływana będzie przez procedurę \proc{Tree-Insert}$'$, której pseudokod znajduje się poniżej.
+Testuje ona jedynie, czy drzewo $T$ jest puste i~w~zależności od wyniku umieszcza $z$ w~korzeniu drzewa $T$ albo wywołuje \proc{Recursive-Tree-Insert}.
+\begin{codebox}
+\Procname{$\proc{Tree-Insert$'$}(T,z)$}
+\li	\If $\attrib{T}{root}=\const{nil}$
+\li		\Then $\attrib{T}{root}\gets z$
+\li		\Else $\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
+		\End
+\end{codebox}
 
 \exercise %12.3-2
 \exercise %12.3-3
