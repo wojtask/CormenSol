@@ -124,6 +124,17 @@ Stąd następnik $x$ nie ma lewego syna.
 Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
 \exercise %12.2-6
+Niech $U$ będzie zbiorem zdefiniowanym jak w~\refExercise{12.2-5}.
+Na podstawie rozumowania z~tamtego zadania mamy, że dla każdego $u\in U$ i~dla każdego węzła $v$ z~prawego poddrzewa $u$ zachodzą nierówności $\attrib{x}{key}<\attrib{u}{key}<\attrib{v}{key}$.
+Następnik $y$ węzła $x$ jest więc elementem zbioru $U$ o~minimalnym kluczu.
+
+Niech $u_1$, $u_2\in U$.
+Węzeł $x$ należy do lewego poddrzewa zarówno $u_1$, jak i~$u_2$.
+Węzły te nie mogą znajdować się w~drzewie $T$ na tej samej głębokości, bo wtedy ich lewe poddrzewa są rozłączne.
+Załóżmy więc bez utraty ogólności, że $u_2$ leży w~$T$ głębiej niż $u_1$.
+Wówczas węzeł $u_2$ oraz jego lewe poddrzewo znajdują się w~lewym poddrzewie węzła $u_1$.
+Wynika stąd, że im głębszy poziom węzła ze zbioru $U$, tym mniejszy jego klucz, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
+
 \exercise %12.2-7
 \exercise %12.2-8
 \exercise %12.2-9
