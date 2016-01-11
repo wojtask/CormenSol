@@ -50,7 +50,6 @@ beginfig(1);
 	
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3.75vshift));
 	
-	
 	p0 := graphnode(scale, (bighshift, 0), gray);
 	p1 := graphnode(scale, (bighshift-4hshift, -vshift), gray);
 	p2 := graphnode(scale, (bighshift+4hshift, -vshift), gray);
@@ -75,7 +74,6 @@ beginfig(1);
 	label("16", center p6);
 	
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (bighshift, -3.75vshift));
-	
 	
 	p0 := graphnode(scale, (0, bigvshift), gray);
 	p1 := graphnode(scale, (-4hshift, bigvshift-vshift), gray);
@@ -102,7 +100,6 @@ beginfig(1);
 	
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (0, bigvshift-6.75vshift));
 	
-	
 	p0 := graphnode(scale, (.45bighshift, bigvshift), gray);
 	p1 := graphnode(scale, (.45bighshift+4hshift, bigvshift-vshift), gray);
 	p2 := graphnode(scale, (.45bighshift+6hshift, bigvshift-2vshift), gray);
@@ -127,7 +124,6 @@ beginfig(1);
 	label("16", center p6);
 	
 	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(d)} etex, (.45bighshift+3hshift, bigvshift-6.75vshift));
-	
 	
 	p0 := graphnode(scale, (bighshift, bigvshift), gray);
 	p1 := graphnode(scale, (bighshift+4hshift, bigvshift-vshift), gray);
@@ -176,6 +172,50 @@ beginfig(2);
 	label("3", center p1);
 	label("2", center p2);
 	label("4", center p3);
+endfig;
+
+beginfig(3);
+	scale := .5cm;
+	hshift := .7scale;
+	vshift := 2scale;
+	color gray; gray := .8white;
+	
+	path p[];
+	p0 := graphnode(scale, (0, 0), gray);
+	p1 := graphnode(scale, (-4hshift, -vshift), gray);
+	p2 := graphnode(scale, (4hshift, -vshift), gray);
+	p3 := graphnode(scale, (2hshift, -2vshift), gray);
+	
+	draw point 4.75 of p0 -- point .75 of p1;
+	draw point 7.25 of p0 -- point 3.25 of p2;
+	draw point 5.25 of p2 -- point 1.25 of p3;
+	
+	label("4", center p0);
+	label("3", center p1);
+	label("7", center p2);
+	label("6", center p3);
+	
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(a)} etex, (0, -3vshift));
+	
+	p0 := graphnode(scale, (14hshift, 0), gray);
+	p1 := graphnode(scale, (14hshift-4hshift, -vshift), gray);
+	
+	draw point 4.75 of p0 -- point .75 of p1;
+	
+	label("7", center p0);
+	label("6", center p1);
+	
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(b)} etex, (12hshift, -3vshift));
+	
+	p0 := graphnode(scale, (20hshift, 0), gray);
+	p1 := graphnode(scale, (20hshift+4hshift, -vshift), gray);
+	
+	draw point 7.25 of p0 -- point 3.25 of p1;
+	
+	label("6", center p0);
+	label("7", center p1);
+	
+	label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries(c)} etex, (22hshift, -3vshift));
 endfig;
 
 end.
