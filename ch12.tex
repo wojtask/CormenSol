@@ -138,15 +138,13 @@ Wynika stąd, że im głębszy poziom węzła ze zbioru $U$, tym mniejszy jego k
 \exercise %12.2-7
 \exercise %12.2-8
 \exercise %12.2-9
-Załóżmy, że $x$ jest prawym synem węzła $y$.
-Pokażemy, że $y$ jest poprzednikiem $x$, czyli że \attrib{y}{key} jest największym kluczem w~drzewie $T$, mniejszym niż \attrib{x}{key}.
-Załóżmy jednak, że istnieje w~$T$ taki węzeł $z$, dla którego spełnione są nierówności $\attrib{y}{key}<\attrib{z}{key}<\attrib{x}{key}$.
-Bez utraty ogólności można przyjąć, że $z$ jest następnikiem $y$.
-Na mocy \refExercise{12.2-6} mamy, że $z$ jest najniższym przodkiem $y$, którego lewy syn jest także przodkiem $y$.
-Ale wówczas $x$ znajduje się w~lewym poddrzewie węzła $z$, a~więc zachodzi $\attrib{z}{key}>\attrib{x}{key}$, co stoi w~sprzeczności z~założeniem.
-Węzeł $y$ jest zatem poprzednikiem węzła $x$.
+Dowód sprowadza się do pokazania, że $y$ jest albo następnikiem albo poprzednikiem węzła $x$.
 
-W~przypadku, gdy $x$ jest lewym synem węzła $y$, rozumując analogicznie i~korzystając z~twierdzenia symetrycznego do tego z~\refExercise{12.2-6}, można pokazać, że $y$ jest następnikiem $x$.
+Załóżmy, że $x$ jest lewym synem węzła $y$.
+Zauważmy, że w~drzewie $T$ istnieje następnik węzła $x$, ponieważ $x$ nie jest skrajnie prawym węzłem drzewa $T$.
+Możemy więc skorzystać z~\refExercise{12.2-6}, żeby pokazać, że następnikiem $x$ jest w~rzeczywistości $y$.
+Symetryczne twierdzenie do tego z~\refExercise{12.2-6} charakteryzujące poprzednika węzła o~pustym lewym poddrzewie, można dowieść, korzystając z~analogicznego rozumowania z~rozwiązania tamtego zadania.
+W~przypadku, gdy $x$ jest prawym synem $y$, na podstawie tego twierdzenia pokazujemy, że $y$ jest poprzednikiem $x$.
 
 \subchapter{Wstawianie i~usuwanie}
 
