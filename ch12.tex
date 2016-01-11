@@ -113,11 +113,15 @@ Klucze 1 i~2 nie spełniają nierówności postawionej w~hipotezie.} \label{fig:
 \end{figure}
 
 \exercise %12.2-5
-Niech $x$ będzie węzłem w~drzewie BST, który ma dwóch synów, a~$y$ -- najniższym przodkiem $x$, którego lewy syn jest także przodkiem $x$.
-Elementy o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także, jeśli $y\ne\const{nil}$, w~$y$ i~,,na prawo'' od $y$.
-Dla każdego węzła $z$ z~prawego poddrzewa $x$ spełniona jest nierówność $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to oznacza, że następnikiem $x$ nie może być ani $y$ ani żaden węzeł na prawo od $y$.
+Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST, a~$U$ zbiorem składającym się ze wszystkich przodków $x$, których lewe poddrzewa zawierają $x$.
+Węzły o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także w~zbiorze $U$ i~w~prawych poddrzewach węzłów z~$U$.
+Dla każdego $u\in U$, dla każdego węzła $v$ z~prawego poddrzewa $u$ i~dla każdego węzła $w$ z~prawego poddrzewa $x$ spełnione są nierówności $\attrib{x}{key}<\attrib{w}{key}<\attrib{u}{key}<\attrib{v}{key}$, a~to oznacza, że następnik $x$ znajduje się w~jego prawym poddrzewie.
 
-Analogiczne rozumowanie można przeprowadzić dla poprzednika węzła $x$.
+Niech $y$ będzie następnikiem węzła $x$.
+Jeśli węzeł $y$ miałby lewego syna $z$, to na podstawie faktu, że $y$ należy do prawego poddrzewa $x$, zachodziłoby $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to z~kolei przeczyłoby faktowi, że następnikiem $x$ jest węzeł $y$.
+Stąd następnik $x$ nie ma lewego syna.
+
+Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
 \exercise %12.2-6
 \exercise %12.2-7
