@@ -204,6 +204,14 @@ Operacja usuwania z~drzewa wyszukiwań binarnych nie jest przemienna. Kontrprzyk
 \end{figure}
 
 \exercise %12.3-6
+Wybór między poprzednikiem i~następnikiem uzależnimy od wyniku rzutu monetą, który zasymulujemy wywołaniem $\proc{Random}(0,1)$.
+Wiersz~3 w~procedurze \proc{Tree-Delete} zastąpimy więc następującym fragmentem:
+\begin{codebox}
+\zi	\If $\proc{Random}(0,1)=0$
+\zi		\Then $y\gets\proc{Tree-Predecessor}(z)$
+\zi		\Else $y\gets\proc{Tree-Successor}(z)$
+\zi		\End
+\end{codebox}
 
 \subchapter{Losowo skonstruowane drzewa wyszukiwań binarnych}
 
