@@ -181,6 +181,14 @@ Testuje ona jedynie, czy drzewo $T$ jest puste i~w~zależności od wyniku umiesz
 \end{codebox}
 
 \exercise %12.3-2
+Procedura \proc{Tree-Insert} wywołana dla nowego węzła $z$ o~kluczu $k$, będzie schodzić ścieżką od korzenia w~dół drzewa w~celu odnalezienia liścia, który stanie się ojcem węzła $z$.
+Z~kolei procedura \proc{Tree-Search} wyszukująca w~drzewie węzeł o~kluczu $k$ zejdzie podobną ścieżką w~celu odnalezienia tego węzła.
+Porównajmy instrukcje odpowiedzialne za poruszanie się po tych ścieżkach -- w~pierwszej procedurze są to wiersze \doubledash{3}{7}, a~w~drugiej -- wiersze \doubledash{1}{4}.
+W~\proc{Tree-Insert} obecność linii 4 nie wpływa na wybór ścieżki, a~$\attrib{z}{key}=k$, więc $\attrib{x}{key}$ jest w~obu procedurach porównywane z~tą samą wartością.
+Jeszcze jedną różnicą jest występowanie w~\proc{Tree-Search} dodatkowego warunku $k\ne\attrib{x}{key}$ w~pętli \kw{while}.
+Z~założenia o~unikalności kluczy w~drzewie wnioskujemy, że warunek ten będzie fałszywy dla każdego węzła na ścieżce, zanim osiągnięty zostanie szukany węzeł.
+Ścieżki pokonywane w~obu procedurach są zatem identyczne, przy czym proceudra \proc{Tree-Search} porówna jeszcze poszukiwany klucz z~węzłem o~tym kluczu na końcu tej ścieżki.
+
 \exercise %12.3-3
 Pesymistyczny przypadek dla takiego sposobu sortowania $n$ liczb zachodzi wtedy, gdy tablica jest uporządkowana rosnąco bądź malejąco.
 Wówczas drzewo powstałe po serii $n$ operacji \proc{Tree-Insert} ma wysokość $n-1$.
