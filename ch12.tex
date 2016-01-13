@@ -199,6 +199,34 @@ Z~\refExercise{B.5-4} wiemy, że drzewo zawierające $n$ węzłów ma wysokość
 Najmniejszy możliwy czas działania algorytmu sortowania wynosi zatem $O(n\lg n)$, bo to jest czas potrzebny na zbudowanie takiego drzewa.
 
 \exercise %12.3-4
+W~przypadku, gdy węzeł $z$ będący argumentem procedury \proc{Tree-Delete} ma dwóch synów, usuwanym węzłem jest następnik $z$.
+Problem pojawia się, gdy pewna struktura danych zawiera wskaźnik do węzła $y$, ale usuwany jest węzeł $z$, będący poprzednikiem $y$.
+Struktura ta może następnie odnosić się do $y$, zakładając, że nadal należy on do drzewa.
+Tak jednak nie jest, ponieważ to węzeł wskazywany przez $y$ został ostatecznie usunięty, a~jego wszystkie atrybuty skopiowane zostały do węzła wskazywanego przez $z$.
+
+Rozwiązanie tego problemu polega na podmianie węzła $z$ przez $y$ tuż przed zakończeniem działania \proc{Tree-Delete} w~przypadku, gdy węzeł $z$ początkowo miał dwóch synów.
+Wówczas węzłem efektywnie usuwanym byłby za każdym razem ten wskazywany przez $z$, dlatego w~bezpiecznej wersji procedury usuwania, której pseudokod prezentujemy poniżej, możemy zrezygnować ze zwracania jakiejkolwiek wartości.
+\begin{codebox}
+\Procname{$\proc{Safe-Tree-Delete}(T,z)$}
+\li	$y\gets\proc{Tree-Delete}(T,z)$
+\li	\If $y\ne z$
+\li		\Then
+			$\attrib{\attrib{z}{left}}{p}\gets\attrib{\attrib{z}{right}}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
+\li			\If $\attrib{z}{p}\ne\const{nil}$
+\li				\Then
+					\If $z=\attrib{\attrib{z}{p}}{left}$
+\li						\Then $\attrib{\attrib{z}{p}}{left}\gets y$
+\li						\Else $\attrib{\attrib{z}{p}}{right}\gets y$
+						\End
+				\End
+\li			skopiuj zawartość wszystkich pól z~$z$ do $y$ \label{li:safe-tree-delete-substitute-end}
+		\End
+\end{codebox}
+
+Powyższa procedura deleguje operację usuwania węzła $z$ do oryginalnej procedury \proc{Tree-Delete}.
+Jeśli zwrócony przez tę ostatnią węzeł $y$ jest różny od $z$, to w~wierszach \doubledash{\ref{li:safe-tree-delete-substitute-begin}}{\ref{li:safe-tree-delete-substitute-end}} następuje przepięcie synów i~ojca $z$ na węzeł $y$ i~przepisanie wszystkich pól z~$z$ do $y$.
+Po wykonaniu tej procedury struktura danych korzystająca z~drzewa może bezpiecznie założyć, że usunięty został dokładnie ten węzeł, który stanowił argument operacji usuwania.
+
 \exercise %12.3-5
 Operacja usuwania z~drzewa wyszukiwań binarnych nie jest przemienna. Kontrprzykład został zilustrowany na rys.\ \ref{fig:12.3-5}.
 \begin{figure}[ht]
