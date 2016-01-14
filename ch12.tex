@@ -199,12 +199,12 @@ Z~\refExercise{B.5-4} wiemy, że drzewo zawierające $n$ węzłów ma wysokość
 Najmniejszy możliwy czas działania algorytmu sortowania wynosi zatem $O(n\lg n)$, bo to jest czas potrzebny na zbudowanie takiego drzewa.
 
 \exercise %12.3-4
-W~przypadku, gdy węzeł $z$ będący argumentem procedury \proc{Tree-Delete} ma dwóch synów, usuwanym węzłem jest następnik $z$.
-Problem pojawia się, gdy pewna struktura danych zawiera wskaźnik do węzła $y$, ale usuwany jest węzeł $z$, będący poprzednikiem $y$.
-Struktura ta może następnie odnosić się do $y$, zakładając, że nadal należy on do drzewa.
+Procedura \proc{Tree-Delete} wywołana dla węzła o~dwóch synach w~rzeczywistości usunie następnik tego węzła.
+Problem pojawia się, gdy pewna struktura danych przechowuje wskaźnik do węzła $y$ i~wywołane zostanie \proc{Tree-Delete} celem usunięcia węzła $z$, będącego poprzednikiem $y$.
+Struktura ta może wciąż zakładać, że $z$ należy do drzewa.
 Tak jednak nie jest, ponieważ to węzeł wskazywany przez $y$ został ostatecznie usunięty, a~jego wszystkie atrybuty skopiowane zostały do węzła wskazywanego przez $z$.
 
-Rozwiązanie tego problemu polega na podmianie węzła $z$ przez $y$ tuż przed zakończeniem działania \proc{Tree-Delete} w~przypadku, gdy węzeł $z$ początkowo miał dwóch synów.
+Rozwiązanie tego problemu polega na podmianie węzła $z$ przez $y$ tuż przed zakończeniem operacji usuwania w~przypadku, gdy węzeł $z$ początkowo miał dwóch synów.
 Wówczas węzłem efektywnie usuwanym byłby za każdym razem ten wskazywany przez $z$, dlatego w~bezpiecznej wersji procedury usuwania, której pseudokod prezentujemy poniżej, możemy zrezygnować ze zwracania jakiejkolwiek wartości.
 \begin{codebox}
 \Procname{$\proc{Safe-Tree-Delete}(T,z)$}
