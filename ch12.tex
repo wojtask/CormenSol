@@ -136,6 +136,23 @@ Wówczas węzeł $u_2$ oraz jego lewe poddrzewo znajdują się w~lewym poddrzewi
 Wynika stąd, że im głębszy poziom węzła ze zbioru $U$, tym mniejszy jego klucz, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
 
 \exercise %12.2-7
+Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.
+Jest w~sumie $n$ wywołań procedur -- algorytm wymaga więc czasu $\Omega(n)$.
+Pokażemy jeszcze, że każda krawędź drzewa jest pokonywana co najwyżej dwukrotnie, skąd wynika górne oszacowanie $O(n)$ na czas działania algorytmu.
+
+Niech $u$ będzie węzłem drzewa, a~$v$ jego lewym synem.
+W~trakcie działania algorytmu przed wypisaniem klucza $u$ wpierw wypisane zostaną klucze wszystkich węzłów z~jego lewego poddrzewa, którego korzeniem jest $v$, co zostanie zapoczątkowane przez przejście krawędzią $\langle u,v\rangle$.
+Następnie w~celu wypisania klucza $u$ procedura \proc{Tree-Successor} przejdzie w~górę drzewa ścieżką do $u$ od maksymalnego elementu poddrzewa o~korzeniu w~$v$.
+Na tej ścieżce oczywiście znajduje się krawędź $\langle u,v\rangle$.
+Po pokonaniu ścieżki krawędź ta nie zostanie ponownie wykorzystana, ponieważ wszystkie węzły w~lewym poddrzewie $u$ zostały już odwiedzone.
+
+Załóżmy teraz, że $v$ jest prawym synem $u$.
+Tuż po wypisaniu klucza $u$ wywoływane jest $\proc{Tree-Successor}(u)$.
+Aby dostać się do węzła o~najmniejszym kluczu w~prawym poddrzewie węzła $u$, algorytm musi zejść krawędzią $\langle u,v\rangle$.
+Przejście nią w~drodze powrotnej nastąpi po odwiedzeniu wszystkich węzłów z~prawego poddrzewa $u$, o~ile będą wówczas jeszcze nieodwiedzone węzły w~drzewie.
+Będzie to miało miejsce podczas wywołania \proc{Tree-Successor} dla węzła o~maksymalnym kluczu w~prawym poddrzewie $u$, kiedy to algorytm będzie przechodził w~górę drzewa do węzła następującego po $u$ w~porządku inorder.
+Krawędź $\langle u,v\rangle$ należy do tej ścieżki i~z~racji tego, że wszystkie węzły prawego poddrzewa $u$ zostały odwiedzone, nie zostanie już użyta ponownie.
+
 \exercise %12.2-8
 \exercise %12.2-9
 Dowód sprowadza się do pokazania, że $y$ jest albo następnikiem albo poprzednikiem węzła $x$.
