@@ -154,6 +154,14 @@ Będzie to miało miejsce podczas wywołania \proc{Tree-Successor} dla węzła o
 Krawędź $\langle u,v\rangle$ należy do tej ścieżki i~z~racji tego, że wszystkie węzły prawego poddrzewa $u$ zostały odwiedzone, nie zostanie już użyta ponownie.
 
 \exercise %12.2-8
+Jeśli węzeł początkowy $u$ nie ma prawego syna, to w~wyniku wywołania $\proc{Tree-Successor}(u)$ następnym odwiedzonym węzłem, na podstawie \refExercise{12.2-6}, będzie najniższy przodek $u$, którego lewy syn też jest przodkiem $u$.
+Oznaczmy ten węzeł przez $v$.
+Jeśli z~kolei prawy syn $u$ istnieje, to zanim algorytm dotrze do $v$, odwiedzi on wpierw prawe poddrzewo $u$.
+O~ile nie zakończył swojego działania podczas tego kroku, to w~obu przypadkach opisane operacje zostają następnie powtórzone dla węzła $v$.
+Widać zatem, że algorytm porusza się w~górę drzewa po ścieżce, której długość ograniczona jest przez wysokość drzewa, odwiedzając prawe poddrzewa węzłów z~tej ścieżki.
+Ponieważ mamy $k$ wywołań \proc{Tree-Successor}, to sumaryczna liczba węzłów w~tych poddrzewach wynosi co najwyżej $O(k)$.
+Algorytm działa więc w~czasie $O(k+h)$.
+
 \exercise %12.2-9
 Dowód sprowadza się do pokazania, że $y$ jest albo następnikiem albo poprzednikiem węzła $x$.
 
