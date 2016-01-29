@@ -304,6 +304,36 @@ Rys.~\ref{fig:12.4-3} ilustruje każde drzewo, podając permutacje, z~których o
 \end{figure}
 
 \exercise %12.4-4
+Udowodnimy silniejsze twierdzenie, że każda funkcja $f(x)=c^x$, gdzie $c$ jest stałą dodatnią, jest wypukła.
+Z~definicji wypukłości funkcji z~dodatku C musimy pokazać, że dla każdych $x$, $y$ i~dla każdego $0\le\lambda\le1$ prawdziwa jest nierówność
+\[
+	c^{\lambda x+(1-\lambda)y} \le \lambda c^x+(1-\lambda)c^y.
+\]
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych liczb rzeczywistych\/ $a$,\/ $b$ i~dla dowolnej dodatniej liczby rzeczywistej\/ $c$ zachodzi
+\[
+	c^a \ge c^b+(a-b)c^b\ln c.
+\]}
+\begin{proof}
+Na podstawie wzoru (3.11), $e^x\ge1+x$ dla dowolnego $x$.
+Jeśli przyjmiemy $x=r\ln c$, to $e^x=e^{r\ln c}=(e^{\ln c})^r=c^r$ i~nierówność sprowadza się do postaci $c^r\ge1+r\ln c$.
+Po podstawieniu $r=a-b$ dostajemy $c^{a-b}\ge1+(a-b)\ln c$ i~aby otrzymać żądaną nierówność, wystarczy pomnożyć obie strony przez $c^b$.
+\end{proof}
+
+Niech $z=\lambda x+(1-\lambda)y$.
+Skorzystajmy z~powyższego lematu dwukrotnie, najpierw podstawiając $a=x$ i~$b=z$ i~otrzymując nierówność $c^x\ge c^z+(x-z)c^z\ln c$, a~następnie przyjmując $a=y$ i~$b=z$, skąd dostajemy $c^y\ge c^z+(y-z)c^z\ln c$.
+Pierwszą otrzymaną nierówność pomnożymy przez $\lambda$, a~drugą przez $1-\lambda$, a~następnie dodamy do siebie:
+\begin{align*}
+	\lambda c^x+(1-\lambda)c^y &\ge \lambda(c^z+(x-z)c^z\ln c)+(1-\lambda)(c^z+(y-z)c^z\ln c) \\
+	&= \lambda c^z+\lambda xc^z\ln c-\lambda zc^z\ln c+(1-\lambda)c^z+(1-\lambda)yc^z\ln c-(1-\lambda)zc^z\ln c \\
+	&= (\lambda+(1-\lambda))c^z+(\lambda x+(1-\lambda)y)c^z\ln c-(\lambda+(1-\lambda))zc^z\ln c \\
+	&= c^z+zc^z\ln c-zc^z\ln c \\
+	&= c^z \\
+	&= c^{\lambda x+(1-\lambda)y}.
+\end{align*}
+Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególności $f(x)=2^x$.
+
 \exercise %12.4-5
 \note{Wymagane jest założenie, że elementy tablicy wejściowej algorytmu \proc{Randomized-Quicksort} są parami różne.}
 
