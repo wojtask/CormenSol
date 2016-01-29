@@ -290,6 +290,40 @@ Mamy
 przy czym w~ostatniej równości wykorzystaliśmy \refExercise{C.1-7}.
 
 \exercise %12.4-2
+Rozważmy drzewo binarne w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów, natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce odchodzącej od tegoż pełnego drzewa w~dół na coraz to niższe poziomy.
+Drzewo takie ma wysokość
+\[
+	\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)+\sqrt{n\lg n} = \Theta\bigl(\!\sqrt{n\lg n}\bigr) = \omega(\lg n).
+\]
+
+O~tym, że średnia głębokość węzła w~tym drzewie wynosi $\Theta(\lg n)$, przekonamy się, wyprowadzając najpierw górne, a~potem dolne oszacowanie tej wartości.
+W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość każdego z~$n-\sqrt{n\lg n}$ węzłów z~części stanowiącej pełne drzewo binarne oraz $O\bigl(\lg n+\sqrt{n\lg n}\bigr)$ jako ograniczenia na głębokość każdego z~$\sqrt{n\lg n}$ węzłów ze ścieżki odchodzącej od pełnego drzewa.
+Średnia głębokość węzła wynosi więc co najwyżej
+\[
+	\frac{1}{n}\cdot O\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n+\sqrt{n\lg n}\,\bigl(\lg n+\sqrt{n\lg n}\bigr)\bigr) = \frac{1}{n}\cdot O(n\lg n) = O(\lg n).
+\]
+Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$\Omega\bigl(n-\sqrt{n\lg n}\bigr)$ węzłów, z~których każdy ma głębokość $\Omega(\lg n)$.
+Stąd średnia głębokość węzła ograniczona jest od dołu przez
+\[
+	\frac{1}{n}\cdot\Omega\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n\bigr) = \frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
+\]
+
+W~drugiej części zadania udowodnimy, że wysokość drzewa binarnego o~$n$ węzłach i~średniej głębokości węzła $\Theta(\lg n)$ wynosi $O\bigl(\!\sqrt{n\lg n}\bigr)$.
+
+Załóżmy, że w~drzewie binarnym o~$n$ węzłach i~wysokości $h$ średnią głębokością węzła jest $\Theta(\lg n)$.
+Istnieje więc ścieżka od korzenia w~dół tego drzewa, na której głębokościami węzłów są kolejno 0, 1, \dots, $h$.
+Oznaczmy przez $U$ zbiór węzłów na tej ścieżce, przez $U'$ zbiór wszystkich pozostałych węzłów drzewa, a~przez $d(x)$ głębokość węzła $x$.
+Wówczas średnia głębokość węzła w~tym drzewie wynosi
+\[
+	\frac{1}{n}\biggl(\sum_{x\in U}d(x)+\sum_{x\in U'}d(x)\biggr) \ge \frac{1}{n}\sum_{x\in U}d(x) = \frac{1}{n}\sum_{i=0}^hi = \frac{1}{n}\cdot\Theta(h^2).
+\]
+Jeśli byłoby $h=\omega\bigl(\!\sqrt{n\lg n}\bigr)$, to wtedy mielibyśmy
+\[
+	\frac{1}{n}\cdot\Theta(h^2) = \frac{1}{n}\cdot\omega(n\lg n) = \omega(\lg n),
+\]
+co stoi w~sprzeczności z~założeniem, że średnią głębokością węzła jest $\Theta(\lg n)$.
+A~zatem wysokość drzewa musi być ograniczona przez $O\bigl(\!\sqrt{n\lg n}\bigr)$.
+
 \exercise %12.4-3
 Istnieje 5 różnych drzew BST o~$n=3$ węzłach, podczas gdy jest $3!=6$ permutacji trójelementowych.
 Jest więc jasne, że któreś z~tych drzew można zbudować z~więcej niż jednej permutacji.
