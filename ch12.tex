@@ -302,15 +302,14 @@ W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość ka�
 \[
 	\frac{1}{n}\cdot O\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n+\sqrt{n\lg n}\,\bigl(\lg n+\sqrt{n\lg n}\bigr)\bigr) = \frac{1}{n}\cdot O(n\lg n) = O(\lg n).
 \]
-Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$\Omega\bigl(n-\sqrt{n\lg n}\bigr)$ węzłów, z~których każdy ma głębokość $\Omega(\lg n)$.
-Stąd średnia głębokość węzła ograniczona jest od dołu przez
+Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$\Theta\bigl(n-\sqrt{n\lg n}\bigr)$ węzłów, z~których każdy ma głębokość $\Theta(\lg n)$.
+Stąd średnia głębokość węzła ograniczona jest z~dołu przez
 \[
-	\frac{1}{n}\cdot\Omega\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n\bigr) = \frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
+	\frac{1}{n}\cdot\Theta\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n\bigr) = \frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
 \]
 
 W~drugiej części zadania udowodnimy, że wysokość drzewa binarnego o~$n$ węzłach i~średniej głębokości węzła $\Theta(\lg n)$ wynosi $O\bigl(\!\sqrt{n\lg n}\bigr)$.
-
-Załóżmy, że w~drzewie binarnym o~$n$ węzłach i~wysokości $h$ średnią głębokością węzła jest $\Theta(\lg n)$.
+Niech dane będzie drzewo binarne o~$n$ węzłach i~wysokości $h$ ze średnią głębokością węzła $\Theta(\lg n)$.
 Istnieje więc ścieżka od korzenia w~dół tego drzewa, na której głębokościami węzłów są kolejno 0, 1, \dots, $h$.
 Oznaczmy przez $U$ zbiór węzłów na tej ścieżce, przez $U'$ zbiór wszystkich pozostałych węzłów drzewa, a~przez $d(x)$ głębokość węzła $x$.
 Wówczas średnia głębokość węzła w~tym drzewie wynosi
