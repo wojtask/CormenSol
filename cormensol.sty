@@ -43,7 +43,7 @@
 \setlength{\cftsecnumwidth}{2.6em}
 
 % zmniejszenie szerokości marginesu, aby notki z todonotes nie wychodziły poza margines
-\setlength{\marginparwidth}{3.5cm}
+%\setlength{\marginparwidth}{3.5cm}
 
 % głębokość numerowania wewnątrz spisu treści
 \setcounter{tocdepth}{1}
@@ -111,7 +111,7 @@
 	{\Large\sffamily}
 }
 
-% dodaje kropkę na koniec każdego numerka rozwiązania zadania i problemu
+% dodaje kropkę na koniec każdego numeru rozwiązania zadania i problemu
 \renewcommand*{\@seccntformat}[1]{%
 	\csname the#1\endcsname
 	\csname adddot@#1\endcsname\quad
@@ -233,16 +233,14 @@
 % niełamliwy podwójny dywiz
 \newcommand{\doubledash}[2]{{#1}\protect\nobreakdash--{#2}}
 
-% odnośnik do zadania --> odblokować w publikowanej wersji!
+% odnośnik do zadania
 \newcommand{\refExercise}[1]{zad.\ \mbox{\ref{ex:#1}}}
-%\newcommand{\refExercise}[1]{zad.\ \mbox{#1}}
 
-% odnośnik do problemu --> odblokować w publikowanej wersji!
+% odnośnik do problemu
 \newcommand{\refProblem}[1]{\mbox{\ref{ex:#1}}}
-%\newcommand{\refProblem}[1]{\mbox{#1}}
 
 % informacja poboczna w tekście rozwiązania
-\newcommand{\note}[1]{\noindent\emph{#1}\bigskip\par}
+\newcommand{\note}[1]{\noindent\emph{#1}\bigskip}
 
 % poprawione polecenie \id dla jednoznakowych identyfikatorów
 \renewcommand{\id}[1]{\ensuremath{\mathit{\text@hyphens#1}}}

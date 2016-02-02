@@ -380,6 +380,32 @@ Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególnoś
 \subproblem %12-1(d)
 
 \problem{Drzewa pozycyjne} %12-2
+\note{$S$ jest zbiorem różnych ciągów bitowych, których długości sumują się do\/ $n$.}
+
+\noindent Zbiór $S$ ciągów bitowych możemy posortować poprzez zbudowanie z~jego elementów drzewa pozycyjnego, a~następnie wypisanie wszystkich kluczy tego drzewa należących do $S$ w~porządku preorder.
+Uzasadnimy teraz to stwierdzenie i~znajdziemy czas działania tego sortowania.
+
+Zbadajmy drzewo pozycyjne zbudowane z~elementów zbioru $S$.
+Rozważmy węzeł $x$ o~kluczu $s\in S$ z~poziomu $i$ tego drzewa.
+Ciąg $s$ jest \singledash{$i$}{bitowym} prefiksem wszystkich ciągów z~lewego i~z~prawego poddrzewa węzła $x$.
+Ponadto w~każdym ciągu z~lewego poddrzewa na \singledash{$(i+1)$}{szej} pozycji jest 0, a~w~każdym ciągu z~prawego poddrzewa na tej samej pozycji jest 1.
+A~zatem ciąg $s$ leksykograficznie poprzedza ciągi po lewej stronie $x$, które z~kolei leksykograficznie poprzedzają ciągi po prawej stronie $x$.
+W~wynikowej posortowanej permutacji bezpośrednio po $s$ znajdą się więc wszystkie klucze z~$S$ należące do lewego poddrzewa węzła $x$, po czym wszystkie klucze z~$S$ należące do jego prawego poddrzewa.
+Klucze w~takiej kolejności możemy wypisać, przechodząc poddrzewo o~korzeniu w~$x$ metodą preorder.
+Zbiór $S$ posortujemy więc poprzez wywołanie \proc{Preorder-Tree-Walk} na całym drzewie pozycyjnym, przy czym wypisywane będą tylko klucze należące do zbioru $S$.
+
+Wstawienie węzła o~kluczu $s$ do drzewa pozycyjnego zajmuje czas $\Theta(|s|)$, gdzie $|s|$ oznacza długość ciągu $s$, gdyż węzeł ten zostanie umieszczony na poziomie $|s|$.
+Budowa drzewa pozycyjnego z~elementów zbioru $S$ odbywa się więc w~czasie
+\[
+	\sum_{s\in S}\Theta(|s|) = \Theta\biggl(\sum_{s\in S}|s|\biggr) = \Theta(n).
+\]
+Podczas wstawiania węzła o~kluczu $s$ tworzonych jest co najwyżej $|s|+1$ nowych węzłów, zatem drzewo zbudowane ze zbioru $S$ posiada nie więcej niż
+\[
+	\sum_{s\in S}(|s|+1) \le (|\varepsilon|+1)+\sum_{s\in S\setminus\{\varepsilon\}}2|s| = 1+2n = O(n)
+\]
+węzłów ($\varepsilon$ oznacza ciąg pusty).
+Przechodzenie drzewa w~porządku preorder działa w~czasie proporcjonalnym do liczby jego węzłów.
+Dodając do tego czas spędzony na budowaniu drzewa, otrzymujemy, że opisane sortowanie odbywa się w~czasie $\Theta(n)$.
 
 \problem{Średnia głębokość węzła w~losowo zbudowanym drzewie wyszukiwań binarnych} %12-3
 
