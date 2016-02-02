@@ -375,9 +375,33 @@ Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególnoś
 \problem{Drzewa wyszukiwań binarnych z~powtarzającymi się kluczami} %12-1
 
 \subproblem %12-1(a)
+Pierwsze wywołanie \proc{Tree-Insert} umieszcza nowy węzeł w~korzeniu drzewa.
+W~pozostałych wywołaniach warunki w~liniach 5 i~11 są fałszywe, co oznacza, że każdy nowy węzeł wstawiony zostanie jako prawy syn poprzedniego węzła i~po $n$ wywołaniach \proc{Tree-Insert} drzewo będzie mieć postać ścieżki o~$n$ elementach.
+Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż w~poprzednim wywołaniu, więc ciąg $n$ wywołań wykona się w~czasie
+\[
+	T(n) = \sum_{i=1}^ni = \frac{n(n+1)}{2} = \Theta(n^2).
+\]
+
 \subproblem %12-1(b)
+W~tej strategii po wstawieniu pierwszego węzła do drzewa kolejne będą umieszczane raz w~lewym, raz w~prawym poddrzewie zarówno korzenia, jak i~każdego węzła aktualnie znajdującego się w~drzewie.
+Powoduje to, że podczas wstawiania węzłów drzewo jest wypełnione na każdym poziomie, być może z~wyjątkiem ostatniego.
+Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~podczas \singledash{$i$}{tego} wywołania, gdzie $i=2$, 3, \dots, $n$, jego wysokość jest równa $\lg(i-1)$.
+Ciąg $n$ operacji \proc{Tree-Insert} działa zatem w~czasie
+\[
+	T(n) = \Theta(1)+\sum_{i=2}^n\lg(i-1) = \Theta(1)+\sum_{i=1}^{n-1}\lg i = \Theta(n\lg n)
+\]
+na podstawie wzoru (3.18).
+
 \subproblem %12-1(c)
+Dodanie węzła do listy węzłów o~tym samym kluczu odbywa się w~czasie stałym.
+Ciąg $n$ wywołań \proc{Tree-Insert} wykona się więc w~czasie $\Theta(n)$.
+
 \subproblem %12-1(d)
+W~pesymistycznym przypadku $x$ jest za każdym razem ustawiane na \attrib{x}{left} (albo za każdym razem na \attrib{x}{right}) i~efektywność działania ciągu operacji \proc{Tree-Insert} w~tej strategii nie różni się od efektywności ciągu wywołań jej oryginalnej wersji, tworząc w~czasie $\Theta(n^2)$ drzewo będące ścieżką \singledash{$n$}{elementową}.
+
+W~średnim przypadku każdy wstawiany węzeł może zostać liściem jakiegokolwiek aktualnego liścia w~tym drzewie.
+Ciąg $n$ wywołań \proc{Tree-Insert} można więc traktować jako konstrukcję losowego drzewa binarnego z~$n$ węzłów o~różnych kluczach.
+Jak wiemy z~tw.\ 12.4, oczekiwana wysokość takiego drzewa wynosi $O(\lg n)$, a~czas wymagany do jego zbudowania jest ograniczony od góry przez $O(n\lg n)$.
 
 \problem{Drzewa pozycyjne} %12-2
 \note{$S$ jest zbiorem różnych ciągów bitowych, których długości sumują się do\/ $n$.}
