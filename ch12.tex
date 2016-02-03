@@ -397,11 +397,11 @@ Dodanie węzła do listy węzłów o~tym samym kluczu odbywa się w~czasie stał
 Ciąg $n$ wywołań \proc{Tree-Insert} wykona się więc w~czasie $\Theta(n)$.
 
 \subproblem %12-1(d)
-W~pesymistycznym przypadku $x$ jest za każdym razem ustawiane na \attrib{x}{left} (albo za każdym razem na \attrib{x}{right}) i~efektywność działania ciągu operacji \proc{Tree-Insert} w~tej strategii nie różni się od efektywności ciągu wywołań jej oryginalnej wersji, tworząc w~czasie $\Theta(n^2)$ drzewo będące ścieżką \singledash{$n$}{elementową}.
+W~pesymistycznym przypadku $x$ jest zawsze ustawiane na \attrib{x}{left} (albo zawsze na \attrib{x}{right}) i~efektywność działania ciągu operacji \proc{Tree-Insert} w~tej strategii nie różni się od efektywności ciągu wywołań jej oryginalnej wersji, gdyż w~czasie $\Theta(n^2)$ tworzone jest drzewo będące ścieżką \singledash{$n$}{elementową}.
 
-W~średnim przypadku każdy wstawiany węzeł może zostać liściem jakiegokolwiek aktualnego liścia w~tym drzewie.
-Ciąg $n$ wywołań \proc{Tree-Insert} można więc traktować jako konstrukcję losowego drzewa binarnego z~$n$ węzłów o~różnych kluczach.
-Jak wiemy z~tw.\ 12.4, oczekiwana wysokość takiego drzewa wynosi $O(\lg n)$, a~czas wymagany do jego zbudowania jest ograniczony od góry przez $O(n\lg n)$.
+W~przypadku średnim $x$ z~jednakowym prawdopodobieństwem przyjmie \attrib{x}{left} albo \attrib{x}{right}, co oznacza, że są równe szanse na to, że wstawiany węzeł trafi do lewego bądź do prawego poddrzewa węzła, z~którym jest aktualnie testowany.
+Wejściowy ciąg kluczy jest więc nieodróżnialny od pewnej losowej permutacji $n$ różnych kluczy i~powstające drzewo można potraktować jak losowo skonstruowane drzewo wyszukiwań binarnych o~$n$ węzłach.
+Konstrukcja ta wymaga czasu proporcjonalnego do sumy głębokości węzłów drzewa, a~na podstawie problemu \refProblem{12-3} w~średnim przypadku wartość ta jest ograniczona przez $O(n\lg n)$.
 
 \problem{Drzewa pozycyjne} %12-2
 \note{$S$ jest zbiorem różnych ciągów bitowych, których długości sumują się do\/ $n$.}
