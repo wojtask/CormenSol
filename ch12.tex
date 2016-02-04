@@ -383,12 +383,12 @@ Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż w~p
 \]
 
 \subproblem %12-1(b)
-W~tej strategii po wstawieniu pierwszego węzła do drzewa kolejne będą umieszczane raz w~lewym, raz w~prawym poddrzewie zarówno korzenia, jak i~każdego węzła aktualnie znajdującego się w~drzewie.
-Powoduje to, że podczas wstawiania węzłów drzewo jest wypełnione na każdym poziomie, być może z~wyjątkiem ostatniego.
-Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~podczas \singledash{$i$}{tego} wywołania, gdzie $i=2$, 3, \dots, $n$, jego wysokość jest równa $\lg(i-1)$.
+Zauważmy, że drzewo tworzone w~tej strategii w~dowolnym momencie spełnia następującą własność: dla każdego jego węzła $v$ liczba węzłów w~lewym poddrzewie $v$ jest równa lub o~1 większa od liczby węzłów w~prawym poddrzewie $v$.
+Wynika z~tego, że drzewo jest wypełnione na każdym poziomie, być może z~wyjątkiem ostatniego.
+Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~w~każdym kolejnym wywołaniu jego wysokość wynosi $\Theta(\lg i)$.
 Ciąg $n$ operacji \proc{Tree-Insert} działa zatem w~czasie
 \[
-	T(n) = \Theta(1)+\sum_{i=2}^n\lg(i-1) = \Theta(1)+\sum_{i=1}^{n-1}\lg i = \Theta(n\lg n)
+	T(n) = \Theta(1)+\sum_{i=2}^n\Theta(\lg i) = \Theta(1)+\Theta\biggl(\sum_{i=2}^n\lg i\biggr) = \Theta(1)+\Theta(\lg(n!)) = \Theta(n\lg n)
 \]
 na podstawie wzoru (3.18).
 
