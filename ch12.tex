@@ -434,7 +434,19 @@ Dodając do tego czas spędzony na budowaniu drzewa, otrzymujemy, że opisane so
 \problem{Średnia głębokość węzła w~losowo zbudowanym drzewie wyszukiwań binarnych} %12-3
 
 \subproblem %12-3(a)
+Wzór wynika wprost z~definicji średniej głębokości węzła w~drzewie $T$ o~$n$ węzłach i~z~definicji $P(T)$.
+
 \subproblem %12-3(b)
+Zauważmy, że dla każdego $x\in T_L$ zachodzi $d(x,T_L)=d(x,T)-1$ i~podobnie, dla każdego $x\in T_R$ zachodzi $d(x,T_R)=d(x,T)-1$.
+Stąd, jeśli drzewo $T$ o~korzeniu $r$ ma $n$ węzłów, to
+\begin{align*}
+	P(T) &= \sum_{x\in T}d(x,T) \\
+	&= d(r,T)+\sum_{x\in T_L}d(x,T)+\sum_{x\in T_R}d(x,T) \\[1mm]
+	&= \sum_{x\in T_L}(d(x,T_L)+1)+\sum_{x\in T_R}(d(x,T_R)+1) \\[1mm]
+	&= \sum_{x\in T_L}d(x,T_L)+\sum_{x\in T_R}d(x,T_R)+n-1 \\[1mm]
+	&= P(T_L)+P(T_R)+n-1.
+\end{align*}
+
 \subproblem %12-3(c)
 \subproblem %12-3(d)
 \subproblem %12-3(e)
