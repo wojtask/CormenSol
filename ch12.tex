@@ -451,7 +451,24 @@ Stąd, jeśli drzewo $T$ ma korzeń $r$, to
 \end{align*}
 
 \subproblem %12-3(c)
+Jeśli $T$ jest losowo skonstruowanym drzewem wyszukiwań binarnych, to klucz pierwszego wstawianego do $T$ węzła jest z~równymi szansami dowolnym w~kolejności rosnącej w~ciągu $n$ kluczy wstawianych węzłów.
+Pierwszy węzeł staje się korzeniem drzewa $T$, a~więc po zbudowaniu $T$ jego lewe poddrzewo $T_L$ może z~jednakowym prawdopodobieństwem być drzewem o~$i$ węzłach, gdzie $i=0$, 1, \dots, $n-1$.
+Dla ustalonego $i$ prawe poddrzewo $T_R$ ma wówczas rozmiar $n-i-1$.
+Z~definicji $P(n)$ jako średniej wartości $P(T)$ oraz z~punktu (b) otrzymujemy
+\[
+	P(n) = \frac{1}{n}\sum_{i=0}^{n-1}(P(i)+P(n-i-1)+n-1).
+\]
+
 \subproblem %12-3(d)
+Na podstawie poprzedniego punktu mamy:
+\begin{align*}
+	P(n) &= \frac{1}{n}\sum_{k=0}^{n-1}(P(k)+P(n-k-1)+n-1) \\
+	&= \frac{1}{n}\biggl(\sum_{k=0}^{n-1}P(k)+\sum_{k=0}^{n-1}P(n-k-1)+\sum_{k=0}^{n-1}(n-1)\biggr) \\
+	&= \frac{1}{n}\biggl(2\sum_{k=0}^{n-1}P(k)+n(n-1)\biggr) \\
+	&= \frac{2}{n}\sum_{k=1}^{n-1}P(k)+\Theta(n).
+\end{align*}
+W~ostatnim przekształceniu skorzystaliśmy z~tego, że $P(0)=0$ i~opuściliśmy ten składnik sumy.
+
 \subproblem %12-3(e)
 \subproblem %12-3(f)
 
