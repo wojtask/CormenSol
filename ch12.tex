@@ -501,6 +501,18 @@ Liczba wszystkich drzew binarnych o~$n$ węzłach wynosi zatem
 \]
 
 \subproblem %12-4(b)
+Wyznaczmy $B^2(x)$.
+Kwadrat sumy wyrazów ciągu jest sumą iloczynów wyrazów tego ciągu na zasadzie ,,każdy z~każdym''.
+Dzięki odpowiedniemu pogrupowaniu iloczynów możemy napisać:
+\[
+	B^2(x) = \biggl(\sum_{n=0}^\infty b_nx^n\biggr)^2 = \sum_{n=0}^\infty\sum_{k=0}^nb_kx^kb_{n-k}x^{n-k} = \sum_{n=0}^\infty\sum_{k=0}^nb_kb_{n-k}x^n.
+\]
+Wewnętrzną sumę na podstawie punktu (a) zamieniamy na $b_{n+1}$ i~wówczas:
+\[
+	B^2(x) = \sum_{n=0}^\infty b_{n+1}x^n = \frac{1}{x}\sum_{n=0}^\infty b_{n+1}x^{n+1} = \frac{1}{x}\sum_{n=1}^\infty b_nx^n = \frac{1}{x}\biggl(\sum_{n=0}^\infty b_nx^n-1\biggr) = \frac{B(x)-1}{x}.
+\]
+Stąd $B(x)=xB^2(x)+1$.
+
 \subproblem %12-4(c)
 \note{Rozwinięciem Taylora funkcji\/ $f(x)$ wokół punktu\/ $x=a$ jest\/ $f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
 
@@ -532,7 +544,7 @@ Rozwinięcie Taylora funkcji $f(x)=\sqrt{1-4x}$ wokół punktu $x=0$ ma postać:
 \]
 Podstawiając powyższy wynik do postaci $B(x)$ wyprowadzonej w~części (b), dostajemy
 \[
-	B(x) = \frac{1}{2x}(1-\sqrt{1-4x}) = \sum_{k=0}^\infty\binom{2k}{k}\frac{x^k}{k+1}.
+	B(x) = \frac{1-\sqrt{1-4x}}{2x} = \sum_{k=0}^\infty\binom{2k}{k}\frac{x^k}{k+1}.
 \]
 co po przyrównaniu do wzoru z~definicji funkcji $B(x)$, daje
 \[
