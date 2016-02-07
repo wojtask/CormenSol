@@ -347,7 +347,8 @@ Z~definicji wypukłości funkcji z~dodatku C musimy pokazać, że dla każdych $
 \noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych liczb rzeczywistych\/ $a$,\/ $b$ i~dla dowolnej dodatniej liczby rzeczywistej\/ $c$ zachodzi
 \[
 	c^a \ge c^b+(a-b)c^b\ln c.
-\]}
+\]
+}
 \begin{proof}
 Na podstawie wzoru (3.11), $e^x\ge1+x$ dla dowolnego $x$.
 Jeśli przyjmiemy $x=r\ln c$, to $e^x=e^{r\ln c}=(e^{\ln c})^r=c^r$ i~nierówność sprowadza się do postaci $c^r\ge1+r\ln c$.
@@ -491,7 +492,42 @@ Posługując się nierównością (7.7) udowodnioną w~punkcie (d) problemu \ref
 \subproblem %12-4(a)
 \subproblem %12-4(b)
 \subproblem %12-4(c)
-\note{Definicja rozwinięcia Taylora została błędnie podana. Wyrażeniem pod znakiem sumy powinno być\/ $\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
+\note{Rozwinięciem Taylora funkcji\/ $f(x)$ wokół punktu\/ $x=a$ jest\/ $f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
+
+\noindent Aby skorzystać z~rozwinięcia Taylora funkcji $f(x)$, musimy wyznaczyć jej kolejne pochodne.
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Jeśli\/ $f(x)=\sqrt{1-4x}$, to dla\/ każdego całkowitego $k\ge1$ zachodzi
+\[
+	f^{(k)}(x) = -\frac{2(2k-2)!}{(k-1)!}\,(1-4x)^{1/2-k}.
+\]
+}
+\begin{proof}
+Wzór udowodnimy przez indukcję.
+Jeśli $k=1$, to $f'(x)=\frac{-2}{\sqrt{1-4x}}$ i~łatwo sprawdzić, że wzór zachodzi.
+Niech teraz $k\ge2$.
+Wykorzystując założenie indukcyjne, wyznaczmy \singledash{$k$}{tą} pochodną funkcji $f(x)$:
+\begin{align*}
+	f^{(k)}(x) &= \bigl(f^{(k-1)}(x)\bigr)' \\
+	&= \biggl(-\frac{2(2k-4)!}{(k-2)!}\,(1-4x)^{3/2-k}\biggr)' \\[1mm]
+	&= -\frac{2(2k-4)!}{(k-2)!}\cdot\biggl(\frac{3}{2}-k\biggr)\cdot(-4)\cdot(1-4x)^{1/2-k} \\[1mm]
+	&= -\frac{2(2k-4)!}{(k-2)!}\cdot\frac{(2k-3)(2k-2)}{(k-1)}\cdot(1-4x)^{1/2-k} \\[1mm]
+	&= -\frac{2(2k-2)!}{(k-1)!}\,(1-4x)^{1/2-k}.
+\end{align*}
+\end{proof}
+
+Rozwinięcie Taylora funkcji $f(x)=\sqrt{1-4x}$ wokół punktu $x=0$ ma postać:
+\[
+	f(x) = \sum_{k=0}^\infty\frac{f^{(k)}(0)}{k!}\,x^k = 1-2\sum_{k=1}^\infty\frac{(2k-2)!}{(k-1)!\,k!}\,x^k = 1-2\sum_{k=1}^\infty\binom{2k-2}{k-1}\frac{x^k}{k} = 1-2\sum_{k=0}^\infty\binom{2k}{k}\frac{x^{k+1}}{k+1}.
+\]
+Podstawiając powyższy wynik do postaci $B(x)$ wyprowadzonej w~części (b), dostajemy
+\[
+	B(x) = \frac{1}{2x}(1-\sqrt{1-4x}) = \sum_{k=0}^\infty\binom{2k}{k}\frac{x^k}{k+1}.
+\]
+co po przyrównaniu do wzoru z~definicji funkcji $B(x)$, daje
+\[
+	b_n = \frac{1}{n+1}\binom{2n}{n}.
+\]
 
 \subproblem %12-4(d)
 
