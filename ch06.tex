@@ -186,12 +186,12 @@ Z~\refExercise{6.4-5} mamy, że jest to w~rzeczywistości oszacowanie dokładne.
 A~zatem w~szczególności dla tablicy posortowanej rosnąco i~tablicy posortowanej malejąco heapsort działa w~czasie $\Theta(n\lg n)$.
 
 \exercise %6.4-4
-Przypadek pesymistyczny algorytmu heapsort ma miejsce wówczas, gdy każde wywołanie \proc{Max-Heapify} z~wiersza 5 schodzi rekurencyjnie aż do ostatniego poziomu drzewa.
-Na mocy wyniku z~\refExercise{6.2-6} oraz wzoru (3.18) czasem działania algorytmu heapsort w~takim przypadku jest
+Przypadek pesymistyczny algorytmu heapsort ma miejsce wtedy, gdy każde wywołanie \proc{Max-Heapify} z~wiersza 5 schodzi rekurencyjnie aż do ostatniego poziomu drzewa.
+Na mocy wyniku z~\refExercise{6.2-6} oraz wzoru (3.18) wywołania te zabierają łącznie czas
 \[
-	T(n) = \Theta(n)+\sum_{i=2}^{n}\Omega(\lg i) = \Theta(n)+\Omega(\lg(n!)) = \Omega(n\lg n),
+	\sum_{i=2}^n\Omega(\lg i) = \Omega(\lg(n!)) = \Omega(n\lg n)
 \]
-przy czym składnik $\Theta(n)$ jest czasem spędzonym na budowaniu kopca z~tablicy \singledash{$n$}{elementowej}.
+i~taki jest też czas działania algorytmu heapsort w~pesymistycznym przypadku.
 
 \exercise %6.4-5
 Dokonamy analizy liczby wykonywanych instrukcji z~linii 9 procedury \proc{Max-Heapify} podczas działania algorytmu sortowania przez kopcowanie w~przypadku optymistycznym.
@@ -422,7 +422,7 @@ Najgorszym przypadkiem dla procedury \proc{Build-Max-Heap}$'$ jest tablica uporz
 W~każdym z~$n-1$ wywołań \proc{Max-Heap-Insert} z~wiersza 3 nowy węzeł transportowany jest wówczas aż do korzenia kopca, co wymaga $\Theta(\lg i)$ operacji przy \singledash{$i$}{elementowym} kopcu.
 Stąd czas działania \proc{Build-Max-Heap}$'$ w~przypadku pesymistycznym wynosi
 \[
-	T(n) = \sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(\lg(n!)) = \Theta(n\lg n).
+	\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(\lg(n!)) = \Theta(n\lg n).
 \]
 
 \problem{Analiza kopców rzędu $d$} %6-2

@@ -125,6 +125,7 @@ Czas algorytmu quicksort w~przypadku optymistycznym jest opisany przez rekurencj
 \[
     T(n) = \min_{0\le q\le n-1}(T(q)+T(n-q-1))+\Theta(n).
 \]
+Rozwiążemy ją metodą podstawiania.
 Niech $c>0$ będzie stałą.
 Zgadujemy, że $T(q)\ge cq\lg q$ dla każdego $q=0$, 1, \dots, $n-1$ (przyjmujemy dla wygody, że $0\lg0=0$) i~podstawiamy:
 \begin{align*}
@@ -159,8 +160,8 @@ Powracamy do oszacowania rekurencji $T(n)$, przyjmując $n\ge2$:
 	&\ge cn\lg n.
 \end{align*}
 Ostatnia nierówność zachodzi, o~ile stała $c$ jest na tyle mała, że wyrażenie $c(2n+\lg(n-1)-1)$ jest zdominowane przez składnik $\Theta(n)$.
-Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(1)=1$.
-Na podstawę indukcji możemy więc przyjąć $n=1$, dla którego $T(n)$ spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
+Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(0)=d$, gdzie $d\ge0$ jest pewną stałą.
+Na podstawę indukcji możemy więc przyjąć $n=0$, dla którego $T(n)$ spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
 
 \exercise %7.4-3
 Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$.

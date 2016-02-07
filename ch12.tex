@@ -378,10 +378,7 @@ Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególnoś
 \subproblem %12-1(a)
 Pierwsze wywołanie \proc{Tree-Insert} umieszcza nowy węzeł w~korzeniu drzewa.
 W~pozostałych wywołaniach warunki w~liniach 5 i~11 są fałszywe, co oznacza, że każdy nowy węzeł wstawiony zostanie jako prawy syn poprzedniego węzła i~po $n$ wywołaniach \proc{Tree-Insert} drzewo będzie mieć postać ścieżki o~$n$ elementach.
-Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż w~poprzednim wywołaniu, więc ciąg $n$ wywołań wykona się w~czasie
-\[
-	T(n) = \sum_{i=1}^ni = \frac{n(n+1)}{2} = \Theta(n^2).
-\]
+Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż w~poprzednim wywołaniu -- sumarycznie więc pokonają ścieżkę o~łącznej długości równej $\sum_{i=1}^ni=\frac{n(n+1)}{2}$, co zajmie czas $\Theta(n^2)$.
 
 \subproblem %12-1(b)
 Zauważmy, że drzewo tworzone w~tej strategii w~dowolnym momencie spełnia następującą własność: dla każdego jego węzła $v$ liczba węzłów w~lewym poddrzewie $v$ jest równa lub o~1 większa od liczby węzłów w~prawym poddrzewie $v$.
@@ -389,7 +386,7 @@ Wynika z~tego, że drzewo jest wypełnione na każdym poziomie, być może z~wyj
 Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~w~każdym kolejnym wywołaniu jego wysokość wynosi $\Theta(\lg i)$.
 Ciąg $n$ operacji \proc{Tree-Insert} działa zatem w~czasie
 \[
-	T(n) = \Theta(1)+\sum_{i=2}^n\Theta(\lg i) = \Theta(1)+\Theta\biggl(\sum_{i=2}^n\lg i\biggr) = \Theta(1)+\Theta(\lg(n!)) = \Theta(n\lg n)
+	\sum_{i=2}^n\Theta(\lg i) = \Theta\biggl(\sum_{i=2}^n\lg i\biggr) = \Theta(\lg(n!)) = \Theta(n\lg n)
 \]
 na podstawie wzoru (3.18).
 
