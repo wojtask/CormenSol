@@ -490,6 +490,16 @@ Posługując się nierównością (7.7) udowodnioną w~punkcie (d) problemu \ref
 \problem{Zliczanie różnych drzew binarnych} %12-4
 
 \subproblem %12-4(a)
+Oczywiście jest tylko jedno drzewo binarne niezawierające żadnego węzła, zatem $b_0=1$.
+
+Rozważmy drzewo binarne o~$n\ge1$ węzłach.
+Jeśli jego lewe poddrzewo ma $k$ węzłów, gdzie $k=0$, 1, \dots, $n-1$, to jego prawe poddrzewo ma $n-1-k$ węzłów.
+Wynika stąd, że liczba drzew binarnych o~$n$ węzłach i~o~ustalonej liczbie $k$ węzłów w~lewym poddrzewie, jest równa $b_kb_{n-1-k}$.
+Liczba wszystkich drzew binarnych o~$n$ węzłach wynosi zatem
+\[
+	b_n = \sum_{k=0}^{n-1}b_kb_{n-1-k}.
+\]
+
 \subproblem %12-4(b)
 \subproblem %12-4(c)
 \note{Rozwinięciem Taylora funkcji\/ $f(x)$ wokół punktu\/ $x=a$ jest\/ $f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
