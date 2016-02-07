@@ -6,12 +6,12 @@
 Niech $c>0$ będzie stałą.
 Przyjmujemy założenie, że
 \[
-    T(\lceil n/2\rceil)\le c\lg(\lceil n/2\rceil)
+    T(\lceil n/2\rceil)\le c\lg\lceil n/2\rceil
 \]
 i~że $n\ge4$.
 Na podstawie założeń i~wzoru (3.3) otrzymujemy:
 \begin{align*}
-	T(n) &\le c\lg(\lceil n/2\rceil)+1 \\
+	T(n) &\le c\lg\lceil n/2\rceil+1 \\
 	&< c\lg(n/2+1)+1 \\
 	&\le c\lg(3n/4)+1 \\
 	&= c\lg n+c\lg(3/4)+1 \\
@@ -28,12 +28,12 @@ Na mocy dowodu indukcyjnego wynika zatem, że $T(n)=O(\lg n)$.
 \exercise %4.1-2
 Przyjmijmy założenie, że
 \[
-	T(\lfloor n/2\rfloor) \ge c\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor)
+	T(\lfloor n/2\rfloor) \ge c\lfloor n/2\rfloor\lg\lfloor n/2\rfloor
 \]
 dla pewnej dodatniej stałej $c$.
 Korzystając ze wzoru (3.3), mamy:
 \begin{align*}
-	T(n) &\ge 2c\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor)+n \\
+	T(n) &\ge 2c\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+n \\
 	&> 2c(n/2-1)\lg(n/4)+n \\
 	&= 2c((n/2)\lg n-n-\lg n+2)+n \\
 	&= cn\lg n-2cn-2c\lg n+4c+n \\
@@ -75,13 +75,13 @@ gdzie $d_1$, $d_2>0$ są stałymi.
 Udowodnimy oszacowania górne i~dolne dla $T(n)$ przy użyciu indukcji, przy czym założymy, że $n\ge4$ i~skorzystamy z~obserwacji, że $T(n)$ jest funkcją niemalejącą.
 Dla stałych $c_1$, $c_2>0$ przyjmijmy założenia
 \[
-	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor) \quad\text{oraz}\quad T(\lceil n/2\rceil) \le c_2\lceil n/2\rceil\lg(\lceil n/2\rceil).
+	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor \quad\text{oraz}\quad T(\lceil n/2\rceil) \le c_2\lceil n/2\rceil\lg\lceil n/2\rceil.
 \]
 
 W~przypadku dolnego oszacowania mamy:
 \begin{align*}
 	T(n) &\ge 2T(\lfloor n/2\rfloor)+d_2n \\
-	&\ge 2c_1\lfloor n/2\rfloor\lg(\lfloor n/2\rfloor)+d_2n \\
+	&\ge 2c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+d_2n \\
 	&> 2c_1(n/2-1)\lg(n/4)+d_2n \\
 	&= c_1n\lg n-2c_1n-2c_1\!\lg(n/4)+d_2n \\
 	&\ge c_1n\lg n,
@@ -93,7 +93,7 @@ Podstawę indukcji stanowi $n=1$, gdyż $T(1)\ge c_1\cdot 1\cdot\lg1=0$, a~zatem
 Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$, dowodzimy górnego oszacowania:
 \begin{align*}
 	T(n) &\le 2T(\lceil n/2\rceil)+d_2n \\
-	&\le 2c_2\lceil n/2\rceil\lg(\lceil n/2\rceil)+d_2n \\
+	&\le 2c_2\lceil n/2\rceil\lg\lceil n/2\rceil+d_2n \\
 	&< 2c_2(n/2+1)\lg\frac{n\lceil n/2\rceil}{n}+d_2n \\
 	&\le c_2n\lg n+c_2(n+2)\lg\frac{\lceil n/2\rceil}{n}+2c_2\lg n+d_2n \\
 	&\le c_2n\lg n.

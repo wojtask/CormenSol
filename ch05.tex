@@ -266,12 +266,12 @@ Dla $k=1$, 2, \dots, $b$ mamy
 Zajmijmy się teraz wartością oczekiwaną zmiennej losowej $X$:
 \begin{align*}
 	\E(X) &= \sum_{k=0}^b(k+1)\Pr(X=k+1) \\
-	&= \frac{b!}{b^b}\sum_{k=0}^b\frac{b^{b-k}k}{(b-k)!\,b}(k+1) \\
-	&= \frac{b!}{b^b}\sum_{k=0}^b\frac{b^k(b-k)}{k!\,b}(b-k+1) \\
-	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}(b-k+1)-\sum_{k=0}^b\frac{b^kk}{k!\,b}(b-k+1)\biggr) \\
-	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}(b-k+1)-\sum_{k=1}^b\frac{b^{k-1}}{(k-1)!}(b-k+1)\biggr) \\
-	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}(b-k+1)-\sum_{k=0}^{b-1}\frac{b^k}{k!}(b-k)\biggr) \\
-	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}(b-k+1)-\sum_{k=0}^b\frac{b^k}{k!}(b-k)\biggr) \\
+	&= \frac{b!}{b^b}\sum_{k=0}^b\frac{b^{b-k}k}{(b-k)!\,b}\,(k+1) \\
+	&= \frac{b!}{b^b}\sum_{k=0}^b\frac{b^k(b-k)}{k!\,b}\,(b-k+1) \\
+	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}\,(b-k+1)-\sum_{k=0}^b\frac{b^kk}{k!\,b}\,(b-k+1)\biggr) \\
+	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}\,(b-k+1)-\sum_{k=1}^b\frac{b^{k-1}}{(k-1)!}\,(b-k+1)\biggr) \\
+	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}\,(b-k+1)-\sum_{k=0}^{b-1}\frac{b^k}{k!}\,(b-k)\biggr) \\
+	&= \frac{b!}{b^b}\biggl(\sum_{k=0}^b\frac{b^k}{k!}\,(b-k+1)-\sum_{k=0}^b\frac{b^k}{k!}\,(b-k)\biggr) \\
 	&= \frac{b!}{b^b}\sum_{k=0}^b\frac{b^k}{k!}.
 \end{align*}
 Ostatnie wyrażenie jest badane w~\cite{taocp1frag}, gdzie wyprowadzono jego oszacowanie $\sqrt{b\pi/2}+O(1)$, a~zatem $E(X)=\Theta(\!\sqrt{b})$.
@@ -398,7 +398,7 @@ Załóżmy teraz, że przed wykonaniem \singledash{$j$}{tej} operacji \proc{Incr
 Jeśli inkrementacja powiedzie się, co zdarzy się z~prawdopodobieństwem równym $1/(n_{i+1}-n_i)$, to wartość reprezentowana na liczniku zwiększy się o~$n_{i+1}-n_i$.
 Dla każdego $j=1$, 2, \dots, $n$ mamy zatem
 \[
-	\E(X_j) = 0\cdot\biggl(1-\frac{1}{n_{i+1}-n_i}\biggr)+(n_{i+1}-n_i)\cdot\biggl(\frac{1}{n_{i+1}-n_i}\biggr) = 1,
+	\E(X_j) = 0\cdot\biggl(1-\frac{1}{n_{i+1}-n_i}\biggr)+(n_{i+1}-n_i)\cdot\frac{1}{n_{i+1}-n_i} = 1,
 \]
 a~więc
 \[
