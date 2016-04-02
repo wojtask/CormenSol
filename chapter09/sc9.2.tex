@@ -1,0 +1,37 @@
+\subchapter{Wybór w~oczekiwanym czasie liniowym}
+
+\exercise %9.2-1
+Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą nierówności $1\le i\le r-p+1$.
+Wywołanie procedury \proc{Randomized-Partition} w~wierszu 3 zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$.
+Dla liczby $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$.
+Wywołanie rekurencyjne w~wierszu 8 nastąpi dla tablicy długości 0, jeśli $i<k$ i~$q=p$, ale wówczas $k=1$, co jest sprzeczne z~założeniem o~parametrze $i$.
+Podobnie w~wierszu 9 funkcja zostanie wywołana rekurencyjnie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$ i~również w~tym przypadku dochodzimy do sprzeczności.
+
+\exercise %9.2-2
+Czas działania procedury \proc{Randomized-Partition} dla tablicy o~mniej niż $n$ elementach jest niezależny od tego, jak została podzielona tablica o~$n$ elementach w~poprzednim wywołaniu rekurencyjnym.
+Jest tak między innymi dlatego, że żaden poziom rekursji nie przekazuje do następnego poziomu informacji o~tym, na jakim fragmencie tablicy działa.
+
+\exercise %9.2-3
+Po dokonaniu oczywistych zmian w~oryginalnej procedurze, otrzymujemy następujący pseudokod:
+\begin{codebox}
+\Procname{$\proc{Iterative-Randomized-Select}(A,p,r,i)$}
+\li	\While $p<r$
+\li		\Do
+			$q\gets\proc{Randomized-Partition}(A,p,r)$
+\li			$k\gets q-p+1$
+\li			\If $i=k$
+\li				\Then \Return $A[q]$
+				\End
+\li			\If $i<k$
+\li				\Then $r\gets q-1$
+\li				\Else
+					$p\gets q+1$
+\li					$i\gets i-k$
+				\End
+		\End
+\li	\Return $A[p]$
+\end{codebox}
+
+\exercise %9.2-4
+W~przypadku szukania elementu najmniejszego pesymistyczny przypadek dzielenia podtablicy występuje, gdy na element rozdzielający wybierany jest za każdym razem jej największy element.
+Kolejne wywołania rekurencyjne zmniejszają wówczas obszar poszukiwań o~1, jednocześnie umieszczając na końcu tablicy elementy w~kolejności rosnącej, w~wyniku czego, jako efekt uboczny, tablica zostaje posortowana.

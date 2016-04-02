@@ -1,0 +1,57 @@
+\subchapter{Czas działania algorytmu quicksort}
+
+\exercise %7.2-1
+Niech $c_1$, $d_1>0$ będą stałymi.
+Korzystając z~założenia, że $T(n-1)\le c_1(n-1)^2$, dostajemy
+\[
+	T(n) = T(n-1)+\Theta(n) \le c_1(n-1)^2+d_1n = c_1n^2+(d_1-2c_1)n+c_1 \le c_1n^2.
+\]
+Ostatnia nierówność jest spełniona dla każdego $n\ge1$, jeśli np.\ $c_1=d_1=1$.
+
+Weźmy teraz inne stałe $c_2$, $d_2>0$.
+Dolnego oszacowania na $T(n)$ dowodzimy analogicznie, wychodząc z~założenia, że $T(n-1)\ge c_2(n-1)^2$:
+\[
+	T(n) = T(n-1)+\Theta(n) \ge c_2(n-1)^2+d_2n = c_2n^2+(d_2-2c_2)n+c_2 \ge c_2n^2.
+\]
+Przyjmujemy $c_2=1/2$, $d_2=2$, dzięki czemu ostatnia nierówność zachodzi dla wszystkich $n\ge1$.
+
+Przypadek brzegowy $n=1$ można przyjąć za podstawę obu powyższych indukcji dla podanych wartości stałych, co kończy dowód, że $T(n)=\Theta(n^2)$.
+
+\exercise %7.2-2
+Procedura \proc{Partition} w~takim przypadku zwraca wartość $q=r$ (\refExercise{7.1-2}), a~więc w~następnych wywołaniach rekurencyjnych procedury \proc{Quicksort} będą przetwarzane podtablice rozmiarów 0 i~$n-1$.
+Napotykając w~każdym wywołaniu rekurencyjnym przypadek pesymistyczny, algorytm będzie działać w~czasie opisanym przez rekurencję z~\refExercise{7.2-1}, której rozwiązaniem jest $\Theta(n^2)$.
+
+\exercise %7.2-3
+W~tym przypadku podczas każdego wywołania rekurencyjnego procedury \proc{Partition} elementem rozdzielającym jest najmniejszy element przetwarzanej podtablicy $A[p\twodots r]$.
+W~każdym wywołaniu jedyne elementy, które zostaną zamienione, to element rozdzielający i~$A[p]$, po czym zwrócona zostanie wartość $q=r$.
+Przypadek ten jest zatem analogiczny do rozważanego w~poprzednim zadaniu, a~więc czasem działania procedury \proc{Quicksort} dla tablicy posortowanej malejąco jest $\Theta(n^2)$.
+
+\exercise %7.2-4
+Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort.
+W~wielu wywołaniach rekurencyjnych na element rozdzielający wybierany jest bowiem największy element przetwarzanej podtablicy.
+Wykonywane są wówczas niezrównoważone podziały, przez co czas działania procedury \proc{Quicksort} zbliża się do kwadratowego.
+
+Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt (c) problemu \refProblem{2-4}).
+W~ciągu prawie posortowanym ilość inwersji jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
+
+\exercise %7.2-5
+Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów.
+Najkrótsza gałąź w~tym drzewie składa się z~węzłów o~wartościach $\alpha^in$, gdzie $i$ jest poziomem węzła, zaś najdłuższa gałąź na \singledash{$i$}{tym} poziomie posiada węzeł o~wartości $(1-\alpha)^in$.
+Niech $h$ będzie głębokością liścia najkrótszej gałęzi.
+Mamy wtedy $\alpha^hn=1$, skąd
+\[
+	h = \log_\alpha\frac{1}{n} = -\frac{\lg n}{\lg\alpha}.
+\]
+Jeśli przez $H$ oznaczymy głębokość liścia na gałęzi najdłuższej, to mamy $(1-\alpha)^Hn=1$, a~zatem
+\[
+	H = \log_{1-\alpha}\frac{1}{n} = -\frac{\lg n}{\lg(1-\alpha)}.
+\]
+
+\exercise %7.2-6
+Załóżmy, że procedura \proc{Partition} utworzyła podział w~stosunku $1-\beta$ do $\beta$, gdzie $0<\beta\le1/2$.
+Aby był to podział bardziej zrównoważony niż $1-\alpha$ do $\alpha$, to musi być $\alpha<\beta$.
+Zdarzenie to można modelować za pomocą ciągłego rozkładu jednostajnego dla przedziału $(\alpha,1/2]$ w~przestrzeni $(0,1/2]$.
+Wykorzystując definicję prawdopodobieństwa o~ciągłym rozkładzie jednostajnym, dostajemy
+\[
+	\Pr((\alpha,1/2]) = \frac{1/2-\alpha}{1/2-0} = 1-2\alpha.
+\]

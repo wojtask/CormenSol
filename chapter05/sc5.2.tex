@@ -1,0 +1,68 @@
+\subchapter{Zmienne losowe wskaźnikowe}
+
+\exercise %5.2-1
+Zatrudnienie tylko jednej kandydatki jest równoważne przyjęciu pierwszej z~nich i~tylko jej.
+Zauważmy, że pierwszą kandydatkę przyjmujemy w~procedurze \proc{Hire-Assistant} w~każdym przypadku.
+Jeśli ma ona być jedyną zatrudnioną osobą, to powinna być najbardziej wykwalifikowaną w~zbiorze wszystkich kandydatek (czyli mieć największą wartość \id{rank}).
+Najlepsza kandydatka może znajdować się na każdym z~$n$ miejsc w~ciągu wejściowym, zatem prawdopodobieństwo tego, że będzie zajmować pierwszą pozycję, jest równe $1/n$.
+
+By dokonać zatrudnienia wszystkich $n$ kandydatek, musimy przesłuchiwać je w~kolejności rosnących rang.
+Jest tylko jedna taka permutacja wejściowa, zatem prawdopodobieństwo tego zdarzenia wynosi $1/n!$.
+
+\exercise %5.2-2
+Zauważmy, że zarówno kandydatka z~pierwszej pozycji w~ciągu wejściowym, jak również ta o~najwyższej randze, są zatrudniane w~każdym przypadku.
+Jeśli procedura \proc{Hire-Assistant} ma dokonać dokładnie dwóch zatrudnień, to kandydatka z~numerem 1 powinna mieć rangę $i\le n-1$, a~wszystkie kandydatki o~rangach $i+1$, $i+2$, \dots, $n-1$ powinny występować w~ciągu po kandydatce z~rangą równą $n$.
+
+Oznaczmy przez $E_i$ zdarzenie, że pierwsza kandydatka ma rangę równą $i$.
+Zachodzi oczywiście $\Pr(E_i)=1/n$ dla każdego $i=1$, 2, \dots, $n$.
+Przyjmijmy, że $j$ jest pozycją najlepszej kandydatki w~ciągu i~niech $F$ będzie zdarzeniem polegającym na tym, że kandydatki o~numerach 2, 3, \dots, $j-1$ mają rangi mniejsze od rangi kandydatki numer 1.
+Jeśli zachodzi $E_i$, to $F$ zachodzi tylko wtedy, gdy $i\ne n$, a~spośród $n-i$ kandydatek, których rangi są większe niż $i$, ta z~rangą równą $n$ przesłuchiwana jest najwcześniej.
+Stąd mamy $\Pr(F\mid E_i)=1/(n-i)$, o~ile $i\ne n$.
+Niech w~końcu $A$ oznacza zdarzenie, że w~procedurze \proc{Hire-Assistant} zatrudniane są dokładnie dwie osoby.
+Ponieważ zdarzenia $E_1$, $E_2$, \dots, $E_n$ są rozłączne, to zachodzi
+\[
+	A = F\cap(E_1\cup E_2\cup\dots\cup E_{n-1}) = (F\cap E_1)\cup(F\cap E_2)\cup\dots\cup(F\cap E_{n-1})
+\]
+oraz
+\[
+	\Pr(A) = \sum_{i=1}^{n-1}\Pr(F\cap E_i).
+\]
+Z~tożsamości (C.14),
+\[
+	\Pr(F\cap E_i) = \Pr(F\mid E_i)\Pr(E_i) = \frac{1}{n-i}\cdot\frac{1}{n},
+\]
+a~zatem
+\[
+	\Pr(A) = \sum_{i=1}^{n-1}\frac{1}{n-i}\cdot\frac{1}{n} = \frac{1}{n}\sum_{i=1}^{n-1}\frac{1}{n-i} = \frac{1}{n}\sum_{i=1}^{n-1}\frac{1}{i} = \frac{H_{n-1}}{n}.
+\]
+
+\exercise %5.2-3
+Obliczmy wartość oczekiwaną liczby oczek w~jednym rzucie kostką.
+Definiując zmienną losową $X_i$ jako liczbę oczek na \singledash{$i$}{tej} kostce ($i=1$, 2, \dots, $n$), obliczamy $\E(X_i)$, przyjmując, że zmienne $X_i$ mają rozkład jednostajny (prawdopodobieństwo każdego wyniku jest równe $1/6$):
+\[
+	\E(X_i) = \sum_xx\Pr(X_i=x) = \frac{1+2+3+4+5+6}{6} = 3{,}5.
+\]
+Niech zmienna losowa $X$ oznacza sumę oczek na $n$ kostkach.
+Mamy $X=X_1+X_2+\dots+X_n$, więc z~liniowości wartości oczekiwanej
+\[
+	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = 3{,}5n.
+\]
+
+\exercise %5.2-4
+Niech $S_i$, dla $i=1$, 2, \dots, $n$, będzie zdarzeniem oznaczającym, że \singledash{$i$}{ta} osoba otrzymała swój kapelusz.
+Definiujemy teraz zmienne losowe $X_i=\I(S_i)$ oraz $X=X_1+X_2+\dots+X_n$, przy czym $X$ oznacza liczbę osób, którym zwrócono właściwe kapelusze.
+Mamy
+\[
+	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(X_i=1) = \sum_{i=1}^n\frac{1}{n} = 1,
+\]
+a~zatem swój kapelusz otrzyma średnio tylko jedna osoba.
+
+\exercise %5.2-5
+Dla wszystkich całkowitych $i$, $j$ takich, że $1\le i<j\le n$, zdefiniujmy zdarzenia $S_{ij}$ -- w~tablicy $A$ występuje inwersja $\langle i,j\rangle$.
+Szanse na to, aby elementy na pozycjach $i$ oraz $j$ tworzyły inwersję, są równe $1/2$.
+Definiujemy zmienne losowe $X_{ij}=\I(S_{ij})$ oraz $X=\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}$, przy czym zmienna $X$ oznacza łączną liczbę inwersji tablicy $A$.
+Jej wartością oczekiwaną jest
+\begin{align*}
+	\E(X) &= \E\biggl(\sum_{i=1}^{n-1}\sum_{j=i+1}^nX_{ij}\biggr) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\E(X_{ij}) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{ij}=1) \\[1mm]
+	&= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{2} = \frac{1}{2}\sum_{i=1}^{n-1}(n-i) = \frac{1}{2}\sum_{i=1}^{n-1}i = \frac{n(n-1)}{4}.
+\end{align*}

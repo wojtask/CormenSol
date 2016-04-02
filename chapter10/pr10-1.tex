@@ -1,0 +1,31 @@
+\problem{Porównanie list} %10-1
+Tabela \ref{tab:10-1} zawiera pesymistyczne czasy poszczególnych operacji słownikowych dla danych czterech typów list.
+Przyjmujemy, że operacje wykonywane są na listach o~rozmiarach $n$.
+
+\begin{table}[ht]
+	\begin{center}
+		\[
+			\begin{array}{l|c|c|c|c}
+				& \text{Nieposortowana} & \text{Posortowana} & \text{Nieposortowana} & \text{Posortowana} \\
+				& \text{jedno-} & \text{jedno-} & \text{dwu-} & \text{dwu-} \\
+				& \text{kierunkowa} & \text{kierunkowa} & \text{kierunkowa} & \text{kierunkowa} \\
+				\hline
+				\proc{Search}(L,k) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(n) \\
+				\hline
+				\proc{Insert}(L,x) & \Theta(1) & \Theta(n) & \Theta(1) & \Theta(n) \\
+				\hline
+				\proc{Delete}(L,x) & \Theta(n) & \Theta(n) & \Theta(1) & \Theta(1) \\
+				\hline
+				\proc{Successor}(L,x) & \Theta(n) & \Theta(1) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Predecessor}(L,x) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Minimum}(L) & \Theta(n) & \Theta(1) & \Theta(n) & \Theta(1) \\
+				\hline
+				\proc{Maximum}(L) & \Theta(n) & \Theta(n) & \Theta(n) & \Theta(n)
+			\end{array}
+		\]
+	\end{center}
+	\caption{Porównanie pesymistycznych złożoności operacji słownikowych dla różnych typów list.} \label{tab:10-1}
+\end{table}
+Jeśli w~implementacjach list będziemy dodatkowo utrzymywać atrybut \id{tail} wskazujący na ogon listy, to operację \proc{Maximum} dla list posortowanych możemy wykonywać w~czasie stałym.

@@ -1,0 +1,24 @@
+\problem{Sortowanie przez wstawianie dla małych tablic podczas sortowania przez scalanie} %2-1
+
+\subproblem %2-1(a)
+Sortowanie przez wstawianie podlisty o~długości $k$ działa w~czasie pesymistycznym $\Theta(k^2)$, a~zastosowane osobno do $n/k$ takich podlist zajmuje czas równy $(n/k)\cdot\Theta(k^2)=\Theta(nk)$.
+
+\subproblem %2-1(b)
+Uogólniając procedurę scalania dwóch podlist na jednoczesne scalanie $n/k$ podlist, można osiągnąć czas $\Theta(n^2\!/k)$, ponieważ wszystkie podlisty należy przejrzeć łącznie $n$ razy, szukając za każdym razem najmniejszego elementu do wstawienia na listę wynikową.
+
+Lepszy czas można jednak uzyskać dzięki scalaniu podlist parami, następnie otrzymane większe podlisty również scalając parami itd., aż do uzyskania pojedynczej listy wynikowej.
+Na każdym poziomie scalanie wymaga czasu $\Theta(n)$, jest $\lceil\lg(n/k)\rceil$ poziomów, a~zatem czas działania scalania $n/k$ podlist przy użyciu tego pomysłu wynosi $\Theta(n\lg(n/k))$.
+
+\subproblem %2-1(c)
+Czas działania zmodyfikowanego algorytmu ma ten sam rząd złożoności co czas działania sortowania przez scalanie, o~ile zachodzi $\Theta(nk+n\lg(n/k))=\Theta(n\lg n)$.
+Zauważmy, że jeśli $k=\omega(\lg n)$, to zmodyfikowany algorytm działa w~czasie $\omega(n\lg n)$.
+Zbadajmy więc, co się dzieje, gdy $k=\Theta(\lg n)$.
+Mamy
+\[
+	\Theta(nk+n\lg(n/k)) = \Theta(nk+n\lg n-n\lg k) = \Theta(2n\lg n-n\lg\lg n) = \Theta(n\lg n),
+\]
+dzięki opuszczeniu składnika niższego rzędu i~pominięciu stałego współczynnika.
+Maksymalnym rzędem $k$, dla którego czas zmodyfikowanego algorytmu jest równy czasowi zwykłego sortowania przez scalanie, jest zatem $\Theta(\lg n)$.
+
+\subproblem %2-1(d)
+W~praktyce $k$ powinno być największą długością listy, dla której sortowanie przez wstawianie działa szybciej od sortowania przez scalanie.

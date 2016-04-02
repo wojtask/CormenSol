@@ -1,0 +1,26 @@
+\problem{Kule i~urny} %C-1
+
+\subproblem %C-1(a)
+Każda kula trafia do jednej z~$b$ urn.
+Jest $b$ sposobów umieszczenia pierwszej kuli, na każdy z~nich przypada $b$ sposobów umieszczenia drugiej kuli itd.
+Jest zatem $b^n$ sposobów rozmieszczenia $n$ różnych kul w~$b$ różnych urnach.
+
+\subproblem %C-1(b)
+Ponieważ dysponujemy $n$ rozróżnialnymi kulami oraz $b$ nierozróżnialnymi urnami, to nasz problem jest równoważny policzeniu wszystkich możliwych ciągów $n$ różnych kul i~$b-1$ identycznych patyków.
+Patyki dzielą ciąg kul na spójne podciągi, z~których każdy odpowiada ciągowi kul w~kolejnej urnie, reprezentując wzajemne uporządkowanie kul wewnątrz urny.
+
+Wszystkich takich ciągów jest $(b+n-1)!$, ale ponieważ nie rozróżniamy urn, to musimy podzielić tę liczbę przez liczbę możliwych rozmieszczeń urn między sobą, czyli $(b-1)!$.
+Istnieje zatem $\frac{(b+n-1)!}{(b-1)!}$ różnych rozmieszczeń kul w~urnach.
+
+\subproblem %C-1(c)
+Sytuacja jest podobna jak w~punkcie (b) z~tą różnicą, że nie rozróżniamy kul między sobą, a~więc również każda permutacja $n$ kul między sobą opisuje ten sam sposób rozmieszczenia kul w~urnach.
+Mamy zatem $\frac{(b+n-1)!}{n!\,(b-1)!}=\binom{b+n-1}{n}$ możliwości rozmieszczenia kul.
+
+\subproblem %C-1(d)
+Zakładając, że $n\le b$, wybieramy spośród $b$ urn $n$ takich, które będą zawierać po jednej kuli.
+Jest $\binom{b}{n}$ sposobów ich wyboru.
+
+\subproblem %C-1(e)
+Zakładamy, że $n\ge b$.
+Najpierw umieszczamy po jednej kuli w~każdej z~$b$ urn, dzięki czemu żadna urna nie jest pusta.
+Na mocy punktu (c) pozostałe $n-b$ kul możemy umieścić w~$b$ urnach na $\binom{b+(n-b)-1}{n-b}=\binom{n-1}{n-b}=\binom{n-1}{b-1}$ sposobów.

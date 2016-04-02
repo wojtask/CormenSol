@@ -1,0 +1,139 @@
+\subchapter{Kolejki priorytetowe}
+
+\exercise %6.5-1
+Na rys.\ \ref{fig:6.5-1} został przedstawiony kopiec wejściowy $A$ i~wynikowy kopiec otrzymany w~wyniku działania procedury \proc{Heap-Extract-Max}.
+W~wierszu 3 zmiennej \id{max} przypisywana jest maksymalna wartość kopca, czyli 15.
+Następnie korzeń otrzymuje wartość 1 i~rozmiar kopca jest pomniejszany o~1.
+Po przywróceniu własności kopca w~linii 6 procedura zwraca wartość \id{max}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_6.5-1}
+	\end{center}
+	\caption{Działanie procedury \proc{Heap-Extract-Max} dla kopca $A=\langle15,13,9,5,12,8,7,4,0,6,2,1\rangle$.
+{\sffamily\bfseries(a)} Kopiec wejściowy $A$.
+{\sffamily\bfseries(b)} Kopiec $A$ po usunięciu maksymalnej wartości i~przywróceniu własności kopca naruszonej przez korzeń, któremu wcześniej przypisano wartość 1.} \label{fig:6.5-1}
+\end{figure}
+
+\exercise %6.5-2
+Procedura \proc{Max-Heap-Insert} rozpoczyna działanie od dodania do kopca nowego elementu o~wartości $-\infty$.
+Wartość ta jest następnie odpowiednio modyfikowana i~element jest umieszczany w~odpowiednim miejscu w~kopcu dzięki wywołaniu \proc{Heap-Increase-Key}.
+Działanie procedury $\proc{Max-Heap-Insert}(A,10)$ zostało przedstawione na rys.\ \ref{fig:6.5-2}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_6.5-2}
+	\end{center}
+	\caption{Działanie procedury $\proc{Max-Heap-Insert}(A,10)$ dla kopca $A=\langle$15,\! 13,\! 9,\! 5,\! 12,\! 8,\! 7,\! 4,\! 0,\! 6,\! 2,\! 1$\rangle$.
+{\sffamily\bfseries(a)} Kopiec po dodaniu nowego elementu o~wartości początkowej $-\infty$.
+{\sffamily\bfseries(b)} Działa teraz procedura \proc{Heap-Increase-Key}.
+Na rysunku pokazano wartość zmiennej $i$ w~tej procedurze.
+Wartość nowego elementu została zwiększona i~wynosi teraz 10.
+{\sffamily\bfseries(c)} Po wykonaniu pierwszej iteracji pętli \kw{while} procedury \proc{Heap-Increase-Key} nowy element został zamieniony ze swoim ojcem.
+{\sffamily\bfseries(d)} Po drugiej iteracji pętli nastąpiła jeszcze jedna zamiana nowego elementu i~jego aktualnego ojca, dzięki czemu $A$ spełnia już własność kopca i~procedura kończy działanie.} \label{fig:6.5-2}
+\end{figure}
+
+\exercise %6.5-3
+Zakładamy, że tablica $A$ stanowi kopiec typu min.
+Poniższe procedury stanowią implementację kolejki priorytetowej typu min i~działają analogicznie do odpowiadających im procedur dla kolejki priorytetowej typu max.
+\begin{codebox}
+\Procname{$\proc{Heap-Minimum}(A)$}
+\li	\Return $A[1]$
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Heap-Extract-Min}(A)$}
+\li	\If $\attrib{A}{heap-size}<1$
+\li		\Then \Error ,,kopiec pusty''
+		\End
+\li	$\id{min}\gets A[1]$
+\li	$A[1]\gets A[\attrib{A}{heap-size}]$
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
+\li	$\proc{Min-Heapify}(A,1)$
+\li	\Return \id{min}
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Heap-Decrease-Key}(A,i,\id{key})$}
+\li	\If $\id{key}>A[i]$
+\li		\Then \Error ,,nowy klucz jest większy niż klucz aktualny''
+		\End
+\li	$A[i]\gets\id{key}$
+\li	\While $i>1$ i~$A[\proc{Parent}(i)]>A[i]$
+\li		\Do
+			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
+\li			$i\gets\proc{Parent}(i)$
+		\End
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Min-Heap-Insert}(A,\id{key})$}
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}+1$
+\li	$A[\attrib{A}{heap-size}]\gets\infty$
+\li	$\proc{Heap-Decrease-Key}(A,\attrib{A}{heap-size},\id{key})$
+\end{codebox}
+
+\exercise %6.5-4
+Po wykonaniu wiersza 1 procedury \proc{Max-Heap-Insert} wartość $A[\attrib{A}{heap-size}]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}.
+Wówczas jednak wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem.
+Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
+
+\exercise %6.5-5
+\begin{description}
+	\item[Inicjowanie:] Przed wykonaniem wiersza3 tablica $A[1\twodots\attrib{A}{heap-size}]$ jest kopcem typu max.
+Zwiększenie wartości $A[i]$ może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
+	\item[Utrzymanie:] Dokonując zamiany elementów w~wiers 5 w~bieżącej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
+Jednak operacja ta może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$.
+Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która może naruszać własność kopca.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$.
+W~pierwszym przypadku $\proc{Parent}(i)\le0$, co jest niepoprawną wartością dla indeksów tablicy $A$.
+W~drugim natomiast jedyna para, która mogłaby naruszać własność kopca, w~rzeczywistości ją spełnia.
+A~zatem po zakończeniu wykonywania pętli tablica $A[1\twodots\attrib{A}{heap-size}]$ stanowi kopiec typu max.
+\end{description}
+Z~prawdziwości niezmiennika pętli wynika, że procedura \proc{Heap-Increase-Key} poprawnie zwiększa wartość węzła $i$, pozostawiając kopiec typu max.
+
+\exercise %6.5-6
+Kolejkę FIFO implementujemy, wykorzystując do tego celu kolejkę priorytetową typu min.
+Przy inicjalizacji kolejki będziemy ustawiać wartość dodatkowej zmiennej \id{rank} na 1.
+Przed dodaniem nowego elementu do kolejki FIFO nadamy mu rangę, czyli powiążemy go z~aktualną wartością zmiennej \id{rank}, po czym wstawimy element wraz z~jego rangą do kolejki priorytetowej procedurą \proc{Min-Heap-Insert}.
+Warunek kolejki priorytetowej spełniany będzie tylko na podstawie wartości rang elementów.
+Po umieszczeniu obiektu w~kolejce wartość zmiennej \id{rank} zostanie zwiększona o~1.
+Z~kolei usuwanie elementów będzie odbywać się poprzez zwykłe wywołanie procedury \proc{Heap-Extract-Min}.
+Taka implementacja operacji na kolejce FIFO zapewnia, że w~danym momencie w~strukturze danych nie będzie dwóch różnych elementów z~tą samą rangą i~elementy pobierane będą w~odpowiedniej kolejności.
+
+Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej typu max, w~której porównań dokonujemy na rangach związanych z~elementami.
+Podczas wstawiania elementów na stos korzystamy z~procedury \proc{Max-Heap-Insert} i~inkrementujemy zmienną \id{rank} (zainicjalizowaną na 1 w~momencie utworzenia stosu).
+Usuwanie polega na odnalezieniu i~pobraniu elementu z~największą rangą, co realizowane jest za pomocą \proc{Heap-Extract-Max}.
+W~wyniku tego elementy pobierane są w~kolejności odwrotnej do tej, w~której były wstawiane.
+
+\exercise %6.5-7
+\note{Zmienimy nazwę operacji z~sugerowanej w~Podręczniku \proc{Heap-Delete} na \proc{Max-Heap-Delete}, aby odróżnić ją od analogicznej procedury dla kopca typu min.}
+
+\noindent Przedstawiona poniżej procedura \proc{Max-Heap-Delete} zamienia element $A[i]$ w~\singledash{$n$}{elementowym} kopcu $A$ typu max z~jego liściem $A[\attrib{A}{heap-size}]$, po czym dekrementuje \attrib{A}{heap-size}.
+Po tym kroku własność kopca może być naruszona przez węzeł $A[i]$ na dwa sposoby.
+W~pierwszym przypadku mamy sytuację, w~której $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}.
+W~drugim przypadku $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wystarczy wykonać podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}.
+Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~kopcu pozycję $i$.
+\begin{codebox}
+\Procname{$\proc{Max-Heap-Delete}(A,i)$}
+\li	zamień $A[i]\leftrightarrow A[\attrib{A}{heap-size}]$
+\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
+\li	$\proc{Max-Heapify}(A,i)$ \label{li:max-heap-delete-heapify}
+\li	\While $i>1$ i~$A[\proc{Parent}(i)]<A[i]$ \label{li:max-heap-delete-while-begin}
+\li		\Do
+			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
+\li			$i\gets\proc{Parent}(i)$
+		\End \label{li:max-heap-delete-while-end}
+\li	\Return $A[\attrib{A}{heap-size}+1]$
+\end{codebox}
+
+Zarówno wywołanie z~wiersza \ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \doubledash{\ref{li:max-heap-delete-while-begin}}{\ref{li:max-heap-delete-while-end}} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
+
+\exercise %6.5-8
+W~algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą.
+Na początku do kolejki zostaną przeniesione elementy z~głowy każdej listy.
+Jest oczywiste, że wśród tych elementów znajduje się najmniejszy element listy wynikowej.
+Aby go uzyskać, wystarczy wywołać na kolejce operację \proc{Extract-Min}.
+Kolejnego elementu należy szukać wśród aktualnych węzłów kolejki lub w~głowie listy, do której początkowo należało usunięte przed chwilą minimum.
+Głowę tej listy, o~ile istnieje, przenosimy do kolejki.
+W~kolejnych iteracjach powtarzamy te operacje -- pobieramy najmniejszy element kolejki i~wstawiamy na listę wynikową, po czym uzupełniamy kolejkę głową listy, do której należał pobrany element, o~ile lista ta nie jest jeszcze pusta.
+Proces ten powtarzamy aż do opróżnienia kolejki, co następuje po przetworzeniu zawartości wszystkich list.
+Aby zachować kolejność niemalejącą na liście wynikowej, musimy wstawiać elementy na jej koniec, pamiętając wskaźnik do ogona tej listy.
+
+Podczas działania algorytmu wykonamy $n$ razy operację wstawienia węzła do kolejki zawierającej co najwyżej $k$ elementów i~tyleż samo operacji \proc{Extract-Min}.
+Otrzymujemy zatem górne oszacowanie $O(n\lg k)$ na czas działania algorytmu, przy założeniu, że kolejka priorytetowa została zaimplementowana w~oparciu o~kopiec typu min.

@@ -1,0 +1,26 @@
+\subchapter{Operacje rotacji}
+
+\exercise %13.2-1
+Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
+\begin{codebox}
+\Procname{$\proc{Right-Rotate}(T,x)$}
+\li	$y\gets\attrib{x}{left}$
+\li	$\attrib{x}{left}\gets\attrib{y}{right}$
+\li	$\attrib{\attrib{y}{right}}{p}\gets x$
+\li	$\attrib{y}{p}\gets\attrib{x}{p}$
+\li	\If $\attrib{x}{p}=\attrib{T}{nil}$
+\li		\Then $\attrib{T}{root}\gets y$
+\li		\Else
+			\If $x=\attrib{\attrib{x}{p}}{left}$
+\li				\Then $\attrib{\attrib{x}{p}}{left}\gets y$
+\li				\Else $\attrib{\attrib{x}{p}}{right}\gets y$
+				\End
+		\End
+\li	$\attrib{y}{right}\gets x$
+\li	$\attrib{x}{p}\gets y$
+\end{codebox}
+
+\exercise %13.2-2
+\exercise %13.2-3
+\exercise %13.2-4
+\exercise %13.2-5

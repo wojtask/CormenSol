@@ -1,0 +1,56 @@
+\problem{Własności notacji asymptotycznej} %3-4
+
+\subproblem %3-4(a)
+Fałsz.
+Niech np.\ $f(n)=n$ i~$g(n)=n^2$.
+Wtedy $f(n)=O(g(n))$, ale $g(n)\ne O(f(n))$.
+
+\subproblem %3-4(b)
+Fałsz.
+Jako kontrprzykład rozważmy $f(n)=n$ i~$g(n)=n^2$.
+Dla $n\ge1$ zachodzi wtedy
+\[
+	\min(f(n),g(n)) = f(n) \quad\text{oraz}\quad f(n)+g(n) = \Theta(g(n)) \ne \Theta(f(n)).
+\]
+
+\subproblem %3-4(c)
+Prawda.
+Z~faktu, że $f(n)=O(g(n))$, wynika $f(n)\le cg(n)$ dla $n\ge n_0$, gdzie $c$, $n_0>0$ są pewnymi stałymi.
+Z~założenia, że $\lg g(n)\ge1$ i~$f(n)\ge1$, otrzymujemy
+\[
+	0 \le \lg f(n) \le \lg c+\lg g(n) \le \lg c\lg g(n)+\lg g(n) = (\lg c+1)\lg g(n) = O(\lg g(n)).
+\]
+
+\subproblem %3-4(d)
+Fałsz.
+Niech $f(n)=2n$ oraz $g(n)=n$.
+Zachodzi $f(n)=O(g(n))$, jednak $2^{f(n)}\ne O\bigl(2^{g(n)}\bigr)$ (z~\refExercise{3.1-4}).
+
+\subproblem %3-4(e)
+Fałsz.
+Dla $f(n)=1/n$ mamy $f^2(n)=1/n^2$.
+Ponieważ nie istnieje żadna dodatnia stała $c$ spełniająca nierówność $1/n\le c/n^2$ dla dowolnie dużych $n$, to stąd $f(n)\ne O\bigl(f^2(n)\bigr)$.
+
+\subproblem %3-4(f)
+Prawda.
+Z~definicji notacji $O$, jeśli $f(n)=O(g(n))$, to istnieją stałe $c$, $n_0>0$, że dla każdego $n\ge n_0$ zachodzi $0\le f(n)\le cg(n)$.
+Dzieląc nierówność przez $c$, otrzymujemy $0\le f(n)/c\le g(n)$, przy czym $1/c>0$, a~więc $g(n)=\Omega(f(n))$.
+
+\subproblem %3-4(g)
+Fałsz.
+Niech np.\ $f(n)=2^n$.
+Wtedy $f(n/2)=2^{n/2}=\sqrt{2^n}$.
+Gdyby zachodziło $2^n=O\bigl(\!\sqrt{2^n}\bigr)$, to dla pewnej stałej $c>0$ i~odpowiednio dużych $n$ mielibyśmy $2^n\le c\sqrt{2^n}$.
+Ale wówczas $c\ge\sqrt{2^n}$ nie mogłoby być stałą.
+
+\subproblem %3-4(h)
+Prawda.
+Niech $h(n)=o(f(n))$.
+Wtedy, na podstawie definicji notacji $o$ mamy, że dla każdej stałej $c>0$ istnieje stała $n_0>0$ taka, że nierówności $0\le h(n)<cf(n)$ zachodzą dla wszystkich $n\ge n_0$.
+To znaczy, że
+\[
+	f(n) \le f(n)+o(f(n)) = f(n)+h(n) < (c+1)f(n).
+\]
+Ponieważ $c+1>1$, to można wyrażenie $f(n)+o(f(n))$ ograniczyć od góry przez $c_2f(n)$, wybierając np.\ $c_2=2$.
+Jego dolnym ograniczeniem jest $f(n)$, więc ustalamy $c_1=1$.
+Stałe $c_1$, $c_2$, $n_0$ spełniają założenia definicji notacji $\Theta$, więc wnioskujemy, że $f(n)+o(f(n))=\Theta(f(n))$.

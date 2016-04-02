@@ -1,0 +1,48 @@
+\problem{Testowanie układów VLSI} %4-6
+
+\subproblem %4-6(a)
+Niech $D$ i~$Z$ będą zbiorami, odpowiednio, układów dobrych i~układów złych.
+Podczas testowania każdy zły układ może twierdzić, że każdy inny układ ze zbioru $Z$ jest dobry, a~każdy układ ze zbioru $D$ jest zły.
+Z~kolei dobry układ może orzekać o~każdym układzie z~$Z$, że jest zły, natomiast o~każdym innym z~$D$, że jest dobry.
+Inaczej ujmując, zbiór $Z$ będzie wskazywał, że sam jest zbiorem układów dobrych, a~zbiór $D$ złych i~symetrycznie dla zbioru $D$.
+W~ogólności $Z$ może składać się z~podzbiorów układów, które będą twierdzić, że wyłącznie one są dobre.
+Nie da się natomiast rozdzielić w~taki sposób zbioru $D$, ponieważ jego układy zawsze orzekają prawdziwie.
+Aby zatem jednoznacznie wskazać zbiór dobrych układów, wymagane jest założenie, że $|D|>|Z|$.
+
+\subproblem %4-6(b)
+Potraktujmy wynik każdego testu dwóch układów jako parę $\langle a,b\rangle\in\{{\scriptstyle\rm D},{\scriptstyle\rm Z}\}^2$.
+Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza pozytywny wynik testu, a~${\scriptstyle\rm Z}$ -- negatywny.
+Możliwe jest uzyskanie jednego z~czterech wyników:
+\begin{itemize}
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$ -- oba układy są dobre albo oba są złe;
+	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$ -- tylko pierwszy z~układów jest zły;
+	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$ -- tylko drugi z~układów jest zły;
+	\item $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- co najmniej jeden z~układów jest zły.
+\end{itemize}
+
+Podzielmy zbiór układów na pary i~przetestujmy wzajemnie układy w~każdej takiej parze, wykonując przy tym $\lfloor n/2\rfloor$ testów.
+Zauważmy, że otrzymawszy dla pewnej pary wynik inny niż $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, możemy ją odrzucić, gdyż co najmniej jeden układ z~tej pary jest zły i~wśród nieodrzuconych układów będzie nadal więcej dobrych niż złych.
+Dostaniemy w~rezultacie od jednej do $\lfloor n/2\rfloor$ par o~tej własności, że w~każdej z~nich oba układy są dobre albo oba są złe.
+Odrzucając zatem po jednym układzie z~każdej pozostawionej pary, nadal zachowujemy własność o~większej liczbie dobrych układów w~pozostawionym zbiorze układów, którego rozmiar wynosi co najwyżej $\lceil n/2\rceil$.
+
+Powyżej opisany proces przeprowadzamy rekurencyjnie, dostając w~końcu zbiór jednoelementowy, który na mocy założenia zawiera dobry układ.
+
+\subproblem %4-6(c)
+Wykorzystując wynik poprzedniego punktu, dostajemy następującą rekurencję opisującą liczbę testów koniecznych do znalezienia jednego dobrego układu w~pesymistycznym przypadku (tzn.\ kiedy każda para układów zwraca wynik $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$):
+\[
+	T(n) =
+	\begin{cases}
+		\Theta(1), & \text{jeśli $n=1$}, \\
+		T(\lceil n/2\rceil)+\lfloor n/2\rfloor, & \text{jeśli $n>1$}.
+	\end{cases}
+\]
+Stosując twierdzenie o~rekurencji uniwersalnej, dostajemy rozwiązanie: $T(n)=\Theta(n)$.
+Wynik ten jest prawdziwy także w~przypadku optymistycznym -- wówczas dobry układ znajdujemy w~jednym zejściu rekurencyjnym po uprzednim wykonaniu $\Theta(n)$ testów.
+
+Potrafimy wyznaczyć dobry układ $u$ -- wykorzystajmy go więc do znalezienia kolejnych.
+Testujemy tenże układ z~pozostałymi $n-1$.
+Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje.
+Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry.
+Uzyskując wynik $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$.
+Wynika stąd, że po wykonaniu $n-1$ takich testów wyznaczymy pozostałe dobre układy.
+A~zatem łączna liczba testów wymaganych do zidentyfikowania wszystkich dobrych układów wynosi $\Theta(n)$.

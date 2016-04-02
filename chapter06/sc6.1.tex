@@ -1,0 +1,34 @@
+\subchapter{Kopce}
+
+\exercise %6.1-1
+Korzystamy z~faktu, że kopiec stanowi prawie pełne drzewo binarne, tzn.\ takie, w~którym wszystkie poziomy, być może z~wyjątkiem najniższego, zawierają komplet węzłów.
+Jeśli drzewo to ma wysokość $h$, to maksymalnie może mieć $2^{h+1}-1$ węzłów (gdy jest drzewem pełnym), a~minimalnie $(2^h-1)+1=2^h$ (gdy jego najniższy poziom składa się z~tylko jednego węzła).
+
+\exercise %6.1-2
+Niech $h$ oznacza wysokość kopca.
+Z~poprzedniego zadania mamy, że $2^h\le n<2^{h+1}$, skąd dostajemy $h\le\lg n<h+1$.
+Ponieważ $h$ jest całkowite, to $h=\lfloor\lg n\rfloor$.
+
+\exercise %6.1-3
+Wartość korzenia każdego poddrzewa w~kopcu typu max jest równa lub większa od wartości obu synów tego korzenia (o~ile istnieją).
+Dla dowolnego poddrzewa $T$ można łatwo dowieść przez indukcję względem jego wysokości, że wartości węzłów wchodzących w~skład ścieżek od liści w~górę $T$, tworzą ciągi niemalejące.
+Ponieważ wszystkie takie ścieżki kończą się w~korzeniu poddrzewa $T$, to musi on mieć największą wartość w~$T$.
+
+\exercise %6.1-4
+Analizując ścieżki od liści do korzenia kopca jak w~poprzednim zadaniu, stwierdzamy, że najmniejsza wartość w~każdej takiej ścieżce znajduje się w~jej pierwszym elemencie.
+Ponieważ warunek kopca typu max nie narzuca żadnego ograniczenia w~zbiorze liści, to każdy z~nich może stanowić najmniejszą wartość kopca.
+
+\exercise %6.1-5
+Powtarzając rozumowanie z~\refExercise{6.1-3} dla kopców typu min, wnioskujemy, że korzeń takiego kopca stanowi jego najmniejszy element, czyli zajmuje pierwszą pozycję w~posortowanej (niemalejąco) tablicy $A$.
+Dla każdego indeksu tablicy $i$ z~wyjątkiem pierwszego zachodzi $\proc{Parent}(i)<i$, a~więc $A[\proc{Parent}(i)]\le A[i]$.
+Własność kopca typu min jest zatem spełniona i~tablica posortowana $A$ stanowi taki kopiec.
+
+\exercise %6.1-6
+Potraktujmy ten ciąg jak tablicę $A$.
+Elementy na pozycjach $i=9$ oraz $\proc{Parent}(i)=4$ nie spełniają własności $A[\proc{Parent}(i)]\ge A[i]$, zatem tablica $A$ nie jest kopcem typu max.
+
+\exercise %6.1-7
+Element kopca na pozycji $i$ nie jest liściem wtedy i~tylko wtedy, gdy istnieje jego lewy syn.
+W~kopcu o~$n$ elementach wierzchołki wewnętrzne znajdują się zatem na pozycjach $i$ takich, że $\proc{Left}(i)\le n$.
+Warunek ten sprowadza się do nierówności $2i\le n$, skąd $i\le\lfloor n/2\rfloor$, bo $i$ jest całkowite.
+Pozostałe wierzchołki są liśćmi i~zajmują pozycje $\lfloor n/2\rfloor+1\twodots n$.

@@ -1,0 +1,44 @@
+\subchapter{Analiza algorytmów}
+
+\exercise %2.2-1
+\[
+	n^3\!/1000-100n^2-100n+3 = \Theta(n^3)
+\]
+
+\exercise %2.2-2
+Poniższy algorytm implementuje sortowanie przez wybieranie:
+\begin{codebox}
+\Procname{$\proc{Selection-Sort}(A)$}
+\li	$n\gets\attrib{A}{length}$
+\li	\For $j\gets1$ \To $n-1$ \label{li:selection-sort-for-begin}
+\li		\Do
+			$\id{min}\gets j$
+\li			\For $i\gets j+1$ \To $n$
+\li				\Do
+					\If $A[i]<A[\id{min}]$
+\li						\Then $\id{min}\gets i$
+						\End
+				\End
+\li			zamień $A[\id{min}]\leftrightarrow A[j]$
+		\End \label{li:selection-sort-for-end}
+\end{codebox}
+Zewnętrzna pętla algorytmu zachowuje następujący niezmiennik:
+\begin{quote}
+Na początku każdej iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:selection-sort-for-begin}}{\ref{li:selection-sort-for-end}} podtablica $A[1\twodots j-1]$ jest posortowana niemalejąco i~zawiera $j-1$ najmniejszych elementów znajdujących się początkowo w~tablicy $A$.
+\end{quote}
+
+Nie trzeba wykonywać $n$ iteracji pętli \kw{for} z~wierszy \doubledash{\ref{li:selection-sort-for-begin}}{\ref{li:selection-sort-for-end}}, gdyż po jej zakończeniu (po $n-1$ iteracjach) fragment $A[1\twodots n-1]$ zawiera $n-1$ najmniejszych elementów tablicy $A$ w~porządku niemalejącym, zatem element $A[n]$ jest większy lub równy względem każdego elementu z~podtablicy $A[1\twodots n-1]$, a~to oznacza, że cała tablica pozostaje posortowana niemalejąco.
+
+Przeprowadzanych jest $n-1$ iteracji zewnętrznej pętli \kw{for}, a~wewnętrzna pętla \kw{for} iteruje po wszystkich elementach aktualnie nieposortowanego fragmentu tablicy, szukając jego minimalnego elementu.
+Łącznie wykonywanych jest więc
+\[
+	\sum_{j=1}^{n-1}(n-j) = \sum_{i=1}^{n-1}j = \frac{n(n-1)}{2}
+\]
+iteracji wewnętrznej pętli \kw{for}, zatem zarówno pesymistyczny, jak i~optymistyczny czas działania algorytmu wynosi $\Theta(n^2)$.
+
+\exercise %2.2-3
+Wykorzystując wynik \refExercise{C.3-2}, mamy, że w~średnim przypadku należy sprawdzić $(n+1)/2$ elementów tablicy, zatem średni czas działania algorytmu wyszukiwania liniowego wynosi $\Theta(n)$.
+W~przypadku pesymistycznym procedura sprawdza wszystkie $n$ elementów, nie znajdując szukanego, a~więc otrzymujemy ten sam wynik.
+
+\exercise %2.2-4
+Na początku działania algorytmu można wykrywać egzemplarze danych wejściowych, które stanowią dla niego przypadek optymistyczny i~zwracać dla nich wyniki, które zostały przygotowane przed uruchomieniem algorytmu.

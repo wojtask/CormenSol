@@ -1,0 +1,53 @@
+\subchapter{Sortowanie pozycyjne}
+
+\exercise %8.3-1
+Przebieg działania procedury \proc{Radix-Sort} dla podanej listy słów został przedstawiony na rys.\ \ref{fig:8.3-1}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_8.3-1}
+	\end{center}
+	\caption{Działanie procedury \proc{Radix-Sort} dla zbioru słów trzyliterowych.} \label{fig:8.3-1}
+\end{figure}
+
+\exercise %8.3-2
+Algorytmami stabilnymi są sortowanie przez wstawianie i~sortowanie przez scalanie.
+W~pierwszym z~nich, wstawiając element $A[j]$ do podtablicy $A[1\twodots j-1]$, zatrzymujemy się na pierwszym elemencie z~tej podtablicy, który jest mniejszy lub równy od $A[j]$.
+Zatem elementy równe sobie nie zostaną wymieszane.
+Podobnie w~procedurze \proc{Merge}, jeśli porównywane elementy będą sobie równe, to do wynikowej tablicy zostanie wstawiony najpierw element z~tablicy $L$ i~dopiero potem ten z~tablicy $R$.
+Stabilność algorytmu wynika na podstawie indukcji po scalanych fragmentach.
+Natomiast zarówno heapsort, jak i~quicksort nie sortuje stabilnie -- przykładem danych wejściowych, które ilustrują ten fakt w~obu tych algorytmach, jest ciąg $A=\langle2,2,1\rangle$.
+
+Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można zapamiętywać z~każdym elementem jego początkową pozycję w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich początkowych pozycji.
+Do realizacji takiego podejścia wymagana jest dodatkowa pamięć rzędu $\Theta(n)$, gdzie $n$ jest długością sortowanej tablicy.
+Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyfikowanego sortowania, ponieważ przeprowadzenie dodatkowego testu odbywa się w~czasie stałym.
+
+\exercise %8.3-3
+Przeprowadzimy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych.
+Dla $d=1$ algorytm \proc{Radix-Sort} sprowadza się do wywołania pomocniczej procedury do posortowania pojedynczych cyfr, a~zatem poprawność algorytmu wynika z~poprawności pomocniczego sortowania.
+
+Załóżmy teraz, że $d>1$ i~że wywołanie algorytmu \proc{Radix-Sort} po $d-1$ fazach zwróciło tablicę elementów, które, obcięte do $d-1$ ostatnich pozycji, wyznaczają porządek niemalejący.
+Teraz elementy sortowane są względem pozycji $d$.
+Niech $a$ i~$b$ będą cyframi porównywanymi podczas tej fazy.
+Jeśli $a\ne b$, to niezależnie od pozostałych cyfr elementów, których częściami są $a$ i~$b$, elementy te zostaną ustawione w~odpowiedniej kolejności.
+Jeśli jednak $a=b$, to elementy nie zostaną zamienione miejscami, bo pomocnicza procedura sortuje stabilnie.
+Elementy pozostają jednak we właściwym porządku, bo jest on wyznaczony przez ich $d-1$ ostatnich pozycji, a~te, na mocy założenia indukcyjnego, zostały poprawnie uporządkowane w~poprzednich fazach algorytmu.
+
+\exercise %8.3-4
+Każdą liczbę z~zakresu $0\twodots n^2-1$ można potraktować jak liczbę dwucyfrową w~systemie o~podstawie $n$.
+Liczby w~takiej postaci sortujemy, wywołując algorytm \proc{Radix-Sort} o~dwóch fazach.
+W~lemacie 8.3 mamy $d=2$ oraz $k=n$, zatem opisane sortowanie działa w~czasie $\Theta(2(n+n))=\Theta(n)$.
+
+\exercise %8.3-5
+Rozważmy sortowanie pozycyjne w~wersji intuicyjnej dla liczb trzycyfrowych.
+W~pierwszej fazie sortujemy po najbardziej znaczącej cyfrze wejściowego ciągu liczb.
+Podczas drugiej fazy dokonujemy sortowania w~obrębie fragmentów tablicy zawierających liczby o~tej samej najbardziej znaczącej cyfrze.
+W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich fragmentów, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach.
+Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego fragmentu utworzy się po 10 jeszcze mniejszych fragmentów o~poszczególnych kombinacjach dwóch pierwszych cyfr.
+Będzie zatem maksymalnie 100 takich podtablic, których posortowanie będzie wymagało 100 kolejnych faz.
+Łącznie algorytm wykona zatem 111 faz.
+
+Najwięcej tymczasowych podtablic pozostawionych do późniejszego przetworzenia istnieje wówczas, gdy rozpoczyna się sortowanie ostatnich cyfr.
+W~przypadku sortowania liczb trzycyfrowych jest łącznie 27 takich podtablic -- 9 powstałych po posortowaniu najbardziej znaczących cyfr, 9 kolejnych powstałych po posortowaniu środkowych cyfr w~obrębie pierwszego fragmentu i~9 takich, które czekają na posortowanie po najmniej znaczących cyfrach.
+
+W~ogólności do posortowania liczb \singledash{$d$}{cyfrowych} tym algorytmem wymaganych jest co najwyżej $\sum_{i=0}^{d-1}10^i=(10^d-1)/9$ faz.
+Najwięcej tymczasowych fragmentów istnieje w~momencie rozpoczęcia sortowania po najmniej znaczącej cyfrze -- jest ich wtedy maksymalnie $9d$.

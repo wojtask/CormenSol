@@ -1,0 +1,44 @@
+\subchapter{Relacje}
+
+\exercise %B.2-1
+Porządek częściowy to relacja zwrotna, antysymetryczna i~przechodnia.
+Zauważmy, że relacja $\subseteq$ w~$2^\mathbb{Z}$ posiada każdą z~tych własności.
+Dla zbioru $A\in2^\mathbb{Z}$ zachodzi $A\subseteq A$ (zwrotność).
+Dla zbiorów $A$, $B\in2^\mathbb{Z}$, jeśli zachodzi $A\subseteq B$ i~$B\subseteq A$, to $A=B$ (antysymetria).
+Wreszcie dla zbiorów $A$, $B$, $C\in2^\mathbb{Z}$, jeżeli $A\subseteq B$ i~$B\subseteq C$, to $A\subseteq C$ (przechodniość).
+Jednak w~$2^\mathbb{Z}$ porządek $\subseteq$ nie jest liniowy, bo np.\ $\{0,1\}\nsubseteq\{1,2\}$ i~$\{1,2\}\nsubseteq\{0,1\}$.
+
+\exercise %B.2-2
+Oznaczmy przez $R_n$, dla $n\in\mathbb{N}\setminus\{0\}$, relację ,,przystaje modulo $n$'':
+\[
+	R_n = \bigl\{\,\langle a,b\rangle\in\mathbb{Z}\times\mathbb{Z}\;:\;a\equiv b\!\!\!\pmod{n}\,\bigr\}.
+\]
+
+Dla dowolnego $a\in\mathbb{Z}$ mamy $a\equiv a\pmod{n}$, bo $a-a=0$, więc relacja $R_n$ jest zwrotna.
+Dla dowolnych $a$, $b\in\mathbb{Z}$, jeśli istnieje $q\in\mathbb{Z}$, że $a-b=qn$, to $b-a=-qn$, a~zatem z~faktu, że $a\equiv b\pmod{n}$ wynika, że $b\equiv a\pmod{n}$, co dowodzi symetrii $R_n$.
+Dla dowodu przechodniości wybierzmy dowolne $a$, $b$, $c\in\mathbb{Z}$ i~załóżmy, że zachodzi $a\equiv b\pmod{n}$ oraz $b\equiv c\pmod{n}$.
+Oznacza to, że istnieją $q$, $r\in\mathbb{Z}$, że $a-b=qn$ oraz $b-c=rn$.
+Stąd $a-c=a-b+b-c=qn+rn=(q+r)n$, a~zatem $a\equiv c\pmod{n}$.
+
+Na mocy powyższych faktów $R_n$ jest relacją równoważności i~dzieli zbiór $\mathbb{Z}$ na $n$ klas abstrakcji; \singledash{$i$}{ta} klasa, gdzie $i=1$, 2, \dots, $n$, jest zbiorem takich liczb całkowitych, które przy dzieleniu przez $n$ dają resztę $i-1$.
+
+\exercise %B.2-3
+\subexercise
+Relacja $R=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle c,c\rangle,\langle a,b\rangle,\langle b,a\rangle,\langle a,c\rangle,\langle c,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
+
+\subexercise
+Relacja porządku $\le$ określona w~zbiorze liczb rzeczywistych.
+
+\subexercise
+Relacja $R=\bigl\{\langle a,a\rangle,\langle b,b\rangle,\langle a,b\rangle,\langle b,a\rangle\bigr\}$ określona w~zbiorze $\{a,b,c\}$.
+
+\exercise %B.2-4
+Jeśli $R$ jest relacją równoważności, to dla każdego $s\in S$ zachodzi $s\in[s]$.
+Na mocy antysymetrii $R$, jeśli zachodzi $s'\,R\,s$ oraz $s\,R\,s'$, to $s=s'$, a~więc nie istnieją takie elementy $s'$, że $s'\in[s]\setminus\{s\}$.
+To oznacza, że klasy abstrakcji $S$ względem relacji $R$ są singletonami.
+
+\exercise %B.2-5
+Symetria i~przechodniość relacji zdefiniowane są za pomocą implikacji, do spełnienia których nie jest konieczne spełnienie ich poprzedników.
+Relacja pozostanie symetryczna i~przechodnia, jeśli w~zbiorze, w~którym jest określona, istnieje element niebędący w~relacji z~żadnym elementem z~tego zbioru.
+Zwrotność wymaga natomiast, aby każdy element był w~relacji z~samym sobą.
+Istnieją zatem relacje symetryczne i~przechodnie, ale nie zwrotne (patrz punkt (c) \refExercise{B.2-3}).

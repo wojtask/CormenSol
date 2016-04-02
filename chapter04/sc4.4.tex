@@ -1,0 +1,87 @@
+\subchapter{Dowód twierdzenia o~rekurencji uniwersalnej}
+
+\exercise %4.4-1
+Wykażemy metodą indukcji, że $n_j=\bigl\lceil n/b^j\bigr\rceil$.
+Z~definicji (4.12) bezpośrednio wynika prawdziwość tego wzoru dla $j=0$.
+Przyjmijmy zatem, że dla $j>0$ zachodzi $n_{j-1}=\bigl\lceil n/b^{j-1}\bigr\rceil$.
+Wykorzystując tożsamość (3.4), otrzymujemy
+\[
+	n_j = \lceil n_{j-1}/b\rceil = \bigl\lceil\bigl\lceil n/b^{j-1}\bigr\rceil/b\bigr\rceil = \bigl\lceil n/b^j\bigr\rceil,
+\]
+co należało pokazać.
+
+\exercise %4.4-2
+Zastąpmy drugi przypadek tw.\ 4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\Theta(n^{\log_ba}\lg^kn)$ dla $k\ge0$, to zachodzi $T(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$.
+Dla tak zmodyfikowanego twierdzenia przeprowadzimy dowody analogicznie zmodyfikowanych lematów 4.3 i~4.4 (oznaczonych poniżej przez 4.3$'$ i~4.4$'$).
+
+\begin{proof}[Dowód lematu 4.3\/$'$]
+	Przy założeniu, że $f(n)=\Theta(n^{\log_ba}\lg^kn)$, otrzymujemy
+	\[
+		f(n/b^j)=\Theta\bigl((n/b^j)^{\log_ba}\lg^k(n/b^j)\bigr)
+	\]
+	i~podstawiamy do wzoru (4.7):
+	\[
+		g(n) = \Theta\biggl(\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j}\biggr).
+	\]
+	Mamy dalej:
+	\begin{align*}
+		\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j} &= n^{\log_ba}\sum_{j=0}^{\log_bn-1}\biggl(\frac{a}{b^{\log_ba}}\biggr)^j\lg^k\frac{n}{b^j} \\
+		&= n^{\log_ba}\sum_{j=0}^{\log_bn-1}(\lg n-j\lg b)^k \\
+		&= n^{\log_ba}\cdot\Theta(\lg^{k+1}n) \\[1mm]
+		&= \Theta(n^{\log_ba}\lg^{k+1}n).
+	\end{align*}
+	Skorzystano ze wzoru (3.2), podstawiając $\lg n$ w~miejsce $n$, a~następnie z~tego, że
+	\[
+		\sum_{j=0}^{\log_bn-1}\Theta(\lg^kn) = \log_bn\cdot\Theta(\lg^kn) = \Theta(\lg^{k+1}n).
+	\]
+	Pokazano, że $g(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$, a~więc lemat jest prawdziwy.
+\end{proof}
+
+\begin{proof}[Dowód lematu 4.4\/$'$]
+	Wystarczy wykazać jedynie drugi przypadek, bo $f(n)=\Theta(n^{\log_ba}\lg^kn)$.
+Z~lematów 4.2 i~4.3$'$:
+	\[
+		T(n) = \Theta(n^{\log_ba})+\Theta(n^{\log_ba}\lg^{k+1}n) = \Theta(n^{\log_ba}\lg^{k+1}n),
+	\]
+	co należało udowodnić.
+\end{proof}
+
+Twierdzenie wynika bezpośrednio z~lematu 4.4$'$.
+
+\exercise %4.4-3
+\note{Aby udowodnić to wynikanie, musimy założyć dodatkowo, że\/ $c>0$ i~że funkcja\/ $f(n)$ jest asymptotycznie dodatnia.
+W~tw.\ 4.1 oba te warunki wynikają z~faktu, że\/ $f(n)=\Omega(n^{\log_ba+\epsilon})$.}
+
+\noindent Załóżmy, że dla danej funkcji asymptotycznie dodatniej $f(n)$ oraz stałych $a\ge1$, $b>1$, zachodzi warunek regularności, tzn.\ istnieje stała $0<c<1$ i~stała $n_0>0$, że dla każdego $n\ge n_0$ spełnione jest $af(n/b)\le cf(n)$.
+Przyjmiemy, że $n_0$ zostało wybrane w~taki sposób, że dla wszystkich $n\ge n_0/b$ funkcja $f(n)$ osiąga wartości dodatnie.
+Dla $n\ge n_0$ mamy
+\[
+	f(n) \ge (a/c)f(n/b),
+\]
+a~zatem, iterując tę nierówność, dostajemy
+\[
+	f(n) \ge (a/c)f(n/b) \ge (a/c)^2f(n/b^2) \ge \dots \ge (a/c)^if(n/b^i).
+\]
+Zakładamy, że nie można wykonać większej ilości iteracji, tzn.\ $n/b^{i-1}\ge n_0$ oraz $n/b^i<n_0$.
+Stąd $\log_b(n/n_0)<i\le\log_b(n/n_0)+1$, czyli, ze wzoru (3.3), $i=\lfloor\log_b(n/n_0)+1\rfloor$.
+Zachodzi więc
+\[
+	f(n) \ge (a/c)^{\lfloor\log_b(n/n_0)+1\rfloor}f\bigl(n/b^{\lfloor\log_b(n/n_0)+1\rfloor}\bigr).
+\]
+Zauważmy, że przy zadanych ograniczeniach na $a$ i~$c$, $a/c>1$, więc $f(n)$ musi być funkcją rosnącą dla $n\ge n_0/b$, skąd
+\[
+	f\bigl(n/b^{\lfloor\log_b(n/n_0)+1\rfloor}\bigr) > f(n/b^{\log_b(n/n_0)+1}) = f(n_0/b).
+\]
+Mamy następnie
+\begin{align*}
+	f(n) &> (a/c)^{\log_b(n/n_0)}\,f(n/b^{\log_b(n/n_0)+1}) \\[1mm]
+	&= \frac{(n/n_0)^{\log_ba}}{(n/n_0)^{\log_bc}}\,f(n_0/b) \\[1mm]
+	&= n^{\log_ba-\log_bc}\cdot n_0^{\log_bc-\log_ba}\cdot f(n_0/b).
+\end{align*}
+Dwa ostatnie czynniki powyższego wyrażenia są dodatnie i~niezależne od $n$, możemy więc potraktować ich iloczyn jako stałą $d>0$.
+Ponieważ $0<c<1$ oraz $b>1$, to $\log_bc<0$, przyjmijmy więc $\epsilon=-\log_bc$.
+Otrzymujemy zatem, że dla dowolnego $n\ge n_0$
+\[
+	f(n) > n^{\log_ba+\epsilon}\cdot d = \Omega(n^{\log_ba+\epsilon}),
+\]
+co należało wykazać.

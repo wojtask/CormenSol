@@ -1,0 +1,41 @@
+\problem{Adresowanie kwadratowe} %11-3
+\note{Krok 3 opisanego algorytmu wyszukiwania powinien mieć następującą treść:
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item Wykonaj\/ $j\gets j+1$.
+Jeśli\/ $j=m$, to tablica jest pełna, więc zakończ wyszukiwanie.
+W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kroku 2.
+\end{enumerate}
+}
+
+\subproblem %11-3(a)
+Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$, \dots, $\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$.
+Stąd mamy, że \singledash{$i$}{tą} sprawdzaną pozycją tablicy ($i=0$, 1, \dots, $m-1$) jest
+\[
+	\biggl(h(k)+\sum_{j=0}^ij\biggr)\bmod m = \biggl(h(k)+\frac{i(i+1)}{2}\biggr)\bmod m = \biggl(h(k)+\frac{i}{2}+\frac{i^2}{2}\biggr)\bmod m.
+\]
+Jest to zatem przykład adresowania kwadratowego, w~którym $c_1=c_2=1/2$.
+
+\subproblem %11-3(b)
+Niech $h'(k,i)=(h(k)+i/2+i^2\!/2)\bmod m$.
+Dowód sprowadza się do pokazania, że wyrazy ciągu $\langle h'(k,0),h'(k,1),\dots,h'(k,m-1)\rangle$ dla dowolnego klucza $k$ są parami różne.
+
+Załóżmy nie-wprost, że istnieje klucz $k$ oraz liczby całkowite $i$, $j$ spełniające $0\le i<j<m$ takie, że $h'(k,i)=h'(k,j)$.
+Wówczas
+\[
+	h(k)+i(i+1)/2 \equiv h(k)+j(j+1)/2 \pmod m,
+\]
+co daje
+\[
+	j(j+1)/2-i(i+1)/2 \equiv 0 \pmod m.
+\]
+Na mocy tożsamości $j(j+1)/2-i(i+1)/2=(j-i)(j+i+1)/2$ dostajemy
+\[
+	(j-i)(j+i+1)/2 \equiv 0 \pmod m.
+\]
+Z~ostatniego wzoru wynika, że istnieje całkowite $r$, dla którego zachodzi $(j-i)(j+i+1)=2rm$.
+Przy założeniu, że $m$ jest potęgą 2, $m=2^p$, sprowadza się to do postaci $(j-i)(j+i+1)=r2^{p+1}$.
+Nietrudno zauważyć, że tylko jeden z~czynników, $j-i$ albo $j+i+1$, jest parzysty, zatem $2^{p+1}$ dzieli tylko jeden z~nich.
+Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$.
+Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$.
+Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.

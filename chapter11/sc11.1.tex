@@ -1,0 +1,54 @@
+\subchapter{Tablice z~adresowaniem bezpośrednim}
+
+\exercise %11.1-1
+Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zwracając element z~pierwszej niepustej pozycji.
+Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}.
+Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
+
+\exercise %11.1-2
+Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie.
+Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku.
+Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
+
+\exercise %11.1-3
+W~naszej implementacji elementy przechowywane w~tablicy $T$, oprócz klucza i~dodatkowych danych, zawierać będą wskaźniki \id{prev} i~\id{next}, dzięki którym elementy będą mogły zostać uszeregowane w~listy dwukierunkowe.
+Komórka o~indeksie $k$ w~tablicy $T$ będzie zawierać głowę listy elementów o~kluczu $k$ znajdujących się aktualnie w~tablicy albo \const{nil}, jeżeli lista ta będzie pusta.
+
+Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy znajdującej się w~$T[\attrib{x}{key}]$.
+Ponieważ operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy w~$T[\attrib{x}{key}]$.
+Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$.
+Każda z~opisanych operacji działa w~czasie $\Theta(1)$.
+
+Opisaną strukturę danych można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
+
+\exercise %11.1-4
+\note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
+
+\noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$.
+Tablicę $S$ będziemy traktować jak stos elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$.
+Rozmiar tablicy $S$, jaki ustalimy podczas jej tworzenia, określa pojemność ogromnej tablicy -- próba umieszczenia w~tej strukturze większej ilości elementów zakończy się błędem nadmiaru wykrywanym przez odpowiednią implementację operacji \proc{Push}.
+
+Tablice $S$ i~$T$ weryfikują się wzajemnie.
+To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera element o~kluczu $k$.
+Innymi słowy, zachodzą zależności: $1\le T[k]\le\attrib{S}{top}$, $\attrib{S[T[k]]}{key}=k$ oraz $T[\attrib{S[j]}{key}]=j$.
+
+Inicjowanie tablicy $T$ sprowadza się do utworzenia tablicy $S$.
+Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$\attrib{S[T[k]]}{key}=k$.
+Jeśli warunki te są spełnione, to zwrócony zostanie element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
+W~celu wstawienia elementu $x$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy umieścić $x$ na stosie $S$, po czym zaktualizować $T[\attrib{x}{key}]$:
+\begin{codebox}
+\Procname{$\proc{Huge-Array-Insert}(S,T,x)$}
+\li	$\proc{Push}(S,x)$
+\li	$T[\attrib{x}{key}]\gets\attrib{S}{top}$
+\end{codebox}
+Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu elementu usuniętego ze szczytu stosu $S$ na pozycję $T[k]$ w~tym stosie oraz aktualizacji odpowiedniej wartości w~tablicy $T$.
+Dokładniej, operacja ta sprowadza się do poniższego pseudokodu:
+\begin{codebox}
+\Procname{$\proc{Huge-Array-Delete}(S,T,x)$}
+\li	$k\gets\attrib{x}{key}$
+\li	$y\gets\proc{Pop}(S)$
+\li	$S[T[k]]\gets y$
+\li	$T[\attrib{y}{key}]\gets T[k]$
+\end{codebox}
+
+Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element znajdujący się w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.

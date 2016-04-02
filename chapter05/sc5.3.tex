@@ -1,0 +1,76 @@
+\subchapter{Algorytmy randomizowane}
+
+\exercise %5.3-1
+Oto zmodyfikowana procedura \proc{Randomize-In-Place}:
+\begin{codebox}
+\Procname{$\proc{Randomize-In-Place}'(A)$}
+\li	$n\gets\attrib{A}{length}$
+\li	zamień $A[1]\leftrightarrow A[\proc{Random}(1,n)]$
+\li	\For $i\gets2$ \To $n$
+\li		\Do zamień $A[i]\leftrightarrow A[\proc{Random}(i,n)]$
+		\End
+\end{codebox}
+
+Treść niezmiennika pozostaje taka sama (z~wyjątkiem fragmentu, który podaje linie kodu zawierające ciało pętli).
+Modyfikacji wymaga jedynie dowód jego pierwszej własności.
+\begin{description}
+	\item[Inicjowanie:] Gdy $i=2$, niezmiennik pętli mówi, że dla każdej \singledash{1}{permutacji} fragment tablicy $A[1\twodots1]$ zawiera tę permutację z~prawdopodobieństwem $(n-1)!/n!=1/n$.
+Podtablica $A[1\twodots1]$ stanowi tylko jeden element $A[1]$, który z~prawdopodobieństwem $1/n$ jest pewnym ustalonym elementem spośród $n$ elementów tablicy.
+A~więc niezmiennik jest spełniony przed pierwszą iteracją.
+\end{description}
+
+\exercise %5.3-2
+\note{Przedstawiony w~treści zadania algorytm jest podany niepoprawnie, ponieważ wynik wywołania\/ $\proc{Random}(i+1,n)$ jest niezdefiniowany, gdy\/ $i$ przyjmuje wartość\/ $n$.
+Pętla \kw{for} w~tej procedurze powinna iterować po wszystkich\/ $i$ od\/ $1$ do\/ $n-1$.}
+
+\noindent Algorytm ten nie działa zgodnie z~zamierzeniem.
+Jako przykład weźmy dowolną tablicę o~$n=3$ elementach.
+Istnieje $n!-1=5$ permutacji tej tablicy różnych niż identycznościowa.
+Pętla \kw{for} w~pierwszej iteracji zamienia pierwszy element tablicy z~losowo wybranym z~pozostałych dwóch.
+W~drugiej iteracji może zostać wybrana tylko jedna wartość na drugi element.
+Za pomocą tej procedury jesteśmy więc w~stanie utworzyć tylko dwie permutacje wejściowej tablicy.
+
+\exercise %5.3-3
+Zauważmy, że kolejne wywołania generatora liczb losowych w~procedurze \proc{Permute-With-All} generują jeden z~$n^n$ możliwych ciągów pozycji tablicy, podczas gdy istnieje $n!$ możliwych wyników procedury.
+Załóżmy, że $n>2$ i~że procedura generuje każdą permutację z~jednakowym prawdopodobieństwem.
+A~zatem każdej permutacji na wyjściu odpowiada stała liczba $c$ ciągów indeksów, czyli $n^n=cn!$.
+W~tym wzorze $n-1$ dzieli prawą stronę, a~więc powinno dzielić także lewą.
+Ale to nie jest prawdą, gdyż ze wzoru (A.5) dla $x=n$ mamy
+\[
+    \sum_{k=0}^{n-1}n^k = \frac{n^n-1}{n-1},
+\]
+skąd dostajemy
+\[
+    n^n = (n-1)\sum_{k=0}^{n-1}n^k+1,
+\]
+czyli $n^n$ daje resztę 1 przy dzieleniu przez $n-1$.
+Na podstawie otrzymanej sprzeczności wnioskujemy, że procedura \proc{Permute-With-All} nie generuje permutacji losowych zgodnie z~rozkładem jednostajnym.
+
+\exercise %5.3-4
+Na początku działania procedury losowana jest liczba \id{offset}, o~jaką zostaną przesunięte elementy tablicy $A$ cyklicznie w~prawo.
+Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset})\bmod n$ w~tablicy $B$.
+Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że element $A[i]$ znajdzie się na pewnej ustalonej pozycji w~$B$, są równe $1/n$.
+
+Ponieważ nie jest zmieniana wzajemna kolejność elementów, to nie każdą permutację można otrzymać w~wyniku działania tej procedury -- na przykład nie dostaniemy nigdy permutacji będącej odwróceniem tablicy wejściowej, o~ile jej rozmiar jest większy niż 2.
+
+\exercise %5.3-5
+Spróbujmy skonstruować tablicę $P$, w~której wszystkie elementy są różne.
+Na pierwszy element tej tablicy możemy wybrać jedną z~$n^3$ liczb, drugi element może przyjąć jedną z~$n^3-1$ pozostałych wartości, trzeci -- jedną z~$n^3-2$ pozostałych itd.
+Ogólnie, \singledash{$i$}{ty} z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach.
+A~zatem prawdopodobieństwo tego, że wszystkie elementy tablicy $P$ są różne, wynosi
+\[
+	\prod_{i=1}^n\frac{n^3-i+1}{n^3} = \prod_{i=0}^{n-1}\frac{n^3-i}{n^3} = \prod_{i=0}^{n-1}\biggl(1-\frac{i}{n^3}\biggr) > \prod_{i=0}^{n-1}\biggl(1-\frac{n}{n^3}\biggr) = \biggl(1-\frac{1}{n^2}\biggr)^n.
+\]
+Wykorzystując teraz fakt, że ciąg $e_n={(1-1/n)}^n$ jest rosnący, otrzymujemy, że
+\[
+	\biggl(1-\frac{1}{n^2}\biggr)^{n^2} \ge \biggl(1-\frac{1}{n}\biggr)^n
+\]
+i~po zastosowaniu pierwiastka \singledash{$n$}{tego} stopnia do obu stron nierówności otrzymujemy żądany wynik.
+
+\exercise %5.3-6
+Gdy dwa priorytety powtarzają się, czyli $P[i]=P[j]$ dla pewnych $i\ne j$, to deterministyczny algorytm sortujący szereguje odpowiadające im elementy $A[i]$ oraz $A[j]$ zawsze w~tej samej kolejności.
+W~skrajnym przypadku, jeśli wszystkie priorytety w~$P$ są identyczne, to generowana będzie tylko jedna permutacja tablicy $A$.
+
+Rozwiązaniem problemu powtarzających się priorytetów jest użycie randomizowanego algorytmu sortującego wykorzystującego porównania.
+Za każdym razem, gdy porównywane elementy $x$ i~$y$ okażą się równe, algorytm ten będzie losowo -- z~równym prawdopodobieństwem -- wybierał, czy potraktować relację między nimi jako $x<y$, czy jako $x>y$.
+Dzięki temu każda wejściowa tablica priorytetów z~punktu widzenia algorytmu sortowania będzie zawierała liczby parami różne, których każda permutacja może pojawić się na wejściu z~jednakowym prawdopodobieństwem.

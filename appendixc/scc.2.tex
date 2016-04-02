@@ -1,0 +1,160 @@
+\subchapter{Prawdopodobieństwo}
+
+\exercise %C.2-1
+Utwórzmy skończoną lub przeliczalną rodzinę zdarzeń $\{C_1,C_2,\dots\}$, gdzie
+\[
+	C_i = A_i\setminus\bigcup_{j=1}^{i-1}A_j
+\]
+dla każdego $i=1$, 2, \dots.
+Korzystając z~faktu, że $\bigcup_iA_i = \bigcup_iC_i$ oraz z~tego, że każde dwa zdarzenia z~rodziny $\{C_1,C_2,\dots\}$ wzajemnie się wykluczają, otrzymujemy
+\[
+	\Pr\biggl(\bigcup_iA_i\biggr) = \Pr\biggl(\bigcup_iC_i\biggr) = \sum_i\Pr(C_i).
+\]
+Ponieważ $\Pr(C_i)\le\Pr(A_i)$ dla każdego $i=1$, 2, \dots, to prawdą jest, że
+\[
+	\Pr\biggl(\bigcup_iA_i\biggr) \le \sum_i\Pr(A_i).
+\]
+
+\exercise %C.2-2
+Zdefiniujmy \singledash{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób.
+Pierwszy symbol tego słowa będzie oznaczać wynik rzutu monetą profesora Rosencrantza, drugi symbol -- wynik rzutu pierwszą monetą profesora Guildensterna, a~trzeci -- wynik rzutu jego drugą monetą, przy czym $\scriptstyle\rm O$ oznacza uzyskanie orła, a~$\scriptstyle\rm R$ -- uzyskanie reszki.
+Tworzymy przestrzeń zdarzeń elementarnych:
+\[
+	S = \{{\scriptstyle\rm OOO},{\scriptstyle\rm OOR},{\scriptstyle\rm ORO},{\scriptstyle\rm ORR},{\scriptstyle\rm ROO},{\scriptstyle\rm ROR},{\scriptstyle\rm RRO},{\scriptstyle\rm RRR}\}.
+\]
+Każde ze zdarzeń z~$S$ zachodzi z~prawdopodobieństwem równym $1/8$, w~szczególności zdarzenie $\scriptstyle\rm ORR$ oznaczające wyrzucenie przez profesora Rosencrantza większej ilości orłów od przeciwnika.
+
+\exercise %C.2-3
+Oznaczmy zdarzenia:
+\begin{itemize}
+	\item[$A$] -- numer drugiej karty jest większy od numeru pierwszej karty,
+	\item[$B$] -- numer trzeciej karty jest większy od numeru drugiej karty.
+\end{itemize}
+Jeśli numer drugiej wybranej karty wynosi $k$, to liczba zdarzeń sprzyjających $A$ wynosi $k-1$, a~liczba zdarzeń sprzyjających $B$ wynosi $10-k$.
+Mamy obliczyć $\Pr(A\cap B)$.
+Korzystając z~reguły iloczynu, dostajemy, że liczba zdarzeń sprzyjających $A\cap B$ wynosi
+\[
+    \sum_{k=1}^{10}(k-1)(10-k) = 120.
+\]
+Liczbą możliwych trójek kart wybranych spośród dziesięciu jest $10!/7!=720$ (liczba wszystkich \singledash{3}{permutacji} zbioru \singledash{10}{elementowego}).
+Dostajemy zatem $\Pr(A\cap B)=120/720=1/6$.
+
+\exercise %C.2-4
+Ponieważ $0<a<b$, to $0<a/b<1$, więc część ułamkowa rozwinięcia binarnego ilorazu $a/b$ jest ciągiem zer i~jedynek $\beta_1,\beta_2,\dots$ zawierającym co najmniej jedno zero i~co najmniej jedną jedynkę oraz spełniającym równość
+\[
+    \frac{a}{b} = \sum_{i=1}^\infty\frac{\beta_i}{2^i}.
+\]
+
+Będziemy rzucać monetą i~tworzyć nowy ciąg zer i~jedynek $\alpha_1,\alpha_2,\dots$, w~zależności od wyniku \singledash{$i$}{tego} rzutu, dla orła przyjmując $\alpha_i=0$, a~dla reszki $\alpha_i=1$.
+Rzuty wykonujemy, dopóki zachodzi $\alpha_i=\beta_i$.
+Natychmiast po wystąpieniu pierwszej różnicy kończymy proces i~zwracamy wynik ostatnio wykonanego rzutu.
+Dokładniej, jeśli $k$ jest najmniejszym indeksem, dla którego $\alpha_k\ne\beta_k$, to zwrócimy orła, jeżeli $\alpha_k=0$, a~reszkę w~przeciwnym przypadku.
+
+Sprawdzimy teraz, ile wynosi prawdopodobieństwo zwrócenia orła.
+Wynik każdego rzutu monetą nie zależy od wyników pozostałych rzutów, zatem szanse uzyskania dokładnie $k-1$ rezultatów zgodnych z~kolejnymi bitami części ułamkowej $a/b$, po czym jednej niezgodności, są równe $1/2^{k-1}\cdot1/2=1/2^k$.
+Stąd mamy, że orzeł zostanie zwrócony z~prawdopodobieństwem równym
+\[
+    \sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{\substack{k=1,2,\dots\\\beta_k=0}}\!\frac{0}{2^k}+\sum_{\substack{k=1,2,\dots\\\beta_k=1}}\!\frac{1}{2^k} = \sum_{k=1}^\infty\frac{\beta_k}{2^k} = \frac{a}{b}.
+\]
+
+Oczekiwana liczba rzutów monetą potrzebnych do wyznaczenia wyniku jest oczekiwaną liczbą rzutów, aż do uzyskania pierwszej niezgodności między wynikiem rzutu a~odpowiednim bitem rozwinięcia binarnego części ułamkowej liczby $a/b$.
+Jeśli przyjmiemy, że sukcesem jest wynik rzutu monetą niezgodny z~bieżącym bitem rozwinięcia, to liczba potrzebnych rzutów $n$ zanim pojawi się pierwszy sukces jest zmienną losową $X$ o~rozkładzie geometrycznym.
+Prawdopodobieństwo sukcesu wynosi $p=1/2$, więc ze wzoru (C.31) otrzymujemy $\E(X)=1/p=2$.
+Widać zatem, że oczekiwana liczba rzutów monetą w~opisanej procedurze jest stała.
+
+\exercise %C.2-5
+Korzystając z~obserwacji, że $(A\cap B)\cup(\overline{A}\cap B)=B$ oraz z~tego, że zdarzenia $A\cap B$ i~$\overline{A}\cap B$ wzajemnie się wykluczają, otrzymujemy
+\[
+	\Pr(A\mid B)+\Pr(\overline{A}\mid B) = \frac{\Pr(A\cap B)}{\Pr(B)}+\frac{\Pr(\overline{A}\cap B)}{\Pr(B)} = \frac{\Pr(B)}{\Pr(B)} = 1.
+\]
+
+\exercise %C.2-6
+Dowodzimy przez indukcję względem liczby zdarzeń $n$.
+Dla $n=1$ dowód jest trywialny, załóżmy zatem, że $n\ge2$.
+Otrzymujemy
+\begin{align*}
+	\Pr\biggl(\bigcap_{i=1}^nA_i\biggr) &= \Pr\biggl(A_n\cap\bigcap_{i=1}^{n-1}A_i\biggr) \\
+	&= \Pr\biggl(\bigcap_{i=1}^{n-1}A_i\biggr)\Pr\biggl(A_n\biggm|\bigcap_{i=1}^{n-1}A_i\biggr) \\
+	&= \Pr(A_1)\Pr(A_2\mid A_1)\Pr(A_3\mid A_1\cap A_2)\dots\Pr\biggl(A_n\biggm|\bigcap_{i=1}^{n-1}A_i\biggr).
+\end{align*}
+Druga równość wynika z~definicji prawdopodobieństwa warunkowego, a~trzecia -- z~założenia indukcyjnego.
+
+\exercise %C.2-7
+Niech $n\ge3$ i~niech $S=\{s_1,s_2,\dots,s_{n^2}\}$ będzie przestrzenią zdarzeń, przy czym $\Pr(s_i)=1/n^2$ dla każdego $i=1$, 2, \dots, $n^2$.
+Pokażemy teraz, jak skonstruować zdarzenia $A_1$, $A_2$, \dots, $A_n\subseteq S$, które spełniają warunek z~treści zadania.
+
+Będziemy dążyć do tego, by dla każdych indeksów $1\le i_1$, $i_2$, $i_3\le n$, zachodziło $|A_{i_1}\cap A_{i_2}|=1$ oraz $|A_{i_1}\cap A_{i_2}\cap A_{i_3}|=0$.
+Jest dokładnie $n(n-1)/2$ przecięć $A_i\cap A_j$, gdzie $1\le i<j\le n$.
+Wybierzmy zatem tyle samo zdarzeń elementarnych i~umieśćmy po jednym w~każdym takim przecięciu, tzn.\ dane zdarzenie elementarne będzie wchodzić w~skład obu zdarzeń tworzących dane przecięcie.
+Każde zdarzenie $A_i$ składa się teraz z~$n-1$ zdarzeń elementarnych i~spełnione są powyższe warunki dotyczące rozmiarów przecięć.
+Spośród pozostałych $n(n+1)/2$ zdarzeń elementarnych wybieramy jeszcze $n$ i~umieszczamy po jednym w~każdym zdarzeniu $A_i$.
+
+Z~opisanej konstrukcji zdarzeń $A_1$, $A_2$, \dots, $A_n$ wynika, że $|A_i|=n$, czyli $\Pr(A_i)=1/n$ dla $i=1$, 2, \dots, $n$, a~zatem
+\[
+	\Pr(A_{i_1}\cap A_{i_2}) = \frac{1}{n^2} = \Pr(A_{i_1})\Pr(A_{i_2})
+\]
+dla wszystkich $1\le i_1<i_2\le n$ oraz
+\[
+	\Pr\biggl(\bigcap_{j=1}^kA_{i_j}\biggr) = 0 \ne \prod_{j=1}^k\Pr(A_{i_j})
+\]
+dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$, \dots, $i_k\le n$.
+Zdarzenia $A_1$, $A_2$, \dots, $A_n$ są więc parami niezależne, ale żaden ich \singledash{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
+
+\exercise %C.2-8
+Rozważmy pewną grupę 300 osób, z~których 100 osiągnęło już wiek 50 lat.
+Wśród młodszych osób jest 22 programistów i~15 matematyków, przy czym tylko 5 osób jednocześnie programuje i~zajmuje się matematyką.
+W~skład grupy seniorów wchodzi 8 programistów oraz 9 matematyków, a~3 jednocześnie jest programistami i~matematykami.
+Rys.\ \ref{fig:C.2-8} stanowi ilustrację przedstawionego opisu.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_c.2-8}
+	\end{center}
+	\caption{Diagramy Venna ilustrujące rozważaną grupę ludzi.
+Liczby w~poszczególnych obszarach oznaczają liczby osób o~danej profesji lub z~danej grupy wiekowej.} \label{fig:C.2-8}
+\end{figure}
+
+Wybieramy losowo jedną osobę z~całej grupy.
+Oznaczmy następujące zdarzenia:
+\begin{itemize}
+	\item[$A$] -- wybrano osobę w~wieku powyżej 50 lat,
+	\item[$B$] -- wybrano programistę,
+	\item[$C$] -- wybrano matematyka.
+\end{itemize}
+Ich prawdopodobieństwa wynoszą:
+\[
+	\Pr(A) = \frac{1}{3}, \quad \Pr(B) = \frac{1}{10}, \quad \Pr(C) = \frac{2}{25}.
+\]
+Zauważmy, że zdarzenia $A$ i~$B$ nie są niezależne, ponieważ
+\[
+	\Pr(A\cap B) = \frac{2}{75} \ne \frac{1}{30} = \Pr(A)\Pr(B).
+\]
+Są jednak warunkowo zależne od zdarzenia $C$:
+\[
+	\Pr(A\cap B\mid C) = \frac{1}{8} = \frac{3}{8}\cdot\frac{1}{3} = \Pr(A\mid C)\Pr(B\mid C).
+\]
+
+\exercise %C.2-9
+Rozważmy zdarzenie $A$ oznaczające, że wybraliśmy zasłonę, za którą znajduje się nagroda.
+Oczywiście $\Pr(A)=1/3$ i~ze wzoru Bayesa (C.17) wynika, że prawdopodobieństwo wygranej $W$ wynosi
+\[
+	\Pr(W) = \Pr(W\mid A)\Pr(A)+\Pr(W\mid\overline{A})\Pr(\overline{A}).
+\]
+Obliczmy wartość powyższego prawdopodobieństwa w~zależności od podjętej decyzji po podniesieniu przez prowadzącego jednej z~zasłon.
+W~pierwszej strategii decydujemy się na pozostanie przy aktualnym wyborze, więc mamy $\Pr(W\mid A)=1$ i~$\Pr(W\mid\overline{A})=0$ i~wygrywamy z~prawdopodobieństwem $\Pr(W)=1/3$.
+Jeśli teraz rozważymy drugą strategię, to będziemy mieć $\Pr(W\mid A)=0$ i~$\Pr(W\mid\overline{A})=1$, ponieważ zamieniliśmy wybraną zasłonę na inną, dotychczas nieodkrytą.
+W~tym przypadku prawdopodobieństwo wygranej wynosi $\Pr(W)=2/3$.
+Widać zatem, że zmiana decyzji jest opłacalna, ponieważ podwaja szanse na wygraną.
+
+\exercise %C.2-10
+Niech $A_X$, $A_Y$ i~$A_Z$ będą zdarzeniami oznaczającymi wyjście na wolność, odpowiednio, więźnia $X$, $Y$ i~$Z$.
+Ponadto niech $B$ będzie zdarzeniem polegającym na tym, że strażnik wskazał więźnia $Y$ jako tego, który zostanie ścięty.
+Strażnik nie może zdradzić, który z~więźniów będzie wolny, mamy więc $\Pr(B\mid A_X)=1/2$, $\Pr(B\mid A_Y)=0$ i~$\Pr(B\mid A_Z)=1$.
+Przed rozmową ze strażnikiem prawdopodobieństwo, że więzień $X$ będzie wolny, wynosi $\Pr(A_X)=1/3$.
+Jego sytuację po rozmowie opisuje zdarzenie $A_X\mid B$.
+Korzystając z~obserwacji, że $B=(B\cap A_X)\cup(B\cap A_Y)\cup(B\cap A_Z)$ i~ze wzoru Bayesa (C.17), mamy
+\begin{align*}
+    \Pr(A_X\mid B) &= \frac{\Pr(A_X)\Pr(B\mid A_X)}{\Pr(A_X)\Pr(B\mid A_X)+\Pr(A_Y)\Pr(B\mid A_Y)+\Pr(A_Z)\Pr(B\mid A_Z)} \\
+	&= \frac{\frac{1}{3}\cdot\frac{1}{2}}{\frac{1}{3}\cdot\frac{1}{2}+\frac{1}{3}\cdot0+\frac{1}{3}\cdot1} \\[2mm]
+	&= \frac{1}{3}.
+\end{align*}
+A~zatem informacja, jaką uzyskał od strażnika więzień $X$, nie zmienia jego szans na wyjście na wolność, które nadal wynoszą $1/3$.

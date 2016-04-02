@@ -1,0 +1,109 @@
+\subchapter{Algorytm sortowania przez kopcowanie (heapsort)}
+
+\exercise %6.4-1
+Na rys.\ \ref{fig:6.4-1} przedstawiono ilustrację działania sortowania przez kopcowanie dla tablicy $A$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_6.4-1}
+	\end{center}
+	\caption{Działanie procedury \proc{Heapsort} dla tablicy $A=\langle5,13,2,25,7,17,20,8,4\rangle$.
+{\sffamily\bfseries(a)} Kopiec zaraz po jego zbudowaniu przez \proc{Build-Max-Heap}.
+{\sffamily\bfseries\doubledash{(b)}{(i)}} Kopiec i~elementy z~niego usunięte po każdym wywołaniu \proc{Max-Heapify} w~wierszu 5.
+{\sffamily\bfseries(j)} Wynikowa posortowana tablica.} \label{fig:6.4-1}
+\end{figure}
+
+\exercise %6.4-2
+\begin{description}
+	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\attrib{A}{length}=n$.
+Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli.
+Podtablica $A[1\twodots i]$ tworzy więc kopiec typu max, którego korzeniem jest $A[1]$, czyli największy element w~tej podtablicy.
+Po wykonaniu wiersza 3 znajdzie się on na pozycji $i$.
+Dekrementacja \attrib{A}{heap-size} powoduje, że element $A[i]$ nie wchodzi teraz w~skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z~$A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ jest równy lub mniejszy od wcześniej umieszczonych tam elementów.
+W~tym momencie korzeń może naruszać własność kopca typu max, dlatego w~wierszu 5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność.
+Uaktualnienie $i$ powoduje odtworzenie niezmiennika.
+	\item[Zakończenie:] Po zakończeniu działania pętli jest $i=1$, zatem podtablica $A[1\twodots i]$ składa się z~jednego elementu, który jest najmniejszym elementem tablicy $A$.
+Ponadto $n-1$ pozostałych elementów jest uszeregowanych w~kolejności niemalejącej w~podtablicy $A[2\twodots n]$.
+Stąd mamy, że tablica $A$ jest posortowana.
+\end{description}
+
+\exercise %6.4-3
+Na podstawie analizy zamieszczonej w~Podręczniku czasem działania algorytmu heapsort dla tablicy o~rozmiarze $n$ jest $O(n\lg n)$.
+Z~\refExercise{6.4-5} mamy, że jest to w~rzeczywistości oszacowanie dokładne.
+A~zatem w~szczególności dla tablicy posortowanej rosnąco i~tablicy posortowanej malejąco heapsort działa w~czasie $\Theta(n\lg n)$.
+
+\exercise %6.4-4
+Przypadek pesymistyczny algorytmu heapsort ma miejsce wtedy, gdy każde wywołanie \proc{Max-Heapify} z~wiersza 5 schodzi rekurencyjnie aż do ostatniego poziomu drzewa.
+Na mocy wyniku z~\refExercise{6.2-6} oraz wzoru (3.18) wywołania te zabierają łącznie czas
+\[
+	\sum_{i=2}^n\Omega(\lg i) = \Omega(\lg(n!)) = \Omega(n\lg n)
+\]
+i~taki jest też czas działania algorytmu heapsort w~pesymistycznym przypadku.
+
+\exercise %6.4-5
+Dokonamy analizy liczby wykonywanych instrukcji z~linii 9 procedury \proc{Max-Heapify} podczas działania algorytmu sortowania przez kopcowanie w~przypadku optymistycznym.
+
+Załóżmy, że algorytm heapsort działa na tablicy $A$ o~rozmiarze $n=2^{h+1}-1$, gdzie $h$ jest dodatnią liczbą całkowitą.
+A~zatem kopiec zbudowany z~$A$ stanowi pełne drzewo binarne o~wysokości $h$.
+Rozważanie tylko takich kopców nie powoduje zmniejszenia ogólności analizy.
+Przez \singledash{$j$}{ty} etap działania algorytmu heapsort, gdzie $j=0$, 1, \dots, $h-1$, będziemy rozumieć działania wykonywane podczas iteracji pętli \kw{for} z~procedury \proc{Heapsort}, w~których $2^{h-j}\le i\le2^{h-j+1}-1$.
+Inaczej mówiąc, \singledash{$j$}{ty} etap pozbawia kopiec \singledash{$(h-j)$}{tego} poziomu.
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ \singledash{$j$}{tego} etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii 9 procedury \proc{Max-Heapify} jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
+\begin{proof}
+Oznaczmy przez $m_j$ badaną liczbę zamian elementów wykonywanych w~\singledash{$j$}{tym} etapie.
+Niech $j=0$ i~bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$.
+Liczbę $k$ będziemy nazywać \textbf{dużą}, jeśli $k\ge(n+1)/2$.
+Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
+\[
+    S = \biggl\{\,i\in\Bigl\{1,2,\dots,\frac{n-1}{2}\Bigr\}:A[i]\ge\frac{n+1}{2}\,\biggr\}.
+\]
+Zauważmy, że wszystkie elementy, których pozycjami w~$A$ są indeksy ze zbioru $S$, zostaną usunięte z~kopca w~etapie $j=0$.
+A~zatem muszą wpierw znaleźć się w~korzeniu kopca za sprawą wykonania pewnej liczby zamian z~linii 9 procedury \proc{Max-Heapify}.
+Stąd $m_0$ spełnia nierówność
+\[
+    m_0 \ge \sum_{i\in S}d_i,
+\]
+gdzie $d_i$ oznacza głębokość węzła o~początkowej pozycji $i$ w~kopcu $A$.
+
+Węzły o~indeksach ze zbioru $S$ tworzą w~kopcu $A$ poddrzewo $T$ o~korzeniu w~$A[1]$.
+Jest tak dlatego, że jeśli węzeł $A[i]$ jest duży, to $A[\proc{Parent}(i)]$ również jest duży, a~więc także wszystkie węzły na ścieżce od $A[i]$ do korzenia kopca, czyli $A[1]$.
+Jeśli zastąpimy każde puste poddrzewo w~$T$ pojedynczym węzłem, to dostaniemy regularne drzewo binarne, którego długość ścieżki wewnętrznej (patrz \refExercise{B.5-5}) wynosi $m_0$.
+W~zbiorze wszystkich drzew binarnych o~$|S|$ węzłach wewnętrznych najmniejsza możliwa długość ścieżki wewnętrznej jest osiągana dla pełnego drzewa binarnego (przy czym ostatni poziom tego drzewa może nie być wypełniony) i~wynosi $\sum_{k=1}^{|S|}\lfloor\lg k\rfloor$.
+Korzystając ze wzoru (3.3) i~\refExercise{8.1-2}, mamy
+\[
+    m_0 \ge \sum_{k=1}^{|S|}\lfloor\lg k\rfloor > \sum_{k=1}^{|S|}(\lg k-1) = \sum_{k=1}^{|S|}\lg k-|S| \ge \frac{|S|}{2}\lg\frac{|S|}{2}-|S| = \frac{|S|}{2}\lg|S|-\frac{3}{2}|S|.
+\]
+
+Pokażemy teraz, że $|S|\ge2^{h-2}$.
+Rozważmy w~tym celu permutację $\pi$ elementów kopca $A$ na początku zerowego etapu w~kolejności ich odwiedzania podczas przechodzenia kopca metodą inorder.
+Jeśli $\pi(i)$, gdzie $i\ge2$, jest liściem kopca, to $\pi(i-1)$ nie może być liściem kopca.
+Jeśli w~dodatku $\pi(i)$ jest dużym liściem, to $\pi(i-1)$ jest dużym węzłem wewnętrznym.
+Stąd indeks elementu $\pi(i-1)$ należy do $S$.
+Mamy więc, że $l$ -- liczba dużych liści -- nie przekracza $|S|+1$, nawet jeśli $\pi(1)$ jest dużym liściem.
+Ponieważ liczba dużych elementów w~kopcu wynosi $(n+1)/2=2^h$, to otrzymujemy, że $|S|=2^h-l\ge2^h-(|S|+1)$, skąd $|S|\ge2^{h-1}-1/2\ge2^{h-2}$.
+
+Powracając teraz do oszacowania na $m_0$, mamy
+\[
+    m_0 > \frac{|S|}{2}\lg|S|-\frac{3}{2}|S| = \frac{|S|}{2}(\lg|S|-3) \ge 2^{h-3}(h-5),
+\]
+czyli lemat jest prawdziwy, gdy $j=0$.
+
+Na początku \singledash{$j$}{tego} etapu kopiec ma wysokość $h-j$, więc dowód lematu dla \singledash{$j$}{tego} etapu, gdzie $1\le j\le h-1$, sprowadza się do dowodu oszacowania $m_0$ dla kopca o~rozmiarze $n=2^{h-j+1}-1$.
+\end{proof}
+
+Załóżmy teraz, że $h\ge5$ i~wykorzystajmy oznaczenie $m_j$ z~powyższego dowodu.
+Sumaryczną liczbę zamian elementów podczas sortowania $n$ liczb, na podstawie lematu, ograniczamy od dołu:
+\[
+    \sum_{j=0}^{h-1}m_j > \sum_{j=0}^{h-5}m_j > \sum_{j=0}^{h-5}(h-j-5)2^{h-j-3} = \sum_{j=0}^{h-5}j2^{j+2} = 4\sum_{j=0}^{h-5}j2^j.
+\]
+Ostatnią sumę obliczamy poprzez skorzystanie ze wzoru (A.5):
+\[
+    \sum_{j=0}^{h-5}jx^j = x\cdot\frac{d}{dx}\biggl(\sum_{j=0}^{h-5}x^j\biggr) = x\cdot\frac{d}{dx}\biggl(\frac{x^{h-4}-1}{x-1}\biggr) = x\,\frac{(h-4)x^{h-5}(x-1)-(x^{h-4}-1)}{(x-1)^2}.
+\]
+Przyjmując teraz $x=2$ i~korzystając z~nierówności $2^h>n/2$ i~$h>\lg n-1$, mamy ostatecznie
+\[
+    4\sum_{j=0}^{h-5}j2^j = (h-4)2^{h-2}-2^{h-1}+8 > (h-6)2^{h-2} > \frac{1}{8}n\lg n-\frac{7}{8}n = \Omega(n\lg n).
+\]
+Otrzymany wynik stanowi oszacowanie czasu działania algorytmu heapsort w~przypadku optymistycznym.

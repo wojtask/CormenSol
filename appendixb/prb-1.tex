@@ -1,0 +1,45 @@
+\problem{Kolorowanie grafów} %B-1
+
+\subproblem %B-1(a)
+Zamiast dowolnych drzew rozważmy bez straty ogólności drzewa ukorzenione.
+Krawędzie w~takim drzewie są incydentne z~węzłami z~sąsiednich poziomów, a~więc można węzłom nadać kolory na podstawie parzystości ich głębokości w~drzewie.
+
+\subproblem %B-1(b)
+Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozostaną równoważne, jeżeli zostaną zastosowane osobno dla każdej składowej.
+\medskip
+
+$1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwiema barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \singledash{2}{kolorowanie}.
+\medskip
+
+$2.\Rightarrow 3.$: Załóżmy, że graf $G$ jest \singledash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$.
+Bez utraty ogólności niech $c(v_1)=0$.
+Wtedy musi być $c(v_{2i})=1$ oraz $c(v_{2i+1})=0$, gdzie $i=1$, 2, \dots, $k$.
+Jednak wówczas dwa sąsiednie wierzchołki mają ten sam kolor, $c(v_1)=c(v_{2k+1})=0$, co przeczy założeniu, że $G$ jest \singledash{2}{kolorowalny}.
+Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
+\medskip
+
+$3.\Rightarrow 1.$: Ustalmy pewne $v\in V$.
+Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$.
+Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
+
+\subproblem %B-1(c)
+Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$.
+Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor.
+Załóżmy więc, że $|V|\ge2$.
+Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$.
+Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$.
+Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów.
+Ponieważ wierzchołek $v$ ma co najwyżej $d$ sąsiadów, to wśród $d+1$ kolorów użytych w~kolorowaniu podgrafu $G'$ jest jeden nieprzypisany żadnemu sąsiadowi wierzchołka $v$.
+Wybierając ten kolor dla $v$, uzyskujemy poprawne \singledash{$(d+1)$}{kolorowanie} grafu $G$.
+
+\subproblem %B-1(d)
+Jeżeli $k$ barw wystarcza do optymalnego pokolorowania (czyli takiego, które wykorzystuje możliwie najmniej kolorów) grafu $G$, to dla każdych dwóch różnych barw istnieje krawędź w~$E$ incydentna z~wierzchołkami o~takich barwach.
+W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać.
+Do pokolorowania grafu wystarczyłoby ich zatem $k-1$, co przeczyłoby optymalności kolorowania.
+
+Na podstawie powyższego rozumowania mamy $\binom{k}{2}\le|E|$.
+Korzystamy z~tego, że dla $k\ge2$ zachodzi $k/2\le k-1$ i~stąd
+\[
+    k^2 = 4\cdot\frac{k}{2}\cdot\frac{k}{2} \le 4\cdot\frac{k(k-1)}{2} = 4\binom{k}{2} \le 4|E| = O(|V|),
+\]
+czyli $k=O\bigl(\!\sqrt{|V|}\bigr)$.

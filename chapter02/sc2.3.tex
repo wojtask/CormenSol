@@ -1,0 +1,151 @@
+\subchapter{Projektowanie algorytmów}
+
+\exercise %2.3-1
+Na rys.\ \ref{fig:2.3-1} przedstawiono działanie algorytmu sortowania przez scalanie dla tablicy $A$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_2.3-1}
+	\end{center}
+	\caption{Działanie algorytmu \proc{Merge-Sort} dla tablicy $A=\langle3,41,52,26,38,57,9,49\rangle$.} \label{fig:2.3-1}
+\end{figure}
+
+\exercise %2.3-2
+Poniżej przedstawiono implementację procedury \proc{Merge}, w~której nie wykorzystuje się wartowników.
+\begin{codebox}
+\Procname{$\proc{Merge}'(A,p,q,r)$}
+\li	$n_1\gets q-p+1$
+\li	$n_2\gets r-q$
+\li	utwórz tablice $L[1\twodots n_1]$ i~$R[1\twodots n_2]$
+\li	\For $i\gets1$ \To $n_1$
+\li		\Do $L[i]\gets A[p+i-1]$
+		\End
+\li	\For $j\gets1$ \To $n_2$
+\li		\Do $R[j]\gets A[q+j]$
+		\End
+\li	$i\gets1$
+\li $j\gets1$
+\li \For $k\gets p$ \To $r$
+\li		\Do
+			\If $j>n_2$ lub $L[i]\le R[j]$ \label{li:merge'-condition}
+\li				\Then
+					$A[k]\gets L[i]$
+\li					$i\gets i+1$
+\li				\Else
+					$A[k]\gets R[j]$
+\li					$j\gets j+1$
+				\End
+		\End
+\end{codebox}
+Warunek w~wierszu \ref{li:merge'-condition} w~powyższej procedurze pozwala na poprawne rozmieszczenie elementów z~tablic $L$ i~$R$ w~wynikowej tablicy $A$ pomimo braku wartowników.
+Dzięki niemu do \singledash{$k$}{tej} komórki tablicy $A$ zostanie przekopiowana wartość z~tablicy $L$ w~jednym z~dwóch przypadków -- gdy tablica $R$ została już w~całości przeglądnięta, bądź wtedy, gdy w~tablicach $L$ i~$R$ znajdują się jeszcze elementy do przekopiowania, ale mniejsza (lub równa) z~liczb znajduje się na aktualnej pozycji w~tablicy $L$.
+Gdy indeks $j$ przekroczy $n_2$, to do końca działania procedury do tablicy $A$ będą kopiowane elementy z~tablicy $L$.
+
+\exercise %2.3-3
+Przeprowadzimy dowód przez indukcję względem $k$.
+Dla $k=1$ mamy $n=2$ i~$T(n)=2=2\lg2$, więc przypadek bazowy zachodzi.
+Załóżmy teraz, że $k>1$, czyli $n>2$ i~że zachodzi $T(n/2)=(n/2)\lg(n/2)$.
+Mamy
+\[
+	T(n) = 2T(n/2)+n = 2(n/2)\lg(n/2)+n = n(\lg n-1)+n = n\lg n,
+\]
+co dowodzi rozwiązania rekurencji dla $n$ będącego potęgą 2.
+
+\exercise %2.3-4
+Niech $T(n)$ będzie czasem potrzebnym na posortowanie tablicy $A[1\twodots n]$.
+Wstawienie elementu $A[n]$ w~posortowaną podtablicę $A[1\twodots n-1]$ odbywa się w~najgorszym przypadku w~czasie $\Theta(n)$, otrzymujemy więc następujące równanie rekurencyjne:
+\[
+	T(n) =
+	\begin{cases}
+		\Theta(1), & \text{jeśli $n=1$}, \\
+		T(n-1)+\Theta(n), & \text{jeśli $n>1$}.
+	\end{cases}
+\]
+
+\exercise %2.3-5
+Algorytm wyszukiwania binarnego przyjmuje na wejściu posortowaną niemalejąco tablicę $A$ oraz szukaną wartość $v$.
+Podczas wyszukiwania $v$ w~podtablicy $A[\id{low}\twodots\id{high}]$, $v$ jest porównywane z~$A[\lfloor(\id{low}+\id{high})/2\rfloor]$, czyli elementem środkowym tego fragmentu i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę tej podtablicy.
+
+Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego.
+W~przypadku odnalezienia wartości $v$ w~tablicy $A$ zwracany jest taki indeks $i$, że $A[i]=v$.
+Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}.
+Wersja rekurencyjna przyjmuje dodatkowo parametry $\id{low}$ i~$\id{high}$ będące indeksami początku i~końca przetwarzanego fragmentu tablicy $A$.
+Aby wyszukiwać w~całej tablicy $A$, używając procedury rekurencyjnej, należy wywołać ją z~parametrami $\id{low}=1$ i~$\id{high}=\attrib{A}{length}$.
+
+\begin{codebox}
+\Procname{$\proc{Recursive-Binary-Search}(A,v,\id{low},\id{high})$}
+\li	\If $\id{low}>\id{high}$
+\li		\Then \Return \const{nil}
+		\End
+\li	$\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
+\li	\If $v=A[\id{mid}]$
+\li		\Then \Return \id{mid}
+		\End
+\li	\If $v<A[\id{mid}]$
+\li		\Then \Return $\proc{Recursive-Binary-Search}(A,v,\id{low},\id{mid}-1)$
+\li		\Else \Return $\proc{Recursive-Binary-Search}(A,v,\id{mid}+1,\id{high})$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Iterative-Binary-Search}(A,v)$}
+\li	$\id{low}\gets1$
+\li	$\id{high}\gets\attrib{A}{length}$
+\li	\While $\id{low}\le\id{high}$
+\li		\Do
+			$\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
+\li			\If $v=A[\id{mid}]$
+\li				\Then \Return \id{mid}
+				\End
+\li			\If $v<A[\id{mid}]$
+\li				\Then $\id{high}\gets\id{mid}-1$
+\li				\Else $\id{low}\gets\id{mid}+1$
+				\End
+		\End
+\li	\Return \const{nil}
+\end{codebox}
+
+W~obu wersjach algorytmu \proc{Binary-Search} $v$ jest przyrównywane do środkowego elementu fragmentu $A[\id{low}\twodots\id{high}]$, odrzucana jest (w~przybliżeniu) połowa tej podtablicy i~$v$ jest następnie poszukiwane w~drugiej połowie.
+Procedury kończą swe działanie, gdy odnajdą $v$ albo gdy zakres poszukiwań okaże się pusty (czyli $\id{low}>\id{high}$), co oznacza, że elementu $v$ nie ma w~$A$.
+Niech $n$ będzie rozmiarem tablicy $A$.
+Rekurencja opisująca czas działania algorytmu w~przypadku pesymistycznym ma postać
+\[
+	T(n) =
+	\begin{cases}
+		\Theta(1), & \text{jeśli $n\le1$}, \\
+		T(n/2)+\Theta(1), & \text{jeśli $n>1$}.
+	\end{cases}
+\]
+Jej rozwiązaniem (z~\refExercise{4.3-3}) jest $T(n)=\Theta(\lg n)$.
+
+\exercise %2.3-6
+Wyszukując binarnie, można odnaleźć pozycję tablicy, na którą należy umieścić kolejny element z~nieposortowanego fragmentu, jednak wstawienie go wymaga przesunięcia pewnej części tablicy o~jedną pozycję w~prawo, co w~najgorszym przypadku zajmuje czas $\Theta(n)$.
+Nie można zatem obniżyć czasu działania sortowania przez wstawianie poprzez zastosowanie wyszukiwania binarnego.
+
+\exercise %2.3-7
+Będziemy traktować zbiór $S$ jak tablicę $S[1\twodots n]$.
+Dla każdego elementu $S[i]$ można wyszukiwać inny element w~tablicy $S$, który po zsumowaniu z~$S[i]$ daje $x$.
+Będziemy wyszukiwać binarnie po uprzednim posortowaniu $S$ (procedura wyszukiwania binarnego została opisana w~\refExercise{2.3-5}).
+Dla $S[i]$ szukamy zatem elementu o~wartości $x-S[i]$ w~podtablicy $S[i+1\twodots n]$.
+Podtablica ta jest pusta dla $i=n$, dlatego wyszukiwanie dla ostatniego elementu pomijamy.
+W~zależności od wyniku wyszukiwania zwracana jest wartość logiczna \const{true} lub \const{false}.
+Algorytm zapisujemy w~postaci pseudokodu:
+\begin{codebox}
+\Procname{$\proc{Sum-Search}(S,x)$}
+\li	$n\gets\attrib{S}{length}$
+\li	$\proc{Merge-Sort}(S,1,n)$ \label{li:sum-search-sort}
+\li	\For $i\gets1$ \To $n-1$
+\li		\Do
+			\If $\proc{Recursive-Binary-Search}(S,x-S[i],i+1,n)\ne\const{nil}$ \label{li:sum-search-bs}
+\li				\Then \Return \const{true}
+				\End
+		\End
+\li	\Return \const{false}
+\end{codebox}
+
+Sortowanie $S$ w~wierszu \ref{li:sum-search-sort} działa w~czasie $\Theta(n\lg n)$, a~procedura \proc{Recursive-Binary-Search} jest wywoływana w~wierszu \ref{li:sum-search-bs} dla tablic o~rozmiarach, kolejno, 1, 2, \dots, $n-1$.
+Wywołania te łącznie zajmują czas
+\[
+	\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta\biggl(\sum_{i=1}^n\lg i-\lg n\biggr) = \Theta\biggl(\lg\biggl(\prod_{i=1}^ni\biggr)-\lg n\biggr) = \Theta(\lg(n!)-\lg n) = \Theta(n\lg n),
+\]
+ponieważ $\lg(n!)=\Theta(n\lg n)$ (ze wzoru (3.18)).
+Zatem pesymistyczny czas algorytmu \proc{Sum-Search} wynosi $\Theta(n\lg n)$.

@@ -1,0 +1,48 @@
+\subchapter{Szacowanie sum}
+
+\exercise %A.2-1
+Wykorzystując własności szeregu teleskopowego, dostajemy
+\[
+	\sum_{k=1}^n\frac{1}{k^2} \le 1+\sum_{k=2}^n\frac{1}{k(k-1)} = 1+\sum_{k=2}^n\biggl(\frac{1}{k-1}-\frac{1}{k}\biggr) = 1+1-\frac{1}{n} < 2,
+\]
+a~zatem badana suma jest ograniczona z~góry przez stałą.
+Można pokazać, że wraz ze wzrostem $n$ wartość tej sumy zbliża się do $\pi^2\!/6$.
+
+\exercise %A.2-2
+Zauważmy, że gdy $n$ osiąga wartość będącą potęgą 2, to zwiększa się o~1 liczba sumowanych składników.
+Funkcja $F(n)=\sum_{k=0}^{\lfloor\lg n\rfloor}\bigl\lceil n/2^k\bigr\rceil$, zdefiniowana dla dodatnich liczb całkowitych, jest niemalejąca, więc jeśli $m$ jest liczbą całkowitą dodatnią, to $F(n)<F(2^m)$ dla wszystkich $n<2^m$.
+Oszacowaniem górnym tej funkcji jest zatem oszacowanie górne jej wartości przyjmowanych dla potęg 2.
+Dla $n=2^m$ zachodzi
+\[
+	F(n) = F(2^m) = \sum_{k=0}^m\biggl\lceil\frac{2^m}{2^k}\biggr\rceil = 2^m+2^{m-1}+\dots+2^0 = 2^{m+1}-1 = 2n-1,
+\]
+z~czego wynika, że $F(n)=O(n)$ i~asymptotycznym górnym ograniczeniem sumy jest $O(n)$.
+
+\exercise %A.2-3
+Postępując podobnie jak podczas badania oszacowania górnego \singledash{$n$}{tej} liczby harmonicznej, dzielimy zakres indeksów od 1 do $n$ na $\lfloor\lg n\rfloor$ części i~ograniczamy sumę każdej części przez $1/2$:
+\[
+    \sum_{k=1}^n\frac{1}{k} \ge \sum_{i=0}^{\lfloor\lg n\rfloor-1}\sum_{j=0}^{2^i-1}\frac{1}{2^i+j} \ge \sum_{i=0}^{\lfloor\lg n\rfloor-1}\sum_{j=0}^{2^i-1}\frac{1}{2^{i+1}} = \sum_{i=0}^{\lfloor\lg n\rfloor-1}\frac{1}{2} = \frac{\lfloor\lg n\rfloor}{2} = \Omega(\lg n).
+\]
+
+\exercise %A.2-4
+Funkcja $f(k)=k^3$, gdzie $k$ to dodatnia liczba całkowita, jest monotonicznie rosnąca, zatem szacujemy sumę, korzystając z~nierówności (A.11):
+\[
+	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
+\]
+Znajdujemy oszacowania obu całek:
+\begin{gather*}
+	\int_0^nx^3\,dx = \frac{n^4}{4} = \Theta(n^4), \\[2mm]
+	\int_1^{n+1}x^3\,dx = \frac{(n+1)^4-1}{4} = \Theta(n^4)
+\end{gather*}
+i~otrzymujemy
+\[
+	\sum_{k=1}^nk^3 = \Theta(n^4).
+\]
+
+\exercise %A.2-5
+Zastosowanie nierówności (A.12) do sumy $\sum_{k=1}^n1/k$ doprowadza do całki niewłaściwej:
+\[
+	\sum_{k=1}^n\frac{1}{k} \le \int_0^n\frac{dx}{x} = \lim_{a\to0^+}\int_a^n\frac{dx}{x} = \infty.
+\]
+W~rezultacie nie uzyskujemy żadnej informacji o~oszacowaniu górnym badanej sumy.
+Dzięki zapisaniu jej w~postaci $1+\sum_{k=2}^n1/k$, można zastosować wzór (A.12) do drugiego składnika i~otrzymać oszacowanie górne $\ln n+1$ na sumę wyjściową.

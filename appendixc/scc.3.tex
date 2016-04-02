@@ -1,0 +1,118 @@
+\subchapter{Dyskretne zmienne losowe}
+
+\exercise %C.3-1
+Niech $X$ będzie zmienną losową oznaczającą sumę oczek na obu kostkach.
+Mamy
+\begin{align*}
+	\E(X) &= \sum_{x=2}^{12}x\Pr(X=x) \\
+	&= 2\cdot\frac{1}{36}+3\cdot\frac{2}{36}+4\cdot\frac{3}{36}+5\cdot\frac{4}{36}+6\cdot\frac{5}{36}+7\cdot\frac{6}{36} \\
+	&\quad {}+8\cdot\frac{5}{36}+9\cdot\frac{4}{36}+10\cdot\frac{3}{36}+11\cdot\frac{2}{36}+12\cdot\frac{1}{36} \\[1mm]
+	&= 7.
+\end{align*}
+Niech $Y$ będzie zmienną losową oznaczającą większą z~liczb oczek na obu kostkach.
+Zachodzi
+\[
+	\E(Y) = \sum_{y=1}^{6}y\Pr(Y=y) = 1\cdot\frac{1}{36}+2\cdot\frac{3}{36}+3\cdot\frac{5}{36}+4\cdot\frac{7}{36}+5\cdot\frac{9}{36}+6\cdot\frac{11}{36} \approx 4{,}47.
+\]
+
+\exercise %C.3-2
+Niech $X$ będzie zmienną losową przyjmującą wartość indeksu największego elementu tablicy $A$.
+Jeśli w~tej tablicy znajduje się $n$ liczb, to $\Pr(X=i)=1/n$ dla każdego $i=1$, 2, \dots, $n$, a~zatem
+\[
+	\E(X) = \sum_{i=1}^ni\Pr(X=i) = \frac{1}{n}\sum_{i=1}^ni = \frac{1}{n}\cdot\frac{n(n+1)}{2} = \frac{n+1}{2}.
+\]
+W~rzeczywistości wynik ten jest identyczny dla każdego elementu tablicy, w~szczególności dla elementów największego i~najmniejszego.
+
+\exercise %C.3-3
+Zdefiniujmy zmienną losową $X$ przyjmującą wielkość wygranej w~opisanej grze.
+Mamy obliczyć
+\[
+	\E(X) = -\Pr(A_0)+\Pr(A_1)+2\Pr(A_2)+3\Pr(A_3),
+\]
+przy czym $A_k$, dla $k=0$, 1, 2, 3, oznacza zdarzenie, że obstawiona przez gracza liczba oczek pojawiła się dokładnie na $k$ kostkach.
+Prawdopodobieństwa tych zdarzeń wynoszą:
+\[
+	\begin{array}{ccccc}
+	\Pr(A_0) &=& \dfrac{5^3}{6^3} &=& \dfrac{125}{216}, \\[3mm]
+	\Pr(A_1) &=& \dfrac{3\cdot 5^2}{6^3} &=& \dfrac{75}{216}, \\[3mm]
+	\Pr(A_2) &=& \dfrac{3\cdot 5^1}{6^3} &=& \dfrac{15}{216}, \\[3mm]
+	\Pr(A_3) &=& \dfrac{1}{6^3} &=& \dfrac{1}{216}.
+	\end{array}
+\]
+Dostajemy zatem
+\[
+	\E(X) = -\dfrac{17}{216} \approx -0{,}08,
+\]
+a~więc gracz straci w~tej grze średnio około 8 groszy.
+
+\exercise %C.3-4
+Niech $S$ będzie przestrzenią zdarzeń, w~której określone są zmienne losowe $X$ i~$Y$.
+Załóżmy, że w~pewnym podzbiorze zbioru $S$ zachodzi $X\ge Y$.
+Ponieważ $Y\ge0$, więc także $\E(Y)\ge0$, skąd
+\[
+    \E(\max(X,Y)) = \E(X) \le \E(X)+\E(Y).
+\]
+Przypadek, gdy $Y\ge X$, dowodzi się analogicznie.
+
+\exercise %C.3-5
+Zgodnie z~definicją niezależnych zmiennych losowych $X$ i~$Y$ mamy
+\[
+	\Pr(X=x\;\;\text{i}\;\;Y=y) = \Pr(X=x)\Pr(Y=y).
+\]
+Niech $f$ i~$g$ będą dowolnymi funkcjami rzeczywistymi.
+Jeśli $X$ przyjmuje wartość $x$, to zmienna losowa $f(X)$ przyjmuje wartość $f(x)$.
+Analogicznie dla $Y$: jeśli $Y=y$, to $g(Y)=g(y)$.
+Powyższy wzór możemy więc zapisać w~postaci
+\[
+	\Pr\bigl(f(X)=f(x)\;\;\text{i}\;\;g(Y)=g(y)\bigr) = \Pr\bigl(f(X)=f(x)\bigr)\Pr\bigl(g(Y)=g(y)\bigr),
+\]
+na podstawie której wnioskujemy, że $f(X)$ i~$g(Y)$ są niezależnymi zmiennymi losowymi.
+
+\exercise %C.3-6
+Niech $t\in\mathbb{R}$.
+Wartość oczekiwaną $\E(X)$ zapisujemy w~następujący sposób:
+\[
+    \E(X) = \sum_xx\Pr(X=x) = \sum_{x<t}x\Pr(X=x)+\sum_{x\ge t}x\Pr(X=x).
+\]
+Ponieważ zmienna losowa $X$ jest nieujemna, to można ograniczyć $E(X)$ od dołu, opuszczając pierwszą sumę w~ostatnim wyrażeniu.
+Zachodzi więc
+\[
+    \E(X) \ge \sum_{x\ge t}x\Pr(X=x) \ge t\sum_{x\ge t}\Pr(X=x) = t\Pr(X\ge t).
+\]
+
+\exercise %C.3-7
+Ustalmy $t\in\mathbb{R}$.
+Niech $A=\{\,s\in S:X(s)\ge t\,\}$ oraz $A'=\{\,s\in S:X'(s)\ge t\,\}$.
+Wprost z~definicji zmiennej losowej mamy
+\[
+	\Pr(X\ge t) = \sum_{s\in A}\Pr(s) \quad\text{oraz}\quad \Pr(X'\ge t) = \sum_{s\in A'}\Pr(s).
+\]
+Dowodzimy, że
+\[
+	\sum_{s\in A}\Pr(s) \ge \sum_{s\in A'}\Pr(s).
+\]
+Z~założenia wynika, że jeśli $X'(s)\ge t$, to $X(s)\ge t$, lub równoważnie, $A'\subseteq A$.
+A~zatem suma po lewej stronie powyższej nierówności zawiera o~$|A\setminus A'|$ więcej składników niż suma po prawej stronie.
+Wszystkie te składniki są liczbami nieujemnymi, więc nierówność jest spełniona.
+
+\exercise %C.3-8
+Wariancja zmiennej losowej $X$ jest liczbą nieujemną, a~więc po skorzystaniu ze wzoru (C.26) otrzymujemy, że $\E(X^2)\ge\E^2(X)$.
+
+\exercise %C.3-9
+Niech $\Pr(X=0)=1-p$ oraz $\Pr(X=1)=p$.
+Stąd
+\[
+    \E(X)=0\cdot(1-p)+1\cdot p=p.
+\]
+Zauważmy ponadto, że $\E(X^2)=\E(X)$.
+Wariancja zmiennej losowej $X$ jest równa
+\[
+	\Var(X) = \E(X^2)-\E^2(X) = p(1-p) = \E(X)(1-\E(X)) = \E(X)\E(1-X),
+\]
+przy czym ostatnia równość zachodzi dzięki liniowości wartości oczekiwanej.
+
+\exercise %C.3-10
+Wprost z~definicji wariancji oraz ze wzoru (C.21):
+\[
+	\Var(aX) = \E(a^2X^2)-\E^2(aX) = a^2\E(X^2)-(a\E(X))^2 = a^2\bigl(\E(X^2)-\E^2(X)\bigr) = a^2\Var(X).
+\]

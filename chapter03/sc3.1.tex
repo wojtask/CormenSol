@@ -1,0 +1,95 @@
+\subchapter{Notacja asymptotyczna}
+
+\exercise %3.1-1
+Załóżmy, że dziedzinami funkcji $f(n)$ i~$g(n)$ jest zbiór $\mathbb{N}$.
+Niech $A=\{\,n\in\mathbb{N}:f(n)\ge g(n)\,\}$.
+Dla odpowiednio dużych $n\in A$, dla których obie funkcje przyjmują wartości nieujemne, mamy
+\[
+    \max(f(n),g(n)) = f(n) \le f(n)+g(n) = O(f(n)+g(n)).
+\]
+Z~kolei
+\[
+    \max(f(n),g(n)) = f(n) \ge \frac{f(n)+g(n)}{2} = \Omega(f(n)+g(n))
+\]
+i~na mocy tw.\ 3.1 otrzymujemy, że $\max(f(n),g(n))=\Theta(f(n)+g(n))$.
+Identyczny rezultat można uzyskać dla $n\in\mathbb{N}\setminus A$, tzn.\ gdy $f(n)<g(n)$.
+
+\exercise %3.1-2
+Aby pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1$, $c_2$, $n_0>0$ takie, że
+\[
+	0 \le c_1n^b \le (n+a)^b \le c_2n^b
+\]
+dla wszystkich $n\ge n_0$.
+Zauważmy, że $n+a\le n+|a|\le2n$, gdy $|a|\le n$ oraz $n+a\ge n-|a|\ge n/2$, o~ile $|a|\le n/2$.
+Stąd, jeśli $n\ge 2|a|$, to zachodzi
+\[
+	0 \le n/2 \le n+a \le 2n.
+\]
+Ponieważ $b>0$, to powyższe nierówności możemy podnieść do potęgi $b$:
+\begin{gather*}
+	0 \le (n/2)^b \le (n+a)^b \le (2n)^b, \\
+	0 \le 2^{-b}n^b \le (n+a)^b \le 2^bn^b.
+\end{gather*}
+Widać zatem, że szukanym stałym można nadać wartości $c_1=2^{-b}$, $c_2=2^b$ oraz $n_0=2|a|$.
+Prawdą jest zatem, że $(n+a)^b=\Theta(n^b)$.
+
+\exercise %3.1-3
+Niech $T(n)$ będzie czasem działania algorytmu $A$.
+Stwierdzenie ,,$T(n)$ wynosi co najmniej $O(n^2)$'' oznacza, że począwszy od pewnego $n$, $T(n)\ge f(n)$ dla pewnej funkcji $f(n)$ z~klasy $O(n^2)$.
+Zdanie to pozostaje prawdziwe dla dowolnego $T$, wystarczy bowiem wybrać funkcję $f(n)$ tożsamościowo równą 0, która oczywiście jest w~$O(n^2)$.
+Widać więc, że takie określenie nie przekazuje żadnej użytecznej informacji o~czasie działania algorytmu.
+
+\exercise %3.1-4
+Znajdziemy stałe $c$, $n_0>0$ takie, że $0\le2^{n+1}\le c2^n$ dla każdego $n\ge n_0$.
+Ponieważ $2^{n+1}=2\cdot2^n$ dla każdego $n\ge1$, to można przyjąć $c=2$ oraz $n_0=1$.
+A~zatem $2^{n+1}=O(2^n)$.
+
+Spróbujmy teraz wyznaczyć te same stałe, ale spełniające zależność $0\le2^{2n}\le c2^n$ dla wszystkich $n\ge n_0$.
+Mamy $2^{2n}=2^n\cdot2^n\le c2^n$, z~czego wynika, że $c\ge2^n$, co jednak uzależnia $c$ od funkcji zmiennej $n$ przyjmującej dowolnie duże wartości, a~więc $c$ nie może być stałą.
+Stąd otrzymujemy, że $2^{2n}\ne O(2^n)$.
+
+\exercise %3.1-5
+Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$, $c_2$, $n_0>0$, że nierówności
+\[
+	0 \le c_1g(n) \le f(n) \le c_2g(n)
+\]
+zachodzą dla wszystkich $n\ge n_0$.
+Możemy je zapisać w~formie układu
+\[
+	\begin{cases}
+		0 \le c_1g(n) \le f(n) \\
+		0 \le f(n) \le c_2g(n)
+	\end{cases}.
+\]
+Z~pierwszej nierówności układu dostajemy, że $f(n)=\Omega(g(n))$, a~z~drugiej, że $f(n)=O(g(n))$.
+
+\exercise %3.1-6
+Niech $c_1$, $c_2$, $n_1$, $n_2$ będą pewnymi stałymi dodatnimi.
+Pesymistyczny czas działania algorytmu wynosi $O(g(n))$ wtedy i~tylko wtedy, gdy dla dowolnych danych wejściowych rozmiaru $n\ge n_1$ czas jego działania $f(n)$ nie przekracza $c_1g(n)$.
+Z~kolei to, że optymistyczny czas wynosi $\Omega(g(n))$, oznacza, że dla dowolnych danych wejściowych rozmiaru $n\ge n_2$ czas działania algorytmu $f(n)$ jest nie mniejszy niż $c_2g(n)$.
+Widać zatem, że dla dowolnych danych rozmiaru $n\ge\max(n_1,n_2)$ mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, a~to jest równoważne z~tym, że $f(n)=\Theta(g(n))$.
+
+\exercise %3.1-7
+Załóżmy niepustość tego zbioru i~rozważmy pewne $f(n)\in o(g(n))\cap\omega(g(n))$.
+Zachodzi zatem zarówno $f(n)=o(g(n))$, jak i~$f(n)=\omega(g(n))$, co oznacza, że dla każdych dodatnich stałych $c_1$ i~$c_2$ istnieje pewne dodatnie $n_0$, że
+\[
+	c_1g(n) < f(n) < c_2g(n)
+\]
+dla wszystkich $n\ge n_0$.
+Dochodzimy do sprzeczności, bowiem nieprawdą jest, że każde liczby $c_1$ i~$c_2$ spełniają $c_1<c_2$.
+Stąd $o(g(n))\cap\omega(g(n))=\emptyset$.
+
+Udowodniona własność pokazuje, że nie ma potrzeby definiowania notacji $\theta$ odpowiadającej $\Theta$ i~analogicznej do $o$ i~$\omega$.
+
+\exercise %3.1-8
+\note{Notacja\/ $O$ dla funkcji dwóch zmiennych jest błędnie zdefiniowana -- warunek powinien zachodzić dla wszystkich\/ $n\ge n_0$ lub\/ $m\ge m_0$.}
+
+\noindent Definicje notacji $\Omega$ i~$\Theta$ dla funkcji dwóch zmiennych:
+\[
+	\begin{split}
+		\Omega(g(n,m)) &= \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c$, $n_0$, $m_0$ takie, że} \\
+		&\qquad 0 \le cg(n,m) \le f(n,m) \text{ dla wszystkich $n \ge n_0$ lub $m \ge m_0$}\,\bigr\}, \\[2mm]
+		\Theta(g(n,m)) &= \bigl\{\,f(n,m):\text{istnieją dodatnie stałe $c_1$, $c_2$, $n_0$, $m_0$ takie, że} \\
+		&\qquad 0 \le c_1g(n,m) \le f(n,m) \le c_2g(n,m) \text{ dla wszystkich $n \ge n_0$ lub $m \ge m_0$}\,\bigr\}.
+	\end{split}
+\]

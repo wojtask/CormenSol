@@ -1,0 +1,26 @@
+\problem{Nieefektywne sortowanie} %7-3
+
+\subproblem %7-3(a)
+Udowodnimy poprawność algorytmu przez indukcję względem rozmiaru tablicy $n$.
+Łatwo sprawdzić, że algorytm działa poprawnie w~przypadku, gdy $n\le2$.
+Załóżmy więc, że $n>2$ i~że poprawnie sortowane są tablice o~rozmiarach mniejszych niż $n$.
+W~wyniku wykonania wiersza 6 na pozycjach $\lfloor n/3\rfloor+1\twodots n-\lfloor n/3\rfloor$ znajdują się elementy nie mniejsze od tych z~pozycji $1\twodots\lfloor n/3\rfloor$.
+A~zatem, po wykonaniu wiersza 7, $\lfloor n/3\rfloor$ największych elementów tablicy $A$ znajduje się w~obszarze $A[n-\lfloor n/3\rfloor+1\twodots n]$.
+Aby zakończyć sortowanie tablicy $A$, wystarczy uporządkować fragment $A[1\twodots n-\lfloor n/3\rfloor]$, co realizuje wiersz 8.
+
+\subproblem %7-3(b)
+Procedura jest wywoływana rekurencyjnie 3 razy, zaś każde wywołanie otrzymuje tablicę o~rozmiarze około $2/3$ rozmiaru oryginalnej tablicy.
+Ponadto praca poza wywołaniami rekurencyjnymi jest wykonywana w~czasie stałym.
+Stąd dostajemy równanie rekurencyjne
+\[
+	T(n) =
+	\begin{cases}
+		\Theta(1), & \text{jeśli $n\le2$}, \\
+		3T(2n/3)+\Theta(1), & \text{jeśli $n>2$},
+	\end{cases}
+\]
+które rozwiązujemy przy użyciu twierdzenia o~rekurencji uniwersalnej, otrzymując wynik $T(n)=\Theta(n^{\log_{3/2}3})\approx \Theta(n^{2{,}71})$.
+
+\subproblem %7-3(c)
+Pesymistyczny czas działania algorytmu \proc{Stooge-Sort} jest wyższego rzędu nie tylko od pesymistycznego czasu działania algorytmów sortowania przez scalanie, kopcowanie czy sortowania szybkiego, ale również od mniej efektywnego sortowania przez wstawianie.
+Metoda sortowania profesorów jest więc poprawna, ale bardzo powolna.

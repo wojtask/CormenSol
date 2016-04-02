@@ -1,0 +1,51 @@
+\problem{Liczby Fibonacciego} %4-5
+
+\subproblem %4-5(a)
+Wprost z~definicji $\mathcal{F}(z)$ mamy:
+\begin{align*}
+	\mathcal{F}(z) &= \sum_{i=0}^\infty F_iz^i \\
+	&= F_0+zF_1+\sum_{i=2}^\infty (F_{i-1}+F_{i-2})z^i \\
+	&= z+\sum_{i=2}^\infty F_{i-1}z^i+\sum_{i=2}^\infty F_{i-2}z^i \\
+	&= z+\sum_{i=1}^\infty F_iz^{i+1}+\sum_{i=0}^\infty F_iz^{i+2} \\[2mm]
+	&= z+z\mathcal{F}(z)+z^2\mathcal{F}(z),
+\end{align*}
+a~zatem tożsamość zachodzi.
+
+\subproblem %4-5(b)
+Ze wzoru z~poprzedniego punktu wynika pierwsza równość:
+\begin{align*}
+	\mathcal{F}(z) &= z+z\mathcal{F}(z)+z^2\mathcal{F}(z), \\
+	(1-z-z^2)\mathcal{F}(z) &= z, \\
+	\mathcal{F}(z) &= \frac{z}{1-z-z^2}.
+\end{align*}
+Mianownik prawej strony ostatniego wyrażenia jest trójmianem kwadratowym o~miejscach zerowych $\phi$ i~$\widehat\phi$, który zapisujemy w~równoważnej postaci
+\[
+	1-z-z^2 = -(z+\phi)\bigl(z+\widehat\phi\bigr) = (1-\phi z)\bigl(1-\widehat\phi z\bigr),
+\]
+co można uzasadnić wzorem $\phi\cdot\widehat\phi=-1$ i~tym samym dowieść drugiej równości.
+Ostatnią z~nich otrzymujemy, zauważając, że
+\[
+	\frac{1}{1-\phi z}-\frac{1}{1-\widehat\phi z} = \frac{1-\widehat\phi z-1+\phi z}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{z\bigl(\phi-\widehat\phi\bigr)}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{z\sqrt{5}}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)},
+\]
+a~stąd mamy
+\[
+	\frac{z}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{1}{\sqrt{5}}\cdot\frac{z\sqrt{5}}{(1-\phi z)\bigl(1-\widehat\phi z\bigr)} = \frac{1}{\sqrt{5}}\biggl(\frac{1}{1-\phi z}-\frac{1}{1-\widehat\phi z}\biggr).
+\]
+
+\subproblem %4-5(c)
+Tezę otrzymujemy natychmiast, jeśli w~definicji $\mathcal{F}(z)$ podstawimy $F_i=\bigl(\phi^i-\widehat\phi^i\bigr)/\sqrt{5}$, co wykazano w~\refExercise{3.2-6}.
+
+\subproblem %4-5(d)
+Ponieważ $\bigl|\widehat\phi\bigr|<1$, to prawdą jest, że $\bigl|\widehat\phi^i\bigr|<1$ dla $i>0$ oraz $\bigl|\widehat\phi^i\bigr|/\sqrt{5}<1/\sqrt{5}<1/2$.
+Mamy
+\[
+	F_i = \frac{\phi^i-\widehat\phi^i}{\sqrt{5}} = \frac{\phi^i}{\sqrt{5}}-\frac{\widehat\phi^i}{\sqrt{5}},
+\]
+skąd
+\[
+	\frac{\phi^i}{\sqrt{5}}-\frac{1}{2} < F_i < \frac{\phi^i}{\sqrt{5}}+\frac{1}{2},
+\]
+a~zatem $F_i$ jest liczbą całkowitą najbliższą wartości $\phi^i/\sqrt{5}$.
+
+\subproblem %4-5(e)
+Nierówność została udowodniona w~\refExercise{3.2-7}.

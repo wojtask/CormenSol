@@ -1,0 +1,35 @@
+\problem{Głębokość stosu w~algorytmie quicksort} %7-4
+
+\subproblem %7-4(a)
+\proc{Quicksort}$'$ wykonuje te same operacje na tablicy $A$ co oryginalny algorytm quicksort.
+Różnica jest tylko w~przetwarzaniu podtablicy $A[q+1\twodots r]$.
+Zamiast drugiego wywołania rekurencyjnego procedura wykonuje przypisanie w~wierszu 5, po czym następuje kolejna iteracja pętli \kw{while}, co działa identycznie jak wywołanie $\proc{Quicksort}'(A,q+1,r)$, ale bez zwiększania stosu rekurencji.
+Poprawność algorytmu wynika zatem z~poprawności oryginalnego algorytmu quicksort.
+
+\subproblem %7-4(b)
+Stos rekurencji może urosnąć do rozmiaru $\Theta(n)$ w~sytuacji, gdy będzie $\Theta(n)$ wywołań rekurencyjnych \proc{Quicksort}$'$.
+Dzieje się tak wtedy, gdy na każdym poziomie rekursji procedura \proc{Partition} zwraca $q=r$.
+Do wywołania rekurencyjnego przekazywana jest wtedy podtablica o~1 mniejsza w~porównaniu z~początkową tablicą.
+Algorytm zachowuje się w~ten sposób, jeśli na wejście dostanie tablicę posortowaną niemalejąco.
+
+\subproblem %7-4(c)
+Wykorzystamy pomysł, aby wywoływać procedurę rekurencyjnie dla mniejszej podtablicy, natomiast większą przetwarzać w~bieżącym wywołaniu.
+Dzięki temu na kolejnym poziomie rekursji rozważany będzie problem mniejszy co najmniej o~połowę, więc w~najgorszym przypadku głębokość stosu rekurencji wyniesie $\Theta(\lg n)$.
+Tworzone podziały będą takie same jak przed dokonaniem usprawnienia, zatem oczekiwany czas działania algorytmu nie zmieni się.
+Zmodyfikowany kod procedury \proc{Quicksort}$'$ został przedstawiony poniżej.
+\begin{codebox}
+\Procname{$\proc{Quicksort}''(A,p,r)$}
+\li	\While $p<r$
+\li		\Do
+			\Comment Dziel i~sortuj mniejszą podtablicę.
+\li			$q\gets\proc{Partition}(A,p,r)$
+\li			\If $q-p<r-q$
+\li				\Then
+					$\proc{Quicksort}''(A,p,q-1)$
+\li					$p\gets q+1$
+\li				\Else
+					$\proc{Quicksort}''(A,q+1,r)$
+\li					$r\gets q-1$
+				\End
+		\End
+\end{codebox}

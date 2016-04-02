@@ -1,0 +1,21 @@
+\problem{Budowa kopca przez wstawianie} %6-1
+
+\subproblem %6-1(a)
+Procedury te nie zawsze generują identyczne kopce dla tej samej tablicy wejściowej.
+Jeśli na przykład rozważymy tablicę $A=\langle1,2,3\rangle$, to kopce budowane przez obie procedury różnią się, jak to widać na rys.\ \ref{fig:6-1(a)}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_6-1.a}
+	\end{center}
+	\caption{Porównanie kopców budowanych przez obie procedury dla tablicy $A=\langle1,2,3\rangle$.
+{\sffamily\bfseries(a)} Wynik działania \proc{Build-Max-Heap}.
+{\sffamily\bfseries(b)} Wynik działania \proc{Build-Max-Heap}$'$.} \label{fig:6-1(a)}
+\end{figure}
+
+\subproblem %6-1(b)
+Najgorszym przypadkiem dla procedury \proc{Build-Max-Heap}$'$ jest tablica uporządkowana rosnąco.
+W~każdym z~$n-1$ wywołań \proc{Max-Heap-Insert} z~wiersza 3 nowy węzeł transportowany jest wówczas aż do korzenia kopca, co wymaga $\Theta(\lg i)$ operacji przy \singledash{$i$}{elementowym} kopcu.
+Stąd czas działania \proc{Build-Max-Heap}$'$ w~przypadku pesymistycznym wynosi
+\[
+	\sum_{i=1}^{n-1}\Theta(\lg i) = \Theta(\lg(n!)) = \Theta(n\lg n).
+\]

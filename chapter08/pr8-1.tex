@@ -1,0 +1,86 @@
+\problem{Dolne ograniczenia na średni czas działania sortowania za pomocą porównań} %8-1
+
+\subproblem %8-1(a)
+Podczas sortowania algorytmem $A$ żadne dwie różne permutacje wejściowe nie prowadzą do tego samego liścia w~drzewie $T_A$ -- jest w~nim zatem co najmniej $n!$ liści.
+Ponieważ algorytm $A$ jest deterministyczny, to dla każdej permutacji wejściowej osiągany jest zawsze ten sam liść, a~więc w~$T_A$ jest co najwyżej $n!$ osiągalnych liści.
+Wynika stąd, że algorytm $A$ może dotrzeć do dokładnie $n!$ liści.
+Ponieważ każda permutacja ma szanse pojawić się na wejściu z~równym prawdopodobieństwem, to szanse na dotarcie do dowolnego osiągalnego liścia wynoszą $1/n!$.
+Pozostałe liście nigdy nie zostaną odwiedzone podczas działania algorytmu $A$.
+
+\subproblem %8-1(b)
+Oznaczmy przez $L(T)$ zbiór liści drzewa $T$, a~przez $d_T(x)$ -- głębokość węzła $x$ w~drzewie $T$.
+Ponieważ $k>1$, to korzeń drzewa $T$ nie jest jego liściem, więc $L(T)=L(LT)\cup L(RT)$.
+Głębokość każdego liścia w~poddrzewie $LT$ jest o~1 mniejsza niż głębokość tego samego liścia w~drzewie $T$ i~analogicznie dla liści w~poddrzewie $RT$.
+Mamy zatem
+\begin{align*}
+    D(T) &= \sum_{x\in L(T)}d_T(x) \\
+	&= \sum_{x\in L(LT)}d_T(x)+\sum_{x\in L(RT)}d_T(x) \\
+	&= \sum_{x\in L(LT)}(d_{LT}(x)+1)+\sum_{x\in L(RT)}(d_{RT}(x)+1) \\
+	&= \sum_{x\in L(LT)}d_{LT}(x)+\sum_{x\in L(RT)}d_{RT}(x)+\sum_{x\in L(T)}1 \\[1mm]
+	&= D(LT)+D(RT)+k.
+\end{align*}
+
+\subproblem %8-1(c)
+\note{W~tekście zadania wykorzystywane jest\/ $d(1)$ mimo braku jego definicji; przyjmujemy zatem\/ $d(1)=0$.}
+
+\noindent W~celu udowodnienia wzoru z~treści zadania pokażemy, że zachodzą nierówności
+\[
+    d(k) \le \min_{1\le i\le k-1}(d(i)+d(k-i)+k) \quad\text{oraz}\quad d(k) \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
+\]
+
+Ustalmy pewne $i$ ze zbioru $\{1,2,\dots,k-1\}$.
+Niech $LT$ będzie takim drzewem binarnym o~$i$ liściach, że $d(i)=D(LT)$ i~niech $RT$ będzie takim drzewem binarnym o~$k-i$ liściach, że $d(k-i)=D(RT)$.
+Niech $T$ będzie drzewem binarnym, w~którym $LT$ jest jego lewym poddrzewem, a~$RT$ -- jego prawym poddrzewem.
+Korzystając z~definicji $d(k)$ i~wzoru z~części (b), mamy
+\[
+    d(k) \le D(T) = D(LT)+D(RT)+k = d(i)+d(k-i)+k.
+\]
+Ponieważ otrzymana nierówność zachodzi dla każdego $i=1$, 2, \dots, $k-1$, to możemy napisać $d(k)\le\min_{1\le i\le k-1}(d(i)+d(k-i)+k)$.
+
+Pokażemy teraz, że zachodzi także nierówność przeciwna.
+Ustalmy w~tym celu drzewo binarne $T$ o~$k$ liściach, dla którego $d(k)=D(T)$.
+Niech $LT$ i~$RT$ będą poddrzewami drzewa $T$, odpowiednio, lewym i~prawym.
+Niech $i_0$, gdzie $1\le i_0\le k-1$, będzie liczbą liści w~drzewie $LT$, a~$k-i_0$ -- liczbą liści w~drzewie $RT$.
+Wówczas
+\[
+    d(k) = D(T) = D(LT)+D(RT)+k \ge d(i_0)+d(k-i_0)+k \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
+\]
+Założyliśmy tutaj, że ani $LT$, ani $RT$ nie są puste.
+Gdyby tak jednak było, to drugie poddrzewo $T$ zawierałoby wszystkie $k$ liści drzewa $T$ i~wówczas, na mocy punktu (b), funkcja $D$ dla niego przyjęłaby wartość $D(T)-k$.
+To jednak przeczyłoby wyborowi $T$ jako drzewa o~$k$ liściach z~minimalną wartością funkcji $D$.
+
+\subproblem %8-1(d)
+W~\refExercise{7.4-2} analizowana była funkcja $f(q)=q\lg q+(n-q-1)\lg(n-q-1)$.
+Zostało tam pokazane, że w~przedziale $(0,n-1)$ funkcja $f$ osiąga minimum dla $q=(n-1)/2$.
+Wystarczy zatem przyjąć $q=i$ oraz $n=k+1$, aby pokazać stwierdzenie z~treści zadania.
+Minimalna wartość badanej funkcji wynosi $k\lg k-k$.
+
+Pokażemy oszacowanie na $d(k)$ przez indukcję, zakładając w~tym celu, że $d(i)\ge i\lg i$ dla każdego $i=1$, 2, \dots, $k-1$ i~korzystając z~powyższego rezultatu oraz z~punktu (c):
+\begin{align*}
+	d(k) &= \min_{1\le i\le k-1}(d(i)+d(k-i)+k) \\
+	&\ge \min_{1\le i\le k-1}(i\lg i+(k-i)\lg(k-i))+k \\
+	&\ge k\lg k-k+k \\
+	&= k\lg k.
+\end{align*}
+Podstawa indukcji zachodzi trywialnie, bo $d(1)=0\ge 1\lg1$, a~zatem $d(k)=\Omega(k\lg k)$.
+
+\subproblem %8-1(e)
+Zauważmy, że możemy usunąć wszystkie nieosiągalne węzły z~drzewa $T_A$, ponieważ nie wpływają one na czas działania algorytmu $A$.
+A~zatem, na mocy punktu (a), po ich usunięciu $T_A$ zawiera dokładnie $n!$ liści.
+Wykorzystując definicję $d(k)$ oraz wynik z~poprzedniej części, mamy
+\[
+	D(T_A) \ge d(n!) = \Omega(n!\lg(n!)).
+\]
+
+$D(T_A)$ stanowi sumę głębokości liści drzewa decyzyjnego $T_A$, a~głębokość każdego liścia jest proporcjonalna do czasu działania algorytmu $A$ dla permutacji reprezentowanej przez ten liść.
+Ponieważ prawdopodobieństwo osiągnięcia dowolnego liścia drzewa $T_A$ jest równe $1/n!$, to oczekiwany czas algorytmu $A$ wynosi
+\[
+	\frac{D(T_A)}{n!} = \frac{\Omega(n!\lg(n!))}{n!} = \Omega(\lg(n!)) = \Omega(n\lg n).
+\]
+
+\subproblem %8-1(f)
+Niech $B$ będzie dowolnym randomizowanym algorytmem sortującym za pomocą porównań, a~$T_B$ -- jego drzewem decyzyjnym.
+Istnieje wówczas deterministyczny algorytm $A$ sortujący za pomocą porównań, którego drzewo decyzyjne $T_A$ powstaje z~drzewa $T_B$ poprzez zastąpienie każdego węzła zrandomizowanego minimalnym poddrzewem o~korzeniu będącym synem tegoż węzła zrandomizowanego.
+Przez minimalne poddrzewo rozumiemy tutaj takie, które posiada minimalną średnią odległość od swojego korzenia od liścia.
+Algorytm $A$ wybiera zatem najlepszą możliwość zawsze wtedy, gdy algorytm $B$ dokonuje losowego wyboru spośród $r$ możliwości.
+Dlatego w~średnim przypadku $A$ wykonuje co najwyżej tyle porównań, co $B$.

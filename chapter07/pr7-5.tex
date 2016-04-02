@@ -1,0 +1,55 @@
+\problem{Podział względem mediany trzech wartości} %7-5
+
+\subproblem %7-5(a)
+Element rozdzielający $x$ znajdzie się na pozycji $i$ w~tablicy $A'$, jeżeli drugi z~wybranych elementów będzie na lewo od $i$ w~tej tablicy, a~trzeci wybrany element -- na prawo od $i$.
+Liczby możliwych pozycji, jakie mogą zająć drugi i~trzeci element, wynoszą, odpowiednio, $i-1$ i~$n-i$.
+Otrzymujemy zatem
+\[
+	p_i = \frac{(i-1)(n-i)}{\binom{n}{3}}.
+\]
+
+\subproblem %7-5(b)
+W~zwykłej implementacji szanse wyboru mediany tablicy $A[1\twodots n]$ na element rozdzielający są równe $1/n$ (z~części (a) problemu \refProblem{7-2}), natomiast w~metodzie mediany trzech wartości wynoszą one $p_{\lfloor(n+1)/2\rfloor}$.
+Jeśli $n$ jest parzyste, to
+\[
+	p_{\lfloor(n+1)/2\rfloor} = p_{n/2} = \frac{\bigl(\frac{n}{2}-1\bigr)\bigl(n-\frac{n}{2}\bigr)}{\binom{n}{3}} = \frac{3}{2(n-1)}.
+\]
+Stosunek prawdopodobieństw z~obu metod dąży do
+\[
+    \lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3n}{2(n-2)} = \frac{3}{2}.
+\]
+Dla $n$ nieparzystego mamy
+\[
+	p_{\lfloor(n+1)/2\rfloor} = p_{(n+1)/2} = \frac{\bigl(\frac{n+1}{2}-1\bigr)\bigl(n-\frac{n+1}{2}\bigr)}{\binom{n}{3}} = \frac{3(n-1)}{2n(n-2)},
+\]
+więc granica stosunku wynosi
+\[
+    \lim_{n\to\infty}\frac{p_{\lfloor(n+1)/2\rfloor}}{1/n} = \lim_{n\to\infty}\frac{3(n-1)}{2(n-2)} = \frac{3}{2}.
+\]
+A~zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
+
+\subproblem %7-5(c)
+W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału jest bliska $1/3$.
+Szanse na dobry podział w~metodzie mediany trzech wartości wynoszą
+\[
+	\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-2\sum_{i=1}^{n/3}\frac{(i-1)(n-i)}{\binom{n}{3}} = 1-\frac{12}{n(n-1)(n-2)}\sum_{i=1}^{n/3}(i-1)(n-i).
+\]
+Ostatnią sumę przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
+\begin{align*}
+    \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]_0^{n/3-1} \\[1mm]
+	&= \frac{(n-1)(n/3-1)^2}{2}-\frac{(n/3-1)^3}{3} \\[1mm]
+	&= \frac{(n-1)(n-3)^2}{18}-\frac{(n-3)^3}{81}.
+\end{align*}
+Wracając do oszacowania prawdopodobieństwa uzyskania dobrego podziału, otrzymujemy
+\[
+    \sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-\frac{2(n-3)^2}{3n(n-2)}+\frac{4(n-3)^3}{27n(n-1)(n-2)}.
+\]
+
+Dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego szanse na utworzenie dobrego podziału wzrastają o~czynnik
+\[
+	\lim_{n\to\infty}\frac{\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i}{1/3} \approx \frac{1-2/3+4/27}{1/3} = \frac{13}{9}.
+\]
+
+\subproblem %7-5(d)
+Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyskanie podziału zrównoważonego, co z~kolei obniża prawdopodobieństwo, że algorytm quicksort będzie działał w~czasie kwadratowym.
+Jednakże dolne oszacowanie na czas działania algorytmu pozostaje bez zmian i~wynosi nadal $\Omega(n\lg n)$ -- można sobie wyobrazić sytuację, w~której oryginalny sposób wyboru elementu rozdzielającego generuje za każdym razem najbardziej zrównoważony podział.

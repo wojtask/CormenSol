@@ -1,0 +1,97 @@
+\problem{Długość listy w~metodzie łańcuchowej} %11-2
+
+\subproblem %11-2(a)
+Potraktujmy odwzorowywanie kluczy jako ciąg prób Bernoulliego, w~których sukcesem jest odwzorowanie klucza na ustaloną pozycję tablicy.
+Prawdopodobieństwo sukcesu każdej takiej próby jest równe $1/n$.
+Z~rozkładu dwumianowego wynika, że uzyskanie dokładnie $k$ sukcesów w~tej serii prób jest równe
+\[
+	Q_k = b(k;n,1/n) = \binom{n}{k}\biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k}.
+\]
+
+\subproblem %11-2(b)
+Niech $A_i$, dla $i=1$, 2, \dots, $n$, oznacza zdarzenie, że liczba elementów odwzorowanych na \singledash{$i$}{tą} pozycję tablicy wynosi $k$.
+Wówczas zdarzenie $A$, że $M=k$, spełnia inkluzję $A\subseteq\bigcup_{i=1}^nA_i$.
+Z~własności prawdopodobieństwa i~z~punktu (a) mamy
+\[
+	P_k = \Pr(A) \le \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = \sum_{i=1}^nQ_k = nQ_k.
+\]
+
+\subproblem %11-2(c)
+Zauważmy, że dla całkowitych $n$, $k$ spełniających $0<k\le n$ zachodzi
+\[
+	(n-k+1)(n-k+2)\dots n(n-1)^{n-k} < n^n,
+\]
+gdyż po lewej stronie jest iloczyn $n$ czynników nieprzekraczających $n$.
+Mnożąc tę nierówność obustronnie przez $(n-k)!$, dostajemy
+\[
+	n!\,(n-1)^{n-k} < (n-k)!\,n^n.
+\]
+Ponadto ze wzoru Stirlinga dla całkowitego $k>0$ wynika
+\[
+	\frac{1}{k!} = \frac{e^k}{k^k\sqrt{2\pi k}\,(1+\Theta(1/k))} < \frac{e^k}{k^k}.
+\]
+
+Jeśli $k=0$, to oczywiście
+\[
+	Q_0 = \biggl(1-\frac{1}{n}\biggr)^n < 1 = \frac{e^0}{0^0}.
+\]
+Załóżmy teraz, że $k>0$.
+Wykorzystując nierówności z~poprzedniego paragrafu, mamy
+\[
+	Q_k = \frac{n!}{k!\,(n-k)!}\biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k} = \frac{n!\,(n-1)^{n-k}}{k!\,(n-k)!\,n^n} < \frac{1}{k!} < \frac{e^k}{k^k}.
+\]
+
+\subproblem %11-2(d)
+\note{W~drugiej części zadania należy wywnioskować, że\/ $P_k<1/n^2$ dla\/ $k\ge k_0=c\lg n/\!\lg\lg n$.}
+
+\noindent Badając wyrażenie $\lg Q_{k_0}$, wyznaczymy odpowiednie $c$ tak, aby zachodziło $Q_{k_0}<1/n^3$, gdzie $k_0=c\lg n/\!\lg\lg n$.
+Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
+\begin{align*}
+	\lg Q_{k_0} &< k_0\lg e-k_0\lg k_0 \\
+	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n}{\lg\lg n}\lg\frac{c\lg n}{\lg\lg n} \\[1mm]
+	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n(\lg c+\lg\lg n-\lg\lg\lg n)}{\lg\lg n} \\[1mm]
+	&= \frac{c\lg n(\lg e-\lg c)}{\lg\lg n}+\frac{c\lg n\lg\lg\lg n}{\lg\lg n}-c\lg n.
+\end{align*}
+Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$.
+Wówczas pierwszy składnik powyższej sumy jest ujemny.
+Ponadto, jeśli $c'$ jest wystarczająco duże, to dla każdego $n$ zachodzi
+\[
+	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0.
+\]
+Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$.
+Aby powyższa nierówność była prawdziwa, musi zachodzić $(3+c')m\le c'2^m$, skąd
+\[
+	c' \ge \frac{3m}{2^m-m}.
+\]
+Można pokazać, że wyrażenie po prawej stronie jest mniejsze niż 4 niezależnie od wartości $m$, możemy zatem przyjąć $c'\ge4$.
+
+Powracając teraz do głównego oszacowania, mamy
+\[
+	\lg Q_{k_0} < \biggl(\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c'-3\biggr)\lg n \le -3\lg n,
+\]
+skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
+
+Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część (b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
+Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$.
+Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
+Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$.
+Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$.
+Mamy
+\[
+	Q_k < e^k\!/k^k \le e^{k_0}\!/k_0^{k_0} < 1/n^3,
+\]
+a~zatem badane oszacowanie jest spełnione.
+
+\subproblem %11-2(e)
+Niech $k_0=c\lg n/\!\lg\lg n$.
+Wówczas
+\begin{align*}
+	\E(M) &= \sum_{k=0}^nkP_k = \sum_{k=0}^{k_0}kP_k+\sum_{k=k_0+1}^nkP_k \\
+	&\le k_0\sum_{k=0}^{k_0}P_k+n\sum_{k=k_0+1}^nP_k = k_0\Pr(M\le k_0)+n\Pr(M>k_0).
+\end{align*}
+Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie (d), że $P_k<1/n^2$ dla $k\ge k_0$.
+Mamy
+\begin{align*}
+	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
+	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 < k_0\cdot1+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
+\end{align*}

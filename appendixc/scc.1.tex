@@ -1,0 +1,180 @@
+\subchapter{Zliczanie}
+
+\exercise %C.1-1
+Załóżmy, że $k=1$, 2, \dots, $n$, to znaczy nie rozważamy podsłów pustych.
+Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje 1, 2, \dots, $k$, drugie -- 2, 3, \dots, $k+1$ itd.
+Ostatnie \singledash{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$, \dots, $n$.
+Istnieje zatem $n-k+1$ wszystkich \singledash{$k$}{podsłów} \singledash{$n$}{słowa}.
+
+By obliczyć łączną ilość podsłów \singledash{$n$}{słowa}, należy zsumować liczby \singledash{$k$}{podsłów} po wszystkich $k=1$, 2, \dots, $n$, co daje
+\[
+	\sum_{k=1}^n(n-k+1) = \sum_{k=1}^nk = \frac{n(n+1)}{2}.
+\]
+
+\exercise %C.1-2
+Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \singledash{$n$}{bitowych} i~\singledash{$m$}{bitowych}.
+Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$.
+Zagadnienie sprowadza się zatem do pytania o~liczbę wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$.
+Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$.
+Jest zatem $2^{m2^n}\!$ funkcji logicznych o~$n$ wejściach i~$m$ wyjściach, a~stąd $2^{2^n}\!$ funkcji logicznych o~$n$ wejściach i~1 wyjściu.
+
+\exercise %C.1-3
+Niech $S_n$ oznacza szukaną liczbę sposobów ustawienia $n$ osób przy okrągłym stole.
+Każdy sposób jest nierozróżnialny z~$n-1$ innymi, które powstają przez przesunięcie wszystkich osób o~pewną ilość miejsc bez zmiany ich kolejności.
+Istnieje $n!$ możliwych permutacji $n$ osób, zatem $nS_n$ jest równe $n!$.
+Mamy zatem
+\[
+	S_n = \frac{n!}{n} = (n-1)!.
+\]
+
+\exercise %C.1-4
+Aby wybrać trzy liczby ze zbioru $\{1,2,\dots,100\}$ sumujące się do liczby parzystej, można postąpić według jednej z~dwóch strategii -- wybrać trzy liczby parzyste albo wybrać dwie liczby nieparzyste i~jedną liczbę parzystą.
+W~pierwszym przypadku możemy dokonać wyboru na $\binom{50}{3}$ sposobów, a~w drugim -- na $\binom{50}{2}\binom{50}{1}$ sposobów.
+Łączna liczba możliwości wyboru liczb wynosi zatem
+\[
+	\binom{50}{3}+\binom{50}{2}\binom{50}{1} = 80850.
+\]
+
+\exercise %C.1-5
+\[
+	\binom{n}{k} = \frac{n!}{k!\,(n-k)!} = \frac{n}{k}\cdot\frac{(n-1)!}{(k-1)!\,(n-k)!} = \frac{n}{k}\binom{n-1}{k-1}
+\]
+
+\exercise %C.1-6
+\[
+	\binom{n}{k} = \frac{n!}{k!\,(n-k)!} = \frac{n}{n-k}\cdot\frac{(n-1)!}{k!\,(n-k-1)!} = \frac{n}{n-k}\binom{n-1}{k}
+\]
+
+\exercise %C.1-7
+Niech $S$ będzie zbiorem \singledash{$n$}{elementowym} oraz niech $s\in S$.
+Ze zbioru $S$ można wybrać $\binom{n}{k}$ \singledash{$k$}{podzbiorów}.
+Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które zawierają $s$.
+Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$.
+Stąd wnioskujemy, że
+\[
+    \binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.
+\]
+
+\exercise %C.1-8
+Kilka początkowych wierszy trójkąta Pascala:
+\[
+	\begin{array}{ccccccccccccc}
+		&&&&&& 1 \\
+		&&&&& 1 && 1 \\
+		&&&& 1 && 2 && 1 \\
+		&&& 1 && 3 && 3 && 1 \\
+		&& 1 && 4 && 6 && 4 && 1 \\
+		& 1 && 5 && 10 && 10 && 5 && 1 \\
+		1 && 6 && 15 && 20 && 15 && 6 && 1
+	\end{array}
+\]
+Pierwszy wiersz składa się z~elementu $\binom{0}{0}=1$.
+Na krańcach kolejnych wierszy występują jedynki, a~pozostałe elementy obliczane są z~tożsamości z~\refExercise{C.1-7}, czyli poprzez zsumowanie liczb występujących bezpośrednio nad wyznaczanym elementem.
+
+\exercise %C.1-9
+Z~definicji współczynnika dwumianowego i~z~tożsamości (A.1) mamy
+\[
+	\binom{n+1}{2} = \frac{(n+1)!}{2!\,(n-1)!} = \frac{n(n+1)}{2} = \sum_{i=1}^ni.
+\]
+
+\exercise %C.1-10
+Potraktujmy współczynnik dwumianowy jak funkcję $b_n(k)=\binom{n}{k}$ dla $k=0$, 1, \dots, $n$ i~sprawdźmy, dla jakich $k$ wartość $b_n(k)$ jest największa.
+Badamy stosunek
+\[
+	\frac{b_n(k+1)}{b_n(k)} = \frac{\binom{n}{k+1}}{\binom{n}{k}} = \frac{n!}{(k+1)!\,(n-k-1)!}\cdot\frac{k!\,(n-k)!}{n!} = \frac{n-k}{k+1}.
+\]
+Jeśli $n-k\ge k+1$, czyli $k\le(n-1)/2$, to funkcja $b_n$ jest niemalejąca.
+Z~kolei gdy $k\ge(n-1)/2$, to $b_n$ jest nierosnąca.
+A~zatem gdy $n$ jest nieparzyste, to $b_n$ przyjmuje największą wartość dla $k=(n-1)/2=\lfloor n/2\rfloor$.
+Ponadto ze wzoru (C.3) mamy
+\[
+    b_n((n-1)/2) = \binom{n}{(n-1)/2} = \binom{n}{n-(n-1)/2} = \binom{n}{(n+1)/2} = b_n((n+1)/2),
+\]
+a~więc wartość największa jest przyjmowana również dla $k=(n+1)/2=\lceil n/2\rceil$.
+
+W~przypadku gdy $n$ jest liczbą parzystą, maksymalna wartość funkcji $b_n$ jest osiągana dla $k=n/2$ lub $k=n/2-1$.
+Sprawdźmy, która wartość jest większa:
+\[
+    \frac{b_n(n/2)}{b_n(n/2-1)} = \frac{\binom{n}{n/2}}{\binom{n}{n/2-1}} = \frac{n!}{(n/2)!\,(n/2)!}\cdot\frac{(n/2-1)!\,(n/2+1)!}{n!} = \frac{n/2+1}{n/2} > 1.
+\]
+Mamy więc, że $b_n$ przyjmuje maksimum dla $k=n/2=\lfloor n/2\rfloor=\lceil n/2\rceil$.
+
+\exercise %C.1-11
+Dla liczb naturalnych $n$, $j$, $k$ takich, że $j+k\le n$, sprawdzamy zachowanie stosunku
+\[
+	\frac{\binom{n}{j+k}}{\binom{n}{j}\binom{n-j}{k}} = \frac{n!}{(j+k)!\,(n-j-k)!}\cdot\frac{j!\,(n-j)!}{n!}\cdot\frac{k!\,(n-j-k)!}{(n-j)!} = \frac{j!\,k!}{(j+k)!} = \frac{\prod_{i=1}^ki}{\prod_{i=1}^k(j+i)}.
+\]
+Oczywistym jest, że iloczyn kolejnych liczb całkowitych od 1 do $k$ nie przekracza iloczynu kolejnych liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1.
+Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
+
+Lewą stronę nierówności (C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
+W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów.
+Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście.
+Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
+
+\exercise %C.1-12
+Łatwo sprawdzić, że dla $k=0$ nierówność zachodzi.
+Przyjmijmy zatem, że $k\ge1$ i~załóżmy, że
+\[
+	\binom{n}{k-1} \le \frac{n^n}{(k-1)^{k-1}(n-k+1)^{n-k+1}}.
+\]
+Mamy teraz z~\refExercise{C.1-5} i~\refExercise{C.1-6} oraz z~założenia indukcyjnego:
+\[
+	\binom{n}{k} = \frac{n}{k}\binom{n-1}{k-1} = \frac{n-k+1}{k}\binom{n}{k-1} \le \frac{n^n}{k(k-1)^{k-1}(n-k+1)^{n-k}}.
+\]
+Wystarczy wykazać nierówność
+\[
+	\frac{n^n}{k(k-1)^{k-1}(n-k+1)^{n-k}} \le \frac{n^n}{k^k(n-k)^{n-k}},
+\]
+co zrobimy poprzez sprawdzenie ilorazu
+\[
+	\frac{\frac{n^n}{k(k-1)^{k-1}(n-k+1)^{n-k}}}{\frac{n^n}{k^k(n-k)^{n-k}}} = \frac{k^{k-1}(n-k)^{n-k}}{(k-1)^{k-1}(n-k+1)^{n-k}} = \frac{\bigl(\frac{k}{k-1}\bigr)^{k-1}}{\bigl(\frac{n-k+1}{n-k}\bigr)^{n-k}} = \frac{\bigl(1+\frac{1}{k-1}\bigr)^{k-1}}{\bigl(1+\frac{1}{n-k}\bigr)^{n-k}}.
+\]
+Ciąg $e_n={(1+1/n)}^n$ jest rosnący, skąd dostajemy, że powyższy iloraz nie przekracza 1, o~ile $k-1\le n-k$, czyli $k\le(n+1)/2$, a~więc tym bardziej, gdy $k\le n/2$.
+Pokazaliśmy tym samym, że nierówność (C.6) jest spełniona dla $k\le n/2$.
+
+Ze wzoru (C.3) mamy $\binom{n}{k}=\binom{n}{n-k}$.
+Gdy $n/2<k\le n$, to $0\le n-k<n/2$ i~dowód sprowadza się do pokazania, że
+\[
+	\binom{n}{n-k} \le \frac{n^n}{k^k(n-k)^{n-k}}.
+\]
+Można to zrobić, wykorzystując rozumowanie z~poprzedniego paragrafu po zamianie zmiennej $k$ na wyrażenie $n-k$.
+
+\exercise %C.1-13
+Wykorzystując wzór Stirlinga, mamy
+\[
+	\binom{2n}{n} = \frac{(2n)!}{(n!)^2} = \frac{\sqrt{4\pi n}\,\bigl(\frac{2n}{e}\bigr)^{2n}(1+\Theta(1/n))}{2\pi n\,\bigl(\frac{n}{e}\bigr)^{2n}(1+\Theta(1/n))^2} = \frac{2^{2n}}{\sqrt{\pi n}}\cdot\frac{1+\Theta(1/n)}{(1+\Theta(1/n))^2}.
+\]
+
+Zajmiemy się teraz ostatnim ułamkiem, którego celowo nie skracaliśmy, ponieważ funkcja w~mianowniku nie musi być równa kwadratowi funkcji z~licznika.
+Niech $c$, $d$ będą stałymi takimi, że $c\ge d>0$ i~funkcja $1+c/n$ ogranicza licznik ułamka od góry, a~funkcja $1+d/n$ -- mianownik ułamka od dołu.
+Mamy
+\[
+    \frac{1+\Theta(1/n)}{(1+\Theta(1/n))^2} \le \frac{1+c/n}{(1+d/n)^2} < \frac{1+c/n}{1+d/n} = \frac{n+c}{n+d} = 1+\frac{c-d}{n+d} = 1+O(1/n).
+\]
+Otrzymujemy ostatecznie
+\[
+    \binom{2n}{n} = \frac{2^{2n}}{\sqrt{\pi n}}\,(1+O(1/n)).
+\]
+
+\exercise %C.1-14
+Obliczamy pierwszą pochodną funkcji entropii $H$:
+\begin{align*}
+    \frac{dH}{d\lambda}(\lambda) &= -\biggl(\lg\lambda+\lambda\cdot\frac{1}{\lambda\ln2}\biggr)-\biggl(-\lg(1-\lambda)+(1-\lambda)\cdot\frac{-1}{(1-\lambda)\ln2}\biggr) \\[1mm]
+	&= -\lg\lambda-\lg e+\lg(1-\lambda)+\lg e \\[1mm]
+	&= \lg\frac{1-\lambda}{\lambda}.
+\end{align*}
+Powyższe wyrażenie przyjmuje wartość 0, gdy $\lambda=1/2$.
+Należy jeszcze zbadać drugą pochodną:
+\[
+	\frac{d^2\!H}{d\lambda^2}(\lambda) = \frac{\lambda}{(1-\lambda)\ln2}\cdot\frac{-\lambda-(1-\lambda)}{\lambda^2} = -\frac{\lg e}{\lambda(1-\lambda)}.
+\]
+W~punkcie $\lambda=1/2$ druga pochodna jest ujemna, czyli binarna funkcja entropii $H$ osiąga maksimum wynoszące $H(1/2)=1$.
+
+\exercise %C.1-15
+Dla $n=0$ równość jest trywialna, przyjmijmy więc, że $n\ge1$.
+Wówczas
+\[
+	\sum_{k=1}^n\binom{n}{k}k = \sum_{k=1}^n\binom{n-1}{k-1}n = n\sum_{k=0}^{n-1}\binom{n-1}{k} = n2^{n-1}.
+\]
+Skorzystaliśmy ze wzoru (C.8), a~następnie z~(C.4) dla $x=y=1$.

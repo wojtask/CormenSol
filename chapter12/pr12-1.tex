@@ -1,0 +1,27 @@
+\problem{Drzewa wyszukiwań binarnych z~powtarzającymi się kluczami} %12-1
+
+\subproblem %12-1(a)
+Pierwsze wywołanie \proc{Tree-Insert} umieszcza nowy węzeł w~korzeniu drzewa.
+W~pozostałych wywołaniach warunki w~liniach 5 i~11 są fałszywe, co oznacza, że każdy nowy węzeł wstawiony zostanie jako prawy syn poprzedniego węzła i~po $n$ wywołaniach \proc{Tree-Insert} drzewo będzie mieć postać ścieżki o~$n$ elementach.
+Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż w~poprzednim wywołaniu -- sumarycznie więc pokonają ścieżkę o~łącznej długości równej $\sum_{i=1}^ni=\frac{n(n+1)}{2}$, co zajmie czas $\Theta(n^2)$.
+
+\subproblem %12-1(b)
+Zauważmy, że drzewo tworzone w~tej strategii w~dowolnym momencie spełnia następującą własność: dla każdego jego węzła $v$ liczba węzłów w~lewym poddrzewie $v$ jest równa lub o~1 większa od liczby węzłów w~prawym poddrzewie $v$.
+Wynika z~tego, że drzewo jest wypełnione na każdym poziomie, być może z~wyjątkiem ostatniego.
+Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~w~każdym kolejnym wywołaniu jego wysokość wynosi $\Theta(\lg i)$.
+Ciąg $n$ operacji \proc{Tree-Insert} działa zatem w~czasie
+\[
+	\sum_{i=2}^n\Theta(\lg i) = \Theta\biggl(\sum_{i=2}^n\lg i\biggr) = \Theta(\lg(n!)) = \Theta(n\lg n)
+\]
+na podstawie wzoru (3.18).
+
+\subproblem %12-1(c)
+Dodanie węzła do listy węzłów o~tym samym kluczu odbywa się w~czasie stałym.
+Ciąg $n$ wywołań \proc{Tree-Insert} wykona się więc w~czasie $\Theta(n)$.
+
+\subproblem %12-1(d)
+W~pesymistycznym przypadku $x$ jest zawsze ustawiane na \attrib{x}{left} (albo zawsze na \attrib{x}{right}) i~efektywność działania ciągu operacji \proc{Tree-Insert} w~tej strategii nie różni się od efektywności ciągu wywołań jej oryginalnej wersji, gdyż w~czasie $\Theta(n^2)$ tworzone jest drzewo będące ścieżką \singledash{$n$}{elementową}.
+
+W~przypadku średnim $x$ z~jednakowym prawdopodobieństwem przyjmie \attrib{x}{left} albo \attrib{x}{right}, co oznacza, że są równe szanse na to, że wstawiany węzeł trafi do lewego bądź do prawego poddrzewa węzła, z~którym jest aktualnie testowany.
+Wejściowy ciąg kluczy jest więc nieodróżnialny od pewnej losowej permutacji $n$ różnych kluczy i~powstające drzewo można potraktować jak losowo skonstruowane drzewo wyszukiwań binarnych o~$n$ węzłach.
+Konstrukcja ta wymaga czasu proporcjonalnego do sumy głębokości węzłów drzewa, a~na podstawie problemu \refProblem{12-3} w~średnim przypadku wartość ta jest ograniczona przez $O(n\lg n)$.

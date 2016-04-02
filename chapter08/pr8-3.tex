@@ -1,0 +1,33 @@
+\problem{Sortowanie obiektów zmiennej długości} %8-3
+
+\subproblem %8-3(a)
+Opiszemy sposób sortowania tylko dla liczb nieujemnych.
+Jeśli w~tablicy znajdują się liczby ujemne, to wystarczy posortować je osobno analogicznym sposobem do opisanego poniżej, a~następnie scalić z~uporządkowaną tablicą liczb nieujemnych.
+
+Sortowanie odbywa się w~dwóch fazach.
+Najpierw liczby porządkowane są według ilości cyfr, z~których się składają -- im większa ilość cyfr, tym liczba jest większa.
+Wykorzystywany jest w~tym celu algorytm sortowania przez zliczanie, w~którym $k=n$.
+Następnie liczby o~tej samej ilości cyfr sortowane są pozycyjnie.
+
+W~tablicy wejściowej może znaleźć się maksymalnie $n$ liczb, zatem pierwsza część algorytmu zajmuje czas $O(n)$.
+Wyznaczmy teraz czas działania drugiej części.
+W~tym celu oznaczmy przez $m_i$ ilość liczb o~$i$ cyfrach w~tablicy.
+Zachodzi wówczas $\sum_{i=1}^nim_i=n$.
+Sortowanie pozycyjne podtablicy liczb o~$i$ cyfrach zajmuje czas $\Theta(im_i)$, a~więc całkowity czas wymagany przez drugą fazę algorytmu wynosi
+\[
+    \sum_{i=1}^n\Theta(im_i) = \Theta\biggl(\sum_{i=1}^nim_i\biggr) = \Theta(n).
+\]
+Stąd oczywiście wynika, że algorytm działa w~czasie $O(n)$.
+
+\subproblem %8-3(b)
+Skorzystajmy z~obserwacji, że jeśli pierwsza litera napisu $x$ jest leksykograficznie mniejsza od pierwszej litery napisu $y$, to $x$ wystąpi w~wynikowej tablicy przed $y$.
+Można zatem sortować napisy przez zliczanie według ich pierwszych liter, a~następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej, sortować napisy według ich drugiej litery itd.
+Pamiętajmy jednak, że napisy mają różną długość, dlatego po ich posortowaniu względem \singledash{$i$}{tych} liter, należy wyłączyć z~kolejnej fazy słowa o~dokładnie $i$ literach, umieszczając je w~tablicy wynikowej przed grupą napisów, które będą sortowane w~kolejnej fazie.
+
+Zauważmy, że napis $x$ składający się z~$i$ liter będzie brał udział w~co najwyżej $i$ fazach sortowania.
+Niech $m_i$ oznacza liczbę napisów na wejściu posiadających dokładnie $i$ liter.
+Wówczas operacje odpowiedzialne za sortowanie napisów \singledash{$i$}{literowych} wymagają czasu $O(im_i)$.
+Korzystając z~faktu, że $\sum_{i=1}^nim_i=n$, otrzymujemy, że czasem działania algorytmu jest
+\[
+    \sum_{i=1}^nO(im_i) = O\biggl(\sum_{i=1}^nim_i\biggr) = O(n).
+\]

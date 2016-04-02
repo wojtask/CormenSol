@@ -1,0 +1,119 @@
+\subchapter{Standardowe notacje i~typowe funkcje}
+
+\exercise %3.2-1
+Z~założenia, jeśli $n_1\le n_2$, to zachodzi $f(n_1)\le f(n_2)$ oraz $g(n_1)\le g(n_2)$, więc po dodaniu tych nierówności stronami otrzymujemy $f(n_1)+g(n_1)\le f(n_2)+g(n_2)$, czyli że $f(n)+g(n)$ jest funkcją monotonicznie rosnącą.
+Traktując wartości funkcji $g(n)$ jako argumenty funkcji $f(n)$, otrzymamy $f(g(n_1))\le f(g(n_2))$, zatem $f(g(n))$ także jest funkcją monotonicznie rosnącą.
+Jeśli ponadto założymy, że funkcje $f(n)$ i~$g(n)$ są nieujemne, to początkowe nierówności można pomnożyć stronami, co daje $f(n_1)\cdot g(n_1)\le f(n_2)\cdot g(n_2)$, a~to oznacza, że również funkcja $f(n)\cdot g(n)$ jest monotonicznie rosnąca.
+
+\exercise %3.2-2
+Wykorzystując podstawowe własności logarytmów, otrzymujemy
+\[
+	\log_ba^{\log_bc} = \log_bc\cdot\log_ba = \log_bc^{\log_ba},
+\]
+skąd na podstawie różnowartościowości funkcji logarytmicznej wynika tożsamość
+\[
+	a^{\log_bc} = c^{\log_ba}.
+\]
+
+\exercise %3.2-3
+\begin{proof}[Dowód wzoru (3.18)]
+	Górne oszacowanie na $\lg(n!)$ dostajemy dzięki wykorzystaniu własności logarytmów:
+	\[
+	    \lg(n!) = \lg\biggl(\prod_{i=1}^ni\biggr) = \sum_{i=1}^n\lg i \le \sum_{i=1}^n\lg n = n\lg n = O(n\lg n).
+	\]
+	Wykorzystując wzór Stirlinga i~wybierając pewną stałą $c>0$, ograniczamy $\lg(n!)$ od dołu:
+	\begin{align*}
+		\lg(n!) &\ge \lg\biggl(\!\sqrt{2\pi n}\,\biggl(\frac{n}{e}\biggr)^n\biggl(1+\frac{c}{n}\biggr)\biggr) \\
+		&= \lg\sqrt{2\pi n}+\lg\biggl(\frac{n}{e}\biggr)^n+\lg\biggl(1+\frac{c}{n}\biggr) \\
+		&> n\lg n-n\lg e \\
+		&\ge n\lg n-\frac{n\lg n}{2} \\
+		&= \frac{n\lg n}{2}.
+	\end{align*}
+	Przedostatnia nierówność zachodzi, o~ile $n\ge e^2$.
+Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierdzenia 3.1 dostajemy $\lg(n!)=\Theta(n\lg n)$.
+\end{proof}
+
+\begin{proof}[Dowód tożsamości $n!=\omega(2^n)$]
+	Równoważnie należy pokazać, że zachodzi
+	\[
+		\lim_{n\to\infty}\frac{n!}{2^n} = \infty.
+	\]
+	Zauważmy, że
+	\[
+	    \frac{n!}{2^n} = \biggl(\frac{1}{2}\biggr)\biggl(\frac{2}{2}\biggr)\dots\biggl(\frac{n}{2}\biggr).
+	\]
+	Wszystkie czynniki powyższego iloczynu są dodatnie, a~przy coraz większym $n$ ostatnie czynniki rosną nieograniczenie, zatem cały iloczyn dąży do $\infty$.
+\end{proof}
+
+\begin{proof}[Dowód tożsamości $n!=o(n^n)$]
+	Na podstawie wzoru (3.1) dowód sprowadza się do pokazania, że
+	\[
+		\lim_{n\to\infty}\frac{n!}{n^n} = 0.
+	\]
+	Mamy
+	\[
+	    \frac{n!}{n^n} = \biggl(\frac{1}{n}\biggr)\biggl(\frac{2}{n}\biggr)\dots\biggl(\frac{n}{n}\biggr).
+	\]
+	Każdy czynnik po prawej stronie znaku równości jest dodatni i~nie przekracza 1.
+Ponadto dla $n$ dążącego do $\infty$ początkowe czynniki zmierzają do 0, a~zatem granicą tego iloczynu jest 0.
+\end{proof}
+
+\exercise %3.2-4
+Funkcja $f(n)$ jest ograniczona wielomianowo, jeżeli istnieją stałe $c$, $k$, $n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$.
+Stąd $\lg f(n)\le k\lg n+\lg c\le(k+1)\lg n$, o~ile $n\ge c$, a~więc $\lg f(n)=O(\lg n)$.
+Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest więc równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
+
+Zanim przejdziemy do głównego dowodu, zauważmy, że $\lceil\lg n\rceil=\Theta(\lg n)$.
+Zachodzi bowiem $\lceil\lg n\rceil\ge\lg n$ oraz $\lceil\lg n\rceil<\lg n+1\le2\lg n$ dla każdego $n\ge2$.
+
+Logarytmując pierwszą badaną funkcję przy wykorzystaniu wzoru (3.18), dostajemy
+\[
+	\lg(\lceil\lg n\rceil!) = \Theta(\lceil\lg n\rceil\lg\lceil\lg n\rceil) = \Theta(\lg n\lg\lg n) = \omega(\lg n),
+\]
+a~zatem $\lg(\lceil\lg n\rceil!)\ne O(\lg n)$ i~funkcja $\lceil\lg n\rceil!$ nie jest ograniczona wielomianowo.
+
+Dla drugiej funkcji mamy
+\[
+	\lg(\lceil\lg\lg n\rceil!) = \Theta(\lceil\lg\lg n\rceil\lg\lceil\lg\lg n\rceil) = \Theta(\lg\lg n\lg\lg\lg n) = o((\lg\lg n)^2) = o(\lg n).
+\]
+Ostatni krok wynika z~tożsamości $\lg^bn=o(n^a)$ prawdziwej dla stałych $a$, $b>0$, w~której podstawiono $\lg n$ w~miejsce $n$ oraz przyjęto $a=1$ i~$b=2$.
+Otrzymany rezultat potwierdza, że $\lg(\lceil\lg\lg n\rceil!)=O(\lg n)$, a~zatem funkcja $\lceil\lg\lg n\rceil!$ jest ograniczona wielomianowo.
+
+\exercise %3.2-5
+Zdefiniujmy $n$ jako
+\[
+    2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k$}\kern0pt},
+\]
+przy czym $0<\epsilon\le1$, a~$k\ge1$ oznacza liczbę dwójek w~powyższym zapisie.
+Zachodzi
+\[
+    \lg^*n=k \quad\text{oraz}\quad \lg n = 2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k-1$}\kern0pt},
+\]
+a~zatem
+\[
+    \lg\lg^*n = \lg k \quad\text{oraz}\quad \lg^*\lg n = k-1.
+\]
+Oczywiście $k-1=\omega(\lg k)$, więc otrzymujemy, że $\lg^*\lg n=\omega(\lg\lg^*n)$.
+
+\exercise %3.2-6
+Łatwo sprawdzić, że dla $i=0$ oraz $i=1$ wzór jest prawdziwy.
+Załóżmy teraz, że zachodzi
+\[
+	F_i = \frac{\phi^i-\widehat\phi^i}{\sqrt{5}} \quad\text{oraz}\quad F_{i+1} = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}
+\]
+dla pewnego $i\ge0$.
+Po wykorzystaniu zależności $\phi+1=\phi^2$ i~$\widehat\phi+1=\widehat\phi^2$ otrzymujemy
+\[
+	F_{i+2} = F_{i+1}+F_i = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}+\frac{\phi^i-\widehat\phi^i}{\sqrt{5}} = \frac{\phi^i(\phi+1)-\widehat\phi^i\bigl(\widehat\phi+1\bigr)}{\sqrt{5}} = \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}},
+\]
+a~zatem wzór jest spełniony dla każdego $i\ge0$.
+
+\exercise %3.2-7
+Korzystając z~wyniku z~poprzedniego zadania, mamy
+\begin{align*}
+    F_{i+2}-\phi^i &= \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}}-\phi^i \\[1mm]
+	&= \frac{\phi^i(\phi^2-\sqrt{5})-\widehat\phi^{i+2}}{\sqrt{5}} \\[1mm]
+	&= \frac{\phi^i\cdot\frac{3-\sqrt{5}}{2}-\widehat\phi^i\cdot\frac{3-\sqrt{5}}{2}}{\sqrt{5}} \\
+	&= \frac{3-\sqrt{5}}{2\sqrt{5}}\,\bigl(\phi^i-\widehat\phi^i\bigr).
+\end{align*}
+Ponieważ $\phi>|\widehat\phi|$, to otrzymane wyrażenie jest nieujemne dla każdego $i\ge0$ (równość zachodzi tylko wówczas, gdy $i=0$), a~zatem $F_{i+2}\ge\phi^i$ dla dowolnego $i\ge0$.

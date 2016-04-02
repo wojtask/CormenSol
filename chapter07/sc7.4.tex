@@ -1,0 +1,102 @@
+\subchapter{Analiza algorytmu quicksort}
+
+\exercise %7.4-1
+Niech $n\ge1$.
+Zgadujemy, że $T(q)\ge dq^2$ dla pewnej stałej $d>0$ i~wszystkich $q=0$, 1, \dots, $n-1$.
+Podstawiamy do wzoru na $T(n)$ i~na podstawie \refExercise{7.4-3} otrzymujemy:
+\begin{align*}
+	T(n) &\ge \max_{0\le q\le n-1}(dq^2+d(n-q-1)^2)+\Theta(n) \\
+	&= d\cdot\!\!\!\max_{0\le q\le n-1}(q^2+(n-q-1)^2)+\Theta(n) \\
+	&= dn^2-d(2n-1)+\Theta(n) \\
+	&\ge dn^2.
+\end{align*}
+Ostatnia nierówność zostaje spełniona, jeśli przyjmiemy $d$ odpowiednio małe tak, aby składnik $\Theta(n)$ zdominował wyrażenie $d(2n-1)$.
+Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(0)=1$.
+Dla dowolnego $d$ zachodzi $T(0)\ge d\cdot0^2=0$, a~więc $n=0$ przyjmujemy na podstawę indukcji, co kończy dowód, że $T(n)=\Omega(n^2)$.
+
+\exercise %7.4-2
+Czas algorytmu quicksort w~przypadku optymistycznym jest opisany przez rekurencję
+\[
+    T(n) = \min_{0\le q\le n-1}(T(q)+T(n-q-1))+\Theta(n).
+\]
+Rozwiążemy ją metodą podstawiania.
+Niech $c>0$ będzie stałą.
+Zgadujemy, że $T(q)\ge cq\lg q$ dla każdego $q=0$, 1, \dots, $n-1$ (przyjmujemy dla wygody, że $0\lg0=0$) i~podstawiamy:
+\begin{align*}
+    T(n) &\ge \min_{0\le q\le n-1}(cq\lg q+c(n-q-1)\lg(n-q-1))+\Theta(n) \\
+	&= c\cdot\!\!\!\min_{0\le q\le n-1}(q\lg q+(n-q-1)\lg(n-q-1))+\Theta(n).
+\end{align*}
+
+Obliczymy teraz minimum wyrażenia $q\lg q+(n-q-1)\lg(n-q-1)$, gdy $0\le q\le n-1$.
+Jeśli $q=0$ lub $q=n-1$, to wyrażenie ma wartość $(n-1)\lg(n-1)$.
+W~pozostałych przypadkach potraktujmy je jako funkcję $f$ zmiennej $q$.
+Pochodne $f$ są postaci:
+\begin{align*}
+    \frac{df}{dq}(q) &= \frac{d}{dq}\biggl(\frac{q\ln q+(n-q-1)\ln(n-q-1)}{\ln2}\biggr) = \frac{\ln q-\ln(n-q-1)}{\ln2}, \\[1mm]
+	\frac{d^2\!f}{dq^2}(q) &= \frac{d}{dq}\biggl(\frac{\ln q-\ln(n-q-1)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q}+\frac{1}{n-q-1}\biggr).
+\end{align*}
+Pierwsza pochodna zeruje się tylko wtedy, gdy $q=(n-1)/2$.
+Wyznaczamy drugą pochodną w~tym punkcie:
+\[
+    \frac{d^2\!f}{dq^2}\biggl(\frac{n-1}{2}\biggr) = \frac{1}{\ln2}\biggl(\frac{2}{n-1}+\frac{2}{2n-(n-1)-2}\biggr) = \frac{4}{\ln2\cdot(n-1)}.
+\]
+Liczba ta jest dodatnia, o~ile $n>1$.
+Mamy zatem, że minimum funkcji $f$ znajduje się w~punkcie $q=(n-1)/2$ i~wynosi $(n-1)\lg((n-1)/2)$.
+Wartość ta stanowi tym samym minimum szukanego wyrażenia.
+
+Powracamy do oszacowania rekurencji $T(n)$, przyjmując $n\ge2$:
+\begin{align*}
+    T(n) &\ge c(n-1)\lg\frac{n-1}{2}+\Theta(n) \\
+	&= c(n-1)\lg(n-1)-c(n-1)+\Theta(n) \\
+	&= cn\lg(n-1)-c\lg(n-1)-c(n-1)+\Theta(n) \\
+	&\ge cn\lg(n/2)-c\lg(n-1)-c(n-1)+\Theta(n) \\
+	&= cn\lg n-c(2n+\lg(n-1)-1)+\Theta(n) \\
+	&\ge cn\lg n.
+\end{align*}
+Ostatnia nierówność zachodzi, o~ile stała $c$ jest na tyle mała, że wyrażenie $c(2n+\lg(n-1)-1)$ jest zdominowane przez składnik $\Theta(n)$.
+Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(0)=d$, gdzie $d\ge0$ jest pewną stałą.
+Na podstawę indukcji możemy więc przyjąć $n=0$, dla którego $T(n)$ spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
+
+\exercise %7.4-3
+Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$.
+W~celu znalezienia maksimum globalnego tej funkcji obliczmy jej pierwszą i~drugą pochodną:
+\begin{align*}
+    \frac{df}{dq}(q) &= 2q-2(n-q-1), \\
+	\frac{d^2\!f}{dq^2}(q) &= 4.
+\end{align*}
+Ponieważ druga pochodna jest dodatnia, to funkcja $f$ nie posiada maksimum lokalnego i~jej największej wartości należy szukać w~punktach brzegowych dziedziny.
+Mamy $f(0)=f(n-1)=(n-1)^2$, więc maksimum jest osiągane w~obu tych punktach.
+
+\exercise %7.4-4
+Przy wyznaczaniu dolnego oszacowania na oczekiwany czas działania algorytmu quicksort korzystamy z~analizy przedstawionej w~Podręczniku dla górnego oszacowania.
+Zauważmy, że lemat 7.1 pozostaje prawdziwy, gdyby zamiast notacji $O$ zastosować $\Omega$.
+Prowadząc rozumowanie analogicznie, dochodzimy w~końcu do wartości oczekiwanej zmiennej losowej $X$, którą następnie ograniczamy od dołu:
+\[
+	\E(X) = \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{k+1} \ge \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac{2}{2k} = \sum_{i=1}^{n-1}H_{n-i} = \sum_{i=1}^{n-1}H_i = \sum_{i=1}^{n-1}\Omega(\lg i) = \Omega(n\lg n).
+\]
+Skorzystaliśmy tutaj z~\refExercise{A.2-3} oraz z~punktu (b) problemu \refProblem{A-1} dla $s=1$, skąd otrzymaliśmy ostatnie dwie równości.
+
+\exercise %7.4-5
+W~rozważanej modyfikacji drzewo rekursji w~algorytmie quicksort ma około $\lg(n/k)$ poziomów, z~których każdy wnosi koszt $O(n)$.
+W~przypadku średnim czas wykonania tego kroku wynosi $O(n\lg(n/k))$.
+Liczba fragmentów o~mniej niż $k$ elementach, których nie uporządkowano w~pierwszej fazie, jest rzędu $O(n/k)$.
+Drugi krok polega na posortowaniu ich przez wstawianie i~zajmuje czas $O(n/k\cdot k^2)=O(nk)$.
+Stąd całkowitym oczekiwanym czasem działania algorytmu jest $O(nk+n\lg(n/k))$.
+
+Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy złożoność czasowa tego algorytmu nie przewyższa złożoności czasowej sortowania szybkiego.
+W~praktyce jednak $k$ powinno być tak dobrane, aby sortowanie przez wstawianie tablicy o~długości $k$ było wykonywane szybciej od sortowania takiej tablicy algorytmem quicksort.
+
+\exercise %7.4-6
+Niech $P$ będzie szukaną funkcją zmiennej $0<\alpha<1$.
+Zauważmy, że funkcja ta spełnia własność $P(\alpha)=P(1-\alpha)$, w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$.
+Niech $i<j<k$ będą indeksami elementów losowo wybranych z~$A$.
+Utworzenie w~najgorszym przypadku podziału $\alpha$ do $1-\alpha$ jest równoważne temu, że $\alpha n\le j\le(1-\alpha)n$.
+Możliwe są następujące przypadki ze względu na wartości przyjmowane przez pozostałe indeksy:
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
+	\item $i<\alpha n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $6\alpha^2(1-2\alpha)$;
+	\item $i<\alpha n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
+	\item $\alpha n\le i\le(1-\alpha)n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
+	\item $\alpha n\le i\le(1-\alpha)n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $(1-2\alpha)^3$.
+\end{enumerate}
+Sumując prawdopodobieństwa z~wszystkich przypadków, otrzymujemy $P(\alpha)\approx4\alpha^3-6\alpha^2+1$.

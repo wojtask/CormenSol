@@ -1,0 +1,138 @@
+\problem{Tablice Younga} %6-3
+
+\subproblem %6-3(a)
+Jedną z~tablic Younga zawierających podane elementy jest
+\[
+	\begin{pmatrix}
+		2 & 3 & 14 & 16 \\
+		4 & 8 & \infty & \infty \\
+		5 & 12 & \infty & \infty \\
+		9 & \infty & \infty & \infty
+	\end{pmatrix}.
+\]
+
+\subproblem %6-3(b)
+Załóżmy, że $Y[1,1]=\infty$ i~że tablica $Y$ nie jest pusta, tzn.\ $Y[i,j]\ne\infty$ dla pewnych $i$, $j$ takich, że $1\le i\le m$ oraz $1\le j\le n$.
+Ale z~własności tablicy Younga otrzymujemy, że $Y[1,1]\le Y[1,j]\le Y[i,j]$, co prowadzi do sprzeczności z~założeniem.
+A~więc tablica Younga $Y$, w~której $Y[1,1]=\infty$, jest pusta.
+
+Dowód drugiej własności przebiega analogicznie.
+Przypuśćmy, że $Y[m,n]\ne\infty$ i~że tablica $Y$ nie jest pełna, tzn.\ $Y[i,j]=\infty$ dla pewnych $i$, $j$, gdzie $1\le i\le m$ oraz $1\le j\le n$.
+Wykorzystując własność tablicy Younga, dostajemy $Y[i,j]\le Y[i,n]\le Y[m,n]$, co jest sprzeczne z~założeniem.
+Tablica Younga $Y$, w~której $Y[m,n]\ne\infty$, jest pełna.
+
+\subproblem %6-3(c)
+Procedura ekstrakcji najmniejszego elementu tablicy Younga $Y$ o~rozmiarach $m\times n$ będzie opierać się o~pomysł z~\proc{Max-Heapify}.
+Najmniejszym elementem tablicy $Y$ jest $\mu=Y[1,1]$.
+Przetransportujemy go na ostatnią pozycję ostatniego wiersza tablicy, skąd będzie można bezpiecznie go usunąć przy jednoczesnym zachowaniu własności tablicy Younga.
+W~tym celu porównajmy $\mu$ z~elementem znajdującym się bezpośrednio na prawo i~elementem bezpośrednio w~dół od niego (o~ile istnieją).
+Mniejszy z~nich zamieniany jest następnie z~$\mu$, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$, w~której $\mu$ stanowi pierwszy element pierwszej kolumny.
+Otrzymując w~wyniku tego postępowania tablicę o~rozmiarach $1\times1$, można usunąć jej jedyny element będący najmniejszym elementem początkowej tablicy Younga (zastępując go wartością $\infty$) i~zwrócić go jako wynik algorytmu.
+
+Opisany sposób został zaimplementowany w~poniższym pseudokodzie.
+Aby pobrać minimum z~tablicy Younga $Y$ o~rozmiarach $m\times n$, należy wywołać $\proc{Young-Extract-Min}(Y,m,n,1,1)$.
+\begin{codebox}
+\Procname{$\proc{Young-Extract-Min}(Y,m,n,i,j)$}
+\li	\If $\langle i,j\rangle=\langle m,n\rangle$
+\li		\Then
+			$\id{min}\gets Y[i,j]$
+\li			$Y[i,j]\gets\infty$
+\li			\Return \id{min}
+		\End
+\li	$\langle i',j'\rangle\gets\langle i,j+1\rangle$
+\li	\If $i<m$
+\li		\Then
+			\If $j=n$ lub $Y[i+1,j]<Y[i,j+1]$
+\li				\Then $\langle i',j'\rangle\gets\langle i+1,j\rangle$
+				\End
+		\End
+\li	zamień $Y[i,j]\leftrightarrow Y[i',j']$
+\li	\Return $\proc{Young-Extract-Min}(Y,m,n,i',j')$
+\end{codebox}
+
+Niech $T(p)$ będzie maksymalnym czasem działania powyższego algorytmu dla tablicy Younga $m\times n$, gdzie $p=m+n$ jest łączną liczbą jej kolumn i~wierszy.
+W~każdym wywołaniu rekurencyjnym zmniejszamy $p$ o~1, wykonując przy tym czas stały, skąd dostajemy
+\[
+	T(p) =
+	\begin{cases}
+		\Theta(1), & \text{jeśli $p=2$}, \\
+		T(p-1)+\Theta(1), & \text{jeśli $p>2$}.
+	\end{cases}
+\]
+Łatwo sprawdzić, że rozwiązaniem tej rekurencji jest $T(p)=O(p)=O(m+n)$.
+
+\subproblem %6-3(d)
+Podamy najpierw pomocniczą procedurę \proc{Youngify}, która działa analogicznie do \proc{Max-Heapify} i~ma na celu przywrócenie własności tablicy Younga $Y$ naruszoną przez $Y[i,j]$.
+Element ten wystarczy porównać z~jego sąsiadem znajdującym się powyżej lub sąsiadem znajdującym się po lewej stronie w~tablicy (o~ile istnieją).
+W~zależności od tego, który z~tych trzech elementów jest największy, dokonywana jest odpowiednia zamiana i~procedura wywoływana jest rekurencyjnie.
+\begin{codebox}
+\Procname{$\proc{Youngify}(Y,i,j)$}
+\li	$\langle i',j'\rangle\gets\langle i,j\rangle$
+\li	\If $i>1$ i~$Y[i-1,j]>Y[i',j']$
+\li		\Then $\langle i',j'\rangle\gets\langle i-1,j\rangle$
+		\End
+\li	\If $j>1$ i~$Y[i,j-1]>Y[i',j']$
+\li		\Then $\langle i',j'\rangle\gets\langle i,j-1\rangle$
+		\End
+\li	\If $\langle i',j'\rangle\ne\langle i,j\rangle$
+\li		\Then
+			zamień $Y[i,j]\leftrightarrow Y[i',j']$
+\li			$\proc{Youngify}(Y,i',j')$
+		\End
+\end{codebox}
+
+Ponieważ zakładamy, że tablica Younga $Y$ nie jest pełna, to na mocy punktu (b) mamy $Y[m,n]=\infty$, czyli pozycja ta jest pusta i~można wstawić na nią nowy element.
+Wówczas jednak własność tablicy Younga może być naruszona, dlatego korzystamy z~procedury \proc{Youngify} w~celu przywrócenia tej własności.
+\begin{codebox}
+\Procname{$\proc{Young-Insert}(Y,m,n,\id{key})$}
+\li	$Y[m,n]\gets\id{key}$
+\li	$\proc{Youngify}(Y,m,n)$
+\end{codebox}
+
+Analiza poprawności i~czasu działania procedury \proc{Youngify} opiera się na analizie procedury \proc{Max-Heapify}.
+W~każdym kolejnym wywołaniu rekurencyjnym jedna z~liczb, $i$ lub $j$, jest mniejsza o~1.
+Koniec działania następuje w~najgorszym przypadku, gdy $i=j=1$, po wykonaniu $O(m+n)$ operacji.
+A~zatem czasem działania operacji \proc{Young-Insert} jest również $O(m+n)$.
+
+\subproblem %6-3(e)
+Niech $A$ będzie tablicą $n^2$ liczb, które należy posortować.
+Poniższy algorytm buduje tablicę Younga $n\times n$ z~liczb tablicy $A$, wykonując na każdej z~nich operację \proc{Young-Insert}.
+Następnie liczby te są pobierane w~kolejności niemalejącej dzięki $n^2$ wywołaniom \proc{Young-Extract-Min}.
+\begin{codebox}
+\Procname{$\proc{Young-Sort}(A)$}
+\li	$n\gets\sqrt{\attrib{A}{length}}$
+\li	\For $i\gets1$ \To $n^2$
+\li		\Do $\proc{Young-Insert}(Y,n,n,A[i])$
+		\End
+\li	\For $i\gets1$ \To $n^2$
+\li		\Do $A[i]\gets\proc{Young-Extract-Min}(Y,n,n,1,1)$
+		\End
+\end{codebox}
+
+Czas działania obu wywoływanych procedur wynosi $O(n)$, zatem powyższy algorytm działa w~czasie $O(n^3)$.
+Jeśli mamy danych $m=n^2$ liczb, to jesteśmy w~stanie posortować je przy użyciu tego algorytmu w~czasie $O(m^{3/2})$.
+Jest to lepsza złożoność niż kwadratowa, ale gorsza od złożoności liniowo-logarytmicznej.
+
+\subproblem %6-3(f)
+Zbadajmy, jak szukana liczba $v$ ma się do ostatniego elementu pierwszego wiersza tablicy Younga $m\times n$.
+Jeśli wartości te są równe, to oczywiście można zakończyć poszukiwania z~rezultatem pozytywnym.
+W~przeciwnym przypadku, w~zależności od tego, która z~liczb jest większa, odrzucamy z~dalszych poszukiwań cały pierwszy wiersz lub całą ostatnią kolumnę i~kontynuujemy szukanie $v$ w~otrzymanej podtablicy, która stanowi tablicę Younga $(m-1)\times n$ albo $m\times(n-1)$.
+W~momencie uzyskania tablicy pustej wiadomo, że szukanej liczby nie ma w~początkowej tablicy.
+\begin{codebox}
+\Procname{$\proc{Young-Search}(Y,m,n,v)$}
+\li	$i\gets1$
+\li	$j\gets n$
+\li	\While $i\le m$ i~$j\ge1$
+\li		\Do
+			\If $v=Y[i,j]$
+\li				\Then \Return \const{true}
+				\End
+\li			\If $v>Y[i,j]$
+\li				\Then $i\gets i+1$
+\li				\Else $j\gets j-1$
+				\End
+		\End
+\li	\Return \const{false}
+\end{codebox}
+
+W~każdym kroku pętli \kw{while} zmniejszamy o~1 liczbę kolumn lub liczbę wierszy rozważanej tablicy, wykonując przy tym stałą liczbę operacji -- jasne jest zatem, że czas działania algorytmu wynosi $O(m+n)$.

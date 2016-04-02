@@ -1,0 +1,86 @@
+\problem{Małe statystyki pozycyjne} %9-3
+
+\subproblem %9-3(a)
+\note{W~treści problemu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$.
+Wartość\/ $T(n)$ powinna być zwracana dla\/ $i\ge n/2$, a~część rekurencyjna -- dla pozostałych wartości\/ $i$.}
+
+\noindent Jeśli $i\ge n/2$, to w~celu znalezienia \singledash{$i$}{tej} statystyki pozycyjnej tablicy wejściowej wywołujemy algorytm \proc{Select}.
+Stąd $U_i(n)=T(n)$.
+
+Załóżmy teraz, że $i<n/2$ i~że tablicą wejściową jest $A[p\twodots r]$, gdzie $n=r-p+1$.
+Niech $m=\lfloor n/2\rfloor$.
+Dzielimy tablicę wejściową na dwie podtablice $A[p\twodots p+m-1]$ oraz $A[p+m\twodots r]$.
+Dla każdego $j=0$, 1, \dots, $m-1$ porównamy elementy $A[p+j]$ oraz $A[p+m+j]$ i~ewentualnie zamienimy je, aby zachodziło $A[p+j]>A[p+m+j]$.
+Wywołujemy następnie nasz algorytm rekurencyjnie w~celu znalezienia \singledash{$i$}{tej} statystyki pozycyjnej podtablicy $A[p+m\twodots r]$, czego efektem ubocznym jest podział tej podtablicy względem szukanego elementu.
+Po powrocie z~wywołania rekurencyjnego podtablica $A[p\twodots p+m-1]$ zostanie podzielona w~analogiczny sposób.
+Dokładniej, dla każdej pary elementów $A[j]$ i~$A[k]$ zamienionych w~wywołaniu rekurencyjnym, gdzie $p+m\le j<k\le p+2m-1$, zamienione zostaną również elementy $A[j-m]$ i~$A[k-m]$.
+Dzięki temu, po wyznaczeniu \singledash{$i$}{tego} najmniejszego elementu podtablicy $A[p+m\twodots r]$, fragmenty $A[p\twodots p+i-1]$ oraz $A[p+m\twodots p+m+i-1]$ będą zawierać po $i$ najmniejszych elementów ze swoich podtablic.
+A~zatem \singledash{$i$}{ty} najmniejszy element tablicy wejściowej znajduje się w~jednym z~tych dwóch fragmentów.
+Wystarczy więc połączyć je w~tablicę $B[1\twodots2i]$, a~następnie zwrócić $\proc{Select}(B,1,2i,i)$.
+
+Omówimy teraz szczegóły implementacyjne.
+Aby zrealizować równoczesny podział tablicy, jak również utrzymywać elementy w~parach tak, że większy element pary należy do lewej części tablicy, a~mniejszy do prawej, będziemy rejestrować każdą zamianę w~tablicy wejściowej.
+Można tego dokonać poprzez utworzenie dodatkowej tablicy \id{permutation} wypełnionej kolejno liczbami od 1 do $n$ i~aktualizowanie jej odpowiednio przy każdej zamianie elementów w~tablicy wejściowej.
+Wynikowa permutacja liczb od 1 do $n$ w~tablicy \id{permutation} jednoznacznie określi permutację elementów tablicy wejściowej w~porównaniu z~jej stanem początkowym na danym poziomie rekurencji i~będzie wykorzystywana do przeprowadzenia podziału drugiej części tablicy po powrocie z~wywołania rekurencyjnego, jak również aktualizacji tablicy \id{permutation} na wyższym poziomie.
+Zauważmy także, że tablica $B$, którą tworzymy pod koniec działania algorytmu, może w~rzeczywistości stanowić część tablicy $A$ -- wystarczy bowiem, aby był to spójny fragment, co da się uzyskać poprzez przeniesienie fragmentu $A[p+m\twodots p+m+i-1]$ tuż za koniec fragmentu $A[p\twodots p+i-1]$.
+
+Sprawdzimy teraz, ile wynosi $U_i(n)$ w~przypadku, gdy $i<n/2$.
+W~pierwszej fazie algorytm wykonuje $\lfloor n/2\rfloor$ porównań elementów pochodzących z~dwóch części tablicy wejściowej.
+Wywołanie rekurencyjne wprowadza składnik $U_i(\lceil n/2\rceil)$, zaś procedura \proc{Select} wywołana na tablicy $B$ wykonuje $T(2i)$ porównań.
+Stąd otrzymujemy
+\[
+    U_i(n) = \lfloor n/2\rfloor+U_i(\lceil n/2\rceil)+T(2i).
+\]
+
+\subproblem %9-3(b)
+Stosując metodę podstawiania, wykażemy, że jeśli $i<n/2$, to
+\[
+	U_i(n) \le n+cT(2i)\lg(n/i),
+\]
+gdzie $c>0$ jest pewną stałą.
+
+Jako przypadek bazowy indukcji będziemy rozważać wyrazy $U_i(n)$, w~których $2i<n\le4i$, skąd $n/4\le i<n/2$.
+Wykażemy, że spełniają one podane oszacowanie.
+Mamy:
+\[
+    U_i(n) = \lfloor n/2\rfloor+U_i(\lceil n/2\rceil)+T(2i) < n+T(\lceil n/2\rceil)+T(2i).
+\]
+Jeśli teraz ograniczymy powyższe wyrażenie od góry przez $n+cT(2i)\lg(n/i)$ i~rozwiążemy ze względu na $c$, to otrzymamy
+\[
+    c \ge \frac{1}{\lg(n/i)}\biggl(\frac{T(\lceil n/2\rceil)}{T(2i)}+1\biggr).
+\]
+Pierwszy czynnik po prawej stronie powyższej nierówności można ograniczyć od góry przez $1/\lg2=1$.
+W~celu oszacowania drugiego czynnika zauważmy, że rekurencja $T(n)$ jest funkcją dodatnią klasy $\Theta(n)$, zatem istnieją stałe $d_1$, $d_2>0$, że dla każdego $n\ge1$ spełnione są nierówności $d_1n\le T(n)\le d_2n$.
+Mamy zatem
+\[
+    \frac{T(\lceil n/2\rceil)}{T(2i)} \le \frac{d_2\lceil n/2\rceil}{2d_1i} < \frac{d_2n}{d_1n/2} = \frac{2d_2}{d_1},
+\]
+a~stąd wynika, że $c\ge2d_2/d_1+1$.
+Pokazaliśmy, że $c$ istotnie może być stałą, a~zatem podstawa indukcji zachodzi.
+
+W~drugim kroku indukcyjnym mamy $n>4i$ i~przyjmujemy założenie
+\[
+    U_i(\lceil n/2\rceil) \le \lceil n/2\rceil+cT(2i)\lg(\lceil n/2\rceil/i).
+\]
+Wówczas:
+\begin{align*}
+    U_i(n) &= \lfloor n/2\rfloor+U_i(\lceil n/2\rceil)+T(2i) \\
+	&\le \lfloor n/2\rfloor+\lceil n/2\rceil+cT(2i)\lg(\lceil n/2\rceil/i)+T(2i) \\
+	&= n+cT(2i)\lg\lceil n/2\rceil-cT(2i)\lg i+T(2i) \\
+	&\le n+cT(2i)\lg n-cT(2i)\lg i.
+\end{align*}
+Ostatnia nierówność jest spełniona, jeżeli $cT(2i)\lg\lceil n/2\rceil+T(2i)\le cT(2i)\lg n$, co po uproszczeniu sprowadza się do warunku $c\lg\frac{n}{\lceil n/2\rceil}\ge1$.
+Łatwo zauważyć, że aby go spełnić dla $n\ge5$, wystarczy przyjąć $c\ge\log_{5/3}2$, co kończy dowód oszacowania na $U_i(n)$.
+
+\subproblem %9-3(c)
+Ponieważ $i$ jest stałe, to $T(2i)$ również można potraktować jako wartość stałą.
+Na mocy poprzedniego punktu mamy
+\[
+	U_i(n) = n+O(T(2i)\lg(n/i)) = n+O(\lg n-\lg i) = n+O(\lg n).
+\]
+
+\subproblem %9-3(d)
+Dla $k>2$ oszacowanie wynika natychmiast z~części (b) po podstawieniu $i=n/k$, bo wtedy oczywiście $i<n/2$.
+
+Jeśli $k=2$, to $i=n/2$ i~rozwiązaniem rekurencji $U_i(n)$ jest $U_i(n)=T(n)=O(n)$.
+Teza w~tym przypadku przyjmuje postać $U_i(n)=n+O(T(n))$, co oczywiście jest spełnione, ponieważ $n+O(T(n))=O(n)$.

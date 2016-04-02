@@ -1,0 +1,46 @@
+\problem{Szacowanie sum} %A-1
+W~celu wyznaczenia asymptotycznych oszacowań dokładnych dla każdej z~sum, znajdziemy ich oszacowania górne i~dolne poprzez zastąpienie odpowiednimi wartościami każdego składnika danej sumy.
+Ponieważ parzystość $n$ nie ma znaczenia dla postaci oszacowań tych sum, to dla uproszczenia rachunków będziemy przyjmować, że $n$ jest liczbą parzystą.
+
+\subproblem %A-1(a)
+Oszacowanie górne:
+\[
+    \sum_{k=1}^nk^r \le \sum_{k=1}^nn^r = n\cdot n^r = O(n^{r+1}).
+\]
+Oszacowanie dolne:
+\[
+    \sum_{k=1}^nk^r \ge \sum_{k=n/2+1}^nk^r \ge \sum_{k=n/2+1}^n(n/2)^r = (n/2)\cdot(n/2)^r = \Omega(n^{r+1}).
+\]
+Na podstawie otrzymanych wyników stwierdzamy, że oszacowaniem dokładnym sumy jest
+\[
+    \sum_{k=1}^nk^r = \Theta(n^{r+1}).
+\]
+
+\subproblem %A-1(b)
+Oszacowanie górne:
+\[
+    \sum_{k=1}^n\lg^sk \le \sum_{k=1}^n\lg^sn = n\cdot\lg^sn = O(n\lg^sn).
+\]
+Oszacowanie dolne:
+\[
+    \sum_{k=1}^n\lg^sk \ge \sum_{k=n/2+1}^n\lg^sk \ge \sum_{k=n/2+1}^n\lg^s(n/2) = (n/2)\cdot\lg^s(n/2) = \Omega(n\lg^sn).
+\]
+Oszacowanie dokładne:
+\[
+    \sum_{k=1}^n\lg^sk = \Theta(n\lg^sn).
+\]
+
+\subproblem %A-1(c)
+Oszacowanie górne:
+\[
+    \sum_{k=1}^nk^r\lg^sk \le \sum_{k=1}^nn^r\lg^sn = n\cdot n^r\lg^sn = O(n^{r+1}\lg^sn).
+\]
+Oszacowanie dolne:
+\[
+    \sum_{k=1}^nk^r\lg^sk \ge \!\!\sum_{k=n/2+1}^n\!\!k^r\lg^sk \ge \!\!\sum_{k=n/2+1}^n\!\!(n/2)^r\lg^s(n/2) = (n/2)\cdot(n/2)^r\lg^s(n/2) = \Omega(n^{r+1}\lg^sn).
+\]
+Oszacowanie dokładne:
+\[
+    \sum_{k=1}^nk^r\lg^sk = \Theta(n^{r+1}\lg^sn).
+\]
+Przyjmując w~powyższym oszacowaniu, odpowiednio, $s=0$ i~$r=0$, otrzymujemy sumy i~ich oszacowania z~punktów (a) i~(b).

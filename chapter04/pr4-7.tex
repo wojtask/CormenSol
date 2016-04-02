@@ -1,0 +1,103 @@
+\problem{Tablice Monge'a} %4-7
+
+\subproblem %4-7(a)
+Elementy tablicy Monge'a $A$ spełniają nierówność
+\[
+	A[i,j]+A[k,l] \le A[i,l]+A[k,j],
+\]
+gdzie $1\le i<k\le m$ oraz $1\le j<l\le n$.
+W~szczególności więc może być $k=i+1$ oraz $l=j+1$, zatem implikacja w~prawo zachodzi.
+
+Implikację w~przeciwną stronę dowodzimy przez indukcję względem liczby wierszy $m$.
+Zauważmy, że warunek tablicy Monge'a nie ma większego sensu dla tablic o~jednej kolumnie lub jednym wierszu, zatem przyjmijmy $m=2$ za podstawę indukcji.
+Wówczas może być tylko $i=1$ oraz $k=2$.
+Na podstawie założenia spełnione są zatem wszystkie nierówności z~następującego układu:
+\[
+	\begin{cases}
+		\hfill A[1,1]+A[2,2] &\le\,\,\, A[1,2]+A[2,1] \\
+		\hfill A[1,2]+A[2,3] &\le\,\,\, A[1,3]+A[2,2] \\
+		& \;\vdots \\
+		A[1,n-1]+A[2,n] &\le\,\,\, A[1,n]+A[2,n-1] \\
+	\end{cases}.
+\]
+Dodając stronami nierówności z~tego układu od \singledash{$j$}{tej} do \singledash{$l$}{tej} włącznie, a~następnie redukując powtarzające się składniki, otrzymujemy nierówność $A[1,j]+A[2,l]\le A[1,l]+A[2,j]$ z~tezy twierdzenia.
+
+Niech teraz $m>2$.
+Przyjmujemy założenie indukcyjne, że tablica $A$ pozbawiona ostatniego wiersza stanowi tablicę Monge'a.
+Pozostaje zatem wykazać, że zachodzą nierówności z~definicji tablicy Monge'a, przy czym $k=m$.
+Wykorzystując pomysł z~pierwszego kroku indukcji, z~układu
+\[
+	\begin{cases}
+		\hfill A[m-1,1]+A[m,2] &\le\,\,\, A[m-1,2]+A[m,1] \\
+		\hfill A[m-1,2]+A[m,3] &\le\,\,\, A[m-1,3]+A[m,2] \\
+		& \;\vdots \\
+		A[m-1,n-1]+A[m,n] &\le\,\,\, A[m-1,n]+A[m,n-1] \\
+	\end{cases}
+\]
+możemy uzyskać wszystkie nierówności postaci $A[m-1,j]+A[m,l]\le A[m-1,l]+A[m,j]$, gdzie $1\le j<l\le n$.
+Jeśli teraz dodamy stronami każdą z~nich do każdej nierówności postaci $A[i,j]+A[m-1,l]\le A[i,l]+A[m-1,j]$, gdzie $1\le j<l\le n$ oraz $1\le i<m-1$, zachodzących na mocy założenia indukcyjnego, to po zredukowaniu zbędnych składników dostaniemy wszystkie nierówności z~tezy, w~których $k=m$.
+
+Widać zatem, że implikacja jest prawdziwa dla tablic o~ustalonej liczbie kolumn.
+Dowód dla zmiennej liczby kolumn przeprowadza się analogicznie przez indukcję po $n\ge2$, pokazując tym samym, że twierdzenie zachodzi dla tablic o~dowolnych wymiarach.
+
+\subproblem %4-7(b)
+Na podstawie poprzedniego punktu można sprawdzić, że nierówność
+\[
+	A[1,2]+A[2,3] \le A[1,3]+A[2,2]
+\]
+jest fałszywa, przez co własność tablicy Monge'a jest zaburzona.
+By przywrócić tę własność, można zamienić $A[1,3]$ np.\ na 24.
+
+\subproblem %4-7(c)
+Korzystając z~poniższej nierówności prawdziwej dla tablicy Monge'a $A$:
+\[
+	A[i,j]+A[i+1,j+r] \le A[i,j+r]+A[i+1,j],
+\]
+gdzie $0<r\le n-j$, wnioskujemy w~następujący sposób.
+Znajdujemy w~pierwszym wierszu tablicy $A$ pierwsze minimum z~lewej strony, które oznaczymy przez $\mu$.
+Indeksem $\mu$ jest oczywiście $f(1)$.
+Wstawiając teraz $i=1$ oraz $r=f(1)-j$ do powyższej nierówności, otrzymujemy
+\[
+	A[1,j]+A[2,f(1)] \le \mu+A[2,j].
+\]
+Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$.
+Łącząc oba fakty, otrzymujemy, że $A[2,f(1)]<A[2,j]$, a~to oznacza, że pierwsze z~lewej strony minimum wiersza 2 występuje w~nim na pozycji nie mniejszej niż $f(1)$, skąd $f(1)\le f(2)$.
+
+Dowód kolejnych nierówności przebiega analogicznie.
+
+\subproblem %4-7(d)
+Aby odnaleźć minimum wiersza \singledash{$i$}{tego} (nieparzystego), sprawdzamy indeksy minimów wierszy \singledash{$(i-1)$}{szego} oraz \singledash{$(i+1)$}{szego} (parzystych).
+Wartości te zostały wyznaczone w~pierwszej części algorytmu.
+Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$, wystarczy więc sprawdzić komórki $A[i,f(i-1)]$, $A[i,f(i-1)+1]$, \dots, $A[i,f(i+1)]$ i~wybrać spośród nich element minimalny.
+Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$.
+Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
+
+Poszukując minimum wiersza \singledash{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu.
+Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
+\begin{align*}
+	\sum_{\substack{1\le i\le m\\2\,\nmid\,i}}(f(i+1)-f(i-1)+1) &= \sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)+1) \\[-4mm]
+	&= \lceil m/2\rceil+\sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)) \\[1mm]
+	&= \lceil m/2\rceil+f(2\lceil m/2\rceil)-f(0) \\[2mm]
+	&\le \lceil m/2\rceil+n-1
+\end{align*}
+komórek, co jest rzędu $O(m+n)$.
+
+\subproblem %4-7(e)
+Na ostatnim poziomie rekursji wyznaczenie minimum jednego wiersza tablicy wymaga sprawdzenia co najwyżej $O(n)$ komórek.
+Na podstawie tego faktu i~oszacowania pokazanego w~poprzednim punkcie formułujemy następującą rekurencję opisującą pesymistyczny czas działania algorytmu:
+\[
+	T(m,n) =
+	\begin{cases}
+		O(n), & \text{jeśli $m=1$}, \\
+		T(\lceil m/2\rceil,n)+O(m+n), & \text{jeśli $m>1$}.
+	\end{cases}
+\]
+Dla uproszczenia pominiemy sufit w~argumencie rekurencji.
+Na \singledash{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$.
+Łatwo zauważyć, że jest $\lg m+1$ poziomów, a~zatem całkowity koszt wynosi:
+\begin{align*}
+	T(m,n) &= \sum_{i=0}^{\lg m-1}O\biggl(\frac{m}{2^i}+n\biggr)+O(n) \\
+	&= O\biggl(m\sum_{i=0}^{\lg m-1}\frac{1}{2^i}\biggr)+O(n\lg m) \\
+	&\le O\biggl(m\sum_{i=0}^\infty\frac{1}{2^i}\biggr)+O(n\lg m) \\[1mm]
+	&= O(m+n\lg m).
+\end{align*}

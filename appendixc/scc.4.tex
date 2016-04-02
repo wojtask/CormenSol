@@ -1,0 +1,129 @@
+\subchapter{Rozkłady: geometryczny i~dwumianowy}
+
+\exercise %C.4-1
+Rodzina zdarzeń elementarnych $S$ składa się ze zdarzeń oznaczających, że należy wykonać $k$ prób, zanim nastąpi pierwszy sukces, przy czym $k=1$, 2, \dots.
+Niech zmienna losowa $X$ będzie liczbą prób potrzebnych do osiągnięcia sukcesu.
+Wówczas
+\[
+	\Pr(S) = \sum_{k=1}^\infty\Pr(X=k) = \sum_{k=1}^\infty q^{k-1}p = p\sum_{k=0}^\infty(1-p)^k = \frac{p}{1-(1-p)} \\[1mm] = 1.
+\]
+Wykorzystano wzór (A.6) przy założeniu, że $p>0$.
+
+\exercise %C.4-2
+Niech sukcesem w~tym doświadczeniu będzie uzyskanie trzech orłów i~trzech reszek, a~porażką -- każdy inny wynik.
+Spośród wszystkich sześciu monet możemy wybrać dowolne trzy takie, na których wypadnie orzeł -- mamy zatem $\binom{6}{3}=20$ sposobów osiągnięcia sukcesu.
+Jest $2^6=64$ wszystkich możliwych wyników, zatem prawdopodobieństwo sukcesu wynosi $p=20/64=5/16$.
+Ze wzoru (C.31) otrzymujemy, że musimy wykonać średnio $1/p=3{,}2$ rzutów.
+
+\exercise %C.4-3
+Z~definicji rodziny rozkładów dwumianowych mamy
+\[
+	b(k;n,p) = \binom{n}{k}p^k(1-p)^{n-k} \quad\text{oraz}\quad b(n-k;n,q) = \binom{n}{n-k}q^{n-k}(1-q)^k.
+\]
+Ponieważ $\binom{n}{n-k}=\binom{n}{k}$ (ze wzoru (C.3)) oraz $q=1-p$, to zachodzi $b(k;n,p)=b(n-k;n,q)$.
+
+\exercise %C.4-4
+Rozkład dwumianowy przyjmuje maksimum dla pewnego $k$, gdzie $np-q\le k\le(n+1)p$, więc dobrym przybliżeniem wartości maksymalnej jest wartość przyjmowana dla $k=np$.
+Ponieważ nie interesuje nas dokładny wynik, to pozwolimy sobie na pewną niedbałość w~rachunkach (wartość $np$ oraz argumenty silni mogą być niecałkowite).
+Mamy
+\[
+	b(np;n,p) = \binom{n}{np}p^{np}(1-p)^{n-np} = \frac{n!}{(np)!\,(n-np)!}\,p^{np}(1-p)^{n-np} = \frac{n!}{(np)!\,(nq)!}\,p^{np}q^{nq}.
+\]
+Wykorzystując wzór Stirlinga do przybliżenia silni, możemy uprościć pierwszy czynnik ostatniego wyrażenia:
+\[
+	\frac{n!}{(np)!\,(nq)!} \approx \frac{\sqrt{2\pi n}\,\bigl(\frac{n}{e}\bigr)^n}{\sqrt{2\pi np}\,\bigl(\frac{np}{e}\bigr)^{np}\sqrt{2\pi nq}\,\bigl(\frac{nq}{e}\bigr)^{nq}} = \frac{\bigl(\frac{n}{e}\bigr)^n\bigl(\frac{e}{np}\bigr)^{np}\bigl(\frac{e}{nq}\bigr)^{nq}}{\sqrt{2\pi npq}} = \frac{1}{p^{np}q^{nq}\sqrt{2\pi npq}}.
+\]
+Stąd dostajemy przybliżenie
+\[
+	b(np;n,p) \approx \frac{1}{\sqrt{2\pi npq}}
+\]
+na maksymalną wartość rozkładu dwumianowego $b(k;n,p)$.
+
+\exercise %C.4-5
+Niech $X$ będzie zmienną losową przyjmującą liczbę sukcesów w~$n$ próbach Bernoulliego.
+Wówczas
+\[
+	\Pr(X=0) = b(0;n,1/n) = \biggl(1-\frac{1}{n}\biggr)^n.
+\]
+Wyrażenie to dąży do $1/e$ wraz ze wzrostem $n$, ponieważ dla dowolnej liczby rzeczywistej $a$ ciąg $e_n={(1+a/n)}^n$ ma granicę równą $e^a$ przy $n$ dążącym do $\infty$.
+
+Analogicznie,
+\[
+	\Pr(X=1) = b(1;n,1/n) = \frac{\bigl(1-\frac{1}{n}\bigr)^n}{1-\frac{1}{n}},
+\]
+co także dąży do $1/e$, bo mianownik zbliża się do 1 wraz ze wzrostem $n$.
+
+\exercise %C.4-6
+Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów.
+W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \singledash{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna.
+Wszystkich takich ciągów jest $2^{2n}=4^n$.
+Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki.
+Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów.
+Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces.
+Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
+\[
+	\frac{\binom{2n}{n}}{4^n}.
+\]
+
+Drugi sposób polega na zdefiniowaniu $X$ i~$Y$ jako zmiennych losowych przyjmujących liczby orłów uzyskane kolejno przez obu profesorów.
+Obie te zmienne są rozkładu dwumianowego $b(k;n,1/2)$.
+Zdarzenia $X=k$ i~$Y=k$ są niezależne, zatem prawdopodobieństwo uzyskania przez obu profesorów równej ilości orłów wynosi
+\begin{align*}
+	\sum_{k=0}^n\Pr(X=k\;\;\text{i}\;\;Y=k) &= \sum_{k=0}^n\Pr(X=k)\Pr(Y=k) \\
+	&= \sum_{k=0}^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n \\
+	&= \frac{\sum_{k=0}^n\binom{n}{k}^2}{4^n}.
+\end{align*}
+
+Przyrównując do siebie wyniki otrzymane w~obu sposobach, dostajemy tożsamość
+\[
+	\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}.
+\]
+
+\exercise %C.4-7
+Niech $0\le\lambda\le1$.
+Wykorzystując nierówność
+\[
+	\binom{n}{\lambda n} \le 2^{nH(\lambda)},
+\]
+wynikającą ze wzoru (C.6), otrzymujemy
+\[
+	b(k;n,1/2) = \binom{n}{k}\biggl(\frac{1}{2}\biggr)^n \le \frac{2^{nH(k/n)}}{2^n} = 2^{nH(k/n)-n}.
+\]
+
+\exercise %C.4-8
+\note{Znak nierówności, którą należy udowodnić w~tym zadaniu, powinien być skierowany przeciwnie.}
+
+\noindent Niech $X'$ będzie zmienną losową przyjmującą liczbę sukcesów w~serii prób Bernoulliego, każda o~prawdopodobieństwie sukcesu równym $p$.
+Z~\refExercise{C.4-9}, po zdefiniowaniu $p_i'=p$ dla każdego $i=1$, 2, \dots, $n$, wynika wzór
+\[
+    \Pr(X\ge k) \le \Pr(X'\ge k).
+\]
+Zmienna losowa $X$ jest rozkładu dwumianowego, zatem powyższą nierówność można zapisać w~postaci
+\[
+    \Pr(X\ge k) \le \sum_{i=k}^nb(i;n,p),
+\]
+skąd, po wykorzystaniu wzoru (C.35), dostajemy
+\[
+    1-\Pr(X<k) \le 1-\sum_{i=0}^{k-1}b(i;n,p).
+\]
+Aby dokończyć dowód, wystarczy od obu stron nierówności odjąć jedynki i~obustronnie pomnożyć przez $-1$.
+
+\exercise %C.4-9
+Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \singledash{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces.
+Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$.
+Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$.
+Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~\singledash{$i$}{tej} próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~\singledash{$i$}{tej} próbie w~ciągu $A'$.
+Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$.
+W~przeciwnym przypadku będziemy generować sukces w~\singledash{$i$}{tej} próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$.
+Ze wzoru Bayesa (C.17) wynika, że
+\[
+    p_i' = \Pr(A_i') = \Pr(A_i)\Pr(A_i'\mid A_i)+\Pr(\overline{A_i})\Pr(A_i'\mid\overline{A_i}) = p_i\cdot1+(1-p_i)\cdot r_i,
+\]
+więc
+\[
+    r_i = \frac{p_i'-p_i}{1-p_i}.
+\]
+
+Operując na tej samej przestrzeni $S$, przyjmujemy, że $X'(s)$ oznacza liczbę sukcesów w~serii $n$ prób otrzymanych powyższą procedurą z~ciągu $A$ na podstawie przyjmowanych sukcesów opisanych przez słowo $s$.
+Dla dowolnego $s\in S$ oczywistym jest, że przy takiej konstrukcji ciągu $A'$ nie zdarzy się, aby w~jego próbach było sumarycznie mniej sukcesów niż w~początkowym ciągu prób $A$, to znaczy $X'(s)\ge X(s)$.
+Korzystając teraz z~\refExercise{C.3-7}, otrzymujemy żądany wynik.

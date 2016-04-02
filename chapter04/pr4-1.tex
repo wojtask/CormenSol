@@ -1,0 +1,66 @@
+\problem{Przykłady rekurencji} %4-1
+W~punktach \doubledash{(a)}{(f)} skorzystano z~twierdzenia o~rekurencji uniwersalnej.
+
+\subproblem %4-1(a)
+Mamy $n^{\log_ba}=n^{\log_22}=n$ oraz $f(n)=n^3=\Omega(n^{1+\epsilon})$ dla $\epsilon\le2$.
+Ponieważ warunek regularności jest spełniony:
+\begin{align*}
+	2f(n/2) &\le cf(n), \\
+	2n^3\!/8 &\le cn^3, \\
+	c &\ge 1/4,
+\end{align*}
+to stąd wnioskujemy, że $T(n)=\Theta(n^3)$.
+
+\subproblem %4-1(b)
+Mamy $n^{\log_ba}=n^{\log_{10/9}1}=n^0=1$ oraz $f(n)=n=\Omega(n^\epsilon)$ dla $\epsilon\le1$.
+Badamy warunek regularności:
+\begin{align*}
+	f(9n/10) &\le cf(n), \\
+	9n/10 &\le cn, \\
+	c &\ge 9/10
+\end{align*}
+i~stwierdzamy, że $T(n)=\Theta(n)$.
+
+\subproblem %4-1(c)
+Mamy $n^{\log_ba}=n^{\log_416}=n^2$ oraz $f(n)=n^2=\Theta(n^2)$, a~stąd $T(n)=\Theta(n^2\lg n)$.
+
+\subproblem %4-1(d)
+Mamy $n^{\log_ba}=n^{\log_37}$ oraz $f(n)=n^2=\Omega(n^{\log_37+\epsilon})$ dla $\epsilon\le2-\log_37$.
+Warunek regularności zachodzi:
+\begin{align*}
+	7f(n/3) &\le cf(n), \\
+	7n^2\!/9 &\le cn^2, \\
+	c &\ge 7/9,
+\end{align*}
+a~zatem $T(n)=\Theta(n^2)$.
+
+\subproblem %4-1(e)
+Mamy $n^{\log_ba}=n^{\lg7}$ oraz $f(n)=n^2=O(n^{\lg7-\epsilon})$ dla $\epsilon\le\lg7-2$, a~stąd $T(n)=\Theta(n^{\lg7})$.
+
+\subproblem %4-1(f)
+Mamy $n^{\log_ba}=n^{\log_42}=n^{1/2}$ oraz $f(n)=\sqrt{n}=\Theta(n^{1/2})$, a~stąd $T(n)=\Theta\bigl(\!\sqrt{n}\lg n\bigr)$.
+
+\subproblem %4-1(g)
+Zauważmy, że rekurencja rozwija się następująco:
+\begin{align*}
+	T(n) &= T(n-1)+n \\
+	&= T(n-2)+(n-1)+n \\
+	&\hspace{.5in}\vdots \\
+	&= c+3+4+\dots+n \\
+	&= c+\sum_{i=3}^ni \\
+	&= c+\frac{n(n+1)}{2}-3,
+\end{align*}
+gdzie $c=T(2)$ jest pewną stałą.
+Otrzymujemy zatem, że $T(n)=\Theta(n^2)$.
+
+\subproblem %4-1(h)
+Niech $n=2^m$, skąd $m=\lg n$.
+Rekurencja przyjmuje postać
+\[
+	T(2^m) = T(2^{m/2})+1.
+\]
+Podstawiając $S(m)$ za $T(2^m)$, otrzymujemy
+\[
+	S(m) = S(m/2)+1.
+\]
+Ponieważ rozwiązaniem ostatniej rekurencji jest $\Theta(\lg m)$ (co pokazano w~\refExercise{4.3-3}), to stąd mamy, że $T(n)=T(2^m)=S(m)=\Theta(\lg m)=\Theta(\lg\lg n)$.

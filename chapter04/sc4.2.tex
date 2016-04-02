@@ -1,0 +1,154 @@
+\subchapter{Metoda drzewa rekursji}
+
+\exercise %4.2-1
+Dokonamy pewnego uproszczenia, pomijając podłogę w~argumencie rekurencji i~rozważając zależność $T(n)=3T(n/2)+n$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_4.2-1}
+	\end{center}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=3T(n/2)+n$.} \label{fig:4.2-1}
+\end{figure}
+Drzewo tej rekursji przedstawione na rys.\ \ref{fig:4.2-1} ma wysokość równą $\lg n$, czyli jest w~nim $\lg n+1$ poziomów.
+Na \singledash{$i$}{tym} poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści.
+Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \singledash{$i$}{tej} głębokości jest równy $(3/2)^in$.
+Przyjmujemy, że $T(1)=1$, a~więc na ostatnim poziomie jest $\Theta(n^{\lg3})$.
+Na podstawie tych wartości rozwiązujemy rekurencję:
+\begin{align*}
+	T(n) &= n+\frac{3}{2}\,n+\biggl(\frac{3}{2}\biggr)^2n+\dots+\biggl(\frac{3}{2}\biggr)^{\lg n-1}n+\Theta(n^{\lg3}) \\
+	&= \sum_{i=0}^{\lg n-1}\biggl(\frac{3}{2}\biggr)^in+\Theta(n^{\lg3}) \\
+	&= \frac{(3/2)^{\lg n}-1}{(3/2)-1}\,n+\Theta(n^{\lg3}) \\[1mm]
+	&= 2n(n^{\lg3-1}-1)+\Theta(n^{\lg3}) \\
+	&= O(n^{\lg3}).
+\end{align*}
+
+Pokażemy teraz, że otrzymany wynik stanowi górne oszacowanie dla oryginalnej rekurencji.
+Przyjmujemy założenie, że
+\[
+    T(\lfloor n/2\rfloor)\le c\lfloor n/2\rfloor^{\lg3}
+\]
+dla pewnej stałej $c>0$.
+Dowodzimy oszacowania dla oryginalnej rekurencji metodą podstawiania:
+\[
+	T(n) \le 3c\lfloor n/2\rfloor^{\lg3}+n \le 3c(n/2)^{\lg3}+n = cn^{\lg3}+n.
+\]
+Nie możemy jednak na podstawie tego wyniku wywnioskować szukanego oszacowania.
+Wzmocnijmy zatem nasze założenie, niech
+\[
+	T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^{\lg3}-b\lfloor n/2\rfloor,
+\]
+gdzie $b\ge0$ jest nową stałą.
+Korzystając ze wzoru (3.3), mamy teraz:
+\begin{align*}
+	T(n) &\le 3c\lfloor n/2\rfloor^{\lg3}-3b\lfloor n/2\rfloor+n \\
+	&< 3c(n/2)^{\lg3}-3b(n/2-1)+n \\
+	&= cn^{\lg3}-3bn/2+3b+n \\
+	&\le cn^{\lg3}-bn,
+\end{align*}
+co zachodzi dla $n\ge7$, o~ile $b\ge14$.
+Przyjmujemy wszystkie $n=3$, 4, 5, 6 na podstawę indukcji, ponieważ dla dowolnie ustalonego $b$ można dobrać dla stałej $c$ odpowiednią wartość tak, aby pokazane oszacowanie zachodziło dla takich $n$.
+To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
+
+\exercise %4.2-2
+Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym.
+Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$.
+Liść tej gałęzi znajduje się na poziomie $h=\log_3n$.
+Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej \singledash{$h$}{tego}, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$.
+Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
+
+\exercise %4.2-3
+W~metodzie drzewa rekursji dla uproszczenia pomijamy branie części całkowitych.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_4.2-3}
+	\end{center}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=4T(n/2)+cn$.} \label{fig:4.2-3}
+\end{figure}
+W~drzewie rekursji z~rys.\ \ref{fig:4.2-3} na \singledash{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$.
+Stąd kosztem całego poziomu jest $2^icn$.
+Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz z~głębokością drzewa, więc jego wysokością jest $\lg n$.
+Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$.
+Sumując koszty z~każdego poziomu, otrzymujemy:
+\begin{align*}
+	T(n) &= cn+2cn+2^2cn+\dots+2^{\lg n-1}cn+\Theta(n^2) \\
+	&= cn\sum_{i=0}^{\lg n-1}2^i+\Theta(n^2) \\
+	&= cn(2^{\lg n}-1)+\Theta(n^2) \\
+	&= cn(n-1)+\Theta(n^2) \\
+	&= \Theta(n^2).
+\end{align*}
+
+Sprawdzimy teraz otrzymany wynik, używając w~tym celu metody podstawiania dla oryginalnej rekurencji.
+Przyjmiemy ponadto, że $T(1)=1$ stanowi jej przypadek brzegowy.
+Badamy najpierw oszacowanie dolne $T(n)$, wykorzystując założenie
+\[
+	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor^2
+\]
+dla pewnej stałej $c_1>0$.
+Stąd
+\[
+	T(n) \ge 4c_1\lfloor n/2\rfloor^2+cn > 4c_1(n/2-1)^2+cn = c_1n^2-4c_1n+4c_1+cn \ge c_1n^2,
+\]
+co jest prawdą dla $n\ge2$, jeśli przyjmiemy, że $c_1\le c/4$.
+Podstawą indukcji jest $n=1$, bo $T(1)$ spełnia oszacowanie dla $c_1\le1$.
+A~więc istotnie $T(n)=\Omega(n^2)$.
+
+Pokażemy teraz, że $T(n)=O(n^2)$.
+W~tym celu można przyjąć analogiczne założenie indukcyjne jak przy dowodzie dolnego oszacowania.
+Niestety założenie to okazuje się zbyt słabe i~nie prowadzi do żądanego wyniku.
+Przyjmijmy zatem, że dla stałych $c_2>0$ i~$c_3\ge0$ zachodzi mocniejszy warunek
+\[
+	T(\lfloor n/2\rfloor) \le c_2\lfloor n/2\rfloor^2-c_3\lfloor n/2\rfloor.
+\]
+Wówczas:
+\begin{align*}
+	T(n) &\le 4(c_2\lfloor n/2\rfloor^2-c_3\lfloor n/2\rfloor)+cn \\
+	&< 4(c_2(n/2)^2-c_3(n/2-1))+cn \\
+	&= c_2n^2-2c_3n+4c_3+cn \\
+	&\le c_2n^2-c_3n.
+\end{align*}
+Ostatnia nierówność jest prawdziwa dla $n\ge5$, o~ile $c_3\ge5c$.
+
+Zajmiemy się teraz ustaleniem stałych $c_2$ i~$c_3$, aby spełnić podstawę tej indukcji.
+Początkowe wyrazy rekurencji wynoszą $T(1)=1$, $T(2)=4+2c$, $T(3)=4+3c$, $T(4)=16+12c$.
+Jeśli przyjmiemy $c_3=5c$, to dla dowolnego $c_2\ge5c+1$ wyrażenie $c_2n^2-c_3n$ będzie stanowić oszacowanie górne dla tych wartości.
+Zachodzi zatem $T(n)=O(n^2)$ i~dowód dokładnego oszacowania na $T(n)$ jest zakończony.
+
+\exercise %4.2-4
+Dla uproszczenia przyjmijmy, że $T(n)=ca$ w~przypadku, gdy $n\le a$, czyli że dla dostatecznie małego $n$ rekurencja przyjmuje wartość stałą równą $ca$.
+Drzewo rekursji $T(n)$ zostało zilustrowane na rys.\ \ref{fig:4.2-4}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_4.2-4}
+	\end{center}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n-a)+T(a)+cn$.} \label{fig:4.2-4}
+\end{figure}
+Wysokością tego drzewa jest $n/a$.
+Koszt wnoszony przez \singledash{$i$}{ty} poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$.
+Mamy zatem:
+\begin{align*}
+	T(n) &= cn+\sum_{i=1}^{n/a-1}c(n-a(i-1))+\Theta(1) \\
+	&= cn+c\sum_{i=0}^{n/a-2}(n-ai)+\Theta(1) \\
+	&= cn+cn\sum_{i=0}^{n/a-2}1-ca\sum_{i=0}^{n/a-2}i+\Theta(1) \\
+	&= cn+cn(n/a-1)-\frac{ca(n/a-2)(n/a-1)}{2}+\Theta(1) \\
+	&= \Theta(n^2).
+\end{align*}
+
+\exercise %4.2-5
+Zauważmy, że drzewo rekurencji $T(n)$ z~rys.\ \ref{fig:4.2-5} dla parametru $\alpha$ jest symetryczne do tego samego drzewa z~parametrem $1-\alpha$ -- przyjmijmy więc, że $0<\alpha\le1/2$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_4.2-5}
+	\end{center}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(\alpha n)+T((1-\alpha)n)+cn$, gdzie $0<\alpha\le1/2$.} \label{fig:4.2-5}
+\end{figure}
+
+Wyznaczmy najpierw oszacowanie dolne rekurencji.
+Na \singledash{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi.
+Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$.
+Oznaczmy przez $h$ głębokość tego poziomu.
+Wtedy $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$.
+Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$.
+Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż \singledash{$h$}{ty}, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
+
+Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt na każdym poziomie, możemy dojść do oszacowania górnego dla $T(n)$.
+Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)=\Theta(\lg n)$, a~więc $T(n)\le cn(H+1)=O(n\lg n)$.
+Asymptotycznie dokładnym oszacowaniem rekurencji jest zatem $\Theta(n\lg n)$.

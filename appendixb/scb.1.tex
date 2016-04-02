@@ -1,0 +1,83 @@
+\subchapter{Zbiory}
+
+\exercise %B.1-1
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_b.1-1}
+	\end{center}
+	\caption{Diagramy Venna ilustrujące pierwsze prawo rozdzielności.}
+\end{figure}
+
+\exercise %B.1-2
+Przeprowadzimy dowód pierwszego wzoru przez indukcję względem $n$.
+Dla $n=1$ dowód jest trywialny, a~dla $n=2$ wzór stanowi pierwsze prawo de Morgana.
+Załóżmy więc, że $n>2$ i~że wzór zachodzi dla rodziny $n-1$ zbiorów.
+Mamy
+\begin{align*}
+	\overline{A_1\cap A_2\cap\dots\cap A_{n-1}\cap A_n} &= \overline{(A_1\cap A_2\cap\dots\cap A_{n-1})\cap A_n} \\
+	&= \overline{A_1\cap A_2\cap\dots\cap A_{n-1}}\cup\overline{A_n} \\
+	&= \overline{A_1}\cup\overline{A_2}\cup\dots\cup\overline{A_{n-1}}\cup\overline{A_n}.
+\end{align*}
+W~drugiej równości skorzystano z~pierwszego prawa de Morgana, a~w~trzeciej -- z~założenia indukcyjnego.
+
+Dowód drugiego wzoru przebiega analogicznie.
+Jeśli $n=2$, to wzór jest drugim prawem de Morgana, a~jeśli $n>2$, to wystarczy zastosować powyższe rozumowanie z~zamienionymi symbolami sumy i~przecięcia zbiorów oraz skorzystać z~drugiego prawa de Morgana.
+
+\exercise %B.1-3
+Udowodnimy zasadę włączania i~wyłączania przez indukcję względem $n$.
+Dla $n=1$ dowód jest trywialny, a~dla $n=2$ zasada stanowi wzór (B.3).
+Jeśli $n>2$, to na mocy tegoż wzoru, jak i~uogólnionego pierwszego prawa rozdzielności, mamy
+\begin{align*}
+    |A_1\cup A_2\cup\dots\cup A_n| &= \bigl|(A_1\cup A_2\cup\dots\cup A_{n-1})\cup A_n\bigr| \\
+	&= |A_1\cup A_2\cup\dots\cup A_{n-1}|+|A_n|-\bigl|(A_1\cup A_2\cup\dots\cup A_{n-1})\cap A_n\bigr| \\
+	&= |A_1\cup A_2\cup\dots\cup A_{n-1}|+|A_n|-\bigl|(A_1\cap A_n)\cup\dots\cup(A_{n-1}\cap A_n)\bigr|.
+\end{align*}
+Stosujemy teraz założenie indukcyjne do pierwszego i~ostatniego składnika, w~wyniku czego otrzymujemy
+\begin{align*}
+	|A_1\cup A_2\cup\dots\cup A_{n-1}| &= \sum_{1\le i_1<n}|A_{i_1}|-\sum_{1\le i_1<i_2<n}|A_{i_1}\cap A_{i_2}|+\sum_{1\le i_1<i_2<i_3<n}|A_{i_1}\cap A_{i_2}\cap A_{i_3}| \\[1mm]
+	&\quad {}-\dots+(-1)^{n-2}|A_1\cap A_2\cap\dots\cap A_{n-1}|
+\end{align*}
+oraz
+\begin{align*}
+	\bigl|(A_1\cap A_n)\cup\dots\cup(A_{n-1}\cap A_n)\bigr| &= \sum_{1\le i_1<n}|A_{i_1}\cap A_n|-\sum_{1\le i_1<i_2<n}|A_{i_1}\cap A_{i_2}\cap A_n|\\[1mm]
+	&\quad {}+\dots+(-1)^{n-2}|A_1\cap A_2\cap\dots\cap A_{n-1}\cap A_n|.
+\end{align*}
+Wystarczy wstawić otrzymane wyrażenia do początkowego wzoru:
+\begin{align*}
+	|A_1\cup A_2\cup\dots\cup A_n| &= \sum_{1\le i_1\le n}|A_{i_1}|-\sum_{1\le i_1<i_2\le n}|A_{i_1}\cap A_{i_2}|+\sum_{1\le i_1<i_2<i_3\le n}|A_{i_1}\cap A_{i_2}\cap A_{i_3}| \\[1mm]
+	&\quad {}-\dots+(-1)^{n-1}|A_1\cap A_2\cap\dots\cap A_n|.
+\end{align*}
+A~zatem zasada zachodzi dla dowolnej skończonej rodziny zbiorów.
+
+\exercise %B.1-4
+\note{Poniższe rozwiązanie dowodzi przeliczalności zbioru nieparzystych liczb naturalnych, czego dotyczy oryginalna treść zadania.
+Tłumaczenie pyta natomiast o~przeliczalność zbioru wszystkich liczb nieparzystych.}
+
+\noindent Aby wykazać ten fakt, należy znaleźć wzajemnie jednoznaczne odwzorowanie zbioru $\mathbb{N}$ w~zbiór $\bigl\{\,2n+1:n\in\mathbb{N}\,\bigr\}$.
+Każdej liczbie naturalnej $n$ przyporządkujmy liczbę $2n+1$.
+Bijektywność tego odwzorowania jest oczywista, wnioskujemy zatem, że zbiór nieparzystych liczb naturalnych jest przeliczalny.
+
+\exercise %B.1-5
+Dowodzimy przez indukcję względem liczby elementów zbioru $S$.
+Jeśli $|S|=0$, czyli $S=\emptyset$, to $|2^S|=2^{|S|}=1$, bo $S$ ma tylko jeden podzbiór -- zbiór pusty.
+Niech teraz $|S|>0$ i~załóżmy, że $|2^S|=2^{|S|}$.
+Ustalmy $p\notin S$ i~rozważmy zbiór $S'=S\cup\{p\}$.
+Podzbiory zbioru $S'$ można podzielić na takie, które zawierają $p$ i~na takie, które nie zawierają $p$.
+Tych ostatnich jest $|2^S|=\bigl|2^{S'\setminus\{p\}}\bigr|=2^{|S'\setminus\{p\}|}$ na mocy założenia indukcyjnego.
+Okazuje się, że podzbiorów zawierających $p$ jest tyle samo, ponieważ każdy powstaje przez zsumowanie singletonu $\{p\}$ z~pewnym podzbiorem niezawierającym $p$.
+Mamy zatem
+\[
+	\bigl|2^{S'}\bigr|=2\cdot2^{|S'\setminus\{p\}|} = 2^{|S'\setminus\{p\}|+1} = 2^{|S'|}.
+\]
+Na mocy indukcji twierdzenie jest spełnione dla dowolnego zbioru skończonego.
+
+\exercise %B.1-6
+\[
+	\langle a_1,a_2,\dots,a_n\rangle =
+	\begin{cases}
+		\emptyset, & \text{jeśli $n=0$}, \\
+		\{a_1\}, & \text{jeśli $n=1$}, \\
+		\{a_1,\{a_1,a_2\}\}, & \text{jeśli $n=2$}, \\
+		\langle a_1,\langle a_2,\dots,a_n\rangle\rangle, & \text{jeśli $n\ge3$}.
+	\end{cases}
+\]

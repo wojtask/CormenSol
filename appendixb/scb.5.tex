@@ -1,0 +1,107 @@
+\subchapter{Drzewa}
+
+\exercise %B.5-1
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_b.5-1}
+	\end{center}
+	\caption{{\sffamily\bfseries(a)} Drzewa wolne o~3 wierzchołkach $A$, $B$ i~$C$.
+{\sffamily\bfseries(b)} Drzewa ukorzenione o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.
+{\sffamily\bfseries(c)} Drzewa uporządkowane o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.
+{\sffamily\bfseries(d)} Drzewa binarne o~węzłach $A$, $B$ i~$C$, w~których $A$ jest korzeniem.} \label{fig:B.5-1}
+\end{figure}
+
+\exercise %B.5-2
+Przypuśćmy, że twierdzenie jest fałszywe, czyli że wersja nieskierowana grafu $G$ nie tworzy drzewa, a~więc posiada cykl, w~szczególności cykl prosty (\refExercise{B.4-2}).
+Niech $\langle v_1,v_2,\dots,v_k,v_1\rangle$ będzie takim cyklem.
+Graf $G$ jest acykliczny, zatem dla pewnego całkowitego $l$, gdzie $1\le l\le k$, istnieją krawędzie $\langle v_l,v_{l+1}\rangle$, $\langle v_{l+2},v_{l+1}\rangle\in E$, przy czym $v_{k+1}$ utożsamiamy z~$v_1$, a~$v_{k+2}$ z~$v_2$.
+Wiemy z~założenia, że $v_0\leadsto v_l$ oraz $v_0\leadsto v_{l+2}$, zatem istnieją dwie różne ścieżki z~$v_0$ do $v_{l+1}$:
+\[
+	\langle v_0,\dots,v_l,v_{l+1}\rangle \quad\text{oraz}\quad \langle v_0,\dots,v_{l+2},v_{l+1}\rangle.
+\]
+Otrzymana sprzeczność prowadzi do wniosku, że wersja nieskierowana grafu $G$ jest acykliczna, zatem istotnie stanowi drzewo.
+
+\exercise %B.5-3
+W~drzewie o~jednym węźle jest jeden liść i~brak węzłów wewnętrznych, więc krok bazowy indukcji zachodzi.
+Zauważmy, że drzewo można ściągnąć wzdłuż wszystkich krawędzi pomiędzy węzłami stopnia 1, a~ich synami, nie powodując zmian w~liczbie węzłów stopnia 2.
+Wykonanie tej operacji pozbawia drzewo wszystkich węzłów stopnia 1.
+W~dalszej części dowodu będziemy zatem rozważać tylko drzewa regularne.
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Niepuste regularne drzewo binarne ma nieparzystą liczbę węzłów.}
+\begin{proof}
+Niech $T=\langle V,E\rangle$ będzie niepustym regularnym drzewem binarnym, a~$L\subseteq V$ -- zbiorem liści tego drzewa.
+Obliczmy sumę stopni wszystkich węzłów $T$ (w~sensie grafowym, czyli uwzględniając ojca węzła):
+\[
+	\sum_{v\in V}\deg(v) = \sum_{v\in L}1+\sum_{v\in V\setminus L}\!\!\!3\;-1=3|V|-2|L|-1.
+\]
+Z~lematu o~podawaniu rąk (\refExercise{B.4-1}) mamy, że $\sum_{v\in V}\deg(v) = 2|E|$, a~stąd
+\[
+	|V| = \frac{2|E|+2|L|+1}{3}.
+\]
+Licznik ułamka jest nieparzysty, zatem liczba węzłów $T$ także jest nieparzysta.
+\end{proof}
+
+Korzystając z~powyższego lematu, założymy, że twierdzenie jest prawdziwe dla drzewa o~$2k-1$ węzłach ($k\ge1$) i~wykażemy jego prawdziwość dla drzewa o~$2k+1$ węzłach.
+Mamy, że liczba węzłów $w$ stopnia 2 w~regularnym drzewie binarnym o~$2k-1$ węzłach jest o~1 mniejsza od liczby jego liści $l$.
+Wybierając dowolny liść i~czyniąc z~niego węzeł wewnętrzny, poprzez dołączenie do niego dwóch synów, tworzymy regularne drzewo binarne o~$2k+1$ węzłach.
+W~nowym drzewie mamy $w'=w+1$ węzłów stopnia 2 oraz $l'=(l-1)+2=l+1$ liści, więc z~założenia indukcyjnego dostajemy $w'=w+1=(l-1)+1=l'-1$, a~zatem twierdzenie jest prawdziwe.
+
+\exercise %B.5-4
+Udowodnimy nierówność $h\ge\lfloor\lg n\rfloor$ przez indukcję względem $n$.
+Jeśli $n=1$, to drzewo posiada tylko jeden węzeł, więc $h=0$ i~nierówność oczywiście zachodzi.
+Załóżmy teraz, że $n\ge2$ oraz że nierówność jest spełniona dla wszystkich drzew binarnych o~$n-1$ węzłach i~wysokości $h$.
+Niech $T$ będzie jednym z~nich.
+Dodając do niego nowy węzeł, tworzymy nowe drzewo $T'$ o~wysokości $h'$.
+Rozważmy dwa przypadki w~zależności od położenia tego węzła w~drzewie $T'$.
+
+Przyjmijmy najpierw, że nowy węzeł został umieszczony na co najwyżej \singledash{$h$}{tym} poziomie.
+Wówczas $h'=h$.
+Jedyny przypadek, gdy nierówność $h'\ge\lfloor\lg n\rfloor$ nie jest spełniona, występuje wówczas, gdy $n=2^{h+1}$, czyli gdy $T$ jest pełnym drzewem binarnym.
+Ale każdy poziom takiego drzewa ma komplet węzłów, dlatego nowy węzeł może zostać umieszczony jedynie na \singledash{$(h+1)$}{szym} poziomie, co przeczy założeniu.
+A~zatem nierówność jest spełniona.
+
+W~przypadku, gdy nowy węzeł zajął w~$T'$ poziom $h+1$, jest $h'=h+1$.
+Z~założenia indukcyjnego mamy $h\ge\lfloor\lg(n-1)\rfloor$, zatem wystarczy pokazać, że $\lfloor\lg(n-1)\rfloor+1\ge\lfloor\lg n\rfloor$.
+Zauważmy, że dla dowolnej liczby rzeczywistej $x$ i~dowolnej liczby całkowitej $k$ zachodzi $\lfloor x\rfloor+k=\lfloor x+k\rfloor$.
+Mamy więc
+\[
+    \lfloor\lg(n-1)\rfloor+1 = \lfloor\lg(n-1)+1\rfloor = \lfloor\lg(n-1)+\lg2\rfloor = \lfloor\lg(2n-2)\rfloor.
+\]
+Podłoga oraz logarytm przy podstawie 2 są funkcjami niemalejącymi, a~więc $\lfloor\lg(2n-2)\rfloor\ge\lfloor\lg n\rfloor$, o~ile $2n-2\ge n$, czyli gdy $n\ge2$.
+Nierówność zachodzi zatem dla dowolnego drzewa binarnego.
+
+\exercise %B.5-5
+Dowodzimy przez indukcję względem $n$.
+Gdy $n=0$, to drzewo jest puste, więc $i=e=0$ i~baza zachodzi.
+Załóżmy więc, że $n>0$ i~że równanie $e=i+2(n-1)$ jest spełnione przez drzewo regularne o~$n-1$ węzłach wewnętrznych.
+W~wyniku dołączenia dwóch nowych węzłów do pewnego liścia, ten staje się węzłem wewnętrznym.
+Zwiększamy przez to zarówno liczbę liści, jak i~liczbę węzłów wewnętrznych drzewa o~1.
+
+Zbadajmy, co się dzieje z~długościami ścieżek wewnętrznej i~zewnętrznej po takiej modyfikacji.
+Oznaczmy przez $e'$ oraz $i'$, odpowiednio, długość nowej ścieżki zewnętrznej i~długość nowej ścieżki wewnętrznej, a~przez $d$ -- głębokość nowego węzła wewnętrznego.
+Zachodzi $e'=e-d+2(d+1)=i+2(n-1)+d+2$ oraz $i'=i+d$, a~zatem $e'=i'+2n$ i~twierdzenie jest spełnione, gdyż teraz w~drzewie jest $n$ węzłów wewnętrznych.
+
+\exercise %B.5-6
+Niech $h$ będzie wysokością drzewa binarnego $T$.
+Zauważmy, że badana suma wag liści drzewa $T$ nie zmniejszy się, jeśli do każdego węzła o~stopniu 1 w~tym drzewie dołączymy jego brakującego syna.
+Nowe węzły są nowymi liśćmi drzewa, zatem powiększają one sumę wag liści.
+Wagą liścia $x$ na głębokości $d$ jest $2^{-d}=2\cdot2^{-(d+1)}$, więc jeśli uczynimy z~$x$ ojca dwóch nowych węzłów, to suma wag liści pozostanie niezmieniona.
+Powtarzając tę czynność dla każdego liścia $x$ (również dla tych, które powstają w~wyniku tej procedury) o~głębokości mniejszej niż $h$, otrzymamy w~końcu pełne drzewo binarne $T'$ o~wysokości $h$.
+Suma wag liści drzewa $T$ nie przekracza sumy wag liści drzewa $T'$, która wynosi
+\[
+	\sum_{x}w(x) = 2^h\cdot2^{-h} = 1,
+\]
+gdzie sumujemy względem wszystkich liści $x$ z~$T'$.
+
+\exercise %B.5-7
+\note{W~tekście zadania występuje błąd.
+Twierdzenie nie zachodzi bowiem dla drzew o~jednym liściu, dlatego w~rozwiązaniu zakładamy, że\/ $L\ge2$.}
+
+\noindent Niech $T$ będzie drzewem binarnym o~$L\ge2$ liściach oraz niech $LT$ i~$RT$ będą, odpowiednio, jego lewym i~prawym poddrzewem.
+Niech ponadto $L_1$ i~$L_2$ stanowią, odpowiednio, liczbę liści $LT$ i~liczbę liści $RT$.
+Bez straty ogólności załóżmy, że $L_1\le L_2$.
+Jeśli $L_2\le2L/3$, to zarówno $LT$, jak i~$RT$ stanowi szukane poddrzewo.
+W~przeciwnym przypadku zachodzi $L_2>2L/3$, więc szukane poddrzewo będzie częścią drzewa $RT$.
+Po skończonej liczbie kroków dojdziemy do drzewa $T'$, którego większe poddrzewo $RT'$ będzie mieć nie więcej niż $2L/3$ liści.
+Ale ponieważ $T'$ ma więcej niż $2L/3$ liści, to liczba liści $RT'$ jest większa niż $L/3$, zatem $RT'$ jest szukanym poddrzewem.

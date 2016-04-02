@@ -1,0 +1,59 @@
+\subchapter{Algorytmy}
+
+\exercise %1.1-1
+\begin{description}
+	\item[Sortowanie:] Jest to problem bardzo powszechny -- znajduje zastosowanie w~wielu zagadnieniach obliczeniowych.
+Najczęstszym powodem sortowania danych jest przygotowanie ich do dalszego przetwarzania, które wówczas jest na ogół bardziej efektywne.
+	\item[Najlepsza kolejność mnożenia macierzy:] Problem występuje podczas wyznaczania transformacji graficznych (np.\ skalowań, obrotów); przekształcenia te opisane są za pomocą macierzy, a~ich składanie oznacza obliczanie iloczynu tych macierzy.
+	\item[Otoczka wypukła:] Mając zbiór wbitych w~ziemię palików, chcemy otoczyć pewien obszar siatką ogrodzeniową opierając ją na niektórych palikach tak, by obszar ten zmaksymalizować.
+\end{description}
+
+\exercise %1.1-2
+Miary efektywności algorytmu inne niż jego szybkość:
+\begin{itemize}
+	\item zużycie pamięci (operacyjnej i~masowej);
+	\item stopień wykorzystania systemu operacyjnego;
+	\item efektywność dostępu do bazy danych;
+	\item stopień wykorzystania połączenia sieciowego;
+	\item dostosowanie do konkretnej architektury sprzętowo-programowej;
+	\item efektywność działania w~architekturze równoległej lub rozproszonej.
+\end{itemize}
+
+\exercise %1.1-3
+Poniżej zestawiono zalety i~wady listy dwukierunkowej w~porównaniu ze zwykłą tablicą.
+
+\bigskip
+\noindent\textbf{Zalety:}
+\begin{itemize}
+	\item przy definiowaniu listy nie trzeba z~góry znać jej maksymalnej pojemności, jak to jest w~przypadku definiowania tablicy;
+	\item lista jest elastyczna -- może się dowolnie powiększać i~kurczyć w~trakcie wykonywania na niej operacji wstawiania i~usuwania;
+	\item wstawianie i~usuwanie elementów z~dowolnej pozycji listy odbywa się w~czasie stałym.
+\end{itemize}
+\bigskip
+\noindent\textbf{Wady:}
+\begin{itemize}
+	\item nie można uzyskać dostępu do dowolnego elementu listy w~stałym czasie;
+	\item lista potrzebuje nieco więcej pamięci niż tablica -- oprócz danych pamiętane są wskaźniki na poprzedni i~następny element listy;
+	\item w~przeciwieństwie do tablicy lista na ogół nie zajmuje spójnego obszaru pamięci, co może prowadzić do fragmentacji pamięci.
+\end{itemize}
+
+\exercise %1.1-4
+\noindent\textbf{Podobieństwa:}
+\begin{itemize}
+	\item oba są problemami grafowymi;
+	\item oba mają na celu minimalizację pewnej ścieżki w~grafie.
+\end{itemize}
+\bigskip
+\noindent\textbf{Różnice:}
+\begin{itemize}
+	\item w~problemie najkrótszej ścieżki poszukuje się minimalnej ścieżki między dwoma wierzchołkami, a~w~problemie komiwojażera -- minimalnego cyklu uwzględniającego wszystkie wierzchołki grafu (minimalny cykl Hamiltona);
+	\item problem najkrótszej ścieżki jest wielomianowy (istnieje dla niego szybki algorytm), podczas gdy problem komiwojażera jest \NPclass-zupełny (prawdopodobnie nie istnieje efektywny algorytm rozwiązujący ten problem).
+\end{itemize}
+
+\exercise %1.1-5
+Rozwiązanie dokładne jest jedynym dopuszczalnym np.\ w~problemie wyznaczenia trajektorii sztucznej satelity.
+Głównym powodem jest to, że ewentualne zniszczenie lub uszkodzenie satelity wiązałoby się z~ogromnymi stratami finansowymi.
+
+Natomiast przybliżone rozwiązanie jest wystarczające np.\ podczas modelowania pogody.
+W~problemie tym występuje bardzo wiele parametrów i~często są one dane tylko jako pewne przybliżenia rzeczywistych wielkości, przez co wyznaczenie dokładnego rozwiązania jest zazwyczaj niemożliwe.
+Poza tym pewna tolerancja rozwiązania jest całkowicie dopuszczalna.

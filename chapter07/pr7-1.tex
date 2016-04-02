@@ -1,0 +1,46 @@
+\problem{Poprawność algorytmu podziału Hoare'a} %7-1
+
+\subproblem %7-1(a)
+Działanie procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ zostało przedstawione na rys.\ \ref{fig:7-1a}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_7-1.a}
+	\end{center}
+	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$.
+Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$.
+Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$.
+{\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych.
+{\sffamily\bfseries\doubledash{(b)}{(d)}} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach \doubledash{4}{11}.} \label{fig:7-1a}
+\end{figure}
+
+\subproblem %7-1(b)
+W~pierwszej iteracji pętli \kw{while} zmienna $j$ zatrzyma się na pewnym indeksie $q\ge p$, a~zmienna $i$ pozostanie na indeksie $p$, pod którym przechowywana jest wartość $x$.
+Jeśli $i=j$, to procedura kończy działanie, załóżmy więc, że $i<j$.
+Element $A[i]=A[p]=x$ zostanie zamieniony z~$A[q]$.
+W~kolejnych iteracjach pętli \kw{while} zmienna $i$ może dotrzeć najdalej na indeks $q$, natomiast $j$ nie będzie nigdy mniejsze niż $p$, bo $A[p]$ zawiera teraz wartość mniejszą bądź równą $x$.
+Ponieważ $q>p$, to w~pewnym momencie podczas działania pętli indeksy $i$ i~$j$ miną się, czyli będzie $i\ge j$, co spowoduje przerwanie pętli w~wierszu 11.
+
+\subproblem %7-1(c)
+\note{Zakładamy, że podtablica\/ $A[p\twodots r]$ składa się z~co najmniej dwóch elementów.}
+
+\noindent Fakt udowodniony w~punkcie (b) mówi o~tym, że $p\le j\le r$.
+Załóżmy, że $A[r]\le x$, bowiem w~przeciwnym przypadku $j<r$ już po pierwszej iteracji pętli \kw{while}.
+W~pierwszej iteracji element $A[p]$ jest zamieniany z~$A[r]$, po czym w~kolejnych iteracjach indeks $j$ jest zmniejszany i~również w~tym przypadku mamy $j<r$.
+
+\subproblem %7-1(d)
+Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza 9.
+Każda para elementów tablicy, która tworzyła inwersję, jest odwracana, dzięki czemu elementy, które naruszały warunek posortowania, po zamianie będą znajdować się w~odpowiednich obszarach tablicy.
+Jak tylko indeksy $i$ i~$j$ miną się, każdy element z~podtablicy $A[p\twodots j]$ będzie równy bądź mniejszy od każdego elementu z~$A[j+1\twodots r]$.
+
+\subproblem %7-1(e)
+Jedyną różnicą w~porównaniu z~procedurą \proc{Quicksort} jest to, że element rozdzielający nie znajduje się w~$A[q]$ po wykonaniu \proc{Hoare-Partition}, musimy więc sortować rekurencyjnie fragment $A[p\twodots q]$ zamiast $A[p\twodots q-1]$.
+Pseudokod procedury został przedstawiony poniżej.
+\begin{codebox}
+\Procname{$\proc{Hoare-Quicksort}(A,p,r)$}
+\li	\If $p<r$
+\li		\Then
+			$q\gets\proc{Hoare-Partition}(A,p,r)$
+\li			$\proc{Hoare-Quicksort}(A,p,q)$
+\li			$\proc{Hoare-Quicksort}(A,q+1,r)$
+		\End
+\end{codebox}

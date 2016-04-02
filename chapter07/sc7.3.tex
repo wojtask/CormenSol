@@ -1,0 +1,12 @@
+\subchapter{Randomizowana wersja algorytmu quicksort}
+
+\exercise %7.3-1
+Randomizacja algorytmu sprawia, że żadne jego dane wejściowe nie stanowią przypadku pesymistycznego.
+Można więc przyjąć, że dla każdych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
+
+\exercise %7.3-2
+W~przypadku pesymistycznym generator liczb losowych za każdym razem wybiera wartości, które tworzą najbardziej niezrównoważony podział podtablicy, czyli $p$ lub $r$.
+W~takiej sytuacji liczba wywołań generatora jest rzędu $\Theta(n)$.
+
+W~przypadku optymistycznym generator za każdym razem zwraca liczbę bliską $(p+r)/2$.
+Tworzone podziały są zatem zrównoważone i~liczba wywołań generatora w~tym przypadku wynosi $\Theta(\lg n)$.

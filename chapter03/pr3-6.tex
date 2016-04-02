@@ -1,0 +1,80 @@
+\problem{Funkcje iterowane} %3-6
+W~każdym punkcie tego problemu za dziedzinę funkcji $f_c^*(n)$ przyjęto dziedzinę $f(n)$.
+W~celu wyznaczenia $f_c^*(n)$ szukamy najmniejszego $i\ge0$, dla którego zachodzi $f^{(i)}(n)\le c$.
+
+\subproblem %3-6(a)
+\note{Rozwiązanie dotyczy przykładu z~tekstu oryginalnego, w~którym\/ $f(n)=n-1$ oraz\/ $c=0$.}
+
+\noindent Ponieważ $(n-1)^{(i)}\equiv n-i$, to otrzymujemy, że $f_0^*(n)=\max(0,\lceil n\rceil)$ i~oszacowaniem dokładnym jest $f_0^*(n)=\Theta(n)$.
+
+\subproblem %3-6(b)
+\note{Rozwiązanie dotyczy przykładu z~tekstu oryginalnego, w~którym\/ $f(n)=\lg n$ oraz\/ $c=1$.}
+
+\noindent Z~definicji logarytmu iterowanego mamy $f_1^*(n)=\lg^*n=\Theta(\lg^*n)$.
+
+\subproblem %3-6(c)
+Oczywiście $(n/2)^{(i)}\equiv n/2^i$, więc:
+\[
+	f_1^*(n) =
+	\begin{cases}
+		0, & \text{jeśli $n\le1$}, \\
+		\lceil\lg n\rceil, & \text{jeśli $n>1$}.
+	\end{cases}
+\]
+Oszacowanie dokładne: $f_1^*(n)=\Theta(\lg n)$.
+
+\subproblem %3-6(d)
+Korzystając z~poprzedniego punktu, ale dla $c=2$, mamy:
+\[
+	f_2^*(n) =
+	\begin{cases}
+		0, & \text{jeśli $n\le2$}, \\
+		\lceil\lg n\rceil-1, & \text{jeśli $n>2$}.
+	\end{cases}
+\]
+Oszacowanie dokładne: $f_2^*(n)=\Theta(\lg n)$.
+
+\subproblem %3-6(e)
+Ponieważ $\sqrt{n}\equiv n^{1/2}$, to mamy $\bigl(\!\sqrt{n}\bigr)^{(i)}\equiv n^{1/2^i}$\!.
+Jeśli $n>2$, to rozwiązaniem nierówności $n^{1/2^i}\le2$ ze względu na $i$ jest $i\ge\lg\lg n$, skąd dostajemy następujący wynik:
+\[
+	f_2^*(n) =
+	\begin{cases}
+		0, & \text{jeśli $0\le n\le2$}, \\
+		\lceil\lg\lg n\rceil, & \text{jeśli $n>2$}.
+	\end{cases}
+\]
+Oszacowanie dokładne: $f_2^*(n)=\Theta(\lg\lg n)$.
+
+\subproblem %3-6(f)
+Bieżący punkt różni się od poprzedniego jedynie stałą $c$, jednak ta zmiana mocno wpływa na postać funkcji $f_c^*(n)$.
+Jeśli $0\le n\le1$, to $f_1^*(n)=0$, a~jeśli $n>1$, to wartości tej funkcji są nieokreślone, ponieważ dla każdego całkowitego $i\ge0$, $\bigl(\!\sqrt{n}\bigr)^{(i)}>1$.
+
+\subproblem %3-6(g)
+Postępowanie jest analogiczne do tego z~punktu (e).
+Mamy $\bigl(n^{1/3}\bigr)^{(i)}\equiv n^{1/3^i}$, a~stąd:
+\[
+	f_2^*(n) =
+	\begin{cases}
+		0, & \text{jeśli $n\le2$}, \\
+		\lceil\log_3\lg n\rceil, & \text{jeśli $n>2$}.
+	\end{cases}
+\]
+Oszacowanie dokładne: $f_2^*(n)=\Theta(\lg\lg n)$.
+
+\subproblem %3-6(h)
+Kolejne iteracje funkcji $f(n)=n/\!\lg n$ mają zbyt skomplikowaną postać, aby można było je badać podobnie jak w~poprzednich punktach.
+Dlatego naszą analizę przeprowadzimy dla oszacowań górnego i~dolnego funkcji $f(n)$.
+Niech $g(n)$ i~$h(n)$ będą funkcjami monotonicznie rosnącymi.
+Dla $n\ge c$, jeśli $f(n)\le g(n)$ oraz $f_c^*(n)$ i~$g_c^*(n)$ są dobrze określone, to $f_c^*(n)\le g_c^*(n)$, gdyż argument w~kolejnych iteracjach funkcji $f(n)$ maleje szybciej niż w~iteracjach funkcji $g(n)$.
+Analogiczny wniosek można uzyskać w~przypadku, gdy $f(n)\ge h(n)$.
+
+Jeśli $n\ge4$, to zachodzi $n/\!\lg n\le n/2$.
+Niech $g(n)=n/2$.
+Wówczas z~punktu (d) mamy, że $g_4^*(n)=g_2^*(n)-1=\Theta(\lg n)$, a~zatem $f_2^*(n)=f_4^*(n)+1\le g_4^*(n)+1=O(\lg n)$.
+
+Jeśli z~kolei $n\ge16$, to prawdziwa jest nierówność $n/\!\lg n\ge\sqrt{n}$.
+Biorąc $h(n)=\sqrt{n}$ i~wykorzystując wynik z~punktu (e), otrzymujemy $h_{16}^*(n)=h_2^*(n)-2=\Theta(\lg\lg n)$, a~zatem $f_2^*(n)=f_{16}^*(n)+2\ge h_{16}^*(n)+2=\Omega(\lg\lg n)$.
+
+Tempo wzrostu funkcji $f_2^*(n)$ znajduje się zatem pomiędzy $\Omega(\lg\lg n)$ a~$O(\lg n)$.
+Niestety na podstawie przeprowadzonej analizy nie można podać dokładniejszego oszacowania.

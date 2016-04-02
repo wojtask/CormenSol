@@ -1,0 +1,46 @@
+\problem{Względny rząd asymptotyczny} %3-2
+
+\subproblem %3-2(a)
+Ponieważ każdy wielomian rośnie szybciej niż dowolna funkcja polilogarytmiczna, czyli $\lg^kn=o(n^\epsilon)$, to stąd wynika, że również $\lg^kn=O(n^\epsilon)$.
+
+\subproblem %3-2(b)
+Podobnie, ze wzoru (3.9), mamy, że $n^k=o(c^n)$, co implikuje również $n^k=O(c^n)$.
+
+\subproblem %3-2(c)
+Wyrażenie $\sqrt{n}$ nie jest w~żadnej rozważanej relacji z~wyrażeniem $n^{\sin n}$, gdyż wartość wykładnika tego ostatniego przyjmuje wszystkie wartości między $-1$ a~1, podczas gdy $\sqrt{n}\equiv n^{1/2}$.
+
+\subproblem %3-2(d)
+Zachodzi $2^n=\omega(2^{n/2})$, bo
+\[
+	\lim_{n\to\infty}\frac{2^n}{2^{n/2}} = \lim_{n\to\infty}2^{n/2} = \infty,
+\]
+a~stąd wynika też $2^n=\Omega(2^{n/2})$.
+
+\subproblem %3-2(e)
+Funkcje $n^{\lg c}$ i~$c^{\lg n}$ dla $n>0$ są równoważne na podstawie tożsamości (3.15).
+
+\subproblem %3-2(f)
+Ze wzoru (3.18) mamy $\lg(n!)=\Theta(n\lg n)$, z~kolei $\lg n^n=n\lg n=\Theta(n\lg n)$, a~zatem obie funkcje są asymptotycznie równoważne.
+
+\bigskip
+\noindent Na podstawie powyższych uzasadnień dostajemy tabelę \ref{tab:3-2}.
+\begin{table}[ht]
+	\begin{center}
+		\begin{tabular}{cc|c|c|c|c|c}
+			$A$ & $B$ & $O$ & $o$ & $\Omega$ & $\omega$ & $\Theta$ \\
+			\hline
+			$\lg^kn$ & $n^\epsilon$ & tak & tak & nie & nie & nie \\
+			\hline
+			$n^k$ & $c^n$ & tak & tak & nie & nie & nie \\
+			\hline
+			$\sqrt{n}$ & $n^{\sin n}$ & nie & nie & nie & nie & nie \\
+			\hline
+			$2^n$ & $2^{n/2}$ & nie & nie & tak & tak & nie \\
+			\hline
+			$n^{\lg c}$ & $c^{\lg n}$ & tak & nie & tak & nie & tak \\
+			\hline
+			$\lg(n!)$ & $\lg n^n$ & tak & nie & tak & nie & tak
+		\end{tabular}
+		\caption{Porównanie funkcji na podstawie rzędu asymptotycznego.} \label{tab:3-2}
+	\end{center}
+\end{table}

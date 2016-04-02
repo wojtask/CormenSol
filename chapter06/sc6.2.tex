@@ -1,0 +1,73 @@
+\subchapter{Przywracanie własności kopca}
+
+\exercise %6.2-1
+Rys.\ \ref{fig:6.2-1} przedstawia działanie procedury $\proc{Max-Heapify}(A,3)$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_6.2-1}
+	\end{center}
+	\caption{Działanie procedury $\proc{Max-Heapify}(A,3)$ dla tablicy $A=\langle$27,\! 17,\! 3,\! 16,\! 13,\! 10,\! 1,\! 5,\! 7,\! 12,\! 4,\! 8,\! 9,\! 0$\rangle$.
+{\sffamily\bfseries\doubledash{(a)}{(b)}} Drzewo binarne reprezentujące $A$, w~którym przywracana jest własność kopca typu max, odpowiednio, w~węzłach $i=3$ oraz $i=6$.
+{\sffamily\bfseries(c)} Wynikowy kopiec z~przywróconą własnością kopca.} \label{fig:6.2-1}
+\end{figure}
+
+\exercise %6.2-2
+Poniższy pseudokod prezentuje procedurę przywracania własności kopca typu min.
+Ponieważ jedyną modyfikacją w~porównaniu z~procedurą \proc{Max-Heapify} jest zmiana znaków nierówności na przeciwne w~warunkach w~wierszach \ref{li:min-heapify-check1} i~\ref{li:min-heapify-check2}, to czas działania tej procedury jest identyczny z~czasem działania \proc{Max-Heapify}, czyli $\Theta(\lg n)$.
+\begin{codebox}
+\Procname{$\proc{Min-Heapify}(A,i)$}
+\li	$l\gets\proc{Left}(i)$
+\li	$r\gets\proc{Right}(i)$
+\li	\If $l\le\attrib{A}{heap-size}$ i~$A[l]<A[i]$ \label{li:min-heapify-check1}
+\li		\Then $\id{smallest}\gets l$
+\li		\Else $\id{smallest}\gets i$
+		\End
+\li	\If $r\le\attrib{A}{heap-size}$ i~$A[r]<A[\id{smallest}]$ \label{li:min-heapify-check2}
+\li		\Then $\id{smallest}\gets r$
+		\End
+\li	\If $\id{smallest}\ne i$
+\li		\Then
+			zamień $A[i]\leftrightarrow A[\id{smallest}]$
+\li			$\proc{Min-Heapify}(A,\id{smallest})$
+		\End
+\end{codebox}
+
+\exercise %6.2-3
+Jeśli element $A[i]$ jest większy niż jego synowie, to \id{largest} jest ustawiane na $i$ i~warunek z~wiersza 8 nie jest spełniony.
+Procedura zakończy więc działanie, nie dokonując żadnej zamiany elementów.
+
+\exercise %6.2-4
+Z~\refExercise{6.1-7} mamy, że element o~indeksie $i>\attrib{A}{heap-size}/2$ jest liściem kopca, czyli nie istnieją jego synowie.
+W~dwóch pierwszych wierszach procedury \proc{Max-Heapify} obliczone zostaną wartości przekraczające \attrib{A}{heap-size}, więc zmienna \id{largest} przyjmie wartość $i$.
+Warunek w~wierszu 8 będzie więc fałszywy i~natychmiast po jego sprawdzeniu procedura zakończy działanie.
+
+\exercise %6.2-5
+Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej.
+\begin{codebox}
+\Procname{$\proc{Iterative-Max-Heapify}(A,i)$}
+\li	\While \const{true}
+\li		\Do
+			$l\gets\proc{Left}(i)$ \label{li:iterative-max-heapify-begin}
+\li			$r\gets\proc{Right}(i)$
+\li			\If $l\le\attrib{A}{heap-size}$ i~$A[l]>A[i]$
+\li				\Then $\id{largest}\gets l$
+\li				\Else $\id{largest}\gets i$
+				\End
+\li			\If $r\le\attrib{A}{heap-size}$ i~$A[r]>A[\id{largest}]$
+\li				\Then $\id{largest}\gets r$
+				\End \label{li:iterative-max-heapify-end}
+\li			\If $\id{largest}=i$ \label{li:iterative-max-heapify-cond}
+\li				\Then \Return
+				\End
+\li			zamień $A[i]\leftrightarrow A[\id{largest}]$
+\li			$i\gets\id{largest}$
+		\End
+\end{codebox}
+Działania wykonywane w~wierszach \doubledash{\ref{li:iterative-max-heapify-begin}}{\ref{li:iterative-max-heapify-end}} są identyczne jak w~oryginalnej implementacji procedury.
+W~zależności od wyniku testu z~wiersza \ref{li:iterative-max-heapify-cond} procedura kończy działanie albo zamienia elementy $A[i]$ i~$A[\id{largest}]$, po czym symuluje wywołanie rekurencyjne, aktualizując wartość zmiennej $i$ i~wykonując kolejną iterację pętli \kw{while}.
+
+\exercise %6.2-6
+Najgorszy przypadek dla procedury \proc{Max-Heapify} zachodzi wówczas, gdy zostanie ona wywołana dla korzenia kopca i~schodzi rekurencyjnie aż do jego ostatniego poziomu.
+Najdłuższa ścieżka od korzenia do liścia składa się z~$h=\lfloor\lg n\rfloor$ krawędzi (z~\refExercise{6.1-2}) i~tyle będzie wywołań rekurencyjnych procedury w~najgorszym przypadku.
+Koszt pracy wykonanej na każdym poziomie rekursji jest stały, a~więc procedura \proc{Max-Heapify} działa wtedy w~czasie $\Omega(\lg n)$.
+Przykładowym drzewem, dla którego procedura wykona opisane operacje, jest takie, w~którym korzeń ma wartość 0, a~każdy inny węzeł ma wartość 1.

@@ -1,0 +1,134 @@
+\subchapter{Stosy i~kolejki}
+
+\exercise %10.1-1
+Ciąg operacji na stosie $S$ został przedstawiony na rys.\ \ref{fig:10.1-1}.
+\begin{figure}[ht]
+    \begin{center}
+		\includegraphics{fig_10.1-1}
+	\end{center}
+	\caption{Operacje wstawiania i~usuwania elementów na stosie $S$.
+{\sffamily\bfseries(a)} Pusty stos $S$ reprezentowany jako tablica $S[1\twodots6]$.
+{\sffamily\bfseries\doubledash{(b)}{(d)}} Stos $S$ po wykonaniu na nim kolejnych operacji \proc{Push}.
+{\sffamily\bfseries(e)} Po usunięciu elementu ze stosu $S$ zmieniana jest jedynie pozycja atrybutu \attrib{S}{top}, natomiast sam element pozostaje w~tablicy.
+{\sffamily\bfseries(f)} Wstawienie nowego elementu na stos $S$ nadpisuje stary element, który został usunięty w~poprzednim kroku.
+{\sffamily\bfseries(g)} Stos $S$ po wykonaniu ostatniej operacji \proc{Pop}.} \label{fig:10.1-1}
+\end{figure}
+
+\exercise %10.1-2
+Z~tablicą $A$ związujemy atrybuty \attrib{A}{left-top} i~\attrib{A}{right-top}, które będą wskazywać na pozycje wierzchołków, odpowiednio, pierwszego i~drugiego stosu.
+Pierwszy stos będzie składał się z~elementów $A[1\twodots\attrib{A}{left-top}]$, a~drugi -- z~elementów $A[\attrib{A}{right-top}\twodots n]$.
+Początkowo $\attrib{A}{left-top}=0$ i~$\attrib{A}{right-top}=n+1$.
+Dodawanie i~usuwanie elementów w~pierwszym stosie działa identycznie jak dla pojedynczego stosu znajdującego się w~tablicy $A$, którego wierzchołek zajmuje pozycję \attrib{A}{left-top}.
+Drugi stos zachowuje się symetrycznie do pierwszego -- podczas dodawania do niego nowego elementu atrybut \attrib{A}{right-top} będzie dekrementowany, a~podczas usuwania -- inkrementowany.
+Operacje dodawania i~usuwania elementów działają oczywiście w~czasie stałym.
+Jeśli $\attrib{A}{left-top}=0$, to pierwszy stos jest pusty, a~jeśli $\attrib{A}{right-top}=n+1$, to drugi stos jest pusty.
+Przepełnienie ma miejsce tylko wtedy, gdy $\attrib{A}{left-top}=\attrib{A}{right-top}-1$ i~usiłujemy dodać nowy element do któregokolwiek stosu, czyli wówczas, gdy łączna liczba elementów na obu stosach wynosi $n$.
+
+\exercise %10.1-3
+Ciąg operacji na kolejce $Q$ ilustruje rys.\ \ref{fig:10.1-3}.
+
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_10.1-3}
+	\end{center}
+	\caption{Operacje wstawiania i~usuwania elementów na kolejce $Q$.
+{\sffamily\bfseries(a)} Pusta kolejka $Q$ reprezentowana jako tablica $Q[1\twodots6]$.
+{\sffamily\bfseries\doubledash{(b)}{(d)}} Kolejka $Q$ po wykonaniu na niej kolejnych operacji \proc{Enqueue}.
+{\sffamily\bfseries(e)} Po usunięciu elementu z~kolejki $Q$ zmieniana jest jedynie pozycja atrybutu \attrib{Q}{head}, natomiast sam element pozostaje w~tablicy.
+{\sffamily\bfseries(f)} Wstawienie nowego elementu do kolejki $Q$ nadpisuje stary element, który został usunięty w~poprzednim kroku.
+{\sffamily\bfseries(g)} Kolejka $Q$ po wykonaniu ostatniej operacji \proc{Dequeue}.} \label{fig:10.1-3}
+\end{figure}
+
+\exercise %10.1-4
+Poniżej znajduje się pseudokod operacji analogicznej do \proc{Stack-Empty}, ale testującej pustość kolejki.
+Wykorzystujemy ją podczas wykrywania błędów niedomiaru.
+
+\begin{codebox}
+\Procname{$\proc{Queue-Empty}(Q)$}
+\li	\If $\attrib{Q}{head}=\attrib{Q}{tail}$
+\li		\Then \Return \const{true}
+\li		\Else \Return \const{false}
+\End
+\end{codebox}
+
+Następujące wiersze należy dodać na początek procedury \proc{Enqueue}:
+\begin{codebox}
+\zi	\If $\attrib{Q}{head}=\attrib{Q}{tail}+1$
+\zi		\Then \Error ,,nadmiar''
+		\End
+\zi	\If $\attrib{Q}{head}=1$ i~$\attrib{Q}{tail}=\attrib{Q}{length}$
+\zi		\Then \Error ,,nadmiar''
+		\End
+\end{codebox}
+Z~kolei poniższy fragment kodu umieszczamy na początku procedury \proc{Dequeue}:
+\begin{codebox}
+\zi	\If $\proc{Queue-Empty}(Q)$
+\zi		\Then \Error ,,niedomiar''
+		\End
+\end{codebox}
+
+\exercise %10.1-5
+Kolejkę dwustronną implementujemy przy użyciu tablicy $D[1\twodots n]$.
+Podobnie jak w~zwykłej kolejce atrybut \attrib{D}{head} wskazuje na początek kolejki, natomiast atrybut \attrib{D}{tail} wyznacza następną wolną pozycję, na którą można wstawić nowy element.
+Procedury \proc{Head-Enqueue} oraz \proc{Head-Dequeue} mają na celu, odpowiednio, dodanie nowego elementu na początek kolejki i~usunięcie elementu z~początku kolejki.
+Z~kolei procedury \proc{Tail-Enqueue} oraz \proc{Tail-Dequeue} implementują dodawanie i~usuwanie elementów na końcu kolejki.
+Dla skrócenia zapisu pominięto sprawdzanie błędów niedomiaru i~przepełnienia.
+
+\begin{codebox}
+\Procname{$\proc{Head-Enqueue}(D,x)$}
+\li	\If $\attrib{D}{head}=1$
+\li		\Then $\attrib{D}{head}\gets\attrib{D}{length}$
+\li		\Else $\attrib{D}{head}\gets\attrib{D}{head}-1$
+		\End
+\li	$D[\attrib{D}{head}]\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Head-Dequeue}(D)$}
+\li	$x\gets D[\attrib{D}{head}]$
+\li	\If $\attrib{D}{head}=\attrib{D}{length}$
+\li		\Then $\attrib{D}{head}\gets1$
+\li		\Else $\attrib{D}{head}\gets\attrib{D}{head}+1$
+		\End
+\li	\Return $x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Tail-Enqueue}(D,x)$}
+\li	$D[\attrib{D}{tail}]\gets x$
+\li	\If $\attrib{D}{tail}=\attrib{D}{length}$
+\li		\Then $\attrib{D}{tail}\gets1$
+\li		\Else $\attrib{D}{tail}\gets\attrib{D}{tail}+1$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Tail-Dequeue}(D,x)$}
+\li	\If $\attrib{D}{tail}=1$
+\li		\Then $\attrib{D}{tail}\gets\attrib{D}{length}$
+\li		\Else $\attrib{D}{tail}\gets\attrib{D}{tail}-1$
+		\End
+\li	\Return $D[\attrib{D}{tail}]$
+\end{codebox}
+
+Wszystkie powyższe operacje działają w~czasie $\Theta(1)$.
+
+\exercise %10.1-6
+Wszystkie elementy kolejki będą trzymane na jednym stosie -- drugi stos będzie pełnił funkcję pomocniczą.
+Dodawanie nowego elementu do kolejki oraz sprawdzanie czy kolejka jest pusta, nie różnią się od analogicznych operacji wykonywanych na pierwszym stosie.
+Usuwanie elementu z~kolejki jest już operacją nieco bardziej skomplikowaną, gdyż należy pobrać element znajdujący się najgłębiej na tym stosie.
+Ściągamy wpierw z~niego wszystkie elementy za pomocą operacji \proc{Pop} i~umieszczamy kolejno na drugim stosie, wywołując ciąg operacji \proc{Push}.
+W~rezultacie drugi stos będzie zawierał wszystkie elementy kolejki w~odwrotnej kolejności.
+Teraz pobieramy i~zapamiętujemy element ze szczytu drugiego stosu, gdyż za chwilę zwrócimy go jako wynik procedury.
+Wcześniej trzeba bowiem przenieść pozostałą zawartość drugiego stosu z~powrotem do pierwszego, co przy okazji przywróci początkową kolejność elementów.
+
+Łatwo sprawdzić, że testowanie pustości kolejki oraz dodawanie do niej nowego elementu, są wykonywane w~czasie stałym, natomiast usuwanie wymaga czasu proporcjonalnego do liczby elementów kolejki.
+
+\exercise %10.1-7
+Rozwiązanie jest analogiczne do rozwiązania poprzedniego zadania.
+Sprawdzanie czy stos jest pusty, jak również dodawanie nowego elementu, to identyczne operacje wywoływane na pierwszej kolejce.
+Usuwanie elementu ze stosu odbywa się poprzez pobranie wszystkich elementów z~wyjątkiem ostatniego z~pierwszej kolejki i~dodanie tych elementów do drugiej.
+Ostatni z~nich także usuwamy z~kolejki, zapamiętawszy go w~celu późniejszego zwrócenia jako wyniku operacji.
+Ostatnim krokiem jest przeniesienie reszty elementów z~powrotem do pierwszej kolejki.
+
+Podobnie jak w~poprzednim zadaniu operacja odpowiedzialna za sprawdzenie czy stos jest pusty oraz dodawanie elementu działają w~czasie stałym, a~operacja usuwania -- w~czasie liniowym względem liczby elementów na stosie.

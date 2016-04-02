@@ -1,0 +1,33 @@
+\problem{Asymptotyczne zachowanie wielomianów} %3-1
+Udowodnimy najpierw fakt, że $p(n)=\Theta(n^d)$.
+Należy znaleźć stałe $c_1$, $c_2$, $n_0>0$ takie, że dla $n\ge n_0$ prawdziwe są nierówności:
+\[
+	0 \le c_1n^d \le a_dn^d+a_{d-1}n^{d-1}+\dots+a_0 \le c_2n^d.
+\]
+Po podzieleniu ich przez $n^d$ dostajemy
+\[
+	0 \le c_1 \le a_d+\underbrace{\frac{a_{d-1}}{n}+\dots+\frac{a_0}{n^d}}_\delta \le c_2,
+\]
+a~ponieważ składnik $\delta$ można dowolnie zbliżyć do zera, zwiększając parametr $n_0$, to stąd obie wartości $c_1$ i~$c_2$ mogą być dowolnie bliskie $a_d$.
+
+\subproblem %3-1(a)
+Zachodzi $p(n)=\Theta(n^d)$, zatem w~szczególności $p(n)=O(n^d)$, co oznacza, że istnieją stałe $c$, $n_0>0$, że dla wszystkich $n\ge n_0$ prawdą jest $0\le p(n)\le cn^d$.
+Z~kolei $k\ge d$, więc $n^k\ge n^d$ dla $n\ge1$, a~zatem $0\le p(n)\le cn^d\le cn^k$, skąd dostajemy, że $p(n)=O(n^k)$.
+
+\subproblem %3-1(b)
+Nierówność $k\le d$ implikuje $n^k\le n^d$ dla $n\ge1$.
+Korzystając z~tego, że $p(n)=\Omega(n^d)$, mamy $0\le cn^k\le cn^d\le p(n)$, skąd wynika $p(n)=\Omega(n^k)$.
+
+\subproblem %3-1(c)
+Dla $k=d$ tożsamość $p(n)=\Theta(n^d)=\Theta(n^k)$ zachodzi w~oczywisty sposób.
+
+\subproblem %3-1(d)
+Zachodzi $p(n)=O(n^d)$, tzn.\ istnieją stałe $c$, $n_0>0$ takie, że dla każdego $n\ge n_0$ spełniona jest nierówność $0\le p(n)\le cn^d$.
+Niech $b>0$ będzie dowolną stałą.
+Zbadajmy, dla jakich $n$ zachodzi $cn^d<bn^k$.
+Ponieważ $k>d$, to nierówność sprowadzamy do postaci $c/b<n^{k-d}$, skąd $n>n_1=(c/b)^{1/(k-d)}$.
+A~zatem dla każdego $b>0$ istnieje $n_2=\max(n_0,n_1+1)$, że dla wszystkich $n\ge n_2$ zachodzi $0\le p(n)\le cn^d<bn^k$, co oznacza, że $p(n)=o(n^k)$.
+
+\subproblem %3-1(e)
+Rozumowanie jest analogiczne do tego z~poprzedniego punktu.
+Wystarczy wykorzystać fakt, że $p(n)=\Omega(n^d)$ i~pokazać, że dla każdej stałej $b>0$ odpowiednio duże $n$ spełniają nierówność $0\le bn^k<cn^d\le p(n)$, gdzie $c>0$ jest stałą ukrytą w~notacji $\Omega$.

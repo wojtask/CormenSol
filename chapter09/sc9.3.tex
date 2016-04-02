@@ -1,0 +1,241 @@
+\subchapter{Wybór w~pesymistycznym czasie liniowym}
+
+\exercise %9.3-1
+Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy będą dzielone na grupy \singledash{7}{elementowe}.
+Wówczas w~co najmniej połowie spośród $\lceil n/7\rceil$ grup są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez 7, i~jednej grupy zawierającej sam element $x$.
+Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
+\[
+	4\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{7}\Bigr\rceil\biggr\rceil-2\biggr) \ge \frac{2n}{7}-8.
+\]
+Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$.
+Stąd procedura wywoła się rekurencyjnie dla zbioru co najwyżej \singledash{$(5n/7+8)$}{elementowego}.
+Rekurencja przyjmuje więc postać
+\[
+	T(n) \le \begin{cases}
+		\Theta(1), & \text{jeśli $n<d$}, \\
+		T(\lceil n/7\rceil)+T(5n/7+8)+O(n), & \text{jeśli $n\ge d$},
+	\end{cases}
+\]
+przy czym $d>0$ jest pewną stałą, którą wyznaczymy później.
+
+Wykażemy metodą przez podstawianie, że $T(n)=O(n)$.
+Zachodzi oczywiście $T(n)\le cn$ dla pewnej stałej $c>0$ oraz wszystkich $n<d$.
+Załóżmy teraz, że $n\ge d$ i~że $T(k)\le ck$ dla pewnej stałej $c>0$ i~wszystkich $k<n$.
+Dla pewnej stałej $a>0$ zachodzi wówczas
+\begin{align*}
+	T(n) &\le c\lceil n/7\rceil+c(5n/7+8)+an \\
+	&\le cn/7+c+5cn/7+8c+an \\
+	&= 6cn/7+9c+an \\
+	&= cn+(-cn/7+9c+an) \\
+	&\le cn,
+\end{align*}
+o~ile składnik $-cn/7+9c+an$ jest niedodatni.
+Dla $n>63$ warunek ten jest spełniony, kiedy $c\ge7a(n/(n-63))$.
+Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~wtedy musi być $c\ge14a$.
+Można zatem przyjąć za $d$ wartość 126, co kończy dowód.
+
+Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \singledash{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} będzie wyższy od liniowego.
+Rozważmy w~szczególności przypadek, kiedy jest dokładnie $\bigl\lceil\frac{1}{2}\bigl\lceil\frac{n}{3}\bigr\rceil\bigr\rceil$ grup o~medianach większych lub równych $x$, w~tym ostatnia, niepełna grupa, która zawiera 2 elementy większe niż $x$.
+Stąd całkowita liczba elementów większych od $x$ wynosi
+\[
+	2\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{3}\Bigr\rceil\biggr\rceil-1\biggr)+1 = 2\Bigl\lceil\frac{n}{6}\Bigr\rceil-1.
+\]
+Procedura jest wywoływana rekurencyjne dla co najmniej $n-(2\lceil n/6\rceil-1)\ge n-(2(n/6+1)-1)=2n/3-1$ elementów nieprzekraczających $x$.
+Na mocy faktu, że sortowanie elementów w~kroku 2 algorytmu \proc{Select} zabiera czas dokładnie $\Theta(n)$, otrzymujemy rekurencję opisującą czas działania algorytmu w~tym przypadku:
+\[
+	T(n) \ge \begin{cases}
+		\Theta(1), & \text{jeśli $n<d$}, \\
+		T(\lceil n/3\rceil)+T(2n/3-1)+\Theta(n), & \text{jeśli $n\ge d$},
+	\end{cases}
+\]
+gdzie $d>0$ jest pewną stałą.
+Można wykazać, stosując metodę przez podstawianie, że rozwiązaniem powyższej rekurencji jest $T(n)=\Omega(n\lg n)$, co oznacza, że algorytm w~tym wariancie nie działa w~czasie liniowym.
+
+\exercise %9.3-2
+Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większych od $x$, jak i~liczba elementów mniejszych od $x$, wynosi co najmniej $3n/10-6$.
+Na mocy założenia, że $n\ge140$, mamy
+\[
+	\frac{3n}{10}-6-\Bigl\lceil\frac{n}{4}\Bigr\rceil \ge \frac{3n}{10}-6-\biggl(\frac{n}{4}+1\biggr) = \frac{n-140}{20} \ge 0,
+\]
+skąd wnioskujemy, że obie badane liczby są nie mniejsze niż $\lceil n/4\rceil$.
+
+\exercise %9.3-3
+\note{W~rozwiązaniu przyjmujemy założenie, że elementy tablicy wejściowej są parami różne.}
+
+\noindent Wykorzystamy algorytm \proc{Select} do znalezienia mediany $x$ elementów z~tablicy wejściowej.
+Przy okazji tablica wejściowa zostanie podzielona względem $x$.
+Można więc w~algorytmie quicksort zastąpić wywołanie procedury \proc{Partition} wywołaniem \proc{Select} szukającym mediany.
+W~rezultacie wykonywane będą najbardziej zrównoważone podziały i~pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
+
+\exercise %9.3-4
+Jedynym źródłem informacji o~elementach we wspomnianym algorytmie wyznaczającym \singledash{$i$}{tą} najmniejszą wartość są porównania.
+Ponadto tablica wejściowa zawierająca te elementy nie jest modyfikowana -- po zakończeniu działania algorytmu ma ona identyczną zawartość jak na początku.
+Zakładamy, że wynik każdego porównania liczb (tzn.\ ustalenie relacji $\le$ albo $>$) jest zapamiętywany, więc przy następnej próbie sprawdzenia tych samych liczb wystarczy odczytać wynik z~pamięci.
+W~związku z~tym pozostaje nam udowodnić, że porównania, które przeprowadzono i~zapamiętano podczas działania algorytmu, aby jednoznacznie stwierdzić, który element jest \singledash{$i$}{tym} najmniejszym, są wystarczające, by jednoznacznie wskazać $i-1$ najmniejszych oraz $n-i$ największych elementów.
+
+Oznaczmy przez $u$ element zwrócony przez algorytm.
+W~rozwiązaniu będziemy korzystać z~przechodniości relacji porządku liczb.
+Jeśli algorytm stwierdził, że $x\le y$ oraz $y\le z$, to wnioskujemy, że $x\le z$.
+Wykażemy, że dzięki tej obserwacji możemy uzyskać informacje o~wzajemnym porządku w~każdej parze elementów ze zbioru wejściowego.
+Załóżmy nie-wprost, że istnieje para $\langle x,y\rangle$, przy czym nie potrafimy stwierdzić, czy $x\le y$, czy $x>y$.
+Wówczas nie potrafimy także wskazać relacji między $x$ i~każdym elementem, z~którym jesteśmy w~stanie porównać $y$, i~na odwrót.
+W~szczególności istnieje element $v$, którego relacja z~$u$ nie jest nam znana.
+Ale to leży w~sprzeczności z~faktem, że $u$ zostało jednoznacznie wskazane jako \singledash{$i$}{ty} najmniejszy ze zbioru wejściowego -- $v$ może bowiem leżeć po jednej albo po drugiej stronie $u$, a~to prowadzi do niejednoznaczności przy określaniu pozycji $u$ w~zbiorze wejściowym.
+
+Mając informacje na temat każdej pary, możemy przejrzeć wyniki porównań elementu $u$ z~każdym innym i~na tej podstawie klasyfikować elementy do jednego z~dwóch zbiorów wynikowych.
+
+\exercise %9.3-5
+Zmodyfikujemy procedurę \proc{Randomized-Select}, dokonując zmiany w~wierszu 3.
+Zamiast wywoływać \proc{Randomized-Partition}, znajdziemy medianę $x$ elementów z~tablicy wejściowej za pomocą danej ,,czarnej skrzynki'', po czym podzielimy tablicę względem $x$.
+W~każdym wywołaniu rekurencyjnym będzie wówczas dokonywany najbardziej zrównoważony podział, więc czas działania algorytmu wyboru w~przypadku pesymistycznym przyjmie postać $T(n)=T(\lfloor n/2\rfloor)+O(n)$.
+Rozwiązaniem tej rekurencji jest $T(n)=O(n)$.
+
+\exercise %9.3-6
+Oznaczmy przez $S$ badany zbiór, a~przez $Q_k(S)$ -- zbiór jego kwantyli rzędu $k$.
+Dopuszczalnymi wartościami parametru $k$ są liczby całkowite od 1 do $n+1$, gdzie $n=|S|$.
+Zbiór kwantyli nie jest jednoznacznie zdefiniowany, opiszemy jednak jeden z~poprawnych sposobów jego konstrukcji.
+Oczywiście $Q_1(S)=\emptyset$.
+Jeśli $k$ jest parzyste, to $Q_k(S)$ składa się z~mediany $m$ zbioru $S$ oraz kwantyli rzędu $k/2$ zbiorów $\{\,x\in S:x<m\,\}$ i~$\{\,x\in S:x>m\,\}$.
+W~przypadku, gdy $k$ jest liczbą nieparzystą i~większą od 1, musimy wyznaczyć te kwantyle rzędu $k$, które znajdują się najbliżej mediany $m$ i~są od niej różne.
+Oznaczmy je przez $m_1$ i~$m_2$.
+Wówczas
+\[
+	Q_k(S) = Q_{(k-1)/2}(\{\,x\in S:x<m_1\,\})\cup\{m_1,m_2\}\cup Q_{(k-1)/2}(\{\,x\in S:x>m_2\,\}).
+\]
+
+Zbiór $S$ reprezentujemy jako tablicę $A$ parami różnych elementów.
+Na podstawie powyższego opisu otrzymujemy następujący algorytm oparty o~metodę ,,dziel i~zwyciężaj'':
+\begin{codebox}
+\Procname{$\proc{Quantiles}(A,p,r,k)$}
+\li	\If $k=1$
+\li		\Then \Return $\emptyset$
+		\End
+\li	$n\gets r-p+1$
+\li	$q_1\gets p+\lfloor\lfloor k/2\rfloor(n/k)\rfloor$ \>\>\>\>\>\>\Comment pozycje zajmowane przez \singledash{$\lfloor k/2\rfloor$}{ty} i~\singledash{$\lceil k/2\rceil$}{ty} kwantyl rzędu $k$
+\li	$q_2\gets p+\lfloor\lceil k/2\rceil(n/k)\rfloor$ \>\>\>\>\>\>\>podtablicy $A[p\twodots r]$, gdyby została ona uporządkowana
+\li	$\proc{Select}(A,p,r,q_1-p+1)$
+\li	\If $q_1\ne q_2$
+\li		\Then $\proc{Select}(A,q_1+1,r,q_2-q_1)$ \label{li:quantiles-second-select}
+		\End
+\li	$L\gets\proc{Quantiles}(A,p,q_1-1,\lfloor k/2\rfloor)$
+\li	$R\gets\proc{Quantiles}(A,q_2+1,r,\lfloor k/2\rfloor)$
+\li	\Return $L\cup\{A[q_1],A[q_2]\}\cup R$
+\end{codebox}
+Aby wyznaczyć $Q_k(S)$, należy wywołać $\proc{Quantiles}(A,1,n,k)$, gdzie $n=|S|$.
+
+W~pseudokodzie nie rozdzielamy przypadków explicite ze względu na parzystość $k$.
+Po wyznaczeniu długości przetwarzanego fragmentu $A[p\twodots r]$ obliczane są pozycje $q_1$ i~$q_2$ zajmowane przez kwantyle $m_1$ i~$m_2$ (jeśli $k$ jest nieparzyste) lub medianę $m$ (jeśli $k$ jest parzyste -- wówczas $q_1=q_2$), gdyby uporządkować podtablicę $A[p\twodots r]$.
+Następnie korzystamy z~algorytmu \proc{Select}, aby podzielić tę podtablicę względem elementu $m_1$ lub $m$ (w~zależności od parzystości $k$).
+Przyjmujemy, że parametrami procedury \proc{Select} są kolejno: tablica wejściowa, indeks początku przetwarzanego fragmentu tej tablicy, indeks końca tego fragmentu oraz numer statystyki pozycyjnej, którą zamierzamy odnaleźć w~tym fragmencie.
+Jeśli $k$ jest nieparzyste (czyli $q_1\ne q_2$), to w~wierszu \ref{li:quantiles-second-select} fragment tablicy $A$ zawierający elementy większe niż $m_1$ dzielimy względem $m_2$.
+W~tym momencie fragment $A[p\twodots q_1-1]$ składa się z~elementów mniejszych niż $A[q_1]=m_1$, fragment $A[q_2+1\twodots r]$ -- z~elementów większych niż $A[q_2]=m_2$, natomiast elementy z~$A[q_1+1\twodots q_2-1]$ (o~ile istnieją) są pomiędzy $m_1$ a~$m_2$.
+Teraz wystarczy znaleźć kwantyle rzędu $\lfloor k/2\rfloor$ w~pierwszym i~drugim fragmencie, wykorzystując wywołania rekurencyjne, po czym zwrócić wynikowy zbiór.
+
+Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisująca całkowity czas działania przyjmuje postać $T(n,k)\le2T(\lfloor n/2\rfloor,\lfloor k/2\rfloor)+O(n)$.
+Jej rozwiązaniem jest $T(n,k)=O(n\lg k)$, o~czym można się przekonać, przeprowadzając analizę z~wykorzystaniem metody drzewa rekursji.
+
+\exercise %9.3-7
+Wyznaczmy medianę $x$ zbioru $S$, a~następnie dla każdego elementu z~tego zbioru obliczmy jego odległość od $x$, czyli wartość bezwzględną z~ich różnicy.
+Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich \singledash{$k$}{tej} statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
+
+Pojawiają się jednak dwie subtelności.
+O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach.
+Analiza czasu działania algorytmu \proc{Select} przeprowadzona w~Podręczniku pozostaje jednak prawdziwa, gdy rozszerzymy ją na przypadek powtarzających się elementów w~tablicy wejściowej, dlatego oszacowanie na czas działania tego algorytmu nie zmienia się.
+Może się także zdarzyć, że zbiór elementów o~odległościach nieprzekraczających $y$ będzie mieć $k+1$ elementów.
+Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$.
+Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
+
+Poniższy algorytm implementuje opisane podejście.
+Przyjmuje on na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą wszystkie elementy zbioru $S$ oraz liczbę $k$.
+\begin{codebox}
+\Procname{$\proc{Median-Proximity}(A,k)$}
+\li	$n\gets\attrib{A}{length}$
+\li	$x\gets\proc{Select}(A,1,n,\lfloor(n+1)/2\rfloor)$
+\li	\For $i\gets1$ \To $n$
+\li		\Do $\id{dist}[i]\gets|A[i]-x|$
+		\End
+\li	$y\gets\proc{Select}(\id{dist},1,n,k)$
+\li	$M\gets\emptyset$
+\li	\For $i\gets1$ \To $n$
+\li		\Do
+			\If $|A[i]-x|\le y$
+\li				\Then $M\gets M\cup\{A[i]\}$
+				\End
+		\End
+\li	\If $|M|=k+1$
+\li		\Then $M\gets M\setminus\{x+y\}$
+		\End
+\li	\Return $M$
+\end{codebox}
+W~czasie $O(n)$ wyznaczana jest mediana $x$ zbioru $S$, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \singledash{$k$}{ta} najmniejsza wartość $y$ tej tablicy.
+W~pozostałej części algorytmu budowany jest zbiór $M$ złożony z~$k$ elementów najbliższych $x$.
+Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały.
+Założenia te można łatwo spełnić, implementując zbiór $M$ np.\ jako listę dwukierunkową (patrz podrozdział 10.2).
+Wówczas czasem działania algorytmu jest $O(n)$.
+
+\exercise %9.3-8
+Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$.
+Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (bądź równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych).
+Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb.
+Załóżmy teraz, że $m_X\ne m_Y$ i~bez utraty ogólności, niech $m_X<m_Y$.
+Pomijając teraz około $n/2$ elementów $X$ mniejszych lub równych $m_X$ i~około $n/2$ elementów $Y$ większych lub równych $m_Y$, sprowadzamy problem do identycznego, ale o~około połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów.
+Dokładniej, podproblem będzie operował na tablicach o~rozmiarach $\lfloor n/2\rfloor+1$.
+
+W~celu wyznaczenia mediany $2n$ liczb nasz algorytm będzie wykorzystywał rekurencję o~przypadku brzegowym, gdy $n\le2$.
+Jeśli $n=1$, to jako wynik algorytmu wystarczy zwrócić mniejszy z~dwóch wejściowych elementów (zgodnie z~konwencją, że interesuje nas mediana dolna).
+W~przypadku zaś, gdy $n=2$, wyznaczamy większy z~elementów znajdujących się w~pierwszych komórkach tablic oraz mniejszy z~elementów zajmujących drugie komórki.
+Łatwo sprawdzić, że jeden z~nich to mediana dolna, a~drugi to mediana górna czterech liczb wejściowych.
+Jako wynik podajemy zatem minimum z~obu tych liczb.
+
+Poniższy pseudokod implementuje opisany algorytm.
+Po sprawdzeniu warunku brzegowego obliczane są indeksy median dolnych elementów z~każdej tablicy, jak również indeksy ich median górnych.
+Te ostatnie przekazywane są w~wywołaniach rekurencyjnych w~celu zapewnienia jednakowych rozmiarów obu tablic na kolejnym poziomie rekursji.
+Aby odnaleźć medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, wywołujemy $\proc{Two-Arrays-Median}(X,1,n,Y,1,n)$.
+
+\begin{codebox}
+\Procname{$\proc{Two-Arrays-Median}(X,p_X,r_X,Y,p_Y,r_Y)$}
+\li	\If $r_X-p_X\le1$
+\li		\Then \Return $\min(\max(X[p_X],Y[p_Y]),\min(X[r_X],Y[r_Y]))$
+		\End
+\li	$q_X\gets\lfloor(p_X+r_X)/2\rfloor$
+\li	$q_X'\gets\lceil(p_X+r_X)/2\rceil$
+\li	$q_Y\gets\lfloor(p_Y+r_Y)/2\rfloor$
+\li	$q_Y'\gets\lceil(p_Y+r_Y)/2\rceil$
+\li	\If $X[q_X]=Y[q_Y]$
+\li		\Then \Return $X[q_X]$
+		\End
+\li	\If $X[q_X]<Y[q_Y]$
+\li		\Then \Return $\proc{Two-Arrays-Median}(X,q_X,r_X,Y,p_Y,q_Y')$
+\li		\Else \Return $\proc{Two-Arrays-Median}(X,p_X,q_X',Y,q_Y,r_Y)$
+		\End
+\end{codebox}
+
+Czas działania podanego algorytmu w~przypadku pesymistycznym jest opisany przez rekurencję $T(n)=T(\lfloor n/2\rfloor+1)+\Theta(1)$, gdzie $n=r_X-p_X+1$.
+Jej rozwiązaniem jest oczywiście $T(n)=O(\lg n)$.
+
+\exercise %9.3-9
+Oznaczmy przez $y_1$ i~$y_2$, odpowiednio, medianę dolną i~górną współrzędnych $y$ wszystkich wież.
+Umieścimy główny rurociąg na współrzędnej $y$ równej $y_r$ takiej, że $y_1\le y_r\le y_2$ i~zbadamy, jak będzie zmieniać się suma długości odnóg \singledash{północ}{południe} $s$, gdy będziemy zmieniać jego położenie.
+
+Wybierzmy $y_r'$, spełniające nierówności $y_1\le y_r'\le y_2$, na współrzędną $y$ nowego położenia głównego rurociągu.
+Niech $d=|y_r-y_r'|$.
+Jeśli $y_1=y_2$, to $y_r'=y_r$, rozważmy więc przypadek przeciwny.
+Wtedy zarówno na północ, jak i~na południe od głównego rurociągu znajduje się $n/2$ wież wiertniczych.
+Do jednych zbliżyliśmy się o~odległość $d$, ale od pozostałych o~tyle samo się oddaliliśmy.
+Widać stąd, że wybór dowolnego $y_r'$ znajdującego się pomiędzy medianami nie zmienia sumy długości odnóg \singledash{północ}{południe}.
+
+Niech teraz $y_r'$ będzie współrzędną $y$ głównego rurociągu taką, że $y_r'<y_1$ lub $y_r'>y_2$.
+Podobnie jak poprzednio, niech $d=|y_r-y_r'|$.
+Gdy $n$ jest parzyste, to po jednej stronie rurociągu mamy co najmniej $n/2+1$ wież, a~po drugiej -- co najwyżej $n/2-1$.
+Stąd otrzymujemy oszacowanie na nową sumę długości odnóg:
+\[
+    s' \ge s+d(n/2+1)-d(n/2-1) = s+2d > s.
+\]
+W~przypadku, gdy $n$ jest liczbą nieparzystą, rurociąg w~nowym położeniu po jednej stronie ma co najmniej $(n+1)/2$ wież wiertniczych, a~po drugiej stronie co najwyżej $(n-1)/2$.
+Nową sumę długości odnóg można więc ograniczyć od dołu:
+\[
+    s' \ge s+d(n+1)/2-d(n-1)/2 = s+d > s.
+\]
+
+A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg \singledash{północ}{południe} -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna.
+Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$ mimo braku założenia o~tym, że elementy, spośród których wyznaczamy medianę, są parami różne (co zauważyliśmy w~\refExercise{9.3-7}).

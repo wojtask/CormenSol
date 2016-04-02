@@ -1,0 +1,35 @@
+\problem{Szacowanie najdłuższego ciągu odwołań do tablicy z~haszowaniem} %11-1
+\note{W~punkcie (b) należy wykazać, że prawdopodobieństwo opisanego tam zdarzenia wynosi\/ $O(1/n^2)$.
+W~treści (także oryginalnej) brakuje założenia o~równomiernym haszowaniu wymaganego do pokazania tego oszacowania.
+W~paragrafie między częścią (b) a~(c) powinno być\/ $\Pr(X_i>2\lg n)=O(1/n^2)$.
+W~punkcie (c) należy wykazać, że\/ $\Pr(X>2\lg n)=O(1/n)$.
+Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
+
+\subproblem %11-1(a)
+Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu.
+Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem.
+Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.\ 11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$.
+Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
+
+\subproblem %11-1(b)
+Wynik otrzymujemy natychmiast po podstawieniu $k=2\lg n$ do oszacowania z~poprzedniego punktu.
+
+\subproblem %11-1(c)
+Oznaczmy przez $A$ zdarzenie, że $X>2\lg n$, a~przez $A_i$, dla $i=1$, 2, \dots, $n$, zdarzenie, że $X_i>2\lg n$.
+Zauważmy, że $A=\bigcup_{i=1}^nA_i$.
+Wykorzystując nierówność Boole'a (\refExercise{C.2-1}) oraz wynik z~punktu (b), w~którym pokazaliśmy, że $\Pr(A_i)=O(1/n^2)$, otrzymujemy
+\[
+	\Pr(A) = \Pr\biggl(\bigcup_{i=1}^nA_i\biggr) \le \sum_{i=1}^n\Pr(A_i) = n\cdot O(1/n^2) = O(1/n).
+\]
+
+\subproblem %11-1(d)
+Na podstawie oszacowania z~poprzedniej części otrzymujemy
+\begin{align*}
+	\E(X) &= \sum_{k=1}^nk\Pr(X=k) \\
+	&= \sum_{k=1}^{\lfloor2\lg n\rfloor}k\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nk\Pr(X=k) \\
+	&\le \sum_{k=1}^{\lfloor2\lg n\rfloor}\lfloor2\lg n\rfloor\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nn\Pr(X=k) \\
+	&= \lfloor2\lg n\rfloor\Pr(X\le2\lg n)+n\Pr(X>2\lg n) \\
+	&= \lfloor2\lg n\rfloor\cdot1+n\cdot O(1/n) \\
+	&= \lfloor2\lg n\rfloor+O(1) \\
+	&= O(\lg n).
+\end{align*}

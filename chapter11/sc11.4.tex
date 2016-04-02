@@ -1,0 +1,107 @@
+\subchapter{Adresowanie otwarte}
+
+\exercise %11.4-1
+\note{Funkcja\/ $h'$ nie jest pierwotną funkcją haszującą, tylko pomocniczą funkcją haszującą.
+Zakładamy, że pierwszą pomocniczą funkcją haszującą w~haszowaniu dwukrotnym jest\/ $h_1=h'$.}
+
+\noindent Tabela \ref{tab:11-1} przedstawia pozycje tablicy, które są obliczane dla poszczególnych kluczy przy zastosowaniu różnych sposobów obliczania ciągów kontrolnych.
+
+\begin{table}[ht]
+	\begin{center}
+		\[
+			\begin{array}{c|c|c|c}
+				& \text{adresowanie} & \text{adresowanie} & \text{haszowanie} \\
+				& \text{liniowe} & \text{kwadratowe} & \text{dwukrotne} \\
+				\hline
+				10 & 10 & 10 & 10 \\
+				\hline
+				22 & 0 & 0 & 0 \\
+				\hline
+				31 & 9 & 9 & 9 \\
+				\hline
+				4 & 4 & 4 & 4 \\
+				\hline
+				15 & 4,5 & 4,8 & 4,10,5 \\
+				\hline
+				28 & 6 & 6 & 6 \\
+				\hline
+				17 & 6,7 & 6,10,9,3 & 6,3 \\
+				\hline
+				88 & 0,1 & 0,4,3,8,8,3,4,0,2 & 0,9,7 \\
+				\hline
+				59 & 4,5,6,7,8 & 4,8,7 & 4,3,2
+			\end{array}
+		\]
+	\end{center}
+	\caption{Pozycje obliczane dla podanego ciągu kluczy w~różnych metodach adresowania otwartego.
+Dany klucz trafia ostatecznie na pierwszą wolną pozycję ze swojego ciągu kontrolnego.} \label{tab:11-1}
+\end{table}
+
+\exercise %11.4-2
+Pseudokod procedury \proc{Hash-Delete} przedstawiono poniżej:
+\begin{codebox}
+\Procname{$\proc{Hash-Delete}(T,k)$}
+\li	$i\gets0$
+\li	\Repeat
+		$j\gets h(k,i)$
+\li		\If $T[j]=k$
+\li			\Then
+				$T[j]\gets\const{deleted}$
+\li				\Return
+			\End
+\li		$i\gets i+1$
+\li	\Until $T[j]=\const{nil}$ lub $i=m$
+\end{codebox}
+W~procedurze \proc{Hash-Insert} wystarczy zamienić warunek z~wiersza 3 na następujący:
+\begin{codebox}
+\setcounter{codelinenumber}{2}
+\li	\If $T[j]=\const{nil}$ lub $T[j]=\const{deleted}$
+\end{codebox}
+
+\exercise %11.4-3
+Dzięki skorzystaniu z~tw.\ 31.20 otrzymujemy, że rzędem grupy generowanej przez $h_2(k)$ jest $m/d$, co oznacza, że w~$\mathbb{Z}_m$ wyrażenie $ih_2(k)$ dla $i=0$, 1, \dots, $m-1$ przyjmuje $m/d$ różnych wartości.
+Podobną własność wykazuje także suma $h_1(k)+ih_2(k)$.
+A~zatem stosując funkcję haszującą $h$, podczas wyszukiwania klucza $k$, które zakończy się porażką, zostanie sprawdzonych $m/d$ różnych komórek tablicy, co stanowi $(1/d)$-tą część tej tablicy.
+
+\exercise %11.4-4
+Wykorzystując tw.\ 11.8, otrzymujemy, że dla współczynnika zapełnienia $\alpha=1/2$ oczekiwana liczba porównań nie przekracza $2\ln2\approx1{,}386$.
+Dla $\alpha=3/4$ oszacowanie to wynosi $(4/3)\ln4\approx1{,}848$, a~dla $\alpha=7/8$ jest ono równe $(8/7)\ln8\approx2{,}377$.
+
+\exercise %11.4-5
+Z~tw.\ 11.6 i~11.8 dostajemy, że szukane $0<\alpha<1$ spełnia równanie
+\[
+	\frac{1}{1-\alpha} = \frac{2}{\alpha}\ln\frac{1}{1-\alpha}.
+\]
+Niech $\beta=1/(1-\alpha)$.
+Wówczas $\alpha=1-1/\beta$ i~powyższy wzór przyjmuje postać
+\[
+	\beta = \frac{2\beta}{\beta-1}\ln\beta,
+\]
+co jest równoważne
+\[
+	\beta-2\ln\beta = 1.
+\]
+Mamy dalej:
+\begin{align*}
+	e^{\beta-2\ln\beta} &= e, \\
+	\beta^{-2}e^\beta &= e, \\
+	\beta e^{-\beta/2} &= e^{-1/2}, \\
+	(-\beta/2)e^{-\beta/2} &= -e^{-1/2}\!/2.
+\end{align*}
+Skorzystamy teraz z~\textbf{funkcji $W$ Lamberta} \cite{lambertwfunction} zdefiniowanej jako wielowartościowe odwzorowanie odwrotne do funkcji $f(x)=xe^x$.
+Innymi słowy, dla każdej liczby rzeczywistej $x\ge-1/e$ spełniony jest wzór
+\[
+	x = W(x)e^{W(x)}.
+\]
+Nasze równanie sprowadza się zatem do
+\[
+	W(-e^{-1/2}\!/2) = -\beta/2,
+\]
+skąd
+\[
+	\beta = -2W(-e^{-1/2}\!/2).
+\]
+Dla argumentu $-e^{-1/2}\!/2$ odwzorowanie $W$ przyjmuje dwie wartości.
+Jedną z~nich jest oczywiście $-1/2$.
+Ale wówczas $\beta=1$ i~$\alpha=0$, co jest sprzeczne z~założeniem.
+Drugą wartość $W(-e^{-1/2}\!/2)$ można uzyskać, stosując metody numeryczne -- wynosi ona w~przybliżeniu $-1{,}756$, skąd $\beta\approx3{,}513$ i~$\alpha\approx0{,}715$.

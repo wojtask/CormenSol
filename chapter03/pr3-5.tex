@@ -1,0 +1,59 @@
+\problem{Wariacje na temat notacji $O$ i~$\Omega$} %3-5
+
+\subproblem %3-5(a)
+Niech $c>0$ będzie pewną stałą.
+Załóżmy, że $f(n)\ge cg(n)$ dla $n$ z~pewnego skończonego zbioru, w~przeciwnym razie zachodzi bowiem $f(n)=\overset{\infty}{\Omega}(g(n))$.
+Ponieważ zbiór ten jest skończony, to wybierzmy największe $n$, dla którego nierówność ta jest spełniona i~oznaczmy je przez $n_0$.
+Mamy zatem $0\le f(n)<cg(n)$ dla $n\ge n_0+1$, czyli $f(n)=O(g(n))$.
+
+Natomiast nie jest prawdą podobne twierdzenie, gdyby zastosować notację $\Omega$ zamiast $\overset{\infty}{\Omega}$ -- jeśli np.\ $f(n)=n$ oraz $g(n)=n^{1+\sin n}$, to $f(n)=\overset{\infty}{\Omega}(g(n))$, ale $f(n)\ne\Omega(g(n))$ i~$f(n)\ne O(g(n))$.
+
+\subproblem %3-5(b)
+Zaletą nowej notacji jest fakt, że jeśli o~pewnej funkcji $f(n)$ wiemy, że nie jest klasy $O(g(n))$, to jest klasy $\overset{\infty}{\Omega}(g(n))$ (z~poprzedniego punktu) -- nie istnieją zatem funkcje, których nie da się porównać z~innymi za pomocą pary notacji $O$ i~$\overset{\infty}{\Omega}$.
+
+Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie dominuje nad funkcją $g(n)$, gdyż w~nieskończenie wielu punktach może przyjmować wartości mniejsze od wartości $g(n)$.
+Nieskończenie wiele punktów, o~których mowa w~definicji $\overset{\infty}{\Omega}$, może też występować daleko ponad maksymalnym rozmiarem danych wejściowych algorytmu, którego czas działania opisujemy przy użyciu nowej notacji.
+Wady te sprawiają, że nowa notacja ma niewielkie zastosowanie praktyczne i~jest użyteczna głównie w~rozważaniach teoretycznych.
+
+\subproblem %3-5(c)
+W~przypadku implikacji w~lewą stronę z~warunku $f(n)=\Theta(g(n))$ wynika, że $f(n)\ge0$ od pewnego dodatniego $n_0$, a~więc $f(n)$ jest funkcją asymptotycznie nieujemną i~twierdzenie stosuje się bez zmian, czyli implikacja zachodzi.
+
+Zbadajmy teraz implikację w~prawo.
+Wprost z~definicji, jeśli $f(n)=O'(g(n))$, to istnieją takie stałe $c$, $n_0>0$, że dla wszystkich $n\ge n_0$ zachodzi
+\[
+	\begin{cases}
+		0 \le f(n) \le cg(n), & \text{jeśli $f(n)\ge0$}, \\
+		0 \le -f(n) \le cg(n), & \text{jeśli $f(n)<0$}.
+	\end{cases}
+\]
+Załóżmy, że istnieje nieskończenie wiele takich $n\ge n_0$, że $f(n)<0$, ponieważ w~przeciwnym przypadku mielibyśmy do czynienia z~funkcją asymptotycznie nieujemną, dla której jest $f(n)=O(g(n))$.
+Teraz jednak nierówności $0\le c_1g(n)\le f(n)$ wynikające z~założenia, że $f(n)=\Omega(g(n))$ nie są spełnione dla nieskończenie wielu $n\ge n_0$ i~dowolnej stałej $c_1>0$.
+Wynika stąd wniosek, że jeśli spełnione są założenia, to funkcja $f(n)$ jest asymptotycznie nieujemna i~implikacja stosuje się bez zmian.
+
+Widać, że zastosowanie notacji $O'$ w~miejsce $O$ nie pozbawia prawdziwości twierdzenia 3.1.
+
+\subproblem %3-5(d)
+Oto definicje notacji $\widetilde{\Omega}$ i~$\widetilde{\Theta}$:
+\[
+	\begin{split}
+		\widetilde{\Omega}(g(n)) &= \bigl\{\,f(n):\text{istnieją dodatnie stałe $c$, $k$, $n_0$ takie, że} \\
+		&\qquad 0 \le cg(n)\lg^kn \le f(n) \text{ dla wszystkich $n \ge n_0$}\,\bigr\}, \\
+		\widetilde{\Theta}(g(n)) &= \bigl\{\,f(n):\text{istnieją dodatnie stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_0$ takie, że} \\
+		&\qquad 0 \le c_1g(n)\lg^{k_1}n \le f(n) \le c_2g(n)\lg^{k_2}n \text{ dla wszystkich $n \ge n_0$}\,\bigr\}.
+	\end{split}
+\]
+
+Dowód twierdzenia 3.1 dla notacji $\widetilde{O}$, $\widetilde{\Omega}$ i~$\widetilde{\Theta}$ przebiega analogicznie do dowodu jego oryginalnego odpowiednika przeprowadzonego w~\refExercise{3.1-5}.
+Z~definicji notacji $\widetilde{\Theta}$ mamy, że $f(n)=\widetilde{\Theta}(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_0>0$, że nierówności
+\[
+	0 \le c_1g(n)\lg^{k_1}n \le f(n) \le c_2g(n)\lg^{k_2}n
+\]
+zachodzą dla wszystkich $n\ge n_0$.
+Zapiszmy je w~postaci układu
+\[
+	\begin{cases}
+		0 \le c_1g(n)\lg^{k_1}n \le f(n) \\
+		0 \le f(n) \le c_2g(n)\lg^{k_2}n
+	\end{cases}.
+\]
+Z~pierwszej nierówności mamy, że $f(n)=\widetilde{\Omega}(g(n))$, a~z~drugiej, że $f(n)=\widetilde{O}(g(n))$.

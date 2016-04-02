@@ -1,0 +1,125 @@
+\subchapter{Reprezentowanie drzew (ukorzenionych)}
+
+\exercise %10.4-1
+Drzewo binarne, którego reprezentacją są podane tablice, przedstawiono na rys.\ \ref{fig:10.4-1}.
+Węzły o~kluczach 14 i~15 nie należą do drzewa.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_10.4-1}
+	\end{center}
+	\caption{Drzewo binarne o~korzeniu o~indeksie 6 reprezentowane przez tablice \id{key}, \id{left} i~\id{right}.} \label{fig:10.4-1}
+\end{figure}
+
+\exercise %10.4-2
+Szukany algorytm został opisany w~Podręczniku w~podrozdziale 12.1 jako procedura \proc{Inorder-Tree-Walk}.
+Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.\ 12.1 z~Podręcznika.
+
+\exercise %10.4-3
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział 12.1).
+Do emulowania rekursji wykorzystywany jest stos.
+Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
+\begin{codebox}
+\Procname{$\proc{Iterative-Preorder-Tree-Walk}(T)$}
+\li	\If $\attrib{T}{root}=\const{nil}$
+\li		\Then \Return
+		\End
+\li	$\proc{Push}(S,\attrib{T}{root})$
+\li	\While $\proc{Stack-Empty}(S)=\const{false}$
+\li		\Do
+			$x\gets\proc{Pop}(S)$
+\li			wypisz \attrib{x}{key}
+\li			\If $\attrib{x}{right}\ne\const{nil}$
+\li				\Then $\proc{Push}(S,\attrib{x}{right})$
+				\End
+\li			\If $\attrib{x}{left}\ne\const{nil}$
+\li				\Then $\proc{Push}(S,\attrib{x}{left})$
+				\End
+		\End
+\end{codebox}
+
+\exercise %10.4-4
+Nasza procedura będzie przyjmować węzeł $x$ drzewa w~reprezentacji ,,na lewo syn, na prawo brat'' i~wypisywać wszystkie klucze z~poddrzewa o~korzeniu w~$x$.
+Jeśli $x\ne\const{nil}$, to zostanie wypisany klucz węzła $x$ i~procedura zostanie wywołana rekurencyjnie najpierw dla najbardziej lewego syna $x$, a~następnie dla kolejnego brata $x$.
+\begin{codebox}
+\Procname{$\proc{Tree-Walk}(x)$}
+\li	\If $x\ne\const{nil}$
+\li		\Then
+			wypisz \attrib{x}{key}
+\li			$\proc{Tree-Walk}(\attrib{x}{left-child})$
+\li			$\proc{Tree-Walk}(\attrib{x}{right-sibling})$
+		\End
+\end{codebox}
+Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', należy wywołać $\proc{Tree-Walk}(\attrib{T}{root})$.
+
+Każdy węzeł drzewa jest wypisywany w~dokładnie jednym wywołaniu rekurencyjnym.
+Procedura wywoływana jest także dla wszystkich pustych najbardziej lewych synów i~dla wszystkich pustych braci znajdujących się w~drzewie.
+Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
+
+\exercise %10.4-5
+W~algorytmie będziemy symulować przechodzenie drzewa w~porządku inorder, używając trzech wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem.
+Odwiedzenie danego węzła $x$ będzie realizowane przez pomocniczą procedurę $\proc{Stackless-Inorder-Visit}(x)$.
+Polega ono na wypisaniu klucza $x$ oraz wyznacza kolejny węzeł do przetworzenia.
+\begin{codebox}
+\Procname{$\proc{Stackless-Inorder-Visit}(x)$}
+\li	wypisz \attrib{x}{key}
+\li	\If $\attrib{x}{right}\ne\const{nil}$
+\li		\Then \Return \attrib{x}{right}
+\li		\Else \Return \attrib{x}{p}
+		\End
+\end{codebox}
+
+Algorytm zapisujemy w~postaci pseudokodu:
+\begin{codebox}
+\Procname{$\proc{Stackless-Inorder-Tree-Walk}(T)$}
+\li	$\id{prev}\gets\const{nil}$
+\li	$\id{curr}\gets\attrib{T}{root}$
+\li	\While $\id{curr}\ne\const{nil}$
+\li		\Do
+			\If $\id{prev}=\attrib{curr}{p}$
+\li				\Then
+					\If $\attrib{curr}{left}\ne\const{nil}$
+\li						\Then $\id{next}\gets\attrib{curr}{left}$ \label{li:stackless-inorder-tree-walk-go-left}
+\li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit1}
+						\End
+\li				\ElseIf $\id{prev}=\attrib{curr}{left}$
+\li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit2}
+\li				\ElseNoIf $\id{next}\gets\attrib{curr}{p}$ \label{li:stackless-inorder-tree-walk-go-up}
+				\End
+\li			$\id{prev}\gets\id{curr}$ \label{li:stackless-inorder-tree-walk-update-prev}
+\li			$\id{curr}\gets\id{next}$ \label{li:stackless-inorder-tree-walk-update-curr}
+		\End
+\end{codebox}
+Kolejne węzły, przez które przechodzimy w~algorytmie, wyznaczane są na podstawie wzajemnej relacji między węzłami \id{prev} i~\id{curr}.
+Gdy \id{prev} jest ojcem \id{curr}, to aktualnie schodzimy w~dół drzewa po lewych synach (wiersz \ref{li:stackless-inorder-tree-walk-go-left}).
+W~przypadku osiągnięcia liścia, odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz \ref{li:stackless-inorder-tree-walk-visit1}).
+Gdy \id{prev} jest lewym synem \id{curr}, to wracamy w~górę drzewa, odwiedzając napotykane węzły i~przechodząc ich prawe poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-visit2}).
+Jeśli wreszcie \id{prev} jest prawym synem węzła \id{curr}, to wracamy w~górę drzewa z~właśnie odwiedzonego prawego poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-go-up}).
+W~wierszach \ref{li:stackless-inorder-tree-walk-update-prev} i~\ref{li:stackless-inorder-tree-walk-update-curr} następuje aktualizacja wskaźników \id{prev} i~\id{curr}, po czym algorytm kontynuuje swoje działanie, aż $\id{curr}=\const{nil}$.
+
+Każdą krawędzią drzewa przejdziemy dokładnie 2 razy -- poruszając się najpierw w~dół, a~później w~górę drzewa.
+Odwiedzenie węzła $x$ następuje w~dwóch przypadkach -- gdy docieramy do niego od jego ojca i~$x$ nie ma lewego syna lub wtedy, gdy wracamy w~górę drzewa z~lewego syna $x$.
+Algorytm odwiedzi zatem każdy węzeł dokładnie raz, działając w~czasie $\Theta(n)$.
+
+\exercise %10.4-6
+\note{W~oryginalnej treści zadania szukana jest taka reprezentacja drzewa, która umożliwi wyznaczanie i~uzyskiwanie dostępu do ojca danego węzła \textbf{lub} wszystkich jego synów w~czasie proporcjonalnym do liczby synów.}
+
+\noindent Opiszemy modyfikacje, jakie należy wprowadzić w~reprezentacji ,,na lewo syn, na prawo brat'', aby spełnić wymaganie z~treści zadania.
+Ponieważ nie wymagamy dostępu do ojca danego węzła w~stałym czasie, to możemy zrezygnować z~atrybutu $p$.
+Zauważmy ponadto, że w~reprezentacji ,,na lewo syn, na prawo brat'', jeśli węzeł $x$ jest korzeniem drzewa albo najbardziej na prawo położonym synem swojego ojca, to $\attrib{x}{right-sibling}=\const{nil}$.
+Wykorzystamy ten wskaźnik w~węźle $x$, pokazując nim na ojca $x$ (albo \const{nil}, jeśli $x$ jest korzeniem).
+Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest bratem, czy ojcem $x$, wykorzystamy dodatkowe pole -- zmienną boolowską.
+Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
+\begin{itemize}
+	\item \attrib{x}{left-child} -- wskazuje na najbardziej lewego syna $x$ albo \const{nil}, jeśli $x$ jest liściem (identyczny z~\attrib{x}{left-child} z~reprezentacji ,,na lewo syn, na prawo brat'');
+	\item \attrib{x}{next} -- wskazuje na kolejnego brata $x$ albo na ojca $x$, jeśli $x$ jest korzeniem drzewa lub najbardziej na prawo wysuniętym synem swojego ojca;
+	\item \attrib{x}{last-sibling} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
+\end{itemize}
+
+Dzięki tak zdefiniowanym atrybutom, dla danego węzła $x$ możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{left-child}, a~następnie poruszając się po wskaźnikach \id{next} kolejnych synów $x$.
+Każdy napotykany węzeł $y$ pokazuje wskaźnikiem \attrib{y}{next} na swojego brata po prawej stronie, o~ile $\attrib{y}{last-sibling}=\const{false}$.
+W~momencie dotarcia do węzła $y$, dla którego $\attrib{y}{last-sibling}=\const{true}$, odwiedzimy wszystkich synów węzła $x$.
+Podobnie, aby ustalić ojca $x$, przechodzimy po wskaźnikach \id{next} braci $x$ znajdujących się po jego prawej stronie, aż do napotkania węzła $z$, dla którego $\attrib{z}{last-sibling}=\const{true}$.
+Warunek ten oznacza, że węzeł $\attrib{z}{next}$, o~ile istnieje, jest ojcem zarówno $z$, jak i~$x$.
+Jeśli z~kolei $\attrib{z}{next}=\const{nil}$, to $x$ jest korzeniem drzewa.
+
+Podana implementacja pozwala na wyznaczenie wszystkich synów danego węzła w~czasie proporcjonalnym do ich liczby oraz jego ojca w~czasie proporcjonalnym do liczby braci danego węzła.

@@ -1,0 +1,35 @@
+\subchapter{Sortowanie przez zliczanie}
+
+\exercise %8.2-1
+Rys.\ \ref{fig:8.2-1} przedstawia działanie procedury \proc{Counting-Sort} dla tablicy $A$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_8.2-1}
+	\end{center}
+	\caption{Działanie procedury \proc{Counting-Sort} dla tablicy $A=\langle6,0,2,0,1,3,4,6,1,3,2\rangle$, której każdy element jest nieujemną liczbą całkowitą nie większą niż $k=6$.
+{\sffamily\bfseries(a)} Tablica $A$ wraz z~tablicą pomocniczą $C$ po wykonaniu pętli w~wierszach \doubledash{3}{4}.
+{\sffamily\bfseries(b)} Tablica $C$ po wykonaniu pętli w~wierszach \doubledash{6}{7}.
+{\sffamily\bfseries\doubledash{(c)}{(e)}} Tablica wynikowa $B$ oraz tablica pomocnicza $C$ po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{for} w~wierszach \doubledash{9}{11}.
+{\sffamily\bfseries(f)} Wynikowa posortowana tablica $B$.} \label{fig:8.2-1}
+\end{figure}
+
+\exercise %8.2-2
+Elementy tablicy wejściowej przetwarzane są od końca, a~wartości w~tablicy $C$ stanowiące indeksy tablicy wynikowej, na które trafią wejściowe elementy, są systematycznie zmniejszane.
+A~zatem równe sobie elementy będą umieszczane na coraz niższych pozycjach w~tablicy wynikowej, dzięki czemu ich początkowa kolejność zostanie zachowana.
+
+\exercise %8.2-3
+Po wprowadzeniu takiej modyfikacji tablica $A$ będzie przeglądana od lewej do prawej, a~równe elementy będą umieszczane w~odpowiedniej części tablicy wynikowej na coraz niższych pozycjach.
+Oczywiście kolejność przetwarzania elementów tablicy $A$ nie wpływa na poprawność algorytmu \proc{Counting-Sort}, jednak zastosowanie opisanej zmiany powoduje, że sortowanie nie jest stabilne.
+
+\exercise %8.2-4
+Algorytm będzie zliczać elementy z~wejściowej tablicy w~czasie $\Theta(n+k)$, zapamiętując wyniki w~pomocniczej tablicy $C[0\twodots k]$.
+Następnie, zapytany o~liczbę elementów z~przedziału $a\twodots b$ na podstawie danych z~tablicy pomocniczej, zwróci liczbę elementów z~zakresu $0\twodots b$ pomniejszoną o~liczbę elementów z~zakresu $0\twodots a-1$.
+Dokładniej, jego pierwsza faza jest równoważna wierszom \doubledash{1}{8} procedury \proc{Counting-Sort}, natomiast w~drugiej fazie zwracany jest odpowiedni wynik w~zależności od przypadku:
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
+	\item $C[b]-C[a-1]$, jeśli $0<a\le b\le k$;
+	\item $C[k]-C[a-1]$, jeśli $0<a\le k<b$;
+	\item $C[b]$, jeśli $a\le0\le b\le k$;
+	\item $C[k]$, jeśli $a\le0\le k<b$;
+	\item 0, jeśli $a>k$ lub $b<0$.
+\end{enumerate}

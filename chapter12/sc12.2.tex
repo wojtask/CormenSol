@@ -1,0 +1,114 @@
+\subchapter{Wyszukiwanie w~drzewie wyszukiwań binarnych}
+
+\exercise %12.2-1
+Ciągi z~przykładów (a), (b) i~(d) są możliwe do uzyskania podczas wyszukiwania klucza 363 w~drzewie BST.
+W~przykładzie (c) po odwiedzeniu węzła o~kluczu 911 przechodzimy do lewego poddrzewa, w~którym znajdują się węzły o~kluczach nie większych niż 911.
+Jednakże później napotykamy 912, a~to nie jest możliwe w~drzewie BST.
+W~przykładzie (e) występuje podobna sytuacja -- po odwiedzeniu węzła o~kluczu 347 przetwarzane jest prawe poddrzewo.
+Klucz 299 napotykany później jest jednak mniejszy niż 347, co w~drzewie BST nie może mieć miejsca.
+
+\exercise %12.2-2
+Rekurencyjne wersje procedur zostały przedstawione poniżej.
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Minimum}(x)$}
+\li	\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Minimum}(\attrib{x}{left})$
+\li		\Else \Return $x$
+		\End
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Maximum}(x)$}
+\li	\If $\attrib{x}{right}\ne\const{nil}$
+\li		\Then \Return $\proc{Recursive-Tree-Maximum}(\attrib{x}{right})$
+\li		\Else \Return $x$
+		\End
+\end{codebox}
+
+\exercise %12.2-3
+Procedura \proc{Tree-Predecessor} jest symetryczna do \proc{Tree-Successor}.
+Jej pseudokod znajduje się poniżej.
+\begin{codebox}
+\Procname{$\proc{Tree-Predecessor}(x)$}
+\li	\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then \Return $\proc{Tree-Maximum}(\attrib{x}{left})$
+		\End
+\li	$y\gets\attrib{x}{p}$
+\li	\While $y\ne\const{nil}$ i~$x=\attrib{y}{left}$
+\li		\Do
+			$x\gets y$
+\li			$y\gets\attrib{y}{p}$
+		\End
+\li	\Return $y$
+\end{codebox}
+
+\exercise %12.2-4
+Rys.\ \ref{fig:12.2-4} przedstawia najmniejsze drzewo BST, które obala postawioną hipotezę.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_12.2-4}
+	\end{center}
+	\caption{Najmniejszy kontrprzykład dla rozumowania profesora Bunyana.
+W~drzewie tym szukano klucza $k=4$.
+Jasnym kolorem zaznaczono jedyny węzeł o~kluczu należącym do zbioru $A$, a~ciemnym kolorem -- węzły o~kluczach ze zbioru $B$.
+Zbiór $C$ w~tym przykładzie jest pusty.
+Klucze 1 i~2 nie spełniają nierówności postawionej w~hipotezie.} \label{fig:12.2-4}
+\end{figure}
+
+\exercise %12.2-5
+Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST, a~$U$ zbiorem składającym się ze wszystkich przodków $x$, których lewe poddrzewa zawierają $x$.
+Węzły o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także w~zbiorze $U$ i~w~prawych poddrzewach węzłów z~$U$.
+Dla każdego $u\in U$, dla każdego węzła $v$ z~prawego poddrzewa $u$ i~dla każdego węzła $w$ z~prawego poddrzewa $x$ spełnione są nierówności $\attrib{x}{key}<\attrib{w}{key}<\attrib{u}{key}<\attrib{v}{key}$, a~to oznacza, że następnik $x$ znajduje się w~jego prawym poddrzewie.
+
+Niech $y$ będzie następnikiem węzła $x$.
+Jeśli węzeł $y$ miałby lewego syna $z$, to na podstawie faktu, że $y$ należy do prawego poddrzewa $x$, zachodziłoby $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to z~kolei przeczyłoby faktowi, że następnikiem $x$ jest węzeł $y$.
+Stąd następnik $x$ nie ma lewego syna.
+
+Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
+
+\exercise %12.2-6
+Niech $U$ będzie zbiorem zdefiniowanym jak w~\refExercise{12.2-5}.
+Na podstawie rozumowania z~tamtego zadania mamy, że dla każdego $u\in U$ i~dla każdego węzła $v$ z~prawego poddrzewa $u$ zachodzą nierówności $\attrib{x}{key}<\attrib{u}{key}<\attrib{v}{key}$.
+Następnik $y$ węzła $x$ jest więc elementem zbioru $U$ o~minimalnym kluczu.
+
+Niech $u_1$, $u_2\in U$.
+Węzeł $x$ należy do lewego poddrzewa zarówno $u_1$, jak i~$u_2$.
+Węzły te nie mogą znajdować się w~drzewie $T$ na tej samej głębokości, bo wtedy ich lewe poddrzewa są rozłączne.
+Załóżmy więc bez utraty ogólności, że $u_2$ leży w~$T$ głębiej niż $u_1$.
+Wówczas węzeł $u_2$ oraz jego lewe poddrzewo znajdują się w~lewym poddrzewie węzła $u_1$.
+Wynika stąd, że im głębszy poziom węzła ze zbioru $U$, tym mniejszy jego klucz, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
+
+\exercise %12.2-7
+Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.
+Jest w~sumie $n$ wywołań procedur -- algorytm wymaga więc czasu $\Omega(n)$.
+Pokażemy jeszcze, że każda krawędź drzewa jest pokonywana co najwyżej dwukrotnie, skąd wynika górne oszacowanie $O(n)$ na czas działania algorytmu.
+
+Niech $u$ będzie węzłem drzewa, a~$v$ jego lewym synem.
+W~trakcie działania algorytmu przed wypisaniem klucza $u$ wpierw wypisane zostaną klucze wszystkich węzłów z~jego lewego poddrzewa, którego korzeniem jest $v$, co zostanie zapoczątkowane przez przejście krawędzią $\langle u,v\rangle$.
+Następnie w~celu wypisania klucza $u$ procedura \proc{Tree-Successor} przejdzie w~górę drzewa ścieżką do $u$ od maksymalnego elementu poddrzewa o~korzeniu w~$v$.
+Na tej ścieżce oczywiście znajduje się krawędź $\langle u,v\rangle$.
+Po pokonaniu ścieżki krawędź ta nie zostanie ponownie wykorzystana, ponieważ wszystkie węzły w~lewym poddrzewie $u$ zostały już odwiedzone.
+
+Załóżmy teraz, że $v$ jest prawym synem $u$.
+Tuż po wypisaniu klucza $u$ wywoływane jest $\proc{Tree-Successor}(u)$.
+Aby dostać się do węzła o~najmniejszym kluczu w~prawym poddrzewie węzła $u$, algorytm musi zejść krawędzią $\langle u,v\rangle$.
+Przejście nią w~drodze powrotnej nastąpi po odwiedzeniu wszystkich węzłów z~prawego poddrzewa $u$, o~ile będą wówczas jeszcze nieodwiedzone węzły w~drzewie.
+Będzie to miało miejsce podczas wywołania \proc{Tree-Successor} dla węzła o~maksymalnym kluczu w~prawym poddrzewie $u$, kiedy to algorytm będzie przechodził w~górę drzewa do węzła następującego po $u$ w~porządku inorder.
+Krawędź $\langle u,v\rangle$ należy do tej ścieżki i~z~racji tego, że wszystkie węzły prawego poddrzewa $u$ zostały odwiedzone, nie zostanie już użyta ponownie.
+
+\exercise %12.2-8
+Jeśli węzeł początkowy $u$ nie ma prawego syna, to w~wyniku wywołania $\proc{Tree-Successor}(u)$ następnym odwiedzonym węzłem, na podstawie \refExercise{12.2-6}, będzie najniższy przodek $u$, którego lewy syn też jest przodkiem $u$.
+Oznaczmy ten węzeł przez $v$.
+Jeśli z~kolei prawy syn $u$ istnieje, to zanim algorytm dotrze do $v$, odwiedzi on wpierw prawe poddrzewo $u$.
+O~ile nie zakończył swojego działania podczas tego kroku, to w~obu przypadkach opisane operacje zostają następnie powtórzone dla węzła $v$.
+Widać zatem, że algorytm porusza się w~górę drzewa po ścieżce, której długość ograniczona jest przez wysokość drzewa, odwiedzając prawe poddrzewa węzłów z~tej ścieżki.
+Ponieważ mamy $k$ wywołań \proc{Tree-Successor}, to sumaryczna liczba węzłów w~tych poddrzewach wynosi co najwyżej $O(k)$.
+Algorytm działa więc w~czasie $O(k+h)$.
+
+\exercise %12.2-9
+Dowód sprowadza się do pokazania, że $y$ jest albo następnikiem albo poprzednikiem węzła $x$.
+
+Załóżmy, że $x$ jest lewym synem węzła $y$.
+Zauważmy, że w~drzewie $T$ istnieje następnik węzła $x$, ponieważ $x$ nie jest skrajnie prawym węzłem drzewa $T$.
+Możemy więc skorzystać z~\refExercise{12.2-6}, żeby pokazać, że następnikiem $x$ jest w~rzeczywistości $y$.
+Symetryczne twierdzenie do tego z~\refExercise{12.2-6} charakteryzujące poprzednika węzła o~pustym lewym poddrzewie, można dowieść, korzystając z~analogicznego rozumowania z~rozwiązania tamtego zadania.
+W~przypadku, gdy $x$ jest prawym synem $y$, na podstawie tego twierdzenia pokazujemy, że $y$ jest poprzednikiem $x$.

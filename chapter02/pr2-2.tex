@@ -1,0 +1,42 @@
+\problem{Poprawność sortowania bąbelkowego} %2-2
+
+\subproblem %2-2(a)
+Należy jeszcze pokazać, że tablica $A'$ stanowi permutację tablicy $A$.
+
+\subproblem %2-2(b)
+Niezmiennik wewnętrznej pętli \kw{for}:
+\begin{quote}
+Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{2}{4} najmniejszym elementem podtablicy $A[j\twodots\id{length}[A]]$ jest $A[j]$.
+\end{quote}
+\begin{description}
+	\item[Inicjowanie:] Przed pierwszą iteracją $j=\attrib{A}{length}$, więc $A[j\twodots\attrib{A}{length}]$ zawiera tylko jeden element, który oczywiście jest najmniejszy w~tej podtablicy i~jest nim $A[j]$.
+	\item[Utrzymanie:] Załóżmy, że $A[j]$ jest najmniejszym elementem w~$A[j\twodots\attrib{A}{length}]$.
+Jeżeli $A[j-1]$ jest większe od $A[j]$, to $A[j]$ jest zamieniane z~$A[j-1]$ w~wierszu 4, więc w~tym momencie podtablica $A[j-1\twodots\attrib{A}{length}]$ posiada swój najmniejszy element w~$A[j-1]$.
+Uaktualnienie $j$ powoduje odtworzenie niezmiennika.
+W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmniejszy element $A[j-1\twodots\attrib{A}{length}]$ i~aktualizacja $j$ także pozwala spełnić niezmiennik.
+	\item[Zakończenie:] Po zakończeniu wykonywania pętli zachodzi $j=i$, a~więc $A[i]$ jest najmniejszym elementem podtablicy $A[i\twodots\attrib{A}{length}]$.
+\end{description}
+
+\subproblem %2-2(c)
+Niezmiennik zewnętrznej pętli \kw{for}:
+\begin{quote}
+Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{1}{4} podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco.
+\end{quote}
+\begin{description}
+	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, czyli podtablica $A[1\twodots i-1]$ jest pusta, a~więc jest trywialnie posortowana.
+	\item[Utrzymanie:] Z~założenia, że podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy.
+Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots\attrib{A}{length}]$ najmniejszy element i~umieszcza go na pozycji $i$ (dowód w~poprzednim punkcie).
+W~podtablicy $A[i\twodots\attrib{A}{length}]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem w~szczególności zachodzi $A[i-1]\le A[i]$.
+Stąd wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
+	\item[Zakończenie:] Na końcu mamy $i=\attrib{A}{length}+1$.
+Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco, a~zatem algorytm sortuje poprawnie.
+\end{description}
+
+\subproblem %2-2(d)
+Niech $n=\attrib{A}{length}$.
+Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy \doubledash{2}{4} wykonuje $n-i$ iteracji dla każdego $i=1$, 2, \dots, $n$.
+Pesymistyczny czas działania sortowania bąbelkowego wynosi zatem
+\[
+	T(n) = \sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2),
+\]
+jest on więc równy pesymistycznemu czasowi sortowania przez wstawianie.

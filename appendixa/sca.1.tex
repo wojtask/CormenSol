@@ -1,0 +1,88 @@
+\subchapter{Wzory i~własności dotyczące sum}
+
+\exercise %A.1-1
+\[
+	\sum_{k=1}^n(2k-1) = 2\sum_{k=1}^nk-\sum_{k=1}^n1 = \frac{2n(n+1)}{2}-n = n^2
+\]
+
+\exercise %A.1-2
+Korzystając z~oszacowania na $H_n$ (wzór (A.7)), mamy
+\begin{align*}
+	\sum_{k=1}^n\frac{1}{2k-1} &= H_{2n-1}-\sum_{k=1}^{n-1}\frac{1}{2k} \\
+	&= H_{2n-1}-\frac{H_{n-1}}{2} \\
+	&= \ln(2n-1)+O(1)-\frac{\ln(n-1)+O(1)}{2} \\
+	&= \ln(2n-2)+\ln\frac{2n-1}{2n-2}-\ln\sqrt{n-1}+O(1) \\
+	&= \ln\frac{2n-2}{\sqrt{n-1}}+O(1) \\[1mm]
+	&= \ln(2\sqrt{n-1})+O(1) \\
+	&= \ln2+\ln\sqrt{n}+\ln\frac{\sqrt{n-1}}{\sqrt{n}}+\,O(1) \\
+	&= \ln\sqrt{n}+O(1).
+\end{align*}
+Wyrażenia $\ln\frac{2n-1}{2n-2}$ i~$\ln\frac{\sqrt{n-1}}{\sqrt{n}}$ zostały potraktowane jak funkcje klasy $O(1)$.
+
+\exercise %A.1-3
+Wykorzystując wzór (A.8), dostajemy
+\[
+	\sum_{k=0}^\infty k^2x^k = x\cdot\frac{d}{dx}\sum_{k=0}^\infty kx^k = \frac{x(x+1)}{(1-x)^3}.
+\]
+
+\exercise %A.1-4
+Korzystając ze wzorów (A.6) oraz (A.8), mamy
+\[
+	\sum_{k=0}^\infty\frac{k-1}{2^k} = \sum_{k=0}^\infty\frac{k}{2^k}-\sum_{k=0}^\infty\frac{1}{2^k} = \sum_{k=0}^\infty k\biggl(\frac{1}{2}\biggr)^k-\sum_{k=0}^\infty\biggl(\frac{1}{2}\biggr)^k = \frac{\frac{1}{2}}{\bigl(1-\frac{1}{2}\bigr)^2}-\frac{1}{1-\frac{1}{2}} = 0.
+\]
+
+\exercise %A.1-5
+Załóżmy, że $|x^2|<1$, czyli $-1<x<1$.
+Wówczas na podstawie wzorów (A.6) i~(A.8) obliczamy:
+\[
+	\sum_{k=1}^\infty(2k+1)x^{2k} = 2\sum_{k=0}^\infty k(x^2)^k+\sum_{k=0}^\infty(x^2)^k-1 = \frac{2x^2}{(1-x^2)^2}+\frac{1}{1-x^2}-1 = \frac{x^2(3-x^2)}{(1-x^2)^2}.
+\]
+W~przypadku, gdy $|x^2|\ge1$, badana suma jest rozbieżna do $\infty$.
+
+\exercise %A.1-6
+Pokażemy mocniejszy wynik, zamieniając w~dowodzonej tożsamości $O$ na $\Theta$.
+Dopuścimy też inną zmienną jako parametr funkcji $f_k$ po obu stronach równości.
+
+Zgodnie z~definicją notacji $\Theta$, dla dowolnej funkcji $F(i)$ zachodzi $F(i)=\Theta\bigl(\sum_{k=1}^nf_k(i)\bigr)$ wtedy i~tylko wtedy, gdy istnieją dodatnie stałe $i_0$, $c_1$, $c_2$ takie, że dla każdego całkowitego $i\ge i_0$ prawdą jest
+\[
+	0 \le c_1\sum_{k=1}^nf_k(i) \le F(i) \le c_2\sum_{k=1}^nf_k(i).
+\]
+
+Ustalmy stałe $i_0$, $c_1$ i~$c_2$.
+Niech $F_1(i)$, $F_2(i)$, \dots, $F_n(i)$ będą funkcjami, które dla każdego całkowitego $i\ge i_0$ spełniają układ nierówności
+\[
+	\arraycolsep=1.5pt
+	\left\{\begin{array}{rlcl}
+		0 &\le c_1f_1(i) &\le F_1(i) &\le c_2f_1(i) \\[1mm]
+		0 &\le c_1f_1(i)+c_1f_2(i) &\le F_2(i) &\le c_2f_1(i)+c_2f_2(i) \\
+		&& \vdots & \\[1mm]
+		0 &\le \sum_{k=1}^nc_1f_k(i) &\le F_n(i) &\le \sum_{k=1}^nc_2f_k(i)
+	\end{array}\right..
+\]
+Wprost z~definicji notacji $\Theta$ mamy:
+\begin{align*}
+	F_1(i) &= \Theta(f_1(i)), \\
+	F_2(i)-F_1(i) &= \Theta(f_2(i)), \\
+	& \,\,\,\vdots \\
+	F_n(i)-F_{n-1}(i) &= \Theta(f_n(i)).
+\end{align*}
+Dodając powyższe równania stronami, otrzymujemy
+\[
+	F_1(i)+(F_2(i)-F_1(i))+\dots+(F_n(i)-F_{n-1}(i)) = \sum_{k=1}^n\Theta(f_k(i)).
+\]
+Wyrażenie po lewej stronie skraca się do $F_n(i)$.
+Ale z~ostatniej nierówności układu wynika, że $F_n(i)=\Theta\bigl(\sum_{k=1}^nf_k(i)\bigr)$, skąd dostajemy tożsamość
+\[
+	\sum_{k=1}^n\Theta(f_k(i)) = \Theta\biggl(\sum_{k=1}^nf_k(i)\biggr).
+\]
+
+\exercise %A.1-7
+\[
+	\prod_{k=1}^n2\cdot4^k = 2^n\cdot4^{1+2+\dots+n} = 2^n\cdot4^{\frac{n(n+1)}{2}} = 2^{n(n+2)}
+\]
+
+\exercise %A.1-8
+\begin{align*}
+	\prod_{k=2}^n\biggl(1-\frac{1}{k^2}\biggr) &= \prod_{k=2}^n\frac{k^2-1}{k^2} = \frac{\prod_{k=2}^n(k^2-1)}{\prod_{k=2}^nk^2} = \frac{\prod_{k=2}^n(k-1)\cdot\prod_{k=2}^n(k+1)}{\bigl(\prod_{k=1}^nk\bigr)^2} \\[2mm]
+	&= \frac{\prod_{k=1}^{n-1}k\cdot\prod_{k=3}^{n+1}k}{(n!)^2} = \frac{(n-1)!\cdot\frac{(n+1)!}{2}}{(n!)^2} = \frac{n+1}{2n}
+\end{align*}

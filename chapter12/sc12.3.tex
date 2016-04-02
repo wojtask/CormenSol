@@ -1,0 +1,102 @@
+\subchapter{Wstawianie i~usuwanie}
+
+\exercise %12.3-1
+Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu korzeń $x$ poddrzewa $T$, w~którym będziemy dokonywać wstawiania oraz nowy węzeł $z$.
+Procedura będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odpowiednią ścieżką tak, aby na końcu tego procesu uczynić $z$ synem bieżącego węzła na tej ścieżce.
+\begin{codebox}
+\Procname{$\proc{Recursive-Tree-Insert}(x,z)$}
+\li	\If $\attrib{z}{key}<\attrib{x}{key}$
+\li		\Then
+			\If $\attrib{x}{left}\ne\const{nil}$
+\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{left},z)$
+\li				\Else
+					$\attrib{x}{left}\gets z$
+\li					$\attrib{z}{p}\gets x$
+				\End
+\li		\Else
+			\If $\attrib{x}{right}\ne\const{nil}$
+\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{right},z)$
+\li				\Else
+					$\attrib{x}{right}\gets z$
+\li					$\attrib{z}{p}\gets x$
+				\End
+		\End
+\end{codebox}
+Procedura ta wywoływana będzie przez procedurę \proc{Tree-Insert}$'$, której pseudokod znajduje się poniżej.
+Testuje ona jedynie, czy drzewo $T$ jest puste i~w~zależności od wyniku umieszcza $z$ w~korzeniu drzewa $T$ albo wywołuje \proc{Recursive-Tree-Insert}.
+\begin{codebox}
+\Procname{$\proc{Tree-Insert$'$}(T,z)$}
+\li	\If $\attrib{T}{root}=\const{nil}$
+\li		\Then $\attrib{T}{root}\gets z$
+\li		\Else $\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
+		\End
+\end{codebox}
+
+\exercise %12.3-2
+Procedura \proc{Tree-Insert} wywołana dla nowego węzła $z$ o~kluczu $k$, będzie schodzić ścieżką od korzenia w~dół drzewa w~celu odnalezienia liścia, który stanie się ojcem węzła $z$.
+Z~kolei procedura \proc{Tree-Search} wyszukująca w~drzewie węzeł o~kluczu $k$ zejdzie podobną ścieżką w~celu odnalezienia tego węzła.
+Porównajmy instrukcje odpowiedzialne za poruszanie się po tych ścieżkach -- w~pierwszej procedurze są to wiersze \doubledash{3}{7}, a~w~drugiej -- wiersze \doubledash{1}{4}.
+W~\proc{Tree-Insert} obecność linii 4 nie wpływa na wybór ścieżki, a~$\attrib{z}{key}=k$, więc $\attrib{x}{key}$ jest w~obu procedurach porównywane z~tą samą wartością.
+Jeszcze jedną różnicą jest występowanie w~\proc{Tree-Search} dodatkowego warunku $k\ne\attrib{x}{key}$ w~pętli \kw{while}.
+Z~założenia o~unikalności kluczy w~drzewie wnioskujemy, że warunek ten będzie fałszywy dla każdego węzła na ścieżce, zanim osiągnięty zostanie szukany węzeł.
+Ścieżki pokonywane w~obu procedurach są zatem identyczne, przy czym procedura \proc{Tree-Search} porówna jeszcze poszukiwany klucz z~węzłem o~tym kluczu na końcu tej ścieżki.
+
+\exercise %12.3-3
+Pesymistyczny przypadek dla takiego sposobu sortowania $n$ liczb zachodzi wtedy, gdy tablica jest uporządkowana rosnąco bądź malejąco.
+Wówczas drzewo powstałe po serii $n$ operacji \proc{Tree-Insert} ma wysokość $n-1$.
+Budowa takiego drzewa zajmuje $O(n^2)$ i~taki też jest czas sortowania w~tym przypadku.
+
+Z~kolei przypadek optymistyczny ma miejsce, gdy zbudowane drzewo ma minimalną wysokość.
+Z~\refExercise{B.5-4} wiemy, że drzewo zawierające $n$ węzłów ma wysokość co najmniej $\lfloor\lg n\rfloor$.
+Najmniejszy możliwy czas działania algorytmu sortowania wynosi zatem $O(n\lg n)$, bo to jest czas potrzebny na zbudowanie takiego drzewa.
+
+\exercise %12.3-4
+Procedura \proc{Tree-Delete} wywołana dla węzła o~dwóch synach w~rzeczywistości usunie następnik tego węzła.
+Problem pojawia się, gdy pewna struktura danych przechowuje wskaźnik do węzła $y$ i~wywołane zostanie \proc{Tree-Delete} celem usunięcia węzła $z$, będącego poprzednikiem $y$.
+Struktura ta może wciąż zakładać, że $z$ należy do drzewa.
+Tak jednak nie jest, ponieważ to węzeł wskazywany przez $y$ został ostatecznie usunięty, a~jego wszystkie atrybuty skopiowane zostały do węzła wskazywanego przez $z$.
+
+Rozwiązanie tego problemu polega na podmianie węzła $z$ przez $y$ tuż przed zakończeniem operacji usuwania w~przypadku, gdy węzeł $z$ początkowo miał dwóch synów.
+Wówczas węzłem efektywnie usuwanym byłby za każdym razem ten wskazywany przez $z$, dlatego w~bezpiecznej wersji procedury usuwania, której pseudokod prezentujemy poniżej, możemy zrezygnować ze zwracania jakiejkolwiek wartości.
+\begin{codebox}
+\Procname{$\proc{Safe-Tree-Delete}(T,z)$}
+\li	$y\gets\proc{Tree-Delete}(T,z)$
+\li	\If $y\ne z$
+\li		\Then
+			$\attrib{\attrib{z}{left}}{p}\gets\attrib{\attrib{z}{right}}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
+\li			\If $\attrib{z}{p}\ne\const{nil}$
+\li				\Then
+					\If $z=\attrib{\attrib{z}{p}}{left}$
+\li						\Then $\attrib{\attrib{z}{p}}{left}\gets y$
+\li						\Else $\attrib{\attrib{z}{p}}{right}\gets y$
+						\End
+				\End
+\li			skopiuj zawartość wszystkich pól z~$z$ do $y$ \label{li:safe-tree-delete-substitute-end}
+		\End
+\end{codebox}
+
+Powyższa procedura deleguje operację usuwania węzła $z$ do oryginalnej procedury \proc{Tree-Delete}.
+Jeśli zwrócony przez tę ostatnią węzeł $y$ jest różny od $z$, to w~wierszach \doubledash{\ref{li:safe-tree-delete-substitute-begin}}{\ref{li:safe-tree-delete-substitute-end}} następuje przepięcie synów i~ojca $z$ na węzeł $y$ i~przepisanie wszystkich pól z~$z$ do $y$.
+Po wykonaniu tej procedury struktura danych korzystająca z~drzewa może bezpiecznie założyć, że usunięty został dokładnie ten węzeł, który stanowił argument operacji usuwania.
+
+\exercise %12.3-5
+Operacja usuwania z~drzewa wyszukiwań binarnych nie jest przemienna. Kontrprzykład został zilustrowany na rys.\ \ref{fig:12.3-5}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_12.3-5}
+	\end{center}
+	\caption{Kontrprzykład dla przemienności operacji usuwania węzła z~drzewa BST.
+{\sffamily\bfseries(a)} Przykładowe drzewo BST.
+{\sffamily\bfseries(b)} Drzewo po usunięciu węzła o~kluczu 3, a~następnie węzła o~kluczu 4.
+{\sffamily\bfseries(c)} Drzewo po usunięciu węzła o~kluczu 4, a~następnie węzła o~kluczu 3.} \label{fig:12.3-5}
+\end{figure}
+
+\exercise %12.3-6
+Wybór między poprzednikiem i~następnikiem uzależnimy od wyniku rzutu monetą, który zasymulujemy wywołaniem $\proc{Random}(0,1)$.
+Wiersz~3 w~procedurze \proc{Tree-Delete} zastąpimy więc następującym fragmentem:
+\begin{codebox}
+\zi	\If $\proc{Random}(0,1)=0$
+\zi		\Then $y\gets\proc{Tree-Predecessor}(z)$
+\zi		\Else $y\gets\proc{Tree-Successor}(z)$
+\zi		\End
+\end{codebox}

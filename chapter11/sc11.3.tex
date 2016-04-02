@@ -1,0 +1,104 @@
+\subchapter{Funkcje haszujące}
+
+\exercise %11.3-1
+W~celu odnalezienia elementu o~kluczu $k$ obliczamy $h(k)$ i~przeglądamy listę, porównując jedynie wartości funkcji haszującej, co jest znacznie szybsze od porównywania kluczy (długich ciągów znaków).
+Gdy znajdziemy element, dla którego wartość funkcji haszującej jest równa $h(k)$, to dopiero wówczas sprawdzamy, czy kluczem tego elementu jest $k$.
+
+\exercise %11.3-2
+Reprezentacją napisu $x=x_0x_1\dots x_{r-1}$ jest liczba $\sum_{i=0}^{r-1}x_i128^i$ (dla uproszczenia zapisu utożsamiamy znak z~odpowiadającą mu wartością w~kodzie ASCII).
+Obliczenie $h(x)$ polega na wyznaczeniu reszty z~dzielenia reprezentacji napisu $x$ przez $m$.
+W~tym celu przedstawimy $h(x)$ w~postaci
+\[
+	h(x) = x_0+128(x_1+128(x_2+\dots+128(x_{r-2}+128x_{r-1})\cdots)),
+\]
+przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\{0,1,\dots,m-1\}$.
+Następnie stosujemy schemat Hornera (patrz problem \refProblem{2-3}).
+Ciągłe obliczanie reszt z~dzielenia przez $m$ pozwala utrzymać pośrednie wyniki w~co najwyżej dwóch słowach maszynowych.
+
+\exercise %11.3-3
+Jeśli napis $x=x_0x_1\dots x_{r-1}$ jest permutacją napisu $y=y_0y_1\dots y_{r-1}$, to $x$ możemy uzyskać z~$y$, zamieniając ze sobą znaki występujące na tych samych pozycjach w~obu napisach, dopóki oba napisy są różne.
+Można pokazać, że zawsze istnieje skończony ciąg pozycji, na których należy zamieniać znaki w~celu przekształcenia jednego napisu w~drugi.
+Założymy zatem, że napis $x$ można uzyskać z~$y$, dokonując tylko jednej takiej zamiany, tzn.\ $x_a=y_b$ oraz $y_a=x_b$ dla pewnych $0\le a<b\le r-1$ oraz $x_i=y_i$ dla $i\ne a$ i~$i\ne b$.
+Łatwo pokazać przez indukcję, że jeśli występuje kolizja dla takiej pary napisów, to ma ona miejsce również dla par napisów różniących się więcej niż jedną parą znaków.
+
+Podobnie jak w~poprzednim zadaniu będziemy traktować zamiennie znak oraz jego reprezentację w~kodzie ASCII\@.
+Pokażemy, że $h(x)=h(y)$, czyli że różnica
+\[
+	h(x)-h(y) = \biggl(\sum_{i=0}^{r-1}x_i2^{ip}\biggr)\bmod(2^p-1)-\biggl(\sum_{i=0}^{r-1}y_i2^{ip}\biggr)\bmod(2^p-1)
+\]
+jest zerem.
+Mamy:
+\begin{align*}
+	h(x)-h(y) &= \bigl((x_a2^{ap}+x_b2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
+	&= \bigl((y_b2^{ap}+y_a2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
+	&= \bigl((y_a-y_b)2^{bp}-(y_a-y_b)2^{ap}\bigr)\bmod(2^p-1) \\
+	&= \bigl((y_a-y_b)(2^{bp}-2^{ap})\bigr)\bmod(2^p-1) \\
+	&= \bigl((y_a-y_b)2^{ap}(2^{(b-a)p}-1)\bigr)\bmod(2^p-1).
+\end{align*}
+Ze wzoru (A.5) zachodzi
+\[
+	\sum_{i=0}^{b-a-1}2^{pi} = \frac{2^{(b-a)p}-1}{2^p-1},
+\]
+skąd
+\[
+	(2^p-1)\sum_{i=0}^{b-a-1}2^{pi} = 2^{(b-a)p}-1
+\]
+i~ostatecznie
+\[
+	h(x)-h(y) = \biggl((y_a-y_b)2^{ap}(2^p-1)\sum_{i=0}^{b-a-1}2^{pi}\biggr)\bmod(2^p-1) = 0,
+\]
+ponieważ jeden z~czynników jest równy $2^p-1$.
+
+Jeśli napisami będą np.\ sekwencje DNA, to użycie $h$ jako funkcji haszującej może doprowadzić do powstania dużej ilości kolizji.
+Każda sekwencja DNA stanowi bowiem ciąg nukleotydów czterech typów (reprezentowanych jako symbole \texttt{A}, \texttt{C}, \texttt{G} i~\texttt{T}), zatem prawdopodobieństwo, że jakaś sekwencja jest permutacją innej, jest stosunkowo duże.
+
+\exercise %11.3-4
+Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy zatem $p=9$.
+Założymy, że słowo maszynowe ma długość $w=32$ bity i~przybliżymy stałą $A$ wartością $s/2^w=2654435769/2^{32}$.
+Wówczas:
+\begin{itemize}
+	\item jeśli $k=61$, to $k\cdot s=161920581909=37\cdot2^{32}+3006791957$, więc $h(61)=358$;
+	\item jeśli $k=62$, to $k\cdot s=164575017678=38\cdot2^{32}+1366260430$, więc $h(62)=162$;
+	\item jeśli $k=63$, to $k\cdot s=167229453447=38\cdot2^{32}+4020696199$, więc $h(63)=479$;
+	\item jeśli $k=64$, to $k\cdot s=169883889216=39\cdot2^{32}+2380164672$, więc $h(64)=283$;
+	\item jeśli $k=65$, to $k\cdot s=172538324985=40\cdot2^{32}+739633145$, więc $h(65)=88$.
+\end{itemize}
+
+\exercise %11.3-5
+Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$.
+Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które zostały odwzorowane na $j$ przez funkcję $h$.
+Wówczas liczba kolizji powstałych na danym elemencie $j\in B$ wynosi $\binom{u_j}{2}=u_j(u_j-1)/2$.
+
+Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest minimalna, gdy $u_j=u/b$ dla każdego $j\in B$.
+Załóżmy, że dla pewnych dwóch różnych $i$, $k\in B$ zachodzi $0<u_i\le u/b\le u_k$.
+Łączna liczba kolizji na elementach $i$ i~$k$ wynosi $S=u_i(u_i-1)/2+u_k(u_k-1)/2$.
+Niech teraz $h'$ będzie funkcją identyczną z~$h$ z~jednym wyjątkiem -- dla dokładnie jednego dowolnie wybranego elementu $x\in U$ takiego, że $h(x)=i$, niech zachodzi $h'(x)=k$.
+Funkcja $h'$ tworzy $S'=(u_i-1)(u_i-2)/2+(u_k+1)u_k/2$ kolizji na elementach $i$ i~$k$.
+Zbadajmy znak różnicy $S'-S$:
+\begin{align*}
+	S'-S &= (u_i-1)(u_i-2)/2+(u_k+1)u_k/2-u_i(u_i-1)/2-u_k(u_k-1)/2 \\
+	&= (u_i^2-3u_i+2+u_k^2+u_k-u_i^2+u_i-u_k^2+u_k)/2 \\
+	&= (2u_k-2u_i+2)/2 \\
+	&= u_k-u_i+1 \\
+	&> 0.
+\end{align*}
+Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ odbiegają od $u/b$.
+Stąd wniosek, że liczba kolizji jest możliwie najmniejsza, gdy dla wszystkich elementów $j\in B$ zachodzi $u_j=u/b$.
+
+Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszująca z~$\mathcal{H}$ generuje łącznie co najmniej $b(u/b)(u/b-1)/2$ kolizji.
+Stąd prawdopodobieństwo $p_{\mathcal{H}}$ wystąpienia kolizji przy losowo wybranej funkcji z~$\mathcal{H}$ można ograniczyć od dołu przez
+\[
+	p_{\mathcal{H}} \ge \frac{b(u/b)(u/b-1)/2}{u(u-1)/2} = \frac{u/b-1}{u-1} > \frac{u/b-1}{u} = \frac{1}{b}-\frac{1}{u}.
+\]
+Jeśli rodzina $\mathcal{H}$ jest \singledash{$\epsilon$}{uniwersalna}, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
+
+\exercise %11.3-6
+Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi \singledash{$n$}{tkami} o~wartościach z~$\mathbb{Z}_p$.
+Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
+\[
+	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j-\sum_{j=0}^{n-1}y_jb^j = \sum_{j=0}^{n-1}(x_j-y_j)b^j.
+\]
+Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem.
+Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$.
+A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$.
+Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.

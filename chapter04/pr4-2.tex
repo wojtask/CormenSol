@@ -1,0 +1,10 @@
+\problem{Szukanie brakującej liczby całkowitej} %4-2
+Poprzez badanie najmniej znaczącego bitu liczby całkowitej możemy sprawdzić parzystość tej liczby.
+Pobierzemy więc najmniej znaczące bity wszystkich liczb z~tablicy $A$ i~policzymy, ile z~nich jest zerami.
+W~zakresie $0\twodots n$ jest $\lfloor n/2\rfloor+1$ liczb parzystych.
+Jeśli więc wśród pobranych bitów znajdziemy dokładnie tyle samo zer, to wiemy, że szukana liczba jest nieparzysta, a~jeśli zer będzie $\lfloor n/2\rfloor$, to brakuje liczby parzystej.
+W~zależności od przypadku z~dalszej analizy odrzucimy liczby o~parzystości innej niż parzystość brakującej liczby, a~pozostałe będziemy przeszukiwać w~kolejnym wywołaniu rekurencyjnym, badając kolejny najmniej znaczący bit tych liczb.
+W~momencie osiągnięcia pustego zbioru będziemy znać wszystkie bity brakującej liczby.
+
+Spośród $n$ liczb, do wywołania rekurencyjnego zostaje ich przekazanych $n-(\lfloor n/2\rfloor+1)=\lfloor(n-1)/2\rfloor$ albo $\lfloor n/2\rfloor$.
+Pesymistyczny czas działania opisanego tutaj algorytmu można więc zapisać w~postaci rekurencji $T(n)=T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $\Theta(n)$ na podstawie tw.\ 4.1.

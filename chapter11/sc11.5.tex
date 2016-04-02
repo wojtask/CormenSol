@@ -1,0 +1,34 @@
+\subchapter{Haszowanie doskonałe}
+
+\exercise %11.5-1
+\note{W~treści zadania zamiast haszowania uniwersalnego powinno być haszowanie równomierne.}
+
+\noindent Rozważmy prawdopodobieństwo $q(n,m)$, że wystąpi przynajmniej jedna kolizja.
+Jest $\binom{n}{2}$ par kluczy, które mogą tworzyć kolizję z~prawdopodobieństwem $1/m$ każda.
+Mamy więc
+\[
+	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
+\]
+i~teraz, dzięki skorzystaniu ze wzoru (3.11), otrzymujemy
+\[
+	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
+\]
+
+W~drugiej części zadania rozważymy funkcję $f(x)=e^{-x(x-1)/2m}$ zmiennej rzeczywistej $x$, traktując $m$ jak stałą dodatnią.
+Jak łatwo zauważyć, granicą tej funkcji w~$\infty$ jest 0.
+Wyznaczając jej pierwszą i~drugą pochodną, mamy
+\[
+	\frac{df}{dx}(x) = e^{-x(x-1)/2m}\,\frac{1-2x}{2m}
+\]
+oraz
+\[
+	\frac{d^2\!f}{dx^2}(x) = e^{-x(x-1)/2m}\biggl(\frac{1-2x}{2m}\biggr)^2+e^{-x(x-1)/2m}\cdot\frac{-1}{m} = e^{-x(x-1)/2m}\,\frac{4x^2-4x+1-4m}{4m^2}.
+\]
+Czynnik $e^{-x(x-1)/2m}$ jest dodatni niezależnie od wartości $x$ i~$m$.
+Jeśli $x>\sqrt{m}$, to natychmiast widać, że pierwsza pochodna funkcji $f$ jest ujemna.
+Do tego samego wniosku dochodzimy dla drugiej pochodnej, ograniczając jej drugi czynnik:
+\[
+	\frac{4x^2-4x+1-4m}{4m^2} < \frac{4m-4\sqrt{m}+1-4m}{4m^2} = \frac{-4\sqrt{m}+1}{4m^2} < 0.
+\]
+A~zatem dla $x>\sqrt{m}$ funkcja $f$ jest malejąca i~wklęsła.
+Oznacza to, że prawdopodobieństwo $p(n,m)$, które wynosi co najwyżej $f(n)$, maleje gwałtownie do zera, gdy $n$ przekracza $\sqrt{m}$.

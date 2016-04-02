@@ -1,0 +1,205 @@
+\problem{Więcej przykładów rekurencji} %4-4
+
+\subproblem %4-4(a)
+Wykorzystując twierdzenie o~rekurencji uniwersalnej, mamy $n^{\log_ba}=n^{\lg3}$ oraz $f(n)=n\lg n=O(n^{\lg3-\epsilon})$, gdzie $\epsilon<\lg3-1$, a~stąd $T(n)=\Theta(n^{\lg3})$.
+
+\subproblem %4-4(b)
+Z~twierdzenia o~rekurencji uniwersalnej obliczamy $n^{\log_ba}=n^{\log_55}=n$, jednak dla żadnego $\epsilon>0$ nie jest prawdą, że
+\[
+	f(n) = \frac{n}{\lg n} = O(n^{1-\epsilon}),
+\]
+ponieważ dla pewnej stałej $c>0$ i~dostatecznie dużych $n$ musiałoby zachodzić
+\[
+	\frac{n^\epsilon}{\lg n} \le c,
+\]
+a~ponieważ $n^\epsilon=\omega(\lg n)$, to niezależnie od wyboru $\epsilon$ dla dużych wartości $n$ licznik tego ułamka jest dowolnie większy od mianownika i~ułamka nie da się z~tego powodu ograniczyć stałą.
+
+Skorzystajmy zatem z~innego sposobu na obliczenie $T(n)$, rozważając rodzinę rekurencji postaci
+\[
+	T_a(n) = \begin{cases}
+		\Theta(1), & \text{jeśli $1\le n<a$}, \\
+		aT_a(n/a)+n/\!\lg n, & \text{jeśli $n\ge a$},
+	\end{cases}
+\]
+gdzie $a\ge2$ jest liczbą całkowitą.
+Wykorzystamy technikę zamiany zmiennych, podstawiając $m=\log_an$, skąd $n=a^m$, dzięki czemu otrzymujemy
+\[
+	T_a(a^m) = aT_a(a^{m-1})+\frac{a^m}{m\lg a}.
+\]
+Możemy teraz podstawić $S_a(m)=T_a(a^m)$, otrzymując nową rekurencję
+\[
+	S_a(m) = aS_a(m-1)+\frac{a^m}{m\lg a},
+\]
+którą rozwiązujemy następująco (po przyjęciu $S_a(0)=T_a(1)=d$ dla pewnej stałej $d>0$):
+\begin{align*}
+	S_a(m) &= \frac{1}{\lg a}\biggl(\frac{a^m}{m}+a\cdot\frac{a^{m-1}}{m-1}+a^2\cdot\frac{a^{m-2}}{m-2}+\dots+a^{m-1}\cdot\frac{a^1}{1}+a^md\biggr) \\[1mm]
+	&= \frac{1}{\lg a}\biggl(\sum_{k=1}^m\frac{a^m}{k}+a^md\biggr) \\[1mm]
+	&= \frac{a^m(H_m+d)}{\lg a} \\[1mm]
+	&= \Theta(a^m\lg m).
+\end{align*}
+Zamieniając z~powrotem $S_a(m)$ na $T_a(n)$, otrzymujemy rozwiązanie
+\[
+	T_a(n) = T_a(a^m) = S_a(m) = \Theta(a^m\lg m) = \Theta(n\lg\log_a n) = \Theta(n\lg\lg n).
+\]
+
+Stosując znalezione oszacowanie do rekurencji $T(n)\equiv T_5(n)$ z~treści zadania, dostajemy oczywiście $T(n)=\Theta(n\lg\lg n)$.
+
+\subproblem %4-4(c)
+Z~twierdzenia o~rekurencji uniwersalnej mamy $n^{\log_ba}=n^{\lg4}=n^2$ oraz $f(n)=n^{5/2}=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1/2$.
+Badamy warunek regularności:
+\begin{align*}
+	4f(n/2) &\le cf(n), \\
+	\frac{4n^{5/2}}{2^{5/2}} &\le cn^{5/2}, \\
+	c &\ge \frac{1}{\sqrt{2}}
+\end{align*}
+i~stwierdzamy, że $T(n)=\Theta(n^{5/2})$.
+
+\subproblem %4-4(d)
+Wykażemy, że stała 5 w~argumencie rekurencji $T(n)$ nie wpływa na postać rozwiązania.
+Rozważając rekurencję $T'(n)=3T'(n/3)+n/2$ i~rozwiązując ją za pomocą twierdzenia o~rekurencji uniwersalnej, dostajemy $T'(n)=\Theta(n\lg n)$.
+Udowodnimy teraz metodą podstawiania, że identyczny wynik jest rozwiązaniem $T(n)$.
+
+Wykorzystując założenie
+\[
+	T(n/3+5) \le c_1(n/3+5)\lg(n/3+5)
+\]
+dla pewnej stałej $c_1>0$, otrzymujemy:
+\begin{align*}
+	T(n) &\le 3c_1(n/3+5)\lg(n/3+5)+n/2 \\
+	&\le c_1(n+15)\lg(2n/5)+n/2 \\
+	&< c_1n\lg n+c_1n\lg(2/5)+15c_1\!\lg n+n/2 \\
+	&\le c_1n\lg n.
+\end{align*}
+Powyższe wnioskowanie jest prawdziwe, o~ile $n/3+5\le2n/5$, skąd $n\ge75$, oraz
+\[
+	c_1n\lg(2/5)+15c_1\!\lg n+n/2 \le 0.
+\]
+Przeprowadzając podobną analizę jak w~\refExercise{4.1-5}, dostajemy, że dowolne $c_1\ge7$ spełnia ostatnią nierówność dla $n\ge75$.
+
+Analogicznie dla dolnego oszacowania przyjmujemy, że
+\[
+	T(n/3+5) \ge c_2(n/3+5)\lg(n/3+5),
+\]
+gdzie $c_2>0$ jest pewną stałą.
+Wówczas:
+\begin{align*}
+	T(n) &\ge 3c_2(n/3+5)\lg(n/3+5)+n/2 \\
+	&> 3c_2(n/3)\lg(n/3)+n/2 \\
+	&= c_2n\lg n-c_2n\lg3+n/2 \\
+	&\ge c_2n\lg n,
+\end{align*}
+przy czym ostatnia nierówność zachodzi, o~ile
+\[
+	-c_2n\lg3+n/2 \ge 0.
+\]
+Warunek ten spełniamy poprzez przyjęcie $c_2\le0{,}3$.
+
+Dowód asymptotycznie dokładnego oszacowania dla $T(n)$ kończymy, wybierając odpowiednie wartości dla podstaw obu indukcji.
+Zauważmy, że obliczanie wartości rekurencji ze wzoru $T(n)=3T(n/3+5)+n/2$ dla $n\le7$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
+Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le7$ będzie przypadkiem brzegowym rekurencji.
+W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji możemy uczynić wszystkie $n=30$, 31, \dots, 74.
+Można sprawdzić, że dla takich wartości oba oszacowania są spełnione, co uzasadnia poprawny dobór stałych $c_1$ i~$c_2$.
+A~zatem $T(n)=\Theta(n\lg n)$.
+
+\subproblem %4-4(e)
+Mamy do czynienia z~rekurencją $T_a(n)$ dla $a=2$, którą rozważaliśmy w~punkcie (b).
+Zgodnie z~przedstawionym tam rozumowaniem wnioskujemy, że $T(n)=\Theta(n\lg\lg n)$.
+
+\subproblem %4-4(f)
+W~celu rozwiązania rekurencji wykorzystamy metodę drzewa rekursji do odgadnięcia rozwiązania, które następnie udowodnimy.
+Drzewo zostało przedstawione na rys.\ \ref{fig:4-4f}.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_4-4.f}
+	\end{center}
+	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n/2)+T(n/4)+T(n/8)+n$.} \label{fig:4-4f}
+\end{figure}
+
+Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi.
+Niech $T(1)=1$.
+Ponieważ koszt węzła z~tej gałęzi znajdującego się na \singledash{$i$}{tym} poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$.
+Łącznym kosztem na \singledash{$i$}{tym} poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \singledash{$h$}{tego}, otrzymujemy oszacowanie rekurencji od dołu:
+\[
+	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-(7/8)n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
+\]
+
+Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi.
+Węzły te wnoszą koszt równy $n/2^i$ na \singledash{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\lg n$.
+Mamy
+\[
+	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-7/8} = O(n),
+\]
+co pozwala przypuszczać, że oszacowaniem dokładnym na $T(n)$ jest $\Theta(n)$.
+
+Przeprowadźmy teraz dowód tego wyniku metodą podstawiania.
+Załóżmy, że:
+\begin{gather*}
+	c_1(n/2) \le T(n/2) \le c_2(n/2), \\
+	c_1(n/4) \le T(n/4) \le c_2(n/4), \\
+	c_1(n/8) \le T(n/8) \le c_2(n/8),
+\end{gather*}
+gdzie $c_1$, $c_2>0$ to pewne stałe.
+Mamy zatem
+\[
+	T(n) \ge c_1n/2+c_1n/4+c_1n/8+n = 7c_1n/8+n \ge c_1n,
+\]
+co jest spełnione dla dowolnego $n$, o~ile $c_1\le8$.
+Dowód górnego oszacowania przebiega analogicznie, przy czym zakładamy, że $c_2\ge8$.
+
+Jako warunek brzegowy rekurencji przyjmijmy $T(1)=T(2)=\dots=T(7)=1$.
+Aby spełnić przypadek bazowy indukcji dla $n=1$, 2, \dots, 7, musimy przyjąć dodatkowo, że $c_1\le1/7$.
+Udowodniliśmy zatem, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
+
+\subproblem %4-4(g)
+Załóżmy dla uproszczenia rachunków, że $T(1)=1$.
+Rozwijając rekurencję, otrzymujemy
+\[
+	T(n) = \frac{1}{n}+\frac{1}{n-1}+\dots+\frac{1}{2}+\frac{1}{1} = H_n,
+\]
+a~zatem, korzystając ze wzoru (A.7), mamy $T(n)=\Theta(\lg n)$.
+
+\subproblem %4-4(h)
+Dla ułatwienia przyjmijmy, że $T(1)=0$.
+Wówczas
+\[
+	T(n) = \lg n+\lg(n-1)+\dots+\lg2+\lg1 = \lg\biggl(\prod_{i=1}^ni\biggr) = \lg(n!)
+\]
+i~ze wzoru (3.18) dostajemy $T(n)=\Theta(n\lg n)$.
+
+\subproblem %4-4(i)
+Przyjmijmy, że $T(2)=2$ i~rozważmy przypadek, gdy $n$ jest parzyste.
+Rozwijamy rekurencję, otrzymując
+\[
+	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg4+2\lg2 = 2\lg\biggl(\prod_{i=1}^{n/2}2i\biggr) = 2\bigl(\lg((n/2)!)+n/2\bigr).
+\]
+Wykorzystując wzór (3.18), dostajemy
+\[
+	T(n) = 2\cdot\Theta((n/2)\lg (n/2))+n = \Theta(n\lg n).
+\]
+
+Dla $n$ nieparzystego, po przyjęciu $T(1)=0$ sprowadzamy rekurencję do sumy
+\[
+	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg3+2\lg1 = 2\lg\biggl(\prod_{i=1}^{(n+1)/2}(2i-1)\biggr),
+\]
+którą można ograniczyć z~góry przez $2\lg\Bigl(\prod_{i=1}^{(n+1)/2}2i\Bigr)$, a~z~dołu przez $2\lg\Bigl(\prod_{i=1}^{(n-1)/2}2i\Bigr)$.
+Po pewnych przekształceniach i~po skorzystaniu ze wzoru (3.18) oba te wyrażenia sprowadzamy do postaci $\Theta(n\lg n)$.
+Na podstawie tego faktu i~uzasadnienia z~poprzedniego paragrafu wnioskujemy, że $T(n)$ jest klasy $\Theta(n\lg n)$.
+
+\subproblem %4-4(j)
+Po podzieleniu rekurencji $T(n)$ przez $n$ dostajemy
+\[
+	\frac{T(n)}{n} = \frac{T(\!\sqrt{n})}{\sqrt{n}}+1.
+\]
+Podstawmy teraz $S(n)=T(n)/n$, otrzymując nową rekurencję
+\[
+	S(n) = S(\!\sqrt{n})+1.
+\]
+Potraktujmy $n$ jako $2^m$, skąd $m=\lg n$ i~podstawmy $R(m)=S(2^m)$:
+\[
+	R(m) = R(m/2)+1.
+\]
+Rozwiązanie ostatniej rekurencji zostało wyznaczone w~\refExercise{4.3-3} i~wynosi $R(m)=\Theta(\lg m)$.
+Powracamy do oryginalnej rekurencji $T(n)$, dostając ostatecznie
+\[
+	T(n) = nS(n) = nR(\lg n) = n\cdot\Theta(\lg\lg n) = \Theta(n\lg\lg n).
+\]

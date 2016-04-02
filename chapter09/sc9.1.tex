@@ -1,0 +1,23 @@
+\subchapter{Minimum i~maksimum}
+
+\exercise %9.1-1
+Wyznaczmy najpierw $\mu$ -- najmniejszą spośród $n$ liczb -- w~następujący sposób.
+Łączymy liczby w~pary i~odrzucamy te, które są większe w~swoich parach, po czym wykonujemy te operacje rekurencyjnie dla zbioru pozostawionych liczb, aż do uzyskania jednej liczby, którą oczywiście będzie $\mu$.
+Przyjmujemy, że w~razie nieparzystej liczby elementów na danym poziomie rekurencji, element bez pary nie jest porównywany z~żadnym innym i~zwyczajnie przechodzi do kolejnego etapu.
+Ponieważ na każdym poziomie z~$k$ liczb zostaje $\lceil k/2\rceil$, to będzie $\lceil\lg n\rceil$ wywołań rekurencyjnych tej procedury i~co najwyżej tylu testom będzie poddawany element $\mu$.
+Zauważmy, że każdy test odrzuca jedną liczbę, wykonamy zatem dokładnie $n-1$ porównań.
+
+Zastanówmy się teraz, która z~pozostałych liczb może być drugą najmniejszą w~zbiorze.
+Liczba ta została odrzucona po porównaniu jej z~elementem $\mu$, więc problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~$\mu$.
+Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
+
+Ostatecznie dostajemy, że drugą najmniejszą spośród $n$ liczb można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
+
+\exercise %9.1-2
+Zadanie rozwiążemy prostszą metodą, niż sugeruje nam to wskazówka.
+
+Jeśli $n$ jest parzyste, to zgodnie z~podaną w~Podręczniku informacją, wykonywanych jest $3n/2-2$ porównań.
+Ale dla parzystego $n$ zachodzi $3n/2=\lceil3n/2\rceil$, więc wzór na liczbę potrzebnych porównań przyjmuje postać $\lceil3n/2\rceil-2$.
+Niech teraz $n$ będzie liczbą nieparzystą, czyli $n=2k+1$ dla pewnego całkowitego $k$.
+Chcemy wykazać, że koniecznych jest $\lceil3n/2\rceil-2$ porównań, czyli $\lceil3k+3/2\rceil-2=3k+2-2=3k$.
+Ale wynik ten zgadza się z~opisanym w~Podręczniku dolnym oszacowaniem na liczbę porównań dla nieparzystego $n$, bo $3\lfloor n/2\rfloor=3\lfloor k+1/2\rfloor=3k$.

@@ -1,0 +1,52 @@
+\problem{Sortowanie względem średnich} %8-5
+
+\subproblem %8-5(a)
+Zgodnie z~definicją tablica $A[1\twodots n]$ jest \singledash{1}{posortowana}, jeśli dla każdego $i=1$, 2, \dots, $n-1$ zachodzi $A[i]\le A[i+1]$, a~to jest równoważne temu, że tablica $A$ jest posortowana niemalejąco.
+
+\subproblem %8-5(b)
+Jedną z~takich permutacji jest $\langle2,1,5,3,7,4,8,6,10,9\rangle$.
+
+\subproblem %8-5(c)
+Aby udowodnić ten fakt, wystarczy nierówność
+\[
+	\frac{\sum_{j=i}^{i+k-1}A[j]}{k} \le \frac{\sum_{j=i+1}^{i+k}A[j]}{k}
+\]
+pomnożyć przez $k$ i~zredukować te same składniki po obu stronach znaku nierówności.
+
+\subproblem %8-5(d)
+Jednym ze sposobów \singledash{$k$}{posortowania} tablicy $A[1\twodots n]$ jest zastosowanie algorytmu quicksort, którego rekursja zatrzymuje się dla podtablic o~rozmiarach nieprzekraczających $k$.
+Dokładniej, należy zamienić warunek z~wiersza 1 procedury \proc{Quicksort} na następujący:
+\begin{codebox}
+\li	\If $p+k-1<r$
+\end{codebox}
+Po zakończeniu działania algorytmu mamy, że $A[i]\le A[i+k]$ dla każdego $i=1$, 2, \dots, $n-k$.
+Warunek ten, na podstawie części (c), jest równoważny temu, że tablica $A$ jest \singledash{$k$}{posortowana}.
+
+W~\refExercise{7.4-5} pokazaliśmy, że quicksort po takiej modyfikacji działa w~oczekiwanym czasie $O(n\lg(n/k))$.
+Aby było to oszacowanie na czas w~przypadku pesymistycznym, musimy zagwarantować najlepszy przypadek wyboru elementów rozdzielających.
+Można to zrealizować poprzez wybieranie do tej roli mediany bieżącej podtablicy, jak to opisano w~\refExercise{9.3-3}.
+
+\subproblem %8-5(e)
+W~\singledash{$k$}{posortowanej} tablicy każdy z~ciągów postaci $\langle A[j],A[j+k],A[j+2k],\dots,A[j+m_jk]\rangle$, gdzie $j=1$, 2 \dots, $k$ i~$j+m_jk\le n$, jest uporządkowany niemalejąco i~wszystkie one zawierają łącznie $n$ elementów.
+Wystarczy więc scalić je w~jedną posortowaną tablicę, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
+
+\subproblem %8-5(f)
+Przyjmiemy dla wygody, że $n$ jest podzielne przez $k$ -- nie spowoduje to zmniejszenia ogólności naszej analizy.
+
+W~dowodzie dolnego ograniczenia czasowego tego problemu wykorzystamy model drzew decyzyjnych.
+Niech $T$ będzie drzewem decyzyjnym pewnego algorytmu \singledash{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach.
+Drzewo $T$ jest podobne do drzewa decyzyjnego algorytmu zwykłego sortowania za pomocą porównań -- każdy jego liść odpowiada pewnej permutacji tablicy wejściowej.
+Jednak liczba osiągalnych liści jest na ogół mniejsza niż w~drzewie zwykłego sortowania.
+Wynikowa tablica składa się z~$n/k$ podtablic \singledash{$k$}{elementowych}, w~których uporządkowanie elementów nie ma znaczenia.
+Osiągalnych liści w~tym drzewie jest zatem
+\[
+    \frac{n!}{(k!)^{n/k}}.
+\]
+
+Niech $h$ oznacza wysokość drzewa $T$.
+Liczba liści w~$T$ nie przekracza $2^h$, więc
+\[
+    h \ge \lg\frac{n!}{(k!)^{n/k}} = \lg(n!)-(n/k)\lg(k!) = \Omega(n\lg n),
+\]
+ponieważ traktujemy $k$ jako stałą.
+Wyznaczone oszacowanie na $h$ stanowi dolne ograniczenie na czas działania dowolnego algorytmu \singledash{$k$}{sortowania} za pomocą porównań tablicy o~$n$ elementach.

@@ -1,0 +1,96 @@
+\subchapter{Losowo skonstruowane drzewa wyszukiwań binarnych}
+
+\exercise %12.4-1
+Wzór udowodnimy przez indukcję względem $n$.
+Jeśli $n=1$, to po obu stronach znaku równości jest 1.
+Załóżmy teraz, że $n>1$ i~że spełnione jest założenie indukcyjne
+\[
+	\sum_{i=0}^{n-2}\binom{i+3}{3} = \binom{n+2}{4}.
+\]
+Mamy
+\[
+	\sum_{i=0}^{n-1}\binom{i+3}{3} = \sum_{i=0}^{n-2}\binom{i+3}{3}+\binom{n+2}{3} = \binom{n+2}{4}+\binom{n+2}{3} = \binom{n+3}{4},
+\]
+przy czym w~ostatniej równości wykorzystaliśmy \refExercise{C.1-7}.
+
+\exercise %12.4-2
+Rozważmy drzewo binarne w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów, natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce odchodzącej od tegoż pełnego drzewa w~dół na coraz to niższe poziomy.
+Drzewo takie ma wysokość
+\[
+	\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)+\sqrt{n\lg n} = \Theta\bigl(\!\sqrt{n\lg n}\bigr) = \omega(\lg n).
+\]
+
+O~tym, że średnia głębokość węzła w~tym drzewie wynosi $\Theta(\lg n)$, przekonamy się, wyprowadzając najpierw górne, a~potem dolne oszacowanie tej wartości.
+W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość każdego z~$n-\sqrt{n\lg n}$ węzłów z~części stanowiącej pełne drzewo binarne oraz $O\bigl(\lg n+\sqrt{n\lg n}\bigr)$ jako ograniczenia na głębokość każdego z~$\sqrt{n\lg n}$ węzłów ze ścieżki odchodzącej od pełnego drzewa.
+Średnia głębokość węzła wynosi więc co najwyżej
+\[
+	\frac{1}{n}\cdot O\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n+\sqrt{n\lg n}\,\bigl(\lg n+\sqrt{n\lg n}\bigr)\bigr) = \frac{1}{n}\cdot O(n\lg n) = O(\lg n).
+\]
+Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$\Theta\bigl(n-\sqrt{n\lg n}\bigr)$ węzłów, z~których każdy ma głębokość $\Theta(\lg n)$.
+Stąd średnia głębokość węzła ograniczona jest z~dołu przez
+\[
+	\frac{1}{n}\cdot\Theta\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n\bigr) = \frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
+\]
+
+W~drugiej części zadania udowodnimy, że wysokość drzewa binarnego o~$n$ węzłach i~średniej głębokości węzła $\Theta(\lg n)$ wynosi $O\bigl(\!\sqrt{n\lg n}\bigr)$.
+Niech dane będzie drzewo binarne o~$n$ węzłach i~wysokości $h$ ze średnią głębokością węzła $\Theta(\lg n)$.
+Istnieje więc ścieżka od korzenia w~dół tego drzewa, na której głębokościami węzłów są kolejno 0, 1, \dots, $h$.
+Oznaczmy przez $U$ zbiór węzłów na tej ścieżce, przez $U'$ zbiór wszystkich pozostałych węzłów drzewa, a~przez $d(x)$ głębokość węzła $x$.
+Wówczas średnia głębokość węzła w~tym drzewie wynosi
+\[
+	\frac{1}{n}\biggl(\sum_{x\in U}d(x)+\sum_{x\in U'}d(x)\biggr) \ge \frac{1}{n}\sum_{x\in U}d(x) = \frac{1}{n}\sum_{i=0}^hi = \frac{1}{n}\cdot\Theta(h^2).
+\]
+Jeśli byłoby $h=\omega\bigl(\!\sqrt{n\lg n}\bigr)$, to wtedy mielibyśmy
+\[
+	\frac{1}{n}\cdot\Theta(h^2) = \frac{1}{n}\cdot\omega(n\lg n) = \omega(\lg n),
+\]
+co stoi w~sprzeczności z~założeniem, że średnią głębokością węzła jest $\Theta(\lg n)$.
+A~zatem wysokość drzewa musi być ograniczona przez $O\bigl(\!\sqrt{n\lg n}\bigr)$.
+
+\exercise %12.4-3
+Istnieje 5 różnych drzew BST o~$n=3$ węzłach, podczas gdy jest $3!=6$ permutacji trójelementowych.
+Jest więc jasne, że któreś z~tych drzew można zbudować z~więcej niż jednej permutacji.
+Rys.~\ref{fig:12.4-3} ilustruje każde drzewo, podając permutacje, z~których one powstają.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_12.4-3}
+	\end{center}
+	\caption{Drzewa BST uzyskane z~permutacji {\sffamily\bfseries(a)} $\langle1,2,3\rangle$,
+{\sffamily\bfseries(b)} $\langle1,3,2\rangle$,
+{\sffamily\bfseries(c)} $\langle2,1,3\rangle$ oraz $\langle2,3,1\rangle$, {\sffamily\bfseries(d)} $\langle3,1,2\rangle$, {\sffamily\bfseries(e)} $\langle3,2,1\rangle$.} \label{fig:12.4-3}
+\end{figure}
+
+\exercise %12.4-4
+Udowodnimy silniejsze twierdzenie, że każda funkcja $f(x)=c^x$, gdzie $c$ jest stałą dodatnią, jest wypukła.
+Z~definicji wypukłości funkcji z~dodatku C musimy pokazać, że dla każdych $x$, $y$ i~dla każdego $0\le\lambda\le1$ prawdziwa jest nierówność
+\[
+	c^{\lambda x+(1-\lambda)y} \le \lambda c^x+(1-\lambda)c^y.
+\]
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych liczb rzeczywistych\/ $a$,\/ $b$ i~dla dowolnej dodatniej liczby rzeczywistej\/ $c$ zachodzi
+\[
+	c^a \ge c^b+(a-b)c^b\ln c.
+\]
+}
+\begin{proof}
+Na podstawie wzoru (3.11), $e^x\ge1+x$ dla dowolnego $x$.
+Jeśli przyjmiemy $x=r\ln c$, to $e^x=e^{r\ln c}=(e^{\ln c})^r=c^r$ i~nierówność sprowadza się do postaci $c^r\ge1+r\ln c$.
+Po podstawieniu $r=a-b$ dostajemy $c^{a-b}\ge1+(a-b)\ln c$ i~aby otrzymać żądaną nierówność, wystarczy pomnożyć obie strony przez $c^b$.
+\end{proof}
+
+Niech $z=\lambda x+(1-\lambda)y$.
+Skorzystajmy z~powyższego lematu dwukrotnie, najpierw podstawiając $a=x$ i~$b=z$ i~otrzymując nierówność $c^x\ge c^z+(x-z)c^z\ln c$, a~następnie przyjmując $a=y$ i~$b=z$, skąd dostajemy $c^y\ge c^z+(y-z)c^z\ln c$.
+Pierwszą otrzymaną nierówność pomnożymy przez $\lambda$, a~drugą przez $1-\lambda$, a~następnie dodamy do siebie:
+\begin{align*}
+	\lambda c^x+(1-\lambda)c^y &\ge \lambda(c^z+(x-z)c^z\ln c)+(1-\lambda)(c^z+(y-z)c^z\ln c) \\
+	&= \lambda c^z+\lambda xc^z\ln c-\lambda zc^z\ln c+(1-\lambda)c^z+(1-\lambda)yc^z\ln c-(1-\lambda)zc^z\ln c \\
+	&= (\lambda+(1-\lambda))c^z+(\lambda x+(1-\lambda)y)c^z\ln c-(\lambda+(1-\lambda))zc^z\ln c \\
+	&= c^z+zc^z\ln c-zc^z\ln c \\
+	&= c^z \\
+	&= c^{\lambda x+(1-\lambda)y}.
+\end{align*}
+Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególności $f(x)=2^x$.
+
+\exercise %12.4-5
+\note{Wymagane jest założenie, że elementy tablicy wejściowej algorytmu \proc{Randomized-Quicksort} są parami różne.}

@@ -1,0 +1,61 @@
+\subchapter{Funkcje}
+
+\exercise %B.3-1
+\subexercise
+Zbiór wartości funkcji $f\colon A\to B$, czyli obraz jej dziedziny, jest zdefiniowany następująco:
+\[
+	f(A) = \bigl\{\,b\in B:b=f(a)\text{ dla pewnego $a\in A$}\,\bigr\}.
+\]
+Z~tego, że $f$ jest injekcją, mamy, że $|A|=|f(A)|$.
+Z~kolei $|f(A)|\le|B|$, bo w~$B$ mogą być takie elementy $b$, dla których nie istnieje $a\in A$ takie, że $b=f(a)$.
+Stąd $|A|\le|B|$.
+
+\subexercise
+Dla surjekcji $f\colon A\to B$ zachodzi $f(A)=B$, więc $|f(A)|=|B|$.
+Dla pewnych elementów $a_1$, $a_2\in A$ może zachodzić $f(a_1)=f(a_2)$, mamy zatem $|A|\ge|f(A)|$, a~stąd $|A|\ge|B|$.
+
+\bigskip
+\noindent Z~powyższych faktów wynika, że jeśli $f\colon A\to B$ jest bijekcją, to $|A|=|B|$.
+
+\exercise %B.3-2
+Funkcja $f(x)=x+1$ o~dziedzinie i~przeciwdziedzinie $\mathbb{N}$ nie jest bijekcją, gdyż dla żadnego $x\in\mathbb{N}$ nie zachodzi $f(x)=0$.
+Jeśli zamiast $\mathbb{N}$ rozważymy $\mathbb{Z}$, to $f$ będzie bijekcją -- każda liczba całkowita jest wartością funkcji $f$ dla pewnej jednoznacznie wyznaczonej liczby całkowitej.
+
+\exercise %B.3-3
+Niech $R$ będzie relacją binarną w~zbiorze $A$.
+Relację $R^{-1}$ w~zbiorze $A$ nazywamy relacją odwrotną do $R$, jeżeli dla dowolnych $a$, $b\in A$, $a\,R^{-1}\,b$ wtedy i~tylko wtedy, gdy $b\,R\,a$.
+Łatwo sprawdzić, że jeśli $R$ jest bijekcją, to $R^{-1}$ jest jej funkcją odwrotną.
+
+\exercise %B.3-4
+Ponieważ każda bijekcja posiada funkcję odwrotną, która także jest bijekcją, to znajdziemy funkcję $F\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}$ będącą odwrotnością szukanego odwzorowania.
+Wyznaczenie $F$ jest równoważne znalezieniu sposobu ponumerowania kolejnymi liczbami całkowitymi każdej pary o~elementach całkowitych tak, aby każda liczba całkowita była wykorzystana jako numer pewnej pary.
+Opiszemy teraz konstrukcję jednej z~takich funkcji.
+
+Dokonajmy pewnego uproszczenia -- zamiast numerować pary liczbami całkowitymi, ograniczymy się do liczb naturalnych.
+Niech $g\colon\mathbb{Z}\times\mathbb{Z}\to\mathbb{N}$ oraz $h\colon\mathbb{N}\to\mathbb{Z}$ będą takimi bijekcjami, że $F=h\circ g$.
+Łatwo wykazać, że $h(n)=(-1)^n\lceil n/2\rceil$ jest bijekcją, pozostaje więc znaleźć funkcję $g$.
+
+Rozważmy numerację par o~elementach całkowitych przedstawioną na rys.\ \ref{fig:B.3-4} w~formie spirali.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_b.3-4}
+	\end{center}
+	\caption{Bijekcja ze zbioru $\mathbb{Z}\times\mathbb{Z}$ w~zbiór $\mathbb{N}$.
+	Poszczególne liczby naturalne oznaczają wartości tej bijekcji dla punktów o~współrzędnych całkowitych w~kartezjańskim układzie współrzędnych.} \label{fig:B.3-4}
+\end{figure}
+Ponieważ każdej takiej parze $\langle x,y\rangle$ przypisywana jest unikalna liczba naturalna, to możemy tę spiralę potraktować jak opis funkcji $g$.
+Przyjmijmy wpierw oznaczenia: $d=\max(|x|,|y|)$ oraz $D=(2d-1)^2-1$.
+Nieformalnie liczby te oznaczają, odpowiednio, numer ,,okrążenia'' punktu $\langle0,0\rangle$ pokonywanego przez spiralę w~momencie przechodzenia przez punkt $\langle x,y\rangle$ oraz największą wartość przyjmowaną przez spiralę podczas pokonywania poprzedniego ,,okrążenia''.
+Można przyjąć następującą definicję funkcji $g$:
+\[
+	g(x,y) =
+	\begin{cases}
+		0, & \text{jeśli $d=|x|=|y|=0$}, \\
+		D+d+y, & \text{jeśli $d=x\ne|y|$}, \\
+		D+3d-x, & \text{jeśli $d=y\ne0$}, \\
+		D+5d-y, & \text{jeśli $d=-x\ne|y|$}, \\
+		D+7d+x, & \text{jeśli $d=-y\ne0$}.
+	\end{cases}
+\]
+
+Zaprezentowana tutaj spirala przypomina znaną w~literaturze \textbf{spiralę Ulama}, opisaną w~\cite{ulamspiral} i~wykorzystywaną do znajdowania własności liczb pierwszych.

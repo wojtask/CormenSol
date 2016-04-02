@@ -1,0 +1,72 @@
+\subchapter{Sortowanie przez wstawianie}
+
+\exercise %2.1-1
+Rys.\ \ref{fig:2.1-1} przedstawia działanie algorytmu \proc{Insertion-Sort} dla tablicy $A$.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{fig_2.1-1}
+	\end{center}
+	\caption{Działanie algorytmu \proc{Insertion-Sort} dla tablicy $A=\langle31,41,59,26,41,58\rangle$.
+{\sffamily\bfseries\doubledash{(a)}{(e)}} Iteracje pętli \kw{for} w~wierszach \doubledash{1}{8}.
+{\sffamily\bfseries(f)} Wynikowa posortowana tablica.} \label{fig:2.1-1}
+\end{figure}
+
+\exercise %2.1-2
+Aby sortować w~porządku nierosnącym, wystarczy w~warunku pętli \kw{while} w~linii 5 algorytmu \proc{Insertion-Sort} zmienić znak drugiej nierówności na przeciwny:
+\begin{codebox}
+\setcounter{codelinenumber}{4}
+\li	\While $i>0$ i~$A[i]<\id{key}$
+\end{codebox}
+
+\exercise %2.1-3
+Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
+\begin{codebox}
+\Procname{$\proc{Linear-Search}(A,v)$}
+\li	$i\gets1$
+\li	\While $i\le\attrib{A}{length}$ i~$A[i]\ne v$ \label{li:linear-search-while-begin}
+\li		\Do $i\gets i+1$
+		\End \label{li:linear-search-while-end}
+\li	\If $i\le\attrib{A}{length}$
+\li		\Then \Return $i$
+		\End
+\li	\Return \const{nil}
+\end{codebox}
+
+Udowodnimy dla powyższej procedury niezmiennik pętli:
+\begin{quote}
+Na początku każdej iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:linear-search-while-begin}}{\ref{li:linear-search-while-end}} fragment tablicy $A[1\twodots i-1]$ nie zawiera elementu $v$.
+\end{quote}
+\begin{description}
+	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc fragment $A[1\twodots i-1]$ jest pusty.
+	\item[Utrzymanie:] Załóżmy, że podtablica $A[1\twodots i-1]$ nie zawiera elementu $v$.
+W~warunku pętli \kw{while} sprawdzamy, czy $A[i]$ jest różne od $v$.
+Jeśli tak, to $i$ jest zwiększane o~1, więc niezmiennik jest zachowany.
+W~przeciwnym przypadku (odnaleziono $v$) przerywamy pętlę.
+	\item[Zakończenie:] Pętla kończy swe działanie, kiedy zostanie odnaleziony indeks $i$ taki, że $A[i]=v$ albo $i=\attrib{A}{length}+1$.
+Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę, nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
+\end{description}
+
+\exercise %2.1-4
+W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które są reprezentowane przez tablice bitów w~kolejności od najmniej do najbardziej znaczącego.
+
+\bigskip
+\noindent\textbf{Dane wejściowe:} \singledash{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \singledash{$n$}{bitowych} liczb całkowitych nieujemnych $a$ i~$b$.\\
+\textbf{Wynik:} \singledash{$(n+1)$}{elementowa} tablica $C$ zawierająca reprezentację binarną \singledash{$(n+1)$}{bitowej} liczby całkowitej $c$ takiej, że $c=a+b$.
+
+\begin{codebox}
+\Procname{$\proc{Binary-Add}(A,B)$}
+\li	$n\gets\attrib{A}{length}$
+\li	\For $i\gets1$ \To $n+1$
+\li		\Do $C[i]\gets0$
+		\End
+\li	\For $i\gets1$ \To $n$ \label{li:binary-add-for-begin}
+\li		\Do
+			$\id{sum}\gets A[i]+B[i]+C[i]$
+\li			$C[i]\gets\id{sum}\bmod2$
+\li			$C[i+1]\gets\lfloor\id{sum}/2\rfloor$
+		\End \label{li:binary-add-for-end}
+\li	\Return $C$
+\end{codebox}
+
+Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wierszach \doubledash{\ref{li:binary-add-for-begin}}{\ref{li:binary-add-for-end}} procedura dodaje poszczególne bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego.
+W~rzeczywistości przeprowadzane jest dodawanie modulo 2, a~bit przeniesienia jest zapamiętywany na kolejnej pozycji w~tablicy wynikowej i~uczestniczy w~kolejnej iteracji pętli (zakładając, że obecna iteracja nie jest ostatnią).

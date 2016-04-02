@@ -1,0 +1,70 @@
+\problem{Grafy znajomości} %B-2
+
+\subproblem %B-2(a)
+\textsf{\textbf{Twierdzenie.}} \textit{W~grafie nieskierowanym\/ $G=\langle V,E\rangle$, w~którym\/ $|V|\ge2$, istnieją dwa wierzchołki o~tym samym stopniu.}
+\begin{proof}
+W~grafie $G$ o~$n\ge2$ wierzchołkach możliwymi stopniami wierzchołków są liczby 0, 1, \dots, $n-1$.
+Jeśli jednak pewien wierzchołek ma stopień równy 0, to żaden z~pozostałych nie ma stopnia $n-1$.
+Oznacza to, że jest $n$ wierzchołków, ale tylko co najwyżej $n-1$ liczb mogących jednocześnie być ich stopniami w~$G$, zatem pewne dwa wierzchołki mają równe stopnie.
+\end{proof}
+
+\subproblem %B-2(b)
+\textsf{\textbf{Twierdzenie.}} \textit{Graf pełny posiadający\/ $3$ wierzchołki jest podgrafem dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$, w~którym\/ $|V|=6$, lub jego dopełnienia\/ $\overline{G}$.}
+\begin{proof}
+Wybierzmy pewne $v\in V$.
+Istnieją wtedy w~$V$ trzy inne wierzchołki $v_1$, $v_2$, $v_3$ wszystkie sąsiednie z~$v$ albo wszystkie niesąsiednie z~$v$.
+Ponieważ przypadki te są symetryczne, rozważmy pierwszy z~nich.
+Jeśli nie istnieje wśród $v_1$, $v_2$, $v_3$ para wierzchołków sąsiednich, to twierdzenie zachodzi.
+Załóżmy więc, że istnieje krawędź między pewnymi dwoma.
+Wtedy jednak tworzą one wraz z~$v$ graf pełny, a~więc również w~tym przypadku twierdzenie jest prawdziwe.
+\end{proof}
+
+Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m,n)$ \cite{ramseynumber}; powyższe twierdzenie pokazuje, że $R(3,3)\le6$.
+
+\subproblem %B-2(c)
+\textsf{\textbf{Twierdzenie.}} \textit{Zbiór wierzchołków dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$ można podzielić na dwa rozłączne zbiory tak, aby dla dowolnego wierzchołka\/ $v\in V$ co najmniej połowa jego sąsiadów nie należała do zbioru, do którego należy\/ $v$.}
+\begin{proof}
+Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą liczbie jego sąsiadów spoza jego zbioru pomniejszoną o~liczbę sąsiadów ze zbioru, do którego $v$ należy.
+Dowód sprowadza się do pokazania, że istnieje taki podział zbioru wierzchołków, że $d(v)\ge0$ dla każdego $v\in V$\!.
+
+Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$.
+Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$.
+Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie.
+Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny.
+Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2.
+W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$.
+Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach.
+Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
+\end{proof}
+
+\subproblem %B-2(d)
+\textsf{\textbf{Twierdzenie} (Dirac)\textbf{.}} \textit{Jeśli dla każdego wierzchołka\/ $v$ grafu nieskierowanego\/ $G=\langle V,E\rangle$, w~którym\/ $|V|\ge3$, zachodzi\/ $\deg(v)\ge|V|/2$, to\/ $G$ jest hamiltonowski.}
+
+\medskip
+\noindent Zanim zajmiemy się dowodem twierdzenia, udowodnimy następujący lemat.
+
+\medskip
+\noindent\textsf{\textbf{Lemat} (Ore)\textbf{.}} \textit{Jeśli w~grafie nieskierowanym\/ $G=\langle V,E\rangle$, gdzie\/ $|V|\ge3$, dla każdej pary niesąsiednich wierzchołków\/ $u$ i~\/$v$ zachodzi nierówność\/ $\deg(u)+\deg(v)\ge|V|$, to\/ $G$ jest hamiltonowski.}
+\begin{proof}
+Oznaczmy przez $n$ liczbę wierzchołków grafu $G$.
+Przypuśćmy, że lemat jest fałszywy, czyli że dla pewnego $n$ istnieje kontrprzykład -- graf $G=\langle V,E\rangle$, w~którym $|V|=n$ i~który spełnia założenie lematu, ale nie jest hamiltonowski.
+Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne.
+Wówczas $G$ musi mieć ścieżkę Hamiltona $\langle v_1,v_2,\dots,v_n\rangle$ -- w~przeciwnym przypadku moglibyśmy uzupełnić go o~pewne brakujące krawędzie, nie naruszając warunku z~założenia lematu i~otrzymując w~wyniku graf o~więcej niż $|E|$ krawędziach.
+Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$.
+Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
+
+Można teraz zdefiniować podzbiory $S_1$ i~$S_n$ zbioru $\{2,3,\dots,n\}$ takie, że
+\[
+	S_1 = \bigl\{\,i:\{v_1,v_i\}\in E\,\bigr\} \quad\text{oraz}\quad S_n = \bigl\{\,i:\{v_{i-1},v_n\}\in E\,\bigr\}.
+\]
+Wtedy $|S_1|=\deg(v_1)$ i~$|S_n|=\deg(v_n)$.
+Ponieważ $|S_1|+|S_n|\ge n$ i~zbiór $S_1\cup S_n$ ma co najwyżej $n-1$ elementów, to zbiór $S_1\cap S_n$ musi być niepusty.
+Istnieje więc $i$, dla którego istnieją krawędzie $\{v_1,v_i\}$ oraz $\{v_{i-1},v_n\}$.
+Stąd ścieżka $\langle v_1,\dots,v_{i-1},v_n,v_{n-1},\dots,v_i,v_1\rangle$ jest cyklem Hamiltona w~grafie $G$.
+Sprzeczność -- lemat jest prawdziwy.
+\end{proof}
+
+Można teraz udowodnić główne twierdzenie.
+\begin{proof}
+Jeśli dla każdego $v\in V$ zachodzi $\deg(v)\ge|V|/2$, to $\deg(u)+\deg(v)\ge|V|$ dla każdych $u$, $v\in V$ niezależnie od tego, czy są sąsiednie, czy nie, a~więc $G$ spełnia założenia powyższego lematu, czyli jest hamiltonowski.
+\end{proof}

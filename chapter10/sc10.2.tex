@@ -1,0 +1,228 @@
+\subchapter{Listy}
+
+\exercise %10.2-1
+Operację \proc{Insert}, dodającą nowy element $x$ na początek listy jednokierunkowej $L$, można zaimplementować w~czasie stałym -- wystarczy ustawić pole \attrib{x}{next} na głowę listy $L$ (albo na \const{nil}, jeśli lista $L$ jest pusta) i~uaktualnić wskaźnik \attrib{L}{head}.
+Operacja \proc{Delete}, czyli usuwanie z~listy jednokierunkowej elementu wskazywanego przez $x$, wymaga jednak czasu wyższego niż stały.
+Jest tak dlatego, że jedynym sposobem na dotarcie do elementu poprzedzającego $x$ na liście $L$ w~celu aktualizacji jego pola \id{next}, jest przejście tej listy od głowy aż do tegoż elementu.
+Czynność ta w~najgorszym przypadku zajmuje czas proporcjonalny do liczby elementów listy $L$.
+
+Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzystać w~późniejszych zadaniach.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Insert}(L,x)$}
+\li	$\attrib{x}{next}\gets\attrib{L}{head}$
+\li	$\attrib{L}{head}\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Delete}(L,x)$}
+\li	\If $x=\attrib{L}{head}$
+\li		\Then $\attrib{L}{head}\gets\attrib{\attrib{L}{head}}{next}$
+\li		\Else
+			$y\gets\attrib{L}{head}$
+\li			\While $\attrib{y}{next}\ne x$
+\li				\Do $y\gets\attrib{y}{next}$
+				\End
+\li			$\attrib{y}{next}\gets\attrib{x}{next}$
+		\End
+\end{codebox}
+
+\exercise %10.2-2
+Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie.
+Dzięki takiemu rozwiązaniu operacje dodawania i~usuwania elementów będą działać w~czasie $\Theta(1)$.
+Sprawdzenie pustości stosu sprowadza się do sprawdzenia pustości listy $L$.
+Pseudokody operacji \proc{Push} i~\proc{Pop} prezentujemy poniżej.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Push}(L,k)$}
+\li	$\attrib{x}{key}\gets k$
+\li $\proc{Singly-Linked-List-Insert}(L,x)$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Pop}(L)$}
+\li	\If $\attrib{L}{head}=\const{nil}$
+\li		\Then \Error ,,niedomiar''
+		\End
+\li	$x\gets\attrib{L}{head}$
+\li	$\attrib{L}{head}\gets\attrib{x}{next}$
+\li	\Return \attrib{x}{key}
+\end{codebox}
+
+\exercise %10.2-3
+Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolejności od głowy kolejki do jej ogona.
+Aby jednak operacja dodawania była wykonalna w~czasie $\Theta(1)$, wymagane jest związanie z~listą $L$ dodatkowego atrybutu \attrib{L}{tail}, który będzie wskazywał na ogon listy $L$ albo na \const{nil}, jeżeli lista $L$ jest pusta.
+Oczywiście testowanie pustości kolejki polega na sprawdzeniu, czy pusta jest lista $L$.
+Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Enqueue}(L,k)$}
+\li	$\attrib{x}{next}\gets\const{nil}$
+\li	$\attrib{x}{key}\gets k$
+\li	\If $\attrib{L}{tail}\ne\const{nil}$
+\li		\Then $\attrib{\attrib{L}{tail}}{next}\gets x$
+\li		\Else $\attrib{L}{head}\gets x$
+		\End
+\li	$\attrib{L}{tail}\gets x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Dequeue}(L)$}
+\li	\If $\attrib{L}{head}=\const{nil}$
+\li		\Then \Error ,,niedomiar''
+		\End
+\li	$x\gets\attrib{L}{head}$
+\li	$\attrib{L}{head}\gets\attrib{x}{next}$
+\li	\If $\attrib{L}{tail}=x$
+\li		\Then $\attrib{L}{tail}\gets\const{nil}$
+		\End
+\li	\Return \attrib{x}{key}
+\end{codebox}
+
+\exercise %10.2-4
+Zauważmy, że pole \attrib{\attrib{L}{nil}}{key} jest niewykorzystywane w~implementacji listy z~wartownikami.
+Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$.
+Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej procedury zatrzyma się na elemencie \attrib{L}{nil}, po czym zostanie on zwrócony.
+
+\exercise %10.2-5
+Operacja wstawiania nowego elementu na jednokierunkową listę cykliczną $L$ umieszcza go jako następnik głowy listy $L$.
+Podczas operacji usuwania znajdowany jest poprzednik $y$ usuwanego elementu $x$, po czym \attrib{y}{next} zostaje uaktualnione.
+Jeśli $x$ jest głową listy, to atrybut \attrib{L}{head} zostaje ustawiony na następnik $x$ albo na \const{nil}, w~przypadku gdy $x$ stanowi jedyny element listy $L$.
+Wreszcie operacja wyszukiwania przechodzi całą listę $L$, począwszy od jej głowy, zatrzymując się w~momencie odnalezienia elementu o~szukanym kluczu bądź w~chwili ponownego dotarcia do głowy listy $L$.
+
+Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
+\begin{codebox}
+\Procname{$\proc{Circular-List-Insert}(L,x)$}
+\li	\If $\attrib{L}{head}=\const{nil}$
+\li		\Then $\attrib{L}{head}\gets\attrib{x}{next}\gets x$
+\li		\Else
+			$\attrib{x}{next}\gets\attrib{\attrib{L}{head}}{next}$
+\li			$\attrib{\attrib{L}{head}}{next}\gets x$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Circular-List-Delete}(L,x)$}
+\li	$y\gets\attrib{L}{head}$
+\li	\While $\attrib{y}{next}\ne x$
+\li		\Do $y\gets\attrib{y}{next}$
+		\End
+\li	$\attrib{y}{next}\gets\attrib{x}{next}$
+\li	\If $\attrib{L}{head}=x$
+\li		\Then
+			\If $\attrib{x}{next}=x$
+\li				\Then $\attrib{L}{head}\gets\const{nil}$
+\li				\Else $\attrib{L}{head}\gets\attrib{x}{next}$
+				\End
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Circular-List-Search}(L,k)$}
+\li	\If $\attrib{L}{head}=\const{nil}$
+\li		\Then \Return \const{nil}
+		\End
+\li	\If $\attrib{\attrib{L}{head}}{key}=k$
+\li		\Then \Return \attrib{L}{head}
+		\End
+\li	$x\gets\attrib{\attrib{L}{head}}{next}$
+\li	\While $x\ne\attrib{L}{head}$
+\li		\Do
+			\If $\attrib{x}{key}=k$
+\li				\Then \Return $x$
+				\End
+\li			$x\gets\attrib{x}{next}$
+		\End
+\li	\Return \const{nil}
+\end{codebox}
+
+Łatwo sprawdzić, że procedura implementująca operację \proc{Insert} działa w~czasie stałym, natomiast pozostałe dwie procedury dla listy o~$n$ elementach w~pesymistycznym przypadku potrzebują czasu $\Theta(n)$.
+
+\exercise %10.2-6
+Zbiory można zaimplementować jako jednokierunkowe listy cykliczne.
+Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy.
+Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$.
+Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej.
+Oczywiście działania te są wykonywane tylko wtedy, gdy obie listy są niepuste.
+Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolny jej element) reprezentującą zbiór $S_1\cup S_2$.
+
+\exercise %10.2-7
+W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy umieszczać kolejno usuwane elementy z~głowy listy $L$.
+Łatwo zauważyć, że pod koniec operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$.
+Nadanie atrybutowi \attrib{L}{head} wartości \attrib{L'}{head} wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
+\begin{codebox}
+\Procname{$\proc{Singly-Linked-List-Reverse}(L)$}
+\li	$\attrib{L'}{head}\gets\const{nil}$
+\li	\While $\attrib{L}{head}\ne\const{nil}$
+\li		\Do
+			$x\gets\attrib{L}{head}$
+\li			$\proc{Singly-Linked-List-Delete}(L,\attrib{L}{head})$
+\li			$\proc{Singly-Linked-List-Insert}(L',x)$
+		\End
+\li	$\attrib{L}{head}\gets\attrib{L'}{head}$
+\end{codebox}
+
+Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zostały przedstawione w~\refExercise{10.2-1}.
+Ich wywołania w~powyższym algorytmie zajmują czas stały, stąd czasem działania algorytmu jest $\Theta(n)$.
+
+\exercise %10.2-8
+Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników.
+Załóżmy, że znamy adres elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$.
+Niech $z$ będzie następnikiem $x$ na tej liście.
+Wówczas $\attrib{x}{np}=z\func{xor}y$, zatem na podstawie własności operacji \func{xor}, aby dostać się do $z$, wystarczy obliczyć wartość
+\[
+    z = z\func{xor}0 = z\func{xor}{}(y\func{xor}y) = (z\func{xor}y)\func{xor}y = \attrib{x}{np}\func{xor}y.
+\]
+Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\attrib{x}{np}\func{xor}z$.
+Zauważmy, że jeśli element $x$ jest ogonem listy, to $\attrib{x}{np}=\const{nil}\func{xor}y=0\func{xor}y=y$, skąd mamy $z=\attrib{x}{np}\func{xor}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\attrib{x}{np}=z\func{xor}0=z$ wynika $y=\const{nil}$.
+Podobnie jak w~zwykłych listach przyjmujemy, że atrybut \attrib{L}{head} przechowuje wskaźnik do głowy listy $L$.
+Ponadto z~listą związujemy atrybut \attrib{L}{tail}, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
+
+Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy.
+\begin{codebox}
+\Procname{$\proc{Xor-Linked-List-Search}(L,k)$}
+\li	$x\gets\attrib{L}{head}$
+\li	$y\gets\const{nil}$
+\li	\While $x\ne\const{nil}$ i~$\attrib{x}{key}\ne k$
+\li		\Do
+			$z\gets\attrib{x}{np}\func{xor}y$
+\li			$y\gets x$
+\li			$x\gets z$
+		\End
+\li	\Return $x$
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Xor-Linked-List-Insert}(L,x)$}
+\li	$\attrib{x}{np}\gets\attrib{L}{head}$
+\li	\If $\attrib{L}{head}\ne\const{nil}$
+\li		\Then $\attrib{\attrib{L}{head}}{np}\gets\attrib{\attrib{L}{head}}{np}\func{xor}x$
+		\End
+\li	$\attrib{L}{head}\gets x$
+\li	\If $\attrib{L}{tail}=\const{nil}$
+\li		\Then $\attrib{L}{tail}\gets x$
+		\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Xor-Linked-List-Delete}(L,x)$}
+\li	$x'\gets\attrib{L}{head}$
+\li	$y\gets\const{nil}$
+\li	\While $x'\ne x$
+\li		\Do
+			$z\gets\attrib{x'}{np}\func{xor}y$
+\li			$y\gets x'$
+\li			$x'\gets z$
+		\End
+\li	$z\gets\attrib{x}{np}\func{xor}y$
+\li	\If $x=\attrib{L}{head}$
+\li		\Then $\attrib{L}{head}\gets z$
+\li		\Else $\attrib{y}{np}\gets\attrib{y}{np}\func{xor}x\func{xor}z$
+		\End
+\li	\If $x=\attrib{L}{tail}$
+\li		\Then $\attrib{L}{tail}\gets y$
+\li		\Else $\attrib{z}{np}\gets\attrib{z}{np}\func{xor}x\func{xor}y$
+		\End
+\end{codebox}
+
+Procedury \proc{Xor-Linked-List-Search} i~\proc{Xor-Linked-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$.
+W~procedurze \proc{Xor-Linked-List-Delete} należy odszukać na liście poprzednika i~następnika elementu $x$, aby uaktualnić ich pola \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$.
+Odwracanie kolejności elementów -- zarówno w~zwykłej liście dwukierunkowej, jak i~w~tak zmodyfikowanej liście -- jest możliwe w~czasie $\Theta(1)$.
+W~tym celu wystarczy zamienić ze sobą wartości atrybutów \attrib{L}{head} i~\attrib{L}{tail}.

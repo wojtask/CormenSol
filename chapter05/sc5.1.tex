@@ -1,0 +1,50 @@
+\subchapter{Problem zatrudnienia sekretarki}
+
+\exercise %5.1-1
+Niech $\preceq$ będzie relacją określoną na zbiorze rang kandydatek, za pomocą której rozstrzygamy, która kandydatka z~dwóch testowanych jest lepsza.
+Na wejściu procedury \proc{Hire-Assistant} może pojawić się każda permutacja kandydatek, więc jesteśmy w~stanie rozstrzygać o~każdej parze kandydatek.
+Pozostaje zatem udowodnić, że $\preceq$ jest porządkiem częściowym.
+
+Możemy bezpiecznie założyć, że relacja $\preceq$ jest zwrotna, jako że nie testujemy żadnej kandydatki z~nią samą.
+Jeśli $\preceq$ nie byłoby antysymetryczne, to w~zależności od kolejności pojawienia się na wejściu procedury pewnych dwóch kandydatek, za lepszą mogłaby zostać uznana którakolwiek z~tej pary, co przeczyłoby założeniu.
+Podobnie można wykazać, że $\preceq$ jest przechodnie, bowiem w~przeciwnym przypadku dla pewnych trzech kandydatek, o~tym, która z~nich jest najlepsza, decydowałaby ich permutacja wejściowa.
+
+\exercise %5.1-2
+Poniższy algorytm implementuje generator liczb losowych z~zakresu $a\twodots b$, korzystając jedynie z~pomocniczych wywołań $\proc{Random}(0,1)$.
+\begin{codebox}
+\Procname{$\proc{Random}(a,b)$}
+\li	\While $a<b$
+\li		\Do
+			$\id{mid}\gets\lfloor(a+b)/2\rfloor$
+\li			\If $\proc{Random}(0,1)=0$
+\li				\Then $a\gets\id{mid}+1$
+\li				\Else $b\gets\id{mid}$
+				\End
+		\End
+\li	\Return $a$
+\end{codebox}
+
+Niech $n=b-a+1$ będzie długością zakresu generowania.
+W~każdym wywołaniu rekurencyjnym odrzucana jest połowa zakresu z~dokładnością do jednego elementu.
+Działanie procedury jest więc analogiczne do pesymistycznego przypadku wyszukiwania binarnego w~\singledash{$n$}{elementowej} tablicy, przez co średnio działa ona w~czasie opisanym przez rekurencję z~\refExercise{4.3-3}.
+Rozwiązaniem tej rekursji jest $T(n)=\Theta(\lg n)$, a~zatem oczekiwany czas działania procedury $\proc{Random}(a,b)$ w~zależności od $a$ i~$b$ wynosi $\Theta(\lg(b-a))$.
+
+\exercise %5.1-3
+Zauważmy, że prawdopodobieństwo uzyskania najpierw orła, a~potem reszki w~dwóch rzutach monetą jest takie samo, jak uzyskanie najpierw reszki, a~potem orła i~wynosi $p(1-p)$.
+Będziemy zatem rzucać monetą po dwa razy, aż do uzyskania różnych wyników.
+Jako wynik procedury przyjmiemy wynik pierwszego rzutu w~ostatniej parze rzutów.
+
+Następujący algorytm implementuje powyższy opis:
+\begin{codebox}
+\Procname{\proc{Unbiased-Random}}
+\li	\Repeat
+		$x\gets\proc{Biased-Random}$
+\li		$y\gets\proc{Biased-Random}$
+\li	\Until $x\ne y$ \label{li:unbiased-random-repeat-end}
+\li	\Return $x$
+\end{codebox}
+
+Załóżmy, że każda iteracja pętli \kw{repeat} odbywa się w~czasie stałym.
+Kolejne iteracje tworzą ciąg prób Bernoulliego, w~których sukcesem jest warunek z~wiersza \ref{li:unbiased-random-repeat-end}, zachodzący z~prawdopodobieństwem $2p(1-p)$.
+Oczekiwana liczba prób aż do osiągnięcia sukcesu jest zadana wzorem (C.31) i~wynosi $1/(2p(1-p))$.
+Stąd wnioskujemy, że oczekiwanym czasem działania algorytmu jest $\Theta(1/(p(1-p)))$.

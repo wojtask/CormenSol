@@ -1,0 +1,158 @@
+\subchapter{Metoda podstawiania}
+
+\exercise %4.1-1
+Niech $c>0$ będzie stałą.
+Przyjmujemy założenie, że
+\[
+    T(\lceil n/2\rceil)\le c\lg\lceil n/2\rceil
+\]
+i~że $n\ge4$.
+Na podstawie założeń i~wzoru (3.3) otrzymujemy:
+\begin{align*}
+	T(n) &\le c\lg\lceil n/2\rceil+1 \\
+	&< c\lg(n/2+1)+1 \\
+	&\le c\lg(3n/4)+1 \\
+	&= c\lg n+c\lg(3/4)+1 \\
+	&\le c\lg n,
+\end{align*}
+przy czym ostatnia nierówność jest spełniona, gdy $c\ge\log_{4/3}2$.
+
+Niech $T(1)=1$.
+Wówczas $T(2)=2$, $T(3)=3$.
+Nierówności $T(2)\le c\lg2$ oraz $T(3)\le c\lg3$ zachodzą dla $c\ge2$, a~więc w~szczególności dla $c\ge\log_{4/3}2$.
+Można zatem przyjąć $n=2$ i~$n=3$ za podstawę indukcji, gdyż dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$.
+Na mocy dowodu indukcyjnego wynika zatem, że $T(n)=O(\lg n)$.
+
+\exercise %4.1-2
+Przyjmijmy założenie, że
+\[
+	T(\lfloor n/2\rfloor) \ge c\lfloor n/2\rfloor\lg\lfloor n/2\rfloor
+\]
+dla pewnej dodatniej stałej $c$.
+Korzystając ze wzoru (3.3), mamy:
+\begin{align*}
+	T(n) &\ge 2c\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+n \\
+	&> 2c(n/2-1)\lg(n/4)+n \\
+	&= 2c((n/2)\lg n-n-\lg n+2)+n \\
+	&= cn\lg n-2cn-2c\lg n+4c+n \\
+	&> cn\lg n-2c(n+\lg n)+n \\
+	&\ge cn\lg n.
+\end{align*}
+Ostatni krok uzasadniamy, rozwiązując nierówność $-2c(n+\lg n)+n\ge0$ ze względu na $c$:
+\[
+	c \le \frac{n}{2(n+\lg n)} \le \frac{n}{2n} = \frac{1}{2}.
+\]
+Wybierając dowolne $0<c\le1/2$, spełniamy ostatnią nierówność wyprowadzenia.
+Można przyjąć $T(1)=1$ i~$n=1$ za podstawę indukcji, bo wówczas $T(1)\ge c\cdot1\cdot\lg1=0$.
+Wykazaliśmy, że $T(n)=\Omega(n\lg n)$, więc na mocy tw.\ 3.1 mamy $T(n)=\Theta(n\lg n)$.
+
+\exercise %4.1-3
+Udowodnimy, że $T(n)=O(n^2)$.
+Przyjmijmy w~tym celu założenie dla $n\ge2$, że
+\[
+    T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^2,
+\]
+gdzie $c>0$ jest stałą.
+Mamy teraz
+\[
+	T(n) \le 2c\lfloor n/2\rfloor^2+n \le 2cn^2\!/4 + n = cn^2\!/2+n \le cn^2,
+\]
+co jest prawdą, o~ile $c\ge1$.
+Definiując $T(1)=1$, dzięki mocniejszemu założeniu indukcyjnemu można przyjąć $n=1$ w~podstawie indukcji, bo $T(1)\le c\cdot1^2=c$.
+
+\exercise %4.1-4
+Rekurencję (4.2) można przedstawić w~alternatywny sposób:
+\[
+	T(n) =
+	\begin{cases}
+		d_1, & \text{jeśli $n=1$}, \\
+		T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+d_2n, & \text{jeśli $n>1$},
+	\end{cases}
+\]
+gdzie $d_1$, $d_2>0$ są stałymi.
+Udowodnimy oszacowania górne i~dolne dla $T(n)$ przy użyciu indukcji, przy czym założymy, że $n\ge4$ i~skorzystamy z~obserwacji, że $T(n)$ jest funkcją niemalejącą.
+Dla stałych $c_1$, $c_2>0$ przyjmijmy założenia
+\[
+	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor \quad\text{oraz}\quad T(\lceil n/2\rceil) \le c_2\lceil n/2\rceil\lg\lceil n/2\rceil.
+\]
+
+W~przypadku dolnego oszacowania mamy:
+\begin{align*}
+	T(n) &\ge 2T(\lfloor n/2\rfloor)+d_2n \\
+	&\ge 2c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+d_2n \\
+	&> 2c_1(n/2-1)\lg(n/4)+d_2n \\
+	&= c_1n\lg n-2c_1n-2c_1\!\lg(n/4)+d_2n \\
+	&\ge c_1n\lg n,
+\end{align*}
+ponieważ zachodzi $\lfloor n/2\rfloor>n/2-1$ i~$\lfloor n/2\rfloor\ge n/4$ oraz można tak dobrać stałą $c_1$, aby prawdziwa była ostatnia nierówność powyższego wyprowadzenia.
+Po podstawieniu $c_1=d_2/4$ sprowadza się ona do postaci $n\ge\lg(n/4)$, co jest prawdą dla wszystkich $n$ dodatnich.
+Podstawę indukcji stanowi $n=1$, gdyż $T(1)\ge c_1\cdot 1\cdot\lg1=0$, a~zatem $T(n)=\Omega(n\lg n)$.
+
+Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$, dowodzimy górnego oszacowania:
+\begin{align*}
+	T(n) &\le 2T(\lceil n/2\rceil)+d_2n \\
+	&\le 2c_2\lceil n/2\rceil\lg\lceil n/2\rceil+d_2n \\
+	&< 2c_2(n/2+1)\lg\frac{n\lceil n/2\rceil}{n}+d_2n \\
+	&\le c_2n\lg n+c_2(n+2)\lg\frac{\lceil n/2\rceil}{n}+2c_2\lg n+d_2n \\
+	&\le c_2n\lg n.
+\end{align*}
+W~ostatniej nierówności skorzystano z~faktu, że dla $n\ge2$ wyrażenie $\lg\frac{\lceil n/2\rceil}{n}$ jest ujemne, a~zatem, dobierając odpowiednio duże $c_2$, można uzasadnić nierówność, gdyż funkcja liniowa rośnie szybciej od logarytmicznej.
+Dokładniej, okazuje się, że przyjęcie $c_2\ge10d_2$ wystarcza, aby spełnić nierówność dla $n\ge4$.
+
+Ponieważ dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$, to za podstawę indukcji można przyjąć $n=2$ i~$n=3$.
+Mamy $T(2)=2d_1+2d_2$ oraz $T(3)=3d_1+5d_2$.
+Łatwo sprawdzić, że otrzymane oszacowanie zachodzi dla tych dwóch wartości, o~ile $d_1$ jest dostatecznie małe.
+W~przeciwnym przypadku górne oszacowanie może nie być wystarczające, jednak zwiększenie $c_2$ pozwala na dowolne ograniczenie rekurencji od góry w~zależności od wartości stałych $d_1$ i~$d_2$.
+Niezależnie od ich doboru oszacowaniem górnym rekurencji $T(n)$ jest $O(n\lg n)$, co na mocy wcześniejszego wyniku dolnego oszacowania implikuje $T(n)=\Theta(n\lg n)$.
+
+\exercise %4.1-5
+Wykorzystując założenie
+\[
+	T(\lfloor n/2\rfloor+17) \le c(\lfloor n/2\rfloor+17)\lg(\lfloor n/2\rfloor+17)
+\]
+dla pewnej stałej $c>0$, otrzymujemy:
+\begin{align*}
+	T(n) &\le 2c(\lfloor n/2\rfloor+17)\lg(\lfloor n/2\rfloor+17)+n \\
+	&\le 2c(n/2+17)\lg(n/2+17)+n \\
+	&\le c(n+34)\lg(11n/20)+n \\
+	&< cn\lg n+cn\lg(11/20)+34c\lg n+n \\
+	&\le cn\lg n.
+\end{align*}
+Nierówności zachodzą, o~ile $n/2+17\le 11n/20$, czyli $n\ge340$, oraz
+\[
+	cn\lg(11/20)+34c\lg n+n \le 0.
+\]
+Badając ostatnią nierówność, można dojść do rezultatu, że przyjęcie $c\ge47$ wystarcza, aby spełnić ją dla wszystkich $n\ge n_0$, gdzie $n_0=340$.
+
+Zauważmy, że stosowanie wzoru $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le34$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
+Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le34$ i~niech stanowi to przypadek brzegowy rekurencji.
+Za podstawę indukcji musimy wtedy przyjąć wszystkie $n=187$, 188, \dots, 339.
+Można pokazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
+
+Analiza tej rekurencji z~każdą inną stałą w~miejscu 17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$ oraz wartości brzegowe rekursji i~podstawa indukcji, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
+
+\exercise %4.1-6
+Przyjmijmy, że $n=2^m$, skąd $m=\lg n$.
+Rekurencja przyjmuje teraz postać
+\[
+	T(2^m) = 2T(2^{m/2})+1.
+\]
+Z~kolei podstawiając $S(m)$ za $T(2^m)$, dostajemy nową rekurencję
+\[
+	S(m) = 2S(m/2)+1,
+\]
+dla której udowodnimy rozwiązanie $\Theta(\lg m)$.
+
+Ponieważ całkowitość argumentów nie jest dla nas istotna, to możemy rekurencję potraktować jako $S(m)=S(\lfloor m/2\rfloor)+S(\lceil m/2\rceil)+1$, co, według Podręcznika, jest $O(m)$.
+
+Aby uzyskać oszacowanie dokładne, pozostaje udowodnić, że $S(m)=\Omega(m)$.
+Przyjmujemy zatem założenie, że $S(m/2)\ge cm/2$ dla $c>0$ i~na jego podstawie otrzymujemy:
+\[
+	S(m) \ge 2cm/2+1 = cm+1 > cm,
+\]
+co zachodzi dla dowolnej wartości $c$.
+Niech $S(1)=1$.
+Przyjęcie $m=1$ na podstawę indukcji wystarcza, bo warunek $S(1)\ge c$ spełnia każde $c\le1$, a~zatem $S(m)=\Omega(m)$.
+
+Stosując tw.\ 3.1, mamy $S(m)=\Theta(m)$.
+Wracając teraz do oryginalnej rekurencji i~starej zmiennej, dostajemy $T(n)=T(2^m)=S(m)=\Theta(m)=\Theta(\lg n)$.

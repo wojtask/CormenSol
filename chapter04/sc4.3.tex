@@ -1,0 +1,83 @@
+\subchapter{Metoda rekurencji uniwersalnej}
+
+\exercise %4.3-1
+
+\subexercise
+We wzorze (4.5) przyjmujemy $a=4$, $b=2$ oraz $f(n)=n$.
+Ponieważ $f(n)=O(n^{2-\epsilon})$ dla $\epsilon\le1$, to z~tw.\ o~rekurencji uniwersalnej mamy $T(n)=\Theta(n^2)$.
+
+\subexercise
+Tutaj mamy te same wartości $a$ i~$b$ jak w~poprzednim punkcie, ale $f(n)=n^2$.
+Z~tego, że $f(n)=\Theta(n^2)$, dostajemy $T(n)=\Theta(n^2\lg n)$.
+
+\subexercise
+Dla tych samych $a$ i~$b$ oraz $f(n)=n^3$ mamy $f(n)=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1$ oraz
+\[
+	4f(n/2) = 4n^3\!/8 = n^3\!/2 = f(n)/2 \le cf(n),
+\]
+o~ile $c\ge1/2$.
+A~zatem warunek regularności jest spełniony i~$T(n)=\Theta(n^3)$.
+
+\exercise %4.3-2
+Rozwiążmy $T(n)$, korzystając z~metody rekurencji uniwersalnej.
+Stosujemy przypadek 1 tw.\ 4.1 i~stwierdzamy, że $n^2=O(n^{\lg7-\epsilon})$ dla $\epsilon\le\lg7-2$, a~więc zachodzi $T(n)=\Theta(n^{\lg7})$.
+
+Pozostaje teraz zbadanie nierówności $T'(n)<T(n)$ w~zależności od parametru $a$, bo w~rekurencji $T'(n)$ jest $n^{\log_ba}=n^{\log_4a}$ oraz $f(n)=n^2$.
+Załóżmy, że dla pewnej stałej $\epsilon>0$, $f(n)=O(n^{\log_4a-\epsilon})$, co jest prawdą dla $a>16$ i~wtedy $T'(n)=\Theta(n^{\log_4a})$.
+Algorytm $A'$ jest efektywniejszy od algorytmu $A$, gdy $\log_4a<\lg7$, skąd $16<a<49$.
+Pozostałe przypadki tw.\ 4.1 można stosować, o~ile $a\le16$, ale pominiemy ich sprawdzanie, bo dążymy do maksymalizacji $a$.
+
+Największym całkowitym $a$, dla którego algorytm $A'$ jest bardziej efektywny od algorytmu $A$, jest $a=48$.
+
+\exercise %4.3-3
+Ponieważ $a=1$ oraz $b=2$, to $n^{\log_ba}=n^0=1$ jest funkcją stałą.
+W~rekurencji tej $f(n)$ także jest stałe, a~więc $f(n)=\Theta(n^{\log_ba})$ i~$T(n)=\Theta(n^{\log_ba}\lg n)=\Theta(\lg n)$.
+
+\exercise %4.3-4
+Dla rekurencji $T(n)$ mamy $a=4$, $b=2$ oraz $f(n)=n^2\lg n$, a~więc $n^{\log_ba}=n^2$, ale nie istnieje takie $\epsilon>0$, że $f(n)=\Omega(n^{2+\epsilon})$.
+Nie można zatem zastosować w~rozwiązaniu twierdzenia o~rekurencji uniwersalnej.
+Asymptotyczne górne oszacowanie na $T(n)$ znajdziemy natomiast, zgadując rozwiązanie, a~następnie dowodząc jego poprawności metodą podstawiania.
+
+W~pierwszym wywołaniu rekurencja wnosi koszt równy $n^2\lg n$.
+Następnie mamy 4 wywołania $T(n/2)$, co daje koszt
+\[
+	4T(n/2) = 4(n/2)^2\lg(n/2) = n^2\lg n-n^2.
+\]
+Kolejne poziomy wywołań kosztują:
+\begin{gather*}
+	16T(n/4) = 16(n/4)^2\lg(n/4) = n^2\lg n-2n^2, \qquad\phantom{\text{itd.}} \\
+	64T(n/8) = 64(n/8)^2\lg(n/8) = n^2\lg n-3n^2 \qquad\text{itd.}
+\end{gather*}
+Z~otrzymanych wyników wnioskujemy, że \singledash{$i$}{ty} poziom wprowadza koszt równy $n^2\lg n-in^2$.
+Liście o~koszcie stałym znajdują się na poziomie $\lg n$ i~jest ich $4^{\lg n}=n^2$, więc dostajemy:
+\begin{align*}
+	T(n) &= \sum_{i=0}^{\lg n-1}(n^2\lg n-in^2)+\Theta(n^2) \\
+	&= n^2\lg^2n-n^2\sum_{i=0}^{\lg n-1}i+\Theta(n^2) \\[1mm]
+	&= n^2\lg^2n-\frac{n^2\lg n(\lg n-1)}{2}+\Theta(n^2) \\[1mm]
+	&= O(n^2\lg^2n).
+\end{align*}
+
+Udowodnimy teraz metodą podstawiania, że otrzymane przypuszczenie jest istotnie oszacowaniem górnym dla $T(n)$.
+Przyjmijmy założenie
+\[
+	T(n/2) \le c(n/2)^2\lg^2(n/2)
+\]
+dla pewnej stałej $c>0$.
+Mamy teraz:
+\begin{align*}
+	T(n) &\le 4c(n/2)^2\lg^2(n/2)+n^2\lg n \\
+	&= cn^2(\lg n-1)^2+n^2\lg n \\
+	&= cn^2\lg^2n-2cn^2\lg n+cn^2+n^2\lg n \\
+	&\le cn^2\lg^2n.
+\end{align*}
+Ostatnią nierówność dla wszystkich $n\ge4$ spełniamy, dobierając $c\ge2/3$.
+Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji, zaś $n=2$ oraz $n=3$ jako podstawę indukcji, ponieważ dla $n\ge4$ rekurencja nie zależy już bezpośrednio od $T(1)$, a~otrzymane oszacowanie dla $T(2)=8$ i~$T(3)=4+9\lg3$ jest spełnione, o~ile $c\ge2$.
+Rozwiązaniem rekurencji $T(n)$ jest zatem $O(n^2\lg^2n)$.
+
+\exercise %4.3-5
+Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla pewnego $0<\epsilon\le1$.
+Jednak dla $n=2(2k+1)\pi$, gdzie $k=0$, 1, \dots, mamy
+\[
+	af(n/b) = 3(2k+1)\pi \quad\text{oraz}\quad f(n) = 2(2k+1)\pi,
+\]
+więc nierówność $af(n/b)\le cf(n)$ zachodzi dla $c\ge3/2$ i~warunek regularności nie jest spełniony.
