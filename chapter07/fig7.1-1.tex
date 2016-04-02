@@ -1,0 +1,211 @@
+\def\scopevdist{-15mm}
+\def\scopehdist{77mm}
+
+\begin{tikzpicture}[
+	array/.style = {matrix of nodes, column sep=-\pgflinewidth, nodes={draw, minimum size=5mm, inner sep=0pt, text height=1.5ex}, nodes in empty cells},
+	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
+	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
+	index node/.style = {font=\scriptsize, inner sep=0pt, minimum size=5mm, inner sep=0pt, text height=1.5ex},
+	partition line/.style = {line width=2pt, line cap=rect},
+	picture label/.style = {font=\small\bfseries\sffamily},
+	node distance = 5mm and 5mm,
+	on grid
+]
+
+\begin{scope}
+	\matrix[array] (arr) {13 & 19 & 9 & 5 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-1.north west) -- (arr-1-1.south west);
+	\draw[partition line] (arr-1-11.north east) -- (arr-1-11.south east);
+	\node[index node, above left=of arr-1-1] {$i$};
+	\node[index node, above=of arr-1-1] {$p,j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(a)};
+\end{scope}
+
+\begin{scope}[yshift=\scopevdist]
+	\matrix[
+		array,
+		med cell/.list = {1}
+	] (arr) {13 & 19 & 9 & 5 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-1.north west) -- (arr-1-1.south west);
+	\draw[partition line] (arr-1-2.north west) -- (arr-1-2.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above left=of arr-1-1] {$i$};
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-2] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(b)};
+\end{scope}
+
+\begin{scope}[yshift=2*\scopevdist]
+	\matrix[
+		array,
+		med cell/.list = {1,2}
+	] (arr) {13 & 19 & 9 & 5 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-1.north west) -- (arr-1-1.south west);
+	\draw[partition line] (arr-1-3.north west) -- (arr-1-3.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above left=of arr-1-1] {$i$};
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-3] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(c)};
+\end{scope}
+
+\begin{scope}[yshift=3*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1},
+		med cell/.list = {2,3}
+	] (arr) {9 & 19 & 13 & 5 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-2.north west) -- (arr-1-2.south west);
+	\draw[partition line] (arr-1-4.north west) -- (arr-1-4.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p,i$};
+	\node[index node, above=of arr-1-4] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(d)};
+\end{scope}
+
+\begin{scope}[yshift=4*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2},
+		med cell/.list = {3,4}
+	] (arr) {9 & 5 & 13 & 19 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-3.north west) -- (arr-1-3.south west);
+	\draw[partition line] (arr-1-5.north west) -- (arr-1-5.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-2] {$i$};
+	\node[index node, above=of arr-1-5] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(e)};
+\end{scope}
+
+\begin{scope}[yshift=5*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2},
+		med cell/.list = {3,4,5}
+	] (arr) {9 & 5 & 13 & 19 & 12 & 8 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-3.north west) -- (arr-1-3.south west);
+	\draw[partition line] (arr-1-6.north west) -- (arr-1-6.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-2] {$i$};
+	\node[index node, above=of arr-1-6] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(f)};
+\end{scope}
+
+\begin{scope}[yshift=6*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3},
+		med cell/.list = {4,5,6}
+	] (arr) {9 & 5 & 8 & 19 & 12 & 13 & 7 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-4.north west) -- (arr-1-4.south west);
+	\draw[partition line] (arr-1-7.north west) -- (arr-1-7.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-3] {$i$};
+	\node[index node, above=of arr-1-7] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(g)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4},
+		med cell/.list = {5,6,7}
+	] (arr) {9 & 5 & 8 & 7 & 12 & 13 & 19 & 4 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-5.north west) -- (arr-1-5.south west);
+	\draw[partition line] (arr-1-8.north west) -- (arr-1-8.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-4] {$i$};
+	\node[index node, above=of arr-1-8] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(h)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist, yshift=\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4,5},
+		med cell/.list = {6,7,8}
+	] (arr) {9 & 5 & 8 & 7 & 4 & 13 & 19 & 12 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-6.north west) -- (arr-1-6.south west);
+	\draw[partition line] (arr-1-9.north west) -- (arr-1-9.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-5] {$i$};
+	\node[index node, above=of arr-1-9] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(i)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist, yshift=2*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4,5},
+		med cell/.list = {6,7,8,9}
+	] (arr) {9 & 5 & 8 & 7 & 4 & 13 & 19 & 12 & 21 & 2 & 6 & 11 \\};
+	\draw[partition line] (arr-1-6.north west) -- (arr-1-6.south west);
+	\draw[partition line] (arr-1-10.north west) -- (arr-1-10.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-5] {$i$};
+	\node[index node, above=of arr-1-10] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(j)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist, yshift=3*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4,5,6},
+		med cell/.list = {7,8,9,10}
+	] (arr) {9 & 5 & 8 & 7 & 4 & 2 & 19 & 12 & 21 & 13 & 6 & 11 \\};
+	\draw[partition line] (arr-1-7.north west) -- (arr-1-7.south west);
+	\draw[partition line] (arr-1-11.north west) -- (arr-1-11.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-6] {$i$};
+	\node[index node, above=of arr-1-11] {$j$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(k)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist, yshift=4*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4,5,6,7},
+		med cell/.list = {8,9,10,11}
+	] (arr) {9 & 5 & 8 & 7 & 4 & 2 & 6 & 12 & 21 & 13 & 19 & 11 \\};
+	\draw[partition line] (arr-1-8.north west) -- (arr-1-8.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-7] {$i$};
+	\node[index node, above=of arr-1-12] {$r,j$};
+	\node[picture label, left=8mm of arr-1-1] {(l)};
+\end{scope}
+
+\begin{scope}[xshift=\scopehdist, yshift=5*\scopevdist]
+	\matrix[
+		array,
+		light cell/.list = {1,2,3,4,5,6,7},
+		med cell/.list = {9,10,11,12}
+	] (arr) {9 & 5 & 8 & 7 & 4 & 2 & 6 & 11 & 21 & 13 & 19 & 12 \\};
+	\draw[partition line] (arr-1-8.north west) -- (arr-1-8.south west);
+	\draw[partition line] (arr-1-9.north west) -- (arr-1-9.south west);
+	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\node[index node, above=of arr-1-1] {$p$};
+	\node[index node, above=of arr-1-7] {$i$};
+	\node[index node, above=of arr-1-12] {$r$};
+	\node[picture label, left=8mm of arr-1-1] {(m)};
+\end{scope}
+
+\end{tikzpicture}
