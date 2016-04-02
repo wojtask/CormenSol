@@ -1,106 +1,109 @@
-I Ogólne
+** Ogólne **
 
-1. Jeśli należy odnieść się do podpunktu problemu lub zadania, to używamy konstrukcji "punkt (b) z~problemu \refProblem{7-2}".
-2. Odnosząc się do tekstu "Wprowadzenia do algorytmów", używamy wyrazu "Podręcznik".
-3. Przy składaniu zależności rekurencyjnych w warunkach używa się słowa "jeżeli", a nie "dla".
-4. Opis działania algorytmu i analiza jego czasu działania powinny znaleźć się w osobnych akapitach.
-5. Po pseudokodzie piszemy w tym samym paragrafie tylko wówczas, gdy piszemy o samym pseudokodzie (tzn. nie zaczynamy nowego wątku).
-6. Można opuścić jawne określenie, że zmienna jest całkowitoliczbowa, o ile jest ona użyta jako indeks tablicy (np. 6-3(b)).
-7. Jeśli wymagane jest "napisanie pseudokodu", to należy napisać pseudokod, natomiast jeśli w polecenie mówi "opisz/podaj algorytm", to można zamieścić opis algorytmu lub pseudokod, mając na uwadze prostotę, ścisłość i przejrzystość przekazu.
-8. Jeśli występuje błąd w tłumaczeniu lub oryginale treści zadania, to opisujemy ten fakt, używając notki (\note) przed treścią rozwiązania. Unikamy określenia "w tłumaczeniu", zakładając, że domyślnie komentujemy problemy tylko z tłumaczenia. Jeśli błąd występuje także w oryginale i nie został on poprawiony w erracie, to zwracamy także na to uwagę, używając określenia "w oryginale", "w tekście oryginalnym" itp.
-9. W dowodach niezmienników pętli w zakończeniach nie należy dowodzić niezmiennika po zakończeniu pętli, ale na podstawie jego prawdziwości podczas działania pętli stwierdzić, co się dzieje po zakończeniu pętli.
-10. Jeśli korzystamy ze wskazówki podanej w treści zadania, to należy o tym napisać, ale korzystanie ze wskazówek nie jest konieczne.
-11. Jeśli definiujemy jakieś pojęcie, to stosujemy pogrubienie, jak to jest w Podręczniku (np. 6.5-4).
-12. Dla danej struktury danych wyspecyfikowana jest lista operacji na tej strukturze danych. Sprawdzanie pustości/pełności są operacjami "querującymi" zdefiniowanymi dla stosu i kolejki. Dla innych struktur danych możemy ich nie potrzebować.
-
-
-II LaTeX
-
-1. Używamy następującego sekcjonowania wewnątrz plików ch??.tex i app?.tex:
-	\chapter{Nazwa}
-		\subchapter{Nazwa}
-			\exercise %numer
-				[\subexercise %numer]
-	\problems
-	\problem{Nazwa} %numer
-		[\subproblem %numer]
-	\endinput
-2. Stosujemy tyldy po sierotach. Nie trzeba używać ich w zakresach (1,2,...,n), tuż przed liczbami, symbolami, nazwami zmiennych oraz numerami wzorów, twierdzeń, wierszy pseudokodu itp.
-3. Używamy polskich cudzysłowów, czyli ,,tekst''.
-4. Jeśli w wielowierszowych formułach jest zbyt mały odstęp między wierszami, to można go zwiększyć poprzez \\[x mm].
-5. Jeśli w środku zdania wystąpi kropka, wykrzyknik lub pytajnik, które nie kończą tego zdania, to po tych znakach należy umieścić \  (twarda spacja).
-5. Jeśli kropka, wykrzyknik lub pytajnik występują po dużej literze i kończą zdanie, to przed tymi znakami należy umieścić \@.
-6. Umieszczamy \/ po tekście złożonym czcionką pochyłą, ale przed tekstem złożonym czcionką zwykłą (z wyjątkiem gdy zaczyna się on kropką lub przecinkiem).
-7. Używamy następujących makr zgodnie z ich przeznaczeniem: \onedash, \twodashes, \refExercise, \refProblem, \E, \Pr, \Var, \note.
-8. Po użyciu \note na początku zadania należy użyć \noindent na początku następnego paragrafu.
-9. W \note stosujemy tryb matematyczny nawet dla pojedynczych liczb, a \/ bezpośrednio przed trybem matematycznym.
-10. Po \E, \Pr, \Var używa się nawiasów okrągłych.
-11. Dla zmiennych losowych wskaźnikowych używa się \I, po czym nawiasów okrągłych.
-12. Używamy \bigl, \bigr i pozostałych zamiast \left, \right (\biggl, \biggr do nawiasów otaczających ułamki i duże operatory np. \sum).
-13. Formuły matematyczne składane są wg zasad D. Knutha w "The TeXbook".
-14. Krotki, ciągi i tablice zapisujemy w nawiasach kątowych \langle i \rangle.
-15. Jeśli piszemy o zbiorach, ciągach, parach itd., to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach przecinki należy umieszczać poza tym trybem (wyjątkiem jest trik z opisem pod rysunkiem).
-16. Używamy \dots zamiast \cdots i \ldots (chyba, że po obu stronach mamy znaki mnożenia, jak w 8-5(f)).
-17. W trybie matematycznym preferujemy \text{tekst $formuła$} zamiast \text{tekst }formuła.
-18. Wewnątrz paragrafu stosujemy zwykły tryb matematyczny, a jeśli trzeba coś wyróżnić - tryb displaystyle.
-19. Formuły zapisujemy w otoczeniach equation* (\[, \]), align* lub gather* (jak w 3.1-2), a jeśli mają być dzielone, to split wewnątrz align* (jak w 3.1-8).
-20. Jeśli formułę można zapisać w jednej linii, to staramy się to zrobić (unikamy łamania krótkich formuł między kilka linii).
-21. Jeśli formuła nie mieści się w jednej linii, ale składa się z krótkich wyrażeń między równościami lub nierównościami, to można ją podzielić jak w 5.2-5.
-22. W ostateczności, aby zniwelować underfull vbox, można zastosować \medskip (jak przed 4.2-4)
-23. Używamy \bigskip tylko wówczas, gdy chcemy wyraźniej oddzielić dwa paragrafy ze względu na kontekst, a nie z powodów technicznych (jak w 3-2(f), B.3-1).
-24. Do opisu przypadków danej sytuacji stosujemy albo środowisko itemize albo środowisko enumerate z numerowaniem itemów małymi cyframi rzymskimi w nawiasach (jak w 7.4-6).
+* Jeśli należy odnieść się do podpunktu problemu lub zadania, to używamy konstrukcji "punkt (b) z~problemu \refProblem{7-2}".
+* Odnosząc się do tekstu "Wprowadzenia do algorytmów", używamy wyrazu "Podręcznik".
+* Przy składaniu zależności rekurencyjnych w warunkach używa się słowa "jeżeli", a nie "dla".
+* Opis działania algorytmu i analiza jego czasu działania powinny znaleźć się w osobnych akapitach.
+* Po pseudokodzie piszemy w tym samym paragrafie tylko wówczas, gdy piszemy o samym pseudokodzie (tzn. nie zaczynamy nowego wątku).
+* Można opuścić jawne określenie, że zmienna jest całkowitoliczbowa, o ile jest ona użyta jako indeks tablicy (np. 6-3(b)).
+* Jeśli wymagane jest "napisanie pseudokodu", to należy napisać pseudokod, natomiast jeśli w polecenie mówi "opisz/podaj algorytm", to można zamieścić opis algorytmu lub pseudokod, mając na uwadze prostotę, ścisłość i przejrzystość przekazu.
+* Jeśli występuje błąd w tłumaczeniu lub oryginale treści zadania, to opisujemy ten fakt, używając notki (\note) przed treścią rozwiązania. Unikamy określenia "w tłumaczeniu", zakładając, że domyślnie komentujemy problemy tylko z tłumaczenia. Jeśli błąd występuje także w oryginale i nie został on poprawiony w erracie, to zwracamy także na to uwagę, używając określenia "w oryginale", "w tekście oryginalnym" itp.
+* W dowodach niezmienników pętli w zakończeniach nie należy dowodzić niezmiennika po zakończeniu pętli, ale na podstawie jego prawdziwości podczas działania pętli stwierdzić, co się dzieje po zakończeniu pętli.
+* Jeśli korzystamy ze wskazówki podanej w treści zadania, to należy o tym napisać, ale korzystanie ze wskazówek nie jest konieczne.
+* Jeśli definiujemy jakieś pojęcie, to stosujemy pogrubienie, jak to jest w Podręczniku (np. 6.5-4).
+* Dla danej struktury danych wyspecyfikowana jest lista operacji na tej strukturze danych. Sprawdzanie pustości/pełności są operacjami "querującymi" zdefiniowanymi dla stosu i kolejki. Dla innych struktur danych możemy ich nie potrzebować.
 
 
-III Matematyka
+** LaTeX **
 
-1. Jeśli stosujemy kwantyfikator ogólny do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis $k=1$, 2, \dots, $n$.
-2. Jeśli stosujemy kwantyfikator szczegółowy do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis "pewne $k$ ze zbioru $\{1$, 2, \dots, $n\}$" ALBO "pewne $k$ całkowite, gdzie $1\le k\le n$".
-3. Dla liczb rzeczywistych stosujemy przedziały zapisane w notacji matematycznej ([a,b], (a,b], [a,b), (a,b)), natomiast dla liczb całkowitych lub naturalnych (w szczególności dla indeksów tablic) stosujemy przedziały w konwencji "pascalowej" (a\twodots b, co oznacza {a, a+1, ..., b}, dla a, b całkowitych, a <= b). Nie mieszamy obu tych konwencji (np. [a\twodots b] -- taki zapis pojawia się w Podręczniku), chyba że ma on na celu wyznaczenie pewnej podtablicy (np. A[1\twodots n]).
-4. Jeśli używamy zmiennej, to należy określić, czy oznacza ona liczbę całkowitą, czy obiekt z innego zbioru, chyba że jednoznacznie jest to określone np. poprzez użycie jej jako indeksu tablicy lub wskazane w treści zadania.
-5. Potęgę pierwiastka zapisuje się, obejmując pierwiastek w nawiasy i umieszczając wykładnik na zewnątrz tego nawiasu.
-6. Numery wyrażeń (odnośniki) zapisuje się w nawiasach okrągłych.
-7. Jeśli kilka równań lub nierówności występuje jedno pod drugim (jak w C.5-6), to oddzielamy je przecinkami, ponieważ nie stanowią one jednego wzoru.
-8. Indukcję matematyczną prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy.
-9. Podstawą indukcji przy dowodzeniu oszacowania rekurencji T(n) nie jest T(1), ale n=1.
-10. Poziomy drzew ukorzenionych liczy się od 0.
-11. Wszędzie gdzie tylko możliwe stosujemy wielkie "theta" zamiast wielkiego "o" lub wielkiego "omega".
-12. Czas działania algorytmu T(n) nie przyjmuje żadnej stałej liczby -- musi być zawsze wyrażony przez jakąś stałą (a nie liczbę) albo przedstawiony w postaci notacji asymptotycznej.
+* Żródło rozdziału umieszcza się wewnątrz katalogu chapter<CH>, gdzie <CH> to dwucyfrowy numer rozdziału (01, 02, ...,), a źródło dodatku -- wewnątrz katalogu appendix<APP>, gdzie <APP> to oznaczenie dodatku (a, b, ...).
+* W katalogach chapter?? i appendix? znajduje się plik ch<C>.tex, gdzie <C> to numer rozdziału (1, 2, ...) lub oznaczenie dodatku (a, b, ...). Plik ten zawiera:
+	* \chapter z tytułem rozdziału lub dodatku,
+	* serię \input załączających źródła podrozdziałów,
+	* \problems
+	* serię \input załączających źródła problemów.
+* W katalogach chapter?? i appendix? znajdują się także źródła każdego podrozdziału w plikach sc<C>.<S>.tex, gdzie <C> ma poprzednie znaczenie, a <S> to numer podrozdziału (1, 2, ...). Pliki te zawierają:
+	* \subchapter z tytułem podrozdziału,
+	* serię \exercise ze źródłem zadań (każde \exercise można zawierać serię \subexercise ze źródłem podzadań).
+* W katalogach chapter?? i appendix? znajdują się także źródła każdego problemu w plikach pr<C>-<P>.tex, gdzie <C> ma poprzednie znaczenie, a <P> to numer problemu (1, 2, ...). Pliki te zawierają:
+	* \problem z nazwą problemu,
+	* serię \subproblem ze źródłem podproblemów.
+* Stosujemy tyldy po sierotach. Nie trzeba używać ich w zakresach (1,2,...,n), tuż przed liczbami, symbolami, nazwami zmiennych oraz numerami wzorów, twierdzeń, wierszy pseudokodu itp.
+* Używamy polskich cudzysłowów, czyli ,,tekst''.
+* Jeśli w wielowierszowych formułach jest zbyt mały odstęp między wierszami, to można go zwiększyć poprzez \\[x mm].
+* Jeśli w środku zdania wystąpi kropka, wykrzyknik lub pytajnik, które nie kończą tego zdania, to po tych znakach należy umieścić \  (twarda spacja).
+* Jeśli kropka, wykrzyknik lub pytajnik występują po dużej literze i kończą zdanie, to przed tymi znakami należy umieścić \@.
+* Umieszczamy \/ po tekście złożonym czcionką pochyłą, ale przed tekstem złożonym czcionką zwykłą (z wyjątkiem gdy zaczyna się on kropką lub przecinkiem).
+* Używamy następujących makr zgodnie z ich przeznaczeniem: \onedash, \twodashes, \refExercise, \refProblem, \E, \Pr, \Var, \note.
+* Po użyciu \note na początku zadania należy użyć \noindent na początku następnego paragrafu.
+* W \note stosujemy tryb matematyczny nawet dla pojedynczych liczb, a \/ bezpośrednio przed trybem matematycznym.
+* Po \E, \Pr, \Var używa się nawiasów okrągłych.
+* Dla zmiennych losowych wskaźnikowych używa się \I, po czym nawiasów okrągłych.
+* Używamy \bigl, \bigr i pozostałych zamiast \left, \right (\biggl, \biggr do nawiasów otaczających ułamki i duże operatory np. \sum).
+* Formuły matematyczne składane są wg zasad D. Knutha w "The TeXbook".
+* Krotki, ciągi i tablice zapisujemy w nawiasach kątowych \langle i \rangle.
+* Jeśli piszemy o zbiorach, ciągach, parach itd., to przecinki są ich częścią, więc są wewnątrz trybu matematycznego, w pozostałych przypadkach przecinki należy umieszczać poza tym trybem (wyjątkiem jest trik z opisem pod rysunkiem).
+* Używamy \dots zamiast \cdots i \ldots (chyba, że po obu stronach mamy znaki mnożenia, jak w 8-5(f)).
+* W trybie matematycznym preferujemy \text{tekst $formuła$} zamiast \text{tekst }formuła.
+* Wewnątrz paragrafu stosujemy zwykły tryb matematyczny, a jeśli trzeba coś wyróżnić - tryb displaystyle.
+* Formuły zapisujemy w otoczeniach equation* (\[, \]), align* lub gather* (jak w 3.1-2), a jeśli mają być dzielone, to split wewnątrz align* (jak w 3.1-8).
+* Jeśli formułę można zapisać w jednej linii, to staramy się to zrobić (unikamy łamania krótkich formuł między kilka linii).
+* Jeśli formuła nie mieści się w jednej linii, ale składa się z krótkich wyrażeń między równościami lub nierównościami, to można ją podzielić jak w 5.2-5.
+* W ostateczności, aby zniwelować underfull vbox, można zastosować \medskip (jak przed 4.2-4)
+* Używamy \bigskip tylko wówczas, gdy chcemy wyraźniej oddzielić dwa paragrafy ze względu na kontekst, a nie z powodów technicznych (jak w 3-2(f), B.3-1).
+* Do opisu przypadków danej sytuacji stosujemy albo środowisko itemize albo środowisko enumerate z numerowaniem itemów małymi cyframi rzymskimi w nawiasach (jak w 7.4-6).
 
 
-IV Język
+** Matematyka **
 
-1. Przydatna strona: http://pl.wikipedia.org/wiki/Pomoc:Powszechne_b%C5%82%C4%99dy_j%C4%99zykowe.
-2. Obiekty matematyczne mają domyślnie rodzaj nijaki, np. "x jest mniejsze niż 3", chyba że dany obiekt matematyczny występuje ze swoim typem np. "wartość x jest mniejsza niż 3".
-3. W odniesieniu do przedmiotów, pojęć, używamy "za pomocą", a nie "przy pomocy".
-4. Nie stawia się przecinka przed "czy" tylko wtedy, gdy znaczy ono "lub", "albo".
-5. Nie stawia się przecinka przed "itd." i "itp.".
-6. Nie stawia się przecinka po rozpoczynających zdanie wyrażeniach odnoszących się do wcześniejszych wypowiedzi, takich jak "stąd", "mimo to", "dzięki temu", "w tym celu", "w ten sposób", "z tego powodu" itd.
-7. Nie stawia się przecinka po wyrazach i wyrażeniach wprowadzających typu: "jednak", "w efekcie", "w rezultacie", "dlatego", "a zatem", "na ogół", "dodatkowo", "podobnie", "tym samym", "w szczególności", "ponadto", "na przykład", "wreszcie" itd.
-8. Nie stawia się przecinka przed członem porównawczym wprowadzonym przez wyrazy "jak", "jakby", "jako", "niż", chyba że mają wyraźnie charakter dopowiedzenia.
-9. Stawia się przecinek przed "jak i".
-10. Stawia się przecinek po wyrażeniach "inaczej", "innymi słowy", "dokładniej" występujących na początku zdania.
-11. O tym, czy przed imiesłowem przymiotnikowym ("-ący", "-ony") powinien zostać postawiony przecinek, decyduje budowa zdania i intencje autora wypowiedzi.
-12. Przyimki "ze", "we" stosuje się przy zbitkach spółgłosek trudnych do wymówienia, np. "we wzorze", "ze sobą".
-13. Nie ma "przebiegów" i "obiegów", tylko "iteracje" pętli.
-14. Nie "analogiczny z" ani "analogiczny jak", ale "analogiczny do".
-15. Partykułę "nie" z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: "nie większy", "nie mniejszy".
-16. Oddziela się przecinkiem imiesłówy zakończone na "-ąc", "-łszy", "-wszy" od dalszej części zdania.
-17. W zdaniach o konstrukcji "... zarówno A, jak i B ..." orzeczenie jest w liczbie pojedynczej, chyba że A i B to rzeczowniki konkretne (zjawiska lub przedmioty rozpoznawane przez człowieka przy użyciu zmysłów).
+* Jeśli stosujemy kwantyfikator ogólny do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis $k=1$, 2, \dots, $n$.
+* Jeśli stosujemy kwantyfikator szczegółowy do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis "pewne $k$ ze zbioru $\{1$, 2, \dots, $n\}$" ALBO "pewne $k$ całkowite, gdzie $1\le k\le n$".
+* Dla liczb rzeczywistych stosujemy przedziały zapisane w notacji matematycznej ([a,b], (a,b], [a,b), (a,b)), natomiast dla liczb całkowitych lub naturalnych (w szczególności dla indeksów tablic) stosujemy przedziały w konwencji "pascalowej" (a\twodots b, co oznacza {a, a+1, ..., b}, dla a, b całkowitych, a <= b). Nie mieszamy obu tych konwencji (np. [a\twodots b] -- taki zapis pojawia się w Podręczniku), chyba że ma on na celu wyznaczenie pewnej podtablicy (np. A[1\twodots n]).
+* Jeśli używamy zmiennej, to należy określić, czy oznacza ona liczbę całkowitą, czy obiekt z innego zbioru, chyba że jednoznacznie jest to określone np. poprzez użycie jej jako indeksu tablicy lub wskazane w treści zadania.
+* Potęgę pierwiastka zapisuje się, obejmując pierwiastek w nawiasy i umieszczając wykładnik na zewnątrz tego nawiasu.
+* Numery wyrażeń (odnośniki) zapisuje się w nawiasach okrągłych.
+* Jeśli kilka równań lub nierówności występuje jedno pod drugim (jak w C.5-6), to oddzielamy je przecinkami, ponieważ nie stanowią one jednego wzoru.
+* Indukcję matematyczną prowadzi się tak, aby udowodnić n-ty element ciągu, a nie (n+1)-szy.
+* Podstawą indukcji przy dowodzeniu oszacowania rekurencji T(n) nie jest T(1), ale n=1.
+* Poziomy drzew ukorzenionych liczy się od 0.
+* Wszędzie gdzie tylko możliwe stosujemy wielkie "theta" zamiast wielkiego "o" lub wielkiego "omega".
+* Czas działania algorytmu T(n) nie przyjmuje żadnej stałej liczby -- musi być zawsze wyrażony przez jakąś stałą (a nie liczbę) albo przedstawiony w postaci notacji asymptotycznej.
 
 
-V Pseudokody
+** Język **
 
-1. Pamiętamy o komentarzach w pseudokodach, jeśli coś jest niejasne.
-2. Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. Mutliary-Parent, Multiary-Child.
-3. Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
-4. Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
-5. Do artybutów używamy makra \attrib{obiekt}{atrybut}.
-6. Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
-7. Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
-8. Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
-9. Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
-10. Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
-11. Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
+* Przydatna strona: http://pl.wikipedia.org/wiki/Pomoc:Powszechne_b%C5%82%C4%99dy_j%C4%99zykowe.
+* Obiekty matematyczne mają domyślnie rodzaj nijaki, np. "x jest mniejsze niż 3", chyba że dany obiekt matematyczny występuje ze swoim typem np. "wartość x jest mniejsza niż 3".
+* W odniesieniu do przedmiotów, pojęć, używamy "za pomocą", a nie "przy pomocy".
+* Nie stawia się przecinka przed "czy" tylko wtedy, gdy znaczy ono "lub", "albo".
+* Nie stawia się przecinka przed "itd." i "itp.".
+* Nie stawia się przecinka po rozpoczynających zdanie wyrażeniach odnoszących się do wcześniejszych wypowiedzi, takich jak "stąd", "mimo to", "dzięki temu", "w tym celu", "w ten sposób", "z tego powodu" itd.
+* Nie stawia się przecinka po wyrazach i wyrażeniach wprowadzających typu: "jednak", "w efekcie", "w rezultacie", "dlatego", "a zatem", "na ogół", "dodatkowo", "podobnie", "tym samym", "w szczególności", "ponadto", "na przykład", "wreszcie" itd.
+* Nie stawia się przecinka przed członem porównawczym wprowadzonym przez wyrazy "jak", "jakby", "jako", "niż", chyba że mają wyraźnie charakter dopowiedzenia.
+* Stawia się przecinek przed "jak i".
+* Stawia się przecinek po wyrażeniach "inaczej", "innymi słowy", "dokładniej" występujących na początku zdania.
+* O tym, czy przed imiesłowem przymiotnikowym ("-ący", "-ony") powinien zostać postawiony przecinek, decyduje budowa zdania i intencje autora wypowiedzi.
+* Przyimki "ze", "we" stosuje się przy zbitkach spółgłosek trudnych do wymówienia, np. "we wzorze", "ze sobą".
+* Nie ma "przebiegów" i "obiegów", tylko "iteracje" pętli.
+* Nie "analogiczny z" ani "analogiczny jak", ale "analogiczny do".
+* Partykułę "nie" z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: "nie większy", "nie mniejszy".
+* Oddziela się przecinkiem imiesłówy zakończone na "-ąc", "-łszy", "-wszy" od dalszej części zdania.
+* W zdaniach o konstrukcji "... zarówno A, jak i B ..." orzeczenie jest w liczbie pojedynczej, chyba że A i B to rzeczowniki konkretne (zjawiska lub przedmioty rozpoznawane przez człowieka przy użyciu zmysłów).
+
+
+** Pseudokody **
+
+* Pamiętamy o komentarzach w pseudokodach, jeśli coś jest niejasne.
+* Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. Mutliary-Parent, Multiary-Child.
+* Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
+* Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
+* Do artybutów używamy makra \attrib{obiekt}{atrybut}.
+* Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
+* Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
+* Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
+* Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
+* Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
+* Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
 \li	\ElseNoIf linia_1
 		\End
 \li		\phantom{\kw{else}} linia_2
@@ -108,31 +111,31 @@ V Pseudokody
 ...
 
 
-VI Rysunki i tabele
+** Rysunki i tabele **
 
-1. Rysunki i tabele umieszczamy wewnątrz otoczenia center, które jest wewnątrz figure[ht]. Czasami rysunki kumulują się na końcu rozdziału, aby temu zapobiec, można zastosować figure[ht!].
-2. Rysunki komórek tablic powinny mieć wymiary takie jak w fig02.1 albo w fig08.1, jeśli potrzebne są mniejsze.
-3. W rysunkach dla indeksów tablic itp. używamy decimal (i) infont "cmr8", w innych przypadkach defaultfont := "cmr8"; lub \fontsize{8}{10}\selectfont.
-4. Rysunki kilkuczęściowe oznaczamy literkami (a), (b), ... poprzez umieszczenie w źródle danego rysunku label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (x, y)); gdzie (x, y) jest miejscem, w którym będzie znajdować się literka.
-5. Stosujemy jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white).
-6. Jeśli jest problem ze zmieszczeniem opisu pod rysunkiem z tablicą, ciągiem lub krotką, to można zastosować trik z opuszczeniem trybu matematycznego i zastosowaniem ujemnych odstępów jak w 6.2-1.
-7. Rysunki, które są wzorowane na podobnych z Podręcznika, są opisywane bardzo krótko, aby nie powtarzać objaśnień konwencji z rysunku z Podręcznika, natomiast pozostałe rysunki są opisywane nieco bardziej obszernie.
-8. Pilnujemy, aby w opisie pod rysunkiem nie było sytuacji, w której odniesienie do części rysunku (np. (c)) znalazło się na końcu linii.
+* Rysunki i tabele umieszczamy wewnątrz otoczenia center, które jest wewnątrz figure[ht]. Czasami rysunki kumulują się na końcu rozdziału, aby temu zapobiec, można zastosować figure[ht!].
+* Rysunki komórek tablic powinny mieć wymiary takie jak w fig02.1 albo w fig08.1, jeśli potrzebne są mniejsze.
+* W rysunkach dla indeksów tablic itp. używamy decimal (i) infont "cmr8", w innych przypadkach defaultfont := "cmr8"; lub \fontsize{8}{10}\selectfont.
+* Rysunki kilkuczęściowe oznaczamy literkami (a), (b), ... poprzez umieszczenie w źródle danego rysunku label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (x, y)); gdzie (x, y) jest miejscem, w którym będzie znajdować się literka.
+* Stosujemy jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white).
+* Jeśli jest problem ze zmieszczeniem opisu pod rysunkiem z tablicą, ciągiem lub krotką, to można zastosować trik z opuszczeniem trybu matematycznego i zastosowaniem ujemnych odstępów jak w 6.2-1.
+* Rysunki, które są wzorowane na podobnych z Podręcznika, są opisywane bardzo krótko, aby nie powtarzać objaśnień konwencji z rysunku z Podręcznika, natomiast pozostałe rysunki są opisywane nieco bardziej obszernie.
+* Pilnujemy, aby w opisie pod rysunkiem nie było sytuacji, w której odniesienie do części rysunku (np. (c)) znalazło się na końcu linii.
 
 
-VII Implementacje
+** Implementacje **
 
-1. Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w Podręczniku, jak również każdy algorytm opisany słownie w Podręczniku.
-2. Wyjątkami są algorytmy celowo błędne (w zadaniach na sprawdzenie poprawności danego algorytmu, np. Permute-With-All), niekompletne (uzupełnienie danego algorytmu stanowi polecenie jednego z zadań, np. Enqueue - wówczas implementujemy kompletną wersję) lub nie rozwiązują realnego problemu i służą jako ilustracja pewnej metody (np. Hire-Assistant).
-3. Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w rozwiązaniach.
-4. Implementujemy i testujemy każdy algorytm, który jest opisany słownie w rozwiązaniach, o ile polecenie zadania/problemu mówi wyraźnie o tym, żeby podać lub opisać algorytm.
-5. Procedury pomocnicze, np. Merge, testujemy poprzez uruchomienie testów dla algorytmów wykorzystających te procedury, np. MergeSort. Procedury pomocnicze nie są umieszczane na liście implementacji i, jeśli nie stanowią również procedur pomocniczych dla algorytmów z innych rozdziałów, to są implementowane jako prywatne.
-6. Nie implementujemy dodatkowych procedur tylko dla testów - np. testujemy bezpośrednio Merge', a nie dodatkowo zaimplementowany algorytm MergeSort', który korzysta z Merge'.
-7. W uzasadnionych przypadkach można pominąć testowanie (np. fakt, że Randomize-In-Place permutuje tablicę zgodnie z rozkładem jednostajnym). Wtedy jednak na liście implementacji należy umieścić odpowiedni komentarz.
-8. Algorytmy implementujemy w podejściu proceduralnym, w sposób jak najbardziej zbliżony do zapisu z pseudokodów, wykorzystując struktury danych z najważniejszymi operacjami (np. klasa Heap implementuje kopiec i zawiera dostępne publicznie atrybuty length i heapSzie).
-9. W implementacjach algorytmów w oparciu o opis, można pozwolić sobie na pewną dowolność, np. w podziale algorytmu na kilka metod.
-10. Implementacje algorytmów umieszczamy jako metody publiczne statyczne w klasach ChapterX, gdzie X to numer rozdziału, z którego pochodzi algorytm, a testy -- w klasach ChapterXTest.
-11. Jako nazw metod używamy nazw ich pseudokodów, opuszczając myślniki, a znaki ' zamieniając na _, a w przypadku, gdy dla danego algorytmu nie podano pseudokodu, ustalamy najbardziej odpowiednią nazwę.
-12. Poprawność danego rozwiązania z pseudokodem lub opisem jakiegoś algorytmu stwierdzamy dopiero wtedy, gdy algorytm ten zostanie zaimplementowany i poprawnie przejdzie testy.
-13. Dokumentujemy wszystkie klasy i metody (z wyjątkiem prywatnych konstruktorów klas Chapter??) przy użyciu Javadoca, podając krótki opis, co robi dana klasa/metoda, jaki pseudokod implementuje dana metoda i skąd pochodzi implementowany pseudokod/opis (Podręcznik/rozwiązania), co oznaczają parametry danej metody, co zwraca dana metoda i jakie wyjątki rzuca dana metoda.
-14. Wyróżniamy następujące typy metod: implementujące algorytmy i struktury danych (dostęp publiczny, testowane i dokumentowane); zapisane w pseudokodzie lub jedynie opisane i jawnie określane jako pomocnicze (dostęp pakietowy, testowane pośrednio i dokumentowane); powstałe poprzez podział kodu w opisanych algorytmach (dostęp prywatny, testowane pośrednio). Na liście implementacji znajdują się tylko metody pierwszego typu.
+* Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w Podręczniku, jak również każdy algorytm opisany słownie w Podręczniku.
+* Wyjątkami są algorytmy celowo błędne (w zadaniach na sprawdzenie poprawności danego algorytmu, np. Permute-With-All), niekompletne (uzupełnienie danego algorytmu stanowi polecenie jednego z zadań, np. Enqueue - wówczas implementujemy kompletną wersję) lub nie rozwiązują realnego problemu i służą jako ilustracja pewnej metody (np. Hire-Assistant).
+* Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w rozwiązaniach.
+* Implementujemy i testujemy każdy algorytm, który jest opisany słownie w rozwiązaniach, o ile polecenie zadania/problemu mówi wyraźnie o tym, żeby podać lub opisać algorytm.
+* Procedury pomocnicze, np. Merge, testujemy poprzez uruchomienie testów dla algorytmów wykorzystających te procedury, np. MergeSort. Procedury pomocnicze nie są umieszczane na liście implementacji i, jeśli nie stanowią również procedur pomocniczych dla algorytmów z innych rozdziałów, to są implementowane jako prywatne.
+* Nie implementujemy dodatkowych procedur tylko dla testów - np. testujemy bezpośrednio Merge', a nie dodatkowo zaimplementowany algorytm MergeSort', który korzysta z Merge'.
+* W uzasadnionych przypadkach można pominąć testowanie (np. fakt, że Randomize-In-Place permutuje tablicę zgodnie z rozkładem jednostajnym). Wtedy jednak na liście implementacji należy umieścić odpowiedni komentarz.
+* Algorytmy implementujemy w podejściu proceduralnym, w sposób jak najbardziej zbliżony do zapisu z pseudokodów, wykorzystując struktury danych z najważniejszymi operacjami (np. klasa Heap implementuje kopiec i zawiera dostępne publicznie atrybuty length i heapSzie).
+* W implementacjach algorytmów w oparciu o opis, można pozwolić sobie na pewną dowolność, np. w podziale algorytmu na kilka metod.
+* Implementacje algorytmów umieszczamy jako metody publiczne statyczne w klasach ChapterX, gdzie X to numer rozdziału, z którego pochodzi algorytm, a testy -- w klasach ChapterXTest.
+* Jako nazw metod używamy nazw ich pseudokodów, opuszczając myślniki, a znaki ' zamieniając na _, a w przypadku, gdy dla danego algorytmu nie podano pseudokodu, ustalamy najbardziej odpowiednią nazwę.
+* Poprawność danego rozwiązania z pseudokodem lub opisem jakiegoś algorytmu stwierdzamy dopiero wtedy, gdy algorytm ten zostanie zaimplementowany i poprawnie przejdzie testy.
+* Dokumentujemy wszystkie klasy i metody (z wyjątkiem prywatnych konstruktorów klas Chapter??) przy użyciu Javadoca, podając krótki opis, co robi dana klasa/metoda, jaki pseudokod implementuje dana metoda i skąd pochodzi implementowany pseudokod/opis (Podręcznik/rozwiązania), co oznaczają parametry danej metody, co zwraca dana metoda i jakie wyjątki rzuca dana metoda.
+* Wyróżniamy następujące typy metod: implementujące algorytmy i struktury danych (dostęp publiczny, testowane i dokumentowane); zapisane w pseudokodzie lub jedynie opisane i jawnie określane jako pomocnicze (dostęp pakietowy, testowane pośrednio i dokumentowane); powstałe poprzez podział kodu w opisanych algorytmach (dostęp prywatny, testowane pośrednio). Na liście implementacji znajdują się tylko metody pierwszego typu.
