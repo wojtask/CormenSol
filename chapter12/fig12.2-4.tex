@@ -1,0 +1,12 @@
+\begin{tikzpicture}[
+	level/.style = {level distance=12mm, sibling distance=50mm/2^#1},
+	every node/.style = {align=center, inner sep=-1pt, minimum size=5mm, circle, draw, fill=black!20},
+	marked node/.style = {fill=black!40}
+]
+\node[marked node] {1}
+	child[missing]
+	child {node[marked node] {3}
+		child {node {2}}
+		child {node[marked node] {4}}
+	};
+\end{tikzpicture}
