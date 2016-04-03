@@ -1,6 +1,7 @@
 \ProvidesPackage{cormensol}
 
 \RequirePackage{fancyhdr}
+\RequirePackage{tikz}
 
 % potrzebne do odpowiedniego traktowania rysunków
 \ifpdf
@@ -255,3 +256,13 @@
 \newcommand{\Pclass}{\text{P}}
 \newcommand{\NPclass}{\text{NP}}
 \newcommand{\coNPclass}{\text{co-NP}}
+
+% domyślne style dla wszystkich rysunków
+\tikzset{
+	array/.style = {matrix of nodes, column sep=-\pgflinewidth, nodes={draw, minimum size=5mm, inner sep=0pt, text height=1.5ex}, nodes in empty cells},
+	index node/.style = {font=\scriptsize, inner sep=0pt, minimum size=5mm, inner sep=0pt, text height=1.5ex, node distance = 5mm and 5mm},
+	subpicture label/.style = {font=\small\bfseries\sffamily},
+	level/.style = {level distance=10mm, sibling distance=60mm/2^#1},
+	tree node/.style = {align=center, inner sep=-1pt, minimum size=5mm, circle, draw, fill=black!20},
+	outer/.style = {draw=none, fill=none, inner sep=0pt}
+}
