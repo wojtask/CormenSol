@@ -1,17 +1,13 @@
-\def\scopevdist{-15mm}
-
 \begin{tikzpicture}[
-	array/.style = {matrix of nodes, column sep=-\pgflinewidth, nodes={draw, minimum size=5mm, inner sep=0pt, text height=1.5ex}},
 	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
-	index node/.style = {font=\scriptsize, inner sep=0pt, minimum size=5mm, inner sep=0pt, text height=1.5ex},
 	partition line/.style = {line width=2pt, line cap=rect},
-	picture label/.style = {font=\small\bfseries\sffamily},
-	node distance = 5mm and 5mm,
+	node distance = 3mm,
 	on grid
 ]
 
-\begin{scope}
+\node[outer] (pic a) {
+\begin{tikzpicture}
 	\matrix[array] (arr) {13 & 19 & 9 & 5 & 12 & 8 & 7 & 4 & 11 & 2 & 6 & 21 \\};
 	\draw[partition line] (arr-1-1.north west) -- (arr-1-1.south west);
 	\draw[partition line] (arr-1-12.north east) -- (arr-1-12.south east);
@@ -19,10 +15,11 @@
 	\node[index node, above=of arr-1-1] {$p$};
 	\node[index node, above=of arr-1-12] {$r$};
 	\node[index node, above right=of arr-1-12] {$j$};
-	\node[picture label, left=1 of arr-1-1] {(a)};
-\end{scope}
+\end{tikzpicture}
+};
 
-\begin{scope}[yshift=\scopevdist]
+\node[outer, below=of pic a.south] (pic b) {
+\begin{tikzpicture}
 	\matrix[
 		array,
 		light cell/.list = {1},
@@ -33,10 +30,11 @@
 	\node[index node, above=of arr-1-1] {$p,i$};
 	\node[index node, above=of arr-1-11] {$j$};
 	\node[index node, above=of arr-1-12] {$r$};
-	\node[picture label, left=1 of arr-1-1] {(b)};
-\end{scope}
+\end{tikzpicture}
+};
 
-\begin{scope}[yshift=2*\scopevdist]
+\node[outer, below=of pic b.south] (pic c) {
+\begin{tikzpicture}
 	\matrix[
 		array,
 		light cell/.list = {1,2},
@@ -48,10 +46,11 @@
 	\node[index node, above=of arr-1-2] {$i$};
 	\node[index node, above=of arr-1-10] {$j$};
 	\node[index node, above=of arr-1-12] {$r$};
-	\node[picture label, left=1 of arr-1-1] {(c)};
-\end{scope}
+\end{tikzpicture}
+};
 
-\begin{scope}[yshift=3*\scopevdist]
+\node[outer, below=of pic c.south] (pic d) {
+\begin{tikzpicture}
 	\matrix[
 		array,
 		light cell/.list = {1,2,3,4,5,6,7,8,9},
@@ -62,7 +61,12 @@
 	\node[index node, above=of arr-1-9] {$j$};
 	\node[index node, above=of arr-1-10] {$i$};
 	\node[index node, above=of arr-1-12] {$r$};
-	\node[picture label, left=1 of arr-1-1] {(d)};
-\end{scope}
+\end{tikzpicture}
+};
+
+\node[subpicture label, left=1mm of pic a.south west, anchor=south] (label a) {(a)};
+\foreach \x in {b,c,d} {
+	\node[subpicture label, anchor=south] at (label a |- pic \x.south west) (label \x) {(\x)};
+}
 
 \end{tikzpicture}
