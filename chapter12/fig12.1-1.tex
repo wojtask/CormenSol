@@ -1,0 +1,115 @@
+\begin{tikzpicture}
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {10}
+		child {node {4}
+			child {node {1}}
+			child {node {5}}
+		}
+		child {node {17}
+			child {node {16}}
+			child {node {21}}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {17}
+		child {node {4}
+			child {node {1}}
+			child {node {10}
+				child {node {5}}
+				child {node {16}}
+			}
+		}
+		child {node {21}};
+\end{tikzpicture}
+};
+
+\node[outer, below=15mm of pic a] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {16}
+		child {node {10}
+			child {node {1}
+				child[missing]
+				child {node {5}
+					child {node {4}}
+					child[missing]
+				}
+			}
+			child[missing]
+		}
+		child {node {21}
+			child {node {17}}
+			child[missing]
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic c] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {1}
+		child[missing]
+		child {node {4}
+			child[missing]
+			child {node {21}
+				child {node {10}
+					child {node {5}}
+					child {node {17}
+						child {node {16}}
+						child[missing]
+					}
+				}
+				child[missing]
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic d] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {1}
+		child[missing]
+		child {node {21}
+			child {node {17}
+				child {node {16}
+					child {node {5}
+						child[missing]
+						child {node {10}
+							child {node {4}}
+							child[missing]
+						}
+					}
+					child[missing]
+				}
+				child[missing]
+			}
+			child[missing]
+		};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] {(a)};
+\node[subpicture label, below=2mm of pic b] {(b)};
+\node[subpicture label, below=2mm of pic c] {(c)};
+\node[subpicture label, below=2mm of pic d] {(d)};
+\node[subpicture label, below=2mm of pic e] {(e)};
+
+\end{tikzpicture}
