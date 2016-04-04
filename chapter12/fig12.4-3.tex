@@ -1,0 +1,75 @@
+\begin{tikzpicture}
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {1}
+		child[missing]
+		child {node {2}
+			child[missing]
+			child {node {3}}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {1}
+		child[missing]
+		child {node {3}
+			child {node {2}}
+			child[missing]
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {2}
+		child {node {1}}
+		child {node {3}};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic c] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {3}
+		child {node {1}
+			child[missing]
+			child {node {2}}
+		}
+		child[missing];
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic d] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node {3}
+		child {node {2}
+			child {node {1}}
+			child[missing]
+		}
+		child[missing];
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] (label a) {(a)};
+\foreach \x in {b,c,d,e} {
+	\node[subpicture label] at (label a -| pic \x) {(\x)};
+}
+
+\end{tikzpicture}
