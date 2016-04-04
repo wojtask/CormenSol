@@ -2,7 +2,7 @@
 	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
 	partition line/.style = {line width=2pt, line cap=rect},
-	node distance = 3mm,
+	outer/.append style = {node distance=4mm},
 	on grid
 ]
 
@@ -66,7 +66,7 @@
 
 \node[subpicture label, left=1mm of pic a.south west, anchor=south] (label a) {(a)};
 \foreach \x in {b,c,d} {
-	\node[subpicture label, anchor=south] at (label a |- pic \x.south west) (label \x) {(\x)};
+	\node[subpicture label, anchor=south] at (label a |- pic \x.south west) {(\x)};
 }
 
 \end{tikzpicture}

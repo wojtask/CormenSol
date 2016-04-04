@@ -1,5 +1,5 @@
 \begin{tikzpicture}[
-	outer/.append style = {node distance=12mm and 12mm},
+	outer/.append style = {node distance=15mm and 12mm},
 	inner/.style = {draw=none, fill=none, node distance=3.5mm, every node/.style=tree node},
 	level/.append style = {sibling distance=30mm/2^#1}
 ]
@@ -96,7 +96,7 @@
 \end{tikzpicture}
 };
 
-\node[draw=none, fill=none] (bottom center) at ($ (pic a.south west) ! .5 ! (pic c.south east) $) {};
+\node[draw=none, fill=none] (bottom center) at ($ (pic a.south west)!.5!(pic c.south east) $) {};
 
 \node[outer, below=of bottom center, anchor=north] (pic d) {
 \begin{tikzpicture}

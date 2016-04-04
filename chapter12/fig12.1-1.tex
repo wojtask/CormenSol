@@ -1,7 +1,8 @@
 \begin{tikzpicture}[
 	level 4/.style = {sibling distance=5mm},
 	level 5/.style = {sibling distance=4mm},
-	level 6/.style = {sibling distance=3.5mm}
+	level 6/.style = {sibling distance=3.5mm},
+	outer/.append style = {node distance=22mm and 15mm}
 ]
 
 \node[outer] (pic a) {
@@ -21,7 +22,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=18mm of pic a.north east, anchor=north west] (pic b) {
+\node[outer, right=28mm of pic a.north east, anchor=north west] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -38,7 +39,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=22mm of pic a.south west, anchor=north west] (pic c) {
+\node[outer, below=of pic a.south west, anchor=north west] (pic c) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center

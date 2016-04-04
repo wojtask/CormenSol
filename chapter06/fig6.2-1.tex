@@ -1,6 +1,7 @@
 \begin{tikzpicture}[
 	marked node/.style = {tree node, fill=black!40},
-	every label/.style = {index node, draw=none, fill=none}
+	every label/.style = {index node, draw=none, fill=none},
+	outer/.append style = {node distance=15mm and 15mm}
 ]
 
 \node[outer] (pic a) {
@@ -61,7 +62,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=15mm of pic a] (pic c) {
+\node[outer, below=of pic a] (pic c) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center

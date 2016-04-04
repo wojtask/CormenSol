@@ -1,9 +1,13 @@
 \begin{tikzpicture}[
-	node distance = 15mm
+	level/.append style = {sibling distance=30mm/2^#1},
+	outer/.append style = {node distance=15mm}
 ]
 
 \node[outer] (pic a) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
 	\node {4}
 		child {node {3}}
 		child {node {7}
@@ -14,7 +18,10 @@
 };
 
 \node[outer, right=of pic a] (pic b) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
 	\node {7}
 		child {node {6}
 			child[missing]
@@ -25,7 +32,10 @@
 };
 
 \node[outer, right=of pic b] (pic c) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
 	\node {6}
 		child[missing]
 		child {node {7}

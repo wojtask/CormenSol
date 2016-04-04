@@ -1,6 +1,7 @@
 \begin{tikzpicture}[
 	every node/.style = {tree node},
-	marked node/.style = {fill=black!40}
+	marked node/.style = {fill=black!40},
+	level/.append style = {sibling distance=30mm/2^#1}
 ]
 \node[marked node] {1}
 	child[missing]

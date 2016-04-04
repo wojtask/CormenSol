@@ -1,4 +1,6 @@
-\begin{tikzpicture}
+\begin{tikzpicture}[
+	outer/.append style = {node distance=15mm}
+]
 
 \node[outer] (pic a) {
 \begin{tikzpicture}[
@@ -29,7 +31,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=15mm of pic a] (pic b) {
+\node[outer, right=of pic a] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
