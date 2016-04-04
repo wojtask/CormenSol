@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+	\node {3}
+		child {node {2}}
+		child {node {1}};
+\end{tikzpicture}
+};
+
+\node[outer, right=20mm of pic a] (pic b) {
+\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+	\node {3}
+		child {node {1}}
+		child {node {2}};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] {(a)};
+\node[subpicture label, below=2mm of pic b] {(b)};
+
+\end{tikzpicture}
