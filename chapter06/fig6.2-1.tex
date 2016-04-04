@@ -4,7 +4,10 @@
 ]
 
 \node[outer] (pic a) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
 	\node[label=1] {27}
 		child {node[label=2] {17}
 			child {node[label=4] {16}
@@ -30,7 +33,10 @@
 };
 
 \node[outer, right=of pic a] (pic b) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
 	\node[label=1] {27}
 		child {node[label=2] {17}
 			child {node[label=4] {16}
@@ -56,7 +62,10 @@
 };
 
 \node[outer, below=of pic a] (pic c) {
-\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
 	\node[label=1] {27}
 		child {node[label=2] {17}
 			child {node[label=4] {16}

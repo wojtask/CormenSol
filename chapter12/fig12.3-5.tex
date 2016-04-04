@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+	node distance = 15mm
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+	\node {4}
+		child {node {3}}
+		child {node {7}
+			child {node {6}}
+			child[missing]
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+	\node {7}
+		child {node {6}
+			child[missing]
+			child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+		}
+		child[missing];
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b] (pic c) {
+\begin{tikzpicture}[every node/.style = tree node, anchor=center]
+	\node {6}
+		child[missing]
+		child {node {7}
+			child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			child[missing]
+		};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] {(a)};
+\node[subpicture label, below=2mm of pic b] {(b)};
+\node[subpicture label, below=2mm of pic c] {(c)};
+
+\end{tikzpicture}
