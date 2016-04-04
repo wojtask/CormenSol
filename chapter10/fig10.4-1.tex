@@ -1,0 +1,18 @@
+\begin{tikzpicture}[
+	every node/.style = {tree node, anchor=center},
+	every label/.style = {index node, draw=none, fill=none}
+]
+\node[label=6] {18}
+	child {node[label=1] {12}
+		child {node[label=7] {7}}
+		child {node[label=3] {4}
+			child {node[label=10] {5}}
+			child[missing]
+		}
+	}
+	child {node[label=4] {10}
+		child {node[label=5] {2}}
+		child {node[label=9] {21}}
+	};
+
+\end{tikzpicture}
