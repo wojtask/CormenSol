@@ -1,4 +1,8 @@
-\begin{tikzpicture}
+\begin{tikzpicture}[
+	level 4/.style = {sibling distance=5mm},
+	level 5/.style = {sibling distance=4mm},
+	level 6/.style = {sibling distance=3.5mm}
+]
 
 \node[outer] (pic a) {
 \begin{tikzpicture}[
@@ -17,7 +21,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic a] (pic b) {
+\node[outer, right=18mm of pic a.north east, anchor=north west] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -34,7 +38,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=15mm of pic a] (pic c) {
+\node[outer, below=22mm of pic a.south west, anchor=north west] (pic c) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -57,7 +61,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic c] (pic d) {
+\node[outer, right=of pic c.north east, anchor=north west] (pic d) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -80,7 +84,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic d] (pic e) {
+\node[outer, right=of pic d.north east, anchor=north west] (pic e) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -106,10 +110,8 @@
 \end{tikzpicture}
 };
 
-\node[subpicture label, below=2mm of pic a] {(a)};
-\node[subpicture label, below=2mm of pic b] {(b)};
-\node[subpicture label, below=2mm of pic c] {(c)};
-\node[subpicture label, below=2mm of pic d] {(d)};
-\node[subpicture label, below=2mm of pic e] {(e)};
+\foreach \x in {a,b,c,d,e} {
+	\node[subpicture label, below=2mm of pic \x] {(\x)};
+}
 
 \end{tikzpicture}
