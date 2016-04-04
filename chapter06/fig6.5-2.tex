@@ -1,0 +1,127 @@
+\begin{tikzpicture}[
+	marked node/.style = {tree node, fill=black!40},
+	every label/.style = {index node, draw=none, fill=none}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {15}
+		child {node {13}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {12}
+				child {node {6}}
+				child {node {2}}
+			}
+		}
+		child {node {9}
+			child {node {8}
+				child {node {1}}
+				child {node[marked node, font=\footnotesize] {$-\infty$}}
+			}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {15}
+		child {node {13}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {12}
+				child {node {6}}
+				child {node {2}}
+			}
+		}
+		child {node {9}
+			child {node {8}
+				child {node {1}}
+				child {node[marked node, font=\footnotesize, label=right:{$i$}] {10}}
+			}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, below=15mm of pic a] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {15}
+		child {node {13}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {12}
+				child {node {6}}
+				child {node {2}}
+			}
+		}
+		child {node {9}
+			child {node[marked node, font=\footnotesize, label=right:{$i$}] {10}
+				child {node {1}}
+				child {node {8}}
+			}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic c] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {15}
+		child {node {13}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {12}
+				child {node {6}}
+				child {node {2}}
+			}
+		}
+		child {node[marked node, font=\footnotesize, label=right:{$i$}] {10}
+			child {node {9}
+				child {node {1}}
+				child {node {8}}
+			}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] {(a)};
+\node[subpicture label, below=2mm of pic b] {(b)};
+\node[subpicture label, below=2mm of pic c] {(c)};
+\node[subpicture label, below=2mm of pic d] {(d)};
+
+\end{tikzpicture}

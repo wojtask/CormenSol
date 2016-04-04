@@ -1,0 +1,61 @@
+\begin{tikzpicture}
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {15}
+		child {node {13}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {12}
+				child {node {6}}
+				child {node {2}}
+			}
+		}
+		child {node {9}
+			child {node {8}
+				child {node {1}}
+				child[missing]
+			}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=15mm of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {13}
+		child {node {12}
+			child {node {5}
+				child {node {4}}
+				child {node {0}}
+			}
+			child {node {6}
+				child {node {1}}
+				child {node {2}}
+			}
+		}
+		child {node {9}
+			child {node {8}}
+			child {node {7}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a] {(a)};
+\node[subpicture label, below=2mm of pic b] {(b)};
+
+\end{tikzpicture}
