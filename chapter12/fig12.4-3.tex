@@ -1,4 +1,6 @@
-\begin{tikzpicture}
+\begin{tikzpicture}[
+	level/.style = {level distance=10mm, sibling distance=30mm/2^#1}
+]
 
 \node[outer] (pic a) {
 \begin{tikzpicture}[
@@ -14,7 +16,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic a] (pic b) {
+\node[outer, right=of pic a.north east, anchor=north west] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -28,7 +30,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic b] (pic c) {
+\node[outer, right=of pic b.north east, anchor=north west] (pic c) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -39,7 +41,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic c] (pic d) {
+\node[outer, right=of pic c.north east, anchor=north west] (pic d) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
@@ -53,7 +55,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic d] (pic e) {
+\node[outer, right=of pic d.north east, anchor=north west] (pic e) {
 \begin{tikzpicture}[
 	every node/.style = tree node,
 	anchor = center
