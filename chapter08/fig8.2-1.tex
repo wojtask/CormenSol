@@ -1,0 +1,143 @@
+\begin{tikzpicture}[
+	row 1/.style = {nodes={fill=black!20}},
+	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
+	outer/.append style = {node distance=10mm and 8mm, scale=0.7},
+	inner/.style = {draw=none, fill=none, node distance=4mm},
+	on grid
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}
+	\node[inner] (pic a1) {
+	\begin{tikzpicture}
+		\matrix[array] (arr) {6 & 0 & 2 & 0 & 1 & 3 & 4 & 6 & 1 & 3 & 2 \\};
+		\foreach \x in {1,...,11} {
+			\node[index node, above=of arr-1-\x] {\x};
+		}
+		\node[left=of arr-1-1.west] {$A$};
+	\end{tikzpicture}
+	};
+	\node[inner, below=of pic a1.south west, anchor=north west] {
+	\begin{tikzpicture}
+		\matrix[array] (arr) {2 & 2 & 2 & 2 & 1 & 0 & 2 \\};
+		\foreach [count=\y] \x in {0, ..., 6} {
+			\node[index node, above=of arr-1-\y] {\x};
+		}
+		\node[left=of arr-1-1.west] {$C$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a.east] (pic b) {
+\begin{tikzpicture}
+	\node[inner] {
+	\begin{tikzpicture}
+		\matrix[array, row 1/.style = {column sep=0pt, nodes={fill=none, draw=none}}] { & & & & & & & & & & \\};
+		\matrix[array] (arr) {2 & 4 & 6 & 8 & 9 & 9 & 11 \\};
+		\foreach [count=\y] \x in {0, ..., 6} {
+			\node[index node, above=of arr-1-\y] {\x};
+		}
+		\node[left=of arr-1-1.west] {$C$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b.east] (pic c) {
+\begin{tikzpicture}
+	\node[inner] (pic c1) {
+	\begin{tikzpicture}[
+		med cell/.list = {1,2,3,4,5,7,8,9,10,11}
+	]
+		\matrix[array] (arr) { & & & & & 2 & & & & & \\};
+		\foreach \x in {1,...,11} {
+			\node[index node, above=of arr-1-\x] {\x};
+		}
+		\node[left=of arr-1-1.west] {$B$};
+	\end{tikzpicture}
+	};
+	\node[inner, below=of pic c1.south west, anchor=north west] {
+	\begin{tikzpicture}
+		\matrix[array] (arr) {2 & 4 & 5 & 8 & 9 & 9 & 11 \\};
+		\foreach [count=\y] \x in {0, ..., 6} {
+			\node[index node, above=of arr-1-\y] {\x};
+		}
+		\node[left=of arr-1-1.west] {$C$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a.south] (pic d) {
+\begin{tikzpicture}
+	\node[inner] (pic d1) {
+	\begin{tikzpicture}[
+		med cell/.list = {1,2,3,4,5,7,9,10,11}
+	]
+		\matrix[array] (arr) { & & & & & 2 & & 3 & & & \\};
+		\foreach \x in {1,...,11} {
+			\node[index node, above=of arr-1-\x] {\x};
+		}
+		\node[left=of arr-1-1.west] {$B$};
+	\end{tikzpicture}
+	};
+	\node[inner, below=of pic d1.south west, anchor=north west] {
+	\begin{tikzpicture}
+		\matrix[array] (arr) {2 & 4 & 5 & 7 & 9 & 9 & 11 \\};
+		\foreach [count=\y] \x in {0, ..., 6} {
+			\node[index node, above=of arr-1-\y] {\x};
+		}
+		\node[left=of arr-1-1.west] {$C$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic d.east] (pic e) {
+\begin{tikzpicture}
+	\node[inner] (pic e1) {
+	\begin{tikzpicture}[
+		med cell/.list = {1,2,3,5,7,9,10,11}
+	]
+		\matrix[array] (arr) { & & & 1 & & 2 & & 3 & & & \\};
+		\foreach \x in {1,...,11} {
+			\node[index node, above=of arr-1-\x] {\x};
+		}
+		\node[left=of arr-1-1.west] {$B$};
+	\end{tikzpicture}
+	};
+	\node[inner, below=of pic e1.south west, anchor=north west] {
+	\begin{tikzpicture}
+		\matrix[array] (arr) {2 & 3 & 5 & 7 & 9 & 9 & 11 \\};
+		\foreach [count=\y] \x in {0, ..., 6} {
+			\node[index node, above=of arr-1-\y] {\x};
+		}
+		\node[left=of arr-1-1.west] {$C$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic e.east] (pic f) {
+\begin{tikzpicture}
+	\node[inner] {
+	\begin{tikzpicture}
+		\matrix[array] (arr) { 0 & 0 & 1 & 1 & 2 & 2 & 3 & 3 & 4 & 6 & 6 \\};
+		\foreach \x in {1,...,11} {
+			\node[index node, above=of arr-1-\x] {\x};
+		}
+		\node[left=of arr-1-1.west] {$B$};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=2mm of pic a.south] (label a) {(a)};
+\node[subpicture label] at (label a -| pic b) {(b)};
+\node[subpicture label] at (label a -| pic c) {(c)};
+\node[subpicture label, below=2mm of pic d.south] (label d) {(d)};
+\node[subpicture label] at (label d -| pic e) {(e)};
+\node[subpicture label] at (label d -| pic f) {(f)};
+
+\end{tikzpicture}
