@@ -1,0 +1,100 @@
+\begin{tikzpicture}[
+	row 1/.style = {nodes={index node, draw=none, fill=none}},
+	light cell/.style = {row 2 column #1/.style={nodes={fill=black!20}}},
+	black cell/.style = {row 2 column #1/.style={nodes={fill=black, text=white}}},
+	outer/.append style = {node distance=10mm and 13mm},
+	light edge/.style = {semithick, draw=black!20, bend right=90, ->, >={stealth'[bend]}},
+	black edge/.style = {semithick, ->, >={stealth'[bend]}}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}
+	\matrix[
+		array,
+		light cell/.list = {1},
+		black cell/.list = {2}		
+	] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\		
+		31 & 41 & 59 & 26 & 41 & 58 \\
+	};
+	\draw (arr-2-2) edge[black edge, loop below] ();
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(a)};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a.north east, anchor=north west] (pic b) {
+\begin{tikzpicture}
+	\matrix[
+		array,
+		light cell/.list = {2},
+		black cell/.list = {3}
+	] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\
+		31 & 41 & 59 & 26 & 41 & 58 \\
+	};
+	\draw (arr-2-3) edge[black edge, loop below] ();
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(b)};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b.north east, anchor=north west] (pic c) {
+\begin{tikzpicture}
+	\matrix[
+		array,
+		light cell/.list = {1,2,3},
+		black cell/.list = {4}
+	] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\		
+		31 & 41 & 59 & 26 & 41 & 58 \\
+	};
+	\draw (arr-2-1.280) edge[light edge] (arr-2-2.260);
+	\draw (arr-2-2.280) edge[light edge] (arr-2-3.260);
+	\draw (arr-2-3.280) edge[light edge] (arr-2-4.260);
+	\draw (arr-2-4.300) edge[black edge, bend left=50] (arr-2-1.240);
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(c)};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a.south west, anchor=north west] (pic d) {
+\begin{tikzpicture}
+	\matrix[
+		array,
+		light cell/.list = {3,4},
+		black cell/.list = {5}
+	] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\	
+		26 & 31 & 41 & 59 & 41 & 58 \\
+	};
+	\draw (arr-2-4.280) edge[light edge] (arr-2-5.260);
+	\draw (arr-2-5.300) edge[black edge, bend left=90] (arr-2-4.240);
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(d)};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic d.north east, anchor=north west] (pic e) {
+\begin{tikzpicture}
+	\matrix[
+		array,
+		light cell/.list = {4,5},
+		black cell/.list = {6}
+	] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\
+		26 & 31 & 41 & 41 & 59 & 58 \\
+	};
+	\draw (arr-2-5.280) edge[light edge] (arr-2-6.260);
+	\draw (arr-2-6.300) edge[black edge, bend left=90] (arr-2-5.240);
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(e)};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic e.north east, anchor=north west] (pic f) {
+\begin{tikzpicture}
+	\matrix[array] (arr) {
+		 1 &  2 &  3 &  4 &  5 &  6 \\	
+		26 & 31 & 41 & 41 & 58 & 59 \\
+	};
+	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(f)};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}
