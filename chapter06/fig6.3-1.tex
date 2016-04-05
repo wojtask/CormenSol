@@ -1,0 +1,139 @@
+\begin{tikzpicture}[
+	marked node/.style = {tree node, fill=black!40},
+	every label/.style = {index node, draw=none, fill=none},
+	outer/.append style = {node distance=15mm and 15mm},
+	inner/.style = {draw=none, fill=none, node distance=3mm},
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}
+	\node[inner] (pic a1) {
+	\begin{tikzpicture}[
+		row 1/.style = {nodes={fill=black!20}}
+	]
+		\matrix[array] (arr) {5 & 3 & 17 & 10 & 84 & 19 & 6 & 22 & 9 \\};
+		\node[left=3mm of arr-1-1] {$A$};
+	\end{tikzpicture}
+	};
+	\node[inner, below=of pic a1] {
+	\begin{tikzpicture}[
+		every node/.style = {tree node},
+		anchor = center
+	]
+		\node[label=1] {5}
+			child {node[label=2] {3}
+				child {node[marked node, label=4, label=left:{$i$}] {10}
+					child {node[label=8] {22}}
+					child {node[label=9] {9}}
+				}
+				child {node[label=5] {84}}
+			}
+			child {node[label=3] {17}
+				child {node[label=6] {19}}
+				child {node[label=7] {6}
+					child[missing]
+					child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+				}
+			};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a.south east, anchor=south west] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[label=1] {5}
+		child {node[label=2] {3}
+			child {node[label=4] {22}
+				child {node[label=8] {10}}
+				child {node[label=9] {9}}
+			}
+			child {node[label=5] {84}}
+		}
+		child {node[marked node, label=3, label=left:{$i$}] {17}
+			child {node[label=6] {19}}
+			child {node[label=7] {6}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node[label=1] {5}
+		child {node[marked node, label=2, label=left:{$i$}] {3}
+			child {node[label=4] {22}
+				child {node[label=8] {10}}
+				child {node[label=9] {9}}
+			}
+			child {node[label=5] {84}}
+		}
+		child {node[label=3] {19}
+			child {node[label=6] {17}}
+			child {node[label=7] {6}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic c] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node[marked node, label=1, label=left:{$i$}] {5}
+		child {node[label=2] {84}
+			child {node[label=4] {22}
+				child {node[label=8] {10}}
+				child {node[label=9] {9}}
+			}
+			child {node[label=5] {3}}
+		}
+		child {node[label=3] {19}
+			child {node[label=6] {17}}
+			child {node[label=7] {6}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic c] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = tree node,
+	anchor = center
+]
+	\node[label=1] {84}
+		child {node[label=2] {22}
+			child {node[label=4] {10}
+				child {node[label=8] {5}}
+				child {node[label=9] {9}}
+			}
+			child {node[label=5] {3}}
+		}
+		child {node[label=3] {19}
+			child {node[label=6] {17}}
+			child {node[label=7] {6}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\foreach \x in {a,b,c,d,e} {
+	\node[subpicture label, below=2mm of pic \x] {(\x)};
+}
+
+\end{tikzpicture}
