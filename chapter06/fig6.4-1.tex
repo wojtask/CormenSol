@@ -1,0 +1,228 @@
+\begin{tikzpicture}[
+	marked node/.style = {tree node, fill=black!40},
+	every label/.style = {index node, draw=none, fill=none},
+	outer/.append style = {node distance=13mm and 8mm},
+	outer scaled/.style = {outer, scale=0.7}
+]
+
+\node[outer scaled] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {25}
+		child {node {13}
+			child {node {8}
+				child {node {5}}
+				child {node {4}}
+			}
+			child {node {7}}
+		}
+		child {node {20}
+			child {node {17}}
+			child {node {2}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {20}
+		child {node {13}
+			child {node {8}
+				child {node {5}}
+				child {node[marked node, label=right:{$i$}] {25} edge from parent[draw=none]}
+			}
+			child {node {7}}
+		}
+		child {node {17}
+			child {node {4}}
+			child {node {2}
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, right=of pic b] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {17}
+		child {node {13}
+			child {node {8}
+				child {node[marked node, label=left:{$i$}] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node {7}}
+		}
+		child {node {5}
+			child {node {4}}
+			child {node {2}
+				child[missing]
+				child {node[draw=none, fill=none, label=right:{}] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic a] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {13}
+		child {node {8}
+			child {node {2}
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node {7}}
+		}
+		child {node {5}
+			child {node {4}}
+			child {node[marked node, label=left:{$i$}] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic b] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {8}
+		child {node {7}
+			child {node {2}
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node {4}}
+		}
+		child {node {5}
+			child {node[marked node, label=left:{$i$}] {13} edge from parent[draw=none]}
+			child {node[marked node] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic c] (pic f) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {7}
+		child {node {4}
+			child {node {2}
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node[marked node, label=left:{$i$}] {8} edge from parent[draw=none]}
+		}
+		child {node {5}
+			child {node[marked node] {13} edge from parent[draw=none]}
+			child {node[marked node] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic d] (pic g) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {5}
+		child {node {4}
+			child {node[marked node, label=left:{$i$}] {7} edge from parent[draw=none]
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node[marked node] {8} edge from parent[draw=none]}
+		}
+		child {node {2}
+			child {node[marked node] {13} edge from parent[draw=none]}
+			child {node[marked node] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic e] (pic h) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {4}
+		child {node {2}
+			child {node[marked node] {7} edge from parent[draw=none]
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node[marked node] {8} edge from parent[draw=none]}
+		}
+		child {node[marked node, label=left:{$i$}] {5} edge from parent[draw=none]
+			child {node[marked node] {13} edge from parent[draw=none]}
+			child {node[marked node] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer scaled, below=of pic f] (pic i) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node {2}
+		child {node[marked node, label=left:{$i$}] {4} edge from parent[draw=none]
+			child {node[marked node] {7} edge from parent[draw=none]
+				child {node[marked node] {20} edge from parent[draw=none]}
+				child {node[marked node] {25} edge from parent[draw=none]}
+			}
+			child {node[marked node] {8} edge from parent[draw=none]}
+		}
+		child {node[marked node] {5} edge from parent[draw=none]
+			child {node[marked node] {13} edge from parent[draw=none]}
+			child {node[marked node] {17} edge from parent[draw=none]
+				child[missing]
+				child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			}
+		};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic g] (pic j) {
+\begin{tikzpicture}[
+	row 1/.style = {nodes={fill=black!20}}
+]
+	\matrix[array] (arr) {2 & 4 & 5 & 7 & 8 & 13 & 17 & 20 & 25 \\};
+	\node[left=3mm of arr-1-1] {$A$};
+\end{tikzpicture}
+};
+
+\foreach \x in {a,b,c,d,e,f,g,h,i,j} {
+	\node[subpicture label, below=2mm of pic \x] {(\x)};
+}
+
+\end{tikzpicture}
