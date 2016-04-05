@@ -3,8 +3,8 @@
 	light cell/.style = {row 2 column #1/.style={nodes={fill=black!20}}},
 	black cell/.style = {row 2 column #1/.style={nodes={fill=black, text=white}}},
 	outer/.append style = {node distance=10mm and 13mm},
-	light edge/.style = {semithick, draw=black!20, bend right=90, ->, >={stealth'[bend]}},
-	black edge/.style = {semithick, ->, >={stealth'[bend]}}
+	light edge/.style = {->, >={stealth'[bend]}, draw=black!20, bend right=90, distance=2.5mm, out=280, in=260},
+	black edge/.style = {->, >={stealth'[bend]}, bend left=90, distance=5mm}
 ]
 
 \node[outer] (pic a) {
@@ -17,8 +17,8 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\		
 		31 & 41 & 59 & 26 & 41 & 58 \\
 	};
-	\draw (arr-2-2) edge[black edge, loop below] ();
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(a)};
+	\draw (arr-2-2.300) edge[black edge] (arr-2-2.240);
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(a)};
 \end{tikzpicture}
 };
 
@@ -32,8 +32,8 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\
 		31 & 41 & 59 & 26 & 41 & 58 \\
 	};
-	\draw (arr-2-3) edge[black edge, loop below] ();
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(b)};
+	\draw (arr-2-3.300) edge[black edge] (arr-2-3.240);
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(b)};
 \end{tikzpicture}
 };
 
@@ -47,11 +47,11 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\		
 		31 & 41 & 59 & 26 & 41 & 58 \\
 	};
-	\draw (arr-2-1.280) edge[light edge] (arr-2-2.260);
-	\draw (arr-2-2.280) edge[light edge] (arr-2-3.260);
-	\draw (arr-2-3.280) edge[light edge] (arr-2-4.260);
-	\draw (arr-2-4.300) edge[black edge, bend left=50] (arr-2-1.240);
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(c)};
+	\draw (arr-2-1) edge[light edge] (arr-2-2)
+	      (arr-2-2) edge[light edge] (arr-2-3)
+	      (arr-2-3) edge[light edge] (arr-2-4)
+	      (arr-2-4.300) edge[black edge] (arr-2-1.240);
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(c)};
 \end{tikzpicture}
 };
 
@@ -65,9 +65,9 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\	
 		26 & 31 & 41 & 59 & 41 & 58 \\
 	};
-	\draw (arr-2-4.280) edge[light edge] (arr-2-5.260);
-	\draw (arr-2-5.300) edge[black edge, bend left=90] (arr-2-4.240);
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(d)};
+	\draw (arr-2-4) edge[light edge] (arr-2-5)
+	      (arr-2-5.300) edge[black edge] (arr-2-4.240);
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(d)};
 \end{tikzpicture}
 };
 
@@ -81,9 +81,9 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\
 		26 & 31 & 41 & 41 & 59 & 58 \\
 	};
-	\draw (arr-2-5.280) edge[light edge] (arr-2-6.260);
-	\draw (arr-2-6.300) edge[black edge, bend left=90] (arr-2-5.240);
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(e)};
+	\draw (arr-2-5) edge[light edge] (arr-2-6)
+          (arr-2-6.300) edge[black edge] (arr-2-5.240);
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(e)};
 \end{tikzpicture}
 };
 
@@ -93,7 +93,7 @@
 		 1 &  2 &  3 &  4 &  5 &  6 \\	
 		26 & 31 & 41 & 41 & 58 & 59 \\
 	};
-	\node[subpicture label, left=5mm of arr-2-1.west, anchor=east] {(f)};
+	\node[subpicture label, left=3mm of arr-2-1.west, anchor=east] {(f)};
 \end{tikzpicture}
 };
 
