@@ -1,11 +1,12 @@
 \begin{tikzpicture}[
 	marked node/.style = {tree node, fill=black!40},
 	every label/.style = {index node, draw=none, fill=none},
-	outer/.append style = {node distance=13mm and 8mm},
-	outer scaled/.style = {outer, scale=0.7}
+	outer/.append style = {node distance=12mm and 6mm},
+	level/.append style = {level distance=7mm, sibling distance=42mm/2^#1},
+	tree node/.append style = {minimum size=4mm},
 ]
 
-\node[outer scaled] (pic a) {
+\node[outer] (pic a) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -28,7 +29,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, right=of pic a] (pic b) {
+\node[outer, right=of pic a] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -51,7 +52,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, right=of pic b] (pic c) {
+\node[outer, right=of pic b] (pic c) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -74,7 +75,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic a] (pic d) {
+\node[outer, below=of pic a] (pic d) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -97,7 +98,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic b] (pic e) {
+\node[outer, below=of pic b] (pic e) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -120,7 +121,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic c] (pic f) {
+\node[outer, below=of pic c] (pic f) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -143,7 +144,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic d] (pic g) {
+\node[outer, below=of pic d] (pic g) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -166,7 +167,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic e] (pic h) {
+\node[outer, below=of pic e] (pic h) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -189,7 +190,7 @@
 \end{tikzpicture}
 };
 
-\node[outer scaled, below=of pic f] (pic i) {
+\node[outer, below=of pic f] (pic i) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
@@ -217,12 +218,12 @@
 	row 1/.style = {nodes={fill=black!20}}
 ]
 	\matrix[array] (arr) {2 & 4 & 5 & 7 & 8 & 13 & 17 & 20 & 25 \\};
-	\node[left=3mm of arr-1-1] {$A$};
+	\node[left=3mm of arr-1-1.west] {$A$};
 \end{tikzpicture}
 };
 
 \foreach \x in {a,b,c,d,e,f,g,h,i,j} {
-	\node[subpicture label, below=2mm of pic \x] {(\x)};
+	\node[subpicture label, below=1mm of pic \x] {(\x)};
 }
 
 \end{tikzpicture}

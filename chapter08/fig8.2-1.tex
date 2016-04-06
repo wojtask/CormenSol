@@ -1,8 +1,9 @@
 \begin{tikzpicture}[
-	row 1/.style = {nodes={fill=black!20}},
+	index node/.append style = {minimum size=2mm, text height=1.5ex, node distance=3.5mm and 3.5mm},
+	row 1/.style = {nodes={fill=black!20, minimum size=3.5mm}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
-	outer/.append style = {node distance=10mm and 8mm, scale=0.7},
-	inner/.style = {draw=none, fill=none, node distance=4mm},
+	outer/.append style = {node distance=10mm and 8mm},
+	inner/.style = {draw=none, fill=none, node distance=4mm and 2mm},
 	on grid
 ]
 
@@ -33,7 +34,7 @@
 \begin{tikzpicture}
 	\node[inner] {
 	\begin{tikzpicture}
-		\matrix[array, row 1/.style = {column sep=0pt, nodes={fill=none, draw=none}}] { & & & & & & & & & & \\};
+		\matrix[array, row 1/.append style = {column sep=0pt, nodes={fill=none, draw=none}}] { & & & & & & & & & & \\};
 		\matrix[array] (arr) {2 & 4 & 6 & 8 & 9 & 9 & 11 \\};
 		\foreach [count=\y] \x in {0, ..., 6} {
 			\node[index node, above=of arr-1-\y] {\x};
