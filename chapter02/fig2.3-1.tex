@@ -1,30 +1,36 @@
 \begin{tikzpicture}[
-	every node/.style = {draw, fill=black!20, minimum size=5mm, text height=1.5ex},
-	every label/.style = {index node, draw=none, fill=none, text height=3ex},
-	level/.style = {level distance=15mm, sibling distance=100mm/2^#1},
-	edge from parent/.style = {<-, >=stealth, draw}
+	every node/.style = {draw, thin, fill=black!20, minimum size=6mm, inner sep=4pt, text height=1.5ex},
+	level/.style = {level distance=15mm, sibling distance=100mm/2^#1, child anchor=north, edge from parent/.style = {<-, >=stealth, draw, very thick, shorten <=4mm-#1mm, shorten >=4mm-#1mm}},
+	index node/.append style = {draw=none, fill=none}
 ]
 
-\node[label=above:{Ciąg posortowany}, label=below:{Scal}] {3 \hspace{2ex} 9 \hspace{2ex} 26 \hspace{2ex} 38 \hspace{2ex} 41 \hspace{2ex} 49 \hspace{2ex} 52 \hspace{2ex} 57}
-	child {node[label=below:{Scal}] {3 \hspace{2ex} 26 \hspace{2ex} 41 \hspace{2ex} 52}
-		child {node[label=below:{Scal}] {3 \hspace{2ex} 41}
-			child {node {3}}
-			child {node {41}}
+\def\valueskip{\hspace{2ex}}
+
+\node (root) {3 \valueskip 9 \valueskip 26 \valueskip 38 \valueskip 41 \valueskip 49 \valueskip 52 \valueskip 57}
+	child {node (0) {3 \valueskip 26 \valueskip 41 \valueskip 52}
+		child {node (00) {3 \valueskip 41}
+			child {node (000) {3}}
+			child {node (001) {41}}
 		}
-		child {node[label=below:{Scal}] {26 \hspace{2ex} 52}
-			child {node {52}}
-			child {node (x) {26}}
+		child {node (01) {26 \valueskip 52}
+			child {node (010) {52}}
+			child {node (011) {26}}
 		}
 	}
-	child {node[label=below:{Scal}] {9 \hspace{2ex} 38 \hspace{2ex} 49 \hspace{2ex} 57}
-		child {node[label=below:{Scal}] {38 \hspace{2ex} 57}
-			child {node (y) {38}}
-			child {node {57}}		
+	child {node (1) {9 \valueskip 38 \valueskip 49 \valueskip 57}
+		child {node (10) {38 \valueskip 57}
+			child {node (100) {38}}
+			child {node (101) {57}}		
 		}
-		child {node[label=below:{Scal}] {9 \hspace{2ex} 49}
-			child {node {9}}
-			child {node {49}}		
+		child {node (11) {9 \valueskip 49}
+			child {node (110) {9}}
+			child {node (111) {49}}		
 		}
 	};
-\node[index node, below=2mm, draw=none, fill=none] at ($ (x.south) ! .5 ! (y.south) $) {Ciąg początkowy};
+
+\path (root.north) node[index node, above=3mm] {Ciąg posortowany};
+\foreach \child/\parent in {0/root, 00/0, 10/1, 000/00, 010/01, 100/10, 110/11} {
+	\path (\parent) -- (\parent |- \child) node[index node, midway] {Scal};
+}
+\path (011.south) -- (100.south) node[index node, midway, below=3mm] {Ciąg początkowy};
 \end{tikzpicture}
