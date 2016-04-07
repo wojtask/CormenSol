@@ -1,8 +1,8 @@
 \begin{tikzpicture}[
 	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
-	black cell/.style = {row 1 column #1/.style={nodes={fill=black, text=white}}},
+	black cell/.style = {row 1 column #1/.style={nodes={fill=black, text=white, font=\bfseries}}},
 	outer/.append style = {node distance=5mm and 12mm},
-	every edge/.style = {->, >={stealth'[bend]}, distance=5mm, out=280, in=260, draw},
+	every edge/.style = {->, >={Stealth[bend]}, distance=5mm, out=280, in=260, draw},
 	light edge/.style = {draw=black!20, distance=2.5mm},
 	subpicture label/.append style = {node distance=8mm},
 	on grid
@@ -18,7 +18,7 @@
 	\foreach \x in {1, ..., 6} {
 		\node[index node, above=of arr-1-\x] {\x};
 	}
-	\draw (arr-1-2) edge (arr-1-2);
+	\draw (arr-1-2) edge[loop below] (arr-1-2);
 	\node[subpicture label, left=of arr-1-1] {(a)};
 \end{tikzpicture}
 };
@@ -33,7 +33,7 @@
 	\foreach \x in {1, ..., 6} {
 		\node[index node, above=of arr-1-\x] {\x};
 	}
-	\draw (arr-1-3) edge (arr-1-3);
+	\draw (arr-1-3) edge[loop below] (arr-1-3);
 	\node[subpicture label, left=of arr-1-1] {(b)};
 \end{tikzpicture}
 };
