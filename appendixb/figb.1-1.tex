@@ -1,12 +1,13 @@
 \begin{tikzpicture}[
 	outer/.append style = {node distance=10mm},
 	filled/.style = {fill=black!20},
+	set label/.style = {circle, inner sep=2pt},
 	node distance = 3mm
 ]
 
-\def\circleA{(0,0) circle (7mm) node[circle, inner sep=2pt, above left] {$A$}}
-\def\circleB{(0:7mm) circle (7mm) node[circle, inner sep=2pt, above right] {$B$}}
-\def\circleC{(-60:7mm) circle (7mm) node[circle, inner sep=2pt, below] {$C$}}
+\def\circleA{(0,0) circle (7mm) node[set label, above left] {$A$}}
+\def\circleB{(0:7mm) circle (7mm) node[set label, above right] {$B$}}
+\def\circleC{(-60:7mm) circle (7mm) node[set label, below] {$C$}}
 	
 \node[outer] (set 1) {
 \begin{tikzpicture}
@@ -33,8 +34,7 @@
        	\clip \circleC;
        	\draw[filled] \circleA;
    	\end{scope}
-	\draw \circleA;
-   	\draw \circleB \circleC;
+	\draw \circleA \circleB \circleC;
 \end{tikzpicture}
 };
 
@@ -44,8 +44,7 @@
        	\clip \circleB;
        	\draw[filled] \circleA;
    	\end{scope}
-	\draw \circleA;
-   	\draw \circleB \circleC;
+	\draw \circleA \circleB \circleC;
 \end{tikzpicture}
 };
 
@@ -55,8 +54,7 @@
        	\clip \circleC;
        	\draw[filled] \circleA;
     \end{scope}
-	\draw \circleA;
-    \draw \circleB \circleC;
+	\draw \circleA \circleB \circleC;
 \end{tikzpicture}
 };
 
