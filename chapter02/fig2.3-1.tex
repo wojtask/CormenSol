@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+	every node/.style = {draw, fill=black!20, minimum size=5mm, text height=1.5ex},
+	every label/.style = {index node, draw=none, fill=none, text height=3ex},
+	level/.style = {level distance=15mm, sibling distance=100mm/2^#1},
+	edge from parent/.style = {<-, >=stealth, draw}
+]
+
+\node[label=above:{Ciąg posortowany}, label=below:{Scal}] {3 \hspace{2ex} 9 \hspace{2ex} 26 \hspace{2ex} 38 \hspace{2ex} 41 \hspace{2ex} 49 \hspace{2ex} 52 \hspace{2ex} 57}
+	child {node[label=below:{Scal}] {3 \hspace{2ex} 26 \hspace{2ex} 41 \hspace{2ex} 52}
+		child {node[label=below:{Scal}] {3 \hspace{2ex} 41}
+			child {node {3}}
+			child {node {41}}
+		}
+		child {node[label=below:{Scal}] {26 \hspace{2ex} 52}
+			child {node {52}}
+			child {node (x) {26}}
+		}
+	}
+	child {node[label=below:{Scal}] {9 \hspace{2ex} 38 \hspace{2ex} 49 \hspace{2ex} 57}
+		child {node[label=below:{Scal}] {38 \hspace{2ex} 57}
+			child {node (y) {38}}
+			child {node {57}}		
+		}
+		child {node[label=below:{Scal}] {9 \hspace{2ex} 49}
+			child {node {9}}
+			child {node {49}}		
+		}
+	};
+\node[index node, below=2mm, draw=none, fill=none] at ($ (x.south) ! .5 ! (y.south) $) {Ciąg początkowy};
+\end{tikzpicture}
