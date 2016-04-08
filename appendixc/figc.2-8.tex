@@ -1,0 +1,51 @@
+\begin{tikzpicture}[
+	outer/.append style = {draw, node distance=0mm, inner sep=3mm},
+	filled/.style = {fill=black!20},
+	set label/.style = {inner sep=0pt, node distance=6mm and 5mm}
+]
+
+\def\circleRadius{14mm}
+
+\coordinate (centerP) at (0, 0);
+\coordinate (centerM) at (\circleRadius, 0);
+
+\def\circleP{(centerP) circle (\circleRadius)}
+\def\circleM{(centerM) circle (\circleRadius)}
+
+\node[outer] (youngsters) {
+\begin{tikzpicture}
+	\fill[black!20] \circleP;
+   	\fill[black!40] \circleM;
+	\begin{scope}
+        \clip \circleP;
+        \fill[black!60] \circleM;
+    \end{scope}
+   	\node[set label, above=of centerP] {programiści};
+   	\node[set label, left=of centerP] (amount 1) {17};
+   	\node[set label, below=of centerM] {matematycy};
+   	\node[set label, right=of centerM] (amount 2) {10};
+   	\node[set label] at ($ (amount 1) !.5! (amount 2) $) {5};
+   	\node[anchor=south] at (current bounding box.north) {168};
+   	\node[index node, anchor=north] at (current bounding box.south) {osoby do 50. roku życia};
+\end{tikzpicture}
+};
+
+\node[outer, right=of youngsters] {
+\begin{tikzpicture}
+	\fill[black!20] \circleP;
+   	\fill[black!40] \circleM;
+	\begin{scope}
+        \clip \circleP;
+        \fill[black!60] \circleM;
+    \end{scope}
+   	\node[set label, above=of centerP] {programiści};
+   	\node[set label, left=of centerP] (amount 1) {5};
+   	\node[set label, below=of centerM] {matematycy};
+   	\node[set label, right=of centerM] (amount 2) {6};
+   	\node[set label] at ($ (amount 1) !.5! (amount 2) $) {3};
+   	\node[anchor=south] at (current bounding box.north) {86};
+   	\node[index node, anchor=north] at (current bounding box.south) {osoby powyżej 50. roku życia};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}
