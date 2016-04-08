@@ -21,16 +21,15 @@
         \fill[black!60] \circleM;
     \end{scope}
    	\node[set label, above=of centerP] {programiści};
+	\node[set label, below=of centerM] {matematycy};
    	\node[set label, left=of centerP] (amount 1) {17};
-   	\node[set label, below=of centerM] {matematycy};
    	\node[set label, right=of centerM] (amount 2) {10};
-   	\node[set label] at ($ (amount 1) !.5! (amount 2) $) {5};
-   	\node[anchor=south] at (current bounding box.north) {168};
-   	\node[index node, anchor=north] at (current bounding box.south) {osoby do 50. roku życia};
+   	\node[set label] at ($(amount 1)!.5!(amount 2)$) (amount 3) {5};
+   	\node[set label, above=\circleRadius of amount 3] {168};
 \end{tikzpicture}
 };
 
-\node[outer, right=of youngsters] {
+\node[outer, right=of youngsters] (elders) {
 \begin{tikzpicture}
 	\fill[black!20] \circleP;
    	\fill[black!40] \circleM;
@@ -39,13 +38,15 @@
         \fill[black!60] \circleM;
     \end{scope}
    	\node[set label, above=of centerP] {programiści};
-   	\node[set label, left=of centerP] (amount 1) {5};
    	\node[set label, below=of centerM] {matematycy};
+   	\node[set label, left=of centerP] (amount 1) {5};
    	\node[set label, right=of centerM] (amount 2) {6};
-   	\node[set label] at ($ (amount 1) !.5! (amount 2) $) {3};
-   	\node[anchor=south] at (current bounding box.north) {86};
-   	\node[index node, anchor=north] at (current bounding box.south) {osoby powyżej 50. roku życia};
+   	\node[set label] at ($ (amount 1) !.5! (amount 2) $) (amount 3) {3};
+   	\node[set label, above=\circleRadius of amount 3] {86};
 \end{tikzpicture}
 };
+
+\node[index node, below=2mm of youngsters] {osoby do 50. roku życia};
+\node[index node, below=2mm of elders] {osoby powyżej 50. roku życia};
 
 \end{tikzpicture}
