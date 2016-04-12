@@ -1,0 +1,45 @@
+\begin{tikzpicture}[
+	level/.style = {level distance=10mm, sibling distance=100mm/2^#1},
+	arrow/.style = {->, >=stealth, dashed},
+	node distance = 2mm and 8mm
+]
+
+\scoped[every node/.style = {inner sep=3pt, minimum width=10mm}]
+\node (root) {$cn$}
+	child {node (0) {$c(n-a)$}
+		child {node (00) {$c(n-2a)$}
+			child {node (000) {$c(n-3a)$}
+				child {node (0000) {$T(1)$} edge from parent[draw=none, label={$\vdots$}]}
+			}
+			child {node (001) {$ca$}}
+		}
+		child {node (01) {$ca$}}
+	}
+	child {node (1) {$ca$}};
+\path (000) -- (0000) node[midway] {$\vdots$};
+
+\scoped[every node/.style = {text width=17mm, align=right}]
+\node[right=35mm of root] (level 0 total) {$cn$}
+	[edge from parent/.style = {draw=none}]
+	child {node (level 1 total) {$cn$}
+		child {node (level 2 total) {$c(n-a)$}
+			child {node (level 3 total) {$c(n-2a)$}
+				child {node (last level total) {$\Theta(1)$}}
+			}
+		}
+	};
+\path (level 3 total) -- (last level total) node[midway] {$\vdots$};
+
+\draw[arrow] (root) -- (level 0 total);
+\draw[arrow] (1) -- (level 1 total);
+\draw[arrow] (01) -- (level 2 total);
+\draw[arrow] (001) -- (level 3 total);
+\draw[arrow] (0000) -- (last level total);
+
+\node[below=of last level total.south east, anchor=north east] {Łącznie: $\Theta(n^2)$};
+\draw (last level total.south east) -- ++(-30mm, 0);
+
+\coordinate[left=of 0000] (bottom);
+\draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$n/a$};
+
+\end{tikzpicture}
