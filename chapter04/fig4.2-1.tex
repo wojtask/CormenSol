@@ -1,0 +1,95 @@
+\begin{tikzpicture}[
+	level/.style = {level distance=15mm, sibling distance=100mm/3^#1},
+	level 3/.style = {level distance=7mm, sibling distance=4mm},
+	arrow/.style = {->, >=stealth, dashed},
+	node distance = 6mm and 0mm
+]
+
+\node (root) {$n$}
+	child {node (0) {$\frac{n}{2}$}
+		child {node (00) {$\frac{n}{4}$}
+			child {node (000) {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (01) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}	
+		}
+		child {node (02) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+	}
+	child {node (1) {$\frac{n}{2}$}
+		child {node (10) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (11) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (12) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+	}
+	child {node (2) {$\frac{n}{2}$}
+		child {node (20) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (21) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (22) {$\frac{n}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node (222) {}}
+		}
+	};
+	
+\node[below=of 000, font=\scriptsize] (t0) {$T(1)$};
+\foreach[count=\i] \x in {0, ..., 9} {
+	\node[right=of t\x, font=\scriptsize] (t\i) {$T(1)$};
+}
+\node[below=of 222, font=\scriptsize] (tlast) {$T(1)$};
+\path (t10) -- (tlast) node[midway] {$\dots$};
+\foreach \x in {0, ..., 9, last} {
+	\draw (t\x.north) -- +(0mm, 1mm);
+}
+
+\node[right=60mm of root] (level 0 total) {$n$};
+\node at (level 0 total |- 2) (level 1 total) {$\frac{3}{2}n$};
+\node at (level 0 total |- 22) (level 2 total) {$\bigl(\frac{3}{2}\bigr)^2n$};
+\node at (level 0 total |- tlast) (last level total) {$\Theta(n^{\lg3})$};
+
+\path (01) -- (01 |- t0) node[midway] {$\vdots$};
+\path (10) -- (10 |- t0) node[midway] {$\vdots$};
+\path (12) -- (12 |- t0) node[midway] {$\vdots$};
+\path (21) -- (21 |- t0) node[midway] {$\vdots$};
+\path (level 2 total) -- (last level total) node[midway] {$\vdots$};
+
+\draw[arrow] (root) -- (level 0 total);
+\draw[arrow] (2) -- (level 1 total);
+\draw[arrow] (22) -- (level 2 total);
+\draw[arrow] (tlast) -- (last level total);
+
+\draw[decorate, decoration={brace, amplitude=10pt, mirror}] (t0.south west) -- (tlast.south east) node[midway, yshift=-7mm] {\footnotesize $n^{\lg3}$};
+
+\node[below=3mm of last level total.south east, anchor=north east] (total) {Łącznie: $O(n^{\lg3})$};
+\draw (total.north east) -- ++(-30mm, 0);
+
+\coordinate[left=3mm of t0] (bottom);
+\draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$\lg n$};
+
+\end{tikzpicture}
