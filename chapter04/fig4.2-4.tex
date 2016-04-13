@@ -1,45 +1,50 @@
 \begin{tikzpicture}[
+	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
+	partially dashed/.style = {decorate, decoration={show path construction, 
+      lineto code={
+          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
+          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
+      }
+    }},
 	level/.style = {level distance=10mm, sibling distance=100mm/2^#1},
-	arrow/.style = {->, >=stealth, dashed},
-	node distance = 2mm and 8mm
+	level 4/.style = {edge from parent/.style = {partially dashed}},
+	arrow/.style = {->, >=stealth, thick, dashed},
+	total/.style = {text width=15mm, align=right}
 ]
 
-\scoped[every node/.style = {inner sep=3pt, minimum width=10mm}]
 \node (root) {$cn$}
 	child {node (0) {$c(n-a)$}
 		child {node (00) {$c(n-2a)$}
 			child {node (000) {$c(n-3a)$}
-				child {node (0000) {$T(1)$} edge from parent[draw=none, label={$\vdots$}]}
+				child {node (0000) {}}
+				child {node {}}
 			}
 			child {node (001) {$ca$}}
 		}
 		child {node (01) {$ca$}}
 	}
 	child {node (1) {$ca$}};
-\path (000) -- (0000) node[midway] {$\vdots$};
+	
+\node[below=5mm of 0000] (leaf) {$T(1)$};
+\draw[very densely dashed] (leaf.north) -- +(0mm, 3mm);
 
-\scoped[every node/.style = {text width=17mm, align=right}]
-\node[right=35mm of root] (level 0 total) {$cn$}
-	[edge from parent/.style = {draw=none}]
-	child {node (level 1 total) {$cn$}
-		child {node (level 2 total) {$c(n-a)$}
-			child {node (level 3 total) {$c(n-2a)$}
-				child {node (last level total) {$\Theta(1)$}}
-			}
-		}
-	};
+\node[right=35mm of root, total] (level 0 total) {$cn$};
+\node[total] at (level 0 total |- 1) (level 1 total) {$cn$};
+\node[total] at (level 0 total |- 01) (level 2 total) {$c(n-a)$};
+\node[total] at (level 0 total |- 001) (level 3 total) {$c(n-2a)$};
+\node[total] at (level 0 total |- leaf) (last level total) {$\Theta(1)$};
 \path (level 3 total) -- (last level total) node[midway] {$\vdots$};
 
 \draw[arrow] (root) -- (level 0 total);
 \draw[arrow] (1) -- (level 1 total);
 \draw[arrow] (01) -- (level 2 total);
 \draw[arrow] (001) -- (level 3 total);
-\draw[arrow] (0000) -- (last level total);
+\draw[arrow] (leaf) -- (last level total);
 
-\node[below=of last level total.south east, anchor=north east] {Łącznie: $\Theta(n^2)$};
-\draw (last level total.south east) -- ++(-30mm, 0);
+\node[below=5mm of last level total.south east, anchor=east] (total) {Łącznie: $\Theta(n^2)$};
+\draw (total.north west) -- (total.north east);
 
-\coordinate[left=of 0000] (bottom);
+\coordinate[left=5mm of leaf] (bottom);
 \draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$n/a$};
 
 \end{tikzpicture}
