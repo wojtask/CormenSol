@@ -1,8 +1,15 @@
 \begin{tikzpicture}[
+	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
+	partially dashed/.style = {decorate, decoration={show path construction, 
+      lineto code={
+          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
+          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
+      }
+    }},
 	level/.style = {level distance=15mm, sibling distance=100mm/3^#1},
-	level 3/.style = {level distance=7mm, sibling distance=4mm},
-	arrow/.style = {->, >=stealth, dashed},
-	node distance = 6mm and 0mm
+	level 3/.style = {edge from parent/.style = {partially dashed}},
+	arrow/.style = {->, >=stealth, thick, dashed},
+	total/.style = {text width=12mm, align=right}
 ]
 
 \node (root) {$n$}
@@ -57,39 +64,35 @@
 			child {node (222) {}}
 		}
 	};
-	
-\node[below=of 000, font=\scriptsize] (t0) {$T(1)$};
-\foreach[count=\i] \x in {0, ..., 9} {
-	\node[right=of t\x, font=\scriptsize] (t\i) {$T(1)$};
+
+\node[below=5mm of 000] (leaf 0) {$T(1)$};
+\foreach[count=\i] \x in {0, ..., 7} {
+	\node[right=0mm of leaf \x] (leaf \i) {$T(1)$};
 }
-\node[below=of 222, font=\scriptsize] (tlast) {$T(1)$};
-\path (t10) -- (tlast) node[midway] {$\dots$};
-\foreach \x in {0, ..., 9, last} {
-	\draw (t\x.north) -- +(0mm, 1mm);
+\node[below=5mm of 222] (leaf n) {$T(1)$};
+\path (leaf 8) -- (leaf n) node[midway] {$\dots$};
+\foreach \x in {0, ..., 8, n} {
+	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 3mm);
 }
 
-\node[right=60mm of root] (level 0 total) {$n$};
-\node at (level 0 total |- 2) (level 1 total) {$\frac{3}{2}n$};
-\node at (level 0 total |- 22) (level 2 total) {$\bigl(\frac{3}{2}\bigr)^2n$};
-\node at (level 0 total |- tlast) (last level total) {$\Theta(n^{\lg3})$};
+\node[right=55mm of root, total] (level 0 total) {$n$};
+\node[total] at (level 0 total |- 2) (level 1 total) {$\frac{3}{2}n$};
+\node[total] at (level 0 total |- 22) (level 2 total) {$\bigl(\frac{3}{2}\bigr)^2n$};
+\node[total] at (level 0 total |- leaf n) (last level total) {$\Theta(n^{\lg3})$};
 
-\path (01) -- (01 |- t0) node[midway] {$\vdots$};
-\path (10) -- (10 |- t0) node[midway] {$\vdots$};
-\path (12) -- (12 |- t0) node[midway] {$\vdots$};
-\path (21) -- (21 |- t0) node[midway] {$\vdots$};
 \path (level 2 total) -- (last level total) node[midway] {$\vdots$};
 
 \draw[arrow] (root) -- (level 0 total);
 \draw[arrow] (2) -- (level 1 total);
 \draw[arrow] (22) -- (level 2 total);
-\draw[arrow] (tlast) -- (last level total);
+\draw[arrow] (leaf n) -- (last level total);
 
-\draw[decorate, decoration={brace, amplitude=10pt, mirror}] (t0.south west) -- (tlast.south east) node[midway, yshift=-7mm] {\footnotesize $n^{\lg3}$};
+\draw[thick, decorate, decoration={brace, amplitude=8pt, mirror}] (leaf 0.south west) -- (leaf n.south east) node[midway, yshift=-6mm] (leaves total) {$n^{\lg3}$};
 
-\node[below=3mm of last level total.south east, anchor=north east] (total) {Łącznie: $O(n^{\lg3})$};
-\draw (total.north east) -- ++(-30mm, 0);
+\node[anchor=east] at (last level total.east |- leaves total) (total) {Łącznie: $O(n^{\lg3})$};
+\draw (total.north west) -- (total.north east);
 
-\coordinate[left=3mm of t0] (bottom);
+\coordinate[left=3mm of leaf 0] (bottom);
 \draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$\lg n$};
 
 \end{tikzpicture}
