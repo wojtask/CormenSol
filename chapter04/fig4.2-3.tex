@@ -1,0 +1,150 @@
+\begin{tikzpicture}[
+	level/.style = {level distance=15mm, sibling distance=100mm/4^#1},
+	level 3/.style = {level distance=7mm, sibling distance=1.5mm},
+	arrow/.style = {->, >=stealth, dashed},
+	node distance = 6mm and 0mm
+]
+
+\node (root) {$cn$}
+	child {node (0) {$\frac{cn}{2}$}
+		child {node (00) {$\frac{cn}{4}$}
+			child {node (000) {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (01) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}	
+		}
+		child {node (02) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (03) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+	}
+	child {node (1) {$\frac{cn}{2}$}
+		child {node (10) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (11) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (12) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (13) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+	}
+	child {node (2) {$\frac{cn}{2}$}
+		child {node (20) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (21) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (22) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (23) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+	}
+	child {node (3) {$\frac{cn}{2}$}
+		child {node (30) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (31) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (32) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+		}
+		child {node (33) {$\frac{cn}{4}$}
+			child {node {}}
+			child {node {}}
+			child {node {}}
+			child {node (333) {}}
+		}
+	};
+	
+\node[below=of 000, font=\scriptsize] (t0) {$T(1)$};
+\foreach[count=\i] \x in {0, ..., 9} {
+	\node[right=of t\x, font=\scriptsize] (t\i) {$T(1)$};
+}
+\node[below=of 333, font=\scriptsize] (tlast) {$T(1)$};
+\path (t10) -- (tlast) node[midway] {$\dots$};
+\foreach \x in {0, ..., 9, last} {
+	\draw (t\x.north) -- +(0mm, 1mm);
+}
+
+\node[right=60mm of root] (level 0 total) {$cn$};
+\node at (level 0 total |- 2) (level 1 total) {$2cn$};
+\node at (level 0 total |- 22) (level 2 total) {$2^2cn$};
+\node at (level 0 total |- tlast) (last level total) {$\Theta(n^2)$};
+
+\path (00) -- (00 |- t0) node[midway] {$\vdots$};
+\path (03) -- (03 |- t0) node[midway] {$\vdots$};
+\path (12) -- (12 |- t0) node[midway] {$\vdots$};
+\path (21) -- (21 |- t0) node[midway] {$\vdots$};
+\path (30) -- (30 |- t0) node[midway] {$\vdots$};
+\path (33) -- (33 |- t0) node[midway] {$\vdots$};
+\path (level 2 total) -- (last level total) node[midway] {$\vdots$};
+
+\draw[arrow] (root) -- (level 0 total);
+\draw[arrow] (3) -- (level 1 total);
+\draw[arrow] (33) -- (level 2 total);
+\draw[arrow] (tlast) -- (last level total);
+
+\draw[decorate, decoration={brace, amplitude=10pt, mirror}] (t0.south west) -- (tlast.south east) node[midway, yshift=-7mm] {\footnotesize $n^2$};
+
+\node[below=3mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n^2)$};
+\draw (total.north east) -- ++(-30mm, 0);
+
+\coordinate[left=3mm of t0] (bottom);
+\draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$\lg n$};
+
+\end{tikzpicture}
