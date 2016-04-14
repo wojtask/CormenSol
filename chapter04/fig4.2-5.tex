@@ -1,0 +1,81 @@
+\begin{tikzpicture}[
+	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
+	partially dashed/.style = {decorate, decoration={show path construction, 
+      lineto code={
+          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
+          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
+      }
+    }},
+	level/.style = {level distance=10mm, sibling distance=95mm/2^#1},
+	level 3/.style = {level distance=8mm, edge from parent/.style = {partially dashed}},
+	level 4/.style = {level distance=8mm, sibling distance=24mm},
+	level 5/.style = {level distance=8mm},
+	arrow/.style = {->, >=stealth, thick, dashed},
+	total/.style = {text width=8mm, align=right}
+]
+
+\node (root) {$cn$}
+	child {node (0) {$c\alpha n$}
+		child {node (00) {$c\alpha^2n$}
+			child {node (000) {}}
+			child {node {}}
+		}
+		child {node (01) {$c\alpha(1-\alpha)n$}
+			child {node (010) {}}
+			child {node (011) {}}
+		}
+	}
+	child {node (1) {$c(1-\alpha)n$}
+		child {node (10) {$c\alpha(1-\alpha)n$}
+			child {node (100) {}}
+			child {node (101) {}}
+		}
+		child {node (11) {$c(1-\alpha)^2n$}
+			child {node (110) {}}
+			child {node (111) {} edge from parent[very densely dashed]
+				child {node (111i0) {$c\alpha(1-\alpha)^{i-1}n$}
+					child {node (111i00) {}}
+					child {node (111i01) {}}
+				}
+				child {node (111i1) {$c(1-\alpha)^in$}
+					child {node (111i10) {}}
+					child {node (111i11) {}}
+				}
+			}
+		}
+	};
+
+\node[below=3mm of 000] (leaf 0) {$T(1)$};
+\node[below=8mm of 010] (leaf 1) {$T(1)$};
+\node[below=13.5mm of 100] (leaf 2) {$T(1)$};
+\path (111i00) -- (111i01) node[below=4mm, midway] (leaf 3) {$T(1)$};
+\node[below=8mm of 111i11] (leaf 4) {$T(1)$};
+\foreach \x in {0, 1, 2, 3, 4} {
+	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 3mm);
+}
+
+\node[right=65mm of root, total] (level 0 total) {$cn$};
+\node[total] at (level 0 total |- 1) (level 1 total) {$cn$};
+\node[total] at (level 0 total |- 11) (level 2 total) {$cn$};
+\node[total] at (level 0 total |- 111i1) (level i total) {$\le cn$};
+\node[total] at (level 0 total |- leaf 4) (last level total) {$\Theta(1)$};
+
+\path (level 2 total) -- (level i total) node[midway] {$\vdots$};
+\path (level i total) -- (last level total) node[midway] {$\vdots$};
+
+\draw[arrow] (root) -- (level 0 total);
+\draw[arrow] (1) -- (level 1 total);
+\draw[arrow] (11) -- (level 2 total);
+\draw[arrow] (111i1) -- (level i total);
+\draw[arrow] (leaf 4) -- (last level total);
+
+\node[below=0mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n\lg n)$};
+\draw (total.north west) -- (total.north east);
+
+\coordinate (bottom) at (leaf 0.west |- leaf 4);
+\coordinate[left=2mm of leaf 0] (bottom 1);
+\coordinate[left=10mm of bottom] (bottom 2);
+\draw[<->, >=stealth, thick] (bottom 1) -- (bottom 1 |- root) node[pos=0.6, fill=white] {$\log_{1/\alpha}n$};
+\draw[<->, >=stealth, thick] (bottom 2) -- (bottom 2 |- root) node[pos=0.2, fill=white] {$\log_{1/(1-\alpha)}n$};
+
+\end{tikzpicture}
