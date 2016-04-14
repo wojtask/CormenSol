@@ -1,0 +1,111 @@
+\begin{tikzpicture}[
+	level/.style = {level distance=10mm, sibling distance=100mm/3^#1},
+	level 3/.style = {edge from parent/.style={halved path={solid}{very densely dashed}}},
+	level 4/.style = {sibling distance=8mm, edge from parent/.style={halved path={draw=none}{very densely dashed}}},
+	level 5/.style = {level distance=8mm, sibling distance=3mm, edge from parent/.style={halved path={solid}{very densely dashed}}},
+	arrow/.style = {->, >=stealth, thick, dashed},
+	total/.style = {text width=13mm, align=right}
+]
+
+\node (root) {$n$}
+	child {node (0) {$\frac{n}{2}$}
+		child {node (00) {$\frac{n}{4}$}
+			child {node (000) {}
+				child {node (i0) {$\frac{n}{2^i}$}
+					child {node (i00) {}}
+					child {node (i01) {}}
+					child {node (i02) {}}
+				}
+				child {node (i1) {$\frac{n}{2\cdot2^i}$}
+					child {node (i10) {}}
+					child {node (i11) {}}
+					child {node (i12) {}}
+				}
+				child {node (i2) {$\frac{n}{4\cdot2^i}$}
+					child {node (i20) {}}
+					child {node (i21) {}}
+					child {node (i22) {}}
+				}
+			}
+			child {node (001) {}}
+			child {node (002) {}}
+		}
+		child {node (01) {$\frac{n}{8}$}
+			child {node (010) {}}
+			child {node (011) {}}
+			child {node (012) {}}
+		}
+		child {node (02) {$\frac{n}{16}$}
+			child {node (020) {}}
+			child {node (021) {}}
+			child {node (022) {}}
+		}
+	}
+	child {node (1) {$\frac{n}{4}$}
+		child {node (10) {$\frac{n}{8}$}
+			child {node (100) {}}
+			child {node (101) {}}
+			child {node (102) {}}
+		}
+		child {node (11) {$\frac{n}{16}$}
+			child {node (110) {}}
+			child {node (111) {}}
+			child {node (112) {}}
+		}
+		child {node (12) {$\frac{n}{32}$}
+			child {node (120) {}}
+			child {node (121) {}}
+			child {node (122) {}}
+		}
+	}
+	child {node (2) {$\frac{n}{8}$}
+		child {node (20) {$\frac{n}{16}$}
+			child {node (200) {}}
+			child {node (201) {}}
+			child {node (202) {}}
+		}
+		child {node (21) {$\frac{n}{32}$}
+			child {node (210) {}}
+			child {node (211) {}}
+			child {node (212) {}}
+		}
+		child {node (22) {$\frac{n}{64}$}
+			child {node (220) {}}
+			child {node (221) {}}
+			child {node (222) {}}
+		}
+	};
+
+\node[below=3mm of 222] (leaf 0) {$T(1)$};
+\node[below=13mm of 200] (leaf 1) {$T(1)$};
+\node[below=18.5mm of 100] (leaf 2) {$T(1)$};
+\node[below=4.5mm of i21] (leaf 3) {$T(1)$};
+\node[below=8mm of i00] (leaf 4) {$T(1)$};
+\foreach \x in {0, ..., 4} {
+	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 3mm);
+}
+
+\node[right=55mm of root, total] (level 0 total) {$n$};
+\node[total] at (level 0 total |- 1) (level 1 total) {$\frac{7}{8}n$};
+\node[total] at (level 0 total |- 11) (level 2 total) {$\bigl(\frac{7}{8}\bigr)^2n$};
+\node[total] at (level 0 total |- i2) (level i total) {$\le\bigl(\frac{7}{8}\bigr)^in$};
+\node[total] at (level 0 total |- leaf 4) (last level total) {$\Theta(1)$};
+
+\path (level 2 total) -- (level i total) node[midway] {$\vdots$};
+\path (level i total) -- (last level total) node[midway] {$\vdots$};
+
+\draw[arrow] (root) -- (level 0 total);
+\draw[arrow] (2) -- (level 1 total);
+\draw[arrow] (22) -- (level 2 total);
+\draw[arrow] (i2) -- (level i total);
+\draw[arrow] (leaf 4) -- (last level total);
+
+\node[below=0mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n)$};
+\draw[thick] (total.north west) -- (total.north east);
+
+\coordinate (bottom 1) at (leaf 4.west |- leaf 0);
+\coordinate[left=6mm of leaf 4] (bottom 2);
+\draw[<->, >=stealth, thick] (bottom 1) -- (bottom 1 |- root) node[midway, fill=white] {$\log_8n$};
+\draw[<->, >=stealth, thick] (bottom 2) -- (bottom 2 |- root) node[pos=0.2, fill=white] {$\lg n$};
+
+\end{tikzpicture}
