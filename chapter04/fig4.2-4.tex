@@ -1,13 +1,6 @@
 \begin{tikzpicture}[
-	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
-	partially dashed/.style = {decorate, decoration={show path construction, 
-      lineto code={
-          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
-          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
-      }
-    }},
 	level/.style = {level distance=10mm, sibling distance=100mm/2^#1},
-	level 4/.style = {edge from parent/.style = {partially dashed}},
+	level 4/.style = {edge from parent/.style = {halved path={solid}{very densely dashed}}},
 	arrow/.style = {->, >=stealth, thick, dashed},
 	total/.style = {text width=15mm, align=right}
 ]
@@ -42,7 +35,7 @@
 \draw[arrow] (leaf) -- (last level total);
 
 \node[below=5mm of last level total.south east, anchor=east] (total) {Łącznie: $\Theta(n^2)$};
-\draw (total.north west) -- (total.north east);
+\draw[thick] (total.north west) -- (total.north east);
 
 \coordinate[left=5mm of leaf] (bottom);
 \draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$n/a$};

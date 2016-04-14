@@ -1,13 +1,6 @@
 \begin{tikzpicture}[
-	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
-	partially dashed/.style = {decorate, decoration={show path construction, 
-      lineto code={
-          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
-          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
-      }
-    }},
 	level/.style = {level distance=15mm, sibling distance=100mm/4^#1},
-	level 3/.style = {edge from parent/.style = {partially dashed}},
+	level 3/.style = {edge from parent/.style = {halved path={solid}{very densely dashed}}},
 	arrow/.style = {->, >=stealth, thick, dashed},
 	total/.style = {text width=9mm, align=right}
 ]
@@ -143,7 +136,7 @@
 \draw[thick, decorate, decoration={brace, amplitude=8pt, mirror}] (leaf 0.south west) -- (leaf n.south east) node[midway, yshift=-6mm] {$n^2$};
 
 \node[anchor=east] at (last level total.east |- leaves total) (total) {Łącznie: $\Theta(n^2)$};
-\draw (total.north west) -- (total.north east);
+\draw[thick] (total.north west) -- (total.north east);
 
 \coordinate[left=3mm of leaf 0] (bottom);
 \draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$\lg n$};

@@ -1,15 +1,8 @@
 \begin{tikzpicture}[
-	very densely dashed/.style = {dash pattern=on 1.5pt off 1pt on 1.5pt off 1pt},
-	partially dashed/.style = {decorate, decoration={show path construction, 
-      lineto code={
-          \draw (\tikzinputsegmentfirst) -- ($(\tikzinputsegmentfirst) ! .6 ! (\tikzinputsegmentlast)$);,
-          \draw[very densely dashed] ($(\tikzinputsegmentfirst)! .6 !(\tikzinputsegmentlast)$) -- (\tikzinputsegmentlast);
-      }
-    }},
 	level/.style = {level distance=10mm, sibling distance=95mm/2^#1},
-	level 3/.style = {level distance=8mm, edge from parent/.style = {partially dashed}},
-	level 4/.style = {level distance=8mm, sibling distance=24mm},
-	level 5/.style = {level distance=8mm},
+	level 3/.style = {level distance=8mm, edge from parent/.style={halved path={solid}{very densely dashed}}},
+	level 4/.style = {level distance=8mm, sibling distance=24mm, edge from parent/.style={halved path={draw=none}{very densely dashed}}},
+	level 5/.style = {level distance=8mm, sibling distance=6mm, edge from parent/.style={halved path={solid}{very densely dashed}}},
 	arrow/.style = {->, >=stealth, thick, dashed},
 	total/.style = {text width=8mm, align=right}
 ]
@@ -32,7 +25,7 @@
 		}
 		child {node (11) {$c(1-\alpha)^2n$}
 			child {node (110) {}}
-			child {node (111) {} edge from parent[very densely dashed]
+			child {node (111) {}
 				child {node (111i0) {$c\alpha(1-\alpha)^{i-1}n$}
 					child {node (111i00) {}}
 					child {node (111i01) {}}
@@ -50,7 +43,7 @@
 \node[below=13.5mm of 100] (leaf 2) {$T(1)$};
 \path (111i00) -- (111i01) node[below=4mm, midway] (leaf 3) {$T(1)$};
 \node[below=8mm of 111i11] (leaf 4) {$T(1)$};
-\foreach \x in {0, 1, 2, 3, 4} {
+\foreach \x in {0, ..., 4} {
 	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 3mm);
 }
 
@@ -70,7 +63,7 @@
 \draw[arrow] (leaf 4) -- (last level total);
 
 \node[below=0mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n\lg n)$};
-\draw (total.north west) -- (total.north east);
+\draw[thick] (total.north west) -- (total.north east);
 
 \coordinate (bottom) at (leaf 0.west |- leaf 4);
 \coordinate[left=2mm of leaf 0] (bottom 1);
