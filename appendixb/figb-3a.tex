@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+\node[tree node] (u1) at (0,0) {$u_1$}; 
+\node[tree node] (u2) at (30:30mm) {$u_2$};
+\coordinate (v) at (-120:15mm);
+\coordinate (w) at (-60:15mm);
+\path (v) -- +(-110:12mm) coordinate (below left v);
+\path (v) -- +(-70:12mm) coordinate (below right v);
+\path (w) -- +(-110:12mm) coordinate (below left w);
+\path (w) -- +(-70:12mm) coordinate (below right w);
+\draw (u1) edge node[above left, pos=0.65] {$e$} (u2) edge node[above right] {$e'$} (w) edge (v);
+\draw (u2) -- +(60:5mm) (u2) -- +(-30:5mm);
+\draw[fill=black!20] (v) -- (below left v) -- node[above] {$T_1$} (below right v) -- cycle;
+\draw[fill=black!20] (w) -- (below left w) -- node[above] {$T_2$} (below right w) -- cycle;
+\node[tree node] at (w) {$w$};
+\node[right=10mm of u2] {$A'$};
+\path (u1 -| below left v) -- (below left v) node[pos=0.3, left=2mm] {$B'$};
+\begin{scope}[on background layer]
+    \fill[black!40] (u2) + (8mm, 0) ellipse (15mm and 12mm);
+    \node[fill=black!40, ellipse, inner xsep=4mm, fit=(u1) (below left v) (below right w)] {};
+\end{scope}
+\end{tikzpicture}
