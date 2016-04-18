@@ -1,12 +1,11 @@
 \begin{tikzpicture}[
 	every node/.style = {tree node},
-	marked node/.style = {fill=black!40},
 	level/.append style = {sibling distance=30mm/2^#1}
 ]
-\node[marked node] {1}
+\node[med gray] {1}
 	child[missing]
-	child {node[marked node] {3}
+	child {node[med gray] {3}
 		child {node {2}}
-		child {node[marked node] {4}}
+		child {node[med gray] {4}}
 	};
 \end{tikzpicture}

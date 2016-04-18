@@ -1,6 +1,6 @@
 \begin{tikzpicture}[
-	cell/.append style = {fill=black!20, minimum size=4mm},
-	med cell/.style = {column #1/.style={nodes={fill=black!40}}},
+	cell/.append style = {light gray, minimum size=4mm},
+	med cell/.style = {column #1/.style={nodes={med gray}}},
 	index node/.append style = {node distance=6mm and 2mm},
 	outer/.append style = {node distance=15mm and 2mm}
 ]
@@ -18,7 +18,7 @@
 	\draw (arr-3-2.south west) + (1mm, 1mm) -- +(3mm, 3mm);
 	\draw (arr-1-7.south west) + (1mm, 1mm) -- +(3mm, 3mm);
 	\draw[very thick] (arr-3-1.south west) rectangle (arr-1-10.north east);
-	\foreach \x in {2, ..., 9} {
+	\foreach \x in {2, ..., 10} {
 		\draw[very thick] (arr-3-\x.south west) -- (arr-1-\x.north west);
 	}
 	\foreach \x in {1, ..., 10} {
