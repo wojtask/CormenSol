@@ -1,7 +1,6 @@
 \begin{tikzpicture}[
 	every node/.style = {draw=none, fill=none, minimum size=3mm, inner sep=0pt},
-	axis/.style = {very thick, >=Stealth},
-	on grid
+	axis/.style = {very thick, arrow}
 ]
 	\pgfkeys{/pgf/number format/.cd,fixed}
 	\foreach \x in {-4, ..., 4} {
@@ -26,6 +25,6 @@
 	
 	\draw[axis, ->] (node 52.east) + (1mm,0mm) -- +(10mm, 0mm) node [above left=2mm] {$x$};
 	\draw[axis, ->] (node 60.north) + (0mm, 1mm) -- +(0mm, 10mm) node [below left=2mm] {$y$};
-	\draw[axis] (node 68.west) + (-1mm, 0mm) -- +(-10mm, 0mm);
-	\draw[axis] (node 76.south) + (0mm, -1mm) -- +(0mm, -10mm);
+	\draw[axis, -] (node 68.west) + (-1mm, 0mm) -- +(-10mm, 0mm);
+	\draw[axis, -] (node 76.south) + (0mm, -1mm) -- +(0mm, -10mm);
 \end{tikzpicture}

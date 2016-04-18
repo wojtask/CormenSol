@@ -2,9 +2,15 @@
 	array/.append style = {nodes={fill=black!20, inner sep=2pt, anchor=center, minimum width=7mm}},
 	double cell/.style = {array, nodes={inner sep=1pt, minimum size=4.5mm}, node distance=5mm},
 	med cell/.style = {row #1/.style={nodes={fill=black!40}}},
-	outer/.append style = {node distance=10mm and 5.5mm},
-	arrow/.style = {->, >=stealth}
+	outer/.append style = {node distance=10mm and 5.5mm}
 ]
+
+\newcommand\arrayindexes{%
+	\foreach[count=\i] \x in {0, ..., 8} {
+		\node[index node, left=1mm of arr-\i-1] {\x};
+	}
+	\node[above=2mm of arr-1-1.north] {$T$};
+}
 
 \node[outer] (pic a) {
 \begin{tikzpicture}
@@ -12,10 +18,7 @@
 		array,
 		med cell/.list = {1,2,3,4,5,7,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};	
+	\arrayindexes
 	\foreach \x in {1,2,3,4,5,7,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -26,16 +29,13 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic a.east] (pic b) {
+\node[outer, right=of pic a] (pic b) {
 \begin{tikzpicture}
 	\matrix[
 		array,
 		med cell/.list = {1,3,4,5,7,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,3,4,5,7,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -50,16 +50,13 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic b.east] (pic c) {
+\node[outer, right=of pic b] (pic c) {
 \begin{tikzpicture}
 	\matrix[
 		array,
 		med cell/.list = {1,3,4,5,7,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,3,4,5,7,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -78,16 +75,13 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic c.east] (pic d) {
+\node[outer, right=of pic c] (pic d) {
 \begin{tikzpicture}
 	\matrix[
 		array,
 		med cell/.list = {1,3,4,5,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,3,4,5,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -112,10 +106,7 @@
 		array,
 		med cell/.list = {1,4,5,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,4,5,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -140,10 +131,7 @@
 		array,
 		med cell/.list = {1,4,5,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,4,5,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -168,10 +156,7 @@
 		array,
 		med cell/.list = {1,5,8,9}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,5,8,9} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -196,10 +181,7 @@
 		array,
 		med cell/.list = {1,5,8}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,5,8} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}
@@ -224,10 +206,7 @@
 		array,
 		med cell/.list = {1,5,8}
 	] (arr) { \\ \\ \\ \\ \\ \\ \\ \\ \\};
-	\foreach[count=\i] \x in {0, ..., 8} {
-		\node[index node, left=1mm of arr-\i-1] {\x};
-	}
-	\node[above=2mm of arr-1-1.north] {$T$};
+	\arrayindexes
 	\foreach \x in {1,5,8} {
 		\draw (arr-\x-1.south west) + (2mm, 1mm) -- +(5mm, 4mm);
 	}

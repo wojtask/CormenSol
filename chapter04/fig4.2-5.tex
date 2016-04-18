@@ -3,7 +3,7 @@
 	level 3/.style = {level distance=8mm, edge from parent/.style={halved path={solid}{very densely dashed}}},
 	level 4/.style = {level distance=8mm, sibling distance=24mm, edge from parent/.style={halved path={draw=none}{very densely dashed}}},
 	level 5/.style = {level distance=8mm, sibling distance=6mm, edge from parent/.style={halved path={solid}{very densely dashed}}},
-	arrow/.style = {->, >=stealth, thick, dashed},
+	level arrow/.style = {arrow, thick, dashed},
 	total/.style = {text width=8mm, align=right}
 ]
 
@@ -44,7 +44,7 @@
 \path (i00) -- (i01) node[below=4mm, midway] (leaf 3) {$T(1)$};
 \node[below=8mm of i11] (leaf 4) {$T(1)$};
 \foreach \x in {0, ..., 4} {
-	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 3mm);
+	\draw[very densely dashed] (leaf \x.north) -- +(0mm, 2.5mm);
 }
 
 \node[right=65mm of root, total] (level 0 total) {$cn$};
@@ -56,19 +56,19 @@
 \path (level 2 total) -- (level i total) node[midway] {$\vdots$};
 \path (level i total) -- (last level total) node[midway] {$\vdots$};
 
-\draw[arrow] (root) -- (level 0 total);
-\draw[arrow] (1) -- (level 1 total);
-\draw[arrow] (11) -- (level 2 total);
-\draw[arrow] (i1) -- (level i total);
-\draw[arrow] (leaf 4) -- (last level total);
+\draw[level arrow] (root) -- (level 0 total);
+\draw[level arrow] (1) -- (level 1 total);
+\draw[level arrow] (11) -- (level 2 total);
+\draw[level arrow] (i1) -- (level i total);
+\draw[level arrow] (leaf 4) -- (last level total);
 
-\node[below=0mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n\lg n)$};
+\node[below=2mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n\lg n)$};
 \draw[thick] (total.north west) -- (total.north east);
 
 \coordinate (bottom) at (leaf 0.west |- leaf 4);
 \coordinate[left=2mm of leaf 0] (bottom 1);
 \coordinate[left=10mm of bottom] (bottom 2);
-\draw[<->, >=stealth, thick] (bottom 1) -- (bottom 1 |- root) node[pos=0.6, fill=white] {$\log_{1/\alpha}n$};
-\draw[<->, >=stealth, thick] (bottom 2) -- (bottom 2 |- root) node[pos=0.2, fill=white] {$\log_{1/(1-\alpha)}n$};
+\draw[arrow, <->, thick] (bottom 1) -- (bottom 1 |- root) node[pos=0.6, fill=white] {$\log_{1/\alpha}n$};
+\draw[arrow, <->, thick] (bottom 2) -- (bottom 2 |- root) node[pos=0.2, fill=white] {$\log_{1/(1-\alpha)}n$};
 
 \end{tikzpicture}

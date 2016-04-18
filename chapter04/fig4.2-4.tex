@@ -1,7 +1,7 @@
 \begin{tikzpicture}[
 	level/.style = {level distance=10mm, sibling distance=100mm/2^#1},
 	level 4/.style = {edge from parent/.style = {halved path={solid}{very densely dashed}}},
-	arrow/.style = {->, >=stealth, thick, dashed},
+	level arrow/.style = {arrow, thick, dashed},
 	total/.style = {text width=15mm, align=right}
 ]
 
@@ -19,7 +19,7 @@
 	child {node (1) {$ca$}};
 	
 \node[below=5mm of 0000] (leaf) {$T(1)$};
-\draw[very densely dashed] (leaf.north) -- +(0mm, 3mm);
+\draw[halved path={draw=none}{very densely dashed}] (0000) -- (leaf.north);
 
 \node[right=35mm of root, total] (level 0 total) {$cn$};
 \node[total] at (level 0 total |- 1) (level 1 total) {$cn$};
@@ -28,16 +28,16 @@
 \node[total] at (level 0 total |- leaf) (last level total) {$\Theta(1)$};
 \path (level 3 total) -- (last level total) node[midway] {$\vdots$};
 
-\draw[arrow] (root) -- (level 0 total);
-\draw[arrow] (1) -- (level 1 total);
-\draw[arrow] (01) -- (level 2 total);
-\draw[arrow] (001) -- (level 3 total);
-\draw[arrow] (leaf) -- (last level total);
+\draw[level arrow] (root) -- (level 0 total);
+\draw[level arrow] (1) -- (level 1 total);
+\draw[level arrow] (01) -- (level 2 total);
+\draw[level arrow] (001) -- (level 3 total);
+\draw[level arrow] (leaf) -- (last level total);
 
-\node[below=5mm of last level total.south east, anchor=east] (total) {Łącznie: $\Theta(n^2)$};
+\node[below=2mm of last level total.south east, anchor=north east] (total) {Łącznie: $\Theta(n^2)$};
 \draw[thick] (total.north west) -- (total.north east);
 
 \coordinate[left=5mm of leaf] (bottom);
-\draw[<->, >=stealth, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$n/a$};
+\draw[arrow, <->, thick] (bottom) -- (bottom |- root) node[midway, fill=white] {$n/a$};
 
 \end{tikzpicture}

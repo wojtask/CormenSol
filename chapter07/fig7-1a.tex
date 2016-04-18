@@ -1,9 +1,9 @@
 \begin{tikzpicture}[
 	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
+	index node/.append style = {node distance=1mm and 1mm},
 	partition line/.style = {line width=2pt, line cap=rect},
-	outer/.append style = {node distance=4mm},
-	on grid
+	outer/.append style = {node distance=4mm}
 ]
 
 \node[outer] (pic a) {
@@ -18,7 +18,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic a.south] (pic b) {
+\node[outer, below=of pic a] (pic b) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -33,7 +33,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic b.south] (pic c) {
+\node[outer, below=of pic b] (pic c) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -49,7 +49,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic c.south] (pic d) {
+\node[outer, below=of pic c] (pic d) {
 \begin{tikzpicture}
 	\matrix[
 		array,

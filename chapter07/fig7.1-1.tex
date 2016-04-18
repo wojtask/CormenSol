@@ -1,9 +1,9 @@
 \begin{tikzpicture}[
 	light cell/.style = {row 1 column #1/.style={nodes={fill=black!20}}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
+	index node/.append style = {node distance=1mm and 1mm},
 	partition line/.style = {line width=2pt, line cap=rect},
-	outer/.append style = {node distance=4mm and 14mm},
-	on grid
+	outer/.append style = {node distance=4mm and 14mm}
 ]
 
 \node[outer] (pic a) {
@@ -17,7 +17,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic a.south east, anchor=north east] (pic b) {
+\node[outer, below=of pic a] (pic b) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -33,7 +33,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic b.south east, anchor=north east] (pic c) {
+\node[outer, below=of pic b] (pic c) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -65,7 +65,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic d.south east, anchor=north east] (pic e) {
+\node[outer, below=of pic d] (pic e) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -82,7 +82,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic e.south east, anchor=north east] (pic f) {
+\node[outer, below=of pic e] (pic f) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -99,7 +99,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic f.south east, anchor=north east] (pic g) {
+\node[outer, below=of pic f] (pic g) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -151,7 +151,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic i.south east, anchor=north east] (pic j) {
+\node[outer, below=of pic i] (pic j) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -168,7 +168,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic j.south east, anchor=north east] (pic k) {
+\node[outer, below=of pic j] (pic k) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -185,7 +185,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic k.south east, anchor=north east] (pic l) {
+\node[outer, below=of pic k] (pic l) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -200,7 +200,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic l.south east, anchor=north east] (pic m) {
+\node[outer, below=of pic l] (pic m) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -209,7 +209,7 @@
 	] (arr) {9 & 5 & 8 & 7 & 4 & 2 & 6 & 11 & 21 & 13 & 19 & 12 \\};
 	\draw[partition line] (arr-1-8.north west) -- (arr-1-8.south west);
 	\draw[partition line] (arr-1-9.north west) -- (arr-1-9.south west);
-	\draw[partition line] (arr-1-12.north west) -- (arr-1-12.south west);
+	\draw[partition line] (arr-1-12.north east) -- (arr-1-12.south east);
 	\node[index node, above=of arr-1-1] {$p$};
 	\node[index node, above=of arr-1-7] {$i$};
 	\node[index node, above=of arr-1-12] {$r$};

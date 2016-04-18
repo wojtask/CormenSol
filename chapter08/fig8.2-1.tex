@@ -1,10 +1,9 @@
 \begin{tikzpicture}[
-	index node/.append style = {minimum size=2mm, text height=1.5ex, node distance=3.5mm and 3.5mm},
+	index node/.append style = {minimum size=2mm, text height=1.5ex, node distance=0.5mm},
 	row 1/.style = {nodes={fill=black!20, minimum size=3.5mm}},
 	med cell/.style = {row 1 column #1/.style={nodes={fill=black!40}}},
-	outer/.append style = {node distance=10mm and 8mm},
-	inner/.style = {draw=none, fill=none, node distance=4mm and 2mm},
-	on grid
+	outer/.append style = {node distance=12mm and 8mm},
+	inner/.style = {draw=none, fill=none, node distance=3mm and 2mm}
 ]
 
 \node[outer] (pic a) {
@@ -30,7 +29,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic a.east] (pic b) {
+\node[outer, right=of pic a] (pic b) {
 \begin{tikzpicture}
 	\node[inner] {
 	\begin{tikzpicture}
@@ -45,7 +44,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic b.east] (pic c) {
+\node[outer, right=of pic b] (pic c) {
 \begin{tikzpicture}
 	\node[inner] (pic c1) {
 	\begin{tikzpicture}[
@@ -70,7 +69,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic a.south] (pic d) {
+\node[outer, below=of pic a] (pic d) {
 \begin{tikzpicture}
 	\node[inner] (pic d1) {
 	\begin{tikzpicture}[
@@ -95,7 +94,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic d.east] (pic e) {
+\node[outer, right=of pic d] (pic e) {
 \begin{tikzpicture}
 	\node[inner] (pic e1) {
 	\begin{tikzpicture}[
@@ -120,7 +119,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic e.east] (pic f) {
+\node[outer, right=of pic e] (pic f) {
 \begin{tikzpicture}
 	\node[inner] {
 	\begin{tikzpicture}

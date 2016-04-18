@@ -1,11 +1,8 @@
 \begin{tikzpicture}[
 	cell/.append style = {fill=black!20, minimum size=4mm},
 	med cell/.style = {column #1/.style={nodes={fill=black!40}}},
-	index node/.append style = {node distance=10mm and 2mm},
-	outer/.append style = {node distance=15mm and 2mm},
-	arrow/.style = {->, >=stealth},
-	subpicture label/.append style = {node distance=8mm},
-	on grid
+	index node/.append style = {node distance=6mm and 2mm},
+	outer/.append style = {node distance=15mm and 2mm}
 ]
 
 \node[outer] (pic a) {
@@ -20,13 +17,17 @@
 	};
 	\draw (arr-3-2.south west) + (1mm, 1mm) -- +(3mm, 3mm);
 	\draw (arr-1-7.south west) + (1mm, 1mm) -- +(3mm, 3mm);
+	\draw[very thick] (arr-3-1.south west) rectangle (arr-1-10.north east);
+	\foreach \x in {2, ..., 9} {
+		\draw[very thick] (arr-3-\x.south west) -- (arr-1-\x.north west);
+	}
 	\foreach \x in {1, ..., 10} {
 		\node[index node, above=of arr-1-\x] {\x};
 	}
 	\node[index node, left=of arr-1-1.west] {$\id{next}$};
 	\node[index node, left=of arr-2-1.west] {$\id{key}$};
 	\node[index node, left=of arr-3-1.west] {$\id{prev}$};
-	\node[cell, above left=7mm and 8mm of arr-1-1] (L) {2};
+	\node[cell, above left=3mm and 4mm of arr-1-1] (L) {2};
 	\node[left=of L.west] {$L$};
 	
 	\draw[arrow] (L) -| (arr-1-2.110);
@@ -44,7 +45,7 @@
 \end{tikzpicture}
 };
 
-\node[outer, below=of pic a.south, anchor=north] (pic b) {
+\node[outer, below=of pic a] (pic b) {
 \begin{tikzpicture}
 	\matrix[
 		array,
@@ -52,15 +53,15 @@
 	] (arr) {5 & 10 & 16 & & & & 13 & 25 & & 11 & & 1 & & & & 19 & 1 & 28 & & & & & & & 4 & 28 & 7 & 8 & 16 & 25 \\};
 	\draw (arr-1-9.south west) + (1mm, 1mm) -- +(3mm, 3mm);
 	\draw (arr-1-11.south west) + (1mm, 1mm) -- +(3mm, 3mm);
-	\draw[ultra thick] (arr-1-1.south west) rectangle (arr-1-30.north east);
-	\foreach \x in {4,7,...,28} {
-		\draw[ultra thick] (arr-1-\x.south west) -- (arr-1-\x.north west);
+	\draw[very thick] (arr-1-1.south west) rectangle (arr-1-30.north east);
+	\foreach \x in {4, 7, ..., 28} {
+		\draw[very thick] (arr-1-\x.south west) -- (arr-1-\x.north west);
 	}
 	\foreach \x in {1, ..., 30} {
 		\node[index node, above=of arr-1-\x] {\x};
 	}
 	\node[left=of arr-1-1.west] {$A$};
-	\node[cell, above left=7mm and 8mm of arr-1-1] (L) {7};
+	\node[cell, above left=3mm and 4mm of arr-1-1] (L) {7};
 	\node[left=of L.west] {$L$};
 	
 	\draw[arrow] (L) -| (arr-1-7);
@@ -76,9 +77,9 @@
 	\draw[arrow] (arr-1-30.south) -- +(0,-3mm) -| (arr-1-25);
 	\draw[arrow] (arr-1-27.south) -- +(0,-2mm) -| (arr-1-7);
 
-	\draw[thick] (arr-1-16.south) + (1mm, 0mm) -- +(2mm, -7mm) node[index node, anchor=50] {$\id{key}$};
-	\draw[thick] (arr-1-17.south) -- +(0, -10mm) node[index node, anchor=north] {$\id{next}$};
-	\draw[thick] (arr-1-18.south) + (-1mm, 0mm) -- +(-2mm, -7mm) node[index node, anchor=140] {$\id{prev}$};
+	\draw (arr-1-16.south) + (1mm, -1mm) -- +(2mm, -7mm) node[index node, anchor=50] {$\id{key}$};
+	\draw (arr-1-17.south) + (0mm, -1mm) -- +(0, -10mm) node[index node, anchor=north] {$\id{next}$};
+	\draw (arr-1-18.south) + (-1mm, -1mm) -- +(-2mm, -7mm) node[index node, anchor=140] {$\id{prev}$};
 \end{tikzpicture}
 };
 

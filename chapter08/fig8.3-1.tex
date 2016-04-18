@@ -1,7 +1,7 @@
 \begin{tikzpicture}[
-	outer/.append style = {node distance=15mm},
-	array/.append style = {nodes={draw=none, minimum size=4mm, font=\ttfamily}},
-	light cell/.style = {column #1/.style={nodes={fill=black!20}}}
+	array/.append style = {nodes={draw=none, minimum height=4mm, minimum width=3mm, font=\ttfamily}},
+	light cell/.style = {column #1/.style={nodes={fill=black!20}}},
+	outer/.append style = {node distance=18mm}
 ]
 
 \node[outer] (pic a) {
@@ -106,7 +106,7 @@
 };
 
 \foreach \from/\to in {a/b, b/c, c/d} {
-	\draw[->, >=stealth, very thick] ([xshift=2mm]pic \from.east) -- ([xshift=-2mm]pic \to.west);
+	\draw[arrow, shorten >=2mm, shorten <=2mm, dashed, thick] (pic \from.east) -- (pic \to.west);
 }
 
 \end{tikzpicture}
