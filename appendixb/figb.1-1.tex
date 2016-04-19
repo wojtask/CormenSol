@@ -10,7 +10,7 @@
 	
 \node[outer] (set 1) {
 \begin{tikzpicture}
-   	\draw[light gray] \circleA;
+   	\draw[light grayed] \circleA;
     \draw \circleB;
     \draw \circleC;
 \end{tikzpicture}
@@ -18,7 +18,7 @@
 
 \node[outer, right=of set 1] (set 2) {
 \begin{tikzpicture}
-    \draw[light gray] \circleB \circleC;
+    \draw[light grayed] \circleB \circleC;
     \draw \circleA;
 \end{tikzpicture}
 };
@@ -27,11 +27,11 @@
 \begin{tikzpicture}
 	\begin{scope}
        	\clip \circleB;
-       	\draw[light gray] \circleA;
+       	\draw[light grayed] \circleA;
    	\end{scope}
     \begin{scope}
        	\clip \circleC;
-       	\draw[light gray] \circleA;
+       	\draw[light grayed] \circleA;
    	\end{scope}
 	\draw \circleA \circleB \circleC;
 \end{tikzpicture}
@@ -41,7 +41,7 @@
 \begin{tikzpicture}
 	\begin{scope}
        	\clip \circleB;
-       	\draw[light gray] \circleA;
+       	\draw[light grayed] \circleA;
    	\end{scope}
 	\draw \circleA \circleB \circleC;
 \end{tikzpicture}
@@ -51,7 +51,7 @@
 \begin{tikzpicture}
 	\begin{scope}
        	\clip \circleC;
-       	\draw[light gray] \circleA;
+       	\draw[light grayed] \circleA;
     \end{scope}
 	\draw \circleA \circleB \circleC;
 \end{tikzpicture}

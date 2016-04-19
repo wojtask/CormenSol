@@ -1,6 +1,6 @@
 \begin{tikzpicture}[
 	outer/.append style = {draw, node distance=-\pgflinewidth, inner sep=3mm},
-	filled/.style = {fill=light gray},
+	filled/.style = {light grayed},
 	set label/.style = {inner sep=0pt, node distance=6mm and 5mm}
 ]
 
@@ -14,11 +14,11 @@
 
 \node[outer] (youngsters) {
 \begin{tikzpicture}
-	\fill[light gray] \circleP;
-   	\fill[med gray] \circleM;
+	\fill[light grayed] \circleP;
+   	\fill[med grayed] \circleM;
 	\begin{scope}
         \clip \circleP;
-        \fill[dark gray] \circleM;
+        \fill[dark grayed] \circleM;
     \end{scope}
    	\node[set label, above=of centerP] {programiści};
 	\node[set label, below=of centerM] {matematycy};
@@ -31,11 +31,11 @@
 
 \node[outer, right=of youngsters] (elders) {
 \begin{tikzpicture}
-	\fill[light gray] \circleP;
-   	\fill[med gray] \circleM;
+	\fill[light grayed] \circleP;
+   	\fill[med grayed] \circleM;
 	\begin{scope}
         \clip \circleP;
-        \fill[dark gray] \circleM;
+        \fill[dark grayed] \circleM;
     \end{scope}
    	\node[set label, above=of centerP] {programiści};
    	\node[set label, below=of centerM] {matematycy};

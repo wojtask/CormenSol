@@ -254,16 +254,17 @@
 
 % domyślne style dla wszystkich rysunków
 \tikzset{
-	light gray/.style = {fill=black!20},
-	med gray/.style = {fill=black!40},
-	dark gray/.style = {fill=black!60},
+	light grayed/.style = {fill=black!20},
+	med grayed/.style = {fill=black!40},
+	dark grayed/.style = {fill=black!60},
+	blackened/.style = {fill=black, text=white, font=\bfseries},
 	cell/.style = {draw, inner sep=0pt, minimum size=5mm, text height=1.5ex},
 	array/.style = {matrix of nodes, column sep=-\pgflinewidth, row sep=-\pgflinewidth, nodes={cell}, nodes in empty cells},
 	index node/.style = {font=\scriptsize, inner sep=0pt, minimum size=3mm, text height=1.5ex},
 	arrow/.style = {->, >={Stealth[bend]}, draw},
 	subpicture label/.style = {font=\small\bfseries\sffamily},
 	level/.style = {level distance=10mm, sibling distance=60mm/2^#1},
-	tree node/.style = {align=center, inner sep=-1pt, minimum size=5mm, circle, draw, light gray},
+	tree node/.style = {align=center, inner sep=-1pt, minimum size=5mm, circle, draw, light grayed},
 	outer/.style = {draw=none, fill=none, inner sep=0pt},
 	halved path/.style 2 args = {decorate, decoration={show path construction,
 		lineto code={
