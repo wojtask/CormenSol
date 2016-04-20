@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	level/.append style = {level distance=7mm, sibling distance=100mm/2^#1}
+]
+\node[blackened] {26}
+	child {node {17}
+		child {node[blackened] {14}
+			child {node {10}
+				child {node[blackened] {7}
+					child {node {3}}
+					child[missing]
+				}
+				child {node[blackened] {12}}
+			}
+			child {node[blackened] {16}
+				child {node {15}}
+				child[missing]
+			}
+		}
+		child {node[blackened] {21}
+			child {node[blackened] {19}
+				child[missing]
+				child {node {20}}
+			}
+			child {node[blackened] {23}}
+		}
+	}
+	child {node[blackened] {41}
+		child {node {30}
+			child {node[blackened] {28}}
+			child {node[blackened] {38}
+				child {node {35}
+					child[missing]
+					child {node[med grayed] {36}}
+				}
+				child {node {39}}
+			}
+		}
+		child {node[blackened] {47}}
+	};
+\end{tikzpicture}
