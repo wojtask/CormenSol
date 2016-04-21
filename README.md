@@ -19,7 +19,7 @@ Wspomnę teraz o kilku kwestiach technicznych i zasadach, którymi kierowałem s
 Dokument został utworzony za pomocą systemu LaTeX 2e, który pozwala na precyzyjną i estetyczną prezentację nie tylko tekstu, ale także formuł matematycznych, tabel i pseudokodów.
 Do złożenia tych ostatnich użyłem pakietu `clrscode` opracowanego przez Thomasa H. Cormena.
 Z pakietu tego korzystano również w oryginalnym tekście Podręcznika, a więc styl pseudokodów w rozwiązaniach jest identyczny jak w książce.
-Rozumowania w wielu miejscach ilustrują rysunki, przy tworzeniu których wykorzystywałem język METAPOST.
+Rozumowania w wielu miejscach ilustrują rysunki, przy tworzeniu których wykorzystywałem języki PGF/TikZ.
 Dzięki zastosowaniu płaskiej numeracji mogę równocześnie i jednoznacznie odnosić się do rysunków i tabel zarówno z rozwiązań, jak i z Podręcznika, w którym to numeracja jest dwupoziomowa.
 
 Niektóre konwencje notacji i nomenklatury pojęć matematycznych odbiegają nieco względem tych z Podręcznika.
