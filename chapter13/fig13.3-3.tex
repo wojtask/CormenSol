@@ -1,0 +1,139 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=100mm/2^#1},
+	every label/.style = {index node, label position=left, draw=none, fill=none},
+	subtree node/.style = {tree node, draw=none, fill=none},
+	outer/.append style = {node distance=0mm}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[draw=none, fill=none] (left tree) {}
+            child {node[blackened, label=$k+1$] (left subtree root) {$\boldsymbol{C}$}
+                child {node[label=$k$] {$A$}
+                    child {node[subtree node] {$\alpha$}}
+                    child {node[label=$k$] {$B$}
+                        child {node[subtree node] {$\beta$}}
+                        child {node[subtree node] {$\gamma$}}
+                    }
+                }
+                child {node[label=$k$] {$D$}
+                    child {node[subtree node] {$\delta$}}
+                    child {node[subtree node] {$\varepsilon$}}
+                }
+            };
+            
+        \node[right=50mm of left tree, draw=none, fill=none] {}
+            child {node[label=$k+1$] (right subtree root) {$C$}
+                child {node[blackened, label=$k+1$] {$\boldsymbol{A}$}
+                    child {node[subtree node] {$\alpha$}}
+                    child {node[label=$k$] {$B$}
+                        child {node[subtree node] {$\beta$}}
+                        child {node[subtree node] {$\gamma$}}
+                    }
+                }
+                child {node[blackened, label=$k+1$] {$\boldsymbol{D}$}
+                    child {node[subtree node] {$\delta$}}
+                    child {node[subtree node] {$\varepsilon$}}
+                }
+            };
+            
+        \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+        
+        \node[subpicture label, draw=none, fill=none, left=25mm of left subtree root] {(a)};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[draw=none, fill=none] (left tree) {}
+            child {node[blackened, label=$k+1$] (left subtree root) {$\boldsymbol{C}$}
+                child {node[label=$k$] {$B$}
+                    child {node[label=$k$] {$A$}
+                        child {node[subtree node] {$\alpha$}}
+                        child {node[subtree node] {$\beta$}}
+                    }
+                    child {node[subtree node] {$\gamma$}}
+                }
+                child {node[label=$k$] {$D$}
+                    child {node[subtree node] {$\delta$}}
+                    child {node[subtree node] {$\varepsilon$}}
+                }
+            };
+            
+        \node[right=50mm of left tree, draw=none, fill=none] {}
+            child {node[label=$k+1$] (right subtree root) {$C$}
+                child {node[blackened, label=$k+1$] {$\boldsymbol{B}$}
+                    child {node[label=$k$] {$A$}
+                        child {node[subtree node] {$\alpha$}}
+                        child {node[subtree node] {$\beta$}}
+                    }
+                    child {node[subtree node] {$\gamma$}}
+                }
+                child {node[blackened, label=$k+1$] {$\boldsymbol{D}$}
+                    child {node[subtree node] {$\delta$}}
+                    child {node[subtree node] {$\varepsilon$}}
+                }
+            };
+            
+        \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+        
+        \node[subpicture label, draw=none, fill=none, left=25mm of left subtree root] {(b)};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic b] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[draw=none, fill=none] (left tree) {}
+            child {node[blackened, label=$k+1$] (left subtree root) {$\boldsymbol{C}$}
+                child {node[label=$k$] {$A$}
+                    child {node[subtree node] {$\alpha$}}
+                    child {node[label=$k$] {$B$}
+                        child {node[subtree node] {$\beta$}}
+                        child {node[subtree node] {$\gamma$}}
+                    }
+                }
+                child {node[subtree node] {$\delta$}}
+            };
+            
+        \node[right=40mm of left tree, draw=none, fill=none] (middle tree) {}
+            child {node[blackened, label=$k+1$] (middle subtree root) {$\boldsymbol{C}$}
+                child {node[label=$k$] {$B$}
+                    child {node[label=$k$] {$A$}
+                        child {node[subtree node] {$\alpha$}}
+                        child {node[subtree node] {$\beta$}}
+                    }
+                    child {node[subtree node] {$\gamma$}}
+                }
+                child {node[subtree node] {$\delta$}}
+            };
+            
+        \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (middle subtree root.west);
+        
+        \node[right=40mm of middle tree, draw=none, fill=none] {}
+            child {node[blackened, label=$k+1$] (right subtree root) {$\boldsymbol{B}$}
+                child {node[label=$k$] {$A$}
+                    child {node[subtree node] {$\alpha$}}
+                    child {node[subtree node] {$\beta$}}
+                }
+                child {node[label=$k$] {$C$}
+                    child {node[subtree node] {$\gamma$}}
+                    child {node[subtree node] {$\delta$}}
+                }
+            };
+            
+        \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle subtree root.east) -- (right subtree root.west);
+        
+        \node[subpicture label, draw=none, fill=none, left=20mm of left subtree root] {(c)};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}
