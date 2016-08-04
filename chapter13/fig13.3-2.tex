@@ -1,0 +1,86 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=50mm/2^#1},
+	outer/.append style = {node distance=20mm and 15mm}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {41};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {41}
+            child {node {38}}
+            child[missing];
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node {31}}
+            child {node {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic c] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node[blackened] {31}
+                child {node {12}}
+                child[missing]
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic b] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node[blackened] {19}
+                child {node {12}}
+                child {node {31}}
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=35mm of pic e] (pic f) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node {19}
+                child {node[blackened] {12}
+                    child {node {8}}
+                    child[missing]
+                }
+                child {node[blackened] {31}}
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\foreach \x in {a, ..., f} {
+	\node[subpicture label, below=2mm of pic \x] {(\x)};
+}
+
+\end{tikzpicture}

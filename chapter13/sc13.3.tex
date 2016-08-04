@@ -4,10 +4,14 @@
 Pokolorowanie węzła $z$ na czarno mogłoby spowodować naruszenie własności 5 drzewa czerwono-czarnego, podczas gdy procedura \proc{RB-Insert-Fixup} operuje na drzewie, w~którym własność ta jest zachowana i~nie narusza jej w~trakcie swojego działania.
 
 \exercise %13.3-2
-Na rys.\ \ref{13.3-2} zilustrowano ciąg operacji wstawiania węzłów do początkowo pustego drzewa czerwono-czarnego.
+Na rys.\ \ref{13.3-2} zilustrowano ciąg operacji wstawiania węzłów do drzewa czerwono-czarnego.
 \begin{figure}[ht]
 	\centering \input{fig13.3-2}
-	\caption{Drzewo czerwono-czarne po wstawieniu do niego kolejno kluczy 41, 38, 31, 12, 19, 8.} \label{fig:13.3-2}
+	\caption{Drzewa czerwono-czarne powstałe po wstawieniu węzłów o~kluczach 41, 38, 31, 12, 19, 8 kolejno do początkowo pustego drzewa.
+	{\sffamily\bfseries(a)} Po wstawieniu pierwszego węzła drzewo składa się tylko z~korzenia, który początkowo ma kolor czerwony.
+	Przywrócenie własności 2 drzewa czerwono-czarnego następuje w~linii 16 procedury \proc{RB-Insert-Fixup}.
+	{\sffamily\bfseries(b)} Dodanie węzła o~kluczu 38 nie powoduje naruszenia żadnej własności drzewa czerwono-czarnego.
+	{\sffamily\bfseries\doubledash{(c)}{(f)}} Wstawienie każdego kolejnego węzła produkuje drzewo, w~którym naruszona jest własność 4, przywracana następnie za pomocą procedury \proc{RB-Insert-Fixup}.} \label{fig:13.3-2}
 \end{figure}
 
 \exercise %13.3-3
