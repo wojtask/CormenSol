@@ -1,0 +1,101 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=50mm/2^#1},
+	every label/.style = {index node, rectangle, label distance=1mm, label position=below, draw=none, fill=none},
+	outer/.append style = {node distance=15mm}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+        \node[blackened] {38}
+            child {node {19}
+                child {node[blackened] {12}
+                    child {node {8}}
+                    child[missing]
+                }
+                child {node[blackened] {31}}
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+        \node[blackened] {38}
+            child {node {19}
+                child {node[blackened] {12}}
+                child {node[blackened] {31}}
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=of pic b] (pic c) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node[blackened] {19}
+                child[missing]
+                child {node {31}}
+            }
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a] (pic d) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child {node[blackened] {31}}
+            child {node[blackened] {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=20mm of pic d] (pic e) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] {38}
+            child[missing]
+            child {node {41}};
+\end{tikzpicture}
+};
+
+\node[outer, right=20mm of pic e] (pic f) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+        \node[blackened] {41};
+\end{tikzpicture}
+};
+
+\node[outer, right=20mm of pic f] (pic g) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+        \node[blackened, label=\attrib{T}{nil}] {};
+\end{tikzpicture}
+};
+
+\node[subpicture label, below=1mm of pic a] (label a) {(a)};
+\foreach \x in {b,c} {
+	\node[subpicture label] at (label a -| pic \x) {(\x)};
+}
+\node[subpicture label, below=3mm of pic d] (label d) {(d)};
+\foreach \x in {e,f,g} {
+	\node[subpicture label] at (label d -| pic \x) {(\x)};
+}
+
+\end{tikzpicture}

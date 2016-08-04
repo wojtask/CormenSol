@@ -79,8 +79,12 @@
 \end{tikzpicture}
 };
 
-\foreach \x in {a, ..., f} {
-	\node[subpicture label, below=2mm of pic \x] {(\x)};
+
+\node[subpicture label, below=1mm of pic d] (label d) {(d)};
+\foreach \x in {a,b,c} {
+	\node[subpicture label] at (label d -| pic \x) {(\x)};
 }
+\node[subpicture label, below=1mm of pic f] (label f) {(f)};
+\node[subpicture label] at (label f -| pic e) {(e)};
 
 \end{tikzpicture}
