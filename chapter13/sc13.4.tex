@@ -19,5 +19,25 @@ Na rys.\ \ref{fig:13.4-3} zilustrowano ciąg operacji usuwania węzłów z~drzew
 
 \exercise %13.4-4
 \exercise %13.4-5
+W~tabeli \ref{tab:13.4-5} zebrano liczby czarnych węzłów znajdujących się na ścieżkach od korzenia każdego poddrzewa sprzed transformacji do poddrzew $\alpha$, $\beta$, \dots, $\zeta$.
+Liczby te w~każdym przypadku zgadzają się z~ilościami czarnych węzłów na odpowiednich ścieżkach w~drzewie po transformacji.
+Oznacza to, że każda transformacja drzewa w~procedurze \proc{RB-Delete-Fixup} zachowuje własność 5 drzewa czerwono-czarnego.
+
+\begin{table}[!ht]
+	\centering
+                \begin{tabular}{l|c|c|c}
+                        & $\alpha$, $\beta$ & $\gamma$, $\delta$ & $\varepsilon$, $\zeta$ \\
+                        \hline
+                        {\sffamily\bfseries(a)} & 3 & 2 & 2 \\
+                        \hline
+                        {\sffamily\bfseries(b)} & $\id{count}(c)+2$ & $\id{count}(c)+2$ & $\id{count}(c)+2$ \\
+                        \hline
+                        {\sffamily\bfseries(c)} & $\id{count}(c)+2$ & $\id{count}(c)+1$ & $\id{count}(c)+2$ \\
+                        \hline
+                        {\sffamily\bfseries(d)} & $\id{count}(c)+2$ & $\id{count}(c)+\id{count}(c')+1$ & $\id{count}(c)+1$ \\
+                \end{tabular}
+	\caption{} \label{tab:13.4-5}
+\end{table}
+
 \exercise %13.4-6
 \exercise %13.4-7
