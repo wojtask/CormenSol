@@ -24,5 +24,11 @@ Wynika z~niego, że własność 5 drzewa czerwono-czarnego faktycznie pozostaje 
 \end{figure}
 
 \exercise %13.3-4
+Jedyny węzeł, który jest kolorowany na czerwono w~trakcie działania procedury \proc{RB-Insert-Fixup} to \attrib{\attrib{z}{p}}{p}.
+Pętla \kw{while} w~tej procedurze wykonuje się tylko wtedy, gdy $z$ nie jest korzeniem.
+Z~dowodu niezmiennika pętli \kw{while} wynika, że jeśli naruszona jest własność 2, to tylko wówczas, gdy $z$ jest korzeniem i~jest czerwony.
+A~zatem kolorowanie węzła \attrib{\attrib{z}{p}}{p} na czerwono odbywa się jedynie w~przypadku, gdy \attrib{z}{p} jest czerwony i~nie jest to korzeń.
+Stąd mamy, że węzeł \attrib{\attrib{z}{p}}{p} nie jest wartownikiem \attrib{T}{nil}, więc procedura \proc{RB-Insert-Fixup} nigdy nie przypisze wartownikowi koloru \const{red}.
+
 \exercise %13.3-5
 \exercise %13.3-6
