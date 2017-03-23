@@ -1,6 +1,17 @@
 \problem{Drzewa AVL} %13-3
 
 \subproblem %13-3(a)
+Udowodnimy stwierdzenie ze wskazówki, wykorzystując indukcję po wysokościach drzew AVL.
+Jako podstawę indukcji przyjmiemy drzewa AVL o~wysokościach 0 i~1.
+W~drzewie o~wysokości 0 jest tylko jeden węzeł, czyli więcej niż $F_0=0$, zaś~drzewo o~wysokości 1 może składać się z~minimalnie 2 węzłów, co jest większe niż $F_1=1$.
+
+Niech teraz dane będzie drzewo AVL o~wysokości $h\ge2$ i~niech $h_L$ będzie wysokością jego lewego poddrzewa, a~$h_R$ -- wysokością jego prawego poddrzewa.
+Bez utraty ogólności możemy przyjąć, że $h_L\le h_R$, skąd $h=h_R+1$.
+Na podstawie definicji drzewa AVL mamy, że $|h_R-h_L|\le1$, a~więc na mocy powyższego $h_L\ge h_R-1$.
+Z~kolei z~założenia indukcyjnego mamy, że liczby węzłów $n_L$ i~$n_R$ w~lewym i~prawym poddrzewie wynoszą, odpowiednio, co najmniej $F_{h_L}$ i~co najmniej $F_{h_R}$.
+Stąd liczba węzłów drzewa wynosi $n=n_L+n_R+1\ge F_{h_L}+F_{h_R}+1\ge F_{h_R-1}+F_{h_R}+1=F_{h_R+1}+1=F_h+1>F_h$.
+Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F_h\ge\phi^{h-2}$, skąd otrzymujemy ostatecznie $h<\log_\phi n+2=O(\lg n)$.
+
 \subproblem %13-3(b)
 \subproblem %13-3(c)
 \subproblem %13-3(d)
