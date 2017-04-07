@@ -39,3 +39,58 @@ Zmiany kolorów węzłów w~drzewie odbywają się tylko w~przypadkach 1 i~3, al
 Ponieważ nowy węzeł nie jest korzeniem, to również linia 17 procedury \proc{RB-Insert-Fixup} nie zaktualizuje koloru $z$ na czarny.
 
 \exercise %13.3-6
+Podczas wstawiania węzła do drzewa czerwono-czarnego w~reprezentacji bez wskaźników do ojców, do zapamiętania ścieżki od korzenia do nowego węzła użyjemy stosu.
+Wstawimy do niego każdy kolejno odwiedzony węzeł drzewa, zanim wywołana zostanie procedura \proc{RB-Insert-Fixup}.
+Dokładniej, między linią 4 a~5 w~procedurze \proc{RB-Insert} będziemy wywoływać $\proc{Push}(S,y)$, gdzie $S$ jest początkowo pustym stosem.
+Pominiemy w~niej także linię 8.
+
+Informacje zebrane na stosie $S$ wystarczą, ponieważ procedura \proc{RB-Insert-Fixup} korzysta ze wskaźnika $p$ jedynie na węzłach znajdujących się w~$S$.
+Musimy następnie zmodyfikować procedurę \proc{RB-Insert-Fixup} tak, aby każde odwołanie do przodka danego węzła przy pomocy wskaźnika $p$ było zamienione na odwołanie do odpowiedniego elementu stosu.
+Implementacja tej procedury została przedstawiona na poniższym pseudokodzie:
+\begin{codebox}
+\Procname{$\proc{RB-No-Parents-Insert-Fixup}(T,S,z)$}
+\li	$p\gets\proc{Pop}(S)$
+\li	\While $\attrib{p}{color}=\const{red}$
+\li		\Do $pp\gets\proc{Pop}(S)$
+\li			\If $p=\attrib{pp}{left}$
+\li				\Then $y\gets\attrib{pp}{right}$
+\li					\If $\attrib{y}{color}=\const{red}$
+\li						\Then $\attrib{y}{color}\gets\attrib{p}{color}\gets\const{black}$
+\li							$\attrib{pp}{color}\gets\const{red}$
+\li							$z\gets pp$
+\li							$p\gets\proc{Pop}(S)$
+\li						\Else \If $z=\attrib{p}{right}$
+\li							\Then $z\leftrightarrow p$
+\li								$\proc{No-Parents-Left-Rotate}(T,z,pp)$
+							\End
+\li							$\attrib{p}{color}\gets\const{black}$
+\li							$\attrib{pp}{color}\gets\const{red}$
+\li							$\proc{No-Parents-Right-Rotate}(T,pp,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
+						\End
+\li				\Else (to samo co po \kw{then} z~zamienionymi wskaźnikami \id{right} i~\id{left})
+				\End
+		\End
+\li	$\attrib{\attrib{T}{root}}{color}\gets\const{black}$
+\end{codebox}
+W~każdej iteracji pętli \kw{while}, oprócz węzła $z$, potrzebujemy znać także jego ojca i~dziadka.
+Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~\id{pp}.
+Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie dodatkowego parametru -- ojca rotowanego węzła.
+W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła \id{pp} jest ściągany ze stosu i~przekazywany do prawej rotacji.
+Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo pętla \kw{while} nie wykona więcej iteracji i~żaden element nie będzie już ściągany z~$S$.
+
+Poniżej znajduje się operacja lewej rotacji na węźle $x$, która nie korzysta ze wskaźników na ojca.
+Zamiast tego otrzymuje ona trzeci parametr, będący ojcem węzła $x$.
+\begin{codebox}
+\Procname{$\proc{No-Parents-Left-Rotate}(T,x,p)$}
+\li	$y\gets\attrib{x}{right}$
+\li	$\attrib{x}{right}\gets\attrib{y}{left}$
+\li	\If $p=\attrib{T}{nil}$
+\li		\Then $\attrib{T}{root}\gets y$
+\li		\Else \If $x=\attrib{p}{left}$
+\li			\Then $\attrib{p}{left}\gets y$
+\li			\Else $\attrib{p}{right}\gets y$
+			\End
+		\End
+\li	$\attrib{y}{left}\gets x$
+\end{codebox}
+Implementacja prawej rotacji nie wykorzystującej wskaźników na ojca jest analogiczna.
