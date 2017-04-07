@@ -1,4 +1,6 @@
 \subchapter{Operacje rotacji}
+\note{W~kilku zadaniach z~tego podrozdziału mowa jest o~rotacjach na drzewach wyszukiwań binarnych, a~nie tylko na bardziej wyspecjalizowanych drzewach czerwono-czarnych.
+Operacje te działają identycznie jak w~procedurach \proc{Left-Rotate} i~\proc{Right-Rotate}, w~których zamieniono\/ $\attrib{T}{nil}$ z~wiersza\/ 5 na\/ \const{nil}.}
 
 \exercise %13.2-1
 Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
@@ -21,7 +23,7 @@ Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \end{codebox}
 
 \exercise %13.2-2
-Na dowolnym węźle $x$ w~drzewie binarnym $T$ można wykonać lewą rotację, o~ile prawy syn $x$ jest różny od \attrib{T}{nil} oraz prawą rotację, o~ile lewy syn jest różny od \attrib{T}{nil}.
+Na dowolnym węźle $x$ w~drzewie wyszukiwań binarnych $T$ można wykonać lewą rotację, o~ile prawy syn $x$ jest różny od \const{nil} a~prawą rotację -- o~ile lewy syn jest różny od \const{nil}.
 Oznacza to, że istnieje wzajemna jednoznaczność między rotacjami a~krawędziami drzewa, wokół których można przeprowadzić rotacje.
 W~drzewie o~$n$ węzłach jest dokładnie $n-1$ krawędzi i~tyle samo różnych rotacji można w~nim wykonać.
 
@@ -30,8 +32,7 @@ Zauważmy, że wewnętrzna struktura węzłów w~poddrzewach $\alpha$, $\beta$, 
 A~zatem głębokość dowolnego węzła $a$ z~$\alpha$ zwiększa się o~1, głębokość dowolnego węzła $b$ z~$\beta$ nie zmienia się, a~głębokość dowolnego węzła $c$ z~$\gamma$ zmniejsza się o~1.
 
 \exercise %13.2-4
-\note{Przyjmujemy, że zadanie dotyczy drzew wyszukiwań binarnych, zgodnie z~treścią oryginalną.
-Rotacje, o~których mówimy w~rozwiązaniu, są operacjami na drzewach wyszukiwań binarnych, których postać dla drzew czerwono-czarnych implementują procedury \proc{Left-Rotate} i~\proc{Right-Rotate}.
+\note{Rozwiązanie zakłada, że zadanie dotyczy drzew wyszukiwań binarnych, zgodnie z~treścią oryginalną.
 Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym lewe poddrzewo każdego węzła jest puste.}
 
 \noindent Wykażemy stwierdzenie ze wskazówki.
@@ -49,8 +50,7 @@ Dla każdej prawej rotacji $r_i'$ niech $l_i'$ będzie odpowiadającą jej lewą
 Wówczas ciąg $\langle r_1,r_2,\dots,r_k,l_{k'}',l_{k'-1}',\dots,l_1'\rangle$ co najwyżej $2n-2$ rotacji pozwala przekształcić drzewo $T_1$ w~$T_2$.
 
 \exercise %13.2-5
-\note{Treść zadania nie definiuje\/ $n$ -- przyjmiemy, że jest to rozmiar drzew\/ $T_1$ i~\/$T_2$.
-Ponadto zakładamy, że procedura \proc{Right-Rotate}, której liczbę wywołań szacujemy, została zaadaptowana do działania na drzewach wyszukiwań binarnych poprzez zastąpienie odniesienia do $\attrib{T}{nil}$ przez \const{nil}.}
+\note{Treść zadania nie definiuje\/ $n$ -- przyjmiemy, że jest to rozmiar drzew\/ $T_1$ i~\/$T_2$.}
 
 \noindent W~drzewie $T_1$ stanowiącym prawy łańcuch (definicja w~komentarzu do rozwiązania \refExercise{13.2-4}) nie można wykonać żadnej prawej rotacji, gdyż nie istnieje w~nim węzeł o~niepustym lewym synu.
 A~zatem $T_1$ nie jest prawostronnie przekształcalne do jakiegokolwiek drzewa wyszukiwań binarnych $T_2$ różnego od $T_1$.
