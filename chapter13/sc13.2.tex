@@ -30,18 +30,19 @@ Zauważmy, że wewnętrzna struktura węzłów w~poddrzewach $\alpha$, $\beta$, 
 A~zatem głębokość dowolnego węzła $a$ z~$\alpha$ zwiększa się o~1, głębokość dowolnego węzła $b$ z~$\beta$ nie zmienia się, a~głębokość dowolnego węzła $c$ z~$\gamma$ zmniejsza się o~1.
 
 \exercise %13.2-4
-\note{Rotacje, o~których mówimy w~rozwiązaniu są operacjami na drzewach binarnych, których szczególną postać dla drzew czerwono-czarnych implementują procedury \proc{Left-Rotate} i~\proc{Right-Rotate}.
-Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo binarne, w~którym lewe poddrzewo każdego węzła jest puste.}
+\note{Przyjmujemy, że zadanie dotyczy drzew wyszukiwań binarnych, zgodnie z~treścią oryginalną.
+Rotacje, o~których mówimy w~rozwiązaniu, są operacjami na drzewach wyszukiwań binarnych, których postać dla drzew czerwono-czarnych implementują procedury \proc{Left-Rotate} i~\proc{Right-Rotate}.
+Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym lewe poddrzewo każdego węzła jest puste.}
 
-\noindent Wykażemy stwierdzenie podane we wskazówce w~treści zadania.
-Dla danego drzewa binarnego $T$ o~$n$ węzłach, niech $R_T$ będzie zbiorem zawierającym korzeń drzewa $T$ oraz wszystkie węzły osiągalne z~korzenia podczas poruszania się wyłącznie w~kierunku prawych synów (czyli po wskaźnikach \id{right}).
+\noindent Wykażemy stwierdzenie ze wskazówki.
+Dla danego drzewa wyszukiwań binarnych $T$ o~$n$ węzłach, niech $R_T$ będzie zbiorem zawierającym korzeń drzewa $T$ oraz wszystkie węzły osiągalne z~korzenia podczas poruszania się wyłącznie w~kierunku prawych synów (czyli po wskaźnikach \id{right}).
 Dopóki drzewo $T$ nie jest prawym łańcuchem, czyli dopóki są w~nim węzły nienależące do $R_T$, to istnieje węzeł $y\in R_T$, którego lewy syn $x\not\in R_T$.
 Zauważmy, że wykonanie prawej rotacji na węźle $y$ dodaje $x$ do $R_T$, jednocześnie nie usuwając z~niego żadnego innego węzła.
 Prawa rotacja zwiększa więc rozmiar $R_T$ o~1, dlatego wystarczy wykonać co najwyżej $n-1$ rotacji, aby przekształcić $T$ w~prawy łańcuch.
 
 Jeśli znamy ciąg prawych rotacji przekształcających drzewo $T$ w~prawy łańcuch $T'$, to możemy powrócić od $T'$ do $T$ poprzez wykonanie tego ciągu w~odwrotnej kolejności, zamieniając każdą prawą rotację w~odpowiadającą jej lewą rotację.
 
-Niech $T_1$, $T_2$ będą drzewami binarnymi o~$n$ węzłach, a~$T'$ -- jedynym prawym łańcuchem powstałym z~$T_1$ bądź z~$T_2$ po przeprowadzeniu powyżej opisanej transformacji.
+Niech $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach, a~$T'$ -- jedynym prawym łańcuchem powstałym z~$T_1$ bądź z~$T_2$ po przeprowadzeniu powyżej opisanej transformacji.
 Niech $r=\langle r_1,r_2,\dots,r_k\rangle$ i~$r'=\langle r_1',r_2',\dots,r_{k'}'\rangle$ będą ciągami prawych rotacji przekształcających, odpowiednio $T_1$ w~$T'$ i~$T_2$ w~$T'$.
 Z~poprzedniego paragrafu wiemy, że istnieją takie ciągi $r$, $r'$, gdzie $k$, $k'\le n-1$.
 Dla każdej prawej rotacji $r_i'$ niech $l_i'$ będzie odpowiadającą jej lewą rotacją.
