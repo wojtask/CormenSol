@@ -48,3 +48,23 @@ Dla każdej prawej rotacji $r_i'$ niech $l_i'$ będzie odpowiadającą jej lewą
 Wówczas ciąg $\langle r_1,r_2,\dots,r_k,l_{k'}',l_{k'-1}',\dots,l_1'\rangle$ co najwyżej $2n-2$ rotacji pozwala przekształcić drzewo $T_1$ w~$T_2$.
 
 \exercise %13.2-5
+\note{Treść zadania nie definiuje\/ $n$ -- przyjmiemy, że jest to rozmiar drzew\/ $T_1$ i~\/$T_2$.
+Ponadto zakładamy, że procedura \proc{Right-Rotate}, której liczbę wywołań szacujemy, została zaadaptowana do działania na drzewach wyszukiwań binarnych poprzez zastąpienie odniesienia do $\attrib{T}{nil}$ przez \const{nil}.}
+
+\noindent W~drzewie $T_1$ stanowiącym prawy łańcuch (definicja w~komentarzu do rozwiązania \refExercise{13.2-4}) nie można wykonać żadnej prawej rotacji, gdyż nie istnieje w~nim węzeł o~niepustym lewym synu.
+A~zatem $T_1$ nie jest prawostronnie przekształcalne do jakiegokolwiek drzewa wyszukiwań binarnych $T_2$ różnego od $T_1$.
+Innym przykładem drzew $T_1$ i~$T_2$ są dowolne 2 drzewa, które reprezentują różne zbiory kluczy, gdyż rotacje zmieniają strukturę drzewa, a~nie klucze w~węzłach.
+
+Niech teraz $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach takimi, że $T_1$ jest prawostronnie przekształcalne do $T_2$.
+Załóżmy, że $n>0$ -- w~przeciwnym przypadku bowiem drzewa są puste i~nie jest potrzebna żadna rotacja, aby przekształcić $T_1$ w~$T_2$.
+
+Dla drzewa binarnego $T$ zdefiniujmy zbiór $L_T$ analogicznie do zbioru $R_T$ z~\refExercise{13.2-4} -- jako składający się z~korzenia drzewa $T$ oraz wszystkich węzłów osiągalnych z~korzenia $T$ przy poruszaniu się po wyłącznie po wskaźnikach \id{left}.
+Prawa rotacja na węźle $x$ w~drzewie $T_1$ przenosi lewego syna $x$ w~miejsce $x$, dlatego jedynie węzły należące do $L_{T_1}$ mogą być przeniesione w~miejsce korzenia drzewa $T_1$.
+Korzeń $r$ drzewa $T_2$ należy zatem do $L_{T_1}$.
+Można więc z~$T_1$ utworzyć drzewo $T_1'$ poprzez wykonanie ciągu prawych rotacji na aktualnym korzeniu, aż $r$ stanie się korzeniem.
+Oczywiście $T_1'$ jest prawostronnie przekształcalne do $T_2$, więc także lewe i~prawe poddrzewo $T_1'$ jest prawostronnie przekształcalne do, odpowiednio, lewego i~prawego poddrzewa $T_2$.
+W~celu otrzymania drzewa $T_2$ wystarczy więc powtórzyć opisane ciągi prawych rotacji rekurencyjnie na lewym i~prawym poddrzewie drzewa $T_1'$.
+
+Liczbę wykonanych rotacji przekształcających drzewo $T_1$ w~$T_1'$, można ograniczyć od góry przez rozmiar zbioru $L_{T_1}$, który wynosi co najwyżej $n$.
+Wywołania rekurencyjne mogą następnie wykonywać podobne ciągi rotacji na każdym spośród $n-1$ pozostałych węzłów w~poddrzewach drzewa $T_1'$.
+Wynika stąd, że sumaryczną liczbę rotacji wykonywanych przy przekształceniu $T_1$ do $T_2$, można ograniczyć od góry przez $O(n^2)$.
