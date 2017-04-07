@@ -31,4 +31,11 @@ A~zatem kolorowanie węzła \attrib{\attrib{z}{p}}{p} na czerwono odbywa się je
 Stąd mamy, że węzeł \attrib{\attrib{z}{p}}{p} nie jest wartownikiem \attrib{T}{nil}, więc procedura \proc{RB-Insert-Fixup} nigdy nie przypisze wartownikowi koloru \const{red}.
 
 \exercise %13.3-5
+Pokażemy, że nowy węzeł wstawiony do niepustego drzewa czerwono-czarnego za pomocą procedury \proc{RB-Insert} zachowuje kolor czerwony.
+Bezpośrednio przed wywołaniem pomocniczej procedury \proc{RB-Insert-Fixup}, nowo wstawiony węzeł $z$ jest czerwonym liściem.
+Jeśli ojciec węzła $z$ jest czarny, to procedura zakończy działanie, a~$z$ zachowa swój kolor.
+Załóżmy teraz, że ojciec węzła $z$ jest czerwony i~rozważmy przypadki, jak przy omawianiu działania procedury \proc{RB-Insert}.
+Zmiany kolorów węzłów w~drzewie odbywają się tylko w~przypadkach 1 i~3, ale~w~żadnym z~nich kolor węzła $z$ nie ulega zmianie -- przekolorowywane są ewentualnie tylko jego przodkowie.
+Ponieważ nowy węzeł nie jest korzeniem, to również linia 17 procedury \proc{RB-Insert-Fixup} nie zaktualizuje koloru $z$ na czarny.
+
 \exercise %13.3-6
