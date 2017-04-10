@@ -1,6 +1,15 @@
 \subchapter{Operacja usuwania}
 
 \exercise %13.4-1
+Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, to korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwamy korzeń drzewa o~jedynym synu, który jest czerwony.
+Wtedy jednak w~wywołaniu \proc{RB-Delete-Fixup} nie jest wykonywana ani jedna iteracja pętli \kw{while} i~korzeń jest kolorowany na czarno w~wierszu 23.
+
+Jednak procedura \proc{RB-Delete-Fixup} w~ciele pętli aktualizuje kolor niektórych węzłów na czerwono i~dokonuje pewnych rotacji.
+Przyjrzymy się tym sytuacjom i~zobaczymy, że w~żadnej z~nich czerwony węzeł nie staje się korzeniem drzewa.
+Zastosujemy identyczny podział na przypadki, jak w~omawianiu działania procedury w~Podręczniku.
+W~przypadkach 1 i~3 zamiana kolorów między czarnym węzłem i~jego czerwonym synem, a~następnie wykonanie rotacji na tym węźle powoduje, że czerwony z~nich zostaje umieszczony w~drzewie głębiej niż czarny, przez co nie może on być korzeniem.
+W~przypadku 2 na czerwono zostaje pokolorowany brat węzła $x$, ale oczywiście nie może być on korzeniem drzewa z~racji posiadania ojca.
+W końcu, po wykonaniu przypadku 4, $x$ jest ustawione na \attrib{T}{root} i~pętla kończy działanie, po czym następuje aktualizacja koloru $x$ na czarny.
 
 \exercise %13.4-2
 Jeśli węzeł $x$ jest czerwony, to pętla \kw{while} w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się i~węzeł $x$ jest kolorowany na czarno w~wierszu 23, co przywraca własność 4.
