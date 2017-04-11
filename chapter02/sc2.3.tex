@@ -23,13 +23,10 @@ Poniżej przedstawiono implementację procedury \proc{Merge}, w~której nie wyko
 \li	$i\gets1$
 \li $j\gets1$
 \li \For $k\gets p$ \To $r$
-\li		\Do
-			\If $j>n_2$ lub $L[i]\le R[j]$ \label{li:merge'-condition}
-\li				\Then
-					$A[k]\gets L[i]$
+\li		\Do \If $j>n_2$ lub $L[i]\le R[j]$ \label{li:merge'-condition}
+\li				\Then $A[k]\gets L[i]$
 \li					$i\gets i+1$
-\li				\Else
-					$A[k]\gets R[j]$
+\li				\Else $A[k]\gets R[j]$
 \li					$j\gets j+1$
 				\End
 		\End
@@ -89,8 +86,7 @@ Aby wyszukiwać w~całej tablicy $A$, używając procedury rekurencyjnej, należ
 \li	$\id{low}\gets1$
 \li	$\id{high}\gets\attrib{A}{length}$
 \li	\While $\id{low}\le\id{high}$
-\li		\Do
-			$\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
+\li		\Do $\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
 \li			\If $v=A[\id{mid}]$
 \li				\Then \Return \id{mid}
 				\End
@@ -132,8 +128,7 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \li	$n\gets\attrib{S}{length}$
 \li	$\proc{Merge-Sort}(S,1,n)$ \label{li:sum-search-sort}
 \li	\For $i\gets1$ \To $n-1$
-\li		\Do
-			\If $\proc{Recursive-Binary-Search}(S,x-S[i],i+1,n)\ne\const{nil}$ \label{li:sum-search-bs}
+\li		\Do \If $\proc{Recursive-Binary-Search}(S,x-S[i],i+1,n)\ne\const{nil}$ \label{li:sum-search-bs}
 \li				\Then \Return \const{true}
 				\End
 		\End

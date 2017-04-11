@@ -11,13 +11,11 @@ Poniższy algorytm implementuje sortowanie przez wybieranie:
 \Procname{$\proc{Selection-Sort}(A)$}
 \li	$n\gets\attrib{A}{length}$
 \li	\For $j\gets1$ \To $n-1$ \label{li:selection-sort-for-begin}
-\li		\Do
-			$\id{min}\gets j$
+\li		\Do $\id{min}\gets j$
 \li			\For $i\gets j+1$ \To $n$
-\li				\Do
-					\If $A[i]<A[\id{min}]$
-\li						\Then $\id{min}\gets i$
-						\End
+\li				\Do \If $A[i]<A[\id{min}]$
+\li					\Then $\id{min}\gets i$
+					\End
 				\End
 \li			zamień $A[\id{min}]\leftrightarrow A[j]$
 		\End \label{li:selection-sort-for-end}

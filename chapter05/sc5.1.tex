@@ -14,8 +14,7 @@ Poniższy algorytm implementuje generator liczb losowych z~zakresu $a\twodots b$
 \begin{codebox}
 \Procname{$\proc{Random}(a,b)$}
 \li	\While $a<b$
-\li		\Do
-			$\id{mid}\gets\lfloor(a+b)/2\rfloor$
+\li		\Do $\id{mid}\gets\lfloor(a+b)/2\rfloor$
 \li			\If $\proc{Random}(0,1)=0$
 \li				\Then $a\gets\id{mid}+1$
 \li				\Else $b\gets\id{mid}$
@@ -37,8 +36,7 @@ Jako wynik procedury przyjmiemy wynik pierwszego rzutu w~ostatniej parze rzutów
 Następujący algorytm implementuje powyższy opis:
 \begin{codebox}
 \Procname{\proc{Unbiased-Random}}
-\li	\Repeat
-		$x\gets\proc{Biased-Random}$
+\li	\Repeat $x\gets\proc{Biased-Random}$
 \li		$y\gets\proc{Biased-Random}$
 \li	\Until $x\ne y$ \label{li:unbiased-random-repeat-end}
 \li	\Return $x$

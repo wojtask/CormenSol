@@ -52,8 +52,7 @@ Poniższe procedury stanowią implementację kolejki priorytetowej typu min i~dz
 		\End
 \li	$A[i]\gets\id{key}$
 \li	\While $i>1$ i~$A[\proc{Parent}(i)]>A[i]$
-\li		\Do
-			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
+\li		\Do zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
 \li			$i\gets\proc{Parent}(i)$
 		\End
 \end{codebox}
@@ -111,8 +110,7 @@ Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~ko
 \li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
 \li	$\proc{Max-Heapify}(A,i)$ \label{li:max-heap-delete-heapify}
 \li	\While $i>1$ i~$A[\proc{Parent}(i)]<A[i]$ \label{li:max-heap-delete-while-begin}
-\li		\Do
-			zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
+\li		\Do zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
 \li			$i\gets\proc{Parent}(i)$
 		\End \label{li:max-heap-delete-while-end}
 \li	\Return $A[\attrib{A}{heap-size}+1]$

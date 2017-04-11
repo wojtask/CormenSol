@@ -44,16 +44,14 @@ W~tym celu stosujemy pętlę przeglądającą wszystkich synów bieżącego węz
 \li	$k\gets1$
 \li	$\id{child}\gets\proc{Multiary-Child}(d,1,i)$
 \li	\While $k\le d$ i~$\id{child}\le\attrib{A}{heap-size}$ \label{li:multiary-max-heapify-while-begin}
-\li		\Do
-			\If $A[\id{child}]>A[\id{largest}]$
+\li		\Do \If $A[\id{child}]>A[\id{largest}]$
 \li				\Then $\id{largest}\gets\id{child}$
 				\End
 \li			$k\gets k+1$
 \li			$\id{child}\gets\proc{Multiary-Child}(d,k,i)$ \label{li:multiary-max-heapify-child}
 		\End \label{li:multiary-max-heapify-while-end}
 \li	\If $\id{largest}\ne i$
-\li		\Then
-			zamień $A[i]\leftrightarrow A[\id{largest}]$
+\li		\Then zamień $A[i]\leftrightarrow A[\id{largest}]$
 \li			$\proc{Multiary-Max-Heapify}(A,d,\id{largest})$
 		\End
 \end{codebox}
@@ -88,8 +86,7 @@ Jednak zamiast sprawdzania poprawności parametru $k$, do $A[i]$ przypisujemy na
 \Procname{$\proc{Multiary-Heap-Increase-Key}(A,d,i,k)$}
 \li	$A[i]\gets\max(A[i],k)$ \label{li:multiary-heap-increase-key}
 \li	\While $i>1$ i~$A[\proc{Multiary-Parent}(d,i)]<A[i]$
-\li		\Do
-			zamień $A[i]\leftrightarrow A[\proc{Multiary-Parent}(d,i)]$
+\li		\Do zamień $A[i]\leftrightarrow A[\proc{Multiary-Parent}(d,i)]$
 \li			$i\gets\proc{Multiary-Parent}(d,i)$
 		\End
 \end{codebox}

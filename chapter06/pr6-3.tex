@@ -34,15 +34,13 @@ Aby pobrać minimum z~tablicy Younga $Y$ o~rozmiarach $m\times n$, należy wywo�
 \begin{codebox}
 \Procname{$\proc{Young-Extract-Min}(Y,m,n,i,j)$}
 \li	\If $\langle i,j\rangle=\langle m,n\rangle$
-\li		\Then
-			$\id{min}\gets Y[i,j]$
+\li		\Then $\id{min}\gets Y[i,j]$
 \li			$Y[i,j]\gets\infty$
 \li			\Return \id{min}
 		\End
 \li	$\langle i',j'\rangle\gets\langle i,j+1\rangle$
 \li	\If $i<m$
-\li		\Then
-			\If $j=n$ lub $Y[i+1,j]<Y[i,j+1]$
+\li		\Then \If $j=n$ lub $Y[i+1,j]<Y[i,j+1]$
 \li				\Then $\langle i',j'\rangle\gets\langle i+1,j\rangle$
 				\End
 		\End
@@ -75,8 +73,7 @@ W~zależności od tego, który z~tych trzech elementów jest największy, dokony
 \li		\Then $\langle i',j'\rangle\gets\langle i,j-1\rangle$
 		\End
 \li	\If $\langle i',j'\rangle\ne\langle i,j\rangle$
-\li		\Then
-			zamień $Y[i,j]\leftrightarrow Y[i',j']$
+\li		\Then zamień $Y[i,j]\leftrightarrow Y[i',j']$
 \li			$\proc{Youngify}(Y,i',j')$
 		\End
 \end{codebox}
@@ -123,8 +120,7 @@ W~momencie uzyskania tablicy pustej wiadomo, że szukanej liczby nie ma w~począ
 \li	$i\gets1$
 \li	$j\gets n$
 \li	\While $i\le m$ i~$j\ge1$
-\li		\Do
-			\If $v=Y[i,j]$
+\li		\Do \If $v=Y[i,j]$
 \li				\Then \Return \const{true}
 				\End
 \li			\If $v>Y[i,j]$

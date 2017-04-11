@@ -28,8 +28,7 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni≈
 \begin{codebox}
 \Procname{$\proc{Preorder-Tree-Walk}(x)$}
 \li	\If $x\ne\const{nil}$
-\li		\Then
-			wypisz \attrib{x}{key}
+\li		\Then wypisz \attrib{x}{key}
 \li			$\proc{Preorder-Tree-Walk}(\attrib{x}{left})$
 \li			$\proc{Preorder-Tree-Walk}(\attrib{x}{right})$
 		\End
@@ -38,8 +37,7 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni≈
 \begin{codebox}
 \Procname{$\proc{Postorder-Tree-Walk}(x)$}
 \li	\If $x\ne\const{nil}$
-\li		\Then
-			$\proc{Postorder-Tree-Walk}(\attrib{x}{left})$
+\li		\Then $\proc{Postorder-Tree-Walk}(\attrib{x}{left})$
 \li			$\proc{Postorder-Tree-Walk}(\attrib{x}{right})$
 \li			wypisz \attrib{x}{key}
 		\End

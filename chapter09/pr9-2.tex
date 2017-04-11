@@ -28,8 +28,7 @@ W~przeciwnym przypadku obszar tablicy wejściowej, który zawiera medianę wraz 
 \begin{codebox}
 \Procname{$\proc{Weighted-Median}(A,w,p,r)$}
 \li	\If $r-p+1\le2$ \label{li:weighted-median-boundary-case-begin}
-\li		\Then
-			\If $w[p]\ge w[r]$
+\li		\Then \If $w[p]\ge w[r]$
 \li				\Then \Return $A[p]$
 \li				\Else \Return $A[r]$
 				\End \label{li:weighted-median-boundary-case-end}
@@ -45,11 +44,9 @@ W~przeciwnym przypadku obszar tablicy wejściowej, który zawiera medianę wraz 
 \li		\Then \Return $A[q]$
 		\End
 \li	\If $W_L\ge1/2$
-\li		\Then
-			$w[q]\gets w[q]+W_R$
+\li		\Then $w[q]\gets w[q]+W_R$
 \li			\Return $\proc{Weighted-Median}(A,w,p,q)$
-\li		\Else
-			$w[q]\gets w[q]+W_L$
+\li		\Else $w[q]\gets w[q]+W_L$
 \li			\Return $\proc{Weighted-Median}(A,w,q,r)$
 		\End
 \end{codebox}

@@ -55,8 +55,7 @@ Poniższy pseudokod stanowi implementację tej operacji.
 \li		\Then $\id{next}[\id{prev}[x]]\gets\id{next}[x]$
 		\End
 \li	\If $x\ne y$
-\li		\Then
-			\If $\id{next}[y]\ne\const{nil}$
+\li		\Then \If $\id{next}[y]\ne\const{nil}$
 \li				\Then $\id{prev}[\id{next}[y]]\gets x$
 				\End
 \li			\If $\id{prev}[y]\ne\const{nil}$
@@ -87,13 +86,10 @@ Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właś
 \li	$x'\gets\const{nil}$
 \li	$y\gets1$
 \li	\While $x\ne\const{nil}$ \label{li:compactify-list-while-begin}
-\li		\Do
-			\If $x\le m$
-\li				\Then
-					$x'\gets x$
+\li		\Do \If $x\le m$
+\li				\Then $x'\gets x$
 \li					$x\gets\id{next}[x]$
-\li				\Else
-					\While $\id{prev}[y]=-1$ \label{li:compactify-list-while2-begin}
+\li				\Else \While $\id{prev}[y]=-1$ \label{li:compactify-list-while2-begin}
 \li						\Do $y\gets y+1$
 						\End \label{li:compactify-list-while2-end}
 \li					zamień wartości pól \id{key}, \id{next} i~\id{prev} elementu $x$ z~polami elementu $y$ \label{li:compactify-list-swap}

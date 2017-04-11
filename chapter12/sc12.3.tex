@@ -8,18 +8,14 @@ Procedura będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odp
 \begin{codebox}
 \Procname{$\proc{Recursive-Tree-Insert}(x,z)$}
 \li	\If $\attrib{z}{key}<\attrib{x}{key}$
-\li		\Then
-			\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then \If $\attrib{x}{left}\ne\const{nil}$
 \li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{left},z)$
-\li				\Else
-					$\attrib{x}{left}\gets z$
+\li				\Else $\attrib{x}{left}\gets z$
 \li					$\attrib{z}{p}\gets x$
 				\End
-\li		\Else
-			\If $\attrib{x}{right}\ne\const{nil}$
+\li		\Else \If $\attrib{x}{right}\ne\const{nil}$
 \li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{right},z)$
-\li				\Else
-					$\attrib{x}{right}\gets z$
+\li				\Else $\attrib{x}{right}\gets z$
 \li					$\attrib{z}{p}\gets x$
 				\End
 		\End
@@ -64,11 +60,9 @@ Wówczas węzłem efektywnie usuwanym byłby za każdym razem ten wskazywany prz
 \Procname{$\proc{Safe-Tree-Delete}(T,z)$}
 \li	$y\gets\proc{Tree-Delete}(T,z)$
 \li	\If $y\ne z$
-\li		\Then
-			$\attrib{\attrib{z}{left}}{p}\gets\attrib{\attrib{z}{right}}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
+\li		\Then $\attrib{\attrib{z}{left}}{p}\gets\attrib{\attrib{z}{right}}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
 \li			\If $\attrib{z}{p}\ne\const{nil}$
-\li				\Then
-					\If $z=\attrib{\attrib{z}{p}}{left}$
+\li				\Then \If $z=\attrib{\attrib{z}{p}}{left}$
 \li						\Then $\attrib{\attrib{z}{p}}{left}\gets y$
 \li						\Else $\attrib{\attrib{z}{p}}{right}\gets y$
 						\End

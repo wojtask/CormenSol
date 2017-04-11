@@ -10,8 +10,7 @@ Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\a
 \begin{codebox}
 \Procname{$\proc{Fuzzy-Sort}(A,p,r)$}
 \li	\If $p<r$
-\li		\Then
-			$\langle q_1,q_2\rangle\gets\proc{Fuzzy-Partition}(A,p,r)$
+\li		\Then $\langle q_1,q_2\rangle\gets\proc{Fuzzy-Partition}(A,p,r)$
 \li			$\proc{Fuzzy-Sort}(A,p,q_1-1)$ \label{li:fuzzy-sort-recursion1}
 \li			$\proc{Fuzzy-Sort}(A,q_2+1,r)$ \label{li:fuzzy-sort-recursion2}
 		\End
@@ -25,20 +24,16 @@ Pseudokod tej procedury pomocniczej został przedstawiony poniżej.
 \li	$x\gets a_r$
 \li $i\gets p-1$
 \li	\For $j\gets p$ \To $r-1$
-\li		\Do
-			\If $a_j\le x$
-\li				\Then
-					$i\gets i+1$
+\li		\Do \If $a_j\le x$
+\li				\Then $i\gets i+1$
 \li					zamień $A[i]\leftrightarrow A[j]$
 				\End
 		\End
 \li	zamień $A[i+1]\leftrightarrow A[r]$ \label{li:fuzzy-partition-swap}
 \li	$q\gets i+1$ \label{li:fuzzy-partition-q-init}
 \li	\For $k\gets i$ \Downto $p$
-\li		\Do
-			\If $b_k\ge x$
-\li				\Then
-					$q\gets q-1$
+\li		\Do \If $b_k\ge x$
+\li				\Then $q\gets q-1$
 \li					zamień $A[q]\leftrightarrow A[k]$
 				\End
 		\End \label{li:fuzzy-partition-for-end}

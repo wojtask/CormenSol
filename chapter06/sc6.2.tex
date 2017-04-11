@@ -24,8 +24,7 @@ Ponieważ jedyną modyfikacją w~porównaniu z~procedurą \proc{Max-Heapify} jes
 \li		\Then $\id{smallest}\gets r$
 		\End
 \li	\If $\id{smallest}\ne i$
-\li		\Then
-			zamień $A[i]\leftrightarrow A[\id{smallest}]$
+\li		\Then zamień $A[i]\leftrightarrow A[\id{smallest}]$
 \li			$\proc{Min-Heapify}(A,\id{smallest})$
 		\End
 \end{codebox}
@@ -44,8 +43,7 @@ Iteracyjna wersja procedury \proc{Max-Heapify} została przedstawiona poniżej.
 \begin{codebox}
 \Procname{$\proc{Iterative-Max-Heapify}(A,i)$}
 \li	\While \const{true}
-\li		\Do
-			$l\gets\proc{Left}(i)$ \label{li:iterative-max-heapify-begin}
+\li		\Do $l\gets\proc{Left}(i)$ \label{li:iterative-max-heapify-begin}
 \li			$r\gets\proc{Right}(i)$
 \li			\If $l\le\attrib{A}{heap-size}$ i~$A[l]>A[i]$
 \li				\Then $\id{largest}\gets l$

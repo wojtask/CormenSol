@@ -28,8 +28,7 @@ Poniższa procedura stanowi adaptację algorytmu quicksort do omawianego problem
 \begin{codebox}
 \Procname{$\proc{Jugs-Match}(R,B,p,r)$}
 \li	\If $p<r$
-\li		\Then
-			$q\gets\proc{Jugs-Partition}(R,B,p,r)$
+\li		\Then $q\gets\proc{Jugs-Partition}(R,B,p,r)$
 \li			$\proc{Jugs-Match}(R,B,p,q-1)$
 \li			$\proc{Jugs-Match}(R,B,q+1,r)$
 		\End
@@ -51,10 +50,8 @@ Zwracanym wynikiem jest pozycja elementu rozdzielającego (która jest identyczn
 \li	zamień $B[i]\leftrightarrow B[r]$
 \li	$i\gets p-1$ \label{li:jugs-partition-first-partition-begin}
 \li	\For $j\gets p$ \To $r-1$ \label{li:jugs-partition-for1-begin}
-\li		\Do
-			\If $B[j]<x$
-\li				\Then
-					$i\gets i+1$
+\li		\Do \If $B[j]<x$
+\li				\Then $i\gets i+1$
 \li					zamień $B[i]\leftrightarrow B[j]$
 				\End
 		\End \label{li:jugs-partition-for1-end}

@@ -16,16 +16,14 @@ Po dokonaniu oczywistych zmian w~oryginalnej procedurze, otrzymujemy następują
 \begin{codebox}
 \Procname{$\proc{Iterative-Randomized-Select}(A,p,r,i)$}
 \li	\While $p<r$
-\li		\Do
-			$q\gets\proc{Randomized-Partition}(A,p,r)$
+\li		\Do $q\gets\proc{Randomized-Partition}(A,p,r)$
 \li			$k\gets q-p+1$
 \li			\If $i=k$
 \li				\Then \Return $A[q]$
 				\End
 \li			\If $i<k$
 \li				\Then $r\gets q-1$
-\li				\Else
-					$p\gets q+1$
+\li				\Else $p\gets q+1$
 \li					$i\gets i-k$
 				\End
 		\End

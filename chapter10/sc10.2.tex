@@ -17,8 +17,7 @@ Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzys
 \Procname{$\proc{Singly-Linked-List-Delete}(L,x)$}
 \li	\If $x=\attrib{L}{head}$
 \li		\Then $\attrib{L}{head}\gets\attrib{\attrib{L}{head}}{next}$
-\li		\Else
-			$y\gets\attrib{L}{head}$
+\li		\Else $y\gets\attrib{L}{head}$
 \li			\While $\attrib{y}{next}\ne x$
 \li				\Do $y\gets\attrib{y}{next}$
 				\End
@@ -92,8 +91,7 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 \Procname{$\proc{Circular-List-Insert}(L,x)$}
 \li	\If $\attrib{L}{head}=\const{nil}$
 \li		\Then $\attrib{L}{head}\gets\attrib{x}{next}\gets x$
-\li		\Else
-			$\attrib{x}{next}\gets\attrib{\attrib{L}{head}}{next}$
+\li		\Else $\attrib{x}{next}\gets\attrib{\attrib{L}{head}}{next}$
 \li			$\attrib{\attrib{L}{head}}{next}\gets x$
 		\End
 \end{codebox}
@@ -106,8 +104,7 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 		\End
 \li	$\attrib{y}{next}\gets\attrib{x}{next}$
 \li	\If $\attrib{L}{head}=x$
-\li		\Then
-			\If $\attrib{x}{next}=x$
+\li		\Then \If $\attrib{x}{next}=x$
 \li				\Then $\attrib{L}{head}\gets\const{nil}$
 \li				\Else $\attrib{L}{head}\gets\attrib{x}{next}$
 				\End
@@ -124,8 +121,7 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 		\End
 \li	$x\gets\attrib{\attrib{L}{head}}{next}$
 \li	\While $x\ne\attrib{L}{head}$
-\li		\Do
-			\If $\attrib{x}{key}=k$
+\li		\Do \If $\attrib{x}{key}=k$
 \li				\Then \Return $x$
 				\End
 \li			$x\gets\attrib{x}{next}$
@@ -151,8 +147,7 @@ Nadanie atrybutowi \attrib{L}{head} wartości \attrib{L'}{head} wystarczy, aby p
 \Procname{$\proc{Singly-Linked-List-Reverse}(L)$}
 \li	$\attrib{L'}{head}\gets\const{nil}$
 \li	\While $\attrib{L}{head}\ne\const{nil}$
-\li		\Do
-			$x\gets\attrib{L}{head}$
+\li		\Do $x\gets\attrib{L}{head}$
 \li			$\proc{Singly-Linked-List-Delete}(L,\attrib{L}{head})$
 \li			$\proc{Singly-Linked-List-Insert}(L',x)$
 		\End
@@ -181,8 +176,7 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \li	$x\gets\attrib{L}{head}$
 \li	$y\gets\const{nil}$
 \li	\While $x\ne\const{nil}$ i~$\attrib{x}{key}\ne k$
-\li		\Do
-			$z\gets\attrib{x}{np}\func{xor}y$
+\li		\Do $z\gets\attrib{x}{np}\func{xor}y$
 \li			$y\gets x$
 \li			$x\gets z$
 		\End
@@ -206,8 +200,7 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \li	$x'\gets\attrib{L}{head}$
 \li	$y\gets\const{nil}$
 \li	\While $x'\ne x$
-\li		\Do
-			$z\gets\attrib{x'}{np}\func{xor}y$
+\li		\Do $z\gets\attrib{x'}{np}\func{xor}y$
 \li			$y\gets x'$
 \li			$x'\gets z$
 		\End

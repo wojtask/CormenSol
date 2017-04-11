@@ -10,14 +10,12 @@ Oto procedura implementująca opisaną strategię:
 		\End
 \li	$\id{checked}\gets0$
 \li	\While $\id{checked}<n$ \label{li:random-search-while-begin}
-\li		\Do
-			$i\gets\proc{Random}(1,n)$
+\li		\Do $i\gets\proc{Random}(1,n)$
 \li			\If $A[i]=x$
 \li				\Then \Return $i$
 				\End
 \li			\If $B[i]=\const{false}$
-\li				\Then
-					$B[i]\gets\const{true}$
+\li				\Then $B[i]\gets\const{true}$
 \li					$\id{checked}\gets\id{checked}+1$
 				\End
 		\End \label{li:random-search-while-end}

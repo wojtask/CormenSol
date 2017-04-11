@@ -23,8 +23,7 @@ Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~n
 		\End
 \li	$\proc{Push}(S,\attrib{T}{root})$
 \li	\While $\proc{Stack-Empty}(S)=\const{false}$
-\li		\Do
-			$x\gets\proc{Pop}(S)$
+\li		\Do $x\gets\proc{Pop}(S)$
 \li			wypisz \attrib{x}{key}
 \li			\If $\attrib{x}{right}\ne\const{nil}$
 \li				\Then $\proc{Push}(S,\attrib{x}{right})$
@@ -41,8 +40,7 @@ Jeśli $x\ne\const{nil}$, to zostanie wypisany klucz węzła $x$ i~procedura zos
 \begin{codebox}
 \Procname{$\proc{Tree-Walk}(x)$}
 \li	\If $x\ne\const{nil}$
-\li		\Then
-			wypisz \attrib{x}{key}
+\li		\Then wypisz \attrib{x}{key}
 \li			$\proc{Tree-Walk}(\attrib{x}{left-child})$
 \li			$\proc{Tree-Walk}(\attrib{x}{right-sibling})$
 		\End
@@ -72,10 +70,8 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \li	$\id{prev}\gets\const{nil}$
 \li	$\id{curr}\gets\attrib{T}{root}$
 \li	\While $\id{curr}\ne\const{nil}$
-\li		\Do
-			\If $\id{prev}=\attrib{curr}{p}$
-\li				\Then
-					\If $\attrib{curr}{left}\ne\const{nil}$
+\li		\Do \If $\id{prev}=\attrib{curr}{p}$
+\li				\Then \If $\attrib{curr}{left}\ne\const{nil}$
 \li						\Then $\id{next}\gets\attrib{curr}{left}$ \label{li:stackless-inorder-tree-walk-go-left}
 \li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit1}
 						\End

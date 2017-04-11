@@ -33,8 +33,7 @@ Poniższe pseudokody implementują to rozumowanie.
 \Procname{$\proc{Count-Inversions}(A,p,r)$}
 \li	$\id{inversions}\gets0$
 \li	\If $p<r$
-\li		\Then
-			$q\gets\lfloor(p+r)/2\rfloor$
+\li		\Then $q\gets\lfloor(p+r)/2\rfloor$
 \li			$\id{inversions}\gets\id{inversions}+\proc{Count-Inversions}(A,p,q)$
 \li			$\id{inversions}\gets\id{inversions}+\proc{Count-Inversions}(A,q+1,r)$
 \li			$\id{inversions}\gets\id{inversions}+\proc{Merge-Inversions}(A,p,q,r)$
@@ -57,13 +56,10 @@ Poniższe pseudokody implementują to rozumowanie.
 \li	$i\gets j\gets1$
 \li	$\id{inversions}\gets0$
 \li	\For $k\gets p$ \To $r$
-\li		\Do
-			\If $L[i]\le R[j]$
-\li				\Then
-					$A[k]\gets L[i]$
+\li		\Do \If $L[i]\le R[j]$
+\li				\Then $A[k]\gets L[i]$
 \li					$i\gets i+1$
-\li				\Else
-					$A[k]\gets R[j]$
+\li				\Else $A[k]\gets R[j]$
 \li					$j\gets j+1$
 \li					$\id{inversions}\gets\id{inversions}+n_1-i+1$
 				\End
