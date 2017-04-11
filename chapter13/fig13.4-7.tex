@@ -1,0 +1,60 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=50mm/2^#1},
+	index node/.append style = {auto, rectangle, draw=none, fill=none},
+	outer/.append style = {node distance=10mm}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] (left root) {3}
+		child {node {2}}
+		child[missing];
+	
+	\node[right=45mm of left root, blackened] (middle root) {2}
+		child {node {1}}
+		child {node {3}};
+	
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {dodanie węzła} (middle root.west);
+	
+	\node[right=45mm of middle root, blackened] (right root) {2}
+		child[missing]
+		child {node {3}};
+	
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {usunięcie węzła} (right root.west);
+	
+	\node[subpicture label, draw=none, fill=none, left=20mm of left root] {(a)};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a] (pic b) {
+\begin{tikzpicture}[
+	every node/.style = {tree node},
+	anchor = center
+]
+	\node[blackened] (left root) {3}
+		child {node {2}}
+		child {node {4}};
+	
+	\node[right=45mm of left root, blackened] (middle root) {3}
+		child {node[blackened] {2}
+			child {node {1}}
+			child[missing]
+		}
+		child {node[blackened] {4}};
+	
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {dodanie węzła} (middle root.west);
+	
+	\node[right=45mm of middle root, blackened] (right root) {3}
+		child {node[blackened] {2}}
+		child {node[blackened] {4}};
+	
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {usunięcie węzła} (right root.west);
+	
+	\node[subpicture label, draw=none, fill=none, left=20mm of left root] {(b)};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}
