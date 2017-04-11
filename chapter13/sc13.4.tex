@@ -34,6 +34,18 @@ Na rys.\ \ref{fig:13.4-3} zilustrowano ciąg operacji usuwania węzłów z~drzew
 \end{figure}
 
 \exercise %13.4-4
+Gdy z~drzewa czerwono-czarnego usuwany jest czarny liść, to do procedury \proc{RB-Delete-Fixup} przekazywany jest jako parametr wartownik \attrib{T}{nil}, którego pole $p$ pokazuje na ojca usuniętego liścia.
+A~zatem wszystkie odniesienia do pól parametru $x$ w~liniach 1, 2, 3, 6, 7, 8, 11, 16, 17, 18, 20, 22, 23, są odniesieniami do pól wartownika \attrib{T}{nil}.
+Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów brata węzła $x$, który także może być liściem i~operacje te mogą odbywać się na atrybucie \id{color} wartownika.
+
+Zastanówmy się teraz, czy w~jakiejkolwiek innej linii procedury \proc{RB-Delete-Fixup} pola \attrib{T}{nil} są odczytywane lub aktualizowane.
+Procedura ta wywoływana jest tylko wtedy, gdy usuwany węzeł $y$ jest czarny.
+Jeśli $y$ jest korzeniem, to do procedury pomocniczej zostaje przekazane $x=\attrib{T}{nil}=\attrib{T}{root}$ i~pętla \kw{while} nie wykonuje się.
+W~przeciwnym przypadku $y$ posiada brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku dla ojca $y$ byłaby zaburzona własność 5.
+Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury.
+Dzięki temu w~wierszach 4, 5, 10, 14 i~15 nigdy nie pojawi się wartownik \attrib{T}{nil}.
+Możemy wyeliminować też linijki 19 -- węzeł \attrib{w}{right} początkowo jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
+
 \exercise %13.4-5
 W~tabeli \ref{tab:13.4-5} zebrano liczby czarnych węzłów znajdujących się na ścieżkach od korzenia każdego poddrzewa sprzed transformacji do poddrzew $\alpha$, $\beta$, \dots, $\zeta$.
 Liczby te w~każdym przypadku zgadzają się z~ilościami czarnych węzłów na odpowiednich ścieżkach w~drzewie po transformacji.
