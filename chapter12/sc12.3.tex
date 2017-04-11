@@ -1,4 +1,6 @@
 \subchapter{Wstawianie i~usuwanie}
+\note{W~polskim tłumaczeniu linia 16 procedury \proc{Tree-Delete} mówi o~kopiowaniu wartości wszystkich pól\/ $y$ do pól\/ $z$, podczas gdy kopiowane powinny być jedynie dodatkowe dane, jakie są przechowywane w~węźle\/ $y$.}
+\vspace{-2ex}
 
 \exercise %12.3-1
 Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu korzeń $x$ poddrzewa $T$, w~którym będziemy dokonywać wstawiania oraz nowy węzeł $z$.
@@ -90,7 +92,7 @@ Operacja usuwania z~drzewa wyszukiwań binarnych nie jest przemienna. Kontrprzyk
 \end{figure}
 
 \exercise %12.3-6
-Wybór między poprzednikiem i~następnikiem uzależnimy od wyniku rzutu monetą, który zasymulujemy wywołaniem $\proc{Random}(0,1)$.
+Wybór między poprzednikiem i~następnikiem uzależnimy od wyniku rzutu monetą, który będziemy symulować wywołaniem $\proc{Random}(0,1)$.
 Wiersz~3 w~procedurze \proc{Tree-Delete} zastąpimy więc następującym fragmentem:
 \begin{codebox}
 \zi	\If $\proc{Random}(0,1)=0$

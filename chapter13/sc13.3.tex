@@ -1,4 +1,6 @@
 \subchapter{Operacja wstawiania}
+\note{Linia 15 procedury \proc{RB-Insert-Fixup} powinna mówić również o~zamianie lewej rotacji na prawą i~vice versa.}
+\vspace{-2ex}
 
 \exercise %13.3-1
 Pokolorowanie węzła $z$ na czarno mogłoby spowodować naruszenie własności 5 drzewa czerwono-czarnego, podczas gdy procedura \proc{RB-Insert-Fixup} operuje na drzewie, w~którym własność ta jest zachowana i~nie narusza jej w~trakcie swojego działania.
@@ -9,7 +11,7 @@ Na rys.\ \ref{fig:13.3-2} zilustrowano ciąg operacji wstawiania węzłów do dr
 	\centering \input{fig13.3-2}
 	\caption{Drzewa czerwono-czarne powstałe po wstawieniu elementów 41, 38, 31, 12, 19, 8 kolejno do początkowo pustego drzewa.
 	{\sffamily\bfseries(a)} Po wstawieniu pierwszego elementu drzewo składa się tylko z~korzenia, który początkowo ma kolor czerwony.
-	Przywrócenie własności 2 drzewa czerwono-czarnego następuje w~linii 16 procedury \proc{RB-Insert-Fixup}.
+	Przywrócenie własności 2 drzewa czerwono-czarnego następuje w~linii 15 procedury \proc{RB-Insert-Fixup}.
 	{\sffamily\bfseries(b)} Dodanie węzła o~kluczu 38 nie powoduje naruszenia żadnej własności drzewa czerwono-czarnego.
 	{\sffamily\bfseries\doubledash{(c)}{(f)}} Wstawienie każdego kolejnego elementu produkuje drzewo, w~którym naruszona jest własność 4, przywracana następnie za pomocą procedury \proc{RB-Insert-Fixup}.} \label{fig:13.3-2}
 \end{figure}
@@ -36,7 +38,7 @@ Bezpośrednio przed wywołaniem pomocniczej procedury \proc{RB-Insert-Fixup}, no
 Jeśli ojciec węzła $z$ jest czarny, to procedura zakończy działanie, a~$z$ zachowa swój kolor.
 Załóżmy teraz, że ojciec węzła $z$ jest czerwony i~rozważmy przypadki, jak przy omawianiu działania procedury \proc{RB-Insert}.
 Zmiany kolorów węzłów w~drzewie odbywają się tylko w~przypadkach 1 i~3, ale~w~żadnym z~nich kolor węzła $z$ nie ulega zmianie -- przekolorowywane są ewentualnie tylko jego przodkowie.
-Ponieważ nowy węzeł nie jest korzeniem, to również linia 17 procedury \proc{RB-Insert-Fixup} nie zaktualizuje koloru $z$ na czarny.
+Ponieważ nowy węzeł nie jest korzeniem, to również ostatni wiersz procedury \proc{RB-Insert-Fixup} nie zaktualizuje koloru $z$ na czarny.
 
 \exercise %13.3-6
 Podczas wstawiania węzła do drzewa czerwono-czarnego w~reprezentacji bez wskaźników do ojców, do zapamiętania ścieżki od korzenia do nowego węzła użyjemy stosu.
