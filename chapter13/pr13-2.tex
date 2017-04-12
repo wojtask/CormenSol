@@ -1,6 +1,18 @@
 \problem{Złączanie drzew czerwono-czarnych} %13-2
 
 \subproblem %13-2(a)
+Podczas wstawiania nowego węzła do drzewa $T$ czarna wysokość $T$ może zmienić się tylko wtedy, gdy czerwony korzeń $T$ zostaje pokolorowany na czarno.
+Można więc w~procedurze \proc{RB-Insert-Fixup} bezpośrednio przed ostatnim wierszem zinkrementować wartość \attrib{T}{bh} w~przypadku, gdy $\attrib{\attrib{T}{root}}{color}=\const{red}$.
+
+W~usuwaniu węzła wszystkie przypadki w~procedurze \proc{RB-Delete-Fixup} zachowują własność 5, o~ile przyjmiemy, że węzeł aktualnie pokazywany przez $x$ wnosi dodatkową ,,czarną jednostkę''.
+Czarna wysokość drzewa $T$ może być więc zmodyfikowana tylko wtedy, gdy nadmiarowa ,,czarna jednostka'' jest usuwana z~korzenia.
+Wystarczy zatem bezpośrednio przed linią 23 zmniejszyć \attrib{T}{bh} o~1, gdy $x=\attrib{T}{root}$.
+
+Czarna wysokość korzenia drzewa $T$ to oczywiście \attrib{T}{bh}.
+Jeśli dany węzeł jest czerwony, to ma tę samą czarną wysokość, co jego ojciec.
+Gdy natomiast jest czarny (ale nie jest korzeniem), to jego czarna wysokość jest o~1 mniejsza od czarnej wysokości ojca.
+Możemy więc wyznaczyć czarne wysokości wszystkich węzłów na ścieżce od korzenia drzewa $T$ do jego liścia w~czasie proporcjonalnym do długości tej ścieżki.
+
 \subproblem %13-2(b)
 \subproblem %13-2(c)
 \subproblem %13-2(d)
