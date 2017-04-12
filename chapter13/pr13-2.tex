@@ -2,7 +2,7 @@
 
 \subproblem %13-2(a)
 Podczas wstawiania nowego węzła do drzewa $T$ czarna wysokość $T$ może zmienić się tylko wtedy, gdy czerwony korzeń $T$ zostaje pokolorowany na czarno.
-Można więc w~procedurze \proc{RB-Insert-Fixup} bezpośrednio przed ostatnim wierszem zinkrementować wartość \attrib{T}{bh} w~przypadku, gdy $\attrib{\attrib{T}{root}}{color}=\const{red}$.
+Można więc w~procedurze \proc{RB-Insert-Fixup} bezpośrednio przed ostatnim wierszem zinkrementować wartość \attrib{T}{bh} w~przypadku, gdy $\attribb{T}{root}{color}=\const{red}$.
 
 W~usuwaniu węzła wszystkie przypadki w~procedurze \proc{RB-Delete-Fixup} zachowują własność 5, o~ile przyjmiemy, że węzeł aktualnie pokazywany przez $x$ wnosi dodatkową ,,czarną jednostkę''.
 Czarna wysokość drzewa $T$ może być więc zmodyfikowana tylko wtedy, gdy nadmiarowa ,,czarna jednostka'' jest usuwana z~korzenia.
@@ -72,7 +72,7 @@ Pseudokod procedury \proc{RB-Join} znajduje się poniżej.
 				\End
 \li			$\attrib{x}{right}\gets\attrib{T_2}{root}$
 \li			\If $\attrib{T_2}{root}\ne\attrib{T_2}{nil}$
-\li				\Then $\attrib{\attrib{T_2}{root}}{p}\gets x$
+\li				\Then $\attribb{T_2}{root}{p}\gets x$
 				\End
 \li			$\attrib{x}{color}\gets\const{red}$
 \li			$\proc{RB-Insert-Fixup}(T,x)$

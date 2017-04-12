@@ -3,7 +3,7 @@
 \bignegskip
 \begin{codebox}
 \zi	\If $\attrib{y}{left}\ne\attrib{T}{nil}$
-\zi		\Then $\attrib{\attrib{y}{left}}{p}\gets x$
+\zi		\Then $\attribb{y}{left}{p}\gets x$
 		\End
 \end{codebox}
 \note{W~kilku zadaniach z~tego podrozdziału mowa jest o~rotacjach na drzewach wyszukiwań binarnych, a~nie tylko na bardziej wyspecjalizowanych drzewach czerwono-czarnych.
@@ -17,14 +17,14 @@ Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \li	$y\gets\attrib{x}{left}$
 \li	$\attrib{x}{left}\gets\attrib{y}{right}$
 \li	\If $\attrib{y}{right}\ne\attrib{T}{nil}$
-\li		\Then $\attrib{\attrib{y}{right}}{p}\gets x$
+\li		\Then $\attribb{y}{right}{p}\gets x$
 		\End
 \li	$\attrib{y}{p}\gets\attrib{x}{p}$
 \li	\If $\attrib{x}{p}=\attrib{T}{nil}$
 \li		\Then $\attrib{T}{root}\gets y$
-\li		\Else \If $x=\attrib{\attrib{x}{p}}{left}$
-\li				\Then $\attrib{\attrib{x}{p}}{left}\gets y$
-\li				\Else $\attrib{\attrib{x}{p}}{right}\gets y$
+\li		\Else \If $x=\attribb{x}{p}{left}$
+\li				\Then $\attribb{x}{p}{left}\gets y$
+\li				\Else $\attribb{x}{p}{right}\gets y$
 				\End
 		\End
 \li	$\attrib{y}{right}\gets x$

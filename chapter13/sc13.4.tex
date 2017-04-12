@@ -41,7 +41,7 @@ Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów b
 Zastanówmy się teraz, czy w~jakimkolwiek innym miejscu w~\proc{RB-Delete-Fixup} pola \attrib{T}{nil} mogą być odczytywane lub aktualizowane.
 Jeśli usuwany węzeł $y$ to korzeń drzewa $T$, to procedura zostaje wywołana dla $x=\attrib{T}{nil}=\attrib{T}{root}$ i~pętla \kw{while} nie wykonuje się.
 Gdy z~kolei $y$ nie jest korzeniem, to posiada brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku dla wszystkich przodków $y$ własność 5 byłaby zaburzona.
-Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury -- zarówno w~linii 8, jak i~16 $\attrib{\attrib{x}{p}}{right}\ne\attrib{T}{nil}$.
+Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury -- zarówno w~linii 8, jak i~16 $\attribb{x}{p}{right}\ne\attrib{T}{nil}$.
 Dzięki temu w~wierszach 4, 5, 10, 14 i~15 nigdy nie pojawi się wartownik \attrib{T}{nil}.
 Możemy wyeliminować też linijki 19 -- węzeł \attrib{w}{right} początkowo jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
 

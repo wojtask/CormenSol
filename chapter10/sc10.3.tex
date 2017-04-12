@@ -45,7 +45,7 @@ Poniższy pseudokod stanowi implementację tej operacji.
 \begin{codebox}
 \Procname{$\proc{Compact-List-Free-Object}(x)$}
 \li	\If $\id{free}=\const{nil}$
-\li		\Then $y\gets\attrib{key}{length}$
+\li		\Then $y\gets\attribii{key}{length}$
 \li		\Else $y\gets\id{free}-1$
 		\End
 \li	\If $\id{next}[x]\ne\const{nil}$
@@ -80,7 +80,7 @@ Na początku działania procedury do pól \id{prev} wszystkich elementów listy 
 Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
-\li	$n\gets\attrib{key}{length}$
+\li	$n\gets\attribii{key}{length}$
 \li	wpisz $-1$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
 \li $x\gets L$
 \li	$x'\gets\const{nil}$

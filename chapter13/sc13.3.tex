@@ -26,11 +26,11 @@ Wynika z~niego, że własność 5 drzewa czerwono-czarnego faktycznie pozostaje 
 \end{figure}
 
 \exercise %13.3-4
-Jedyny węzeł, który jest kolorowany na czerwono w~trakcie działania procedury \proc{RB-Insert-Fixup} to \attrib{\attrib{z}{p}}{p}.
+Jedyny węzeł, który jest kolorowany na czerwono w~trakcie działania procedury \proc{RB-Insert-Fixup} to \attribb{z}{p}{p}.
 Pętla \kw{while} w~tej procedurze wykonuje się tylko wtedy, gdy $z$ nie jest korzeniem.
 Z~dowodu niezmiennika pętli \kw{while} wynika, że jeśli naruszona jest własność 2, to tylko wówczas, gdy $z$ jest korzeniem i~jest czerwony.
-A~zatem kolorowanie węzła \attrib{\attrib{z}{p}}{p} na czerwono odbywa się jedynie w~przypadku, gdy \attrib{z}{p} jest czerwony i~nie jest to korzeń.
-Stąd mamy, że węzeł \attrib{\attrib{z}{p}}{p} nie jest wartownikiem \attrib{T}{nil}, więc procedura \proc{RB-Insert-Fixup} nigdy nie przypisze wartownikowi koloru \const{red}.
+A~zatem kolorowanie węzła \attribb{z}{p}{p} na czerwono odbywa się jedynie w~przypadku, gdy \attrib{z}{p} jest czerwony i~nie jest to korzeń.
+Stąd mamy, że węzeł \attribb{z}{p}{p} nie jest wartownikiem \attrib{T}{nil}, więc procedura \proc{RB-Insert-Fixup} nigdy nie przypisze wartownikowi koloru \const{red}.
 
 \exercise %13.3-5
 Pokażemy, że nowy węzeł wstawiony do niepustego drzewa czerwono-czarnego za pomocą procedury \proc{RB-Insert} zachowuje kolor czerwony.
@@ -53,31 +53,31 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie:
 \Procname{$\proc{RB-No-Parents-Insert-Fixup}(T,S,z)$}
 \li	$p\gets\proc{Pop}(S)$
 \li	\While $\attrib{p}{color}=\const{red}$
-\li		\Do $pp\gets\proc{Pop}(S)$
-\li			\If $p=\attrib{pp}{left}$
-\li				\Then $y\gets\attrib{pp}{right}$
+\li		\Do $r\gets\proc{Pop}(S)$
+\li			\If $p=\attrib{r}{left}$
+\li				\Then $y\gets\attrib{r}{right}$
 \li					\If $\attrib{y}{color}=\const{red}$
 \li						\Then $\attrib{y}{color}\gets\attrib{p}{color}\gets\const{black}$
-\li							$\attrib{pp}{color}\gets\const{red}$
-\li							$z\gets pp$
+\li							$\attrib{r}{color}\gets\const{red}$
+\li							$z\gets r$
 \li							$p\gets\proc{Pop}(S)$
 \li						\Else \If $z=\attrib{p}{right}$
 \li							\Then $z\leftrightarrow p$
-\li								$\proc{No-Parents-Left-Rotate}(T,z,pp)$
+\li								$\proc{No-Parents-Left-Rotate}(T,z,r)$
 							\End
 \li							$\attrib{p}{color}\gets\const{black}$
-\li							$\attrib{pp}{color}\gets\const{red}$
-\li							$\proc{No-Parents-Right-Rotate}(T,pp,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
+\li							$\attrib{r}{color}\gets\const{red}$
+\li							$\proc{No-Parents-Right-Rotate}(T,r,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
 						\End
 \li				\Else (to samo co po \kw{then} z~zamienionymi wskaźnikami \id{right} i~\id{left})
 				\End
 		\End
-\li	$\attrib{\attrib{T}{root}}{color}\gets\const{black}$
+\li	$\attribb{T}{root}{color}\gets\const{black}$
 \end{codebox}
 W~każdej iteracji pętli \kw{while}, oprócz węzła $z$, potrzebujemy znać także jego ojca i~dziadka.
-Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~\id{pp}.
+Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~$r$.
 Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie dodatkowego parametru -- ojca rotowanego węzła.
-W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła \id{pp} jest ściągany ze stosu i~przekazywany do prawej rotacji.
+W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do prawej rotacji.
 Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo pętla \kw{while} nie wykona więcej iteracji i~żaden element nie będzie już ściągany z~$S$.
 
 Poniżej znajduje się operacja lewej rotacji na węźle $x$, która nie korzysta ze wskaźników na ojca.

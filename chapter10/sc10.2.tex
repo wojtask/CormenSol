@@ -16,7 +16,7 @@ Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzys
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Delete}(L,x)$}
 \li	\If $x=\attrib{L}{head}$
-\li		\Then $\attrib{L}{head}\gets\attrib{\attrib{L}{head}}{next}$
+\li		\Then $\attrib{L}{head}\gets\attribb{L}{head}{next}$
 \li		\Else $y\gets\attrib{L}{head}$
 \li			\While $\attrib{y}{next}\ne x$
 \li				\Do $y\gets\attrib{y}{next}$
@@ -56,7 +56,7 @@ Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
 \li	$\attrib{x}{next}\gets\const{nil}$
 \li	$\attrib{x}{key}\gets k$
 \li	\If $\attrib{L}{tail}\ne\const{nil}$
-\li		\Then $\attrib{\attrib{L}{tail}}{next}\gets x$
+\li		\Then $\attribb{L}{tail}{next}\gets x$
 \li		\Else $\attrib{L}{head}\gets x$
 		\End
 \li	$\attrib{L}{tail}\gets x$
@@ -76,7 +76,7 @@ Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
 \end{codebox}
 
 \exercise %10.2-4
-Zauważmy, że pole \attrib{\attrib{L}{nil}}{key} jest niewykorzystywane w~implementacji listy z~wartownikami.
+Zauważmy, że pole \attribb{L}{nil}{key} jest niewykorzystywane w~implementacji listy z~wartownikami.
 Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$.
 Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej procedury zatrzyma się na elemencie \attrib{L}{nil}, po czym zostanie on zwrócony.
 
@@ -91,8 +91,8 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 \Procname{$\proc{Circular-List-Insert}(L,x)$}
 \li	\If $\attrib{L}{head}=\const{nil}$
 \li		\Then $\attrib{L}{head}\gets\attrib{x}{next}\gets x$
-\li		\Else $\attrib{x}{next}\gets\attrib{\attrib{L}{head}}{next}$
-\li			$\attrib{\attrib{L}{head}}{next}\gets x$
+\li		\Else $\attrib{x}{next}\gets\attribb{L}{head}{next}$
+\li			$\attribb{L}{head}{next}\gets x$
 		\End
 \end{codebox}
 
@@ -116,10 +116,10 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 \li	\If $\attrib{L}{head}=\const{nil}$
 \li		\Then \Return \const{nil}
 		\End
-\li	\If $\attrib{\attrib{L}{head}}{key}=k$
+\li	\If $\attribb{L}{head}{key}=k$
 \li		\Then \Return \attrib{L}{head}
 		\End
-\li	$x\gets\attrib{\attrib{L}{head}}{next}$
+\li	$x\gets\attribb{L}{head}{next}$
 \li	\While $x\ne\attrib{L}{head}$
 \li		\Do \If $\attrib{x}{key}=k$
 \li				\Then \Return $x$
@@ -187,7 +187,7 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \Procname{$\proc{Xor-Linked-List-Insert}(L,x)$}
 \li	$\attrib{x}{np}\gets\attrib{L}{head}$
 \li	\If $\attrib{L}{head}\ne\const{nil}$
-\li		\Then $\attrib{\attrib{L}{head}}{np}\gets\attrib{\attrib{L}{head}}{np}\func{xor}x$
+\li		\Then $\attribb{L}{head}{np}\gets\attribb{L}{head}{np}\func{xor}x$
 		\End
 \li	$\attrib{L}{head}\gets x$
 \li	\If $\attrib{L}{tail}=\const{nil}$

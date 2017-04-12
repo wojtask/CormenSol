@@ -70,14 +70,14 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \li	$\id{prev}\gets\const{nil}$
 \li	$\id{curr}\gets\attrib{T}{root}$
 \li	\While $\id{curr}\ne\const{nil}$
-\li		\Do \If $\id{prev}=\attrib{curr}{p}$
-\li				\Then \If $\attrib{curr}{left}\ne\const{nil}$
-\li						\Then $\id{next}\gets\attrib{curr}{left}$ \label{li:stackless-inorder-tree-walk-go-left}
+\li		\Do \If $\id{prev}=\attribii{curr}{p}$
+\li				\Then \If $\attribii{curr}{left}\ne\const{nil}$
+\li						\Then $\id{next}\gets\attribii{curr}{left}$ \label{li:stackless-inorder-tree-walk-go-left}
 \li						\Else $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit1}
 						\End
-\li				\ElseIf $\id{prev}=\attrib{curr}{left}$
+\li				\ElseIf $\id{prev}=\attribii{curr}{left}$
 \li					\Then $\id{next}\gets\proc{Stackless-Inorder-Visit}(\id{curr})$ \label{li:stackless-inorder-tree-walk-visit2}
-\li				\ElseNoIf $\id{next}\gets\attrib{curr}{p}$ \label{li:stackless-inorder-tree-walk-go-up}
+\li				\ElseNoIf $\id{next}\gets\attribii{curr}{p}$ \label{li:stackless-inorder-tree-walk-go-up}
 				\End
 \li			$\id{prev}\gets\id{curr}$ \label{li:stackless-inorder-tree-walk-update-prev}
 \li			$\id{curr}\gets\id{next}$ \label{li:stackless-inorder-tree-walk-update-curr}

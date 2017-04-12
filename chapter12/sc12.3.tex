@@ -60,11 +60,11 @@ Wówczas węzłem efektywnie usuwanym byłby za każdym razem ten wskazywany prz
 \Procname{$\proc{Safe-Tree-Delete}(T,z)$}
 \li	$y\gets\proc{Tree-Delete}(T,z)$
 \li	\If $y\ne z$
-\li		\Then $\attrib{\attrib{z}{left}}{p}\gets\attrib{\attrib{z}{right}}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
+\li		\Then $\attribb{z}{left}{p}\gets\attribb{z}{right}{p}\gets y$ \label{li:safe-tree-delete-substitute-begin}
 \li			\If $\attrib{z}{p}\ne\const{nil}$
-\li				\Then \If $z=\attrib{\attrib{z}{p}}{left}$
-\li						\Then $\attrib{\attrib{z}{p}}{left}\gets y$
-\li						\Else $\attrib{\attrib{z}{p}}{right}\gets y$
+\li				\Then \If $z=\attribb{z}{p}{left}$
+\li						\Then $\attribb{z}{p}{left}\gets y$
+\li						\Else $\attribb{z}{p}{right}\gets y$
 						\End
 				\End
 \li			skopiuj zawartość wszystkich pól z~$z$ do $y$ \label{li:safe-tree-delete-substitute-end}

@@ -238,11 +238,23 @@
 % ujemny odstęp kasujący \bigskip
 \newcommand{\bignegskip}{\vspace{-\bigskipamount}}
 
-% poprawione polecenie \id dla jednoznakowych identyfikatorów
-\renewcommand{\id}[1]{\ensuremath{\mathit{\text@hyphens#1}}}
+% seria poleceń do atrybutów obiektów (zapożyczone z clrscode3e.sty)
+% kilka definicji:
+% i-string to identyfikator, który umieszczamy w \id, np. złożone z jednej lub kilku liter nie-greckich lub podkreśleń
+% x-string to identyfikator, który nie powinien być umieszczany w \id, np. złożony z jednej lub kilku liter greckich lub zawierający indeks
+% pojedyncza nie-grecka litera może być zarówno i-stringiem, jak i x-stringiem
+% poszczególne definicje służą do składania atrybutów dla każdej kombinacji stringów (xi, xx, ix, ii)
+% w drugim wydaniu Podręcznika atrybuty składane są jednak w odwrotnej kolejności, dlatego np. użycie \attribix{current}{h}
+% spowoduje wyświetlenie h[current], gdzie current zostanie złożone z użyciem \id (i-string), a h -- bez \id (x-string)
+\newcommand{\attribxi}[2]{\ensuremath{\id{#2}[#1]}}
+\newcommand{\attribxx}[2]{\ensuremath{#2[#1]}}
+\newcommand{\attribix}[2]{\ensuremath{#2[\id{#1}]}}
+\newcommand{\attribii}[2]{\ensuremath{\id{#2}[\id{#1}]}}
+\newcommand{\attrib}[2]{\attribxi{#1}{#2}}
 
-% atrybut obiektu
-\newcommand{\attrib}[2]{\id{#2}[\id{#1}]}
+% polecenia służące do kaskadowego składania atrybutów, zakładając, że pierwszy element jest x-stringiem, a kolejne -- i-stringami
+\newcommand{\attribb}[3]{\attribxi{\attribxi{#1}{#2}}{#3}}
+\newcommand{\attribbb}[4]{\attribxi{\attribb{#1}{#2}{#3}}{#4}}
 
 % definicja nowych operatorów matematycznych
 \DeclareMathOperator{\sgn}{sgn}
