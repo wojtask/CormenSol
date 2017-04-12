@@ -14,6 +14,31 @@ Gdy natomiast jest czarny (ale nie jest korzeniem), to jego czarna wysokość je
 Możemy więc wyznaczyć czarne wysokości wszystkich węzłów na ścieżce od korzenia drzewa $T$ do jego liścia w~czasie proporcjonalnym do długości tej ścieżki.
 
 \subproblem %13-2(b)
+Poniższy pseudokod realizuje opisaną operację.
+\begin{codebox}
+\Procname{$\proc{RB-Join-Point}(T_1,T_2)$}
+\li	$y\gets\attrib{T_1}{root}$
+\li	$b\gets\attrib{T_1}{bh}$
+\li	\While $b>\attrib{T_2}{bh}$
+\li		\Do \If $\attrib{y}{right}\ne\attrib{T_1}{nil}$
+\li				\Then $z\gets\attrib{y}{right}$
+\li				\Else $z\gets\attrib{y}{left}$
+				\End
+\li			\If $\attrib{z}{color}=\const{black}$
+\li				\Then $b\gets b-1$
+				\End
+\li			$y\gets z$
+		\End
+\li	\Return $y$
+\end{codebox}
+Algorytm przechodzi drzewo $T_1$ od korzenia w~dół, wybierając w~pierwszej kolejności prawego syna aktualnego węzła $y$, a~jeżeli ten jest równy \attrib{T_1}{nil}, to wtedy lewego syna $y$.
+Dzięki temu odwiedzane są węzły o~największym możliwym kluczu na danej czarnej wysokości w~drzewie $T_1$.
+Algorytm kończy działanie, gdy czarna wysokość $b$ węzła $y$, wyznaczona na podstawie obserwacji z~punktu~(a), zrówna się z~wartością \attrib{T_2}{bh}.
+Gdy to się wydarzy, węzeł $y$ jest czarny i~następuje jego zwrócenie.
+
+Algorytm może odwiedzić wszystkie węzły na pewnej ścieżce od korzenia do liścia.
+Ponieważ $T_1$ jest drzewem czerwono-czarnym o~co najwyżej $n$ węzłach, to czas działania algorytmu można ograniczyć od góry przez $O(\lg n)$.
+
 \subproblem %13-2(c)
 \subproblem %13-2(d)
 \subproblem %13-2(e)
