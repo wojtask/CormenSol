@@ -44,5 +44,10 @@ Na podstawie założenia, klucz korzenia $y$ drzewa $T_y$, będącego poddrzewem
 Można zatem, bez naruszenia własności drzewa wyszukiwań binarnych, umieścić węzeł $x$ między $y$ i~ojcem $y$, czyniąc $T_1$ lewym poddrzewem $x$, a~$T_2$ -- jego prawym poddrzewem.
 
 \subproblem %13-2(d)
+Jeżeli pokolorujemy węzeł $x$ na czerwono, to czarna wysokość ojca $x$ (o~ile $x\ne\attrib{T}{root}$) nie zmieni się i~czerwono-czarne własności 1, 3 i~5 będą spełnione.
+W~przypadku gdy $x=\attrib{T}{root}$, to naruszona może być czerwono-czarna własność 2, a~jeśli $x\ne\attrib{T}{root}$, to węzeł \attrib{x}{p} także może być czerwony, co powoduje naruszenie własności 4.
+Z~identyczną sytuacją mieliśmy do czynienia podczas wstawiania węzła do drzewa czerwono-czarnego przy pomocy procedury \proc{RB-Insert}.
+Możemy więc posłużyć się pomocniczą procedurą, wywołując $\proc{RB-Insert-Fixup}(T,x)$, co przywróci naruszone własności 2 i~4 w~drzewie $T$ w~czasie $O(\lg n)$.
+
 \subproblem %13-2(e)
 \subproblem %13-2(f)
