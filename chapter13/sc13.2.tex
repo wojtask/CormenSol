@@ -1,4 +1,11 @@
 \subchapter{Operacje rotacji}
+\note{Linia 3 w~procedurze \proc{Left-Rotate} powinna być zastąpiona liniami:}
+\vspace{-\bigskipamount}
+\begin{codebox}
+\zi	\If $\attrib{y}{left}\ne\attrib{T}{nil}$
+\zi		\Then $\attrib{\attrib{y}{left}}{p}\gets x$
+		\End
+\end{codebox}
 \note{W~kilku zadaniach z~tego podrozdziału mowa jest o~rotacjach na drzewach wyszukiwań binarnych, a~nie tylko na bardziej wyspecjalizowanych drzewach czerwono-czarnych.
 Operacje te działają identycznie jak w~procedurach \proc{Left-Rotate} i~\proc{Right-Rotate}, w~których zamieniono\/ \attrib{T}{nil} z~wiersza 5 na \const{nil}.}
 \vspace{-2ex}
@@ -9,7 +16,9 @@ Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \Procname{$\proc{Right-Rotate}(T,x)$}
 \li	$y\gets\attrib{x}{left}$
 \li	$\attrib{x}{left}\gets\attrib{y}{right}$
-\li	$\attrib{\attrib{y}{right}}{p}\gets x$
+\li	\If $\attrib{y}{right}\ne\attrib{T}{nil}$
+\li		\Then $\attrib{\attrib{y}{right}}{p}\gets x$
+		\End
 \li	$\attrib{y}{p}\gets\attrib{x}{p}$
 \li	\If $\attrib{x}{p}=\attrib{T}{nil}$
 \li		\Then $\attrib{T}{root}\gets y$
