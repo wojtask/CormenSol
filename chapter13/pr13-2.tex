@@ -56,3 +56,29 @@ Węzeł $x$ można następnie umieścić w~drzewie $T_2$ jako nowy ojciec węzł
 Pokolorowanie $x$ na czerwono i~przywrócenie własności drzewa czerwono-czarnego w~wynikowym drzewie $T$ odbywa się identycznie jak w~punkcie (d).
 
 \subproblem %13-2(f)
+Pseudokod procedury \proc{RB-Join} znajduje się poniżej.
+\begin{codebox}
+\Procname{$\proc{RB-Join}(T_1,x,T_2)$}
+\li	\If $\attrib{T_1}{bh}\ge\attrib{T_2}{bh}$
+\li		\Then $y\gets\proc{RB-Join-Point}(T_1,T_2)$
+\li			$\attrib{x}{left}\gets y$
+\li			$\attrib{x}{p}\gets\attrib{y}{p}$
+\li			\If $\attrib{y}{p}=\attrib{T_1}{nil}$
+\li				\Then $\attrib{T}{root}\gets x$
+\li				\Else $\attrib{T}{root}\gets\attrib{T_1}{root}$
+				\End
+\li			\If $y\ne\attrib{T_1}{nil}$
+\li				\Then $\attrib{y}{p}\gets x$
+				\End
+\li			$\attrib{x}{right}\gets\attrib{T_2}{root}$
+\li			\If $\attrib{T_2}{root}\ne\attrib{T_2}{nil}$
+\li				\Then $\attrib{\attrib{T_2}{root}}{p}\gets x$
+				\End
+\li			$\attrib{x}{color}\gets\const{red}$
+\li			$\proc{RB-Insert-Fixup}(T,x)$
+\li		\Else (to samo co po \kw{then} odwrócone symetrycznie) \label{li:rb-join-symmetric-case}
+		\End
+\end{codebox}
+W~wierszu~\ref{li:rb-join-symmetric-case} wykonywane są operacje dla przypadku, gdy $\attrib{T_1}{bh}<\attrib{T_2}{bh}$, opisane dokładnie w~części (e).
+
+Na podstawie analizy z~poprzednich punktów wynika, że czas działania operacji złączania drzew czerwono-czarnych o~sumarycznej liczbie węzłów $n$ wynosi $O(\lg n)$.
