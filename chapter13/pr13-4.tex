@@ -8,6 +8,14 @@ A~zatem, jeśli dodatkowo $\attrib{x_i}{priority}<\attrib{x_j}{priority}$, to w�
 Dla każdej pary węzłów z~danego zbioru istnieje jednoznacznie wyznaczone ich wzajemne rozmieszczenie w~drzepcu, dlatego istnieje dokładnie jeden drzepiec dla tego zbioru węzłów i~powiązanych z~nimi priorytetów.
 
 \subproblem %13-4(b)
+Niech $T$ będzie drzepcem zbudowanym z~węzłów $x_1$, $x_2$, \dots, $x_n$.
+Załóżmy bez utraty ogólności, że priorytety węzłów w~$T$ zostały wybrane ze zbioru $P=\{1,2,\dots,n\}$ losowo i~niezależnie od każdego węzła.
+Rozważamy więc pewną permutację $\pi$ zbioru $P$, która wyznacza priorytety dla ciągu węzłów drzepca $T$, tzn.\ dla $i=1$, 2, \dots, $n$, priorytetem $x_i$ jest $\pi(i)$.
+Oczywiście każda z~$n!$ permutacji zbioru $P$ jest jednakowo prawdopodobna, co oznacza, że każda permutacja kluczy węzłów, wyznaczona przez ich rosnące priorytety, jest również jednakowo prawdopodobna.
+Możemy zatem potraktować drzepiec $T$ jak drzewo wyszukiwań binarnych utworzone przez wstawienie do niego węzłów o~coraz większym priorytecie, czyli, kolejno $x_{\pi^{-1}(1)}$, $x_{\pi^{-1}(2)}$, \dots, $x_{\pi^{-1}(n)}$.
+Drzewo $T$ jest zatem losowo skonstruowanym drzewem wyszukiwań binarnych, które, na podstawie analizy z~podrozdziału 12.4, ma wysokość $h=O(\lg n)$.
+Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, daje nam oczekiwaną wysokość drzepca równą $\Theta(\lg n)$.
+
 \subproblem %13-4(c)
 Procedura \proc{Treap-Insert} wstawia nowy węzeł $z$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
 Jeśli priorytet nowego węzła jest mniejszy od priorytetu jego ojca, to mamy naruszoną własność kopca typu min i~procedura przystępuje do jej przywrócenia.
@@ -22,7 +30,7 @@ Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseu
 \li		\Do \If $z=\attribb{z}{p}{left}$
 \li				\Then $\proc{Right-Rotate}(\attrib{z}{p})$
 \li				\Else $\proc{Left-Rotate}(\attrib{z}{p})$
-				\End
+				\End		
 		\End
 \end{codebox}
 
