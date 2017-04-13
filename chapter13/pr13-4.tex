@@ -9,6 +9,23 @@ Dla każdej pary węzłów z~danego zbioru istnieje jednoznacznie wyznaczone ich
 
 \subproblem %13-4(b)
 \subproblem %13-4(c)
+Procedura \proc{Treap-Insert} wstawia nowy węzeł $z$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
+Jeśli priorytet nowego węzła jest mniejszy od priorytetu jego ojca, to mamy naruszoną własność kopca typu min i~procedura przystępuje do jej przywrócenia.
+Wykonuje w~tym celu odpowiednie rotacje, przenosząc dzięki temu węzeł $z$ na wyższe poziomy drzepca aż do momentu, gdy $z$ osiągnie korzeń albo gdy własność kopca między $z$ i~\attrib{z}{p} jest już spełniona.
+Gdy $z$ jest lewym synem \attrib{z}{p}, to na \attrib{z}{p} wykonywana jest prawa rotacja, natomiast gdy $z$ jest prawym synem \attrib{z}{p} -- lewa rotacja.
+
+Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseudokodzie:
+\begin{codebox}
+\Procname{$\proc{Treap-Insert}(T,z)$}
+\li	$\proc{Tree-Insert}(T,z)$
+\li	\While $z\ne\attrib{T}{root}$ i~$\attrib{z}{priority}<\attribb{z}{p}{priority}$
+\li		\Do \If $z=\attribb{z}{p}{left}$
+\li				\Then $\proc{Right-Rotate}(\attrib{z}{p})$
+\li				\Else $\proc{Left-Rotate}(\attrib{z}{p})$
+				\End
+		\End
+\end{codebox}
+
 \subproblem %13-4(d)
 \subproblem %13-4(e)
 \subproblem %13-4(f)
