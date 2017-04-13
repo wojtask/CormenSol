@@ -67,6 +67,13 @@ Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to n
 
 \subproblem %13-4(g)
 \subproblem %13-4(h)
+W~lewym poddrzewie węzła $x$ o~kluczu $k=\attrib{x}{key}$ znajdują się węzły o~kluczach $j<k$, dlatego możemy napisać $C=\sum_{j=1}^{k-1}X_{j,k}$.
+Stąd
+\begin{align*}
+	\E(C) &= \E\biggl(\sum_{j=1}^{k-1}X_{j,k}\biggr) = \sum_{j=1}^{k-1}\E(X_{j,k}) = \sum_{j=1}^{k-1}\Pr(X_{j,k}=1) \\
+	&= \sum_{j=1}^{k-1}\frac{1}{(k-j+1)(k-j)} = \sum_{j=1}^{k-1}\frac{1}{j(j+1)} = \sum_{j=1}^{k-1}\biggl(\frac{1}{j}-\frac{1}{j+1}\biggr) = 1-\frac{1}{k}.
+\end{align*}
+
 \subproblem %13-4(i)
 \subproblem %13-4(j)
 Na podstawie wyników uzyskanych w~poprzednich punktach mamy, że oczekiwana liczba rotacji wykonywanych przez \proc{Treap-Insert} wynosi
