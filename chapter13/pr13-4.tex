@@ -40,6 +40,31 @@ A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(
 
 \subproblem %13-4(e)
 \subproblem %13-4(f)
+\note{Definicja zmiennej losowej\/ $X_{i,k}$ powinna brzmieć następująco:}
+\bignegskip
+\[
+	X_{i,k} = \I(\text{$y$ jest na prawym kręgosłupie lewego poddrzewa węzła $x$ (w~$T$)}).
+\]
+\smallskip
+
+\noindent Wprowadźmy oznaczenia $T^L_x$ i~$T^R_x$ na, odpowiednio, lewe i~prawe poddrzewo węzła $x$.
+Będziemy też pisać $x\in T$ dla oznaczenia, że $x$ jest węzłem w~drzewie $T$.
+
+Koniunkcja warunków $\attrib{y}{priority}>\attrib{x}{priority}$ i~$\attrib{y}{key}<\attrib{x}{key}$ jest równoważna temu, że $y\in T^L_x$.
+Zastanówmy się teraz, które węzły $z\in T$ spełniają nierówności $\attrib{y}{key}<\attrib{z}{key}<\attrib{x}{key}$.
+Pierwsza z~nich jest prawdziwa wtedy, gdy $z\in T^R_y$ albo $y\in T^L_z$, a~druga, gdy $z\in T^L_x$ albo $x\in T^R_z$.
+Przy założeniu, że $y\in T^L_x$, obydwie nierówności zachodzą w~następujących przypadkach:
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
+	\item $z\in T^L_x$ i~$y\in T^L_z$;
+	\item $z\in T^R_y$.
+\end{enumerate}
+Przypadek (i) obejmuje węzły $z$ z~lewego poddrzewa $x$, które z~kolei w~swoim lewym poddrzewie mają $y$.
+Zgodnie z~własnościami drzepca oznacza to, że $\attrib{x}{priority}<\attrib{z}{priority}<\attrib{y}{priority}$.
+W~przypadku (ii) zaś zachodzi $\attrib{y}{priority}<\attrib{z}{priority}$.
+Jeśli nie istnieje węzeł $z\in T$, który spełnia warunek (i), to $y$ znajduje się na prawym kręgosłupie drzewa $T^L_x$.
+Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to nie istnieje węzeł $z\in T^L_x$, dla którego $y\in T^L_z$.
+
 \subproblem %13-4(g)
 \subproblem %13-4(h)
 \subproblem %13-4(i)
