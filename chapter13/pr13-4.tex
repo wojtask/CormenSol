@@ -17,7 +17,7 @@ Gdy $z$ jest lewym synem \attrib{z}{p}, to na \attrib{z}{p} wykonywana jest praw
 Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseudokodzie:
 \begin{codebox}
 \Procname{$\proc{Treap-Insert}(T,z)$}
-\li	$\proc{Tree-Insert}(T,z)$
+\li	$\proc{Tree-Insert}(T,z)$ \label{li:treap-insert-tree-insert}
 \li	\While $z\ne\attrib{T}{root}$ i~$\attrib{z}{priority}<\attribb{z}{p}{priority}$
 \li		\Do \If $z=\attribb{z}{p}{left}$
 \li				\Then $\proc{Right-Rotate}(\attrib{z}{p})$
@@ -27,6 +27,9 @@ Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseu
 \end{codebox}
 
 \subproblem %13-4(d)
+Wywołanie z~linii~\ref{li:treap-insert-tree-insert} potrzebuje czasu proporcjonalnego do wysokości $h$ drzepca $T$, a~liczba rotacji wykonywanych w~trakcie działania pętli \kw{while} nigdy nie przekracza $h$.
+A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(h)$, co na mocy faktu wykazanego w~punkcie (b) jest równe $\Theta(\lg n)$.
+
 \subproblem %13-4(e)
 \subproblem %13-4(f)
 \subproblem %13-4(g)
