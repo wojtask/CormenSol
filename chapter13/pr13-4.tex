@@ -86,7 +86,19 @@ Stąd
 \end{align*}
 
 \subproblem %13-4(i)
-%Podobnie jak w~poprzednim punkcie stwierdzamy, że prawe poddrzewo $x$ zawiera węzły o~kluczach $j>k$, więc $D=\sum_{j=k+1}^nY_{j,k}$.
+Dla tych samych oznaczeń, jak w~definicji zmiennej losowej $X_{i,k}$, niech
+\[
+	Y_{i,k} = \I(\text{$y$ jest na lewym kręgosłupie prawego poddrzewa węzła $x$ (w~$T$)}).
+\]
+Można udowodnić symetryczny fakt do tego z~punktu (f), czyli że $Y_{i,k}=1$ wtedy i~tylko wtedy, gdy $\attrib{y}{priority}>\attrib{x}{priority}$, $\attrib{x}{key}<\attrib{y}{key}$ oraz dla każdego $z$ takiego, że $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, zachodzi $\attrib{y}{priority}<\attrib{z}{priority}$.
+Rozumując analogicznie, jak w~części (g), otrzymujemy
+\[
+	\Pr(Y_{i,k}=1) = \frac{(i-k-1)!}{(i-k+1)!} = \frac{1}{(i-k+1)(i-k)}.
+\]
+Ponieważ prawe poddrzewo węzła $x$ o~kluczu $k$ zawiera węzły o~kluczach $j>k$, to stąd $D=\sum_{j=k+1}^nY_{j,k}$ i~podobnie jak w~(h):
+\[
+	\E(D) = \sum_{j=k+1}^n\Pr(Y_{j,k}=1) = \sum_{j=k+1}^n\frac{1}{(j-k+1)(j-k)} = \sum_{j=1}^{n-k}\frac{1}{j(j+1)} = \frac{1}{n-k+1}.
+\]
 
 \subproblem %13-4(j)
 Na podstawie wyników uzyskanych w~poprzednich punktach mamy, że oczekiwana liczba rotacji wykonywanych przez \proc{Treap-Insert} wynosi
