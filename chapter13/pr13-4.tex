@@ -66,6 +66,17 @@ Jeśli nie istnieje węzeł $z\in T$, który spełnia warunek (i), to $y$ znajdu
 Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to nie istnieje węzeł $z\in T^L_x$, dla którego $y\in T^L_z$.
 
 \subproblem %13-4(g)
+Załóżmy, że $i<k$.
+Niech $p_i$, $p_{i+1}$, \dots, $p_k$, będą priorytetami węzłów o~kluczach od $i$ do $k$ włącznie.
+Z~punktu (f) mamy, że $X_{i,k}=1$ wtedy i~tylko wtedy, gdy $p_i>p_k$ oraz dla każdego $j=i+1$, $i+2$, \dots, $k-1$, zachodzi $p_j>p_i$.
+Istnieje $(k-i+1)!$ permutacji priorytetów $p_i$, $p_{i+1}$, \dots, $p_k$.
+Spośród nich, w~tych, dla których zmienna $X_{i,k}$ przyjmuje 1, $p_k$ i~$p_i$ są, odpowiednio, najmniejszą i~drugą najmniejszą wartością.
+Pozostałe priorytety mogą dowolnie przyjmować pozostałe wartości, dlatego permutacji sprzyjających jest $(k-i-1)!$.
+Mamy więc
+\[
+	\Pr(X_{i,k}=1) = \frac{(k-i-1)!}{(k-i+1)!} = \frac{1}{(k-i+1)(k-i)}.
+\]
+
 \subproblem %13-4(h)
 W~lewym poddrzewie węzła $x$ o~kluczu $k=\attrib{x}{key}$ znajdują się węzły o~kluczach $j<k$, dlatego możemy napisać $C=\sum_{j=1}^{k-1}X_{j,k}$.
 Stąd
@@ -75,6 +86,8 @@ Stąd
 \end{align*}
 
 \subproblem %13-4(i)
+%Podobnie jak w~poprzednim punkcie stwierdzamy, że prawe poddrzewo $x$ zawiera węzły o~kluczach $j>k$, więc $D=\sum_{j=k+1}^nY_{j,k}$.
+
 \subproblem %13-4(j)
 Na podstawie wyników uzyskanych w~poprzednich punktach mamy, że oczekiwana liczba rotacji wykonywanych przez \proc{Treap-Insert} wynosi
 \[
