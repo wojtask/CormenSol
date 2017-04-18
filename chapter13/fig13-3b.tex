@@ -1,0 +1,64 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=50mm/2^#1},
+	every label/.style = {index node, inner sep=1pt, draw=none, fill=none},
+	subtree node/.style = {tree node, draw=none, fill=none},
+	outer/.append style = {node distance=7mm}
+]
+
+\node[outer] (pic a) {
+\begin{tikzpicture}[anchor=center]
+	\node[tree node, label=left:$h+3$] (left subtree root) {$x$}
+    	child {node[tree node, label=left:$h+2$] {$y$}
+        	child {node[subtree node, label=left:$h+1$] {$\alpha$}}
+            child {node[subtree node, label=right:\text{$h$ lub $h+1$}] {$\beta$}}
+        }
+        child {node[subtree node, label=left:$h$] {$\gamma$}};
+        
+    \draw (left subtree root.north) -- +(0, 2mm);
+            
+	\node[right=50mm of left subtree root, tree node, label=right:\text{$h+2$ lub $h+3$}] (right subtree root) {$y$}
+        child {node[subtree node, label=right:$h+1$] {$\alpha$}}
+        child {node[tree node, label=right:\text{$h+1$ lub $h+2$}] {$x$}
+            child {node[subtree node, label=left:\text{$h$ lub $h+1$}] {$\beta$}}
+            child {node[subtree node, label=right:$h$] {$\gamma$}}
+        };
+            
+    \draw (right subtree root.north) -- +(0, 2mm);
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+    
+    \node[subpicture label, left=30mm of left subtree root] {(a)};
+\end{tikzpicture}
+};
+
+\node[outer, below=of pic a.south west, anchor=north west] (pic b) {
+\begin{tikzpicture}[anchor=center]
+	\node[tree node, label=left:$h+3$] (left tree) (left subtree root) {$x$}
+    	child {node[tree node, label=left:$h+2$] {$y$}
+        	child {node[subtree node, label=left:$h$] {$\alpha$}}
+            child {node[tree node, label=right:$h+1$, label={[label distance=7mm]below:\text{$h-1$ lub $h$}}] {$z$}
+            	child {node[subtree node] {$\beta$}}
+            	child {node[subtree node] {$\gamma$}}
+            }
+        }
+        child {node[subtree node, label=left:$h$] {$\delta$}};
+        
+    \draw (left subtree root.north) -- +(0, 2mm);
+            
+    \node[right=50mm of left subtree root, tree node, label=right:$h+2$, label={[label distance=14mm]below:\text{$h-1$ lub $h$}}] {$z$}
+    	child {node[tree node, label=right:$h+1$] {$y$}
+        	child {node[subtree node, label=left:$h$] {$\alpha$}}
+            child {node[subtree node] {$\beta$}}
+        }
+        child {node[tree node, label=right:$h+1$] {$x$}
+            child {node[subtree node] {$\gamma$}}
+            child {node[subtree node, label=right:$h$] {$\delta$}}
+        };
+
+	\draw (right subtree root.north) -- +(0, 2mm); 
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+    
+    \node[subpicture label, left=30mm of left subtree root] {(b)};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}

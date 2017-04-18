@@ -13,5 +13,48 @@ Stąd liczba węzłów drzewa wynosi $n=n_L+n_R+1\ge F_{h_L}+F_{h_R}+1\ge F_{h_R
 Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F_h\ge\phi^{h-2}$, skąd otrzymujemy ostatecznie $h<\log_\phi n+2=O(\lg n)$.
 
 \subproblem %13-3(b)
+\note{Do procedury \proc{Balance} konieczne jest przekazanie drzewa AVL jako dodatkowego parametru\/ $T$.}
+
+\noindent Pseudokod procedury \proc{Balance} wygląda następująco:
+\begin{codebox}
+\Procname{$\proc{Balance}(T,x)$}
+\li	\If $\attrib{x}{left}\ne\const{nil}$ i~$\attrib{x}{h}=\attribb{x}{left}{h}+1$
+\li		\Then $y\gets\attrib{x}{left}$ \label{li:balance-left-cases-begin}
+\li			\If $\attrib{y}{left}\ne\const{nil}$ i~$\attrib{y}{h}=\attribb{y}{left}{h}+1$
+\li				\Then $\proc{Right-Rotate}(T,x)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-lewo''}
+\li				\Else $z\gets\attrib{y}{right}$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
+\li					$\proc{Left-Rotate}(T,y)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
+\li					$\proc{Right-Rotate}(T,z)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
+				\End \label{li:balance-left-cases-end}
+\li		\Else (to samo co po \kw{then} z~zamienionymi ,,right'' i~,,left'')
+		\End
+\end{codebox}
+
+Dla każdego węzła $x$ w~drzewie AVL zdefiniujmy \attrib{x}{balance-factor} jako $-\attribb{x}{left}{h}+\attribb{x}{right}{h}$.
+Nie będziemy jednak przechowywać tego atrybutu w~węźle -- posłuży on nam jedynie w~opisie działania algorytmu jako uproszczony zapis różnicy wysokości poddrzew węzła.
+
+Procedura $\proc{Balance}(T,x)$ wywoływana jest, gdy $\attrib{x}{balance-factor}\in\{-2,2\}$, a~dla każdego potomka $y$ węzła $x$ zachodzi $\attrib{y}{balance-factor}\in\{-1,0,1\}$.
+Rozważmy 4 przypadki w~zależności od wysokości poddrzew węzła $x$ oraz jego synów.
+W~przypadku, który określimy jako ,,lewo-lewo'', spełnione jest $\attrib{x}{balance-factor}=-2$ oraz $\attribb{x}{left}{balance-factor}\in\{-1,0\}$.
+Aby zrównoważyć $x$, wystarczy wykonać na nim prawą rotację.
+Przypadek ,,lewo-prawo'' zachodzi wtedy, gdy $\attrib{x}{balance-factor}=-2$ i~$\attribb{x}{left}{balance-factor}=1$.
+Do zrównoważenia $x$ potrzebne są dwie rotacje, najpierw lewa na \attrib{x}{left}, która sprowadza przypadek ,,lewo-prawo'' dla $x$ do przypadku ,,lewo-lewo'' dla \attrib{x}{left}, a~następnie prawa rotacja na \attrib{x}{left} wprowadzająca równowagę dla tego węzła.
+Działanie procedury dla opisanych przypadków przedstawione zostało na rys.\ \ref{fig:13-3b}.
+\begin{figure}[!ht]
+	\centering \input{fig13-3b}
+	\caption{Działanie procedury \proc{Balance} wywołanej dla węzła $x$, który nie jest zrównoważony po wysokościach.
+	Obok węzłów $x$, $y$, $z$ i~poddrzew $\alpha$, $\beta$, $\gamma$, $\delta$ zaznaczone zostały ich wysokości.
+	{\sffamily\bfseries(a)} Przypadek ,,lewo-lewo''.
+	Jeśli przyjmiemy, że wysokością poddrzewa $\gamma$ jest $h$, to wysokość poddrzewa o~korzeniu w~$y$ wynosi $h+2$.
+	Węzeł $y$ jest zrównoważony i~$\attrib{y}{balance-factor}\in\{-1,0\}$, więc poddrzewo $\alpha$ ma wysokość $h+1$, a~poddrzewo $\beta$ może mieć wysokość równą $h$ lub $h+1$.
+	Drzewo $T$ po lewej stronie rysunku zostaje przekształcone w~zrównoważone drzewo po prawej stronie rysunku po wykonaniu $\proc{Right-Rotate}(T,x)$.
+	{\sffamily\bfseries(b)} W~przypadku ,,lewo-prawo'' po przyjęciu, że wysokością $\delta$ jest $h$, mamy, że wysokość poddrzewa o~korzeniu w~węźle $y$ wynosi $h+2$.
+	Tutaj jednak $\attrib{y}{balance-factor}=1$, więc wyróżniamy $z$ -- prawego syna $y$ o~wysokości $h+1$, którego oba poddrzewa, $\beta$ i~$\gamma$, mają wysokość $h-1$ lub $h$.
+	Zrównoważenie drzewa $T$ odbywa się poprzez wywołanie najpierw $\proc{Left-Rotate}(T,y)$, a~następnie $\proc{Right-Rotate}(T,z)$.} \label{fig:13-3b}
+\end{figure}
+
+Pozostałe przypadki, ''prawo-prawo'' oraz ,,prawo-lewo'', są symetryczne do poprzednich, gdzie tym razem $\attrib{x}{balance-factor}=2$.
+Aby je obsłużyć, wystarczy w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} zamienić lewych synów z~prawymi i~odwrócić kierunki rotacji.
+
 \subproblem %13-3(c)
 \subproblem %13-3(d)
