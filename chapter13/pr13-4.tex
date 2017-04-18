@@ -17,19 +17,19 @@ Drzewo $T$ jest zatem losowo skonstruowanym drzewem wyszukiwań binarnych, któr
 Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, daje nam oczekiwaną wysokość drzepca równą $\Theta(\lg n)$.
 
 \subproblem %13-4(c)
-Procedura \proc{Treap-Insert} wstawia nowy węzeł $z$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
+Procedura \proc{Treap-Insert} wstawia nowy węzeł $x$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
 Jeśli priorytet nowego węzła jest mniejszy od priorytetu jego ojca, to mamy naruszoną własność kopca typu min i~procedura przystępuje do jej przywrócenia.
-Wykonuje w~tym celu odpowiednie rotacje, przenosząc dzięki temu węzeł $z$ na wyższe poziomy drzepca aż do momentu, gdy $z$ osiągnie korzeń albo gdy własność kopca między $z$ i~\attrib{z}{p} jest już spełniona.
-Gdy $z$ jest lewym synem \attrib{z}{p}, to na \attrib{z}{p} wykonywana jest prawa rotacja, natomiast gdy $z$ jest prawym synem \attrib{z}{p} -- lewa rotacja.
+Wykonuje w~tym celu odpowiednie rotacje, przenosząc dzięki temu węzeł $x$ na wyższe poziomy drzepca aż do momentu, gdy $x$ osiągnie korzeń albo gdy własność kopca między $x$ i~\attrib{x}{p} jest już spełniona.
+Gdy $x$ jest lewym synem \attrib{x}{p}, to na \attrib{x}{p} wykonywana jest prawa rotacja, natomiast gdy $x$ jest prawym synem \attrib{x}{p} -- lewa rotacja.
 
 Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseudokodzie:
 \begin{codebox}
-\Procname{$\proc{Treap-Insert}(T,z)$}
-\li	$\proc{Tree-Insert}(T,z)$ \label{li:treap-insert-tree-insert}
-\li	\While $z\ne\attrib{T}{root}$ i~$\attrib{z}{priority}<\attribb{z}{p}{priority}$
-\li		\Do \If $z=\attribb{z}{p}{left}$
-\li				\Then $\proc{Right-Rotate}(\attrib{z}{p})$
-\li				\Else $\proc{Left-Rotate}(\attrib{z}{p})$
+\Procname{$\proc{Treap-Insert}(T,x)$}
+\li	$\proc{Tree-Insert}(T,x)$ \label{li:treap-insert-tree-insert}
+\li	\While $z\ne\attrib{T}{root}$ i~$\attrib{x}{priority}<\attribb{x}{p}{priority}$
+\li		\Do \If $x=\attribb{x}{p}{left}$
+\li				\Then $\proc{Right-Rotate}(T,\attrib{x}{p})$ \label{li:treap-insert-right-rotate}
+\li				\Else $\proc{Left-Rotate}(T,\attrib{x}{p})$ \label{li:treap-insert-left-rotate}
 				\End		
 		\End
 \end{codebox}
@@ -39,6 +39,11 @@ Wywołanie z~linii~\ref{li:treap-insert-tree-insert} potrzebuje czasu proporcjon
 A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(h)$, co na mocy faktu wykazanego w~punkcie (b) jest równe $\Theta(\lg n)$.
 
 \subproblem %13-4(e)
+Bezpośrednio po umieszczeniu nowego węzła $x$ w~drzepcu w~wierszu \ref{li:treap-insert-tree-insert} procedury \proc{Treap-Insert}, zarówno lewe, jak i~prawe poddrzewo $x$ są puste -- ich lewy i~prawy kręgosłup mają długość~0.
+Każde wykonanie rotacji w~tej procedurze przenosi węzeł $x$ o~jeden poziom wyżej w~drzepcu, zwiększając przy tym o~1 długość $C$ prawego kręgosłupa w~lewym poddrzewie $x$ albo długość $D$ lewego kręgosłupa w~prawym poddrzewie $x$.
+Po zakończeniu działania procedury \proc{Treap-Insert}, wartość $C$ jest równa ilości wywołań z~linii \ref{li:treap-insert-left-rotate}, a~$D$ jest równe ilości wywołań z~linii \ref{li:treap-insert-right-rotate}.
+Łączna liczba wykonanych rotacji w~procedurze \proc{Treap-Insert} wynosi zatem $C+D$.
+
 \subproblem %13-4(f)
 \note{Definicja zmiennej losowej\/ $X_{i,k}$ powinna brzmieć następująco:}
 \bignegskip
