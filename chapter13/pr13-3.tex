@@ -22,9 +22,11 @@ Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F
 \li		\Then $y\gets\attrib{x}{left}$ \label{li:balance-left-cases-begin}
 \li			\If $\attrib{y}{left}\ne\const{nil}$ i~$\attrib{y}{h}=\attribb{y}{left}{h}+1$
 \li				\Then $\proc{Right-Rotate}(T,x)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-lewo''}
+\li					\Return $y$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-lewo''}
 \li				\Else $z\gets\attrib{y}{right}$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
 \li					$\proc{Left-Rotate}(T,y)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
 \li					$\proc{Right-Rotate}(T,z)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
+\li					\Return $z$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
 				\End \label{li:balance-left-cases-end}
 \li		\Else (to samo co po \kw{then} z~zamienionymi ,,right'' i~,,left'')
 		\End
@@ -57,4 +59,29 @@ Pozostałe przypadki, ''prawo-prawo'' oraz ,,prawo-lewo'', są symetryczne do po
 Aby je obsłużyć, wystarczy w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} zamienić lewych synów z~prawymi i~odwrócić kierunki rotacji.
 
 \subproblem %13-3(c)
+Idea działania operacji \proc{AVL-Insert} opiera się na procedurze \proc{Recursive-Tree-Insert} z~\refExercise{12.3-1}.
+Po wstawieniu węzła $z$ do niepustego drzewa AVL o~korzeniu w~$x$, węzeł $x$ może mieć zaburzoną równowagę po wysokościach.
+Można to naprawić, wywołując procedurę \proc{Balance} opisaną w~części (b).
+Wynikiem zwracanym przez \proc{AVL-Insert} jest aktualny korzeń drzewa, do którego wstawiane było $z$.
+Pseudokod tej operacji został przedstawiony poniżej:
+\begin{codebox}
+\Procname{$\proc{AVL-Insert}(x,z)$}
+\li	\If $x=\const{nil}$
+\li		\Then \Return $z$
+		\End
+\li	\If $\attrib{z}{key}<\attrib{x}{key}$
+\li		\Then $\attrib{x}{left}\gets\proc{AVL-Insert}(\attrib{x}{left},z)$
+\li			$\attribb{x}{left}{p}\gets x$
+\li		\Else $\attrib{x}{right}\gets\proc{AVL-Insert}(\attrib{x}{right},z)$
+\li			$\attribb{x}{right}{p}\gets x$
+		\End
+\li	\Return $\proc{Balance}(x)$
+\end{codebox}
+
+Podobnie jak \proc{Recursive-Tree-Insert}, z~powyższej procedury nie należy korzystać bezpośrednio, ale poprzez wywołanie poniższego pseudokodu, który aktualizuje pole \id{root} drzewa $T$, do którego wstawiany jest węzeł $z$.
+\begin{codebox}
+\Procname{$\proc{AVL-Insert}'(T,z)$}
+\li	$\attrib{T}{root}\gets\proc{AVL-Insert}(\attrib{T}{root},z)$
+\end{codebox}
+
 \subproblem %13-3(d)
