@@ -7,7 +7,7 @@ Gdy usuwamy węzeł $z$, to rzeczywiście usuwany jest węzeł $y$, który jest 
 Aktualizowane są wtedy wszyscy przodkowie $y$.
 
 \subproblem %13-1(b)
-Zdefiniujemy dwie pomocnicze operacje, które wykorzystamy w~procedurze:
+Zdefiniujmy dwie pomocnicze operacje, które wykorzystamy w~procedurze:
 \begin{itemize}
 \item $\proc{New-Node}(k)$ -- tworzy nowy węzeł, którego pole \id{key} ma wartość $k$, a~pola \id{left} i~\id{right} są ustawione na \const{nil}; zwraca wskaźnik do nowo utworzonego węzła;
 \item $\proc{Copy-Node}(x)$ -- tworzy nowy węzeł, którego pola \id{key}, \id{left} oraz \id{right} mają identyczne wartości jak odpowiadające pola węzła $x$; zwraca wskaźnik do nowo utworzonego węzła.
@@ -27,7 +27,7 @@ Węzły na ścieżce w~dół drzewa o~korzeniu w~$x$ są kopiowane, a~na końcu 
 		\End
 \li	\Return $z$		
 \end{codebox}
-Aby wstawić klucz $k$ do drzewa z~historią $T$, należy użyć wywołania $\proc{Persistent-Tree-Insert}(\attrib{T}{root},k)$, które zwróci wskaźnik na korzeń wynikowego drzewa $T'$.
+Wywołanie $\proc{Persistent-Tree-Insert}(\attrib{T}{root},k)$ pozwala na wstawienie klucza $k$ do drzewa z~historią $T$ i~zwraca wskaźnik na korzeń wynikowego drzewa $T'$.
 
 \subproblem %13-1(c)
 Każde kolejne wywołanie rekurencyjne procedury \proc{Persistent-Tree-Insert} schodzi o~1 poziom w~dół drzewa.
