@@ -79,8 +79,8 @@ Aby je obsłużyć, wystarczy w~wierszach \doubledash{\ref{li:balance-left-cases
 
 \subproblem %13-3(c)
 Idea działania operacji \proc{AVL-Insert} opiera się na procedurze \proc{Recursive-Tree-Insert} z~\refExercise{12.3-1}.
-Po wstawieniu węzła $z$ do niepustego drzewa AVL o~korzeniu w~$x$, węzeł $x$ może mieć zaburzoną równowagę po wysokościach.
-Można to naprawić, wywołując procedurę \proc{Balance} opisaną w~części (b).
+Po wstawieniu węzła $z$ do niepustego drzewa AVL o~korzeniu w~$x$, węzeł $x$ może mieć nieaktualną wartość w~polu $h$ i~zaburzoną równowagę po wysokościach.
+Problemy te można naprawić, aktualizując \attrib{x}{h} wartością $\proc{Height}(x)$ oraz wywołując dla $x$ procedurę \proc{Balance} opisaną w~części (b).
 Wynikiem zwracanym przez \proc{AVL-Insert} jest aktualny korzeń drzewa, do którego wstawiane było $z$.
 Pseudokod tej operacji został przedstawiony poniżej:
 \begin{codebox}
@@ -94,6 +94,7 @@ Pseudokod tej operacji został przedstawiony poniżej:
 \li		\Else $\attrib{x}{right}\gets\proc{AVL-Insert}(\attrib{x}{right},z)$
 \li			$\attribb{x}{right}{p}\gets x$
 		\End
+\li	$\attrib{x}{h}\gets\proc{Height}(x)$
 \li	\Return $\proc{Balance}(x)$
 \end{codebox}
 
