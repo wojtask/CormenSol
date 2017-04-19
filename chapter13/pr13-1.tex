@@ -30,5 +30,12 @@ Węzły na ścieżce w~dół drzewa o~korzeniu w~$x$ są kopiowane, a~na końcu 
 Aby wstawić klucz $k$ do drzewa z~historią $T$, należy użyć wywołania $\proc{Persistent-Tree-Insert}(\attrib{T}{root},k)$, które zwróci wskaźnik na korzeń wynikowego drzewa $T'$.
 
 \subproblem %13-1(c)
+Każde kolejne wywołanie rekurencyjne procedury \proc{Persistent-Tree-Insert} schodzi o~1 poziom w~dół drzewa.
+Ścieżka pokonywana przez procedurę ma długość co najwyżej $h$.
+A~zatem, przy założeniu, że operacje \proc{New-Node} oraz \proc{Copy-Node} działają w~czasie stałym, czas działania procedury wynosi $O(h)$.
+
+Z~punktu (a) mamy, że podczas wstawiania nowego węzła procedura \proc{Persistent-Tree-Insert} skopiuje każdy węzeł znajdujący się na ścieżce od korzenia do nowego węzła.
+Złożoność pamięciowa procedury wynosi więc także $O(h)$.
+
 \subproblem %13-1(d)
 \subproblem %13-1(e)
