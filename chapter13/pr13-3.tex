@@ -13,34 +13,53 @@ Stąd liczba węzłów drzewa wynosi $n=n_L+n_R+1\ge F_{h_L}+F_{h_R}+1\ge F_{h_R
 Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F_h\ge\phi^{h-2}$, skąd otrzymujemy ostatecznie $h<\log_\phi n+2=O(\lg n)$.
 
 \subproblem %13-3(b)
-\note{Do procedury \proc{Balance} konieczne jest przekazanie drzewa AVL jako dodatkowego parametru\/ $T$.}
+Zanim podamy pseudokod algorytmu \proc{Balance}, zdefiniujemy pomocnicze procedury, które będą w~nim wykorzystywane.
 
-\noindent Pseudokod procedury \proc{Balance} wygląda następująco:
+%W~naszej implementacji drzew AVL użyjemy specjalnego węzła-wartownika.
+%Dla drzewa AVL $T$ wartownik \attrib{T}{nil} będzie obiektem o~takich samych polach jak zwykły węzeł w~drzewie $T$.
+%Dla uproszczenia poniższych operacji przyjmijmy, że $h$ w~wartowniku ma wartość $-1$, natomiast pozostałe pola mogą mieć dowolne wartości.
+%Podobnie jak w~drzewach czerwono-czarnych jeden wartownik $\attrib{T}{nil}$ będzie reprezentował wszystkie \const{nil} -- zarówno dla ojca korzenia drzewa $T$, jak i~dla pustych synów węzłów w~$T$.
+
+Dla każdego węzła $x$ w~drzewie AVL definiujemy jego \textbf{współczynnik zrównoważenia} jako wartość zwracaną przez następującą procedurę:
 \begin{codebox}
-\Procname{$\proc{Balance}(T,x)$}
-\li	\If $\attrib{x}{left}\ne\const{nil}$ i~$\attrib{x}{h}=\attribb{x}{left}{h}+1$
-\li		\Then $y\gets\attrib{x}{left}$ \label{li:balance-left-cases-begin}
-\li			\If $\attrib{y}{left}\ne\const{nil}$ i~$\attrib{y}{h}=\attribb{y}{left}{h}+1$
-\li				\Then $\proc{Right-Rotate}(T,x)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-lewo''}
-\li					\Return $y$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-lewo''}
-\li				\Else $z\gets\attrib{y}{right}$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
-\li					$\proc{Left-Rotate}(T,y)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
-\li					$\proc{Right-Rotate}(T,z)$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
-\li					\Return $z$ \>\>\>\>\>\>\>\Comment{Przypadek ,,lewo-prawo''}
-				\End \label{li:balance-left-cases-end}
-\li		\Else (to samo co po \kw{then} z~zamienionymi ,,right'' i~,,left'')
+\Procname{$\proc{Balance-Factor}(x)$}
+\li	$\id{lh}\gets\id{rh}\gets-1$
+\li	\If $\attrib{x}{left}\ne\const{nil}$
+\li		\Then $\id{lh}\gets\attribb{x}{left}{h}$
 		\End
+\li	\If $\attrib{x}{right}\ne\const{nil}$
+\li		\Then $\id{rh}\gets\attribb{x}{right}{h}$
+		\End
+\li	\Return $-\id{lh}+\id{rh}$
 \end{codebox}
+W~drzewie zrównoważonym po wysokościach współczynnik zrównoważenia dowolnego jego węzła przyjmuje wartość $-1$, 0 lub 1.
+Będziemy korzystać także z~procedury $\proc{Height}(x)$, która dla danego węzła $x$ zwróci jego aktualną wysokość w~drzewie na podstawie wartości pola $h$ jego synów.
+Jej działanie jest identyczne z~$\proc{Balance-Factor}(x)$ z~wyjątkiem ostatniego wiersza, w~którym zwracana jest wartość $\max(\id{lh},\id{rh})+1$.
 
-Dla każdego węzła $x$ w~drzewie AVL zdefiniujmy \attrib{x}{balance-factor} jako $-\attribb{x}{left}{h}+\attribb{x}{right}{h}$.
-Nie będziemy jednak przechowywać tego atrybutu w~węźle -- posłuży on nam jedynie w~opisie działania algorytmu jako uproszczony zapis różnicy wysokości poddrzew węzła.
+Opiszmy też procedury \proc{AVL-Left-Rotate} i~\proc{AVL-Right-Rotate}, których zadaniem jest wykonanie rotacji na węźle $x$ w~drzewie, które niekoniecznie jest zrównoważone po wysokościach.
+Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie aktualizują wskaźnika \attrib{T}{root} w~wierszu 6, a~tuż przed zakończeniem działania aktualizują jeszcze \attrib{x}{h} i~\attrib{y}{h} na wartości, odpowiednio, $\proc{Height}(x)$ i~$\proc{Height}(y)$.
 
-Procedura $\proc{Balance}(T,x)$ wywoływana jest, gdy $\attrib{x}{balance-factor}\in\{-2,2\}$, a~dla każdego potomka $y$ węzła $x$ zachodzi $\attrib{y}{balance-factor}\in\{-1,0,1\}$.
-Rozważmy 4 przypadki w~zależności od wysokości poddrzew węzła $x$ oraz jego synów.
-W~przypadku, który określimy jako ,,lewo-lewo'', spełnione jest $\attrib{x}{balance-factor}=-2$ oraz $\attribb{x}{left}{balance-factor}\in\{-1,0\}$.
+\begin{codebox}
+\Procname{$\proc{Balance}(x)$}
+\li	\If $\proc{Balance-Factor}(x)=-2$
+\li		\Then \If $\proc{Balance-Factor}(\attrib{x}{left})=1$ \label{li:balance-left-cases-begin}
+\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$
+				\End
+\li				$\proc{AVL-Right-Rotate}(x)$
+\li				\Return \attrib{x}{p} \label{li:balance-left-cases-end}
+\li		\Else \If $\proc{Balance-Factor}(x)=2$
+\li				\Then (to samo co w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} z~zamienionymi ,,right'' i~,,left'')
+				\End
+		\End
+\li	\Return $x$
+\end{codebox}
+Procedura $\proc{Balance}(T,x)$ modyfikuje drzewo, gdy $|\proc{Balance-Factor}(x)|=2$, przy założeniu, że dla każdego potomka $y$ węzła $x$ zachodzi $|\proc{Balance-Factor}(y)|\le1$.
+Rozważmy 4 przypadki w~zależności od współczynników zrównoważenia $x$ oraz jego synów.
+W~przypadku, który określimy jako ,,lewo-lewo'', spełnione jest $\proc{Balance-Factor}(x)=-2$ oraz $\proc{Balance-Factor}(\attrib{x}{left})\in\{-1,0\}$.
 Aby zrównoważyć $x$, wystarczy wykonać na nim prawą rotację.
-Przypadek ,,lewo-prawo'' zachodzi wtedy, gdy $\attrib{x}{balance-factor}=-2$ i~$\attribb{x}{left}{balance-factor}=1$.
-Do zrównoważenia $x$ potrzebne są dwie rotacje, najpierw lewa na \attrib{x}{left}, która sprowadza przypadek ,,lewo-prawo'' dla $x$ do przypadku ,,lewo-lewo'' dla \attrib{x}{left}, a~następnie prawa rotacja na \attrib{x}{left} wprowadzająca równowagę dla tego węzła.
+Przypadek ,,lewo-prawo'' zachodzi wtedy, gdy $\proc{Balance-Factor}(x)=-2$ i~$\proc{Balance-Factor}(\attrib{x}{left})=1$.
+Można go jednak sprowadzić do przypadku ,,lewo-lewo'', wykonując lewą rotację na \attrib{x}{left}.
+Wynikiem zwracanym przez procedurę jest najwyższy węzeł biorący udział w~rotacjach w~danym wywołaniu, czyli taki, który zastąpił $x$ w~roli korzenia modyfikowanego poddrzewa, albo $x$, jeżeli drzewo nie było zmieniane.
 Działanie procedury dla opisanych przypadków przedstawione zostało na rys.\ \ref{fig:13-3b}.
 \begin{figure}[!ht]
 	\centering \input{fig13-3b}
@@ -48,14 +67,14 @@ Działanie procedury dla opisanych przypadków przedstawione zostało na rys.\ \
 	Obok węzłów $x$, $y$, $z$ i~poddrzew $\alpha$, $\beta$, $\gamma$, $\delta$ zaznaczone zostały ich wysokości.
 	{\sffamily\bfseries(a)} Przypadek ,,lewo-lewo''.
 	Jeśli przyjmiemy, że wysokością poddrzewa $\gamma$ jest $h$, to wysokość poddrzewa o~korzeniu w~$y$ wynosi $h+2$.
-	Węzeł $y$ jest zrównoważony i~$\attrib{y}{balance-factor}\in\{-1,0\}$, więc poddrzewo $\alpha$ ma wysokość $h+1$, a~poddrzewo $\beta$ może mieć wysokość równą $h$ lub $h+1$.
-	Drzewo $T$ po lewej stronie rysunku zostaje przekształcone w~zrównoważone drzewo po prawej stronie rysunku po wykonaniu $\proc{Right-Rotate}(T,x)$.
+	Węzeł $y$ jest zrównoważony i~$\proc{Balance-Factor}(y)\in\{-1,0\}$, więc poddrzewo $\alpha$ ma wysokość $h+1$, a~poddrzewo $\beta$ może mieć wysokość równą $h$ lub $h+1$.
+	Drzewo $T$ po lewej stronie rysunku zostaje przekształcone w~zrównoważone drzewo po prawej stronie rysunku po wykonaniu $\proc{AVL-Right-Rotate}(x)$.
 	{\sffamily\bfseries(b)} W~przypadku ,,lewo-prawo'' po przyjęciu, że wysokością $\delta$ jest $h$, mamy, że wysokość poddrzewa o~korzeniu w~węźle $y$ wynosi $h+2$.
-	Tutaj jednak $\attrib{y}{balance-factor}=1$, więc wyróżniamy $z$ -- prawego syna $y$ o~wysokości $h+1$, którego oba poddrzewa, $\beta$ i~$\gamma$, mają wysokość $h-1$ lub $h$.
-	Zrównoważenie drzewa $T$ odbywa się poprzez wywołanie najpierw $\proc{Left-Rotate}(T,y)$, a~następnie $\proc{Right-Rotate}(T,z)$.} \label{fig:13-3b}
+	Tutaj jednak $\proc{Balance-Factor}(y)=1$, więc wyróżniamy $z$ -- prawego syna $y$ o~wysokości $h+1$, którego oba poddrzewa, $\beta$ i~$\gamma$, mają wysokość $h-1$ lub $h$.
+	Zrównoważenie drzewa $T$ odbywa się poprzez wywołanie najpierw $\proc{AVL-Left-Rotate}(y)$, a~następnie $\proc{AVL-Right-Rotate}(x)$.} \label{fig:13-3b}
 \end{figure}
 
-Pozostałe przypadki, ''prawo-prawo'' oraz ,,prawo-lewo'', są symetryczne do poprzednich, gdzie tym razem $\attrib{x}{balance-factor}=2$.
+Pozostałe przypadki, ''prawo-prawo'' oraz ,,prawo-lewo'', są symetryczne do poprzednich, gdzie tym razem $\proc{Balance-Factor}(x)=2$.
 Aby je obsłużyć, wystarczy w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} zamienić lewych synów z~prawymi i~odwrócić kierunki rotacji.
 
 \subproblem %13-3(c)
