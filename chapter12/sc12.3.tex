@@ -3,31 +3,29 @@
 \bignegskip
 
 \exercise %12.3-1
-Rekurencyjna wersja operacji wstawiania węzła będzie przyjmować na wejściu korzeń $x$ poddrzewa $T$, w~którym będziemy dokonywać wstawiania oraz nowy węzeł $z$.
-Procedura będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odpowiednią ścieżką tak, aby na końcu tego procesu uczynić $z$ synem bieżącego węzła na tej ścieżce.
+Rekurencyjna wersja operacji wstawiania będzie przyjmować na wejściu korzeń $x$ poddrzewa, do~którego odbywa się wstawianie, oraz nowy węzeł $z$.
+Jeśli $x=\const{nil}$, to procedura natychmiast zakończy działanie, zwracając $z$.
+W~przeciwnym przypadku będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odpowiednią ścieżką tak, aby na końcu tego procesu uczynić $z$ synem liścia znajdującego się na tej ścieżce.
+Następnie, po aktualizacji lewego lub prawego syna $x$ na wynik poprzedniego wywołania rekurencyjnego, zwrócone zostanie $x$.
 \begin{codebox}
 \Procname{$\proc{Recursive-Tree-Insert}(x,z)$}
-\li	\If $\attrib{z}{key}<\attrib{x}{key}$
-\li		\Then \If $\attrib{x}{left}\ne\const{nil}$
-\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{left},z)$
-\li				\Else $\attrib{x}{left}\gets z$
-\li					$\attrib{z}{p}\gets x$
-				\End
-\li		\Else \If $\attrib{x}{right}\ne\const{nil}$
-\li				\Then $\proc{Recursive-Tree-Insert}(T,\attrib{x}{right},z)$
-\li				\Else $\attrib{x}{right}\gets z$
-\li					$\attrib{z}{p}\gets x$
-				\End
+\li	\If $x=\const{nil}$
+\li		\Then \Return $z$
 		\End
+\li	\If $\attrib{z}{key}<\attrib{x}{key}$
+\li		\Then $\attrib{x}{left}\gets\proc{Recursive-Tree-Insert}(\attrib{x}{left},z)$
+\li			$\attribb{x}{left}{p}\gets x$
+\li		\Else $\attrib{x}{right}\gets\proc{Recursive-Tree-Insert}(\attrib{x}{right},z)$
+\li			$\attribb{x}{right}{p}\gets x$
+		\End
+\li	\Return $x$
 \end{codebox}
-Procedura ta wywoływana będzie przez procedurę \proc{Tree-Insert}$'$, której pseudokod znajduje się poniżej.
-Testuje ona jedynie, czy drzewo $T$ jest puste i~w~zależności od wyniku umieszcza $z$ w~korzeniu drzewa $T$ albo wywołuje \proc{Recursive-Tree-Insert}.
+
+Procedura ta nie powinna być wywoływana bezpośrednio, gdyż nie aktualizuje ona pola \id{root} drzewa $T$, do którego wstawiany jest nowy węzeł $z$.
+Czynność tę wykonuje poniższy pseudokod, który powinien być stosowany do skorzystania z~procedury \proc{Recursive-Tree-Insert}.
 \begin{codebox}
 \Procname{$\proc{Tree-Insert$'$}(T,z)$}
-\li	\If $\attrib{T}{root}=\const{nil}$
-\li		\Then $\attrib{T}{root}\gets z$
-\li		\Else $\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
-		\End
+\li	$\attrib{T}{root}\gets\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
 \end{codebox}
 
 \exercise %12.3-2
