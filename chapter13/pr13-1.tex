@@ -38,4 +38,8 @@ Z~punktu (a) mamy, że podczas wstawiania nowego węzła procedura \proc{Persist
 Złożoność pamięciowa procedury wynosi więc także $O(h)$.
 
 \subproblem %13-1(d)
+Jeśli w~każdym węźle byłby przechowywany wskaźnik na ojca, to skopiowanie korzenia drzewa podczas wstawiania nowego węzła sprawiłoby, że obaj synowie korzenia musieliby również zostać skopiowani, a~wówczas także ich synowie i~tak dalej, aż do liści drzewa.
+A~zatem obecność wskaźników na ojca wymaga skopiowania każdego węzła w~drzewie przez procedurę \proc{Persistent-Tree-Insert}.
+W~drzewie o~$n$ węzłach działałaby więc ona w~czasie $\Omega(n)$ i~potrzebowałaby $\Omega(n)$ dodatkowej pamięci.
+
 \subproblem %13-1(e)
