@@ -7,6 +7,28 @@ Gdy usuwamy węzeł $z$, to rzeczywiście usuwany jest węzeł $y$, który jest 
 Aktualizowane są wtedy wszyscy przodkowie $y$.
 
 \subproblem %13-1(b)
+Zdefiniujemy dwie pomocnicze operacje, które wykorzystamy w~procedurze:
+\begin{itemize}
+\item $\proc{New-Node}(k)$ -- tworzy nowy węzeł, którego pole \id{key} ma wartość $k$, a~pola \id{left} i~\id{right} są ustawione na \const{nil}; zwraca wskaźnik do nowo utworzonego węzła;
+\item $\proc{Copy-Node}(x)$ -- tworzy nowy węzeł, którego pola \id{key}, \id{left} oraz \id{right} mają identyczne wartości jak odpowiadające pola węzła $x$; zwraca wskaźnik do nowo utworzonego węzła.
+\end{itemize}
+
+Poniższa rekurencyjna procedura \proc{Persistent-Tree-Insert} wywoływana jest z~dwoma parametrami -- korzeniem $x$ drzewa, do którego wstawiany jest nowy węzeł, oraz kluczem $k$ nowego węzła.
+Węzły na ścieżce w~dół drzewa o~korzeniu w~$x$ są kopiowane, a~na końcu ścieżki złożonej ze skopiowanych węzłów umieszczany jest nowy węzeł o~kluczu $k$.
+\begin{codebox}
+\Procname{$\proc{Persistent-Tree-Insert}(x,k)$}
+\li	\If $x=\const{nil}$
+\li		\Then $z\gets\proc{New-Node}(k)$
+\li		\Else $z\gets\proc{Copy-Node}(x)$
+\li			\If $k<\attrib{x}{key}$
+\li				\Then $\attrib{z}{left}\gets\proc{Persistent-Tree-Insert}(\attrib{x}{left},k)$
+\li				\Else $\attrib{z}{right}\gets\proc{Persistent-Tree-Insert}(\attrib{x}{right},k)$
+				\End
+		\End
+\li	\Return $z$		
+\end{codebox}
+Aby wstawić klucz $k$ do drzewa z~historią $T$, należy użyć wywołania $\proc{Persistent-Tree-Insert}(\attrib{T}{root},k)$, które zwróci wskaźnik na korzeń wynikowego drzewa $T'$.
+
 \subproblem %13-1(c)
 \subproblem %13-1(d)
 \subproblem %13-1(e)
