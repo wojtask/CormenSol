@@ -32,19 +32,22 @@ Będziemy korzystać także z~procedury $\proc{Height}(x)$, która dla danego w�
 Jej działanie jest identyczne z~$\proc{Balance-Factor}(x)$ z~wyjątkiem ostatniego wiersza, w~którym zwracana jest wartość $\max(\id{hl},\id{hr})+1$.
 
 Opiszmy też procedury \proc{AVL-Left-Rotate} i~\proc{AVL-Right-Rotate}, których zadaniem jest wykonanie rotacji na węźle $x$ w~drzewie, które niekoniecznie jest zrównoważone po wysokościach.
-Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie aktualizują wskaźnika \attrib{T}{root} w~wierszu 6, a~tuż przed zakończeniem działania aktualizują jeszcze \attrib{x}{h} i~\attrib{y}{h} na wartości, odpowiednio, $\proc{Height}(x)$ i~$\proc{Height}(y)$.
+Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie przyjmują $T$ jako parametru i~nie modyfikują wskaźnika \attrib{T}{root} w~wierszu 6, a~tuż przed zakończeniem działania aktualizują jeszcze \attrib{x}{h} i~\attrib{y}{h} na wartości, odpowiednio, $\proc{Height}(x)$ i~$\proc{Height}(y)$.
 
 \begin{codebox}
 \Procname{$\proc{Balance}(x)$}
 \li	\If $\proc{Balance-Factor}(x)=-2$
 \li		\Then \If $\proc{Balance-Factor}(\attrib{x}{left})=1$ \label{li:balance-left-cases-begin}
-\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$ \label{li:balance-left-right-case}
+\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$ \hspace{20mm}\Comment Przypadek ,,lewo-prawo'' \label{li:balance-left-right-case}
 				\End
-\li				$\proc{AVL-Right-Rotate}(x)$ \label{li:balance-left-left-case}
-\li				\Return \attrib{x}{p} \label{li:balance-left-cases-end}
+\li			$\proc{AVL-Right-Rotate}(x)$ \hspace{38mm}\Comment Przypadek ,,lewo-lewo'' \label{li:balance-left-left-case} \label{li:balance-left-cases-end}
 \li		\Else \If $\proc{Balance-Factor}(x)=2$
-\li				\Then (to samo co w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} z~zamienionymi ,,right'' i~,,left'')
+\li				\Then \If $\proc{Balance-Factor}(\attrib{x}{right})=-1$
+\li						\Then $\proc{AVL-Right-Rotate}(\attrib{x}{right})$ \hspace{2.6mm}\Comment Przypadek ,,prawo-lewo''
+						\End
+\li					$\proc{AVL-Left-Rotate}(x)$ \hspace{27.2mm}\Comment Przypadek ,,prawo-prawo''
 				\End
+\li		\Return \attrib{x}{p}
 		\End
 \li	\Return $x$
 \end{codebox}
@@ -70,7 +73,6 @@ Działanie procedury dla opisanych przypadków przedstawione zostało na rys.\ \
 \end{figure}
 
 Pozostałe przypadki, ''prawo-prawo'' oraz ,,prawo-lewo'', są symetryczne do poprzednich, gdzie tym razem $\proc{Balance-Factor}(x)=2$.
-Aby je obsłużyć, wystarczy w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} zamienić lewych synów z~prawymi i~odwrócić kierunki rotacji.
 
 \subproblem %13-3(c)
 Idea działania operacji \proc{AVL-Insert} opiera się na procedurze \proc{Recursive-Tree-Insert} z~\refExercise{12.3-1}.
@@ -101,7 +103,7 @@ Podobnie jak \proc{Recursive-Tree-Insert}, z~powyższej procedury nie należy ko
 
 \subproblem %13-3(d)
 \note{Ten punkt pyta o~coś, co nie jest prawdą.
-Podamy więc rozwiązanie dla treści z~erraty do oryginału, której tłumaczenie brzmi:
+Podamy więc rozwiązanie dla treści z~erraty do oryginału, czego tłumaczenie brzmi:
 }
 
 \noindent Pokaż, że operacja \proc{AVL-Insert} dla drzewa AVL o~$n$ węzłach działa w~czasie $O(\lg n)$ i~wykonuje $O(1)$ rotacji.

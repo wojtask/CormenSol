@@ -1,5 +1,6 @@
 \subchapter{Operacja usuwania}
-\note{Tylko dodatkowe dane z~węzła\/ $y$ do\/ $z$ powinny być kopiowane w~linii 15 w~pseudokodzie \proc{RB-Delete}.
+\note{W~procedurze \proc{RB-Delete} w~linii 3 powinna być wywoływana wersja operacji następnika dla drzew czerwono-czarnych, która różni się od \proc{Tree-Successor} tym, że przyjmuje drzewo\/ $T$ jako dodatkowy parametr oraz używa\/ \attrib{T}{nil} zamiast \const{nil}.
+Z~kolei w~linii 15 powinny być kopiowane tylko dodatkowe dane z~węzła\/ $y$ do\/ $z$.
 W~szczególności kolor węzła\/ $z$ powinien pozostać bez zmian.
 Ponadto w~linii 22 procedury \proc{RB-Delete-Fixup} nie chodzi tylko o~zamianę wskaźników, ale także o~zamianę każdej lewej rotacji na prawą i~vice versa.}
 \bignegskip
