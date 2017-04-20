@@ -1,5 +1,5 @@
 \subchapter{Operacje rotacji}
-\note{Linia 3 w~procedurze \proc{Left-Rotate} powinna być zastąpiona liniami:}
+\note{Linia 3 w~procedurze wykonującej lewą rotację powinna być zastąpiona liniami:}
 \bignegskip
 \begin{codebox}
 \zi	\If $\attrib{y}{left}\ne\attrib{T}{nil}$
@@ -7,13 +7,13 @@
 		\End
 \end{codebox}
 \note{W~kilku zadaniach z~tego podrozdziału mowa jest o~rotacjach na drzewach wyszukiwań binarnych, a~nie tylko na bardziej wyspecjalizowanych drzewach czerwono-czarnych.
-Operacje te działają identycznie jak w~procedurach \proc{Left-Rotate} i~\proc{Right-Rotate}, w~których zamieniono\/ \attrib{T}{nil} z~wiersza 5 na \const{nil}.}
+Będziemy zatem używać nazw \proc{RB-Left-Rotate} i~\proc{RB-Right-Rotate} dla procedur wykonujących rotacje na drzewach czerwono czarnych, a~nazwy \proc{Left-Rotate} i~\proc{Right-Rotate} zarezerwujemy dla operacji rotacji dla drzew wyszukiwań binarnych, które działają identycznie jak \proc{RB-Left-Rotate} i~\proc{RB-Right-Rotate}, w~których zamieniono\/ \attrib{T}{nil} z~wiersza 5 (oraz 3 -- patrz wyżej) na \const{nil}.}
 \bignegskip
 
 \exercise %13.2-1
 Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \begin{codebox}
-\Procname{$\proc{Right-Rotate}(T,x)$}
+\Procname{$\proc{RB-Right-Rotate}(T,x)$}
 \li	$y\gets\attrib{x}{left}$
 \li	$\attrib{x}{left}\gets\attrib{y}{right}$
 \li	\If $\attrib{y}{right}\ne\attrib{T}{nil}$

@@ -63,11 +63,11 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie:
 \li							$p\gets\proc{Pop}(S)$
 \li						\Else \If $z=\attrib{p}{right}$
 \li							\Then $z\leftrightarrow p$
-\li								$\proc{No-Parents-Left-Rotate}(T,z,r)$
+\li								$\proc{RB-No-Parents-Left-Rotate}(T,z,r)$
 							\End
 \li							$\attrib{p}{color}\gets\const{black}$
 \li							$\attrib{r}{color}\gets\const{red}$
-\li							$\proc{No-Parents-Right-Rotate}(T,r,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
+\li							$\proc{RB-No-Parents-Right-Rotate}(T,r,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
 						\End
 \li				\Else (to samo co po \kw{then} z~zamienionymi ,,right'' i~,,left'')
 				\End
@@ -83,7 +83,7 @@ Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo p�
 Poniżej znajduje się operacja lewej rotacji na węźle $x$, która nie korzysta ze wskaźników na ojca.
 Zamiast tego otrzymuje ona trzeci parametr, będący ojcem węzła $x$.
 \begin{codebox}
-\Procname{$\proc{No-Parents-Left-Rotate}(T,x,p)$}
+\Procname{$\proc{RB-No-Parents-Left-Rotate}(T,x,p)$}
 \li	$y\gets\attrib{x}{right}$
 \li	$\attrib{x}{right}\gets\attrib{y}{left}$
 \li	\If $p=\attrib{T}{nil}$
