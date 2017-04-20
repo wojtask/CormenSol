@@ -15,26 +15,21 @@ Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F
 \subproblem %13-3(b)
 Zanim podamy pseudokod algorytmu \proc{Balance}, zdefiniujemy pomocnicze procedury, które będą w~nim wykorzystywane.
 
-%W~naszej implementacji drzew AVL użyjemy specjalnego węzła-wartownika.
-%Dla drzewa AVL $T$ wartownik \attrib{T}{nil} będzie obiektem o~takich samych polach jak zwykły węzeł w~drzewie $T$.
-%Dla uproszczenia poniższych operacji przyjmijmy, że $h$ w~wartowniku ma wartość $-1$, natomiast pozostałe pola mogą mieć dowolne wartości.
-%Podobnie jak w~drzewach czerwono-czarnych jeden wartownik $\attrib{T}{nil}$ będzie reprezentował wszystkie \const{nil} -- zarówno dla ojca korzenia drzewa $T$, jak i~dla pustych synów węzłów w~$T$.
-
 Dla każdego węzła $x$ w~drzewie AVL definiujemy jego \textbf{współczynnik zrównoważenia} jako wartość zwracaną przez następującą procedurę:
 \begin{codebox}
 \Procname{$\proc{Balance-Factor}(x)$}
-\li	$\id{lh}\gets\id{rh}\gets-1$
+\li	$\id{hl}\gets\id{hr}\gets-1$
 \li	\If $\attrib{x}{left}\ne\const{nil}$
-\li		\Then $\id{lh}\gets\attribb{x}{left}{h}$
+\li		\Then $\id{hl}\gets\attribb{x}{left}{h}$
 		\End
 \li	\If $\attrib{x}{right}\ne\const{nil}$
-\li		\Then $\id{rh}\gets\attribb{x}{right}{h}$
+\li		\Then $\id{hr}\gets\attribb{x}{right}{h}$
 		\End
-\li	\Return $-\id{lh}+\id{rh}$
+\li	\Return $-\id{hl}+\id{hr}$
 \end{codebox}
 W~drzewie zrównoważonym po wysokościach współczynnik zrównoważenia dowolnego jego węzła przyjmuje wartość $-1$, 0 lub 1.
 Będziemy korzystać także z~procedury $\proc{Height}(x)$, która dla danego węzła $x$ zwróci jego aktualną wysokość w~drzewie na podstawie wartości pola $h$ jego synów.
-Jej działanie jest identyczne z~$\proc{Balance-Factor}(x)$ z~wyjątkiem ostatniego wiersza, w~którym zwracana jest wartość $\max(\id{lh},\id{rh})+1$.
+Jej działanie jest identyczne z~$\proc{Balance-Factor}(x)$ z~wyjątkiem ostatniego wiersza, w~którym zwracana jest wartość $\max(\id{hl},\id{hr})+1$.
 
 Opiszmy też procedury \proc{AVL-Left-Rotate} i~\proc{AVL-Right-Rotate}, których zadaniem jest wykonanie rotacji na węźle $x$ w~drzewie, które niekoniecznie jest zrównoważone po wysokościach.
 Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie aktualizują wskaźnika \attrib{T}{root} w~wierszu 6, a~tuż przed zakończeniem działania aktualizują jeszcze \attrib{x}{h} i~\attrib{y}{h} na wartości, odpowiednio, $\proc{Height}(x)$ i~$\proc{Height}(y)$.
@@ -43,9 +38,9 @@ Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie aktu
 \Procname{$\proc{Balance}(x)$}
 \li	\If $\proc{Balance-Factor}(x)=-2$
 \li		\Then \If $\proc{Balance-Factor}(\attrib{x}{left})=1$ \label{li:balance-left-cases-begin}
-\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$
+\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$ \label{li:balance-left-right-case}
 				\End
-\li				$\proc{AVL-Right-Rotate}(x)$
+\li				$\proc{AVL-Right-Rotate}(x)$ \label{li:balance-left-left-case}
 \li				\Return \attrib{x}{p} \label{li:balance-left-cases-end}
 \li		\Else \If $\proc{Balance-Factor}(x)=2$
 \li				\Then (to samo co w~wierszach \doubledash{\ref{li:balance-left-cases-begin}}{\ref{li:balance-left-cases-end}} z~zamienionymi ,,right'' i~,,left'')
@@ -64,13 +59,13 @@ Działanie procedury dla opisanych przypadków przedstawione zostało na rys.\ \
 \begin{figure}[!ht]
 	\centering \input{fig13-3b}
 	\caption{Działanie procedury \proc{Balance} wywołanej dla węzła $x$, który nie jest zrównoważony po wysokościach.
-	Obok węzłów $x$, $y$, $z$ i~poddrzew $\alpha$, $\beta$, $\gamma$, $\delta$ zaznaczone zostały ich wysokości.
+	Obok węzłów $x$, $y$, $w$ i~poddrzew $\alpha$, $\beta$, $\gamma$, $\delta$ zaznaczone zostały ich wysokości.
 	{\sffamily\bfseries(a)} Przypadek ,,lewo-lewo''.
 	Jeśli przyjmiemy, że wysokością poddrzewa $\gamma$ jest $h$, to wysokość poddrzewa o~korzeniu w~$y$ wynosi $h+2$.
 	Węzeł $y$ jest zrównoważony i~$\proc{Balance-Factor}(y)\in\{-1,0\}$, więc poddrzewo $\alpha$ ma wysokość $h+1$, a~poddrzewo $\beta$ może mieć wysokość równą $h$ lub $h+1$.
 	Drzewo $T$ po lewej stronie rysunku zostaje przekształcone w~zrównoważone drzewo po prawej stronie rysunku po wykonaniu $\proc{AVL-Right-Rotate}(x)$.
 	{\sffamily\bfseries(b)} W~przypadku ,,lewo-prawo'' po przyjęciu, że wysokością $\delta$ jest $h$, mamy, że wysokość poddrzewa o~korzeniu w~węźle $y$ wynosi $h+2$.
-	Tutaj jednak $\proc{Balance-Factor}(y)=1$, więc wyróżniamy $z$ -- prawego syna $y$ o~wysokości $h+1$, którego oba poddrzewa, $\beta$ i~$\gamma$, mają wysokość $h-1$ lub $h$.
+	Tutaj jednak $\proc{Balance-Factor}(y)=1$, więc wyróżniamy $w$ -- prawego syna $y$ o~wysokości $h+1$, którego oba poddrzewa, $\beta$ i~$\gamma$, mają wysokość $h-1$ lub $h$.
 	Zrównoważenie drzewa $T$ odbywa się poprzez wywołanie najpierw $\proc{AVL-Left-Rotate}(y)$, a~następnie $\proc{AVL-Right-Rotate}(x)$.} \label{fig:13-3b}
 \end{figure}
 
@@ -105,3 +100,35 @@ Podobnie jak \proc{Recursive-Tree-Insert}, z~powyższej procedury nie należy ko
 \end{codebox}
 
 \subproblem %13-3(d)
+\note{Ten punkt pyta o~coś, co nie jest prawdą.
+Podamy więc rozwiązanie dla treści z~erraty do oryginału, której tłumaczenie brzmi:
+}
+
+\noindent Pokaż, że operacja \proc{AVL-Insert} dla drzewa AVL o~$n$ węzłach działa w~czasie $O(\lg n)$ i~wykonuje $O(1)$ rotacji.
+
+\bigskip
+\note{Rozwiązanie tego zadania znajduje się poniżej.}
+
+\noindent Wszystkie pomocnicze operacje, które opisaliśmy w~punkcie (b), tzn.\ \proc{Balance-Factor}, \proc{Height}, operacje rotacji oraz \proc{Balance} działają w~czasie stałym.
+Na każdym poziomie rekurencji procedura \proc{AVL-Insert} wykonuje więc $O(1)$ operacji.
+Liczbę poziomów rekurencji można z~kolei ograniczyć od góry przez wysokość $h$ drzewa, na którym ona działa.
+W~drzewie o~$n$ węzłach $h=O(\lg n)$, zatem czas działania \proc{AVL-Insert} dla drzewa o~$n$ węzłach wynosi $O(\lg n)$.
+
+Na każdym poziomie rekursji w~\proc{AVL-Insert} wywoływana jest operacja \proc{Balance}.
+Wykażemy jednak, że sumaryczna liczba rotacji w~niej przeprowadzanych jest nie większa niż 2.
+Po znalezieniu miejsca w~drzewie dla węzła $z$ rekurencja wraca, wywołując \proc{Balance} dla przodków $z$ na coraz wyższych poziomach drzewa.
+Rotacje zostaną wykonane w~\proc{Balance} tylko wówczas, gdy współczynnik zrównoważenia aktualnego przodka $z$ wynosi $-2$ lub 2.
+Niech $x$ będzie pierwszym napotkanym węzłem o~tej własności, czyli najgłębiej położonym przodkiem węzła $z$, który nie jest zrównoważony po wysokościach.
+Sprawdźmy, jak zmieni się wysokość poddrzewa o~korzeniu w~$x$ w~każdym z~przypadków rozważanych w~procedurze \proc{Balance}.
+
+Posługując się oznaczeniami z~rys.\ \ref{fig:13-3b}, w~przypadku ,,lewo-lewo'' zanim nowy węzeł $z$ został umieszczony w~drzewie, węzeł $x$ znajdujący się na wysokości $h+2$ był zrównoważony po wysokościach, więc węzeł $y$ miał wysokość $h+1$, a~wysokość poddrzew $\alpha$ i~$\beta$ wynosiła $h$.
+Nowy węzeł musiał więc zostać dodany do poddrzewa $\alpha$.
+Po wykonaniu rotacji w~wierszu \ref{li:balance-left-left-case} procedury \proc{Balance} wysokość węzła $x$ wynosi $h+1$, skąd wysokością $y$ jest $h+2$.
+Wywołanie procedury \proc{Balance} przywraca zatem nie tylko zrównoważenie poddrzewa, na którym ona działa, ale także przywraca wysokość tego poddrzewa do wartości sprzed wstawienia węzła $z$.
+Dzięki temu zrównoważenie po wysokościach każdego przodka węzła $y$ pozostaje nienaruszone i~w~dalszym działaniu procedury \proc{AVL-Insert} nie zostanie wykonana już żadna rotacja.
+
+Jeśli z~kolei wstawienie $z$ doprowadziło do przypadku ,,lewo-prawo'', to początkowo wysokość węzła $y$ wynosiła $h+1$, a~wysokość węzła $x$ wynosiła $h+2$.
+Po wstawieniu $z$ do drzewa oraz wykonaniu rotacji w~liniach \ref{li:balance-left-right-case} i~\ref{li:balance-left-left-case} poddrzewo o~korzeniu w~$x$ zostaje przekształcone w~zrównoważone po wysokościach poddrzewo o~korzeniu w~$w$ o~wysokości $h+2$ równej tej sprzed przekształcenia.
+Każdy przodek węzła $w$ pozostaje więc zrównoważony, dlatego rotacje nie będą już wykonywane.
+
+Analiza w~przypadkach ,,prawo-lewo'' i ,,prawo-prawo'' jest analogiczna.
