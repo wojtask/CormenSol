@@ -1,7 +1,7 @@
 \begin{tikzpicture}[
 	level/.append style = {level distance=7mm, sibling distance=100mm/2^#1},
 	every label/.style = {index node, label position=left, draw=none, fill=none},
-	outer/.append style = {node distance=15mm and 15mm}
+	outer/.append style = {node distance=10mm}
 ]
 
 \newcommand\nilnode{%
@@ -13,7 +13,7 @@
 	every node/.style = {tree node},
 	anchor = center
 ]
-	\node[label=177:2, blackened] {8}
+	\node[label=177:2, blackened] (root) {8}
 		child {node[label=2] {4}
 			child {node[label=1, blackened] {2}
 				child {node[label=1] {1}
@@ -58,6 +58,8 @@
 				}
 			}
 		};
+		
+	\node[subpicture label, draw=none, fill=none, left=50mm of root] {(a)};
 \end{tikzpicture}
 };
 
@@ -66,7 +68,7 @@
 	every node/.style = {tree node},
 	anchor = center
 ]
-	\node[label=177:3, blackened] {8}
+	\node[label=177:3, blackened] (root) {8}
 		child {node[label=2, blackened] {4}
 			child {node[label=2] {2}
 				child {node[label=1, blackened] {1}
@@ -111,6 +113,8 @@
 				}
 			}
 		};
+		
+	\node[subpicture label, draw=none, fill=none, left=50mm of root] {(b)};
 \end{tikzpicture}
 };
 
@@ -119,7 +123,7 @@
 	every node/.style = {tree node},
 	anchor = center
 ]
-	\node[label=177:4, blackened] {8}
+	\node[label=177:4, blackened] (root) {8}
 		child {node[label=3, blackened] {4}
 			child {node[label=2, blackened] {2}
 				child {node[label=1, blackened] {1}
@@ -164,11 +168,9 @@
 				}
 			}
 		};
+		
+	\node[subpicture label, draw=none, fill=none, left=50mm of root] {(c)};
 \end{tikzpicture}
 };
-
-\foreach \x in {a,b,c} {
-	\node[subpicture label, below=2mm of pic \x] {(\x)};
-}
 
 \end{tikzpicture}
