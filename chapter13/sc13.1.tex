@@ -4,14 +4,15 @@
 Drzewa zostały przedstawione na rys.\ \ref{fig:13.1-1}.
 \begin{figure}[!ht]
 	\centering \input{fig13.1-1}
-	\caption{Drzewa czerwono-czarne o~wysokości 3 zawierające zbiór kluczy $\{$1,\! 2,\! \dots,\! 15$\}$ z~dodanymi węzłami \const{nil}.
+	\caption{Drzewa czerwono-czarne o~wysokości 3 zawierające zbiór kluczy $\{$1,\! 2,\! \dots,\! 15$\}$ z~dodanymi liśćmi \const{nil}.
 	Czarna wysokość tych drzew wynosi, odpowiednio, {\sffamily\bfseries(a)} 2, {\sffamily\bfseries(b)} 3 oraz {\sffamily\bfseries(c)} 4.} \label{fig:13.1-1}
 \end{figure}
 
 \exercise %13.1-2
 Rys.\ \ref{fig:13.1-2} przedstawia drzewo po dodaniu nowego węzła o~nieustalonym kolorze.
-Pokolorowanie go na czerwono naruszy jednak własność 4 drzewa czerwono-czarnego, natomiast nadanie mu koloru czarnego naruszy własność 5 -- na ścieżce od korzenia drzewa do nowego węzła będą 3 czarne węzły, a~na ścieżce od korzenia do każdego innego liścia -- po 2 czarne węzły.
-A~zatem niezależnie od wyboru koloru dla nowego węzła, wynikowe drzewo nie będzie drzewem czerwono-czarnym.
+Pokolorowanie go na czerwono naruszy jednak własność 4 drzewa czerwono-czarnego.
+Natomiast nadanie mu koloru czarnego naruszy własność 5 -- na prostej ścieżce od korzenia drzewa do liścia \const{nil}, będącego synem nowego węzła, znajdzie się 5 czarnych węzłów, a~na prostej ścieżce od korzenia do dowolnego innego liścia \const{nil} będą 4 czarne węzły.
+A~zatem, niezależnie od wyboru koloru dla nowego węzła, wynikowe drzewo nie będzie drzewem czerwono-czarnym.
 \begin{figure}[!ht]
 	\centering \input{fig13.1-2}
 	\caption{Drzewo z~rys.\ 13.1 z~Podręcznika po dodaniu węzła o~kluczu 36 procedurą \proc{Tree-Insert}.} \label{fig:13.1-2}
@@ -23,29 +24,29 @@ Liczba czarnych węzłów na każdej prostej ścieżce od korzenia do liścia zw
 To oznacza, że także własność 5 nie będzie naruszona i~otrzymane drzewo będzie drzewem czerwono-czarnym.
 
 \exercise %13.1-4
-W~wyniku wykonania operacji pochłaniania każdy ojciec $x$ czerwonego węzła $y$ stanie się ojcem dwóch czarnych synów $y$.
-Stopień węzła $x$ będzie więc nadal wynosił 2 (jeśli obaj synowie $x$ są czarni), zwiększy się do 3 (jeśli dokładnie jeden z~synów $x$ był czerwony) albo do 4 (gdy obaj synowie $x$ byli czerwoni).
+Niech $x$ będzie czarnym węzłem w~drzewie czerwono-czarnym.
+Jeśli $x$ nie ma czerwonego syna, to w~wyniku pochłaniania czerwonych węzłów jego stopień nie zmieni się i~będzie nadal wynosił 0 dla $x=\const{nil}$ albo 2 dla $x\ne\const{nil}$.
+Jeśli $x$ ma dokładnie jednego czerwonego syna $y$, to pochłaniając go, przyjmuje czarnych synów $y$, zwiększając swój stopień do 3.
+Gdy obaj synowie $y_1$, $y_2$ węzła $x$ są czerwoni, to po ich pochłonięciu $x$ będzie ojcem 4 czarnych węzłów, które początkowo były synami węzłów $y_1$ i~$y_2$.
 
-Po pochłonięciu wszystkich czerwonych węzłów dowolna prosta ścieżka od korzenia do liścia będzie składać się z~tej samej liczby czarnych węzłów.
-Głębokość każdego liścia będzie równa czarnej wysokości początkowego drzewa czerwono-czarnego.
+Po pochłonięciu wszystkich czerwonych węzłów dowolna prosta ścieżka od korzenia do liścia będzie składać się z~tej samej liczby węzłów, skąd wynika, że głębokość każdego liścia będzie równa czarnej wysokości początkowego drzewa czerwono-czarnego.
 
 \exercise %13.1-5
-Skorzystamy z~faktu, że każda prosta ścieżka od węzła $x$ do jego potomnego liścia w~drzewie czerwono-czarnym składa się z~tej samej liczby czarnych węzłów.
-Na najkrótszej z~nich są same czarne węzły, a~na najdłuższej oprócz nich znajduje się maksymalna możliwa liczba czerwonych węzłów.
-Oczywiście dwa czerwone węzły nie mogą następować bezpośrednio po sobie na takiej ścieżce, skąd wynika, że jest ich co najwyżej tyle, ile czarnych węzłów.
-Najdłuższa ścieżka jest więc co najwyżej dwukrotnie dłuższa od najkrótszej.
+Skorzystamy z~faktu, że każda prosta ścieżka z~ustalonego węzła $x$ do jego potomnego czarnego liścia w~danym drzewie czerwono-czarnym składa się z~tej samej liczby czarnych węzłów.
+Na możliwie najkrótszej takiej ścieżce są same czarne węzły (być może z~wyjątkiem $x$) i~jej długością jest czarna wysokość węzła $x$.
+Najdłuższa możliwa ścieżka powstaje z~najkrótszej poprzez wstawienie czerwonego węzła pomiędzy każdą parę sąsiednich czarnych węzłów, w~wyniku czego długość ścieżki może zwiększyć się maksymalnie dwukrotnie.
 
 \exercise %13.1-6
-Drzewo czerwono-czarne o~czarnej wysokości $k$ ma najmniejszą możliwą liczbę węzłów wewnętrznych, jeśli każda ścieżka od korzenia do liścia jest możliwie najkrótsza.
+Drzewo czerwono-czarne o~czarnej wysokości $k$ ma najmniejszą możliwą liczbę węzłów wewnętrznych, jeśli każda prosta ścieżka od korzenia do liścia jest możliwie najkrótsza.
 Podobnie, największa liczba węzłów wewnętrznych w~tym drzewie jest osiągana, gdy każda taka ścieżka jest możliwie najdłuższa.
-Na podstawie poprzedniego zadania mamy, że ich długość, a~co za tym idzie także wysokość drzewa, wynosi co najmniej $k$ i~co najwyżej $2k$.
+Na podstawie poprzedniego zadania mamy, że długość takiej ścieżki, a~co za tym idzie także wysokość drzewa, wynosi co najmniej $k$ i~co najwyżej $2k$.
 Drzewo składa się zatem z~co najmniej $2^k-1$ i~co najwyżej $2^{2k}-1$ węzłów wewnętrznych.
 
 \exercise %13.1-7
-W~\refExercise{13.1-5} zobaczyliśmy, że na prostej ścieżce od korzenia do liścia w~drzewie czerwono-czarnym może znajdować się maksymalnie tyle samo węzłów czerwonych co czarnych.
+Rozumując podobnie jak w~\refExercise{13.1-5}, możemy wywnioskować, że w~drzewie czerwono-czarnym na prostej ścieżce od korzenia do ojca liścia (najniżej położonego węzła wewnętrznego na tej ścieżce) węzłów czerwonych może być co najwyżej tyle samo co czarnych.
 Jeśli każda taka ścieżka zawiera maksymalną liczbę czerwonych węzłów, to drzewo jest pełnym drzewem binarnym o~wysokości parzystej, w~którym na parzystych poziomach są węzły czarne, a~na nieparzystych -- czerwone.
 Przykładem takiego drzewa jest to zobrazowane na rys.\ \ref{fig:13.1-1}(a).
-W~drzewach takich czerwonych węzłów wewnętrznych jest 2 razy więcej niż czarnych węzłów wewnętrznych.
+W~takich drzewach czerwonych węzłów wewnętrznych jest 2 razy więcej niż czarnych węzłów wewnętrznych.
 
 Z~drugiej strony zauważmy, że pełne drzewo wyszukiwań binarnych, w~którym wszystkie węzły są czarne, jest poprawnym drzewem czerwono-czarnym (np.\ to z~rys.\ \ref{fig:13.1-1}(c)).
 Minimalny stosunek czerwonych węzłów wewnętrznych do czarnych węzłów wewnętrznych wynosi więc 0.
