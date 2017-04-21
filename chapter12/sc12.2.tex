@@ -52,9 +52,9 @@ Klucze 1 i~2 nie spełniają nierówności postawionej w~hipotezie.} \label{fig:
 \end{figure}
 
 \exercise %12.2-5
-Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST, a~$U$ zbiorem składającym się ze wszystkich przodków $x$, których lewe poddrzewa zawierają $x$.
-Węzły o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także w~zbiorze $U$ i~w~prawych poddrzewach węzłów z~$U$.
-Dla każdego $u\in U$, dla każdego węzła $v$ z~prawego poddrzewa $u$ i~dla każdego węzła $w$ z~prawego poddrzewa $x$ spełnione są nierówności $\attrib{x}{key}<\attrib{w}{key}<\attrib{u}{key}<\attrib{v}{key}$, a~to oznacza, że następnik $x$ znajduje się w~jego prawym poddrzewie.
+Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST, a~$U_x$ zbiorem składającym się ze wszystkich przodków $x$, których lewe poddrzewa zawierają $x$.
+Węzły o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także w~zbiorze $U_x$ i~w~prawych poddrzewach węzłów z~$U_x$.
+Dla każdego $u\in U_x$, dla każdego węzła $v$ z~prawego poddrzewa $u$ i~dla każdego węzła $w$ z~prawego poddrzewa $x$ spełnione są nierówności $\attrib{x}{key}<\attrib{w}{key}<\attrib{u}{key}<\attrib{v}{key}$, a~to oznacza, że następnik $x$ znajduje się w~jego prawym poddrzewie.
 
 Niech $y$ będzie następnikiem węzła $x$.
 Jeśli węzeł $y$ miałby lewego syna $z$, to na podstawie faktu, że $y$ należy do prawego poddrzewa $x$, zachodziłoby $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to z~kolei przeczyłoby faktowi, że następnikiem $x$ jest węzeł $y$.
@@ -63,16 +63,16 @@ Stąd następnik $x$ nie ma lewego syna.
 Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
 \exercise %12.2-6
-Niech $U$ będzie zbiorem zdefiniowanym jak w~\refExercise{12.2-5}.
-Na podstawie rozumowania z~tamtego zadania mamy, że dla każdego $u\in U$ i~dla każdego węzła $v$ z~prawego poddrzewa $u$ zachodzą nierówności $\attrib{x}{key}<\attrib{u}{key}<\attrib{v}{key}$.
-Następnik $y$ węzła $x$ jest więc elementem zbioru $U$ o~minimalnym kluczu.
+Niech $U_x$ będzie zbiorem zdefiniowanym jak w~\refExercise{12.2-5}.
+Na podstawie rozumowania z~tamtego zadania mamy, że dla każdego $u\in U_x$ i~dla każdego węzła $v$ z~prawego poddrzewa $u$ zachodzą nierówności $\attrib{x}{key}<\attrib{u}{key}<\attrib{v}{key}$.
+Następnik $y$ węzła $x$ jest więc elementem zbioru $U_x$ o~minimalnym kluczu.
 
-Niech $u_1$, $u_2\in U$.
+Niech $u_1$, $u_2\in U_x$.
 Węzeł $x$ należy do lewego poddrzewa zarówno $u_1$, jak i~$u_2$.
 Węzły te nie mogą znajdować się w~drzewie $T$ na tej samej głębokości, bo wtedy ich lewe poddrzewa są rozłączne.
 Załóżmy więc bez utraty ogólności, że $u_2$ leży w~$T$ głębiej niż $u_1$.
 Wówczas węzeł $u_2$ oraz jego lewe poddrzewo znajdują się w~lewym poddrzewie węzła $u_1$.
-Wynika stąd, że im głębszy poziom węzła ze zbioru $U$, tym mniejszy jego klucz, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
+Wynika stąd, że węzły ze zbioru $U_x$ na większych głębokościach w~drzewie $T$ mają mniejsze klucze, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U_x$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
 
 \exercise %12.2-7
 Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.

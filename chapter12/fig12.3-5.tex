@@ -1,6 +1,8 @@
 \begin{tikzpicture}[
 	level/.append style = {sibling distance=30mm/2^#1},
-	outer/.append style = {node distance=15mm}
+	every label/.style = {index node, label position=left, draw=none, fill=none},
+	index node/.append style = {rectangle, draw=none, fill=none},
+	outer/.append style = {node distance=10mm}
 ]
 
 \node[outer] (pic a) {
@@ -8,45 +10,43 @@
 	every node/.style = {tree node},
 	anchor = center
 ]
-	\node {4}
-		child {node {3}}
+	\node[label=$y$] (left subtree root) {4}
+		child {node[label=$x$] {3}}
 		child {node {7}
 			child {node {6}}
 			child[missing]
 		};
-\end{tikzpicture}
-};
 
-\node[outer, right=of pic a] (pic b) {
-\begin{tikzpicture}[
-	every node/.style = {tree node},
-	anchor = center
-]
-	\node {7}
-		child {node {6}
-			child[missing]
-			child {node[draw=none, fill=none] {} edge from parent[draw=none]}
-		}
+	\node[right=50mm of left subtree root] (right subtree root) {7}
+		child {node {6}}
 		child[missing];
+            
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {$\proc{Tree-Delete}(T,x)$} node[index node, below] {$\proc{Tree-Delete}(T,y)$} (right subtree root.west);
+    
+    \node[subpicture label, draw=none, fill=none, left=15mm of left subtree root] {(a)};
 \end{tikzpicture}
 };
 
-\node[outer, right=of pic b] (pic c) {
+\node[outer, below=of pic a.south west, anchor=north west] (pic b) {
 \begin{tikzpicture}[
 	every node/.style = {tree node},
 	anchor = center
 ]
-	\node {6}
-		child[missing]
+	\node[label=$y$] (left subtree root) {4}
+		child {node[label=$x$] {3}}
 		child {node {7}
-			child {node[draw=none, fill=none] {} edge from parent[draw=none]}
+			child {node {6}}
 			child[missing]
 		};
+
+	\node[right=50mm of left subtree root] (right subtree root) {6}
+		child[missing]
+		child {node {7}};
+		
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {$\proc{Tree-Delete}(T,y)$} node[index node, below] {$\proc{Tree-Delete}(T,x)$} (right subtree root.west);
+    
+    \node[subpicture label, draw=none, fill=none, left=15mm of left subtree root] {(b)};
 \end{tikzpicture}
 };
-
-\foreach \x in {a,b,c} {
-	\node[subpicture label, below=2mm of pic \x] {(\x)};
-}
 
 \end{tikzpicture}
