@@ -1,19 +1,18 @@
 \subchapter{Operacje rotacji}
-\note{Linia 3 w~procedurze wykonującej lewą rotację powinna być zastąpiona liniami:}
+\note{Linia 3 w~procedurze \proc{Left-Rotate} powinna być zastąpiona fragmentem:}
 \bignegskip
 \begin{codebox}
 \zi	\If $\attrib{y}{left}\ne\attrib{T}{nil}$
 \zi		\Then $\attribb{y}{left}{p}\gets x$
 		\End
 \end{codebox}
-\note{W~kilku zadaniach z~tego podrozdziału mowa jest o~rotacjach na drzewach wyszukiwań binarnych, a~nie tylko na bardziej wyspecjalizowanych drzewach czerwono-czarnych.
-Będziemy zatem używać nazw \proc{RB-Left-Rotate} i~\proc{RB-Right-Rotate} dla procedur wykonujących rotacje na drzewach czerwono czarnych, a~nazwy \proc{Left-Rotate} i~\proc{Right-Rotate} zarezerwujemy dla operacji rotacji dla drzew wyszukiwań binarnych, które działają identycznie jak \proc{RB-Left-Rotate} i~\proc{RB-Right-Rotate}, w~których zamieniono\/ \attrib{T}{nil} z~wiersza 5 (oraz 3 -- patrz wyżej) na \const{nil}.}
+\note{Przyjmujemy, że procedury \proc{Left-Rotate} i~\proc{Right-Rotate} działają poprawnie także dla zwykłych drzew BST, zastępując odwołanie do\/ \attrib{T}{nil} z~wiersza 5 (oraz 3 -- patrz wyżej) przez \const{nil}.}
 \bignegskip
 
 \exercise %13.2-1
-Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
+Pseudokod operacji prawej rotacji wygląda analogicznie do procedury \proc{Left-Rotate}, w~której zamieniono ze sobą pola \id{left} i~\id{right}.
 \begin{codebox}
-\Procname{$\proc{RB-Right-Rotate}(T,x)$}
+\Procname{$\proc{Right-Rotate}(T,x)$}
 \li	$y\gets\attrib{x}{left}$
 \li	$\attrib{x}{left}\gets\attrib{y}{right}$
 \li	\If $\attrib{y}{right}\ne\attrib{T}{nil}$
@@ -22,9 +21,9 @@ Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \li	$\attrib{y}{p}\gets\attrib{x}{p}$
 \li	\If $\attrib{x}{p}=\attrib{T}{nil}$
 \li		\Then $\attrib{T}{root}\gets y$
-\li		\Else \If $x=\attribb{x}{p}{left}$
-\li				\Then $\attribb{x}{p}{left}\gets y$
-\li				\Else $\attribb{x}{p}{right}\gets y$
+\li		\Else \If $x=\attribb{x}{p}{right}$
+\li				\Then $\attribb{x}{p}{right}\gets y$
+\li				\Else $\attribb{x}{p}{left}\gets y$
 				\End
 		\End
 \li	$\attrib{y}{right}\gets x$
@@ -32,29 +31,28 @@ Oto pseudokod prawej rotacji na drzewie czerwono-czarnym:
 \end{codebox}
 
 \exercise %13.2-2
-Na dowolnym węźle $x$ w~drzewie wyszukiwań binarnych $T$ można wykonać lewą rotację, o~ile prawy syn $x$ jest różny od \const{nil} a~prawą rotację -- o~ile lewy syn jest różny od \const{nil}.
+Na dowolnym węźle $x$ w~drzewie wyszukiwań binarnych $T$ można wykonać lewą rotację, o~ile prawy syn $x$ jest różny od \const{nil}, a~prawą rotację -- o~ile jego lewy syn jest różny od \const{nil}.
 Oznacza to, że istnieje wzajemna jednoznaczność między rotacjami a~krawędziami drzewa, wokół których można przeprowadzić rotacje.
 W~drzewie o~$n$ węzłach jest dokładnie $n-1$ krawędzi i~tyle samo różnych rotacji można w~nim wykonać.
 
 \exercise %13.2-3
-Zauważmy, że wewnętrzna struktura węzłów w~poddrzewach $\alpha$, $\beta$, $\gamma$ nie zmienia się w~wyniku wykonania rotacji.
+Wewnętrzna struktura węzłów w~poddrzewach $\alpha$, $\beta$, $\gamma$ nie zmienia się w~wyniku wykonania rotacji.
 A~zatem głębokość dowolnego węzła $a$ z~$\alpha$ zwiększa się o~1, głębokość dowolnego węzła $b$ z~$\beta$ nie zmienia się, a~głębokość dowolnego węzła $c$ z~$\gamma$ zmniejsza się o~1.
 
 \exercise %13.2-4
 \note{Rozwiązanie zakłada, że zadanie dotyczy drzew wyszukiwań binarnych, zgodnie z~treścią oryginalną.
-Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym lewe poddrzewo każdego węzła jest puste.}
+Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym każdy węzeł znajduje się na jego prawym kręgosłupie (patrz problem 13.4).}
 
-\noindent Wykażemy stwierdzenie ze wskazówki.
-Dla danego drzewa wyszukiwań binarnych $T$ o~$n$ węzłach, niech $R_T$ będzie zbiorem zawierającym korzeń drzewa $T$ oraz wszystkie węzły osiągalne z~korzenia podczas poruszania się wyłącznie w~kierunku prawych synów (czyli po wskaźnikach \id{right}).
-Dopóki drzewo $T$ nie jest prawym łańcuchem, czyli dopóki są w~nim węzły nienależące do $R_T$, to istnieje węzeł $y\in R_T$, którego lewy syn $x\not\in R_T$.
-Zauważmy, że wykonanie prawej rotacji na węźle $y$ dodaje $x$ do $R_T$, jednocześnie nie usuwając z~niego żadnego innego węzła.
-Prawa rotacja zwiększa więc rozmiar $R_T$ o~1, dlatego wystarczy wykonać co najwyżej $n-1$ rotacji, aby przekształcić $T$ w~prawy łańcuch.
+\noindent Wykażemy stwierdzenie podane we wskazówce.
+Jeśli drzewo $T$ nie jest prawym łańcuchem, czyli jeśli są w~nim węzły nie leżące na prawym kręgosłupie $T$, to istnieje węzeł $y$ na prawym kręgosłupie, którego lewy syn $x$ nie leży na nim.
+Zauważmy, że wykonanie prawej rotacji na węźle $y$ dodaje $x$ do prawego kręgosłupa, jednocześnie nie usuwając z~niego żadnego innego węzła.
+Prawa rotacja zwiększa więc rozmiar prawego kręgosłupa o~1, dlatego wystarczy wykonać co najwyżej $n-1$ rotacji, aby przekształcić $T$ w~prawy łańcuch.
 
 Jeśli znamy ciąg prawych rotacji przekształcających drzewo $T$ w~prawy łańcuch $T'$, to możemy powrócić od $T'$ do $T$ poprzez wykonanie tego ciągu w~odwrotnej kolejności, zamieniając każdą prawą rotację w~odpowiadającą jej lewą rotację.
 
 Niech $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach, a~$T'$ -- jedynym prawym łańcuchem powstałym z~$T_1$ bądź z~$T_2$ po przeprowadzeniu powyżej opisanej transformacji.
 Niech $r=\langle r_1,r_2,\dots,r_k\rangle$ i~$r'=\langle r_1',r_2',\dots,r_{k'}'\rangle$ będą ciągami prawych rotacji przekształcających, odpowiednio $T_1$ w~$T'$ i~$T_2$ w~$T'$.
-Z~poprzedniego paragrafu wiemy, że istnieją takie ciągi $r$, $r'$, gdzie $k$, $k'\le n-1$.
+Z~poprzedniego paragrafu wiemy, że istnieją ciągi $r$ i~$r'$, gdzie $k$, $k'\le n-1$.
 Dla każdej prawej rotacji $r_i'$ niech $l_i'$ będzie odpowiadającą jej lewą rotacją.
 Wówczas ciąg $\langle r_1,r_2,\dots,r_k,l_{k'}',l_{k'-1}',\dots,l_1'\rangle$ co najwyżej $2n-2$ rotacji pozwala przekształcić drzewo $T_1$ w~$T_2$.
 
@@ -63,18 +61,18 @@ Wówczas ciąg $\langle r_1,r_2,\dots,r_k,l_{k'}',l_{k'-1}',\dots,l_1'\rangle$ c
 
 \noindent W~drzewie $T_1$ stanowiącym prawy łańcuch (definicja w~komentarzu do rozwiązania \refExercise{13.2-4}) nie można wykonać żadnej prawej rotacji, gdyż nie istnieje w~nim węzeł o~niepustym lewym synu.
 A~zatem $T_1$ nie jest prawostronnie przekształcalne do jakiegokolwiek drzewa wyszukiwań binarnych $T_2$ różnego od $T_1$.
-Innym przykładem drzew $T_1$ i~$T_2$ są dowolne 2 drzewa, które reprezentują różne zbiory kluczy, gdyż rotacje zmieniają strukturę drzewa, a~nie klucze w~węzłach.
+Innym przykładem drzew $T_1$ i~$T_2$ są dowolne 2 drzewa, które przechowują różne zbiory kluczy, gdyż rotacje zmieniają strukturę drzewa, a~nie klucze w~węzłach.
 
 Niech teraz $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach takimi, że $T_1$ jest prawostronnie przekształcalne do $T_2$.
 Załóżmy, że $n>0$ -- w~przeciwnym przypadku bowiem drzewa są puste i~nie jest potrzebna żadna rotacja, aby przekształcić $T_1$ w~$T_2$.
 
-Dla drzewa binarnego $T$ zdefiniujmy zbiór $L_T$ analogicznie do zbioru $R_T$ z~\refExercise{13.2-4} -- jako składający się z~korzenia drzewa $T$ oraz wszystkich węzłów osiągalnych z~korzenia $T$ przy poruszaniu się po wyłącznie po wskaźnikach \id{left}.
-Prawa rotacja na węźle $x$ w~drzewie $T_1$ przenosi lewego syna $x$ w~miejsce $x$, dlatego jedynie węzły należące do $L_{T_1}$ mogą być przeniesione w~miejsce korzenia drzewa $T_1$.
-Korzeń $r$ drzewa $T_2$ należy zatem do $L_{T_1}$.
-Można więc z~$T_1$ utworzyć drzewo $T_1'$ poprzez wykonanie ciągu prawych rotacji na aktualnym korzeniu, aż $r$ stanie się korzeniem.
+Wykonanie prawej rotacji na węźle $x$ skutkuje tym, że jego lewy syn zostaje przeniesiony na mniejszą głębokość w~drzewie, stając się nowym synem ojca $x$.
+Wynika stąd, że jedynie węzły leżące na lewym kręgosłupie drzewa mogą być przeniesione w~miejsce korzenia.
+Korzeń $r$ drzewa $T_2$ leży zatem na lewym kręgosłupie $T_1$.
+Można więc z~$T_1$ utworzyć drzewo $T_1'$ poprzez wykonywanie prawych rotacji na aktualnym korzeniu, aż $r$ stanie się korzeniem.
 Oczywiście $T_1'$ jest prawostronnie przekształcalne do $T_2$, więc także lewe i~prawe poddrzewo $T_1'$ jest prawostronnie przekształcalne do, odpowiednio, lewego i~prawego poddrzewa $T_2$.
 W~celu otrzymania drzewa $T_2$ wystarczy więc powtórzyć opisane ciągi prawych rotacji rekurencyjnie na lewym i~prawym poddrzewie drzewa $T_1'$.
 
-Liczbę wykonanych rotacji przekształcających drzewo $T_1$ w~$T_1'$, można ograniczyć od góry przez rozmiar zbioru $L_{T_1}$, który wynosi co najwyżej $n$.
+Liczbę wykonanych rotacji przekształcających drzewo $T_1$ w~$T_1'$ można ograniczyć od góry przez długość lewego kręgosłupa drzewa $T_1$, która wynosi co najwyżej $n-1$.
 Wywołania rekurencyjne mogą następnie wykonywać podobne ciągi rotacji na każdym spośród $n-1$ pozostałych węzłów w~poddrzewach drzewa $T_1'$.
 Wynika stąd, że sumaryczną liczbę rotacji wykonywanych przy przekształceniu $T_1$ do $T_2$, można ograniczyć od góry przez $O(n^2)$.
