@@ -72,11 +72,11 @@ Przypadek 1 ma miejsce wtedy, gdy brat $w$ węzła $x$ ma kolor czerwony, a~zate
 Własność ta może być naruszona podczas usuwania węzła jedynie w~przypadku, gdy czerwone są węzły $x$ oraz \attrib{x}{p}, ale wtedy zostaje ona natychmiast przywrócona (\refExercise{13.4-2}) i~nie dochodzi do przypadku 1.
 
 \exercise %13.4-7
-Wywołanie \proc{RB-Insert}, a~następnie bezpośrednio \proc{RB-Delete} nie zawsze pozostawia takie samo drzewo.
-Rys.\ \ref{fig:13.4-7} przedstawia przykład, w~którym zmienia się struktura drzewa po takim działaniu oraz taki, w~którym struktura jest identyczna, ale zmianom ulegają kolory węzłów.
+Wstawienie nowego węzła do drzewa czerwono-czarnego za pomocą procedury \proc{RB-Insert}, a~następnie natychmiastowe jego usunięcie przez \proc{RB-Delete} nie zawsze pozostawia takie samo drzewo.
+Rys.\ \ref{fig:13.4-7} przedstawia przykład, w~którym zmienia się struktura drzewa po takim działaniu oraz taki, w~którym struktura jest zachowana, ale zmianie ulegają kolory węzłów.
 \begin{figure}[!ht]
 	\centering \input{fig13.4-7}
-	\caption{Drzewa czerwono-czarne po dodaniu nowego węzła o~kluczu 1, a~następnie natychmiastowym jego usunięciu.
-	{\sffamily\bfseries(a)} Drzewo o~zmienionej strukturze.
-	{\sffamily\bfseries(b)} Drzewo o~zachowanej strukturze, ale zmienionych kolorach węzłów.} \label{fig:13.4-7}
+	\caption{Drzewa czerwono-czarne po wstawieniu nowego węzła $z$ o~kluczu 1, a~następnie natychmiastowym jego usunięciu.
+	{\sffamily\bfseries(a)} Drzewo $T$, w~którym opisane operacje powodują zmianę struktury drzewa.
+	{\sffamily\bfseries(b)} Drzewo $T$, w~którym działania te zachowują strukturę, ale zmieniają kolory węzłów.} \label{fig:13.4-7}
 \end{figure}
