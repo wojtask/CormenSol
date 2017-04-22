@@ -6,27 +6,27 @@ Ponadto w~linii 22 procedury \proc{RB-Delete-Fixup} nie chodzi tylko o~zamianę 
 \bignegskip
 
 \exercise %13.4-1
-Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, to korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwamy korzeń drzewa o~jedynym synu, który jest czerwony.
+Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwany jest korzeń drzewa, którego dokładnie jeden z~synów jest czerwony.
 Wtedy jednak w~wywołaniu \proc{RB-Delete-Fixup} nie jest wykonywana ani jedna iteracja pętli \kw{while} i~korzeń jest kolorowany na czarno w~wierszu 23.
 
-Jednak procedura \proc{RB-Delete-Fixup} w~ciele pętli aktualizuje kolor niektórych węzłów na czerwono i~dokonuje pewnych rotacji.
-Przyjrzymy się tym sytuacjom i~zobaczymy, że w~żadnej z~nich czerwony węzeł nie staje się korzeniem drzewa.
+Procedura \proc{RB-Delete-Fixup} aktualizuje jednak kolor niektórych węzłów na czerwono i~dokonuje pewnych rotacji.
+Przyjrzymy się tym sytuacjom i~sprawdzimy, że w~żadnej z~nich czerwony węzeł nie staje się korzeniem drzewa.
 Zastosujemy identyczny podział na przypadki, jak w~omawianiu działania procedury w~Podręczniku.
 W~przypadkach 1 i~3 zamiana kolorów między czarnym węzłem i~jego czerwonym synem, a~następnie wykonanie rotacji na tym węźle powoduje, że czerwony z~nich zostaje umieszczony w~drzewie głębiej niż czarny, przez co nie może on być korzeniem.
-W~przypadku 2 na czerwono zostaje pokolorowany brat węzła $x$, ale oczywiście nie może być on korzeniem drzewa z~racji posiadania ojca.
-W końcu, po wykonaniu przypadku 4, $x$ jest ustawione na \attrib{T}{root} i~pętla kończy działanie, po czym następuje aktualizacja koloru $x$ na czarny.
+W~przypadku 2 na czerwono zostaje pokolorowany brat węzła $x$, ale oczywiście nie może być on korzeniem drzewa z~racji istnienia jego ojca.
+W końcu, po wykonaniu przypadku 4, $x$ jest ustawione na \attrib{T}{root} i~pętla kończy działanie, po czym koloruje $x$ na czarno.
 
 \exercise %13.4-2
 Jeśli węzeł $x$ jest czerwony, to pętla \kw{while} w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się i~węzeł $x$ jest kolorowany na czarno w~wierszu 23, co przywraca własność 4.
 
 \exercise %13.4-3
-Na rys.\ \ref{fig:13.4-3} zilustrowano ciąg operacji usuwania węzłów z~drzewa czerwono-czarnego.
+Ciąg drzew po każdej operacji usunięcia węzła został zilustrowany na rys.\ \ref{fig:13.4-3}.
 \begin{figure}[!ht]
 	\centering \input{fig13.4-3}
 	\caption{Drzewa czerwono-czarne powstałe po usunięciu elementów 8, 12, 19, 31, 38, 41 kolejno z~drzewa czerwono-czarnego $T$ skonstruowanego w~\refExercise{13.3-2}.
 	{\sffamily\bfseries(a)} Drzewo $T$ przed rozpoczęciem usuwania.
 	{\sffamily\bfseries(b)} Wycięcie węzła o~kluczu 8 nie powoduje naruszenia żadnej własności drzewa czerwono-czarnego.
-	{\sffamily\bfseries\doubledash{(c)}{(e)}} Po wycięciu każdego kolejnego elementu w~drzewie naruszona zostaje wyłącznie własność 5.
+	{\sffamily\bfseries\doubledash{(c)}{(e)}} Po wycięciu kolejnych elementów, w~drzewie naruszona zostaje wyłącznie własność 5.
 	Przywracana jest ona następnie w~procedurze \proc{RB-Delete-Fixup}.
 	{\sffamily\bfseries{(f)}} Po pozbawieniu drzewa przedostatniego węzła pozostaje w~nim jedynie czerwony korzeń, co stanowi naruszenie własności 2.
         W~linii 23 procedury \proc{RB-Delete-Fixup} jest ona jednak natychmiast przywracana.
@@ -35,40 +35,43 @@ Na rys.\ \ref{fig:13.4-3} zilustrowano ciąg operacji usuwania węzłów z~drzew
 \end{figure}
 
 \exercise %13.4-4
-Gdy z~drzewa czerwono-czarnego usuwany jest czarny liść, to do procedury \proc{RB-Delete-Fixup} przekazywany jest jako parametr wartownik \attrib{T}{nil}, którego pole $p$ pokazuje na ojca usuniętego liścia.
-A~zatem wszystkie odniesienia do pól parametru $x$ w~liniach 1, 2, 3, 6, 7, 8, 11, 16, 17, 18, 20, 22, 23 tej procedury są odniesieniami do pól wartownika \attrib{T}{nil}.
-Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów brata węzła $x$, który także może być liściem i~operacje te mogą odbywać się na atrybucie \id{color} wartownika.
+Gdy z~drzewa czerwono-czarnego $T$ efektywnie usuwany jest czarny węzeł $y$, którego obaj synowie są \attrib{T}{nil}, to do procedury \proc{RB-Delete-Fixup} przekazywany jest jako parametr wartownik \attrib{T}{nil}, którego pole $p$ pokazuje na \attrib{y}{p}.
+A~zatem wszystkie odniesienia do pól parametru $x$ w~liniach 1, 2, 3, 6, 7, 8, 11, 16, 17, 18, 20, 22 i~23 tej procedury są odniesieniami do pól wartownika \attrib{T}{nil}.
+Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów brata $w$ węzła $x$, przy czym $w$ także może mieć obu synów równych \attrib{T}{nil} i~operacje te mogą odbywać się na atrybucie \id{color} wartownika.
 
 Zastanówmy się teraz, czy w~jakimkolwiek innym miejscu w~\proc{RB-Delete-Fixup} pola \attrib{T}{nil} mogą być odczytywane lub aktualizowane.
-Jeśli usuwany węzeł $y$ to korzeń drzewa $T$, to procedura zostaje wywołana dla $x=\attrib{T}{nil}=\attrib{T}{root}$ i~pętla \kw{while} nie wykonuje się.
-Gdy z~kolei $y$ nie jest korzeniem, to posiada brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku dla wszystkich przodków $y$ własność 5 byłaby zaburzona.
+Jeśli efektywnie usuniętym węzłem $y$ jest korzeń drzewa $T$, to procedura zostaje wywołana dla $x=\attrib{T}{root}$ i~pętla \kw{while} nie wykonuje się.
+Gdy z~kolei $y$ nie jest korzeniem, to posiada brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku przed wywołaniem operacji usuwania własność 5 byłaby zaburzona dla \attrib{y}{p}.
 Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury -- zarówno w~linii 8, jak i~16 $\attribb{x}{p}{right}\ne\attrib{T}{nil}$.
 Dzięki temu w~wierszach 4, 5, 10, 14 i~15 nigdy nie pojawi się wartownik \attrib{T}{nil}.
 Możemy wyeliminować też linijki 19 -- węzeł \attrib{w}{right} początkowo jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
 
+Można także sprawdzić, że w~żadnym z~wywołań \proc{Left-Rotate} i~\proc{Right-Rotate} w~procedurze \proc{RB-Delete-Fixup} nie ma odwołań do pól wartownika, ponieważ wszystkie węzły, na których operacje te pracują, są wewnętrznymi węzłami drzewa.
+
 \exercise %13.4-5
 W~tabeli \ref{tab:13.4-5} zebrano liczby czarnych węzłów znajdujących się na ścieżkach od korzenia każdego poddrzewa sprzed transformacji do poddrzew $\alpha$, $\beta$, \dots, $\zeta$.
 Liczby te w~każdym przypadku zgadzają się z~ilościami czarnych węzłów na odpowiednich ścieżkach w~drzewie po transformacji.
-Oznacza to, że każda transformacja drzewa w~procedurze \proc{RB-Delete-Fixup} zachowuje własność 5 drzewa czerwono-czarnego.
+Oznacza to, że każde przekształcenie drzewa w~procedurze \proc{RB-Delete-Fixup} zachowuje własność 5 drzewa czerwono-czarnego.
+Pamiętajmy, że węzeł $x$ wnosi dodatkową ,,czarną jednostkę''.
 
 \begin{table}[!ht]
 	\centering
-                \begin{tabular}{l|c|c|c}
-                        & $\alpha$, $\beta$ & $\gamma$, $\delta$ & $\varepsilon$, $\zeta$ \\
-                        \hline
-                        {\sffamily\bfseries(a)} & 3 & 2 & 2 \\
-                        \hline
-                        {\sffamily\bfseries(b)} & $\id{count}(c)+2$ & $\id{count}(c)+2$ & $\id{count}(c)+2$ \\
-                        \hline
-                        {\sffamily\bfseries(c)} & $\id{count}(c)+2$ & $\id{count}(c)+1$ & $\id{count}(c)+2$ \\
-                        \hline
-                        {\sffamily\bfseries(d)} & $\id{count}(c)+2$ & $\id{count}(c)+\id{count}(c')+1$ & $\id{count}(c)+1$ \\
-                \end{tabular}
-	\caption{} \label{tab:13.4-5}
+    	\begin{tabular}{l|c|c|c}
+        	& $\alpha$, $\beta$ & $\gamma$, $\delta$ & $\varepsilon$, $\zeta$ \\
+        	\hline
+            {\sffamily\bfseries(a)} & 3 & 2 & 2 \\
+            \hline
+            {\sffamily\bfseries(b)} & $\mathrm{count}(c)+2$ & $\mathrm{count}(c)+2$ & $\mathrm{count}(c)+2$ \\
+            \hline
+            {\sffamily\bfseries(c)} & $\mathrm{count}(c)+2$ & $\mathrm{count}(c)+1$ & $\mathrm{count}(c)+2$ \\
+            \hline
+            {\sffamily\bfseries(d)} & $\mathrm{count}(c)+2$ & $\mathrm{count}(c)+\mathrm{count}(c')+1$ & $\mathrm{count}(c)+1$ \\
+        \end{tabular}
+	\caption{Liczby czarnych węzłów od korzeni poddrzew z~rys. 13.7 z~Podręcznika do każdego z~poddrzew $\alpha$, $\beta$, \dots, $\zeta$, zarówno sprzed, jak i~po przekształceniu poddrzew.} \label{tab:13.4-5}
 \end{table}
 
 \exercise %13.4-6
-Przypadek 1 ma miejsce wtedy, gdy brat $w$ węzła $x$ ma kolor czerwony, a~zatem $\attrib{x}{p}=\attrib{w}{p}$ ma kolor czarny na mocy własności 4.
+Przypadek 1 ma miejsce wtedy, gdy brat $w$ węzła $x$ ma kolor czerwony, a~zatem węzeł $\attrib{x}{p}=\attrib{w}{p}$ ma kolor czarny na mocy własności 4.
 Własność ta może być naruszona podczas usuwania węzła jedynie w~przypadku, gdy czerwone są węzły $x$ oraz \attrib{x}{p}, ale wtedy zostaje ona natychmiast przywrócona (\refExercise{13.4-2}) i~nie dochodzi do przypadku 1.
 
 \exercise %13.4-7
