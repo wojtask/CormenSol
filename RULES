@@ -97,12 +97,13 @@
 * Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. Mutliary-Parent, Multiary-Child.
 * Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
 * Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
-* Do artybutów używamy makra \attrib{obiekt}{atrybut}.
-* Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od pełnej nazwy procedury.
+* Do artybutów używamy makr z serii \attrib -- szczegóły w komentarzu w cormensol.sty.
+* Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od 'li:' + pełna nazwa procedury.
 * Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
 * Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
 * Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
 * Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
+* Procedury rekurencyjne, których nie należy wywoływać bezpośrednio, np. Recursive-Tree-Insert albo Avl-Insert, opakowujemy procedurami, które je wywołują. Mają one zbliżoną nazwę do procedury wywoływanej oraz przyrostek '-Wrapper'.
 * Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
 \li	\ElseNoIf linia_1
 		\End

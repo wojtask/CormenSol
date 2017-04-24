@@ -21,10 +21,10 @@ Następnie, po aktualizacji lewego lub prawego syna $x$ na wynik poprzedniego wy
 \li	\Return $x$
 \end{codebox}
 
-Procedura ta nie powinna być wywoływana bezpośrednio, gdyż nie aktualizuje ona pola \id{root} drzewa $T$, do którego wstawiany jest nowy węzeł $z$.
-Czynność tę wykonuje poniższy pseudokod, który powinien być stosowany do skorzystania z~procedury \proc{Recursive-Tree-Insert}.
+Procedura ta nie powinna być używana bezpośrednio, gdyż nie aktualizuje ona pola \id{root} drzewa $T$, do którego wstawiany jest nowy węzeł $z$.
+Czynność tę wykonuje poniższy pseudokod, który powinien być wywoływany, aby skorzystać z~procedury \proc{Recursive-Tree-Insert}.
 \begin{codebox}
-\Procname{$\proc{Tree-Insert$'$}(T,z)$}
+\Procname{$\proc{Recursive-Tree-Insert-Wrapper}(T,z)$}
 \li	$\attrib{T}{root}\gets\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
 \end{codebox}
 
