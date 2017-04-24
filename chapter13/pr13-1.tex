@@ -1,45 +1,53 @@
 \problem{Zbiory dynamiczne z~historią} %13-1
 
 \subproblem %13-1(a)
-Podczas wstawiania nowego klucza $k$ zmianie muszą ulec wszystkie węzły na ścieżce od korzenia drzewa do nowego węzła z~kluczem $k$, który staje się nowym liściem drzewa.
+Gdy do drzewa wstawiany jest klucz $k$, zmianie ulegają wszystkie węzły na prostej ścieżce od korzenia drzewa do nowego węzła z~kluczem $k$, który staje się nowym liściem drzewa.
 
-Gdy usuwamy węzeł $z$, to rzeczywiście usuwany jest węzeł $y$, który jest równy $z$, jeśli $z$ posiada co najwyżej jednego syna, albo jest następnikiem $z$ w~przypadku, gdy $z$ ma dwóch synów.
-Aktualizowane są wtedy wszyscy przodkowie $y$.
+Podczas usuwania węzła $z$, z~drzewa rzeczywiście wycinany jest węzeł $y$, który jest równy $z$, gdy ten posiada co najwyżej jednego syna, albo jest następnikiem $z$, w~przypadku gdy ten ma dwóch synów.
+Aktualizowani są wtedy wszyscy właściwi przodkowie $y$.
 
 \subproblem %13-1(b)
-Zdefiniujmy dwie pomocnicze operacje, które wykorzystamy w~procedurze:
+Zdefiniujmy dwie pomocnicze operacje, z~których będziemy korzystać:
 \begin{itemize}
 \item $\proc{New-Node}(k)$ -- tworzy nowy węzeł, którego pole \id{key} ma wartość $k$, a~pola \id{left} i~\id{right} są ustawione na \const{nil}; zwraca wskaźnik do nowo utworzonego węzła;
 \item $\proc{Copy-Node}(x)$ -- tworzy nowy węzeł, którego pola \id{key}, \id{left} oraz \id{right} mają identyczne wartości jak odpowiadające pola węzła $x$; zwraca wskaźnik do nowo utworzonego węzła.
 \end{itemize}
 
-Poniższa rekurencyjna procedura \proc{Persistent-Tree-Insert} wywoływana jest z~dwoma parametrami -- korzeniem $x$ drzewa, do którego wstawiany jest nowy węzeł, oraz kluczem $k$ nowego węzła.
-Węzły na ścieżce w~dół drzewa o~korzeniu w~$x$ są kopiowane, a~na końcu ścieżki złożonej ze skopiowanych węzłów umieszczany jest nowy węzeł o~kluczu $k$.
+Poniższa rekurencyjna procedura \proc{Persistent-Subtree-Insert} wywoływana jest z~dwoma parametrami -- korzeniem $x$ drzewa, do którego wstawiany jest nowy węzeł, oraz kluczem $k$ nowego węzła.
+Ścieżka od $x$ do jednego z~jego potomnych liści jest kopiowana, a~na końcu kopii tej ścieżki umieszczany jest nowy węzeł o~kluczu $k$.
 \begin{codebox}
-\Procname{$\proc{Persistent-Tree-Insert}(x,k)$}
+\Procname{$\proc{Persistent-Subtree-Insert}(x,k)$}
 \li	\If $x=\const{nil}$
 \li		\Then $z\gets\proc{New-Node}(k)$
 \li		\Else $z\gets\proc{Copy-Node}(x)$
 \li			\If $k<\attrib{x}{key}$
-\li				\Then $\attrib{z}{left}\gets\proc{Persistent-Tree-Insert}(\attrib{x}{left},k)$
-\li				\Else $\attrib{z}{right}\gets\proc{Persistent-Tree-Insert}(\attrib{x}{right},k)$
+\li				\Then $\attrib{z}{left}\gets\proc{Persistent-Subtree-Insert}(\attrib{x}{left},k)$
+\li				\Else $\attrib{z}{right}\gets\proc{Persistent-Subtree-Insert}(\attrib{x}{right},k)$
 				\End
 		\End
 \li	\Return $z$		
 \end{codebox}
-Wywołanie $\proc{Persistent-Tree-Insert}(\attrib{T}{root},k)$ pozwala na wstawienie klucza $k$ do drzewa z~historią $T$ i~zwraca wskaźnik na korzeń wynikowego drzewa $T'$.
+Wynikiem zwracanym przez tę procedurę jest nowo wstawiony węzeł albo kopia węzła $x$ będąca jego przodkiem.
+
+Następujący pseudokod przyjmuje na wejściu drzewo z~historią $T$ oraz klucz $k$ i~zwraca nowe drzewo z~historią $T'$ powstałe przez dodanie do $T$ klucza $k$.
+\begin{codebox}
+\Procname{$\proc{Persistent-Tree-Insert}(T,k)$}
+\li	utwórz puste drzewo z~historią $T'$
+\li	$\attrib{T'}{root}\gets\proc{Persistent-Subtree-Insert}(\attrib{T}{root},k)$
+\li	\Return $T'$
+\end{codebox}
 
 \subproblem %13-1(c)
-Każde kolejne wywołanie rekurencyjne procedury \proc{Persistent-Tree-Insert} schodzi o~1 poziom w~dół drzewa.
-Ścieżka pokonywana przez procedurę ma długość co najwyżej $h$.
-A~zatem, przy założeniu, że operacje \proc{New-Node} oraz \proc{Copy-Node} działają w~czasie stałym, czas działania procedury wynosi $O(h)$.
+Każde kolejne wywołanie rekurencyjne procedury \proc{Persistent-Subtree-Insert} schodzi o~1 poziom w~dół drzewa $T$.
+Ścieżka pokonywana przez tę procedurę, wywołaną z~\proc{Persistent-Tree-Insert}, ma długość co najwyżej $h$.
+A~zatem, przy założeniu, że operacje \proc{New-Node} oraz \proc{Copy-Node} działają w~czasie stałym, czas potrzebny do wstawienia nowego klucza do $T$ wynosi $O(h)$.
 
-Z~punktu (a) mamy, że podczas wstawiania nowego węzła procedura \proc{Persistent-Tree-Insert} skopiuje każdy węzeł znajdujący się na ścieżce od korzenia do nowego węzła.
-Złożoność pamięciowa procedury wynosi więc także $O(h)$.
+Z~punktu (a) mamy, że podczas wstawiania nowego klucza do $T$ w~procedurze \proc{Persistent-Subtree-Insert} skopiowany zostanie każdy przodek nowego węzła.
+Złożoność pamięciowa operacji wstawiania wynosi więc także $O(h)$.
 
 \subproblem %13-1(d)
-Jeśli w~każdym węźle byłby przechowywany wskaźnik na ojca, to skopiowanie korzenia drzewa podczas wstawiania nowego węzła sprawiłoby, że obaj synowie korzenia musieliby również zostać skopiowani, a~wówczas także ich synowie i~tak dalej, aż do liści drzewa.
-A~zatem obecność wskaźników na ojca wymaga skopiowania każdego węzła w~drzewie przez procedurę \proc{Persistent-Tree-Insert}.
-W~drzewie o~$n$ węzłach działałaby więc ona w~czasie $\Omega(n)$ i~potrzebowałaby $\Omega(n)$ dodatkowej pamięci.
+Jeśli w~każdym węźle byłby przechowywany wskaźnik na ojca, to skopiowanie korzenia drzewa podczas wstawiania nowego węzła pociągałoby za sobą konieczność skopiowania obydwu synów korzenia, a~to z~kolei konieczność skopiowania także ich synów -- i~tak dalej, aż do liści drzewa.
+A~zatem obecność wskaźników na ojca wymaga wykonania kopii każdego węzła w~drzewie w~procedurze \proc{Persistent-Subtree-Insert}.
+Dla drzewa o~$n$ węzłach operacja \proc{Persistent-Tree-Insert} potrzebowałaby więc czasu $\Omega(n)$ oraz $\Omega(n)$ dodatkowej pamięci.
 
 \subproblem %13-1(e)
