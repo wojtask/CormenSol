@@ -1,17 +1,17 @@
 \problem{Drzepce, czyli drzewa ,,treaps''} %13-4
 
 \subproblem %13-4(a)
-Dla danego zbioru węzłów $x_1$, $x_2$, \dots, $x_n$ może istnieć wiele możliwych drzew wyszukiwań binarnych zbudowanych z~tych węzłów.
+Dla danego zbioru węzłów $x_1$, $x_2$, \dots, $x_n$ istnieje wiele możliwych drzew wyszukiwań binarnych zbudowanych z~tych węzłów.
 Jeśli $\attrib{x_i}{key}<\attrib{x_j}{key}$, to węzeł $x_i$ może znajdować się w~lewym poddrzewie węzła $x_j$ albo $x_j$ może znajdować się w~prawym poddrzewie $x_i$.
-Powiązanie z~każdym węzłem priorytetów i~utrzymywanie na ich podstawie własności kopca typu min w~drzepcu sprawia, że niejednoznaczność ta znika -- węzeł o~niższym priorytecie zajmuje w~drzepcu wyższy poziom od węzła o~wyższym priorytecie.
-A~zatem, jeśli dodatkowo $\attrib{x_i}{priority}<\attrib{x_j}{priority}$, to węzeł $x_i$ jest przodkiem $x_j$, a~w~przeciwnym przypadku -- odwrotnie.
+Powiązanie z~każdym węzłem priorytetów i~utrzymywanie na ich podstawie własności kopca typu min w~drzepcu sprawia, że niejednoznaczność ta znika -- węzeł o~wyższym priorytecie znajduje się w~drzepcu głębiej od węzła o~niższym priorytecie.
+A~zatem, jeśli dodatkowo $\attrib{x_i}{priority}<\attrib{x_j}{priority}$, to węzeł $x_i$ jest przodkiem $x_j$, a~w~przeciwnym przypadku $x_i$ jest potomkiem $x_j$.
 Dla każdej pary węzłów z~danego zbioru istnieje jednoznacznie wyznaczone ich wzajemne rozmieszczenie w~drzepcu, dlatego istnieje dokładnie jeden drzepiec dla tego zbioru węzłów i~powiązanych z~nimi priorytetów.
 
 \subproblem %13-4(b)
 Niech $T$ będzie drzepcem zbudowanym z~węzłów $x_1$, $x_2$, \dots, $x_n$.
-Załóżmy bez utraty ogólności, że priorytety węzłów w~$T$ zostały wybrane ze zbioru $P=\{1,2,\dots,n\}$ losowo i~niezależnie od każdego węzła.
-Rozważamy więc pewną permutację $\pi$ zbioru $P$, która wyznacza priorytety dla ciągu węzłów drzepca $T$, tzn.\ dla $i=1$, 2, \dots, $n$, priorytetem $x_i$ jest $\pi(i)$.
-Oczywiście każda z~$n!$ permutacji zbioru $P$ jest jednakowo prawdopodobna, co oznacza, że każda permutacja kluczy węzłów, wyznaczona przez ich rosnące priorytety, jest również jednakowo prawdopodobna.
+Załóżmy bez utraty ogólności, że priorytety węzłów w~$T$ zostały wybrane ze zbioru $\{1,2,\dots,n\}$ losowo i~niezależnie od każdego węzła.
+Oznaczmy przez $\pi$ permutację tego zbioru przyporządkowującą priorytety dla ciągu węzłów drzepca $T$ taką, że dla $i=1$, 2, \dots, $n$ priorytetem $x_i$ jest $\pi(i)$.
+Oczywiście każda z~$n!$ takich permutacji jest jednakowo prawdopodobna, co oznacza, że każda permutacja kluczy węzłów, wyznaczona przez ich rosnące priorytety, czyli $\pi^{-1}$, jest również jednakowo prawdopodobna.
 Możemy zatem potraktować drzepiec $T$ jak drzewo wyszukiwań binarnych utworzone przez wstawienie do niego węzłów o~coraz większym priorytecie, czyli, kolejno $x_{\pi^{-1}(1)}$, $x_{\pi^{-1}(2)}$, \dots, $x_{\pi^{-1}(n)}$.
 Drzewo $T$ jest zatem losowo skonstruowanym drzewem wyszukiwań binarnych, które, na podstawie analizy z~podrozdziału 12.4, ma wysokość $h=O(\lg n)$.
 Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, daje nam oczekiwaną wysokość drzepca równą $\Theta(\lg n)$.
@@ -19,14 +19,14 @@ Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, d
 \subproblem %13-4(c)
 Procedura \proc{Treap-Insert} wstawia nowy węzeł $x$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
 Jeśli priorytet nowego węzła jest mniejszy od priorytetu jego ojca, to mamy naruszoną własność kopca typu min i~procedura przystępuje do jej przywrócenia.
-Wykonuje w~tym celu odpowiednie rotacje, przenosząc dzięki temu węzeł $x$ na wyższe poziomy drzepca aż do momentu, gdy $x$ osiągnie korzeń albo gdy własność kopca między $x$ i~\attrib{x}{p} jest już spełniona.
+Wykonuje w~tym celu odpowiednie rotacje, przenosząc węzeł $x$ o~jeden poziom w~górę drzepca aż do momentu, gdy $x$ jest korzeniem albo gdy własność kopca między $x$ i~\attrib{x}{p} jest już spełniona.
 Gdy $x$ jest lewym synem \attrib{x}{p}, to na \attrib{x}{p} wykonywana jest prawa rotacja, natomiast gdy $x$ jest prawym synem \attrib{x}{p} -- lewa rotacja.
 
 Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseudokodzie:
 \begin{codebox}
 \Procname{$\proc{Treap-Insert}(T,x)$}
 \li	$\proc{Tree-Insert}(T,x)$ \label{li:treap-insert-tree-insert}
-\li	\While $z\ne\attrib{T}{root}$ i~$\attrib{x}{priority}<\attribb{x}{p}{priority}$
+\li	\While $x\ne\attrib{T}{root}$ i~$\attrib{x}{priority}<\attribb{x}{p}{priority}$
 \li		\Do \If $x=\attribb{x}{p}{left}$
 \li				\Then $\proc{Right-Rotate}(T,\attrib{x}{p})$ \label{li:treap-insert-right-rotate}
 \li				\Else $\proc{Left-Rotate}(T,\attrib{x}{p})$ \label{li:treap-insert-left-rotate}
@@ -35,13 +35,14 @@ Operacja wstawiania węzła do drzepca została przedstawiona na poniższym pseu
 \end{codebox}
 
 \subproblem %13-4(d)
-Wywołanie z~linii~\ref{li:treap-insert-tree-insert} potrzebuje czasu proporcjonalnego do wysokości $h$ drzepca $T$, a~liczba rotacji wykonywanych w~trakcie działania pętli \kw{while} nigdy nie przekracza $h$.
+Jeśli $h$ jest wysokością drzepca $T$ przed wstawieniem nowego węzła, to wywołanie z~linii~\ref{li:treap-insert-tree-insert} potrzebuje czasu proporcjonalnego do $h$, a~liczba rotacji wykonywanych w~trakcie działania pętli \kw{while} nigdy nie przekracza $h+1$.
 A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(h)$, co na mocy faktu wykazanego w~punkcie (b) jest równe $\Theta(\lg n)$.
 
 \subproblem %13-4(e)
 Bezpośrednio po umieszczeniu nowego węzła $x$ w~drzepcu w~wierszu \ref{li:treap-insert-tree-insert} procedury \proc{Treap-Insert}, zarówno lewe, jak i~prawe poddrzewo $x$ są puste -- ich lewy i~prawy kręgosłup mają długość~0.
-Każde wykonanie rotacji w~tej procedurze przenosi węzeł $x$ o~jeden poziom wyżej w~drzepcu, zwiększając przy tym o~1 długość $C$ prawego kręgosłupa w~lewym poddrzewie $x$ albo długość $D$ lewego kręgosłupa w~prawym poddrzewie $x$.
-Po zakończeniu działania procedury \proc{Treap-Insert}, wartość $C$ jest równa ilości wywołań z~linii \ref{li:treap-insert-left-rotate}, a~$D$ jest równe ilości wywołań z~linii \ref{li:treap-insert-right-rotate}.
+Każde wykonanie lewej rotacji w~tej procedurze na węźle $y=\attrib{x}{p}$ przenosi węzeł $x$ o~jeden poziom w~górę drzepca oraz dodaje $y$ do prawego kręgosłupa lewego poddrzewa $x$.
+Analogicznie prawa rotacja zwiększa o~1 lewy kręgosłup prawego poddrzewa węzła $x$.
+Wartość $C$ jest więc równa ilości wywołań z~linii \ref{li:treap-insert-left-rotate}, a~$D$ jest równe ilości wywołań z~linii \ref{li:treap-insert-right-rotate}.
 Łączna liczba wykonanych rotacji w~procedurze \proc{Treap-Insert} wynosi zatem $C+D$.
 
 \subproblem %13-4(f)
@@ -72,12 +73,12 @@ Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to n
 
 \subproblem %13-4(g)
 Załóżmy, że $i<k$.
-Niech $p_i$, $p_{i+1}$, \dots, $p_k$, będą priorytetami węzłów o~kluczach od $i$ do $k$ włącznie.
-Z~punktu (f) mamy, że $X_{i,k}=1$ wtedy i~tylko wtedy, gdy $p_i>p_k$ oraz dla każdego $j=i+1$, $i+2$, \dots, $k-1$, zachodzi $p_j>p_i$.
+Niech $p_i$, $p_{i+1}$, \dots, $p_k$ będą priorytetami węzłów o~kluczach od $i$ do $k$ włącznie.
+Z~punktu (f) mamy, że $X_{i,k}=1$ wtedy i~tylko wtedy, gdy $p_i>p_k$ oraz dla każdego $j=i+1$, $i+2$, \dots, $k-1$ zachodzi $p_j>p_i$.
 Istnieje $(k-i+1)!$ permutacji priorytetów $p_i$, $p_{i+1}$, \dots, $p_k$.
 Spośród nich, w~tych, dla których zmienna $X_{i,k}$ przyjmuje 1, $p_k$ i~$p_i$ są, odpowiednio, najmniejszą i~drugą najmniejszą wartością.
-Pozostałe priorytety mogą dowolnie przyjmować pozostałe wartości, dlatego permutacji sprzyjających jest $(k-i-1)!$.
-Mamy więc
+Pozostałe priorytety mogą dowolnie przyjmować pozostałe wartości, dlatego permutacji sprzyjających zdarzeniu $X_{i,k}=1$ jest $(k-i-1)!$.
+Stąd
 \[
 	\Pr(X_{i,k}=1) = \frac{(k-i-1)!}{(k-i+1)!} = \frac{1}{(k-i+1)(k-i)}.
 \]
@@ -91,12 +92,12 @@ Stąd
 \end{align*}
 
 \subproblem %13-4(i)
-Dla tych samych oznaczeń, jak w~definicji zmiennej losowej $X_{i,k}$, niech
+Dla tych samych oznaczeń jak w~definicji zmiennej losowej $X_{i,k}$, niech
 \[
 	Y_{i,k} = \I(\text{$y$ jest na lewym kręgosłupie prawego poddrzewa węzła $x$ (w~$T$)}).
 \]
 Można udowodnić symetryczny fakt do tego z~punktu (f), czyli że $Y_{i,k}=1$ wtedy i~tylko wtedy, gdy $\attrib{y}{priority}>\attrib{x}{priority}$, $\attrib{x}{key}<\attrib{y}{key}$ oraz dla każdego $z$ takiego, że $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, zachodzi $\attrib{y}{priority}<\attrib{z}{priority}$.
-Rozumując analogicznie, jak w~części (g), otrzymujemy
+Rozumując analogicznie jak w~części (g), otrzymujemy
 \[
 	\Pr(Y_{i,k}=1) = \frac{(i-k-1)!}{(i-k+1)!} = \frac{1}{(i-k+1)(i-k)}.
 \]
