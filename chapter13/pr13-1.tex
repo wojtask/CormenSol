@@ -51,3 +51,26 @@ A~zatem obecność wskaźników na ojca wymaga wykonania kopii każdego węzła 
 Dla drzewa o~$n$ węzłach operacja \proc{Persistent-Tree-Insert} potrzebowałaby więc czasu $\Omega(n)$ oraz $\Omega(n)$ dodatkowej pamięci.
 
 \subproblem %13-1(e)
+Jak zobaczyliśmy w~punkcie (c), operacja wstawiania do drzewa z~historią działa w~czasie proporcjonalnym do wysokości tego drzewa.
+Jeśli do implementacji drzew z~historią użylibyśmy drzew czerwono-czarnych, to moglibyśmy zagwarantować niski czas działania tej operacji.
+W~implementacji tej w~żadnym węźle nie możemy jednak przechowywać pola wskazującego na ojca, gdyż wtedy bylibyśmy zmuszeni do kopiowania całego drzewa przy wstawianiu jednego węzła (patrz punkt (d)).
+Możliwe jest jednak zaimplementowanie operacji wstawiania do drzewa czerwono-czarnego nie wykorzystującego wskaźników na ojca, poprzez użycie stosu -- szczegóły zostały opisane w~\refExercise{13.3-6}.
+Możemy zmodyfikować nieco implementację podaną w~tamtym rozwiązaniu tak, aby zamiast dokonywać zmian na drzewie wejściowym, odpowiednie węzły były kopiowane, a~na końcu działania, by zwracane było nowe drzewo uzupełnione o~nowy węzeł, podobnie jak w~\proc{Persistent-Tree-Insert} z~punktu (b).
+
+Wystarczy jeszcze pokazać, że w~trakcie wstawiania do drzewa z~historią $T$ o~$n$ węzłach opisana wersja procedury \proc{RB-Insert} kopiuje nie więcej niż $O(\lg n)$ węzłów w~wyniku wykonywania rotacji i~zmian kolorów.
+Niech $s$ będzie ścieżką złożoną ze skopiowanych węzłów, zanim została wywołana procedura \proc{RB-Insert-Fixup} -- czyli od kopii korzenia do nowo wstawionego węzła.
+Procedura ta wykonuje co najwyżej 2 rotacje, a~każda z~nich modyfikuje wskaźniki do synów 3 węzłów -- tego, wokół którego rotacja jest wykonywana, jego ojca oraz jednego z~jego synów.
+Wszystkie one stanowią jednak fragment ścieżki $s$, dlatego zostały skopiowane jeszcze wewnątrz \proc{RB-Insert}.
+
+W~przypadku 1 w~procedurze \proc{RB-Insert-Fixup} zmieniany jest kolor dziadka (ojca ojca) aktualnego węzła oraz synowie dziadka.
+Zarówno dziadek, jak i~jeden z~jego synów znajdują się na ścieżce $s$ -- należy więc wykonać kopię drugiego syna (stryja aktualnego węzła).
+Jest to jednak jedyny dodatkowo kopiowany węzeł w~aktualnej iteracji pętli w~procedurze \proc{RB-Insert-Fixup}, ponieważ jego ojciec leży już na $s$.
+Pętla może sumarycznie wykonać $O(\lg n)$ iteracji i~tyle samo węzłów może wymagać wykonania ich kopii z~powodu aktualizacji kolorów.
+
+Widzimy zatem, że wstawianie do drzewa z~historią reprezentowanego przez drzewo czerwono-czarne o~$n$ węzłach bez wskaźników do ojca wymaga czasu $O(\lg n)$.
+
+Do usuwania węzła z~drzewa z~historią reprezentowanego przez drzewo czerwono-czarne możemy podać wersję procedury \proc{RB-Delete} z~modyfikacjami podobnymi do tych opisanych dla wstawiania.
+Skopiowane węzły sprzed wywołania \proc{RB-Delete-Fixup}, czyli z~punktu (a) przodków efektywnie usuniętego węzła (i~jego syna $x$ w~przypadku, gdy $\attrib{x}{color}=\const{red}$), można przechować na stosie, co pozwoli dostać się do nich bez użycia w~tym celu wskaźników na ojca.
+
+Analogicznie do analizy operacji wstawiania można sprawdzić, że w~wywołaniu \proc{RB-Delete-Fixup} w~każdej iteracji pętli aktualizowanych jest $O(1)$ węzłów przez wykonane rotacje i~modyfikacje kolorów.
+Sumarycznie procedura ta skopiuje zatem dodatkowo co najwyżej $O(\lg n)$ węzłów, dlatego czas działania operacji usuwania także wynosi $O(\lg n)$.
