@@ -70,7 +70,7 @@ Pętla może sumarycznie wykonać $O(\lg n)$ iteracji i~tyle samo węzłów moż
 Widzimy zatem, że wstawianie do drzewa z~historią reprezentowanego przez drzewo czerwono-czarne o~$n$ węzłach bez wskaźników do ojca wymaga czasu $O(\lg n)$.
 
 Do usuwania węzła z~drzewa z~historią reprezentowanego przez drzewo czerwono-czarne możemy podać wersję procedury \proc{RB-Delete} z~modyfikacjami podobnymi do tych opisanych dla wstawiania.
-Skopiowane węzły sprzed wywołania \proc{RB-Delete-Fixup}, czyli z~punktu (a) przodków efektywnie usuniętego węzła (i~jego syna $x$ w~przypadku, gdy $\attrib{x}{color}=\const{red}$), można przechować na stosie, co pozwoli dostać się do nich bez użycia w~tym celu wskaźników na ojca.
+Skopiowane węzły sprzed wywołania \proc{RB-Delete-Fixup}, czyli z~punktu (a) właściwych przodków efektywnie usuniętego węzła (i~jego syna $x$ w~przypadku, gdy $\attrib{x}{color}=\const{red}$), można przechować na stosie, co pozwoli dostać się do nich bez użycia w~tym celu wskaźników na ojca.
 
 Analogicznie do analizy operacji wstawiania można sprawdzić, że w~wywołaniu \proc{RB-Delete-Fixup} w~każdej iteracji pętli aktualizowanych jest $O(1)$ węzłów przez wykonane rotacje i~modyfikacje kolorów.
 Sumarycznie procedura ta skopiuje zatem dodatkowo co najwyżej $O(\lg n)$ węzłów, dlatego czas działania operacji usuwania także wynosi $O(\lg n)$.
