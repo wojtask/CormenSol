@@ -69,6 +69,10 @@ Gdy natomiast $k>\attrib{x}{key}$, to ranga $k$ w~poddrzewie o~korzeniu $x$ jest
 Aby wyznaczyć rangę klucza $k$ w~drzewie statystyk pozycyjnych $T$ zawierającego parami różne klucze, należy wywołać $\proc{OS-Key-Rank}(\attrib{T}{root},k)$.
 
 \exercise %14.1-5
+Załóżmy, że ranga klucza \attrib{x}{key} wynosi $r$.
+Wystarczy zauważyć, że \singledash{$i$}{ty} następnik węzła $x$ jest węzłem z~kluczem o~randze $r+i$.
+Najpierw wyznaczamy więc $r$ w~czasie $O(\lg n)$, wywołując $\proc{OS-Rank}(T,x)$, a~następnie, również w~czasie $O(\lg n)$, szukamy w~$T$ elementu o~randze $r+i$, czyli wykonujemy $\proc{OS-Select}(\attrib{T}{root},r+i)$.
+
 \exercise %14.1-6
 \exercise %14.1-7
 \exercise %14.1-8
