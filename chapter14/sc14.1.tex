@@ -30,6 +30,23 @@ Wynikiem zwracanym w~wywołaniu procedury jest 16.
 \end{table}
 
 \exercise %14.1-3
+Iteracyjna wersja \proc{OS-Select} wykorzystuje pętlę \kw{while}, w~której symulowana jest rekurencja z~wersji rekurencyjnej przez odpowiednie zaktualizowanie zmiennych $x$ oraz $i$.
+Gdy $x$ wskazuje na węzeł o~szukanym kluczu, pętla jest przerywana poprzez zwrócenie $x$ jako wyniku procedury.
+\begin{codebox}
+\Procname{$\proc{Iterative-OS-Select}(x,i)$}
+\li	\While \const{true}
+\li		\Do $r\gets\attribb{x}{left}{size}+1$
+\li			\If $i=r$
+\li				\Then \Return $x$
+				\End
+\li			\If $i<r$
+\li				\Then $x\gets\attrib{x}{left}$
+\li				\Else $x\gets\attrib{x}{right}$
+\li					$i\gets i-r$
+				\End
+		\End
+\end{codebox}
+
 \exercise %14.1-4
 \exercise %14.1-5
 \exercise %14.1-6
