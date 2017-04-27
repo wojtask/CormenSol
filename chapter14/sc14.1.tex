@@ -74,5 +74,13 @@ Wystarczy zauważyć, że \singledash{$i$}{ty} następnik węzła $x$ jest węz�
 Najpierw wyznaczamy więc $r$ w~czasie $O(\lg n)$, wywołując $\proc{OS-Rank}(T,x)$, a~następnie, również w~czasie $O(\lg n)$, szukamy w~$T$ elementu o~randze $r+i$, czyli wykonujemy $\proc{OS-Select}(\attrib{T}{root},r+i)$.
 
 \exercise %14.1-6
+Załóżmy, że ranga klucza dowolnego węzła $x$ przechowywana jest w~atrybucie \attrib{x}{rank}.
+Pamiętajmy, że rotacje nie zmieniają uszeregowania inorder kluczy w~drzewie, dlatego wykonanie rotacji nie zmienia ich rang.
+
+Podczas wstawiania nowego węzła $z$ do drzewa statystyk pozycyjnych szukamy dla niego odpowiedniego miejsca na ścieżce w~dół od korzenia drzewa.
+Dla każdego węzła $x$ na tej ścieżce zwiększamy \attrib{x}{rank} o~1, jeżeli nowy węzeł jest umieszczany w~lewym poddrzewie $x$, albo zostawiamy bez zmian, jeśli $z$ ląduje w~prawym poddrzewie $x$.
+
+Podobnie w~usuwaniu, dla każdego węzła $x$ na ścieżce od efektywnie usuniętego węzła $y$ do korzenia, \attrib{x}{rank} należy zmniejszyć o~1, o~ile $y$ znajdował się w~lewym poddrzewie $x$.
+
 \exercise %14.1-7
 \exercise %14.1-8
