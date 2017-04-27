@@ -13,6 +13,22 @@ Algorytm wywoływany jest więc rekurencyjnie jeszcze raz w~celu znalezienia $2-
 Po wyznaczeniu rangi i~porównaniu z~wartością zmiennej $i=1$ zwracany jest wskaźnik do węzła o~kluczu 20.
 
 \exercise %14.1-2
+Na początku działania procedury zmienna $r$ zostaje zainicjalizowana na 1, a~$y$ początkowo wskazuje węzeł $x$.
+W~tabeli \ref{tab:14.1-2} zamieszczono wartości \attrib{y}{key} oraz $r$ na początku każdej iteracji pętli \kw{while}.
+Wynikiem zwracanym w~wywołaniu procedury jest 16.
+\begin{table}[!ht]
+	\centering
+		\begin{tabular}{rrr}
+			iteracja & \attrib{y}{key} & $r$ \\ \hline
+			1 & 35 & 1 \\
+			2 & 38 & 1 \\
+			3 & 30 & 3 \\
+			4 & 41 & 3 \\
+			5 & 26 & 16
+		\end{tabular}
+		\caption{Przebieg działania pętli \kw{while} w~procedurze \proc{OS-Rank} wywołanej dla drzewa $T$ z~rys.\ 14.1 z~Podręcznika oraz $x$ takiego, że $\attrib{x}{key}=35$.} \label{tab:14.1-2}
+\end{table}
+
 \exercise %14.1-3
 \exercise %14.1-4
 \exercise %14.1-5
