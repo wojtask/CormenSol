@@ -1,6 +1,17 @@
 \subchapter{Dynamiczne statystyki pozycyjne}
 
 \exercise %14.1-1
+Algorytm rozpoczyna działanie od $i=10$ oraz ze zmienną $x$ pokazującą na korzeń drzewa $T$.
+Ranga klucza 26 wyznaczona w~linii 1 wynosi 13, więc algorytm zostaje wywołany rekurencyjnie dla lewego poddrzewa, czyli dla węzła o~kluczu 17.
+W~wywołaniu tym obliczona ranga klucza 17 wynosi 8.
+Szukany element jest więc $10-8=2$ (drugim) największym elementem w~prawym poddrzewie aktualnego węzła.
+Po wywołaniu rekurencyjnym zmienna $x$ wskazuje na jeden z~węzłów o~kluczu 21, ten na głębokości 2, a~$i=2$.
+Ranga tego klucza zostaje wyznaczona na 3, dlatego szukany klucz należy do lewego poddrzewa.
+W~kolejnym wywołaniu mamy $x$ wskazujące na węzeł o~kluczu 19 oraz $i=2$.
+Tym razem jednak lewe poddrzewo jest puste, ale zdefiniowanie \attribb{T}{nil}{size} jako 0 pozwala obliczyć rangę obecnego elementu jako 1.
+Algorytm wywoływany jest więc rekurencyjnie jeszcze raz w~celu znalezienia $2-1=1$ (pierwszego) elementu w~prawym poddrzewie.
+Po wyznaczeniu rangi i~porównaniu z~wartością zmiennej $i=1$ zwracany jest wskaźnik do węzła o~kluczu 20.
+
 \exercise %14.1-2
 \exercise %14.1-3
 \exercise %14.1-4
