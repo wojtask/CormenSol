@@ -48,6 +48,26 @@ Gdy $x$ wskazuje na węzeł o~szukanym kluczu, pętla jest przerywana poprzez zw
 \end{codebox}
 
 \exercise %14.1-4
+W~naszej implementacji procedura przyjmować będzie jako parametr węzeł $x$ drzewa $T$ zamiast samego drzewa.
+Pozwoli to wywoływać procedurę rekurencyjnie w~celu znalezienia rangi klucza w~poddrzewach $T$.
+\begin{codebox}
+\Procname{$\proc{OS-Key-Rank}(x,k)$}
+\li	$r=\attribb{x}{left}{size}+1$
+\li	\If $k=\attrib{x}{key}$
+\li		\Then \Return $r$ \label{li:os-key-rank-key-found}
+		\End
+\li	\If $k<\attrib{x}{key}$
+\li		\Then \Return $\proc{OS-Key-Rank}(\attrib{x}{left},k)$
+\li		\Else \Return $\proc{OS-Key-Rank}(\attrib{x}{right},k)+r$
+		\End
+\end{codebox}
+Po wyznaczeniu rangi $r$ klucza \attrib{x}{key}, jeśli jest on elementem, którego rangi szukamy, to w~wierszu \ref{li:os-key-rank-key-found} nastąpi zwrócenie $r$.
+W~przeciwnym przypadku procedura wywołuje się rekurencyjne dla lewego poddrzewa $x$ albo prawego poddrzewa $x$, w~zależności od tego, w~którym z~nich szukany klucz się znajduje na podstawie własności drzewa wyszukiwań binarnych.
+W~przeciwnym przypadku, jeśli $k<\attrib{x}{key}$, to ranga klucza $k$ w~poddrzewie o~korzeniu $x$ jest równa jego randze w~poddrzewie o~korzeniu \attrib{x}{left}.
+Gdy natomiast $k>\attrib{x}{key}$, to ranga $k$ w~poddrzewie o~korzeniu $x$ jest o~$r$ większa od jego rangi w~poddrzewie o~korzeniu \attrib{x}{right}.
+
+Aby wyznaczyć rangę klucza $k$ w~drzewie statystyk pozycyjnych $T$ zawierającego parami różne klucze, należy wywołać $\proc{OS-Key-Rank}(\attrib{T}{root},k)$.
+
 \exercise %14.1-5
 \exercise %14.1-6
 \exercise %14.1-7
