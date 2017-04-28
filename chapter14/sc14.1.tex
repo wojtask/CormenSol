@@ -93,3 +93,45 @@ Tuż po wstawieniu elementu $A[i]$ jego ranga w~aktualnym drzewie wynosi $r_i$, 
 Wstawienie dowolnego elementu tablicy $A$ do drzewa oraz obliczenie jego rangi wymaga czasu $O(\lg n)$, dlatego inwersje w~$A$ możemy policzyć w~czasie $O(n\lg n)$.
 
 \exercise %14.1-8
+Ponumerujmy końce cięciw liczbami od 1 do $n$ w~taki sposób, aby dwa różne punkty miały ten sam numer wtedy i~tylko wtedy, gdy są końcami tej samej cięciwy.
+Niech $\sigma$ będzie ciągiem wszystkich tych etykiet czytanych wzdłuż okręgu w~ustalonym kierunku.
+Zauważmy, że $\sigma$ składa się z~$2n$ wyrazów, a~każdy z~nich pojawia się dokładnie 2 razy.
+Cięciwa oznaczona jako $i$ przecina się z~cięciwą oznaczoną jako $j$ wtedy i~tylko wtedy, gdy dokładnie jeden egzemplarz $i$ znajduje się w~$\sigma$ pomiędzy dwoma egzemplarzami $j$.
+
+Algorytm będzie przeglądał ciąg $\sigma$ od lewej do prawej.
+Będzie on zapamiętywał, które z~etykiet pojawiły się dotychczas dokładnie raz w~trakcie tego przeglądania.
+W~momencie gdy pewna liczba $i$ pojawia się drugi raz, policzy, ile liczb różnych od $i$ pojawiło się dokładnie raz po pierwszym wystąpieniu $i$.
+Wartość ta oznacza liczbę cięciw przecinających się z~cięciwą o~numerze $i$.
+
+W~algorytmie użyjemy dwóch tablic do zapamiętania cięciw.
+W~tablicy $E[1\twodots n]$ w~komórce $E[i]$ będziemy zapisywać pozycję pierwszego wystąpienia $i$ w~ciągu $\sigma$, a~w~wektorze bitowym $\id{seen}[1\twodots n]$ wartość \const{true} na \singledash{$i$}{tej} pozycji będzie oznaczać, że $i$ zostało już napotkane w~trakcie przeglądania ciągu $\sigma$.
+Potrzebny będzie nam też zbiór dynamiczny $S$ przechowujący wartości z~tablicy $E$ dla liczb, które pojawiły się dokładnie raz.
+Zbiór $S$ będziemy reprezentować, używając w~tym celu drzewa statystyk pozycyjnych, które pozwoli na generowanie odpowiedzi na pytania ,,ile elementów zbioru $S$ jest większych od $x$'' w~czasie $O(\lg n)$.
+\begin{codebox}
+\Procname{$\proc{Intersecting-Chords}(\sigma)$}
+\li	\For $k=1$ \To $2n$
+\li		\Do $\id{seen}[k]=\const{false}$
+		\End
+\li	$\id{intersections}\gets0$
+\li	$S\gets\emptyset$
+\li	\For $k=1$ \To $2n$
+\li		\Do $j\gets\sigma_k$
+\li			\If $\id{seen}[j]=\const{false}$
+\li				\Then $\id{seen}[j]\gets\const{true}$
+\li					$E[j]=k$
+\li					$S\gets S\cup\{k\}$
+\li				\Else $\id{intersections}\gets\id{intersections}+\bigl|\{s\in S:s>E[j]\}\bigr|$
+\li					$S\gets S\setminus\{E[j]\}$
+				\End
+		\End
+\li	\Return \id{intersections}
+\end{codebox}
+
+Zastanówmy się nad poprawnością przedstawionego algorytmu.
+Dla każdej etykiety $i$ niech $\sigma_{s_i}=\sigma_{t_i}=i$, gdzie $s_i<t_i$ są pozycjami końców cięciwy $i$ w~ciągu $\sigma$.
+Rozważmy cięciwy $i$ oraz $j$, dla których $s_i<s_j$.
+Jeśli cięciwa $i$ i~$j$ przecinają się, to $s_j<t_i<t_j$ i~przecięcie to zostanie policzone dokładnie raz -- wtedy, gdy przetwarzany będzie \singledash{$t_i$}{ty} wyraz ciągu $\sigma$.
+W~przeciwnym przypadku $t_j<t_i$, więc tego (nieistniejącego) przecięcia nie policzymy.
+
+Aby otrzymać czas działania algorytmu, zauważmy, że każda etykieta jest wstawiana do $S$ dokładnie raz i~co najwyżej jedno zapytanie z~wiersza 11 zostaje wykonane w~celu policzenia elementów ze zbioru $S$ większych od tej etykiety.
+Ponieważ obydwie te operacje działają w~czasie $O(\lg n)$, to stąd czasem działania algorytmu jest $O(n\lg n)$.
