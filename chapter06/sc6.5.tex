@@ -70,9 +70,9 @@ Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
 
 \exercise %6.5-5
 \begin{description}
-	\item[Inicjowanie:] Przed wykonaniem wiersza3 tablica $A[1\twodots\attrib{A}{heap-size}]$ jest kopcem typu max.
+	\item[Inicjowanie:] Przed wykonaniem wiersza 3 tablica $A[1\twodots\attrib{A}{heap-size}]$ jest kopcem typu max.
 Zwiększenie wartości $A[i]$ może naruszyć własność kopca tylko dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
-	\item[Utrzymanie:] Dokonując zamiany elementów w~wiers 5 w~bieżącej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
+	\item[Utrzymanie:] Dokonując zamiany elementów w~wierszu 5 w~bieżącej iteracji pętli, przywracamy własność kopca dla elementów $A[i]$ oraz $A[\proc{Parent}(i)]$.
 Jednak operacja ta może wygenerować nową parę elementów niespełniających własności kopca: $A[\proc{Parent}(i)]$ oraz $A[\proc{Parent}(\proc{Parent}(i))]$.
 Aktualizacja wartości $i$ powoduje zachowanie niezmiennika, albowiem nowa para elementów jest jedyną, która może naruszać własność kopca.
 	\item[Zakończenie:] Pętla kończy działanie, gdy $i\le1$ lub $A[\proc{Parent}(i)]\ge A[i]$.
