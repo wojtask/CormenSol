@@ -3,16 +3,10 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{tikz}
 
-% definicja flagi określającej czy jesteśmy w sekcji dodatków
-\newif\if@appendix
-\@appendixfalse
-
-% zapobiega wcinaniu pierwszej linii pierwszego paragrafu
-\let\@afterindenttrue\@afterindentfalse
-\@afterindentfalse
-
-% odpowiednia czcionka do złożenia loga METAPOST
-\font\manual=logo10
+% odpowiedni wygląd liczników
+\def\thechapter{\arabic{chapter}}
+\def\thesection{\bfseries\thechapter.\arabic{section}.}
+\def\thesubsubsection{(\alph{subsubsection})}
 
 % definicje czcionek i separatorów w spisie treści
 \renewcommand{\cfttoctitlefont}{\Huge\sffamily\bfseries}
@@ -44,28 +38,49 @@
 % głębokość numerowania sekcji
 \setcounter{secnumdepth}{3}
 
+% definicja zawartości nagłówków i stopek
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{\small\sffamily\bfseries #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\small\sffamily\thesection\ {\mdseries #1}}{}}
+\lhead[\small\sffamily\bfseries\thepage]{\rightmark}
+\rhead[\leftmark]{\small\sffamily\bfseries\thepage}
+\cfoot{}
+
+% zredefiniowanie stylu plain używanego na pierwszych stronach części i rozdziału
+\fancypagestyle{plain}{%
+	\fancyhf{} % usuń wszystkie nagłówki i stopki z tych stron 
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+% redefinicja części, która sprawia, że części rozpoczynają się na nieparzystych stronach
+\let\originalpart=\part
+\def\part{\cleardoublepage\originalpart}
+
 % zmiana wyglądu nagłówka części
 \renewcommand{\@part}[2][default]{%
-	\ifnum \c@secnumdepth >-2\relax
-		\refstepcounter{part}%
-		\addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
-	\else
-		\addcontentsline{toc}{part}{#1}%
-	\fi
-	\markboth{}{}%
+	\refstepcounter{part}%
+	\addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
 	{%
 		\interlinepenalty \@M
 		\normalfont
-		\ifnum \c@secnumdepth >-2\relax
-			\noindent\hskip0pt\leaders\hrule height1pt \hskip10pt plus1filll \hspace{15pt}\huge\sffamily\partname\nobreakspace\bfseries\thepart
-			\par
-			\vskip 40\p@
-		\fi
+		\noindent\hskip0pt\leaders\hrule height1pt \hskip10pt plus1filll \hspace{15pt}\huge\sffamily\partname\nobreakspace\bfseries\thepart
+		\par
+		\vskip 40\p@
 		\raggedleft\Huge \bfseries\sffamily #2\par
 		\vskip 40\p@
 		\rule{\textwidth}{1pt}
 	}%
 	\@endpart%
+}
+
+% redefinicja rozdziału, która przywraca styl licznika subsekcji na styl numerów zadań
+\let\originalchapter=\chapter
+\renewcommand{\chapter}[1]{%
+	\originalchapter{#1}
+	\setcounter{subsection}{0}
+	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
+	\lhead[\small\sffamily\bfseries\thepage]{\rightmark}
 }
 
 % zmiana wyglądu nagłówka rozdziału
@@ -93,131 +108,48 @@
 	}%
 }
 
-% definicja polecenia tworzenia podrozdziału
-\newcommand\subchapter{%
-\@startsection
-	{section}
-	{1}
-	{0mm}
-	{2.5\baselineskip}
-	{0.5\baselineskip}
-	{\Large\sffamily}
-}
+% definicja czcionek i odstępów dla section (podrozdziału)
+\titleformat{\section}[hang]{\Large\sffamily}{\thesection}{1ex}{}
+\titlespacing{\section}{0pt}{2.5\baselineskip}{0.5\baselineskip}
 
-% dodaje kropkę na koniec każdego numeru rozwiązania zadania i problemu
-\renewcommand*{\@seccntformat}[1]{%
-	\csname the#1\endcsname
-	\csname adddot@#1\endcsname\quad
-}
-\newcommand*{\adddot@subsection}{.}
+% polecenie tworzące podrozdział
+\newcommand\subchapter{\section}
 
-% definicja polecenia tworzenia (rozwiązania) zadania
-\newcommand\ex@rcise{%
-\@startsection
-	{subsection}
-	{2}
-	{0mm}
-	{-1.5\baselineskip}
-	{0.5\baselineskip}
-	{\sffamily\bfseries}
-}
-\newcommand{\exercise}{%
-	\ex@rcise{}%
-	\label{ex:%
-	\if@appendix%
-		\Alph{chapter}%
-	\else%
-		\arabic{chapter}%
-	\fi%
-	.\arabic{section}-\arabic{subsection}}%
-}
+% definicja czcionek i odstępów dla subsection (rozwiązania zadania)
+\titleformat{name=\subsection,page=odd}[runin]{\sffamily\bfseries}{\thesubsection.}{1em}{}
+\titleformat{name=\subsection,page=even}[runin]{\sffamily\bfseries}{\thesubsection.}{1em}{}
+\titlespacing{\subsection}{0pt}{1.5\baselineskip}{1em}
 
-% definicja polecenia tworzenia (rozwiązania) punktu zadania
-\newcommand\subex@rcise{%
-\@startsection
-	{subsubsection}
-	{3}
-	{0mm}
-	{\baselineskip}
-	{0mm}
-	{\sffamily\bfseries}
-}
-\newcommand{\subexercise}{\subex@rcise{}}
+% polecenie tworzące rozwiązanie zadania
+\newcommand{\exercise}{\subsection{}\label{sol:\thesubsection}}
 
-% odpowiedni wygląd liczników
-\def\thechapter{\arabic{chapter}}
-\def\thesection{\bfseries\thechapter.\arabic{section}.}
-\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
-\def\thesubsubsection{(\alph{subsubsection})}
+% definicja czcionek i odstępów dla subsubsection (podrozwiązania)
+\titleformat{\subsubsection}[runin]{\sffamily\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}{0pt}{\baselineskip}{1em}
 
-% redefinicja części, która sprawia, że części rozpoczynają się na nieparzystych stronach
-\let\originalpart=\part
-\def\part{\cleardoublepage\originalpart}
+% polecenie tworzące podrozwiązanie
+\newcommand{\subexercise}{\subsubsection{}}
 
-% redefinicja rozdziału, która przywraca styl licznika subsekcji na styl numerów zadań i przywraca nazwę podrozdziału na żywej paginie
-\let\originalchapter=\chapter
-\renewcommand{\chapter}[1]{%
-	\originalchapter{#1}
-	\setcounter{subsection}{0}
-	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
-	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
-}
-
-% kod odpowiedzialny za uczynienie numerów rysunków i tabel globalnych
-\def\@removefromreset#1#2{{%
-	\expandafter\let\csname c@#1\endcsname\@removefromreset
-	\def\@elt##1{
-		\expandafter
-		\ifx
-			\csname c@##1\endcsname\@removefromreset
-		\else
-			\noexpand\@elt{##1}
-		\fi
-	}
-	\expandafter\xdef\csname cl@#2\endcsname{\csname cl@#2\endcsname}}
-}
-\@removefromreset{figure}{chapter}
-\@removefromreset{table}{chapter}
-
-% odpowiednie wyświetlanie liczników rysunków i tabel
-\def\thefigure{\arabic{figure}}
-\def\thetable{\arabic{table}}
-
-% definicja zawartości żywych pagin
-\pagestyle{fancyplain}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
-\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries\rightmark}}
-\rhead[\fancyplain{}{\small\sffamily\bfseries\leftmark}]{\fancyplain{}{\small\sffamily\bfseries\thepage}}
-\cfoot[]{}
-\addtolength{\headheight}{1.6pt}
-
-% definicja polecenia rozpoczynającego sekcję problemów
+% polecenie rozpoczynające sekcję problemów
 \newcommand\problems{%
-	\vspace*{1.3\baselineskip}
 	\section*{\sffamily\mdseries Problemy}
 	\addcontentsline{toc}{section}{Problemy}
 	\setcounter{subsection}{0}
-	\renewcommand{\thesubsection}{\thechapter-\arabic{subsection}}
-	\lhead[\fancyplain{}{\small\sffamily\bfseries\thepage}]{\fancyplain{}{\small\sffamily\bfseries Problemy}}
+	\def\thesubsection{\thechapter-\arabic{subsection}}
+	\titlespacing*{\subsection}{0pt}{2\baselineskip}{\baselineskip}
+	\lhead[\small\sffamily\bfseries\thepage]{\small\sffamily Problemy}
 }
 
-% definicja polecenia tworzącego problem wraz z jego nazwą
-\newcommand{\problem}[1]{%
-	\ex@rcise{#1}%
-	\label{ex:%
-	\if@appendix%
-		\Alph{chapter}%
-	\else%
-		\arabic{chapter}%
-	\fi%
-	-\arabic{subsection}}%
-}
+% polecenie tworzące problem wraz z jego tytułem
+\newcommand{\problem}[1]{\subsection{#1}\label{sol:\thesubsection}}
 
-% definicja polecenia wstawiającego podproblem
-\newcommand{\subproblem}{\subex@rcise{}}
+% polecenie wstawiające podproblem
+\newcommand{\subproblem}{\subsubsection{}}
 
-% zmienia czcionkę nagłówka bibliografii na pogrubioną bezszeryfową
+% czcionka tytułu spisu treści
+\renewcommand{\contentsname}{\sffamily\bfseries Spis treści}
+
+% czcionka tytułu bibliografii
 \renewcommand{\bibname}{\sffamily\bfseries Bibliografia}
 
 % niełamliwy dywiz
@@ -227,13 +159,13 @@
 \newcommand{\doubledash}[2]{{#1}\protect\nobreakdash--{#2}}
 
 % odnośnik do zadania
-\newcommand{\refExercise}[1]{zad.\ \mbox{\ref{ex:#1}}}
+\newcommand{\refExercise}[1]{zad.\ \mbox{\ref{sol:#1}}}
 
 % odnośnik do problemu
-\newcommand{\refProblem}[1]{\mbox{\ref{ex:#1}}}
+\newcommand{\refProblem}[1]{\mbox{\ref{sol:#1}}}
 
-% informacja poboczna w tekście rozwiązania
-\newcommand{\note}[1]{\noindent\emph{#1}\bigskip}
+% komentarz do treści zadania
+\newcommand{\note}[1]{\emph{#1}\bigskip}
 
 % ujemny odstęp kasujący \bigskip
 \newcommand{\bignegskip}{\vspace{-\bigskipamount}}
@@ -264,11 +196,6 @@
 \DeclareMathOperator{\E}{E}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\I}{I}
-
-% definicja klas złożoności
-\newcommand{\Pclass}{\text{P}}
-\newcommand{\NPclass}{\text{NP}}
-\newcommand{\coNPclass}{\text{co-NP}}
 
 % domyślne style dla wszystkich rysunków
 \tikzset{

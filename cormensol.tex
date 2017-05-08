@@ -5,11 +5,13 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{geometry}
+\usepackage[head=13pt,foot=0pt]{geometry}
 \usepackage{clrscode}
 \usepackage{url}
 \usepackage{tocloft}
 \usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{chngcntr}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
 \usepackage{cormensol}
@@ -20,11 +22,12 @@
 % wyrównuje teskt na niepełnej stronie na górę strony zamiast równomiernego rozciągania tekstu
 \raggedbottom
 
-% zapobiega pojawianiu się dziwnych znaków w zakładkach PDFowych
-\hypersetup{pdfencoding=auto}
-
 % decyduje, jak chętnie będą łamane wielowierszowe bloki
 \allowdisplaybreaks[1]
+
+% globalne numery rysunków i tabel
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
 
 % włącza tylko wybrane rozdziały
 %\includeonly{chapter14/ch14}
@@ -35,7 +38,7 @@
 
 \include{title}
 \ifpdf
-	\addtocontents{toc}{\protect\pdfbookmark{Spis treści}{Tableofcont}}
+	\addtocontents{toc}{\protect\pdfbookmark{Spis treści}{toc}}
 \fi
 \include{intro}
 \tableofcontents
@@ -69,9 +72,6 @@
 \part{Dodatek: Podstawy matematyczne}
 
 \appendix
-\makeatletter
-	\@appendixtrue
-\makeatother
 
 \include{appendixa/cha}
 \include{appendixb/chb}
