@@ -2,7 +2,7 @@
 	cell/.append style = {light grayed, minimum size=4mm},
 	med cell/.style = {column #1/.style={nodes={med grayed}}},
 	index node/.append style = {node distance=6mm and 2mm},
-	outer/.append style = {node distance=15mm and 2mm}
+	outer/.append style = {node distance=10mm and 2mm}
 ]
 
 \node[outer] (pic a) {
@@ -42,6 +42,8 @@
 	\draw[arrow] (arr-3-5.250) -- +(0,-3mm) -| (arr-3-4.290);
 	\draw[arrow] (arr-3-4.250) -- +(0,-4mm) -| (arr-3-10.250);
 	\draw[arrow] (arr-3-10.290) -- +(0,-5mm) -| (arr-3-2);
+	
+	\node[subpicture label, left=10mm of L] {(a)};
 \end{tikzpicture}
 };
 
@@ -80,10 +82,9 @@
 	\draw (arr-1-16.south) + (1mm, -1mm) -- +(2mm, -7mm) node[index node, anchor=50] {$\id{key}$};
 	\draw (arr-1-17.south) + (0mm, -1mm) -- +(0, -10mm) node[index node, anchor=north] {$\id{next}$};
 	\draw (arr-1-18.south) + (-1mm, -1mm) -- +(-2mm, -7mm) node[index node, anchor=140] {$\id{prev}$};
+	
+	\node[subpicture label, left=10mm of L] {(b)};
 \end{tikzpicture}
 };
-
-\node[subpicture label, below=2mm of pic a.south] {(a)};
-\node[subpicture label, below=2mm of pic b.south] {(b)};
 
 \end{tikzpicture}

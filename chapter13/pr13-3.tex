@@ -9,7 +9,10 @@ Niech teraz dane będzie drzewo AVL o~wysokości $h\ge2$ i~niech $h_L$ będzie w
 Bez utraty ogólności możemy przyjąć, że $h_L\le h_R$, skąd $h=h_R+1$.
 Na podstawie definicji drzewa AVL mamy, że $|h_R-h_L|\le1$, a~więc $h_L\ge h_R-1$.
 Z~kolei z~założenia indukcyjnego mamy, że liczby węzłów $n_L$ i~$n_R$ w~lewym i~prawym poddrzewie wynoszą, odpowiednio, co najmniej $F_{h_L}$ i~co najmniej $F_{h_R}$.
-Stąd liczba węzłów drzewa wynosi $n=n_L+n_R+1\ge F_{h_L}+F_{h_R}+1\ge F_{h_R-1}+F_{h_R}+1=F_{h_R+1}+1=F_h+1>F_h$.
+Stąd liczba węzłów drzewa wynosi
+\[
+	n = n_L+n_R+1 \ge F_{h_L}+F_{h_R}+1 \ge F_{h_R-1}+F_{h_R}+1 = F_{h_R+1}+1 = F_h+1 > F_h.
+\]
 Z~\refExercise{3.2-7} mamy $F_h\ge\phi^{h-2}$ dla każdego $h\ge2$, a~zatem $n>F_h\ge\phi^{h-2}$, skąd otrzymujemy ostatecznie $h<\log_\phi n+2=O(\lg n)$.
 
 \subproblem %13-3(b)
@@ -113,7 +116,7 @@ Przedstawimy więc rozwiązanie dla treści z~erraty do oryginału, czego tłuma
 \noindent Pokaż, że operacja \proc{AVL-Insert} dla drzewa AVL o~$n$ węzłach działa w~czasie $O(\lg n)$ i~wykonuje $O(1)$ rotacji.
 
 \bigskip
-\note{Rozwiązanie:}
+\noindent\note{Rozwiązanie:}
 
 \noindent Wszystkie procedury pomocnicze, które opisaliśmy w~punkcie (b), czyli \proc{Balance-Factor}, \proc{Height}, operacje rotacji oraz \proc{Balance}, działają w~czasie stałym.
 Na każdym poziomie rekurencji algorytm \proc{AVL-Insert} wykonuje więc $O(1)$ operacji.

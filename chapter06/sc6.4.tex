@@ -1,7 +1,7 @@
 \subchapter{Algorytm sortowania przez kopcowanie (heapsort)}
 
 \exercise %6.4-1
-Na rys.\ \ref{fig:6.4-1} przedstawiono ilustrację działania sortowania przez kopcowanie dla tablicy $A$.
+Na rys.\ \ref{fig:6.4-1} zilustrowano działanie sortowania przez kopcowanie dla tablicy $A$.
 \begin{figure}[!ht]
 	\centering \input{fig6.4-1}
 	\caption{Działanie procedury \proc{Heapsort} dla tablicy $A=\langle5,13,2,25,7,17,20,8,4\rangle$.
@@ -11,6 +11,7 @@ Na rys.\ \ref{fig:6.4-1} przedstawiono ilustrację działania sortowania przez k
 \end{figure}
 
 \exercise %6.4-2
+Pokażemy, że podany niezmiennik jest spełniony przed pierwszą iteracją pętli \kw{for}, że każda iteracja tej pętli zachowuje niezmiennik i~że po zakończeniu pętli z~niezmiennika można wywnioskować poprawność procedury.
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\attrib{A}{length}=n$.
 Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.

@@ -4,9 +4,11 @@
 \RequirePackage{tikz}
 
 % odpowiedni wygląd liczników
-\def\thechapter{\arabic{chapter}}
-\def\thesection{\bfseries\thechapter.\arabic{section}.}
-\def\thesubsubsection{(\alph{subsubsection})}
+\def\thechapter{\arabic{chapter}} % podrozdział
+\def\thesection{\bfseries\thechapter.\arabic{section}.} % zadanie
+\def\thesubsubsection{(\alph{subsubsection})} % punkt zadania
+\def\theparagraph{\thechapter-\arabic{paragraph}} % problem
+\def\thesubparagraph{(\alph{subparagraph})} % punkt problemu
 
 % definicje czcionek i separatorów w spisie treści
 \renewcommand{\cfttoctitlefont}{\Huge\sffamily\bfseries}
@@ -36,7 +38,7 @@
 \setcounter{tocdepth}{1}
 
 % głębokość numerowania sekcji
-\setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{5}
 
 % definicja zawartości nagłówków i stopek
 \pagestyle{fancy}
@@ -109,23 +111,30 @@
 }
 
 % definicja czcionek i odstępów dla section (podrozdziału)
-\titleformat{\section}[hang]{\Large\sffamily}{\thesection}{1ex}{}
-\titlespacing{\section}{0pt}{2\baselineskip}{0.5\baselineskip}
-
-% polecenie tworzące podrozdział
-\newcommand\subchapter{\section}
+\titleformat{\section}[hang]{\Large\sffamily}{\thesection}{1.6ex}{}
+\titlespacing*{\section}{0pt}{2\baselineskip}{0.5\baselineskip}
 
 % definicja czcionek i odstępów dla subsection (rozwiązania zadania)
 \titleformat{name=\subsection,page=odd}[runin]{\sffamily\bfseries}{\thesubsection.}{1em}{}
 \titleformat{name=\subsection,page=even}[runin]{\sffamily\bfseries}{\thesubsection.}{1em}{}
 \titlespacing{\subsection}{0pt}{1.25\baselineskip}{1em}
 
-% polecenie tworzące rozwiązanie zadania
-\newcommand{\exercise}{\subsection{}\label{sol:\thesubsection}}
+% pakiet titlesec nie pozwala na ponowną redefinicję formatu dla subsection,
+% dlatego problemy będą składane jako paragraph, a punkty problemów jako subparagraph
+\titleformat{\paragraph}[hang]{\sffamily\bfseries}{\theparagraph.}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1.5\baselineskip}{1em}
+\titleformat{\subparagraph}[runin]{\sffamily\bfseries}{\thesubparagraph}{1em}{}
+\titlespacing{\subparagraph}{0pt}{\baselineskip}{1em}
 
 % definicja czcionek i odstępów dla subsubsection (podrozwiązania)
 \titleformat{\subsubsection}[runin]{\sffamily\bfseries}{\thesubsubsection}{1em}{}
 \titlespacing{\subsubsection}{0pt}{\baselineskip}{1em}
+
+% polecenie tworzące podrozdział
+\newcommand\subchapter{\section}
+
+% polecenie tworzące rozwiązanie zadania
+\newcommand{\exercise}{\subsection{}\label{sol:\thesubsection}}
 
 % polecenie tworzące podrozwiązanie
 \newcommand{\subexercise}{\subsubsection{}}
@@ -134,17 +143,14 @@
 \newcommand\problems{%
 	\section*{\sffamily\mdseries Problemy}
 	\addcontentsline{toc}{section}{Problemy}
-	\setcounter{subsection}{0}
-	\def\thesubsection{\thechapter-\arabic{subsection}}
-	\titlespacing*{\subsection}{0pt}{2\baselineskip}{\baselineskip}
 	\lhead[\small\sffamily\bfseries\thepage]{\small\sffamily Problemy}
 }
 
 % polecenie tworzące problem wraz z jego tytułem
-\newcommand{\problem}[1]{\subsection{#1}\label{sol:\thesubsection}}
+\newcommand{\problem}[1]{\paragraph{#1}\label{sol:\theparagraph}}
 
 % polecenie wstawiające podproblem
-\newcommand{\subproblem}{\subsubsection{}}
+\newcommand{\subproblem}{\subparagraph{}}
 
 % czcionka tytułu spisu treści
 \renewcommand{\contentsname}{\sffamily\bfseries Spis treści}
