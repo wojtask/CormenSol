@@ -1,6 +1,25 @@
 \subchapter{Jak wzbogacać strukturę danych}
 
 \exercise %14.2-1
+Aby efektywnie wykonywać podane operacje, wzbogacimy każdy węzeł drzewa statystyk pozycyjnych o~4 pola wskaźnikowe:
+\begin{itemize}
+	\item \id{min} -- wskaźnik na węzeł o~najmniejszym kluczu w~drzewie,
+	\item \id{max} -- wskaźnik na węzeł o~największym kluczu w~drzewie,
+	\item \id{pred} -- wskaźnik na poprzednika danego węzła oraz
+	\item \id{succ} -- wskaźnik na następnika danego węzła.
+\end{itemize}
+W~szczególności, jeśli węzeł $x$ ma najmniejszy klucz w~drzewie $T$, to $\attrib{x}{min}=x$ i~$\attrib{x}{pred}=\attrib{T}{nil}$.
+
+Wartość każdego nowego pola można wyznaczyć na podstawie jedynie wartości tych pól w~synach danego węzła:
+\begin{itemize}
+	\item $\attrib{x}{min}=\attribb{x}{left}{min}=\attribb{x}{right}{min}$;
+	\item $\attrib{x}{max}=\attribb{x}{left}{max}=\attribb{x}{right}{max}$;
+	\item $\attrib{x}{pred}=\attribb{x}{left}{max}$;
+	\item $\attrib{x}{succ}=\attribb{x}{right}{min}$.
+\end{itemize}
+Zatem zgodnie z~tw.\ 14.1 można zachować poprawne wartości tych pól podczas wstawiania i~usuwania, nie zwiększając asymptotycznej złożoności tych operacji.
+Operacje $\proc{Minimum}(T)$ i~$\proc{Maximum}(T)$ polegają na zwróceniu, odpowiednio, \attribb{T}{root}{min} i~\attribb{T}{root}{max}, natomiast operacje $\proc{Predecessor}(T,x)$ i~$\proc{Successor}(T,x)$ polegają na zwróceniu, odpowiednio, \attrib{x}{pred} i~\attrib{x}{succ}.
+
 \exercise %14.2-2
 \exercise %14.2-3
 \exercise %14.2-4
