@@ -21,6 +21,15 @@ Zatem zgodnie z~tw.\ 14.1 można zachować poprawne wartości tych pól podczas 
 Operacje $\proc{Minimum}(T)$ i~$\proc{Maximum}(T)$ polegają na zwróceniu, odpowiednio, \attribb{T}{root}{min} i~\attribb{T}{root}{max}, natomiast operacje $\proc{Predecessor}(T,x)$ i~$\proc{Successor}(T,x)$ polegają na zwróceniu, odpowiednio, \attrib{x}{pred} i~\attrib{x}{succ}.
 
 \exercise %14.2-2
+Jeśli czarną wysokość wewnętrznego węzła $x$ w~drzewie czerwono-czarnym $T$ przechowamy w~polu \attrib{x}{bh}, a~ponadto zdefiniujemy $\attribb{T}{nil}{bh}=0$, to zachodzi następująca zależność:
+\[
+	\attrib{x}{bh} = \begin{cases}
+		\attribb{x}{left}{bh}, & \text{jeśli $\attribb{x}{left}{color}=\const{red}$}, \\
+		\attribb{x}{left}{bh}+1, & \text{jeśli $\attribb{x}{left}{color}=\const{black}$}.
+	\end{cases}
+\]
+A~zatem na mocy tw.\ 14.1 mamy, że złożoność asymptotyczna operacji na tak wzbogaconym drzewie czerwono-czarnym nie ulegnie zmianie.
+
 \exercise %14.2-3
 \exercise %14.2-4
 \exercise %14.2-5
