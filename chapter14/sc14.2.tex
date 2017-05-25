@@ -55,3 +55,51 @@ Jeśli operacją $\otimes$ będzie zwykłe dodawanie, to wartość \attrib{x}{f}
 Dzięki powyżej przedstawionej argumentacji pole \id{size} może być aktualizowane w~czasie $O(1)$ po każdym wykonaniu rotacji w~drzewie $T$.
 
 \exercise %14.2-5
+Do zaimplementowania tej operacji potrzebna nam będzie pomocnicza procedura wyszukująca w~drzewie czerwono-czarnym węzeł o~najmniejszym kluczu większym lub równym podanej wartości.
+\begin{codebox}
+\Procname{$\proc{RB-Search-Upper-Bound}(T,x,k)$}
+\li	\If $z\gets\attrib{T}{nil}$
+\li	\While \const{true}
+\li		\Do \If $x=\attrib{T}{nil}$
+\li				\Then \Return $y$ \label{li:rb-search-upper-bound-return-z}
+				\End
+\li			\If $\attrib{x}{key}=k$
+\li				\Then \Return $x$ \label{li:rb-search-upper-bound-return-x}
+				\End
+\li			\If $k<\attrib{x}{key}$
+\li				\Then $z\gets x$
+\li					$x\gets\attrib{x}{left}$
+\li				\Else $x\gets\attrib{x}{right}$
+				\End
+\end{codebox}
+Jest to modyfikacja procedury \proc{Iterative-RB-Search}, która z~kolei jest wersją procedury \proc{Iterative-Tree-Search} przystosowaną do drzew czerwono-czarnych.
+W~drzewie $T$ wyszukiwany jest węzeł o~kluczu $k$ i~jeśli istnieje, to zostaje zwrócony w~linii \ref{li:rb-search-upper-bound-return-x}.
+W~przeciwnym przypadku w~wierszu \ref{li:rb-search-upper-bound-return-z} następuje zwrócenie następnika węzła o~kluczu $k$, gdyby znajdował się on w~drzewie $T$.
+Zmienna $z$ w~kolejnych iteracjach pętli \kw{while} wskazuje na węzeł będący przodkiem aktualnie testowanego węzła $x$ znajdującego się w~lewym poddrzewie $z$, albo na \attrib{T}{nil}, jeżeli węzeł taki nie istnieje w~$T$.
+Poza utrzymywaniem odpowiedniej wartości zmiennej $z$, procedura wykonuje te same działania, co \proc{Iterative-RB-Search}, a~zatem działa w~czasie $O(\lg n)$ dla drzewa $T$ o~$n$ węzłach.
+
+Rozważymy także modyfikację operacji następnika, \proc{RB-Subtree-Successor}, która przyjmuje dodatkowy, trzeci parametr $z$ i~znajduje następnik węzła $x$ w~poddrzewie o~korzeniu $z$.
+Jeśli taki węzeł nie istnieje w~tym poddrzewie, to zwracane jest \attrib{T}{nil}.
+Modyfikacja polega na dodaniu następującego fragmentu między wiersz 2 i~3 w~\proc{RB-Successor}, co nie zwiększa czasu działania tej procedury:
+\begin{codebox}
+\zi	\If $x=\proc{RB-Maximum}(T,z)$
+\zi		\Then \Return \attrib{T}{nil}
+		\End
+\end{codebox}
+
+Następujący algorytm stanowi implementację szukanej operacji.
+Przyjmuje on dodatkowo jako parametr drzewo $T$ potrzebne do odwołania się do \attrib{T}{nil} i~wypisuje szukane klucze w~porządku niemalejącym.
+\begin{codebox}
+\Procname{$\proc{RB-Enumerate}(T,x,a,b)$}
+\li $z\gets\proc{RB-Search-Upper-Bound}(T,x,a)$ \label{li:rb-enumerate-initial-node}
+\li	\While $z\ne\attrib{T}{nil}$ i~$a\le\attrib{z}{key}\le b$
+\li		\Do wypisz \attrib{z}{key}
+\li			$z\gets\proc{RB-Subtree-Successor}(T,x,z)$ \label{li:rb-enumerate-next-node}
+		\End
+\end{codebox}
+Zmienna $z$ jest inicjalizowana na węzeł o~kluczu $k\ge a$ z~poddrzewa o~korzeniu w~$x$.
+Jeśli węzeł taki nie istnieje (bo poddrzewo $x$ zawiera klucze mniejsze od $a$), to $z=\attrib{T}{nil}$ i~procedura kończy działanie.
+W~przeciwnym przypadku następuje seria wywołań operacji następnika $y$ w~wierszu \ref{li:rb-enumerate-next-node}, aż do wyczerpania węzłów w~poddrzewie $x$ albo odnalezienia węzła o~kluczu przekraczającym $b$.
+
+Wywołanie z~linii \ref{li:rb-enumerate-initial-node} zajmuje czas $O(\lg n)$.
+Na mocy \refExercise{12.2-8} niezależnie od tego, od którego węzła rozpoczniemy, seria $m$ wywołań operacji następnika w~drzewie o~wysokości $h=O(\lg n)$ potrzebuje czasu $O(m+\lg n)$, co stanowi czas działania przedstawionego algorytmu.
