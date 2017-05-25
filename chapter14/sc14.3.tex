@@ -10,4 +10,24 @@ Powiemy, że dwa przedziały otwarte $i$ oraz $i'$ zachodzą na siebie, jeśli $
 \exercise %14.3-4
 \exercise %14.3-5
 \exercise %14.3-6
+Strukturę danych $Q$ zaimplementujemy jako odpowiednio wzbogacone drzewo czerwono-czarne.
+W~każdym węźle $x$ drzewa $Q$ przechowamy dodatkowe pola:
+\begin{itemize}
+	\item \attrib{x}{min} -- równe najmniejszemu kluczowi w~poddrzewie o~korzeniu w~$x$;
+	\item \attrib{x}{max} -- równe największemu kluczowi w~poddrzewie o~korzeniu w~$x$;
+	\item \attrib{x}{min-gap} -- równe najmniejszej odległości między kluczami w~poddrzewie o~korzeniu w~$x$.
+\end{itemize}
+Wszystkie nowe pola każdego wewnętrznego węzła $x$ są zależne od innych pól węzła $x$ oraz od pól węzłów \attrib{x}{left} i~\attrib{x}{right}:
+\begin{align*}
+	\attrib{x}{min} &= \min(\attribb{x}{left}{min},\attrib{x}{key},\attribb{x}{right}{min}), \\
+	\attrib{x}{max} &= \max(\attribb{x}{left}{max},\attrib{x}{key},\attribb{x}{right}{max}), \\
+	\attrib{x}{min-gap} &= \min(\attribb{x}{left}{min-gap},\attribb{x}{right}{min-gap}, \\
+		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max},\attribb{x}{right}{min}-\attrib{x}{key}).
+\end{align*}
+Definiujemy ponadto $\attribb{Q}{nil}{min}=\attribb{Q}{nil}{min-gap}=\infty$ oraz $\attribb{Q}{nil}{max}=-\infty$.
+
+Wywołanie $\proc{Min-Gap}(Q)$ polega na zwróceniu wartości \attribb{Q}{root}{min-gap} i~działa w~czasie $O(1)$.
+Oczywiście wzbogacenie drzewa o~nowe pola nie zmienia działania operacji \proc{Search}.
+Dzięki zastosowaniu tw.\ 14.1 mamy z~kolei, że wprowadzenie nowych pól nie zwiększa asymptotycznej złożoności czasowej operacji \proc{Insert} i~\proc{Delete}.
+
 \exercise %14.3-7
