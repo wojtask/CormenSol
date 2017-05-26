@@ -1,24 +1,43 @@
 \subchapter{Jak wzbogacać strukturę danych}
 
 \exercise %14.2-1
-Aby efektywnie wykonywać podane operacje, wzbogacimy każdy węzeł drzewa statystyk pozycyjnych o~4 pola wskaźnikowe:
+Aby efektywnie wykonywać podane operacje, wzbogacimy każdy węzeł $x$ drzewa statystyk pozycyjnych $T$ o~4 nowe pola:
 \begin{itemize}
-	\item \id{min} -- wskaźnik na węzeł o~najmniejszym kluczu w~drzewie,
-	\item \id{max} -- wskaźnik na węzeł o~największym kluczu w~drzewie,
-	\item \id{pred} -- wskaźnik na poprzednika danego węzła oraz
-	\item \id{succ} -- wskaźnik na następnika danego węzła.
+	\item \attrib{x}{min} -- wskaźnik na węzeł o~najmniejszym kluczu w~poddrzewie o~korzeniu w~$x$,
+	\item \attrib{x}{max} -- wskaźnik na węzeł o~największym kluczu w~poddrzewie o~korzeniu w~$x$,
+	\item \attrib{x}{pred} -- wskaźnik na poprzednika węzła $x$ (lub \attrib{T}{nil} jeśli poprzednik nie istnieje),
+	\item \attrib{x}{succ} -- wskaźnik na następnika węzła $x$ (lub \attrib{T}{nil} jeśli następnik nie istnieje).
 \end{itemize}
-W~szczególności, jeśli węzeł $x$ ma najmniejszy klucz w~drzewie $T$, to $\attrib{x}{min}=x$ i~$\attrib{x}{pred}=\attrib{T}{nil}$.
+Przyjmujemy, że wartością każdego z~tych pól dla \attrib{T}{nil} jest \attrib{T}{nil}.
 
-Wartość każdego nowego pola można wyznaczyć na podstawie jedynie wartości tych pól w~synach danego węzła:
-\begin{itemize}
-	\item $\attrib{x}{min}=\attribb{x}{left}{min}=\attribb{x}{right}{min}$;
-	\item $\attrib{x}{max}=\attribb{x}{left}{max}=\attribb{x}{right}{max}$;
-	\item $\attrib{x}{pred}=\attribb{x}{left}{max}$;
-	\item $\attrib{x}{succ}=\attribb{x}{right}{min}$.
-\end{itemize}
+Wartości pól \id{min} oraz \id{max} każdego wewnętrznego węzła $x$ można wyznaczyć na podstawie jedynie wartości tych pól w~synach węzła $x$.
+Niech
+\[
+	\mu_x = \min(\attribbb{x}{left}{min}{key},\attrib{x}{key},\attribbb{x}{right}{min}{key}).
+\]
+Wówczas:
+\[
+	\attrib{x}{min} = \begin{cases}
+		\attribb{x}{left}{min}, & \text{jeśli $\mu_x=\attribbb{x}{left}{min}{key}$,} \\
+		x, & \text{jeśli $\mu_x=\attrib{x}{key}$,} \\
+		\attribb{x}{right}{min}, & \text{jeśli $\mu_x=\attribbb{x}{right}{min}{key}$.}
+	\end{cases}	
+\]
+Analogicznie można wyznaczyć wartość pola \attrib{x}{max}.
 Zatem zgodnie z~tw.\ 14.1 można zachować poprawne wartości tych pól podczas wstawiania i~usuwania, nie zwiększając asymptotycznej złożoności tych operacji.
-Operacje $\proc{Minimum}(T)$ i~$\proc{Maximum}(T)$ polegają na zwróceniu, odpowiednio, \attribb{T}{root}{min} i~\attribb{T}{root}{max}, natomiast operacje $\proc{Predecessor}(T,x)$ i~$\proc{Successor}(T,x)$ polegają na zwróceniu, odpowiednio, \attrib{x}{pred} i~\attrib{x}{succ}.
+
+Jednakże w~przypadku pól \id{pred} i~\id{succ} nie można zastosować tw.\ 14.1, bo wartości tych pól mogą zależeć nie tylko od pól synów danego węzła -- zarówno następnik, jak i~poprzednik węzła może znajdować się na wyższym poziomie drzewa.
+Pokażemy jednak, że nadal możliwe jest efektywne zaimplementowanie operacji wstawiania i~usuwania, które aktualizują wartości tych pól.
+
+Zauważmy najpierw, że rotacje nie pociągają za sobą konieczności modyfikacji pól \id{pred} i~\id{succ}.
+Jest tak dlatego, że porządek inorder węzłów w~drzewie nie zostaje zmieniony przez rotacje, więc nie ma zmian w~poprzednikach i~następnikach.
+Po wstawieniu nowego węzła do drzewa wystarczy więc nadać jego atrybutowi \id{pred} wartość zwróconą przez wywołanie oryginalnej wersji operacji \proc{Predecessor}, a~atrybutowi \id{succ} -- oryginalnej wersji operacji \proc{Successor}.
+Nowe pola można zaktualizować także w~operacji \proc{Delete}.
+Wystarczy tuż przed usunięciem węzła odnaleźć jego poprzednik $p$ i~następnik $s$ poprzez wywołanie zwykłych wersji operacji \proc{Predecessor} i~\proc{Successor}.
+Następnie tuż po usunięciu węzła wystarczy ustawić \attrib{p}{succ} na $s$ (o~ile $p\ne\attrib{T}{nil}$), a~\attrib{s}{pred} na $p$ (o~ile $s\ne\attrib{T}{nil}$).
+Widać więc, że dodatkowe wywołania nie powiększają czasu działania operacji \proc{Insert} i~\proc{Delete}.
+
+Dzięki wykorzystaniu nowo dodanych atrybutów wywołania $\proc{Minimum}(T)$, $\proc{Maximum}(T)$, $\proc{Predecessor}(T,x)$ i~$\proc{Successor}(T,x)$ można zaimplementować w~czasie $O(1)$ tak, aby zwracały, odpowiednio, \attribb{T}{root}{min}, \attribb{T}{root}{max}, \attrib{x}{pred} i~\attrib{x}{succ}.
 
 \exercise %14.2-2
 Jeśli czarną wysokość wewnętrznego węzła $x$ w~drzewie czerwono-czarnym $T$ przechowamy w~polu \attrib{x}{bh}, a~ponadto zdefiniujemy $\attribb{T}{nil}{bh}=0$, to zachodzi następująca zależność:
@@ -71,6 +90,7 @@ Do zaimplementowania tej operacji potrzebna nam będzie pomocnicza procedura wys
 \li					$x\gets\attrib{x}{left}$
 \li				\Else $x\gets\attrib{x}{right}$
 				\End
+		\End
 \end{codebox}
 Jest to modyfikacja procedury \proc{Iterative-RB-Search}, która z~kolei jest wersją procedury \proc{Iterative-Tree-Search} przystosowaną do drzew czerwono-czarnych.
 W~drzewie $T$ wyszukiwany jest węzeł o~kluczu $k$ i~jeśli istnieje, to zostaje zwrócony w~linii \ref{li:rb-search-upper-bound-return-x}.
