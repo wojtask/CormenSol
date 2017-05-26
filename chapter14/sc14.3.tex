@@ -3,28 +3,28 @@
 \exercise %14.3-1
 \exercise %14.3-2
 Pseudokod procedury \proc{Interval-Search} nie zmieni się.
-Jedyna różnica będzie ukryta w~linii 2 tej procedury, a~dokładniej w~definicji zachodzenia przedziałów.
+Jedyna różnica będzie ukryta w~linii 2 tej procedury w~definicji zachodzenia przedziałów.
 Powiemy, że dwa przedziały otwarte $i$ oraz $i'$ zachodzą na siebie, jeśli $i\cap i'\ne\emptyset$, tj.\ jeśli $\attrib{i}{low}<\attrib{i'}{high}$ i~$\attrib{i'}{low}<\attrib{i}{high}$.
 
 \exercise %14.3-3
 \exercise %14.3-4
 \exercise %14.3-5
 \exercise %14.3-6
-Strukturę danych $Q$ zaimplementujemy jako odpowiednio wzbogacone drzewo czerwono-czarne.
+Strukturę danych $Q$ zaimplementujemy w~postaci odpowiednio wzbogaconego drzewa czerwono-czarnego.
 W~każdym węźle $x$ drzewa $Q$ przechowamy dodatkowe pola:
 \begin{itemize}
-	\item \attrib{x}{min} -- równe najmniejszemu kluczowi w~poddrzewie o~korzeniu w~$x$;
-	\item \attrib{x}{max} -- równe największemu kluczowi w~poddrzewie o~korzeniu w~$x$;
+	\item \attrib{x}{min-key} -- równe najmniejszemu kluczowi w~poddrzewie o~korzeniu w~$x$;
+	\item \attrib{x}{max-key} -- równe największemu kluczowi w~poddrzewie o~korzeniu w~$x$;
 	\item \attrib{x}{min-gap} -- równe najmniejszej odległości między kluczami w~poddrzewie o~korzeniu w~$x$.
 \end{itemize}
 Wszystkie nowe pola każdego wewnętrznego węzła $x$ są zależne od innych pól węzła $x$ oraz od pól węzłów \attrib{x}{left} i~\attrib{x}{right}:
 \begin{align*}
-	\attrib{x}{min} &= \min(\attribb{x}{left}{min},\attrib{x}{key},\attribb{x}{right}{min}), \\
-	\attrib{x}{max} &= \max(\attribb{x}{left}{max},\attrib{x}{key},\attribb{x}{right}{max}), \\
+	\attrib{x}{min-key} &= \min(\attribb{x}{left}{min-key},\attrib{x}{key},\attribb{x}{right}{min-key}), \\
+	\attrib{x}{max-key} &= \max(\attribb{x}{left}{max-key},\attrib{x}{key},\attribb{x}{right}{max-key}), \\
 	\attrib{x}{min-gap} &= \min(\attribb{x}{left}{min-gap},\attribb{x}{right}{min-gap}, \\
-		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max},\attribb{x}{right}{min}-\attrib{x}{key}).
+		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max-key},\attribb{x}{right}{min-key}-\attrib{x}{key}).
 \end{align*}
-Definiujemy ponadto $\attribb{Q}{nil}{min}=\attribb{Q}{nil}{min-gap}=\infty$ oraz $\attribb{Q}{nil}{max}=-\infty$.
+Definiujemy ponadto $\attribb{Q}{nil}{min-key}=\attribb{Q}{nil}{min-gap}=\infty$ oraz $\attribb{Q}{nil}{max-key}=-\infty$.
 
 Wywołanie $\proc{Min-Gap}(Q)$ polega na zwróceniu wartości \attribb{Q}{root}{min-gap} i~działa w~czasie $O(1)$.
 Oczywiście wzbogacenie drzewa o~nowe pola nie zmienia działania operacji \proc{Search}.
