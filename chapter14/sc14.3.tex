@@ -7,6 +7,49 @@ Jedyna różnica będzie ukryta w~linii 2 tej procedury w~definicji zachodzenia 
 Powiemy, że dwa przedziały otwarte $i$ oraz $i'$ zachodzą na siebie, jeśli $i\cap i'\ne\emptyset$, tj.\ jeśli $\attrib{i}{low}<\attrib{i'}{high}$ i~$\attrib{i'}{low}<\attrib{i}{high}$.
 
 \exercise %14.3-3
+Algorytm wyszukuje w~drzewie przedziałowym $T$ dowolny węzeł $x$, taki że przedział \attrib{x}{int} zachodzi na przedział $i$, wywołując w~tym celu procedurę \proc{Interval-Search}.
+Jeśli przedział taki istnieje, czyli $x\ne\attrib{T}{nil}$, to począwszy od $x$, algorytm przechodzi w~dół drzewa przedziałowego w~poszukiwaniu przedziału zachodzącego na $i$ o~najmniejszym lewym końcu.
+\begin{codebox}
+\Procname{$\proc{Min-Interval-Search}(T,i)$}
+\li $x\gets\proc{Interval-Search}(T,i)$
+\li \If $x\ne\attrib{T}{nil}$
+\li 	\Then $y\gets\attrib{x}{left}$
+\li			\While $y\ne\attrib{T}{nil}$ \label{li:min-interval-search-while-begin}
+\li				\Do \If $i$ zachodzi na \attrib{y}{int}
+\li						\Then $x\gets y$
+\li							$y\gets\attrib{x}{left}$ \label{li:min-interval-search-y-modification}
+\li						\Else \If $\attrib{y}{left}\ne\attrib{T}{nil}$ i~$\attribb{y}{left}{max}\ge\attrib{i}{low}$ \label{li:min-interval-search-no-overlap-begin}
+\li							\Then $y\gets\attrib{y}{left}$
+\li							\Else $y\gets\attrib{y}{right}$
+							\End \label{li:min-interval-search-no-overlap-end}
+						\End
+				\End \label{li:min-interval-search-while-end}
+		\End
+\li	\Return $x$
+\end{codebox}
+
+Udowodnimy następujący niezmiennik pętli \kw{while}:
+\begin{quote}
+Przed każdą iteracją pętli \kw{while} w~wierszach \doubledash{\ref{li:min-interval-search-while-begin}}{\ref{li:min-interval-search-while-end}}, jeśli w~drzewie $T$ znajduje się przedział zachodzący na $i$ o~lewym końcu mniejszym niż \attribb{x}{int}{low}, to należy on do poddrzewa o~korzeniu w~$y$.
+\end{quote}
+\begin{description}
+	\item[Inicjowanie:] Przed pierwszą iteracją pętli \kw{while} $y=\attrib{x}{left}$.
+Przedziały o~lewych końcach mniejszych niż \attribb{x}{int}{low} znajdują się w~poddrzewie o~korzeniu w~\attrib{x}{left}, dlatego niezmiennik jest spełniony.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed każdą następną iteracją pętli \kw{while} i~zobaczmy, co zmienia wykonanie iteracji.
+Zauważmy wpierw, że każda aktualizacja zmiennej $x$ w~trakcie działania procedury pociąga za sobą przestawienie $y$ na \attrib{x}{left}.
+Jeśli przedział $i$ zachodzi na \attrib{y}{int}, to można zaktualizować wskaźnik $x$ -- przechowujący przedział zachodzący na $i$ o~najmniejszym dotychczas napotkanym lewym końcu -- na $y$, ponieważ $y$ jest węzłem z~lewego poddrzewa $x$, więc $\attribb{y}{int}{low}<\attribb{x}{int}{low}$.
+Niezmiennik pozostaje spełniony, bo jeśli w~drzewie $T$ istnieje przedział zachodzący na $i$ o~mniejszym lewym końcu od nowej wartości $x$, to należy on do lewego poddrzewa $x$, a~w~wierszu \ref{li:min-interval-search-y-modification} $y$ jest zaktualizowane na \attrib{x}{left}.
+
+Załóżmy teraz, że przedział $i$ nie zachodzi na \attrib{y}{int}.
+Zauważmy, że wiersze \doubledash{\ref{li:min-interval-search-no-overlap-begin}}{\ref{li:min-interval-search-no-overlap-end}} stanowią ciało pętli \kw{while} z~procedury \proc{Interval-Search} z~$y$ w~miejscu $x$.
+Wykorzystując niezmiennik pętli \kw{while} tamtej procedury do obecnej iteracji pętli w~procedurze \proc{Min-Interval-Search} otrzymujemy, że jeśli przed aktualizacją $y$ poddrzewo o~korzeniu $y$ zawierało przedział zachodzący na $i$, to zawiera go też poddrzewo o~korzeniu w~węźle wskazywanym przez nową wartość wskaźnika $y$.
+Niezmiennik jest więc zachowany, gdyż $y$ znajduje się zawsze w~lewym poddrzewie $x$.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $y=\attrib{T}{nil}$.
+Poddrzewo o~korzeniu w~$y$ jest puste, skąd wynika, że nie istnieje w~$T$ przedział zachodzący na $i$ o~lewym końcu mniejszym niż \attribb{x}{int}{low}, czyli $x$ jest szukanym przedziałem.
+\end{description}
+
+Algorytm działa w~czasie $O(\lg n)$ dla drzewa o~$n$ węzłach, ponieważ oprócz wywołania operacji \proc{Interval-Search} schodzi jeszcze od znalezionego węzła do liścia drzewa $T$ po ścieżce prostej.
+
 \exercise %14.3-4
 \exercise %14.3-5
 \exercise %14.3-6
