@@ -1,4 +1,17 @@
 \problem{Permutacja Józefa} %14-2
 
 \subproblem %14-2(a)
+Algorytm można zaimplementować jako symulację opisanego procesu eliminowania osób.
+W~tym celu można wykorzystać dwukierunkową listę cykliczną zawierającą początkowo liczby całkowite, kolejno 1, 2, \dots, $n$.
+Symulacja polega na usuwaniu co \singledash{$m$}{tego} elementu z~tej listy poprzez przejście $m$ razy wskaźnikami \id{next} po tej liście, a~następnie usunięcie aktualnego elementu.
+Ostatni element, który pozostanie na liście, zostaje wypisany.
+
+Operacja usuwania z~dwukierunkowej listy cyklicznej działa jak \proc{List-Delete}, ale polega na założeniu, że $\attrib{x}{prev}\ne\const{nil}$ oraz $\attrib{x}{next}\ne\const{nil}$.
+Operacja składa się zatem jedynie z~wierszy 2 i~5 procedury \proc{List-Delete}, dlatego jej czasem działania jest oczywiście $O(1)$.
+Stąd całkowity czas działania symulacji wynosi
+\[
+	\sum_{k=2}^n(m+O(1)) = m(n-1)+O(n) = O(n),
+\]
+ponieważ $m$ jest stałą.
+
 \subproblem %14-2(b)
