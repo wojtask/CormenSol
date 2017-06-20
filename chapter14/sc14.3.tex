@@ -1,6 +1,16 @@
 \subchapter{Drzewa przedziałowe}
 
 \exercise %14.3-1
+Procedura \proc{Interval-Left-Rotate} dla drzew przedziałowych działa identycznie jak procedura \proc{Left-Rotate} dla drzew czerwono-czarnych, z~tą różnicą, że tuż przed zakończeniem działania modyfikuje \attrib{x}{max} i~\attrib{y}{max}, gdzie $y$ jest nowym ojcem $x$ po przeprowadzeniu rotacji.
+Modyfikacje te polegają najpierw na aktualizacji \attrib{x}{max} wprost z~definicji pola \id{max}, a~następnie analogicznym zaktualizowaniu \attrib{y}{max}, które po wykonaniu rotacji zależy od \attrib{x}{max}.
+\begin{codebox}
+\Procname{$\proc{Interval-Left-Rotate}(T,x)$}
+\li	$\proc{Left-Rotate}(T,x)$
+\li	$y\gets\attrib{x}{p}$
+\li	$\attrib{x}{max}\gets\max(\attribb{x}{int}{high},\attribb{x}{left}{max},\attribb{x}{right}{max})$
+\li	$\attrib{y}{max}\gets\max(\attribb{y}{int}{high},\attrib{x}{max},\attribb{y}{right}{max})$
+\end{codebox}
+
 \exercise %14.3-2
 Pseudokod procedury \proc{Interval-Search} nie zmieni się.
 Jedyna różnica będzie ukryta w~linii 2 tej procedury w~definicji zachodzenia przedziałów.
