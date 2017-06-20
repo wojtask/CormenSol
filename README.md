@@ -10,13 +10,13 @@ Moim celem jest stworzenie kompletnego zbioru rozwiązań, który pomaga w przys
 Oczywiście gorąco zachęcam do uprzedniego zmierzenia się z zadaniami samodzielnie, zamiast natychmiastowego zaglądania do odpowiedzi -- z pewnością więcej można się w ten sposób nauczyć, a samo rozwiązywanie problemów może dostarczyć mnóstwa satysfakcji.
 Wyznaczony przeze mnie cel rzetelności przedstawionych tu treści zaowocował zastosowaniem języka formalnego i w wielu miejscach niewątpliwie trudnego, jednak należy mieć na uwadze to, że dokładność i precyzja powinny być nieodłącznymi cechami pozycji matematycznych i informatycznych.
 
-Zwracam uwagę na to, że sami Autorowie Podręcznika dostarczają rozwiązań niektórych zadań i problemów -- można je pobrać ze [strony WWW] (http://mitpress.mit.edu/algorithms) książki.
+Zwracam uwagę na to, że sami Autorowie Podręcznika dostarczają rozwiązań niektórych zadań i problemów -- można je pobrać ze [strony WWW](http://mitpress.mit.edu/algorithms) książki.
 Stanowią one jednak niewielki ułamek wszystkich rozwiązań -- niemal połowa rozdziałów Podręcznika jest w całości pominięta, a pozostałe są opracowane tylko częściowo.
 Ponadto wiele rozwiązań jest napisana zbyt szczegółowo i obszernie.
 Niektóre posłużyły mi jako podstawa dla moich własnych rozwiązań, zawsze jednak dążyłem do przeformułowania ich treści do bardziej skondensowanych (i niejednokrotnie bardziej precyzyjnych) form.
 
 Wspomnę teraz o kilku kwestiach technicznych i zasadach, którymi kierowałem się podczas opracowywania rozwiązań.
-Dokument został utworzony za pomocą systemu LaTeX 2e, który pozwala na precyzyjną i estetyczną prezentację nie tylko tekstu, ale także formuł matematycznych, tabel i pseudokodów.
+Dokument został utworzony za pomocą systemu LaTeX2e, który pozwala na precyzyjną i estetyczną prezentację nie tylko tekstu, ale także formuł matematycznych, tabel i pseudokodów.
 Do złożenia tych ostatnich użyłem pakietu `clrscode` opracowanego przez Thomasa H. Cormena.
 Z pakietu tego korzystano również w oryginalnym tekście Podręcznika, a więc styl pseudokodów w rozwiązaniach jest identyczny jak w książce.
 Rozumowania w wielu miejscach ilustrują rysunki, przy tworzeniu których wykorzystywałem języki PGF/TikZ.
@@ -35,7 +35,7 @@ W początkowych rozdziałach można zatem zaobserwować nieco większą koncentr
 
 O każdym znalezionym błędzie lub nieścisłości w treściach zadań zwracam uwagę w krótkich notkach przed rozwiązaniem danego zadania.
 Wskazuję, czy błąd występuje zarówno w oryginale, jak i w polskim tłumaczeniu, czy tylko w jednym z tekstów.
-Uwzględniam jednakże [erratę] (http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php) do oryginału -- jeśli znajduje się w niej wpis o pewnej poprawce, to przyjmuję, że błąd został ostatecznie naprawiony w którejś wersji tekstu i wspominam o jego istnieniu tylko wówczas, gdy występuje w tłumaczeniu.
+Uwzględniam jednakże [erratę](http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php) do oryginału -- jeśli znajduje się w niej wpis o pewnej poprawce, to przyjmuję, że błąd został ostatecznie naprawiony w którejś wersji tekstu i wspominam o jego istnieniu tylko wówczas, gdy występuje w tłumaczeniu.
 
 W porównaniu z poprzednim wydaniem (oznaczonym numerem 0.3), oprócz dodania rozwiązań z części II, wprowadziłem także ogromną ilość poprawek do zadań z części I i VIII.
 Poprawiłem wiele błędów logicznych, przeredagowałem mnóstwo paragrafów, a część rozwiązań została nawet przepisana w całości.
@@ -51,5 +51,5 @@ Jeśli jednak znalazłeś błąd merytoryczny lub typograficzny, bądź twierdzi
 Jeśli sugestia okaże się trafna, Twoje nazwisko pojawi się w podziękowaniach, a kolejne wydania tego opracowania będą dzięki Tobie bliższe ideału.
 
 Ważną metodą weryfikacji rozwiązań jest implementowanie ich w rzeczywistym języku programowania i testowanie ich przy użyciu testów jednostkowych.
-Projekt, w którym implementuję algorytmy i struktury dancyh zarówno z rozwiązań, jak i te przedstawione w Podręczniku, znajduje się [tutaj] (https://github.com/wojtask/CormenImpl).
-Implementacje podane są w języku Java i testowane są za pomocą biblioteki JUnit 4.
+Projekt, w którym implementuję algorytmy i struktury dancyh zarówno z rozwiązań, jak i te przedstawione w Podręczniku, znajduje się [tutaj](https://github.com/wojtask/CormenImpl).
+Implementacje podane są w języku Java i testowane są za pomocą biblioteki JUnit.
