@@ -62,6 +62,34 @@ Algorytm działa w~czasie $O(\lg n)$ dla drzewa o~$n$ węzłach, ponieważ opró
 
 \exercise %14.3-4
 \exercise %14.3-5
+Zmodyfikujemy operację wstawiania do drzewa przedziałowego w~taki sposób, aby w~poddrzewach składających się z~przedziałów o~takich samych lewych końcach, przedziały uporządkowane były względem prawych końców.
+Załóżmy, że do drzewa przedziałowego $T$ o~takiej własności wstawiany jest element $x$.
+Niech $y$ będzie pierwszym napotkanym węzłem w~$T$ podczas tego wstawiania, gdzie $\attribb{y}{int}{low}=\attribb{x}{int}{low}$, albo \attrib{T}{nil}, jeżeli węzeł taki nie istnieje.
+Wszystkie przedziały w~drzewie $T$ o~takich samych lewych końcach jak lewy koniec \attrib{x}{int} znajdują się w~poddrzewie o~korzeniu w~$y$.
+Korzystając z~uporządkowania przedziałów w~takim poddrzewie i~traktując jako klucze prawe końce przedziałów, wyszukujemy dla $x$ odpowiednie miejsce w~tym poddrzewie.
+Dzięki temu po wstawieniu elementu $x$ uporządkowanie w~drzewie $T$ pozostaje zachowane.
+Łatwo zauważyć, że następujące potem rotacje nie naruszają wprowadzonego uporządkowania, bo zachowują porządek inorder w~drzewie, jak również to, że wykonana modyfikacja nie zwiększa asymptotycznego czasu działania operacji wstawiania.
+
+Operacja \proc{Interval-Search-Exactly} wyznacza szukany węzeł w~identyczny sposób jak opisane powyżej wyszukiwanie miejsca w~drzewie podczas wstawiania do niego nowego węzła.
+Stąd też czas działania nowej operacji można ograniczyć od góry przez $O(\lg n)$, gdzie $n$ jest liczbą węzłów w~drzewie wejściowym.
+\begin{codebox}
+\Procname{$\proc{Interval-Search-Exactly}(T,i)$}
+\li	$x\gets\attrib{T}{root}$
+\li	\While $x\ne\attrib{T}{nil}$ i~$\attribb{x}{int}{low}\ne\attrib{i}{low}$
+\li		\Do \If $\attribb{x}{int}{low}<\attrib{i}{low}$
+\li			\Then $x\gets\attrib{x}{left}$
+\li			\Else $x\gets\attrib{x}{right}$
+			\End
+		\End
+\li	\While $x\ne\attrib{T}{nil}$ i~$\attribb{x}{int}{high}\ne\attrib{i}{high}$
+\li		\Do \If $\attribb{x}{int}{high}<\attrib{i}{high}$
+\li			\Then $x\gets\attrib{x}{left}$
+\li			\Else $x\gets\attrib{x}{right}$
+			\End
+		\End
+\li	\Return $x$
+\end{codebox}
+
 \exercise %14.3-6
 Strukturę danych $Q$ zaimplementujemy w~postaci odpowiednio wzbogaconego drzewa czerwono-czarnego.
 W~każdym węźle $x$ drzewa $Q$ przechowamy dodatkowe pola:
