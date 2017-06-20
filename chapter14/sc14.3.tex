@@ -61,6 +61,28 @@ Poddrzewo o~korzeniu w~$y$ jest puste, skąd wynika, że nie istnieje w~$T$ prze
 Algorytm działa w~czasie $O(\lg n)$ dla drzewa o~$n$ węzłach, ponieważ oprócz wywołania operacji \proc{Interval-Search} schodzi jeszcze od znalezionego węzła do liścia drzewa $T$ po ścieżce prostej.
 
 \exercise %14.3-4
+Poniższy pseudokod implementuje szukany algorytm, wypisując szukane przedziały.
+Wejściowe drzewo przedziałowe nie jest modyfikowane.
+\begin{codebox}
+\Procname{$\proc{Interval-Search-All}(T,x,i)$}
+\li \If $x\ne\attrib{T}{nil}$ oraz $i$ zachodzi na \attrib{x}{int} \label{li:interval-search-all-overlap}
+\li		\Then wypisz \attrib{x}{int}
+		\End
+\li	\If $\attrib{x}{left}\ne\attrib{T}{nil}$ i~$\attribb{x}{left}{max}\ge\attrib{i}{low}$ \label{li:interval-search-all-examine-left}
+\li		\Then $\proc{Interval-Search-All}(T,\attrib{x}{left},i)$
+		\End
+\li	\If $\attrib{x}{right}\ne\attrib{T}{nil}$ i~$\attribb{x}{right}{max}\ge\attrib{i}{low}$ i~$\attribb{x}{int}{low}\le\attrib{i}{high}$ \label{li:interval-search-all-examine-right}
+\li		\Then $\proc{Interval-Search-All}(T,\attrib{x}{right},i)$
+		\End
+\end{codebox}
+Aby wyznaczyć wszystkie przedziały zachodzące na $i$ w~drzewie $T$, należy skorzystać z~wywołania $\proc{Interval-Search-All}(T,\attrib{T}{root},i)$.
+
+Każdy węzeł drzewa $T$ testowany jest w~algorytmie co najwyżej dwa razy -- raz w~linii \ref{li:interval-search-all-overlap} i~raz w~linii \ref{li:interval-search-all-examine-left} albo \ref{li:interval-search-all-examine-right}.
+Każdy taki test zajmuje czas stały, dlatego czas działania algorytmu nie przekracza $O(n)$.
+Z~drugiej strony, jeśli procedura schodzi rekurencyjnie do któregoś z~poddrzew, to poddrzewo to musi zawierać przedział zachodzący na $i$.
+Dlatego czas działania również nie może przekroczyć $O(k\lg n)$, gdyż wysokość drzewa $T$ wynosi $O(\lg n)$, a~liczba przedziałów zachodzących na $i$ w~$T$ wynosi $k$.
+Łącząc te ograniczenia, dostajemy, że algorytm działa w~czasie $O(\min(n,k\lg n))$.
+
 \exercise %14.3-5
 Zmodyfikujemy operację wstawiania do drzewa przedziałowego w~taki sposób, aby w~poddrzewach składających się z~przedziałów o~takich samych lewych końcach, przedziały uporządkowane były względem prawych końców.
 Załóżmy, że do drzewa przedziałowego $T$ o~takiej własności wstawiany jest element $x$.
@@ -77,15 +99,15 @@ Stąd też czas działania nowej operacji można ograniczyć od góry przez $O(\
 \li	$x\gets\attrib{T}{root}$
 \li	\While $x\ne\attrib{T}{nil}$ i~$\attribb{x}{int}{low}\ne\attrib{i}{low}$
 \li		\Do \If $\attribb{x}{int}{low}<\attrib{i}{low}$
-\li			\Then $x\gets\attrib{x}{left}$
-\li			\Else $x\gets\attrib{x}{right}$
-			\End
+\li				\Then $x\gets\attrib{x}{left}$
+\li				\Else $x\gets\attrib{x}{right}$
+				\End
 		\End
 \li	\While $x\ne\attrib{T}{nil}$ i~$\attribb{x}{int}{high}\ne\attrib{i}{high}$
 \li		\Do \If $\attribb{x}{int}{high}<\attrib{i}{high}$
-\li			\Then $x\gets\attrib{x}{left}$
-\li			\Else $x\gets\attrib{x}{right}$
-			\End
+\li				\Then $x\gets\attrib{x}{left}$
+\li				\Else $x\gets\attrib{x}{right}$
+				\End
 		\End
 \li	\Return $x$
 \end{codebox}
