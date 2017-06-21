@@ -145,3 +145,19 @@ Oczywiście wzbogacenie drzewa o~nowe pola nie zmienia działania operacji \proc
 Dzięki zastosowaniu tw.\ 14.1 mamy z~kolei, że wprowadzenie nowych pól nie zwiększa asymptotycznej złożoności czasowej operacji \proc{Insert} i~\proc{Delete}.
 
 \exercise %14.3-7
+Ogólna idea algorytmu polega na pomyśle ze wskazówki podanej w~treści zadania: wykorzystywana jest tzw.\ ,,miotła'', czyli pionowa prosta zamiatająca zbiór prostokątów od lewej do prawej.
+W~danym momencie pamiętane będą prostokąty, których bok poziomy wyznacza przedział zawierający aktualną pozycję ,,miotły''.
+Tak naprawdę zamiast przechowywania wszystkich informacji o~prostokątach wystarczy pamiętać przedziały wyznaczone przez boki pionowe tych prostokątów.
+Do tego celu zastosujemy drzewo przedziałowe.
+
+Omówmy teraz szczegóły techniczne algorytmu.
+Najpierw utworzone zostanie puste drzewo przedziałowe $T$ oraz lista współrzędnych $x$ wszystkich prostokątów wraz z~informacją o~tym, czy jest to lewa współrzędna swojego prostokąta, czy prawa.
+Lista ta zostanie następnie posortowana i~będzie przeglądana od lewej do prawej.
+Jeśli kolejna napotkana współrzędna na tej liście stanowi lewą współrzędną $x$ pewnego prostokąta $R$, to na drzewie $T$ wywołana zostanie operacja \proc{Interval-Search} dla przedziału wyznaczonego przez współrzędne $y$ prostokąta $R$ (czyli jego bok pionowy).
+Wynik działania tego wywołania stanowi informację o~tym, czy w~zbiorze prostokątów istnieje prostokąt różny od $R$ i~zachodzący na $R$.
+Następnie pionowy bok prostokąta $R$ zostanie wstawiony do drzewa $T$.
+Z~kolei napotkawszy prawą współrzędną $x$ prostokąta $R$, algorytm usunie pionowy bok $R$ z~drzewa $T$.
+W~dowolnym momencie działania algorytmu drzewo $T$ reprezentuje zatem zbiór prostokątów, które są aktualnie przecinane przez prostą zamiatającą.
+
+Czas działania algorytmu dla $n$ prostokątów wynosi $O(n\lg n)$.
+Tyle czasu zajmuje sortowanie listy współrzędnych $x$ oraz $O(n)$ wywołań operacji na drzewie przedziałowym (wstawianie, usuwanie i~wyszukiwanie przedziałów zachodzących), z~których każda wymaga czasu $O(\lg n)$.
