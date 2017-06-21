@@ -1,0 +1,399 @@
+\newcommand{\Pclass}{\text{P}}
+\newcommand{\NPclass}{\text{NP}}
+\newcommand{\coNPclass}{\text{co-NP}}
+\DeclareGraphicsRule{.1}{mps}{*}{}
+
+\chapter{\singledash{\NPclass}{zupełność}}
+
+% ROZDZIAŁ 34 -- rozdział oderwany od głównego planu, sprawdzić po przerobieniu rozdziałów z~grafami
+% 34.1-4 -- zostaje do publikacji rozdziału 16
+% 34.2-4 --
+% 34.2-11 -- zostaje do publikacji rozdziału 23
+% 34.3-4 --
+% 34.3-5 --
+% 34.3-8
+% 34.4-1
+% 34.4-7 -- zostaje do publikacji części VI
+% 34.5-2
+% 34.5-4
+% 34.5-5
+% 34.5-6
+% 34.5-7
+% 34.5-8
+% 34-1(a)
+% 34-1(b)
+% 34-1(c)
+% 34-1(d)
+% 34-2(a)
+% 34-2(b)
+% 34-2(c)
+% 34-2(d)
+% 34-3(b) -- dokończyć
+% 34-3(c) -- czy można tak dowieść NP-trudności?
+% 34-3(d)
+% 34-3(e)
+% 34-3(f)
+% 34-4(a)
+% 34-4(b)
+% 34-4(c)
+% 34-4(d)
+
+\subchapter{Czas wielomianowy}
+
+\exercise %34.1-1
+Fakt, że $\text{LONGEST-PATH}\in\Pclass$ oznacza, że problem ten można rozwiązać w~czasie wielomianowym, a~zatem istnieje taka stała $c$, że problem rozwiązuje pewien algorytm o~złożoności $O(n^c)$, gdzie $n$ jest długością standardowego kodowania egzemplarza tego problemu.
+Wykonajmy ten algorytm dla kolejnych wartości $k$, zaczynając od 0 i~po każdym wykonaniu sprawdzając odpowiedź.
+Jeśli dla pewnego $k=k_0$ odpowiedzią było ,,tak'', a~dla $k=k_0+1$ ,,nie'', to wiadomo, że w~grafie $G$ istnieje ścieżka prosta o~długości $k_0$ między wierzchołkami $u$ i~$v$, ale nie istnieje taka ścieżka o~długości $k_0+1$.
+Ponieważ $k_0$ jest ograniczone przez $|V|-1$, to algorytm wywołamy co najwyżej $|V|$ razy.
+Na mocy tego, że $|V|=O(\langle G\rangle)=O(n)$ mamy, że złożonością przedstawionej tu procedury rozwiązywania problemu LONGEST-PATH-LENGTH jest $O(n^{c+1})$, a~więc złożoność wielomianowa.
+
+\exercise %34.1-2
+Problem znajdowania najdłuższego cyklu prostego w~grafie nieskierowanym to relacja
+\[
+	\text{LONGEST-CYCLE-LENGTH}\subseteq I\times S, \quad \text{gdzie}
+\]
+\begin{align*}
+	I &= \bigl\{\,G:G=\langle V,E\rangle\text{ jest grafem nieskierowanym}\,\bigr\}, \\
+	S &= \bigl\{\,c\in V^*\!:c\text{ jest najdłuższym cyklem prostym w~$G$}\,\bigr\}.
+\end{align*}
+Związany z~nim problem decyzyjny jest funkcją
+\[
+	\text{LONGEST-CYCLE}\colon I_D\to\{0,1\}, \quad \text{gdzie}
+\]
+\[
+	I_D = \bigl\{\,\langle G,c\rangle:G=\langle V,E\rangle\text{ jest grafem nieskierowanym i~}c\in V^*\,\bigr\}
+\]
+oraz $\text{LONGEST-CYCLE}(G,c)=1$ wtedy i~tylko wtedy, gdy $c$ stanowi najdłuższy cykl prosty w~grafie $G$.
+Językiem odpowiadającym problemowi LONGEST-CYCLE jest
+\[
+	\begin{split}
+		L = \bigl\{\,x\in\{0,1\}^*\!&:x\text{ jest standardowym kodowaniem $i\in I_D$,} \\
+		&\qquad \text{dla którego }\text{LONGEST-CYCLE}(i)=1\,\bigr\}.
+	\end{split}
+\]
+
+\exercise %34.1-3
+Ponumerujmy wierzchołki grafu skierowanego $G=\langle V,E\rangle$ liczbami całkowitymi, zaczynając od 1.
+Graf taki można reprezentować w~postaci ciągu $x\in\{0,1\}^*$ takiego, że $|x|=|V|^2$ i~na \singledash{$i$}{tej} jego pozycji znajduje się 1 wtedy i~tylko wtedy, gdy wierzchołek o~numerze $\lfloor(i-1)/|V|\rfloor+1$ ma sąsiada o~numerze $(i-1)\bmod|V|+1$.
+Ciąg $x$ jest więc macierzą sąsiedztwa grafu $G$ zapisaną kolejnymi wierszami.
+
+W~reprezentacji listowej grafu $G$ można dla każdego kolejnego wierzchołka po zapisaniu liczby jego sąsiadów, wypisywać ich numery w~kolejności rosnącej.
+Wszystkie liczby będą reprezentowane binarnie na pewnej ustalonej liczbie bitów, otrzymamy więc w~rezultacie ciąg $y\in\{0,1\}^*$.
+
+Aby pokazać, że reprezentacje te są wielomianowo równoważne, musimy znaleźć funkcje obliczalne w~czasie wielomianowym, dokonujące przekształceń jednej reprezentacji na drugą.
+Z~reprezentacji macierzowej $x$ budujemy reprezentację listową, najpierw znajdując liczbę wierzchołków grafu poprzez wyciągnięcie pierwiastka kwadratowego z~$|x|$, a~następnie wyznaczamy dla każdego wierzchołka liczbę jego sąsiadów na podstawie liczby jedynek w~odpowiednim podciągu $x$.
+Po zapisaniu tej liczby w~postaci binarnej wypisywane są reprezentacje binarne numerów jego sąsiadów w~kolejności rosnącej.
+
+Z~kolei posiadając reprezentację listową, po wyznaczeniu liczby wierzchołków grafu, dla każdego sąsiada kolejnego wierzchołka wypisujemy 1 na odpowiedniej pozycji wynikowego ciągu, natomiast 0, jeśli odpowiednie wierzchołki nie są sąsiednie.
+
+Nietrudno sprawdzić, że dla obu funkcji istnieją obliczające je algorytmy wielomianowe, a~zatem obie reprezentacje są wielomianowo równoważne.
+
+\exercise %34.1-4
+\note{Rozwiązanie ukaże się po publikacji rozdziału 16.}
+
+\exercise %34.1-5
+Załóżmy, że czasy działania wszystkich wywoływanych podprogramów ograniczone są przez $O(n^c)$, gdzie $c$ jest pewną stałą.
+Algorytm wykonujący co najwyżej $k$ takich wywołań działa w~czasie $O(kn^c)$, a~co najwyżej $O(n^d)$ dla innej stałej $d$ -- w~czasie $O(n^{c+d})$.
+Przyjęliśmy jednak, że wywołania podprogramów nie zmieniają danych wejściowych dla kolejnych wywołań i~za każdym razem ich długością jest $n$.
+
+Algorytm wykonujący co najwyżej $O(n^c)$ operacji może z~danych o~rozmiarze $n$ utworzyć wynik o~rozmiarze $O(n^c)$, który może zostać przekazany jako dane wejściowe do następnego algorytmu.
+W~takiej sytuacji po $k$ wywołaniach rozmiar danych będzie wynosił $O\bigl(n^{c^k}\bigr)$ i~czas działania tego ciągu wywołań będzie tego samego rzędu, a~więc co najwyżej wielomianowy.
+
+Załóżmy jednak, że na początku działania algorytmu ustalamy $O(n^d)$ jako liczbę wywołań podprogramów o~złożoności $O(n^c)$ każdy.
+Po wszystkich wywołaniach rozmiar danych może wzrosnąć do $O\Bigl(n^{c^{n^d}}\Bigr)$ i~taki też będzie czas działania całego algorytmu.
+Ponieważ $n^{c^{n^d}}\!\!=\omega(c^n)$, to możemy otrzymać w~tym przypadku algorytm wykładniczy.
+
+\exercise %34.1-6
+Ponieważ $L_1$, $L_2\in\Pclass$, to istnieją algorytmy, odpowiednio, $A_1$, $A_2$, rozstrzygające te języki w~czasie wielomianowym.
+Aby rozstrzygać język $L=L_1\cup L_2$, wystarczy dla dowolnego $x\in L$ zwracać 1, jeśli $A_1(x)=1$ lub $A_2(x)=1$, a~w~przeciwnym przypadku zwracać 0.
+Oczywiście wykonanie obu algorytmów wielomianowych i~wykonanie dwóch takich testów zajmuje nadal czas wielomianowy, więc $L\in\Pclass$.
+
+Analogicznie rozstrzygamy język $L=L_1\cap L_2$, zwracając1 wtedy i~tylko wtedy, gdy $A_1(x)=1$ i~$A_2(x)=1$, gdzie $x\in L$.
+
+W~przypadku języka $L=\overline{L_1}$, dla $x\in L$ zwracamy 1 wtedy i~tylko wtedy, gdy $A_1(x)=0$.
+
+Język $L=L_1\cdot L_2$ będący konkatenacją $L_1$ i~$L_2$ rozstrzygamy, biorąc $x\in L$ i~zwracając 1 wtedy i~tylko wtedy, gdy dla pewnego $m=0$, 1, \dots, $|x|$ zachodzi $A_1(x_1)=1$ oraz $A_2(x_2)=1$, przy czym $x_1$ jest \singledash{$m$}{symbolowym} prefiksem słowa $x$, a~$x_2$ -- jego \singledash{$(|x|-m)$}{symbolowym} sufiksem.
+
+Aby rozstrzygać domknięcie $L=L_1^*$, należy dla $x\in L$ zwracać 1 wtedy i~tylko wtedy, gdy dla pewnego $k=0$, 1, \dots, $|x|$ prawdą jest, że $x\in L_1^k$.
+Sprawdzenie tej przynależności jest wykonalne w~czasie wielomianowym, co wynika z~uogólnienia dowodu z~poprzedniego paragrafu na iloczyn dowolnej skończonej ilości języków.
+
+Nietrudno zobaczyć, że w~każdym opisanym przypadku jesteśmy w~stanie rozstrzygać język $L$ w~czasie wielomianowym, czyli $L\in\Pclass$ dla każdego $L$ zdefiniowanego powyżej.
+
+\subchapter{Weryfikacja w~czasie wielomianowym}
+
+\exercise %34.2-1
+Dwa grafy $G=\langle V,E\rangle$ i~$G'=\langle V',E'\rangle$ są izomorficzne, jeśli istnieje bijekcja $f\colon V\to V'$ taka, że $\langle u,v\rangle\in E$ wtedy i~tylko wtedy, gdy $\langle f(u),f(v)\rangle\in E'$.
+Jeśli potrafimy zweryfikować w~czasie wielomianowym, że dana bijekcja spełnia ten warunek, to $\text{GRAPH-ISOMORPHISM}\in\NPclass$.
+Jest to oczywiście możliwe -- dla reprezentacji macierzowej grafu potrafimy znaleźć algorytm o~złożoności $O(n^2)$, gdzie $n$ jest długością kodowania $G$.
+Algorytm ten sprawdza, czy każdy element macierzy sąsiedztwa grafu $G$ jest równy odpowiadającemu, na podstawie odwzorowania $f$, elementowi macierzy sąsiedztwa grafu $G'$.
+
+\exercise %34.2-2
+Z~punktu (b) problemu \refProblem{B-1} mamy, że żaden graf dwudzielny nie posiada cyklu o~nieparzystej długości, więc w~grafach dwudzielnych o~nieparzystej liczbie wierzchołków nie istnieje cykl Hamiltona.
+
+\exercise %34.2-3
+Dla kolejnej krawędzi grafu sprawdzamy, czy jej usunięcie spowoduje zniszczenie cyklu Hamiltona, poprzez uruchomienie algorytmu sprawdzania czy graf pozbawiony takiej krawędzi nadal jest hamiltonowski.
+Bezpieczne krawędzie usuwamy z~grafu, natomiast pozostałe zachowujemy.
+Postępowanie kontynuujemy aż do pozostawienia samego cyklu Hamiltona, który można teraz wypisać.
+Cały algorytm jest wielomianowy przy założeniu, że $\text{HAM-CYCLE}\in\Pclass$.
+
+\exercise %34.2-4
+Niech $L_1,L_2\in\NPclass$.
+Oznacza to, że istnieje wielomianowy algorytm weryfikacji $A_1$ i~pewna stała $c_1$, że dla każdego $x\in L_1$ istnieje takie świadectwo $y$, gdzie $|y|=O(|x|^{c_1})$, że $A_1(x,y)=1$ oraz analogicznie dla algorytmu weryfikacji $A_2$ i~stałej $c_2$ dla języka $L_2$.
+Rozważmy język $L=L_1\cup L_2$ oraz dowolne $x\in L$.
+Oznacza to, że $x\in L_1$ lub $x\in L_2$.
+Algorytm weryfikacji $L$ dla takiego słowa i~jego świadectwa $y$ zwraca 1 wtedy i~tylko wtedy, gdy $A_1(x,y)=1$ lub $A_2(x,y)=1$.
+Jest to algorytm wielomianowy, skąd mamy $L\in\NPclass$.
+
+Analogicznie, jeśli $L=L_1\cap L_2$, to dla dowolnego $x\in L$ wynika, że $x\in L_1$ oraz $x\in L_2$, a~więc dla tego $x$ i~jego świadectwa $y$ zwracamy 1 wtedy i~tylko wtedy, gdy $A_1(x,y)=1$ i~$A_2(x,y)=1$.
+Taki algorytm rozstrzyga $L$ w~czasie wielomianowym.
+
+Język $L=L_1\cdot L_2$ rozstrzygamy, biorąc $x\in L$ i~jego świadectwo, i~zwracając 1 wtedy i~tylko wtedy, gdy dla pewnego $m=0$, 1, \dots, $|x|$ istnieją $y_1$, $y_2$ oraz zachodzi $A_1(x_1,y_1)=1$ i~$A_2(x_2,y_2)$, gdzie $x_1$ jest \singledash{$m$}{symbolowym} prefiksem $x$, $x_2$ jest \singledash{$(|x|-m)$}{symbolowym} sufiksem $x$, a~$y_1$ i~$y_2$ odpowiednio, jego świadectwami.
+
+Aby rozstrzygać domknięcie $L=L_1^*$, należy dla $x\in L$ zwracać 1 wtedy i~tylko wtedy, gdy dla pewnego $k=0$, 1, \dots, $|x|$ prawdą jest, że $x\in L_1^k$.
+Sprawdzenie tej przynależności jest wykonalne w~czasie wielomianowym, co wynika z~uogólnienia dowodu z~poprzedniego paragrafu na iloczyn dowolnej skończonej ilości języków.
+
+W~każdym z~powyżej rozważanych przypadków opisaliśmy algorytm weryfikujący $L$, więc każdy język $L$ definiowany w~powyższych paragrafach spełnia $L\in\NPclass$.
+
+Jeśli z~kolei $L=\overline{L_1}$, to nie możemy stwierdzić, czy $L\in\NPclass$, ponieważ dla pewnego $x\in L$ może nie istnieć świadectwo $y$ lub istnieć, ale nie być ograniczone przez wielomian względem $|x|$.
+Zaistniała trudność uniemożliwia dowód, że $\NPclass=\coNPclass$.
+
+\exercise %34.2-5
+Dla każdego języka $L$ z~klasy \NPclass\ znany jest algorytm weryfikacji działający w~czasie wielomianowym.
+Przy braku znajomości świadectwa w~rozstrzyganiu czy $x\in L$ jesteśmy zmuszeni sprawdzić wszystkie możliwe ciągi $y\in\{0,1\}^*$ o~długości $O(n^c)$, gdzie $n=|x|$, a~$c$ jest pewną stałą.
+Wszystkich takich ciągów jest $2^{O(n^c)}$, a~korzystając z~tego, że algorytm weryfikacji działa w~czasie $O(n^k)$ dla pewnej stałej $k\ge c$ otrzymujemy, że czasem działania algorytmu rozstrzygającego język $L$ jest $O(n^k)\cdot2^{O(n^c)}=2^{O(n^k)+O(n^c)}=2^{O(n^k)}$.
+
+\exercise %34.2-6
+Dla świadectwa będącego ścieżką z~$u$ do $v$ w~grafie $G$ możemy zweryfikować w~czasie wielomianowym, czy jest to ścieżka Hamiltona, przeglądając kolejne wierzchołki i~sprawdzając, czy są sąsiednie i~czy ścieżka zawiera każdy wierzchołek grafu $G$ dokładnie raz.
+Jest to możliwe w~czasie kwadratowym przy reprezentacji macierzowej grafu.
+Stąd, $\text{HAM-PATH}\in\NPclass$.
+
+\exercise %34.2-7
+Acykliczny graf skierowany jest dagiem, który możemy posortować topologicznie algorytmem \proc{Topological-Sort}, a~następnie sprawdzić, czy każde dwa kolejne wierzchołki w~otrzymanym uporządkowaniu topologicznym są sąsiednie w~tym grafie.
+Dla dagu $G=\langle V,E\rangle$ algorytm znajdowania ścieżki Hamiltona działa więc w~czasie $O(V+E)$.
+
+\exercise %34.2-8
+Równoważnie należy dowieść, że dopełnienie języka TAUTOLOGY należy do klasy \NPclass.
+Jest to język złożony z~takich formuł, które nie są tautologiami -- dla każdej formuły należącej do tego języka istnieje zatem pewne wartościowanie, które jej nie spełnia.
+Dostając pewne świadectwo, będące wartościowaniem zmiennych logicznych użytych w~formule, możemy zweryfikować czy formuła ta nie jest dla niego spełniona w~czasie wielomianowym, ewaluując jej wartość dla tego wartościowania.
+
+\exercise %34.2-9
+Wiemy, że $\Pclass\subseteq\NPclass$.
+Stąd dla dowolnego $L\in\Pclass$ zachodzi $L\in\NPclass$, czyli $\overline{L}\in\coNPclass$.
+Z~drugiej strony mamy, że klasa \Pclass\ jest zamknięta na operację dopełnienia (\refExercise{34.1-6}), skąd $\overline{L}\in\Pclass$.
+A~zatem dla dowolnego $\overline{L}$, jeśli $\overline{L}\in\Pclass$, to $\overline{L}\in\coNPclass$, co daje $\Pclass\subseteq\coNPclass$.
+
+\exercise %34.2-10
+Wiemy, że $\Pclass\subseteq\NPclass\cap\coNPclass$.
+Jeśli $\NPclass\ne\coNPclass$, to klasa $\NPclass\setminus\coNPclass$ jest niepusta, czyli istnieją języki należące do tej klasy, ale nienależące do \Pclass, czyli $\Pclass\ne\NPclass$.
+
+\exercise %34.2-11
+\note{Rozwiązanie ukaże się po publikacji rozdziału 23.}
+
+\subchapter{\singledash{\NPclass}{zupełność} i~redukowalność}
+
+\exercise %34.3-1
+Oznaczmy bramki jak na rys.\ \ref{fig:34.3-1}.
+Widać, że do spełnienia układu konieczne jest, aby wszystkie wejścia bramki $g_7$ miały wartości 1.
+Bramka $g_5$ zwraca 1 tylko wtedy, gdy na wejściu bramki $g_3$ będzie wartość 0 i~$g_2$ zwraca 1.
+Jednakże wejście do $g_3$ jest rozgałęzione i~podawane również na wejście bramki $g_4$, która otrzymując 0 na którymkolwiek wejściu, zwróci 0.
+Nie jest więc możliwa sytuacja, w~której bramka $g_7$ nie dostaje na którymkolwiek wejściu wartości 0, w~wyniku czego dla żadnego wartościowania układ nie zwróci 1, co oznacza, że nie jest spełnialny.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{chapter34/fig34.1}
+	\end{center}
+	\caption{Niespełnialny układ logiczny.} \label{fig:34.3-1}
+\end{figure}
+
+\exercise %34.3-2
+Z~założenia mamy, że istnieją funkcje redukcji $f_1$ i~$f_2$ przekształcające, odpowiednio, $L_1$ na $L_2$ i~$L_2$ na $L_3$.
+Ponieważ złożenie funkcji obliczalnych w~czasie wielomianowym jest również funkcją obliczalną w~czasie wielomianowym, to $f_2\circ f_1$ można potraktować jako funkcję redukcji $L_1$ na $L_3$, co dowodzi przechodniości relacji $\le_\Pclass$.
+
+\exercise %34.3-3
+Równoważność jest symetryczna, udowodnimy więc tylko implikację w~jedną stronę.
+
+Niech $f$ będzie funkcją redukcji przekształcającą $L$ na $\overline{L}$.
+Oznacza to, że $x\in L$ wtedy i~tylko wtedy, gdy $f(x)\in\overline{L}$.
+Równoważnie, jeśli $x\notin L$, czyli $x\in\overline{L}$, to zachodzi $f(x)\notin\overline{L}$, czyli $f(x)\in L$, a~to jest definicja funkcji redukcji przekształcającej $\overline{L}$ na $L$, skąd mamy $\overline{L}\le_\Pclass L$.
+
+\exercise %34.3-4
+Aby użyć wartościowania spełniającego, należy zweryfikować, że spełnia ono dany układ logiczny $C$ poprzez zasymulowanie działania tego układu dla wejściowych wartości.
+Ponieważ układ $C$ można zamodelować jako acykliczny graf skierowany, to kolejne wartości można obliczać zgodnie z~uporządkowaniem topologicznym jego wierzchołków.
+Jesteśmy zatem w~stanie w~czasie wielomianowym sprawdzać wyjście układu $C$ dla danego wartościowania, a~zatem weryfikować świadectwo.
+Ponieważ wartościowanie spełniające jednoznacznie determinuje wartości na wszystkich przewodach układu $C$, to wystarcza ono jako świadectwo.
+
+Modyfikacja tego dowodu lematu jest o~tyle trudniejsza, że musieliśmy zauważyć istnienie modelu układu jako grafu, po czym opisać przebieg weryfikacji w~tym modelu.
+
+\exercise %34.3-5
+Obszar roboczy musi być spójny, bo stanowi wejście do układu $M$, a~nigdzie nie przechowujemy informacji w~kolejnych konfiguracjach o~miejscu rezydowania obszaru roboczego w~pamięci -- zakładamy więc, że jest to spójny blok o~ustalonym rozmiarze.
+Można jednak pozwolić na jego rozproszenie w~pamięci, pamiętając adresy poszczególnych bloków.
+Dzięki tym adresom przechowywanym w~części zawierającej dane o~stanie maszyny symulujemy ciągłość obszaru roboczego.
+Ponieważ jego rozmiar jest wielomianowy, to użyjemy dodatkowo wielomianowej ilości adresów -- nie zmieni to zatem rzędu wielkości pamięci zajmowanej przez każdą konfigurację.
+
+\exercise %34.3-6
+Niech $L\in\Pclass$ nie będzie językiem pustym lub $\{0,1\}^*$.
+Wtedy dla dowolnego języka $L'\in\Pclass$ istnieje funkcja redukcji $f$ przeprowadzająca $L'$ w~$L$, ponieważ jesteśmy w~stanie w~czasie wielomianowym stwierdzić, czy $x\in L'$ i~na tej podstawie zwrócić słowo $f(x)$ z~$L$ albo z~$\overline{L}$.
+Dowolny taki język $L$ jest więc zupełny w~\Pclass\ ze względu na redukcję w~czasie wielomianowym.
+
+Jeśli $L=\emptyset$, to nie można odwzorować żadnego słowa z~$L'$ na słowo z~$L$ -- funkcja redukcji zatem nie istnieje.
+Dla języka $L=\{0,1\}^*$ sytuacja jest symetryczna -- żadnego słowa z~$\overline{L'}$ nie da się odwzorować na słowo z~$\overline{L}$.
+Te dwa języki są jedynymi w~klasie \Pclass, które nie są w~niej zupełne ze względu na redukcję w~czasie wielomianowym.
+
+\exercise %34.3-7
+Udowodnimy implikację tylko w~jedną stronę, gdyż druga z~nich jest symetryczna.
+
+Załóżmy, że język $L$ jest \singledash{\NPclass}{zupełny}.
+Na mocy definicji \singledash{\NPclass}{zupełności} $L\in\NPclass$, więc $\overline{L}\in\coNPclass$.
+Pozostaje udowodnić drugi punkt z~definicji.
+Wiemy, że $L'\le_\Pclass L$ dla każdego języka $L'\in\NPclass$.
+Istnieje zatem funkcja redukcji $f$, która zwaca element z~$L$ dla każdego elementu należącego do $L'$ i~tylko takiego.
+Oznacza to, że dla każdego słowa z~$\overline{L'}$, funkcja $f$ zwraca słowo z~$\overline{L}$, a~ponieważ $\overline{L'}\in\coNPclass$ jest dowolnym językiem, to $\overline{L'}\le_\Pclass\overline{L}$.
+Język $\overline{L}$ jest zatem zupełny w~\coNPclass.
+
+\exercise %34.3-8
+
+\subchapter{Dowodzenie \singledash{\NPclass}{zupełności}}
+
+\exercise %34.4-1
+
+\exercise %34.4-2
+Szukana formuła \singledash{3}{CNF} ma postać
+\[
+	\phi''' = \psi_0\wedge\psi_1\wedge\psi_2\wedge\psi_3\wedge\psi_4\wedge\psi_5\wedge\psi_6,
+\]
+dla następujących klauzul $\psi_i$:
+\begin{align*}
+	\psi_0 &= (y_1\vee p\vee q)\wedge(y_1\vee p\vee\neg q)\wedge(y_1\vee\neg p\vee q)\wedge(y_1\vee\neg p\vee\neg q), \\
+	\psi_1 &= (\neg y_1\vee\neg y_2\vee\neg x_2)\wedge(\neg y_1\vee y_2\vee\neg x_2)\wedge(\neg y_1\vee y_2\vee x_2)\wedge(y_1 \vee\neg y_2\vee x_2), \\
+	\psi_2 &= (y_2\vee y_3\vee\neg y_4)\wedge(y_2\vee\neg y_3\vee y_4)\wedge(y_2\vee\neg y_3\vee\neg y_4)\wedge(\neg y_2\vee y_3\vee y_4), \\
+	\psi_3 &= (y_3\vee x_1\vee x_2)\wedge(y_3\vee x_1\vee\neg x_2)\wedge(y_3\vee\neg x_1\vee\neg x_2)\wedge(\neg y_3\vee\neg x_1\vee x_2), \\
+	\psi_4 &= (y_4\vee y_5\vee p)\wedge(y_4\vee y_5\vee\neg p)\wedge(\neg y_4\vee\neg y_5\vee p)\wedge(\neg y_4\vee\neg y_5\vee\neg p), \\
+	\psi_5 &= (y_5\vee y_6\vee\neg x_4)\wedge(y_5\vee\neg y_6\vee x_4)\wedge(y_5\vee\neg y_6\vee\neg x_4)\wedge(\neg y_5\vee y_6\vee x_4), \\
+	\psi_6 &= (y_6\vee x_1\vee\neg x_3)\wedge(y_6\vee\neg x_1\vee x_3)\wedge(\neg y_6\vee x_1\vee x_3)\wedge(\neg y_6\vee\neg x_1\vee\neg x_3).
+\end{align*}
+
+\exercise %34.4-3
+Główny problem tego rozumowania polega na tym, że dla formuły o~$n$ zmiennych tablica ich wartości składa się z~$2^n$ wierszy, ponieważ odpowiada rozważeniu wszystkich \singledash{$n$}{elementowych} wektorów bitowych.
+Ponieważ może się zdarzyć, że dla każdego takiego wartościowania formuła przyjmie wartość 0, to budowa równoważnej formuły \singledash{3}{DNF} zajmie czas wykładniczy.
+
+\exercise %34.4-4
+Z~\refExercise{34.3-7} wiemy, że równoważnie wystarczy udowodnić, iż dopełnienie języka TAUTOLOGY jest \singledash{\NPclass}{zupełne}.
+Ponieważ w~\refExercise{34.2-8} wykazaliśmy, że należy do klasy \NPclass, to wystarczy pokazać, że jest to język \singledash{\NPclass}{trudny}.
+
+Dana formuła nie jest tautologią, jeśli istnieje wartościowanie, dla którego nie jest spełniona.
+Możemy więc pokazać, że $\text{SAT}\le_\Pclass\overline{\text{TAUTOLOGY}}$, definiując funkcję redukcji, która dla danej formuły $\phi$ zwraca dowolną formułę nie będącą tautologią, jeśli $\phi$ jest spełnialne i~dowolną tautologię w~przeciwnym przypadku.
+Oczywiście funkcja ta jest obliczalna w~czasie wielomianowym, co dowodzi \singledash{\NPclass}{trudności} języka.
+
+Na mocy powyższych wniosków stwierdzamy, że język TAUTOLOGY jest \singledash{\coNPclass}{zupełny}.
+
+\exercise %34.4-5
+Formuła $\phi$ jest w~dysjunkcyjnej postaci normalnej, jeśli
+\[
+	\phi = \phi_1\vee\phi_2\vee\cdots\vee\phi_n,
+\]
+a~$\phi_i$ dla dowolnego $i=1$, 2, \dots, $n$ jest koniunkcją pewnej ilości literałów.
+Formuła $\phi$ jest spełnialna, jeśli spełnialna jest pewna klauzula $\phi_i$, a~to z~kolei można zweryfikować w~czasie wielomianowym, sprawdzając, czy nie składa się ona z~literałów komplementarnych, czyli $x$ i~$\neg x$.
+Jeśli nie ma pary takich literałów, to możliwe jest przyjęcie wartościowania, w~którym każdy literał przyjmuje wartość 1, co spełnia klauzulę $\phi_i$.
+
+\exercise %34.4-6
+Załóżmy, że $\phi$ jest formułą zawierającą zmienne $x_1$, $x_2$, \dots, $x_n$, dla której chcemy znaleźć wartościowanie spełniające.
+Przyjmijmy, że $\phi$ jest spełnialna -- w~przeciwnym przypadku wartościowanie spełniające nie istnieje.
+
+Dla kolejnej zmiennej $x_i$ będziemy w~pętli sprawdzać, czy formuła $\phi$, dla której przyjęto $x_i=1$, jest spełnialna.
+Jeśli tak, to zmienna $x_i$ przyjmuje wartość 1 w~pewnym wartościowaniu spełniającym dla $\phi$, więc zastępujemy każde wystąpienie tej zmiennej w~$\phi$ przez tautologię $(x_i\vee\neg x_i)$.
+W~przeciwnym przypadku musi być $x_i=0$, zatem wystąpienia $x_i$ w~$\phi$ zamieniamy w~formułę niespełnialną $(x_i\wedge\neg x_i)$.
+Wykonując taki test dla każdej zmiennej, dostajemy jedno ze spełniających wartościowań dla $\phi$.
+Po wykonaniu pętli otrzymana formuła będzie składać się z~dwukrotnie większej liczby literałów, co $\phi$.
+
+Ponieważ dysponujemy wielomianowym algorytmem rozstrzygania spełnialności formuł, a~wejście zwiększy się tylko dwukrotnie, to opisany algorytm jest również wielomianowy.
+
+\exercise %34.4-7
+\note{Rozwiązanie ukaże się po publikacji części VI.}
+
+\subchapter{Problemy \singledash{\NPclass}{zupełne}}
+
+\exercise %34.5-1
+Rozpocznijmy od formalnego sformułowania problemu izomorfizmu podgrafu za pomocą następującego języka formalnego 
+\[
+	\text{SUBGRAPH-ISOMORPHISM} = \bigl\{\,\langle G_1,G_2\rangle:\text{graf $G_1$ jest izomorficzny z~podgrafem grafu $G_2$}\,\bigr\}
+\]
+oraz przyjęcia oznaczeń $G_1=\langle V_1,E_1\rangle$ i~$G_2=\langle V_2,E_2\rangle$.
+
+W~pierwszej części dowodu wykażemy, że $\text{SUBGRAPH-ISOMORPHISM}\in\NPclass$, przy czym jako świadectwa użyjemy bijekcji $f$ przekształcającej zbiór $V_1$ w~pewien podzbiór $V'\subseteq V_2$.
+Świadectwo potrafimy zweryfikować w~czasie wielomianowym, sprawdzając, czy dla wszystkich $u$, $v\in V_1$ zachodzi $\langle u,v\rangle\in E_1$ wtedy i~tylko wtedy, gdy $\langle f(u),f(v)\rangle\in E_2$.
+
+Wystarczy jeszcze udowodnić \singledash{\NPclass}{trudność} problemu izomorfizmu podgrafu.
+Wykorzystamy w~tym celu redukcję problemu \text{CLIQUE}.
+Dla egzemplarza $\langle G,k\rangle$ problemu kliki wystarczy zwrócić $\langle K_k,G\rangle$ jako egzemplarz problemu izomorfizmu podgrafu, gdzie $K_k$ oznacza graf pełny o~$k$ wierzchołkach.
+Jeśli $G$ ma klikę rozmiaru $k$, to jako podgraf $G$ jest ona oczywiście izomorficzna z~$K_k$.
+W~drugą stronę, jeśli $K_k$ jest izomorficzne z~pewnym podgrafem $G$, to tym podgrafem musi być graf pełny o~$k$ wierzchołkach, czyli klika rozmiaru $k$.
+
+\exercise %34.5-2
+\exercise %34.5-3
+Problem \singledash{zero}{jedynkowego} programowania całkowitoliczbowego jest szczególnym przypadkiem dla problemu programowania liniowego całkowitoliczbowego.
+Ponieważ pierwszy z~nich jest \singledash{\NPclass}{trudny}, to drugi z~nich również.
+Wystarczy jeszcze pokazać, że ogólny problem jest w~\NPclass.
+Jako świadectwa użyjemy wektora $x$, który można zweryfikować poprzez obliczenie wektora $Ax$ i~porównanie go z~wektorem $b$, co z~łatwością można wykonać w~czasie wielomianowym.
+
+\exercise %34.5-4
+\exercise %34.5-5
+\exercise %34.5-6
+\exercise %34.5-7
+% Zajmijmy się decyzyjną wersją problemu.
+% W~tym celu oprócz grafu mamy liczbę całkowitą $k$ i~pytamy, czy w~grafie istnieje cykl prosty o~długości $k$, ale nie istnieje taki cykl o~długości $k+1$.
+% Problem jest w~\NPclass\ -- mając świadectwo w~postaci ciągu wierzchołków grafu, potrafimy w~czasie wielomianowym sprawdzić, czy każde dwa sąsiednie i~ostatni z~pierwszym są sąsiednie.
+
+\exercise %34.5-8
+
+\problems
+
+\problem{Zbiór niezależny} %34-1
+
+\subproblem %34-1(a)
+\subproblem %34-1(b)
+\subproblem %34-1(c)
+\subproblem %34-1(d)
+
+\problem{Bonnie i~Clyde} %34-2
+
+\subproblem %34-2(a)
+\subproblem %34-2(b)
+\subproblem %34-2(c)
+\subproblem %34-2(d)
+
+\problem{Kolorowanie grafu} %34-3
+
+\subproblem %34-3(a)
+Przechodzimy wszerz graf $G$, rozpoczynając od dowolnego jego wierzchołka jako źródła.
+Wierzchołki kolorujemy zgodnie z~parzystością ich odległości od źródła.
+Jeśli sąsiad przetwarzanego wierzchołka ma już przypisany kolor, którym miał być pokolorowany ten wierzchołek, to znaczy, że \singledash{2}{kolorowanie} grafu nie istnieje.
+Algorytm działa w~czasie $O(V+E)$.
+
+\subproblem %34-3(b)
+\[
+	\text{COLOR} = \bigl\{\,\langle G,k\rangle:\text{$k\ge0$ jest liczbą całkowitą oraz graf $G$ jest \singledash{$k$}{kolorowalny}}\,\bigr\}
+\]
+
+Pierwsza implikacja jest oczywista -- jeśli pewne \singledash{$k$}{kolorowanie} grafu $G$ jesteśmy w~stanie otrzymać w~czasie wielomianowym, to jednocześnie w~czasie wielomianowym rozwiązujemy problem COLOR.
+
+% Na odwrót, jeśli problem decyzyjny jest w~\Pclass, to \singledash{$k$}{kolorowanie} grafu możemy znaleźć w~następujący sposób.
+% Budujemy graf $G$, rozpoczynając od pustego zbioru wierzchołków i~krawędzi, w~kolejnej iteracji dodając kolejny wierzchołek grafu $G$ i~krawędzie incydentne z~nim i~z~wierzchołkami dodanymi wcześniej.
+% W~każdym kroku pamiętamy też bieżące $k$, na początku równe 0.
+% Po dodaniu nowego wierzchołka ustalamy jego kolor, sprawdzając, czy bieżący graf jest \singledash{$k$}{kolorowalny}.
+
+\subproblem %34-3(c)
+Oba problemy są w~\NPclass, dla świadectwa będącego listą kolorów wierzchołków sprawdzamy, czy kolorowanie to jest poprawne, tzn.\ czy każde dwa sąsiednie wierzchołki mają różne kolory.
+
+Na mocy tego, że problem \singledash{3}{COLOR} jest szczególnym przypadkiem problemu COLOR, to z~\singledash{\NPclass}{trudności} ostatniego wynika \singledash{\NPclass}{trudność} pierwszego.
+
+\subproblem %34-3(d)
+\subproblem %34-3(e)
+\subproblem %34-3(f)
+
+\problem{Szeregowanie zadań z~premiami za dotrzymanie terminu} %34-4
+
+\subproblem %34-4(a)
+\subproblem %34-4(b)
+\subproblem %34-4(c)
+\subproblem %34-4(d)
+
+\endinput
