@@ -15,3 +15,30 @@ Stąd całkowity czas działania symulacji wynosi
 ponieważ $m$ jest stałą.
 
 \subproblem %14-2(b)
+Załóżmy, że w~pewnym momencie odliczanie zatrzymało się na osobie o~\singledash{$j$}{tym} największym numerze spośród pozostałych $k\le n$ osób.
+Osoba ta zostaje usunięta, co powoduje dekrementację zmiennej $k$, a~numer kolejnej osoby do usunięcia można wyznaczyć następująco.
+Do $j$ dodajemy $m$, bo przesuwamy się o~$m$ numerów i~odejmujemy 1, bo osoba o~\singledash{$j$}{tym} największym numerze została właśnie usunięta.
+Ponieważ liczba $j+m-1$ może przekraczać liczbę pozostałych $k$ osób w~okręgu, to należy zastosować arytmetykę modularną.
+W~rezultacie otrzymujemy, że następna osoba ma numer na pozycji $(j+m-2)\bmod k+1$ na uszeregowanej rosnąco liście numerów pozostałych osób.
+
+Na podstawie powyższego opisu w~algorytmie wykorzystamy drzewo statystyk pozycyjnych.
+Będziemy używać operacji \proc{OS-Insert} oraz \proc{OS-Delete}, które stanowią implementacje operacji słownikowych \proc{Insert} i~\proc{Delete} na drzewie statystyk pozycyjnych.
+\begin{codebox}
+\Procname{$\proc{Josephus}(n,m)$}
+\li	utwórz puste drzewo statystyk pozycyjnych $T$
+\li	\For $j\gets1$ \To $n$
+\li		\Do utwórz węzeł $x$, w~którym $\attrib{x}{key}=j$
+\li			$\proc{OS-Insert}(T,x)$
+		\End
+\li	$j\gets1$
+\li	\For $k\gets n$ \Downto 1
+\li		\Do $j\gets(j+m-2)\bmod k+1$
+\li			$x\gets\proc{OS-Select}(\attrib{T}{root},j)$
+\li			wypisz \attrib{x}{key}
+\li			$\proc{OS-Delete}(T,x)$
+		\End
+\end{codebox}
+
+Zbudowanie drzewa statystyk pozycyjnych $T$ zajmuje czas $O(n\lg n)$.
+Następnie wykonywanych jest $n$ wywołań procedur działających na tym drzewie, z~których każde potrzebuje czasu $O(\lg n)$.
+A~zatem czas działania algorytmu wynosi $O(n\lg n)$.
