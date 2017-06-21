@@ -7,3 +7,39 @@ Oczywiście przecięcie $i=\bigcap_{k=1}^si_k$ również jest przedziałem, któ
 Przedział $i$ składa się z~punktów, na które zachodzi dokładnie $s$ przedziałów z~$I$, w~szczególności końce $i$ stanowią punkty o~największej liczbie przecięć z~przedziałami z~$I$.
 
 \subproblem %14-1(b)
+Skorzystamy ze wskazówki i~do zapamiętania wszystkich $n$ przedziałów wykorzystamy wzbogacone drzewo czerwono-czarne $T$ przechowujące nie przedziały, ale ich końce.
+Do każdego wewnętrznego węzła $x$ w~tym drzewie dodamy atrybut \id{int} będący wskaźnikiem na przedział, którego końcem jest klucz węzła $x$ oraz atrybut \id{side} przyjmujący wartość $+1$, jeśli klucz węzła $x$ stanowi lewy koniec przedziału \attrib{x}{int} oraz $-1$ -- jeśli klucz $x$ stanowi prawy koniec przedziału \attrib{x}{int}.
+Do początkowo pustego drzewa $T$ wstawione zostaną najpierw wszystkie lewe końce przedziałów, a~następnie wszystkie prawe końce.
+Dzięki temu, jeśli pewien lewy koniec ma tę samą wartość co pewien prawy koniec, to lewy będzie poprzedzał prawy w~uporządkowaniu inorder w~drzewie $T$.
+
+Niech $\langle e_1,e_2,\dots,e_{2n}\rangle$ będzie posortowanym ciągiem końców przedziałów ze zbioru wejściowego.
+Zdefiniujmy
+\[
+	s(j,k) = \sum_{i=j}^k\attrib{e_i}{side}
+\]
+dla $1\le j\le k\le2n$.
+Na podstawie poprzedniej części, punkt o~największej liczbie przecięć znajduje się w~lewym końcu $e_k$ przedziału, dla którego wartość $s(1,k)$ jest maksymalna.
+
+Z~każdym węzłem $x$ zwiążemy kolejne atrybuty.
+Niech $e_{j_x}$ i~$e_{k_x}$ będą końcami przedziałów znajdującymi się w~poddrzewie o~korzeniu w~$x$, odpowiednio, najbardziej na lewo i~najbardziej na prawo w~porządku inorder.
+Atrybut \attrib{x}{sum} definiujemy jako $s(j_x,k_x)$, czyli sumę wartości \id{side} po wszystkich przedziałach w~poddrzewie w~$x$.
+W~polu \attrib{x}{max} przechowamy maksymalną wartość wyrażenia $s(j_x,i)$ dla $i=j_x$, $j_x+1$, \dots, $k_x$.
+W~końcu pole \attrib{x}{pom} przechowywać będzie przedział o~końcu $e_i$, dla którego \attrib{x}{max} osiąga maksimum.
+Przyjmijmy ponadto $\attribb{T}{nil}{sum}=\attribb{T}{nil}{max}=0$.
+
+Wartości nowych pól można wyznaczyć na podstawie ich wartości w~synach, co spełnia założenie tw.\ 14.1:
+\begin{align*}
+	\attrib{x}{sum} &= \attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{sum}, \\
+	\attrib{x}{max} &= \max(\attribb{x}{left}{max},\attribb{x}{left}{sum}+\attrib{x}{side},\attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{max}).
+\end{align*}
+O~ile sposób obliczania \attrib{x}{sum} jest oczywisty, to opiszemy na czym polega wzór na \attrib{x}{max}.
+Koniec $e_i$, gdzie $i$ maksymalizuje sumę $s(j_x,i)$, znajduje się albo w~węźle $x$ albo w~którymś z~jego poddrzew.
+Jeśli $e_i$ jest w~lewym poddrzewie $x$, to maksymalna wartość $s(j_x,i)$ jest równa maksymalnej wartości $s(j_{\attrib{x}{left}},i)$, skąd $\attrib{x}{max}=\attribb{x}{left}{max}$.
+Gdy $e_i$ jest w~węźle $x$, to \attrib{x}{max} stanowi sumę wartości \id{side} po każdym węźle w~lewym poddrzewie $x$ łącznie z~\attrib{x}{side}, więc $\attrib{x}{max}=\attribb{x}{left}{sum}+\attrib{x}{side}$.
+W~końcu, gdy $e_i$ jest w~jednym z~węzłów w~prawym poddrzewie $x$, to \attrib{x}{max} stanowi sumę wartości \id{side} po każdym węźle z~lewego poddrzewa $x$, łącznie z~\attrib{x}{side} i~wartościami \id{side} w~pewnym zbiorze węzłów z~prawego poddrzewa $x$.
+Zbiór ten przebiega węzły, począwszy od najbardziej na lewo położonego w~tym poddrzewie, aż do węzła zawierającego $e_i$, który maksymalizuje $s(j_{\attrib{x}{right}},i)$.
+Maksymalna wartość tego wyrażenia jest równa dokładnie \attribb{x}{right}{max}, skąd w~tym przypadku dostajemy $\attrib{x}{max}=\attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{max}$.
+Na podstawie wartości, która przypisywana jest do \attrib{x}{max}, ustalana jest odpowiednia wartość dla \attrib{x}{pom}, czyli \attribb{x}{left}{pom}, \attrib{x}{int} albo \attribb{x}{right}{pom}, kolejno dla przypadków opisywanych powyżej.
+
+Stosując teraz tw.\ 14.1 mamy, że operacje wstawiająca i~usuwająca koniec przedziału do opisanej struktury danych, działają w~czasie $O(\lg n)$.
+Operacja $\proc{Find-POM}(T)$ działa w~czasie $O(1)$, zwracając po prostu przedział \attribb{T}{root}{pom}.
