@@ -15,11 +15,11 @@ Uogólnienie procedury \proc{Parent} dla kopca rzędu $d$ wygląda zatem następ
 Łatwo pokazać, że indeks \singledash{$k$}{tego} od lewej syna węzła o~indeksie $i$, gdzie $k=1$, 2, \dots, $d$, jest opisany wzorem $d(i-1)+k+1$.
 Poniższa procedura stanowi uogólnienie procedur \proc{Left} i~\proc{Right} dla kopca rzędu $d$ -- w~porównaniu do nich przyjmuje dodatkowy parametr $k$ oznaczający numer szukanego syna węzła $i$.
 \begin{codebox}
-\Procname{$\proc{Multiary-Child}(d,k,i)$}
+\Procname{$\proc{Multiary-Child}(d,i,k)$}
 \zi	\Return $d(i-1)+k+1$
 \end{codebox}
 
-Można sprawdzić, że zachodzi $\proc{Multiary-Parent}(d,\proc{Multiary-Child}(d,k,i))=i$ dla każdego $k=1$, 2, \dots, $d$.
+Można sprawdzić, że zachodzi $\proc{Multiary-Parent}(d,\proc{Multiary-Child}(d,i,k))=i$ dla każdego $k=1$, 2, \dots, $d$.
 
 \subproblem %6-2(b)
 Uogólnimy rozumowanie z~\refExercise{6.1-1} na kopce rzędu $d$.
@@ -42,13 +42,13 @@ W~tym celu stosujemy pętlę przeglądającą wszystkich synów bieżącego węz
 \Procname{$\proc{Multiary-Max-Heapify}(A,d,i)$}
 \li	$\id{largest}\gets i$
 \li	$k\gets1$
-\li	$\id{child}\gets\proc{Multiary-Child}(d,1,i)$
+\li	$\id{child}\gets\proc{Multiary-Child}(d,i,1)$
 \li	\While $k\le d$ i~$\id{child}\le\attrib{A}{heap-size}$ \label{li:multiary-max-heapify-while-begin}
 \li		\Do \If $A[\id{child}]>A[\id{largest}]$
 \li				\Then $\id{largest}\gets\id{child}$
 				\End
 \li			$k\gets k+1$
-\li			$\id{child}\gets\proc{Multiary-Child}(d,k,i)$ \label{li:multiary-max-heapify-child}
+\li			$\id{child}\gets\proc{Multiary-Child}(d,i,k)$ \label{li:multiary-max-heapify-child}
 		\End \label{li:multiary-max-heapify-while-end}
 \li	\If $\id{largest}\ne i$
 \li		\Then zamień $A[i]\leftrightarrow A[\id{largest}]$
