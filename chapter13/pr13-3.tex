@@ -42,16 +42,17 @@ Różnią się one od \proc{Left-Rotate} i~\proc{Right-Rotate} tym, że nie przy
 \Procname{$\proc{Balance}(x)$}
 \li	\If $\proc{Balance-Factor}(x)=-2$
 \li		\Then \If $\proc{Balance-Factor}(\attrib{x}{left})=1$ \label{li:balance-left-cases-begin}
-\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$ \>\>\>\>\>\>\>\hspace{25mm}\Comment Przypadek ,,lewo-prawo'' \label{li:balance-left-right-case}
+\li				\Then $\proc{AVL-Left-Rotate}(\attrib{x}{left})$ \>\>\>\>\>\>\>\hspace{15mm}\Comment Przypadek ,,lewo-prawo'' \label{li:balance-left-right-case}
 				\End
-\li			$\proc{AVL-Right-Rotate}(x)$ \>\>\>\>\>\>\>\>\>\hspace{25mm}\Comment Przypadek ,,lewo-lewo'' \label{li:balance-left-left-case} \label{li:balance-left-cases-end}
-\li		\Else \If $\proc{Balance-Factor}(x)=2$
-\li				\Then \If $\proc{Balance-Factor}(\attrib{x}{right})=-1$
-\li						\Then $\proc{AVL-Right-Rotate}(\attrib{x}{right})$ \>\>\>\>\>\hspace{25mm}\Comment Przypadek ,,prawo-lewo''
-						\End
-\li					$\proc{AVL-Left-Rotate}(x)$ \>\>\>\>\>\>\>\hspace{25mm}\Comment Przypadek ,,prawo-prawo''
+\li			$\proc{AVL-Right-Rotate}(x)$ \>\>\>\>\>\>\>\>\>\hspace{15mm}\Comment Przypadek ,,lewo-lewo'' \label{li:balance-left-left-case} \label{li:balance-left-cases-end}
+\li			\Return \attrib{x}{p}
+		\End
+\li \If $\proc{Balance-Factor}(x)=2$
+\li		\Then \If $\proc{Balance-Factor}(\attrib{x}{right})=-1$
+\li				\Then $\proc{AVL-Right-Rotate}(\attrib{x}{right})$ \>\>\>\>\>\>\>\hspace{15mm}\Comment Przypadek ,,prawo-lewo''
 				\End
-\li		\Return \attrib{x}{p}
+\li			$\proc{AVL-Left-Rotate}(x)$ \>\>\>\>\>\>\>\>\>\hspace{15mm}\Comment Przypadek ,,prawo-prawo''
+\li			\Return \attrib{x}{p}
 		\End
 \li	\Return $x$
 \end{codebox}
