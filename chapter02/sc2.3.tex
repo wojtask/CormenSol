@@ -20,20 +20,30 @@ Poniżej przedstawiono implementację procedury \proc{Merge}, w~której nie wyko
 \li	\For $j\gets1$ \To $n_2$
 \li		\Do $R[j]\gets A[q+j]$
 		\End
-\li	$i\gets1$
-\li $j\gets1$
-\li \For $k\gets p$ \To $r$
-\li		\Do \If $j>n_2$ lub $L[i]\le R[j]$ \label{li:merge'-condition}
+\li	$i\gets j\gets1$
+\li $k\gets p$
+\li \While $i\le n_1$ i~$j\le n_2$ \label{li:merge'-while-begin}
+\li		\Do \If $L[i]\le R[j]$
 \li				\Then $A[k]\gets L[i]$
 \li					$i\gets i+1$
 \li				\Else $A[k]\gets R[j]$
 \li					$j\gets j+1$
 				\End
+\li				$k\gets k+1$
+		\End \label{li:merge'-while-end}
+\li \While $i\le n_1$
+\li		\Do $A[k]\gets L[i]$
+\li			$i\gets i+1$
+\li			$k\gets k+1$
+		\End
+\li \While $j\le n_2$
+\li		\Do $A[k]\gets R[j]$
+\li			$j\gets j+1$
+\li			$k\gets k+1$
 		\End
 \end{codebox}
-Warunek w~wierszu \ref{li:merge'-condition} w~powyższej procedurze pozwala na poprawne rozmieszczenie elementów z~tablic $L$ i~$R$ w~wynikowej tablicy $A$ pomimo braku wartowników.
-Dzięki niemu do \singledash{$k$}{tej} komórki tablicy $A$ zostanie przekopiowana wartość z~tablicy $L$ w~jednym z~dwóch przypadków -- gdy tablica $R$ została już w~całości przeglądnięta, bądź wtedy, gdy w~tablicach $L$ i~$R$ znajdują się jeszcze elementy do przekopiowania, ale mniejsza (lub równa) z~liczb znajduje się na aktualnej pozycji w~tablicy $L$.
-Gdy indeks $j$ przekroczy $n_2$, to do końca działania procedury do tablicy $A$ będą kopiowane elementy z~tablicy $L$.
+Po zakończeniu wykonywania pętli \kw{while} z~wierszy \doubledash{\ref{li:merge'-while-begin}}{\ref{li:merge'-while-end}} wszystkie elementy z~co najmniej jednej tablicy $L$ lub $R$ zostały przekopiowane do $A$, więc w~kolejnych dwóch pętlach \kw{while} przeprowadzane jest kopiowanie pozostałej części $L$ lub $R$ na koniec $A$.
+Tylko co najwyżej jedna z~tych pętli wykona swój kod.
 
 \exercise %2.3-3
 Przeprowadzimy dowód przez indukcję względem $k$.
