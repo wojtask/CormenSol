@@ -135,7 +135,36 @@ Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisując
 Jej rozwiązaniem jest $T(n,k)=O(n\lg k)$, o~czym można się przekonać, przeprowadzając analizę z~wykorzystaniem metody drzewa rekursji.
 
 \exercise %9.3-7
-Wyznaczmy medianę $x$ zbioru $S$, a~następnie dla każdego elementu z~tego zbioru obliczmy jego odległość od $x$, czyli wartość bezwzględną z~ich różnicy.
+Liczby najbliższe medianie zbioru $S$ można zdefiniować dwa sposoby.
+Są to albo ,,sąsiedzi'' mediany otaczający ją równolicznie po obu stronach w~uporządkowanym zbiorze, albo liczby najbliższe w~sensie wartości bezwzględnej.
+Ponieważ treść zadania nie definiuje pojęcia ,,bliskości'', a~obydwie podane definicje są równie racjonalne, to podamy algorytmy rozwiązujące ten problem z~zastosowaniem każdej z~tych definicji.
+Jak się okaże, w~obu przypadkach istnieje algorytm o~złożoności $O(n)$.
+
+W~pierwszej wersji definicji $k$ najbliższymi liczbami medianie zbioru $S$ są elementy oddalone od mediany o~nie więcej niż około $(k-1)/2$ pozycji, gdybyśmy ustawili elementy $S$ w~kolejności rosnącej.
+Znając więc ich pozycje w~uporządkowanym zbiorze, możemy je wyznaczyć za pomocą odpowiednich wywołań algorytmu \proc{Select}.
+Następnie wystarczy przeglądnąć elementy zbioru $S$ i~zwrócić te, które znajdują się pomiędzy wyznaczonymi statystykami pozycyjnymi.
+
+Poniższy pseudokod przyjmuje na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą elementy zbioru $S$ oraz liczbę $k$ i~zwraca \singledash{$k$}{elementowy} zbiór $N$ ,,sąsiadów'' mediany według powyższego opisu.
+\begin{codebox}
+\Procname{$\proc{Median-Neighbors}(A,k)$}
+\li	$n\gets\attrib{A}{length}$
+\li	$m\gets\lfloor(n+1)/2\rfloor$
+\li	$\id{leftmost}\gets\proc{Select}(A,1,n,m-\lfloor(k-1)/2\rfloor)$
+\li	$\id{rightmost}\gets\proc{Select}(A,1,n,m+\lceil(k-1)/2\rceil)$
+\li	$N\gets\emptyset$
+\li	\For $i=1$ \To $n$
+\li		\Do \If $\id{leftmost}\le A[i]\le\id{rightmost}$
+\li				\Then $N\gets N\cup\{A[i]\}$
+				\End
+		\End
+\li	\Return $N$
+\end{codebox}
+Zakładamy, że operacje inicjalizacji zbioru oraz dodania do niego nowego elementu zajmują czas stały, natomiast zarówno pobieranie jego rozmiaru, jak i~usuwanie z~niego pojedynczego elementu, odbywają się w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru.
+Założenia te można łatwo spełnić, implementując zbiór $N$ np.\ jako listę dwukierunkową (patrz podrozdział 10.2).
+Wówczas czas działania powyższego algorytmu wynosi $O(n)$.
+
+Jeśli z~kolei będziemy stosować wartość bezwzględną do określenia bliskości między elementami zbioru $S$, to wyznaczenie $k$ liczb najbliższych medianie w~takim rozumieniu odbywa się następująco.
+Wyznaczymy medianę $x$ zbioru $S$, a~następnie obliczymy odległość każdego elementu z~$S$ od $x$, czyli wartość bezwzględną z~ich różnicy.
 Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich \singledash{$k$}{tej} statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
 
 Pojawiają się jednak dwie subtelności.
@@ -145,32 +174,26 @@ Może się także zdarzyć, że zbiór elementów o~odległościach nieprzekracz
 Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$.
 Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
 
-Poniższy algorytm implementuje opisane podejście.
-Przyjmuje on na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą wszystkie elementy zbioru $S$ oraz liczbę $k$.
+Poniższy algorytm stanowi implementację opisanego podejścia i~przy założeniu efektywnej implementacji na zbiorach działa w~czasie $O(n)$.
 \begin{codebox}
-\Procname{$\proc{Median-Neighbors}(A,k)$}
+\Procname{$\proc{Median-Nearest}(A,k)$}
 \li	$n\gets\attrib{A}{length}$
 \li	$x\gets\proc{Select}(A,1,n,\lfloor(n+1)/2\rfloor)$
 \li	\For $i\gets1$ \To $n$
 \li		\Do $\id{dist}[i]\gets|A[i]-x|$
 		\End
 \li	$y\gets\proc{Select}(\id{dist},1,n,k)$
-\li	$M\gets\emptyset$
+\li	$N\gets\emptyset$
 \li	\For $i\gets1$ \To $n$
 \li		\Do \If $|A[i]-x|\le y$
-\li				\Then $M\gets M\cup\{A[i]\}$
+\li				\Then $N\gets N\cup\{A[i]\}$
 				\End
 		\End
-\li	\If $|M|=k+1$
-\li		\Then $M\gets M\setminus\{x+y\}$
+\li	\If $|N|=k+1$
+\li		\Then $N\gets N\setminus\{x+y\}$
 		\End
-\li	\Return $M$
+\li	\Return $N$
 \end{codebox}
-W~czasie $O(n)$ wyznaczana jest mediana $x$ zbioru $S$, jak również tablica $\id{dist}$ zawierająca odległości poszczególnych elementów $S$ od $x$ oraz \singledash{$k$}{ta} najmniejsza wartość $y$ tej tablicy.
-W~pozostałej części algorytmu budowany jest zbiór $M$ złożony z~$k$ elementów najbliższych $x$.
-Zakładamy, że operacje inicjalizacji zbioru, pobierania jego rozmiaru i~usuwania z~niego pojedynczego elementu działają w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru oraz że dodanie do niego pojedynczego elementu zajmuje czas stały.
-Założenia te można łatwo spełnić, implementując zbiór $M$ np.\ jako listę dwukierunkową (patrz podrozdział 10.2).
-Wówczas czasem działania algorytmu jest $O(n)$.
 
 \exercise %9.3-8
 Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$.
