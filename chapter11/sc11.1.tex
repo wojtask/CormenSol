@@ -27,8 +27,9 @@ Opisaną strukturę danych można traktować jak tablicę z~haszowaniem z~identy
 \noindent Przez $T$ oznaczymy ogromną tablicę, a~przez $S$ -- korzystając ze wskazówki z~treści zadania -- dodatkową tablicę, za pomocą której będziemy odwoływać się do odpowiednich pozycji w~$T$.
 Tablicę $S$ będziemy traktować jak stos elementów przechowywanych w~$T$ i~będziemy używać atrybutu \attrib{S}{top} wskazującego na ostatnią zajętą komórkę w~$S$.
 Rozmiar tablicy $S$, jaki ustalimy podczas jej tworzenia, określa pojemność ogromnej tablicy -- próba umieszczenia w~tej strukturze większej ilości elementów zakończy się błędem nadmiaru wykrywanym przez odpowiednią implementację operacji \proc{Push}.
+Jeśli rozmiarem ogromnej tablicy jest $m$, to można w~niej przechowywać klucze z~uniwersum $U=\{0,1,\dots,m-1\}$.
 
-Tablice $S$ i~$T$ weryfikują się wzajemnie.
+Tablice $T$ i~$S$ weryfikują się wzajemnie.
 To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera element o~kluczu $k$.
 Innymi słowy, zachodzą zależności: $1\le T[k]\le\attrib{S}{top}$, $\attrib{S[T[k]]}{key}=k$ oraz $T[\attrib{S[j]}{key}]=j$.
 
@@ -37,14 +38,14 @@ Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib
 Jeśli warunki te są spełnione, to zwrócony zostanie element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
 W~celu wstawienia elementu $x$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy umieścić $x$ na stosie $S$, po czym zaktualizować $T[\attrib{x}{key}]$:
 \begin{codebox}
-\Procname{$\proc{Huge-Array-Insert}(S,T,x)$}
+\Procname{$\proc{Huge-Array-Insert}(T,S,x)$}
 \li	$\proc{Push}(S,x)$
 \li	$T[\attrib{x}{key}]\gets\attrib{S}{top}$
 \end{codebox}
 Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu elementu usuniętego ze szczytu stosu $S$ na pozycję $T[k]$ w~tym stosie oraz aktualizacji odpowiedniej wartości w~tablicy $T$.
 Dokładniej, operacja ta sprowadza się do poniższego pseudokodu:
 \begin{codebox}
-\Procname{$\proc{Huge-Array-Delete}(S,T,x)$}
+\Procname{$\proc{Huge-Array-Delete}(T,S,x)$}
 \li	$k\gets\attrib{x}{key}$
 \li	$y\gets\proc{Pop}(S)$
 \li	$S[T[k]]\gets y$
