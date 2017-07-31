@@ -85,16 +85,15 @@ Z~prawdziwości niezmiennika pętli wynika, że procedura \proc{Heap-Increase-Ke
 
 \exercise %6.5-6
 Kolejkę FIFO implementujemy, wykorzystując do tego celu kolejkę priorytetową typu min.
-Przy inicjalizacji kolejki będziemy ustawiać wartość dodatkowej zmiennej \id{rank} na 1.
-Przed dodaniem nowego elementu do kolejki FIFO nadamy mu rangę, czyli powiążemy go z~aktualną wartością zmiennej \id{rank}, po czym wstawimy element wraz z~jego rangą do kolejki priorytetowej procedurą \proc{Min-Heap-Insert}.
-Warunek kolejki priorytetowej spełniany będzie tylko na podstawie wartości rang elementów.
-Po umieszczeniu obiektu w~kolejce wartość zmiennej \id{rank} zostanie zwiększona o~1.
-Z~kolei usuwanie elementów będzie odbywać się poprzez zwykłe wywołanie procedury \proc{Heap-Extract-Min}.
-Taka implementacja operacji na kolejce FIFO zapewnia, że w~danym momencie w~strukturze danych nie będzie dwóch różnych elementów z~tą samą rangą i~elementy pobierane będą w~odpowiedniej kolejności.
+Przyjmiemy, że elementy kolejki oprócz kluczy zawierają też dodatkowe dane, natomiast klucze będą odpowiednio modyfikowane tak, aby symulować działanie kolejki FIFO.
+Podczas inicjalizacji kolejki ustawimy dodatkowy jej atrybut \id{rank} na 1.
+Przed dodaniem nowego elementu do kolejki FIFO ustawimy jego klucz na aktualną wartość pola \id{rank}, następnie wstawimy element do kolejki priorytetowej procedurą \proc{Min-Heap-Insert}, po czym zwiększymy wartość pola \id{rank} o~1.
+Z~kolei usuwanie elementów sprowadza się do zwykłego wywołania procedury \proc{Heap-Extract-Min}.
+Taka implementacja operacji kolejki FIFO zapewnia, że w~danym momencie w~strukturze danych nie będzie dwóch różnych elementów z~tym samym kluczem i~elementy pobierane będą w~odpowiedniej kolejności.
 
-Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej typu max, w~której porównań dokonujemy na rangach związanych z~elementami.
-Podczas wstawiania elementów na stos korzystamy z~procedury \proc{Max-Heap-Insert} i~inkrementujemy zmienną \id{rank} (zainicjalizowaną na 1 w~momencie utworzenia stosu).
-Usuwanie polega na odnalezieniu i~pobraniu elementu z~największą rangą, co realizowane jest za pomocą \proc{Heap-Extract-Max}.
+Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej typu max.
+Podczas wstawiania elementów na stos korzystamy z~procedury \proc{Max-Heap-Insert} i~inkrementujemy jego pole \id{rank} (zainicjalizowane na 1 w~momencie utworzenia stosu).
+Usuwanie polega na odnalezieniu i~pobraniu elementu z~największym kluczem, co realizowane jest za pomocą \proc{Heap-Extract-Max}.
 W~wyniku tego elementy pobierane są w~kolejności odwrotnej do tej, w~której były wstawiane.
 
 \exercise %6.5-7
