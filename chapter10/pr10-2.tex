@@ -11,20 +11,27 @@ Z~kolei stosując algorytm opisany w~\refExercise{6.5-8} w~wersji dla list jedno
 \subproblem %10-2(b)
 W~tym przypadku także wystarczy nam lista jednokierunkowa.
 Zarówno utworzenie pustego kopca, jak i~dodanie do niego nowego elementu odbywa się w~czasie stałym, ale odszukanie oraz usunięcie minimalnego elementu wiąże się z~przeszukaniem całej listy, co zajmuje czas liniowy względem rozmiaru listy.
-Możemy jednak wprowadzić usprawnienie, dzięki któremu operacja \proc{Minimum} będzie działać w~czasie stałym.
-Będziemy mianowicie przechowywać minimalny element listy w~jej głowie.
-Podczas dodawania nowego elementu wystarczy porównać ten element z~głową listy (o~ile istnieje) i~jeśli stanowi on nowe minimum, umieścić go w~głowie listy albo, w~przeciwnym przypadku, tuż za nią.
-Operacja \proc{Extract-Min} po usunięciu głowy nadal jednak musi przeszukać całą listę w~celu odszukania aktualnego minimum i~umieszczenia go w~głowie listy.
+Możemy jednak wprowadzić usprawnienie, dzięki któremu operacja \proc{Minimum} będzie działać w~czasie stałym, jednocześnie nie pogarszając czasów działania pozostałych operacji.
+Wystarczy bowiem utrzymywać minimalny element listy w~jej głowie.
+Wstawianie nowego elementu po takiej modyfikacji polega na umieszczeniu go w~głowie listy albo tuż za nią, w~zależności od tego, czy nowy element jest mniejszy od aktualnego minimum.
+Operacja \proc{Extract-Min} po usunięciu głowy nadal jednak musi przeszukać całą listę w~celu znalezienia nowego minimum i~przeniesienia go do głowy listy.
 
-Podczas operacji \proc{Union}, musimy pamiętać o~tym, że łączone listy nie zawsze reprezentują rozłączne zbiory, a~także o~tym, że w~głowie wynikowej listy powinien znaleźć się najmniejszy element z~obu łączonych list.
-Efektywna implementacja spełniająca oba warunki będzie polegać na wywołaniu operacji \proc{Union} z~punktu (a) po uprzednim posortowaniu obu list, co zrealizujemy za pomocą algorytmu sortowania przez scalanie w~wersji dla list jednokierunkowych.
-Do zaimplementowania pomocniczej procedury \proc{Merge} możemy użyć algorytmu przedstawionego w~\refExercise{6.5-8}.
-Ostatecznie łączenie list jesteśmy w~stanie zaimplementować w~czasie $\Theta(n\lg n)$, gdzie $n$ jest rozmiarem wynikowej listy.
+W~operacji łączenia musimy pamiętać o~tym, że listy wejściowe nie zawsze reprezentują rozłączne zbiory, a~także o~tym, że w~głowie wynikowej listy powinien znaleźć się najmniejszy element z~obu łączonych list.
+Podamy efektywną implementację operacji \proc{Union} uwzględniającą obie kwestie, w~której jako pomocniczą strukturę danych wykorzystamy tablicę z~haszowaniem.
+Na początku wyznaczymy element $x$ o~minimalnym kluczu spośród elementów z~obu kopców.
+Porównujemy w~tym celu elementy w~głowach obu list wejściowych i~wybieramy mniejszy z~nich.
+Następnie umieścimy wszystkie klucze z~pierwszego kopca w~tablicy z~haszowaniem, wykorzystując do tego celu metodę haszowania doskonałego opisaną w~podrozdziale 11.5.
+Teraz wystarczy tylko przeglądnąć drugi kopiec i~te jego elementy, których klucz nie znajduje się w~tablicy, wstawić do pierwszego kopca.
+Należy jeszcze przenieść znalezione wcześniej minimum $x$ na początek wynikowej listy $L$.
+Można to zrobić dzięki wywołaniu $\proc{Singly-Linked-List-Delete}(L,x)$, a~następnie $\proc{Singly-Linked-List-Insert}(L,x)$ (patrz \refExercise{10.2-1}).
+
+Podczas działania procedury \proc{Union} dającej w~wyniku scalony kopiec o~$n$ elementach, w~tablicy z~haszowaniem umieszczany jest zbiór co najwyżej $n$ kluczy i~co najwyżej $n$ razy wykonywane jest wyszukiwanie klucza w~tej tablicy.
+Na podstawie analizy z~podrozdziału 11.5 mamy, że sumaryczny pesymistyczny czas potrzebny do przeprowadzenia tych operacji na tablicy z~haszowaniem wykorzystującej haszowanie doskonałe, wynosi $\Theta(n)$.
 
 \subproblem %10-2(c)
 Przypadek jest identyczny z~poprzednim, ale tym razem nie jest wymagane wykrywanie powtórzeń podczas operacji \proc{Union}.
 Łączenie list możemy więc zaimplementować jako ich konkatenację, to znaczy ustawienie głowy jednej listy jako elementu następującego po ogonie drugiej.
-To, w~jakiej kolejności skleimy listy, będzie zależeć od tego, której głowa przechowuje mniejszy element, co ma na celu spełnienie usprawnienia opisanego w~poprzednim punkcie.
+To, w~jakiej kolejności skleimy listy, będzie zależeć od tego, której z~nich głowa przechowuje mniejszy element, co ma na celu spełnienie usprawnienia opisanego w~poprzednim punkcie.
 Operację łączenia możemy zrealizować w~czasie stałym, jeśli dla listy w~tej reprezentacji kopca będziemy pamiętać wskaźnik na jej ogon.
 
 \bigskip
@@ -45,7 +52,7 @@ Operację łączenia możemy zrealizować w~czasie stałym, jeśli dla listy w~t
 				\hline
 				\proc{Extract-Min} & \Theta(1) & \Theta(n) & \Theta(n) \\
 				\hline
-				\proc{Union} & \Theta(n) & \Theta(n\lg n) & \Theta(1)
+				\proc{Union} & \Theta(n) & \Theta(n) & \Theta(1)
 			\end{array}
 		\]
 	\caption{Porównanie pesymistycznych czasów operacji słownikowych dla reprezentacji listowych kopców złączalnych.
