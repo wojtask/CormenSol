@@ -38,8 +38,8 @@ Lista wolnych pozycji jest listą jednokierunkową -- nie są więc wykorzystywa
 Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych pozycji jako stos.
 Będzie on zajmował wszystkie pozycje na prawo od tej wskazywanej przez \id{free}, na której znajdzie się jego wierzchołek.
 Stos jest pusty wtedy i~tylko wtedy, gdy $\id{free}=\const{nil}$.
-Przydzielanie pamięci polega na wywołaniu na stosie wolnych pozycji operacji \proc{Pop}, a~więc procedura \proc{Compact-List-Allocate-Object} jest identyczna z~oryginalną \proc{Allocate-Object}.
-Z~kolei zwalnianie pamięci to wywołanie na tym stosie operacji \proc{Push}.
+Przydzielanie pamięci polega na wywołaniu na tym stosie operacji \proc{Pop}, a~więc procedura \proc{Compact-List-Allocate-Object} jest identyczna z~oryginalną \proc{Allocate-Object}.
+Z~kolei zwalnianie pamięci to wywołanie na nim operacji \proc{Push}.
 Wcześniej jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu.
 Poniższy pseudokod stanowi implementację tej operacji.
 \begin{codebox}
@@ -77,7 +77,7 @@ Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$,
 Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji.
 Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}.
 Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.\ $-1$.
-Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
+Tuż przed końcem procedury wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
 \li	wpisz $-1$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
@@ -112,7 +112,7 @@ Tuż przed zakończeniem działania wskaźnikom \id{prev} zostaną nadane właś
 
 Procedura przechodzi przez listę $L$ trzy razy.
 Najpierw w~wierszu \ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na $-1$.
-W~tym samym kroku wyznaczana jest wartość $m$ -- rozmiar listy $L$.
+W~tym samym kroku wyznaczane jest $m$ -- rozmiar listy $L$.
 
 Kolejne przejście po liście to właściwe kompaktowanie.
 Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo.
