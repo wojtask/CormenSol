@@ -76,13 +76,13 @@ Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} dla listowej reprezentacj
 \exercise %10.2-4
 Zauważmy, że pole \attribb{L}{nil}{key} jest niewykorzystywane w~implementacji listy z~wartownikami.
 Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$.
-Jeśli na liście $L$ nie będzie elementu o~wartości $k$, to pętla tej procedury zatrzyma się na elemencie \attrib{L}{nil}, po czym zostanie on zwrócony.
+Jeśli na liście $L$ nie będzie elementu o~kluczu $k$, to pętla tej procedury zatrzyma się na elemencie \attrib{L}{nil}, po czym zostanie on zwrócony.
 
 \exercise %10.2-5
 Operacja wstawiania nowego elementu na jednokierunkową listę cykliczną $L$ umieszcza go jako następnik głowy listy $L$.
-Podczas operacji usuwania znajdowany jest poprzednik $y$ usuwanego elementu $x$, po czym \attrib{y}{next} zostaje uaktualnione.
+Podczas operacji usuwania znajdowany jest poprzednik $y$ usuwanego elementu $x$, po czym uaktualnione zostaje \attrib{y}{next}.
 Jeśli $x$ jest głową listy, to atrybut \attrib{L}{head} zostaje ustawiony na następnik $x$ albo na \const{nil}, w~przypadku gdy $x$ stanowi jedyny element listy $L$.
-Wreszcie operacja wyszukiwania przechodzi całą listę $L$, począwszy od jej głowy, zatrzymując się w~momencie odnalezienia elementu o~szukanym kluczu bądź w~chwili ponownego dotarcia do głowy listy $L$.
+Wreszcie operacja wyszukiwania przechodzi całą listę $L$, począwszy od jej głowy, i~zatrzymuje się w~momencie odnalezienia elementu o~szukanym kluczu bądź w~chwili ponownego dotarcia do głowy listy $L$.
 
 Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 \begin{codebox}
@@ -134,12 +134,12 @@ Zbiory można zaimplementować jako jednokierunkowe listy cykliczne.
 Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy.
 Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$.
 Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej.
-Oczywiście działania te są wykonywane tylko wtedy, gdy obie listy są niepuste.
+Działania te są wykonywane tylko wtedy, gdy obie listy są niepuste.
 Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolny jej element) reprezentującą zbiór $S_1\cup S_2$.
 
 \exercise %10.2-7
-W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy umieszczać kolejno usuwane elementy z~głowy listy $L$.
-Łatwo zauważyć, że pod koniec operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$.
+W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy wstawiać kolejno usuwane elementy z~głowy listy $L$.
+Łatwo zauważyć, że po przeprowadzeniu tego ciągu operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$.
 Nadanie atrybutowi \attrib{L}{head} wartości \attrib{L'}{head} wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Reverse}(L)$}
@@ -157,7 +157,7 @@ Ich wywołania w~powyższym algorytmie zajmują czas stały, stąd czasem dział
 
 \exercise %10.2-8
 Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników.
-Załóżmy, że znamy adres elementu $x$ listy $L$ i~elementu $y$ będącego poprzednikiem $x$ na liście $L$.
+Załóżmy, że znamy adres elementu $x$ na liście $L$ i~elementu $y$ będącego poprzednikiem $x$ w~$L$.
 Niech $z$ będzie następnikiem $x$ na tej liście.
 Wówczas $\attrib{x}{np}=z\func{xor}y$, zatem na podstawie własności operacji \func{xor}, aby dostać się do $z$, wystarczy obliczyć wartość
 \[
