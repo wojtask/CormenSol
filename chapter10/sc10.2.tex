@@ -28,8 +28,7 @@ Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzys
 \exercise %10.2-2
 Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie.
 Dzięki takiemu rozwiązaniu operacje dodawania i~usuwania elementów będą działać w~czasie $\Theta(1)$.
-Sprawdzenie pustości stosu sprowadza się do sprawdzenia pustości listy $L$.
-Pseudokody operacji \proc{Push} i~\proc{Pop} prezentujemy poniżej.
+Pseudokody operacji \proc{Push} i~\proc{Pop} dla opisanej implementacji stosu prezentujemy poniżej.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Push}(L,k)$}
 \li	$\attrib{x}{key}\gets k$
@@ -49,8 +48,7 @@ Pseudokody operacji \proc{Push} i~\proc{Pop} prezentujemy poniżej.
 \exercise %10.2-3
 Elementy kolejki będziemy przechowywać na liście jednokierunkowej $L$ w~kolejności od głowy kolejki do jej ogona.
 Aby jednak operacja dodawania była wykonalna w~czasie $\Theta(1)$, wymagane jest związanie z~listą $L$ dodatkowego atrybutu \attrib{L}{tail}, który będzie wskazywał na ogon listy $L$ albo na \const{nil}, jeżeli lista $L$ jest pusta.
-Oczywiście testowanie pustości kolejki polega na sprawdzeniu, czy pusta jest lista $L$.
-Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} znajdują się poniżej.
+Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} dla listowej reprezentacji kolejki znajdują się poniżej.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Enqueue}(L,k)$}
 \li	$\attrib{x}{next}\gets\const{nil}$
