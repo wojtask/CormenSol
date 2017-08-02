@@ -75,8 +75,8 @@ Implementacje operacji \proc{Enqueue} i~\proc{Dequeue} dla listowej reprezentacj
 
 \exercise %10.2-4
 Zauważmy, że pole \attribb{L}{nil}{key} jest niewykorzystywane w~implementacji listy z~wartownikami.
-Możemy zatem na początku działania procedury \proc{List-Search}$'$ przypisać mu wartość $k$.
-Jeśli na liście $L$ nie będzie elementu o~kluczu $k$, to pętla tej procedury zatrzyma się na elemencie \attrib{L}{nil}, po czym zostanie on zwrócony.
+Możemy zatem na początku działania procedury \proc{List-Search}$'$ nadać mu wartość $k$.
+Pętla \kw{while} w~tej procedurze nie musi wówczas sprawdzać warunku, czy $x\ne\attrib{L}{nil}$, ponieważ jeśli na liście $L$ nie ma elementu o~kluczu $k$, to pętla zatrzyma się na wartowniku \attrib{L}{nil} i~zostanie on zwrócony jako wynik procedury.
 
 \exercise %10.2-5
 Operacja wstawiania nowego elementu na jednokierunkową listę cykliczną $L$ umieszcza go jako następnik głowy listy $L$.
