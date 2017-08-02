@@ -46,9 +46,8 @@ Jeśli $x\ne\const{nil}$, to zostanie wypisany klucz węzła $x$ i~procedura zos
 		\End
 \end{codebox}
 Aby wypisać wszystkie klucze drzewa $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', należy wywołać $\proc{Tree-Walk}(\attrib{T}{root})$.
-
-Każdy węzeł drzewa jest wypisywany w~dokładnie jednym wywołaniu rekurencyjnym.
-Procedura wywoływana jest także dla wszystkich pustych najbardziej lewych synów i~dla wszystkich pustych braci znajdujących się w~drzewie.
+Wówczas każdy klucz drzewa $T$ będzie wypisywany w~dokładnie jednym wywołaniu rekurencyjnym.
+Ponadto na każdym poziomie rekursji, gdzie $x\ne\const{nil}$, procedura może zostać wywołana rekurencyjnie z~argumentem równym \const{nil} co najwyżej dwukrotnie.
 Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
