@@ -3,15 +3,15 @@
 \subproblem %10-2(a)
 Kopiec zaimplementujemy jako posortowaną listę jednokierunkową.
 Operacja \proc{Make-Heap} tworzy pustą listę, co zajmuje oczywiście czas stały.
-Dodanie elementu do kopca polega na dodaniu go do listy.
+Wstawienie elementu do kopca polega na dodaniu go do listy.
 Aby zachować jej uporządkowanie, musimy odnaleźć miejsce, które zajmie nowy element, co w~pesymistycznym przypadku wymaga czasu $\Theta(n)$.
 Dzięki uporządkowaniu listy można zaimplementować operacje \proc{Minimum} i~\proc{Extract-Min} działające w~czasie $\Theta(1)$.
-Z~kolei stosując algorytm opisany w~\refExercise{6.5-8} w~wersji dla list jednokierunkowych, a~następnie przechodząc po scalonej liście w~celu usunięcia powtarzających się elementów, jesteśmy w~stanie zaimplementować operację \proc{Union} w~czasie $\Theta(n)$, gdzie $n$ jest liczbą elementów na wynikowej liście.
+Z~kolei stosując algorytm z~\refExercise{6.5-8} w~wersji dla list jednokierunkowych, a~następnie przechodząc po scalonej liście w~celu usunięcia powtarzających się elementów, jesteśmy w~stanie zaimplementować operację \proc{Union} w~czasie $\Theta(n)$, gdzie $n$ jest liczbą elementów na wynikowej liście.
 
 \subproblem %10-2(b)
 W~tym przypadku także wystarczy nam lista jednokierunkowa.
-Zarówno utworzenie pustego kopca, jak i~dodanie do niego nowego elementu odbywa się w~czasie stałym, ale odszukanie oraz usunięcie minimalnego elementu wiąże się z~przeszukaniem całej listy, co zajmuje czas liniowy względem rozmiaru listy.
-Możemy jednak wprowadzić usprawnienie, dzięki któremu operacja \proc{Minimum} będzie działać w~czasie stałym, jednocześnie nie pogarszając czasów działania pozostałych operacji.
+Zarówno utworzenie pustego kopca, jak i~dodanie do niego nowego elementu odbywa się w~czasie stałym, ale odszukanie oraz usunięcie minimalnego elementu wiąże się z~przeszukaniem całej listy, co zajmuje czas liniowy względem jej rozmiaru.
+Możemy jednak wprowadzić usprawnienie, dzięki któremu operacja \proc{Minimum} będzie działać w~czasie stałym, i~jednocześnie nie pogorszymy czasów działania pozostałych operacji.
 Wystarczy bowiem utrzymywać minimalny element listy w~jej głowie.
 Wstawianie nowego elementu po takiej modyfikacji polega na umieszczeniu go w~głowie listy albo tuż za nią, w~zależności od tego, czy nowy element jest mniejszy od aktualnego minimum.
 Operacja \proc{Extract-Min} po usunięciu głowy nadal jednak musi przeszukać całą listę w~celu znalezienia nowego minimum i~przeniesienia go do głowy listy.
@@ -21,7 +21,7 @@ Podamy efektywną implementację operacji \proc{Union} uwzględniającą obie kw
 Na początku wyznaczymy element $x$ o~minimalnym kluczu spośród elementów z~obu kopców.
 Porównujemy w~tym celu elementy w~głowach obu list wejściowych i~wybieramy mniejszy z~nich.
 Następnie umieścimy wszystkie klucze z~pierwszego kopca w~tablicy z~haszowaniem, wykorzystując do tego celu metodę haszowania doskonałego opisaną w~podrozdziale 11.5.
-Teraz wystarczy tylko przeglądnąć drugi kopiec i~te jego elementy, których klucz nie znajduje się w~tablicy, wstawić do pierwszego kopca.
+Teraz wystarczy tylko przeglądnąć drugi kopiec i~te jego elementy, których klucze nie znajdują się w~tablicy, wstawić do pierwszego kopca.
 Należy jeszcze przenieść znalezione wcześniej minimum $x$ na początek wynikowej listy $L$.
 Można to zrobić dzięki wywołaniu $\proc{Singly-Linked-List-Delete}(L,x)$, a~następnie $\proc{Singly-Linked-List-Insert}(L,x)$ (patrz \refExercise{10.2-1}).
 
