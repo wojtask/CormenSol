@@ -108,11 +108,11 @@ Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
 	\item \attrib{x}{last-sibling} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
 \end{itemize}
 
-Dzięki tak zdefiniowanym atrybutom, dla danego węzła $x$ możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{left-child}, a~następnie poruszając się po wskaźnikach \id{next} kolejnych synów $x$.
-Każdy napotykany węzeł $y$ pokazuje wskaźnikiem \attrib{y}{next} na swojego brata po prawej stronie, o~ile $\attrib{y}{last-sibling}=\const{false}$.
-W~momencie dotarcia do węzła $y$, dla którego $\attrib{y}{last-sibling}=\const{true}$, odwiedzimy wszystkich synów węzła $x$.
+Dzięki tak zdefiniowanym atrybutom, dla danego węzła $x$ możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{left-child}, a~następnie poruszając się po wskaźnikach \id{next}.
+Każdy napotykany syn $y$ węzła $x$ pokazuje wskaźnikiem \attrib{y}{next} na swojego brata po prawej stronie, o~ile $\attrib{y}{last-sibling}=\const{false}$.
+W~momencie dotarcia do węzła $y$, dla którego $\attrib{y}{last-sibling}=\const{true}$, odwiedzeni zostali wszyscy synowie węzła $x$.
 Podobnie, aby ustalić ojca $x$, przechodzimy po wskaźnikach \id{next} braci $x$ znajdujących się po jego prawej stronie, aż do napotkania węzła $z$, dla którego $\attrib{z}{last-sibling}=\const{true}$.
 Warunek ten oznacza, że węzeł $\attrib{z}{next}$, o~ile istnieje, jest ojcem zarówno $z$, jak i~$x$.
-Jeśli z~kolei $\attrib{z}{next}=\const{nil}$, to $x$ jest korzeniem drzewa.
+Jeśli jednak $\attrib{x}{next}=\const{nil}$, to $x$ jest korzeniem drzewa.
 
 Podana implementacja pozwala na wyznaczenie wszystkich synów danego węzła w~czasie proporcjonalnym do ich liczby oraz jego ojca w~czasie proporcjonalnym do liczby braci danego węzła.
