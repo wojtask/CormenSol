@@ -51,7 +51,7 @@ Ponadto na każdym poziomie rekursji, gdzie $x\ne\const{nil}$, procedura może z
 Stąd wnioskujemy, że procedura wypisze wszystkie $n$ kluczy drzewa w~czasie $\Theta(n)$.
 
 \exercise %10.4-5
-W~algorytmie będziemy symulować przechodzenie drzewa w~porządku inorder, używając trzech wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem.
+W~algorytmie będziemy symulować przechodzenie drzewa metodą inorder (patrz podrozdział 12.1), używając do tego trzech wskaźników -- \id{curr} będący aktualnie odwiedzanym węzłem oraz \id{prev} i~\id{next} -- odpowiednio, poprzednio przetwarzanym i~kolejnym do przetworzenia węzłem.
 Odwiedzenie danego węzła $x$ będzie realizowane przez pomocniczą procedurę $\proc{Stackless-Inorder-Visit}(x)$.
 Polega ono na wypisaniu klucza $x$ oraz wyznacza kolejny węzeł do przetworzenia.
 \begin{codebox}
@@ -63,7 +63,6 @@ Polega ono na wypisaniu klucza $x$ oraz wyznacza kolejny węzeł do przetworzeni
 		\End
 \end{codebox}
 
-Algorytm zapisujemy w~postaci pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Stackless-Inorder-Tree-Walk}(T)$}
 \li	$\id{prev}\gets\const{nil}$
@@ -82,10 +81,11 @@ Algorytm zapisujemy w~postaci pseudokodu:
 \li			$\id{curr}\gets\id{next}$ \label{li:stackless-inorder-tree-walk-update-curr}
 		\End
 \end{codebox}
-Kolejne węzły, przez które przechodzimy w~algorytmie, wyznaczane są na podstawie wzajemnej relacji między węzłami \id{prev} i~\id{curr}.
-Gdy \id{prev} jest ojcem \id{curr}, to aktualnie schodzimy w~dół drzewa po lewych synach (wiersz \ref{li:stackless-inorder-tree-walk-go-left}).
-W~przypadku osiągnięcia liścia, odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz \ref{li:stackless-inorder-tree-walk-visit1}).
-Gdy \id{prev} jest lewym synem \id{curr}, to wracamy w~górę drzewa, odwiedzając napotykane węzły i~przechodząc ich prawe poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-visit2}).
+
+Kolejne węzły, które odwiedzamy w~algorytmie, wyznaczane są na podstawie wzajemnej relacji między węzłami \id{prev} i~\id{curr}.
+Jeśli \id{prev} jest ojcem \id{curr}, to oznacza to, że aktualnie schodzimy w~dół drzewa po lewych synach (wiersz \ref{li:stackless-inorder-tree-walk-go-left}).
+W~momencie dotarcia do liścia odwiedzamy go, po czym przechodzimy do jego prawego poddrzewa albo zawracamy w~kierunku korzenia (wiersz \ref{li:stackless-inorder-tree-walk-visit1}).
+Gdy \id{prev} jest lewym synem \id{curr}, to jesteśmy w~trakcie powrotu w~górę drzewa, jednocześnie odwiedzając napotykane węzły i~przechodząc po ich prawych poddrzewach (wiersz \ref{li:stackless-inorder-tree-walk-visit2}).
 Jeśli wreszcie \id{prev} jest prawym synem węzła \id{curr}, to wracamy w~górę drzewa z~właśnie odwiedzonego prawego poddrzewa (wiersz \ref{li:stackless-inorder-tree-walk-go-up}).
 W~wierszach \ref{li:stackless-inorder-tree-walk-update-prev} i~\ref{li:stackless-inorder-tree-walk-update-curr} następuje aktualizacja wskaźników \id{prev} i~\id{curr}, po czym algorytm kontynuuje swoje działanie, aż $\id{curr}=\const{nil}$.
 
