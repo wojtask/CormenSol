@@ -112,20 +112,20 @@ Wszystkie powyższe operacje działają w~czasie $\Theta(1)$.
 
 \exercise %10.1-6
 Wszystkie elementy kolejki będą trzymane na jednym stosie -- drugi stos będzie pełnił funkcję pomocniczą.
-Dodawanie nowego elementu do kolejki oraz sprawdzanie czy kolejka jest pusta, nie różnią się od analogicznych operacji wykonywanych na pierwszym stosie.
-Usuwanie elementu z~kolejki jest już operacją nieco bardziej skomplikowaną, gdyż należy pobrać element znajdujący się najgłębiej na tym stosie.
+Wstawianie nowego elementu do kolejki jest równoważne z~wykonaniem operacji \proc{Push} na pierwszym stosie.
+Usuwanie elementu z~kolejki jest operacją nieco bardziej skomplikowaną, gdyż w~tym celu należy pobrać element znajdujący się najgłębiej na tym stosie.
 Ściągamy wpierw z~niego wszystkie elementy za pomocą operacji \proc{Pop} i~umieszczamy kolejno na drugim stosie, wywołując ciąg operacji \proc{Push}.
 W~rezultacie drugi stos będzie zawierał wszystkie elementy kolejki w~odwrotnej kolejności.
 Teraz pobieramy i~zapamiętujemy element ze szczytu drugiego stosu, gdyż za chwilę zwrócimy go jako wynik procedury.
 Wcześniej trzeba bowiem przenieść pozostałą zawartość drugiego stosu z~powrotem do pierwszego, co przy okazji przywróci początkową kolejność elementów.
 
-Łatwo sprawdzić, że testowanie pustości kolejki oraz dodawanie do niej nowego elementu, są wykonywane w~czasie stałym, natomiast usuwanie wymaga czasu proporcjonalnego do liczby elementów kolejki.
+Wstawianie nowego elementu do kolejki odbywa się w~czasie stałym, natomiast usuwanie wymaga czasu proporcjonalnego do liczby jej elementów.
 
 \exercise %10.1-7
 Rozwiązanie jest analogiczne do rozwiązania poprzedniego zadania.
-Sprawdzanie czy stos jest pusty, jak również dodawanie nowego elementu, to identyczne operacje wywoływane na pierwszej kolejce.
-Usuwanie elementu ze stosu odbywa się poprzez pobranie wszystkich elementów z~wyjątkiem ostatniego z~pierwszej kolejki i~dodanie tych elementów do drugiej.
-Ostatni z~nich także usuwamy z~kolejki, zapamiętawszy go w~celu późniejszego zwrócenia jako wyniku operacji.
-Ostatnim krokiem jest przeniesienie reszty elementów z~powrotem do pierwszej kolejki.
+Dodawanie nowego elementu do stosu pokrywa się z~operacją \proc{Enqueue} dla pierwszej kolejki, natomiast usuwanie polega na ekstrakcji elementu znajdującego się w~ogonie pierwszej kolejki.
+Dysponując jednak jedynie operacjami słownikowymi kolejek, musimy w~tym celu posłużyć się drugą kolejką.
+Przenosimy do niej kolejno wszystkie elementy, jednocześnie zliczając je.
+Następnie wszystkie z~wyjątkiem ostatniego przenosimy z~powrotem do pierwszej kolejki, a~ostatni z~nich ściągamy i~zwracamy jako wynik operacji usuwania.
 
-Podobnie jak w~poprzednim zadaniu operacja odpowiedzialna za sprawdzenie czy stos jest pusty oraz dodawanie elementu działają w~czasie stałym, a~operacja usuwania -- w~czasie liniowym względem liczby elementów na stosie.
+Operacja odpowiedzialna za wstawienie nowego elementu na stos działa w~czasie stałym, a~operacja usuwania -- w~czasie liniowym względem liczby elementów na stosie.
