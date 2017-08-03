@@ -52,13 +52,11 @@ Klucze 1 i~2 nie spełniają nierówności postawionej w~hipotezie.} \label{fig:
 \end{figure}
 
 \exercise %12.2-5
-Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST, a~$U_x$ zbiorem składającym się ze wszystkich przodków $x$, których lewe poddrzewa zawierają $x$.
-Węzły o~kluczach większych niż \attrib{x}{key} znajdują się w~prawym poddrzewie $x$, a~także w~zbiorze $U_x$ i~w~prawych poddrzewach węzłów z~$U_x$.
-Dla każdego $u\in U_x$, dla każdego węzła $v$ z~prawego poddrzewa $u$ i~dla każdego węzła $w$ z~prawego poddrzewa $x$ spełnione są nierówności $\attrib{x}{key}<\attrib{w}{key}<\attrib{u}{key}<\attrib{v}{key}$, a~to oznacza, że następnik $x$ znajduje się w~jego prawym poddrzewie.
-
-Niech $y$ będzie następnikiem węzła $x$.
-Jeśli węzeł $y$ miałby lewego syna $z$, to na podstawie faktu, że $y$ należy do prawego poddrzewa $x$, zachodziłoby $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, a~to z~kolei przeczyłoby faktowi, że następnikiem $x$ jest węzeł $y$.
-Stąd następnik $x$ nie ma lewego syna.
+Niech $x$ będzie węzłem o~dwóch synach w~drzewie BST.
+Następnik $y$ węzła $x$, zgodnie z~definicją, jest węzłem występującym bezpośrednio po $x$ w~porządku inorder wszystkich węzłów drzewa -- należy on zatem do prawego poddrzewa $x$.
+Załóżmy teraz, że $z$ jest lewym synem $y$.
+W~porządku inorder pojawi się on przed $y$, ale po $x$, bo też znajduje się w~prawym poddrzewie $x$.
+Istnienie węzła $z$ stoi jednak w~sprzeczności z~faktem, że $y$ jest następnikiem $x$.
 
 Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
