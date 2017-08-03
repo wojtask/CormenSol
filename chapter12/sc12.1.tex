@@ -13,7 +13,6 @@ Przykładowe drzewa BST przedstawiono na rys.\ \ref{fig:12.1-1}.
 \noindent Niech $x$ będzie węzłem drzewa $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$.
 Jeśli drzewo $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\attrib{y}{key}\le\attrib{x}{key}\le\attrib{z}{key}$.
 Jeśli z~kolei drzewo $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\attrib{x}{key}\le\attrib{y}{key}$ oraz $\attrib{x}{key}\le\attrib{z}{key}$.
-
 Ta różnica sprawia, że podczas przechodzenia kopca typu min w~kolejności niemalejących węzłów, po odwiedzeniu węzła $x$ nie jest wiadomo, które jego poddrzewo należałoby następnie odwiedzić, ponieważ nie jest znana relacja między $y$ a~$z$.
 Oznacza to, że wypisanie wszystkich $n$ węzłów kopca typu min w~kolejności niemalejącej zajmuje czas wyższy niż $O(n)$.
 W~przeciwnym przypadku moglibyśmy zaimplementować algorytm heapsort w~czasie liniowym.
@@ -43,9 +42,10 @@ Algorytmy przechodzenia drzewa metodami preorder i~postorder przedstawiono poni�
 		\End
 \end{codebox}
 
-Dla każdego z~tych algorytmów można udowodnić twierdzenie analogiczne do tw.\ 12.1, a~więc każdy z~nich działa w~czasie $\Theta(n)$ na drzewie \singledash{$n$}{wierzchołkowym}.
+Dla każdego z~tych algorytmów można udowodnić twierdzenie analogiczne do tw.\ 12.1.
+Jeśli więc $T$ jest drzewem \singledash{$n$}{wierzchołkowym}, to oba wywołania $\proc{Preorder-Tree-Walk}(\attrib{T}{root})$ oraz $\proc{Postorder-Tree-Walk}(\attrib{T}{root})$ działają w~czasie $\Theta(n)$.
 
 \exercise %12.1-5
-Załóżmy nie-wprost, że istnieje algorytm konstruowania drzewa BST z~dowolnej listy $n$ elementów za pomocą porównań, którego pesymistyczny czas działania wynosi $o(n\lg n)$.
+Załóżmy nie-wprost, że istnieje algorytm konstruowania drzewa BST z~dowolnej listy $n$ elementów za pomocą porównań, którego pesymistyczny czas działania jest rzędu $o(n\lg n)$.
 Na drzewie BST utworzonym za pomocą tego algorytmu moglibyśmy następnie uruchomić algorytm przechodzenia drzewa metodą inorder i~wypisać wszystkie jego klucze w~kolejności niemalejącej w~czasie $\Theta(n)$.
 Posortowanie wejściowej listy $n$ elementów można byłoby wtedy przeprowadzić w~czasie niższym niż liniowo-logarytmiczny, co przeczyłoby tw.\ 8.1.
