@@ -13,23 +13,20 @@ Szukany algorytm został opisany w~Podręczniku w~podrozdziale 12.1 jako procedu
 Czas działania tego algorytmu dla drzewa o~$n$ węzłach wynosi $\Theta(n)$ -- mówi o~tym tw.\ 12.1 z~Podręcznika.
 
 \exercise %10.4-3
-Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą preorder (patrz podrozdział 12.1).
-Do emulowania rekursji wykorzystywany jest stos.
-Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa o~$n$ węzłach wynosi $\Theta(n)$.
+Przedstawiona poniżej procedura stanowi nierekurencyjną implementację algorytmu przechodzenia drzewa metodą inorder (patrz podrozdział 12.1).
+Algorytm próbuje zejść do lewego poddrzewa aktualnego węzła $x$, zapamiętując odwiedzane węzły na stosie $S$.
+Po dotarciu do liścia następuje powrót w~górę drzewa, podczas którego wypisywany jest klucz węzła $x$ oraz odwiedzane jest prawe poddrzewo $x$.
+Każdy węzeł drzewa jest dokładnie raz wstawiany na stos i~dokładnie raz z~niego usuwany, stąd czas działania tej procedury dla drzewa $T$ o~$n$ węzłach wynosi $\Theta(n)$.
 \begin{codebox}
-\Procname{$\proc{Iterative-Preorder-Tree-Walk}(T)$}
-\li	\If $\attrib{T}{root}=\const{nil}$
-\li		\Then \Return
-		\End
-\li	$\proc{Push}(S,\attrib{T}{root})$
-\li	\While $\proc{Stack-Empty}(S)=\const{false}$
-\li		\Do $x\gets\proc{Pop}(S)$
-\li			wypisz \attrib{x}{key}
-\li			\If $\attrib{x}{right}\ne\const{nil}$
-\li				\Then $\proc{Push}(S,\attrib{x}{right})$
-				\End
-\li			\If $\attrib{x}{left}\ne\const{nil}$
-\li				\Then $\proc{Push}(S,\attrib{x}{left})$
+\Procname{$\proc{Iterative-Inorder-Tree-Walk}(T)$}
+\li	$x\gets\attrib{T}{root}$
+\li	\While $\proc{Stack-Empty}(S)=\const{false}$ lub $x\ne\const{nil}$
+\li		\Do \If $x\ne\const{nil}$
+\li				\Then $\proc{Push}(S,x)$
+\li					$x\gets\attrib{x}{left}$
+\li				\Else $x\gets\proc{Pop}(S)$
+\li					wypisz \attrib{x}{key}
+\li					$x\gets\attrib{x}{right}$
 				\End
 		\End
 \end{codebox}
