@@ -1,25 +1,25 @@
 \subchapter{Tablice z~adresowaniem bezpośrednim}
 
 \exercise %11.1-1
-Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, zwracając element z~pierwszej niepustej pozycji.
+Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, i~zwróci element z~pierwszej niepustej pozycji.
 Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}.
 Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
-Elementy składają się tylko z~kluczy, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie.
-Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka, jeśli element o~kluczu $k$ należy do zbioru i~zero w~przeciwnym przypadku.
+W~skład elementów wchodzą tylko klucze, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie.
+Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka wtedy i~tylko wtedy, gdy element o~kluczu $k$ należy do zbioru dynamicznego.
 Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu \singledash{$k$}{tej} pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
 W~naszej implementacji elementy przechowywane w~tablicy $T$, oprócz klucza i~dodatkowych danych, zawierać będą wskaźniki \id{prev} i~\id{next}, dzięki którym elementy będą mogły zostać uszeregowane w~listy dwukierunkowe.
-Komórka o~indeksie $k$ w~tablicy $T$ będzie zawierać głowę listy elementów o~kluczu $k$ znajdujących się aktualnie w~tablicy albo \const{nil}, jeżeli lista ta będzie pusta.
+Komórka o~indeksie $k$ w~tablicy $T$ będzie zawierać głowę listy elementów o~kluczu $k$ znajdujących się aktualnie w~tablicy albo \const{nil}, jeżeli lista ta jest pusta.
 
 Dodanie nowego elementu $x$ będzie polegać na dodaniu go do listy znajdującej się w~$T[\attrib{x}{key}]$.
 Ponieważ operacja \proc{Delete} przyjmuje wskaźnik do elementu $x$, a~nie jego klucz, możliwe jest zrealizowanie jej poprzez natychmiastowe usunięcie elementu $x$ z~listy w~$T[\attrib{x}{key}]$.
 Wreszcie działanie operacji wyszukującej element o~kluczu $k$ będzie polegać na zwróceniu wartości $T[k]$.
 Każda z~opisanych operacji działa w~czasie $\Theta(1)$.
 
-Opisaną strukturę danych można traktować jak tablicę z~haszowaniem z~identycznością jako funkcją haszującą.
+Opisaną strukturę danych można traktować jak tablicę z~haszowaniem wykorzystującą łańcuchową metodę rozwiązywania kolizji z~identycznością jako funkcją haszującą.
 
 \exercise %11.1-4
 \note{Dodatkową strukturą danych, jaką należy użyć według wskazówki, powinna być tablica traktowana jak stos.}
@@ -29,13 +29,13 @@ Tablicę $S$ będziemy traktować jak stos elementów przechowywanych w~$T$ i~b�
 Rozmiar tablicy $S$, jaki ustalimy podczas jej tworzenia, określa pojemność ogromnej tablicy -- próba umieszczenia w~tej strukturze większej ilości elementów zakończy się błędem nadmiaru wykrywanym przez odpowiednią implementację operacji \proc{Push}.
 Jeśli rozmiarem ogromnej tablicy jest $m$, to można w~niej przechowywać klucze z~uniwersum $U=\{0,1,\dots,m-1\}$.
 
-Tablice $T$ i~$S$ weryfikują się wzajemnie.
-To znaczy, jeśli klucz $k$ znajduje się w~tablicy $T$, to $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera element o~kluczu $k$.
+Powiemy, że klucz $k$ należy do zbioru dynamicznego reprezentowanego przez ogromną tablicę $T$ wtedy i~tylko wtedy, gdy $T[k]$ przechowuje poprawny indeks $j$ tablicy $S$, a~$S[j]$ zawiera element o~kluczu $k$.
 Innymi słowy, zachodzą zależności: $1\le T[k]\le\attrib{S}{top}$, $\attrib{S[T[k]]}{key}=k$ oraz $T[\attrib{S[j]}{key}]=j$.
+Tablice $T$ i~$S$ weryfikują się więc wzajemnie.
 
 Inicjowanie tablicy $T$ sprowadza się do utworzenia tablicy $S$.
-Aby wyszukać element o~kluczu $k$, należy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$\attrib{S[T[k]]}{key}=k$.
-Jeśli warunki te są spełnione, to zwrócony zostanie element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
+Aby wyszukać element o~kluczu $k$, wystarczy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$\attrib{S[T[k]]}{key}=k$.
+Jeśli warunki te są spełnione, to należy zwrócić element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
 W~celu wstawienia elementu $x$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy umieścić $x$ na stosie $S$, po czym zaktualizować $T[\attrib{x}{key}]$:
 \begin{codebox}
 \Procname{$\proc{Huge-Array-Insert}(T,S,x)$}
