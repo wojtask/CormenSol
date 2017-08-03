@@ -1,8 +1,8 @@
 \subchapter{Tablice z~haszowaniem}
 
 \exercise %11.2-1
-Dla kluczy $k$, $l$ ($k\ne l$), definiujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$.
-Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu 5.1 otrzymujemy $\E(X_{kl})=1/m$.
+Dla kluczy $k$, $l$ ($k\ne l$) zdefiniujemy zmienną losową $X_{kl}=\I(h(k)=h(l))$.
+Przy założeniu o~prostym równomiernym haszowaniu mamy $\Pr(h(k)=h(l))=1/m$ i~na podstawie lematu 5.1, $\E(X_{kl})=1/m$.
 Niech $X$ będzie zmienną losową oznaczającą liczbę kolizji w~tablicy $T$, czyli
 \[
     X = \sum_{k=1}^{n-1}\sum_{l=k+1}^nX_{kl}.
@@ -69,5 +69,5 @@ Aby go uzyskać, musieliśmy założyć, że lista wolnych pozycji $F$ jest list
 
 \exercise %11.2-5
 Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$.
-Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ elementom ze zbioru $U$.
-Fakt ten wynika z~nieco zmodyfikowanej wersji \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
+Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ kluczom ze zbioru $U$.
+Fakt ten wynika z~nieco zmodyfikowanej \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
