@@ -14,28 +14,29 @@ Mamy
 przy czym w~ostatniej równości wykorzystaliśmy \refExercise{C.1-7}.
 
 \exercise %12.4-2
-Rozważmy drzewo binarne w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów, natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce odchodzącej od tegoż pełnego drzewa w~dół na coraz to niższe poziomy.
+Rozważmy drzewo binarne o~$n\ge16$ węzłach, w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów (dla zwiększenia czytelności pomijamy branie części całkowitych), natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce w~dół od jednego z~węzłów pełnego drzewa i~rozciąga się na $\sqrt{n\lg n}$ poziomów.
 Drzewo takie ma wysokość
 \[
 	\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)+\sqrt{n\lg n} = \Theta\bigl(\!\sqrt{n\lg n}\bigr) = \omega(\lg n).
 \]
 
 O~tym, że średnia głębokość węzła w~tym drzewie wynosi $\Theta(\lg n)$, przekonamy się, wyprowadzając najpierw górne, a~potem dolne oszacowanie tej wartości.
-W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość każdego z~$n-\sqrt{n\lg n}$ węzłów z~części stanowiącej pełne drzewo binarne oraz $O\bigl(\lg n+\sqrt{n\lg n}\bigr)$ jako ograniczenia na głębokość każdego z~$\sqrt{n\lg n}$ węzłów ze ścieżki odchodzącej od pełnego drzewa.
-Średnia głębokość węzła wynosi więc co najwyżej
+W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość każdego z~$n-\sqrt{n\lg n}$ węzłów z~części stanowiącej pełne drzewo binarne oraz $O\bigl(\lg n+\sqrt{n\lg n}\bigr)$ jako ograniczenia na głębokość każdego z~pozostałych $\sqrt{n\lg n}$ węzłów.
+Średnia głębokość węzła w~drzewie wynosi więc co najwyżej
 \[
 	\frac{1}{n}\cdot O\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n+\sqrt{n\lg n}\,\bigl(\lg n+\sqrt{n\lg n}\bigr)\bigr) = \frac{1}{n}\cdot O(n\lg n) = O(\lg n).
 \]
-Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$\Theta\bigl(n-\sqrt{n\lg n}\bigr)$ węzłów, z~których każdy ma głębokość $\Theta(\lg n)$.
+Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$n-\sqrt{n\lg n}$ węzłów, z~których każdy ma głębokość $\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)$.
+Dla $n\ge16$ zachodzi $\sqrt{n\lg n}\le n/2$, dlatego liczbę węzłów w~pełnym drzewie binarnym można ograniczyć przez $n-\sqrt{n\lg n}\ge n-n/2=\Omega(n)$, a~wysokość każdego z~nich przez $\Omega(\lg n)$.
 Stąd średnia głębokość węzła ograniczona jest z~dołu przez
 \[
-	\frac{1}{n}\cdot\Theta\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n\bigr) = \frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
+	\frac{1}{n}\cdot\Omega(n\lg n) = \Omega(\lg n).
 \]
 
 W~drugiej części zadania udowodnimy, że wysokość drzewa binarnego o~$n$ węzłach i~średniej głębokości węzła $\Theta(\lg n)$ wynosi $O\bigl(\!\sqrt{n\lg n}\bigr)$.
 Niech dane będzie drzewo binarne o~$n$ węzłach i~wysokości $h$ ze średnią głębokością węzła $\Theta(\lg n)$.
 Istnieje więc ścieżka od korzenia w~dół tego drzewa, na której głębokościami węzłów są kolejno 0, 1, \dots, $h$.
-Oznaczmy przez $U$ zbiór węzłów na tej ścieżce, przez $U'$ zbiór wszystkich pozostałych węzłów drzewa, a~przez $d(x)$ głębokość węzła $x$.
+Oznaczmy przez $U$ zbiór węzłów na jednej z~takich ścieżek, przez $U'$ zbiór wszystkich pozostałych węzłów drzewa, a~przez $d(x)$ głębokość węzła $x$.
 Wówczas średnia głębokość węzła w~tym drzewie wynosi
 \[
 	\frac{1}{n}\biggl(\sum_{x\in U}d(x)+\sum_{x\in U'}d(x)\biggr) \ge \frac{1}{n}\sum_{x\in U}d(x) = \frac{1}{n}\sum_{i=0}^hi = \frac{1}{n}\cdot\Theta(h^2).
@@ -48,12 +49,12 @@ co stoi w~sprzeczności z~założeniem, że średnią głębokością węzła je
 A~zatem wysokość drzewa musi być ograniczona przez $O\bigl(\!\sqrt{n\lg n}\bigr)$.
 
 \exercise %12.4-3
-Istnieje 5 różnych drzew BST o~$n=3$ węzłach, podczas gdy jest $3!=6$ permutacji trójelementowych.
-Jest więc jasne, że któreś z~tych drzew można zbudować z~więcej niż jednej permutacji.
+Istnieje 5 różnych drzew BST przechowujących zbiór kluczy $\{1,2,3\}$, podczas gdy permutacji tego zbioru jest $3!=6$.
+Jedno z~tych drzew można więc zbudować z~więcej niż jednej permutacji.
 Rys.~\ref{fig:12.4-3} ilustruje każde drzewo, podając permutacje, z~których one powstają.
 \begin{figure}[!ht]
 	\centering \input{fig12.4-3}
-	\caption{Drzewa BST uzyskane z~permutacji {\sffamily\bfseries(a)} $\langle1,2,3\rangle$,
+	\caption{Drzewa BST powstałe w~wyniku wstawienia kluczy 1, 2, 3 w~kolejności wyznaczonej przez permutację {\sffamily\bfseries(a)} $\langle1,2,3\rangle$,
 {\sffamily\bfseries(b)} $\langle1,3,2\rangle$,
 {\sffamily\bfseries(c)} $\langle2,1,3\rangle$ oraz $\langle2,3,1\rangle$, {\sffamily\bfseries(d)} $\langle3,1,2\rangle$, {\sffamily\bfseries(e)} $\langle3,2,1\rangle$.} \label{fig:12.4-3}
 \end{figure}
