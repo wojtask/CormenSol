@@ -61,16 +61,15 @@ Istnienie węzła $z$ stoi jednak w~sprzeczności z~faktem, że $y$ jest następ
 Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
 \exercise %12.2-6
-Niech $U_x$ będzie zbiorem zdefiniowanym jak w~\refExercise{12.2-5}.
-Na podstawie rozumowania z~tamtego zadania mamy, że dla każdego $u\in U_x$ i~dla każdego węzła $v$ z~prawego poddrzewa $u$ zachodzą nierówności $\attrib{x}{key}<\attrib{u}{key}<\attrib{v}{key}$.
-Następnik $y$ węzła $x$ jest więc elementem zbioru $U_x$ o~minimalnym kluczu.
+Udowodnimy to stwierdzenie bez użycia założenia o~unikalności kluczy w~drzewie.
 
-Niech $u_1$, $u_2\in U_x$.
-Węzeł $x$ należy do lewego poddrzewa zarówno $u_1$, jak i~$u_2$.
-Węzły te nie mogą znajdować się w~drzewie $T$ na tej samej głębokości, bo wtedy ich lewe poddrzewa są rozłączne.
-Załóżmy więc bez utraty ogólności, że $u_2$ leży w~$T$ głębiej niż $u_1$.
-Wówczas węzeł $u_2$ oraz jego lewe poddrzewo znajdują się w~lewym poddrzewie węzła $u_1$.
-Wynika stąd, że węzły ze zbioru $U_x$ na większych głębokościach w~drzewie $T$ mają mniejsze klucze, a~to oznacza, że następnikiem węzła $x$ jest najgłębszy węzeł z~$U_x$, czyli najniższy przodek $x$, którego lewy syn jest także przodkiem $x$.
+Oczywiście następnik węzła $x$ nie należy do jego lewego poddrzewa.
+Nie jest nim także żaden przodek $x$, którego prawe poddrzewo zawiera $x$, ani żaden węzeł z~lewego poddrzewa takiego przodka.
+Wszystkie te węzły bowiem występują w~porządku inorder przed $x$.
+Następnika $x$ należy więc szukać wśród tych przodków $x$, które zawierają $x$ w~swoich lewych poddrzewach.
+Niech $y_1$, $y_2$ będą dwoma takimi przodkami $x$ i~przyjmijmy, że $y_1$ zajmuje głębszy poziom od $y_2$.
+Wynika stąd, że $y_1$ należy do lewego poddrzewa $y_2$, a~więc $y_1$ występuje pomiędzy $x$ a~$y_2$ w~porządku inorder.
+Wnioskujemy zatem, że następnikiem węzła $x$ jest najniższy przodek $x$ mający $x$ w swoim lewym poddrzewie, a~to jest równoważne temu, że jego lewy syn także jest przodkiem $x$.
 
 \exercise %12.2-7
 Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.
