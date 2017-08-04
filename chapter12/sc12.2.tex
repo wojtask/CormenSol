@@ -84,25 +84,25 @@ Po pokonaniu ścieżki krawędź ta nie zostanie ponownie wykorzystana, poniewa�
 
 Załóżmy teraz, że $v$ jest prawym synem $u$.
 Tuż po wypisaniu klucza $u$ wywoływane jest $\proc{Tree-Successor}(u)$.
-Aby dostać się do węzła o~najmniejszym kluczu w~prawym poddrzewie węzła $u$, algorytm musi zejść krawędzią $\langle u,v\rangle$.
+Aby dostać się do następnika węzła $u$ znajdującego się w~jego prawym poddrzewie, algorytm musi zejść krawędzią $\langle u,v\rangle$.
 Przejście nią w~drodze powrotnej nastąpi po odwiedzeniu wszystkich węzłów z~prawego poddrzewa $u$, o~ile będą wówczas jeszcze nieodwiedzone węzły w~drzewie.
 Będzie to miało miejsce podczas wywołania \proc{Tree-Successor} dla węzła o~maksymalnym kluczu w~prawym poddrzewie $u$, kiedy to algorytm będzie przechodził w~górę drzewa do węzła następującego po $u$ w~porządku inorder.
 Krawędź $\langle u,v\rangle$ należy do tej ścieżki i~z~racji tego, że wszystkie węzły prawego poddrzewa $u$ zostały odwiedzone, nie zostanie już użyta ponownie.
 
 \exercise %12.2-8
-Na podstawie \refExercise{12.2-6}, jeśli węzeł początkowy $u$ nie ma prawego syna, to w~wyniku wywołania $\proc{Tree-Successor}(u)$, następnym odwiedzonym węzłem będzie najniższy przodek $u$, którego lewy syn też jest przodkiem $u$.
-Oznaczmy ten węzeł przez $v$.
-Jeśli z~kolei prawy syn $u$ istnieje, to zanim algorytm dotrze do $v$, odwiedzi on wpierw prawe poddrzewo $u$.
-O~ile nie zakończył swojego działania podczas tego kroku, to w~obu przypadkach opisane operacje zostają następnie powtórzone dla węzła $v$.
-Widać zatem, że algorytm porusza się w~górę drzewa po ścieżce, której długość ograniczona jest przez wysokość drzewa, odwiedzając prawe poddrzewa węzłów z~tej ścieżki.
-Ponieważ mamy $k$ wywołań \proc{Tree-Successor}, to sumaryczna liczba węzłów w~tych poddrzewach wynosi co najwyżej $O(k)$.
-Algorytm działa więc w~czasie $O(k+h)$.
+Niech $x$ będzie początkowym węzłem, a~$y$ -- jego \singledash{$k$}{tym} następnikiem.
+Z~rozwiązania poprzedniego zadania mamy, że każda krawędź drzewa pokonywana jest w~wywołaniach \proc{Tree-Successor} co najwyżej dwukrotnie.
+A~zatem każdy z~$k$ węzłów od $x$ do $y$ w~porządku inorder będzie odwiedzany w~serii wywołań \proc{Tree-Successor} co najwyżej 3 razy.
+Oznaczmy przez $z$ najniższego wspólnego przodka węzłów $x$ i~$y$.
+W~ciągu wywołań \proc{Tree-Successor} badane są także węzły będące poprzednikami $x$ i~węzły będące następnikami $y$.
+Wszystkie one występują na prostej ścieżce z~$x$ do $z$ lub na prostej ścieżce z~$z$ do $y$, dlatego ich liczbę można ograniczyć od góry przez $2h$.
+Górne ograniczenie na czas działania danego ciągu wywołań wynosi zatem $3k+2h=O(k+h)$.
 
 \exercise %12.2-9
 Dowód sprowadza się do pokazania, że $y$ jest albo następnikiem albo poprzednikiem węzła $x$.
 
 Załóżmy, że $x$ jest lewym synem węzła $y$.
 Zauważmy, że w~drzewie $T$ istnieje następnik węzła $x$, ponieważ $x$ nie jest skrajnie prawym węzłem drzewa $T$.
-Możemy więc skorzystać z~\refExercise{12.2-6}, żeby pokazać, że następnikiem $x$ jest w~rzeczywistości $y$.
-Symetryczne twierdzenie do tego z~\refExercise{12.2-6} charakteryzujące poprzednika węzła o~pustym lewym poddrzewie, można dowieść, korzystając z~analogicznego rozumowania z~rozwiązania tamtego zadania.
-W~przypadku, gdy $x$ jest prawym synem $y$, na podstawie tego twierdzenia pokazujemy, że $y$ jest poprzednikiem $x$.
+Możemy więc skorzystać z~\refExercise{12.2-6}, z~którego wynika, że następnikiem $x$ jest w~rzeczywistości $y$.
+Korzystając z~analogicznego rozumowania z~rozwiązania tamtego zadania, można udowodnić symetryczne twierdzenie charakteryzujące poprzednika węzła o~pustym lewym poddrzewie.
+W~przypadku, gdy $x$ jest prawym synem $y$, na podstawie twierdzenia symetrycznego do tego z~\refExercise{12.2-6} pokazujemy, że $y$ jest poprzednikiem $x$.
