@@ -2,28 +2,29 @@
 \note{W~procedurze \proc{RB-Delete} w~linii 3 powinna być wywoływana wersja operacji następnika dla drzew czerwono-czarnych, która różni się od \proc{Tree-Successor} tym, że przyjmuje drzewo\/ $T$ jako dodatkowy parametr oraz używa\/ \attrib{T}{nil} zamiast \const{nil}.
 Z~kolei w~linii 15 powinny być kopiowane tylko dodatkowe dane z~węzła\/ $y$ do\/ $z$.
 W~szczególności kolor węzła\/ $z$ powinien pozostać bez zmian.
-Ponadto w~linii 22 procedury \proc{RB-Delete-Fixup} nie chodzi tylko o~zamianę wskaźników, ale także o~zamianę każdej lewej rotacji na prawą i~vice versa.}
+Ponadto w~linii 22 procedury \proc{RB-Delete-Fixup} nie wystarczy tylko zamienić wskaźniki, ale także każdą lewą rotację na prawą i~vice versa.}
 \bignegskip
 
 \exercise %13.4-1
-Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwany jest korzeń drzewa, którego dokładnie jeden z~synów jest czerwony.
+Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwany jest korzeń drzewa, którego jedyny syn jest czerwony.
 Wtedy jednak w~wywołaniu \proc{RB-Delete-Fixup} nie jest wykonywana ani jedna iteracja pętli \kw{while} i~korzeń jest kolorowany na czarno w~wierszu 23.
 
 Procedura \proc{RB-Delete-Fixup} aktualizuje jednak kolor niektórych węzłów na czerwono i~dokonuje pewnych rotacji.
 Przyjrzymy się tym sytuacjom i~sprawdzimy, że w~żadnej z~nich czerwony węzeł nie staje się korzeniem drzewa.
 Zastosujemy identyczny podział na przypadki, jak w~omawianiu działania procedury w~Podręczniku.
 W~przypadkach 1 i~3 zamiana kolorów między czarnym węzłem i~jego czerwonym synem, a~następnie wykonanie rotacji na tym węźle powoduje, że czerwony z~nich zostaje umieszczony w~drzewie głębiej niż czarny, przez co nie może on być korzeniem.
-W~przypadku 2 na czerwono zostaje pokolorowany brat węzła $x$, ale oczywiście nie może być on korzeniem drzewa z~racji istnienia jego ojca.
+W~przypadku 2 na czerwono zostaje pokolorowany brat węzła $x$, ale oczywiście nie może być on korzeniem drzewa.
 W końcu, po wykonaniu przypadku 4, $x$ jest ustawione na \attrib{T}{root} i~pętla kończy działanie, po czym koloruje $x$ na czarno.
 
 \exercise %13.4-2
-Jeśli węzeł $x$ jest czerwony, to pętla \kw{while} w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się i~węzeł $x$ jest kolorowany na czarno w~wierszu 23, co przywraca własność 4.
+Jeśli węzeł \attrib{y}{p} jest czerwony, to $y$ jest czarny i~w~wierszu 17 operacji \proc{RB-Delete} wywoływana jest procedura \proc{RB-Delete-Fixup} dla czerwonego węzła $x$.
+Pętla \kw{while} tej procedury nie wykonuje się i~węzeł $x$ jest kolorowany na czarno w~wierszu 23, co przywraca własność~4.
 
 \exercise %13.4-3
 Ciąg drzew po każdej operacji usunięcia węzła został zilustrowany na rys.\ \ref{fig:13.4-3}.
 \begin{figure}[!ht]
 	\centering \input{fig13.4-3}
-	\caption{Drzewa czerwono-czarne powstałe po usunięciu elementów 8, 12, 19, 31, 38, 41 kolejno z~drzewa czerwono-czarnego $T$ skonstruowanego w~\refExercise{13.3-2}.
+	\caption{Drzewa czerwono-czarne powstałe po usunięciu węzłów o~kluczach 8, 12, 19, 31, 38, 41 kolejno z~drzewa czerwono-czarnego $T$ skonstruowanego w~\refExercise{13.3-2}.
 	{\sffamily\bfseries(a)} Drzewo $T$ przed rozpoczęciem usuwania.
 	{\sffamily\bfseries(b)} Wycięcie węzła o~kluczu 8 nie powoduje naruszenia żadnej własności drzewa czerwono-czarnego.
 	{\sffamily\bfseries\doubledash{(c)}{(e)}} Po wycięciu kolejnych elementów, w~drzewie naruszona zostaje wyłącznie własność 5.
@@ -46,7 +47,7 @@ Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{n
 Dzięki temu w~wierszach 4, 5, 10, 14 i~15 nigdy nie pojawi się wartownik \attrib{T}{nil}.
 Możemy wyeliminować też linijki 19 -- węzeł \attrib{w}{right} początkowo jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
 
-Można także sprawdzić, że w~żadnym z~wywołań \proc{Left-Rotate} i~\proc{Right-Rotate} w~procedurze \proc{RB-Delete-Fixup} nie ma odwołań do pól wartownika, ponieważ wszystkie węzły, na których operacje te pracują, są wewnętrznymi węzłami drzewa.
+Także w~żadnym z~wywołań \proc{Left-Rotate} i~\proc{Right-Rotate} w~procedurze \proc{RB-Delete-Fixup} nie ma odwołań do pól wartownika, ponieważ wszystkie węzły, na których operacje te pracują, są węzłami wewnętrznymi.
 
 \exercise %13.4-5
 W~tabeli \ref{tab:13.4-5} zebrano liczby czarnych węzłów znajdujących się na ścieżkach od korzenia każdego poddrzewa sprzed transformacji do poddrzew $\alpha$, $\beta$, \dots, $\zeta$.
