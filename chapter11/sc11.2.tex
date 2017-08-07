@@ -29,38 +29,32 @@ Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej
 W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
 
 \exercise %11.2-4
-\note{Treść zadania podaje opis tablicy z~haszowaniem jako struktury heterogenicznej, czyli przechowującej obiekty różnego typu w~zależności od zajętości pozycji danego obiektu. W~rozwiązaniu podajemy zaś implementację tej struktury w~postaci tablicy homogenicznej.}
-
-\noindent Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik przechowujący informację o~tym, czy pozycja ta jest wolna.
+Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik przechowujący informację o~tym, czy pozycja ta jest zajęta.
 Na zajętych pozycjach oprócz elementu będzie przechowywany wskaźnik (który oznaczymy przez \id{next}) do innej pozycji tablicy $T$ lub wskaźnik pusty, dzięki czemu komórki te będą mogły formować listy jednokierunkowe.
 Wolne pozycje natomiast tworzyć będą listę dwukierunkową $F$, do zrealizowania której wykorzystane zostaną dwa wskaźniki na każdej wolnej pozycji -- \id{prev} na poprzednik i~\id{next} na następnik.
-Do zapamiętania, gdzie znajduje się głowa listy $F$, zostanie użyty dodatkowy wskaźnik będący atrybutem tablicy $T$.
-Wskaźnik ten oraz \id{prev} i~\id{next} są tutaj tak naprawdę liczbami całkowitymi określającymi indeksy tablicy $T$, przy czym pusty wskaźnik (odpowiednik \const{nil}) będziemy reprezentować wartością $-1$.
+Do wskazania na głowę listy $F$ zostanie użyte dodatkowe pole tablicy $T$.
+Atrybut ten oraz wskaźniki \id{prev} i~\id{next} będą tak naprawdę liczbami całkowitymi określającymi indeksy tablicy $T$, przy czym pusty wskaźnik (odpowiednik \const{nil}) będziemy reprezentować wartością $-1$.
 
-W~celu zachowania homogeniczności tablicy $T$ musimy sprawić, by pozycje wolne i~zajęte składały się z~tego samego zestawu atrybutów.
-Niech więc pole odpowiedzialne za przechowywanie elementu będzie wskaźnikiem na ten element.
-Dopuścimy obecność tego wskaźnika również na wolnych pozycjach -- przyjmie on wtedy wartość \const{nil}.
-Z~kolei pole \id{prev} możemy wykorzystać w~dwóch celach -- do przechowywania indeksu poprzedniej pozycji na liście $F$, jak również jako znacznik określający zajętość aktualnej pozycji.
-Jeśli tablica $T$ ma długość $m$, to na wolnych pozycjach pole \id{prev} może przyjąć wartości od 0 do $m-1$ oznaczające indeksy tablicy $T$ oraz wartość $-1$ jako reprezentację wskaźnika pustego.
-Przyjmiemy natomiast, że na zajętych pozycjach pole to będzie miało wartość $m$ i~będzie to warunek rozstrzygający o~zajętości danej pozycji.
-
-Aby dodać do tablicy $T[0\twodots m-1]$ element $x$ o~kluczu $k$, wpierw sprawdzamy, czy pozycja $h(k)$ w~$T$ jest wolna.
-Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$, ustawiamy \attrib{T[h(k)]}{prev} na $m$, a~\attrib{T[h(k)]}{next} -- na $-1$.
+Aby wstawić do tablicy $T$ element $x$ o~kluczu $k$, wpierw należy sprawdzić, czy pozycja $h(k)$ w~$T$ jest wolna.
+Jeśli tak, to usuwamy ją z~listy $F$, umieszczamy na niej element $x$ i~ustawiamy \attrib{T[h(k)]}{next} na $-1$.
 W~przeciwnym razie na pozycji $h(k)$ znajduje się już inny element $y$ o~kluczu $l$.
-Wówczas usuwamy głowę listy $F$, przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next} i~ustawiamy znacznik \id{prev} tej pozycji na $m$.
-Następnie do komórki $h(k)$ wstawiamy element $x$.
+Wówczas usuwamy głowę listy $F$ i~przenosimy na nią element $y$ wraz ze wskaźnikiem \attrib{T[h(k)]}{next}, a~do komórki $h(k)$ wstawiamy element $x$.
+Pamiętamy też o~ustawieniu znacznika zajętości na pobranej pozycji z~listy $F$.
 
 Pozostaje uaktualnić wskaźnik \attrib{T[h(k)]}{next}.
 W~tym celu oznaczmy przez $j$ indeks nowej pozycji elementu $y$ i~rozważmy dwie sytuacje.
 W~pierwszej z~nich na podstawie funkcji haszującej elementowi $y$ odpowiada komórka $h(k)$, tzn.\ $h(l)=h(k)$.
-Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny należeć do tej samej listy zajętych pozycji.
+Wówczas wskaźnikiem \attrib{T[h(k)]}{next} należy pokazać na pozycję $j$, gdyż $x$ i~$y$ powinny znaleźć się na tej samej liście zajętych pozycji.
 W~drugim przypadku element $y$ znajdował się na liście zajętych pozycji rozpoczynającej się na indeksie $h(l)\ne h(k)$.
 Musimy zatem przejść po tej liście i~zmodyfikować ją tak, aby wskaźnik \id{next} poprzednika elementu $y$ pokazywał teraz na pozycję $j$.
 Element $x$ będzie wówczas jedyny na swojej liście -- wystarczy więc wpisać do \attrib{T[h(k)]}{next} wartość $-1$.
 
-Ponieważ traktujemy zajęte pozycje tablicy $T$ jak węzły list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu pozycji, która go zawiera, z~listy o~głowie w~$h(k)$.
-Należy pamiętać jeszcze o~tym, aby wstawić zwolnioną pozycję na początek listy $F$ i~przestawić znacznik \id{prev} na $-1$.
-Z~kolei wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
+Ponieważ traktujemy zajęte pozycje tablicy $T$ jak węzły list jednokierunkowych, to usuwanie elementu $x$ o~kluczu $k$ polega na usunięciu węzła, który go zawiera, z~listy o~głowie w~$h(k)$.
+Musimy jednakże pamiętać o~tym, że lista ta, o~ile po usunięciu $x$ będzie zawierać jeszcze jakieś węzły, powinna mieć głowę na pozycji $h(k)$.
+Jeśli $x$ leży w~głowie swojej listy, to wystarczy na jego miejsce przenieść element po nim następujący.
+Wycięty węzeł z~elementem $x$ należy jeszcze wstawić na listę $F$ i~oznaczyć tę pozycję tablicy jako wolną.
+
+Wreszcie wyszukiwanie elementu o~kluczu $k$ sprowadza się do przeglądnięcia listy o~głowie w~$h(k)$ i~zwrócenia wskaźnika do takiego elementu (o~ile istnieje) albo wartości \const{nil}.
 
 Zauważmy, że przechowywanie list zajętych pozycji bezpośrednio w~tablicy nie zmienia czasów działania operacji słownikowych w~porównaniu z~zastosowaniem metody łańcuchowej, w~której listy te znajdują się poza tablicą.
 Ponadto w~opisanej reprezentacji mamy zawsze $\alpha\le1$.
