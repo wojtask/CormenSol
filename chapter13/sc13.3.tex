@@ -6,18 +6,18 @@
 Pokolorowanie węzła $z$ na czarno mogłoby spowodować naruszenie własności 5 drzewa czerwono-czarnego, podczas gdy procedura \proc{RB-Insert-Fixup} operuje na drzewie, w~którym własność ta jest zachowana i~nie narusza jej w~trakcie swojego działania.
 
 \exercise %13.3-2
-Na rys.\ \ref{fig:13.3-2} zilustrowano ciąg drzew czerwono-czarnych powstających po każdym wywołaniu operacji \proc{Tree-Insert} dla zadanego ciągu elementów.
+Na rys.\ \ref{fig:13.3-2} zilustrowano ciąg drzew czerwono-czarnych powstających po każdym wywołaniu operacji \proc{RB-Insert} dla węzłów o~zadanych kluczach.
 \begin{figure}[!ht]
 	\centering \input{fig13.3-2}
 	\caption{Drzewa czerwono-czarne powstałe po wstawieniu węzłów o~kluczach 41, 38, 31, 12, 19, 8 kolejno do początkowo pustego drzewa.
 	{\sffamily\bfseries(a)} Po wstawieniu pierwszego elementu drzewo składa się tylko z~korzenia, który początkowo ma kolor czerwony.
 	Przywrócenie własności 2 drzewa czerwono-czarnego następuje w~ostatnim wierszu procedury \proc{RB-Insert-Fixup}.
 	{\sffamily\bfseries(b)} Dodanie węzła o~kluczu 38 nie powoduje naruszenia żadnej własności drzewa czerwono-czarnego.
-	{\sffamily\bfseries\doubledash{(c)}{(f)}} Wstawienie każdego kolejnego elementu produkuje drzewo, w~którym naruszona jest własność 4 przywracana następnie w~procedurze \proc{RB-Insert-Fixup}.} \label{fig:13.3-2}
+	{\sffamily\bfseries\doubledash{(c)}{(f)}} Wstawienie każdego kolejnego elementu tworzy drzewo, w~którym naruszona jest własność 4, przywracana następnie w~procedurze \proc{RB-Insert-Fixup}.} \label{fig:13.3-2}
 \end{figure}
 
 \exercise %13.3-3
-Wersja rysunków 13.5 i~13.6 z~Podręcznika z~podanymi czarnymi wysokościami węzłów została zaprezentowana na rys.\ \ref{fig:13.3-3}.
+Rys.\ \ref{fig:13.3-3} jest wersją rysunków 13.5 i~13.6 z~Podręcznika z~podanymi czarnymi wysokościami węzłów.
 Wartości te wyznaczone są jednoznacznie dla każdego węzła, co oznacza, że własność 5 drzewa czerwono-czarnego faktycznie pozostaje zachowana podczas działania procedury \proc{RB-Insert-Fixup}.
 \begin{figure}[!ht]
 	\centering \input{fig13.3-3}
@@ -75,12 +75,12 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie.
 \end{codebox}
 W~każdej iteracji pętli \kw{while}, oprócz węzła $z$, potrzebujemy znać także jego ojca i~dziadka (ojca ojca).
 Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~$r$.
-Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie im dodatkowego parametru -- ojca węzła, dla którego rotację wykonujemy.
-W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do prawej rotacji.
+Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie im dodatkowego parametru w~postaci wskaźnika na ojca węzła, dla którego rotacja jest wykonywana.
+W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do operacji rotacji.
 Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo pętla \kw{while} nie wykona więcej iteracji i~żaden element nie będzie już ściągany z~$S$.
 
-Poniżej znajduje się operacja lewej rotacji na węźle $x$ w~drzewie $T$, która nie korzysta ze wskaźników na ojca.
-Zamiast tego otrzymuje ona trzeci parametr, będący ojcem węzła $x$.
+Poniżej znajduje się operacja lewej rotacji na węźle $x$ w~drzewie $T$, która nie korzysta z~atrybutów węzłów wskazujących na ojca.
+Zamiast tego otrzymuje ona trzeci parametr, będący wskaźnikiem na ojca węzła $x$.
 \begin{codebox}
 \Procname{$\proc{RB-Parentless-Left-Rotate}(T,x,p)$}
 \li	$y\gets\attrib{x}{right}$
@@ -94,4 +94,4 @@ Zamiast tego otrzymuje ona trzeci parametr, będący ojcem węzła $x$.
 		\End
 \li	$\attrib{y}{left}\gets x$
 \end{codebox}
-Implementacja prawej rotacji nie wykorzystującej wskaźników na ojca jest analogiczna.
+Implementacja prawej rotacji nie wykorzystującej pola $p$ jest analogiczna.
