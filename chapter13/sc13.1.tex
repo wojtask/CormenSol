@@ -10,8 +10,8 @@ Drzewa zostały przedstawione na rys.\ \ref{fig:13.1-1}.
 
 \exercise %13.1-2
 Rys.\ \ref{fig:13.1-2} przedstawia drzewo po dodaniu nowego węzła o~nieustalonym kolorze.
-Pokolorowanie go na czerwono naruszy jednak własność 4 drzewa czerwono-czarnego.
-Natomiast nadanie mu koloru czarnego naruszy własność 5 -- na prostej ścieżce od korzenia drzewa do liścia \const{nil}, będącego synem nowego węzła, znajdzie się 5 czarnych węzłów, a~na prostej ścieżce od korzenia do dowolnego innego liścia \const{nil} będą 4 czarne węzły.
+Pokolorowanie go na czerwono naruszyłoby jednak własność 4 drzewa czerwono-czarnego.
+Natomiast nadanie mu koloru czarnego spowodowałoby naruszenie własności 5 -- na prostej ścieżce od korzenia drzewa do liścia \const{nil}, będącego synem nowego węzła, znalazłoby się 5 czarnych węzłów, a~na prostej ścieżce od korzenia do dowolnego innego liścia \const{nil} byłyby 4 czarne węzły.
 A~zatem, niezależnie od wyboru koloru dla nowego węzła, wynikowe drzewo nie będzie drzewem czerwono-czarnym.
 \begin{figure}[!ht]
 	\centering \input{fig13.1-2}
@@ -25,7 +25,7 @@ To oznacza, że także własność 5 nie będzie naruszona i~otrzymane drzewo b�
 
 \exercise %13.1-4
 Niech $x$ będzie czarnym węzłem w~drzewie czerwono-czarnym.
-Jeśli $x$ nie ma czerwonego syna, to w~wyniku pochłaniania czerwonych węzłów jego stopień nie zmieni się i~będzie nadal wynosił 0 dla $x=\const{nil}$ albo 2 dla $x\ne\const{nil}$.
+Jeśli $x$ nie ma czerwonego syna, to w~wyniku pochłaniania czerwonych węzłów jego stopień nie zmieni się i~będzie nadal wynosił 0, dla $x=\const{nil}$, albo 2, dla $x\ne\const{nil}$.
 Jeśli $x$ ma dokładnie jednego czerwonego syna $y$, to pochłaniając go, przyjmuje czarnych synów $y$, zwiększając swój stopień do 3.
 Gdy obaj synowie $y_1$, $y_2$ węzła $x$ są czerwoni, to po ich pochłonięciu $x$ będzie ojcem 4 czarnych węzłów, które początkowo były synami węzłów $y_1$ i~$y_2$.
 
@@ -34,7 +34,7 @@ Po pochłonięciu wszystkich czerwonych węzłów dowolna prosta ścieżka od ko
 \exercise %13.1-5
 Skorzystamy z~faktu, że każda prosta ścieżka z~ustalonego węzła $x$ do jego potomnego czarnego liścia w~danym drzewie czerwono-czarnym składa się z~tej samej liczby czarnych węzłów.
 Na możliwie najkrótszej takiej ścieżce są same czarne węzły (być może z~wyjątkiem $x$) i~jej długością jest czarna wysokość węzła $x$.
-Najdłuższa możliwa ścieżka powstaje z~najkrótszej poprzez wstawienie czerwonego węzła pomiędzy każdą parę sąsiednich czarnych węzłów, w~wyniku czego długość ścieżki może zwiększyć się maksymalnie dwukrotnie.
+Najdłuższa możliwa ścieżka powstaje z~najkrótszej poprzez umieszczenie czerwonego węzła pomiędzy każdą parą sąsiednich czarnych węzłów, w~wyniku czego długość ścieżki może zwiększyć się maksymalnie dwukrotnie.
 
 \exercise %13.1-6
 Drzewo czerwono-czarne o~czarnej wysokości $k$ ma najmniejszą możliwą liczbę węzłów wewnętrznych, jeśli każda prosta ścieżka od korzenia do liścia jest możliwie najkrótsza.
