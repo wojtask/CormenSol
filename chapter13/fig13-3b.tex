@@ -16,7 +16,7 @@
         
     \draw (left subtree root.north) -- +(0, 2mm);
             
-	\node[right=50mm of left subtree root, tree node, label=right:\text{$h+2$ lub $h+3$}] (right subtree root) {$y$}
+	\node[right=60mm of left subtree root, tree node, label=right:\text{$h+2$ lub $h+3$}] (right subtree root) {$y$}
         child {node[subtree node, label=right:$h+1$] {$\alpha$}}
         child {node[tree node, label=right:\text{$h+1$ lub $h+2$}] {$x$}
             child {node[subtree node, label=left:\text{$h$ lub $h+1$}] {$\beta$}}
@@ -24,7 +24,7 @@
         };
             
     \draw (right subtree root.north) -- +(0, 2mm);
-    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {$\proc{AVL-Right-Rotate}(x)$} (right subtree root.west);
     
     \node[subpicture label, left=30mm of left subtree root] {(a)};
 \end{tikzpicture}
@@ -44,7 +44,7 @@
         
     \draw (left subtree root.north) -- +(0, 2mm);
             
-    \node[right=50mm of left subtree root, tree node, label=right:$h+2$, label={[label distance=14mm]below:\text{$h-1$ lub $h$}}] {$w$}
+    \node[right=60mm of left subtree root, tree node, label=right:$h+2$, label={[label distance=14mm]below:\text{$h-1$ lub $h$}}] {$w$}
     	child {node[tree node, label=right:$h+1$] {$y$}
         	child {node[subtree node, label=right:$h$] {$\alpha$}}
             child {node[subtree node] {$\beta$}}
@@ -55,7 +55,7 @@
         };
 
 	\draw (right subtree root.north) -- +(0, 2mm);
-    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- (right subtree root.west);
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {\begin{tabular}{c}$\proc{AVL-Left-Rotate}(y)$ \\ $\proc{AVL-Right-Rotate}(x)$\end{tabular}} (right subtree root.west);
     
     \node[subpicture label, left=30mm of left subtree root] {(b)};
 \end{tikzpicture}
