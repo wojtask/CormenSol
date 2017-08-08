@@ -1,7 +1,7 @@
 \subchapter{Funkcje haszujące}
 
 \exercise %11.3-1
-W~celu odnalezienia elementu o~kluczu $k$ obliczamy $h(k)$ i~przeglądamy listę, porównując jedynie wartości funkcji haszującej, co jest znacznie szybsze od porównywania kluczy (długich ciągów znaków).
+W~celu odnalezienia elementu o~kluczu $k$ obliczamy $h(k)$ i~przeglądamy listę, porównując jedynie wartości funkcji haszującej napotykanych kluczy, co jest znacznie szybsze od porównywania samych kluczy będącymi długimi ciągami znaków.
 Gdy znajdziemy element, dla którego wartość funkcji haszującej jest równa $h(k)$, to dopiero wówczas sprawdzamy, czy kluczem tego elementu jest $k$.
 
 \exercise %11.3-2
@@ -11,9 +11,9 @@ W~tym celu przedstawimy $h(x)$ w~postaci
 \[
 	h(x) = x_0+128(x_1+128(x_2+\dots+128(x_{r-2}+128x_{r-1})\cdots)),
 \]
-przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\{0,1,\dots,m-1\}$.
+przy czym dodawanie i~mnożenie są tutaj działaniami w~zbiorze $\mathbb{Z}_m=\{0,1,\dots,m-1\}$.
 Następnie stosujemy schemat Hornera (patrz problem \refProblem{2-3}).
-Ciągłe obliczanie reszt z~dzielenia przez $m$ pozwala utrzymać pośrednie wyniki w~co najwyżej dwóch słowach maszynowych.
+Utrzymywanie pośrednich iloczynów i~sum w~zbiorze $\mathbb{Z}_m$ pozwala zmieścić je w~co najwyżej dwóch słowach maszynowych.
 
 \exercise %11.3-3
 Jeśli napis $x=x_0x_1\dots x_{r-1}$ jest permutacją napisu $y=y_0y_1\dots y_{r-1}$, to $x$ możemy uzyskać z~$y$, zamieniając ze sobą znaki występujące na tych samych pozycjach w~obu napisach, dopóki oba napisy są różne.
@@ -101,4 +101,4 @@ Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
 Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem.
 Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$.
 A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$.
-Prawdopodobieństwo kolizji jest więc równe $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
+Prawdopodobieństwo kolizji nie przekracza więc $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest \singledash{$((n-1)/p)$}{uniwersalna} według definicji z~\refExercise{11.3-5}.
