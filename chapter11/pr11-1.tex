@@ -9,7 +9,7 @@ Ponadto użyto błędnych liter do oznaczenia punktów (c) i~(d).}
 \subproblem %11-1(a)
 Niech $X_i$ będzie zmienną losową oznaczającą liczbę odwołań do tablicy wykonywanych podczas wstawiania \singledash{$i$}{tego} elementu.
 Operacja ta jest poprzedzona wyszukiwaniem tego elementu w~tablicy z~negatywnym skutkiem.
-Dzięki założeniu o~równomiernym haszowaniu możemy zatem skorzystać z~dowodu tw.\ 11.6, z~którego wynika, że $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$.
+Dzięki założeniu o~równomiernym haszowaniu możemy napisać $\Pr(X_i>k)=\Pr(X_i\ge k+1)\le\alpha^k$, co wynika z~oszacowania wykazanego w~dowodzie tw.\ 11.6.
 Ponieważ $n\le m/2$, to $\alpha\le1/2$, a~stąd $\Pr(X_i>k)\le(1/2)^k=2^{-k}$.
 
 \subproblem %11-1(b)
@@ -30,7 +30,7 @@ Na podstawie oszacowania z~poprzedniej części otrzymujemy
 	&= \sum_{k=1}^{\lfloor2\lg n\rfloor}k\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nk\Pr(X=k) \\
 	&\le \sum_{k=1}^{\lfloor2\lg n\rfloor}\lfloor2\lg n\rfloor\Pr(X=k)+\sum_{k=\lfloor2\lg n\rfloor+1}^nn\Pr(X=k) \\
 	&= \lfloor2\lg n\rfloor\Pr(X\le2\lg n)+n\Pr(X>2\lg n) \\
-	&= \lfloor2\lg n\rfloor\cdot1+n\cdot O(1/n) \\
+	&\le \lfloor2\lg n\rfloor\cdot1+n\cdot O(1/n) \\
 	&= \lfloor2\lg n\rfloor+O(1) \\
 	&= O(\lg n).
 \end{align*}
