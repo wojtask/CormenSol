@@ -61,9 +61,9 @@ Pozwoli to wywoływać procedurę rekurencyjnie w~celu znalezienia rangi klucza 
 \li		\Else \Return $\proc{OS-Key-Rank}(\attrib{x}{right},k)+r$
 		\End
 \end{codebox}
-Po wyznaczeniu rangi $r$ klucza \attrib{x}{key}, jeśli jest on elementem, którego rangi szukamy, to w~wierszu \ref{li:os-key-rank-key-found} nastąpi zwrócenie $r$.
+Po wyznaczeniu rangi $r$ klucza \attrib{x}{key}, jeśli jest on elementem o~szukanej randze, to w~wierszu \ref{li:os-key-rank-key-found} nastąpi zwrócenie $r$.
 W~przeciwnym przypadku procedura wywołuje się rekurencyjne dla lewego poddrzewa $x$ albo prawego poddrzewa $x$, w~zależności od tego, w~którym z~nich szukany klucz się znajduje na podstawie własności drzewa wyszukiwań binarnych.
-W~przeciwnym przypadku, jeśli $k<\attrib{x}{key}$, to ranga klucza $k$ w~poddrzewie o~korzeniu $x$ jest równa jego randze w~poddrzewie o~korzeniu \attrib{x}{left}.
+Jeśli $k<\attrib{x}{key}$, to ranga klucza $k$ w~poddrzewie o~korzeniu $x$ jest równa jego randze w~poddrzewie o~korzeniu \attrib{x}{left}.
 Gdy natomiast $k>\attrib{x}{key}$, to ranga $k$ w~poddrzewie o~korzeniu $x$ jest o~$r$ większa od jego rangi w~poddrzewie o~korzeniu \attrib{x}{right}.
 
 Aby wyznaczyć rangę klucza $k$ w~drzewie statystyk pozycyjnych $T$ zawierającego parami różne klucze, należy wywołać $\proc{OS-Key-Rank}(\attrib{T}{root},k)$.
