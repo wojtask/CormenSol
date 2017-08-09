@@ -19,7 +19,7 @@ Z~własności prawdopodobieństwa i~z~punktu (a) mamy
 \subproblem %11-2(c)
 Zauważmy, że dla całkowitych $n$, $k$ spełniających $0<k\le n$ zachodzi
 \[
-	(n-k+1)(n-k+2)\dots n(n-1)^{n-k} < n^n,
+	(n-k+1)(n-k+2)\dots n\cdot(n-1)^{n-k} < n^n,
 \]
 gdyż po lewej stronie jest iloczyn $n$ czynników nieprzekraczających $n$.
 Mnożąc tę nierówność obustronnie przez $(n-k)!$, dostajemy
@@ -54,16 +54,17 @@ Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
 \end{align*}
 Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$.
 Wówczas pierwszy składnik powyższej sumy jest ujemny.
-Ponadto, jeśli $c'$ jest wystarczająco duże, to dla każdego $n$ zachodzi
+Wyznaczymy jeszcze takie wartości $c'$, dla których nierówność
 \[
-	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0.
+	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0
 \]
+jest spełniona dla wszystkich $n$.
 Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$.
-Aby powyższa nierówność była prawdziwa, musi zachodzić $(3+c')m\le c'2^m$, skąd
+Powyższa nierówność sprowadza się do $(3+c')m\le c'2^m$, skąd
 \[
 	c' \ge \frac{3m}{2^m-m}.
 \]
-Można pokazać, że wyrażenie po prawej stronie jest mniejsze niż 4 niezależnie od wartości $m$, możemy zatem przyjąć $c'\ge4$.
+Można pokazać przez indukcję po $m$, że wyrażenie po prawej stronie jest mniejsze niż 4 niezależnie od wartości $m$, możemy zatem przyjąć $c'\ge4$.
 
 Powracając teraz do głównego oszacowania, mamy
 \[
@@ -73,10 +74,11 @@ skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
 
 Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część (b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
 Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$.
-Pokażemy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
+Udowodnimy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
 Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$.
 Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$.
-Mamy
+Wcześniej pokazaliśmy, że $e^{k_0}\!/k_0^{k_0}<1/n^3$.
+Mamy więc
 \[
 	Q_k < e^k\!/k^k \le e^{k_0}\!/k_0^{k_0} < 1/n^3,
 \]
@@ -93,5 +95,5 @@ Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodn
 Mamy
 \begin{align*}
 	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
-	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 < k_0\cdot1+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
+	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 \le k_0+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
 \end{align*}
