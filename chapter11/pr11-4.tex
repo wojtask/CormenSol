@@ -13,13 +13,13 @@ Dla każdej \singledash{$n$}{tki} $a=\langle a_0,a_1,\dots,a_{n-1}\rangle\in U$ 
 	\[
 		h_a(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j\biggr)\bmod p.
 	\]
-	Udowodnij, że rodzina $\mathcal{H}=\{h_a\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}.
+	Udowodnij, że rodzina $\mathcal{H}=\{h_a:a\in U\}$ jest uniwersalna, ale nie \singledash{2}{uniwersalna}.
 (\!\emph{Wskazówka:} Znajdź klucz, dla którego wszystkie funkcje z~$\mathcal{H}$ przyjmują tę samą wartość.)
 	\item[{\sffamily\bfseries(c)}] Załóżmy, że zmodyfikowaliśmy nieco rodzinę $\mathcal{H}$ z~punktu (b): dla każdego $a\in U$ i~każdego $b\in\mathbb{Z}_p$ definiujemy
 	\[
 		h_{a,b}'(x) = \biggl(\sum_{j=0}^{n-1}a_jx_j+b\biggr)\bmod p
 	\]
-	oraz $\mathcal{H}'=\{h_{a,b}'\}$.
+	oraz $\mathcal{H}'=\{h_{a,b}':a\in U,b\in\mathbb{Z}_p\}$.
 Udowodnij, że rodzina $\mathcal{H}'$ jest \singledash{2}{uniwersalna}.
 (\!\emph{Wskazówka:} Rozważ ustalone $x\in U$ i~$y\in U$ spełniające $x_i\ne y_i$ dla pewnego $i$.
 Co dzieje się z~$h_{a,b}'(x)$ i~$h_{a,b}'(y)$, gdy $a_i$ i~$b$ przyjmują poszczególne wartości z~$\mathbb{Z}_p$?)
@@ -42,14 +42,13 @@ A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństw
 Rodzina $\mathcal{H}$ jest więc uniwersalna.
 
 \subproblem %11-4(b)
-Aby zbadać \singledash{2}{uniwersalność}, wykorzystamy wskazówkę.
-Dla $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają w~wyniku 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera.
+Aby zbadać \singledash{2}{uniwersalność} rodziny $\mathcal{H}$, wykorzystamy pomysł ze wskazówki.
+Dla argumentu $x=\langle0,0,\dots,0\rangle$ wszystkie funkcje haszujące z~$\mathcal{H}$ dają wynik 0, więc dla dowolnej funkcji $h\in\mathcal{H}$ i~dowolnej pary $\langle x,y\rangle$ różnych kluczy z~$U$ nigdy nie otrzymamy pary $\langle h_a(x),h_a(y)\rangle$, której pierwszym elementem jest liczba różna od zera.
 To wyklucza \singledash{2}{uniwersalność} rodziny $\mathcal{H}$.
 
 Udowodnimy teraz, że rodzina $\mathcal{H}$ jest uniwersalna.
-Wybierzmy w~tym celu dowolną parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~pewną funkcję $h_a$ z~$\mathcal{H}$.
-Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$.
-Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniony będzie poniższy wzór:
+Wybierzmy w~tym celu dowolną parę kluczy $\langle x,y\rangle$ z~$U$, dla których $x_0\ne y_0$, i~pewną funkcję $h_a$ z~$\mathcal{H}$.
+Kolizja $h_a(x)=h_a(y)$ wystąpi tylko wtedy, gdy suma $\sum_{j=0}^{n-1}a_jx_j$ będzie dawać taką samą resztę z~dzielenia przez $p$, co suma $\sum_{j=0}^{n-1}a_jy_j$, lub równoważnie, kiedy spełniona będzie kongruencja
 \[
 	\sum_{j=0}^{n-1}a_j(x_j-y_j) \equiv 0 \pmod p.
 \]
@@ -65,8 +64,7 @@ To oznacza, że dokładnie $p^{n-1}$ spośród $p^n$ funkcji w~$\mathcal{H}$ dop
 Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wybrana losowo z~$\mathcal{H}$, wynosi $1/p$, co kończy dowód.
 
 \subproblem %11-4(c)
-Ustalmy parę $\langle x,y\rangle$ różnych kluczy z~$U$ i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$.
-Bez utraty ogólności przyjmijmy, że $x_0\ne y_0$.
+Ustalmy parę kluczy $\langle x,y\rangle$ z~$U$, dla których $x_0\ne y_0$, i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$.
 Wprowadźmy oznaczenia $\alpha=h_{a,b}'(x)$, $\beta=h_{a,b}'(y)$ oraz $X=\sum_{j=1}^{n-1}a_jx_j$, $Y=\sum_{j=1}^{n-1}a_jy_j$.
 Zachodzi $\alpha=(a_0x_0+X+b)\bmod p$ oraz $\beta=(a_0y_0+Y+b)\bmod p$.
 Zauważmy, że aby wygenerować każdą możliwą parę $\langle\alpha,\beta\rangle$, wystarczy abyśmy byli w~stanie wygenerować dowolne $\alpha-\beta$ i~dowolne $\beta$.
