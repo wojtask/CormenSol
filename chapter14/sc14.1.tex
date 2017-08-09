@@ -85,13 +85,13 @@ W~przypadku usuwania jeśli $x$ jest dowolnym węzłem na ścieżce od efektywni
 Widać więc, że utrzymywanie w~każdym węźle drzewa jego rangi powoduje, że operacje wstawiania i~usuwania wymagają czasu $O(n)$, gdzie $n$ jest liczbą węzłów w~drzewie.
 
 \exercise %14.1-7
-Niech $A=[1\twodots n]$ będzie tablicą zawierającą liczby parami różne.
+Niech $A[1\twodots n]$ będzie tablicą zawierającą $n$ różnych liczb.
 Oznaczmy przez $r_i$ rangę elementu $A[i]$ w~podtablicy $A[1\twodots i]$.
-Dla każdego $i=1$, 2, \dots, $n$ element $A[i]$ jest zatem \singledash{$r_i$}{tym} najmniejszym elementem w~podtablicy $A[1\twodots i]$, dlatego z~innymi elementami w~tej podtablicy tworzy $i-r_i$ inwersji.
+Dla każdego $i=1$, 2, \dots, $n$ element $A[i]$ jest zatem \singledash{$r_i$}{tym} najmniejszym elementem w~podtablicy $A[1\twodots i]$, dlatego z~pozostałymi jej elementami tworzy $i-r_i$ inwersji.
 Sumaryczna liczba inwersji w~tablicy $A$ jest więc równa $\sum_{i=1}^n(i-r_i)$.
 
 Rangi elementów tablicy $A$ możemy wyznaczyć, wstawiając do drzewa statystyk pozycyjnych kolejno, $A[1]$, $A[2]$, \dots, $A[n]$.
-Tuż po wstawieniu elementu $A[i]$ jego ranga w~aktualnym drzewie wynosi $r_i$, którą to wartość otrzymujemy za pomocą algorytmu \proc{OS-Rank}.
+Tuż po wstawieniu elementu $A[i]$ jego ranga w~aktualnym drzewie wynosi $r_i$, którą to wartość otrzymujemy, wywołując algorytm \proc{OS-Rank}.
 Wstawienie dowolnego elementu tablicy $A$ do drzewa oraz obliczenie jego rangi wymaga czasu $O(\lg n)$, dlatego inwersje w~$A$ możemy policzyć w~czasie $O(n\lg n)$.
 
 \exercise %14.1-8
