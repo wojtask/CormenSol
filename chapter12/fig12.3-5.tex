@@ -1,7 +1,7 @@
 \begin{tikzpicture}[
 	level/.append style = {sibling distance=30mm/2^#1},
 	every label/.style = {index node, label position=left, draw=none, fill=none},
-	index node/.append style = {rectangle, draw=none, fill=none},
+	index node/.append style = {auto, rectangle, draw=none, fill=none},
 	outer/.append style = {node distance=10mm}
 ]
 
@@ -13,14 +13,23 @@
 			child {node[tree node] {6}}
 			child[missing]
 		};
+		
+	\node[tree node, right=50mm of left subtree root, label=$y$] (middle subtree root) {4}
+		child[missing]
+		child {node[tree node] {7}
+			child {node[tree node] {6}}
+			child[missing]
+		};
+		
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node] {$\proc{Tree-Delete}(T,x)$} (middle subtree root.west);
 
-	\node[tree node, right=50mm of left subtree root] (right subtree root) {7}
+	\node[tree node, right=50mm of middle subtree root] (right subtree root) {7}
 		child {node[tree node] {6}}
 		child[missing];
             
-    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {\begin{tabular}{c}$\proc{Tree-Delete}(T,x)$ \\ $\proc{Tree-Delete}(T,y)$\end{tabular}} (right subtree root.west);
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle subtree root.east) -- node[index node] {$\proc{Tree-Delete}(T,y)$} (right subtree root.west);
     
-    \node[subpicture label, draw=none, fill=none, left=15mm of left subtree root] {(a)};
+    \node[subpicture label, draw=none, fill=none, left=18mm of left subtree root] {(a)};
 \end{tikzpicture}
 };
 
@@ -32,14 +41,20 @@
 			child {node[tree node] {6}}
 			child[missing]
 		};
+		
+	\node[tree node, right=50mm of left subtree root] (middle subtree root) {6}
+		child {node[tree node, label=$x$] {3}}
+		child {node[tree node] {7}};
 
-	\node[tree node, right=50mm of left subtree root] (right subtree root) {6}
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {$\proc{Tree-Delete}(T,y)$} (middle subtree root.west);
+
+	\node[tree node, right=50mm of middle subtree root] (right subtree root) {6}
 		child[missing]
 		child {node[tree node] {7}};
 		
-    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left subtree root.east) -- node[index node, above] {\begin{tabular}{c}$\proc{Tree-Delete}(T,y)$ \\ $\proc{Tree-Delete}(T,x)$\end{tabular}} (right subtree root.west);
+    \draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle subtree root.east) -- node[index node, above] {$\proc{Tree-Delete}(T,x)$} (right subtree root.west);
     
-    \node[subpicture label, draw=none, fill=none, left=15mm of left subtree root] {(b)};
+    \node[subpicture label, draw=none, fill=none, left=18mm of left subtree root] {(b)};
 \end{tikzpicture}
 };
 
