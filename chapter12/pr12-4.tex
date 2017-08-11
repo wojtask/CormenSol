@@ -13,19 +13,41 @@ Liczba wszystkich drzew binarnych o~$n$ węzłach wynosi zatem
 
 \subproblem %12-4(b)
 Wyznaczmy $B^2(x)$.
-Kwadrat sumy wyrazów ciągu jest sumą iloczynów wyrazów tego ciągu na zasadzie ,,każdy z~każdym''.
+Kwadrat sumy wyrazów ciągu jest sumą iloczynów każdej pary wyrazów tego ciągu.
 Dzięki odpowiedniemu pogrupowaniu iloczynów możemy napisać:
 \[
 	B^2(x) = \biggl(\sum_{n=0}^\infty b_nx^n\biggr)^2 = \sum_{n=0}^\infty\sum_{k=0}^nb_kx^kb_{n-k}x^{n-k} = \sum_{n=0}^\infty\sum_{k=0}^nb_kb_{n-k}x^n.
 \]
-Wewnętrzną sumę na podstawie punktu (a) zamieniamy na $b_{n+1}$ i~wówczas:
+Wewnętrzną sumę na podstawie punktu (a) zamieniamy na $b_{n+1}$ i~przy założeniu, że $x\ne0$:
 \[
 	B^2(x) = \sum_{n=0}^\infty b_{n+1}x^n = \frac{1}{x}\sum_{n=0}^\infty b_{n+1}x^{n+1} = \frac{1}{x}\sum_{n=1}^\infty b_nx^n = \frac{1}{x}\biggl(\sum_{n=0}^\infty b_nx^n-1\biggr) = \frac{B(x)-1}{x}.
 \]
-Stąd $B(x)=xB^2(x)+1$ i~jednym ze sposobów wyrażenia $B(x)$ w~postaci jawnej jest
+Stąd $B(x)=xB^2(x)+1$ i~jednym z~rozwiązań tego równania ze względu na $B(x)$ jest
 \[
 	B(x) = \frac{1-\sqrt{1-4x}}{2x}.
 \]
+
+Pokażemy teraz, że jest to szukana postać funkcji $B(x)$, podczas gdy drugie z~rozwiązań,
+\[
+	B(x) = \frac{1+\sqrt{1-4x}}{2x},
+\]
+prowadzi do sprzeczności z~definicją $B(x)$.
+Zauważmy, że
+%W~tym celu obliczymy granice prawostronne w~0 obu otrzymanych postaci funkcji i~porównamy z~wartością obliczoną na podstawie wzoru z~definicji funkcji $B(x)$, czyli
+\[
+	\lim_{x\to0^+}\sum_{n=0}^\infty b_nx^n = b_0 = 1,
+\]
+a~więc taką samą wartość powinna przyjmować granica prawostronna w~0 odpowiedniej postaci funkcji $B(x)$.
+W~przypadku pierwszej otrzymanej postaci mamy
+\[
+	\lim_{x\to0^+}B(x) = \lim_{x\to0^+}\frac{1-\sqrt{1-4x}}{2x} = \lim_{x\to0^+}\frac{\frac{2}{\sqrt{1-4x}}}{2} = \lim_{x\to0^+}\frac{1}{\sqrt{1-4x}} = 1
+\]
+(w~drugim przejściu skorzystaliśmy z~reguły de l'Hospitala).
+Natomiast dla drugiego rozwiązania otrzymujemy
+\[
+	\lim_{x\to0^+}B(x) = \lim_{x\to0^+}\frac{1+\sqrt{1-4x}}{2x} = \infty,
+\]
+a~zatem postać ta jest sprzeczna z~definicją funkcji $B(x)$.
 
 \subproblem %12-4(c)
 \note{Rozwinięciem Taylora funkcji\/ $f(x)$ wokół punktu\/ $x=a$ jest\/ $f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
@@ -42,7 +64,7 @@ Stąd $B(x)=xB^2(x)+1$ i~jednym ze sposobów wyrażenia $B(x)$ w~postaci jawnej 
 Wzór udowodnimy przez indukcję.
 Jeśli $k=1$, to $f'(x)=\frac{-2}{\sqrt{1-4x}}$ i~łatwo sprawdzić, że wzór zachodzi.
 Niech teraz $k\ge2$.
-Wykorzystując założenie indukcyjne, wyznaczmy \singledash{$k$}{tą} pochodną funkcji $f(x)$:
+Wykorzystując założenie indukcyjne, mamy:
 \begin{align*}
 	f^{(k)}(x) &= \bigl(f^{(k-1)}(x)\bigr)' \\
 	&= \biggl(-\frac{2(2k-4)!}{(k-2)!}\,(1-4x)^{3/2-k}\biggr)' \\[1mm]
@@ -56,7 +78,7 @@ Rozwinięcie Taylora funkcji $f(x)=\sqrt{1-4x}$ wokół punktu $x=0$ ma postać:
 \[
 	f(x) = \sum_{k=0}^\infty\frac{f^{(k)}(0)}{k!}\,x^k = 1-2\sum_{k=1}^\infty\frac{(2k-2)!}{(k-1)!\,k!}\,x^k = 1-2\sum_{k=1}^\infty\binom{2k-2}{k-1}\frac{x^k}{k} = 1-2\sum_{k=0}^\infty\binom{2k}{k}\frac{x^{k+1}}{k+1}.
 \]
-Podstawiając powyższy wynik do postaci $B(x)$ wyprowadzonej w~części (b), dostajemy
+Podstawiając uzyskany wynik do postaci $B(x)$ wyprowadzonej w~części (b), dostajemy
 \[
 	B(x) = \frac{1-\sqrt{1-4x}}{2x} = \sum_{k=0}^\infty\binom{2k}{k}\frac{x^k}{k+1}.
 \]
