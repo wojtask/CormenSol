@@ -1,6 +1,6 @@
 \problem{Średnia głębokość węzła w~losowo zbudowanym drzewie wyszukiwań binarnych} %12-3
-\note{W~treści problemu -- także w~wersji oryginalnej -- brakuje założenia, że\/ $n$ jest liczbą węzłów w\/~$T$.
-Co więcej, nie zdefiniowano notacji\/ $x\in T$ oznaczającej przynależność węzła\/ $x$ do drzewa\/ $T$.}
+\note{Przyjmiemy, że zapis $x\in T$ oznacza, że węzeł\/ $x$ znajduje się w~drzewie\/ $T$.
+Notacji tej nie zdefiniowano wyraźnie w~Podręczniku, także w~wersji oryginalnej.}
 \bignegskip
 
 \subproblem %12-3(a)
@@ -18,7 +18,7 @@ Stąd, jeśli $r$ jest korzeniem drzewa $T$, to
 \end{align*}
 
 \subproblem %12-3(c)
-Jeśli $T$ jest losowo skonstruowanym drzewem wyszukiwań binarnych, to klucz pierwszego wstawianego do $T$ węzła jest z~równymi szansami dowolnym w~kolejności rosnącej w~ciągu $n$ kluczy wstawianych węzłów.
+Jeśli $T$ jest losowo skonstruowanym drzewem wyszukiwań binarnych o~$n$ węzłach, to klucz pierwszego wstawianego do $T$ węzła jest z~jednakowym prawdopodobieństwem dowolnym w~kolejności rosnącej w~ciągu $n$ kluczy wstawianych węzłów.
 Pierwszy węzeł staje się korzeniem drzewa $T$, a~więc po zbudowaniu $T$ jego lewe poddrzewo $T_L$ może z~jednakowym prawdopodobieństwem być drzewem o~$i$ węzłach, gdzie $i=0$, 1, \dots, $n-1$.
 Dla ustalonego $i$ prawe poddrzewo $T_R$ ma wówczas rozmiar $n-i-1$.
 Z~definicji $P(n)$ jako średniej wartości $P(T)$ oraz z~punktu (b) otrzymujemy
@@ -34,25 +34,27 @@ Na podstawie poprzedniego punktu mamy:
 	&= \frac{1}{n}\biggl(2\sum_{k=0}^{n-1}P(k)+n(n-1)\biggr) \\
 	&= \frac{2}{n}\sum_{k=1}^{n-1}P(k)+\Theta(n).
 \end{align*}
-W~ostatnim przekształceniu skorzystaliśmy z~tego, że $P(0)=0$ i~opuściliśmy ten składnik sumy.
+W~ostatnim przekształceniu skorzystaliśmy z~tego, że $P(0)=0$, i~opuściliśmy ten składnik sumy.
 
 \subproblem %12-3(e)
 Podobnie jak w~problemie \refProblem{7-2} pokażemy, że $P(n)\le an\lg n$ dla pewnej dodatniej stałej $a$.
 Podstawą indukcji niech będzie $n=1$.
-Oczywiście $P(1)=0$ oraz $a\cdot1\cdot\lg1=0$, więc podstawa jest spełniona dla jakiegokolwiek $a$.
+Oczywiście $P(1)=0$ oraz $a\cdot1\cdot\lg1=0$, więc podstawa jest spełniona dla każdego $a$.
 Niech teraz $n>1$.
 Przyjmijmy założenie, że dla dowolnego $k=1$, 2, \dots, $n-1$ zachodzi $P(k)\le ak\lg k$.
 Wówczas:
 \[
 	P(n) = \frac{2}{n}\sum_{k=1}^{n-1}P(k)+\Theta(n) \le \frac{2}{n}\sum_{k=1}^{n-1}ak\lg k+\Theta(n) = \frac{2a}{n}\sum_{k=1}^{n-1}{k\lg k}+\Theta(n).
 \]
-Posługując się nierównością (7.7) udowodnioną w~punkcie (d) problemu \refProblem{7-2} i~dobierając odpowiednio duże $a$ tak, aby wyrażenie $an/4$ nie było mniejsze od składnika $\Theta(n)$, mamy
+Posługując się nierównością (7.7) udowodnioną w~punkcie (d) problemu \refProblem{7-2} i~dobierając odpowiednio duże $a$ tak, aby wyrażenie $an/4$ było równe co najmniej składnikowi $\Theta(n)$, mamy
 \[
 	P(n) \le \frac{2a}{n}\biggl(\frac{n^2\lg n}{2}-\frac{n^2}{8}\biggr)+\Theta(n) = an\lg n-\frac{an}{4}+\Theta(n) \le an\lg n = O(n\lg n).
 \]
 
 \subproblem %12-3(f)
-Zauważmy, że po tym, jak węzeł $x$ zostaje wybrany jako korzeń drzewa $T$, wszystkie węzły wstawiane do $T$ po $x$ są porównywane z~$x$.
-Analogicznie, po tym, jak element $y$ zostaje wybrany jako element rozdzielający w~podtablicy $S$, wszystkie elementy wstawiane do $S$ po $y$ są porównywane z~$y$.
-Podczas budowy losowo skonstruowanego drzewa wyszukiwań binarnych korzeniem staje się zawsze pierwszy węzeł z~permutacji wejściowej.
+Zauważmy, że po tym, jak węzeł $x$ zostaje wybrany jako korzeń drzewa $T$, każdy kolejny węzeł wstawiany do $T$ jest porównywany z~$x$.
+Analogicznie, po tym, jak klucz $y$ zostaje wybrany jako element rozdzielający w~tablicy $A$, każdy inny klucz z~tablicy $A$ porównywany jest z~$y$.
+Opisaną analogię możemy powtórzyć dla lewego poddrzewa $T$ i~podtablicy $A$ zawierającej elementy mniejsze od $y$ oraz dla prawego poddrzewa $T$ i~podtablicy $A$ zawierającej elementy większe bądź równe $y$.
+Aby jednak klucze równe elementowi rozdzielającemu trafiały do drugiej podtablicy, musimy w~wierszu 4 procedury \proc{Partition} zmienić nierówność na ostrą.
+Ponadto podczas budowy losowo skonstruowanego drzewa wyszukiwań binarnych korzeniem staje się pierwszy węzeł z~permutacji wejściowej.
 Implementacja quicksorta o~identycznych porównaniach elementów powinna zatem wybierać na element rozdzielający pierwszy element tablicy wejściowej.
