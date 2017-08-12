@@ -49,7 +49,7 @@ Elementy zebrane na stosie $S$ są wystarczające dla procedury \proc{RB-Insert-
 Musimy następnie zmodyfikować procedurę \proc{RB-Insert-Fixup} tak, aby każde odwołanie do przodka danego węzła przy pomocy wskaźnika $p$ było zamienione na odwołanie do odpowiedniego elementu stosu.
 Implementacja tej procedury została przedstawiona na poniższym pseudokodzie.
 \begin{codebox}
-\Procname{$\proc{RB-Parentless-Insert-Fixup}(T,S,z)$}
+\Procname{$\proc{Parentless-RB-Insert-Fixup}(T,S,z)$}
 \li	$p\gets\proc{Pop}(S)$
 \li	\While $\attrib{p}{color}=\const{red}$
 \li		\Do $r\gets\proc{Pop}(S)$
@@ -62,11 +62,11 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie.
 \li							$p\gets\proc{Pop}(S)$
 \li						\Else \If $z=\attrib{p}{right}$
 \li							\Then zamień $z\leftrightarrow p$
-\li								$\proc{RB-Parentless-Left-Rotate}(T,z,r)$
+\li								$\proc{Parentless-RB-Left-Rotate}(T,z,r)$
 							\End
 \li							$\attrib{p}{color}\gets\const{black}$
 \li							$\attrib{r}{color}\gets\const{red}$
-\li							$\proc{RB-Parentless-Right-Rotate}(T,r,\proc{Pop}(S))$ \label{li:no-parents-insert-fixup-left-rotate}
+\li							$\proc{Parentless-RB-Right-Rotate}(T,r,\proc{Pop}(S))$ \label{li:parentless-rb-insert-fixup-left-rotate}
 						\End
 \li				\Else (to samo co po \kw{then} z~zamienionymi ,,right'' i~,,left'')
 				\End
@@ -76,13 +76,13 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie.
 W~każdej iteracji pętli \kw{while}, oprócz węzła $z$, potrzebujemy znać także jego ojca i~dziadka (ojca ojca).
 Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~$r$.
 Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie im dodatkowego parametru w~postaci wskaźnika na ojca węzła, dla którego rotacja jest wykonywana.
-W~wierszu \ref{li:no-parents-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do operacji rotacji.
+W~wierszu \ref{li:parentless-rb-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do operacji rotacji.
 Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo pętla \kw{while} nie wykona więcej iteracji i~żaden element nie będzie już ściągany z~$S$.
 
 Poniżej znajduje się operacja lewej rotacji na węźle $x$ w~drzewie $T$, która nie korzysta z~atrybutów węzłów wskazujących na ojca.
 Zamiast tego otrzymuje ona trzeci parametr, będący wskaźnikiem na ojca węzła $x$.
 \begin{codebox}
-\Procname{$\proc{RB-Parentless-Left-Rotate}(T,x,p)$}
+\Procname{$\proc{Parentless-RB-Left-Rotate}(T,x,p)$}
 \li	$y\gets\attrib{x}{right}$
 \li	$\attrib{x}{right}\gets\attrib{y}{left}$
 \li	\If $p=\attrib{T}{nil}$
