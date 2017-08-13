@@ -4,11 +4,14 @@
 Podczas wstawiania nowego węzła do drzewa $T$ czarna wysokość $T$ może zmienić się tylko wtedy, gdy czerwony korzeń $T$ zostaje pokolorowany na czarno.
 Można więc w~procedurze \proc{RB-Insert-Fixup} bezpośrednio przed ostatnim wierszem inkrementować wartość \attrib{T}{bh} w~przypadku, gdy $\attribb{T}{root}{color}=\const{red}$.
 
-W~usuwaniu węzła wszystkie przypadki w~procedurze \proc{RB-Delete-Fixup} zachowują własność 5, o~ile przyjmiemy, że węzeł aktualnie pokazywany przez $x$ wnosi dodatkową ,,czarną jednostkę''.
-Czarna wysokość drzewa $T$ może być więc zmodyfikowana tylko wtedy, kiedy nadmiarowa ,,czarna jednostka'' jest przenoszona na korzeń drzewa i~,,zapominana'' w~przypadku 2.
-Wystarczy zatem bezpośrednio po linii 11 zmniejszyć \attrib{T}{bh} o~1, gdy $x=\attrib{T}{root}$.
+W~procedurze \proc{RB-Delete-Fixup} wszystkie przypadki zachowują własność 5, o~ile przyjmiemy, że węzeł aktualnie pokazywany przez $x$ wnosi dodatkową ,,czarną jednostkę''.
+Czarna wysokość drzewa $T$ w~tej procedurze może być więc zmodyfikowana tylko wtedy, gdy nadmiarowa ,,czarna jednostka'' jest przenoszona na korzeń drzewa i~,,zapominana'' w~przypadku 2.
+Wystarczy zatem bezpośrednio po linii 11 (a~także w~analogicznym miejscu w~symetrycznej sytuacji reprezentowanej przez linię 22) zmniejszyć \attrib{T}{bh} o~1, gdy $x=\attrib{T}{root}$.
 W~przypadku 4 wskaźnik $x$ także jest ustawiany na korzeń, ale zanim zostanie wykonane przypisanie z~wiersza 21, w~drzewie zachowana jest już własność 5 bez potraktowania węzła wskazywanego przez $x$ jako ,,nadmiarowo'' czarnego.
 Przypisanie to służy tylko do przerwania pętli.
+
+Czarna wysokość drzewa $T$ może się zmienić także w~sytuacji, gdy z~$T$ usuwany jest jego jedyny węzeł.
+Wówczas w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się żadna iteracja pętli \kw{while}, więc sytuację tę należy wykrywać już w~trakcie wcześniej, np.\ w~wierszu 9 procedury \proc{RB-Delete}.
 
 Czarna wysokość korzenia drzewa $T$ to oczywiście \attrib{T}{bh}.
 Jeśli dany węzeł jest czerwony, to ma tę samą czarną wysokość, co jego ojciec.
@@ -34,22 +37,24 @@ Poniższy pseudokod realizuje opisany w~treści algorytm, przy założeniu, że 
 		\End
 \li	\Return $y$
 \end{codebox}
-Algorytm przechodzi drzewo $T_1$ od korzenia w~dół, wybierając w~pierwszej kolejności prawego syna aktualnego węzła $y$, a~jeżeli ten jest \const{nil}, to wtedy lewego syna $y$.
+Algorytm przechodzi drzewo $T_1$ od korzenia w~dół, wybierając w~pierwszej kolejności prawego syna aktualnego węzła $y$, a~jeżeli ten jest pusty, to wtedy lewego syna $y$.
 Dzięki temu odwiedzane są węzły o~największym możliwym kluczu na danej czarnej wysokości w~drzewie $T_1$.
 Algorytm kończy działanie, gdy czarna wysokość $b$ węzła $y$, wyznaczona na podstawie obserwacji z~punktu~(a), zrówna się z~wartością \attrib{T_2}{bh}.
-Gdy to się wydarzy, węzeł $y$ jest czarny i~następuje jego zwrócenie.
+Gdy to się wydarzy, węzeł wskazywany aktualnie przez $y$ jest czarny i~następuje jego zwrócenie.
 Zauważmy, że test z~linii \ref{li:rb-join-point-z-color} traktuje \const{nil} jak wirtualny czarny węzeł, którego napotkanie także prowadzi do dekrementacji $b$.
 
 Algorytm może odwiedzić wszystkie węzły na prostej ścieżce od korzenia do liścia \const{nil}.
 Ponieważ $T_1$ jest drzewem czerwono-czarnym o~co najwyżej $n$ węzłach, to czas działania algorytmu można ograniczyć od góry przez $O(\lg n)$.
 
 \subproblem %13-2(c)
-Na podstawie założenia klucz korzenia $y$ drzewa $T_y$, będącego poddrzewem $T_1$, jest mniejszy lub równy od \attrib{x}{key}.
-Można zatem, bez naruszenia własności drzewa wyszukiwań binarnych, umieścić węzeł $x$ między $y$ a~\attrib{y}{p}, czyniąc $T_y$ lewym poddrzewem $x$, a~$T_2$ -- jego prawym poddrzewem.
+Na podstawie założenia klucz korzenia $y$ drzewa $T_y$, będącego poddrzewem $T_1$, jest mniejszy lub równy od klucza węzła $x$.
+Można zatem, bez naruszenia własności drzewa wyszukiwań binarnych, umieścić węzeł $x$ między $y$ a~\attrib{y}{p}, tzn.\ uczynić $T_y$ lewym poddrzewem $x$.
+Korzystając ponownie z~założenia, dochodzimy do wniosku, że $T_2$ może być prawym poddrzewem $x$.
+Wykonując opisane modyfikacje, jesteśmy w~stanie zastąpić poddrzewo $T_y$ przez $T_y\cup\{x\}\cup T_2$ w~czasie $O(1)$.
 
 \subproblem %13-2(d)
-Jeżeli pokolorujemy $x$ na czerwono, to czarna wysokość węzła \attrib{x}{p} (o~ile $x\ne\attrib{T}{root}$) nie zmieni się i~czerwono-czarne własności 1, 3 i~5 będą spełnione.
-W~przypadku gdy $x=\attrib{T}{root}$, to naruszona może być czerwono-czarna własność 2, a~jeśli $x\ne\attrib{T}{root}$, to węzeł \attrib{x}{p} także może być czerwony, co powoduje naruszenie własności 4.
+Jeżeli pokolorujemy $x$ na czerwono, to czarna wysokość węzła \attrib{x}{p} (o~ile $x\ne\attrib{T}{root}$) nie zmieni się i~czerwono-czarne własności 1, 3 i~5 pozostaną spełnione.
+W~przypadku gdy $x=\attrib{T}{root}$, to naruszona będzie czerwono-czarna własność 2, a~jeśli $x\ne\attrib{T}{root}$ i~węzeł \attrib{x}{p} też jest czerwony, to spowoduje to naruszenie własności 4.
 Z~identyczną sytuacją mieliśmy do czynienia podczas wstawiania węzła do drzewa czerwono-czarnego przy pomocy procedury \proc{RB-Insert}.
 Wystarczy więc wywołać $\proc{RB-Insert-Fixup}(T,x)$, aby przywrócić naruszone własności 2 i~4 w~drzewie $T$ w~czasie $O(\lg n)$.
 
@@ -60,7 +65,7 @@ Węzeł $x$ należy następnie umieścić w~drzewie $T_2$ jako nowego ojca węz�
 Nadanie koloru węzłowi $x$ i~przywrócenie własności drzewa czerwono-czarnego w~wynikowym drzewie $T$ odbywa się identycznie jak w~punkcie (d).
 
 \subproblem %13-2(f)
-Prześledźmy działanie algorytmu \proc{RB-Join}, którego pseudokod podaliśmy poniżej.
+Prześledźmy działanie algorytmu \proc{RB-Join}, którego pseudokod został podany poniżej.
 \begin{codebox}
 \Procname{$\proc{RB-Join}(T_1,x,T_2)$}
 \li	utwórz puste drzewo czerwono-czarne $T$
@@ -99,11 +104,15 @@ Pod koniec działania procedura koloruje węzeł $x$ na czerwono i~przywraca nar
 Na podstawie analizy z~poprzednich punktów nietrudno wywnioskować, że czas działania algorytmu \proc{RB-Join}, działającego na drzewach o~sumarycznie $n$ węzłach, wynosi $O(\lg n)$.
 
 Zastanówmy się teraz, dlaczego wartownik w~reprezentacji drzew czerwono-czarnych powoduje problemy w~efektywnej implementacji operacji złączania.
-W~takiej reprezentacji po zakończeniu działania algorytmu wskaźniki na synów niektórych węzłów w~$T_1$ pokazują na \attrib{T_1}{nil}, a~niektórych węzłów w~$T_2$ -- na \attrib{T_2}{nil}.
-Tuż przed zakończeniem działania algorytmu moglibyśmy wykonać przypisanie $\attrib{T}{nil}\gets\attrib{T_1}{nil}$, dzięki któremu wartownik w~drzewie $T$ byłby poprawnie ustawiony dla węzłów oryginalnie znajdujących się w~drzewie $T_1$.
-Jednakże wszystkie węzły początkowo znajdujące się w~$T_2$, których co najmniej jeden z~synów jest liściem, nadal pokazywałyby na wartownika $\attrib{T_2}{nil}\ne\attrib{T}{nil}$.
+W~reprezentacji z~wartownikami po zakończeniu działania algorytmu wskaźniki na synów niektórych węzłów w~$T_1$ pokazują na \attrib{T_1}{nil}, a~niektórych węzłów w~$T_2$ -- na \attrib{T_2}{nil}.
+Tuż przed zakończeniem działania algorytmu moglibyśmy wykonać przypisanie $\attrib{T}{nil}\gets\attrib{T_1}{nil}$, dzięki któremu wartownik w~drzewie $T$ byłby poprawnie ustawiony dla węzłów oryginalnie znajdujących się w~$T_1$.
+Jednakże wszystkie węzły początkowo należące do $T_2$, których co najmniej jeden z~synów jest liściem, nadal pokazywałyby na wartownika $\attrib{T_2}{nil}\ne\attrib{T}{nil}$.
 Liczba takich węzłów może być rzędu $O(n)$, dlatego modyfikacja ich pól wskazujących na \attrib{T_2}{nil} zwiększyłaby czas działania procedury \proc{RB-Join} do $O(n)$.
 
 Wartownik służy jedynie do uproszczenia operacji na drzewach czerwono-czarnych.
-Drzewa w~implementacji bez wartownika zachowują własność zrównoważenia, dzięki czemu podstawowe operacje słownikowe wciąż działają na nich w~czasie logarytmicznym względem ich rozmiaru.
-Zmodyfikowane wersje tych operacji są tylko nieznacznie bardziej skomplikowane z~powodu konieczności wykrywania przypadków, gdy dany wskaźnik jest \const{nil} i~traktowania tej wartości jako wirtualnego czarnego liścia.
+Wersje tych operacji wykorzystujące wartość \const{nil} zamiast wartownika powinny wykrywać sytuacje z~próbami odniesienia się do pól węzła \const{nil} i~nie dopuszczać do ich odczytania bądź zapisania.
+Węzeł \const{nil} powinien być traktowany jak wirtualny czarny liść.
+Pamiętajmy też, że w~oryginalnej implementacji \proc{RB-Delete} pole $p$ wartownika wykorzystywane jest do przechowania pewnej wartości.
+Jednym ze sposobów poradzenia sobie z~tym niuansem w~implementacji \proc{RB-Delete} bez wartowników jest tworzenie sztucznego węzła zastępującego wartownik, w~przypadku, gdy $x=\const{nil}$ i~odpowiednie jego podłączenie do węzła $y$.
+Po powrocie z~wywołania \proc{RB-Delete-Fixup} sztuczny węzeł jest następnie z~powrotem zastępowany przez \const{nil}.
+Widać zatem, że zmodyfikowanie operacji wstawiania i~usuwania tak, aby nie wykorzystywały wartownika, jest możliwe, a~w~dodatku nie powoduje pogorszenia ich czasów działania.
