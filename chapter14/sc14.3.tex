@@ -61,8 +61,9 @@ Poddrzewo o~korzeniu w~$y$ jest puste, skąd wynika, że nie istnieje w~$T$ prze
 Algorytm działa w~czasie $O(\lg n)$ dla drzewa o~$n$ węzłach, ponieważ oprócz wywołania operacji \proc{Interval-Search} schodzi jeszcze od znalezionego węzła do liścia drzewa $T$ po ścieżce prostej.
 
 \exercise %14.3-4
-Poniższy pseudokod implementuje szukany algorytm, wypisując szukane przedziały niemalejąco według ich lewych końców.
-Wejściowe drzewo przedziałowe nie jest modyfikowane.
+Poniższy pseudokod wypisuje szukane przedziały niemalejąco według ich lewych końców.
+Aby wypisać wszystkie przedziały zachodzące na $i$ w~drzewie $T$, należy skorzystać z~wywołania $\proc{Interval-Search-All}(T,\attrib{T}{root},i)$.
+Drzewo $T$ nie jest modyfikowane w~trakcie działania algorytmu.
 \begin{codebox}
 \Procname{$\proc{Interval-Search-All}(T,x,i)$}
 \li	\If $\attrib{x}{left}\ne\attrib{T}{nil}$ i~$\attribb{x}{left}{max}\ge\attrib{i}{low}$ \label{li:interval-search-all-examine-left}
@@ -75,12 +76,11 @@ Wejściowe drzewo przedziałowe nie jest modyfikowane.
 \li		\Then $\proc{Interval-Search-All}(T,\attrib{x}{right},i)$
 		\End
 \end{codebox}
-Aby wyznaczyć wszystkie przedziały zachodzące na $i$ w~drzewie $T$, należy skorzystać z~wywołania $\proc{Interval-Search-All}(T,\attrib{T}{root},i)$.
 
 Zastanówmy się nad testami przeprowadzanymi, zanim wykonane zostaną wywołania rekurencyjne.
 W~linii \ref{li:interval-search-all-examine-left}, gdyby było $\attribb{x}{left}{max}<\attrib{i}{low}$, to każdy przedział z~lewego poddrzewa $x$ leżałby na lewo od $i$, więc wywołanie byłoby zbędne.
 Podobnie w~wierszu \ref{li:interval-search-all-examine-right} -- gdyby $\attribb{x}{right}{max}<\attrib{i}{low}$, to wszystkie przedziały z~prawego poddrzewa $x$ leżałyby na lewo od $i$.
-Gdyby ponadto zachodziło $\attribb{x}{int}{low}>\attrib{i}{high}$, to zarówno \attrib{x}{int}, jak i~każdy przedział z~prawego poddrzewa $x$ znajdowałby się na prawo od $i$, dlatego także wtedy blokowane jest wywołanie rekurencyjne.
+Gdyby ponadto zachodziło $\attribb{x}{int}{low}>\attrib{i}{high}$, to zarówno \attrib{x}{int}, jak i~każdy przedział z~prawego poddrzewa $x$ znajdowałby się na prawo od $i$, dlatego także wtedy do wywołania rekurencyjnego nie dochodzi.
 
 Załóżmy teraz, że poddrzewo o~korzeniu w~$x$ nie zawiera przedziałów zachodzących na $i$.
 Jeśli $i$ leży na lewo od \attrib{x}{int}, to procedura może zostać wywołana rekurencyjnie tylko dla lewego poddrzewa $x$.
