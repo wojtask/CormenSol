@@ -1,7 +1,7 @@
 \subchapter{Drzewa przedziałowe}
 
 \exercise %14.3-1
-Procedura \proc{Interval-Left-Rotate} dla drzew przedziałowych działa identycznie jak procedura \proc{Left-Rotate} dla drzew czerwono-czarnych, z~tą różnicą, że tuż przed zakończeniem działania modyfikuje \attrib{x}{max} i~\attrib{y}{max}, gdzie $y$ jest nowym ojcem $x$ po przeprowadzeniu rotacji.
+Procedura \proc{Interval-Left-Rotate} dla drzew przedziałowych działa identycznie jak procedura \proc{Left-Rotate} dla drzew czerwono-czarnych, z~tą różnicą, że tuż przed zakończeniem działania modyfikuje pola \attrib{x}{max} i~\attrib{y}{max}, gdzie $y$ jest nowym ojcem $x$ po przeprowadzeniu rotacji.
 Modyfikacje te polegają najpierw na aktualizacji \attrib{x}{max} wprost z~definicji pola \id{max}, a~następnie analogicznym zaktualizowaniu \attrib{y}{max}, które po wykonaniu rotacji zależy od \attrib{x}{max}.
 \begin{codebox}
 \Procname{$\proc{Interval-Left-Rotate}(T,x)$}
@@ -25,7 +25,7 @@ Jeśli przedział taki istnieje, czyli $x\ne\attrib{T}{nil}$, to począwszy od $
 \li \If $x\ne\attrib{T}{nil}$
 \li 	\Then $y\gets\attrib{x}{left}$
 \li			\While $y\ne\attrib{T}{nil}$ \label{li:min-interval-search-while-begin}
-\li				\Do \If $i$ zachodzi na \attrib{y}{int}
+\li				\Do \If $i$ zachodzi na \attrib{y}{int} \label{li:min-interval-search-overlap-test}
 \li						\Then $x\gets y$
 \li							$y\gets\attrib{x}{left}$ \label{li:min-interval-search-y-modification}
 \li						\Else \If $\attrib{y}{left}\ne\attrib{T}{nil}$ i~$\attribb{y}{left}{max}\ge\attrib{i}{low}$ \label{li:min-interval-search-no-overlap-begin}
@@ -45,15 +45,15 @@ Przed każdą iteracją pętli \kw{while} w~wierszach \doubledash{\ref{li:min-in
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją pętli \kw{while} $y=\attrib{x}{left}$.
 Przedziały o~lewych końcach mniejszych niż \attribb{x}{int}{low} znajdują się w~poddrzewie o~korzeniu w~\attrib{x}{left}, dlatego niezmiennik jest spełniony.
-	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed każdą następną iteracją pętli \kw{while} i~zobaczmy, co zmienia wykonanie iteracji.
-Zauważmy wpierw, że każda aktualizacja zmiennej $x$ w~trakcie działania procedury pociąga za sobą przestawienie $y$ na \attrib{x}{left}.
-Jeśli przedział $i$ zachodzi na \attrib{y}{int}, to można zaktualizować wskaźnik $x$ -- przechowujący przedział zachodzący na $i$ o~najmniejszym dotychczas napotkanym lewym końcu -- na $y$, ponieważ $y$ jest węzłem z~lewego poddrzewa $x$, więc $\attribb{y}{int}{low}<\attribb{x}{int}{low}$.
-Niezmiennik pozostaje spełniony, bo jeśli w~drzewie $T$ istnieje przedział zachodzący na $i$ o~mniejszym lewym końcu od nowej wartości $x$, to należy on do lewego poddrzewa $x$, a~w~wierszu \ref{li:min-interval-search-y-modification} $y$ jest zaktualizowane na \attrib{x}{left}.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik zachodzi przed każdą następną iteracją pętli \kw{while} i~zobaczmy, co zmienia wykonanie iteracji.
+Zauważmy, że każda aktualizacja zmiennej $x$ w~trakcie działania procedury pociąga za sobą przestawienie $y$ na \attrib{x}{left}.
+Jeśli w~linii \ref{li:min-interval-search-overlap-test} przedział $i$ zachodzi na \attrib{y}{int}, to można zaktualizować wskaźnik $x$ -- przechowujący przedział zachodzący na $i$ o~najmniejszym dotychczas napotkanym lewym końcu -- na $y$, ponieważ $y$ jest węzłem z~lewego poddrzewa $x$, więc $\attribb{y}{int}{low}\le\attribb{x}{int}{low}$.
+Niezmiennik pozostaje spełniony, bo jeśli w~drzewie $T$ istnieje przedział zachodzący na $i$ o~mniejszym lewym końcu od nowej wartości $x$, to należy on do lewego poddrzewa $x$, a~w~wierszu \ref{li:min-interval-search-y-modification} $y$ jest aktualizowane na \attrib{x}{left}.
 
 Załóżmy teraz, że przedział $i$ nie zachodzi na \attrib{y}{int}.
 Zauważmy, że wiersze \doubledash{\ref{li:min-interval-search-no-overlap-begin}}{\ref{li:min-interval-search-no-overlap-end}} stanowią ciało pętli \kw{while} z~procedury \proc{Interval-Search} z~$y$ w~miejscu $x$.
 Wykorzystując niezmiennik pętli \kw{while} tamtej procedury do obecnej iteracji pętli w~procedurze \proc{Min-Interval-Search} otrzymujemy, że jeśli przed aktualizacją $y$ poddrzewo o~korzeniu $y$ zawierało przedział zachodzący na $i$, to zawiera go też poddrzewo o~korzeniu w~węźle wskazywanym przez nową wartość wskaźnika $y$.
-Niezmiennik jest więc zachowany, gdyż $y$ znajduje się zawsze w~lewym poddrzewie $x$.
+Niezmiennik jest więc zachowany, gdyż jak zobaczyliśmy wcześniej, $y$ znajduje się zawsze w~lewym poddrzewie $x$.
 	\item[Zakończenie:] Pętla kończy działanie, gdy $y=\attrib{T}{nil}$.
 Poddrzewo o~korzeniu w~$y$ jest puste, skąd wynika, że nie istnieje w~$T$ przedział zachodzący na $i$ o~lewym końcu mniejszym niż \attribb{x}{int}{low}, czyli $x$ jest szukanym przedziałem.
 \end{description}
@@ -109,7 +109,7 @@ Stąd też czas działania nowej operacji można ograniczyć od góry przez $O(\
 \Procname{$\proc{Interval-Search-Exactly}(T,i)$}
 \li	$x\gets\attrib{T}{root}$
 \li	\While $x\ne\attrib{T}{nil}$ i~$\attribb{x}{int}{low}\ne\attrib{i}{low}$
-\li		\Do \If $\attribb{x}{int}{low}<\attrib{i}{low}$
+\li		\Do \If $\attribb{x}{int}{low}>\attrib{i}{low}$
 \li				\Then $x\gets\attrib{x}{left}$
 \li				\Else $x\gets\attrib{x}{right}$
 				\End
