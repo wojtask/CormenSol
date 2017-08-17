@@ -124,14 +124,14 @@ Stąd też czas działania nowej operacji można ograniczyć od góry przez $O(\
 Strukturę danych $Q$ zaimplementujemy w~postaci odpowiednio wzbogaconego drzewa czerwono-czarnego.
 W~każdym węźle $x$ drzewa $Q$ przechowamy dodatkowe pola:
 \begin{itemize}
-	\item \attrib{x}{min-key} -- równe najmniejszemu kluczowi w~poddrzewie o~korzeniu w~$x$;
-	\item \attrib{x}{max-key} -- równe największemu kluczowi w~poddrzewie o~korzeniu w~$x$;
-	\item \attrib{x}{min-gap} -- równe najmniejszej odległości między kluczami w~poddrzewie o~korzeniu w~$x$.
+	\item \attrib{x}{min-key} -- równe najmniejszemu kluczowi w~poddrzewie o~korzeniu $x$,
+	\item \attrib{x}{max-key} -- równe największemu kluczowi w~poddrzewie o~korzeniu $x$,
+	\item \attrib{x}{min-gap} -- równe najmniejszej odległości między dwoma różnymi kluczami w~poddrzewie o~korzeniu $x$.
 \end{itemize}
-Wszystkie nowe pola każdego wewnętrznego węzła $x$ są zależne od innych pól węzła $x$ oraz od pól węzłów \attrib{x}{left} i~\attrib{x}{right}:
+Wszystkie nowe pola każdego wewnętrznego węzła $x$ zależą od innych pól węzła $x$ oraz od pól węzłów \attrib{x}{left} i~\attrib{x}{right}:
 \begin{align*}
-	\attrib{x}{min-key} &= \min(\attribb{x}{left}{min-key},\attrib{x}{key},\attribb{x}{right}{min-key}), \\
-	\attrib{x}{max-key} &= \max(\attribb{x}{left}{max-key},\attrib{x}{key},\attribb{x}{right}{max-key}), \\
+	\attrib{x}{min-key} &= \min(\attrib{x}{key},\attribb{x}{left}{min-key}), \\
+	\attrib{x}{max-key} &= \max(\attrib{x}{key},\attribb{x}{right}{max-key}), \\
 	\attrib{x}{min-gap} &= \min(\attribb{x}{left}{min-gap},\attribb{x}{right}{min-gap}, \\
 		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max-key},\attribb{x}{right}{min-key}-\attrib{x}{key}).
 \end{align*}
