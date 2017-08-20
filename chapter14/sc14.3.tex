@@ -145,19 +145,25 @@ Oczywiście wzbogacenie drzewa o~nowe pola nie zmienia działania operacji \proc
 Dzięki zastosowaniu tw.\ 14.1 mamy z~kolei, że wprowadzenie nowych pól nie zwiększa asymptotycznej złożoności czasowej operacji \proc{Insert} i~\proc{Delete}.
 
 \exercise %14.3-7
-Ogólna idea algorytmu polega na pomyśle ze wskazówki podanej w~treści zadania: wykorzystywana jest tzw.\ ,,miotła'', czyli pionowa prosta zamiatająca zbiór prostokątów od lewej do prawej.
+Ogólna idea algorytmu będzie polegać na pomyśle ze wskazówki podanej w~treści zadania: wykorzystamy tzw.\ ,,miotłę'', czyli pionową prostą zamiatającą zbiór prostokątów od lewej do prawej.
 W~danym momencie pamiętane będą prostokąty, których bok poziomy wyznacza przedział zawierający aktualną pozycję ,,miotły''.
 Tak naprawdę zamiast przechowywania wszystkich informacji o~prostokątach wystarczy pamiętać przedziały wyznaczone przez boki pionowe tych prostokątów.
 Do tego celu zastosujemy drzewo przedziałowe.
 
 Omówmy teraz szczegóły techniczne algorytmu.
-Najpierw utworzone zostanie puste drzewo przedziałowe $T$ oraz lista współrzędnych $x$ wszystkich prostokątów wraz z~informacją o~tym, czy jest to lewa współrzędna swojego prostokąta, czy prawa.
-Lista ta zostanie następnie posortowana i~będzie przeglądana od lewej do prawej.
-Jeśli kolejna napotkana współrzędna na tej liście stanowi lewą współrzędną $x$ pewnego prostokąta $R$, to na drzewie $T$ wywołana zostanie operacja \proc{Interval-Search} dla przedziału wyznaczonego przez współrzędne $y$ prostokąta $R$ (czyli jego bok pionowy).
-Wynik działania tego wywołania stanowi informację o~tym, czy w~zbiorze prostokątów istnieje prostokąt różny od $R$ i~zachodzący na $R$.
-Następnie pionowy bok prostokąta $R$ zostanie wstawiony do drzewa $T$.
-Z~kolei napotkawszy prawą współrzędną $x$ prostokąta $R$, algorytm usunie pionowy bok $R$ z~drzewa $T$.
+Najpierw utworzone zostanie puste drzewo przedziałowe $T$ oraz lista współrzędnych $x$ wszystkich prostokątów, przy czym z~każdą współrzędną zapamiętamy wskaźnik do prostokąta, z~którego ona pochodzi.
+Lista ta zostanie następnie posortowana niemalejąco, z~tym, że dla równych elementów na wynikowej liście najpierw zostaną umieszczone te, które stanowią współrzędną $x$ lewego boku swojego prostokąta.
+
+Lista jest następnie przeglądana od lewej do prawej.
+Jeśli kolejny napotkany na niej element stanowi współrzędną $x$ lewego boku swojego prostokąta $R$, to na drzewie $T$ wywołana zostanie operacja \proc{Interval-Search} dla przedziału wyznaczonego przez współrzędne $y$ prostokąta $R$ (czyli jego bok pionowy).
+Jeśli wywołanie to zwróci węzeł różny od \attrib{T}{nil}, to w~drzewie $T$ znajduje się pionowy bok innego prostokąta $R'$ zachodzący na pionowy bok prostokąta $R$, a~to oznacza, że prostokąty $R$ i~$R'$ zachodzą na siebie.
+Można więc zakończyć działanie procedury, zwracając wartość logiczną \const{True}.
+Jeśli jednak w~drzewie $T$ nie ma prostokąta zachodzącego na $R$, to jego pionowy bok jest wstawiany do $T$.
+Z~kolei napotkawszy współrzędną $x$ prawego boku prostokąta $R$, algorytm usunie pionowy bok $R$ z~drzewa $T$.
 W~dowolnym momencie działania algorytmu drzewo $T$ reprezentuje zatem zbiór prostokątów, które są aktualnie przecinane przez prostą zamiatającą.
+Do odszukania węzła do usunięcia o~zadanym przedziale można wykorzystać operację \proc{Interval-Search-Exactly} opisaną w~\refExercise{14.3-5}.
+Aby działała ona poprawnie, wstawianie przedziałów do drzewa musi być odpowiednio zmodyfikowane według opisu z~tamtego zadania.
+Po przetworzeniu wszystkich elementów listy, jeśli algorytm nie został wcześniej zakończony, to w~wejściowym zbiorze prostokątów nie było dwóch zachodzących na siebie, dlatego zostanie zwrócona wartość logiczna \const{false}.
 
 Czas działania algorytmu dla $n$ prostokątów wynosi $O(n\lg n)$.
 Tyle czasu zajmuje sortowanie listy współrzędnych $x$ oraz $O(n)$ wywołań operacji na drzewie przedziałowym (wstawianie, usuwanie i~wyszukiwanie przedziałów zachodzących), z~których każda wymaga czasu $O(\lg n)$.
