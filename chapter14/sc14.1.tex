@@ -8,7 +8,7 @@ Szukany element jest więc $10-8=2$ (drugim) największym elementem w~prawym pod
 Algorytm zostaje więc wywołany rekurencyjnie dla $x$ wskazującego na jeden z~węzłów o~kluczu 21, ten na głębokości 2, oraz $i=2$.
 Ranga tego klucza zostaje wyznaczona na 3, dlatego szukany klucz należy do lewego poddrzewa.
 W~kolejnym wywołaniu $x$ wskazuje na węzeł o~kluczu 19, a~$i=2$.
-Tym razem jednak lewe poddrzewo jest puste, ale zdefiniowanie \attribb{T}{nil}{size} jako 0 pozwala obliczyć rangę obecnego elementu jako 1.
+Tym razem jednak lewe poddrzewo składa się tylko z~wartownika \attrib{T}{nil}, ale zdefiniowanie \attribb{T}{nil}{size} jako 0 pozwala obliczyć rangę obecnego elementu jako 1.
 Algorytm wywoływany jest więc rekurencyjnie jeszcze raz w~celu znalezienia $2-1=1$ (pierwszego) elementu w~prawym poddrzewie.
 Po wyznaczeniu rangi i~porównaniu z~wartością zmiennej $i=1$ zwracany jest wskaźnik do węzła o~kluczu 20.
 
@@ -82,9 +82,9 @@ Jeśli z~kolei $z$ ląduje w~prawym poddrzewie $x$, to \attrib{x}{rank} nie zmie
 Podobnie w~usuwaniu, o~1 zostanie zmniejszona ranga każdego węzła $x$, który w~swoim lewym poddrzewie zawierał efektywnie usunięty węzeł, a~rangi każdego innego węzła pozostaną niezmienione.
 
 Opiszemy jeszcze zmiany rang, jakie zachodzą podczas przeprowadzania rotacji.
-Rozważmy węzeł $x$ o~prawym synu $y$ i~wykonajmy lewą rotację na $x$.
+Rozważmy węzeł $x$, którego prawy syn $y$ jest węzłem wewnętrznym drzewa, i~wykonajmy na $x$ lewą rotację.
 Wartość \attrib{x}{rank} nie zmieni się, ponieważ lewe poddrzewo $x$ nie zmienia swojego rozmiaru w~wyniku przeprowadzenia rotacji.
-Węzeł $x$ staje się lewym synem $y$, a~lewe poddrzewo $y$ sprzed rotacji staje się prawym poddrzewem $x$, w~dalszym ciągu jednak pozostając w~lewym poddrzewie $y$.
+Węzeł $x$ staje się lewym synem węzła $y$, a~lewe poddrzewo $y$ sprzed rotacji staje się prawym poddrzewem $x$, w~dalszym ciągu jednak pozostając w~lewym poddrzewie $y$.
 Wynika stąd, że po wykonaniu rotacji \attrib{y}{rank} zostanie powiększone o~\attrib{x}{rank}.
 Modyfikacje rang w~przypadku prawej rotacji są analogiczne.
 
@@ -116,8 +116,8 @@ W~przeciwnym przypadku znajdziemy liczbę elementów zbioru $T$ większych od $P
 Aby efektywnie wykonywać operacje na zbiorze dynamicznym $T$, zaimplementujemy go jako drzewo statystyk pozycyjnych.
 Do wstawiania, usuwania i~wyszukiwania elementów w~tym drzewie wykorzystamy operacje \proc{OS-Insert}, \proc{OS-Delete} i~\proc{OS-Search}, które działają jak odpowiednie operacje na drzewach czerwono-czarnych i~ewentualnie aktualizują wartości atrybutów \id{size}.
 Pierwsze dwie z~nich zostały opisane w~Podręczniku, a~\proc{OS-Search} działa identycznie jak wyszukiwanie zadanego klucza w~drzewie czerwono-czarnym.
-W~trackie działania algorytmu drzewo $T$ nigdy nie będzie zawierać powtarzających się elementów, więc wyszukiwanie klucza w~$T$ zwróci jedyny węzeł z~tym kluczem.
-Można też zauważyć, że dla dowolnego węzła $x$ rozmiar drzewa $T$ pomniejszony o~rangę $x$ w~$T$, jest liczbą elementów o~kluczach większych niż \attrib{x}{key}.
+W~trackie działania algorytmu w~drzewie $T$ nigdy nie będzie powtarzających się kluczy, więc wyszukiwanie danego klucza w~$T$ zwróci jedyny węzeł z~takim kluczem.
+Można też zauważyć, że dla dowolnego węzła $x$ rozmiar drzewa $T$ pomniejszony o~rangę $x$ w~$T$, jest liczbą węzłów o~kluczach większych niż \attrib{x}{key}.
 Rozmiar drzewa pozycyjnego $T$ wynosi \attribb{T}{root}{size}, a~do znajdowania rangi elementu wykorzystamy operację \proc{OS-Rank}.
 \begin{codebox}
 \Procname{$\proc{Intersecting-Chords}(C)$}

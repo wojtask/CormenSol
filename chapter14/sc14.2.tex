@@ -96,9 +96,9 @@ Załóżmy, że procedura \proc{RB-Enumerate} została wywołana dla $x=\attrib{
 Oznaczmy przez $S$ zbiór tych węzłów drzewa $T$, których klucze leżą w~przedziale $[a,b]$.
 Na podstawie poprzedniego paragrafu odwiedzony zostanie każdy z~$m$ węzłów ze zbioru $S$.
 Zauważmy, że jeśli $x\in S$, to procedura może zostać wywołana rekurencyjnie zarówno dla lewego poddrzewa $x$, jak i~jego prawego poddrzewa.
-Gdy z~kolei $x\not\in S$, to $\attrib{x}{key}<a$ albo $\attrib{x}{key}>b$.
+Gdy z~kolei $x\not\in S$ oraz $x\ne\attrib{T}{nil}$, to $\attrib{x}{key}<a$ albo $\attrib{x}{key}>b$.
 W~pierwszej sytuacji wiersz \ref{li:rb-enumerate-recurse-left-subtree} nie zostanie wykonany, a~w~drugiej -- wiersz \ref{li:rb-enumerate-recurse-right-subtree}.
-Wynika stąd, że jeśli $x\not\in S$, to procedura wywoła się rekurencyjnie co najwyżej raz.
+Wynika stąd, że jeśli $x\not\in S$ i~$x\ne\attrib{T}{nil}$, to procedura wywoła się rekurencyjnie co najwyżej raz.
 Zaobserwujmy, że dla każdych $x$, $y\in S$, jeśli węzeł $y$ znajduje się w~lewym poddrzewie $x$, to wszystkie węzły z~prawego poddrzewa $y$ także należą do $S$, i~symetrycznie w~przypadku, gdy węzeł $y$ jest w~prawym poddrzewie $x$.
 Wynika stąd, że gdy algorytm osiągnie najwyżej położony w~$T$ węzeł $z\in S$, to na każdym następnym poziomie rekursji algorytm wywołany będzie dla co najwyżej jednego węzła spoza $S$.
 Innymi słowy, na każdym poziomie drzewa głębiej od $z$ odwiedzane są w~kolejnych wywołaniach rekurencyjnych co najwyżej dwa węzły spoza $S$, jeden w~lewym poddrzewie $z$, a~drugi w~prawym poddrzewie $z$.
