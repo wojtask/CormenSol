@@ -10,8 +10,8 @@ Wystarczy zatem bezpośrednio po linii 11 (a~także w~analogicznym miejscu w~sym
 W~przypadku 4 wskaźnik $x$ także jest ustawiany na korzeń, ale zanim zostanie wykonane przypisanie z~wiersza 21, w~drzewie zachowana jest już własność 5 bez potraktowania węzła wskazywanego przez $x$ jako ,,nadmiarowo'' czarnego.
 Przypisanie to służy tylko do przerwania pętli.
 
-Czarna wysokość drzewa $T$ może się zmienić także w~sytuacji, gdy z~$T$ usuwany jest jego jedyny węzeł.
-Wówczas w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się żadna iteracja pętli \kw{while}, więc sytuację tę należy wykrywać już w~trakcie wcześniej, np.\ w~wierszu 9 procedury \proc{RB-Delete}.
+Czarna wysokość drzewa $T$ może się zmienić także w~sytuacji, gdy z~$T$ usuwany jest jego jedyny węzeł wewnętrzny.
+Wówczas w~procedurze \proc{RB-Delete-Fixup} nie wykonuje się żadna iteracja pętli \kw{while}, więc sytuację tę należy wykrywać wcześniej, np.\ w~wierszu 9 procedury \proc{RB-Delete}.
 
 Czarna wysokość korzenia drzewa $T$ to oczywiście \attrib{T}{bh}.
 Jeśli dany węzeł jest czerwony, to ma tę samą czarną wysokość, co jego ojciec.
@@ -37,7 +37,7 @@ Poniższy pseudokod realizuje opisany w~treści algorytm, przy założeniu, że 
 		\End
 \li	\Return $y$
 \end{codebox}
-Algorytm przechodzi drzewo $T_1$ od korzenia w~dół, wybierając w~pierwszej kolejności prawego syna aktualnego węzła $y$, a~jeżeli ten jest pusty, to wtedy lewego syna $y$.
+Algorytm przechodzi drzewo $T_1$ od korzenia w~dół, wybierając w~pierwszej kolejności prawego syna aktualnego węzła $y$, a~jeżeli ten jest \const{nil}, to wtedy lewego syna $y$.
 Dzięki temu odwiedzane są węzły o~największym możliwym kluczu na danej czarnej wysokości w~drzewie $T_1$.
 Algorytm kończy działanie, gdy czarna wysokość $b$ węzła $y$, wyznaczona na podstawie obserwacji z~punktu~(a), zrówna się z~wartością \attrib{T_2}{bh}.
 Gdy to się wydarzy, węzeł wskazywany aktualnie przez $y$ jest czarny i~następuje jego zwrócenie.
@@ -95,7 +95,7 @@ Prześledźmy działanie algorytmu \proc{RB-Join}, którego pseudokod został po
 \li	\Return $T$
 \end{codebox}
 W~wierszach \doubledash{\ref{li:rb-join-if-begin}}{\ref{li:rb-join-if-end}} wykonywane są działania w~przypadku, gdy czarna wysokość drzewa $T_2$ nie przekracza czarnej wysokości drzewa $T_1$.
-Jeśli drzewo $T_2$ jest puste, to w~celu złączenia $T_1$ oraz węzła $x$, wystarczy ten ostatni wstawić do $T_1$ za pomocą zwykłej operacji wstawiania, po czym zwrócić wynikowe drzewo $T_1$.
+Jeśli jedynym węzłem drzewa $T_2$ jest jego liść \const{nil}, to w~celu złączenia $T_1$ oraz węzła $x$, wystarczy ten ostatni wstawić do $T_1$ za pomocą zwykłej operacji wstawiania, po czym zwrócić wynikowe drzewo $T_1$.
 W~przeciwnym przypadku wykonywane są operacje opisane w~punkcie (c).
 W~wierszu~\ref{li:rb-join-symmetric-case} obsługiwany jest przypadek, gdy $\attrib{T_1}{bh}<\attrib{T_2}{bh}$, poprzez przeprowadzenie analogicznych działań do tych z~linii \doubledash{\ref{li:rb-join-if-begin}}{\ref{li:rb-join-if-end}}, ale z~zamienionymi $T_1$ i~$T_2$ oraz \id{left} i~\id{right}.
 Wywołanie odpowiadające temu z~linii \ref{li:rb-join-rb-join-point} jest z~kolei zastąpione wersją symetryczną opisaną w~części (e).

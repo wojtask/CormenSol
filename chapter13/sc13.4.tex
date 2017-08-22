@@ -6,7 +6,7 @@ Ponadto w~linii 22 procedury \proc{RB-Delete-Fixup} nie wystarczy tylko zamieni�
 \bignegskip
 
 \exercise %13.4-1
-Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwany jest korzeń drzewa, którego jedyny syn jest czerwony.
+Zanim wywołana zostanie procedura \proc{RB-Delete-Fixup}, korzeniem może zostać czerwony węzeł tylko w~przypadku, gdy usuwany jest korzeń drzewa, którego dokładnie jeden syn jest czerwonym węzłem wewnętrznym.
 Wtedy jednak w~wywołaniu \proc{RB-Delete-Fixup} nie jest wykonywana ani jedna iteracja pętli \kw{while} i~korzeń jest kolorowany na czarno w~wierszu 23.
 
 Procedura \proc{RB-Delete-Fixup} aktualizuje jednak kolor niektórych węzłów na czerwono i~dokonuje pewnych rotacji.
@@ -31,7 +31,7 @@ Ciąg drzew po każdej operacji usunięcia węzła został zilustrowany na rys.\
 	Przywracana jest ona następnie w~procedurze \proc{RB-Delete-Fixup}.
 	{\sffamily\bfseries{(f)}} Po pozbawieniu drzewa przedostatniego węzła pozostaje w~nim jedynie czerwony korzeń, co stanowi naruszenie własności 2.
         W~linii 23 procedury \proc{RB-Delete-Fixup} jest ona jednak natychmiast przywracana.
-        {\sffamily\bfseries{(g)}} Usunięcie ostatniego węzła pozostawia puste drzewo czerwono-czarne, czyli składające się tylko z~wartownika \attrib{T}{nil} (którego pominęliśmy na pozostałych częściach rysunku dla zwiększenia czytelności).
+        {\sffamily\bfseries{(g)}} Usunięcie ostatniego węzła pozostawia drzewo czerwono-czarne składające się tylko z~wartownika \attrib{T}{nil} (którego pominęliśmy na pozostałych częściach rysunku dla zwiększenia czytelności).
         Wywołanie procedury \proc{RB-Delete-Fixup} na wartowniku nie powoduje żadych zmian.} \label{fig:13.4-3}
 \end{figure}
 
