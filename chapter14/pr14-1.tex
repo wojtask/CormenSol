@@ -7,39 +7,70 @@ Oczywiście przecięcie $i=\bigcap_{k=1}^si_k$ również jest przedziałem, któ
 Przedział $i$ składa się z~punktów, na które zachodzi dokładnie $s$ przedziałów z~$I$, w~szczególności końce $i$ stanowią punkty o~największej liczbie przecięć z~przedziałami z~$I$.
 
 \subproblem %14-1(b)
-Skorzystamy ze wskazówki i~do zapamiętania wszystkich $n$ przedziałów wykorzystamy wzbogacone drzewo czerwono-czarne $T$ przechowujące nie przedziały, ale ich końce.
-Do każdego wewnętrznego węzła $x$ w~tym drzewie dodamy atrybut \id{int} będący wskaźnikiem na przedział, którego końcem jest klucz węzła $x$ oraz atrybut \id{side} przyjmujący wartość $+1$, jeśli klucz węzła $x$ stanowi lewy koniec przedziału \attrib{x}{int} oraz $-1$ -- jeśli klucz $x$ stanowi prawy koniec przedziału \attrib{x}{int}.
-Do początkowo pustego drzewa $T$ wstawione zostaną najpierw wszystkie lewe końce przedziałów, a~następnie wszystkie prawe końce.
-Dzięki temu, jeśli pewien lewy koniec ma tę samą wartość co pewien prawy koniec, to lewy będzie poprzedzał prawy w~uporządkowaniu inorder w~drzewie $T$.
+Skorzystamy ze wskazówki i~do przechowywania przedziałów wykorzystamy wzbogacone drzewo czerwono-czarne $T$ zawierające nie same przedziały, ale ich końce.
+Wstawianie przedziału będzie polegać na dodaniu do drzewa końców tego przedziału, a~usuwanie -- na usunięciu jego końców z~drzewa.
+Opiszemy teraz, jak wzbogacić drzewo $T$ o~nowe atrybuty, dzięki czemu możliwe będzie efektywne wykonywanie operacji wstawiania i~usuwania oraz wyznaczania punktu o~największej liczbie przecięć, także w~przypadku, gdy końce przedziałów nie są parami różne.
 
-Niech $\langle e_1,e_2,\dots,e_{2n}\rangle$ będzie posortowanym ciągiem końców przedziałów ze zbioru wejściowego.
+Kluczem danego węzła jest reprezentowany przez ten węzeł koniec przedziału.
+Poza standardowymi atrybutami węzła drzewa czerwono-czarnego, czyli \id{key}, $p$, \id{left}, \id{right} i~\id{color}, każdy węzeł w~drzewie $T$ będzie zawierał też kilka nowych.
+Przyjmiemy, że każde dwa końce przedziałów będące tym samym punktem reprezentowane są przez wspólny węzeł, dzięki czemu w~drzewie $T$ nie będzie dwóch różnych węzłów o~tym samym kluczu.
+W~atrybucie \attrib{x}{low} węzła $x$ przechowamy liczbę lewych końców równych \attrib{x}{key} znajdujących się w~drzewie, a~w~atrybucie \attrib{x}{high} -- liczbę takich prawych końców.
+
+Niech $a=\langle x_1,x_2,\dots,x_n\rangle$ będzie ciągiem węzłów wewnętrznych drzewa $T$ w~porządku inorder.
 Zdefiniujmy
 \[
-	s(j,k) = \sum_{i=j}^k\attrib{e_i}{side}
+	\sigma(j,k) = \sum_{i=j}^k(\attrib{x_i}{low}-\attrib{x_i}{high}) \quad\text{oraz}\quad s(j,k) = \sigma(j,k-1)+\attrib{x_k}{low}
 \]
-dla $1\le j\le k\le2n$.
-Na podstawie poprzedniej części, punkt o~największej liczbie przecięć znajduje się w~lewym końcu $e_k$ przedziału, dla którego wartość $s(1,k)$ jest maksymalna.
+dla $1\le j$, $k\le n$.
+Na podstawie tych definicji można wywnioskować, że na punkt \attrib{x_i}{key} zachodzi $s(1,i)$ przedziałów.
+Dzięki obserwacji z~poprzedniej części problemu, punkt o~największej liczbie przecięć znajduje się w~końcu \attrib{x_i}{key} przedziału, dla którego wartość $s(1,i)$ jest maksymalna.
 
 Z~każdym węzłem $x$ zwiążemy kolejne atrybuty.
-Niech $e_{j_x}$ i~$e_{k_x}$ będą końcami przedziałów znajdującymi się w~poddrzewie o~korzeniu w~$x$, odpowiednio, najbardziej na lewo i~najbardziej na prawo w~porządku inorder.
-Atrybut \attrib{x}{sum} definiujemy jako $s(j_x,k_x)$, czyli sumę wartości \id{side} po wszystkich przedziałach w~poddrzewie w~$x$.
-W~polu \attrib{x}{max} przechowamy maksymalną wartość wyrażenia $s(j_x,i)$ dla $i=j_x$, $j_x+1$, \dots, $k_x$.
-W~końcu pole \attrib{x}{pom} przechowywać będzie przedział o~końcu $e_i$, dla którego \attrib{x}{max} osiąga maksimum.
-Przyjmijmy ponadto $\attribb{T}{nil}{sum}=\attribb{T}{nil}{max}=0$.
+Dla dowolnego węzła wewnętrznego $x$, niech $j_x$ i~$k_x$ oznaczają pozycje w~ciągu $a$ węzłów o~odpowiednio, minimalnym i~maksymalnym kluczu spośród węzłów z~poddrzewa o~korzeniu w~$x$.
+Atrybut \attrib{x}{sum} zdefiniujemy jako $\sigma(j_x,k_x)$.
+W~polu \attrib{x}{max} przechowamy z~kolei maksymalną wartość wyrażenia $s(j_x,i)$ dla $j_x\le i\le k_x$.
+W~końcu pole \attrib{x}{pom} przechowywać będzie koniec \attrib{x_i}{key}, dla którego $\attrib{x}{max}=s(j_x,i)$.
+Przyjmujemy ponadto $\attribb{T}{nil}{sum}=0$ oraz $\attribb{T}{nil}{max}=-\infty$.
 
-Wartości nowych pól można wyznaczyć na podstawie ich wartości w~synach, co spełnia założenie tw.\ 14.1:
+Wartości nowych pól w~węźle wewnętrznym $x$ można wyznaczyć na podstawie informacji zawartych w~węzłach $x$, \attrib{x}{left} i~\attrib{x}{right}, co spełnia założenie tw.\ 14.1:
 \begin{align*}
-	\attrib{x}{sum} &= \attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{sum}, \\
-	\attrib{x}{max} &= \max(\attribb{x}{left}{max},\attribb{x}{left}{sum}+\attrib{x}{side},\attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{max}).
+	\attrib{x}{sum} &= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+\attribb{x}{right}{sum}, \\
+	\attrib{x}{max} &= \max(\attribb{x}{left}{max}, \\
+	&\phantom{{}=\max(}\attribb{x}{left}{sum}+\attrib{x}{low}, \\
+	&\phantom{{}=\max(}\attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+\attribb{x}{right}{max}).
 \end{align*}
-O~ile sposób obliczania \attrib{x}{sum} jest oczywisty, to opiszemy na czym polega wzór na \attrib{x}{max}.
-Koniec $e_i$, gdzie $i$ maksymalizuje sumę $s(j_x,i)$, znajduje się albo w~węźle $x$ albo w~którymś z~jego poddrzew.
-Jeśli $e_i$ jest w~lewym poddrzewie $x$, to maksymalna wartość $s(j_x,i)$ jest równa maksymalnej wartości $s(j_{\attrib{x}{left}},i)$, skąd $\attrib{x}{max}=\attribb{x}{left}{max}$.
-Gdy $e_i$ jest w~węźle $x$, to \attrib{x}{max} stanowi sumę wartości \id{side} po każdym węźle w~lewym poddrzewie $x$ łącznie z~\attrib{x}{side}, więc $\attrib{x}{max}=\attribb{x}{left}{sum}+\attrib{x}{side}$.
-W~końcu, gdy $e_i$ jest w~jednym z~węzłów w~prawym poddrzewie $x$, to \attrib{x}{max} stanowi sumę wartości \id{side} po każdym węźle z~lewego poddrzewa $x$, łącznie z~\attrib{x}{side} i~wartościami \id{side} w~pewnym zbiorze węzłów z~prawego poddrzewa $x$.
-Zbiór ten przebiega węzły, począwszy od najbardziej na lewo położonego w~tym poddrzewie, aż do węzła zawierającego $e_i$, który maksymalizuje $s(j_{\attrib{x}{right}},i)$.
-Maksymalna wartość tego wyrażenia jest równa dokładnie \attribb{x}{right}{max}, skąd w~tym przypadku dostajemy $\attrib{x}{max}=\attribb{x}{left}{sum}+\attrib{x}{side}+\attribb{x}{right}{max}$.
-Na podstawie wartości, która przypisywana jest do \attrib{x}{max}, ustalana jest odpowiednia wartość dla \attrib{x}{pom}, czyli \attribb{x}{left}{pom}, \attrib{x}{int} albo \attribb{x}{right}{pom}, kolejno dla przypadków opisywanych powyżej.
+Sposób obliczania \attrib{x}{sum} jest oczywisty, udowodnimy zatem tylko postać wzoru na \attrib{x}{max}.
+Niech $x_i$ będzie węzłem, dla którego $i$ maksymalizuje wyrażenie $s(j_x,i)$.
+Jeśli $x_i$ jest w~lewym poddrzewie $x$, to maksymalna wartość powyższego wyrażenia dla $j_{\attrib{x}{left}}\le i\le k_{\attrib{x}{left}}$ znajduje się w~$\attribb{x}{left}{max}$, więc $\attrib{x}{max}=\attribb{x}{left}{max}$.
+Gdy $x_i=x$, to $s(j_x,i)=\sigma(j_x,i-1)+\attrib{x}{low}$ i~rozważmy dwa przypadki.
+Jeśli $\attrib{x}{left}=\attrib{T}{nil}$, to $j_x=i$, a~więc $s(j_x,i)=\attrib{x}{low}$.
+Wzór na \attrib{x}{max} zachodzi dzięki odpowiedniemu zdefiniowaniu wartości pól dla wartownika.
+W~przeciwnym przypadku mamy $j_x=j_{\attrib{x}{left}}$ oraz $i-1=k_{\attrib{x}{left}}$, a~stąd
+\[
+	s(j_x,i) = \sigma(j_{\attrib{x}{left}},k_{\attrib{x}{left}})+\attrib{x}{low} = \attribb{x}{left}{sum}+\attrib{x}{low}.
+\]
+Wreszcie, gdy $x_i$ należy do prawego poddrzewa $x$ oraz $\attrib{x}{left}\ne\attrib{T}{nil}$, to
+\begin{align*}
+	s(j_x,i) &= \sigma(j_x,i-1)+\attrib{x_i}{low} \\
+	&= \sigma\bigl(j_{\attrib{x}{left}},k_{\attrib{x}{left}}\bigr)+(\attrib{x}{low}-\attrib{x}{high})+\sigma\bigl(j_{\attrib{x}{right}},i-1\bigr)+\attrib{x_i}{low} \\[1mm]
+	&= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+s(j_{\attrib{x}{right}},i) \\
+	&= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+\attribb{x}{right}{max}.
+\end{align*}
+W~sytuacji, gdy $\attrib{x}{left}$ jest wartownikiem, w~powyższym wzorze składnik $\sigma(j_{\attrib{x}{left}},k_{\attrib{x}{left}})$ należy zastąpić zerem, ale wówczas wzór także pozostaje spełniony.
 
-Stosując teraz tw.\ 14.1 mamy, że operacje wstawiająca i~usuwająca koniec przedziału do opisanej struktury danych, działają w~czasie $O(\lg n)$.
-Operacja $\proc{Find-POM}(T)$ działa w~czasie $O(1)$, zwracając po prostu przedział \attribb{T}{root}{pom}.
+Na podstawie wartości, jaką przyjmuje \attrib{x}{max}, ustalana jest odpowiednia wartość dla \attrib{x}{pom}, czyli \attribb{x}{left}{pom}, \attrib{x}{key} albo \attribb{x}{right}{pom}, kolejno dla przypadków opisywanych powyżej.
+
+Jak mówiliśmy wcześniej, dodanie przedziału do drzewa polega na wstawieniu do niego obu jego końców.
+Jeśli w~drzewie istnieje już węzeł $x$ przechowujący dany koniec (co można stwierdzić, uruchamiając operację \proc{Search} w~drzewie $T$), to należy zinkrementować \attrib{x}{low} dla lewego końca albo \attrib{x}{high} dla prawego końca, a~następnie zaktualizować pola \id{sum}, \id{max} i~\id{pom} dla wszystkich przodków $x$.
+W~przeciwnym przypadku do drzewa $T$ wstawiany jest nowy węzeł $z$, w~którym $\attrib{z}{low}=1$ i~$\attrib{z}{high}=0$, jeśli dodawany jest lewy koniec, albo $\attrib{z}{low}=0$ i~$\attrib{z}{high}=1$, jeśli dodawany jest prawy koniec.
+Początkowe wartości pozostałych nowych pól wynoszą: $\attrib{z}{sum}=\attrib{z}{low}-\attrib{z}{high}$, $\attrib{z}{max}=\attrib{z}{low}$ oraz $\attrib{z}{pom}=\attrib{z}{key}$.
+Procedura wstawiająca nowy przedział zwróci w~wyniku parę węzłów przechowujących końce tego przedziału.
+
+W~celu usunięcia przedziału, z~drzewa $T$ usuwane są oba jego końce.
+W~węźle przechowującym lewy koniec dekrementowana jest wartość atrybutu \id{low}, a~w~węźle z~prawym końcem -- wartość atrybutu \id{high}.
+Faktyczne usunięcie któregokolwiek z~tych węzłów nastąpi tylko wówczas, gdy oba jego atrybuty \id{low} i~\id{high} osiągną wartość 0.
+W~przeciwnym przypadku zaktualizowane zostaną jedynie wartości nowych pól we wszystkich przodkach aktualizowanego węzła.
+Ponieważ węzły drzewa są pamiętane poza wywołaniami procedur, to operację usuwania węzła z~drzewa należy zaimplementować w~oparciu o~rozwiązanie \refExercise{12.3-4}.
+
+Stosując teraz tw.\ 14.1 mamy, że operacje wstawiania i~usuwania przedziału do opisanego drzewa $T$, działają w~czasie $O(\lg n)$, gdzie $n$ jest liczbą przedziałów znajdujących się aktualnie w~$T$.
+Operacja $\proc{Find-POM}(T)$ działa w~czasie $O(1)$, zwracając po prostu wartość \attribb{T}{root}{pom}.
