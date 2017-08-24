@@ -135,8 +135,10 @@ Wszystkie nowe pola każdego wewnętrznego węzła $x$ zależą od innych pól w
 \begin{align*}
 	\attrib{x}{min-key} &= \min(\attrib{x}{key},\attribb{x}{left}{min-key}), \\
 	\attrib{x}{max-key} &= \max(\attrib{x}{key},\attribb{x}{right}{max-key}), \\
-	\attrib{x}{min-gap} &= \min(\attribb{x}{left}{min-gap},\attribb{x}{right}{min-gap}, \\
-		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max-key},\attribb{x}{right}{min-key}-\attrib{x}{key}).
+	\attrib{x}{min-gap} &= \min(\attribb{x}{left}{min-gap}, \\
+		&\phantom{{}=\min(}\attribb{x}{right}{min-gap}, \\
+		&\phantom{{}=\min(}\attrib{x}{key}-\attribb{x}{left}{max-key}, \\
+		&\phantom{{}=\min(}\attribb{x}{right}{min-key}-\attrib{x}{key}).
 \end{align*}
 Definiujemy ponadto $\attribb{Q}{nil}{min-key}=\attribb{Q}{nil}{min-gap}=\infty$ oraz $\attribb{Q}{nil}{max-key}=-\infty$.
 
