@@ -47,16 +47,16 @@ Jeśli $\attrib{x}{left}=\attrib{T}{nil}$, to $j_x=i$, a~więc $s(j_x,i)=\attrib
 Wzór na \attrib{x}{max} zachodzi dzięki odpowiedniemu zdefiniowaniu wartości pól dla wartownika.
 W~przeciwnym przypadku mamy $j_x=j_{\attrib{x}{left}}$ oraz $i-1=k_{\attrib{x}{left}}$, a~stąd
 \[
-	s(j_x,i) = \sigma(j_{\attrib{x}{left}},k_{\attrib{x}{left}})+\attrib{x}{low} = \attribb{x}{left}{sum}+\attrib{x}{low}.
+	s(j_x,i) = \sigma\bigl(j_{\attrib{x}{left}},k_{\attrib{x}{left}}\bigl)+\attrib{x}{low} = \attribb{x}{left}{sum}+\attrib{x}{low}.
 \]
 Wreszcie, gdy $x_i$ należy do prawego poddrzewa $x$ oraz $\attrib{x}{left}\ne\attrib{T}{nil}$, to
 \begin{align*}
 	s(j_x,i) &= \sigma(j_x,i-1)+\attrib{x_i}{low} \\
 	&= \sigma\bigl(j_{\attrib{x}{left}},k_{\attrib{x}{left}}\bigr)+(\attrib{x}{low}-\attrib{x}{high})+\sigma\bigl(j_{\attrib{x}{right}},i-1\bigr)+\attrib{x_i}{low} \\[1mm]
-	&= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+s(j_{\attrib{x}{right}},i) \\
+	&= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+s\bigl(j_{\attrib{x}{right}},i\bigl) \\
 	&= \attribb{x}{left}{sum}+(\attrib{x}{low}-\attrib{x}{high})+\attribb{x}{right}{max}.
 \end{align*}
-W~sytuacji, gdy $\attrib{x}{left}$ jest wartownikiem, w~powyższym wzorze składnik $\sigma(j_{\attrib{x}{left}},k_{\attrib{x}{left}})$ należy zastąpić zerem, ale wówczas wzór także pozostaje spełniony.
+W~sytuacji, gdy $\attrib{x}{left}$ jest wartownikiem, w~powyższym wzorze składnik $\sigma\bigl(j_{\attrib{x}{left}},k_{\attrib{x}{left}}\bigl)$ należy zastąpić zerem, ale wówczas wzór także pozostaje spełniony.
 
 Na podstawie wartości, jaką przyjmuje \attrib{x}{max}, ustalana jest odpowiednia wartość dla \attrib{x}{pom}, czyli \attribb{x}{left}{pom}, \attrib{x}{key} albo \attribb{x}{right}{pom}, kolejno dla przypadków opisywanych powyżej.
 
