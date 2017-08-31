@@ -8,21 +8,21 @@ Wartość\/ $T(n)$ powinna być zwracana dla\/ $i\ge n/2$, a~część rekurencyj
 Stąd $U_i(n)=T(n)$.
 
 Załóżmy teraz, że $i<n/2$ i~że tablicą wejściową jest $A[p\twodots r]$, gdzie $n=r-p+1$.
+Algorytm będzie wyszukiwał \singledash{$i$}{tą} statystykę pozycyjną tablicy wejściowej, przy okazji partycjonując tablicę wokół szukanego elementu.
 Niech $m=\lfloor n/2\rfloor$.
-Dzielimy tablicę wejściową na dwie podtablice $A[p\twodots p+m-1]$ oraz $A[p+m\twodots r]$.
+Rozważmy podtablice $L=A[p\twodots p+m-1]$ oraz $R=A[p+m\twodots r]$ tablicy wejściowej.
 Dla każdego $j=0$, 1, \dots, $m-1$ porównamy elementy $A[p+j]$ oraz $A[p+m+j]$ i~ewentualnie zamienimy je, aby zachodziło $A[p+j]>A[p+m+j]$.
-Wywołujemy następnie nasz algorytm rekurencyjnie w~celu znalezienia \singledash{$i$}{tej} statystyki pozycyjnej podtablicy $A[p+m\twodots r]$, czego efektem ubocznym jest podział tej podtablicy względem szukanego elementu.
-Po powrocie z~wywołania rekurencyjnego podtablica $A[p\twodots p+m-1]$ zostanie podzielona w~analogiczny sposób.
-Dokładniej, dla każdej pary elementów $A[j]$ i~$A[k]$ zamienionych w~wywołaniu rekurencyjnym, gdzie $p+m\le j<k\le p+2m-1$, zamienione zostaną również elementy $A[j-m]$ i~$A[k-m]$.
-Dzięki temu, po wyznaczeniu \singledash{$i$}{tego} najmniejszego elementu podtablicy $A[p+m\twodots r]$, fragmenty $A[p\twodots p+i-1]$ oraz $A[p+m\twodots p+m+i-1]$ będą zawierać po $i$ najmniejszych elementów ze swoich podtablic.
-A~zatem \singledash{$i$}{ty} najmniejszy element tablicy wejściowej znajduje się w~jednym z~tych dwóch fragmentów.
-Wystarczy więc połączyć je w~tablicę $B[1\twodots2i]$, a~następnie zwrócić $\proc{Select}(B,1,2i,i)$.
+Wywołamy następnie nasz algorytm rekurencyjnie w~celu znalezienia \singledash{$i$}{tego} najmniejszego elementu podtablicy $R$, czego efektem ubocznym będzie podział tej podtablicy względem szukanego elementu.
+Po powrocie z~wywołania rekurencyjnego podtablica $L$ zostanie podzielona w~analogiczny sposób.
+Dokładniej, dla każdej pary elementów $A[j]$ i~$A[k]$ zamienionych w~wywołaniu rekurencyjnym, gdzie $p+m\le j<k\le r$, zamienione zostaną również elementy $A[j-m]$ i~$A[k-m]$.
+Dzięki temu, po wyznaczeniu \singledash{$i$}{tej} statystyki pozycyjnej podtablicy $R$, fragmenty $A[p\twodots p+i-1]$ oraz $A[p+m\twodots p+m+i-1]$ będą zawierać po $i$ najmniejszych elementów ze swoich podtablic.
+Najmniejszy element tablicy wejściowej znajduje się w~którymś z~tych fragmentów, więc wystarczy połączyć je w~tablicę $B[1\twodots2i]$, a~następnie zwrócić $\proc{Select}(B,1,2i,i)$.
 
-Omówimy teraz szczegóły implementacyjne.
-Aby zrealizować równoczesny podział tablicy, jak również utrzymywać elementy w~parach tak, że większy element pary należy do lewej części tablicy, a~mniejszy do prawej, będziemy rejestrować każdą zamianę w~tablicy wejściowej.
-Można tego dokonać poprzez utworzenie dodatkowej tablicy \id{permutation} wypełnionej kolejno liczbami od 1 do $n$ i~aktualizowanie jej odpowiednio przy każdej zamianie elementów w~tablicy wejściowej.
-Wynikowa permutacja liczb od 1 do $n$ w~tablicy \id{permutation} jednoznacznie określi permutację elementów tablicy wejściowej w~porównaniu z~jej stanem początkowym na danym poziomie rekurencji i~będzie wykorzystywana do przeprowadzenia podziału drugiej części tablicy po powrocie z~wywołania rekurencyjnego, jak również aktualizacji tablicy \id{permutation} na wyższym poziomie.
-Zauważmy także, że tablica $B$, którą tworzymy pod koniec działania algorytmu, może w~rzeczywistości stanowić część tablicy $A$ -- wystarczy bowiem, aby był to spójny fragment, co da się uzyskać poprzez przeniesienie fragmentu $A[p+m\twodots p+m+i-1]$ tuż za koniec fragmentu $A[p\twodots p+i-1]$.
+Omówimy teraz pokrótce szczegóły implementacyjne.
+Aby zrealizować równoczesny podział tablicy i~utrzymywać elementy w~parach, każda zamiana elementów tablicy będzie pociągać za sobą kaskadowo analogiczne zamiany w~innej części tablicy, zgodnie z~opisem z~poprzedniego akapitu.
+W~celu zapewnienia, że każdy element podtablicy ma swojego odpowiednika, można wprowadzić sztuczne elementy równe $\infty$.
+Za każdym razem, gdy rozmiar tablicy wejściowej $n$ jest nieparzysty, o~taki element rozszerzana byłaby podtablica $L$, a~także kaskadowo te części tablicy wejściowej na lewo od $L$, których to rozszerzenie doprowadzi do sytuacji, w~której niektóre elementy będą bez pary.
+Zauważmy także, że tablica $B$, którą tworzymy pod koniec działania algorytmu, może w~rzeczywistości stanowić część tablicy $A$ -- wystarczy bowiem, aby był to spójny jej fragment, co da się uzyskać poprzez zamianę elementów z~podtablicy $A[p+m\twodots p+m+i-1]$ z~tymi należącymi do podtablicy $A[p\twodots p+i-1]$.
 
 Sprawdzimy teraz, ile wynosi $U_i(n)$ w~przypadku, gdy $i<n/2$.
 W~pierwszej fazie algorytm wykonuje $\lfloor n/2\rfloor$ porównań elementów pochodzących z~dwóch części tablicy wejściowej.
