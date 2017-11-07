@@ -31,4 +31,12 @@ Wykorzystując wynik poprzedniego zadania oraz wzór A.5, mamy:
 \]
 
 \exercise %15.1-4
+Możemy zrezygnować z~większości komórek tablic $f_i$.
+Wystarczy zauważyć, że jedynymi wartościami z~tablic $f_i$ potrzebnymi do obliczenia $f_i[j]$ są $f_i[j-1]$.
+Tablice $f_i$ nie są też wykorzystywane podczas wypisywania optymalnego rozwiązania w~procedurze \proc{Print-Stations}.
+Można więc w~procedurze \proc{Fastest-Way} zaalokować jedynie $f_i[1\twodots2]$, czyli w~sumie 4 komórki.
+Na pozycji $f_i[1]$ przechowamy wartości dla poprzedniego stanowiska i~wykorzystamy je do obliczenia wartości dla obecnego stanowiska, co zapiszemy w~$f_i[2]$.
+Na początku każdej iteracji pętli \kw{for} $f_i[2]$ będzie przepisywane do $f_i[1]$.
+Dzięki tej modyfikacji tablice $f_i$ i~$l_i$ zawierają łącznie $4+(2n-2)=2n+2$ pozycji.
+
 \exercise %15.1-5
