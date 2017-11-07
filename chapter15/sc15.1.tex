@@ -40,3 +40,10 @@ Na początku każdej iteracji pętli \kw{for} $f_i[2]$ będzie przepisywane do $
 Dzięki tej modyfikacji tablice $f_i$ i~$l_i$ zawierają łącznie $4+(2n-2)=2n+2$ pozycji.
 
 \exercise %15.1-5
+Przypisanie $l_1[j]\gets2$ wykonywane jest w~procedurze \proc{Fastest-Way} tylko w~linii 8 i~odbywa się jedynie wtedy, gdy warunek z~wiersza 4 jest fałszywy.
+Podobnie, przypisanie $l_2[j]\gets1$ odbywa się jedynie wtedy, gdy warunek z~wiersza 9 jest fałszywy.
+Oba te przypisania zostaną więc wykonane dla tego samego $j$, o~ile spełnione zostaną nierówności
+\[
+	f_1[j-1]+a_{1,j}>f_2[j-1]+t_{2,j-1}+a_{1,j} \quad\text{oraz}\quad f_2[j-1]+a_{2,j}>f_1[j-1]+t_{1,j-1}+a_{2,j}.
+\]
+Jednakże po dodaniu ich stronami i~zredukowaniu powtarzających się wyrazów, otrzymujemy $t_{1,j-1}+t_{2,j-1}<0$, co jest sprzeczne z~założeniem.
