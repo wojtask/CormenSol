@@ -1,6 +1,17 @@
 \subchapter{Planowanie czynności na liniach montażowych}
 
 \exercise %15.1-1
+Poniższa procedura wypisuje wszystkie stanowiska w~kolejności rosnącej -- stanowisko o~numerze $n$ wypisywane jest po stanowiskach o~niższych numerach, co realizowane jest poprzez zastosowanie rekursji.
+\begin{codebox}
+\Procname{$\proc{Print-Stations}'(l,l^*\!,n)$}
+\li	\If $n\ge1$
+\li	\Then $\proc{Print-Stations}'(l,l_{l^*\!}[n],n-1)$
+\li		wypisz ,,linia '' $l^*\!$ ,,{}, stanowisko '' $n$
+	\End
+\end{codebox}
+Do wywołania rekurencyjnego przekazywany jest numer wykorzystanej linii na stanowisku $n-1$, który odczytywany jest z~$l_{l^*\!}[n]$.
+Imitujemy dzięki temu zachowanie pętli z~oryginalnej procedury.
+
 \exercise %15.1-2
 \exercise %15.1-3
 \exercise %15.1-4
