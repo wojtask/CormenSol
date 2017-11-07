@@ -13,6 +13,17 @@ Do wywołania rekurencyjnego przekazywany jest numer wykorzystanej linii na stan
 Imitujemy dzięki temu zachowanie pętli z~oryginalnej procedury.
 
 \exercise %15.1-2
+W~pierwszym kroku indukcyjnym wzór oczywiście zachodzi:
+\[
+	r_1(n) = r_2(n) = 1 = 2^{n-n}.
+\]
+Niech teraz $j=1$, 2, \dots, $n-1$ i~przyjmijmy, że $r_1(j+1)=r_2(j+1)=2^{n-(j+1)}$.
+Stąd
+\[
+	r_1(j) = r_2(j) = r_1(j+1)+r_2(j+1) = 2^{n-(j+1)}+2^{n-(j+1)} = 2^{n-(j+1)+1} = 2^{n-j},
+\]
+a~więc wzór jest prawdziwy w~ogólnym przypadku.
+
 \exercise %15.1-3
 \exercise %15.1-4
 \exercise %15.1-5
