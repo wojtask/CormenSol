@@ -17,5 +17,27 @@ Nasz algorytm oprzemy na \proc{Print-Optimal-Parens}, ale zamiast wypisywać naw
 \end{codebox}
 
 \exercise %15.2-3
+Udowodnimy przez indukcję, że istnieje stała $c>0$ taka, że $P(n)\ge c2^n$ dla każdego $n\ge1$.
+
+Okazuje się, że w~celu pokazania tego oszacowania na podstawę indukcji musimy przyjąć $n=1$, 2, 3, 4.
+Mamy:
+\begin{align*}
+	P(1) &= 1 \ge c2^1 \quad\Leftrightarrow\quad c \le 1/2, \\
+	P(2) &= P(1)P(1) = 1 \ge c2^2 \quad\Leftrightarrow\quad c \le 1/4, \\
+	P(3) &= P(1)P(2)+P(2)P(1) = 1+1 = 2 \ge c2^3 \quad\Leftrightarrow\quad c \le 1/4, \\
+	P(4) &= P(1)P(3)+P(2)P(2)+P(3)P(1) = 2+1+2 = 5 \ge c2^4 \quad\Leftrightarrow\quad c \le 5/16.
+\end{align*}
+Największym $c$ spełniającym każdą powyższą nierówność jest $c=1/4$.
+
+Niech teraz $n\ge5$.
+Dla każdego $i=1$, \dots, $n-1$ przyjmiemy, że zachodzi $P(i)\ge c2^i$.
+Mamy:
+\[
+	P(n) = \sum_{k=1}^{n-1}P(k)P(n-k) \ge \sum_{k=1}^{n-1}c2^kc2^{n-k} = \sum_{k=1}^{n-1}c^22^n = c^22^n(n-1).
+\]
+Nierówność $c^22^n(n-1)\ge c2^n$ będzie zachodzić, o~ile $c\ge1/(n-1)$.
+A~zatem najmniejszą wartością $c$ spełniającą tę nierówność dla wszystkich $n\ge5$, jest $c=1/4$.
+Widać więc, że wybór takiego $c$ pozwala spełnić oszacowanie $P(n)\ge c2^n$ dla każdego $n$, co oznacza, że $P(n)=\Omega(2^n)$.
+
 \exercise %15.2-4
 \exercise %15.2-5
