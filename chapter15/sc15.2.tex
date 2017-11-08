@@ -40,4 +40,26 @@ A~zatem najmniejszą wartością $c$ spełniającą tę nierówność dla wszyst
 Widać więc, że wybór takiego $c$ pozwala spełnić oszacowanie $P(n)\ge c2^n$ dla każdego $n$, co oznacza, że $P(n)=\Omega(2^n)$.
 
 \exercise %15.2-4
+Procedura \proc{Matrix-Chain-Order} oblicza wartości w~tablicy $m$ metodą wstępującą z~wykorzystaniem tablicowania wyników pośrednich na podstawie rekurencji (15.12).
+Podczas obliczania $m[i,j]$ odczytywane są wartości z~pozycji $m[i,k]$ i~$m[k+1,j]$ -- dla ułatwienia nazwijmy je, odpowiednio, pierwszym i~drugim składnikiem.
+Ustalmy $i'$ i~$j'$.
+Odwołanie do $m[i',j']$ w~roli pierwszego składnika ma miejsce podczas obliczania $m[i',j'+1]$, $m[i',j'+2]$, \dots, $m[i',n]$, a~więc $n-j'$ wartości.
+Z~kolei wartość $m[i',j']$ w~roli drugiego składnika służy do wyznaczenia $m[1,j']$, $m[2,j']$, \dots, $m[i'-1,j']$, czyli $i'-1$ wartości.
+Stąd otrzymujemy $R(i',j')=n-j'+i'-1$.
+
+Znajdziemy teraz całkowitą liczbę odwołań do tablicy $m$.
+W~poniższym wyprowadzeniu stosujemy zamianę zmiennych w~sumie ($k=n-j$) oraz korzystamy z~tożsamości (A.1) i~(A.3):
+\begin{align*}
+	\sum_{i=1}^n\sum_{j=i}^nR(i,j) &= \sum_{i=1}^n\sum_{j=i}^n(n-j+i-1) \\
+	&= \sum_{i=1}^n\sum_{k=0}^{n-i}(k+i-1) \\
+	&= \sum_{i=1}^n\biggl(\sum_{k=0}^{n-1}k+\sum_{k=0}^{n-i}(i-1)\biggr) \\
+	&= \sum_{i=1}^n\biggl(\frac{(n-i)(n-i+1)}{2}+(n-i+1)(i-1)\biggr) \\
+	&= \frac{1}{2}\sum_{i=1}^n(n-i+1)(n-i+2i-2) \\
+	&= \frac{1}{2}\sum_{i=1}^n(n^2-n-2+3i-i^2) \\
+	&= \frac{1}{2}\biggl(n(n^2-n-2)+3\sum_{i=1}^ni-\sum_{i=1}^ni^2\biggr) \\
+	&= \frac{1}{2}\biggl(n(n^2-n-2)+\frac{3n(n+1)}{2}-\frac{n(n+1)(2n+1)}{6}\biggr) \\
+	&= \frac{n}{12}(6n^2-6n-12+9n+9-2n^2-3n-1) \\[1mm]
+	&= \frac{n^3-n}{3}.
+\end{align*}
+
 \exercise %15.2-5
