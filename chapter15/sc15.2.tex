@@ -5,6 +5,17 @@ Posługując się algorytmami \proc{Matrix-Chain-Order} i~\proc{Print-Optimal-Pa
 Mnożąc macierze zgodnie z~tym nawiasowaniem, wykonamy 2010 mnożeń skalarnych.
 
 \exercise %15.2-2
+Nasz algorytm oprzemy na \proc{Print-Optimal-Parens}, ale zamiast wypisywać nawiasowanie, będziemy przekazywać macierze zwrócone przez wywołania rekurencyjne do procedury odpowiedzialnej za rzeczywiste ich pomnożenie.
+\begin{codebox}
+\Procname{$\proc{Matrix-Chain-Multiply}(A,s,i,j)$}
+\li	\If $i=j$
+\li		\Then \Return $A_i$
+		\End
+\li	\Return $\proc{Matrix-Multiply}($
+\zi	\>\>\> $\proc{Matrix-Chain-Multiply}(A,s,i,s[i,j]),$
+\zi	\>\>\> $\proc{Matrix-Chain-Multiply}(A,s,s[i,j]+1,j))$
+\end{codebox}
+
 \exercise %15.2-3
 \exercise %15.2-4
 \exercise %15.2-5
