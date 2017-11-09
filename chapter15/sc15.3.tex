@@ -1,6 +1,51 @@
 \subchapter{Podstawy programowania dynamicznego}
 
 \exercise %15.3-1
+W~podrozdziale 15.2 stwierdzono, że liczba wszystkich możliwych nawiasowań ciągu $n$ macierzy jest rzędu $\Omega(4^n\!/n^{3/2})$, zatem algorytm przeglądający wszystkie nawiasowania w~poszukiwaniu optymalnego kosztu mnożenia macierzy, wymaga czasu co najmniej takiego rzędu.
+Aby uzyskać górne oszacowanie na czas działania $T(n)$ procedury \proc{Recursive-Matrix-Chain}, zastosujemy analizę podobną do tej z~Podręcznika, która posłużyła do znalezienia dolnego oszacowania na $T(n)$.
+W~naszym przypadku przyjmiemy, że wykonanie instrukcji w~wierszach \doubledash{1}{2} oraz wierszach \doubledash{6}{7} zajmuje co najwyżej $c$ jednostek czasu, gdzie $c$ jest stałą.
+Rozważymy rekurencję
+\[
+	T(n) \le \begin{cases}
+		c, & \text{jeśli $n=1$}, \\
+		c+\sum_{k=1}^{n-1}(T(k)+T(n-k)+c), & \text{jeśli $n>1$}, \\
+	\end{cases}
+\]
+która sprowadza się do postaci
+\[
+	T(n) \le 2\sum_{i=1}^{n-1}T(i)+cn.
+\]
+
+Wykorzystamy metodę podstawiania do pokazania, że $T(n)\le c(7/2)^n$.
+Dla $n=1$ mamy $T(1)=1\le c(7/2)$, co jest spełnione przez każde $c\ge2/7$.
+W~drugim kroku indukcyjnym przyjmijmy $n\ge2$.
+Mamy wówczas:
+\begin{align*}
+	T(n) &\le 2\sum_{i=1}^{n-1}T(i)+cn \\
+	&\le 2c\sum_{i=1}^{n-1}(7/2)^i+cn \\
+	&= 2c\cdot\frac{(7/2)^n-1}{5/2}+cn \\
+	&= c(4/5)(7/2)^n-c(4/5)+cn \\
+	&= c(7/2)^n-c((1/5)(7/2)^n+(4/5)-n) \\
+	&\le c(7/2)^n.
+\end{align*}
+Można sprawdzić, że ostatnia nierówność zachodzi dla każdych $n$, $c>0$, co ostatecznie kończy dowód oszacowania $T(n)=O((7/2)^n)$.
+
+Udowodnimy jeszcze następujący lemat, dzięki któremu będziemy mogli porównać czasy działania obu metod obliczania optymalnego nawiasowania iloczynu macierzy.
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych liczb rzeczywistych\/ $n$, $p$, $q$ i\/~$b$, takich że\/ $n>0$,\/ $p>q>0$ zachodzi}
+\[
+	q^n = o(p^n\!/n^b).
+\]
+\begin{proof}
+Ze wzoru (3.9) mamy, że dla dowolnych stałych rzeczywistych $a$ i~$b$, gdzie $a>1$, zachodzi $n^b=o(a^n)$.
+Z~definicji notacji $o$, dla każdej stałej $c>0$ istnieje stała $n_0>0$, że $0\le n^b<ca^n$ dla wszystkich $n\ge n_0$.
+Wybierzmy $a=p/q$.
+Wówczas nierówność sprowadza się do $0\le n^b\le c(p/q)^n$, skąd po przekształceniu otrzymujemy $0\le q^n<cp^n\!/n^b$, a~to oznacza, że $q^n=o(p^n\!/n^b)$.
+\end{proof}
+
+Z~powyższego lematu wynika w~szczególności, że $(7/2)^n=o(4^n\!/n^{3/2})$, a~zatem wywołanie procedury \proc{Recursive-Matrix-Chain} jest efektywniejsze od generowania wszystkich możliwych nawiasowań i~obliczania liczby mnożeń skalarnych w~każdym z~nich.
+
 \exercise %15.3-2
 \exercise %15.3-3
 \exercise %15.3-4
