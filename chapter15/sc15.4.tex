@@ -9,6 +9,21 @@ Poza nim istnieje jeszcze 7 innych NWP tych ciągów:
 \end{gather*}
 
 \exercise %15.4-2
+Poniższy pseudokod stanowi implementację zmodyfikowanej wersji procedury \proc{Print-LCS}, która wypisuje NWP ciągów $X$, $Y$ bez korzystania z~tablicy $b$.
+\begin{codebox}
+\Procname{$\proc{Print-LCS}'(c,X,Y,i,j)$}
+\li	\If $i=0$ lub $j=0$
+\li		\Then \Return
+		\End
+\li	\If $x_i=y_j$
+\li		\Then $\proc{Print-LCS}'(c,X,Y,i-1,j-1)$
+\li			wypisz $x_i$
+\li		\ElseIf $c[i,j]=c[i-1,j]$
+\li			\Then $\proc{Print-LCS}'(c,X,Y,i-1,j)$
+\li		\ElseNoIf $\proc{Print-LCS}'(c,X,Y,i,j-1)$
+		\End
+\end{codebox}
+
 \exercise %15.4-3
 \exercise %15.4-4
 \exercise %15.4-5
