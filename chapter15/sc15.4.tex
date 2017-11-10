@@ -25,6 +25,46 @@ Poniższy pseudokod stanowi implementację zmodyfikowanej wersji procedury \proc
 \end{codebox}
 
 \exercise %15.4-3
+W~naszej implementacji będziemy obliczać kolejne wartości rekurencyjnie bezpośrednio ze wzoru (15.14), ale z~wykorzystaniem tablicy $c[1\twodots m,1\twodots n]$ i~mechanizmu spamiętywania.
+Aby zaznaczyć, że dane pole tablicy $c$ nie zostało jeszcze obliczone, użyjemy specjalnej wartości $\infty$.
+Pierwsza z~procedur inicjalizuje tablicę $c$, po czym wywołuje właściwy algorytm odpowiedzialny za obliczenie wartości $c[m,n]$.
+\begin{codebox}
+\Procname{$\proc{Memoized-LCS-Length}(X,Y)$}
+\li	$m\gets\attrib{X}{length}$
+\li	$n\gets\attrib{Y}{length}$
+\li	\For $i\gets0$ \To $m$
+\li		\Do \For $j\gets0$ \To $n$
+\li				\Do $c[i,j]\gets\infty$ \label{li:memoized-lcs-length-init}
+				\End
+		\End
+\li	\Return $\proc{Lookup-LCS}(c,X,Y,m,n)$
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Lookup-LCS}(c,X,Y,i,j)$}
+\li	\If $c[i,j]<\infty$
+\li		\Then \Return $c[i,j]$
+		\End
+\li	\If $i=0$ lub $j=0$
+\li		\Then $c[i,j]\gets0$
+\li		\ElseIf $x_i=y_j$
+\li			\Then $c[i,j]\gets\proc{Lookup-LCS}(c,X,Y,i-1,j-1)+1$
+\li		\ElseNoIf $c[i,j]\gets\max(\proc{Lookup-LCS}(c,X,Y,i,j-1),\proc{Lookup-LCS}(c,X,Y,i-1,j))$
+		\End
+\li	\Return $c[i,j]$
+\end{codebox}
+
+Każde z~$(m+1)(n+1)$ pól tablicy $c$ zostaje zainicjalizowane w~wierszu \ref{li:memoized-lcs-length-init}, a~następnie zmodyfikowane przez jedno wywołanie procedury \proc{Lookup-LCS}.
+Wywołania procedury \proc{Lookup-LCS} możemy podzielić na dwa typy:
+\begin{enumerate}
+	\item wywołania, w~których $c[i,j]=\infty$, oraz
+	\item wywołania, w~których $c[i,j]<\infty$.
+\end{enumerate}
+Wywołań pierwszego typu jest dokładnie $\Theta(mn)$, jedno na każde pole tablicy $c$.
+Wszystkie wywołania drugiego typu pojawiają się jako rekurencyjne wywołania w~wywołaniach pierwszego typu.
+Kiedy w~danym wywołaniu \proc{Lookup-LCS} pojawiają się wywołania rekurencyjne, jest ich $\Theta(1)$, dlatego łącznie wywołań drugiego typu jest $\Theta(mn)$.
+Każde wywołanie drugiego typu zabiera czas $\Theta(1)$, a~każde wywołanie pierwszego typu jest wykonywane w~czasie $O(1)$ plus czas spędzany na obliczenia rekurencyjne.
+Dlatego łączny czas wykonania algorytmu \proc{Memoized-LCS-Length} wynosi $\Theta(mn)$.
+
 \exercise %15.4-4
 \exercise %15.4-5
 \exercise %15.4-6
