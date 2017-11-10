@@ -66,5 +66,22 @@ Każde wywołanie drugiego typu zabiera czas $\Theta(1)$, a~każde wywołanie pi
 Dlatego łączny czas wykonania algorytmu \proc{Memoized-LCS-Length} wynosi $\Theta(mn)$.
 
 \exercise %15.4-4
+Zauważmy, że do obliczenia $c[i,j]$ w~procedurze \proc{LCS-Length} wykorzystywane są wartości $c[i-1,j]$, $c[i,j-1]$ lub $c[i-1,j-1]$.
+Możemy więc utrzymywać tylko 2 wiersze tablicy $c$ -- wiersz aktualnie obliczany oraz wiersz bezpośrednio go poprzedzający.
+Po każdej iteracji poprzedni wiersz będzie nadpisywany wartościami z~bieżącego wiersza, aby przygotować tablicę do kolejnej iteracji.
+Aby tablica $c$ była rozmiaru $2\cdot\min(m,n)$, przed jej utworzeniem należy jeszcze sprawdzić, czy $n\le m$.
+Jeśli nie, to wystarczy uruchomić procedurę z~ciągami $X$ i~$Y$ zamienionymi miejscami.
+
+Można jednak jeszcze bardziej ograniczyć zapotrzebowanie procedury na pamięć.
+Dwuwymiarowa tablica $c$ może zostać zamieniona na jednowymiarową tablicę $C[1\twodots n]$, która reprezentować będzie aktualnie obliczany wiersz tablicy $c$ w~trakcie działania procedury.
+W~momencie obliczania $c[i,j]$ reprezentowanego przez $C[j]$, komórka $C[j]$ przechowuje wartość $c[i-1,j]$ z~poprzedniego wiersza.
+Jeśli w~osobnej zmiennej $p$ zapamiętamy $c[i-1,j-1]$, czyli wartość $C[j-1]$ przed jej aktualizacją, to będziemy dysponować wszystkimi danymi potrzebnymi do obliczenia $C[j]$.
+Jeśli $x_i=y_j$, to $C[j]$ ustawione zostanie na $p+1$, co odpowiada wierszowi 10 z~oryginalnej procedury \proc{LCS-Length}.
+W~przeciwnym przypadku do $C[j]$ wpisane zostanie $\max(C[j],C[j-1])$, co odpowiada wierszom \doubledash{12}{16}.
+Ostatnim krokiem w~bieżącej iteracji pętli jest aktualizacja zmiennej $p$ na wartość znajdującą się w~$C[j]$ przed modyfikacją tej komórki.
+Dzięki tak wprowadzonym zmianom w~procedurze wykorzystujemy $\min(m,n)+\Theta(1)$ pamięci.
+
 \exercise %15.4-5
+
+
 \exercise %15.4-6
