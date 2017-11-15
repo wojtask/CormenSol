@@ -82,6 +82,59 @@ Ostatnim krokiem w~bieżącej iteracji pętli jest aktualizacja zmiennej $p$ na 
 Dzięki tak wprowadzonym zmianom w~procedurze wykorzystujemy $\min(m,n)+\Theta(1)$ pamięci.
 
 \exercise %15.4-5
+W~problemie najdłuższego niemalejącego podciągu (w~skrócie: NNP) dla danego ciągu $X=\langle x_1,x_2,\dots,x_n\rangle$ szukany jest podciąg ciągu $X$ o~największej możliwej długości, którego wyrazy ustawione są w~porządku niemalejącym.
+Przez $c[i]$ oznaczmy długość najdłuższego niemalejącego podciągu ciągu $X$, w~którym ostatnim wyrazem jest $x_i$.
+NNP ciągu $X$ zakończony wyrazem $x_i$ składa się z~NNP prefiksu $X_{i-1}$ z~dołączonym na końcu $x_i$, o~ile tylko NNP prefiksu $X_{i-1}$ zakończony jest wyrazem $x_j\le x_i$.
+Jeśli nie istnieje takie $1\le j<i$, to NNP ciągu $X$ jest $\langle x_i\rangle$.
+Problem ma zatem własność optymalnej podstruktury.
+Aby znaleźć długość NNP danego ciągu, należy wpierw znaleźć rozwiązania podproblemów, czyli długości NNP prefiksów tego ciągu.
+Otrzymujemy zależność rekurencyjną:
+\[
+	c[i] = \begin{cases}
+		1, & \text{jeśli $x_j>x_i$ dla każdego $1\le j<i$}, \\
+		\displaystyle\max_{\substack{1\le j<i\\x_j\le x_i}}(c[j])+1, & \text{w~przeciwnym przypadku}.
+	\end{cases}
+\]
+NNP ciągu $X$ ma wówczas długość $\max_{1\le i\le n}c[i]$.
 
+Obliczanie $c[n]$ bezpośrednio z~definicji doprowadziłoby do algorytmu o~czasie wykładniczym z~racji wielokrotnego rozwiązywania tych samych podproblemów.
+Dzięki wykorzystaniu tablicowania wyników w~programowaniu dynamicznym, możemy podać algorytm działający w~czasie $O(n^2)$.
+\begin{codebox}
+\Procname{$\proc{LIS-Length}(X)$}
+\li	$n\gets\attrib{X}{length}$
+\li	$\id{longest}\gets0$
+\li	$b^*\!\gets0$
+\li	\For $i\gets1$ \To $n$ \label{li:lis-length-computing-c-begin}
+\li		\Do $c[i]\gets1$
+\li			$b[i]\gets0$
+\li			\For $j\gets1$ \To $i-1$
+\li				\Do \If $x_j\le x_i$ i~$c[j]+1>c[i]$
+\li						\Then $c[i]\gets c[j]+1$
+\li							$b[i]\gets j$
+						\End
+				\End
+\li			\If $c[i]>\id{longest}$
+\li				\Then $\id{longest}\gets c[i]$
+\li					$b^*\!\gets i$
+				\End
+		\End \label{li:lis-length-computing-c-end}
+\li	\Return $\id{longest}$, $b$ i~$b^*$
+\end{codebox}
+W~pętli \kw{for} w~wierszach \doubledash{\ref{li:lis-length-computing-c-begin}}{\ref{li:lis-length-computing-c-end}} wyznaczane są kolejne pola tablicy $c$, a~także aktualizowana jest zmienna \id{longest} przechowująca maksimum aktualnie znanego NNP wejściowego ciągu $X$.
+W~tablicy $b[1\twodots n]$ zapamiętywane są dodatkowe informacje służące później do odtworzenia znalezionego NNP.
+Dokładniej, po zakończeniu działania procedury, w~$b[i]$ znajduje się ta wartość $j$, dla której $c[i]=c[j]+1$, albo $b[i]=0$, jeżeli takie $j$ nie istnieje.
+Ponadto, $b^*\!$ przechowuje takie $i$, dla którego $\id{longest}=c[i]$, albo 0, jeżeli ciąg $X$ jest pusty.
+
+Znaleziony podciąg można otrzymać (w~odwrotnej kolejności) poprzez wypisanie $x_{b^*\!}$, a~następnie $x_{b[b^*\!]}$, $x_{b[b[b^*\!]]}$ itd., dopóki indeks nie jest zerem.
+Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejności.
+\begin{codebox}
+\Procname{$\proc{Print-LIS}(b,X,i)$}
+\li	\If $i>0$
+\li		\Then $\proc{Print-LIS}(b,X,b[i])$
+\li			wypisz $x_i$
+		\End
+\end{codebox}
+Dysponując tablicą $b$ i~wartością $b^*\!$ wyznaczonymi dla danego ciągu $X$, możemy wypisać NNP ciągu $X$, wywołując $\proc{Print-LIS}(b,X,b^*\!)$.
 
 \exercise %15.4-6
+
