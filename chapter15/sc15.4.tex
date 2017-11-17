@@ -137,4 +137,56 @@ Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejno
 Dysponując tablicą $b$ i~wartością $b^*\!$ wyznaczonymi dla danego ciągu $X$, możemy wypisać NNP ciągu $X$, wywołując $\proc{Print-LIS}(b,X,b^*\!)$.
 
 \exercise %15.4-6
+Dla ciągu wejściowego $X=\langle x_1,x_2,\dots,x_n\rangle$ niech $Y=\langle y_1,y_2,\dots,y_m\rangle$ będzie ciągiem takim, że $y_i$ jest najmniejszym elementem w~$X$ kończącym pewien podciąg niemalejący ciągu $X$ o~długości $i$.
+Kluczowa jest własność ciągu $Y$ podana we wskazówce, czyli to, że jest on niemalejący.
+Podamy krótki dowód tego faktu.
+Załóżmy, że istnieją indeksy $i$, $j$, takie, że $i<j$ oraz $y_i>y_j$.
+Oznacza to, że najmniejszy element ciągu $X$ będący ostatnim elementem niemalejącego podciągu $X$ o~długości $i$ jest większy niż najmniejszy element ciągu $X$ kończący pewien niemalejący podciąg $X$ o~długości $j$.
+Moglibyśmy jednak usunąć $j-i$ elementów z~podciągu o~długości $j$ zakończonego na $y_j$, otrzymując niemalejący podciąg ciągu $X$ o~długości $i$, w~którym ostatni element jest mniejszy niż $y_i$.
+Sprzeczność.
 
+Zamiast zapamiętywania ciągu $Y$, w~algorytmie będziemy korzystać z~tablicy $a[0\twodots n]$, w~której na \singledash{$j$}{tej} pozycji, gdzie $j=1$, 2, \dots, $m$, będziemy przechowywać indeks $i$, taki że $y_j=x_i$.
+Na pozycjach $j=0$ oraz $j=m+1$, $m+2$, \dots, $n$, $a[j]=0$.
+Przechowywanie indeksów elementów pozwoli nam na zbudowanie tablicy $b$ identycznej, jak w~procedurze \proc{LIS-Length} z~poprzedniego zadania, dzięki której będzie można odtworzyć znaleziony NNP.
+
+Załóżmy, że w~trakcie przeglądania ciągu $X$ od lewej do prawej, aktualnie przetwarzanym elementem jest $x_i$.
+Niech $k$ będzie takim indeksem w~tablicy $a$, że $x_{a[j]}\le x_i$ dla każdego $j=1$, 2, \dots, $k-1$, oraz $x_{a[j]}>x_i$ dla każdego $j=k$, $k+1$, \dots, $n$.
+Element $x_i$ stanowi zatem najmniejszy napotkany do tej pory element kończący pewien niemalejący podciąg ciągu $X$ o~długości $k$ -- na pozycję $a[k]$ można więc wpisać $i$.
+Dzięki uporządkowaniu elementów ciągu $X$ o~indeksach z~tablicy $a$, liczbę $k$ dla każdego elementu $x_i$ jesteśmy w~stanie wyszukiwać w~czasie logarytmicznym, stosując wyszukiwanie binarne.
+
+\begin{codebox}
+\Procname{$\proc{LIS-Length}'(X)$}
+\li	$n\gets\attrib{X}{length}$
+\li	\For $i\gets0$ \To $n$ \label{li:lis-length'-a-init-begin}
+\li		\Do $a[i]\gets0$
+		\End \label{li:lis-length'-a-init-end}
+\li	$\id{longest}\gets0$
+\li	\For $i\gets1$ \To $n$ \label{li:lis-length'-for-begin}
+\li		\Do $\id{low}\gets1$ \label{li:lis-length'-binary-search-begin}
+\li			$\id{high}\gets\id{longest}$
+\li			\While $\id{low}\le\id{high}$
+\li				\Do $\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
+\li					\If $x_i<x_{a[\id{mid}]}$
+\li						\Then $\id{high}\gets\id{mid}-1$
+\li						\Else $\id{low}\gets\id{mid}+1$
+						\End
+				\End \label{li:lis-length'-binary-search-end}
+\li			$a[\id{low}]\gets i$
+\li			$b[i]\gets a[\id{low}-1]$
+\li			\If $\id{low}>\id{longest}$
+\li				\Then $\id{longest}\gets\id{low}$
+				\End
+		\End \label{li:lis-length'-for-end}
+\li	\Return $\id{longest}$, $b$ i~$a[\id{longest}]$
+\end{codebox}
+W~wierszach \doubledash{\ref{li:lis-length'-a-init-begin}}{\ref{li:lis-length'-a-init-end}} tablica $a$ inicjalizowana jest zerami, aby zaznaczyć, że żaden z~elementów ciągu $Y$ nie jest jeszcze znany.
+W~zmiennej \id{longest} będzie znajdować się długość najdłuższego znanego niemalejącego podciągu $X$.
+Elementy ciągu $X$ przeglądane są następnie z~lewej do prawej.
+W~wierszach \doubledash{\ref{li:lis-length'-binary-search-begin}}{\ref{li:lis-length'-binary-search-end}} dla danego elementu $x_i$ odbywa się wyszukiwanie odpowiedniego indeksu tablicy $a$, gdzie należy umieścić $i$, aby zachować uporządkowanie elementów ciągu $X$ indukowane przez fragment $a[1\twodots\id{longest}]$.
+Po aktualizacji odpowiedniej komórki tablicy $a$, wpisywany jest do $b[i]$ indeks poprzedniego elementu w~ciągu $Y$, a~następnie aktualizowana wartość zmiennej \id{longest}.
+Procedura zwraca ten sam zestaw wyników, co \proc{LIS-Length} z~poprzedniego zadania.
+Znaleziony NNP można więc wypisać, wywołując procedurę \proc{Print-LIS} tak, jak to opisano w~tamtym rozwiązaniu.
+
+Każda iteracja pętli \kw{for} w~liniach \doubledash{\ref{li:lis-length'-for-begin}}{\ref{li:lis-length'-for-end}} przeprowadza wyszukiwanie binarne w~tablicy o~co najwyżej $n$ elementach.
+Poza pętlą inicjalizującą tablicę $a$ pozostałe operacje wykonywane w~procedurze zajmują czas co najwyżej stały.
+Stąd czasem działania algorytmu jest $O(n\lg n)$.
