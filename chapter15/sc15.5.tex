@@ -1,6 +1,33 @@
 \subchapter{Optymalne drzewa wyszukiwań binarnych}
 
 \exercise %15.5-1
+Algorytm podzielimy na 3 procedury.
+Pierwsza z~nich ma za zadanie wypisać korzeń optymalnego drzewa BST oraz wywołać drugą, rekurencyjną procedurę wypisującą strukturę tego drzewa.
+W~tej ostatniej, dla danej tablicy \id{root} oraz pozycji $i\le j$, konstruowane jest poddrzewo o~korzeniu, którego indeks znajduje się w~$\id{root}[i,j]$.
+Konstrukcja ta polega na wypisaniu jego lewego poddrzewa, a~następnie na wypisaniu jego prawego poddrzewa.
+Trzecia procedura służy nam do pozyskiwania nazw węzłów na podstawie wartości w~tablicy \id{root} oraz pozycji w~niej.
+\begin{codebox}
+\Procname{$\proc{Construct-Optimal-BST}(\id{root})$}
+\li	$n\gets\attribii{root}{length}$
+\li	wypisz $\proc{Optimal-BST-Node}(\id{root},i,n)$ ,, jest korzeniem''
+\li	$\proc{Construct-Optimal-BST-Subtree}(\id{root},1,n)$
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Construct-Optimal-BST-Subtree}(\id{root},i,j)$}
+\li	\If $i\le j$
+\li		\Then wypisz $\proc{Optimal-BST-Node}(\id{root},i,\id{root}[i,j]-1)$ ,, jest lewym synem $k$''$\!{}_{\id{root}[i,j]}$
+\li			$\proc{Construct-Optimal-BST-Subtree}(\id{root},i,\id{root}[i,j]-1)$
+\li			wypisz $\proc{Optimal-BST-Node}(\id{root},\id{root}[i,j]+1,j)$ ,, jest prawym synem $k$''$\!{}_{\id{root}[i,j]}$
+\li			$\proc{Construct-Optimal-BST-Subtree}(\id{root},\id{root}[i,j]+1,j)$
+		\End
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Optimal-BST-Node}(\id{root},i,j)$}
+\li	\If $i\le j$
+\li		\Then \Return ,,$k$''$\!{}_{\id{root}[i,j]}$
+\li		\Else \Return ,,$d$''$\!{}_j$
+\end{codebox}
+
 \exercise %15.5-2
 \exercise %15.5-3
 \exercise %15.5-4
