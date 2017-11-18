@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=7mm, sibling distance=120mm/2^#1},
+	every node/.style = {tree node}
+]
+
+\newcommand\leafnode[1]{%
+	node[align=center, inner sep=1pt, minimum size=5mm, rectangle, rounded corners=3pt, draw] {#1}
+}
+
+\node (root) {$k_5$}
+	child {node {$k_2$}
+		child {node {$k_1$}
+			child[shorten >=-1pt] {\leafnode {$d_0$}}
+			child[shorten >=-1pt] {\leafnode {$d_1$}}
+		}
+		child {node {$k_3$}
+			child[shorten >=-1pt] {\leafnode {$d_2$}}
+			child {node {$k_4$}
+				child {\leafnode {$d_3$}}
+				child {\leafnode {$d_4$}}
+			}
+		}
+	}
+	child {node {$k_7$}
+		child {node {$k_6$}
+			child[shorten >=-1pt] {\leafnode {$d_5$}}
+			child [shorten >=-1pt]{\leafnode {$d_6$}}
+		}
+		child {\leafnode {$d_7$}}
+	};
+
+\end{tikzpicture}

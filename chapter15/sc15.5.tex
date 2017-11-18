@@ -29,5 +29,34 @@ Trzecia procedura służy nam do pozyskiwania nazw węzłów na podstawie warto�
 \end{codebox}
 
 \exercise %15.5-2
+Algorytm \proc{Optimal-BST} wywołany dla zadanych prawdopodobieństw zwraca optymalne drzewo BST przedstawione na rys.\ \ref{fig:15.5-2}.
+\begin{figure}[!ht]
+	\centering \input{fig15.5-2}
+	\caption{Optymalne drzewo BST dla podanych danych wejściowych.} \label{fig:15.5-2}
+\end{figure}
+Podobnie jak w~Podręczniku, w~poniższej tabeli przedstawiony został wkład każdego węzła w~tym drzewie i~wyznaczony koszt tego drzewa.
+\begin{table}[!ht]
+	\centering
+		\begin{tabular}{cccc}
+			węzeł & głębokość & prawdopodobieństwo & wkład \\ \hline
+			$k_1$ & 2 & 0{,}04 & 0{,}12 \\
+			$k_2$ & 1 & 0{,}06 & 0{,}12 \\
+			$k_3$ & 2 & 0{,}08 & 0{,}24 \\
+			$k_4$ & 3 & 0{,}02 & 0{,}08 \\
+			$k_5$ & 0 & 0{,}10 & 0{,}10 \\
+			$k_6$ & 2 & 0{,}12 & 0{,}36 \\
+			$k_7$ & 1 & 0{,}14 & 0{,}28 \\
+			$d_0$ & 3 & 0{,}06 & 0{,}24 \\
+			$d_1$ & 3 & 0{,}06 & 0{,}24 \\
+			$d_2$ & 3 & 0{,}06 & 0{,}24 \\
+			$d_3$ & 4 & 0{,}06 & 0{,}30 \\
+			$d_4$ & 4 & 0{,}05 & 0{,}25 \\
+			$d_5$ & 3 & 0{,}05 & 0{,}20 \\
+			$d_6$ & 3 & 0{,}05 & 0{,}20 \\
+			$d_7$ & 2 & 0{,}05 & 0{,}15 \\ \hline
+			Razem & & & 3{,}12
+		\end{tabular}
+\end{table}
+
 \exercise %15.5-3
 \exercise %15.5-4
