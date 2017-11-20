@@ -64,3 +64,18 @@ Zauważmy, że pętla \kw{for} w~wierszach \doubledash{9}{13} wykonuje także $\
 A~zatem modyfikacja ta nie wpłynie na asymptotyczny czas działania algorytmu, tylko co najwyżej na zwiększenie stałego czynnika ukrytego w~notacji $\Theta$.
 
 \exercise %15.5-4
+Wykorzystamy podany fakt i~w~najbardziej wewnętrznej pętli procedury \proc{Optimal-BST}, zamiast iterować zmienną $r$ od $i$ do $j$, będziemy przebiegać wszystkie wartości od $\id{root}[i,j-1]$ do $\id{root}[i+1,j]$.
+Pokażemy, że tablice $e$ i~\id{root} zostaną wypełnione w~czasie $\Theta(n^2)$.
+Dla pewnego ustalonego $l$ pętla \kw{for} w~wierszach \doubledash{4}{13} wykona $\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1)$ iteracji.
+Po podstawieniu $j=i+l-1$ otrzymujemy
+\begin{align*}
+	\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1) &= \sum_{i=1}^{n-l+1}(\id{root}[i+1,i+l-1]-\id{root}[i,i+l-2]+1) \\
+	&= \sum_{i=1}^{n-l+1}(\id{root}[i+1,i+l-1]-\id{root}[i,i+l-2])+\sum_{i=1}^{n-l+1}1 \\
+	&= \id{root}[n-l+2,n]-\id{root}[1,l-1]+n-l+1.
+\end{align*}
+W~ostatniej równości skorzystaliśmy z~własności sumy teleskopowej.
+Największą możliwą wartością różnicy $\id{root}[n-l+2,n]-\id{root}[1,l-1]$ jest $n-1$, więc liczbę iteracji pętli można ograniczyć z~góry przez $n-1+n-l+1\le2n$.
+
+Zmienna $l$ przyjmuje $n$ wartości, a~więc sumaryczna liczba iteracji w~procedurze wynosi co najwyżej $O(n^2)$.
+Dolne ograniczenie $\Omega(n^2)$ zachodzi oczywiście, bo obliczana jest każda z~$n(n+1)/2$ z~komórek tablic $e$ i~\id{root}.
+Stąd czasem działania algorytmu jest $\Theta(n^2)$.
