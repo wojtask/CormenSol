@@ -39,7 +39,7 @@ Jeśli $h$ jest wysokością drzepca $T$ przed wstawieniem nowego węzła, to wy
 A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(h)$, co na mocy faktu wykazanego w~punkcie (b) jest równe $\Theta(\lg n)$.
 
 \subproblem %13-4(e)
-Bezpośrednio po umieszczeniu nowego węzła $x$ w~drzepcu w~wierszu \ref{li:treap-insert-tree-insert} procedury \proc{Treap-Insert}, zarówno lewe, jak i~prawe poddrzewo $x$ są puste -- ich lewy i~prawy kręgosłup mają długość~0.
+Bezpośrednio po umieszczeniu nowego węzła $x$ w~drzepcu w~wierszu \ref{li:treap-insert-tree-insert} procedury \proc{Treap-Insert}, zarówno lewe, jak i~prawe poddrzewo $x$ jest puste -- ich lewy i~prawy kręgosłup mają długość~0.
 Każde wykonanie lewej rotacji w~tej procedurze na węźle $y=\attrib{x}{p}$ przenosi węzeł $x$ o~jeden poziom w~górę drzepca oraz dodaje $y$ do prawego kręgosłupa lewego poddrzewa $x$.
 Analogicznie prawa rotacja zwiększa o~1 lewy kręgosłup prawego poddrzewa węzła $x$.
 Wartość $C$ jest więc równa ilości wywołań z~linii \ref{li:treap-insert-left-rotate}, a~$D$ jest równe ilości wywołań z~linii \ref{li:treap-insert-right-rotate}.

@@ -184,7 +184,7 @@ W~zmiennej \id{longest} będzie znajdować się długość najdłuższego znaneg
 Elementy ciągu $X$ przeglądane są następnie z~lewej do prawej.
 W~wierszach \doubledash{\ref{li:lis-length'-binary-search-begin}}{\ref{li:lis-length'-binary-search-end}} dla danego elementu $x_i$ odbywa się wyszukiwanie odpowiedniego indeksu tablicy $a$, gdzie należy umieścić $i$, aby zachować uporządkowanie elementów ciągu $X$ indukowane przez fragment $a[1\twodots\id{longest}]$.
 Po aktualizacji odpowiedniej komórki tablicy $a$, wpisywany jest do $b[i]$ indeks poprzedniego elementu w~ciągu $Y$, a~następnie aktualizowana wartość zmiennej \id{longest}.
-Procedura zwraca ten sam zestaw wyników, co \proc{LIS-Length} z~poprzedniego zadania.
+Procedura zwraca ten sam zestaw wyników, co \proc{LIS-Length} z~poprzedniego zadania (z~$a[\id{longest}]$ jako $b^*\!$).
 Znaleziony NNP można więc wypisać, wywołując procedurę \proc{Print-LIS} tak, jak to opisano w~tamtym rozwiązaniu.
 
 Każda iteracja pętli \kw{for} w~liniach \doubledash{\ref{li:lis-length'-for-begin}}{\ref{li:lis-length'-for-end}} przeprowadza wyszukiwanie binarne w~tablicy o~co najwyżej $n$ elementach.
