@@ -1,1 +1,78 @@
 \problem{Bitoniczny problem komiwojażera} %15-1
+W~naszym rozwiązaniu przyjmujemy, że żadne dwa punkty wejściowe nie mają tej samej współrzędnej $x$.
+Podążając za wskazówką z~treści problemu, będziemy przeglądać punkty wejściowe od lewej do prawej, po uprzednim posortowaniu ich po współrzędnych $x$.
+Ciąg tak uporządkowanych punktów oznaczymy przez $\langle p_1,p_2,\dots,p_n\rangle$, czyli $p_1$ jest punktem wysuniętym najbardziej na lewo, a~$p_n$ punktem wysuniętym najbardziej na prawo.
+
+Oznaczmy przez $B_{i,j}$, gdzie $i\le j$, zbiór ścieżek bitonicznych zawierających wszystkie punkty $p_1$, $p_2$, \dots, $p_j$, które zaczynają się w~pewnym punkcie $p_i$, biegną następnie ciągle w~lewo (czyli po punktach o~coraz mniejszych współrzędnych $x$) do punktu $p_1$, a~następnie ciągle w~prawo (czyli po punktach o~coraz większych współrzędnych $x$) do punktu $p_j$.
+Przez $|p_ip_j|$ oznaczymy odległość euklidesową między punktami $p_i$ i~$p_j$, a~przez $b[i,j]$, gdzie $1\le i\le j\le n$, długość najkrótszej ścieżki bitonicznej ze zbioru $B_{i,j}$.
+Zauważmy, że zbiór $B_{1,j}$ zawiera tylko jedną ścieżkę, dlatego $b[1,j]=\sum_{k=2}^j|p_{k-1}p_k|$.
+Jedyną wartością $b[i,i]$, której będziemy potrzebować, jest $b[n,n]$, co stanowi długość szukanego najkrótszego cyklu bitonicznego dla wejściowego zbioru punktów.
+
+Rozważmy najkrótszą ścieżkę bitoniczną $\beta$ z~$B_{i,j}$ i~zastanówmy się nad położeniem na niej punktu $p_{j-1}$.
+Jeśli znajduje się on na podścieżce biegnącej w~prawo, to poprzedza on bezpośrednio punkt $p_j$ na tej podścieżce.
+Podścieżka od $p_i$ do $p_{j-1}$ musi być najkrótszą ścieżką bitoniczną z~$B_{i,j-1}$, inaczej moglibyśmy ją ,,wyciąć'' i~,,wkleić'' w~jej miejsce podścieżkę bitoniczną o~mniejszej długości, uzyskując ścieżkę krótszą niż $\beta$.
+Stąd długość $b[i,j]$ ścieżki $\beta$ wynosi $b[i,j-1]+|p_{j-1}p_j|$.
+W~przeciwnym przypadku $p_{j-1}$ musi być najbardziej w~prawo wysuniętym punktem podścieżki biegnącej w~lewo, czyli $i=j-1$.
+Bezpośrednio przed $p_j$ na podścieżce biegnącej w~prawo mamy więc $p_k$, gdzie $k<j-1$.
+Tutaj także ma miejsce optymalna podstruktura -- podścieżka z~$p_k$ do $p_{j-1}$ jest najkrótszą ścieżką bitoniczną z~$B_{k,j-1}$, o~czym można się przekonać stosując metodę ,,wytnij i~wklej''.
+W~tym przypadku ścieżka $\beta$ ma długość $b[i,j]=\min_{1\le k<j-1}(b[k,j-1]+|p_kp_j|)$.
+Zachodzi zatem następująca zależność rekurencyjna:
+\[
+	b[i,j] = \begin{cases}
+		|p_1p_2|, & \text{jeśli $i=1$, $j=2$}, \\
+		\displaystyle\min_{1\le k<j-1}(b[k,j-1]+|p_kp_j|), & \text{jeśli $i=j-1>1$}, \\
+		b[i,j-1]+|p_{j-1}p_j|, & \text{jeśli $i<j-1$}.
+	\end{cases}
+\]
+W~szukanym optymalnym cyklu bitonicznym, jednym z~punktów sąsiadujących z~$p_n$ jest $p_{n-1}$, skąd $b[n,n]=b[n,n-1]+|p_{n-1}p_n|$.
+
+Aby zrekonstruować rozwiązanie, będziemy obliczać wartości $r[i,j]$ -- indeks punktu bezpośrednio poprzedzającego $p_j$ na najkrótszej ścieżce z~$B_{i,j}$.
+Poniższy pseudokod wyznacza wartości $b[i,j]$ i~$r[i,j]$, wykorzystując programowanie dynamiczne.
+\begin{codebox}
+\Procname{$\proc{Bitonic-TSP}(p,n)$}
+\li	posortuj ciąg punktów wejściowych $p$ rosnąco względem ich współrzędnych $x$
+\li	$b[1,2]\gets|p_1p_2|$
+\li	\For $j\gets3$ \To $n$
+\li		\Do \For $i\gets1$ \To $j-2$
+\li			\Do $b[i,j]\gets b[i,j-1]+|p_{j-1}p_j|$
+\li				$r[i,j]\gets j-1$
+			\End
+\li			$b[j-1,j]\gets\infty$
+\li			\For $k\gets1$ \To $j-2$
+\li				\Do $q\gets b[k,j-1]+|p_kp_j|$
+\li					\If $q<b[j-1,j]$
+\li						\Then $b[j-1,j]\gets q$
+\li							$r[j-1,j]\gets k$
+						\End
+				\End
+		\End
+\li	$b[n,n]\gets b[n,n-1]+|p_{n-1}p_n|$
+\li	\Return $b$ i~$r$
+\end{codebox}
+
+Znalezione rozwiązanie wypiszemy, zaczynając od $p_n$, następnie wypiszemy punkty na podścieżce biegnącej w~lewo, która zawiera $p_{n-1}$, aż do $p_1$, a~następnie pozostałe punkty z~podścieżki biegnącej w~prawo aż do $p_n$.
+\begin{codebox}
+\Procname{$\proc{Print-Bitonic-Tour}(r,n)$}
+\li	wypisz $p_n$
+\li	wypisz $p_{n-1}$
+\li	$\proc{Print-Bitonic-Path}(r,r[n-1,n],n-1)$
+\li	wypisz $p_{r[n-1,n]}$
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Print-Bitonic-Path}(r,i,j)$}
+\li	\If $i<j$
+\li		\Then wypisz $p_{r[i,j]}$
+\li			\If $r[i,j]>1$
+\li				\Then $\proc{Print-Bitonic-Path}(r,i,r[i,j])$
+				\End
+\li		\Else \If $r[j,i]>1$
+\li				\Then $\proc{Print-Bitonic-Path}(r,r[j,i],j)$
+\li					wypisz $p_{r[j,i]}$
+				\End
+		\End
+\end{codebox}
+W~wywołaniu $\proc{Print-Bitonic-Path}(r,i,j)$, jeśli $i<j$, to procedura ta wypisuje podścieżkę biegnącą w~lewo, a~jeśli $i>j$, to podścieżkę biegnącą w~prawo.
+
+Czas działania algorytmu \proc{Bitonic-TSP} wynosi $O(n^2)$, gdyż zewnętrzna pętla wykonuje $n-2$ iteracje, a~każda wewnętrzna pętla wykonuje co najwyżej $n-2$ iteracji.
+Sortowanie punktów na samym początku algorytmu można wykonać w~czasie $O(n\lg n)$, co nie wpływa na powyższe oszacowanie.
+Wypisanie znalezionego cyklu za pomocą procedury \proc{Print-Tour} odbywa się w~czasie $O(n)$, dlatego że każdy punkt wypisywany jest dokładnie raz.
