@@ -1,1 +1,81 @@
 \problem{Estetyczny wydruk} %15-2
+W~rozwiązaniu zakładamy, że każde słowo z~wejściowego tekstu mieści się w~wierszu, tzn.\ dla każdego $i$, $l_i\le M$.
+
+Zdefiniujemy $\id{extras}[i,j]$ jako liczbę zbędnych znaków odstępu na końcu wiersza zawierającego słowa o~numerach od $i$ do $j$, gdzie $i\le j$, czyli $\id{extras}[i,j]=M-j+i-\sum_{k=i}^jl_k$.
+Z~kolei w~$\id{lc}[i,j]$ będziemy przechowywać koszt wprowadzany przez wiersz ze słowami od $i$ do $j$.
+Przyjmiemy, że $\id{lc}[i,j]=\infty$, jeśli słowa te nie zmieszczą się w~wierszu -- to sprawi, że podczas minimalizacji tych wartości przepełnione wiersze nie będą wybierane.
+Ostatni wiersz, jeśli nie jest przepełniony, wprowadza zerowy koszt, według opisu z~treści problemu.
+Mamy więc:
+\[
+	\id{lc}[i,j] = \begin{cases}
+		\infty, & \text{jeśli $\id{extras}[i,j]<0$}, \\
+		0, & \text{jeśli $j=n$ i~$\id{extras}[i,j]\ge0$}, \\
+		(\id{extras[i,j]})^3, & \text{w~pozostałych przypadkach}.
+	\end{cases}
+\]
+
+Naszym zadaniem jest minimalizacja sumy wartości \id{lc} po wszystkich wierszach tekstu, na jakie można podzielić tekst wejściowy.
+Podproblemy, jakie się tutaj pojawiają, mają na celu optymalne rozmieszczenie słów o~numerach od 1 do $j$, gdzie $j=1$, 2, \dots, $n$.
+Rozważmy optymalne rozmieszczenie słów o~numerach od 1 do $j$.
+Niech $i$ będzie numerem słowa, które rozpoczyna ostatni wiersz w~takim układzie.
+Poprzednie wiersze składają się zatem ze słów od 1 do $i-1$ i~rozmieszczenie ich w~wierszach musi być optymalne, co można uzasadnić za pomocą metody ,,wytnij i~wklej''.
+
+Niech $c[j]$ będzie kosztem optymalnego układu słów od 1 do $j$.
+Jeśli ostatni wiersz rozpoczyna słowo o~numerze $i$, to $c[j]=c[i-1]+\id{lc}[i,j]$.
+Odpowiednią wartość $i$ minimalizującą $c[j]$ można wyznaczyć, sprawdzając każdy numer od 1 do $j$ i~wybierając optymalny z~nich.
+Jako brzegowy przypadek tej rekurencji możemy przyjąć $c[0]=0$ -- wówczas $c[1]=\id{lc}[1,1]$, co odpowiada rzeczywistości.
+Wartości rekurencji
+\[
+	c[j] = \begin{cases}
+		0, & \text{jeśli $j=0$}, \\
+		\displaystyle\min_{1\le i\le j}(c[i-1]+\id{lc}[i,j]), & \text{jeśli $j>0$}.
+	\end{cases}
+\]
+możemy przechowywać w~tablicy i~obliczać je z~lewej na prawo.
+
+Do zapamiętywania, na~których pozycjach wejściowego ciągu następuje podział na wiersze, wykorzystamy dodatkową tablicę $p$.
+W~trakcie obliczania $c[j]$, jeśli $c[j]=c[k-1]+\id{lc}[k,j]$, to wartość $k$ wstawimy na pozycję $p[j]$.
+Dzięki temu, będziemy wiedzieć, że ostatni wiersz w~znalezionym rozwiązaniu zawiera słowa o~numerach od $p[n]$ do $n$, przedostatni -- słowa o~numerach od $p[p[n]]$ do $p[n]-1$ itd.
+
+\begin{codebox}
+\Procname{$\proc{Print-Neatly}(l,n,M)$}
+\li	\For $i\gets1$ \To $n$
+\li		\Do $\id{extras}[i,i]\gets M-l_i$
+\li			\For $j\gets i+1$ \To $n$
+\li				\Do $\id{extras}[i,j]\gets\id{extras}[i,j-1]-l_i-1$
+				\End
+		\End
+\li	\For $i\gets1$ \To $n$
+\li		\Do \For $j\gets i$ \To $n$
+\li				\Do \If $\id{extras}[i,j]<0$
+\li						\Then $\id{lc}[i,j]\gets\infty$
+\li					\ElseIf $j=n$ i~$\id{extras}[i,j]\ge0$
+\li						\Then $\id{lc}[i,j]\gets0$
+\li					\ElseNoIf $\id{lc}[i,j]\gets(\id{extras}[i,j])^3$
+						\End
+				\End
+		\End
+\li	$c[0]\gets0$
+\li	\For $j\gets1$ \To $n$
+\li		\Do $c[j]\gets\infty$
+\li			\For $i\gets1$ \To $j$
+\li				\Do \If $c[i-1]+\id{lc}[i,j]<c[j]$
+\li						\Then $c[j]\gets c[i-1]+\id{lc}[i,j]$
+\li							$p[j]\gets i$
+						\End
+				\End
+		\End
+\li	\Return $c$ i~$p$
+\end{codebox}
+
+Analizując liczbę wykonywanych iteracji poszczególnych pętli, łatwo można przekonać się o~tym, że zarówno czasowa, jak i~pamięciowa złożoność algorytmu wynosi $\Theta(n^2)$.
+Wypisanie znalezionego rozwiązania w~postaci ciągu numerów słów rozpoczynających kolejne wiersze realizuje wywołanie $\proc{Give-Lines}(p,n)$ poniższej procedury rekurencyjnej.
+\begin{codebox}
+\Procname{$\proc{Give-Lines}(p,j)$}
+\li	\If $p[j]>1$
+\li		\Then $\proc{Give-Lines}(p,p[j]-1)$
+		\End
+\li	wypisz $p[j]$
+\end{codebox}
+
+Ponieważ drugi argument jest zmniejszany w~kolejnych wywołaniach rekurencyjnych, to czasem działania tej procedury jest $O(n)$.
