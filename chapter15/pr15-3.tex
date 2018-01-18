@@ -1,4 +1,125 @@
 \problem{Odległość redakcyjna} %15-3
 
 \subproblem %15-3(a)
+Podobnie jak w~problemie NWP, będziemy korzystać z~notacji $X_i$ jako \singledash{$i$}{tego} prefiksu słowa $x$ oraz $Y_j$ jako \singledash{$j$}{tego} prefiksu słowa $y$.
+W~podproblemach, jakie się pojawią, będziemy wyznaczać odległość redakcyjną prefiksów $X_i$ i~$Y_j$.
+
+Niech $c[i,j]$ będzie optymalnym kosztem przekształcenia $X_i$ do $Y_j$.
+Załóżmy, że $i$, $j>0$ i~że znana jest ostatnia operacja w~tym przekształceniu.
+Jeśli operacją tą było kopiowanie lub zastąpienie znaku innym, to problemem do rozwiązania pozostaje znalezienie odległości redakcyjnej $X_{i-1}$ i~$Y_{j-1}$.
+Można to stwierdzenie uzasadnić rozumowaniem ,,wytnij i~wklej''.
+Zatem $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj})$ w~przypadku, gdy znak $x[i]$ został skopiowany  do $y[j]$ oraz $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})$, jeśli $x[i]$ został zastąpiony przez inny znak $y[j]$.
+W~przypadku usuwania znaku podproblem stanowi wyznaczenie odległości redakcyjnej między $X_{i-1}$ a~$Y_j$, skąd $c[i,j]=c[i-1,j]+\mathrm{koszt}(\text{usuń})$.
+Podobnie, jeśli ostatnio wstawiany był nowy znak, to podproblemem jest odległość $X_i$ od $Y_{j-1}$ i~wówczas $c[i,j]=c[i,j-1]+\mathrm{koszt}(\text{wstaw})$.
+Do zamiany znaków doszło, gdy $x[i]=y[j-1]$ oraz $x[i-1]=y[j]$, o~ile $i$, $j\ge2$.
+Wystarczy w~tym przypadku obliczyć odległość między słowami $X_{i-2}$ i~$Y_{j-2}$, a~następnie dodać do niej koszt operacji zamiany: $c[i,j]=c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$.
+W~końcu, jeśli ostatnią operacją było wyrzucenie reszty słowa $X_i$, to znaczy to, że konwersja z~$X_m$ do $Y_n$ została zakończona, czyli musi być $i=m$ oraz $j=n$.
+Krok ten mógł zostać wykonany, gdy słowami wejściowymi był jakikolwiek prefiks $X_k$, gdzie $n<k<m$, oraz $Y_m$ -- mamy zatem $c[m,n]=\min_{n<k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć})$.
+
+Gdy $i$, $j>0$, to prawdziwa jest następująca zależność:
+\[
+	c[i,j] = \min\begin{cases}
+		c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj}), & \text{jeśli $x[i]=y[j]$}, \\
+		c[i-1,j-1]+\mathrm{koszt}(\text{zastąp}), & \text{jeśli $x[i]\ne y[j]$}, \\
+		c[i-1,j]+\mathrm{koszt}(\text{usuń}), \\
+		c[i,j-1]+\mathrm{koszt}(\text{wstaw}), \\
+		c[i-2,j-2]+\mathrm{koszt}(\text{zamień}), & \text{jeśli $i$, $j\ge2$, $x[i]=y[j-1]$ i~$x[i-1]=y[j]$}, \\
+		\displaystyle\min_{n<k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć}), & \text{jeśli $i=m$ i~$j=n$}.
+	\end{cases}
+\]
+
+Rozważmy teraz sytuacje z~$i=0$ lub $j=0$.
+Jeśli $i=0$, to prefiks $X_i$ jest słowem pustym i~przekształcenie go do słowa $Y_j$ polega na wykonaniu $j$ operacji wstawienia znaku, czyli $c[0,j]=j\cdot\mathrm{koszt}(\text{wstaw})$.
+Podobnie, jeśli $j=0$, to słowo $Y_j$ jest puste i~można je uzyskać poprzez \singledash{$i$}{krotne} usunięcie znaku ze słowa $X_i$, czyli $c[i,0]=i\cdot\mathrm{koszt}(\text{usuń})$.
+
+Poniższy pseudokod wypełnia tablicę $c$ od najwyższego do najniższego wiersza oraz od lewej do prawej w~obrębie wierszy.
+Równocześnie konstruowana jest także tablica $\id{op}[1\twodots m,1\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta do przekształcenia $X_i$ do $Y_j$.
+
+\begin{codebox}
+\Procname{$\proc{Edit-Distance}(x,y,m,n)$}
+\li	\For $i\gets0$ \To $m$
+\li		\Do $c[i,0]\gets i\cdot\mathrm{koszt}(\text{usuń})$
+\li			$\id{op}[i,0]\gets{}$,,usuń''
+		\End
+\li	\For $j\gets1$ \To $n$
+\li		\Do $c[0,j]\gets j\cdot\mathrm{koszt}(\text{wstaw})$
+\li			$\id{op}[0,j]\gets{}$,,wstaw '' $y[j]$
+		\End
+\li	\For $i\gets1$ \To $m$
+\li		\Do \For $j\gets1$ \To $n$
+\li				\Do $c[i,j]\gets\infty$
+\li					\If $x[i]=y[j]$
+\li						\Then $c[i,j]\gets c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj})$
+\li							$\id{op}[i,j]\gets{}$,,skopiuj''
+						\End
+\li					\If $x[i]\ne y[j]$ i~$c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})<c[i,j]$
+\li						\Then $c[i,j]\gets c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})$
+\li							$\id{op}[i,j]\gets{}$,,zastąp przez '' $y[j]$
+						\End
+\li					\If $c[i-1,j]+\mathrm{koszt}(\text{usuń})<c[i,j]$
+\li						\Then $c[i,j]\gets c[i-1,j]+\mathrm{koszt}(\text{usuń})$
+\li							$\id{op}[i,j]\gets{}$,,usuń''
+						\End
+\li					\If $c[i,j-1]+\mathrm{koszt}(\text{wstaw})<c[i,j]$
+\li						\Then $c[i,j]\gets c[i,j-1]+\mathrm{koszt}(\text{wstaw})$
+\li							$\id{op}[i,j]\gets{}$,,wstaw '' $y[j]$
+						\End
+\li					\If $i\ge2$ i~$j\ge2$ i~$x[i]=y[j-1]$ i~$x[i-1]=y[j]$
+\zi	\phantom{\kw{if} $i\ge2$} i~$c[i-2,j-2]+\mathrm{koszt}(\text{zamień})<c[i,j]$
+\li						\Then $c[i,j]\gets c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$
+\li							$\id{op}[i,j]\gets{}$,,zamień''
+						\End
+				\End
+		\End
+\li	\For $i\gets0$ \To $m-1$
+\li		\Do \If $c[i,n]+\mathrm{koszt}(\text{wyrzuć})<c[m,n]$
+\li				\Then $c[m,n]\gets c[i,n]+\mathrm{koszt}(\text{wyrzuć})$
+\li					$\id{op}[m,n]\gets{}$,,wyrzuć'' $i$
+				\End
+		\End
+\li	\Return $c$ i~\id{op}
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Op-Sequence}(\id{op},i,j)$}
+\li	\If $i=0$ i~$j=0$
+\li		\Then \Return
+		\End
+\li	\If $\id{op}[i,j]={}$,,skopiuj'' lub $\id{op}[i,j]={}$,,zastąp''
+\li		\Then $i'\gets i-1$
+\li			$j'\gets j-1$
+\li		\ElseIf $\id{op}[i,j]={}$,,skopiuj''
+\li			\Then $i'\gets i-2$
+\li				$j'\gets j-2$
+\li		\ElseIf $\id{op}[i,j]={}$,,usuń''
+\li			\Then $i'\gets i-1$
+\li				$j'\gets j$
+\li		\ElseIf $\id{op}[i,j]={}$,,wstaw''
+\li			\Then $i'\gets i$
+\li				$j'\gets j-1$
+\li		\ElseNoIf $i'\gets\id{op}[i,j][8\twodots\attrib{\id{op}[i,j]}{length}]$
+		\End
+\li			\phantom{\kw{else}} $j'\gets j$
+\li	$\proc{Op-Sequence}(\id{op},i',j')$
+\li	wypisz $\id{op}[i,j]$
+		\End
+\end{codebox}
+
 \subproblem %15-3(b)
+Możemy sprowadzić problem optymalnego uliniowienia do problemu odległości redakcyjnej w~następujący sposób.
+Załóżmy, że $x'$ i~$y'$ są wynikowymi sekwencjami DNA powstałymi w~wyniku optymalnego uliniowienia, odpowiednio, sekwencji $x$ i~$y$.
+Jeśli $x'[j]=y'[j]$, to w~problemie odległości redakcyjnej możemy tę sytuację rozumieć jako skopiowanie znaku $x'[j]$.
+Jeśli $x'[j]\ne y'[j]$ i~żaden z~tych znaków nie jest spacją, to mamy tutaj sytuację po zastąpieniu znaku $x'[j]$ przez znak $y'[j]$.
+W~końcu, spację na pozycję $x'[j]$ można uzyskać przez wykonanie operacji wstawienia znaku $y'[j]$, a~spację na pozycji $y'[j]$ -- przez wykonanie operacji usunięcia znaku $x'[j]$.
+
+Teraz wystarczy jeszcze przypisać odpowiednie koszty dla poszczególnych operacji elementarnych.
+W~problemie optymalnego uliniowienia odpowiednio zdefiniowana ocena jest maksymalizowana, zaś problem odległości redakcyjnej ma na celu minimalizację odpowiadającego tej ocenie kosztu.
+Wystarczy więc jako koszt wziąć liczbę przeciwną do odpowiadającej mu oceny.
+Poszczególne operacje wartościujemy następująco:
+\begin{align*}
+	\mathrm{koszt}(\text{skopiuj}) &= -1, \\
+	\mathrm{koszt}(\text{zamień}) &= +1, \\
+	\mathrm{koszt}(\text{usuń}) &= +2, \\
+	\mathrm{koszt}(\text{wstaw}) &= +2.
+\end{align*}
+Operacje zamień i~wyrzuć nie są wykorzystywane, więc na ich koszt możemy przyjąć wartość $\infty$.
