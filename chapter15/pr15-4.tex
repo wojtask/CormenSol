@@ -1,1 +1,42 @@
 \problem{Planowanie bankietu w~firmie} %15-4
+Ogólnie rzecz biorąc, naszym zamiarem w~tym problemie jest zapraszanie pracowników o~wysokim ,,współczynniku towarzyskości'', zaś wykluczanie takich, dla których współczynnik ten jest niski.
+Dla każdego pracownika będziemy rozważać, czy opłaca się zaprosić go na bankiet.
+Jeśli to zrobimy, to musimy wykluczyć z~bankietu wszystkich jego bezpośrednich podwładnych i~bezpośredniego przełożonego (o~ile ten istnieje).
+
+Załóżmy, że dane wejściowe do problemu stanowi drzewo $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', w~którym każdy węzeł $x$, oprócz wskaźników na inne węzły ma atrybut \id{name} przechowujący nazwisko pracownika oraz \id{conviviality} zawierający jego ,,współczynnik towarzyskości''.
+Potraktujemy każde poddrzewo drzewa wejściowego jako podproblem naszego problemu i~rozwiążemy każdy z~nich, poruszając się od poddrzew składających się z~tylko jednego węzła (liścia drzewa $T$), aż do całego drzewa $T$.
+Każdy węzeł $x$ drzewa $T$ wzbogacimy o~dwa dodatkowe pola -- \id{invited} oraz \id{uninvited}.
+W~pierwszym z~nich obliczana będzie największa możliwa suma ,,współczynników towarzyskości'' dla podproblemu stanowiącego poddrzewo o~korzeniu $x$, przy założeniu, że osoba reprezentowana przez węzeł $x$ jest zaproszona na bankiet.
+Rola atrybutu \id{uninvited} jest identyczna, ale dla sytuacji, w~której osoba $x$ nie zostaje zaproszona na bankiet.
+
+Łatwo zauważyć, że dla dowolnego węzła $x$ w~$T$, gdzie $C_x$ jest zbiorem jego dzieci, zachodzą następujące zależności:
+\begin{align*}
+	\attrib{x}{invited} &= \attrib{x}{conviviality}+\sum_{y\in C_x}\attrib{y}{uninvited}, \\
+	\attrib{x}{uninvited} &= \sum_{y\in C_x}\max(\attrib{y}{invited},\attrib{y}{uninvited}).
+\end{align*}
+Wówczas rozwiązaniem problemu jest $\max(\attribb{T}{root}{invited},\attribb{T}{root}{uninvited})$.
+
+Nasz algorytm będzie przyjmował na wejściu węzeł $x$ drzewa $T$ i~obliczy wartości pól \attrib{x}{invited} oraz \attrib{x}{uninvited}.
+Algorytm wywołany zostanie w~tym celu rekurencyjnie po wszystkich dzieciach węzła $x$.
+Zwracaną wartością jest maksymalna suma ,,współczynników towarzyskości'' dla poddrzewa o~korzeniu w~$x$.
+Wywołanie $\proc{Company-Party}(\attrib{T}{root})$ zwróci zatem rozwiązanie pełnego problemu, wypisując przy okazji listę nazwisk osób, które zostaną zaproszone na bankiet.
+\begin{codebox}
+\Procname{$\proc{Company-Party}(x)$}
+\li	$\attrib{x}{invited}\gets\attrib{x}{conviviality}$
+\li	$\attrib{x}{uninvited}\gets0$
+\li	$y\gets\attrib{x}{left-child}$
+\li	\While $y\ne\const{nil}$
+\li		\Do $\proc{Company-Party}(y)$
+\li			$\attrib{x}{invited}\gets\attrib{x}{invited}+\attrib{y}{uninvited}$
+\li			$\attrib{x}{uninvited}\gets\attrib{x}{uninvited}+\max(\attrib{y}{invited},\attrib{y}{uninvited})$
+\li			$y\gets\attrib{y}{right-sibling}$
+		\End
+\li	\If $\attrib{x}{invited}>\attrib{x}{uninvited}$
+\li		\Then wypisz \attrib{x}{name}
+\li			\Return \attrib{x}{invited}
+\li		\Else \Return \attrib{x}{uninvited}
+		\End
+\end{codebox}
+
+Każdy węzeł drzewa $T$ w~wywołaniu $\proc{Company-Party}(\attrib{T}{root})$ jest wskazywany przez $x$ w~dokładnie jednym wywołaniu rekurencyjnym oraz przez $y$ w~co najwyżej jednym wywołaniu rekurencyjnym.
+Wynika stąd, że dla hierarchii $n$ pracowników firmy, algorytm wyznacza optymalne rozwiązanie w~czasie $\Theta(n)$.
