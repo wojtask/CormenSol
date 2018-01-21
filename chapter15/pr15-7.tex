@@ -1,1 +1,35 @@
 \problem{Planowanie prac} %15-7
+Kluczowy w~naszym rozwiązaniu będzie następujący lemat:
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{W~uporządkowaniu o~maksymalnym zysku prace uszeregowane są według terminów ich ukończenia.}
+\begin{proof}
+Rozważmy optymalne uszeregowanie prac, w~którym praca $a_i$ jest wykonywana przed pracą $a_j$, ale $d_i>d_j$.
+Zamiana $a_i$ z~$a_j$ w~tym uporządkowaniu może jedynie powiększyć zysk, dlatego możemy zamienić każdą taką parę, uzyskując w~wyniku zysk niemniejszy niż przez zamianą.
+Ciąg, w~którym nie można już wykonać takiej zamiany, jest uporządkowaniem prac według terminów ich ukończenia.
+\end{proof}
+
+Posortujemy prace według ich terminów tak, aby zachodziło $d_1\le d_2\le\dots\le d_n$.
+Zdefiniujemy $P[i,j]$ jako maksymalny zysk możliwy do osiągnięcia przez planowanie prac $\{a_1,a_2,\dots,a_i\}$ w~przedziale czasowym $[0,j]$.
+Rozwiązaniem problemu jest wówczas $P[n,d_n]$, gdyż wykonanie dowolnej pracy po terminie jej ukończenia, a~w~szczególności po $d_n$, nie prowadzi do powiększenia sumarycznego zysku.
+Z~tego samego powodu i~z~założenia, że czas wykonania każdej pracy wynosi co najwyżej $n$ jednostek czasu, możemy każdy termin wykonania $d_i$ zmniejszyć do $n^2$.
+
+Zastanówmy się teraz, jak obliczyć wartość $P[i,j]$.
+Jeśli $j<t_i$, to praca $a_i$ nie może być wykonana w~przedziale czasowym $[0,j]$, dlatego $P[i,j]=P[i-1,j]$.
+Gdy jednak $j\ge t_i$, to możemy pominąć pracę $a_i$ w~naszym uporządkowaniu, co daje $P[i,j]=P[i-1,j]$.
+Możemy też włączyć ją do uporządkowania, skąd na mocy powyższego lematu $P[i,j]$ jest równe sumie zysku wprowadzanego przez tę pracę oraz zysku z~podproblemu, w~którym przedział czasowy jest skrócony o~czas wykonania tej pracy, czyli $P[i,j]=p_i+P[i-1,j-t_i]$.
+
+Dostajemy zależność rekurencyjną:
+\[
+	P[i,j] = \begin{cases}
+		0, & \text{jeśli $i=1$, $j<t_i$}, \\
+		p_1, & \text{jeśli $i=1$, $j\ge t_i$}, \\
+		P[i-1,j], & \text{jeśli $i>1$, $j<t_i$}, \\
+		\max(P[i-1,j],p_i+P[i-1,j-t_i]), & \text{jeśli $i>1$, $j\ge t_i$}.
+	\end{cases}
+\]
+Można teraz łatwo ułożyć algorytm wykorzystujący programowanie dynamiczne, który wypełnia tablicę $P$ i~zwraca w~wyniku $P[n,d_n]$.
+Tablica $P$ składa się z~$O(nd_n)=O(n^3)$ pozycji, dlatego czas wymagany do wypełnienia jej w~całości wynosi $O(n^3)$.
+
+Założenie, z~którego korzystaliśmy w~zadaniu pozwoliło na zaprojektowanie wielomianowego algorytmu dla tego problemu.
+W~ogólności, czyli przy dopuszczeniu dowolnie dużych czasów wykonania, problem staje się \singledash{NP}{zupełny} i~prawdopodobnie nie istnieje dla niego algorytm o~czasie niższym niż wykładniczy względem rozmiaru danych wejściowych.
