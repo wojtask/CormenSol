@@ -1,1 +1,61 @@
 \problem{Przesuwanie pionka} %15-6
+Ponumerujmy kolejnymi liczbami całkowitymi od 1 do $n$ wiersze z~dołu do góry, oraz kolumny z~lewej do prawej.
+Każde pole szachownicy utożsamimy z~parą jego współrzędnych $\langle i,j\rangle$.
+Zdefiniujmy $c[i,j]$ dla $1\le i$, $j\le n$ jako największy zysk możliwy do uzyskania, startując pionkiem od pewnego pola na dolnym brzegu szachownicy, a~kończąc na polu $\langle i,j\rangle$.
+Oczywiście $c[1,j]=0$ dla $j=1$, 2, \dots, $n$.
+Maksymalny zysk do pola $\langle i,j\rangle$ możemy osiągnąć, przechodząc na nie z~pola $\langle i-1,j-1\rangle$ (o~ile $j>1$), $\langle i-1,j\rangle$ albo $\langle i-1,j+1\rangle$ (o~ile $j<n$).
+Każda możliwość do sumarycznego zysku dodaje częściowy zysk związany z~przejściem na pole $\langle i,j\rangle$, zdefiniowanym przez funkcję $p$.
+Dla $i=2$, 3, \dots, $n$ zachodzi następująca zależność rekurencyjna:
+\[
+	c[i,j] = \max\begin{cases}
+		c[i-1,j-1]+p(\langle i-1,j-1\rangle,\langle i,j\rangle), & \text{jeśli $j>1$,} \\
+		c[i-1,j]+p(\langle i-1,j\rangle,\langle i,j\rangle), & \\
+		c[i-1,j+1]+p(\langle i-1,j+1\rangle,\langle i,j\rangle), & \text{jeśli $j<n$.}
+	\end{cases}
+\]
+
+W~naszym algorytmie zastosujemy programowanie dynamiczne w~celu obliczenia wartości w~tablicy $c$.
+Ponadto, w~tablicy $b$ będziemy przechowywać dane ułatwiające rekonstrukcję znalezionej ścieżki pionka.
+Pozycja $b[i,j]$ będzie zawierać numer kolumny pola z~wiersza $i-1$, z~którego prowadzi optymalna ścieżka do pola $\langle i,j\rangle$.
+Ponadto w~zmiennej $b^*\!$ po zakończeniu działania algorytmu znajdzie się numer kolumny pola na górnym brzegu szachownicy, na którym kończy się optymalna ścieżka pionka.
+\begin{codebox}
+\Procname{$\proc{Checkerboard}(p,n)$}
+\li	\For $j\gets1$ \To $n$
+\li		\Do $c[1,j]\gets0$
+		\End
+\li	\For $i\gets2$ \To $n$
+\li		\Do \For $j\gets1$ \To $n$
+\li				\Do $c[i,j]\gets c[i-1,j]+p(\langle i-1,j\rangle,\langle i,j\rangle)$
+\li					$b[i,j]\gets j$
+\li					\If $j>1$ i~$c[i-1,j-1]+p(\langle i-1,j-1\rangle,\langle i,j\rangle)>c[i,j]$
+\li						\Then $c[i,j]\gets c[i-1,j-1]+p(\langle i-1,j-1\rangle,\langle i,j\rangle)$
+\li							$b[i,j]\gets j-1$
+						\End
+\li					\If $j<n$ i~$c[i-1,j+1]+p(\langle i-1,j+1\rangle,\langle i,j\rangle)>c[i,j]$
+\li						\Then $c[i,j]\gets c[i-1,j+1]+p(\langle i-1,j+1\rangle,\langle i,j\rangle)$
+\li							$b[i,j]\gets j+1$
+						\End
+				\End
+		\End
+\li	$\id{result}\gets-\infty$
+\li	$b^*\!\gets1$
+\li	\For $j\gets1$ \To $n$
+\li		\Do \If $c[n,j]>\id{result}$
+\li				\Then $\id{result}\gets c[n,j]$
+\li					$b^*\!\gets j$
+				\End
+		\End
+\li	\Return $\id{result}$, $b$ i~$b^*\!$
+\end{codebox}
+Wykorzystując zwrócone wartości przez powyższy algorytm, możemy wypisać optymalną ścieżkę jako ciąg odwiedzonych pól, używając w~tym celu wywołania $\proc{Print-Moves}(b,n,b^*\!)$.
+Pseudokod tej procedury przedstawiono poniżej.
+\begin{codebox}
+\Procname{$\proc{Print-Moves}(b,i,j)$}
+\li	\If $i>1$
+\li		\Then $\proc{Print-Moves}(b,i-1,b[i,j])$
+		\End
+\li	wypisz ,,$\langle$'' $i$ ,,{}, '' $j$ ,,$\rangle$''
+\end{codebox}
+
+Algorytm wypełnia tablicę $c$, dla każdej z~$n^2$ jej komórek wykonując operacje w~czasie ograniczonym przez stałą.
+Stąd czasem działania algorytmu jest $\Theta(n^2)$.
