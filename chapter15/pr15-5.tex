@@ -1,4 +1,57 @@
 \problem{Algorytm Viterbiego} %15-5
 
 \subproblem %15-5(a)
+Ścieżka w~grafie $G$ z~wierzchołka $v_0$, mająca zadaną etykietę $\langle\sigma_1,\sigma_2,\dots,\sigma_k\rangle$ istnieje wtedy i~tylko wtedy, gdy istnieje ścieżka o~etykiecie $\langle\sigma_2,\dots,\sigma_k\rangle$ z~pewnego sąsiada $v_1$ wierzchołka $v_0$ oraz $\sigma(v_0,v_1)=\sigma_1$.
+Innymi słowy, w~problemie tym dla zadanego ciągu etykiet wykorzystywane są podproblemy dla o~1 krótszego sufiksu tego ciągu.
+
+Procedura \proc{Find-Path}, której pseudokod znajduje się poniżej, przyjmuje na wejściu graf $G$ reprezentowany przez tablicę list sąsiedztwa \id{Adj}, wierzchołek początkowy $v$ grafu $G$, tablicę $s$ przechowującą ciąg etykiet oraz początkowy indeks $i$ tej tablicy.
+Wywołanie $\proc{Find-Path}(G,v,s,i)$ będzie znajdować ścieżkę w~grafie $G$, zaczynającą się w~wierzchołku $v$ oraz mającą etykietę złożoną z~kolejnych elementów z~$s[i\twodots\attrib{s}{length}]$.
+Przeglądani będą wszyscy sąsiedzi $w$ wierzchołka $v$ i~w~razie odnalezienia takiej krawędzi $\langle v,w\rangle$, której etykietą jest $\sigma_i$, procedura wywołana zostanie rekurencyjnie dla wierzchołka $w$ oraz ze zwiększonym o~1 indeksem $i$.
+W~przypadku odnalezienia ścieżki dla któregokolwiek sąsiada $v$, zostanie ona skonkatenowana z~$v$ i~zwrócona jako wynik procedury.
+W~przeciwnym wypadku zwrócona zostanie specjalna wartość \const{nie-ma-takiej-ścieżki}.
+\begin{codebox}
+\Procname{$\proc{Find-Path}(G,v,s,i)$}
+\li	\If $i=\attrib{s}{length}+1$
+\li		\Then \Return $v$
+		\End
+\li	\For każdy $w\in\id{Adj}[v]$
+\li		\Do \If $\sigma(v,w)=\sigma_i$
+\li				\Then $\id{path}\gets\proc{Find-Path}(G,w,s,i+1)$
+\li					\If $\id{path}\ne\const{nie-ma-takiej-ścieżki}$
+\li						\Then \Return $v$, \id{path}
+						\End
+				\End
+		\End
+\li	\Return \const{nie-ma-takiej-ścieżki}
+\end{codebox}
+Aby rozwiązać problem dla grafu $G=\langle V,E\rangle$ z~wyróżnionym wierzchołkiem $v_0\in V$ oraz etykiety przechowywanej w~tablicy $s$, należy wywołać $\proc{Find-Path}(G,v_0,s,1)$.
+
+Każdy podproblem, jaki może się pojawić, ma na celu znalezienie ścieżki o~zadanej długości $k$, zaczynającej się w~pewnym wierzchołku grafu $G=\langle V,E\rangle$.
+Istnieje zatem $k|V|$ możliwych podproblemów, a~podczas rozwiązywania dowolnego z~nich może być sprawdzana krawędź do każdego innego wierzchołka grafu $G$.
+Czas działania algorytmu wynosi stąd $O(k|V|^2)$.
+
 \subproblem %15-5(b)
+W~tej modyfikacji, zamiast kończyć wyszukiwanie ścieżki w~momencie odnalezienia jakiejkolwiek o~zadanej etykiecie, będziemy sprawdzać możliwe krawędzie wychodzące z~wierzchołka wejściowego.
+Optymalna podstruktura wygląda podobnie do tej z~oryginalnej wersji problemu z~punktu (a).
+Następujący algorytm opiera się na \proc{Find-Path} i~realizuje opisane podejście.
+Zwraca on ścieżkę o maksymalnym możliwym prawdopodobieństwie, a~także samą wartość tego prawdopodobieństwa.
+\begin{codebox}
+\Procname{$\proc{Viterbi}(G,v,s,i)$}
+\li	\If $i=\attrib{s}{length}+1$
+\li		\Then \Return $v$, 1
+		\End
+\li	$\id{path}\gets\const{nie-ma-takiej-ścieżki}$
+\li	$\id{prob}\gets0$
+\li	\For każdy $w\in\id{Adj}[v]$
+\li		\Do \If $\sigma(v,w)=\sigma_i$
+\li				\Then $\id{path}'$, $\id{prob}'\gets\proc{Viterbi}(G,w,s,i+1)$
+\li					\If $p(v,w)\cdot\id{prob}'\ge\id{prob}$
+\li						\Then $\id{prob}\gets p(v,w)\cdot\id{prob}'$
+\li							$\id{path}\gets v$, $\id{path}'$
+						\End
+				\End
+		\End
+\li	\Return \id{path}, \id{prob}
+\end{codebox}
+
+Czas działania tego algorytmu wynosi $O(k|V|^2)$, na podstawie identycznej analizy jak w~punkcie (a).
