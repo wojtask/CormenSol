@@ -129,10 +129,10 @@ Znaleziony podciąg można otrzymać (w~odwrotnej kolejności) poprzez wypisanie
 Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejności.
 \begin{codebox}
 \Procname{$\proc{Print-LIS}(b,X,i)$}
-\li	\If $i>0$
+\li	\If $b[i]>0$
 \li		\Then $\proc{Print-LIS}(b,X,b[i])$
-\li			wypisz $x_i$
 		\End
+\li	wypisz $x_i$
 \end{codebox}
 Dysponując tablicą $b$ i~wartością $b^*\!$ wyznaczonymi dla danego ciągu $X$, możemy wypisać NNP ciągu $X$, wywołując $\proc{Print-LIS}(b,X,b^*\!)$.
 
