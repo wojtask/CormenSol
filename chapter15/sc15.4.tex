@@ -9,7 +9,9 @@ Poza nim istnieje jeszcze 7 innych NWP tych ciągów:
 \end{gather*}
 
 \exercise %15.4-2
-Poniższy pseudokod stanowi implementację zmodyfikowanej wersji procedury \proc{Print-LCS}, która wypisuje NWP ciągów $X$, $Y$ bez korzystania z~tablicy $b$.
+Poniższy pseudokod stanowi implementację zmodyfikowanej wersji procedury \proc{Print-LCS}, która wypisuje NWP ciągów $X$ i~$Y$ bez korzystania z~tablicy $b$.
+Zamiast tego przyjmuje tablicę $c$ oraz dodatkowo ciąg $Y$.
+Pierwsze wywołanie procedury powinno być następujące: $\proc{Print-LCS}'(c,X,Y,\attrib{X}{length},\attrib{Y}{length})$.
 \begin{codebox}
 \Procname{$\proc{Print-LCS}'(c,X,Y,i,j)$}
 \li	\If $i=0$ lub $j=0$
@@ -25,7 +27,7 @@ Poniższy pseudokod stanowi implementację zmodyfikowanej wersji procedury \proc
 \end{codebox}
 
 \exercise %15.4-3
-W~naszej implementacji będziemy obliczać kolejne wartości rekurencyjnie bezpośrednio ze wzoru (15.14), ale z~wykorzystaniem tablicy $c[1\twodots m,1\twodots n]$ i~mechanizmu spamiętywania.
+W~naszej implementacji będziemy obliczać kolejne wartości rekurencyjnie bezpośrednio ze wzoru (15.14), ale z~wykorzystaniem tablicy $c[0\twodots m,0\twodots n]$ i~mechanizmu spamiętywania.
 Aby zaznaczyć, że dane pole tablicy $c$ nie zostało jeszcze obliczone, użyjemy specjalnej wartości $\infty$.
 Pierwsza z~procedur inicjalizuje tablicę $c$, po czym wywołuje właściwy algorytm odpowiedzialny za obliczenie wartości $c[m,n]$.
 \begin{codebox}
@@ -53,20 +55,20 @@ Pierwsza z~procedur inicjalizuje tablicę $c$, po czym wywołuje właściwy algo
 \li	\Return $c[i,j]$
 \end{codebox}
 
-Każde z~$(m+1)(n+1)$ pól tablicy $c$ zostaje zainicjalizowane w~wierszu \ref{li:memoized-lcs-length-init}, a~następnie zmodyfikowane przez jedno wywołanie procedury \proc{Lookup-LCS}.
-Wywołania procedury \proc{Lookup-LCS} możemy podzielić na dwa typy:
+Każde z~$(m+1)(n+1)$ pól tablicy $c$ zostaje zainicjalizowane w~wierszu \ref{li:memoized-lcs-length-init} pierwszej procedury, a~następnie zmodyfikowane przez jedno wywołanie algorytmu \proc{Lookup-LCS}.
+Wywołania \proc{Lookup-LCS} możemy podzielić na dwa typy:
 \begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
 	\item wywołania, w~których $c[i,j]=\infty$, oraz
 	\item wywołania, w~których $c[i,j]<\infty$.
 \end{enumerate}
 Wywołań pierwszego typu jest dokładnie $\Theta(mn)$, jedno na każde pole tablicy $c$.
-Wszystkie wywołania drugiego typu pojawiają się jako rekurencyjne wywołania w~wywołaniach pierwszego typu.
-Kiedy w~danym wywołaniu \proc{Lookup-LCS} pojawiają się wywołania rekurencyjne, jest ich $\Theta(1)$, dlatego łącznie wywołań drugiego typu jest $\Theta(mn)$.
-Każde wywołanie drugiego typu zabiera czas $\Theta(1)$, a~każde wywołanie pierwszego typu jest wykonywane w~czasie $O(1)$ plus czas spędzany na obliczenia rekurencyjne.
-Dlatego łączny czas wykonania algorytmu \proc{Memoized-LCS-Length} wynosi $\Theta(mn)$.
+Do każdego wywołania drugiego typu może doprowadzić rekursja podczas wywołań pierwszego typu.
+Kiedy w~danym wywołaniu \proc{Lookup-LCS} pojawiają się wywołania rekurencyjne, jest ich $\Theta(1)$, dlatego łącznie wywołań drugiego typu jest $\Theta(mn)$, z~których każde zabiera czas $\Theta(1)$. Natomiast każde wywołanie pierwszego typu jest wykonywane w~czasie $O(1)$ plus czas spędzany na obliczenia rekurencyjne.
+Stąd całkowity czas wykonania procedury \proc{Memoized-LCS-Length} wynosi $\Theta(mn)$.
 
 \exercise %15.4-4
-Zauważmy, że do obliczenia $c[i,j]$ w~procedurze \proc{LCS-Length} wykorzystywane są wartości $c[i-1,j]$, $c[i,j-1]$ lub $c[i-1,j-1]$.
+Zauważmy, że do obliczenia $c[i,j]$ w~procedurze \proc{LCS-Length} wykorzystywane są wartości $c[i-1,j]$, $c[i,j-1]$ oraz $c[i-1,j-1]$.
 Możemy więc utrzymywać tylko 2 wiersze tablicy $c$ -- wiersz aktualnie obliczany oraz wiersz bezpośrednio go poprzedzający.
 Po każdej iteracji poprzedni wiersz będzie nadpisywany wartościami z~bieżącego wiersza, aby przygotować tablicę do kolejnej iteracji.
 Aby tablica $c$ była rozmiaru $2\cdot\min(m,n)$, przed jej utworzeniem należy jeszcze sprawdzić, czy $n\le m$.
@@ -97,12 +99,12 @@ Otrzymujemy zależność rekurencyjną:
 \]
 NNP ciągu $X$ ma wówczas długość $\max_{1\le i\le n}c[i]$.
 
-Obliczanie $c[n]$ bezpośrednio z~definicji doprowadziłoby do algorytmu o~czasie wykładniczym z~racji wielokrotnego rozwiązywania tych samych podproblemów.
+Obliczanie wartości tablicy $c$ bezpośrednio z~definicji doprowadziłoby do algorytmu o~czasie wykładniczym z~racji wielokrotnego rozwiązywania tych samych podproblemów.
 Dzięki wykorzystaniu tablicowania wyników w~programowaniu dynamicznym, możemy podać algorytm działający w~czasie $O(n^2)$.
 \begin{codebox}
 \Procname{$\proc{LIS-Length}(X)$}
 \li	$n\gets\attrib{X}{length}$
-\li	$\id{longest}\gets0$
+\li	$m\gets0$
 \li	$b^*\!\gets0$
 \li	\For $i\gets1$ \To $n$ \label{li:lis-length-computing-c-begin}
 \li		\Do $c[i]\gets1$
@@ -113,17 +115,17 @@ Dzięki wykorzystaniu tablicowania wyników w~programowaniu dynamicznym, możemy
 \li							$b[i]\gets j$
 						\End
 				\End
-\li			\If $c[i]>\id{longest}$
-\li				\Then $\id{longest}\gets c[i]$
+\li			\If $c[i]>m$
+\li				\Then $m\gets c[i]$
 \li					$b^*\!\gets i$
 				\End
 		\End \label{li:lis-length-computing-c-end}
-\li	\Return $\id{longest}$, $b$ i~$b^*$
+\li	\Return $m$, $b$ i~$b^*$
 \end{codebox}
-W~pętli \kw{for} w~wierszach \doubledash{\ref{li:lis-length-computing-c-begin}}{\ref{li:lis-length-computing-c-end}} wyznaczane są kolejne pola tablicy $c$, a~także aktualizowana jest zmienna \id{longest} przechowująca maksimum aktualnie znanego NNP wejściowego ciągu $X$.
+W~pętli \kw{for} w~wierszach \doubledash{\ref{li:lis-length-computing-c-begin}}{\ref{li:lis-length-computing-c-end}} wyznaczane są kolejne pola tablicy $c$, a~także aktualizowana jest zmienna $m$ przechowująca długość najdłuższego aktualnie znanego niemalejącego podciągu wejściowego ciągu $X$.
 W~tablicy $b[1\twodots n]$ zapamiętywane są dodatkowe informacje służące później do odtworzenia znalezionego NNP.
-Dokładniej, po zakończeniu działania procedury, w~$b[i]$ znajduje się ta wartość $j$, dla której $c[i]=c[j]+1$, albo $b[i]=0$, jeżeli takie $j$ nie istnieje.
-Ponadto, $b^*\!$ przechowuje takie $i$, dla którego $\id{longest}=c[i]$, albo 0, jeżeli ciąg $X$ jest pusty.
+Dokładniej, po zakończeniu działania procedury, na pozycji $b[i]$ znajduje się taka wartość $j$, dla której $c[i]=c[j]+1$, albo $b[i]=0$, jeżeli takie $j$ nie istnieje.
+Ponadto, $b^*\!$ przechowuje takie $i$, dla którego $m=c[i]$, albo 0, jeżeli ciąg $X$ jest pusty.
 
 Znaleziony podciąg można otrzymać (w~odwrotnej kolejności) poprzez wypisanie $x_{b^*\!}$, a~następnie $x_{b[b^*\!]}$, $x_{b[b[b^*\!]]}$ itd., dopóki indeks nie jest zerem.
 Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejności.
@@ -134,25 +136,25 @@ Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejno
 		\End
 \li	wypisz $x_i$
 \end{codebox}
-Dysponując tablicą $b$ i~wartością $b^*\!$ wyznaczonymi dla danego ciągu $X$, możemy wypisać NNP ciągu $X$, wywołując $\proc{Print-LIS}(b,X,b^*\!)$.
+Dysponując tablicą $b$ i~wartością $b^*\!$ wyznaczonymi dla danego ciągu $X$, możemy wypisać jego NNP, wywołując $\proc{Print-LIS}(b,X,b^*\!)$.
 
 \exercise %15.4-6
-Dla ciągu wejściowego $X=\langle x_1,x_2,\dots,x_n\rangle$ niech $Y=\langle y_1,y_2,\dots,y_m\rangle$ będzie ciągiem takim, że $y_i$ jest najmniejszym elementem w~$X$ kończącym pewien podciąg niemalejący ciągu $X$ o~długości $i$.
-Kluczowa jest własność ciągu $Y$ podana we wskazówce, czyli to, że jest on niemalejący.
+Dla ciągu wejściowego $X=\langle x_1,x_2,\dots,x_n\rangle$, w~którym NNP ma długość $m$, niech $Z=\langle z_1,z_2,\dots,z_m\rangle$ będzie ciągiem takim, że $z_i$ jest najmniejszym elementem w~$X$ kończącym pewien podciąg niemalejący ciągu $X$ o~długości $i$.
+Kluczowa jest własność ciągu $Z$ podana we wskazówce, czyli to, że jest on niemalejący.
 Podamy krótki dowód tego faktu.
-Załóżmy, że istnieją indeksy $i$, $j$, takie, że $i<j$ oraz $y_i>y_j$.
+Załóżmy nie-wprost, że istnieją indeksy $i$, $j$, takie, że $i<j$ oraz $z_i>z_j$.
 Oznacza to, że najmniejszy element ciągu $X$ będący ostatnim elementem niemalejącego podciągu $X$ o~długości $i$ jest większy niż najmniejszy element ciągu $X$ kończący pewien niemalejący podciąg $X$ o~długości $j$.
-Moglibyśmy jednak usunąć $j-i$ elementów z~podciągu o~długości $j$ zakończonego na $y_j$, otrzymując niemalejący podciąg ciągu $X$ o~długości $i$, w~którym ostatni element jest mniejszy niż $y_i$.
+Moglibyśmy jednak usunąć $j-i$ elementów z~podciągu o~długości $j$ zakończonego na $z_j$, otrzymując niemalejący podciąg ciągu $X$ o~długości $i$, w~którym ostatni element jest mniejszy niż $z_i$.
 Sprzeczność.
 
-Zamiast zapamiętywania ciągu $Y$, w~algorytmie będziemy korzystać z~tablicy $a[0\twodots n]$, w~której na \singledash{$j$}{tej} pozycji, gdzie $j=1$, 2, \dots, $m$, będziemy przechowywać indeks $i$, taki że $y_j=x_i$.
-Na pozycjach $j=0$ oraz $j=m+1$, $m+2$, \dots, $n$, $a[j]=0$.
+Zamiast zapamiętywania ciągu $Z$, w~algorytmie będziemy korzystać z~tablicy $a[0\twodots n]$, w~której na \singledash{$j$}{tej} pozycji, gdzie $j=1$, 2, \dots, $m$, będziemy przechowywać indeks $i$, taki że $z_j=x_i$.
+Dla pozycji $j=0$ oraz $j=m+1$, $m+2$, \dots, $n$, przyjmiemy $a[j]=0$.
 Przechowywanie indeksów elementów pozwoli nam na zbudowanie tablicy $b$ identycznej, jak w~procedurze \proc{LIS-Length} z~poprzedniego zadania, dzięki której będzie można odtworzyć znaleziony NNP.
 
-Załóżmy, że w~trakcie przeglądania ciągu $X$ od lewej do prawej, aktualnie przetwarzanym elementem jest $x_i$.
-Niech $k$ będzie takim indeksem w~tablicy $a$, że $x_{a[j]}\le x_i$ dla każdego $j=1$, 2, \dots, $k-1$, oraz $x_{a[j]}>x_i$ dla każdego $j=k$, $k+1$, \dots, $n$.
+Załóżmy, że w~trakcie przeglądania ciągu $X$ od lewej do prawej, aktualnie przetwarzanym elementem jest $x_i$, a~w~zmiennej $m$ przechowywana jest długość najdłuższego aktualne znanego niemalejącego podciągu $X$.
+Niech $k$ będzie takim indeksem w~tablicy $a$, że $x_{a[j]}\le x_i$ dla każdego $j=1$, 2, \dots, $k-1$, oraz $x_{a[j]}>x_i$ dla każdego $j=k$, $k+1$, \dots, $m$.
 Element $x_i$ stanowi zatem najmniejszy napotkany do tej pory element kończący pewien niemalejący podciąg ciągu $X$ o~długości $k$ -- na pozycję $a[k]$ można więc wpisać $i$.
-Dzięki uporządkowaniu elementów ciągu $X$ o~indeksach z~tablicy $a$, liczbę $k$ dla każdego elementu $x_i$ jesteśmy w~stanie wyszukiwać w~czasie logarytmicznym, stosując wyszukiwanie binarne.
+Dzięki uporządkowaniu elementów ciągu $X$ o~indeksach z~tablicy $a$, liczbę $k$ dla każdego elementu $x_i$ jesteśmy w~stanie wyznaczać w~czasie logarytmicznym, stosując wyszukiwanie binarne.
 
 \begin{codebox}
 \Procname{$\proc{LIS-Length}'(X)$}
@@ -160,33 +162,33 @@ Dzięki uporządkowaniu elementów ciągu $X$ o~indeksach z~tablicy $a$, liczbę
 \li	\For $i\gets0$ \To $n$ \label{li:lis-length'-a-init-begin}
 \li		\Do $a[i]\gets0$
 		\End \label{li:lis-length'-a-init-end}
-\li	$\id{longest}\gets0$
+\li	$m\gets0$
 \li	\For $i\gets1$ \To $n$ \label{li:lis-length'-for-begin}
-\li		\Do $\id{low}\gets1$ \label{li:lis-length'-binary-search-begin}
-\li			$\id{high}\gets\id{longest}$
-\li			\While $\id{low}\le\id{high}$
-\li				\Do $\id{mid}\gets\lfloor(\id{low}+\id{high})/2\rfloor$
-\li					\If $x_i<x_{a[\id{mid}]}$
-\li						\Then $\id{high}\gets\id{mid}-1$
-\li						\Else $\id{low}\gets\id{mid}+1$
+\li		\Do $k\gets1$ \label{li:lis-length'-binary-search-begin}
+\li			$l\gets m$
+\li			\While $k\le l$
+\li				\Do $j\gets\lfloor(k+l)/2\rfloor$
+\li					\If $x_{a[j]}\le x_i$
+\li						\Then $k\gets j+1$
+\li						\Else $l\gets j-1$
 						\End
 				\End \label{li:lis-length'-binary-search-end}
-\li			$a[\id{low}]\gets i$
-\li			$b[i]\gets a[\id{low}-1]$
-\li			\If $\id{low}>\id{longest}$
-\li				\Then $\id{longest}\gets\id{low}$
+\li			$a[k]\gets i$
+\li			$b[i]\gets a[k-1]$
+\li			\If $k>m$
+\li				\Then $m\gets k$
 				\End
 		\End \label{li:lis-length'-for-end}
-\li	\Return $\id{longest}$, $b$ i~$a[\id{longest}]$
+\li	\Return $m$, $b$ i~$a[m]$
 \end{codebox}
-W~wierszach \doubledash{\ref{li:lis-length'-a-init-begin}}{\ref{li:lis-length'-a-init-end}} tablica $a$ inicjalizowana jest zerami, aby zaznaczyć, że żaden z~elementów ciągu $Y$ nie jest jeszcze znany.
-W~zmiennej \id{longest} będzie znajdować się długość najdłuższego znanego niemalejącego podciągu $X$.
+Powyżej zaprezentowany algorytm realizuje opisane podejście.
+W~wierszach \doubledash{\ref{li:lis-length'-a-init-begin}}{\ref{li:lis-length'-a-init-end}} tablica $a$ inicjalizowana jest zerami, aby zaznaczyć, że żaden z~elementów ciągu $Z$ nie jest jeszcze znany.
 Elementy ciągu $X$ przeglądane są następnie z~lewej do prawej.
-W~wierszach \doubledash{\ref{li:lis-length'-binary-search-begin}}{\ref{li:lis-length'-binary-search-end}} dla danego elementu $x_i$ odbywa się wyszukiwanie odpowiedniego indeksu tablicy $a$, gdzie należy umieścić $i$, aby zachować uporządkowanie elementów ciągu $X$ indukowane przez fragment $a[1\twodots\id{longest}]$.
-Po aktualizacji odpowiedniej komórki tablicy $a$, wpisywany jest do $b[i]$ indeks poprzedniego elementu w~ciągu $Y$, a~następnie aktualizowana wartość zmiennej \id{longest}.
-Procedura zwraca ten sam zestaw wyników, co \proc{LIS-Length} z~poprzedniego zadania (z~$a[\id{longest}]$ jako $b^*\!$).
+W~wierszach \doubledash{\ref{li:lis-length'-binary-search-begin}}{\ref{li:lis-length'-binary-search-end}} dla elementu $x_i$ odbywa się wyszukiwanie odpowiedniego indeksu tablicy $a$, gdzie należy umieścić $i$, aby zachować uporządkowanie elementów ciągu $X$ indukowane przez fragment $a[1\twodots m]$.
+Po aktualizacji odpowiedniej komórki tablicy $a$, do $b[i]$ wpisywany jest indeks poprzedniego elementu w~ciągu $Z$ (lub 0, jeśli element $x_i$ rozpoczyna nowy podciąg niemalejący), a~następnie aktualizowana jest wartość zmiennej $m$.
+Procedura zwraca ten sam zestaw wyników, co \proc{LIS-Length} z~poprzedniego zadania (z~$a[m]$ jako $b^*\!$).
 Znaleziony NNP można więc wypisać, wywołując procedurę \proc{Print-LIS} tak, jak to opisano w~tamtym rozwiązaniu.
 
-Każda iteracja pętli \kw{for} w~liniach \doubledash{\ref{li:lis-length'-for-begin}}{\ref{li:lis-length'-for-end}} przeprowadza wyszukiwanie binarne w~tablicy o~co najwyżej $n$ elementach.
+Każda iteracja pętli \kw{for} w~liniach \doubledash{\ref{li:lis-length'-for-begin}}{\ref{li:lis-length'-for-end}} przeprowadza wyszukiwanie binarne w~podtablicy zawierającej co najwyżej $n$ elementów.
 Poza pętlą inicjalizującą tablicę $a$ pozostałe operacje wykonywane w~procedurze zajmują czas co najwyżej stały.
-Stąd czasem działania algorytmu jest $O(n\lg n)$.
+Stąd algorytm działa w~czasie $O(n\lg n)$.
