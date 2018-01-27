@@ -17,48 +17,34 @@ Nasz algorytm oprzemy na \proc{Print-Optimal-Parens}, ale zamiast wypisywać naw
 \end{codebox}
 
 \exercise %15.2-3
-Udowodnimy przez indukcję, że istnieje stała $c>0$ taka, że $P(n)\ge c2^n$ dla każdego $n\ge1$.
+Udowodnimy przez indukcję, że $P(n)\ge2^{n-2}$ dla każdego $n\ge1$, co pozwoli nam wywnioskować, że $P(n)=\Omega(2^n)$.
 
-Okazuje się, że w~celu pokazania tego oszacowania na podstawę indukcji musimy przyjąć $n=1$, 2, 3, 4.
-Mamy:
+W~przypadkach, gdy $n=1$, 2, 3, 4, nierówność jest spełniona:
 \begin{align*}
-	P(1) &= 1 \ge c2^1 \quad\Leftrightarrow\quad c \le 1/2, \\
-	P(2) &= P(1)P(1) = 1 \ge c2^2 \quad\Leftrightarrow\quad c \le 1/4, \\
-	P(3) &= P(1)P(2)+P(2)P(1) = 1+1 = 2 \ge c2^3 \quad\Leftrightarrow\quad c \le 1/4, \\
-	P(4) &= P(1)P(3)+P(2)P(2)+P(3)P(1) = 2+1+2 = 5 \ge c2^4 \quad\Leftrightarrow\quad c \le 5/16.
+	P(1) &= 1 \ge 2^{1-2}, \\
+	P(2) &= P(1)P(1) = 1 \ge 2^{2-2}, \\
+	P(3) &= P(1)P(2)+P(2)P(1) = 1+1 = 2 \ge 2^{3-2}, \\
+	P(4) &= P(1)P(3)+P(2)P(2)+P(3)P(1) = 2+1+2 = 5 \ge 2^{4-2}.
 \end{align*}
-Największym $c$ spełniającym każdą powyższą nierówność jest $c=1/4$.
-
 Niech teraz $n\ge5$.
-Dla każdego $i=1$, \dots, $n-1$ przyjmiemy, że zachodzi $P(i)\ge c2^i$.
-Mamy:
+Dla każdego $i=1$, \dots, $n-1$ przyjmiemy założenie indukcyjne $P(i)\ge2^{i-2}$.
+Mamy wówczas:
 \[
-	P(n) = \sum_{k=1}^{n-1}P(k)P(n-k) \ge \sum_{k=1}^{n-1}c2^kc2^{n-k} = \sum_{k=1}^{n-1}c^22^n = c^22^n(n-1).
+	P(n) = \sum_{k=1}^{n-1}P(k)P(n-k) \ge \sum_{k=1}^{n-1}2^{k-2}2^{n-k-2} = \sum_{k=1}^{n-1}2^{n-4} = \frac{n-1}{4}\cdot2^{n-2}.
 \]
-Nierówność $c^22^n(n-1)\ge c2^n$ będzie zachodzić, o~ile $c\ge1/(n-1)$.
-A~zatem najmniejszą wartością $c$ spełniającą tę nierówność dla wszystkich $n\ge5$, jest $c=1/4$.
-Widać więc, że wybór takiego $c$ pozwala spełnić oszacowanie $P(n)\ge c2^n$ dla każdego $n$, co oznacza, że $P(n)=\Omega(2^n)$.
+Gdy $n\ge5$, to $(n-1)/4\ge1$, dlatego otrzymujemy $P(n)\ge2^{n-2}$.
 
 \exercise %15.2-4
-Procedura \proc{Matrix-Chain-Order} oblicza wartości w~tablicy $m$ metodą wstępującą z~wykorzystaniem tablicowania wyników pośrednich na podstawie rekurencji (15.12).
-Podczas obliczania $m[i,j]$ odczytywane są wartości z~pozycji $m[i,k]$ i~$m[k+1,j]$ -- dla ułatwienia nazwijmy je, odpowiednio, pierwszym i~drugim składnikiem.
-Ustalmy $i'$ i~$j'$.
-Odwołanie do $m[i',j']$ w~roli pierwszego składnika ma miejsce podczas obliczania $m[i',j'+1]$, $m[i',j'+2]$, \dots, $m[i',n]$, a~więc $n-j'$ wartości.
-Z~kolei wartość $m[i',j']$ w~roli drugiego składnika służy do wyznaczenia $m[1,j']$, $m[2,j']$, \dots, $m[i'-1,j']$, czyli $i'-1$ wartości.
-Stąd otrzymujemy $R(i',j')=n-j'+i'-1$.
-
-Znajdziemy teraz całkowitą liczbę odwołań do tablicy $m$.
-W~poniższym wyprowadzeniu stosujemy zamianę zmiennych w~sumie ($k=n-j$) oraz korzystamy z~tożsamości (A.1) i~(A.3):
+W~celu obliczenia $m[i,j]$, w~każdej iteracji pętli \kw{for} w~wierszach \doubledash{8}{12} wykorzystywane są dwie inne wartości z~tej tablicy.
+Łączna liczba odwołań do tablicy $m$ jest zatem dwukrotnie większa od sumarycznej liczby iteracji najbardziej wewnętrznej pętli.
+Mamy więc:
 \begin{align*}
-	\sum_{i=1}^n\sum_{j=i}^nR(i,j) &= \sum_{i=1}^n\sum_{j=i}^n(n-j+i-1) \\
-	&= \sum_{i=1}^n\sum_{k=0}^{n-i}(k+i-1) \\
-	&= \sum_{i=1}^n\biggl(\sum_{k=0}^{n-1}k+\sum_{k=0}^{n-i}(i-1)\biggr) \\
-	&= \sum_{i=1}^n\biggl(\frac{(n-i)(n-i+1)}{2}+(n-i+1)(i-1)\biggr) \\
-	&= \frac{1}{2}\sum_{i=1}^n(n-i+1)(n-i+2i-2) \\
-	&= \frac{1}{2}\sum_{i=1}^n(n^2-n-2+3i-i^2) \\
-	&= \frac{1}{2}\biggl(n(n^2-n-2)+3\sum_{i=1}^ni-\sum_{i=1}^ni^2\biggr) \\
-	&= \frac{1}{2}\biggl(n(n^2-n-2)+\frac{3n(n+1)}{2}-\frac{n(n+1)(2n+1)}{6}\biggr) \\
-	&= \frac{n}{12}(6n^2-6n-12+9n+9-2n^2-3n-1) \\[1mm]
+	\sum_{i=1}^n\sum_{j=1}^nR(i,j) &= \sum_{l=2}^n\sum_{i=1}^{n-l+1}\sum_{k=i}^{i+l-2}2 \\
+	&= \sum_{l=2}^n2(l-1)(n-l+1) \\
+	&= \sum_{l=1}^{n-1}2l(n-l) \\
+	&= 2n\sum_{l=1}^{n-1}l-2\sum_{l=1}^{n-1}l^2 \\
+	&= 2n\cdot\frac{n(n-1)}{2}-2\cdot\frac{n(n-1)(2n-1)}{6} \\
+	&= n^3-n^2-\frac{2n^3-3n^2+n}{3} \\
 	&= \frac{n^3-n}{3}.
 \end{align*}
 
@@ -71,4 +57,4 @@ Załóżmy, że dla każdego wyrażenia o~$k<n$ elementach w~ich pełnym nawiaso
 Rozważmy dowolne pełne nawiasowanie wyrażenia $\Phi$ o~$n$ elementach.
 Z~definicji mamy, że istnieje $1<k<n$ takie, że wyrażenie $\Phi$ stanowi iloczyn podwyrażenia o~$k$ elementach i~podwyrażenia o~$n-k$ elementach, oba o~ustalonych pełnych nawiasowaniach.
 Z~założenia mamy, że pełne nawiasowania tych podwyrażeń mają, odpowiednio, $k-1$ i~$n-k-1$ par nawiasów.
-Dodając do tych liczb dodatkową parę nawiasów, która obejmuje całe wyrażenie $\Phi$, mamy, że łącznie w~nawiasowaniu $\Phi$ występuje $(k-1)+(n-k-1)+1=n-1$ par nawiasów.
+Dodając do tych liczb dodatkową parę nawiasów, która obejmuje całe wyrażenie $\Phi$, mamy, że łącznie w~pełnym nawiasowaniu $\Phi$ występuje $(k-1)+(n-k-1)+1=n-1$ par nawiasów.
