@@ -1,17 +1,17 @@
 \subchapter{Podstawy programowania dynamicznego}
 
 \exercise %15.3-1
-W~podrozdziale 15.2 stwierdzono, że liczba wszystkich możliwych nawiasowań ciągu $n$ macierzy jest rzędu $\Omega(4^n\!/n^{3/2})$, zatem algorytm przeglądający wszystkie nawiasowania w~poszukiwaniu optymalnego kosztu mnożenia macierzy, wymaga czasu co najmniej takiego rzędu.
+W~podrozdziale 15.2 stwierdzono, że liczba wszystkich możliwych nawiasowań ciągu $n$ macierzy jest rzędu $\Omega(4^n\!/n^{3/2})$, zatem algorytm przeglądający wszystkie nawiasowania w~poszukiwaniu optymalnego kosztu mnożenia macierzy, wymaga czasu co najmniej tego rzędu.
 Aby uzyskać górne oszacowanie na czas działania $T(n)$ procedury \proc{Recursive-Matrix-Chain}, zastosujemy analizę podobną do tej z~Podręcznika, która posłużyła do znalezienia dolnego oszacowania na $T(n)$.
-W~naszym przypadku przyjmiemy, że wykonanie instrukcji w~wierszach \doubledash{1}{2} oraz wierszach \doubledash{6}{7} zajmuje co najwyżej $c$ jednostek czasu, gdzie $c$ jest stałą.
-Rozważymy rekurencję
+W~naszej analizie przyjmiemy, że wykonanie instrukcji w~wierszach \doubledash{1}{2} oraz wierszach \doubledash{6}{7} zajmuje co najwyżej $c$ jednostek czasu, gdzie $c$ jest stałą.
+Prowadzi to do rekurencji
 \[
 	T(n) \le \begin{cases}
 		c, & \text{jeśli $n=1$}, \\
-		c+\sum_{k=1}^{n-1}(T(k)+T(n-k)+c), & \text{jeśli $n>1$}, \\
+		c+\displaystyle\sum_{k=1}^{n-1}(T(k)+T(n-k)+c), & \text{jeśli $n>1$},
 	\end{cases}
 \]
-która sprowadza się do postaci
+którą możemy przekształcić do postaci
 \[
 	T(n) \le 2\sum_{i=1}^{n-1}T(i)+cn.
 \]
@@ -25,7 +25,7 @@ Mamy wówczas:
 	&\le 2c\sum_{i=1}^{n-1}(7/2)^i+cn \\
 	&= 2c\cdot\frac{(7/2)^n-1}{5/2}+cn \\
 	&= c(4/5)(7/2)^n-c(4/5)+cn \\
-	&= c(7/2)^n-c((1/5)(7/2)^n+(4/5)-n) \\
+	&= c(7/2)^n-c((1/5)(7/2)^n+4/5-n) \\
 	&\le c(7/2)^n.
 \end{align*}
 Można sprawdzić, że ostatnia nierówność zachodzi dla każdych $n$, $c>0$, co ostatecznie kończy dowód oszacowania $T(n)=O((7/2)^n)$.
@@ -48,7 +48,7 @@ Z~powyższego lematu wynika w~szczególności, że $(7/2)^n=o(4^n\!/n^{3/2})$, a
 
 \exercise %15.3-2
 Sortowanie przez scalanie jest algorytmem realizującym podejście ,,dziel i~zwyciężaj'', w~którym początkowy problem dzielony jest na podproblemy rozwiązywane rekurencyjnie.
-Powstające podproblemy na ogół nie powtarzają się pomiędzy wywołaniami rekurencyjnymi, co można zaobserwować na ilustracji drzewa rekursji tego algorytmu (rys.\ \ref{fig:15.3-2}).
+Powstające podproblemy nie powtarzają się pomiędzy wywołaniami rekurencyjnymi, co można zaobserwować na ilustracji drzewa rekursji tego algorytmu (rys.\ \ref{fig:15.3-2}).
 W~drzewie tym każdy węzeł jest unikalny, inaczej niż w~przypadku drzewa rekursji algorytmu opartego na programowaniu dynamicznym, np.\ tego z~rys.\ 15.5 z Podręcznika.
 Brak wspólnych podproblemów w~algorytmach opartych na metodzie ,,dziel i~zwyciężaj'' sprawia, że nie można ich przyspieszyć, stosując spamiętywanie.
 \begin{figure}[!ht]
@@ -58,7 +58,7 @@ Każdy węzeł drzewa jest oznaczony przez zakres $i\twodots j$ tablicy, na któ
 \end{figure}
 
 \exercise %15.3-3
-Problem ten ma własność optymalnej podstruktury, co można udowodnić podobnie, jak w~jego oryginalnej wersji.
+Problem ten ma własność optymalnej podstruktury, o~czym można się przekonać podobnie, jak w~jego oryginalnej wersji.
 W~tym wariancie optymalnym nawiasowaniem iloczynu macierzy będziemy nazywać takie nawiasowanie, które maksymalizuje liczbę mnożeń skalarnych.
 
 Przypuśćmy, że w~optymalnym nawiasowaniu iloczynu $A_iA_{i+1}\dots A_j$ podział występuje między $A_k$ i~$A_{k+1}$.
@@ -68,7 +68,7 @@ Podobne rozumowanie prowadzi do wniosku, że nawiasowanie podciągu $A_{k+1}A_{k
 
 \exercise %15.3-4
 W~problemie planowania czynności na liniach montażowych zarówno najszybszy sposób montażu do stanowiska $S_{1,j}$, jak i~najszybszy sposób montażu do stanowiska $S_{2,j}$, polega na optymalnych czasach montażu do stanowisk $S_{1,j-1}$ i~$S_{2,j-1}$.
-Innymi słowy, wartości $f_1[j-1]$ oraz $f_2[j-1]$ wykorzystywane są do obliczenia $f_1[j]$, jak i~$f_2[j]$.
+Innymi słowy, wartości $f_1[j-1]$ oraz $f_2[j-1]$ wykorzystywane są do obliczenia zarówno $f_1[j]$, jak i~$f_2[j]$.
 
 \exercise %15.3-5
 Jednym z~kontrprzykładów jest ciąg macierzy $\langle A_1,A_2,A_3\rangle$ o~rozmiarach stanowiących ciąg $\langle1,2,5,4\rangle$.
