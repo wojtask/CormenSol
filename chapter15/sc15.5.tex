@@ -3,7 +3,7 @@
 \exercise %15.5-1
 Algorytm podzielimy na 3 procedury.
 Pierwsza z~nich ma za zadanie wypisać korzeń optymalnego drzewa BST oraz wywołać drugą, rekurencyjną procedurę wypisującą strukturę tego drzewa.
-W~tej ostatniej, dla danej tablicy \id{root} oraz pozycji $i\le j$, konstruowane jest poddrzewo o~korzeniu, którego indeks znajduje się w~$\id{root}[i,j]$.
+W~tym celu dla danej tablicy \id{root} oraz pozycji $i\le j$ konstruowane jest poddrzewo o~korzeniu, którego indeks znajduje się w~$\id{root}[i,j]$.
 Konstrukcja ta polega na wypisaniu jego lewego poddrzewa, a~następnie na wypisaniu jego prawego poddrzewa.
 Trzecia procedura służy nam do pozyskiwania nazw węzłów na podstawie wartości w~tablicy \id{root} oraz pozycji w~niej.
 \begin{codebox}
@@ -26,15 +26,16 @@ Trzecia procedura służy nam do pozyskiwania nazw węzłów na podstawie warto�
 \li	\If $i\le j$
 \li		\Then \Return ,,$k$''$\!{}_{\id{root}[i,j]}$
 \li		\Else \Return ,,$d$''$\!{}_j$
+		\End
 \end{codebox}
 
 \exercise %15.5-2
 Algorytm \proc{Optimal-BST} wywołany dla zadanych prawdopodobieństw zwraca optymalne drzewo BST przedstawione na rys.\ \ref{fig:15.5-2}.
+Tabela \ref{tab:15.5-2} ilustruje, podobnie jak w~Podręczniku, oczekiwany koszt wyszukiwania w~tym drzewie oraz wkład, jaki wprowadza w~ten koszt każdy węzeł.
 \begin{figure}[!ht]
 	\centering \input{fig15.5-2}
-	\caption{Optymalne drzewo BST dla podanych danych wejściowych.} \label{fig:15.5-2}
+	\caption{Optymalne drzewo BST dla zadanego ciągu prawdopodobieństw.} \label{fig:15.5-2}
 \end{figure}
-Podobnie jak w~Podręczniku, w~poniższej tabeli przedstawiony został wkład każdego węzła w~tym drzewie i~wyznaczony koszt tego drzewa.
 \begin{table}[!ht]
 	\centering
 		\begin{tabular}{cccc}
@@ -55,27 +56,36 @@ Podobnie jak w~Podręczniku, w~poniższej tabeli przedstawiony został wkład ka
 			$d_6$ & 3 & 0{,}05 & 0{,}20 \\
 			$d_7$ & 2 & 0{,}05 & 0{,}15 \\ \hline
 			Razem & & & 3{,}12
-		\end{tabular}
+		\end{tabular} \caption{Zestawienie kosztów wprowadzanych przez poszczególne węzły w~optymalnym drzewie BST dla podanych prawdopodobieństw.} \label{tab:15.5-2}
 \end{table}
 
 \exercise %15.5-3
 Obliczanie wartości $w(i,j)$ bezpośrednio ze wzoru (15.17) wymaga wykonania $\Theta(j-i)$ dodawań.
-Zauważmy, że pętla \kw{for} w~wierszach \doubledash{9}{13} wykonuje także $\Theta(j-i)$ iteracji, każda wymagająca czasu stałego.
+Zauważmy, że pętla \kw{for} w~wierszach \doubledash{9}{13} wykonuje także $\Theta(j-i)$ iteracji, a~każda z~nich wymaga czasu stałego.
 A~zatem modyfikacja ta nie wpłynie na asymptotyczny czas działania algorytmu, tylko co najwyżej na zwiększenie stałego czynnika ukrytego w~notacji $\Theta$.
 
 \exercise %15.5-4
-Wykorzystamy podany fakt i~w~najbardziej wewnętrznej pętli procedury \proc{Optimal-BST}, zamiast iterować zmienną $r$ od $i$ do $j$, będziemy przebiegać wszystkie wartości od $\id{root}[i,j-1]$ do $\id{root}[i+1,j]$.
+Wykorzystamy podaną obserwację i~w~najbardziej wewnętrznej pętli w~procedurze \proc{Optimal-BST}, zamiast iterować zmienną $r$ od $i$ do $j$, będziemy przebiegać wszystkie wartości od $\id{root}[i,j-1]$ do $\id{root}[i+1,j]$.
+Aby jednak skorzystać z~tego usprawnienia, musimy upewnić się, że $i<j$.
+Warunek ten zachodzi, gdy $l>1$, zatem w~pętli \kw{for} w~wierszach \doubledash{4}{13} zmienna $l$ będzie przyjmować wartości od 2 do $n$, natomiast działania wykonywane, gdy $l=1$, będziemy imitować następującym fragmentem, który wstawimy tuż przed tę pętlę:
+\begin{codebox}
+\zi	\For $i\gets1$ \To $n$
+\zi		\Do $w[i,i]\gets w[i,i-1]+p_i+q_i$
+\zi			$e[i,i]\gets e[i,i-1]+e[i+1,i]+w[i,i]$
+\zi			$\id{root}[i,i]\gets i$
+		\End
+\end{codebox}
+
 Pokażemy, że tablice $e$ i~\id{root} zostaną wypełnione w~czasie $\Theta(n^2)$.
-Dla pewnego ustalonego $l$ pętla \kw{for} w~wierszach \doubledash{4}{13} wykona $\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1)$ iteracji.
-Po podstawieniu $j=i+l-1$ otrzymujemy
+Pętla w~wierszach \doubledash{1}{3} wraz z~tą stanowiącą nowy fragment wykonują w~sumie $2n+1$ iteracji.
+Dla każdego $2\le l\le n$ pętla \kw{for} w~wierszach \doubledash{9}{13} wykona łącznie $S(n,l)=\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1)$ iteracji.
+Po podstawieniu $j=i+l-1$ i~skorzystaniu z~własności sumy teleskopowej otrzymujemy:
 \begin{align*}
-	\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1) &= \sum_{i=1}^{n-l+1}(\id{root}[i+1,i+l-1]-\id{root}[i,i+l-2]+1) \\
+	S(n,l) &= \sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1) \\
 	&= \sum_{i=1}^{n-l+1}(\id{root}[i+1,i+l-1]-\id{root}[i,i+l-2])+\sum_{i=1}^{n-l+1}1 \\
 	&= \id{root}[n-l+2,n]-\id{root}[1,l-1]+n-l+1.
 \end{align*}
-W~ostatniej równości skorzystaliśmy z~własności sumy teleskopowej.
-Największą możliwą wartością różnicy $\id{root}[n-l+2,n]-\id{root}[1,l-1]$ jest $n-1$, więc liczbę iteracji pętli można ograniczyć z~góry przez $n-1+n-l+1\le2n$.
-
-Zmienna $l$ przyjmuje $n$ wartości, a~więc sumaryczna liczba iteracji w~procedurze wynosi co najwyżej $O(n^2)$.
-Dolne ograniczenie $\Omega(n^2)$ zachodzi oczywiście, bo obliczana jest każda z~$n(n+1)/2$ z~komórek tablic $e$ i~\id{root}.
+Największą możliwą wartością różnicy $\id{root}[n-l+2,n]-\id{root}[1,l-1]$ jest $n-1$, skąd mamy $S(n,l)\le n-1+n-l+1\le2n-2$.
+Sumaryczna liczba iteracji najbardziej wewnętrznej pętli wynosi więc $\sum_{l=2}^nS(n,l)\le2(n-1)^2=O(n^2)$.
+Obliczana jest każda z~$n(n+1)/2$ z~komórek tablic $e$ i~\id{root}, dlatego dolnym ograniczeniem na czas potrzebny do ich wypełnienia jest oczywiście $\Omega(n^2)$.
 Stąd czasem działania algorytmu jest $\Theta(n^2)$.
