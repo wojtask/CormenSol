@@ -1,16 +1,17 @@
 \subchapter{Planowanie czynności na liniach montażowych}
 
 \exercise %15.1-1
-Poniższa procedura wypisuje wszystkie stanowiska w~kolejności rosnącej -- stanowisko o~numerze $n$ wypisywane jest po stanowiskach o~niższych numerach, co realizowane jest poprzez zastosowanie rekursji.
+Poniższa rekurencyjna procedura wypisuje wszystkie stanowiska o~numerach od 1 do $j$ w~kolejności rosnącej, przy założeniu, że linia użyta na stanowisku $j$ ma numer $i$.
+Do wywołania rekurencyjnego przekazywany jest numer wykorzystanej linii na stanowisku $j-1$ odczytany z~$l_i[j]$.
+Imitowane jest dzięki temu zachowanie pętli z~oryginalnej procedury.
 \begin{codebox}
-\Procname{$\proc{Print-Stations}'(l,l^*\!,n)$}
-\li	\If $n\ge1$
-\li	\Then $\proc{Print-Stations}'(l,l_{l^*\!}[n],n-1)$
-\li		wypisz ,,linia '' $l^*\!$ ,,{}, stanowisko '' $n$
+\Procname{$\proc{Print-Stations}'(l,i,j)$}
+\li	\If $j\ge1$
+\li	\Then $\proc{Print-Stations}'(l,l_i[j],j-1)$
+\li		wypisz ,,linia '' $i$ ,,{}, stanowisko '' $j$
 	\End
 \end{codebox}
-Do wywołania rekurencyjnego przekazywany jest numer wykorzystanej linii na stanowisku $n-1$, który odczytywany jest z~$l_{l^*\!}[n]$.
-Imitujemy dzięki temu zachowanie pętli z~oryginalnej procedury.
+Aby wypisać cały ciąg stanowisk, należy wywołać $\proc{Print-Stations}'(l,l^*\!,n)$.
 
 \exercise %15.1-2
 W~pierwszym kroku indukcyjnym wzór oczywiście zachodzi:
@@ -22,22 +23,22 @@ Stąd
 \[
 	r_1(j) = r_2(j) = r_1(j+1)+r_2(j+1) = 2^{n-(j+1)}+2^{n-(j+1)} = 2^{n-(j+1)+1} = 2^{n-j},
 \]
-a~więc wzór jest prawdziwy w~ogólnym przypadku.
+a~więc wzór jest prawdziwy dla dowolnego $j$.
 
 \exercise %15.1-3
-Wykorzystując wynik poprzedniego zadania oraz wzór (A.5), mamy:
+Na podstawie wyniku poprzedniego zadania oraz wzoru (A.5), łączna liczba odwołań do wartości $f_i[j]$ wynosi:
 \[
-	\sum_{i=1}^2\sum_{j=1}^nr_i(j) = 2\sum_{j=1}^n2^{n-j} = 2\sum_{j=0}^{n-1}2^j = 2\cdot\frac{2^n-1}{2-1} = 2^{n+1}-2.
+	\sum_{i=1}^2\sum_{j=1}^nr_i(j) = 2\sum_{j=1}^n2^{n-j} = 2\sum_{k=0}^{n-1}2^k = 2\cdot\frac{2^n-1}{2-1} = 2^{n+1}-2.
 \]
 
 \exercise %15.1-4
 Możemy zrezygnować z~większości komórek tablic $f_i$.
 Wystarczy zauważyć, że jedynymi wartościami z~tablic $f_i$ potrzebnymi do obliczenia $f_i[j]$ są $f_i[j-1]$.
 Tablice $f_i$ nie są też wykorzystywane podczas wypisywania optymalnego rozwiązania w~procedurze \proc{Print-Stations}.
-Można więc w~procedurze \proc{Fastest-Way} zaalokować jedynie $f_i[1\twodots2]$, czyli w~sumie 4 komórki.
-Na pozycji $f_i[1]$ przechowamy wartości dla poprzedniego stanowiska i~wykorzystamy je do obliczenia wartości dla obecnego stanowiska, co zapiszemy w~$f_i[2]$.
-Na początku każdej iteracji pętli \kw{for} $f_i[2]$ będzie przepisywane do $f_i[1]$.
-Dzięki tej modyfikacji tablice $f_i$ i~$l_i$ zawierają łącznie $4+(2n-2)=2n+2$ pozycji.
+Dokładniej mówiąc, w~procedurze \proc{Fastest-Way} wystarczy zaalokować jedynie $f_1[1\twodots2]$ oraz $f_2[1\twodots2]$, czyli w~sumie 4 komórki.
+Na pozycji $f_i[1]$ zapisane zostaną wartości dla poprzedniego stanowiska i~wykorzystane następnie do obliczenia wartości dla obecnego stanowiska, które zostaną zapamiętane w~$f_i[2]$.
+Na początku każdej iteracji pętli \kw{for} $f_i[1]$ będzie nadpisywane przez $f_i[2]$.
+Dzięki tej modyfikacji tablice $f_i$ i~$l_i$ będą zawierać łącznie $4+(2n-2)=2n+2$ pozycji.
 
 \exercise %15.1-5
 Przypisanie $l_1[j]\gets2$ wykonywane jest w~procedurze \proc{Fastest-Way} tylko w~linii 8 i~odbywa się jedynie wtedy, gdy warunek z~wiersza 4 jest fałszywy.
