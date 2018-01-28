@@ -39,7 +39,7 @@ W~celu obliczenia $m[i,j]$, w~każdej iteracji pętli \kw{for} w~wierszach \doub
 Łączna liczba odwołań do tablicy $m$ jest zatem dwukrotnie większa od sumarycznej liczby iteracji najbardziej wewnętrznej pętli.
 Mamy więc:
 \begin{align*}
-	\sum_{i=1}^n\sum_{j=1}^nR(i,j) &= \sum_{l=2}^n\sum_{i=1}^{n-l+1}\sum_{k=i}^{i+l-2}2 \\
+	\sum_{i=1}^n\sum_{j=i}^nR(i,j) &= \sum_{l=2}^n\sum_{i=1}^{n-l+1}\sum_{k=i}^{i+l-2}2 \\
 	&= \sum_{l=2}^n2(l-1)(n-l+1) \\
 	&= \sum_{l=1}^{n-1}2l(n-l) \\
 	&= 2n\sum_{l=1}^{n-1}l-2\sum_{l=1}^{n-1}l^2 \\
