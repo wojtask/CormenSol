@@ -5,28 +5,28 @@
 Innymi słowy, w~problemie tym dla zadanego ciągu etykiet wykorzystywane są podproblemy dla o~1 krótszego sufiksu tego ciągu.
 
 Procedura \proc{Find-Path}, której pseudokod znajduje się poniżej, przyjmuje na wejściu graf $G$ reprezentowany przez tablicę list sąsiedztwa \id{Adj}, wierzchołek początkowy $v$ grafu $G$, tablicę $s$ przechowującą ciąg etykiet oraz początkowy indeks $i$ tej tablicy.
-Wywołanie $\proc{Find-Path}(G,v,s,i)$ będzie znajdować ścieżkę w~grafie $G$, zaczynającą się w~wierzchołku $v$ oraz mającą etykietę złożoną z~kolejnych elementów z~$s[i\twodots\attrib{s}{length}]$.
-Przeglądani będą wszyscy sąsiedzi $w$ wierzchołka $v$ i~w~razie odnalezienia takiej krawędzi $\langle v,w\rangle$, której etykietą jest $\sigma_i$, procedura wywołana zostanie rekurencyjnie dla wierzchołka $w$ oraz ze zwiększonym o~1 indeksem $i$.
+Wywołanie $\proc{Find-Path}(G,v,s,\sigma,i)$ będzie znajdować ścieżkę w~grafie $G$, zaczynającą się w~wierzchołku $v$ oraz mającą etykietę złożoną z~kolejnych elementów z~$s[i\twodots\attrib{s}{length}]$.
+Przeglądani będą wszyscy sąsiedzi $w$ wierzchołka $v$ i~w~razie odnalezienia krawędzi $\langle v,w\rangle$ o~etykiecie $\sigma_i$, procedura wywołana zostanie rekurencyjnie dla wierzchołka $w$ oraz ze zwiększonym o~1 indeksem $i$.
 W~przypadku odnalezienia ścieżki dla któregokolwiek sąsiada $v$, zostanie ona skonkatenowana z~$v$ i~zwrócona jako wynik procedury.
-W~przeciwnym wypadku zwrócona zostanie specjalna wartość \const{nie-ma-takiej-ścieżki}.
+W~przeciwnym wypadku wynikiem jest specjalna wartość \const{nie-ma-takiej-ścieżki}.
 \begin{codebox}
-\Procname{$\proc{Find-Path}(G,v,s,i)$}
+\Procname{$\proc{Find-Path}(G,v,s,\sigma,i)$}
 \li	\If $i=\attrib{s}{length}+1$
-\li		\Then \Return $v$
+\li		\Then \Return $\langle v\rangle$
 		\End
 \li	\For każdy $w\in\id{Adj}[v]$
-\li		\Do \If $\sigma(v,w)=\sigma_i$
-\li				\Then $\id{path}\gets\proc{Find-Path}(G,w,s,i+1)$
+\li		\Do \If $\sigma(v,w)=s[i]$
+\li				\Then $\id{path}\gets\proc{Find-Path}(G,w,s,\sigma,i+1)$
 \li					\If $\id{path}\ne\const{nie-ma-takiej-ścieżki}$
-\li						\Then \Return $v$, \id{path}
+\li						\Then \Return $\langle v\rangle\id{path}$ \hspace{11mm}\Comment konkatenacja elementu $v$ z~ciągiem \id{path}
 						\End
 				\End
 		\End
 \li	\Return \const{nie-ma-takiej-ścieżki}
 \end{codebox}
-Aby rozwiązać problem dla grafu $G=\langle V,E\rangle$ z~wyróżnionym wierzchołkiem $v_0\in V$ oraz etykiety przechowywanej w~tablicy $s$, należy wywołać $\proc{Find-Path}(G,v_0,s,1)$.
+Aby rozwiązać problem dla grafu $G=\langle V,E\rangle$ z~wyróżnionym wierzchołkiem $v_0\in V$ oraz etykiety przechowywanej w~tablicy $s$, należy wywołać $\proc{Find-Path}(G,v_0,s,\sigma,1)$.
 
-Każdy podproblem, jaki może się pojawić, ma na celu znalezienie ścieżki o~zadanej długości $k$, zaczynającej się w~pewnym wierzchołku grafu $G=\langle V,E\rangle$.
+Każdy podproblem, jaki może się pojawić, polega na znalezieniu ścieżki o~zadanej długości $k$, zaczynającej się w~pewnym wierzchołku grafu $G=\langle V,E\rangle$.
 Istnieje zatem $k|V|$ możliwych podproblemów, a~podczas rozwiązywania dowolnego z~nich może być sprawdzana krawędź do każdego innego wierzchołka grafu $G$.
 Czas działania algorytmu wynosi stąd $O(k|V|^2)$.
 
@@ -36,22 +36,22 @@ Optymalna podstruktura wygląda podobnie do tej z~oryginalnej wersji problemu z~
 Następujący algorytm opiera się na \proc{Find-Path} i~realizuje opisane podejście.
 Zwraca on ścieżkę o maksymalnym możliwym prawdopodobieństwie, a~także samą wartość tego prawdopodobieństwa.
 \begin{codebox}
-\Procname{$\proc{Viterbi}(G,v,s,i)$}
+\Procname{$\proc{Viterbi}(G,v,s,\sigma,p,i)$}
 \li	\If $i=\attrib{s}{length}+1$
-\li		\Then \Return $v$, 1
+\li		\Then \Return $\langle\langle v\rangle,1\rangle$
 		\End
 \li	$\id{path}\gets\const{nie-ma-takiej-ścieżki}$
 \li	$\id{prob}\gets0$
 \li	\For każdy $w\in\id{Adj}[v]$
-\li		\Do \If $\sigma(v,w)=\sigma_i$
-\li				\Then $\id{path}'$, $\id{prob}'\gets\proc{Viterbi}(G,w,s,i+1)$
+\li		\Do \If $\sigma(v,w)=s[i]$
+\li				\Then $\langle\id{path}',\id{prob}'\rangle\gets\proc{Viterbi}(G,w,s,\sigma,p,i+1)$
 \li					\If $p(v,w)\cdot\id{prob}'\ge\id{prob}$
 \li						\Then $\id{prob}\gets p(v,w)\cdot\id{prob}'$
-\li							$\id{path}\gets v$, $\id{path}'$
+\li							$\id{path}\gets\langle v\rangle\id{path}'$ \hspace{8mm}\Comment konkatenacja elementu $v$ z~ciągiem \id{path}$'$
 						\End
 				\End
 		\End
-\li	\Return \id{path}, \id{prob}
+\li	\Return $\langle\id{path},\id{prob}\rangle$
 \end{codebox}
 
 Czas działania tego algorytmu wynosi $O(k|V|^2)$, na podstawie identycznej analizy jak w~punkcie (a).
