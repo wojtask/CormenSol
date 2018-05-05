@@ -13,10 +13,10 @@ W~przypadku usuwania znaku podproblem stanowi wyznaczenie odległości redakcyjn
 Podobnie, jeśli ostatnio wstawiany był nowy znak, to podproblemem jest odległość $X_i$ od $Y_{j-1}$ i~wówczas $c[i,j]=c[i,j-1]+\mathrm{koszt}(\text{wstaw})$.
 Do zamiany znaków doszło, gdy $x[i]=y[j-1]$ oraz $x[i-1]=y[j]$, o~ile $i$, $j\ge2$.
 Wystarczy w~tym przypadku obliczyć odległość między słowami $X_{i-2}$ i~$Y_{j-2}$, a~następnie dodać do niej koszt operacji zamiany: $c[i,j]=c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$.
-W~końcu, jeśli ostatnią operacją było wyrzucenie reszty słowa $X_i$, to znaczy to, że konwersja z~$X_m$ do $Y_n$ została zakończona, czyli musi być $i=m$ oraz $j=n$.
-Krok ten mógł zostać wykonany, gdy słowami wejściowymi był jakikolwiek prefiks $X_k$, gdzie $n<k<m$, oraz $Y_m$ -- mamy zatem $c[m,n]=\min_{n<k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć})$.
-
-Gdy $i$, $j>0$, to prawdziwa jest następująca zależność:
+W~końcu, jeśli ostatnią operacją było wyrzucenie reszty słowa $X_i$, to znaczy to, że konwersja z~$X_m$ do $Y_n$ została zakończona, czyli w~momencie wykonania tej operacji było $i=m$ oraz $j=n$.
+Jeśli potraktujemy wyrzucenie reszty słowa jako wielokrotne usuwanie ostatniego jego znaku, to przekonamy się, że podproblem stanowi w~tym przypadku każde przekształcenie z~$X_k$ do $Y_n$, gdzie $0\le k<m$.
+Mamy zatem $c[m,n]=\min_{0\le k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć})$.
+Na podstawie tej analizy otrzymujemy następującą zależność rekurencyjną:
 \[
 	c[i,j] = \min\begin{cases}
 		c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj}), & \text{jeśli $x[i]=y[j]$}, \\
@@ -24,7 +24,7 @@ Gdy $i$, $j>0$, to prawdziwa jest następująca zależność:
 		c[i-1,j]+\mathrm{koszt}(\text{usuń}), \\
 		c[i,j-1]+\mathrm{koszt}(\text{wstaw}), \\
 		c[i-2,j-2]+\mathrm{koszt}(\text{zamień}), & \text{jeśli $i$, $j\ge2$, $x[i]=y[j-1]$ i~$x[i-1]=y[j]$}, \\
-		\displaystyle\min_{n<k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć}), & \text{jeśli $i=m$ i~$j=n$}.
+		\displaystyle\min_{0\le k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć}), & \text{jeśli $i=m$ i~$j=n$}.
 	\end{cases}
 \]
 
@@ -33,75 +33,64 @@ Jeśli $i=0$, to prefiks $X_i$ jest słowem pustym i~przekształcenie go do sło
 Podobnie, jeśli $j=0$, to słowo $Y_j$ jest puste i~można je uzyskać poprzez \singledash{$i$}{krotne} usunięcie znaku ze słowa $X_i$, czyli $c[i,0]=i\cdot\mathrm{koszt}(\text{usuń})$.
 
 Poniższy pseudokod wypełnia tablicę $c$ od najwyższego do najniższego wiersza oraz od lewej do prawej w~obrębie wierszy.
-Równocześnie konstruowana jest także tablica $\id{op}[1\twodots m,1\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta do przekształcenia $X_i$ do $Y_j$.
+Równocześnie konstruowana jest także tablica $\id{op}[0\twodots m,0\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta do przekształcenia $X_i$ do $Y_j$, a~także tablice $l[0\twodots m,0\twodots n]$ i~$r[0\twodots m,0\twodots n]$ przechowujące rozmiary rozważanych podproblemów podczas tych przekształceń.
 
 \begin{codebox}
-\Procname{$\proc{Edit-Distance}(x,y,m,n)$}
+\Procname{$\proc{Edit-Distance}(x,y)$}
+\li	$m\gets\attrib{x}{length}$
+\li	$n\gets\attrib{y}{length}$
 \li	\For $i\gets0$ \To $m$
 \li		\Do $c[i,0]\gets i\cdot\mathrm{koszt}(\text{usuń})$
-\li			$\id{op}[i,0]\gets{}$,,usuń''
+\li			$\langle\id{op}[i,0],l[i,0],r[i,0]\rangle\gets\langle$,,usuń''$,i-1,0\rangle$
 		\End
 \li	\For $j\gets1$ \To $n$
 \li		\Do $c[0,j]\gets j\cdot\mathrm{koszt}(\text{wstaw})$
-\li			$\id{op}[0,j]\gets{}$,,wstaw '' $y[j]$
+\li			$\langle\id{op}[0,j],l[0,j],r[0,j]\rangle\gets\langle$,,wstaw ''$y[j],0,j-1\rangle$
 		\End
 \li	\For $i\gets1$ \To $m$
 \li		\Do \For $j\gets1$ \To $n$
 \li				\Do $c[i,j]\gets\infty$
 \li					\If $x[i]=y[j]$
 \li						\Then $c[i,j]\gets c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj})$
-\li							$\id{op}[i,j]\gets{}$,,skopiuj''
+\li							$\langle\id{op}[i,j],l[i,j],r[i,j]\rangle\gets\langle$,,skopiuj''$,i-1,j-1\rangle$
 						\End
 \li					\If $x[i]\ne y[j]$ i~$c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})<c[i,j]$
 \li						\Then $c[i,j]\gets c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})$
-\li							$\id{op}[i,j]\gets{}$,,zastąp przez '' $y[j]$
+\li							$\langle\id{op}[i,j],l[i,j],r[i,j]\rangle\gets\langle$,,zastąp przez ''$y[j],i-1,j-1\rangle$
 						\End
 \li					\If $c[i-1,j]+\mathrm{koszt}(\text{usuń})<c[i,j]$
 \li						\Then $c[i,j]\gets c[i-1,j]+\mathrm{koszt}(\text{usuń})$
-\li							$\id{op}[i,j]\gets{}$,,usuń''
+\li							$\langle\id{op}[i,j],l[i,j],r[i,j]\rangle\gets\langle$,,usuń''$,i-1,j\rangle$
 						\End
 \li					\If $c[i,j-1]+\mathrm{koszt}(\text{wstaw})<c[i,j]$
 \li						\Then $c[i,j]\gets c[i,j-1]+\mathrm{koszt}(\text{wstaw})$
-\li							$\id{op}[i,j]\gets{}$,,wstaw '' $y[j]$
+\li							$\langle\id{op}[i,j],l[i,j],r[i,j]\rangle\gets\langle$,,wstaw ''$y[j],i,j-1\rangle$
 						\End
 \li					\If $i\ge2$ i~$j\ge2$ i~$x[i]=y[j-1]$ i~$x[i-1]=y[j]$
 \zi	\phantom{\kw{if} $i\ge2$} i~$c[i-2,j-2]+\mathrm{koszt}(\text{zamień})<c[i,j]$
 \li						\Then $c[i,j]\gets c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$
-\li							$\id{op}[i,j]\gets{}$,,zamień''
+\li							$\langle\id{op}[i,j],l[i,j],r[i,j]\rangle\gets\langle$,,zamień''$,i-2,j-2\rangle$
 						\End
 				\End
 		\End
-\li	\For $i\gets0$ \To $m-1$
-\li		\Do \If $c[i,n]+\mathrm{koszt}(\text{wyrzuć})<c[m,n]$
-\li				\Then $c[m,n]\gets c[i,n]+\mathrm{koszt}(\text{wyrzuć})$
-\li					$\id{op}[m,n]\gets{}$,,wyrzuć'' $i$
+\li	\For $k\gets0$ \To $m-1$
+\li		\Do \If $c[k,n]+\mathrm{koszt}(\text{wyrzuć})<c[m,n]$
+\li				\Then $c[m,n]\gets c[k,n]+\mathrm{koszt}(\text{wyrzuć})$
+\li					$\langle\id{op}[m,n],l[m,n],r[m,n]\rangle\gets\langle$,,wyrzuć''$,k,n\rangle$
 				\End
 		\End
-\li	\Return $c$ i~\id{op}
+\li	\Return $c$, \id{op}, $l$ i~$r$
 \end{codebox}
 
+Zarówno złożoność czasowa, jak i~pamięciowa tego algorytmu wynoszą $\Theta(mn)$.
+Wypisanie optymalnego ciągu operacji przekształcających słowo $x$ do słowa $y$ realizuje następująca procedura.
+Jej początkowym wywołaniem jest $\proc{Print-Operations}(\id{op},l,r,m,n)$.
+Aby zapewnić odpowiednią kolejność, przed wypisaniem bieżącej operacji procedura wywoływana jest rekurencyjnie dla podproblemu na podstawie wartości w~tablicach $l$ i~$r$ wyznaczonych w~\proc{Edit-Distance}.
 \begin{codebox}
-\Procname{$\proc{Op-Sequence}(\id{op},i,j)$}
-\li	\If $i=0$ i~$j=0$
-\li		\Then \Return
-		\End
-\li	\If $\id{op}[i,j]={}$,,skopiuj'' lub $\id{op}[i,j]={}$,,zastąp''
-\li		\Then $i'\gets i-1$
-\li			$j'\gets j-1$
-\li		\ElseIf $\id{op}[i,j]={}$,,skopiuj''
-\li			\Then $i'\gets i-2$
-\li				$j'\gets j-2$
-\li		\ElseIf $\id{op}[i,j]={}$,,usuń''
-\li			\Then $i'\gets i-1$
-\li				$j'\gets j$
-\li		\ElseIf $\id{op}[i,j]={}$,,wstaw''
-\li			\Then $i'\gets i$
-\li				$j'\gets j-1$
-\li		\ElseNoIf $i'\gets\id{op}[i,j][8\twodots\attrib{\id{op}[i,j]}{length}]$
-		\End
-\li			\phantom{\kw{else}} $j'\gets j$
-\li	$\proc{Op-Sequence}(\id{op},i',j')$
-\li	wypisz $\id{op}[i,j]$
+\Procname{$\proc{Print-Operations}(\id{op},l,r,i,j)$}
+\li	\If $i>0$ lub $j>0$
+\li		\Then $\proc{Print-Operations}(\id{op},l,r,l[i,j],r[i,j])$
+\li			wypisz $\id{op}[i,j]$
 		\End
 \end{codebox}
 
@@ -122,4 +111,4 @@ Poszczególne operacje wartościujemy następująco:
 	\mathrm{koszt}(\text{usuń}) &= +2, \\
 	\mathrm{koszt}(\text{wstaw}) &= +2.
 \end{align*}
-Operacje zamień i~wyrzuć nie są wykorzystywane, więc na ich koszt możemy przyjąć wartość $\infty$.
+Operacje zamień i~wyrzuć nie są wykorzystywane, więc jako ich koszt można przyjąć wartość $\infty$.
