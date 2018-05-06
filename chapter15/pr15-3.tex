@@ -96,7 +96,7 @@ Aby zapewnić odpowiednią kolejność, przed wypisaniem bieżącej operacji pro
 
 \subproblem %15-3(b)
 Możemy sprowadzić problem optymalnego uliniowienia do problemu odległości redakcyjnej w~następujący sposób.
-Załóżmy, że $x'$ i~$y'$ są wynikowymi sekwencjami DNA powstałymi w~wyniku optymalnego uliniowienia, odpowiednio, sekwencji $x$ i~$y$.
+Załóżmy, że $x'$ i~$y'$ są wynikowymi ciągami powstałymi w~wyniku optymalnego uliniowienia sekwencji DNA, odpowiednio, $x$ i~$y$.
 Jeśli $x'[j]=y'[j]$, to w~problemie odległości redakcyjnej możemy tę sytuację rozumieć jako skopiowanie znaku $x'[j]$.
 Jeśli $x'[j]\ne y'[j]$ i~żaden z~tych znaków nie jest spacją, to mamy tutaj sytuację po zastąpieniu znaku $x'[j]$ przez znak $y'[j]$.
 W~końcu, spację na pozycję $x'[j]$ można uzyskać przez wykonanie operacji wstawienia znaku $y'[j]$, a~spację na pozycji $y'[j]$ -- przez wykonanie operacji usunięcia znaku $x'[j]$.
@@ -112,3 +112,4 @@ Poszczególne operacje wartościujemy następująco:
 	\mathrm{koszt}(\text{wstaw}) &= +2.
 \end{align*}
 Operacje zamień i~wyrzuć nie są wykorzystywane, więc jako ich koszt można przyjąć wartość $\infty$.
+Wynikowa ocena optymalnego uliniowienia wejściowych sekwencji DNA stanowi liczbę przeciwną do ich odległości redakcyjnej, zaś do wypisania rozwiązania można użyć procedury podobnej do \proc{Print-Operations}.
