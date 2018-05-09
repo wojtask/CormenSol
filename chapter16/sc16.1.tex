@@ -1,0 +1,37 @@
+\subchapter{Problem wyboru zajęć}
+\note{W~procedurze \proc{Greedy-Activity-Selector} w~linii 1 zmienna\/ $n$ powinna przyjąć wartość\/ $\attrib{s}{length}-2$.
+Wynika to z~tego, że tablica\/ $s$ składa się tak naprawdę z~\/$n+2$ elementów -- oprócz czasów rozpoczęcia \/$n$ rzeczywistych zajęć przechowuje także czasy fikcyjnych zajęć\/ $a_0$ i~\/$a_{n+1}$.}
+\bignegskip
+
+\exercise %16.1-1
+W~poniższym algorytmie przyjmujemy, że zajęcia zostały uporządkowane niemalejąco według czasów zakończenia.
+\begin{codebox}
+\Procname{$\proc{Dynamic-Activity-Selector}(s,f)$}
+\li	$n\gets\attrib{s}{length}-2$
+\li	\For $l\gets2$ \To $n+2$ \label{li:dynamic-activity-selector-main-loop-begin}
+\li		\Do \For $i\gets0$ \To $n-l+2$
+\li				\Do $j\gets i+l-1$
+\li					$c[i,j]\gets0$
+\li					$A_{i,j}\gets\emptyset$
+\li					\For $k\gets i+1$ \To $j-1$
+\li						\Do $q\gets c[i,k]+c[k,j]+1$
+\li							\If $f_i\le s_k<f_k\le s_j$ i~$q>c[i,j]$
+\li								\Then $c[i,j]\gets q$
+\li									$A_{i,j}\gets A_{i,k}\cup\{a_k\}\cup A_{k,j}$
+								\End
+						\End
+				\End
+		\End \label{li:dynamic-activity-selector-main-loop-end}
+\li	\Return $A_{0,n+1}$
+\end{codebox}
+Algorytm oblicza wartości $c[i,j]$ oraz konstruuje zbiory $A_{i,j}$ dla $0\le i<j\le n+1$.
+W~pierwszej iteracji pętli głównej (wiersze \doubledash{\ref{li:dynamic-activity-selector-main-loop-begin}}{\ref{li:dynamic-activity-selector-main-loop-end}}) dla $i=0$, 1, \dots, $n$ za pomocą równania (16.3) wyznaczane są wartości $c[i,i+1]$, a~na podstawie wzoru (16.2) zbiory $A_{i,i+1}$, czyli rozwiązywane są podproblemy składające się z~dokładnie dwóch zajęć.
+W~kolejnej iteracji zostają wyznaczone rozwiązania podproblemów z~dokładnie trzema zajęciami itd.
+Zwracanym wynikiem jest najliczniejszy zbiór zajęć stanowiący rozwiązanie podproblemu $S_{0,n+1}=S$.
+
+Struktura pętli zaprezentowanego algorytmu przypomina tę z~procedury \proc{Matrix-Chain-Order} z~podrozdziału 15.2.
+Można więc zastosować tu podobną analizę efektywności jak w~przypadku tamtej procedury i~dojść do oszacowania $\Theta(n^3)$ na czas działania naszego algorytmu -- znacznie wyższego od złożoności czasowej rozwiązania zachłannego.
+
+\exercise %16.1-2
+\exercise %16.1-3
+\exercise %16.1-4
