@@ -33,5 +33,41 @@ Struktura pętli zaprezentowanego algorytmu przypomina tę z~procedury \proc{Mat
 Można więc zastosować tu podobną analizę efektywności jak w~przypadku tamtej procedury i~dojść do oszacowania $\Theta(n^3)$ na czas działania naszego algorytmu -- znacznie wyższego od złożoności czasowej rozwiązania zachłannego.
 
 \exercise %16.1-2
+Załóżmy, że zajęcia $a_1$, $a_2$, \dots, $a_n$, wraz z~dwoma fikcyjnymi $a_0$ i~$a_{n+1}$, uporządkowane są według czasów rozpoczęcia, tzn.
+\[
+	s_0 \le s_1 \le s_2 \le \dots \le s_n \le s_{n+1}.
+\]
+Możemy wówczas udowodnić następujące twierdzenie analogiczne do tw.\ 16.1:
+
+\bigskip
+\noindent\textsf{\textbf{Twierdzenie 16.1$'$.}} \textit{Rozważmy niepusty podproblem\/ $S_{i,j}$ i~niech\/ $a_m$ będą zajęciami w~\/$S_{i,j}$ rozpoczynającymi się najpóźniej:
+\[
+	s_m = \max\bigl\{\,s_k:a_k\in S_{i,j}\,\bigr\}.
+\]
+Wtedy:
+\begin{enumerate}
+	\item Wśród najliczniejszych pozdbiorów parami zgodnych zajęć z~\/$S_{i,j}$ istnieje taki, który zawiera\/ $a_m$.
+	\item Podproblem\/ $S_{m,j}$ jest pusty, tak więc po wybraniu\/ $a_m$ jedynym niepustym podproblemem może być tylko\/ $S_{i,m}$.
+\end{enumerate}
+}
+
+Twierdzenie to mówi nam, że w~optymalnym rozwiązaniu podproblemu $S_{i,j}$, po wyborze zajęcia $a_m\in S_{i,j}$ rozpoczynającego się najpóźniej, do rozwiązania pozostanie tylko jeden podproblem, podczas gdy drugi z~nich jest pusty.
+O~wyborze zajęć o~najpóźniejszym czasie rozpoczęcia można więc myśleć jak o~wyborze ,,zachłannym'', gdyż pozostawia on jak najwięcej możliwości wybrania zgodnych zajęć, czyli -- podobnie jak w~oryginalnej strategii -- maksymalizuje on ilość czasu do zagospodarowania.
+Algorytm realizujący strategię wyboru zajęć o~najpóźniejszym starcie może rozwiązywać każdy podproblem zstępująco przy pomocy rekurencji lub iteracyjnie, analogicznie do oryginalnych procedur zaprezentowanych w~Podręczniku.
+Poniższy pseudokod jest implementacją wariantu iteracyjnego.
+\begin{codebox}
+\Procname{$\proc{Greedy-Activity-Selector}'(s,f)$}
+\li	$n\gets\attrib{s}{length}-2$
+\li	$A\gets\{a_n\}$
+\li	$i\gets n$
+\li	\For $m\gets n-1$ \Downto 1
+\li		\Do \If $f_m\le s_i$
+\li				\Then $A\gets A\cup\{a_m\}$
+\li					$i\gets m$
+				\End
+		\End
+\li	\Return $A$
+\end{codebox}
+
 \exercise %16.1-3
 \exercise %16.1-4
