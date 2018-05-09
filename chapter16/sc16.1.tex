@@ -71,3 +71,28 @@ Poniższy pseudokod jest implementacją wariantu iteracyjnego.
 
 \exercise %16.1-3
 \exercise %16.1-4
+Oto zbiory zajęć stanowiących kontrprzykłady dla strategii wyboru zajęć, odpowiednio, o~najkrótszym czasie trwania oraz o~najwcześniejszym czasie rozpoczęcia:
+\begin{center}
+	\begin{tabular}{cccc}
+		$i$ & 1 & 2 & 3 \\ \hline
+		$s_i$ & 5 & 1 & 7 \\
+		$f_i$ & 8 & 6 & 13
+	\end{tabular}
+	\hskip3cm
+	\begin{tabular}{cccc}
+		$i$ & 1 & 2 & 3 \\ \hline
+		$s_i$ & 1 & 3 & 5 \\
+		$f_i$ & 6 & 4 & 12
+	\end{tabular}
+\end{center}
+W~obu sytuacjach zastosowanie danej strategii skutkuje uzyskaniem zbioru $\{a_1\}$, podczas gdy zbiór $\{a_2,a_3\}$ złożony z~parami zgodnych zajęć jest liczniejszy.
+
+Dla strategii opartej na wyborze zajęcia kolidującego z~najmniejszą liczbą pozostałych zajęć można podać następujący kontrprzykład:
+\begin{center}
+	\begin{tabular}{cccccccccccc}
+		$i$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ \hline
+		$s_i$ & 1 & 2 & 2 & 2 & 3 & 4 & 5 & 6 & 6 & 6 & 7 \\
+		$f_i$ & 3 & 4 & 4 & 4 & 5 & 6 & 7 & 8 & 8 & 8 & 9
+	\end{tabular}
+\end{center}
+Istnieje tylko jeden zbiór 4 parami zgodnych zajęć, $\{a_1,a_5,a_7,a_{11}\}$, natomiast w~obranej strategii w~pierwszym kroku wybierane są zajęcia $a_6$, co prowadzi do rozwiązania będącego zbiorem o~mniej niż 4 elementach.
