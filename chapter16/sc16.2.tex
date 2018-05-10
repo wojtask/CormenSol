@@ -54,6 +54,14 @@ W~celu wypisania rozwiązania całego problemu, czyli $S_{n,W}$, procedura powin
 \exercise %16.2-3
 \exercise %16.2-4
 \exercise %16.2-5
+Oznaczmy przez $X$ zbiór punktów wejściowych, a~przez $k$ prostą, na której leżą punkty z~$X$.
+Niech $x\in X$ będzie takim punktem, który wszystkie pozostałe punkty z~$X$ ma po tej samej stronie na prostej $k$.
+Odcinek jednostkowy leżący na prostej $k$ zawierający $x$ można umieścić w~taki sposób, aby jeden z~jego końców pokrywał się z~$x$, a~drugi sięgał w~kierunku innych punktów z~$X$.
+Żadne inne ustawienie tego odcinka nie prowadzi do lepszego rozwiązania.
+Jest tak dlatego, że w~takiej pozycji odcinek pokrywa największą możliwą liczbę innych punktów z~$X$ -- wszystkie te, których odległość od $x$ nie przekracza 1.
+Wybór tego położenia jest więc zachłanny i~pozostawia on tylko jeden podproblem do rozwiązania -- taki, w~którym danymi wejściowymi jest podzbiór $X$ składający się z~punktów odległych od $x$ o~więcej niż 1.
+Algorytm zachłanny rozwiązujący ten problem może więc znajdować punkt $x$ na prostej $k$, a~następnie usuwać wszystkie punkty z~$X$ odległe od $x$ o~nie więcej niż 1, po czym rozwiązywać pozostały podproblem.
+
 \exercise %16.2-6
 \exercise %16.2-7
 Posortujmy zbiór $A$ i~zbiór $B$ niemalejąco.
