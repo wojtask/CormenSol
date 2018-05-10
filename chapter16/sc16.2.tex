@@ -1,0 +1,58 @@
+\subchapter{Podstawy strategii zachłannej}
+
+\exercise %16.2-1
+\exercise %16.2-2
+Niech $a_1$, $a_2$, \dots, $a_n$ będą przedmiotami, które złodziej będzie wkładał do plecaka.
+Przedmioty te ważą, odpowiednio $w_1$, $w_2$, \dots, $w_n$ i~są warte, odpowiednio, $v_1$, $v_2$, \dots, $v_n$.
+Niech $S_{i,j}$, dla $0\le i\le n$, $0\le j\le W$, będzie podproblemem polegającym na wybraniu do plecaka przedmiotów spośród $a_1$, \dots, $a_i$ o~sumarycznej wadze nieprzekraczającej $j$ i~możliwie największej sumarycznej wartości.
+Podczas rozwiązywania podproblemu $S_{i,j}$, gdzie $i\ge1$, musimy zdecydować, czy włożyć do plecaka przedmiot $a_i$ (o~ile $w_i\le j$).
+Jeśli tak, to do sumarycznej wartości konstruowanego plecaka należy dodać wartość $v_i$ wprowadzaną przez ten przedmiot, a~następnie rozwiązać podproblem $S_{i-1,j-w_i}$.
+W~przeciwnym przypadku podproblem, jaki zostaje do rozpatrzenia to $S_{i-1,j}$, a~sumaryczna wartość nie zostaje powiększona.
+Zdefiniujmy $K[i,j]$ jako największą sumaryczną wartość przedmiotów wchodzących w~skład rozwiązania podproblemu $S_{i,j}$.
+Z~naszego rozumowania wynika zależność
+\[
+	K[i,j] = \begin{cases}
+		0, & \text{jeśli $i=0$}, \\
+		K[i-1,j], & \text{jeśli $i\ge1$, $w_i>j$}, \\
+		\max(K[i-1,j],K[i-1,j-w_i]+v_i), & \text{jeśli $i\ge1$, $w_i\le j$}.
+	\end{cases}
+\]
+
+Następujący algorytm oparty na programowaniu dynamicznym wylicza kolejne wartości w~tablicy $K$:
+\begin{codebox}
+\Procname{$\proc{Knapsack}(w,v,W)$}
+\li	$n\gets\attrib{w}{length}$
+\li	\For $j\gets0$ \To $W$
+\li		\Do $K[0,j]\gets0$
+		\End
+\li	\For $i\gets1$ \To $n$
+\li		\Do \For $j\gets0$ \To $W$
+\li				\Do $K[i,j]\gets K[i-1,j]$
+\li					\If $w_i\le j$ i~$K[i-1,j-w_i]+v_i>K[i,j]$
+\li						\Then $K[i,j]\gets K[i-1,j-w_i]+v_i$
+						\End
+				\End
+		\End
+\li	\Return $K$
+\end{codebox}
+Nietrudno przekonać się, że wypełnienie całej tablicy $K$ zajmuje czas $\Theta(nW)$.
+
+Do wypisania optymalnego zbioru przedmiotów, jakie należy umieścić w~plecaku, służy poniższa procedura.
+W~trakcie przeglądania tablicy $K$, w~zależności od podjętej decyzji w~algorytmie \proc{Knapsack}, wypisywany jest odpowiedni przedmiot.
+\begin{codebox}
+\Procname{$\proc{Print-Knapsack}(K,w,i,j)$}
+\li	\If $i\ge1$
+\li		\Then \If $K[i,j]=K[i-1,j]$
+\li				\Then $\proc{Print-Knapsack}(K,w,i-1,j)$
+\li				\Else $\proc{Print-Knapsack}(K,w,i-1,j-w_i)$
+\li					wypisz $a_i$
+				\End
+		\End
+\end{codebox}
+W~celu wypisania rozwiązania całego problemu, czyli $S_{n,W}$, procedura powinna zostać wywołana jako $\proc{Print-Knapsack}(K,w,n,W)$, co zajmuje czas $\Theta(n)$.
+
+\exercise %16.2-3
+\exercise %16.2-4
+\exercise %16.2-5
+\exercise %16.2-6
+\exercise %16.2-7
