@@ -52,6 +52,21 @@ W~trakcie przeglądania tablicy $K$, w~zależności od podjętej decyzji w~algor
 W~celu wypisania rozwiązania całego problemu, czyli $S_{n,W}$, procedura powinna zostać wywołana jako $\proc{Print-Knapsack}(K,w,n,W)$, co zajmuje czas $\Theta(n)$.
 
 \exercise %16.2-3
+Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ posortowane są według niemalejących wag, czyli $w_1\le w_2\le\dots\le w_n$.
+Z~założenia mamy też, że kolejne wartości tych przedmiotów tworzą ciąg nierosnący: $v_1\ge v_2\ge\dots\ge v_n$.
+Przez $A_W$ oznaczmy optymalny podzbiór przedmiotów będący rozwiązaniem dyskretnego problemu plecakowego, gdzie $W$ jest pojemnością plecaka.
+
+Niech $1\le i<j\le n$.
+Udowodnimy, że jeśli $a_j\in A_W$, to $a_i\in A_W$, co jest równoważne temu, że istnieje $0\le k\le n$, że $A_W=\{a_1,a_2,\dots,a_k\}$.
+Ustalmy $i$, $j$, takie że $1\le i<j\le n$ i~załóżmy nie-wprost, że $a_j\in A_W$, ale $a_i\not\in A_W$.
+Rozważmy zbiór $A_W'=A_W\setminus\{a_j\}\cup\{a_i\}$.
+Ponieważ $w_i\le w_j$, to elementy $A_W'$ mieszczą się w~plecaku o~pojemności $W$, toteż $A_W'$ może stanowić rozwiązanie problemu.
+Jednak suma wartości przedmiotów wchodzących w~skład $A_W'$ jest większa od sumarycznej wartości przedmiotów z~$A_W$ o~$v_i-v_j\ge0$.
+Oznacza to, że $A_W'$ jest rozwiązaniem rozważanego problemu plecakowego o~niemniejszej wartości, co stoi w~sprzeczności z~definicją $A_W$.
+
+Udowodniona obserwacja pozwala nam na skonstruowanie rozwiązania za pomocą algorytmu zachłannego.
+Wystarczy przeglądać przedmioty od najlżejszych do najcięższych (czyli równoważnie, od najbardziej do najmniej wartościowych) i~włączać aktualny przedmiot do rozwiązania, o~ile tylko wraz z~poprzednio wybranymi przedmiotami nie przekracza pojemności plecaka.
+
 \exercise %16.2-4
 \exercise %16.2-5
 Oznaczmy przez $X$ zbiór punktów wejściowych, a~przez $k$ prostą, na której leżą punkty z~$X$.
