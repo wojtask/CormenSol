@@ -20,7 +20,7 @@ Z~naszego rozumowania wynika zależność
 
 Następujący algorytm oparty na programowaniu dynamicznym wylicza kolejne wartości w~tablicy $K$:
 \begin{codebox}
-\Procname{$\proc{Knapsack}(w,v,W)$}
+\Procname{$\proc{0-1-Knapsack}(w,v,W)$}
 \li	$n\gets\attrib{w}{length}$
 \li	\For $j\gets0$ \To $W$
 \li		\Do $K[0,j]\gets0$
@@ -35,7 +35,7 @@ Następujący algorytm oparty na programowaniu dynamicznym wylicza kolejne warto
 		\End
 \li	\Return $K$
 \end{codebox}
-Nietrudno przekonać się, że wypełnienie całej tablicy $K$ zajmuje czas $\Theta(nW)$.
+Nietrudno przekonać się, że wypełnienie całej tablicy $K$ wymaga czasu $\Theta(nW)$ i~pamięci tego samego rzędu.
 
 Do wypisania optymalnego zbioru przedmiotów, jakie należy umieścić w~plecaku, służy poniższa procedura.
 W~trakcie przeglądania tablicy $K$, w~zależności od podjętej decyzji w~algorytmie \proc{Knapsack}, wypisywany jest odpowiedni przedmiot.
