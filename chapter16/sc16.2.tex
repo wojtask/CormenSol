@@ -93,6 +93,29 @@ Wybór tego położenia jest więc zachłanny i~pozostawia on tylko jeden podpro
 Algorytm zachłanny rozwiązujący ten problem może więc znajdować punkt $x$ na prostej $k$, a~następnie usuwać wszystkie punkty z~$X$ odległe od $x$ o~nie więcej niż 1, po czym rozwiązywać pozostały podproblem.
 
 \exercise %16.2-6
+Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ posortowane są według nierosnących wartości na jednostkę masy, tzn.\ $v_1/w_1\ge v_2/w_2\ge\dots\ge v_n/w_n$.
+W~optymalnym plecaku stanowiącym rozwiązanie ciągłego problemu plecakowego istnieje takie $1\le k\le n$, że przedmioty $a_{k'}$ dla $1\le k'<k$ znajdują się w~plecaku w~całości, a~przedmiotów $a_{k''}$ dla $k<k''\le n$ nie ma w~plecaku w~ogóle.
+A~zatem problem ten tak naprawdę sprowadza się do znalezienia odpowiedniego $k$ oraz udziału przedmiotu $a_k$ w~plecaku.
+
+Pokażemy, jak zrobić to w~czasie $O(n)$ w~sytuacji, gdy nie znamy uporządkowania przedmiotów według wartości jednostkowej.
+Wykorzystując algorytm \proc{Select} z~podrozdziału 9.3, wyznaczmy medianę $m$ zbioru ilorazów $v_i/w_i$ i~zdefiniujmy zbiory
+\[
+	G = \{\,a_i:v_i/w_i>m\,\}, \quad E = \{\,a_i:v_i/w_i=m\,\}, \quad L = \{\,a_i:v_i/w_i<m\,\}
+\]
+oraz sumy
+\[
+	w_G = \sum_{a_i\in G}w_i, \quad w_E = \sum_{a_i\in E}w_i, \quad w_L = \sum_{a_i\in L}w_i.
+\]
+Jeśli $w_G>W$, to w~plecaku nie możemy umieścić w~całości wszystkich przedmiotów ze zbioru $G$, więc wywołujemy nasz algorytm rekurencyjnie dla tych przedmiotów i~zwracamy wynik tego wywołania jako wynik oryginalnego problemu.
+W~przeciwnym przypadku $w_G\le W$, więc zbiór $G$ można włączyć do rozwiązania, a~następnie dobrać maksymalną ilość przedmiotów z~$E$ (pamiętajmy, że możemy brać części ułamkowe), która zmieści się w~pozostałej pojemności $W-w_G$.
+Nierówność $w_G+w_E\ge W$ oznacza, że w~plecaku nie zostało już wolnego miejsca po wybraniu w~całości wszystkich przedmiotów z~$G$ i~$E$, i~jeśli ona zachodzi, to można zakończyć algorytm.
+W~przeciwnym wypadku wystarczy wywołać go rekurencyjnie dla przedmiotów z~$L$ oraz plecaka o~pojemności $W-w_G-w_E$ i~dołączyć jego wynik do konstruowanego rozwiązania.
+
+Wyznaczenie mediany $m$ wymaga czasu co najwyżej $O(n)$.
+Zauważmy, że na każde wywołanie algorytmu przypada $\Theta(n)$ operacji plus co najwyżej jedno wywołanie rekurencyjne.
+Wybór mediany na ,,element rozdzielający'' jest optymalne w~tym sensie, że kolejne wywołanie rekurencyjne dostaje na wejściu zbiór przedmiotów o~rozmiarze nieprzekraczającym połowy rozmiaru bieżącego zbioru przedmiotów.
+Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm, $T(n)\le T(n/2)+\Theta(n)$, której rozwiązaniem jest $T(n)=O(n)$.
+
 \exercise %16.2-7
 Posortujmy zbiór $A$ i~zbiór $B$ niemalejąco.
 Niech $1\le i<j\le n$.
