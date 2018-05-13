@@ -68,6 +68,21 @@ Udowodniona obserwacja pozwala nam na skonstruowanie rozwiązania za pomocą alg
 Wystarczy przeglądać przedmioty od najlżejszych do najcięższych (czyli równoważnie, od najbardziej do najmniej wartościowych) i~włączać aktualny przedmiot do rozwiązania, o~ile tylko wraz z~poprzednio wybranymi przedmiotami nie przekracza pojemności plecaka.
 
 \exercise %16.2-4
+Załóżmy, że na trasie znajduje się $m$ stacji benzynowych i~że żadne kolejne stacje nie są oddalone od siebie o~więcej niż $n$ kilometrów.
+Ponumerujmy je kolejnymi liczbami naturalnymi od 1 do $m$ wzdłuż trasy pokonywanej przez profesora.
+Pokażemy, że problem ma własność optymalnej podstruktury.
+Rozważmy optymalne rozwiązanie zawierające $s$ stacji, przy czym pierwszy przystanek znajduje się na \singledash{$k$}{tej} stacji.
+Wówczas rozwiązanie dla podproblemu z~pozostałymi $m-k$ stacjami musi być optymalne; w~przeciwnym wypadku bowiem moglibyśmy zastąpić je lepszym, tzn.\ takim, w~którym występuje mniej niż $s-1$ stacji, uzyskując tym samym dla głównego problemu rozwiązanie o~mniej niż $s$ stacjach.
+
+Problem cechuje także własność wyboru zachłannego.
+Załóżmy, że na trasie w~odległości co najwyżej $n$ kilometrów od startu znajduje się dokładnie $k$ stacji benzynowych.
+Profesor nie może wybrać na pierwszy przystanek stacji o~numerze większym niż $k$, gdyż nie jest możliwe dojechanie do niej bez tankowania po drodze.
+W~optymalnym rozwiązaniu nie opłaca się też wybierać jako pierwszej stacji o~numerze $j<k$.
+Jest tak dlatego, że gdyby wybrana została stacja $j$, to później, w~momencie przejeżdżania obok stacji $k$, w~baku pozostałoby mniej paliwa niż wtedy, gdy profesor opuszczałby stację $k$ po zatankowaniu na niej.
+Innymi słowy, wybór stacji $k$ pozwala na dojechanie dalej, niż gdyby wybór padł na stację $j$.
+
+Na podstawie tych własności możemy podać prosty algorytm zachłanny, który wyznacza optymalny ciąg tankowań w~czasie $O(m)$.
+
 \exercise %16.2-5
 Oznaczmy przez $X$ zbiór punktów wejściowych, a~przez $k$ prostą, na której leżą punkty z~$X$.
 Niech $x\in X$ będzie takim punktem, który wszystkie pozostałe punkty z~$X$ ma po tej samej stronie na prostej $k$.
