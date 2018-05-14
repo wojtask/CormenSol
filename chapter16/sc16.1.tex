@@ -73,7 +73,7 @@ Poniższy pseudokod jest implementacją wariantu iteracyjnego.
 Założymy, że liczba dostępnych sal wykładowych jest odpowiednio duża, aby pomieścić wszystkie zajęcia.
 
 Wykorzystamy pomysł z~rozwiązania \refExercise{14.3-7}.
-Zdarzenia polegające na rozpoczęciu lub zakończeniu zajęć będziemy przeglądać od najwcześniejszego do najpóźniejszego, przy czym w~danej chwili rozpoczęcia będą rozważane przed zakończeniami.
+Zdarzenia polegające na rozpoczęciu lub zakończeniu zajęć będziemy przeglądać od najwcześniejszego do najpóźniejszego, przy czym w~danej chwili zakończenia będą rozważane przed rozpoczęciami (co wynika z~prawostronnej otwartości przedziałów czasowych zajmowanych przez zajęcia).
 Równocześnie będziemy utrzymywać stos $F$ złożony z~wolnych sal wykładowych oraz zbiór $B$ sal zajmowanych w~danej chwili.
 Początkowo zbiór $B$ jest pusty.
 Jeśli kolejnym napotkanym zdarzeniem jest rozpoczęcie pewnych zajęć $a_i$, to przypiszemy je do nowej wolnej sali poprzez pobranie jej ze stosu $F$ i~umieszczenie w~zbiorze $B$ wraz z~informacją, że jest ona zajmowana przez zajęcia $a_i$.
@@ -82,7 +82,7 @@ Gdy z~kolei napotkamy zakończenie pewnych zajęć $a_j$, to w~zbiorze $B$ nale�
 Zastosowanie stosu do przechowywania wolnych sal sprawia, że użyjemy ich tylko tyle, ile potrzeba.
 Załóżmy, że w~trakcie działania algorytmu największym rozmiarem zbioru $B$ jest $m$ i~niech $a_k$ będą pierwszymi zajęciami przypisanymi do \singledash{$m$}{tej} sali.
 Powodem, dla którego zajęcia $a_k$ zajęły tę salę, jest to, że pozostałe $m-1$ sal było zajętych w~chwili $s_k$, co oznacza, że w~chwili tej odbywa się jednocześnie $m$ zajęć.
-Stąd w~każdym przydziale zajęć do sal musi być użytych co najmniej $m$ sal, więc ten zawracany przez nasz algorytm jest optymalny.
+Stąd w~każdym przydziale zajęć do sal musi być użytych co najmniej $m$ sal, więc przydział zwracany przez nasz algorytm jest optymalny.
 
 Czas działania algorytmu jest sumą czasu spędzonego na sortowaniu rozpoczęć i~zakończeń zajęć oraz czasu spędzonego na ich przeglądaniu i~konstruowaniu rozwiązania.
 Do efektywnego zaimplementowania zbioru dynamicznego $B$ można zastosować np.\ drzewa czerwono-czarne.
