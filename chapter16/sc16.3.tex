@@ -34,6 +34,21 @@ mogą być przypisane do tych liter w~dowolnej kolejności.
 
 \exercise %16.3-3
 \exercise %16.3-4
+Niech $C=\{c_1,c_2,\dots,c_n\}$ będzie zbiorem znaków o~częstościach $f(c_1)\ge f(c_2)\ge\dots\ge f(c_n)$.
+Niech $T$ będzie drzewem odpowiadającym optymalnemu kodowi Huffmana dla znaków ze zbioru $C$.
+Przypomnijmy, że głębokość liścia reprezentującego znak $c\in C$ w~drzewie $T$ jest długością słowa kodowego przypisanego do znaku $c$.
+
+Udowodnimy żądaną własność nie-wprost, poprzez założenie, że istnieją takie $1\le i<j\le n$, że $d_T(c_i)>d_T(c_j)$ i~doprowadzenie do sprzeczności.
+Suma kosztów wprowadzana przez znaki $c_i$ i~$c_j$ do kosztu drzewa $B(T)$ wynosi $f(c_i)d_T(c_i)+f(c_j)d_T(c_j)$.
+Porównajmy ją z~sumą kosztów tych znaków w~przypadku, gdyby zostały one zamienione miejscami w~drzewie $T$.
+Różnica
+\[
+	f(c_i)d_T(c_i)+f(c_j)d_T(c_j)-\bigl(f(c_i)d_T(c_j)+f(c_j)d_T(c_i)\bigr) = \bigl(f(c_i)-f(c_j)\bigr)\bigl(d_T(c_i)-d_T(c_j)\bigr)
+\]
+jest dodatnia, na podstawie przyjętych założeń.
+A~zatem drzewo powstałe z~$T$ poprzez zamianę miejscami znaków $c_i$ i~$c_j$ ma niższy koszt niż drzewo $T$, dlatego $T$ nie może reprezentować optymalnego kodowania.
+Wynika stąd, że w~optymalnym drzewie każde dwa znaki o~niemalejących częstościach zajmują nierosnące głębokości, a~więc ich słowa kodowe także mają nierosnące długości.
+
 \exercise %16.3-5
 \exercise %16.3-6
 \exercise %16.3-7
