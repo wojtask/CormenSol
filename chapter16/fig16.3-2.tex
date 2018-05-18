@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+	level/.append style = {level distance=10mm, sibling distance=10mm}
+]
+
+\newcommand\leafnode[1]{%
+	node[tree node, rectangle, minimum height=4mm, minimum width=7mm, inner sep=0pt] {#1}
+}
+
+\node[outer] (pic a) {
+\begin{tikzpicture}
+	\matrix[array, nodes={draw=none, text depth=0pt, anchor=west}] (arr) {
+		\texttt{a} \quad 1111111 \\
+		\texttt{b} \quad 1111110 \\
+		\texttt{c} \quad 111110 \\
+		\texttt{d} \quad 11110 \\
+		\texttt{e} \quad 1110 \\
+		\texttt{f} \quad 110 \\
+		\texttt{g} \quad 10 \\
+		\texttt{h} \quad 0 \\
+	};
+\end{tikzpicture}
+};
+
+\node[outer, right=30mm of pic a] (pic b) {
+\begin{tikzpicture}[anchor=center]
+\node[tree node] (root) {54}
+	child {\leafnode {\texttt{h}:21} edge from parent node[index node, left] {0}}
+	child {node[tree node] {33}
+		child {\leafnode {\texttt{g}:13} edge from parent node[index node, left] {0}}
+		child {node[tree node] {20}
+			child {\leafnode {\texttt{f}:8} edge from parent node[index node, left] {0}}
+			child {node[tree node] {12}
+				child {\leafnode {\texttt{e}:5} edge from parent node[index node, left] {0}}
+				child {node[tree node] {7}
+					child {\leafnode {\texttt{d}:3} edge from parent node[index node, left] {0}}
+					child {node[tree node] {4}
+						child {\leafnode {\texttt{c}:2} edge from parent node[index node, left] {0}}
+						child {node[tree node] {2}
+							child {\leafnode {\texttt{b}:1} edge from parent node[index node, left] {0}}
+							child {\leafnode {\texttt{a}:1} edge from parent node[index node, right] {1}}
+							edge from parent node[index node, right] {1}
+						}
+						edge from parent node[index node, right] {1}
+					}
+					edge from parent node[index node, right] {1}
+				}
+				edge from parent node[index node, right] {1}
+			}
+			edge from parent node[index node, right] {1}
+		}
+		edge from parent node[index node, right] {1}
+	};
+\end{tikzpicture}
+};
+
+\node[subpicture label, left=5mm of pic a] {(a)};
+\node[subpicture label, left=5mm of pic b] {(b)};
+
+\end{tikzpicture}

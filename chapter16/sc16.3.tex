@@ -6,6 +6,32 @@ Jeśli węzeł ten zostanie ,,wycięty'' z~$T$, to głębokość każdego potomk
 Można ten koszt obniżać, pozbywając się w~ten sposób wszystkich węzłów stopnia 1 i~uzyskując drzewo regularne.
 
 \exercise %16.3-2
+Jeden z~optymalnych kodów Huffmana dla podanego zbioru liter i~ich częstości ilustruje rys.\ \ref{fig:16.3-2}.
+\begin{figure}[!ht]
+	\centering \input{fig16.3-2}
+	\caption{{\sffamily\bfseries(a)} Optymalny kod Huffmana dla liter \texttt{a}, \texttt{b}, \dots, \texttt{h} o~częstościach będących początkowymi liczbami Fibonacciego.
+{\sffamily\bfseries(b)} Drzewo odpowiadające optymalnemu temu kodowi uzyskane w~wyniku działania procedury \proc{Huffman}.} \label{fig:16.3-2}
+\end{figure}
+
+Zastanówmy się, jak może wyglądać optymalny kod Huffmana dla $n$ liter o~częstościach będących początkowymi liczbami Fibonacciego.
+Przyjrzyjmy się wartości \attrib{z}{f} obliczanej w~algorytmie \proc{Huffman} w~linii 7.
+Nietrudno zauważyć, że w~\singledash{$i$}{tej} iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ pierwszych liczb Fibonacciego:
+\[
+	\attrib{z}{f} = \sum_{k=1}^{i+1}F_k = F_{i+3}-1.
+\]
+Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego wartość \attrib{z}{f} w~iteracji $i+1$ jest drugą najmniejszą w~kolejce $Q$ i~węzeł ten zostaje wybrany na prawego syna kolejnego węzła $z$.
+W~pierwszej iteracji zachodzi $\attrib{z}{f}=2=F_3$, ale implementacja kolejki priorytetowej także wtedy doprowadzi do opisanego powiązania węzłów.
+Zbudowane drzewo będzie mieć wysokość $n-1$, przy czym lewy syn każdego jego węzła wewnętrznego będzie liściem.
+W~otrzymanym kodzie Huffmana, literze o~częstości $F_k$, gdzie $3\le k\le n$, przypisane zostanie słowo kodowe postaci
+\[
+	\underbrace{11\cdots1}_{n-k}0.
+\]
+Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego problemu, więc następujące dwa słowa kodowe:
+\[
+	\underbrace{11\cdots1}_{n-2}0 \quad\text{oraz}\quad \underbrace{11\cdots1}_{n-1}
+\]
+mogą być przypisane do tych liter w~dowolnej kolejności.
+
 \exercise %16.3-3
 \exercise %16.3-4
 \exercise %16.3-5
