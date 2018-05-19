@@ -33,6 +33,29 @@ Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego
 mogą być przypisane do tych liter w~dowolnej kolejności.
 
 \exercise %16.3-3
+Dowód przeprowadzimy przez indukcję względem wysokości drzewa $h$.
+Jeśli $h=0$, czyli drzewo $T$ składa się z~jednego węzła, to $B(T)=0$ i~twierdzenie trywialnie zachodzi.
+
+Niech teraz $h>0$.
+Przez $I(T)$ oznaczymy zbiór węzłów wewnętrznych drzewa $T$, a~przez $L(T)$ -- zbiór jego liści.
+Załóżmy, że twierdzenie zachodzi dla lewego poddrzewa $T_L$ i~prawego poddrzewa $T_R$ drzewa $T$, czyli
+\[
+	B(T_L) = \sum_{x\in I(T_L)}\bigl(\attribb{x}{left}{f}+\attribb{x}{right}{f}\bigr) \quad\text{oraz}\quad B(T_R) = \sum_{x\in I(T_R)}\bigl(\attribb{x}{left}{f}+\attribb{x}{right}{f}\bigr).
+\]
+Częstość każdego węzła jest równa sumie częstości obu jego synów, a~te z~kolei są sumami częstości swoich synów itd.
+Stąd częstość węzła można przedstawić jako sumę po wszystkich liściach znajdujących się w~poddrzewie o~korzeniu w~tym węźle, w~szczególności $\attribb{T}{root}{f}=\sum_{x\in L(T)}\attrib{x}{f}$.
+Mamy więc:
+\begin{align*}
+	B(T) &= \sum_{x\in L(T)}\attrib{x}{f}d_T(x) \\[1mm]
+	&= \sum_{x\in L(T_L)}\attrib{x}{f}d_T(x)+\sum_{x\in L(T_R)}\attrib{x}{f}d_T(x) \\[1mm]
+	&= \sum_{x\in L(T_L)}\attrib{x}{f}(d_{T_L}(x)+1)+\sum_{x\in L(T_R)}\attrib{x}{f}(d_{T_R}(x)+1) \\[1mm]
+	&= \sum_{x\in L(T_L)}\attrib{x}{f}d_{T_L}(x)+\sum_{x\in L(T_R)}\attrib{x}{f}d_{T_R}(x)+\sum_{x\in L(T)}\attrib{x}{f} \\[1mm]
+	&= B(T_L)+B(T_R)+\attribb{T}{root}{f} \\[1mm]
+	&= \sum_{x\in I(T_L)}\bigl(\attribb{x}{left}{f}+\attribb{x}{right}{f}\bigr)+\sum_{x\in I(T_R)}\bigl(\attribb{x}{left}{f}+\attribb{x}{right}{f}\bigr) \\
+	& \phantom{{}=B(T_L)+B(T_R)}+\attribbb{T}{root}{left}{f}+\attribbb{T}{root}{right}{f} \\[1mm]
+	&= \sum_{x\in I(T)}\bigl(\attribb{x}{left}{f}+\attribb{x}{right}{f}\bigr).
+\end{align*}
+
 \exercise %16.3-4
 Niech $C=\{c_1,c_2,\dots,c_n\}$ będzie zbiorem znaków o~częstościach $f(c_1)\ge f(c_2)\ge\dots\ge f(c_n)$.
 Niech $T$ będzie drzewem odpowiadającym optymalnemu kodowi Huffmana dla znaków ze zbioru $C$.
