@@ -50,6 +50,13 @@ A~zatem drzewo powstałe z~$T$ poprzez zamianę miejscami znaków $c_i$ i~$c_j$ 
 Wynika stąd, że w~optymalnym drzewie każde dwa znaki o~niemalejących częstościach zajmują nierosnące głębokości, a~więc ich słowa kodowe także mają nierosnące długości.
 
 \exercise %16.3-5
+Drzewo $T$ reprezentujące optymalne kodowanie zbioru $C$ zawiera $n$ liści i~$n-1$ węzłów wewnętrznych.
+Jego strukturę możemy zakodować, przechodząc je w~porządku preorder i~zamiast wypisywać klucz węzła, odnotowywać 0, jeśli jest to węzeł wewnętrzny, albo 1, jeśli jest on liściem.
+Ponieważ drzewo $T$ jest regularne, to opisane kodowanie jest jednoznaczne i~składa się z~$2n-1$ bitów.
+Należy jeszcze uzupełnić je o~informacje, któremu liściowi w~$T$ odpowiada który znak z~$C$.
+Zauważmy, że do zapisania każdego znaku z~$C$ w~postaci binarnej, przy pomocy zwykłego kodu o~stałej długości, potrzeba $\lceil\lg n\rceil$ bitów.
+Można więc użyć łącznie $n\lceil\lg n\rceil$ bitów do zapisania ciągu wszystkich znaków w~kolejności wyznaczonej przez liście w~kodowaniu drzewa $T$.
+
 \exercise %16.3-6
 \exercise %16.3-7
 \exercise %16.3-8
