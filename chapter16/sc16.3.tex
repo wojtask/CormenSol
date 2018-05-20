@@ -81,6 +81,46 @@ Zauważmy, że do zapisania każdego znaku z~$C$ w~postaci binarnej, przy pomocy
 Można więc użyć łącznie $n\lceil\lg n\rceil$ bitów do zapisania ciągu wszystkich znaków w~kolejności wyznaczonej przez liście w~kodowaniu drzewa $T$.
 
 \exercise %16.3-6
+Podobnie jak kody binarne składają się z~bitów, o~kodach trójkowych będziemy mówić, że składają się z~\textbf{tritów} przyjmujących wartości 0, 1 lub 2.
+Algorytm uogólniony do kodów trójkowych będzie korzystał z~kolejki priorytetowej typu min opartej na kopcu trójkowym.
+Kopiec taki można zaimplementować, opierając się na rozwiązaniu problemu \refProblem{6-2}.
+Ponadto w~naszej implementacji każdy węzeł $x$ takiego kopca zostanie dodatkowo wyposażony w~pole \attrib{x}{middle} będące wskaźnikiem na środkowego syna $x$.
+
+\begin{codebox}
+\Procname{$\proc{Ternary-Huffman}(C)$}
+\li	$n\gets|C|$
+\li	$Q\gets C$
+\li	\For $i\gets1$ \To $n-2$ \label{li:ternary-huffman-for-begin}
+\li		\Do utwórz nowy węzeł $w$
+\li			$\attrib{w}{left}\gets x\gets\proc{Extract-Min}(Q)$
+\li			$\attrib{w}{middle}\gets y\gets\proc{Extract-Min}(Q)$
+\li			$\attrib{w}{right}\gets z\gets\proc{Extract-Min}(Q)$
+\li			$\attrib{w}{f}\gets\attrib{x}{f}+\attrib{y}{f}+\attrib{z}{f}$
+\li			$\proc{Insert}(Q,w)$
+		\End \label{li:ternary-huffman-for-end}
+\li	\Return $\proc{Extract-Min}(Q)$
+\end{codebox}
+W~każdej z~$n-2$ iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} z~kolejki $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach.
+Węzły te są stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$.
+Za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
+W~drzewie trójkowym zbudowanym przez algorytm przyjmujemy, że krawędź do lewego syna jest etykietowana przez 0, krawędź do środkowego syna -- przez 1, a~krawędź do prawego syna -- przez 2.
+Wówczas słowem kodowym znaku $c\in C$ jest ciąg tritów wyznaczonych przez etykiety na ścieżce od korzenia drzewa do liścia reprezentującego znak $c$.
+
+Poprawność algorytmu \proc{Ternary-Huffman} wynika z~następujących lematów, które są wersjami lematów 16.2 i~16.3 rozszerzonymi na kody trójkowe.
+Nie podajemy ich dowodów, ponieważ są one naturalnymi rozszerzeniami dowodów lematów dla kodów binarnych.
+
+\bigskip
+\noindent\textsf{\textbf{Lemat 16.2\/$'$.}} \textit{Niech\/ $C$ będzie alfabetem, w~którym częstością każdego znaku\/ $c\in C$ jest\/ \attrib{c}{f}.
+Niech\/ $x$,\/ $y$ i~\/$z$ będą trójką znaków z~\/$C$ o~najmniejszych częstościach.
+Istnieje wtedy optymalny kod prefiksowy dla\/ $C$, w~którym kody dla\/ $x$,\/ $y$ i~\/$z$ mają tę samą długość i~różnią się tylko ostatnim tritem.}
+
+\bigskip
+\noindent\textsf{\textbf{Lemat 16.3\/$'$.}} \textit{Niech\/ $C$ będzie alfabetem ze znakami\/ $c\in C$ o~częstościach\/ \attrib{c}{f}.
+Niech\/ $x$,\/ $y$ i~\/$z$ będą trzema znakami z~\/$C$ o~najmniejszych częstościach.
+Niech\/ $C'$ będzie alfabetem powstałym z~\/$C$ w~wyniku zastąpienia znaków\/ $x$,\/ $y$ i~\/$z$ znakiem\/ $w$ o~częstości równej sumie częstości\/ $x$,\/ $y$ i~\/$z$; tzn.\/\ $C'=C\setminus\{x,y,z\}\cup\{w\}$, częstość\/ $f$ każdego znaku w~\/$C'$ z~wyjątkiem\/ $w$ jest taka sama jak w~\/$C$, natomiast\/ $\attrib{w}{f}=\attrib{x}{f}+\attrib{y}{f}+\attrib{z}{f}$.
+Niech\/ $T'$ będzie dowolnym drzewem reprezentującym pewny optymalny kod prefiksowy dla\/ $C'$.
+Wówczas drzewo\/ $T$, otrzymane z~\/$T'$ przez zastąpienie liścia odpowiadającego\/ $w$ przez węzeł wewnętrzny z~trzema synami\/ $x$,\/ $y$ i~\/$z$, reprezentuje pewien optymalny kod prefiksowy dla alfabetu\/ $C$.}
+
 \exercise %16.3-7
 \note{Maksymalna częstość wystąpienia znaku powinna być mniejsza niż dwukrotność najmniejszej częstości wystąpienia innego znaku.}
 
