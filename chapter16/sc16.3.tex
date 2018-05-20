@@ -82,4 +82,11 @@ Można więc użyć łącznie $n\lceil\lg n\rceil$ bitów do zapisania ciągu ws
 
 \exercise %16.3-6
 \exercise %16.3-7
+\note{Maksymalna częstość wystąpienia znaku powinna być mniejsza niż dwukrotność najmniejszej częstości wystąpienia innego znaku.}
+
+\noindent Jeśli w~zbiorze znaków najmniejszą częstością jest $a$, to największa częstość jest mniejsza niż $2a$.
+W~algorytmie \proc{Huffman} każdy tworzony węzeł $z$ będzie miał częstość $\attrib{z}{f}\ge2a$, zatem każdy znak zostanie przetworzony i~usunięty z~kolejki $Q$, zanim zostanie pobrany z~niej węzeł $z$.
+To sprawia, że każdy znak zajmie ten sam, najniższy poziom w~tworzonym drzewie, a~co za tym idzie, każdemu znakowi odpowiadać będzie słowo kodowe o~tej samej długości.
+Nie jest to więc żadne usprawnienie w~porównaniu z~zastosowaniem kodu binarnego o~stałej długości, w~którym każdy znak zapisywany jest jako ciąg 8 bitów.
+
 \exercise %16.3-8
