@@ -32,3 +32,17 @@ Ponadto dla każdego $i\ne j$, $(A\cup\{x\})\cap S_i=A\cap S_i$, dlatego $|(A\cu
 To kończy dowód, że para $\langle S,\mathcal{I}\rangle$ jest matroidem.
 
 \exercise %16.4-5
+Niech $M=\langle S,\mathcal{I}\rangle$ będzie matroidem ważonym z~funkcją wagi $w$ i~niech $W$ będzie liczbą większą niż waga któregokolwiek elementu zbioru $S$.
+Dla każdego $x\in S$ zdefiniujmy nową dodatnią funkcję wagi $w'(x)=W-w(x)$.
+Wówczas dla dowolnego $A\in\mathcal{I}$,
+\[
+	w'(A) = \sum_{x\in A}w'(x) = \sum_{x\in A}(W-w(x)) = W|A|-w(A).
+\]
+Niech $A\in\mathcal{I}$ będzie maksymalnym zbiorem, dla którego $w(A)$ jest maksymalne, zaś $A'\in\mathcal{I}$ -- innym zbiorem maksymalnym.
+Z~tw.\ 16.6 mamy, że $|A|=|A'|$.
+Zachodzi
+\[
+	w'(A)-w'(A') = W|A|-w(A)-(W|A'|-w(A')) = w(A')-w(A) \le 0,
+\]
+skąd $w'(A)\le w'(A')$.
+Zatem każdy maksymalny zbiór matroidu $M$ maksymalizuje wagę $w$ wtedy i~tylko wtedy, gdy minimalizuje wagę $w'$.
