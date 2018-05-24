@@ -130,3 +130,11 @@ To sprawia, że każdy znak zajmie ten sam, najniższy poziom w~tworzonym drzewi
 Nie jest to więc żadne usprawnienie w~porównaniu z~zastosowaniem kodu binarnego o~stałej długości, w~którym każdy znak zapisywany jest jako ciąg 8 bitów.
 
 \exercise %16.3-8
+Istnieje $2^{8k}$ możliwych plików składających się z~$k$ znaków \singledash{8}{bitowych}, czyli
+\[
+	C_n = \sum_{k=0}^n2^{8k} = \sum_{k=0}^n256^k = \frac{256^{n+1}-1}{255}
+\]
+plików zawierających co najwyżej $n$ znaków.
+Jakakolwiek metoda kompresji każdemu takiemu plikowi przypisuje jednoznaczny plik skompresowany, dlatego potencjalna liczba plików skompresowanych wynosi co najmniej $C_n$.
+Znaki w~pliku wejściowym pojawiają się losowo, toteż nic nie zyskamy przez przypisywanie krótszych plików skompresowanych jednym plikom wejściowym, a~dłuższych innym.
+Statystycznie rzecz biorąc, nie da się więc zaoszczędzić nawet jednego bitu, stosując jakąkolwiek metodę kompresji dla losowych danych.
