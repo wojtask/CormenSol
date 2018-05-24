@@ -6,6 +6,19 @@ Jeśli teraz wybierzemy $A$, $B\in\mathcal{I}_k$ takie, że $|A|<|B|$, to dla ka
 A~zatem $M=\langle S,\mathcal{I}_k\rangle$ spełnia własność wymiany, co kończy dowód, że $M$ jest matroidem.
 
 \exercise %16.4-2
+Oczywiście zbiór $S$ jest skończony.
+Dziedziczność rodziny $\mathcal{I}$ wynika z~faktu, że każdy podzbiór zbioru kolumn liniowo niezależnych także składa się z~kolumn liniowo niezależnych.
+
+W~dowodzie własności wymiany wykorzystamy pojęcie rzędu macierzy, czyli mocy największego zbioru jej kolumn liniowo niezależnych (patrz podrozdział 28.1).
+Załóżmy, że $A$, $B\in\mathcal{I}$ i~$|A|<|B|$.
+Kolumny w~zbiorze $A$ są niezależne, więc jeśli zbudujemy z~nich macierz $T_A$, to $\mathrm{rank}(T_A)=|A|$, i~podobnie z~macierzą $T_B$ złożoną z~kolumn ze zbioru $B$, $\mathrm{rank}(T_B)=|B|$.
+Ponieważ $|A|<|B|$, to $\mathrm{rank}(T_A)<\mathrm{rank}(T_B)$.
+
+Załóżmy teraz nie-wprost, że każda kolumna w~$B$ jest liniową kombinacją kolumn w~$A$.
+Oznacza to, że każdy wektor będący liniową kombinacją kolumn z~$B$ jest także liniową kombinacją kolumn z~$A$.
+Zatem przestrzeń liniowa generowana przez wektory będące kolumnami macierzy $T_B$ stanowi podprzestrzeń przestrzeni liniowej generowanej przez kolumny macierzy $T_A$.
+Z~własności podprzestrzeni, jej baza (czyli zbiór wektorów liniowo niezależnych generujący tę podprzestrzeń) ma moc nie większą niż baza obejmującej ją przestrzeni; zachodzi zatem $\mathrm{rank}(T_B)\le\mathrm{rank}(T_A)$, co jest sprzeczne z~poprzednią nierównością.
+
 \exercise %16.4-3
 \exercise %16.4-4
 Niech $B\in\mathcal{I}$.
