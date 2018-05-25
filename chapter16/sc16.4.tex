@@ -6,7 +6,9 @@ Jeśli teraz wybierzemy $A$, $B\in\mathcal{I}_k$ takie, że $|A|<|B|$, to dla ka
 A~zatem $M=\langle S,\mathcal{I}_k\rangle$ spełnia własność wymiany, co kończy dowód, że $M$ jest matroidem.
 
 \exercise %16.4-2
-Oczywiście zbiór $S$ jest skończony.
+\note{Macierz może być określona nad dowolnym ciałem (w~szczególności\/ $\mathbb{R}$).}
+
+\noindent Oczywiście zbiór $S$ jest skończony.
 Dziedziczność rodziny $\mathcal{I}$ wynika z~faktu, że każdy podzbiór zbioru kolumn liniowo niezależnych także składa się z~kolumn liniowo niezależnych.
 
 W~dowodzie własności wymiany wykorzystamy pojęcie rzędu macierzy, czyli mocy największego zbioru jej kolumn liniowo niezależnych (patrz podrozdział 28.1).
@@ -20,6 +22,32 @@ Zatem przestrzeń liniowa generowana przez wektory będące kolumnami macierzy $
 Z~własności podprzestrzeni, jej baza (czyli zbiór wektorów liniowo niezależnych generujący tę podprzestrzeń) ma moc nie większą niż baza obejmującej ją przestrzeni; zachodzi zatem $\mathrm{rank}(T_B)\le\mathrm{rank}(T_A)$, co jest sprzeczne z~poprzednią nierównością.
 
 \exercise %16.4-3
+Wybierzmy $B'\in\mathcal{I}'$ i~niech $A'\subseteq B'$.
+Na mocy definicji rodziny $\mathcal{I}'$ mamy, że istnieje taki zbiór maksymalny $B\in\mathcal{I}$, że $B\subseteq S\setminus B'$.
+Inkluzja $A'\subseteq B'$ implikuje inkluzję $S\setminus B'\subseteq S\setminus A'$, skąd $B\subseteq S\setminus A'$, a~to oznacza, że $A'\in\mathcal{I}'$.
+
+Pozostaje do wykazania, że zachodzi własność wymiany dla $\langle S,\mathcal{I}'\rangle$.
+Niech $A'$, $B'\in\mathcal{I}'$, gdzie $|A'|<|B'|$.
+Z~założenia mamy, że istnieje taki maksymalny zbiór $A\in\mathcal{I}$, że $A\subseteq S\setminus A'$, a~także taki maksymalny zbiór $B\in\mathcal{I}$, że $B\subseteq S\setminus B'$.
+Rozważmy zbiór $X=B'\setminus(A'\cup A)$ i~zbadajmy dwa przypadki.
+W~pierwszym z~nich $X\ne\emptyset$, więc wybierzmy dowolny element $x\in X$.
+Zbiory $A'\cup\{x\}$ i~$A$ są rozłączne, więc $A\subseteq S\setminus(A'\cup\{x\})$, co oznacza, że $A'\cup\{x\}\in\mathcal{I}'$.
+
+W~przypadku, gdy $X=\emptyset$ zachodzi $A'\supseteq(A'\cap B')\cup(A'\cap B)$ i~$B'=(A'\cap B')\cup(A\cap B')$, zatem:
+\begin{align*}
+	|A'| &\ge |A'\cap B'|+|A'\cap B|, \\
+	|B'| &= |A'\cap B'|+|A\cap B'|.
+\end{align*}
+Z~założenia, że $|A'|<|B'|$ mamy $|A'\cap B'|+|A'\cap B|<|A'\cap B'|+|A\cap B'|$, skąd $|A'\cap B|<|A\cap B'|$.
+Skonstruujemy teraz pewien maksymalny zbiór niezależny $C$.
+Początkowo przyjmijmy $C=B\setminus A'$.
+Oczywiście $|C|\le|B|=|A|$ oraz $C\in\mathcal{I}$.
+Jeśli $|C|<|A|$, to możemy skorzystać z~własności wymiany matroidu $\langle S,\mathcal{I}\rangle$, by stwierdzić, że istnieje $x\in A\setminus C$ takie, że $C\cup\{x\}\in\mathcal{I}$.
+Dodajmy więc $x$ do $C$, a~następnie zastosujmy własność wymiany dla kolejno otrzymywanych zbiorów, aż $C$ osiągnie moc równą $|A|$.
+W~tym momencie $C\in\mathcal{I}$ oraz $|C|=|A|$, czyli $C$ jest maksymalnym zbiorem niezależnym w~$\langle S,\mathcal{I}\rangle$.
+Na podstawie pokazanej wcześniej nierówności $|A'\cap B|<|A\cap B'|$ wnioskujemy, że $C$ nie zawiera wszystkich elementów zbioru $A\cap B'$, czyli że istnieje element $x\in(A\cap B')\setminus C$.
+Wynika stąd, że $C\subseteq S\setminus(A'\cup\{x\})$, czyli $A'\cup\{x\}\in\mathcal{I}'$, co kończy dowód, że $\langle S,\mathcal{I}'\rangle$ jest matroidem.
+
 \exercise %16.4-4
 Niech $B\in\mathcal{I}$.
 Z~definicji rodziny $\mathcal{I}$ mamy, że do zbioru $B$ należy po co najwyżej jednym elemencie z~każdego zbioru $S_1$, $S_2$, \dots, $S_k$.
