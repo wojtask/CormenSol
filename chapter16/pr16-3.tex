@@ -1,0 +1,53 @@
+\problem{Podgrafy acykliczne} %16-3
+
+\subproblem %16-3(a)
+Twierdzenie to pokrywa się z~tw.\ 16.5 udowodnionym w~Podręczniku.
+
+\subproblem %16-3(b)
+\note{Kluczowe jest doprecyzowanie, że\/ $M$ jest macierzą określoną nad ciałem\/ $\mathbb{Z}_2$ liczb całkowitych modulo\/ $2$.}
+
+\noindent Niech $A$ będzie zbiorem liniowo niezależnych kolumn macierzy $M$.
+Załóżmy, że odpowiadający mu zbiór krawędzi $E_A\subseteq E$ zawiera cykl $\langle v_0,v_1,v_2,\dots,v_{k-1},v_0\rangle$ o~długości $k>1$, tzn.\ $\{v_i,v_{(i+1)\bmod k}\}\in E_A$ dla $i=0$, 1, \dots, $k-1$.
+A~zatem dla każdego $i=0$, 1, \dots, $k-1$, $M_{v_i,e}=1$ wtedy i~tylko wtedy, gdy $e=\bigl\{v_{(i-1)\bmod k},v_i\bigr\}$ lub $e=\bigl\{v_i,v_{(i+1)\bmod k}\bigr\}$.
+Stąd suma kolumn ze zbioru $A$ stanowi wektor składający się z~dwójek na każdej pozycji, czyli wektor zerowy w~$\mathbb{Z}_2$.
+Kolumny te są więc liniowo zależne, co stoi w~sprzeczności z~założeniem.
+
+Dla dowodu w~drugą stronę przyjmijmy, że $E_A\subseteq E$ jest zbiorem $k>1$ krawędzi, które nie tworzą cyklu i~niech $A=\{a_1,a_2,\dots,a_k\}$ będzie podzbiorem kolumn macierzy $M$ odpowiadających zbiorowi $E_A$.
+Gdyby zbiór $A$ zawierał kolumny liniowo zależne, to istniałyby takie współczynniki $c_1$, $c_2$, \dots, $c_k\in\mathbb{Z}_2$, nie wszystkie równe 0, że $\sum_{i=1}^kc_ia_i$ byłoby wektorem zerowym w~$\mathbb{Z}_2$.
+Ponieważ działania wykonywane są w~arytmetyce modulo 2, to równoważnie istniałby niepusty podzbiór kolumn $A'\subseteq A$, których suma byłaby wektorem złożonym z~samych liczb parzystych.
+Oznacza to, że w~grafie $G_{A'}=\langle V,A'\rangle$ każdy wierzchołek byłby parzystego stopnia.
+Każda składowa grafu $G_{A'}$ byłaby więc tzw.\ \textbf{grafem eulerowskim} i~jako taka miała cykl Eulera, o~czym mówi problem \refProblem{22-3} zmodyfikowany do wersji nieskierowanych grafów.
+Otrzymana sprzeczność dowodzi, że zbiór $A$ nie może składać się z~kolumn liniowo zależnych.
+
+Niech $S$ będzie zbiorem kolumn macierzy $M$, a~$\mathcal{I}'$ rodziną podzbiorów zbioru $S$ taką, że $A\in\mathcal{I}'$ wtedy i~tylko wtedy, gdy wszystkie kolumny należące do $A$ są liniowo niezależne.
+Każdej kolumnie macierzy $M$ odpowiada inna krawędź grafu $G=\langle V,E\rangle$.
+Jeśli przez $E_A$ oznaczymy zbiór krawędzi grafu $G$ odpowiadających kolumnom z~$A$, to istnieje jednoznaczne odwzorowanie $\mathcal{I}'$ na rodzinę $\mathcal{I}=\{\,E_A\subseteq E:A\in\mathcal{I}'\,\}$.
+W~\refExercise{16.4-2} pokazaliśmy, że $\langle S,\mathcal{I}'\rangle$ jest matroidem, a~zatem $\langle E,\mathcal{I}\rangle$ także jest matroidem.
+
+\subproblem %16-3(c)
+Dla grafu $G=\langle V,E\rangle$ rozważmy matroid ważony $M=\langle E,\mathcal{I}\rangle$ zdefiniowany jak w~punkcie (a) wraz z~funkcją wagi $w$.
+Do znalezienia acyklicznego podzbioru krawędzi grafu $G$ o~największej wadze można użyć algorytmu opartego na \proc{Greedy}, w~którym używana jest efektywna metoda weryfikowania, czy dany zbiór krawędzi $A$ nie zawiera cyklu, czyli czy $A\in\mathcal{I}$.
+Wymagania te spełnia algorytm Kruskala z~podrozdziału 23.2, z~tą różnicą, że ma on na celu minimalizację sumarycznej wagi krawędzi.
+Aby wartość ta była maksymalizowana, wystarczy zastosować w~tym algorytmie funkcję wagową zmodyfikowaną według pomysłu z~\refExercise{16.4-5}.
+
+\subproblem %16-3(d)
+Na rys.\ \ref{fig:16-3c} zamieszczono przykładowy graf skierowany $G=\langle V,E\rangle$, dla którego zdefiniowana w~treści problemu para $\langle E,\mathcal{I}\rangle$ nie jest matroidem.
+Rozważmy zbiory $A=\{e_1,e_4\}$, $B=\{e_1,e_2,e_3\}$.
+Oczywiście $A$, $B\in\mathcal{I}$, ale zarówno w~$A\cup\{e_2\}$, jak i~w~$A\cup\{e_3\}$ znajduje się cykl, czyli zbiory te nie należą do $\mathcal{I}$.
+Para $\langle E,\mathcal{I}\rangle$ nie spełnia więc własności wymiany, przez co nie stanowi matroidu.
+\begin{figure}[!ht]
+	\centering \input{fig16-3c}
+	\caption{Przykładowy graf skierowany, dla którego struktura $\langle E,\mathcal{I}\rangle$ nie jest matroidem.} \label{fig:16-3c}
+\end{figure}
+
+\subproblem %16-3(e)
+Jeśli pewien podgraf $G'=\langle V',E'\rangle$ grafu $G$ stanowi cykl, to jest on cyklem Eulera w~$G$.
+Na podstawie punktu (a) problemu \refProblem{22-3} stopień wejściowy każdego wierzchołka $v$ w~grafie $G'$ jest równy stopniowi wyjściowemu $v$.
+Oznacza to, że dla każdego wierzchołka $v\in V'$ wartości w~macierzy $V'$ brane po krawędziach z~$E'$ sumują się do zera, a~zatem dla każdego grafu $G$ zawierającego cykl istnieje podmacierz macierzy $M$ o~wszystkich wierszach sumujących się do zera.
+Płynie z~tego wniosek, że kolumny macierzy $M$ są liniowo zależne lub, równoważnie, jeśli kolumny macierzy $M$ są liniowo niezależne, to odpowiadający im graf nie zawiera cyklu.
+
+\subproblem %16-3(f)
+W~punkcie (e) udowodniliśmy wynikanie tylko w~jedną stronę.
+Implikacja przeciwna jest fałszywa; istnieją bowiem grafy skierowane niezawierające cyklu, których macierz incydencji zawiera kolumny liniowo zależne.
+Jednym z~nich jest graf z~rys.\ \ref{fig:16-3c} pozbawiony krawędzi $e_4$.
+Nie istnieje zatem jednoznaczne odwzorowanie między matroidem z~\refExercise{16.4-2} a~strukturą z~punktu (d), która matroidem nie jest.

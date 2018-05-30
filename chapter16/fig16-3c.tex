@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+
+\node[tree node] (a) {};
+\node[tree node, above right=10mm and 7mm of a] (b) {};
+\node[tree node, right=16mm of a] (c) {};
+\path (a) edge[arrow] node[index node, auto] {$e_1$} (b) edge[arrow, bend left=25] node[index node, auto] {$e_3$} (c);
+\path (b) edge[arrow] node[index node, auto] {$e_2$} (c);
+\path (c) edge[arrow, bend left=25] node[index node, auto] {$e_4$} (a);
+
+\end{tikzpicture}
