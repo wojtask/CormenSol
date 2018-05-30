@@ -1,0 +1,79 @@
+\problem{Wydawanie reszty} %16-1
+
+\subproblem %16-1(a)
+Optymalna reszta o~wartości $n$ składa się z~monety o~pewnym nominale $d$ (o~ile $d\le n$) plus optymalnej reszty dla podproblemu wydawania reszty o~wartości $n-d$.
+Ma tutaj zastosowanie standardowe rozumowanie ,,wytnij i~wklej''.
+Załóżmy, że dysponujemy rozwiązaniem dla reszty o~wartości $n$, w~którym nie jest uwzględniona moneta o~największym nominale nieprzekraczającym $n$.
+Moglibyśmy jednak dołączyć taką monetę do rozwiązania, zastępując nią kilka innych o~niższych nominałach:
+\begin{itemize}
+	\item $50\ \mathrm{gr}=20\ \mathrm{gr}+20\ \mathrm{gr}+10\ \mathrm{gr}$,
+	\item $20\ \mathrm{gr}=10\ \mathrm{gr}+10\ \mathrm{gr}$,
+	\item $10\ \mathrm{gr}=5\ \mathrm{gr}+5\ \mathrm{gr}$,
+	\item $5\ \mathrm{gr}=2\ \mathrm{gr}+2\ \mathrm{gr}+1\ \mathrm{gr}$,
+	\item $2\ \mathrm{gr}=1\ \mathrm{gr}+1\ \mathrm{gr}$.
+\end{itemize}
+Zamiana każdego takiego zestawu monet w~rozwiązaniu pojedynczą monetą o~sumarycznym nominale pozwala zredukować liczbę użytych monet i~daje lepsze rozwiązanie.
+Problem ma zatem zarówno własność optymalnej podstruktury, jak i~własność wyboru zachłannego.
+
+Można więc użyć algorytmu zachłannego, w~którym dla reszty o~wartości $n$ do rozwiązania dodawany będzie największy nominał $d$ nieprzekraczający $n$, po czym algorytm zostanie wywołany dla reszty o~wartości $n-d$, o~ile $n-d>0$.
+Łatwo jednak przekształcić ten algorytm w~taki, który działa w~czasie $O(1)$.
+Wystarczy zauważyć, że dany nominał będzie wybierany najdłużej jak to tylko możliwe i~do wydania reszty o~wartości $n$ użytych zostanie kolejno:
+\begin{itemize}
+	\item $\lfloor n/50\rfloor$ monet \singledash{50}{groszowych}, pozostawiając resztę o~wartości $n_{50}=n\bmod50$,
+	\item $\lfloor n_{50}/20\rfloor$ monet \singledash{20}{groszowych}, pozostawiając resztę o~wartości $n_{20}=n_{50}\bmod20$,
+	\item $\lfloor n_{20}/10\rfloor$ monet \singledash{10}{groszowych}, pozostawiając resztę o~wartości $n_{10}=n_{20}\bmod10$,
+	\item $\lfloor n_{10}/5\rfloor$ monet \singledash{5}{groszowych}, pozostawiając resztę o~wartości $n_5=n_{10}\bmod5$,
+	\item $\lfloor n_5/2\rfloor$ monet \singledash{2}{groszowych}, pozostawiając resztę o~wartości $n_2=n_5\bmod2$,
+	\item $n_2$ monet \singledash{1}{groszowych}.
+\end{itemize}
+
+\subproblem %16-1(b)
+Do uzasadnienia poprawności algorytmu zachłannego w~tym przypadku wystarczy użyć argumentacji z~punktu (a) zmodyfikowanej jedynie w~części mówiącej o~wzajemnych powiązaniach dostępnych nominałów.
+Dla każdego $c>1$ oraz $i=1$, 2, \dots, $k$ zachodzi $c^i=c\cdot c^{i-1}$, toteż własność wyboru zachłannego w~tym przypadku jest zachowana.
+
+Algorytm zachłanny będzie przeglądał nominały w~kolejności malejącej.
+Załóżmy, że aktualnym przetwarzanym nominałem jest $c^i$, a~pozostałą resztą do wydania jest $m$.
+Do rozwiązania zostanie wówczas dołączone $\lfloor m/c^i\rfloor$ monet o~nominale $c^i$, a~w~następnym kroku wydawana będzie reszta $m\bmod c^i$.
+Do znalezienia optymalnego rozwiązania algorytm potrzebuje czasu $\Theta(k)$.
+
+\subproblem %16-1(c)
+Jeśli do dyspozycji będą nominały 1~gr, 3~gr i~4~gr, to np.\ reszta o~wartości 6~gr przez opisany algorytm zachłanny zostanie wydana za pomocą 3 monet: $6\ \mathrm{gr}=4\ \mathrm{gr}+1\ \mathrm{gr}+1\ \mathrm{gr}$, podczas gdy w~optymalnym rozwiązaniu wystarczą 2 monety: $6\ \mathrm{gr}=3\ \mathrm{gr}+3\ \mathrm{gr}$.
+
+\subproblem %16-1(d)
+Oznaczmy dopuszczalne nominały przez $d_1$, $d_2$, \dots, $d_k$, wśród których jednym z~nich jest 1~gr.
+W~tablicy $c[0\twodots n]$ na pozycji $c[j]$ będziemy przechowywać minimalną liczbę monet konieczną do wydania reszty o~wartości $j$.
+Jako przypadek bazowy przyjmujemy $c[0]=0$.
+Na podstawie optymalnej podstruktury mamy, że jeśli w~optymalnym rozwiązaniu dla $j>0$ użyta została moneta o~nominale $d_i$, to $c[j]=1+c[j-d_i]$.
+Zachodzi więc zależność rekurencyjna:
+\[
+	c[j] = \max\begin{cases}
+		0, & \text{jeśli $j=0$,} \\
+		\displaystyle\min_{1\le i\le k}(1+c[j-d_i]), & \text{jeśli $j>1$.}
+	\end{cases}
+\]
+Wartości tablicy $c$ można wyliczać dla rosnących indeksów.
+Po zakończeniu wypełniania tablicy $c[n]$ będzie równe minimalnej liczbie monet w~optymalnym rozwiązaniu problemu.
+
+Poniższa procedura realizuje opisany plan, zapisując dodatkowo w~tablicy $\id{denom}[1\twodots n]$ na pozycji $\id{denom}[j]$ nominał $d_i$ minimalizujący $c[j]$.
+\begin{codebox}
+\Procname{$\proc{Make-Change}(n,d)$}
+\li	$c[0]\gets0$
+\li	\For $j\gets1$ \To $n$
+\li		\Do $c[j]\gets\infty$
+\li			\For $i\gets1$ \To $k$
+\li				\Do \If $j\ge d_i$ i~$1+c[j-d_i]<c[j]$
+\li						\Then $c[j]\gets1+c[j-d_i]$
+\li							$\id{denom}[j]\gets d_i$
+						\End
+				\End
+		\End
+\li	\Return $c$ i~\id{denom}
+\end{codebox}
+Tablica \id{denom} pozwala wypisać monety używane w~optymalnym rozwiązaniu.
+\begin{codebox}
+\Procname{$\proc{Print-Change}(\id{denom},n)$}
+\li	\While $n>0$
+\li		\Then wypisz $\id{denom}[n]$
+\li			$n\gets n-\id{denom}[n]$
+		\End
+\end{codebox}
