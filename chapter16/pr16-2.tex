@@ -1,0 +1,20 @@
+\problem{Szeregowanie o~minimalnym średnim czasie wykonania zadań} %16-2
+
+\subproblem %16-2(a)
+Rozważmy dowolne uszeregowanie zadań stanowiące rozwiązanie przedstawionego problemu.
+Załóżmy, że dla pewnych zadań $a_i$, $a_j$ w~tym uszeregowaniu, tuż po zakończeniu wykonywania zadania $a_i$ w~chwili $c_i$ następuje przerwa, czyli kolejne zadanie $a_j$ rozpoczęte zostaje w~chwili $b_j$ późniejszej niż $c_i$.
+Moglibyśmy wtedy jednak usunąć ten odstęp, rozpoczynając wszystkie zadania następujące po $a_i$ o~$c_i-b_j$ jednostek czasu wcześniej.
+W~rezultacie czasy zakończenia tychże zadań zostałyby zmniejszone o~tyle samo jednostek i~otrzymane w~ten sposób uszeregowanie miałoby niższy średni koszt zakończenia zadania.
+Wnioskujemy więc, że w~optymalnym uporządkowaniu zadania wykonywane są bezpośrednio po sobie.
+
+Przyjmijmy teraz, że w~uszeregowaniu nie ma przerw między zadaniami i~że istnieją zadania $a_i$, $a_j$, dla których $p_i>p_j$ oraz $a_i$ wykonywane jest bezpośrednio przed $a_j$.
+Suma ich czasów zakończenia wnoszona do średniego czasu zakończenia rozważanego uszeregowania wynosi $C=c_i+c_j$.
+Oznaczmy przez $c_i'$, $c_j'$, odpowiednio, czasy zakończenia zadań $a_i$, $a_j$, gdyby zostały one zamienione miejscami w~tym uporządkowaniu.
+Z~założenia $c_i'=c_j$ oraz $c_j'<c_i$, a~więc suma nowych czasów zakończenia wynosi $C'=c_i'+c_j'<c_j+c_i=C$.
+Wynika stąd, że w~każdej parze sąsiednich zadań najpierw powinno być wykonywane to, które wymaga krótszego czasu.
+Równoważnie, optymalnym uszeregowaniem zadań minimalizującym średni czas zakończenia zadania jest takie, w~którym zadania wykonywane są w~kolejności niemalejących czasów wykonywania, bez przerw między nimi.
+
+Na podstawie powyższej analizy otrzymujemy algorytm rozwiązujący ten problem, w~którym zadania z~wejściowego zbioru $S$ są sortowane według ich czasów wykonywania.
+Jeśli $a_1$, $a_2$, \dots, $a_n$ jest kolejnością po posortowaniu, to dla każdego $k=1$, 2, \dots, $n$ wystarczy przyjąć $c_k=\sum_{i=1}^kp_i$.
+
+\subproblem %16-2(b)
