@@ -6,4 +6,8 @@ Ciąg $n$ operacji mógłby się bowiem składać z~występujących na przemian 
 Koszt takiego ciągu operacji wynosi $O(n^2)$ i~oszacowaniem na zamortyzowany koszt operacji jest $O(n^2)/n=O(n)$.
 
 \exercise %17.1-2
+Rozważmy ciąg $n$ operacji wykonywanych na początkowo wyzerowanym liczniku, gdzie pierwszą operacją jest \proc{Decrement}, a~następnie naprzemiennie występują \proc{Increment} oraz \proc{Decrement}.
+Zauważmy, że każda operacja w~tym ciągu odwraca wszystkie bity licznika -- \proc{Decrement} ustawia każdy bit na jedynkę, a~\proc{Increment} na zero -- działając w~czasie $\Theta(k)$.
+A~zatem ciąg ten wymaga w~sumie czasu $\Theta(nk)$.
+
 \exercise %17.1-3
