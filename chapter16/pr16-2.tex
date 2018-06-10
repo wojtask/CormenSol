@@ -18,3 +18,15 @@ Na podstawie powyższej analizy otrzymujemy algorytm rozwiązujący ten problem,
 Jeśli $a_1$, $a_2$, \dots, $a_n$ jest kolejnością po posortowaniu, to dla każdego $k=1$, 2, \dots, $n$ wystarczy przyjąć $c_k=\sum_{i=1}^kp_i$.
 
 \subproblem %16-2(b)
+Każde zadanie ze zbioru wejściowego będziemy reprezentować jako element o~wadze początkowo równej ilości jednostek czasu potrzebnej do jego wykonania.
+Elementy reprezentujące zadania gotowe do wykonania w~danej chwili na podstawie czasów pojawienia się, przechowywane będą w~zbiorze dynamicznym $S$.
+W~danej chwili $b$ do zbioru $S$ dodane zostaną zadania, które stają się gotowe do wykonania, czyli takie, dla których $r_i=b$.
+W~razie wyboru zadania $a_i$ do uszeregowania w~chwili $b$, waga tego zadania w~zbiorze $S$ zostanie zmniejszona o~1, co reprezentuje wykonanie fragmentu tego zadania w~chwili $b$ o~długości jednostki czasu.
+Jeśli waga danego zadania osiąga 0, to jest ono usuwane z~$S$.
+
+W~celu minimalizacji średniego czasu zakończenia zadań, postępujemy według podobnego schematu jak w~punkcie (a).
+Ponieważ aktualna waga elementu w~$S$ oznacza pozostały czas wymagany do wykonania tego zadania, to w~danym momencie optymalnym wyborem jest to zadanie ze zbioru $S$, które ma minimalną wagę (o~ile $S$ nie jest zbiorem pustym).
+Zaimplementowanie zbioru dynamicznego $S$ w~postaci kolejki priorytetowej typu min, pozwala na szybkie pobieranie elementu o~minimalnej wadze oraz na dekrementowanie wag elementów.
+W~trakcie działania algorytmu każde zadanie zostanie wstawione do $S$, a~po wyzerowaniu jego wagi usunięte.
+Łącznie wykonanych będzie $P=\sum_{i=1}^np_i$ dekrementacji wag elementów i~tyle samo wyszukiwań elementu o~najmniejszej wadze w~$S$.
+Zbiór $S$ może zawierać maksymalnie $n$ elementów, zatem algorytm wykona co najwyżej $O(P\lg n)$ operacji.
