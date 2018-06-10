@@ -16,10 +16,6 @@ Mamy $c_i=i$ dla $i$ postaci $2^k$, gdzie $k=1$, 2, \dots, $\lfloor\lg n\rfloor$
 Koszt pozostałych $n-\lfloor\lg n\rfloor$ operacji wynosi 1.
 Sumaryczny czas wymagany przez wszystkie operacje w~tym ciągu jest więc równy
 \[
-	T(n) = \sum_{i=1}^nc_i = \sum_{k=1}^{\lfloor\lg n\rfloor}2^k+n-\lfloor\lg n\rfloor = 2^{\lfloor\lg n\rfloor+1}-2+n-\lfloor\lg n\rfloor.
+	T(n) = \sum_{i=1}^nc_i = \sum_{k=1}^{\lfloor\lg n\rfloor}2^k+n-\lfloor\lg n\rfloor = 2^{\lfloor\lg n\rfloor+1}-2+n-\lfloor\lg n\rfloor < 2^{\lg n+1}+n = 2n+n = 3n.
 \]
-Zachodzi $n>\lfloor\lg n\rfloor$, więc powyższe wyrażenie można oszacować przez
-\[
-	T(n) > 2^{\lg n}-2+n-n = n-2 \quad\text{oraz}\quad T(n) < 2^{\lg n+1}+n = 2n+n = 3n,
-\]
-skąd $T(n)=\Theta(n)$ i~kosztem zamortyzowanym każdej operacji w~tym ciągu jest $T(n)/n=\Theta(1)$.
+Zatem $T(n)=O(n)$ i~kosztem zamortyzowanym każdej operacji w~tym ciągu jest $T(n)/n=O(1)$.
