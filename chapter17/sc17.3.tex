@@ -34,6 +34,12 @@ Stąd pesymistyczny koszt ciągu $n$ operacji wynosi $O(n)$.
 
 \exercise %17.3-3
 \exercise %17.3-4
+Jeśli skorzystamy z~funkcji $\Phi$ przyjmującej wysokość stosu, to $\Phi(D_0)=s_0$ i~$\Phi(D_n)=s_n$.
+Zgodnie z~równaniem (17.3) mamy więc, że łączny koszt zamortyzowany ciągu $n$ operacji na stosie wynosi \[
+	\sum_{i=1}^n\widehat{c_i} = \sum_{i=1}^nc_i+\Phi(D_n)-\Phi(D_0) = O(n)+s_n-s_0.
+\]
+Jeśli $s_n\ge s_0$, to wyrażenie powyższe stanowi górne ograniczenie łącznego kosztu faktycznego.
+
 \exercise %17.3-5
 \exercise %17.3-6
 \exercise %17.3-7
