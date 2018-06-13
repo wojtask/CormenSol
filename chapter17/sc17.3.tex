@@ -11,6 +11,27 @@ Następnie mamy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_1)+\Phi'(D_1)$ i~wstawiając uprzed
 Postępując w~ten sposób dla kolejnych $i$, skonstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$ dla każdego $i=1$, 2, \dots, $n$.
 
 \exercise %17.3-2
+W~naszej analizie skorzystamy z~następującej funkcji potencjału:
+\[
+	\Phi(D_i) = \begin{cases}
+		0, & \text{jeśli $i=0$}, \\
+		k+2, & \text{jeśli $i=2^k$, $k=1$, 2, \dots, $\lfloor\lg n\rfloor$}, \\
+		\Phi(D_{i-1})+2, & \text{w~przeciwnym przypadku}.
+	\end{cases}
+\]
+Gdy $i=1$ lub gdy $i$ nie jest potęgą 2, to $\widehat{c_i}=c_i+\Phi(D_i)-\Phi(D_{i-1})=1+2=3$.
+Przyjmijmy teraz, że $i=2^k$ dla pewnego $k=1$, 2, \dots, $\lfloor\lg n\rfloor$.
+Mamy
+\begin{align*}
+	\widehat{c_{2^k}} &= c_{2^k}+\Phi(D_{2^k})-\Phi(D_{2^k-1}) \\
+	&= 2^k+k+2-\bigl(\Phi(D_{2^{k-1}})+2(2^k-1-2^{k-1})\bigr) \\
+	&= 2^k+k+2-(k+1+2^k-2) \\
+	&= 3.
+\end{align*}
+Dzięki wybraniu szczególnej funkcji $\Phi$, jako koszt zamortyzowany każdej operacji mogliśmy przyjąć 3, podobnie jak w~rozwiązaniu \refExercise{17.2-2}.
+Oczywiście $\Phi(D_i)\ge\Phi(D_0)$ dla każdego $i\ge1$, zatem łączny koszt zamortyzowany $n$ operacji stanowi górne ograniczenie ich faktycznego kosztu.
+Stąd pesymistyczny koszt ciągu $n$ operacji wynosi $O(n)$.
+
 \exercise %17.3-3
 \exercise %17.3-4
 \exercise %17.3-5
