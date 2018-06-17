@@ -45,4 +45,27 @@ Jeśli $n=\Omega(b)$, to $b=O(n)$.
 Zgodnie z~wynikiem przedstawionym w~Podręczniku, łączny koszt $n$ operacji \proc{Increment} można ograniczyć od góry przez $2n+b=O(n)$.
 
 \exercise %17.3-6
+Podamy bardziej efektywne rozwiązanie \refExercise{10.1-6}, które pozwoli nam na osiągnięcie zamierzonych czasów zamortyzowanych.
+Elementy kolejki będziemy przechowywać na dwóch stosach $S_1$ i~$S_2$.
+Operacja \proc{Enqueue} w~tej implementacji będzie wywołaniem \proc{Push} na stosie $S_1$, a~operacja \proc{Dequeue} będzie realizowana przez poniższy pseudokod:
+\begin{codebox}
+\Procname{$\proc{Effective-Stack-Dequeue}(S_1,S_2)$}
+\li	\If $\proc{Stack-Empty}(S_2)$
+\li		\Then \While $\proc{Stack-Empty}(S_1)=\const{false}$
+\li				\Do $\proc{Push}(S_2,\proc{Pop}(S_1))$
+				\End
+		\End
+\li	\Return $\proc{Pop}(S_2)$
+\end{codebox}
+Rzeczywisty koszt operacji \proc{Enqueue} wynosi $c_E=1$, zaś rzeczywisty koszt operacji \proc{Dequeue} $c_D$ zależy od pustości stosu $S_2$.
+Jeśli stos ten nie jest pusty, to $c_D=1$.
+W~przeciwnym przypadku wykonywanych jest $k$ operacji \proc{Push} oraz $k+1$ operacji \proc{Pop}, gdzie $k$ to rozmiar stosu $S_1$ sprzed wykonania operacji.
+Wówczas $c_D=2k+1$.
+
+Jako potencjał naszej struktury danych przyjmiemy dwukrotność rozmiaru stosu $S_1$.
+W~trakcie operacji wstawiania do kolejki pierwszy stos zwiększa swój rozmiar o~1, dlatego zamortyzowany koszt tej operacji jest równy $\widehat{c_E}=c_E+2\cdot1=3$.
+Jeśli $S_2$ jest stosem niepustym, to koszt zamortyzowany operacji \proc{Dequeue} $\widehat{c_D}$ wynosi $c_D$.
+Gdy stos $S_2$ jest pusty, to podczas usuwania elementu z~kolejki stos $S_1$ zmniejsza swój rozmiar o~$k$, więc $\widehat{c_D}=c_D-2k=1$.
+Koszty zamortyzowane obu operacji w~tej implementacji wynoszą zatem $O(1)$.
+
 \exercise %17.3-7
