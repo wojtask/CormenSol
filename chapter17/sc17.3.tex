@@ -33,6 +33,27 @@ Oczywiście $\Phi(D_i)\ge\Phi(D_0)$ dla każdego $i\ge1$, zatem łączny koszt z
 Stąd pesymistyczny koszt ciągu $n$ operacji wynosi $O(n)$.
 
 \exercise %17.3-3
+Na początkowo pustym kopcu $D_0$ wykonujemy ciąg operacji \proc{Insert} lub \proc{Extract-Min}.
+Przez $D_i$ oznaczmy kopiec powstały po wykonaniu \singledash{$i$}{tej} operacji, a~przez $n_i$ -- liczbę jego węzłów.
+Niech $k>0$ będzie taką stałą, że zarówno koszt $c_I$ operacji \proc{Insert}, jak i~koszt $c_X$ operacji \proc{Extract-Min} na \singledash{$n$}{elementowym} kopcu można ograniczyć z~góry przez $k\lg n$.
+
+Rozważymy funkcję potencjału
+\[
+	\Phi(D_i) = \sum_{x\in D_i}k(d_i(x)+1),
+\]
+gdzie $d_i(x)$ oznacza głębokość węzła $x$ w~kopcu $D_i$.
+Dla pustego kopca mamy $\Phi(D_0)=0$, a~dla każdego $i$, $\Phi(D_i)\ge0$.
+Gdy do kopca $D_{i-1}$ wstawiany jest nowy węzeł, to ląduje on na głębokości $\lfloor\lg(n_{i-1}+1)\rfloor$, nie naruszając przy tym pozycji pozostałych węzłów.
+Mamy $n_i=n_{i-1}+1$ oraz $\Phi(D_i)-\Phi(D_{i-1})=k(\lfloor\lg(n_{i-1}+1)\rfloor+1)=k(\lfloor\lg n_i\rfloor+1)$, skąd zamortyzowanym kosztem operacji \proc{Insert} jest
+\[
+	\widehat{c_I} = c_I+\Phi(D_i)-\Phi(D_{i-1}) \le k\lg n_{i-1}+k(\lfloor\lg n_i\rfloor+1) < k\lg n_i+k(\lg n_i+1) = O(\lg n_i).
+\]
+Po wykonaniu operacji \proc{Extract-Min} kopiec $D_{i-1}$ zostaje pozbawiony węzła znajdującego się na najniższym jego poziomie.
+Potencjał kopca maleje więc o~$k(\lfloor\lg n_{i-1}\rfloor+1)$ i~zamortyzowany koszt tej operacji można oszacować przez
+\[
+	\widehat{c_X} = c_X+\Phi(D_i)-\Phi(D_{i-1}) \le k\lg n_{i-1}-k(\lfloor\lg n_{i-1}\rfloor+1) < k(\lg n_{i-1}-\lfloor\lg n_{i-1}\rfloor) < k = O(1).
+\]
+
 \exercise %17.3-4
 Jeśli skorzystamy z~funkcji $\Phi$ przyjmującej wysokość stosu, to $\Phi(D_0)=s_0$ i~$\Phi(D_n)=s_n$.
 Zgodnie z~równaniem (17.3) mamy więc, że łączny koszt zamortyzowany ciągu $n$ operacji na stosie wynosi \[
