@@ -25,19 +25,19 @@ W~poniższym algorytmie przyjmujemy, że zajęcia zostały uporządkowane niemal
 \li	\Return $A_{0,n+1}$
 \end{codebox}
 Algorytm oblicza wartości $c[i,j]$ oraz konstruuje zbiory $A_{i,j}$ dla $0\le i<j\le n+1$.
-W~pierwszej iteracji pętli głównej (wiersze \doubledash{\ref{li:dynamic-activity-selector-main-loop-begin}}{\ref{li:dynamic-activity-selector-main-loop-end}}) dla $i=0$, 1, \dots, $n$ za pomocą równania (16.3) wyznaczane są wartości $c[i,i+1]$, a~na podstawie wzoru (16.2) zbiory $A_{i,i+1}$, czyli rozwiązywane są podproblemy składające się z~dokładnie dwóch zajęć.
-W~kolejnej iteracji zostają wyznaczone rozwiązania podproblemów z~dokładnie trzema zajęciami itd.
+W~pierwszej iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:dynamic-activity-selector-main-loop-begin}}{\ref{li:dynamic-activity-selector-main-loop-end}} dla $i=0$, 1, \dots, $n$ za pomocą równania (16.3) wyznaczane są wartości $c[i,i+1]$, a~na podstawie wzoru (16.2) zbiory $A_{i,i+1}$, czyli rozwiązywane są podproblemy składające się z~dokładnie dwóch zajęć.
+W~kolejnych iteracjach wyznaczane są rozwiązania podproblemów z~coraz większą ilością zajęć.
 Zwracanym wynikiem jest najliczniejszy zbiór zajęć stanowiący rozwiązanie podproblemu $S_{0,n+1}=S$.
 
 Struktura pętli zaprezentowanego algorytmu przypomina tę z~procedury \proc{Matrix-Chain-Order} z~podrozdziału 15.2.
-Można więc zastosować tu podobną analizę efektywności jak w~przypadku tamtej procedury i~dojść do oszacowania $\Theta(n^3)$ na czas działania naszego algorytmu -- znacznie wyższego od złożoności czasowej rozwiązania zachłannego.
+Z~tego powodu analizę efektywności tej procedury można zaadaptować do obecnego algorytmu i~dojść do oszacowania $\Theta(n^3)$ na czas jego działania -- znacznie wyższego od złożoności czasowej rozwiązania zachłannego.
 
 \exercise %16.1-2
-Załóżmy, że zajęcia $a_1$, $a_2$, \dots, $a_n$, wraz z~dwoma fikcyjnymi $a_0$ i~$a_{n+1}$, uporządkowane są według czasów rozpoczęcia, tzn.
+Załóżmy, że zajęcia $a_1$, $a_2$, \dots, $a_n$, wraz z~dwoma fikcyjnymi $a_0$ i~$a_{n+1}$, uporządkowane są według czasów rozpoczęcia:
 \[
 	s_0 \le s_1 \le s_2 \le \dots \le s_n \le s_{n+1}.
 \]
-Możemy wówczas udowodnić następujące twierdzenie analogiczne do tw.\ 16.1:
+Wówczas prawdziwe jest następujące twierdzenie analogiczne do tw.\ 16.1:
 
 \bigskip
 \noindent\textsf{\textbf{Twierdzenie 16.1\/$'$.}} \textit{Rozważmy niepusty podproblem\/ $S_{i,j}$ i~niech\/ $a_m$ będą zajęciami w\/~$S_{i,j}$ rozpoczynającymi się najpóźniej:
@@ -46,7 +46,7 @@ Możemy wówczas udowodnić następujące twierdzenie analogiczne do tw.\ 16.1:
 \]
 Wtedy:
 \begin{enumerate}
-	\item Wśród najliczniejszych pozdbiorów parami zgodnych zajęć z\/~$S_{i,j}$ istnieje taki, który zawiera\/ $a_m$.
+	\item Wśród najliczniejszych podzbiorów parami zgodnych zajęć z\/~$S_{i,j}$ istnieje taki, który zawiera\/ $a_m$.
 	\item Podproblem\/ $S_{m,j}$ jest pusty, tak więc po wybraniu\/ $a_m$ jedynym niepustym podproblemem może być tylko\/ $S_{i,m}$.
 \end{enumerate}
 }
@@ -71,7 +71,6 @@ Poniższy pseudokod jest implementacją wariantu iteracyjnego.
 
 \exercise %16.1-3
 Założymy, że liczba dostępnych sal wykładowych jest odpowiednio duża, aby pomieścić wszystkie zajęcia.
-
 Wykorzystamy pomysł z~rozwiązania \refExercise{14.3-7}.
 Zdarzenia polegające na rozpoczęciu lub zakończeniu zajęć będziemy przeglądać od najwcześniejszego do najpóźniejszego, przy czym w~danej chwili zakończenia będą rozważane przed rozpoczęciami (co wynika z~prawostronnej otwartości przedziałów czasowych zajmowanych przez zajęcia).
 Równocześnie będziemy utrzymywać stos $F$ złożony z~wolnych sal wykładowych oraz zbiór $B$ sal zajmowanych w~danej chwili.
@@ -79,14 +78,14 @@ Początkowo zbiór $B$ jest pusty.
 Jeśli kolejnym napotkanym zdarzeniem jest rozpoczęcie pewnych zajęć $a_i$, to przypiszemy je do nowej wolnej sali poprzez pobranie jej ze stosu $F$ i~umieszczenie w~zbiorze $B$ wraz z~informacją, że jest ona zajmowana przez zajęcia $a_i$.
 Gdy z~kolei napotkamy zakończenie pewnych zajęć $a_j$, to w~zbiorze $B$ należy odszukać jedyną salę zajmowaną przez $a_j$, a~następnie umieścić ją na stosie $F$.
 
-Zastosowanie stosu do przechowywania wolnych sal sprawia, że użyjemy ich tylko tyle, ile potrzeba.
+Wykorzystanie stosu do przechowywania wolnych sal sprawia, że użyjemy ich tylko tyle, ile potrzeba.
 Załóżmy, że w~trakcie działania algorytmu największym rozmiarem zbioru $B$ jest $m$ i~niech $a_k$ będą pierwszymi zajęciami przypisanymi do \singledash{$m$}{tej} sali.
 Powodem, dla którego zajęcia $a_k$ zajęły tę salę, jest to, że pozostałe $m-1$ sal było zajętych w~chwili $s_k$, co oznacza, że w~chwili tej odbywa się jednocześnie $m$ zajęć.
 Stąd w~każdym przydziale zajęć do sal musi być użytych co najmniej $m$ sal, więc przydział zwracany przez nasz algorytm jest optymalny.
 
 Czas działania algorytmu jest sumą czasu spędzonego na sortowaniu rozpoczęć i~zakończeń zajęć oraz czasu spędzonego na ich przeglądaniu i~konstruowaniu rozwiązania.
 Do efektywnego zaimplementowania zbioru dynamicznego $B$ można zastosować np.\ drzewa czerwono-czarne.
-Jesteśmy więc w~stanie podać implementację tego algorytmu wymagającą czasu $\Theta(n\lg n)$, gdzie $n$ jest ilością zajęć na wejściu.
+Jesteśmy więc w~stanie podać implementację tego algorytmu działającą w~czasie $O(n\lg n)$, gdzie $n$ jest ilością zajęć na wejściu.
 
 \exercise %16.1-4
 \note{Oryginalna treść zadania wymaga też podania kontrprzykładu dla strategii polegającej na wyborze zajęć o~najwcześniejszym czasie rozpoczęcia spośród zajęć zgodnych z~dotychczas wybranymi.}
@@ -107,7 +106,7 @@ Jesteśmy więc w~stanie podać implementację tego algorytmu wymagającą czasu
 \end{center}
 W~obu sytuacjach zastosowanie danej strategii skutkuje uzyskaniem zbioru $\{a_1\}$, podczas gdy zbiór $\{a_2,a_3\}$ złożony z~parami zgodnych zajęć jest liczniejszy.
 
-Dla strategii opartej na wyborze zajęcia kolidującego z~najmniejszą liczbą pozostałych zajęć do rozpatrzenia można podać następujący kontrprzykład:
+Dla strategii opartej na wyborze zajęcia kolidującego z~najmniejszą liczbą pozostałych zajęć do rozpatrzenia rozważmy następujący zbiór:
 \begin{center}
 	\begin{tabular}{cccccccccccc}
 		$i$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ \hline
@@ -115,4 +114,4 @@ Dla strategii opartej na wyborze zajęcia kolidującego z~najmniejszą liczbą p
 		$f_i$ & 3 & 4 & 4 & 4 & 5 & 6 & 7 & 8 & 8 & 8 & 9
 	\end{tabular}
 \end{center}
-Istnieje tylko jeden zbiór 4 parami zgodnych zajęć, $\{a_1,a_5,a_7,a_{11}\}$, natomiast w~obranej strategii w~pierwszym kroku wybierane są zajęcia $a_6$, co prowadzi do rozwiązania będącego zbiorem o~mniej niż 4 elementach.
+Istnieje tylko jeden zbiór czterech parami zgodnych zajęć, $\{a_1,a_5,a_7,a_{11}\}$, natomiast w~obranej strategii w~pierwszym kroku wybierane są zajęcia $a_6$, co prowadzi do rozwiązania mniej licznego.
