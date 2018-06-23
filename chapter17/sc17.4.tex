@@ -1,6 +1,11 @@
 \subchapter{Tablice dynamiczne}
 
 \exercise %17.4-1
+Z~twierdzeń 11.6 i~11.8 oraz z~wniosku 11.7 wynika, że koszty operacji wstawiania i~wyszukiwania elementu w~tablicy z~haszowaniem z~adresowaniem otwartym dążą do nieskończoności, gdy tylko współczynnik zapełnienia zbliża się do 1.
+Wybranie pewnej stałej mniejszej niż 1 jako maksymalnego dopuszczalnego współczynnika zapełnienia takiej tablicy z~haszowaniem pozwala na ograniczenie tych kosztów przez stałą.
+Gdy tablica wypełni się, wszystkie jej elementy zostaną przeniesione do tablicy o~większym rozmiarze i~wówczas operacja wstawiania będzie potrzebować więcej czasu niż $O(1)$.
+Przeprowadzając analogiczną analizę do tej z~Podręcznika dla \proc{Table-Insert}, można wykazać, że oczekiwany czas zamortyzowany operacji wstawiania do dynamicznej tablicy z~haszowaniem wynosi $O(1)$.
+
 \exercise %17.4-2
 Gdy $\alpha_{i-1}\ge1/2$, to jedynymi sytuacjami, kiedy współczynnik zapełnienia zostaje obniżony poniżej $1/4$, jest wykonanie operacji \proc{Table-Delete} na tablicy dynamicznej, w~której $\id{size}_{i-1}\le2$ oraz $\id{num}_{i-1}=1$.
 Oczywiście zamortyzowany koszt operacji usuwania w~takich przypadkach jest ograniczony przez stałą.
