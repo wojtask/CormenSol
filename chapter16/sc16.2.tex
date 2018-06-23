@@ -2,7 +2,6 @@
 
 \exercise %16.2-1
 Pokażemy, że w~optymalnym plecaku będącym rozwiązaniem ciągłego problemu plecakowego musi wystąpić maksymalna ilość najbardziej wartościowego przedmiotu $a_m$, nieprzekraczająca pojemności plecaka $W$.
-
 Załóżmy, że dysponujemy rozwiązaniem problemu, w~którym przedmiot $a_m$ występuje w~wadze $u<\min(w_m,W)$ kilogramów.
 Wyrzućmy teraz z~plecaka łącznie $d=\min(w_m,W)-u$ kilogramów innych przedmiotów i~na to miejsce dobierzmy $d$ kilogramów przedmiotu $a_m$.
 Ponieważ wartości jednostkowe usuniętych przedmiotów nie przekraczają wartości na jednostkę masy przedmiotu $a_m$, to ubytek wartości plecaka spowodowany ich usunięciem jest niewiększy niż $dv_m$.
@@ -12,7 +11,7 @@ Jednak przyrost wartości po dodaniu $d$ kilogramów przedmiotu $a_m$ jest równ
 Niech $a_1$, $a_2$, \dots, $a_n$ będą przedmiotami, które złodziej będzie wkładał do plecaka.
 Przedmioty te ważą, odpowiednio $w_1$, $w_2$, \dots, $w_n$ i~są warte, odpowiednio, $v_1$, $v_2$, \dots, $v_n$.
 Niech $S_{i,j}$, dla $0\le i\le n$, $0\le j\le W$, będzie podproblemem polegającym na wybraniu do plecaka przedmiotów spośród $a_1$, \dots, $a_i$ o~sumarycznej wadze nieprzekraczającej $j$ i~możliwie największej sumarycznej wartości.
-Podczas rozwiązywania podproblemu $S_{i,j}$, gdzie $i\ge1$, musimy zdecydować, czy włożyć do plecaka przedmiot $a_i$ (o~ile $w_i\le j$).
+Podczas rozwiązywania podproblemu $S_{i,j}$, gdzie $i\ge1$, złodziej musi zdecydować, czy włożyć do plecaka przedmiot $a_i$ (o~ile $w_i\le j$).
 Jeśli tak, to do sumarycznej wartości konstruowanego plecaka należy dodać wartość $v_i$ wprowadzaną przez ten przedmiot, a~następnie rozwiązać podproblem $S_{i-1,j-w_i}$.
 W~przeciwnym przypadku podproblem, jaki zostaje do rozpatrzenia to $S_{i-1,j}$, a~sumaryczna wartość nie zostaje powiększona.
 Zdefiniujmy $K[i,j]$ jako największą sumaryczną wartość przedmiotów wchodzących w~skład rozwiązania podproblemu $S_{i,j}$.
@@ -60,54 +59,53 @@ W~celu wypisania rozwiązania całego problemu, czyli $S_{n,W}$, procedura powin
 
 \exercise %16.2-3
 Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ posortowane są według niemalejących wag, czyli $w_1\le w_2\le\dots\le w_n$.
-Z~założenia mamy też, że kolejne wartości tych przedmiotów tworzą ciąg nierosnący: $v_1\ge v_2\ge\dots\ge v_n$.
+Z~założenia mamy też, że wartości tych przedmiotów tworzą ciąg nierosnący: $v_1\ge v_2\ge\dots\ge v_n$.
 Przez $A_W$ oznaczmy optymalny podzbiór przedmiotów będący rozwiązaniem dyskretnego problemu plecakowego, gdzie $W$ jest pojemnością plecaka.
-
 Niech $1\le i<j\le n$.
 Udowodnimy, że jeśli $a_j\in A_W$, to $a_i\in A_W$, co jest równoważne temu, że istnieje $0\le k\le n$, że $A_W=\{a_1,a_2,\dots,a_k\}$.
-Ustalmy $i$, $j$, takie że $1\le i<j\le n$ i~załóżmy nie-wprost, że $a_j\in A_W$, ale $a_i\not\in A_W$.
+Ustalmy $i$, $j$ i~załóżmy, że $a_j\in A_W$, ale $a_i\not\in A_W$.
 Rozważmy zbiór $A_W'=A_W\setminus\{a_j\}\cup\{a_i\}$.
 Ponieważ $w_i\le w_j$, to elementy $A_W'$ mieszczą się w~plecaku o~pojemności $W$, toteż $A_W'$ może stanowić rozwiązanie problemu.
 Jednak suma wartości przedmiotów wchodzących w~skład $A_W'$ jest większa od sumarycznej wartości przedmiotów z~$A_W$ o~$v_i-v_j\ge0$.
 Oznacza to, że $A_W'$ jest rozwiązaniem rozważanego problemu plecakowego o~niemniejszej wartości, co stoi w~sprzeczności z~definicją $A_W$.
 
 Udowodniona obserwacja pozwala nam na skonstruowanie rozwiązania za pomocą algorytmu zachłannego.
-Wystarczy przeglądać przedmioty od najlżejszych do najcięższych (czyli równoważnie, od najbardziej do najmniej wartościowych) i~włączać aktualny przedmiot do rozwiązania, o~ile tylko wraz z~poprzednio wybranymi przedmiotami nie przekracza pojemności plecaka.
+Wystarczy przeglądać przedmioty od najlżejszych do najcięższych (czyli równoważnie, od najbardziej do najmniej wartościowych) i~włączać aktualny przedmiot do rozwiązania, o~ile tylko wraz z~poprzednio wybranymi przedmiotami mieści się w~plecaku.
 
 \exercise %16.2-4
 Załóżmy, że na trasie znajduje się $m$ stacji benzynowych i~że żadne kolejne stacje nie są oddalone od siebie o~więcej niż $n$ kilometrów.
 Ponumerujmy je kolejnymi liczbami naturalnymi od 1 do $m$ wzdłuż trasy pokonywanej przez profesora.
 Pokażemy, że problem ma własność optymalnej podstruktury.
-Rozważmy optymalne rozwiązanie zawierające $s$ stacji, przy czym pierwszy przystanek znajduje się na \singledash{$k$}{tej} stacji.
+Rozważmy optymalne rozwiązanie zawierające $s$ stacji z~pierwszym przystankiem znajdującym się na stacji o~numerze $k$.
 Wówczas rozwiązanie dla podproblemu z~pozostałymi $m-k$ stacjami musi być optymalne; w~przeciwnym wypadku bowiem moglibyśmy zastąpić je lepszym, tzn.\ takim, w~którym występuje mniej niż $s-1$ stacji, uzyskując tym samym dla głównego problemu rozwiązanie o~mniej niż $s$ stacjach.
 
 Problem cechuje także własność wyboru zachłannego.
 Załóżmy, że na trasie w~odległości co najwyżej $n$ kilometrów od startu znajduje się dokładnie $k$ stacji benzynowych.
 Profesor nie może wybrać na pierwszy przystanek stacji o~numerze większym niż $k$, gdyż nie jest możliwe dojechanie do niej bez tankowania po drodze.
 W~optymalnym rozwiązaniu nie opłaca się też wybierać jako pierwszej stacji o~numerze $j<k$.
-Jest tak dlatego, że gdyby wybrana została stacja $j$, to później, w~momencie przejeżdżania obok stacji $k$, w~baku pozostałoby mniej paliwa niż wtedy, gdy profesor opuszczałby stację $k$ po zatankowaniu na niej.
+Jest tak dlatego, że gdyby wybrana została stacja $j$, to później, w~momencie przejeżdżania obok stacji $k$, w~baku pozostałoby mniej paliwa niż w~momencie opuszczania stacji $k$ po pierwszym zatankowaniu na niej.
 Innymi słowy, wybór stacji $k$ pozwala na dojechanie dalej, niż gdyby wybór padł na stację $j$.
 
-Na podstawie tych własności możemy podać prosty algorytm zachłanny, który wyznacza optymalny ciąg tankowań w~czasie $O(m)$.
+Korzystając z~tych własności, możemy podać prosty algorytm zachłanny wyznaczający optymalny ciąg tankowań w~czasie $O(m)$.
 
 \exercise %16.2-5
 \note{Przyjmiemy, że punkty ze zbioru wejściowego znajdują się na prostej rzeczywistej, według oryginalnej treści zadania.}
 
-\noindent Punkty wejściowe utożsamimy z~liczbami rzeczywistymi będącymi ich współrzędnymi na prostej rzeczywistej.
-Rozważmy podproblem $S_i$ tego problemu, w~którym zbiorem punktów wejściowych jest $X_i=\{x_i,x_{i+1},\dots,x_n\}$, gdzie $x_i$ jest punktem położonym na prostej rzeczywistej najbardziej na lewo spośród punktów z~$X_i$.
+\noindent Punkty wejściowe utożsamimy z~ich współrzędnymi na prostej rzeczywistej.
+Rozważmy podproblem $S_i$ tego problemu, w~którym zbiorem punktów wejściowych jest $X_i=\{x_i,x_{i+1},\dots,x_n\}$, przy czym $x_i$ jest punktem położonym na prostej rzeczywistej najbardziej na lewo spośród punktów z~$X_i$.
 Udowodnimy, że problem wykazuje własność optymalnej podstruktury.
 Niech $C_i$ będzie rozwiązaniem podproblemu $S_i$, czyli najmniejszym zbiorem przedziałów domkniętych o~długości jednostkowej, których suma zawiera wszystkie punkty z~$X_i$.
 Rozważmy jeden z~przedziałów $I\in C_i$ zawierający punkt $x_i$.
 Jeśli przedział ten pokrywa wszystkie punkty z~$X_i$, to $C_i=\{I\}$.
-W~przeciwnym przypadku niech $x_j$ będzie punktem w~$X_i$ o~najmniejszej współrzędnej rzeczywistej i~nienależącym do przedziału $I$.
+W~przeciwnym przypadku niech $x_j$ będzie punktem w~$X_i\setminus I$ o~najmniejszej współrzędnej rzeczywistej.
 Wówczas $C_i=\{I\}\cup C_j$.
 Oczywiście zbiór $C_j$ jest optymalnym rozwiązaniem podproblemu $S_j$.
-Gdyby było inaczej, moglibyśmy zastąpić go mniejszym, uzyskując dla $S_i$ rozwiązanie o~mniejszej liczności niż $C_i$, co prowadzi do sprzeczności z~założeniem.
+Gdyby było inaczej, moglibyśmy zastąpić go mniejszym, uzyskując dla $S_i$ rozwiązanie o~mniejszej liczności niż $C_i$, co stoi w~sprzeczności z~definicją zbioru $C_i$.
 
 Problem ma też własność wyboru zachłannego.
 Załóżmy, że dysponujemy rozwiązaniem podproblemu $S_i$ zawierającym przedział $I=[a,a+1]$, w~którym $a<x_i\le a+1$.
 Usuńmy teraz $I$ z~rozwiązania i~zastąpmy go przedziałem $I'=[x_i,x_i+1]$.
-Podobnie jak $I$, przedział $I'$ też zawiera punkt $x_i$, a~ponadto może pokryć więcej punktów wejściowych, bo jego prawy koniec $x_i+1$ leży na prawo od prawego końca $a+1$ przedziału $I$.
+Podobnie jak $I$, przedział $I'$ też zawiera punkt $x_i$, a~ponadto może potencjalnie pokryć więcej punktów wejściowych niż $I$, bo jego prawy koniec $x_i+1$ leży na prawo od prawego końca $a+1$ przedziału $I$.
 Nowe rozwiązanie jest więc niegorsze od początkowego, zawierającego $I$.
 
 Algorytm rozwiązujący problem będzie sortował punkty wejściowe, a~następnie przeglądał je od lewej do prawej.
@@ -117,11 +115,11 @@ Po wyczerpaniu wszystkich punktów zwrócony zostanie skonstruowany zbiór przed
 Czas działania algorytmu zdominowany jest przez czas spędzony na sortowaniu punktów.
 
 \exercise %16.2-6
-Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ posortowane są według nierosnących wartości na jednostkę masy, tzn.\ $v_1/w_1\ge v_2/w_2\ge\dots\ge v_n/w_n$.
+Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ zostały posortowane według nierosnących wartości na jednostkę masy, tzn.\ zachodzi $v_1/w_1\ge v_2/w_2\ge\dots\ge v_n/w_n$.
 W~optymalnym plecaku stanowiącym rozwiązanie ciągłego problemu plecakowego istnieje takie $1\le k\le n$, że przedmioty $a_{k'}$ dla $1\le k'<k$ znajdują się w~plecaku w~całości, a~przedmiotów $a_{k''}$ dla $k<k''\le n$ nie ma w~plecaku w~ogóle.
 A~zatem problem ten tak naprawdę sprowadza się do znalezienia odpowiedniego $k$ oraz udziału przedmiotu $a_k$ w~plecaku.
 
-Pokażemy, jak zrobić to w~czasie $O(n)$ w~sytuacji, gdy nie znamy uporządkowania przedmiotów według wartości jednostkowej.
+Pokażemy, jak to zrobić w~czasie $O(n)$ w~sytuacji, gdy nie znamy uporządkowania przedmiotów według wartości jednostkowej.
 Wykorzystując algorytm \proc{Select} z~podrozdziału 9.3, wyznaczmy medianę $m$ zbioru ilorazów $v_i/w_i$ i~zdefiniujmy zbiory
 \[
 	G = \{\,a_i:v_i/w_i>m\,\}, \quad E = \{\,a_i:v_i/w_i=m\,\}, \quad L = \{\,a_i:v_i/w_i<m\,\}
@@ -132,22 +130,21 @@ oraz sumy
 \]
 Jeśli $w_G>W$, to w~plecaku nie możemy umieścić w~całości wszystkich przedmiotów ze zbioru $G$, więc wywołujemy nasz algorytm rekurencyjnie dla tych przedmiotów i~zwracamy wynik tego wywołania jako wynik oryginalnego problemu.
 W~przeciwnym przypadku $w_G\le W$, więc zbiór $G$ można włączyć do rozwiązania, a~następnie dobrać maksymalną ilość przedmiotów z~$E$ (pamiętajmy, że możemy brać części ułamkowe), która zmieści się w~pozostałej pojemności $W-w_G$.
-Nierówność $w_G+w_E\ge W$ oznacza, że w~plecaku nie zostało już wolnego miejsca po wybraniu w~całości wszystkich przedmiotów z~$G$ i~$E$, i~jeśli ona zachodzi, to można zakończyć algorytm.
+Jeśli w~trakcie dobierania przedmiotów z~$E$ w~plecaku skończyło się miejsce, czyli gdy spełniona jest nierówność $w_G+w_E\ge W$, to można zakończyć algorytm.
 W~przeciwnym wypadku wystarczy wywołać go rekurencyjnie dla przedmiotów z~$L$ oraz plecaka o~pojemności $W-w_G-w_E$ i~dołączyć jego wynik do konstruowanego rozwiązania.
 
-Wyznaczenie mediany $m$ wymaga czasu co najwyżej $O(n)$.
-Zauważmy, że na każde wywołanie algorytmu przypada $\Theta(n)$ operacji plus co najwyżej jedno wywołanie rekurencyjne.
+Na każdym poziomie rekursji dla zbioru przedmiotów o~rozmiarze $n$ wykonywanych jest $O(n)$ operacji plus co najwyżej jedno wywołanie rekurencyjne.
 Wybór mediany na ,,element rozdzielający'' jest optymalne w~tym sensie, że kolejne wywołanie rekurencyjne dostaje na wejściu zbiór przedmiotów o~rozmiarze nieprzekraczającym połowy rozmiaru bieżącego zbioru przedmiotów.
-Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm, $T(n)\le T(n/2)+\Theta(n)$, której rozwiązaniem jest $T(n)=O(n)$.
+Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm, $T(n)\le T(n/2)+O(n)$, której rozwiązaniem jest $T(n)=O(n)$.
 
 \exercise %16.2-7
 Posortujmy zbiór $A$ i~zbiór $B$ niemalejąco.
 Niech $1\le i<j\le n$.
-Zachodzi wtedy $a_i\le a_j$ oraz $b_i\le b_j$, skąd
+Wówczas $a_i\le a_j$, $b_i\le b_j$ oraz
 \[
 	\frac{a_i^{b_i}a_j^{b_j}}{a_i^{b_j}a_j^{b_i}} = \frac{a_j^{b_j-b_i}}{a_i^{b_j-b_i}} = \biggl(\frac{a_j}{a_i}\biggr)^{b_j-b_i} \ge 1.
 \]
 Ostatnia nierówność zachodzi, ponieważ $a_j/a_i\ge1$ i~$b_j-b_i\ge0$.
-Wynika z~tego, że w~iloczynie będącym zyskiem z~uporządkowania bardziej opłaca się mieć czynniki będące potęgami $a^b$, w~których podstawa $a$ jest tą samą statystyką pozycyjną w~zbiorze $A$, co wykładnik $b$ w~zbiorze $B$.
+Wynika z~tego, że w~iloczynie będącym zyskiem z~uporządkowania bardziej opłacalne są czynniki postaci $a^b$, w~których podstawa $a$ jest tą samą statystyką pozycyjną w~zbiorze $A$, co wykładnik $b$ w~zbiorze $B$.
 Jednym z~uporządkowań maksymalizujących zysk jest więc porządek niemalejący obu zbiorów lub porządek nierosnący obu zbiorów.
-Algorytm rozwiązujący ten problem może zatem jedynie sortować niemalejąco oba zbiory, co wymaga czasu $\Theta(n\lg n)$.
+Algorytm rozwiązujący ten problem może zatem jedynie sortować oba zbiory, co przy efektywnej implementacji zajmuje czas $\Theta(n\lg n)$.
