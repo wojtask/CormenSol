@@ -26,3 +26,33 @@ Jeśli natomiast $\alpha_i<1/2$, to
 A~zatem we wszystkich przypadkach $\widehat{c_i}$ jest ograniczone od góry przez stałą.
 
 \exercise %17.4-3
+W~naszej analizie skorzystamy z~oznaczeń identycznych do tych z~Podręcznika.
+Potrzebna nam będzie następująca obserwacja:
+
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych nieujemnych liczb rzeczywistych\/ $x$, $y$ zachodzi
+\[
+	|x-y|\le x+y.
+\]}
+\begin{proof}
+Jeśli $x\ge y$, to $|x-y|=x-y\le x+y$, a~jeśli $x<y$, to $|x-y|=-x+y\le x+y$.
+\end{proof}
+
+Jeśli wywołanie operacji \proc{Delete} nie powoduje zmniejszenia rozmiaru tablicy, to faktyczny koszt operacji wynosi $c_i=1$.
+Wówczas $\id{num}_i=\id{num}_{i-1}-1$, $\id{size}_i=\id{size}_{i-1}$ i~na podstawie powyższego lematu mamy
+\begin{align*}
+	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
+	&= 1+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_{i-1}-\id{size}_{i-1}| \\
+	&= 1+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_i-2-\id{size}_i| \\
+	&\le 1+(2\cdot\id{num}_i+\id{size}_i)-(2\cdot\id{num}_i+2+\id{size}_i) \\
+	&= -1.
+\end{align*}
+W~sytuacji, w~której tablica zostaje zmniejszona faktyczny koszt wynosi $c_i=\id{num}_i+1$, a~także zachodzą równości $\id{size}_i/2=\id{size}_{i-1}/3=\id{num}_{i-1}=\id{num}_i+1$.
+Koszt zamortyzowany w~tym przypadku wynosi więc
+\begin{align*}
+	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
+	&= (\id{num}_i+1)+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_{i-1}-\id{size}_{i-1}| \\
+	&= (\id{num}_i+1)+|2\cdot\id{num}_i-2\cdot\id{num}_i-2|-|2\cdot\id{num}_i+2-3\cdot\id{num}_i-3| \\
+	&= (\id{num}_i+1)+|{-}2|-|{-}\id{num}_i-1| \\
+	&= 2.
+\end{align*}
