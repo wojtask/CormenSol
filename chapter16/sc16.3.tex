@@ -2,31 +2,31 @@
 
 \exercise %16.3-1
 Drzewo $T$, które nie jest regularne, zawiera co najmniej jeden węzeł $x$ o~stopniu 1.
-Jeśli węzeł ten zostanie ,,wycięty'' z~$T$, to głębokość każdego potomka węzła $x$ zmniejszy się o~1 i~powstałe w~ten sposób drzewo będzie mieć koszt niższy od $T$.
-Można ten koszt obniżać, pozbywając się w~ten sposób wszystkich węzłów stopnia 1 i~uzyskując drzewo regularne.
+Jeśli węzeł ten zostanie ,,wycięty'' z~$T$, to głębokość każdego potomka węzła $x$ zmniejszy się o~1 i~powstałe w~ten sposób drzewo będzie mieć koszt niższy od kosztu $T$.
+Można go dalej obniżać przez pozbywanie się w~ten sposób wszystkich węzłów stopnia 1.
 
 \exercise %16.3-2
 Jeden z~optymalnych kodów Huffmana dla podanego zbioru liter i~ich częstości ilustruje rys.\ \ref{fig:16.3-2}.
 \begin{figure}[!ht]
 	\centering \input{fig16.3-2}
 	\caption{{\sffamily\bfseries(a)} Optymalny kod Huffmana dla liter \texttt{a}, \texttt{b}, \dots, \texttt{h} o~częstościach będących początkowymi liczbami Fibonacciego.
-{\sffamily\bfseries(b)} Drzewo odpowiadające optymalnemu temu kodowi uzyskane w~wyniku działania procedury \proc{Huffman}.} \label{fig:16.3-2}
+{\sffamily\bfseries(b)} Drzewo odpowiadające temu kodowi uzyskane w~wyniku działania procedury \proc{Huffman}.} \label{fig:16.3-2}
 \end{figure}
 
 Zastanówmy się, jak może wyglądać optymalny kod Huffmana dla $n$ liter o~częstościach będących początkowymi liczbami Fibonacciego.
 Przyjrzyjmy się wartości \attrib{z}{f} obliczanej w~algorytmie \proc{Huffman} w~linii 7.
-Nietrudno zauważyć, że w~\singledash{$i$}{tej} iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ pierwszych liczb Fibonacciego:
+Nietrudno zauważyć, że w~\singledash{$i$}{tej} iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ początkowych liczb Fibonacciego:
 \[
 	\attrib{z}{f} = \sum_{k=1}^{i+1}F_k = F_{i+3}-1.
 \]
-Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego wartość \attrib{z}{f} w~iteracji $i+1$ jest drugą najmniejszą w~kolejce $Q$ i~węzeł ten zostaje wybrany na prawego syna kolejnego węzła $z$.
+Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego \attrib{z}{f} w~iteracji $i+1$ jest drugą najmniejszą wartością w~kolejce $Q$ i~węzeł o~tej wartości zostaje wybrany na prawego syna kolejnego węzła $z$.
 W~pierwszej iteracji zachodzi $\attrib{z}{f}=2=F_3$, ale implementacja kolejki priorytetowej także wtedy doprowadzi do opisanego powiązania węzłów.
 Zbudowane drzewo będzie mieć wysokość $n-1$, przy czym lewy syn każdego jego węzła wewnętrznego będzie liściem.
 W~otrzymanym kodzie Huffmana, literze o~częstości $F_k$, gdzie $3\le k\le n$, przypisane zostanie słowo kodowe postaci
 \[
 	\underbrace{11\cdots1}_{n-k}0.
 \]
-Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego problemu, więc następujące dwa słowa kodowe:
+Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego problemu, więc następujące słowa kodowe
 \[
 	\underbrace{11\cdots1}_{n-2}0 \quad\text{oraz}\quad \underbrace{11\cdots1}_{n-1}
 \]
@@ -60,13 +60,13 @@ Mamy więc:
 Niech $C=\{c_1,c_2,\dots,c_n\}$ będzie zbiorem znaków o~częstościach $f(c_1)\ge f(c_2)\ge\dots\ge f(c_n)$.
 Niech $T$ będzie drzewem odpowiadającym optymalnemu kodowi Huffmana dla znaków ze zbioru $C$.
 Przypomnijmy, że głębokość liścia reprezentującego znak $c\in C$ w~drzewie $T$ jest długością słowa kodowego przypisanego do znaku $c$.
-
 Udowodnimy żądaną własność nie-wprost, poprzez założenie, że istnieją takie $1\le i<j\le n$, że $d_T(c_i)>d_T(c_j)$ i~doprowadzenie do sprzeczności.
-Suma kosztów wprowadzana przez znaki $c_i$ i~$c_j$ do kosztu drzewa $B(T)$ wynosi $f(c_i)d_T(c_i)+f(c_j)d_T(c_j)$.
-Porównajmy ją z~sumą kosztów tych znaków w~przypadku, gdyby zostały one zamienione miejscami w~drzewie $T$.
+
+Suma kosztów wnoszonych przez znaki $c_i$ i~$c_j$ do łącznego kosztu drzewa $B(T)$ wynosi $f(c_i)d_T(c_i)+f(c_j)d_T(c_j)$.
+Porównajmy ją z~sumą kosztów tych znaków w~sytuacji, gdy są one zamienione miejscami w~drzewie $T$.
 Różnica
 \[
-	f(c_i)d_T(c_i)+f(c_j)d_T(c_j)-\bigl(f(c_i)d_T(c_j)+f(c_j)d_T(c_i)\bigr) = \bigl(f(c_i)-f(c_j)\bigr)\bigl(d_T(c_i)-d_T(c_j)\bigr)
+	\bigl(f(c_i)d_T(c_i)+f(c_j)d_T(c_j)\bigr)-\bigl(f(c_i)d_T(c_j)+f(c_j)d_T(c_i)\bigr) = \bigl(f(c_i)-f(c_j)\bigr)\bigl(d_T(c_i)-d_T(c_j)\bigr)
 \]
 jest dodatnia, na podstawie przyjętych założeń.
 A~zatem drzewo powstałe z~$T$ poprzez zamianę miejscami znaków $c_i$ i~$c_j$ ma niższy koszt niż drzewo $T$, dlatego $T$ nie może reprezentować optymalnego kodowania.
@@ -122,7 +122,7 @@ Niech\/ $T'$ będzie dowolnym drzewem reprezentującym pewny optymalny kod prefi
 Wówczas drzewo\/ $T$, otrzymane z\/~$T'$ przez zastąpienie liścia odpowiadającego\/ $w$ przez węzeł wewnętrzny z~trzema synami\/ $x$,\/ $y$ i\/~$z$, reprezentuje pewien optymalny kod prefiksowy dla alfabetu\/ $C$.}
 
 \exercise %16.3-7
-\note{Maksymalna częstość wystąpienia znaku powinna być mniejsza niż dwukrotność najmniejszej częstości wystąpienia innego znaku.}
+\note{Maksymalna częstość wystąpienia znaku powinna być ostro mniejsza niż dwukrotność najmniejszej częstości wystąpienia innego znaku.}
 
 \noindent Jeśli w~zbiorze znaków najmniejszą częstością jest $a$, to największa częstość jest mniejsza niż $2a$.
 W~algorytmie \proc{Huffman} każdy tworzony węzeł $z$ będzie miał częstość $\attrib{z}{f}\ge2a$, zatem każdy znak zostanie przetworzony i~usunięty z~kolejki $Q$, zanim zostanie pobrany z~niej węzeł $z$.
