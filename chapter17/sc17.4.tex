@@ -1,0 +1,28 @@
+\subchapter{Tablice dynamiczne}
+
+\exercise %17.4-1
+\exercise %17.4-2
+Gdy $\alpha_{i-1}\ge1/2$, to jedynymi sytuacjami, kiedy współczynnik zapełnienia zostaje obniżony poniżej $1/4$, jest wykonanie operacji \proc{Table-Delete} na tablicy dynamicznej, w~której $\id{size}_{i-1}\le2$ oraz $\id{num}_{i-1}=1$.
+Oczywiście zamortyzowany koszt operacji usuwania w~takich przypadkach jest ograniczony przez stałą.
+
+Przy założeniu, że $\id{size}_{i-1}>2$, faktyczny koszt operacji wynosi $c_i=1$.
+Jeśli $\alpha_i\ge1/2$, to
+\begin{align*}
+	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
+	&= 1+(2\cdot\id{num}_i-\id{size}_i)-(2\cdot\id{num}_{i-1}-\id{size}_{i-1}) \\
+	&= 1+2\cdot\id{num}_i-\id{size}_i-2\cdot\id{num}_i-2+\id{size}_i \\
+	&= -1.
+\end{align*}
+Jeśli natomiast $\alpha_i<1/2$, to
+\begin{align*}
+	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
+	&= 1+(\id{size}_i/2-\id{num}_i)-(2\cdot\id{num}_{i-1}-\id{size}_{i-1}) \\
+	&= 1+\id{size}_i/2-\id{num}_i-2\cdot\id{num}_i-2+\id{size}_i \\
+	&= (3/2)\id{size}_i-3\cdot\id{num}_i-1 \\[1mm]
+	&= (3/2)\id{size}_i-3\alpha_i\id{size}_i-1 \\[1mm]
+	&< (3/2)\id{size}_i-(3/2)\id{size}_i-1 \\
+	&= -1.
+\end{align*}
+A~zatem we wszystkich przypadkach $\widehat{c_i}$ jest ograniczone od góry przez stałą.
+
+\exercise %17.4-3
