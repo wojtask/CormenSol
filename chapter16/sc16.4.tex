@@ -13,7 +13,7 @@ Dziedziczność rodziny $\mathcal{I}$ wynika z~faktu, że każdy podzbiór zbior
 
 W~dowodzie własności wymiany wykorzystamy pojęcie rzędu macierzy, czyli mocy największego zbioru jej kolumn liniowo niezależnych (patrz podrozdział 28.1).
 Załóżmy, że $A$, $B\in\mathcal{I}$ i~$|A|<|B|$.
-Kolumny w~zbiorze $A$ są niezależne, więc jeśli zbudujemy z~nich macierz $T_A$, to $\mathrm{rank}(T_A)=|A|$, i~podobnie z~macierzą $T_B$ złożoną z~kolumn ze zbioru $B$, $\mathrm{rank}(T_B)=|B|$.
+Kolumny w~zbiorze $A$ są niezależne, więc jeśli zbudujemy z~nich macierz $T_A$, to $\mathrm{rank}(T_A)=|A|$, i~podobnie dla macierzy $T_B$ złożonej z~kolumn ze zbioru $B$, $\mathrm{rank}(T_B)=|B|$.
 Ponieważ $|A|<|B|$, to $\mathrm{rank}(T_A)<\mathrm{rank}(T_B)$.
 
 Załóżmy teraz nie-wprost, że każda kolumna w~$B$ jest liniową kombinacją kolumn w~$A$.
@@ -31,29 +31,33 @@ Niech $A'$, $B'\in\mathcal{I}'$, gdzie $|A'|<|B'|$.
 Z~założenia mamy, że istnieje taki maksymalny zbiór $A\in\mathcal{I}$, że $A\subseteq S\setminus A'$, a~także taki maksymalny zbiór $B\in\mathcal{I}$, że $B\subseteq S\setminus B'$.
 Rozważmy zbiór $X=B'\setminus(A'\cup A)$ i~zbadajmy dwa przypadki.
 W~pierwszym z~nich $X\ne\emptyset$, więc wybierzmy dowolny element $x\in X$.
-Zbiory $A'\cup\{x\}$ i~$A$ są rozłączne, więc $A\subseteq S\setminus(A'\cup\{x\})$, co oznacza, że $A'\cup\{x\}\in\mathcal{I}'$.
-
-W~przypadku, gdy $X=\emptyset$ zachodzi $A'\supseteq(A'\cap B')\cup(A'\cap B)$ i~$B'=(A'\cap B')\cup(A\cap B')$, zatem:
-\begin{align*}
-	|A'| &\ge |A'\cap B'|+|A'\cap B|, \\
-	|B'| &= |A'\cap B'|+|A\cap B'|.
-\end{align*}
+Zbiory $A'\cup\{x\}$ i~$A$ są rozłączne, więc $A\subseteq S\setminus(A'\cup\{x\})$, a~to oznacza, że $A'\cup\{x\}\in\mathcal{I}'$.
+W~przypadku, gdy $X=\emptyset$ zachodzi
+\[
+	A' \supseteq (A'\cap B')\cup(A'\cap B) \quad\text{i}\quad B' = (A'\cap B')\cup(A\cap B'),
+\]
+skąd
+\[
+	|A'| \ge |A'\cap B'|+|A'\cap B| \quad\text{i}\quad |B'| = |A'\cap B'|+|A\cap B'|.
+\]
 Z~założenia, że $|A'|<|B'|$ mamy $|A'\cap B'|+|A'\cap B|<|A'\cap B'|+|A\cap B'|$, skąd $|A'\cap B|<|A\cap B'|$.
+
 Skonstruujemy teraz pewien maksymalny zbiór niezależny $C$.
 Początkowo przyjmijmy $C=B\setminus A'$.
 Oczywiście $|C|\le|B|=|A|$ oraz $C\in\mathcal{I}$.
-Jeśli $|C|<|A|$, to możemy skorzystać z~własności wymiany matroidu $\langle S,\mathcal{I}\rangle$, by stwierdzić, że istnieje $x\in A\setminus C$ takie, że $C\cup\{x\}\in\mathcal{I}$.
-Dodajmy więc $x$ do $C$, a~następnie zastosujmy własność wymiany dla kolejno otrzymywanych zbiorów, aż $C$ osiągnie moc równą $|A|$.
+Jeśli $|C|<|A|$, to możemy skorzystać z~własności wymiany matroidu $\langle S,\mathcal{I}\rangle$, by stwierdzić, że istnieje $y\in A\setminus C$ takie, że $C\cup\{y\}\in\mathcal{I}$.
+Dodajmy więc $y$ do $C$, a~następnie zastosujmy własność wymiany dla otrzymanego zbioru.
+Proces ten powtarzamy, aż $C$ osiągnie moc równą $|A|$.
 W~tym momencie $C\in\mathcal{I}$ oraz $|C|=|A|$, czyli $C$ jest maksymalnym zbiorem niezależnym w~$\langle S,\mathcal{I}\rangle$.
-Na podstawie pokazanej wcześniej nierówności $|A'\cap B|<|A\cap B'|$ wnioskujemy, że $C$ nie zawiera wszystkich elementów zbioru $A\cap B'$, czyli że istnieje element $x\in(A\cap B')\setminus C$.
+Na podstawie pokazanej wcześniej nierówności wnioskujemy, że $C$ nie zawiera wszystkich elementów zbioru $A\cap B'$, czyli że istnieje element $x\in(A\cap B')\setminus C$.
 Wynika stąd, że $C\subseteq S\setminus(A'\cup\{x\})$, czyli $A'\cup\{x\}\in\mathcal{I}'$, co kończy dowód, że $\langle S,\mathcal{I}'\rangle$ jest matroidem.
 
 \exercise %16.4-4
 Niech $B\in\mathcal{I}$.
 Z~definicji rodziny $\mathcal{I}$ mamy, że do zbioru $B$ należy po co najwyżej jednym elemencie z~każdego zbioru $S_1$, $S_2$, \dots, $S_k$.
-Oczywiście każdy jego podzbiór $A$ też spełnia taką własność, dlatego $A\in\mathcal{I}$.
+Oczywiście własność ta cechuje też każdy zbiór $A\subseteq B$, toteż $A\in\mathcal{I}$.
 
-Wybierzmy teraz $A,B\in\mathcal{I}$ takie, że $|A|<|B|$, a~także $x\in B\setminus A$.
+Wybierzmy teraz $A,B\in\mathcal{I}$ takie, że $|A|<|B|$, oraz $x\in B\setminus A$.
 Istnieje więc $1\le j\le k$, dla którego $x\in S_j$.
 Wynika stąd, że $A\cap S_j=\emptyset$ oraz $|(A\cup\{x\})\cap S_j|=1$.
 Ponadto dla każdego $i\ne j$, $(A\cup\{x\})\cap S_i=A\cap S_i$, dlatego $|(A\cup\{x\})\cap S_i|\le1$ na mocy przynależności zbioru $A$ do rodziny $\mathcal{I}$.
@@ -66,11 +70,11 @@ Wówczas dla dowolnego $A\in\mathcal{I}$,
 \[
 	w'(A) = \sum_{x\in A}w'(x) = \sum_{x\in A}(W-w(x)) = W|A|-w(A).
 \]
-Niech $A\in\mathcal{I}$ będzie maksymalnym zbiorem, dla którego $w(A)$ jest maksymalne, zaś $A'\in\mathcal{I}$ -- innym zbiorem maksymalnym.
-Z~tw.\ 16.6 mamy, że $|A|=|A'|$.
-Zachodzi
+Niech $B\in\mathcal{I}$ będzie zbiorem maksymalnym o~największej wadze $w(B)$.
+Jeśli istnieje inny zbiór maksymalny $B'\in\mathcal{I}$, to z~tw.\ 16.6 mamy, że $|B|=|B'|$.
+Zachodzi wtedy
 \[
-	w'(A)-w'(A') = W|A|-w(A)-(W|A'|-w(A')) = w(A')-w(A) \le 0,
+	w'(B)-w'(B') = W|B|-w(B)-(W|B'|-w(B')) = w(B')-w(B) \le 0,
 \]
-skąd $w'(A)\le w'(A')$.
-Zatem każdy maksymalny zbiór matroidu $M$ maksymalizuje wagę $w$ wtedy i~tylko wtedy, gdy minimalizuje wagę $w'$.
+a~zatem $w'(B)\le w'(B')$.
+Otrzymujemy stąd, że każdy maksymalny zbiór matroidu $M$ maksymalizuje wagę $w$ wtedy i~tylko wtedy, gdy minimalizuje wagę $w'$.
