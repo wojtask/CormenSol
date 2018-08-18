@@ -1,9 +1,55 @@
-\subchapter{Dowodzenie NP-zupełności}
+\subchapter{Dowodzenie \NPclass-zupełności}
 
 \exercise %34.4-1
 \exercise %34.4-2
+Szukana formuła \singledash{3}{CNF} ma postać
+\[
+	\phi''' = \psi_0\wedge\psi_1\wedge\psi_2\wedge\psi_3\wedge\psi_4\wedge\psi_5\wedge\psi_6,
+\]
+dla następujących klauzul $\psi_i$:
+\begin{align*}
+	\psi_0 &= (y_1\vee p\vee q)\wedge(y_1\vee p\vee\neg q)\wedge(y_1\vee\neg p\vee q)\wedge(y_1\vee\neg p\vee\neg q), \\
+	\psi_1 &= (\neg y_1\vee\neg y_2\vee\neg x_2)\wedge(\neg y_1\vee y_2\vee\neg x_2)\wedge(\neg y_1\vee y_2\vee x_2)\wedge(y_1 \vee\neg y_2\vee x_2), \\
+	\psi_2 &= (y_2\vee y_3\vee\neg y_4)\wedge(y_2\vee\neg y_3\vee y_4)\wedge(y_2\vee\neg y_3\vee\neg y_4)\wedge(\neg y_2\vee y_3\vee y_4), \\
+	\psi_3 &= (y_3\vee x_1\vee x_2)\wedge(y_3\vee x_1\vee\neg x_2)\wedge(y_3\vee\neg x_1\vee\neg x_2)\wedge(\neg y_3\vee\neg x_1\vee x_2), \\
+	\psi_4 &= (y_4\vee y_5\vee p)\wedge(y_4\vee y_5\vee\neg p)\wedge(\neg y_4\vee\neg y_5\vee p)\wedge(\neg y_4\vee\neg y_5\vee\neg p), \\
+	\psi_5 &= (y_5\vee y_6\vee\neg x_4)\wedge(y_5\vee\neg y_6\vee x_4)\wedge(y_5\vee\neg y_6\vee\neg x_4)\wedge(\neg y_5\vee y_6\vee x_4), \\
+	\psi_6 &= (y_6\vee x_1\vee\neg x_3)\wedge(y_6\vee\neg x_1\vee x_3)\wedge(\neg y_6\vee x_1\vee x_3)\wedge(\neg y_6\vee\neg x_1\vee\neg x_3).
+\end{align*}
+
 \exercise %34.4-3
+Główny problem tego rozumowania polega na tym, że dla formuły o~$n$ zmiennych tablica ich wartości składa się z~$2^n$ wierszy, ponieważ odpowiada rozważeniu wszystkich \singledash{$n$}{elementowych} wektorów bitowych.
+Ponieważ może się zdarzyć, że dla każdego takiego wartościowania formuła przyjmie wartość 0, to budowa równoważnej formuły \singledash{3}{DNF} zajmie czas wykładniczy.
+
 \exercise %34.4-4
+Z~\refExercise{34.3-7} wiemy, że równoważnie wystarczy udowodnić, iż dopełnienie języka TAUTOLOGY jest \singledash{\NPclass}{zupełne}.
+Ponieważ w~\refExercise{34.2-8} wykazaliśmy, że należy do klasy \NPclass, to wystarczy pokazać, że jest to język \singledash{\NPclass}{trudny}.
+
+Dana formuła nie jest tautologią, jeśli istnieje wartościowanie, dla którego nie jest spełniona.
+Możemy więc pokazać, że $\text{SAT}\le_\Pclass\overline{\text{TAUTOLOGY}}$, definiując funkcję redukcji, która dla danej formuły $\phi$ zwraca dowolną formułę nie będącą tautologią, jeśli $\phi$ jest spełnialne i~dowolną tautologię w~przeciwnym przypadku.
+Oczywiście funkcja ta jest obliczalna w~czasie wielomianowym, co dowodzi \singledash{\NPclass}{trudności} języka.
+
+Na mocy powyższych wniosków stwierdzamy, że język TAUTOLOGY jest \singledash{\coNPclass}{zupełny}.
+
 \exercise %34.4-5
+Formuła $\phi$ jest w~dysjunkcyjnej postaci normalnej, jeśli
+\[
+	\phi = \phi_1\vee\phi_2\vee\cdots\vee\phi_n,
+\]
+a~$\phi_i$ dla dowolnego $i=1$, 2, \dots, $n$ jest koniunkcją pewnej ilości literałów.
+Formuła $\phi$ jest spełnialna, jeśli spełnialna jest pewna klauzula $\phi_i$, a~to z~kolei można zweryfikować w~czasie wielomianowym, sprawdzając, czy nie składa się ona z~literałów komplementarnych, czyli $x$ i~$\neg x$.
+Jeśli nie ma pary takich literałów, to możliwe jest przyjęcie wartościowania, w~którym każdy literał przyjmuje wartość 1, co spełnia klauzulę $\phi_i$.
+
 \exercise %34.4-6
+Załóżmy, że $\phi$ jest formułą zawierającą zmienne $x_1$, $x_2$, \dots, $x_n$, dla której chcemy znaleźć wartościowanie spełniające.
+Przyjmijmy, że $\phi$ jest spełnialna -- w~przeciwnym przypadku wartościowanie spełniające nie istnieje.
+
+Dla kolejnej zmiennej $x_i$ będziemy w~pętli sprawdzać, czy formuła $\phi$, dla której przyjęto $x_i=1$, jest spełnialna.
+Jeśli tak, to zmienna $x_i$ przyjmuje wartość 1 w~pewnym wartościowaniu spełniającym dla $\phi$, więc zastępujemy każde wystąpienie tej zmiennej w~$\phi$ przez tautologię $(x_i\vee\neg x_i)$.
+W~przeciwnym przypadku musi być $x_i=0$, zatem wystąpienia $x_i$ w~$\phi$ zamieniamy w~formułę niespełnialną $(x_i\wedge\neg x_i)$.
+Wykonując taki test dla każdej zmiennej, dostajemy jedno ze spełniających wartościowań dla $\phi$.
+Po wykonaniu pętli otrzymana formuła będzie składać się z~dwukrotnie większej liczby literałów, co $\phi$.
+
+Ponieważ dysponujemy wielomianowym algorytmem rozstrzygania spełnialności formuł, a~wejście zwiększy się tylko dwukrotnie, to opisany algorytm jest również wielomianowy.
+
 \exercise %34.4-7

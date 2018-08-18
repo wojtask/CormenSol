@@ -1,8 +1,28 @@
-\subchapter{Problemy NP-zupełne}
+\subchapter{Problemy \NPclass-zupełne}
 
 \exercise %34.5-1
+Rozpocznijmy od formalnego sformułowania problemu izomorfizmu podgrafu za pomocą następującego języka formalnego 
+\[
+	\text{SUBGRAPH-ISOMORPHISM} = \bigl\{\,\langle G_1,G_2\rangle:\text{graf $G_1$ jest izomorficzny z~podgrafem grafu $G_2$}\,\bigr\}
+\]
+oraz przyjęcia oznaczeń $G_1=\langle V_1,E_1\rangle$ i~$G_2=\langle V_2,E_2\rangle$.
+
+W~pierwszej części dowodu wykażemy, że $\text{SUBGRAPH-ISOMORPHISM}\in\NPclass$, przy czym jako świadectwa użyjemy bijekcji $f$ przekształcającej zbiór $V_1$ w~pewien podzbiór $V'\subseteq V_2$.
+Świadectwo potrafimy zweryfikować w~czasie wielomianowym, sprawdzając, czy dla wszystkich $u$, $v\in V_1$ zachodzi $\langle u,v\rangle\in E_1$ wtedy i~tylko wtedy, gdy $\langle f(u),f(v)\rangle\in E_2$.
+
+Wystarczy jeszcze udowodnić \singledash{\NPclass}{trudność} problemu izomorfizmu podgrafu.
+Wykorzystamy w~tym celu redukcję problemu \text{CLIQUE}.
+Dla egzemplarza $\langle G,k\rangle$ problemu kliki wystarczy zwrócić $\langle K_k,G\rangle$ jako egzemplarz problemu izomorfizmu podgrafu, gdzie $K_k$ oznacza graf pełny o~$k$ wierzchołkach.
+Jeśli $G$ ma klikę rozmiaru $k$, to jako podgraf $G$ jest ona oczywiście izomorficzna z~$K_k$.
+W~drugą stronę, jeśli $K_k$ jest izomorficzne z~pewnym podgrafem $G$, to tym podgrafem musi być graf pełny o~$k$ wierzchołkach, czyli klika rozmiaru $k$.
+
 \exercise %34.5-2
 \exercise %34.5-3
+Problem \singledash{zero}{jedynkowego} programowania całkowitoliczbowego jest szczególnym przypadkiem dla problemu programowania liniowego całkowitoliczbowego.
+Ponieważ pierwszy z~nich jest \singledash{\NPclass}{trudny}, to drugi z~nich również.
+Wystarczy jeszcze pokazać, że ogólny problem jest w~\NPclass.
+Jako świadectwa użyjemy wektora $x$, który można zweryfikować poprzez obliczenie wektora $Ax$ i~porównanie go z~wektorem $b$, co z~łatwością można wykonać w~czasie wielomianowym.
+
 \exercise %34.5-4
 \exercise %34.5-5
 \exercise %34.5-6

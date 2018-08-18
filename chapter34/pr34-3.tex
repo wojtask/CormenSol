@@ -1,8 +1,23 @@
 \problem{Kolorowanie grafu} %34-3
 
 \subproblem %34-3(a)
+Przechodzimy wszerz graf $G$, rozpoczynając od dowolnego jego wierzchołka jako źródła.
+Wierzchołki kolorujemy zgodnie z~parzystością ich odległości od źródła.
+Jeśli sąsiad przetwarzanego wierzchołka ma już przypisany kolor, którym miał być pokolorowany ten wierzchołek, to znaczy, że \singledash{2}{kolorowanie} grafu nie istnieje.
+Algorytm działa w~czasie $O(V+E)$.
+
 \subproblem %34-3(b)
+\[
+	\text{COLOR} = \bigl\{\,\langle G,k\rangle:\text{$k\ge0$ jest liczbą całkowitą oraz graf $G$ jest \singledash{$k$}{kolorowalny}}\,\bigr\}
+\]
+
+Pierwsza implikacja jest oczywista -- jeśli pewne \singledash{$k$}{kolorowanie} grafu $G$ jesteśmy w~stanie otrzymać w~czasie wielomianowym, to jednocześnie w~czasie wielomianowym rozwiązujemy problem COLOR.
+
 \subproblem %34-3(c)
+Oba problemy są w~\NPclass, dla świadectwa będącego listą kolorów wierzchołków sprawdzamy, czy kolorowanie to jest poprawne, tzn.\ czy każde dwa sąsiednie wierzchołki mają różne kolory.
+
+Na mocy tego, że problem \singledash{3}{COLOR} jest szczególnym przypadkiem problemu COLOR, to z~\singledash{\NPclass}{trudności} ostatniego wynika \singledash{\NPclass}{trudność} pierwszego.
+
 \subproblem %34-3(d)
 \subproblem %34-3(e)
 \subproblem %34-3(f)

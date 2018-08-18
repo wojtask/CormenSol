@@ -1,13 +1,68 @@
 \subchapter{Weryfikacja w~czasie wielomianowym}
 
 \exercise %34.2-1
+Dwa grafy $G=\langle V,E\rangle$ i~$G'=\langle V',E'\rangle$ są izomorficzne, jeśli istnieje bijekcja $f\colon V\to V'$ taka, że $\langle u,v\rangle\in E$ wtedy i~tylko wtedy, gdy $\langle f(u),f(v)\rangle\in E'$.
+Jeśli potrafimy zweryfikować w~czasie wielomianowym, że dana bijekcja spełnia ten warunek, to $\text{GRAPH-ISOMORPHISM}\in\NPclass$.
+Jest to oczywiście możliwe -- dla reprezentacji macierzowej grafu potrafimy znaleźć algorytm o~złożoności $O(n^2)$, gdzie $n$ jest długością kodowania $G$.
+Algorytm ten sprawdza, czy każdy element macierzy sąsiedztwa grafu $G$ jest równy odpowiadającemu, na podstawie odwzorowania $f$, elementowi macierzy sąsiedztwa grafu $G'$.
+
 \exercise %34.2-2
+Z~punktu (b) problemu \refProblem{B-1} mamy, że żaden graf dwudzielny nie posiada cyklu o~nieparzystej długości, więc w~grafach dwudzielnych o~nieparzystej liczbie wierzchołków nie istnieje cykl Hamiltona.
+
 \exercise %34.2-3
+Dla kolejnej krawędzi grafu sprawdzamy, czy jej usunięcie spowoduje zniszczenie cyklu Hamiltona, poprzez uruchomienie algorytmu sprawdzania czy graf pozbawiony takiej krawędzi nadal jest hamiltonowski.
+Bezpieczne krawędzie usuwamy z~grafu, natomiast pozostałe zachowujemy.
+Postępowanie kontynuujemy aż do pozostawienia samego cyklu Hamiltona, który można teraz wypisać.
+Cały algorytm jest wielomianowy przy założeniu, że $\text{HAM-CYCLE}\in\Pclass$.
+
 \exercise %34.2-4
+Niech $L_1,L_2\in\NPclass$.
+Oznacza to, że istnieje wielomianowy algorytm weryfikacji $A_1$ i~pewna stała $c_1$, że dla każdego $x\in L_1$ istnieje takie świadectwo $y$, gdzie $|y|=O(|x|^{c_1})$, że $A_1(x,y)=1$ oraz analogicznie dla algorytmu weryfikacji $A_2$ i~stałej $c_2$ dla języka $L_2$.
+Rozważmy język $L=L_1\cup L_2$ oraz dowolne $x\in L$.
+Oznacza to, że $x\in L_1$ lub $x\in L_2$.
+Algorytm weryfikacji $L$ dla takiego słowa i~jego świadectwa $y$ zwraca 1 wtedy i~tylko wtedy, gdy $A_1(x,y)=1$ lub $A_2(x,y)=1$.
+Jest to algorytm wielomianowy, skąd mamy $L\in\NPclass$.
+
+Analogicznie, jeśli $L=L_1\cap L_2$, to dla dowolnego $x\in L$ wynika, że $x\in L_1$ oraz $x\in L_2$, a~więc dla tego $x$ i~jego świadectwa $y$ zwracamy 1 wtedy i~tylko wtedy, gdy $A_1(x,y)=1$ i~$A_2(x,y)=1$.
+Taki algorytm rozstrzyga $L$ w~czasie wielomianowym.
+
+Język $L=L_1\cdot L_2$ rozstrzygamy, biorąc $x\in L$ i~jego świadectwo, i~zwracając 1 wtedy i~tylko wtedy, gdy dla pewnego $m=0$, 1, \dots, $|x|$ istnieją $y_1$, $y_2$ oraz zachodzi $A_1(x_1,y_1)=1$ i~$A_2(x_2,y_2)$, gdzie $x_1$ jest \singledash{$m$}{symbolowym} prefiksem $x$, $x_2$ jest \singledash{$(|x|-m)$}{symbolowym} sufiksem $x$, a~$y_1$ i~$y_2$ odpowiednio, jego świadectwami.
+
+Aby rozstrzygać domknięcie $L=L_1^*$, należy dla $x\in L$ zwracać 1 wtedy i~tylko wtedy, gdy dla pewnego $k=0$, 1, \dots, $|x|$ prawdą jest, że $x\in L_1^k$.
+Sprawdzenie tej przynależności jest wykonalne w~czasie wielomianowym, co wynika z~uogólnienia dowodu z~poprzedniego paragrafu na iloczyn dowolnej skończonej ilości języków.
+
+W~każdym z~powyżej rozważanych przypadków opisaliśmy algorytm weryfikujący $L$, więc każdy język $L$ definiowany w~powyższych paragrafach spełnia $L\in\NPclass$.
+
+Jeśli z~kolei $L=\overline{L_1}$, to nie możemy stwierdzić, czy $L\in\NPclass$, ponieważ dla pewnego $x\in L$ może nie istnieć świadectwo $y$ lub istnieć, ale nie być ograniczone przez wielomian względem $|x|$.
+Zaistniała trudność uniemożliwia dowód, że $\NPclass=\coNPclass$.
+
 \exercise %34.2-5
+Dla każdego języka $L$ z~klasy \NPclass\ znany jest algorytm weryfikacji działający w~czasie wielomianowym.
+Przy braku znajomości świadectwa w~rozstrzyganiu czy $x\in L$ jesteśmy zmuszeni sprawdzić wszystkie możliwe ciągi $y\in\{0,1\}^*$ o~długości $O(n^c)$, gdzie $n=|x|$, a~$c$ jest pewną stałą.
+Wszystkich takich ciągów jest $2^{O(n^c)}$, a~korzystając z~tego, że algorytm weryfikacji działa w~czasie $O(n^k)$ dla pewnej stałej $k\ge c$ otrzymujemy, że czasem działania algorytmu rozstrzygającego język $L$ jest $O(n^k)\cdot2^{O(n^c)}=2^{O(n^k)+O(n^c)}=2^{O(n^k)}$.
+
 \exercise %34.2-6
+Dla świadectwa będącego ścieżką z~$u$ do $v$ w~grafie $G$ możemy zweryfikować w~czasie wielomianowym, czy jest to ścieżka Hamiltona, przeglądając kolejne wierzchołki i~sprawdzając, czy są sąsiednie i~czy ścieżka zawiera każdy wierzchołek grafu $G$ dokładnie raz.
+Jest to możliwe w~czasie kwadratowym przy reprezentacji macierzowej grafu.
+Stąd, $\text{HAM-PATH}\in\NPclass$.
+
 \exercise %34.2-7
+Acykliczny graf skierowany jest dagiem, który możemy posortować topologicznie algorytmem \proc{Topological-Sort}, a~następnie sprawdzić, czy każde dwa kolejne wierzchołki w~otrzymanym uporządkowaniu topologicznym są sąsiednie w~tym grafie.
+Dla dagu $G=\langle V,E\rangle$ algorytm znajdowania ścieżki Hamiltona działa więc w~czasie $O(V+E)$.
+
 \exercise %34.2-8
+Równoważnie należy dowieść, że dopełnienie języka TAUTOLOGY należy do klasy \NPclass.
+Jest to język złożony z~takich formuł, które nie są tautologiami -- dla każdej formuły należącej do tego języka istnieje zatem pewne wartościowanie, które jej nie spełnia.
+Dostając pewne świadectwo, będące wartościowaniem zmiennych logicznych użytych w~formule, możemy zweryfikować czy formuła ta nie jest dla niego spełniona w~czasie wielomianowym, ewaluując jej wartość dla tego wartościowania.
+
 \exercise %34.2-9
+Wiemy, że $\Pclass\subseteq\NPclass$.
+Stąd dla dowolnego $L\in\Pclass$ zachodzi $L\in\NPclass$, czyli $\overline{L}\in\coNPclass$.
+Z~drugiej strony mamy, że klasa \Pclass\ jest zamknięta na operację dopełnienia (\refExercise{34.1-6}), skąd $\overline{L}\in\Pclass$.
+A~zatem dla dowolnego $\overline{L}$, jeśli $\overline{L}\in\Pclass$, to $\overline{L}\in\coNPclass$, co daje $\Pclass\subseteq\coNPclass$.
+
 \exercise %34.2-10
+Wiemy, że $\Pclass\subseteq\NPclass\cap\coNPclass$.
+Jeśli $\NPclass\ne\coNPclass$, to klasa $\NPclass\setminus\coNPclass$ jest niepusta, czyli istnieją języki należące do tej klasy, ale nienależące do \Pclass, czyli $\Pclass\ne\NPclass$.
+
 \exercise %34.2-11

@@ -1,10 +1,61 @@
-\subchapter{NP-zupełność i~redukowalność}
+\subchapter{\NPclass-zupełność i~redukowalność}
 
 \exercise %34.3-1
+Oznaczmy bramki jak na rys.\ \ref{fig:34.3-1}.
+Widać, że do spełnienia układu konieczne jest, aby wszystkie wejścia bramki $g_7$ miały wartości 1.
+Bramka $g_5$ zwraca 1 tylko wtedy, gdy na wejściu bramki $g_3$ będzie wartość 0 i~$g_2$ zwraca 1.
+Jednakże wejście do $g_3$ jest rozgałęzione i~podawane również na wejście bramki $g_4$, która otrzymując 0 na którymkolwiek wejściu, zwróci 0.
+Nie jest więc możliwa sytuacja, w~której bramka $g_7$ nie dostaje na którymkolwiek wejściu wartości 0, w~wyniku czego dla żadnego wartościowania układ nie zwróci 1, co oznacza, że nie jest spełnialny.
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{chapter34/fig34.1}
+	\end{center}
+	\caption{Niespełnialny układ logiczny.} \label{fig:34.3-1}
+\end{figure}
+
 \exercise %34.3-2
+Z~założenia mamy, że istnieją funkcje redukcji $f_1$ i~$f_2$ przekształcające, odpowiednio, $L_1$ na $L_2$ i~$L_2$ na $L_3$.
+Ponieważ złożenie funkcji obliczalnych w~czasie wielomianowym jest również funkcją obliczalną w~czasie wielomianowym, to $f_2\circ f_1$ można potraktować jako funkcję redukcji $L_1$ na $L_3$, co dowodzi przechodniości relacji $\le_\Pclass$.
+
 \exercise %34.3-3
+Równoważność jest symetryczna, udowodnimy więc tylko implikację w~jedną stronę.
+
+Niech $f$ będzie funkcją redukcji przekształcającą $L$ na $\overline{L}$.
+Oznacza to, że $x\in L$ wtedy i~tylko wtedy, gdy $f(x)\in\overline{L}$.
+Równoważnie, jeśli $x\notin L$, czyli $x\in\overline{L}$, to zachodzi $f(x)\notin\overline{L}$, czyli $f(x)\in L$, a~to jest definicja funkcji redukcji przekształcającej $\overline{L}$ na $L$, skąd mamy $\overline{L}\le_\Pclass L$.
+
 \exercise %34.3-4
+Aby użyć wartościowania spełniającego, należy zweryfikować, że spełnia ono dany układ logiczny $C$ poprzez zasymulowanie działania tego układu dla wejściowych wartości.
+Ponieważ układ $C$ można zamodelować jako acykliczny graf skierowany, to kolejne wartości można obliczać zgodnie z~uporządkowaniem topologicznym jego wierzchołków.
+Jesteśmy zatem w~stanie w~czasie wielomianowym sprawdzać wyjście układu $C$ dla danego wartościowania, a~zatem weryfikować świadectwo.
+Ponieważ wartościowanie spełniające jednoznacznie determinuje wartości na wszystkich przewodach układu $C$, to wystarcza ono jako świadectwo.
+
+Modyfikacja tego dowodu lematu jest o~tyle trudniejsza, że musieliśmy zauważyć istnienie modelu układu jako grafu, po czym opisać przebieg weryfikacji w~tym modelu.
+
 \exercise %34.3-5
+Obszar roboczy musi być spójny, bo stanowi wejście do układu $M$, a~nigdzie nie przechowujemy informacji w~kolejnych konfiguracjach o~miejscu rezydowania obszaru roboczego w~pamięci -- zakładamy więc, że jest to spójny blok o~ustalonym rozmiarze.
+Można jednak pozwolić na jego rozproszenie w~pamięci, pamiętając adresy poszczególnych bloków.
+Dzięki tym adresom przechowywanym w~części zawierającej dane o~stanie maszyny symulujemy ciągłość obszaru roboczego.
+Ponieważ jego rozmiar jest wielomianowy, to użyjemy dodatkowo wielomianowej ilości adresów -- nie zmieni to zatem rzędu wielkości pamięci zajmowanej przez każdą konfigurację.
+
 \exercise %34.3-6
+Niech $L\in\Pclass$ nie będzie językiem pustym lub $\{0,1\}^*$.
+Wtedy dla dowolnego języka $L'\in\Pclass$ istnieje funkcja redukcji $f$ przeprowadzająca $L'$ w~$L$, ponieważ jesteśmy w~stanie w~czasie wielomianowym stwierdzić, czy $x\in L'$ i~na tej podstawie zwrócić słowo $f(x)$ z~$L$ albo z~$\overline{L}$.
+Dowolny taki język $L$ jest więc zupełny w~\Pclass\ ze względu na redukcję w~czasie wielomianowym.
+
+Jeśli $L=\emptyset$, to nie można odwzorować żadnego słowa z~$L'$ na słowo z~$L$ -- funkcja redukcji zatem nie istnieje.
+Dla języka $L=\{0,1\}^*$ sytuacja jest symetryczna -- żadnego słowa z~$\overline{L'}$ nie da się odwzorować na słowo z~$\overline{L}$.
+Te dwa języki są jedynymi w~klasie \Pclass, które nie są w~niej zupełne ze względu na redukcję w~czasie wielomianowym.
+
 \exercise %34.3-7
+Udowodnimy implikację tylko w~jedną stronę, gdyż druga z~nich jest symetryczna.
+
+Załóżmy, że język $L$ jest \singledash{\NPclass}{zupełny}.
+Na mocy definicji \singledash{\NPclass}{zupełności} $L\in\NPclass$, więc $\overline{L}\in\coNPclass$.
+Pozostaje udowodnić drugi punkt z~definicji.
+Wiemy, że $L'\le_\Pclass L$ dla każdego języka $L'\in\NPclass$.
+Istnieje zatem funkcja redukcji $f$, która zwaca element z~$L$ dla każdego elementu należącego do $L'$ i~tylko takiego.
+Oznacza to, że dla każdego słowa z~$\overline{L'}$, funkcja $f$ zwraca słowo z~$\overline{L}$, a~ponieważ $\overline{L'}\in\coNPclass$ jest dowolnym językiem, to $\overline{L'}\le_\Pclass\overline{L}$.
+Język $\overline{L}$ jest zatem zupełny w~\coNPclass.
+
 \exercise %34.3-8

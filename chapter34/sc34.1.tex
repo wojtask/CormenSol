@@ -1,8 +1,78 @@
 \subchapter{Czas wielomianowy}
 
 \exercise %34.1-1
+Fakt, że $\text{LONGEST-PATH}\in\Pclass$ oznacza, że problem ten można rozwiązać w~czasie wielomianowym, a~zatem istnieje taka stała $c$, że problem rozwiązuje pewien algorytm o~złożoności $O(n^c)$, gdzie $n$ jest długością standardowego kodowania egzemplarza tego problemu.
+Wykonajmy ten algorytm dla kolejnych wartości $k$, zaczynając od 0 i~po każdym wykonaniu sprawdzając odpowiedź.
+Jeśli dla pewnego $k=k_0$ odpowiedzią było ,,tak'', a~dla $k=k_0+1$ ,,nie'', to wiadomo, że w~grafie $G$ istnieje ścieżka prosta o~długości $k_0$ między wierzchołkami $u$ i~$v$, ale nie istnieje taka ścieżka o~długości $k_0+1$.
+Ponieważ $k_0$ jest ograniczone przez $|V|-1$, to algorytm wywołamy co najwyżej $|V|$ razy.
+Na mocy tego, że $|V|=O(\langle G\rangle)=O(n)$ mamy, że złożonością przedstawionej tu procedury rozwiązywania problemu LONGEST-PATH-LENGTH jest $O(n^{c+1})$, a~więc złożoność wielomianowa.
+
 \exercise %34.1-2
+Problem znajdowania najdłuższego cyklu prostego w~grafie nieskierowanym to relacja
+\[
+	\text{LONGEST-CYCLE-LENGTH}\subseteq I\times S, \quad \text{gdzie}
+\]
+\begin{align*}
+	I &= \bigl\{\,G:G=\langle V,E\rangle\text{ jest grafem nieskierowanym}\,\bigr\}, \\
+	S &= \bigl\{\,c\in V^*\!:c\text{ jest najdłuższym cyklem prostym w~$G$}\,\bigr\}.
+\end{align*}
+Związany z~nim problem decyzyjny jest funkcją
+\[
+	\text{LONGEST-CYCLE}\colon I_D\to\{0,1\}, \quad \text{gdzie}
+\]
+\[
+	I_D = \bigl\{\,\langle G,c\rangle:G=\langle V,E\rangle\text{ jest grafem nieskierowanym i~}c\in V^*\,\bigr\}
+\]
+oraz $\text{LONGEST-CYCLE}(G,c)=1$ wtedy i~tylko wtedy, gdy $c$ stanowi najdłuższy cykl prosty w~grafie $G$.
+Językiem odpowiadającym problemowi LONGEST-CYCLE jest
+\[
+	\begin{split}
+		L = \bigl\{\,x\in\{0,1\}^*\!&:x\text{ jest standardowym kodowaniem $i\in I_D$,} \\
+		&\qquad \text{dla którego }\text{LONGEST-CYCLE}(i)=1\,\bigr\}.
+	\end{split}
+\]
+
 \exercise %34.1-3
+Ponumerujmy wierzchołki grafu skierowanego $G=\langle V,E\rangle$ liczbami całkowitymi, zaczynając od 1.
+Graf taki można reprezentować w~postaci ciągu $x\in\{0,1\}^*$ takiego, że $|x|=|V|^2$ i~na \singledash{$i$}{tej} jego pozycji znajduje się 1 wtedy i~tylko wtedy, gdy wierzchołek o~numerze $\lfloor(i-1)/|V|\rfloor+1$ ma sąsiada o~numerze $(i-1)\bmod|V|+1$.
+Ciąg $x$ jest więc macierzą sąsiedztwa grafu $G$ zapisaną kolejnymi wierszami.
+
+W~reprezentacji listowej grafu $G$ można dla każdego kolejnego wierzchołka po zapisaniu liczby jego sąsiadów, wypisywać ich numery w~kolejności rosnącej.
+Wszystkie liczby będą reprezentowane binarnie na pewnej ustalonej liczbie bitów, otrzymamy więc w~rezultacie ciąg $y\in\{0,1\}^*$.
+
+Aby pokazać, że reprezentacje te są wielomianowo równoważne, musimy znaleźć funkcje obliczalne w~czasie wielomianowym, dokonujące przekształceń jednej reprezentacji na drugą.
+Z~reprezentacji macierzowej $x$ budujemy reprezentację listową, najpierw znajdując liczbę wierzchołków grafu poprzez wyciągnięcie pierwiastka kwadratowego z~$|x|$, a~następnie wyznaczamy dla każdego wierzchołka liczbę jego sąsiadów na podstawie liczby jedynek w~odpowiednim podciągu $x$.
+Po zapisaniu tej liczby w~postaci binarnej wypisywane są reprezentacje binarne numerów jego sąsiadów w~kolejności rosnącej.
+
+Z~kolei posiadając reprezentację listową, po wyznaczeniu liczby wierzchołków grafu, dla każdego sąsiada kolejnego wierzchołka wypisujemy 1 na odpowiedniej pozycji wynikowego ciągu, natomiast 0, jeśli odpowiednie wierzchołki nie są sąsiednie.
+
+Nietrudno sprawdzić, że dla obu funkcji istnieją obliczające je algorytmy wielomianowe, a~zatem obie reprezentacje są wielomianowo równoważne.
+
 \exercise %34.1-4
 \exercise %34.1-5
+Załóżmy, że czasy działania wszystkich wywoływanych podprogramów ograniczone są przez $O(n^c)$, gdzie $c$ jest pewną stałą.
+Algorytm wykonujący co najwyżej $k$ takich wywołań działa w~czasie $O(kn^c)$, a~co najwyżej $O(n^d)$ dla innej stałej $d$ -- w~czasie $O(n^{c+d})$.
+Przyjęliśmy jednak, że wywołania podprogramów nie zmieniają danych wejściowych dla kolejnych wywołań i~za każdym razem ich długością jest $n$.
+
+Algorytm wykonujący co najwyżej $O(n^c)$ operacji może z~danych o~rozmiarze $n$ utworzyć wynik o~rozmiarze $O(n^c)$, który może zostać przekazany jako dane wejściowe do następnego algorytmu.
+W~takiej sytuacji po $k$ wywołaniach rozmiar danych będzie wynosił $O\bigl(n^{c^k}\bigr)$ i~czas działania tego ciągu wywołań będzie tego samego rzędu, a~więc co najwyżej wielomianowy.
+
+Załóżmy jednak, że na początku działania algorytmu ustalamy $O(n^d)$ jako liczbę wywołań podprogramów o~złożoności $O(n^c)$ każdy.
+Po wszystkich wywołaniach rozmiar danych może wzrosnąć do $O\Bigl(n^{c^{n^d}}\Bigr)$ i~taki też będzie czas działania całego algorytmu.
+Ponieważ $n^{c^{n^d}}\!\!=\omega(c^n)$, to możemy otrzymać w~tym przypadku algorytm wykładniczy.
+
 \exercise %34.1-6
+Ponieważ $L_1$, $L_2\in\Pclass$, to istnieją algorytmy, odpowiednio, $A_1$, $A_2$, rozstrzygające te języki w~czasie wielomianowym.
+Aby rozstrzygać język $L=L_1\cup L_2$, wystarczy dla dowolnego $x\in L$ zwracać 1, jeśli $A_1(x)=1$ lub $A_2(x)=1$, a~w~przeciwnym przypadku zwracać 0.
+Oczywiście wykonanie obu algorytmów wielomianowych i~wykonanie dwóch takich testów zajmuje nadal czas wielomianowy, więc $L\in\Pclass$.
+
+Analogicznie rozstrzygamy język $L=L_1\cap L_2$, zwracając1 wtedy i~tylko wtedy, gdy $A_1(x)=1$ i~$A_2(x)=1$, gdzie $x\in L$.
+
+W~przypadku języka $L=\overline{L_1}$, dla $x\in L$ zwracamy 1 wtedy i~tylko wtedy, gdy $A_1(x)=0$.
+
+Język $L=L_1\cdot L_2$ będący konkatenacją $L_1$ i~$L_2$ rozstrzygamy, biorąc $x\in L$ i~zwracając 1 wtedy i~tylko wtedy, gdy dla pewnego $m=0$, 1, \dots, $|x|$ zachodzi $A_1(x_1)=1$ oraz $A_2(x_2)=1$, przy czym $x_1$ jest \singledash{$m$}{symbolowym} prefiksem słowa $x$, a~$x_2$ -- jego \singledash{$(|x|-m)$}{symbolowym} sufiksem.
+
+Aby rozstrzygać domknięcie $L=L_1^*$, należy dla $x\in L$ zwracać 1 wtedy i~tylko wtedy, gdy dla pewnego $k=0$, 1, \dots, $|x|$ prawdą jest, że $x\in L_1^k$.
+Sprawdzenie tej przynależności jest wykonalne w~czasie wielomianowym, co wynika z~uogólnienia dowodu z~poprzedniego paragrafu na iloczyn dowolnej skończonej ilości języków.
+
+Nietrudno zobaczyć, że w~każdym opisanym przypadku jesteśmy w~stanie rozstrzygać język $L$ w~czasie wielomianowym, czyli $L\in\Pclass$ dla każdego $L$ zdefiniowanego powyżej.
