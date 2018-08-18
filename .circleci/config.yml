@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: danteev/texlive
+    steps:
+      - checkout
+      - run: latexmk -pdf cormensol.tex
+      - run: mkdir target && cp cormensol.pdf target/cormensol-`date +%Y%m%d%H%M`.pdf
+      - store_artifacts:
+          path: target/
