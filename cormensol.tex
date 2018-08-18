@@ -11,6 +11,11 @@
 \usepackage{tocloft}
 \usepackage{tikz}
 \usepackage{titlesec}
+
+% obejście buga w pakiecie chngcntr
+\let\counterwithout\relax
+\let\counterwithin\relax
+
 \usepackage{chngcntr}
 \usepackage[font=small,format=plain,labelfont=sf,bf,up]{caption}
 \usepackage[pdfborder={0 0 0},pdftex,bookmarks=true,hypertexnames=false,unicode=true]{hyperref}
@@ -28,9 +33,6 @@
 % globalne numery rysunków i tabel
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
-
-% włącza tylko wybrane rozdziały
-\includeonly{chapter17/ch17}
 
 \begin{document}
 
