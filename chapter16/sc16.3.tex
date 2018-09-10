@@ -82,15 +82,17 @@ Można więc użyć łącznie $n\lceil\lg n\rceil$ bitów do zapisania ciągu ws
 
 \exercise %16.3-6
 Podobnie jak kody binarne składają się z~bitów, o~kodach trójkowych będziemy mówić, że składają się z~\textbf{tritów} przyjmujących wartości 0, 1 lub 2.
-Algorytm uogólniony do kodów trójkowych będzie korzystał z~kolejki priorytetowej typu min opartej na kopcu trójkowym.
-Kopiec taki można zaimplementować, opierając się na rozwiązaniu problemu \refProblem{6-2}.
-Ponadto w~naszej implementacji każdy węzeł $x$ takiego kopca zostanie dodatkowo wyposażony w~pole \attrib{x}{middle} będące wskaźnikiem na środkowego syna $x$.
+W~naszym algorytmie budowane będzie drzewo trójkowe odpowiadające optymalnemu trójkowemu kodu Huffmana.
+Każdy węzeł $x$ takiego drzewa, oprócz pól \attrib{x}{left} i~\attrib{x}{right} wyposażony jest dodatkowo w~pole \attrib{x}{middle}, będące wskaźnikiem na środkowego syna $x$.
 
 \begin{codebox}
 \Procname{$\proc{Ternary-Huffman}(C)$}
 \li	$n\gets|C|$
+\li	\If $n\bmod2=0$
+\li		\Then $C\gets C\cup\{\#\}$ \>\>\>\>\Comment \# -- specjalny znak o~częstości 0
+		\End
 \li	$Q\gets C$
-\li	\For $i\gets1$ \To $n-2$ \label{li:ternary-huffman-for-begin}
+\li	\For $i\gets1$ \To $\lfloor n/2\rfloor$ \label{li:ternary-huffman-for-begin}
 \li		\Do utwórz nowy węzeł $w$
 \li			$\attrib{w}{left}\gets x\gets\proc{Extract-Min}(Q)$
 \li			$\attrib{w}{middle}\gets y\gets\proc{Extract-Min}(Q)$
@@ -100,10 +102,13 @@ Ponadto w~naszej implementacji każdy węzeł $x$ takiego kopca zostanie dodatko
 		\End \label{li:ternary-huffman-for-end}
 \li	\Return $\proc{Extract-Min}(Q)$
 \end{codebox}
-W~każdej z~$n-2$ iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} z~kolejki $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach.
-Węzły te są stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$.
-Za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
-W~drzewie trójkowym zbudowanym przez algorytm przyjmujemy, że krawędź do lewego syna jest etykietowana przez 0, krawędź do środkowego syna -- przez 1, a~krawędź do prawego syna -- przez 2.
+Aby możliwe było zbudowanie drzewa regularnego, liczba znaków w~zbiorze $C$ musi być nieparzysta.
+W~przeciwnym przypadku alfabet $C$ zostaje rozszerzony o~dodatkowy specjalny znak~\#, dla którego przyjmujemy $\attrib{\#}{f}=0$.
+Dodanie nowego znaku nie zmienia kosztu tego drzewa, zaś podczas odczytywania wynikowego kodowania znak ten może zostać bezpiecznie zignorowany.
+
+Algorytm wykonuje $\lfloor n/2\rfloor$ pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} tworzących kolejne węzły wewnętrzne budowanego drzewa.
+Z~kolejki priorytetowej $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach, które stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$, a~za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
+W~drzewie trójkowym zbudowanym w~algorytmie przyjmujemy, że krawędź do lewego syna jest etykietowana przez 0, krawędź do środkowego syna -- przez 1, a~krawędź do prawego syna -- przez 2.
 Wówczas słowem kodowym znaku $c\in C$ jest ciąg tritów wyznaczonych przez etykiety na ścieżce od korzenia drzewa do liścia reprezentującego znak $c$.
 
 Poprawność algorytmu \proc{Ternary-Huffman} wynika z~następujących lematów, które są wersjami lematów 16.2 i~16.3 rozszerzonymi na kody trójkowe.
