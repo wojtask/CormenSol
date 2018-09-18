@@ -1,13 +1,18 @@
 \subchapter{Metoda księgowania}
 
 \exercise %17.2-1
-Operację wykonywania kopii bezpieczeństwa nazwiemy \proc{Backup}.
-W~naszym rozwiązaniu metodą księgowania przypiszemy koszt zamortyzowany równy 2 dla operacji \proc{Push} i~\proc{Pop} oraz 0 dla operacji \proc{Backup}.
-
-Wykażemy, że używając takich kosztów, jesteśmy w~stanie spełnić nierówność (17.1) w~dowolnym ciągu $n$ operacji.
-Możemy wyobrazić sobie, że za każde wstawienie elementu na stos i~każde usunięcie elementu ze stosu płacimy 2 zł, czyli 1 zł za rzeczywisty koszt samej operacji plus 1 zł kredytu na poczet przyszłych operacji.
-W~momencie gdy wywołana zostanie procedura \proc{Backup}, na stosie będzie znajdować się co najwyżej $k$ elementów, wstawionych tam przez co najwyżej $k$ wywołań \proc{Push}, więc rzeczywisty koszt wywołania \proc{Backup} będzie wynosił co najwyżej $k$.
-Po wywołaniu dokładnie $k$ operacji \proc{Push} i~\proc{Pop} łączna wartość kredytu na stosie wynosi dokładnie $k$ zł, zatem kredyt ten wystarczy na pokrycie kosztu operacji \proc{Backup}.
+Operację wykonywania kopii bezpieczeństwa będziemy nazywać \proc{Backup}.
+W~naszym rozwiązaniu metodą księgowania operacjom przypiszemy następujące koszty zamortyzowane:
+\begin{flushleft}
+	\begin{tabular}{lr}
+		\proc{Push} & 2, \\
+		\proc{Pop} & 1, \\
+		\proc{Backup} & 0.
+	\end{tabular}
+\end{flushleft}
+Wykażemy, że przy takich wartościach jesteśmy w~stanie spełnić nierówność (17.1) dla dowolnego ciągu $n$ operacji.
+Możemy wyobrazić sobie, że za każde wstawienie elementu na stos płacimy 2~zł, czyli 1~zł za rzeczywisty koszt samej operacji plus 1~zł kredytu na poczet przyszłych operacji.
+Po wywołaniu dokładnie $k$ operacji \proc{Push} i~\proc{Pop} łączna wartość kredytu na stosie wynosi dokładnie $k$~zł, co wystarcza na zapłacenie za wykonanie kopii bezpieczeństwa, gdy operacja \proc{Backup} jest wywoływana na stosie o~co najwyżej $k$ elementach.
 
 Zamortyzowanym kosztem każdej operacji jest więc $O(1)$, co oznacza, że łączny koszt ciągu $n$ operacji można oszacować przez $O(n)$.
 
@@ -32,8 +37,8 @@ Pseudokod procedury zerującej licznik przedstawiono poniżej.
 \li	$\attrib{A}{highest}\gets\const{nil}$
 \end{codebox}
 
-Podobnie jak w~analizie kosztu zamortyzowanego przeprowadzonej w~Podręczniku, za każde ustawienie bitu na 1 w~procedurze \proc{Increment} zapłacimy 1 zł, po czym ,,położymy'' na tym bicie 1 zł jako kredyt.
-Dodatkowo, jeśli zwiększy się wartość pola \attrib{A}{highest}, to kolejne 1 zł ,,położymy'' na nowej jedynce najwyższego rzędu.
+Podobnie jak w~analizie kosztu zamortyzowanego przeprowadzonej w~Podręczniku, za każde ustawienie bitu na 1 w~procedurze \proc{Increment} zapłacimy 1~zł, po czym ,,położymy'' na tym bicie 1~zł jako kredyt.
+Dodatkowo, jeśli zwiększy się wartość pola \attrib{A}{highest}, to kolejne 1~zł ,,położymy'' na nowej jedynce najwyższego rzędu.
 Ten dodatkowy kredyt wykorzystany będzie do spłacenia kosztu zerowania licznika procedurą \proc{Reset}.
 
 Możemy zatem powiązać koszt zamortyzowany równy 3 z~każdym wywołaniem \proc{Increment} oraz zerowy koszt zamortyzowany z~każdym wywołaniem \proc{Reset}.
