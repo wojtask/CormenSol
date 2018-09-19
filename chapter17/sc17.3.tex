@@ -6,20 +6,20 @@ A~zatem dla każdego $i=1$, 2, \dots, $n$ musi zachodzić
 \[
 	\Phi'(D_i)-\Phi'(D_{i-1}) = \Phi(D_i)-\Phi(D_{i-1}).
 \]
-Mamy $\Phi'(D_1)-\Phi'(D_0)=\Phi(D_1)-\Phi(D_0)$, skąd $\Phi'(D_1)=\Phi(D_1)-\Phi(D_0)$.
-Następnie mamy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_1)+\Phi'(D_1)$ i~wstawiając uprzednio wyznaczone $\Phi'(D_1)$, dostajemy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_0)$.
-Postępując w~ten sposób dla kolejnych $i$, skonstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$ dla każdego $i=1$, 2, \dots, $n$.
+Stąd mamy $\Phi'(D_1)-\Phi'(D_0)=\Phi(D_1)-\Phi(D_0)$, czyli $\Phi'(D_1)=\Phi(D_1)-\Phi(D_0)$.
+Następnie $\Phi'(D_2)=\Phi(D_2)-\Phi(D_1)+\Phi'(D_1)$ i~wstawiając uprzednio wyznaczone $\Phi'(D_1)$, dostajemy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_0)$.
+Postępując w~ten sposób dla kolejnych $i$, konstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$ dla każdego $i=1$, 2, \dots, $n$.
 
 \exercise %17.3-2
 W~naszej analizie skorzystamy z~następującej funkcji potencjału:
 \[
 	\Phi(D_i) = \begin{cases}
 		0, & \text{jeśli $i=0$}, \\
-		k+2, & \text{jeśli $i=2^k$, $k=1$, 2, \dots, $\lfloor\lg n\rfloor$}, \\
+		k+2, & \text{jeśli $i=2^k$, $k=0$, 1, \dots, $\lfloor\lg n\rfloor$}, \\
 		\Phi(D_{i-1})+2, & \text{w~przeciwnym przypadku}.
 	\end{cases}
 \]
-Gdy $i=1$ lub gdy $i$ nie jest potęgą 2, to $\widehat{c_i}=c_i+\Phi(D_i)-\Phi(D_{i-1})=1+2=3$.
+Gdy $i=1$ lub $i$ nie jest potęgą 2, to $\widehat{c_i}=c_i+\Phi(D_i)-\Phi(D_{i-1})=1+2=3$.
 Przyjmijmy teraz, że $i=2^k$ dla pewnego $k=1$, 2, \dots, $\lfloor\lg n\rfloor$.
 Mamy
 \begin{align*}
@@ -29,25 +29,24 @@ Mamy
 	&= 3.
 \end{align*}
 Dzięki wybraniu szczególnej funkcji $\Phi$, jako koszt zamortyzowany każdej operacji mogliśmy przyjąć 3, podobnie jak w~rozwiązaniu \refExercise{17.2-2}.
-Oczywiście $\Phi(D_i)\ge\Phi(D_0)$ dla każdego $i\ge1$, zatem łączny koszt zamortyzowany $n$ operacji stanowi górne ograniczenie ich faktycznego kosztu.
-Stąd pesymistyczny koszt ciągu $n$ operacji wynosi $O(n)$.
+Oczywiście $\Phi(D_i)\ge\Phi(D_0)$ dla każdego $i\ge1$, zatem łączny koszt zamortyzowany ciągu $n$ operacji stanowi górne ograniczenie ich kosztu faktycznego, co daje pesymistyczny koszt tego ciągu równy $O(n)$.
 
 \exercise %17.3-3
 Na początkowo pustym kopcu $D_0$ wykonujemy ciąg operacji \proc{Insert} lub \proc{Extract-Min}.
-Przez $D_i$ oznaczmy kopiec powstały po wykonaniu \singledash{$i$}{tej} operacji, a~przez $n_i$ -- liczbę jego węzłów.
-Niech $k>0$ będzie taką stałą, że zarówno koszt $c_I$ operacji \proc{Insert}, jak i~koszt $c_X$ operacji \proc{Extract-Min} na \singledash{$n$}{elementowym} kopcu można ograniczyć z~góry przez $k\lg n$.
-
+Przez $D_i$ oznaczmy kopiec powstały tuż po wykonaniu \singledash{$i$}{tej} operacji, a~przez $n_i$ -- liczbę jego węzłów.
+Niech $d_i(x)$ oznacza głębokość węzła $x$ w~kopcu $D_i$ i~niech $k>0$ będzie taką stałą, że zarówno koszt $c_I$ operacji \proc{Insert}, jak i~koszt $c_X$ operacji \proc{Extract-Min} na \singledash{$n$}{elementowym} kopcu ograniczony jest z~góry przez $k\lg n$.
 Rozważymy funkcję potencjału
 \[
-	\Phi(D_i) = \sum_{x\in D_i}k(d_i(x)+1),
+	\Phi(D_i) = \sum_{x\in D_i}k(d_i(x)+1).
 \]
-gdzie $d_i(x)$ oznacza głębokość węzła $x$ w~kopcu $D_i$.
-Dla pustego kopca mamy $\Phi(D_0)=0$, a~dla każdego $i$, $\Phi(D_i)\ge0$.
-Gdy do kopca $D_{i-1}$ wstawiany jest nowy węzeł, to ląduje on na głębokości $\lfloor\lg(n_{i-1}+1)\rfloor$, nie naruszając przy tym pozycji pozostałych węzłów.
-Mamy $n_i=n_{i-1}+1$ oraz $\Phi(D_i)-\Phi(D_{i-1})=k(\lfloor\lg(n_{i-1}+1)\rfloor+1)=k(\lfloor\lg n_i\rfloor+1)$, skąd zamortyzowanym kosztem operacji \proc{Insert} jest
+Dla pustego kopca mamy $\Phi(D_0)=0$, a~dla każdego $i\ge1$, $\Phi(D_i)\ge0$.
+
+Gdy do kopca $D_{i-1}$ wstawiany jest nowy węzeł, to ląduje on na głębokości $\lfloor\lg(n_{i-1}+1)\rfloor$, nie naruszając przy tym pozycji innych węzłów.
+Mamy więc $n_i=n_{i-1}+1$ oraz $\Phi(D_i)-\Phi(D_{i-1})=k(\lfloor\lg(n_{i-1}+1)\rfloor+1)=k(\lfloor\lg n_i\rfloor+1)$, skąd zamortyzowanym kosztem operacji \proc{Insert} jest
 \[
 	\widehat{c_I} = c_I+\Phi(D_i)-\Phi(D_{i-1}) \le k\lg n_{i-1}+k(\lfloor\lg n_i\rfloor+1) < k\lg n_i+k(\lg n_i+1) = O(\lg n_i).
 \]
+
 Po wykonaniu operacji \proc{Extract-Min} kopiec $D_{i-1}$ zostaje pozbawiony węzła znajdującego się na najniższym jego poziomie.
 Potencjał kopca maleje więc o~$k(\lfloor\lg n_{i-1}\rfloor+1)$ i~zamortyzowany koszt tej operacji można oszacować przez
 \[
@@ -56,7 +55,8 @@ Potencjał kopca maleje więc o~$k(\lfloor\lg n_{i-1}\rfloor+1)$ i~zamortyzowany
 
 \exercise %17.3-4
 Jeśli skorzystamy z~funkcji $\Phi$ przyjmującej wysokość stosu, to $\Phi(D_0)=s_0$ i~$\Phi(D_n)=s_n$.
-Zgodnie z~równaniem (17.3) mamy więc, że łączny koszt zamortyzowany ciągu $n$ operacji na stosie wynosi \[
+Na podstawie równania (17.3) oraz oszacowania na zamortyzowany koszt $n$ operacji na początkowo pustym stosie dostajemy, że łączny koszt zamortyzowany ciągu $n$ operacji na stosie o~początkowo $s_0$ elementach wynosi
+\[
 	\sum_{i=1}^n\widehat{c_i} = \sum_{i=1}^nc_i+\Phi(D_n)-\Phi(D_0) = O(n)+s_n-s_0.
 \]
 Jeśli $s_n\ge s_0$, to wyrażenie powyższe stanowi górne ograniczenie łącznego kosztu faktycznego.
@@ -85,8 +85,8 @@ Wówczas $c_D=2k+1$.
 
 Jako potencjał naszej struktury danych przyjmiemy dwukrotność rozmiaru stosu $S_1$.
 W~trakcie operacji wstawiania do kolejki pierwszy stos zwiększa swój rozmiar o~1, dlatego zamortyzowany koszt tej operacji jest równy $\widehat{c_E}=c_E+2\cdot1=3$.
-Jeśli $S_2$ jest stosem niepustym, to koszt zamortyzowany operacji \proc{Dequeue} $\widehat{c_D}$ wynosi $c_D$.
-Gdy stos $S_2$ jest pusty, to podczas usuwania elementu z~kolejki stos $S_1$ zmniejsza swój rozmiar o~$k$, więc $\widehat{c_D}=c_D-2k=1$.
+Gdy stos $S_2$ jest niepusty, to koszt zamortyzowany operacji \proc{Dequeue} $\widehat{c_D}$ wynosi $c_D$.
+W~przeciwnym razie podczas usuwania elementu z~kolejki stos $S_1$ zmniejsza swój rozmiar o~$k$, więc $\widehat{c_D}=c_D-2k=1$.
 Koszty zamortyzowane obu operacji w~tej implementacji wynoszą zatem $O(1)$.
 
 \exercise %17.3-7
