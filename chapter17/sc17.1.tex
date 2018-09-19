@@ -1,21 +1,23 @@
 \subchapter{Metoda kosztu sumarycznego}
 
 \exercise %17.1-1
-Nawet jeśli ograniczymy ilość wkładanych elementów na stos w~operacji \proc{Multipush} przez $n$, to nie jesteśmy w~stanie osiągnąć zamortyzowanego kosztu $O(1)$.
-Ciąg $n$ operacji mógłby się bowiem składać z~występujących na przemian \proc{Multipush} umieszczającej na stosie $n$ elementów i~\proc{Multipop}, która wszystkie te elementy usuwa ze stosu.
-Koszt takiego ciągu operacji wynosi $O(n^2)$ i~oszacowaniem na zamortyzowany koszt operacji jest $O(n^2)/n=O(n)$.
+Przyjmijmy, że operacja \proc{Multipush} może jednocześnie umieścić na stosie co najwyżej $k$ elementów.
+Jeśli $k$ jest stałą, to z~punktu widzenia analizy kosztu zamortyzowanego operacja ta nie różni się od działającej także w~czasie $O(1)$ zwykłej operacji \proc{Push}.
+Gdy jednak $k=\omega(1)$, to nie jesteśmy w~stanie osiągnąć zamortyzowanego kosztu $O(1)$.
+Ciąg $n$ operacji mógłby się bowiem składać z~występujących na przemian \proc{Multipush} umieszczającej na stosie $k$ elementów i~\proc{Multipop}, która wszystkie te elementy usuwa ze stosu.
+Koszt takiego ciągu operacji wynosi $\Theta(nk)$ i~oszacowaniem na zamortyzowany koszt operacji jest $\Theta(nk)/n=\Theta(k)=\omega(1)$.
 
 \exercise %17.1-2
 Rozważmy ciąg $n$ operacji wykonywanych na początkowo wyzerowanym liczniku, gdzie pierwszą operacją jest \proc{Decrement}, a~następnie naprzemiennie występują \proc{Increment} oraz \proc{Decrement}.
-Zauważmy, że każda operacja w~tym ciągu odwraca wszystkie bity licznika -- \proc{Decrement} ustawia każdy bit na jedynkę, a~\proc{Increment} na zero -- działając w~czasie $\Theta(k)$.
+Zauważmy, że każda operacja w~tym ciągu odwraca wszystkie bity licznika, działając w~czasie $\Theta(k)$ -- \proc{Decrement} ustawia każdy bit na jedynkę, a~\proc{Increment} na zero.
 A~zatem ciąg ten wymaga w~sumie czasu $\Theta(nk)$.
 
 \exercise %17.1-3
 Oznaczmy przez $c_i$ koszt \singledash{$i$}{tej} operacji.
-Mamy $c_i=i$ dla $i$ postaci $2^k$, gdzie $k=1$, 2, \dots, $\lfloor\lg n\rfloor$.
-Koszt pozostałych $n-\lfloor\lg n\rfloor$ operacji wynosi 1.
-Sumaryczny czas wymagany przez wszystkie operacje w~tym ciągu jest więc równy
+Mamy $c_i=i$ dla $i=2^k$, gdzie $k=0$, 1, \dots, $\lfloor\lg n\rfloor$.
+Koszt pozostałych $n-\lfloor\lg n\rfloor-1$ operacji wynosi 1.
+Sumaryczny czas zajmowany przez wszystkie operacje w~tym ciągu jest więc równy
 \[
-	T(n) = \sum_{i=1}^nc_i = \sum_{k=1}^{\lfloor\lg n\rfloor}2^k+n-\lfloor\lg n\rfloor = 2^{\lfloor\lg n\rfloor+1}-2+n-\lfloor\lg n\rfloor < 2^{\lg n+1}+n = 2n+n = 3n.
+	T(n) = \sum_{i=1}^nc_i = \sum_{k=0}^{\lfloor\lg n\rfloor}2^k+n-\lfloor\lg n\rfloor-1 = 2^{\lfloor\lg n\rfloor+1}+n-\lfloor\lg n\rfloor-1 < 2^{\lg n+1}+n = 2n+n = 3n.
 \]
 Zatem $T(n)=O(n)$ i~kosztem zamortyzowanym każdej operacji w~tym ciągu jest $T(n)/n=O(1)$.
