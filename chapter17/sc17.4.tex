@@ -3,15 +3,15 @@
 \exercise %17.4-1
 Z~twierdzeń 11.6 i~11.8 oraz z~wniosku 11.7 wynika, że koszty operacji wstawiania i~wyszukiwania elementu w~tablicy z~haszowaniem z~adresowaniem otwartym dążą do nieskończoności, gdy tylko współczynnik zapełnienia zbliża się do 1.
 Wybranie pewnej stałej mniejszej niż 1 jako maksymalnego dopuszczalnego współczynnika zapełnienia takiej tablicy z~haszowaniem pozwala na ograniczenie tych kosztów przez stałą.
-Gdy tablica wypełni się, wszystkie jej elementy zostaną przeniesione do tablicy o~większym rozmiarze i~wówczas operacja wstawiania będzie potrzebować więcej czasu niż $O(1)$.
+Gdy tablica wypełni się, wszystkie jej elementy będą wymagały przeniesienia do tablicy o~większym rozmiarze, co powoduje, że operacja wstawiania w~takiej sytuacji zabiera więcej czasu niż $O(1)$.
 Przeprowadzając analogiczną analizę do tej z~Podręcznika dla \proc{Table-Insert}, można wykazać, że oczekiwany czas zamortyzowany operacji wstawiania do dynamicznej tablicy z~haszowaniem wynosi $O(1)$.
 
 \exercise %17.4-2
-Gdy $\alpha_{i-1}\ge1/2$, to jedynymi sytuacjami, kiedy współczynnik zapełnienia zostaje obniżony poniżej $1/4$, jest wykonanie operacji \proc{Table-Delete} na tablicy dynamicznej, w~której $\id{size}_{i-1}\le2$ oraz $\id{num}_{i-1}=1$.
-Oczywiście zamortyzowany koszt operacji usuwania w~takich przypadkach jest ograniczony przez stałą.
+Gdy $\alpha_{i-1}\ge1/2$, to jedyną sytuacją, kiedy współczynnik zapełnienia zostaje obniżony poniżej $1/4$, jest wykonanie operacji \proc{Table-Delete} na tablicy dynamicznej, w~której $\id{size}_{i-1}\le2$ oraz $\id{num}_{i-1}=1$.
+Oczywiście zamortyzowany koszt operacji usuwania w~takim przypadku jest ograniczony przez stałą.
 
 Przy założeniu, że $\id{size}_{i-1}>2$, faktyczny koszt operacji wynosi $c_i=1$.
-Jeśli $\alpha_i\ge1/2$, to
+Dla $\alpha_i\ge1/2$ mamy
 \begin{align*}
 	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
 	&= 1+(2\cdot\id{num}_i-\id{size}_i)-(2\cdot\id{num}_{i-1}-\id{size}_{i-1}) \\
@@ -35,22 +35,26 @@ W~naszej analizie skorzystamy z~oznaczeń identycznych do tych z~Podręcznika.
 Potrzebna nam będzie następująca obserwacja:
 
 \medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych nieujemnych liczb rzeczywistych\/ $x$, $y$ zachodzi
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnej liczby rzeczywistej\/ $x$ oraz dowolnej nieujemnej liczby rzeczywistej\/ $a$ zachodzi
 \[
-	|x-y|\le x+y.
+	|x+a|\ge |x|-a.
 \]}
 \begin{proof}
-Jeśli $x\ge y$, to $|x-y|=x-y\le x+y$, a~jeśli $x<y$, to $|x-y|=-x+y\le x+y$.
+Jeśli $x\ge0$, to $|x+a|=x+a\ge x-a=|x|-a$.
+
+Jeśli $-a\le x<0$, to $|x+a|=x+a\ge-x-a=|x|-a$.
+
+Jeśli $x<-a$, to $|x+a|=-x-a=|x|-a$.
 \end{proof}
 
 Jeśli wywołanie operacji \proc{Delete} nie powoduje zmniejszenia rozmiaru tablicy, to faktyczny koszt operacji wynosi $c_i=1$.
-Wówczas $\id{num}_i=\id{num}_{i-1}-1$, $\id{size}_i=\id{size}_{i-1}$ i~na podstawie powyższego lematu mamy
+Wówczas $\id{num}_i=\id{num}_{i-1}-1$, a~$\id{size}_i=\id{size}_{i-1}$ i~na podstawie powyższego lematu mamy
 \begin{align*}
 	\widehat{c_i} &= c_i+\Phi_i-\Phi_{i-1} \\
 	&= 1+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_{i-1}-\id{size}_{i-1}| \\
-	&= 1+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_i-2-\id{size}_i| \\
-	&\le 1+(2\cdot\id{num}_i+\id{size}_i)-(2\cdot\id{num}_i+2+\id{size}_i) \\
-	&= -1.
+	&= 1+|2\cdot\id{num}_i-\id{size}_i|-|2\cdot\id{num}_i+2-\id{size}_i| \\
+	&\le 1+|2\cdot\id{num}_i-\id{size}_i|-\bigl(|2\cdot\id{num}_i-\id{size}_i|-2\bigr) \\
+	&= 3.
 \end{align*}
 W~sytuacji, w~której tablica zostaje zmniejszona faktyczny koszt wynosi $c_i=\id{num}_i+1$, a~także zachodzą równości $\id{size}_i/2=\id{size}_{i-1}/3=\id{num}_{i-1}=\id{num}_i+1$.
 Koszt zamortyzowany w~tym przypadku wynosi więc
