@@ -1,0 +1,61 @@
+\problem{Licznik binarny z~odwróconymi bitami} %17-1
+
+\subproblem %17-1(a)
+Poniższa procedura oblicza kolejne wartości funkcji $\mathrm{rev}_k$ i~zamienia miejscami elementy wejściowej tablicy, o~ile nie zostały one zamienione już wcześniej.
+\begin{codebox}
+\Procname{$\proc{Bit-Reversal}(A)$}
+\li	$n\gets\attrib{A}{length}$
+\li	$k\gets\lg n$
+\li	\For $i\gets1$ \To $n-2$
+\li		\Do $j\gets\mathrm{rev}_k(i)$
+\li			\If $i<j$
+\li				\Then zamień $A[i]\leftrightarrow A[j]$
+				\End
+		\End
+\end{codebox}
+Ponieważ $\mathrm{rev}_k(0)=0$ oraz $\mathrm{rev}_k(2^k-1)=2^k-1$, to elementy $A[0]$ oraz $A[n-1]$ pozostaną na swoich miejscach, dlatego pętla \kw{for} iteruje od $i=1$ do $i=n-2$.
+Nietrudno zauważyć, że czas działania tej procedury ograniczony jest przez $O(nk)$.
+
+\subproblem %17-1(b)
+Kolejna wartość licznika powstaje w~wyniku zinkrementowania bieżącej wartości, ale na odwróconych bitach, czyli przy potraktowaniu skrajnie lewego bitu jako najmniej znaczącego, a~skrajnie prawego -- jako najbardziej znaczącego.
+Zaimplementujemy procedurę \proc{Increment} z~podrozdziału 17.1 przy pomocy operacji bitowych, a~następnie zmodyfikujemy ją, aby działała dla odwróconej kolejności bitów.
+
+Pętla \kw{while} w~tej procedurze wyszukuje w~liczniku zero umiejscowione najbardziej na prawo oraz zeruje wszystkie mniej znaczące jedynki.
+Można zasymulować działanie tej pętli przez utrzymywanie tzw.\ \textbf{maski bitowej} $m$ -- wartości początkowo równej 1, która będzie następnie przesuwana bitowo w~lewo w~kolejnych iteracjach, służąc do szybkiego odczytu danego bitu licznika i~jego modyfikacji.
+W~\singledash{$i$}{tej} iteracji, gdzie $i=0$, 1, \dots, $k-1$, maska będzie mieć wartość $m=2^i$ otrzymaną przez przesunięcie jedynki w~lewo o~$i$.
+Aby pobrać \singledash{$i$}{ty} najmniej znaczący bit licznika, należy wykonać operację bitową AND między licznikiem i~aktualną maską.
+Podobnie, aby wyzerować ten bit, należy wykonać bitowe XOR.
+Po odnalezieniu szukanego zera, jego zamiana na jedynkę realizowana jest za pomocą bitowego OR.
+Przystosowanie opisanych kroków do działania na odwróconych bitach wymaga zastosowania maski początkowo równej $2^{k-1}$, a~następnie przesuwania jej bitowo w~prawo.
+
+W~pseudokodzie poniżej \func{SHL} oznacza operację przesunięcia bitowego w~lewo, a~\func{SHR} -- operację przesunięcia bitowego w~prawo.
+\begin{codebox}
+\Procname{$\proc{Bit-Reversed-Increment}(a,k)$}
+\li	$m\gets1\func{SHL}{}(k-1)$
+\li	\While $a\func{AND}m\ne0$
+\li		\Do $a\gets a\func{XOR}m$
+\li			$m\gets m\func{SHR}1$
+		\End
+\li	\Return $a\func{OR}m$
+\end{codebox}
+W~celu wykonania permutacji odwracającej bity utrzymujemy 2 \singledash{$k$}{bitowe} liczniki binarne -- zwykły oraz z~odwróconymi bitami -- i~zmieniamy elementy w~tablicy $A$ znajdujące się na indeksach równych tym licznikom, upewniając się, że zamiany te nie powtarzają się.
+\begin{codebox}
+\Procname{$\proc{Bit-Reversal}'(A)$}
+\li	$n\gets\attrib{A}{length}$
+\li	$k\gets\lg n$
+\li	$j\gets0$
+\li	\For $i\gets1$ \To $n-2$
+\li		\Do $j\gets\proc{Bit-Reversed-Increment}(j,k)$
+\li			\If $i<j$
+\li				\Then zamień $A[i]\leftrightarrow A[j]$
+				\End
+		\End
+\end{codebox}
+
+Procedura \proc{Bit-Reversed-Increment} działa w~tym samym czasie co \proc{Increment}, na której jest oparta, zatem $n$ kolejnych jej wywołań wymaga czasu $O(n)$.
+Jest to też czas, jaki potrzebuje procedura $\proc{Bit-Reversal}'$ wywołana na tablicy $A[0\twodots n-1]$.
+
+\subproblem %17-1(c)
+Przy takim założeniu inicjalizacja maski w~procedurze \proc{Bit-Reversed-Increment} wymaga czasu $\Theta(k)$.
+Sprawia to, że $n$ kolejnych wywołań tej procedury zajmuje czas $O(nk)$.
+Bez przygotowania maski nie jesteśmy jednak w~stanie przeglądać bitów w~kolejności od lewej do prawej i~wykonanie permutacji odwracającej bity w~czasie $O(n)$ jest w~tym przypadku niemożliwe.

@@ -159,22 +159,22 @@ Ich wywołania w~powyższym algorytmie zajmują czas stały, stąd czasem dział
 Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników.
 Załóżmy, że znamy adres elementu $x$ na liście $L$ i~elementu $y$ będącego poprzednikiem $x$ w~$L$.
 Niech $z$ będzie następnikiem $x$ na tej liście.
-Wówczas $\attrib{x}{np}=z\func{xor}y$, zatem na podstawie własności operacji \func{xor}, aby dostać się do $z$, wystarczy obliczyć wartość
+Wówczas $\attrib{x}{np}=z\func{XOR}y$, zatem na podstawie własności operacji \func{XOR}, aby dostać się do $z$, wystarczy obliczyć wartość
 \[
-    z = z\func{xor}0 = z\func{xor}{}(y\func{xor}y) = (z\func{xor}y)\func{xor}y = \attrib{x}{np}\func{xor}y.
+    z = z\func{XOR}0 = z\func{XOR}{}(y\func{XOR}y) = (z\func{XOR}y)\func{XOR}y = \attrib{x}{np}\func{XOR}y.
 \]
-Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\attrib{x}{np}\func{xor}z$.
-Zauważmy, że jeśli element $x$ jest ogonem listy, to $\attrib{x}{np}=\const{nil}\func{xor}y=0\func{xor}y=y$, skąd mamy $z=\attrib{x}{np}\func{xor}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\attrib{x}{np}=z\func{xor}0=z$ wynika $y=\const{nil}$.
+Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\attrib{x}{np}\func{XOR}z$.
+Zauważmy, że jeśli element $x$ jest ogonem listy, to $\attrib{x}{np}=\const{nil}\func{XOR}y=0\func{XOR}y=y$, skąd mamy $z=\attrib{x}{np}\func{XOR}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\attrib{x}{np}=z\func{XOR}0=z$ wynika $y=\const{nil}$.
 Podobnie jak w~zwykłych listach przyjmujemy, że atrybut \attrib{L}{head} przechowuje wskaźnik do głowy listy $L$.
 Ponadto z~listą związujemy atrybut \attrib{L}{tail}, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
 
 Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy.
 \begin{codebox}
-\Procname{$\proc{Xor-Linked-List-Search}(L,k)$}
+\Procname{$\proc{XOR-Linked-List-Search}(L,k)$}
 \li	$x\gets\attrib{L}{head}$
 \li	$y\gets\const{nil}$
 \li	\While $x\ne\const{nil}$ i~$\attrib{x}{key}\ne k$
-\li		\Do $z\gets\attrib{x}{np}\func{xor}y$
+\li		\Do $z\gets\attrib{x}{np}\func{XOR}y$
 \li			$y\gets x$
 \li			$x\gets z$
 		\End
@@ -182,10 +182,10 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{Xor-Linked-List-Insert}(L,x)$}
+\Procname{$\proc{XOR-Linked-List-Insert}(L,x)$}
 \li	$\attrib{x}{np}\gets\attrib{L}{head}$
 \li	\If $\attrib{L}{head}\ne\const{nil}$
-\li		\Then $\attribb{L}{head}{np}\gets\attribb{L}{head}{np}\func{xor}x$
+\li		\Then $\attribb{L}{head}{np}\gets\attribb{L}{head}{np}\func{XOR}x$
 		\End
 \li	$\attrib{L}{head}\gets x$
 \li	\If $\attrib{L}{tail}=\const{nil}$
@@ -194,25 +194,25 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{Xor-Linked-List-Delete}(L,x)$}
+\Procname{$\proc{XOR-Linked-List-Delete}(L,x)$}
 \li	$x'\gets\attrib{L}{head}$
 \li	$y\gets\const{nil}$
 \li	\While $x'\ne x$
-\li		\Do $z\gets\attrib{x'}{np}\func{xor}y$
+\li		\Do $z\gets\attrib{x'}{np}\func{XOR}y$
 \li			$y\gets x'$
 \li			$x'\gets z$
 		\End
-\li	$z\gets\attrib{x}{np}\func{xor}y$
+\li	$z\gets\attrib{x}{np}\func{XOR}y$
 \li	\If $x=\attrib{L}{head}$
 \li		\Then $\attrib{L}{head}\gets z$
-\li		\Else $\attrib{y}{np}\gets\attrib{y}{np}\func{xor}x\func{xor}z$
+\li		\Else $\attrib{y}{np}\gets\attrib{y}{np}\func{XOR}x\func{XOR}z$
 		\End
 \li	\If $x=\attrib{L}{tail}$
 \li		\Then $\attrib{L}{tail}\gets y$
-\li		\Else $\attrib{z}{np}\gets\attrib{z}{np}\func{xor}x\func{xor}y$
+\li		\Else $\attrib{z}{np}\gets\attrib{z}{np}\func{XOR}x\func{XOR}y$
 		\End
 \end{codebox}
 
-Procedury \proc{Xor-Linked-List-Search} i~\proc{Xor-Linked-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$.
-W~procedurze \proc{Xor-Linked-List-Delete} należy odszukać na liście poprzednika i~następnika elementu $x$, aby uaktualnić ich pola \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$.
+Procedury \proc{XOR-Linked-List-Search} i~\proc{XOR-Linked-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$.
+W~procedurze \proc{XOR-Linked-List-Delete} należy odszukać na liście poprzednika i~następnika elementu $x$, aby uaktualnić ich pola \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$.
 Odwracanie kolejności elementów listy w~opisanej tu implementacji można zrealizować poprzez zamianę wartości jej atrybutów $head$ i~$tail$.
