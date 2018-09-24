@@ -25,21 +25,35 @@ Z~\refExercise{17.1-3} wiemy, że $\sum_{i=1}^nc_i<3n$, dlatego kredyt w~żadnym
 Koszt zamortyzowany każdej operacji jest więc rzędu $O(1)$.
 
 \exercise %17.2-3
-W~naszej implementacji licznika z~wektorem bitów $A$ powiążemy atrybut \id{highest}, w~którym będziemy pamiętać najwyższy rząd bitu ustawionego na 1 aktualnie w~liczniku.
-Dokładniej, $\attrib{A}{highest}=k$, gdzie $k\ge0$, jeśli wartość licznika znajduje się w~przedziale $[2^k,2^{k+1})$, oraz $\attrib{A}{highest}=\const{nil}$, jeśli wartością licznika jest 0.
-Procedura \proc{Increment} powinna dodatkowo tuż przed zakończeniem uaktualnić wartość pola \attrib{A}{highest}.
-Pseudokod procedury zerującej licznik przedstawiono poniżej.
+W~naszej implementacji licznika, z~wektorem bitów $A$ powiążemy atrybut \id{highest}, w~którym będziemy pamiętać pozycję najbardziej znaczącej jedynki w~tym liczniku.
+Dokładniej, $\attrib{A}{highest}=k$, gdzie $k\ge0$, jeśli wartość licznika znajduje się w~przedziale $[2^k,2^{k+1})$.
+Jeśli wartością licznika jest 0, to przyjmiemy $\attrib{A}{highest}=-1$.
+Poniżej przedstawiono pseudokod wersji procedury \proc{Increment}, która dodatkowo aktualizuje wartość pola \attrib{A}{highest} oraz procedury zerującej licznik.
+\begin{codebox}
+\Procname{$\proc{Increment}'(A)$}
+\li	$i\gets0$
+\li	\While $i<\attrib{A}{length}$ i~$A[i]=1$
+\li		\Do $A[i]\gets0$
+\li			$i\gets i+1$
+		\End
+\li	\If $i<\attrib{A}{length}$
+\li		\Then $A[i]\gets1$
+\li			\If $i>\attrib{A}{highest}$
+\li				\Then $\attrib{A}{highest}\gets i$ \label{li:increment'-highest-increased}
+				\End
+\li		\Else $\attrib{A}{highest}\gets-1$
+		\End
+\end{codebox}
 \begin{codebox}
 \Procname{$\proc{Reset}(A)$}
 \li	\For $i\gets0$ \To \attrib{A}{highest}
 \li		\Do $A[i]\gets0$
 		\End
-\li	$\attrib{A}{highest}\gets\const{nil}$
+\li	$\attrib{A}{highest}\gets-1$
 \end{codebox}
 
-Podobnie jak w~analizie kosztu zamortyzowanego przeprowadzonej w~Podręczniku, za każde ustawienie bitu na 1 w~procedurze \proc{Increment} zapłacimy 1~zł, po czym ,,położymy'' na tym bicie 1~zł jako kredyt.
-Dodatkowo, jeśli zwiększy się wartość pola \attrib{A}{highest}, to kolejne 1~zł ,,położymy'' na nowej jedynce najwyższego rzędu.
+Podobnie jak w~analizie kosztu zamortyzowanego przeprowadzonej w~Podręczniku, za każde ustawienie bitu na 1 w~procedurze $\proc{Increment}'$ płacimy 1~zł, po czym ,,kładziemy'' na tym bicie 1~zł jako kredyt.
+Dodatkowo, jeśli zwiększy się wartość pola \attrib{A}{highest} (linia \ref{li:increment'-highest-increased}), to kolejne 1~zł ,,kładziemy'' na nowej jedynce najwyższego rzędu.
 Ten dodatkowy kredyt wykorzystany będzie do spłacenia kosztu zerowania licznika procedurą \proc{Reset}.
-
-Możemy zatem powiązać koszt zamortyzowany równy 3 z~każdym wywołaniem \proc{Increment} oraz zerowy koszt zamortyzowany z~każdym wywołaniem \proc{Reset}.
-Wnioskujemy stąd, że dowolny ciąg $n$ operacji zwiększenia i~zerowania licznika można wykonać w~czasie $O(n)$.
+Możemy zatem powiązać koszt zamortyzowany równy 3 z~każdym wywołaniem $\proc{Increment}'$ oraz zerowy koszt zamortyzowany z~każdym wywołaniem \proc{Reset}.
+Wnioskujemy stąd, że dowolny ciąg $n$ operacji inkrementacji i~zerowania licznika można wykonać w~czasie $O(n)$.
