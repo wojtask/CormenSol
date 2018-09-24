@@ -1,0 +1,47 @@
+\problem{Dynamiczne wyszukiwanie binarne} %17-2
+
+\subproblem %17-2(a)
+Operacja \proc{Search} polega na wykonywaniu zwykłego wyszukiwania binarnego na kolejnych tablicach $A_i$, aż do odnalezienia szukanego elementu albo do wyczerpania tablic.
+
+Pesymistyczny przypadek dla tej operacji stanowi sytuacja, gdy każda z~tablic $A_0$, $A_1$, \dots, $A_{k-1}$ jest pełna, ale żadna z~nich nie zawiera szukanego elementu.
+Czas działania wyszukiwania w~takim przypadku wynosi
+\[
+	T(n) = \sum_{i=0}^{k-1}\Theta(\lg2^i) = \sum_{i=0}^{k-1}\Theta(i) = \Theta(k^2) = \Theta(\lg^2n).
+\]
+
+\subproblem %17-2(b)
+Operację \proc{Insert} wstawiającą element $x$ opiszemy w~postaci listy kroków.
+Zakładamy, że struktura danych, na której operacja ta jest uruchamiana, zawiera mniej niż $2^k-1$ elementów, więc nie istnieje możliwość wystąpienia przepełnienia.
+\begin{enumerate}
+\item Utwórz tablicę $B$ złożoną wyłącznie z~elementu $x$.
+\item Niech $i=0$.
+\item Jeśli tablica $A_i$ jest pusta, to wpisz do niej całą zawartość tablicy $B$ i~zakończ procedurę. \label{li:dynamic-binary-insert-empty-array}
+\item W~przeciwnym przypadku scal tablice $A_i$ i~$B$ w~posortowaną tablicę i~przypisz ją do $B$.
+\item Opróżnij tablicę $A_i$.
+\item Zwiększ $i$ o~1 i~przejdź do punktu \ref{li:dynamic-binary-insert-empty-array}.
+\end{enumerate}
+Do scalenia dwóch posortowanych tablic w~jedną posortowaną tablicę posłuży procedura \proc{Merge} z~podrozdziału 2.3, której wykonanie na dwóch tablicach o~$2^i$ elementach każda, zajmuje $2\cdot2^i$ jednostek czasu.
+W~pesymistycznym przypadku każda z~tablic $A_0$, $A_1$, \dots, $A_{k-2}$ jest pełna i~wtedy wykonanych zostanie $k-1$ scaleń.
+Wówczas czasem potrzebnym do wstawienia $x$ do struktury danych jest
+\[
+	T(n) = \sum_{i=0}^{k-2}2\cdot2^i = 2(2^{k-1}-1) = 2^k-2 = \Theta(n).
+\]
+
+Przeanalizujmy teraz czas zamortyzowany tej operacji, stosując metodę księgowania.
+Każde wstawienie elementu będzie nas kosztować $k$~zł -- 1~zł płacimy za umieszczenie elementu $x$ w~strukturze danych, natomiast pozostałe $k-1$~zł ,,kładziemy'' na $x$ jako kredyt do pokrycia przyszłych scaleń tablic.
+Takich scaleń, w~których uczestniczy $x$, może być łącznie co najwyżej $k-1$, zatem kredyt pozostawiony w~$x$ pozwala na ich całkowite pokrycie.
+Ponieważ $k=\Theta(\lg n)$, to kosztem zamortyzowanym operacji \proc{Insert} jest $\Theta(\lg n)$.
+
+\subproblem %17-2(c)
+Lista kroków operacji \proc{Delete}, usuwającej element $x$ znajdujący się w~opisanej strukturze danych, wygląda następująco:
+\begin{enumerate}
+\item Znajdź najmniejsze $i$ takie, że tablica $A_i$ jest pełna.
+\item Znajdź tablicę $A_j$ zawierającą $x$.
+\item Usuń $x$ z~tablicy $A_j$ i~na jego miejsce wstaw element $y=A_i[2^i-1]$.
+\item Przenieś element $y$ w~tablicy $A_j$ tak, aby była ona posortowana.
+\item Do każdej tablicy $A_r$, gdzie $r=0$, 1, \dots, ${i-1}$, przypisz fragment $A_i[2^r-1\twodots2^{r+1}-2]$.
+\item Opróżnij tablicę $A_i$.
+\end{enumerate}
+Po przeniesieniu elementu $y$ do $A_j$, tablica $A_i$ składa się z~$2^i-1$ elementów.
+Zostają więc one rozdystrybuowane między tablice $A_0$, $A_1$, \dots, $A_{i-1}$, po czym tablica $A_i$ zostaje opróżniona.
+Dzięki temu zabiegowi przywrócona zostaje własność struktury danych z~treści problemu.
