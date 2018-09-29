@@ -1,0 +1,51 @@
+\problem{Koszt przebudowy drzew czerwono-czarnych} %17-4
+
+\subproblem %17-4(a)
+Rozważmy drzewa czerwono-czarne opisane w~rozwiązaniu \refExercise{13.1-7}.
+Gdy do pierwszego z~nich wstawiony zostanie nowy węzeł, to w~wywołaniu procedury \proc{RB-Insert-Fixup} przypadek 1 wystąpi $\Omega(\lg n)$ razy, a~w~każdym z~nich kolor zmienią dokładnie 3 węzły.
+
+Drugie z~tych drzew potraktujemy jako przykład dla procedury \proc{RB-Delete}.
+Podczas usuwania najniższego węzła wewnętrznego nadmiarowa ,,czarna jednostka'' jest przesuwana w~górę drzewa aż do jego korzenia, a~na każdym poziomie swój kolor zmienia dokładnie jeden węzeł (przypadek 2 z~procedury \proc{RB-Delete-Fixup}).
+Łącznie wykonanych zostanie więc $\Omega(\lg n)$ takich zmian.
+
+\subproblem %17-4(b)
+W~procedurze \proc{RB-Insert-Fixup} kończące są przypadki 2 i~3, a~w~procedurze \proc{RB-Delete-Fixup} -- przypadki 1, 3 i~4.
+
+\subproblem %17-4(c)
+W~przypadku 1 procedury \proc{RB-Insert-Fixup} ojciec i~stryj węzła $z$ zmieniają kolor z~czerwonego na czarny, natomiast dziadek węzła $z$ -- z~czarnego na czerwony.
+Liczba czerwonych węzłów w~drzewie zmniejsza się zatem o~1, czyli $\Phi(T')=\Phi(T)-1$.
+
+\subproblem %17-4(d)
+W~liniach \doubledash{1}{16} procedury \proc{RB-Insert} następuje umieszczenie nowego węzła w~drzewie i~pokolorowanie go na czerwono -- rośnie więc o~1 potencjał drzewa.
+Niekończący przypadek 1 procedury \proc{RB-Insert-Fixup} wykonuje 3 zmiany koloru, zmniejszając przy tym potencjał o~1.
+W~każdym z~przypadków kończących (2 i~3) wykonywana jest jedna rotacja, a~potencjał drzewa nie zmienia się.
+Ponadto w~przypadku 3 kolor zmieniają 2 węzły.
+
+\subproblem %17-4(e)
+Zarówno liczba wykonywanych modyfikacji strukturalnych, jak i~różnica potencjału odpowiadająca liniom \doubledash{1}{16} procedury \proc{RB-Insert} oraz kończącym przypadkom \proc{RB-Insert-Fixup}, są rzędu $O(1)$.
+Niekończący przypadek \proc{RB-Insert-Fixup} może powtórzyć się w~jednym wywołaniu $O(\lg n)$ razy, ale zamortyzowana liczba modyfikacji strukturalnych wynosi 0, gdyż obniżeniem potencjału drzewa jesteśmy w~stanie zapłacić za wykonywane wtedy modyfikacje strukturalne.
+W~związku z~tym zamortyzowana liczba modyfikacji strukturalnych przeprowadzanych w~wywołaniu \proc{RB-Insert} wynosi $O(1)$.
+
+\subproblem %17-4(f)
+W~przypadku 1 procedury \proc{RB-Insert-Fixup} zachodzą następujące modyfikacje kolorów:
+\begin{itemize}
+	\item czarny węzeł o~dwóch czerwonych synach staje się czerwony -- potencjał maleje o~2;
+	\item czerwony węzeł o~jednym czerwonym synu staje się czarny -- potencjał nie zmienia się;
+	\item czerwony węzeł nie mający czerwonych synów staje się czarny -- potencjał rośnie o~1.
+\end{itemize}
+Zatem w~przypadku niekończącym tej procedury potencjał maleje łącznie o~1.
+Zgodnie z~poczynionym założeniem, ta jednostka potencjału pozwala opłacić wykonane w~tym przypadku modyfikacje strukturalne, dlatego zamortyzowaną ich liczbą jest tu 0.
+W~przypadkach kończących rzeczywista liczba modyfikacji strukturalnych jest rzędu $O(1)$, skąd zamortyzowana liczba modyfikacji strukturalnych wykonywanych w~wywołaniu \proc{RB-Insert-Fixup} wynosi $O(1)$.
+
+\subproblem %17-4(g)
+Przypadek 2 procedury \proc{RB-Delete-Fixup} prowadzi do następujących zmian w~kolorach:
+\begin{itemize}
+	\item czarny węzeł nie mający czerwonych synów staje się czerwony -- potencjał maleje o~1;
+	\item inny węzeł nie mający czerwonych synów zyskuje jednego czerwonego syna -- jeśli węzeł ten jest czerwony, to potencjał nie zmienia się, a~jeśli jest czarny, to potencjał maleje o~1.
+\end{itemize}
+Łącznie potencjał maleje więc o~1 lub o~2.
+Jedna jednostka potencjału wystarcza, by zapłacić za wykonane modyfikacje strukturalne, a~więc w~przypadku 2 zamortyzowaną ich liczbą jest co najwyżej 0.
+Przypadki kończące prowadzą do $O(1)$ modyfikacji strukturalnych, dlatego całkowitą ich zamortyzowaną liczbą w~procedurze \proc{RB-Delete-Fixup} jest $O(1)$.
+
+\subproblem %17-4(h)
+Ponieważ zamortyzowane liczby modyfikacji strukturalnych w~obu operacjach są rzędu $O(1)$, to ich rzeczywista liczba w~dowolnym ciągu $m$ operacji \proc{RB-Insert} i~\proc{RB-Delete} wykonanych na początkowo pustym drzewie czerwono-czarnym, jest rzędu $O(m)$ w~najgorszym przypadku.
