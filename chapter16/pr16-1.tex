@@ -1,60 +1,77 @@
 \problem{Wydawanie reszty} %16-1
 
 \subproblem %16-1(a)
-Optymalna reszta o~wartości $n$ składa się z~monety o~pewnym nominale $d$ (o~ile $d\le n$) plus optymalnej reszty dla podproblemu wydawania reszty o~wartości $n-d$.
-Ma tutaj zastosowanie standardowe rozumowanie ,,wytnij i~wklej''.
-Załóżmy, że dysponujemy rozwiązaniem dla reszty o~wartości $n$, w~którym nie jest uwzględniona moneta o~największym nominale nieprzekraczającym $n$.
-Moglibyśmy jednak dołączyć taką monetę do rozwiązania, zastępując nią kilka innych o~niższych nominałach:
-\begin{itemize}
-	\item $50\ \mathrm{gr}=20\ \mathrm{gr}+20\ \mathrm{gr}+10\ \mathrm{gr}$,
-	\item $20\ \mathrm{gr}=10\ \mathrm{gr}+10\ \mathrm{gr}$,
-	\item $10\ \mathrm{gr}=5\ \mathrm{gr}+5\ \mathrm{gr}$,
-	\item $5\ \mathrm{gr}=2\ \mathrm{gr}+2\ \mathrm{gr}+1\ \mathrm{gr}$,
-	\item $2\ \mathrm{gr}=1\ \mathrm{gr}+1\ \mathrm{gr}$.
-\end{itemize}
-Zamiana każdego takiego zestawu monet w~rozwiązaniu pojedynczą monetą o~sumarycznym nominale pozwala zredukować liczbę użytych monet i~daje lepsze rozwiązanie.
-Problem ma zatem zarówno własność optymalnej podstruktury, jak i~własność wyboru zachłannego.
+Optymalna reszta o~wartości $n$ składa się z~monety o~pewnym nominale $d\le n$ plus optymalnej reszty dla podproblemu wydawania reszty o~wartości $n-d$.
+Ma tutaj zastosowanie rozumowanie ,,wytnij i~wklej'', co stanowi uzasadnienie właściwości optymalnej podstruktury problemu.
 
-Można więc użyć algorytmu zachłannego, w~którym dla reszty o~wartości $n$ do rozwiązania dodawany będzie największy nominał $d$ nieprzekraczający $n$, po czym algorytm zostanie wywołany dla reszty o~wartości $n-d$, o~ile $n-d>0$.
+Pokażemy, że zachodzi też własność wyboru zachłannego polegająca na tym, że rozwiązanie optymalne dla reszty o~wartości $n$ zawiera monetę o~największym nominale $d$ nieprzekraczającym $n$.
+Jeśli $n=1$, to jedynym rozwiązaniem jest jedna moneta 1~gr.
+Przyjmijmy więc, że $n>1$ i~załóżmy, że dysponujemy pewnym rozwiązaniem dla reszty o~wartości $n$, w~którym nie ma monety o~nominale $d$.
+Będziemy wprowadzać modyfikacje w~tym rozwiązaniu polegające na zamianach monet o~niskich nominałach na monety o~wyższych nominałach, zmniejszając tym samym liczbę monet w~rozwiązaniu, ale też utrzymując jego wartość.
+
+Jeśli $n\ge2$, to każdą parę jednogroszówek wymieniamy na jedną dwugroszówkę.
+Teraz rozwiązanie zawiera co najwyżej jedną niesparowaną jednogroszówkę.
+
+Jeśli $n\ge5$, to rozważamy dwie sytuacje w~zależności od obecności monety 1~gr w~aktualnym rozwiązaniu.
+Zamieniamy wówczas albo zestaw 2~gr, 2~gr, 1~gr na jedną pięciogroszówkę, albo zestaw trzech monet 2~gr na dwie inne monety -- pięciogroszówkę i~jednogroszówkę.
+Proces powtarzamy, aż do wyczerpania takich zestawów.
+
+Jeśli $n\ge10$, to rozwiązanie na pewno zawiera parę pięciogroszówek, więc każdą taką parę zamieniamy na dziesięciogroszówkę.
+
+Jeśli $n\ge20$, to analogicznie do poprzedniego przypadku -- każda para dziesięciogroszówek zostaje zamieniona na jedną dwudziestogroszówkę.
+
+Jeśli $n\ge50$, to podobnie jak przy dążeniu do uzyskania 5~gr -- w~zależności od tego, czy moneta 10~gr należy do aktualnego rozwiązania, to albo zestaw 20~gr, 20~gr, 10~gr zostaje zamieniony na monetę pięćdziesięciogroszową, albo zestaw trzech monet 20~gr -- na monety pięćdziesięciogroszową i~dziesięciogroszową.
+
+Zachodzenie pokazanych własności pozwala na użycie algorytmu zachłannego.
+W~algorytmie tym dla reszty o~wartości $n$ do rozwiązania dodawany będzie największy nominał $d$ nieprzekraczający $n$, po czym algorytm zostanie wywołany dla reszty o~wartości $n-d$, o~ile $n-d>0$.
 Łatwo jednak przekształcić ten algorytm w~taki, który działa w~czasie $O(1)$.
 Wystarczy zauważyć, że dany nominał będzie wybierany najdłużej jak to tylko możliwe i~do wydania reszty o~wartości $n$ użytych zostanie kolejno:
 \begin{itemize}
-	\item $\lfloor n/50\rfloor$ monet \singledash{50}{groszowych}, pozostawiając resztę o~wartości $n_{50}=n\bmod50$,
-	\item $\lfloor n_{50}/20\rfloor$ monet \singledash{20}{groszowych}, pozostawiając resztę o~wartości $n_{20}=n_{50}\bmod20$,
-	\item $\lfloor n_{20}/10\rfloor$ monet \singledash{10}{groszowych}, pozostawiając resztę o~wartości $n_{10}=n_{20}\bmod10$,
-	\item $\lfloor n_{10}/5\rfloor$ monet \singledash{5}{groszowych}, pozostawiając resztę o~wartości $n_5=n_{10}\bmod5$,
-	\item $\lfloor n_5/2\rfloor$ monet \singledash{2}{groszowych}, pozostawiając resztę o~wartości $n_2=n_5\bmod2$,
-	\item $n_2$ monet \singledash{1}{groszowych}.
+	\item $\lfloor n/50\rfloor$ pięćdziesięciogroszówek, pozostawiając resztę o~wartości $n_{50}=n\bmod50$,
+	\item $\lfloor n_{50}/20\rfloor$ dwudziestogroszówek, pozostawiając resztę o~wartości $n_{20}=n_{50}\bmod20$,
+	\item $\lfloor n_{20}/10\rfloor$ dziesięciogroszówek, pozostawiając resztę o~wartości $n_{10}=n_{20}\bmod10$,
+	\item $\lfloor n_{10}/5\rfloor$ pięciogroszówek, pozostawiając resztę o~wartości $n_5=n_{10}\bmod5$,
+	\item $\lfloor n_5/2\rfloor$ dwugroszówek, pozostawiając resztę o~wartości $n_2=n_5\bmod2$,
+	\item $n_2$ jednogroszówek.
 \end{itemize}
 
 \subproblem %16-1(b)
-Do uzasadnienia poprawności algorytmu zachłannego w~tym przypadku wystarczy użyć argumentacji z~punktu (a) zmodyfikowanej jedynie w~części mówiącej o~wzajemnych powiązaniach dostępnych nominałów.
-Dla każdego $c>1$ oraz $i=1$, 2, \dots, $k$ zachodzi $c^i=c\cdot c^{i-1}$, toteż własność wyboru zachłannego w~tym przypadku jest zachowana.
+Dla $i=0$, 1, \dots, $k$, niech $a_i$ będzie liczbą monet o~nominale $c^i$ użytych w~rozwiązaniu problemu wydawania reszty o~wartości $n$.
+Zauważmy, że w~rozwiązaniu optymalnym dla każdego $i=0$, 1, \dots, $k-1$ zachodzi $a_i\le c-1$.
+W~przeciwnym przypadku bowiem, jeśli $a_i\ge c$ dla pewnego $0\le i<k$, to moglibyśmy usunąć $c$ monet o~nominale $c^i$ i~zastąpić je jedną monetą o~nominale $c^{i+1}$.
+W~nowym rozwiązaniu mielibyśmy o~$c-1>0$ monet mniej, co przeczyłoby optymalności początkowego rozwiązania.
 
-Algorytm zachłanny będzie przeglądał nominały w~kolejności malejącej.
-Załóżmy, że aktualnym przetwarzanym nominałem jest $c^i$, a~pozostałą resztą do wydania jest $m$.
-Do rozwiązania zostanie wówczas dołączone $\lfloor m/c^i\rfloor$ monet o~nominale $c^i$, a~w~następnym kroku wydawana będzie reszta $m\bmod c^i$.
-Do znalezienia optymalnego rozwiązania algorytm potrzebuje czasu $\Theta(k)$.
+Pokażemy, że każde rozwiązanie, które nie zawiera największego nominału nieprzekraczającego $n$, jest nieoptymalne.
+Zdefiniujmy $j=\max\{\,0\le i\le k:c^i\le n\,\}$ i~rozważmy dowolne rozwiązanie problemu dla $n$ bez nominału $c^j$.
+Wówczas $\sum_{i=0}^{j-1}a_ic^i=n\ge c^j$.
+Jeśli założymy, że takie rozwiązanie jest optymalne, to z~obserwacji z~poprzedniego paragrafu mamy, że $a_i\le c-1$ dla każdego $i=0$, 1, \dots, $j-1$.
+Zachodzi
+\[
+	n = \sum_{i=0}^{j-1}a_ic^i \le \sum_{i=0}^{j-1}(c-1)c^i = (c-1)\sum_{i=0}^{j-1}c^i = (c-1)\cdot\frac{c^j-1}{c-1} = c^j-1 < c^j,
+\]
+co jest sprzeczne z~poprzednim wynikiem.
+Oznacza to, że rozwiązanie generowane przez algorytm zachłanny jest optymalne.
 
 \subproblem %16-1(c)
-Jeśli do dyspozycji będą nominały 1~gr, 3~gr i~4~gr, to np.\ reszta o~wartości 6~gr przez opisany algorytm zachłanny zostanie wydana za pomocą 3 monet: $6\ \mathrm{gr}=4\ \mathrm{gr}+1\ \mathrm{gr}+1\ \mathrm{gr}$, podczas gdy w~optymalnym rozwiązaniu wystarczą 2 monety: $6\ \mathrm{gr}=3\ \mathrm{gr}+3\ \mathrm{gr}$.
+Jeśli do dyspozycji będą nominały 1~gr, 3~gr i~4~gr, to np.\ reszta o~wartości 6~gr przez opisany algorytm zachłanny zostanie wydana za pomocą 3 monet: $6\ \mathrm{gr}=4\ \mathrm{gr}+1\ \mathrm{gr}+1\ \mathrm{gr}$, podczas gdy wystarczą 2 monety: $6\ \mathrm{gr}=3\ \mathrm{gr}+3\ \mathrm{gr}$.
 
 \subproblem %16-1(d)
-Oznaczmy dopuszczalne nominały przez $d_1$, $d_2$, \dots, $d_k$, wśród których jednym z~nich jest 1~gr.
+Oznaczmy dysponowane nominały przez $d_1$, $d_2$, \dots, $d_k$, wśród których jednym z~nich jest 1~gr.
 W~tablicy $c[0\twodots n]$ na pozycji $c[j]$ będziemy przechowywać minimalną liczbę monet konieczną do wydania reszty o~wartości $j$.
-Jako przypadek bazowy przyjmujemy $c[0]=0$.
+Jako przypadek brzegowy przyjmujemy $c[0]=0$.
 Na podstawie optymalnej podstruktury mamy, że jeśli w~optymalnym rozwiązaniu dla $j>0$ użyta została moneta o~nominale $d_i$, to $c[j]=1+c[j-d_i]$.
 Zachodzi więc zależność rekurencyjna:
 \[
-	c[j] = \max\begin{cases}
+	c[j] = \begin{cases}
 		0, & \text{jeśli $j=0$,} \\
-		\displaystyle\min_{1\le i\le k}(1+c[j-d_i]), & \text{jeśli $j>1$.}
+		\displaystyle\min_{1\le i\le k}(1+c[j-d_i]), & \text{jeśli $j>1$,}
 	\end{cases}
 \]
-Wartości tablicy $c$ można wyliczać dla rosnących indeksów.
+przy czym dla uproszczenia zapisu przyjmujemy, że gdy $j<d_i$, to $c[j-d_i]=\infty$.
+Wartości tablicy $c[0\twodots n]$ można wyliczać według rosnących indeksów.
 Po zakończeniu wypełniania tablicy $c[n]$ będzie równe minimalnej liczbie monet w~optymalnym rozwiązaniu problemu.
 
-Poniższa procedura realizuje opisany plan, zapisując dodatkowo w~tablicy $\id{denom}[1\twodots n]$ na pozycji $\id{denom}[j]$ nominał $d_i$ minimalizujący $c[j]$.
+Poniższa procedura realizuje opisany plan w~czasie $O(nk)$, zapisując dodatkowo w~tablicy $\id{denom}[1\twodots n]$ na pozycji $\id{denom}[j]$ nominał $d_i$ minimalizujący $c[j]$.
 \begin{codebox}
 \Procname{$\proc{Make-Change}(n,d)$}
 \li	$c[0]\gets0$
@@ -69,9 +86,9 @@ Poniższa procedura realizuje opisany plan, zapisując dodatkowo w~tablicy $\id{
 		\End
 \li	\Return $c$ i~\id{denom}
 \end{codebox}
-Tablica \id{denom} pozwala wypisać monety używane w~optymalnym rozwiązaniu.
+Dzięki tablicy \id{denom} nominały użyte w~optymalnym rozwiązaniu można wypisać w~czasie $O(n)$, stosując poniższą procedurę.
 \begin{codebox}
-\Procname{$\proc{Print-Change}(\id{denom},n)$}
+\Procname{$\proc{Print-Change}(n,\id{denom})$}
 \li	\While $n>0$
 \li		\Then wypisz $\id{denom}[n]$
 \li			$n\gets n-\id{denom}[n]$
