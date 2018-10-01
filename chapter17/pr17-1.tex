@@ -21,7 +21,7 @@ Kolejna wartość licznika powstaje w~wyniku zinkrementowania bieżącej wartoś
 Zaimplementujemy procedurę \proc{Increment} z~podrozdziału 17.1 przy pomocy operacji bitowych, a~następnie zmodyfikujemy ją, aby działała dla odwróconej kolejności bitów.
 
 Pętla \kw{while} w~tej procedurze wyszukuje w~liczniku zero umiejscowione najbardziej na prawo oraz zeruje wszystkie mniej znaczące jedynki.
-Można zasymulować działanie tej pętli przez utrzymywanie tzw.\ \textbf{maski bitowej} $m$ -- wartości początkowo równej 1, która będzie następnie przesuwana bitowo w~lewo w~kolejnych iteracjach, służąc do szybkiego odczytu danego bitu licznika i~jego modyfikacji.
+Można zasymulować działanie tej pętli przez utrzymywanie tzw.\ \textbf{maski bitowej} $m$ -- wartości początkowo równej 1, która, przesuwana bitowo w~lewo w~kolejnych iteracjach, posłuży do szybkiego odczytu danego bitu licznika i~jego modyfikacji.
 W~\singledash{$i$}{tej} iteracji, gdzie $i=0$, 1, \dots, $k-1$, maska będzie mieć wartość $m=2^i$ otrzymaną przez przesunięcie jedynki w~lewo o~$i$.
 Aby pobrać \singledash{$i$}{ty} najmniej znaczący bit licznika, należy wykonać operację bitową AND między licznikiem i~aktualną maską.
 Podobnie, aby wyzerować ten bit, należy wykonać bitowe XOR.
@@ -38,7 +38,7 @@ W~pseudokodzie poniżej \func{SHL} oznacza operację przesunięcia bitowego w~le
 		\End
 \li	\Return $a\func{OR}m$
 \end{codebox}
-W~celu wykonania permutacji odwracającej bity utrzymujemy 2 \singledash{$k$}{bitowe} liczniki binarne -- zwykły oraz z~odwróconymi bitami -- i~zmieniamy elementy w~tablicy $A$ znajdujące się na indeksach równych tym licznikom, upewniając się, że zamiany te nie powtarzają się.
+W~celu wykonania permutacji odwracającej bity utrzymujemy dwa \singledash{$k$}{bitowe} liczniki binarne -- zwykły oraz z~odwróconymi bitami -- i~zamieniamy elementy w~tablicy $A$ znajdujące się na indeksach równych tym licznikom, upewniając się, że zamiany te nie powtarzają się.
 \begin{codebox}
 \Procname{$\proc{Bit-Reversal}'(A)$}
 \li	$n\gets\attrib{A}{length}$

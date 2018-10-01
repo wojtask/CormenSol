@@ -20,16 +20,16 @@ Zakładamy, że struktura danych, na której operacja ta jest uruchamiana, zawie
 \item Opróżnij tablicę $A_i$.
 \item Zwiększ $i$ o~1 i~przejdź do punktu \ref{li:dynamic-binary-insert-empty-array}.
 \end{enumerate}
-Do scalenia dwóch posortowanych tablic w~jedną posortowaną tablicę posłuży procedura \proc{Merge} z~podrozdziału 2.3, której wykonanie na dwóch tablicach o~$2^i$ elementach każda, zajmuje $2\cdot2^i$ jednostek czasu.
+Do scalenia dwóch posortowanych tablic w~jedną posortowaną tablicę posłuży procedura \proc{Merge} z~podrozdziału 2.3, której wykonanie na dwóch tablicach o~$2^i$ elementach każda, zabiera czas rzędu $\Theta(2^i)$.
 W~pesymistycznym przypadku każda z~tablic $A_0$, $A_1$, \dots, $A_{k-2}$ jest pełna i~wtedy wykonanych zostanie $k-1$ scaleń.
 Wówczas czasem potrzebnym do wstawienia $x$ do struktury danych jest
 \[
-	T(n) = \sum_{i=0}^{k-2}2\cdot2^i = 2(2^{k-1}-1) = 2^k-2 = \Theta(n).
+	T(n) = \sum_{i=0}^{k-2}\Theta(2^i) = \Theta(2^k) = \Theta(n).
 \]
 
 Przeanalizujmy teraz czas zamortyzowany tej operacji, stosując metodę księgowania.
-Każde wstawienie elementu będzie nas kosztować $k$~zł -- 1~zł płacimy za umieszczenie elementu $x$ w~strukturze danych, natomiast pozostałe $k-1$~zł ,,kładziemy'' na $x$ jako kredyt do pokrycia przyszłych scaleń tablic.
-Takich scaleń, w~których uczestniczy $x$, może być łącznie co najwyżej $k-1$, zatem kredyt pozostawiony w~$x$ pozwala na ich całkowite pokrycie.
+Każde wstawienie elementu będzie nas kosztować $k$~zł -- 1~zł płacimy za umieszczenie elementu $x$ w~strukturze danych, natomiast pozostałe $(k-1)$~zł ,,kładziemy'' na $x$ jako kredyt do pokrycia przyszłych scaleń tablic.
+Takich scaleń, w~których uczestniczy $x$, może być łącznie co najwyżej $k-1$, zatem kredyt pozostawiony w~$x$ pozwala na całkowite ich pokrycie.
 Ponieważ $k=\Theta(\lg n)$, to kosztem zamortyzowanym operacji \proc{Insert} jest $\Theta(\lg n)$.
 
 \subproblem %17-2(c)

@@ -2,19 +2,19 @@
 
 \exercise %17.2-1
 Operację wykonywania kopii bezpieczeństwa będziemy nazywać \proc{Backup}.
-W~naszym rozwiązaniu metodą księgowania operacjom przypiszemy następujące koszty zamortyzowane:
+W~naszym rozwiązaniu za pomocą metody księgowania operacjom przypiszemy następujące koszty zamortyzowane:
 \begin{flushleft}
 	\begin{tabular}{lr}
 		\proc{Push} & 2, \\
-		\proc{Pop} & 1, \\
+		\proc{Pop} & 2, \\
 		\proc{Backup} & 0.
 	\end{tabular}
 \end{flushleft}
-Wykażemy, że przy takich wartościach jesteśmy w~stanie spełnić nierówność (17.1) dla dowolnego ciągu $n$ operacji.
-Możemy wyobrazić sobie, że za każde wstawienie elementu na stos płacimy 2~zł, czyli 1~zł za rzeczywisty koszt samej operacji plus 1~zł kredytu na poczet przyszłych operacji.
-Po wywołaniu dokładnie $k$ operacji \proc{Push} i~\proc{Pop} łączna wartość kredytu na stosie wynosi dokładnie $k$~zł, co wystarcza na zapłacenie za wykonanie kopii bezpieczeństwa, gdy operacja \proc{Backup} jest wywoływana na stosie o~co najwyżej $k$ elementach.
+Wykażemy, że przy takich wartościach jesteśmy w~stanie spełnić nierówność (17.1) dla dowolnego ciągu $n$ operacji, w~którym \proc{Backup} wykonywana jest co~każdych $k$ operacji.
 
-Zamortyzowanym kosztem każdej operacji jest więc $O(1)$, co oznacza, że łączny koszt ciągu $n$ operacji można oszacować przez $O(n)$.
+Możemy wyobrazić sobie, że za każde wstawienie elementu na stos i~za każde usunięcie elementu ze stosu płacimy 2~zł, czyli 1~zł za rzeczywisty koszt samej operacji plus 1~zł kredytu na poczet kolejnej operacji kopii bezpieczeństwa.
+Po wykonaniu dokładnie $k$ operacji \proc{Push} i~\proc{Pop} łączna wartość kredytu na stosie wynosi dokładnie $k$~zł, co wystarcza na zapłacenie za wykonanie kopii bezpieczeństwa, gdy operacja \proc{Backup} jest wywoływana na stosie o~co najwyżej $k$ elementach.
+Łączny koszt zamortyzowany ciągu $n$ operacji jest więc rzędu $O(n)$, co stanowi również oszacowanie na łączny koszt rzeczywisty tego ciągu.
 
 \exercise %17.2-2
 Każdej operacji przypiszemy koszt zamortyzowany $\widehat{c_i}=3$.
@@ -22,7 +22,7 @@ Z~\refExercise{17.1-3} wiemy, że $\sum_{i=1}^nc_i<3n$, dlatego kredyt w~żadnym
 \[
 	\sum_{i=1}^n\widehat{c_i} = 3n > \sum_{i=1}^nc_i.
 \]
-Koszt zamortyzowany każdej operacji jest więc rzędu $O(1)$.
+Łączny koszt zamortyzowany ciągu $n$ operacji jest więc rzędu $O(n)$, co jest także ograniczeniem na łączny koszt rzeczywisty tego ciągu operacji.
 
 \exercise %17.2-3
 W~naszej implementacji licznika, z~wektorem bitów $A$ powiążemy atrybut \id{highest}, w~którym będziemy pamiętać pozycję najbardziej znaczącej jedynki w~tym liczniku.

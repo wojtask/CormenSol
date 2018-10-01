@@ -8,7 +8,7 @@ A~zatem dla każdego $i=1$, 2, \dots, $n$ musi zachodzić
 \]
 Stąd mamy $\Phi'(D_1)-\Phi'(D_0)=\Phi(D_1)-\Phi(D_0)$, czyli $\Phi'(D_1)=\Phi(D_1)-\Phi(D_0)$.
 Następnie $\Phi'(D_2)=\Phi(D_2)-\Phi(D_1)+\Phi'(D_1)$ i~wstawiając uprzednio wyznaczone $\Phi'(D_1)$, dostajemy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_0)$.
-Postępując w~ten sposób dla kolejnych $i$, konstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$ dla każdego $i=1$, 2, \dots, $n$.
+Postępując w~ten sposób dla kolejnych $D_i$, konstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$, gdzie $i=0$, 1, \dots, $n$.
 
 \exercise %17.3-2
 W~naszej analizie skorzystamy z~następującej funkcji potencjału:
@@ -32,7 +32,7 @@ Dzięki wybraniu szczególnej funkcji $\Phi$, jako koszt zamortyzowany każdej o
 Oczywiście $\Phi(D_i)\ge\Phi(D_0)$ dla każdego $i\ge1$, zatem łączny koszt zamortyzowany ciągu $n$ operacji stanowi górne ograniczenie ich kosztu faktycznego, co daje pesymistyczny koszt tego ciągu równy $O(n)$.
 
 \exercise %17.3-3
-Na początkowo pustym kopcu $D_0$ wykonujemy ciąg operacji \proc{Insert} lub \proc{Extract-Min}.
+Na początkowo pustym kopcu $D_0$ wykonujemy ciąg operacji \proc{Insert} i~\proc{Extract-Min}.
 Przez $D_i$ oznaczmy kopiec powstały tuż po wykonaniu \singledash{$i$}{tej} operacji, a~przez $n_i$ -- liczbę jego węzłów.
 Niech $d_i(x)$ oznacza głębokość węzła $x$ w~kopcu $D_i$ i~niech $k>0$ będzie taką stałą, że zarówno koszt $c_I$ operacji \proc{Insert}, jak i~koszt $c_X$ operacji \proc{Extract-Min} na \singledash{$n$}{elementowym} kopcu ograniczony jest z~góry przez $k\lg n$.
 Rozważymy funkcję potencjału
@@ -84,7 +84,7 @@ W~przeciwnym przypadku wykonywanych jest $k$ operacji \proc{Push} oraz $k+1$ ope
 Wówczas $c_D=2k+1$.
 
 Jako potencjał naszej struktury danych przyjmiemy dwukrotność rozmiaru stosu $S_1$.
-W~trakcie operacji wstawiania do kolejki pierwszy stos zwiększa swój rozmiar o~1, dlatego zamortyzowany koszt tej operacji jest równy $\widehat{c_E}=c_E+2\cdot1=3$.
+W~trakcie wstawiania do kolejki pierwszy stos zwiększa swój rozmiar o~1, dlatego zamortyzowany koszt tej operacji jest równy $\widehat{c_E}=c_E+2\cdot1=3$.
 Gdy stos $S_2$ jest niepusty, to koszt zamortyzowany operacji \proc{Dequeue} $\widehat{c_D}$ wynosi $c_D$.
 W~przeciwnym razie podczas usuwania elementu z~kolejki stos $S_1$ zmniejsza swój rozmiar o~$k$, więc $\widehat{c_D}=c_D-2k=1$.
 Koszty zamortyzowane obu operacji w~tej implementacji wynoszą zatem $O(1)$.
