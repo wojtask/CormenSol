@@ -2,7 +2,7 @@
 
 Niniejsze opracowanie zawiera rozwiązania zadań i~problemów z~drugiego wydania monografii \textsl{Introduction to Algorithms} \cite{cormen} autorstwa Thomasa H.\ Cormena, Charlesa E.\ Leisersona, Ronalda L.\ Rivesta i~Clifforda Steina.
 Przy opracowywaniu rozwiązań korzystałem równolegle z~polskiego tłumaczenia pt.\ \textsl{Wprowadzenie do algorytmów} \cite{cormenpl} w~wydaniu szóstym.
-Na chwilę obecną opracowanie pokrywa rozdziały należące do części pierwszej (rozdz.\ \doubledash{1}{5}), drugiej (rozdz.\ \doubledash{6}{9}) i~trzeciej (rozdz.\ \doubledash{10}{14}) oraz dodatki wypełniające część ósmą książki.
+Na chwilę obecną opracowanie pokrywa rozdziały wchodzące w~skład części I--IV (rozdz.\ \doubledash{1}{17}) oraz dodatki wypełniające część VIII.
 Kolejne wersje będą sukcesywnie uzupełniane o~rozwiązania zadań z~kolejnych części, wprowadzając jednocześnie poprawki znalezionych błędów i~ewentualnie doskonaląc poprzednie rozwiązania.
 
 Moim celem było stworzenie kompletnego zbioru rozwiązań, który pomaga w~przyswajaniu materiału z~\textsl{Wprowadzenia do algorytmów} (określanego dalej jako ,,Podręcznik''), będąc czymś w~rodzaju wzorcowego ,,klucza odpowiedzi'', z~którym student porównuje uzyskany przez siebie rezultat.
@@ -36,19 +36,14 @@ O~każdym znalezionym błędzie lub nieścisłości w~treściach zadań zwracam 
 Bazuję przede wszystkim na polskim tłumaczeniu, ale wskazuję, czy błąd występuje także w~oryginale.
 Uwzględniam jednakże erratę do oryginału: \url{http://www.cs.dartmouth.edu/~thc/clrs-2e-bugs/bugs.php} -- jeśli znajduje się w~niej wpis o~pewnej poprawce, to przyjmuję, że błąd został naprawiony i~wspominam o~jego istnieniu tylko wówczas, gdy występuje w~tłumaczeniu.
 
-Obecna wersja tekstu (oznaczona jako 0.5) w~porównaniu z~poprzednią (0.4), oprócz rozwiązań z~części III, zawiera też pewną liczbę poprawek do zadań z~części I, II i~VIII.
-Poprawione zostały przede wszystkim znalezione błędy logiczne, a~niektóre paragrafy zostały przeredagowane.
-Zmiany zaszły także w~warstwie prezentacyjnej, między innymi dzięki wciągnięciu numerów zadań do pierwszych paragrafów rozwiązań, co zmniejszyło nieestetyczne puste odstępy między rozwiązaniami.
+Algorytmy i~struktury danych z~Podręcznika i~rozwiązań implementowane są w~języku Python i~testowane pod kątem poprawności.
+Projekt dostępny jest pod adresem \url{https://github.com/wojtask/CormenPy}.
+Nie zalecam jednak wykorzystywania tej implementacji jako biblioteki algorytmów do rzeczywistych zastosowań, ponieważ głównym celem projektu jest jak najwierniejsze odwzorowanie pseudokodów w~rzeczywistym języku programowania i~dokładne przetestowanie powstałego kodu.
 
-W~ostatnim czasie zdecydowałem się na implementację algorytmów i~struktur danych z~Podręcznika i~rozwiązań w~rzeczywistym języku programowania i~przeprowadzenia testów ich poprawności.
-W~wyniku tego przedsięwzięcia powstał projekt w~języku Python dostępny pod adresem \url{https://github.com/wojtask/CormenPy}.
-Nie zalecam jednak wykorzystywania tej implementacji jako biblioteki algorytmów do rzeczywistych zastosowań, ponieważ głównym celem projektu jest jak najwierniejsze odwzorowanie pseudokodów w~języku programowania i~przetestowanie powstałego kodu.
-W~wyniku przeprowadzenia testów udało mi się wykryć wiele błędów i~innych niedoskonałości w~pseudokodach z~rozwiązań, które zostały oczywiście poprawione w~obecnej wersji tekstu.
-
-Opracowanie powstaje od 2009 roku w~bardzo powolnym tempie, głównie z~powodu mojego perfekcjonistycznego podejścia w~ich opracowywaniu.
-Tymczasem w~tym samym roku ukazało się kolejne, trzecie wydanie Podręcznika \cite{cormen3} zawierające nowy materiał, jak i~wiele nowych zadań i~problemów.
-Mam nadzieję na przyspieszenie prac nad wydaniem drugim i~jak najszybszego przystąpienia do opracowywania rozwiązań dla wydania trzeciego.
-Innym planowanym projektem jest przetłumaczenie całego tekstu na język angielski, aby dotrzeć do szerszego grona odbiorców.
+Opracowanie powstaje od 2009 roku.
+Z~powodu mojego perfekcjonistycznego podejścia w~przygotowywaniu rozwiązań, częstotliwość wydawania kolejnych wersji jest dość niska.
+Na podstawie obserwacji tego tempa estymuję, że prawdopodobnym terminem ukończenia projektu jest rok 2025.
+Po wydaniu finalnej wersji niniejszego opracowania mam zamiar przygotować podobne, bazujące na nowszych wydaniach Podręcznika (trzeciego \cite{cormen3} oraz ewentualnych przyszłych), a~także przetłumaczyć ich tekst na język angielski, aby dotrzeć do szerszego grona odbiorców.
 
 Dołożyłem wszelkich starań, aby każde rozwiązanie zostało dokładnie sprawdzone.
 Jeśli jednak znalazłeś błąd merytoryczny lub typograficzny, bądź twierdzisz, że znasz znacznie krótsze lub prostsze rozwiązanie jakiegoś zadania lub problemu, powiadom mnie o~tym niezwłocznie, pisząc na adres \url{kwojtas@gmail.com}.
@@ -56,4 +51,4 @@ Jeśli sugestia okaże się trafna, Twoje nazwisko pojawi się w~podziękowaniac
 
 \bigskip
 \bigskip
-\noindent{\sl Kraków, czerwiec 2017}\hfill--- Krzysztof Wojtas
+\noindent{\sl Kraków, październik 2018}\hfill--- Krzysztof Wojtas
