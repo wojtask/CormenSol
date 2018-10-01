@@ -71,7 +71,7 @@ przy czym dla uproszczenia zapisu przyjmujemy, że gdy $j<d_i$, to $c[j-d_i]=\in
 Wartości tablicy $c[0\twodots n]$ można wyliczać według rosnących indeksów.
 Po zakończeniu wypełniania tablicy $c[n]$ będzie równe minimalnej liczbie monet w~optymalnym rozwiązaniu problemu.
 
-Poniższa procedura realizuje opisany plan w~czasie $O(nk)$, zapisując dodatkowo w~tablicy $\id{denom}[1\twodots n]$ na pozycji $\id{denom}[j]$ nominał $d_i$ minimalizujący $c[j]$.
+Poniższa procedura realizuje opisany plan w~czasie $O(nk)$, zapisując dodatkowo w~tablicy $\id{denom}[1\twodots n]$ na pozycji $j$ nominał $d_i$ minimalizujący $c[j]$.
 \begin{codebox}
 \Procname{$\proc{Make-Change}(n,d)$}
 \li	$c[0]\gets0$

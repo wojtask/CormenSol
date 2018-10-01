@@ -12,7 +12,7 @@ Suma ich czasów zakończenia wnoszona do średniego czasu zakończenia rozważa
 Oznaczmy przez $c_i'$, $c_j'$, odpowiednio, czasy zakończenia zadań $a_i$, $a_j$, gdyby zostały one zamienione miejscami w~tym uporządkowaniu.
 Z~założenia $c_i'=c_j$ oraz $c_j'<c_i$, a~więc suma nowych czasów zakończenia wynosi $C'=c_i'+c_j'<c_j+c_i=C$.
 Wynika stąd, że w~każdej parze sąsiednich zadań najpierw powinno być wykonywane to, które wymaga krótszego czasu.
-Równoważnie, optymalnym uszeregowaniem zadań minimalizującym średni czas zakończenia zadania jest takie, w~którym zadania wykonywane są w~kolejności niemalejących czasów wykonywania, bez przerw między nimi.
+Reasumując, optymalnym uszeregowaniem zadań minimalizującym średni czas zakończenia zadania jest takie, w~którym zadania wykonywane są w~kolejności niemalejących czasów wykonywania, bez przerw między nimi.
 
 Na podstawie powyższej analizy otrzymujemy algorytm rozwiązujący ten problem, w~którym zadania z~wejściowego zbioru $S$ są sortowane według ich czasów wykonywania.
 Jeśli $a_1$, $a_2$, \dots, $a_n$ jest kolejnością po posortowaniu, to dla każdego $k=1$, 2, \dots, $n$ wystarczy przyjąć $c_k=\sum_{i=1}^kp_i$.
@@ -26,7 +26,7 @@ Jeśli waga danego zadania osiąga 0, to jest ono usuwane z~$S$.
 
 W~celu minimalizacji średniego czasu zakończenia zadań, postępujemy według podobnego schematu jak w~punkcie (a).
 Ponieważ aktualna waga elementu w~$S$ oznacza pozostały czas wymagany do wykonania tego zadania, to w~danym momencie optymalnym wyborem jest to zadanie ze zbioru $S$, które ma minimalną wagę (o~ile $S$ nie jest zbiorem pustym).
-Zaimplementowanie zbioru dynamicznego $S$ w~postaci kolejki priorytetowej typu min, pozwala na szybkie pobieranie elementu o~minimalnej wadze oraz na dekrementowanie wag elementów.
+Zaimplementowanie zbioru dynamicznego $S$ w~postaci kolejki priorytetowej typu min pozwala na szybkie pobieranie elementu o~minimalnej wadze oraz na dekrementowanie wag elementów.
 W~trakcie działania algorytmu każde zadanie zostanie wstawione do $S$, a~po wyzerowaniu jego wagi usunięte.
 Łącznie wykonanych będzie $P=\sum_{i=1}^np_i$ dekrementacji wag elementów i~tyle samo wyszukiwań elementu o~najmniejszej wadze w~$S$.
 Zbiór $S$ może zawierać maksymalnie $n$ elementów, zatem algorytm wykona co najwyżej $O(P\lg n)$ operacji.

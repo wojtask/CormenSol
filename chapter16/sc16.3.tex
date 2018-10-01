@@ -20,7 +20,8 @@ Nietrudno zauważyć, że w~\singledash{$i$}{tej} iteracji pętli \kw{for} jest 
 	\attrib{z}{f} = \sum_{k=1}^{i+1}F_k = F_{i+3}-1.
 \]
 Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego \attrib{z}{f} w~iteracji $i+1$ jest drugą najmniejszą wartością w~kolejce $Q$ i~węzeł o~tej wartości zostaje wybrany na prawego syna kolejnego węzła $z$.
-W~pierwszej iteracji zachodzi $\attrib{z}{f}=2=F_3$, ale implementacja kolejki priorytetowej także wtedy doprowadzi do opisanego powiązania węzłów.
+W~pierwszej iteracji zachodzi $\attrib{z}{f}=2=F_3$.
+Jeśli kolejka priorytetowa zaimplementowana jest jako kopiec binarny typu min na podstawie informacji w~rozdziale 6, to także w~tym przypadku doprowadzi to do opisanego powiązania węzłów.
 Zbudowane drzewo będzie mieć wysokość $n-1$, przy czym lewy syn każdego jego węzła wewnętrznego będzie liściem.
 W~otrzymanym kodzie Huffmana, literze o~częstości $F_k$, gdzie $3\le k\le n$, przypisane zostanie słowo kodowe postaci
 \[
@@ -70,10 +71,10 @@ Różnica
 \]
 jest dodatnia, na podstawie przyjętych założeń.
 A~zatem drzewo powstałe z~$T$ poprzez zamianę miejscami znaków $c_i$ i~$c_j$ ma niższy koszt niż drzewo $T$, dlatego $T$ nie może reprezentować optymalnego kodowania.
-Wynika stąd, że w~optymalnym drzewie każde dwa znaki o~niemalejących częstościach zajmują nierosnące głębokości, a~więc ich słowa kodowe także mają nierosnące długości.
+Wynika stąd, że w~optymalnym drzewie każda para znaków o~niemalejących częstościach zajmuje nierosnące głębokości, a~więc słowa kodowe tej pary znaków także mają nierosnące długości.
 
 \exercise %16.3-5
-Drzewo $T$ reprezentujące optymalne kodowanie zbioru $C$ zawiera $n$ liści i~$n-1$ węzłów wewnętrznych.
+Na podstawie \refExercise{16.3-1} drzewo $T$ reprezentujące optymalne kodowanie zbioru $C$ jest regularne, więc posiada $n$ liści i~$n-1$ węzłów wewnętrznych.
 Jego strukturę możemy zakodować, przechodząc je w~porządku preorder i~zamiast wypisywać klucz węzła, odnotowywać 0, jeśli jest to węzeł wewnętrzny, albo 1, jeśli jest on liściem.
 Ponieważ drzewo $T$ jest regularne, to opisane kodowanie jest jednoznaczne i~składa się z~$2n-1$ bitów.
 Należy jeszcze uzupełnić je o~informacje, któremu liściowi w~$T$ odpowiada który znak z~$C$.
@@ -103,10 +104,10 @@ Każdy węzeł $x$ takiego drzewa, oprócz pól \attrib{x}{left} i~\attrib{x}{ri
 \li	\Return $\proc{Extract-Min}(Q)$
 \end{codebox}
 Aby możliwe było zbudowanie drzewa regularnego, liczba znaków w~zbiorze $C$ musi być nieparzysta.
-W~przeciwnym przypadku alfabet $C$ zostaje rozszerzony o~dodatkowy specjalny znak~\#, dla którego przyjmujemy $\attrib{\#}{f}=0$.
+Jeśli jest inaczej, to alfabet $C$ zostaje rozszerzony o~dodatkowy specjalny znak~\#, dla którego przyjmujemy $\attrib{\#}{f}=0$.
 Dodanie nowego znaku nie zmienia kosztu tego drzewa, zaś podczas odczytywania wynikowego kodowania znak ten może zostać bezpiecznie zignorowany.
 
-Algorytm wykonuje $\lfloor n/2\rfloor$ pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} tworzących kolejne węzły wewnętrzne budowanego drzewa.
+Algorytm wykonuje $\lfloor n/2\rfloor$ iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} tworzących kolejne węzły wewnętrzne budowanego drzewa.
 Z~kolejki priorytetowej $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach, które stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$, a~za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
 W~drzewie trójkowym zbudowanym w~algorytmie przyjmujemy, że krawędź do lewego syna jest etykietowana przez 0, krawędź do środkowego syna -- przez 1, a~krawędź do prawego syna -- przez 2.
 Wówczas słowem kodowym znaku $c\in C$ jest ciąg tritów wyznaczonych przez etykiety na ścieżce od korzenia drzewa do liścia reprezentującego znak $c$.

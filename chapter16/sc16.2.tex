@@ -83,7 +83,7 @@ Problem cechuje także własność wyboru zachłannego.
 Załóżmy, że na trasie w~odległości co najwyżej $n$ kilometrów od startu znajduje się dokładnie $k$ stacji benzynowych.
 Profesor nie może wybrać na pierwszy przystanek stacji o~numerze większym niż $k$, gdyż nie jest możliwe dojechanie do niej bez tankowania po drodze.
 W~optymalnym rozwiązaniu nie opłaca się też wybierać jako pierwszej stacji o~numerze $j<k$.
-Jest tak dlatego, że gdyby wybrana została stacja $j$, to później, w~momencie przejeżdżania obok stacji $k$, w~baku pozostałoby mniej paliwa niż w~momencie opuszczania stacji $k$ po pierwszym zatankowaniu na niej.
+Jest tak dlatego, że gdyby wybrana została stacja $j$, to później, w~momencie przejeżdżania obok stacji $k$, w~baku pozostałoby mniej paliwa niż w~momencie opuszczania stacji $k$, gdy pierwsze tankowanie jest właśnie na niej.
 Innymi słowy, wybór stacji $k$ pozwala na dojechanie dalej, niż gdyby wybór padł na stację $j$.
 
 Korzystając z~tych własności, możemy podać prosty algorytm zachłanny wyznaczający optymalny ciąg tankowań w~czasie $O(m)$.
@@ -103,7 +103,7 @@ Oczywiście zbiór $C_j$ jest optymalnym rozwiązaniem podproblemu $S_j$.
 Gdyby było inaczej, moglibyśmy zastąpić go mniejszym, uzyskując dla $S_i$ rozwiązanie o~mniejszej liczności niż $C_i$, co stoi w~sprzeczności z~definicją zbioru $C_i$.
 
 Problem ma też własność wyboru zachłannego.
-Załóżmy, że dysponujemy rozwiązaniem podproblemu $S_i$ zawierającym przedział $I=[a,a+1]$, w~którym $a<x_i\le a+1$.
+Załóżmy, że dysponujemy rozwiązaniem podproblemu $S_i$ zawierającym taki przedział $I=[a,a+1]$, że $a<x_i\le a+1$.
 Usuńmy teraz $I$ z~rozwiązania i~zastąpmy go przedziałem $I'=[x_i,x_i+1]$.
 Podobnie jak $I$, przedział $I'$ też zawiera punkt $x_i$, a~ponadto może potencjalnie pokryć więcej punktów wejściowych niż $I$, bo jego prawy koniec $x_i+1$ leży na prawo od prawego końca $a+1$ przedziału $I$.
 Nowe rozwiązanie jest więc niegorsze od początkowego, zawierającego $I$.
@@ -117,7 +117,7 @@ Czas działania algorytmu zdominowany jest przez czas spędzony na sortowaniu pu
 \exercise %16.2-6
 Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ zostały posortowane według nierosnących wartości na jednostkę masy, tzn.\ zachodzi $v_1/w_1\ge v_2/w_2\ge\dots\ge v_n/w_n$.
 W~optymalnym plecaku stanowiącym rozwiązanie ciągłego problemu plecakowego istnieje takie $1\le k\le n$, że przedmioty $a_{k'}$ dla $1\le k'<k$ znajdują się w~plecaku w~całości, a~przedmiotów $a_{k''}$ dla $k<k''\le n$ nie ma w~plecaku w~ogóle.
-A~zatem problem ten tak naprawdę sprowadza się do znalezienia odpowiedniego $k$ oraz udziału przedmiotu $a_k$ w~plecaku.
+A~zatem problem ten sprowadza się do znalezienia odpowiedniego $k$ oraz udziału przedmiotu $a_k$ w~plecaku.
 
 Pokażemy, jak to zrobić w~czasie $O(n)$ w~sytuacji, gdy nie znamy uporządkowania przedmiotów według wartości jednostkowej.
 Wykorzystując algorytm \proc{Select} z~podrozdziału 9.3, wyznaczmy medianę $m$ zbioru ilorazów $v_i/w_i$ i~zdefiniujmy zbiory
@@ -135,7 +135,11 @@ W~przeciwnym wypadku wystarczy wywołać go rekurencyjnie dla przedmiotów z~$L$
 
 Na każdym poziomie rekursji dla zbioru przedmiotów o~rozmiarze $n$ wykonywanych jest $O(n)$ operacji plus co najwyżej jedno wywołanie rekurencyjne.
 Wybór mediany na ,,element rozdzielający'' jest optymalne w~tym sensie, że kolejne wywołanie rekurencyjne dostaje na wejściu zbiór przedmiotów o~rozmiarze nieprzekraczającym połowy rozmiaru bieżącego zbioru przedmiotów.
-Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm, $T(n)\le T(n/2)+O(n)$, której rozwiązaniem jest $T(n)=O(n)$.
+Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm:
+\[
+	T(n) \le T(n/2)+O(n),
+\]
+której rozwiązaniem jest $T(n)=O(n)$.
 
 \exercise %16.2-7
 Posortujmy zbiór $A$ i~zbiór $B$ niemalejąco.
@@ -146,5 +150,5 @@ Wówczas $a_i\le a_j$, $b_i\le b_j$ oraz
 \]
 Ostatnia nierówność zachodzi, ponieważ $a_j/a_i\ge1$ i~$b_j-b_i\ge0$.
 Wynika z~tego, że w~iloczynie będącym zyskiem z~uporządkowania bardziej opłacalne są czynniki postaci $a^b$, w~których podstawa $a$ jest tą samą statystyką pozycyjną w~zbiorze $A$, co wykładnik $b$ w~zbiorze $B$.
-Jednym z~uporządkowań maksymalizujących zysk jest więc porządek niemalejący obu zbiorów lub porządek nierosnący obu zbiorów.
+Przykładem uporządkowania maksymalizującego zysk jest więc porządek niemalejący obu zbiorów lub porządek nierosnący obu zbiorów.
 Algorytm rozwiązujący ten problem może zatem jedynie sortować oba zbiory, co przy efektywnej implementacji zajmuje czas $\Theta(n\lg n)$.
