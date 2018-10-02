@@ -4,7 +4,7 @@
 
 Niniejsze opracowanie zawiera rozwiązania zadań i problemów z drugiego wydania monografii *Introduction to Algorithms* autorstwa Thomasa H. Cormena, Charlesa E. Leisersona, Ronalda L. Rivesta i Clifforda Steina.
 Przy opracowywaniu rozwiązań korzystałem równolegle z polskiego tłumaczenia pt. *Wprowadzenie do algorytmów* w wydaniu szóstym.
-Na chwilę obecną opracowanie pokrywa rozdziały wchodzace w skład czesci I–IV (rozdz. 1-17) oraz dodatki wypełniające część VIII.
+Na chwilę obecną opracowanie pokrywa rozdziały wchodzące w skład części I–IV (rozdz. 1-17) oraz dodatki wypełniające część VIII.
 Kolejne wersje będą sukcesywnie uzupełniane o rozwiązania zadań z kolejnych części, wprowadzając jednocześnie poprawki znalezionych błędów i ewentualnie doskonaląc poprzednie rozwiązania.
 
 Moim celem jest stworzenie kompletnego zbioru rozwiązań, który pomaga w przyswajaniu materiału z *Wprowadzenia do algorytmów* (określanego dalej jako "Podręcznik"), będąc czymś w rodzaju wzorcowego "klucza odpowiedzi", z którym student weryfikuje uzyskany przez siebie rezultat.
