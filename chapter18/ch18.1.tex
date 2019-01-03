@@ -9,6 +9,11 @@ W~drzewie z~rys.\ 18.1 korzeń ma 1 klucz, a~każdy inny węzeł wewnętrzny ma 
 Taka sytuacja możliwa jest tylko dla $t=2$ lub $t=3$.
 
 \exercise %18.1-3
+B-drzewa zostały zilustrowane na \ref{fig:18.1-3}.
+\begin{figure}[!ht]
+	\centering \input{fig18.1-3}
+	\caption{Wszystkie poprawne B-drzewa reprezentujące zbiór $\{1,2,3,4,5\}$.} \label{fig:18.1-3}
+\end{figure}
 
 \exercise %18.1-4
 Rozważmy B-drzewo o~minimalnym stopniu $t$, w~którym liczba kluczy w~każdym węźle jest maksymalna, czyli wynosi $2t-1$.
@@ -20,3 +25,7 @@ W~dowolnym B-drzewie o~wysokości $h$ sumaryczna liczba węzłów spełnia zatem
 Każdy węzeł posiada co najwyżej $2t-1$ kluczy, więc B-drzewo może pomieścić co najwyżej $(2t)^{h+1}-1$ kluczy.
 
 \exercise %18.1-5
+W~opisanym procesie klucz każdego czerwonego węzła zostanie dodany do ojca tego węzła.
+W~powstałym drzewie każdy węzeł będzie zatem mieć 1, 2 albo 3 klucze, w~zależności od początkowej liczby czerwonych synów.
+Z~własności drzew czerwono-czarnych wynika też, że wysokością ostatecznego drzewa będzie czarna wysokość początkowego drzewa czerwono-czarnego i~każdy liść będzie znajdował się na tej samej głębokości.
+Powstałą strukturę można więc traktować jak B-drzewo o~minimalnym stopniu $t=2$.
