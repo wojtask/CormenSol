@@ -3,6 +3,63 @@
 \exercise %18.2-1
 \exercise %18.2-2
 \exercise %18.2-3
+Operacja znajdowania minimalnego klucza w~B-drzewie jest uogólnieniem analogicznej operacji dla drzew BST.
+Gdy w~danej iteracji odwiedzany jest węzeł wewnętrzny $x$, to w~kolejnej odwiedzony zostanie węzeł $\attrib{x}{c_1}$.
+Po dotarciu do liścia $x$ zwrócony zostanie najmniejszy jego klucz, czyli $\attrib{x}{key_1}$.
+\begin{codebox}
+\Procname{$\proc{B-Tree-Minimum}(x)$}
+\li	\While $\attrib{x}{leaf}=\const{false}$
+\li		\Do $\proc{Disk-Read}(\attribxx{x}{c_1})$
+\li     $x\gets\attribxx{x}{c_1}$
+		\End
+\li	\Return $\attribxx{x}{key_1}$
+\end{codebox}
+
+Podamy też pseudokod operacji znajdowania maksymalnego klucza, gdyż potrzebna nam ona będzie w~implementacji wyznaczania poprzednika.
+Operacja różni się od \proc{B-Tree-Minimum} tym, że porusza się po skrajnie prawych synach węzłów wewnętrznych i~zwraca największy klucz napotkanego liścia.
+\begin{codebox}
+\Procname{$\proc{B-Tree-Maximum}(x)$}
+\li	\While $\attrib{x}{leaf}=\const{false}$
+\li		\Do $\proc{Disk-Read}(\attribxx{x}{c_{\attrib{x}{n}+1}})$
+\li     $x\gets\attribxx{x}{c_{\attrib{x}{n}+1}}$
+		\End
+\li	\Return $\attribxx{x}{key_{\attrib{x}{n}}}$
+\end{codebox}
+
+Zastanówmy się teraz, jak wyznaczyć poprzednik klucza $k=\attribxx{x}{key_i}$, gdzie $x$ jest węzłem B-drzewa $T$.
+Jeżeli $x$ jest węzłem wewnętrznym, to poprzednikiem $k$ jest największy klucz poddrzewa $\attribxx{x}{c_i}$.
+W~przeciwnym przypadku szukaną wartością jest $\attribxx{x}{key_{i-1}}$ (gdy $i>1$) albo może znajdować się ona w~jednym z~przodków węzła $x$.
+W~implementacji B-drzew nie posługujemy się wskaźnikami do ojców, dlatego zamiast poruszać się w~górę drzewa jak w~\proc{Tree-Predecessor} (podrozdział 12.2), będziemy symulować wyszukiwanie klucza $k$ przez schodzenie w~dół drzewa, począwszy od jego korzenia.
+W~każdym kroku tego wyszukiwania zapamiętamy klucz mniejszy od szukanego, który posłużył do wskazania poddrzewa do następnego kroku.
+Jeśli takiego klucza nie uda się wyznaczyć, będzie to oznaczać, że poprzednik $k$ nie istnieje.
+
+Procedura przyjmuje na wejściu drzewo $T$, jego węzeł $x$ oraz indeks $i$ i~zwraca poprzednik klucza $k=\attribxx{x}{key_i}$ albo \const{nil}.
+\begin{codebox}
+\Procname{$\proc{B-Tree-Predecessor}(T,x,i)$}
+\li \If $\attrib{x}{leaf}=\const{false}$
+\li   \Then $\proc{Disk-Read}(\attribxx{x}{c_i})$
+\li     \Return $\proc{B-Tree-Maximum}(\attribxx{x}{c_i})$
+    \End
+\li \If $i>1$
+\li   \Then \Return \attribxx{x}{key_{i-1}}
+    \End
+\li $k\gets\attribxx{x}{key_i}$
+\li $l\gets\const{nil}$
+\li $y\gets\attrib{T}{root}$
+\li \While $y\ne x$
+\li   \Do $j\gets1$
+\li   \While $j\le\attrib{y}{n}$ i~$k>\attribxx{y}{key_j}$
+\li     \Do $j\gets j+1$
+      \End
+\li   \If $j>1$
+\li     \Then $l\gets\attribxx{y}{key_{j-1}}$
+      \End
+\li   $\proc{Disk-Read}(\attribxx{y}{c_j})$
+\li   $y\gets\attribxx{y}{c_j}$
+    \End
+\li \Return $l$
+\end{codebox}
+
 \exercise %18.2-4
 \exercise %18.2-5
 \exercise %18.2-6
