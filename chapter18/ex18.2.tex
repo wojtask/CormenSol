@@ -2,6 +2,14 @@
 
 \exercise %18.2-1
 \exercise %18.2-2
+Jedyna sytuacja z~nadmiarowym wykonaniem operacji \proc{Disk-Read} może mieć miejsce, gdy klucz wstawiany jest do drzewa o~pełnym korzeniu.
+W~procedurze \proc{B-Tree-Insert} w~trakcie rozbijania korzenia w~wywołaniu z~wiersza 8 tworzony jest nowy węzeł, który z~automatu trafia do pamięci wewnętrznej.
+Następnie wołana jest procedura \proc{B-Tree-Insert-Nonfull} z~nowym korzeniem jako argumentem.
+Nadmiarowe wczytanie do pamięci wewnętrznej może się wówczas wydarzyć w~linii 12 tejże procedury.
+
+Z~kolei żaden zapis na dysk nie jest nadmiarowy.
+Wywołanie \proc{Disk-Write} w~linii 8 procedury \proc{B-Tree-Insert-Nonfull}, jak również w~liniach 17 oraz 19 procedury \proc{B-Tree-Split-Child} poprzedzone są aktualizacjami pola $n$ zapisywanych węzłów, zaś w~linii 18 ostatniej procedury zapisywany jest nowo utworzony węzeł.
+
 \exercise %18.2-3
 Operacja znajdowania minimalnego klucza w~B-drzewie jest uogólnieniem analogicznej operacji dla drzew BST.
 Gdy w~danej iteracji odwiedzany jest węzeł wewnętrzny $x$, to w~kolejnej odwiedzony zostanie węzeł $\attrib{x}{c_1}$.
