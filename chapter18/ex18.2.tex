@@ -81,3 +81,28 @@ Całkowity czas działania tak zmodyfikowanej procedury \proc{B-Tree-Search} wyn
 Skorzystaliśmy tu z~własności logarytmów (wzory 3.14).
 
 \exercise %18.2-7
+\note{W~rozwiązaniu przyjmujemy wartości z~treści oryginalnej:\/ $a=5$ milisekund i\/~$b=10$ mikrosekund.}
+
+\noindent Założymy dla uproszczenia, że wykonanie pojedynczej instrukcji zajmuje procesorowi około 1 mikrosekundę.
+Czas działania wyszukiwania w~B-drzewie zawierającym $n$ kluczy można wyrazić przez sumę czasu dostępu do stron dysku i~pozostałego czasu spędzonego na obliczeniach.
+Zgodnie z~analizą z~Podręcznika, pierwsza z~tych wartości wynosi w~przybliżeniu $(1000a+bt)\log_tn$ mikrosekund, a~druga w~przybliżeniu $t\log_tn$ mikrosekund.
+Ustalmy teraz $n$ i~potraktujmy tę sumę jako funkcję zmiennej $t$, gdzie $t\ge2$:
+\[
+	f_n(t) = (1000a+bt)\log_tn+t\log_tn = \frac{\ln n\cdot(1000a+(b+1)t)}{\ln t}.
+\]
+
+W~celu znalezienia minimum funkcji $f_n$ znajdujemy jej pochodną:
+\[
+	\frac{df_n}{dt}(t) = \frac{\ln n\cdot(b+1)\ln t-\frac{\ln n\cdot(1000a+(b+1)t)}{t}}{\ln^2t}.
+\]
+Pochodna zeruje się, gdy
+\[
+	\ln n\cdot(b+1)t\ln t = \ln n\cdot(1000a+(b+1)t),
+\]
+czyli, równoważnie,
+\[
+	t(\ln t-1) = \frac{1000a}{b+1}.
+\]
+Dla $t>e$ wyrażenie po lewej stronie znaku równości jest funkcją rosnącą (jako iloczyn funkcji rosnących i~dodatnich; patrz \refExercise{3.2-1}).
+Nietrudno więc, szukając binarnie, wyznaczyć takie całkowite $t$, dla którego wyrażenie przyjmuje wartość po prawej stronie, czyli $5000/11$.
+Rozwiązaniem jest $t=120$.
