@@ -1,88 +1,57 @@
-\tikzstyle{btreeptr} = [minimum height=1.5em]
-\tikzstyle{btreeval} = [minimum size=1.5em]
-
-\newcommand{\xyshift}[3]{%
-  \begin{scope}[xshift=#1, yshift=#2]
-    #3
-  \end{scope}%
+\tikzset{
+  arrow/.append style = {shorten <=-3pt},
+  btree node/.style = {draw, light grayed, rectangle split, rectangle split horizontal, rectangle split parts=#1, rectangle split draw splits=false, rectangle split part align=base, inner sep=5pt}
 }
 
-\newcommand{\btreenodethree}[4]{%
-  \matrix[draw, med grayed, semithick, ampersand replacement=\&, inner sep=0pt, outer sep=0pt, anchor=center] (#1)
-  {
-    \node[btreeptr] (#1-1) {}; \& \node[btreeval] (#1-a) {#2}; \&
-    \node[btreeptr] (#1-2) {}; \& \node[btreeval] (#1-b) {#3}; \&
-    \node[btreeptr] (#1-3) {}; \& \node[btreeval] (#1-c) {#4}; \&
-    \node[btreeptr] (#1-4) {}; \\
-  };
+\newcommand\bnodeone[2]{
+  node[btree node=1]{#2} edge from parent[parent anchor=#1, child anchor=north]
+}
+\newcommand\bnodetwo[3]{
+  node[btree node=2]{#2 \nodepart{two} #3} edge from parent[parent anchor=#1, child anchor=north]
+}
+\newcommand\bnodethree[4]{
+  node[btree node=3]{#2 \nodepart{two} #3 \nodepart{three} #4} edge from parent[parent anchor=#1, child anchor=north]
 }
 
-\newcommand{\btreenodetwo}[3]{%
-  \matrix[draw, med grayed, semithick, ampersand replacement=\&, inner sep=0pt, outer sep=0pt, anchor=center] (#1)
-  {
-    \node[btreeptr] (#1-1) {}; \& \node[btreeval] (#1-a) {#2}; \&
-    \node[btreeptr] (#1-2) {}; \& \node[btreeval] (#1-b) {#3}; \&
-    \node[btreeptr] (#1-3) {}; \\
-  };
-}
-
-\newcommand{\btreenodeone}[2]{%
-  \matrix[draw, med grayed, semithick, ampersand replacement=\&, inner sep=0pt, outer sep=0pt, anchor=center] (#1)
-  {
-    \node[btreeptr] (#1-1) {}; \& \node[btreeval] (#1-a) {#2}; \&
-    \node[btreeptr] (#1-2) {}; \\
-  };
-}
-
-\begin{tikzpicture}[arrow/.append style = {shorten <=-3pt}]
-
-\node[outer] (pic a) {
+\hfill
+%
 \begin{tikzpicture}
-	\btreenodetwo{root}{2}{4}
-    \xyshift{-10mm}{-15mm}{\btreenodeone{n1}{1}}
-    \xyshift{-0mm}{-15mm}{\btreenodeone{n2}{13}}
-    \xyshift{10mm}{-15mm}{\btreenodeone{n3}{15}}
-	\foreach \x in {1,2,3} {
-		\draw[arrow] (root-\x.south) -- (n\x.north);
-	}
+  \tikzstyle{level 1}=[sibling distance=10mm]
+  \node[btree node=2] {2 \nodepart{two} 4} [arrow]
+    child {\bnodeone{210}{1}}
+    child {\bnodeone{south}{3}}
+    child {\bnodeone{-30}{5}};
+  \node[subpicture label, anchor=north, below=2 mm of current bounding box] {(a)};
 \end{tikzpicture}
-};
-
-\node[outer, right=of pic a] (pic b) {
+%
+\hfill
+%
 \begin{tikzpicture}
-	\btreenodeone{root}{2}
-    \xyshift{-7mm}{-15mm}{\btreenodeone{n1}{1}}
-    \xyshift{7mm}{-15mm}{\btreenodethree{n2}{3}{4}{5}}
-	\foreach \x in {1,2} {
-		\draw[arrow] (root-\x.south) -- (n\x.north);
-	}
+  \tikzstyle{level 1}=[sibling distance=15mm]
+  \node[btree node=1] {2} [arrow]
+    child {\bnodeone{220}{1}}
+    child {\bnodethree{-40}{3}{4}{5}};
+  \node[subpicture label, anchor=north, below=2 mm of current bounding box] {(b)};
 \end{tikzpicture}
-};
-
-\node[outer, right=of pic b] (pic c) {
+%
+\hfill
+%
 \begin{tikzpicture}
-	\btreenodeone{root}{3}
-    \xyshift{-8mm}{-15mm}{\btreenodetwo{n1}{1}{2}}
-    \xyshift{8mm}{-15mm}{\btreenodetwo{n2}{4}{5}}
-	\foreach \x in {1,2} {
-		\draw[arrow] (root-\x.south) -- (n\x.north);
-	}
+  \tikzstyle{level 1}=[sibling distance=15mm]
+  \node[btree node=1] {3} [arrow]
+    child {\bnodetwo{220}{1}{2}}
+    child {\bnodetwo{-40}{4}{5}};
+  \node[subpicture label, anchor=north, below=2 mm of current bounding box] {(c)};
 \end{tikzpicture}
-};
-
-\node[outer, right=of pic c] (pic d) {
+%
+\hfill
+%
 \begin{tikzpicture}
-	\btreenodeone{root}{4}
-    \xyshift{-7mm}{-15mm}{\btreenodethree{n1}{1}{2}{3}}
-    \xyshift{7mm}{-15mm}{\btreenodeone{n2}{5}}
-	\foreach \x in {1,2} {
-		\draw[arrow] (root-\x.south) -- (n\x.north);
-	}
+  \tikzstyle{level 1}=[sibling distance=15mm]
+  \node[btree node=1] {4} [arrow]
+    child {\bnodethree{220}{1}{2}{3}}
+    child {\bnodeone{-40}{5}};
+  \node[subpicture label, anchor=north, below=2 mm of current bounding box] {(d)};
 \end{tikzpicture}
-};
-
-\foreach \x in {a,b,c,d} {
-	\node[subpicture label, below=2mm of pic \x] {(\x)};
-}
-
-\end{tikzpicture}
+%
+\hfill{}
