@@ -1,5 +1,5 @@
 # Wprowadzenie do Algorytmów
-[![CircleCI](https://circleci.com/gh/wojtask/CormenSol.svg?style=shield)](https://circleci.com/gh/wojtask/CormenSol)
+![Build PDF](https://github.com/wojtask/CormenSol/actions/workflows/build.yml/badge.svg)
 ## Rozwiązania zadań i problemów
 
 Niniejsze opracowanie zawiera rozwiązania zadań i problemów z drugiego wydania monografii *Introduction to Algorithms* autorstwa Thomasa H. Cormena, Charlesa E. Leisersona, Ronalda L. Rivesta i Clifforda Steina.
