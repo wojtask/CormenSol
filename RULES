@@ -1,7 +1,7 @@
 ** Ogólne **
 
 * Jeśli należy odnieść się do podpunktu problemu lub zadania, to używamy konstrukcji "punkt (b) z~problemu \refProblem{7-2}".
-* Odnosząc się do tekstu "Wprowadzenia do algorytmów", używamy wyrazu "Podręcznik".
+* Odnosząc się do książki "Wprowadzenia do algorytmów", używamy wyrazu "Podręcznik".
 * Przy składaniu zależności rekurencyjnych w warunkach używa się słowa "jeżeli", a nie "dla".
 * Opis działania algorytmu i analiza jego czasu działania powinny znaleźć się w osobnych akapitach.
 * Po pseudokodzie piszemy w tym samym paragrafie tylko wówczas, gdy piszemy o samym pseudokodzie (tzn. nie zaczynamy nowego wątku).
@@ -16,26 +16,26 @@
 
 ** LaTeX **
 
-* Żródło rozdziału umieszcza się wewnątrz katalogu chapter<CH>, gdzie <CH> to dwucyfrowy numer rozdziału (01, 02, ...,), a źródło dodatku -- wewnątrz katalogu appendix<APP>, gdzie <APP> to oznaczenie dodatku (a, b, ...).
-* W katalogach chapter?? i appendix? znajduje się plik ch<C>.tex, gdzie <C> to numer rozdziału (1, 2, ...) lub oznaczenie dodatku (a, b, ...). Plik ten zawiera:
+* Rozwiązania zadań z danego rozdziału umieszcza się wewnątrz katalogu chapter<CH>, gdzie <CH> to dwucyfrowy numer rozdziału (01, 02, ...,), a rozwiązania zadań z danego dodatku -- wewnątrz katalogu appendix<APP>, gdzie <APP> to jednoliterowe oznaczenie dodatku (a, b, ...).
+* W katalogach chapter?? i appendix? znajduje się plik main.tex, który zawiera:
 	* \chapter z tytułem rozdziału lub dodatku,
-	* serię \input załączających źródła podrozdziałów,
+	* serię \input załączających pliki z rozwiązaniami zadań,
 	* \problems
-	* serię \input załączających źródła problemów.
-* W katalogach chapter?? i appendix? znajdują się także źródła każdego podrozdziału w plikach sc<C>.<S>.tex, gdzie <C> ma poprzednie znaczenie, a <S> to numer podrozdziału (1, 2, ...). Pliki te zawierają:
+	* serię \input załączających pliki z rozwiązaniami problemów.
+* W katalogach chapter?? i appendix? znajdują się także pliki z rozwiązaniami każdego zadania z danego podrozdziału w plikach ex<C>.<S>.tex, gdzie <C> to numer rozdziału, a <S> to numer podrozdziału. Pliki te zawierają:
 	* \subchapter z tytułem podrozdziału,
-	* serię \exercise ze źródłem zadań (każde \exercise można zawierać serię \subexercise ze źródłem podzadań).
-* W katalogach chapter?? i appendix? znajdują się także źródła każdego problemu w plikach pr<C>-<P>.tex, gdzie <C> ma poprzednie znaczenie, a <P> to numer problemu (1, 2, ...). Pliki te zawierają:
+	* serię \exercise z rozwiązaniami poszczególnych zadań (każde \exercise można zawierać serię \subexercise z rozwiązaniami podzadań).
+* W katalogach chapter?? i appendix? znajdują się także rozwiązania każdego problemu w plikach pr<C>-<P>.tex, gdzie <C> to numer rozdziału, a <P> to numer problemu. Pliki te zawierają:
 	* \problem z nazwą problemu,
-	* serię \subproblem ze źródłem podproblemów.
+	* serię \subproblem ze rozwiązaniami podproblemów.
 * Stosujemy tyldy po sierotach. Nie trzeba używać ich w zakresach (1,2,...,n), tuż przed liczbami, symbolami, nazwami zmiennych oraz numerami wzorów, twierdzeń, wierszy pseudokodu itp.
-* Używamy polskich cudzysłowów, czyli ,,tekst''.
+* Używamy polskich cudzysłowów: ,,tekst''.
 * Jeśli w wielowierszowych formułach jest zbyt mały odstęp między wierszami, to można go zwiększyć poprzez \\[x mm].
 * Jeśli w środku zdania wystąpi kropka, wykrzyknik lub pytajnik, które nie kończą tego zdania, to po tych znakach należy umieścić \  (twarda spacja).
 * Jeśli kropka, wykrzyknik lub pytajnik występują po dużej literze i kończą zdanie, to przed tymi znakami należy umieścić \@.
 * Umieszczamy \/ po tekście złożonym czcionką pochyłą, ale przed tekstem złożonym czcionką zwykłą (z wyjątkiem gdy zaczyna się on kropką lub przecinkiem).
-* Używamy następujących makr zgodnie z ich przeznaczeniem: \onedash, \twodashes, \refExercise, \refProblem, \E, \Pr, \Var, \note.
-* Po użyciu \note na początku zadania należy użyć \noindent na początku następnego paragrafu, chyba że bezpośrednio następuje \exercise lub \subproblem -- wówczas stosuje się \bignegskip.
+* Używamy następujących makr zgodnie z ich przeznaczeniem: \singledash, \doubledash, \refExercise, \refProblem, \E, \Pr, \Var, \note.
+* Po użyciu \note na początku zadania należy użyć \noindent na początku następnego paragrafu, chyba że bezpośrednio po tym następuje \exercise lub \subproblem -- wówczas stosuje się \bignegskip.
 * W \note stosujemy tryb matematyczny nawet dla pojedynczych liczb (o ile nie są to numery linii, numery wzorów itp.), a \/ bezpośrednio przed trybem matematycznym (\id i \attrib są implicite w trybie matematycznym).
 * Po \E, \Pr, \Var używa się nawiasów okrągłych.
 * Dla zmiennych losowych wskaźnikowych używa się \I, po czym nawiasów okrągłych.
@@ -51,13 +51,13 @@
 * Jeśli formuła nie mieści się w jednej linii, ale składa się z krótkich wyrażeń między równościami lub nierównościami, to można ją podzielić jak w 5.2-5.
 * W ostateczności, aby zniwelować underfull vbox, można zastosować \medskip (jak przed 4.2-4)
 * Używamy \bigskip tylko wówczas, gdy chcemy wyraźniej oddzielić dwa paragrafy ze względu na kontekst, a nie z powodów technicznych (jak w 3-2(f), B.3-1).
-* Do opisu przypadków danej sytuacji stosujemy albo środowisko itemize albo środowisko enumerate z numerowaniem itemów małymi cyframi rzymskimi w nawiasach (jak w 7.4-6).
+* Do opisu przypadków danej sytuacji stosujemy albo środowisko itemize albo środowisko enumerate z numerowaniem pozycji listy małymi cyframi rzymskimi w nawiasach (jak w 7.4-6).
 
 
 ** Matematyka **
 
 * Jeśli stosujemy kwantyfikator ogólny do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis $k=1$, 2, \dots, $n$.
-* Jeśli stosujemy kwantyfikator szczegółowy do zmiennej całkowitej k, 1<=k<=n, to stosujemy zapis "pewne $k$ ze zbioru $\{1$, 2, \dots, $n\}$" ALBO "pewne $k$ całkowite, gdzie $1\le k\le n$".
+* Jeśli stosujemy kwantyfikator szczegółowy do zmiennej całkowitej k takiej, że 1<=k<=n, to stosujemy zapis "pewne $k$ ze zbioru $\{1$, 2, \dots, $n\}$" ALBO "pewne $k$ całkowite, gdzie $1\le k\le n$".
 * Dla liczb rzeczywistych stosujemy przedziały zapisane w notacji matematycznej ([a,b], (a,b], [a,b), (a,b)), natomiast dla liczb całkowitych lub naturalnych (w szczególności dla indeksów tablic) stosujemy przedziały w konwencji "pascalowej" (a\twodots b, co oznacza {a, a+1, ..., b}, dla a, b całkowitych, a <= b). Nie mieszamy obu tych konwencji (np. [a\twodots b] -- taki zapis pojawia się w Podręczniku), chyba że ma on na celu wyznaczenie pewnej podtablicy (np. A[1\twodots n]).
 * Jeśli używamy zmiennej, to należy określić, czy oznacza ona liczbę całkowitą, czy obiekt z innego zbioru, chyba że jednoznacznie jest to określone np. poprzez użycie jej jako indeksu tablicy lub wskazane w treści zadania.
 * Potęgę pierwiastka zapisuje się, obejmując pierwiastek w nawiasy i umieszczając wykładnik na zewnątrz tego nawiasu.
@@ -87,7 +87,7 @@
 * Nie ma "przebiegów" i "obiegów", tylko "iteracje" pętli.
 * Nie "analogiczny z" ani "analogiczny jak", ale "analogiczny do".
 * Partykułę "nie" z imiesłowami przymiotnikowymi (czynnym i biernym) pisze się łącznie, wyjątki: "nie większy", "nie mniejszy".
-* Oddziela się przecinkiem imiesłówy zakończone na "-ąc", "-łszy", "-wszy" od dalszej części zdania.
+* Oddziela się przecinkiem imiesłowy zakończone na "-ąc", "-łszy", "-wszy" od dalszej części zdania.
 * W zdaniach o konstrukcji "... zarówno A, jak i B ..." orzeczenie jest w liczbie pojedynczej, chyba że A i B to rzeczowniki konkretne (zjawiska lub przedmioty rozpoznawane przez człowieka przy użyciu zmysłów).
 
 
@@ -97,13 +97,13 @@
 * Nie numerujemy linii (\zi zamiast \li) w typowych jednowierszowych makrach, np. Mutliary-Parent, Multiary-Child.
 * Jeśli nazwa procedury zawiera znak "'", to jest on umieszczany w trybie matematycznym poza klauzulą \proc, np. \proc{List-Search}$'$.
 * Słowa kluczowe error i return przerywają procedury, więc nie trzeba umieszczać \Else po \Error i \Return (chyba że bardziej elegancko wygląda z \Else jak w 2.3-5).
-* Do artybutów używamy makr z serii \attrib -- szczegóły w komentarzu w cormensol.sty.
-* Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od 'li:' + pełna nazwa procedury.
+* Do atrybutów używamy makr z serii \attrib -- szczegóły w komentarzu w cormensol.sty.
+* Etykiety (\label) w pseudokodach powinny mieć identyfikatory zaczynające się od 'li:' + pełna-nazwa-procedury.
 * Jeśli wywołujemy algorytm, to nie musimy pobierać wartości przez niego zwracanej, gdy interesują nas tylko zmiany, jakich dokonuje na argumentach.
-* Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
 * Jeśli testujemy wynik funkcji logicznej, to aby sprawdzić, czy zwróciła ona true, stosujemy skrócony zapis, np. \If \proc{Stack-Empty}(S). Jeśli testujemy, czy zwróciła false, to korzystamy z zapisu jawnego: \If \proc{Stack-Empty}(S)=\const{false}.
 * Jeśli pewna instrukcja jest ciężka do zapisania za pomocą właściwego pseudokodu, a można ją w jasny sposób opisać językiem naturalnym, to wybieramy to drugie.
 * Procedury rekurencyjne, których nie należy wywoływać bezpośrednio, np. Recursive-Tree-Insert albo Avl-Insert, opakowujemy procedurami, które je wywołują. Mają one zbliżoną nazwę do procedury wywoływanej oraz przyrostek '-Wrapper'.
+* Używamy \Else \If zamiast \ElseIf, chyba że poziom zagnieżdżenia ifów i else'ów jest większy niż 2.
 * Występuje bug w pakiecie clrscode - począwszy od drugiej linijki po \ElseNoIf, tekst jest za bardzo wcinany. Rozwiązaniem jest:
 \li	\ElseNoIf linia_1
 		\End
@@ -115,10 +115,6 @@
 ** Rysunki i tabele **
 
 * Rysunki i tabele umieszczamy wewnątrz otoczenia center, które jest wewnątrz figure[ht]. Czasami rysunki kumulują się na końcu rozdziału, aby temu zapobiec, można zastosować figure[ht!].
-* Rysunki komórek tablic powinny mieć wymiary takie jak w fig02.1 albo w fig08.1, jeśli potrzebne są mniejsze.
-* W rysunkach dla indeksów tablic itp. używamy decimal (i) infont "cmr8", w innych przypadkach defaultfont := "cmr8"; lub \fontsize{8}{10}\selectfont.
-* Rysunki kilkuczęściowe oznaczamy literkami (a), (b), ... poprzez umieszczenie w źródle danego rysunku label(btex \fontsize{9}{11}\selectfont{\sffamily\bfseries (a)} etex, (x, y)); gdzie (x, y) jest miejscem, w którym będzie znajdować się literka.
-* Stosujemy jednolite kolory szarości w rysunkach (lightgray = .8white (domyślny, jeśli potrzebny tylko jeden odcień szarości), medgray = .6white, darkgray = .4white).
 * Jeśli jest problem ze zmieszczeniem opisu pod rysunkiem z tablicą, ciągiem lub krotką, to można zastosować trik z opuszczeniem trybu matematycznego i zastosowaniem ujemnych odstępów jak w 6.2-1.
 * Rysunki, które są wzorowane na podobnych z Podręcznika, są opisywane bardzo krótko, aby nie powtarzać objaśnień konwencji z rysunku z Podręcznika, natomiast pozostałe rysunki są opisywane nieco bardziej obszernie.
 * Pilnujemy, aby w opisie pod rysunkiem nie było sytuacji, w której odniesienie do części rysunku (np. (c)) znalazło się na końcu linii.
@@ -130,13 +126,9 @@
 * Wyjątkami są algorytmy celowo błędne (w zadaniach na sprawdzenie poprawności danego algorytmu, np. Permute-With-All), niekompletne (uzupełnienie danego algorytmu stanowi polecenie jednego z zadań, np. Enqueue - wówczas implementujemy kompletną wersję) lub nie rozwiązują realnego problemu i służą jako ilustracja pewnej metody (np. Hire-Assistant).
 * Implementujemy i testujemy każdy algorytm zapisany w pseudokodzie w rozwiązaniach.
 * Implementujemy i testujemy każdy algorytm, który jest opisany słownie w rozwiązaniach, o ile polecenie zadania/problemu mówi wyraźnie o tym, żeby podać lub opisać algorytm.
-* Procedury pomocnicze, np. Merge, testujemy poprzez uruchomienie testów dla algorytmów wykorzystających te procedury, np. MergeSort. Procedury pomocnicze nie są umieszczane na liście implementacji i, jeśli nie stanowią również procedur pomocniczych dla algorytmów z innych rozdziałów, to są implementowane jako prywatne.
+* Procedury pomocnicze, np. Merge, testujemy poprzez uruchomienie testów dla algorytmów wykorzystujących te procedury, np. MergeSort. Procedury pomocnicze nie są umieszczane na liście implementacji i, jeśli nie stanowią również procedur pomocniczych dla algorytmów z innych rozdziałów, to są implementowane jako prywatne.
 * Nie implementujemy dodatkowych procedur tylko dla testów - np. testujemy bezpośrednio Merge', a nie dodatkowo zaimplementowany algorytm MergeSort', który korzysta z Merge'.
 * W uzasadnionych przypadkach można pominąć testowanie (np. fakt, że Randomize-In-Place permutuje tablicę zgodnie z rozkładem jednostajnym). Wtedy jednak na liście implementacji należy umieścić odpowiedni komentarz.
 * Algorytmy implementujemy w podejściu proceduralnym, w sposób jak najbardziej zbliżony do zapisu z pseudokodów, wykorzystując struktury danych z najważniejszymi operacjami (np. klasa Heap implementuje kopiec i zawiera dostępne publicznie atrybuty length i heapSize).
-* W implementacjach algorytmów w oparciu o opis, można pozwolić sobie na pewną dowolność, np. w podziale algorytmu na kilka metod.
-* Implementacje algorytmów umieszczamy jako metody publiczne statyczne w klasach ChapterX, gdzie X to numer rozdziału, z którego pochodzi algorytm, a testy -- w klasach ChapterXTest.
-* Jako nazw metod używamy nazw ich pseudokodów, opuszczając myślniki, a znaki ' zamieniając na _, a w przypadku, gdy dla danego algorytmu nie podano pseudokodu, ustalamy najbardziej odpowiednią nazwę.
+* W implementacjach algorytmów w oparciu o opis, można pozwolić sobie na pewną dowolność, np. w podziale algorytmu na kilka mniejszych procedur.
 * Poprawność danego rozwiązania z pseudokodem lub opisem jakiegoś algorytmu stwierdzamy dopiero wtedy, gdy algorytm ten zostanie zaimplementowany i poprawnie przejdzie testy.
-* Dokumentujemy wszystkie klasy i metody (z wyjątkiem prywatnych konstruktorów klas Chapter??) przy użyciu Javadoca, podając krótki opis, co robi dana klasa/metoda, jaki pseudokod implementuje dana metoda i skąd pochodzi implementowany pseudokod/opis (Podręcznik/rozwiązania), co oznaczają parametry danej metody, co zwraca dana metoda i jakie wyjątki rzuca dana metoda.
-* Wyróżniamy następujące typy metod: implementujące algorytmy i struktury danych (dostęp publiczny, testowane i dokumentowane); zapisane w pseudokodzie lub jedynie opisane i jawnie określane jako pomocnicze (dostęp pakietowy, testowane pośrednio i dokumentowane); powstałe poprzez podział kodu w opisanych algorytmach (dostęp prywatny, testowane pośrednio). Na liście implementacji znajdują się tylko metody pierwszego typu.
