@@ -2,3 +2,212 @@
 
 \exercise %18.3-1
 \exercise %18.3-2
+Z~powodu skomplikowania procedury, dla czytelności podzielimy jej pseudokod na kilka mniejszych procedur pomocniczych.
+Zakładamy, że węzły B-drzewa stanowiące parametry wejściowe tych procedur zostały już wczytane do pamięci wewnętrznej.
+
+Zacznijmy od zapisania operacji \proc{B-Tree-Left-Shift}, przyjmującej węzeł $x$ o~co najmniej $t$ kluczach oraz indeks $i$ taki, że $1\le i\le\attrib{x}{n}$.
+Operacja ta, zgodnie ze swoją nazwą, przesuwa w~lewo klucze (oraz wskaźniki do synów, jeśli $x$ jest węzłem wewnętrznym), począwszy od pozycji $i+1$.
+W~wyniku działania tej operacji wartość \attrib{x}{n} zostaje pomniejszona o~1, a~klucz będący początkowo na pozycji $i$ zostaje nadpisany.
+Jeśli $x$ jest węzłem wewnętrznym, to nadpisywany jest też wskaźnik do syna, początkowo znajdujący się w~\attribxx{x}{c_i}, dlatego tuż przed wywołaniem tej operacji należy pamiętać o~skopiowaniu tego wskaźnika, aby nie utracić dostępu do syna.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Left-Shift}(x,i)$}
+    \li \For $j\gets i$ \To $\attrib{x}{n}-1$
+    \li     \Do $\attribxx{x}{key_j}\gets\attribxx{x}{key_{j+1}}$
+            \End
+    \li \If $\attrib{x}{leaf}=\const{false}$
+    \li     \Then \For $j\gets i$ \To $\attrib{x}{n}$
+    \li         \Do $\attribxx{x}{c_j}\gets\attribxx{x}{c_{j+1}}$
+                \End
+            \End
+    \li $\attrib{x}{n}\gets\attrib{x}{n}-1$
+    \li $\proc{Disk-Write}(x)$
+\end{codebox}
+Symetryczna do powyższej operacja \proc{B-Tree-Right-Shift} przesuwa w~niepełnym węźle $x$ klucze (i~ewentualnie wskaźniki do synów) w~prawo, od pozycji $i$.
+Celem działania tej operacji jest przygotowanie miejsca na pozycji $i$ dla jakiegokolwiek nowego klucza, który znajdzie się w~$x$.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Right-Shift}(x,i)$}
+    \li $\attrib{x}{n}\gets\attrib{x}{n}+1$
+    \li \For $j\gets\attrib{x}{n}-1$ \Downto $i$
+    \li     \Do $\attribxx{x}{key_{j+1}}\gets\attribxx{x}{key_j}$
+            \End
+    \li \If $\attrib{x}{leaf}=\const{false}$
+    \li     \Then \For $j\gets\attrib{x}{n}$ \Downto $i$
+    \li         \Do $\attribxx{x}{c_{j+1}}\gets\attribxx{x}{c_j}$
+                \End
+            \End
+    \li $\proc{Disk-Write}(x)$
+\end{codebox}
+
+Kolejne dwie operacje zostaną użyte w~implementacji przypadku 3a z~opisu procedury w~Podręczniku.
+Wejściem każdej z~nich jest węzeł wewnętrzny $x$, indeks $i$ oraz węzły $y=\attribxx{x}{c_i}$ i~$z=\attribxx{x}{c_{i+1}}$.
+Pierwsza z~operacji zakłada, że węzeł $y$ zawiera $t-1$ kluczy, a~$z$ -- co najmniej $t$ kluczy -- i~wykonuje ,,rotację'' kluczy w~lewo, w~wyniku której do $y$ na pozycję $t$ trafia klucz \attribxx{x}{key_i}, a~w~jego miejsce przeniesiony zostaje \attribxx{z}{key_1}.
+Dodatkowo w~przypadku, gdy $y$ i~$z$ są węzłami wewnętrznymi, w~rotacji uczestniczą także odpowiednie wskaźniki do synów.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Left-Rotate}(x,i,y,z)$}
+    \li $\attrib{y}{n}\gets\attrib{y}{n}+1$
+    \li $\attribxx{y}{key_{\attrib{y}{n}}}\gets\attribxx{x}{key_i}$
+    \li $\attribxx{x}{key_i}\gets\attribxx{z}{key_1}$
+    \li \If $\attrib{y}{leaf}=\const{false}$
+    \li     \Then $\attribxx{y}{c_{\attrib{y}{n}+1}}\gets\attribxx{z}{c_1}$
+            \End
+    \li $\proc{B-Tree-Left-Shift}(z,1)$
+    \li $\proc{Disk-Write}(x)$
+\end{codebox}
+Symetryczna ,,rotacja w~prawo'' przyjmuje, że to węzeł $y$ ma co najmniej $t$ kluczy, a~$z$ ma ich dokładnie $t-1$.
+Klucze przesuwane są tutaj od $y$ przez $x$ do $z$.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Right-Rotate}(x,i,y,z)$}
+    \li $\proc{B-Tree-Right-Shift}(z,1)$
+    \li $\attribxx{z}{key_1}\gets\attribxx{x}{key_i}$
+    \li $\attribxx{x}{key_i}\gets\attribxx{y}{key_{\attrib{y}{n}}}$
+    \li \If $\attrib{z}{leaf}=\const{false}$
+    \li     \Then $\attribxx{z}{c_1}\gets\attribxx{y}{c_{\attrib{y}{n}+1}}$
+            \End
+    \li $\attrib{y}{n}\gets\attrib{y}{n}-1$
+    \li $\proc{Disk-Write}(x)$
+    \li $\proc{Disk-Write}(y)$
+\end{codebox}
+Zauważmy, że operacje rotacji modyfikują niektóre węzły, ale nie zapisują ich na dysku.
+Jak przekonamy się później, zapis zostanie ostatecznie wykonany w~procedurach wywołujących te operacje, dzięki czemu nie mają miejsca nadmiarowe operacje \proc{Disk-Write}.
+
+Kolejna procedura pomocnicza stanowi odwrotność procedury \proc{B-Tree-Split-Child} z~podrozdziału 18.2 i~posłuży do zaimplementowania podkroków 2c i~3b.
+Dla parametrów wejściowych -- węzła wewnętrznego $x$, indeksu $i$ oraz węzłów $y=\attribxx{x}{c_i}$, $z=\attribxx{x}{c_{i+1}}$ mających po $t-1$ kluczy -- omawiana procedura scala węzły $y$ i~$z$ poprzez przeniesienie do $y$ klucza \attribxx{x}{key_i} oraz wszystkich kluczy (i~ewentualnie wskaźników do synów) z~węzła $z$.
+Pamięć przydzielona dla węzła $z$ zostaje następnie zwolniona przeciwstawną do \proc{Allocate-Node} operacją \proc{Free-Node}.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Merge-Children}(x,i,y,z)$}
+    \li $\attrib{y}{n}\gets 2t-1$
+    \li $\attribxx{y}{key_t}\gets\attribxx{x}{key_i}$
+    \li \For $j\gets1$ \To $t-1$
+    \li     \Do $\attribxx{y}{key_{j+t}}\gets\attribxx{z}{key_j}$
+            \End
+    \li \If $\attrib{y}{leaf}=\const{false}$
+    \li     \Then \For $j\gets 1$ \To $t$
+    \li         \Do $\attribxx{y}{c_{j+t}}\gets\attribxx{z}{c_j}$
+                \End
+            \End
+    \li $\proc{B-Tree-Left-Shift}(x,i)$
+    \li $\attribxx{x}{c_i}\gets y$
+    \li $\proc{Disk-Write}(x)$
+    \li $\proc{Disk-Write}(y)$
+    \li $\proc{Free-Node}(z)$
+\end{codebox}
+
+Podamy teraz pseudokody procedur usuwania najmniejszego oraz największego klucza w~danym poddrzewie.
+Stanowią one szczególny przypadek głównego algorytmu, ponieważ podczas wyszukiwania takich kluczy nie zachodzi nigdy przypadek 2, a~zejście rekurencyjne jest wykonywane zawsze dla najbardziej skrajnego syna.
+Jednak w~odróżnieniu od ogólnej wersji procedury, te nie przyjmują na wejściu klucza do usunięcia, tylko zwracają usunięty klucz jako wynik.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Delete-Minimum}(x)$}
+    \li \If $\attrib{x}{leaf}$
+    \li     \Then $\id{min}\gets\attribxx{x}{key_1}$
+    \li         $\proc{B-Tree-Left-Shift}(x,1)$
+    \li         \Return \id{min}
+            \End
+    \li $y\gets\attribxx{x}{c_1}$
+    \li $\proc{Disk-Read}(y)$
+    \li \If $\attrib{y}{n}=t-1$
+    \li     \Then $z\gets\attribxx{x}{c_2}$
+    \li         $\proc{Disk-Read}(z)$
+    \li         \If $\attrib{z}{n}\ge t$
+    \li             \Then $\proc{B-Tree-Left-Rotate}(x,1,y,z)$
+    \li             \Else $\proc{B-Tree-Merge-Children}(x,1,y,z)$
+                    \End
+            \End
+    \li \Return $\proc{B-Tree-Delete-Minimum}(y)$
+\end{codebox}
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Delete-Maximum}(x)$}
+    \li \If $\attrib{x}{leaf}$
+    \li     \Then $\id{max}\gets\attribxx{x}{key_{\attrib{x}{n}}}$
+    \li         $\attrib{x}{n}\gets\attrib{x}{n}-1$
+    \li         $\proc{Disk-Write}(x)$
+    \li         \Return \id{max}
+            \End
+    \li $y\gets\attribxx{x}{c_{\attrib{x}{n}+1}}$
+    \li $\proc{Disk-Read}(y)$
+    \li \If $\attrib{y}{n}=t-1$
+    \li     \Then $z\gets\attribxx{x}{c_{\attrib{x}{n}}}$
+    \li         $\proc{Disk-Read}(z)$
+    \li         \If $\attrib{z}{n}\ge t$
+    \li             \Then $\proc{B-Tree-Right-Rotate}(x,\attrib{x}{n},z,y)$
+    \li             \Else $\proc{B-Tree-Merge-Children}(x,\attrib{x}{n},z,y)$
+    \li                 $y\gets z$
+                    \End
+            \End
+    \li \Return $\proc{B-Tree-Delete-Maximum}(y)$
+\end{codebox}
+
+Jesteśmy gotowi do zapisania rekurencyjnej części algorytmu opisanego w~Podręczniku.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Safe-Delete}(x,k)$}
+    \li $i\gets1$ \label{li:b-tree-safe-delete-search-begin}
+    \li \While $i\le\attrib{x}{n}$ i~$k>\attribxx{x}{key_i}$
+    \li     \Do $i\gets i+1$
+            \End \label{li:b-tree-safe-delete-search-end}
+    \li \If $i\le\attrib{x}{n}$ i~$k=\attribxx{x}{key_i}$
+    \li     \Then \If $\attrib{x}{leaf}$
+    \li         \Then $\proc{B-Tree-Left-Shift}(x,i)$ \label{li:b-tree-safe-delete-remove-from-leaf}
+    \li         \Else $y\gets\attribxx{x}{c_i}$ \label{li:b-tree-safe-delete-remove-predecessor-begin}
+    \li             $\proc{Disk-Read}(y)$
+    \li             \If $\attrib{y}{n}\ge t$
+    \li                 \Then $\attribxx{x}{key_i}\gets\proc{B-Tree-Delete-Maximum}(y)$
+    \li                     $\proc{Disk-Write}(x)$ \label{li:b-tree-safe-delete-remove-predecessor-end}
+    \li                 \Else $z\gets\attribxx{x}{c_{i+1}}$ \label{li:b-tree-safe-delete-remove-successor-begin}
+    \li                     $\proc{Disk-Read}(z)$
+    \li                     \If $\attrib{z}{n}\ge t$
+    \li                         \Then $\attribxx{x}{key_i}\gets\proc{B-Tree-Delete-Minimum}(z)$
+    \li                             $\proc{Disk-Write}(x)$ \label{li:b-tree-safe-delete-remove-successor-end}
+    \li                         \Else $\proc{B-Tree-Merge-Children}(x,i,y,z)$ \label{li:b-tree-safe-delete-remove-merge-children-1}
+    \li                             $\proc{B-Tree-Safe-Delete}(y,k)$ \label{li:b-tree-safe-delete-recursive-call-1}
+                                \End
+                        \End
+                \End
+    \li     \Else $y\gets\attribxx{x}{c_i}$
+    \li         $\proc{Disk-Read}(y)$
+    \li         \If $\attrib{y}{n}=t-1$
+    \li             \Then $z_L\gets z_R\gets\const{nil}$
+    \li                 \If $i\ge2$
+    \li                     \Then $z_L\gets\attribxx{x}{c_{i-1}}$
+    \li                         $\proc{Disk-Read}(z_L)$
+    \li                     \Else $z_R\gets\attribxx{x}{c_{i+1}}$
+    \li                         $\proc{Disk-Read}(z_R)$
+                            \End
+    \li                 \If $z_L\ne\const{nil}$ i~$\attrib{z_L}{n}\ge t$ \label{li:b-tree-safe-delete-rotations-begin}
+    \li                     \Then $\proc{B-Tree-Right-Rotate}(x,i-1,z_L,y)$
+    \li                     \ElseIf $z_R\ne\const{nil}$ i~$\attrib{z_R}{n}\ge t$
+    \li                         \Then $\proc{B-Tree-Left-Rotate}(x,i,y,z_R)$ \label{li:b-tree-safe-delete-rotations-end}
+    \li                     \ElseIf $z_L\ne\const{nil}$ \label{li:b-tree-safe-delete-remove-mergers-begin}
+    \li                         \Then $\proc{B-Tree-Merge-Children}(x,i-1,z_L,y)$
+    \li                             $y\gets z_L$
+    \li                     \ElseNoIf $\proc{B-Tree-Merge-Children}(x,i,y,z_R)$
+                            \End \label{li:b-tree-safe-delete-remove-mergers-end}
+                    \End \label{li:b-tree-safe-delete-key-brothers-end}
+    \li         $\proc{B-Tree-Safe-Delete}(y,k)$ \label{li:b-tree-safe-delete-recursive-call-2}
+            \End
+\end{codebox}
+Procedura rozpoczyna od wyszukania w~węźle $x$ pozycji $i$ klucza $k$ (linie \doubledash{\ref{li:b-tree-safe-delete-search-begin}}{\ref{li:b-tree-safe-delete-search-end}}).
+Jeśli klucz został odnaleziony, czyli $1\le i\le\attribxx{x}{n}$, a~$x$ jest liściem, to w~linii \ref{li:b-tree-safe-delete-remove-from-leaf} realizowany jest krok 1.
+W~wierszach \doubledash{\ref{li:b-tree-safe-delete-remove-predecessor-begin}}{\ref{li:b-tree-safe-delete-remove-predecessor-end}} algorytm znajduje i~usuwa rekurencyjnie poprzednik klucza $k$ w~poddrzewie o~korzeniu w~$y=\attribxx{x}{c_i}$, czyli jednocześnie maksymalny klucz tego poddrzewa (podkrok 2a).
+Analogicznie, w~wierszach \doubledash{\ref{li:b-tree-safe-delete-remove-successor-begin}}{\ref{li:b-tree-safe-delete-remove-successor-end}} w~poddrzewie o~korzeniu w~$z=\attribxx{x}{c_{i+1}}$ jest znajdowany i~usuwany następnik klucza $k$ (podkrok 2b).
+Implementacja przypadku 2c polega na scaleniu węzłów $y$ i~$z$ dzięki wywołaniu procedury pomocniczej w~linii \ref{li:b-tree-safe-delete-remove-merge-children-1} oraz wywołaniu rekurencyjnym dla scalonego węzła $y$ w~linii \ref{li:b-tree-safe-delete-recursive-call-1}.
+
+Pozostała część algorytmu stanowi implementację kroku 3.
+Sąsiedni bracia $z_L$ i~$z_R$ węzła $y=\attribxx{x}{c_i}$ są wczytywani do pamięci wewnętrznej, przy czym należy pamiętać, że co najwyżej jeden z~tych braci może nie istnieć.
+W~zależności od liczby kluczy znajdujących się w~$y$, $z_L$ i~$z_R$, algorytm wykonuje odpowiednie rotacje (podkrok 3a; wiersze \doubledash{\ref{li:b-tree-safe-delete-rotations-begin}}{\ref{li:b-tree-safe-delete-rotations-end}}) albo scala odpowiednie węzły (podkrok 3b; wiersze \doubledash{\ref{li:b-tree-safe-delete-remove-mergers-begin}}{\ref{li:b-tree-safe-delete-remove-mergers-end}}).
+W~przypadku, gdy istnieje lewy brat węzła $y$, zostaje on scalony z~$y$, po czym wskaźnik $y$ ustawiany jest na wynikowy węzeł, który to zostanie następnie przekazany do wywołania rekurencyjnego.
+W~razie braku lewego brata, scalany jest $y$ z~jego prawym bratem.
+Wreszcie, w~linii \ref{li:b-tree-safe-delete-recursive-call-2} algorytm zostaje wywołany rekurencyjne dla węzła $y$.
+
+W~trakcie działania algorytmu dostęp do pól węzła B-drzewa poprzedzony jest odczytem tego węzła z~dysku, zaś po zakończeniu działania algorytmu każdy zmodyfikowany węzeł jest zapisany na dysk.
+Zapis najczęściej odbywa się w~tym samym wywołaniu, w~którym zaszła modyfikacja, ewentualnie w~następnym wywołaniu rekurencyjnym procedur \proc{B-Tree-Delete-Minimum}, \proc{B-Tree-Delete-Maximum}, \proc{B-Tree-Safe-Delete} po wykonaniu operacji rotacji.
+
+Inicjujące wywołanie algorytmu wykonywane jest przez właściwą procedurę \proc{B-Tree-Delete}, zamieszczoną poniżej.
+W~trakcie działania algorytmu korzeń drzewa mógł zostać pozbawiony swojego ostatniego klucza, dlatego wówczas procedura \proc{B-Tree-Delete} ustawia nowy korzeń i~zwalnia pamięć przydzieloną dla starego korzenia.
+\begin{codebox}
+    \Procname{$\proc{B-Tree-Delete}(T,k)$}
+    \li $r\gets\attrib{T}{root}$
+    \li $\proc{B-Tree-Safe-Delete}(r,k)$
+    \li \If $\attrib{r}{n}=0$ i~$\attrib{r}{leaf}=\const{false}$
+    \li     \Then $\attrib{T}{root}\gets\attribxx{r}{c_1}$
+    \li         $\proc{Free-Node}(r)$
+            \End
+\end{codebox}
