@@ -168,7 +168,9 @@ Jesteśmy gotowi do zapisania rekurencyjnej części algorytmu opisanego w~Podr�
     \li                 \If $i\ge2$
     \li                     \Then $z_L\gets\attribxx{x}{c_{i-1}}$
     \li                         $\proc{Disk-Read}(z_L)$
-    \li                     \Else $z_R\gets\attribxx{x}{c_{i+1}}$
+                            \End
+    \li                 \If $i\le\attribxx{x}{n}$
+    \li                     \Then $z_R\gets\attribxx{x}{c_{i+1}}$
     \li                         $\proc{Disk-Read}(z_R)$
                             \End
     \li                 \If $z_L\ne\const{nil}$ i~$\attrib{z_L}{n}\ge t$ \label{li:b-tree-safe-delete-rotations-begin}
@@ -196,6 +198,9 @@ W~zależności od liczby kluczy znajdujących się w~$y$, $z_L$ i~$z_R$, algoryt
 W~przypadku, gdy istnieje lewy brat węzła $y$, zostaje on scalony z~$y$, po czym wskaźnik $y$ ustawiany jest na wynikowy węzeł, który to zostanie następnie przekazany do wywołania rekurencyjnego.
 W~razie braku lewego brata, scalany jest $y$ z~jego prawym bratem.
 Wreszcie, w~linii \ref{li:b-tree-safe-delete-recursive-call-2} algorytm zostaje wywołany rekurencyjne dla węzła $y$.
+
+Zauważmy, że opis procedury w~Podręczniku opiera się na założeniu, że klucz $k$ jest w~B-drzewie.
+Jeśli dodatkowo chcielibyśmy obsłużyć sytuację jego braku, to w~przypadku 3 algorytm powinien rozpoczynać od sprawdzenia, czy $x$ jest liściem i~w~takim wypadku natychmiast zakończyć działanie.
 
 W~trakcie działania algorytmu dostęp do pól węzła B-drzewa poprzedzony jest odczytem tego węzła z~dysku, zaś po zakończeniu działania algorytmu każdy zmodyfikowany węzeł jest zapisany na dysk.
 Zapis najczęściej odbywa się w~tym samym wywołaniu, w~którym zaszła modyfikacja, ewentualnie w~następnym wywołaniu rekurencyjnym procedur \proc{B-Tree-Delete-Minimum}, \proc{B-Tree-Delete-Maximum}, \proc{B-Tree-Safe-Delete} po wykonaniu operacji rotacji.
