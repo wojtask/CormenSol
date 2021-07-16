@@ -1,6 +1,25 @@
 \problem{Stosy w~pamięci zewnętrznej} %18-1
 
 \subproblem %18-1(a)
+Każda operacja na stosie w~tej implementacji wymaga stałej liczby dostępów do dysku oraz $\Theta(m)$ czasu procesora.
+Zatem ciąg $n$ operacji na stosie wymaga $\Theta(n)$ dostępów do dysku i~$\Theta(mn)$ czasu.
+
 \subproblem %18-1(b)
+W~ciągu $n$ operacji \proc{Push}, mniej więcej co \singledash{$m$}{ta} operacja wiąże się ze zmianą strony.
+Wynika stąd, że liczba dostępów do dysku wynosi sumarycznie $\Theta(n/m)$.
+Całkowity czas procesora jest sumą czasu spędzonego na samym wstawianiu na stos oraz czasu potrzebnego do wczytywania i~zapisywania strony na dysku, wynosi więc $\Theta(n+m\cdot n/m)=\Theta(n)$.
+
 \subproblem %18-1(c)
+Najgorszy przypadek dla ciągu dowolnych operacji ma miejsce, gdy dostęp do dysku jest wymagany przez jak największą liczbę operacji w~tym ciągu.
+Sytuacja taka zachodzi, gdy początkowo wskaźnik $p$ znajduje się na ostatnim słowie strony i~przeplatane są ze sobą dwie operacje \proc{Push} i~dwie operacje \proc{Pop}.
+Pierwsze wywołanie \proc{Push} przestawia wskaźnik $p$ na kolejną stronę, ale jej wczytanie i~zapis poprzedniej strony są wykonywane podczas drugiego wywołania \proc{Push}.
+Następujące po nich dwa wywołania \proc{Pop} powodują wczytanie poprzedniej strony i~przestawienie wskaźnika $p$ na wyjściową pozycję.
+W~ciągu $n$ operacji w~najgorszym przypadku wykonywanych jest zatem $\Theta(n)$ operacji dostępu do dysku, a~całkowity czas procesora wynosi $\Theta(mn)$.
+
 \subproblem %18-1(d)
+W~pamięci wewnętrznej będziemy zawsze trzymać aktualną stronę, czyli tę, na którą pokazuje wskaźnik $p$ i~taką, która była wykorzystywana tuż przed przeniesieniem $p$ na aktualną stronę.
+Wczytanie do pamięci wewnętrznej nowej strony będzie poprzedzone zapisem na dysk starej strony.
+Każde wczytanie zastępuje w~pamięci wewnętrznej stronę, która nie była wykorzystywana od co najmniej $m$ operacji.
+A~zatem zmiana strony w~pamięci wewnętrznej będzie się odbywać w~najgorszym przypadku co $m$ operacji.
+Tym samym analiza efektywności tej implementacji stosu sprowadza się do analizy z~punktu (b) -- w~ciagu $n$ operacji wykonanych będzie $O(n/m)$ dostępów do dysku, a~całkowity czas wyniesie $O(n)$.
+Oznacza to, że zamortyzowana liczba dostępów do dysku wynosi $O(1/m)$, a~zamortyzowany czas jest stały.
