@@ -1,6 +1,17 @@
 \problem{Sklejanie i~rozbijanie 2-3-4 drzew} %18-2
 
 \subproblem %18-2(a)
+Przez wprowadzenie atrybutu \id{height} atrybut \id{leaf} jest teraz zbędny, dlatego pominiemy go w~implementacji 2-3-4 drzew.
+Operacje tworzenia pustego drzewa, wyszukiwania, wstawiania i~usuwania dla 2-3-4 drzew opierają się w~dużej mierze na analogicznych operacjach dla B-drzew, z~kilkoma modyfikacjami.
+Po pierwsze w~implementacjach tych operacji rezygnujemy ze stosowania zmiennej $t$, zastępując ją przez minimalny stopień 2-3-4 drzew, czyli 2.
+Ponadto każde odwołanie do pola \id{leaf} zamieniamy na odpowiednie odwołanie do pola \id{height}.
+Warunek \attrib{x}{leaf} zastępujemy przez $\attrib{x}{height}=0$, a~warunek $\attrib{x}{leaf}=\const{false}$ -- przez $\attrib{x}{height}>0$.
+W~wersji procedury \proc{B-Tree-Create} dla 2-3-4 drzew inicjalizacja pola \id{leaf} na \const{true} jest zastąpiona przez inicjalizację pola \id{height} na 0.
+W~procedurze rozbijania węzła w~2-3-4 drzewie kopiowanie pola \id{leaf} z~węzła $y$ do $z$ jest zastąpione przez kopiowanie pola \id{height} między tymi węzłami.
+Wreszcie, w~procedurze wstawiania do 2-3-4 drzewa, jeśli w~wyniku rozbicia korzenia $r$ powstanie nowy korzeń, to jego pole \id{height} jest inicjalizowane na $\attrib{r}{height}+1$.
+
+Utrzymywanie i~aktualizowanie atrybutu \id{height} nie wpływa na asymptotyczny czas działania poszczególnych operacji, ponieważ w~B-drzewach -- a~więc w~szczególności w~2-3-4 drzewach -- węzły są zawsze tworzone i~usuwane na głębokości 0, dzięki czemu wysokość żadnego poddrzewa nie ulega wtedy zmianie.
+
 \subproblem %18-2(b)
 \subproblem %18-2(c)
 \subproblem %18-2(d)
