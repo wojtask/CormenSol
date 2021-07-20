@@ -37,9 +37,9 @@ Lista kroków operacji \proc{Delete}, usuwającej element $x$ znajdujący się w
 \begin{enumerate}
 \item Znajdź najmniejsze $i$ takie, że tablica $A_i$ jest pełna.
 \item Znajdź tablicę $A_j$ zawierającą $x$.
-\item Usuń $x$ z~tablicy $A_j$ i~na jego miejsce wstaw element $y=A_i[2^i-1]$.
+\item Usuń $x$ z~tablicy $A_j$ i~na jego miejsce wstaw element $y=A_i[2^i]$.
 \item Przenieś element $y$ w~tablicy $A_j$ tak, aby była ona posortowana.
-\item Do każdej tablicy $A_r$, gdzie $r=0$, 1, \dots, ${i-1}$, przypisz fragment $A_i[2^r-1\twodots2^{r+1}-2]$.
+\item Do każdej tablicy $A_r$, gdzie $r=0$, 1, \dots, ${i-1}$, przypisz fragment $A_i[2^r\!\twodots2^{r+1}-1]$.
 \item Opróżnij tablicę $A_i$.
 \end{enumerate}
 Po przeniesieniu elementu $y$ do $A_j$, tablica $A_i$ składa się z~$2^i-1$ elementów.
