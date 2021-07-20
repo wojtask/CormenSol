@@ -23,10 +23,10 @@ Tablica Younga $Y$, w~której $Y[m,n]\ne\infty$, jest pełna.
 
 \subproblem %6-3(c)
 Procedura ekstrakcji najmniejszego elementu tablicy Younga $Y$ o~rozmiarach $m\times n$ będzie opierać się o~pomysł z~\proc{Max-Heapify}.
-Najmniejszym elementem tablicy $Y$ jest $\mu=Y[1,1]$.
+Najmniejszym elementem tablicy $Y$ jest $y=Y[1,1]$.
 Przetransportujemy go na ostatnią pozycję ostatniego wiersza tablicy, skąd będzie można bezpiecznie go usunąć przy jednoczesnym zachowaniu własności tablicy Younga.
-W~tym celu porównajmy $\mu$ z~elementem znajdującym się bezpośrednio na prawo i~elementem bezpośrednio w~dół od niego (o~ile istnieją).
-Mniejszy z~nich zamieniany jest następnie z~$\mu$, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$, w~której $\mu$ stanowi pierwszy element pierwszej kolumny.
+W~tym celu porównajmy $y$ z~elementem znajdującym się bezpośrednio na prawo i~elementem bezpośrednio w~dół od niego (o~ile istnieją).
+Mniejszy z~nich zamieniany jest następnie z~$y$, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$, w~której $y$ stanowi pierwszy element pierwszej kolumny.
 Otrzymując w~wyniku tego postępowania tablicę o~rozmiarach $1\times1$, można usunąć jej jedyny element będący najmniejszym elementem początkowej tablicy Younga (zastępując go wartością $\infty$) i~zwrócić go jako wynik algorytmu.
 
 Opisany sposób został zaimplementowany w~poniższym pseudokodzie.
@@ -34,9 +34,9 @@ Aby pobrać minimum z~tablicy Younga $Y$ o~rozmiarach $m\times n$, należy wywo�
 \begin{codebox}
 \Procname{$\proc{Young-Extract-Min}(Y,m,n,i,j)$}
 \li	\If $\langle i,j\rangle=\langle m,n\rangle$
-\li		\Then $\id{min}\gets Y[i,j]$
+\li		\Then $y\gets Y[i,j]$
 \li			$Y[i,j]\gets\infty$
-\li			\Return \id{min}
+\li			\Return $y$
 		\End
 \li	$\langle i',j'\rangle\gets\langle i,j+1\rangle$
 \li	\If $i<m$
