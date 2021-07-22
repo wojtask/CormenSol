@@ -76,10 +76,16 @@ Procedura przyjmuje na wejściu drzewo $T$, jego węzeł $x$ oraz indeks $i$ i~z
 
 \exercise %18.2-4
 \exercise %18.2-5
-Jeśli w~liściach dopuścimy więcej niż $2t-1$ kluczy, to musimy zmodyfikować warunek rozstrzygający, czy węzeł B-drzewa jest pełny.
-Teraz warunek ten będzie zależny nie tylko od \attrib{x}{n}, ale też od \attrib{x}{leaf}, przy czym dla węzłów wewnętrznych nie ulegnie on zmianie.
+Zwiększenie dozwolonej liczby kluczy w~liściach pociąga za sobą konieczność modyfikacji warunku rozstrzygającego, czy węzeł B-drzewa jest pełny.
+Warunek ten będzie musiał uwzględnić pole \id{leaf}, poza tym nie ulegnie on zmianie dla węzłów wewnętrznych, ale w~przypadku liści pole $n$ będzie porównywane z~nowym ograniczeniem na liczbę kluczy w~węźle.
+
+Procedura tworzenia nowego B-drzewa nie wymaga modyfikacji, bo nie sprawdza pełności węzłów.
 W~operacji wstawiania klucza do B-drzewa nową wersję warunku należy zastosować w~wierszu 2 procedury \proc{B-Tree-Insert} i~w~wierszu 13 procedury \proc{B-Tree-Insert-Nonfull}.
-Zauważmy, że jeśli węzeł jest liściem, to w~trakcie operacji wstawiania nie stanie się on węzłem wewnętrznym, dlatego nie ma obawy, że liczba kluczy węzła zostanie przekroczona.
+Jeśli węzeł $x$ jest liściem, to po wstawieniu do drzewa nowego klucza, $x$ nie stanie się węzłem wewnętrznym, dlatego nie ma obawy, że liczba kluczy w~$x$ zostanie przekroczona.
+
+Musimy jednak pamiętać o~zmodyfikowaniu także procedury \proc{B-Tree-Split-Child}, w~której zakłada się, że wejściowy węzeł $y$ jest pełny.
+Podczas rozbijania węzła $y$ mniej więcej połowa jego kluczy zostaje przeniesiona do nowego węzła $z$.
+Gdy $y$ jest liściem, to jest nim także $z$ i~wtedy należy wybrać adekwatną nową liczbę liści dla tych węzłów oraz zadbać o~przeniesienie do $x$ odpowiedniego klucza z~$y$.
 
 \exercise %18.2-6
 Przeszukiwanie węzła B-drzewa wykorzystujące wyszukiwanie binarne zabiera czas $O(\lg t)$.
