@@ -71,4 +71,19 @@ Nietrudno zauważyć, że algorytm wykonuje co najwyżej $|h'-h''+1|$ wywołań 
 Stąd algorytm działa w~czasie $O(1+|h'-h''|)$.
 
 \subproblem %18-2(c)
+Przypatrzmy się działaniu operacji wyszukiwania klucza $k$ w~drzewie $T$, która oczywiście podąża ścieżką $p$.
+Pracując na węźle $x$, procedura przegląda wszystkie klucze $k'$ węzła $x$ nieprzekraczające $k$.
+W~przypadku nieodnalezienia $k$ w~$x$ procedura wywoła się rekurencyjne dla syna $x$ o~kluczach większych niż każdy dotychczas przejrzany $k'$.
+Oznacza to, że procedura przejrzy we wszystkich odwiedzonych węzłach klucze $k_1'$, $k_2'$, \dots, $k_m'$, $k_{m+1}'=k$, w~porządku rosnącym.
+Mamy więc $k_1'<k_2'<\dots<k_m'<k$.
+
+Wybierzmy teraz dowolne $i=1$, 2, \dots, $m+1$.
+Jeśli $x$ jest węzłem wewnętrznym, w~którym $k_i'=\attribxx{x}{key_j}$ dla pewnego $j$, to wszystkie klucze z~poddrzewa o~korzeniu w~\attribxx{x}{c_j} są mniejsze od $k_i'$, a~dodatkowo, gdy $i>1$, to są one też większe od $k_{i-1}'$.
+Jeśli przez $T_{i-1}'$ oznaczymy wspomniane poddrzewo, a~w~przypadku, gdy $k_i'$ jest w~liściu -- drzewo puste -- to otrzymamy tezę.
+
+Dla każdego $i=1$, 2, \dots, $m$, jeśli $T_{i-1}'$ jest poddrzewem węzła $x$, to $T_i'$ jest poddrzewem $x$ albo któregoś z~jego potomków, zatem wysokość $T_{i-1}'$ wynosi co najmniej tyle, ile wysokość $T_i'$.
+
+Możemy rozumować analogicznie, aby pokazać, że ścieżka $p$ rozbija zbiór $S''$ na zbiór drzew $\{T_0''$, $T_1''$, \dots, $T_m''\}$ i~zbiór kluczy $\{k_1''$, $k_2''$, \dots, $k_m''\}$ takie, że $y>k_i''>z$ dla $i=1$, 2, \dots, $m$ oraz każdej pary kluczy $y\in T_{i-1}''$ i~$z\in T_i''$.
+Podobnie jak w~podziale zbioru $S'$, indeksy $i$ porządkują drzewa $T_i''$ nierosnąco według wysokości.
+
 \subproblem %18-2(d)
