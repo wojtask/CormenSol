@@ -84,6 +84,74 @@ Jeśli przez $T_{i-1}'$ oznaczymy wspomniane poddrzewo, a~w~przypadku, gdy $k_i'
 Dla każdego $i=1$, 2, \dots, $m$, jeśli $T_{i-1}'$ jest poddrzewem węzła $x$, to $T_i'$ jest poddrzewem $x$ albo któregoś z~jego potomków, zatem wysokość $T_{i-1}'$ wynosi co najmniej tyle, ile wysokość $T_i'$.
 
 Możemy rozumować analogicznie, aby pokazać, że ścieżka $p$ rozbija zbiór $S''$ na zbiór drzew $\{T_0''$, $T_1''$, \dots, $T_m''\}$ i~zbiór kluczy $\{k_1''$, $k_2''$, \dots, $k_m''\}$ takie, że $y>k_i''>z$ dla $i=1$, 2, \dots, $m$ oraz każdej pary kluczy $y\in T_{i-1}''$ i~$z\in T_i''$.
-Podobnie jak w~podziale zbioru $S'$, indeksy $i$ porządkują drzewa $T_i''$ nierosnąco według wysokości.
+Podobnie jak w~rozbiciu zbioru $S'$, indeksy $i$ porządkują drzewa $T_i''$ nierosnąco według wysokości.
 
 \subproblem %18-2(d)
+Danymi wejściowymi operacji rozbijania dla 2-3-4 drzew jest 2-3-4 drzewo $T$ oraz klucz $k$ znajdujący się w~$T$.
+
+Niech $S'$, $S''$ będą zbiorami kluczy $T$, odpowiednio, mniejszych od $k$ i~większych od $k$.
+Do zbudowania drzew $T'$ i~$T''$ reprezentujących zbiory $S'$ i~$S''$ potrzebne nam będą rozbicia tych zbiorów opisane w~części (c).
+Do ich wyznaczenia wykorzystamy procedury pomocnicze \proc{2-3-4-Tree-Left-Partition} i~\proc{2-3-4-Tree-Right-Partition}.
+Poniżej podajemy pseudokod pierwszej z~nich służącej do znalezienia rozbicia zbioru $S'$.
+\begin{codebox}
+    \Procname{$\proc{2-3-4-Tree-Left-Partition}(T,k)$}
+    \li $h\gets\attrib{\attrib{T}{root}}{height}$
+    \li utwórz tablice $L[0\twodots 3h+2]$ i~$K[1\twodots 3h+2]$
+    \li $m\gets0$
+    \li $x\gets\attrib{T}{root}$
+    \li \While \const{true}
+    \li     \Do $i\gets1$
+    \li     \While $i\le\attrib{x}{n}$ i~$k\ge\attribxx{x}{key_i}$
+    \li         \Do $\proc{2-3-4-Tree-Create}(T^*)$
+    \li             \If $\attrib{x}{height}>0$
+    \li                 \Then $\attrib{T^*}{root}\gets\attribxx{x}{c_i}$
+                        \End
+    \li             $L[m]\gets T^*$
+    \li             \If $k=\attribxx{x}{key_i}$
+    \li                 \Then \Return $\langle L[0\twodots m], K[1\twodots m]\rangle$
+                        \End
+    \li             $m\gets m+1$
+    \li             $K[m]=\attribxx{x}{key_i}$
+    \li             $i\gets i+1$
+                \End
+    \li         $x\gets\attribxx{x}{c_i}$
+            \End
+\end{codebox}
+Główna idea przyświecająca tej procedurze opiera się na opisie z~rozwiązania punktu (c).
+Procedura przechodzi po ścieżce $p$ od korzenia $T$ do klucza $k$, który z~założenia znajduje się w~$T$, i~na każdym poziomie drzewa wyznacza elementy zbioru drzew i~elementy zbioru kluczy, wchodzące w~skład rozbicia $S'$.
+Zbiory te reprezentowane są w~algorytmie przez tablice $L$ i~$K$.
+Zauważmy, że na każdym z~$h+1$ poziomów drzewa $T$ co najwyżej 3 drzewa mogą zostać umieszczone w~tablicy $L$, oraz co najwyżej 3 klucze w~tablicy $K$ (z~wyjątkiem poziomu liści drzewa, który generuje co najwyżej 2 klucze).
+Stąd biorą się ograniczenia na rozmiary tych tablic użyte przy ich inicjalizacji.
+W~momencie odnalezienia klucza $k$ -- co jest gwarantowane na podstawie założenia -- procedura natychmiast kończy działanie, zwracając fragmenty tablic z~wyznaczonym rozbiciem.
+
+Jak nietrudno się domyślić, procedura \proc{2-3-4-Tree-Right-Partition} jest symetryczna do powyższej.
+Jedynymi różnicami w~porównaniu z~\proc{2-3-4-Tree-Left-Partition} jest odwrotna kolejność przeglądania kluczy węzłów na ścieżce $p$ oraz dodawanie do zbioru $L$ poddrzew sąsiadujących z~aktualnym kluczem od prawej strony.
+
+W~głównej operacji rozbijania \proc{2-3-4-Tree-Split} drzewo $T'$ zostanie zbudowane przez wykonywanie sklejania kolejnych par drzew i~kluczy z~rozbicia zbioru $S'$, a~drzewo $T''$ -- symetrycznie przy użyciu rozbicia zbioru $S''$.
+Moglibyśmy sklejać kolejne drzewa, zaczynając od tych najwyższych, ale taka strategia pochłania asymptotycznie wyższy czas, niż jesteśmy w~stanie osiągnąć przez odwrócenie kolejności sklejania.
+\begin{codebox}
+    \Procname{$\proc{2-3-4-Tree-Split}(T,k)$}
+    \li $\langle L',K'\rangle\gets\proc{2-3-4-Tree-Left-Partition}(T,k)$ \label{li:2-3-4-tree-split-left-partition}
+    \li $\langle L'',K''\rangle\gets\proc{2-3-4-Tree-Right-Partition}(T,k)$ \label{li:2-3-4-tree-split-right-partition}
+    \li \For $i\gets\attrib{K'}{length}$ \Downto 1 \label{li:2-3-4-tree-split-left-tree-create-begin}
+    \li     \Do $L'[i-1]\gets\proc{2-3-4-Tree-Join}(L'[i-1],L'[i],K'[i])$
+            \End \label{li:2-3-4-tree-split-left-tree-create-end}
+    \li \For $i\gets\attrib{K''}{length}$ \Downto 1 \label{li:2-3-4-tree-split-right-tree-create-begin}
+    \li     \Do $L''[i-1]\gets\proc{2-3-4-Tree-Join}(L''[i],L''[i-1],K'[i])$
+            \End \label{li:2-3-4-tree-split-right-tree-create-end}
+    \li \Return $\langle L'[0],L''[0]\rangle$
+\end{codebox}
+
+Przeanalizujmy czas działania procedury \proc{2-3-4-Tree-Split} dla drzewa $T$ o~wysokości $h$ i~$n$ kluczach.
+Oczywiście czas potrzebny na wyznaczenie rozbić zbiorów $S'$ i~$S''$ w~wierszach \ref{li:2-3-4-tree-split-left-partition} i~\ref{li:2-3-4-tree-split-right-partition} wynosi tyle samo, co czas (dwukrotnego) odszukania w~$T$ klucza $k$, czyli $O(h)$.
+Niech $m'=\attrib{L'}{length}$ i~$m''=\attrib{L''}{length}$.
+Jak zauważyliśmy wcześniej, $m'\le3h+3$ i~$m''\le3h+3$.
+Oznaczmy przez $h_i'$ dla $i=0$, 1, \dots, $m'-1$ wysokość drzewa $T_i'$ znajdującego się tuż po linii \ref{li:2-3-4-tree-split-right-partition} w~$L'[i]$ i~podobnie, przez $h_i''$ dla $i=0$, 1, \dots, $m''-1$ wysokość drzewa $T_i''$ znajdującego się wtedy w~$L''[i]$.
+Na mocy obserwacji z~punktu (c) mamy, że oba te ciągi wysokości są nierosnące, ponadto $h_m'-h_0'\le h$ i~$h_m''-h_0''\le h$.
+Czas działania utworzenia $T'$ w~wierszach \doubledash{\ref{li:2-3-4-tree-split-left-tree-create-begin}}{\ref{li:2-3-4-tree-split-left-tree-create-end}} wynosi zatem
+\[
+    \sum_{i=1}^mO(1+|h_i'-h_{i-1}'|) = O\biggl(\sum_{i=1}^m(1+(h_i'-h_{i-1}'))\biggr) = O(m+h_m'-h_0') = O(h),
+\]
+co z~tw.\ 12.1 daje $O(\lg n)$.
+Oczywiście analogicznie otrzymuje się identyczne oszacowanie na czas budowy drzewa $T''$ w~liniach \doubledash{\ref{li:2-3-4-tree-split-right-tree-create-begin}}{\ref{li:2-3-4-tree-split-right-tree-create-end}}.
+A~zatem czas działania operacji rozbijania 2-3-4 drzewa wynosi $O(\lg n)$.
