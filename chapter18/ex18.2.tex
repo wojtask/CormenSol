@@ -75,6 +75,52 @@ Procedura przyjmuje na wejściu drzewo $T$, jego węzeł $x$ oraz indeks $i$ i~z
 \end{codebox}
 
 \exercise %18.2-4
+W~rozwiązaniu posługujemy się pojęciem \textbf{prawego kręgosłupa} B-drzewa.
+Definiujemy je analogicznie do problemu \refProblem{13-4} w~przypadku drzew wyszukiwań binarnych.
+
+Zachodzi następujące twierdzenie:
+
+\medskip
+\noindent\textit{Niech\/ $T$ będzie B-drzewem o~minimalnym stopniu\/ $2$, do którego wstawiono kolejno klucze\/ $1$,\/ $2$,\/ \dots,\/ $n-1$.
+Podczas wstawiania klucza\/ $n$ węzeł drzewa\/ $T$ na wysokości\/ $h$ jest rozbijany tylko wtedy, gdy znajduje się na prawym kręgosłupie\/ $T$ oraz\/ $n=2^{h+1}k+h$, gdzie\/ $k\ge2$.}
+\begin{proof}
+	Dowód przeprowadzimy przez indukcję po $h$.
+	Niech $h=0$ i~niech $y$ będzie węzłem prawego kręgosłupa drzewa $T$ na wysokości 0.
+	Gdy $n\le3$, to drzewo $T$ składa się tylko z~węzła $y$.
+	Pierwsze jego rozbicie ma miejsce, gdy $n=4$.
+	Powstaje wówczas nowy korzeń drzewa $T$ i~jeszcze jeden węzeł na wysokości 0, do którego trafia klucz 4.
+	Gdy $n>4$, to dla nieparzystych $n$ węzeł $y$ otrzymuje trzeci klucz, a~dla parzystych $n$ węzeł $y$ jest rozbijany, w~wyniku czego powstaje nowy węzeł $z$ na prawym kręgosłupie na wysokości 0 i~po zakończeniu wstawiania klucza $n$ w~węźle $z$ są już 2 klucze.
+	Równoważnie, można powiedzieć, że węzeł na prawym kręgosłupie drzewa na wysokości 0 jest rozbijany tylko wtedy, gdy $n=2^{0+1}k+0$ dla $k\ge2$.
+
+	Niech teraz $h>0$ i~załóżmy prawdziwość twierdzenia dla $h-1$.
+	Zgodnie z~założeniem wstawienie klucza $n=2^h\cdot2+h-1$ skutkowało pierwszym rozbiciem węzła na prawym kręgosłupie $T$ na wysokości $h-1$ oraz powstaniem nowego korzenia $x$ z~jednym kluczem na wysokości $h$.
+	Podczas wstawiania kolejnych kluczy węzeł $x$ może uzyskać nowy klucz tylko w~wyniku rozbicia jego syna $y$ znajdującego się na prawym kręgosłupie.
+	Po dwóch takich rozbiciach w~węźle $x$ są już 3 klucze i~wstawianie kolejnego klucza rozbija $x$.
+	Na podstawie założenia sytuacja taka zachodzi, gdy $n=(2^h\cdot4+h-1)+1=2^{h+1}\cdot2+h$.
+	Tuż po zakończeniu wstawiania $n$ schemat powtarza się cyklicznie -- węzeł na prawym kręgosłupie na wysokości $h$ ma teraz znów tylko 1 klucz, a~jego kolejne rozbicie nastąpi po $2^h-1+2^h+1=2^{h+1}$ wstawieniach, czyli gdy $n=2^{h+1}\cdot3+h$.
+\end{proof}
+
+Oznaczmy przez $s(n)$ liczbę węzłów drzewa $T$ o~minimalnym stopniu 2 po wstawieniu do niego kolejno kluczy 1, 2, \dots, $n$.
+Zgodnie z~wyżej udowodnionym twierdzeniem $s(n)$ stanowi sumę wszystkich rozbić węzłów na wszystkich wysokościach drzewa, łącznie z~liczbą utworzonych nowych korzeni.
+Każdy poziom finalnego drzewa, z~wyjątkiem poziomu korzenia, wprowadzał dokładnie jeden nowy korzeń podczas wstawiania.
+Liczba nowych węzłów drzewa tworzonych z~rozbicia węzłów na wysokości $h$ wynosi zatem $\lfloor(n-h)/2^{h+1}\rfloor$, skąd dostajemy
+\[
+	s(n) = \begin{cases}
+		1, & \text{jeśli $n=1$}, \\
+		\sum_{h=0}^\infty\bigl\lfloor\frac{n-h}{2^{h+1}}\bigr\rfloor, & \text{w~przeciwnym przypadku}.
+	\end{cases}
+\]
+
+Aby znaleźć górne asymptotyczne oszacowanie $s(n)$, wystarczy zauważyć, że $s(n)\le n$, bo B-drzewo o~$n$ kluczach nigdy nie ma więcej niż $n$ węzłów.
+Z~kolei dla oszacowania dolnego zauważmy, że dla $r>2$,
+\begin{align*}
+	s(2^r) &= \biggl\lfloor\frac{2^r}{2}\biggr\rfloor+\biggl\lfloor\frac{2^r-1}{2^2}\biggr\rfloor+\biggl\lfloor\frac{2^r-2}{2^3}\biggr\rfloor+\dots \\
+	&= 2^{r-1}+2^{r-2}-1+2^{r-3}-1+\dots+2^1-1 \\
+	&= 2^r-1-(r-1) \\
+	&= 2^r-r,
+\end{align*}
+a~więc $s(n)\ge n-\lg n$.
+
 \exercise %18.2-5
 Zwiększenie dozwolonej liczby kluczy w~liściach pociąga za sobą konieczność modyfikacji warunku rozstrzygającego, czy węzeł B-drzewa jest pełny.
 Warunek ten będzie musiał uwzględnić pole \id{leaf}, poza tym nie ulegnie on zmianie dla węzłów wewnętrznych, ale w~przypadku liści pole $n$ będzie porównywane z~nowym ograniczeniem na liczbę kluczy w~węźle.
