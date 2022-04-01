@@ -1,12 +1,14 @@
 \subchapter{Relacje}
 
 \exercise %B.2-1
-Porządek częściowy to relacja zwrotna, antysymetryczna i~przechodnia.
-Zauważmy, że relacja $\subseteq$ w~$2^\mathbb{Z}$ posiada każdą z~tych własności.
-Dla zbioru $A\in2^\mathbb{Z}$ zachodzi $A\subseteq A$ (zwrotność).
-Dla zbiorów $A$, $B\in2^\mathbb{Z}$, jeśli zachodzi $A\subseteq B$ i~$B\subseteq A$, to $A=B$ (antysymetria).
-Wreszcie dla zbiorów $A$, $B$, $C\in2^\mathbb{Z}$, jeżeli $A\subseteq B$ i~$B\subseteq C$, to $A\subseteq C$ (przechodniość).
-Jednak w~$2^\mathbb{Z}$ porządek $\subseteq$ nie jest liniowy, bo np.\ $\{0,1\}\nsubseteq\{1,2\}$ i~$\{1,2\}\nsubseteq\{0,1\}$.
+Pokażemy, że relacja $\subseteq$ w~$2^\mathbb{Z}$ jest zwrotna, antysymetryczna i~przechodnia.
+Niech $A$, $B$, $C\in2^\mathbb{Z}$.
+Oczywiście $x\in A$ implikuje $x\in A$, czyli zwrotność trywialnie zachodzi.
+Jeśli $A\subseteq B$, czyli $x\in A$ implikuje $x\in B$, oraz $B\subseteq A$, czyli $x\in B$ implikuje $x\in A$, to z~prawa przechodniości implikacji $x\in A$ wtedy i~tylko wtedy, gdy $x\in B$, a~zatem $A=B$.
+Koniunkcja $A\subseteq B$ i~$B\subseteq C$ oznacza, że $x\in A$ implikuje $x\in B$, a~$x\in B$ implikuje $x\in C$.
+Odwołując się ponownie do prawa przechodniości implikacji mamy, że $x\in A$ implikuje $x\in C$, czyli $A\subseteq C$.
+
+Porządek $\subseteq$ w~$2^\mathbb{Z}$ nie jest liniowy, bo np.\ $\{0,1\}\nsubseteq\{1,2\}$ i~$\{1,2\}\nsubseteq\{0,1\}$.
 
 \exercise %B.2-2
 Oznaczmy przez $R_n$, dla $n\in\mathbb{N}\setminus\{0\}$, relację ,,przystaje modulo $n$'':
