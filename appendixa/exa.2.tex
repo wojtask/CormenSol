@@ -24,14 +24,13 @@ Funkcja $f(k)=k^3$, gdzie $k$ to dodatnia liczba całkowita, jest monotonicznie 
 \[
 	\int_0^nx^3\,dx \le \sum_{k=1}^nk^3 \le \int_1^{n+1}x^3\,dx.
 \]
-Znajdujemy oszacowania obu całek:
-\begin{gather*}
-	\int_0^nx^3\,dx = \frac{n^4}{4} = \Theta(n^4), \\[2mm]
-	\int_1^{n+1}x^3\,dx = \frac{(n+1)^4-1}{4} = \Theta(n^4)
-\end{gather*}
-i~otrzymujemy
+Dolnym oszacowaniem sumy jest więc
 \[
-	\sum_{k=1}^nk^3 = \Theta(n^4).
+	\int_0^nx^3\,dx = \frac{n^4}{4},
+\]
+a~górnym
+\[
+	\int_1^{n+1}x^3\,dx = \frac{(n+1)^4-1}{4}.
 \]
 
 \exercise %A.2-5
