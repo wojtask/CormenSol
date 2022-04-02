@@ -80,10 +80,10 @@ Zatem w~drzewie $T$ sumy wag liści zarówno z~$T_L$, jak i~$T_R$, nie przekracz
 \note{W~tekście zadania występuje błąd.
 Twierdzenie nie zachodzi bowiem dla drzew o~jednym liściu, dlatego w~rozwiązaniu zakładamy, że\/ $L\ge2$.}
 
-\noindent Niech $T$ będzie drzewem binarnym o~$L\ge2$ liściach oraz niech $LT$ i~$RT$ będą, odpowiednio, jego lewym i~prawym poddrzewem.
-Niech ponadto $L_1$ i~$L_2$ stanowią, odpowiednio, liczbę liści $LT$ i~liczbę liści $RT$.
-Bez straty ogólności załóżmy, że $L_1\le L_2$.
-Jeśli $L_2\le2L/3$, to zarówno $LT$, jak i~$RT$ stanowi szukane poddrzewo.
-W~przeciwnym przypadku zachodzi $L_2>2L/3$, więc szukane poddrzewo będzie częścią drzewa $RT$.
-Po skończonej liczbie kroków dojdziemy do drzewa $T'$, którego większe poddrzewo $RT'$ będzie mieć nie więcej niż $2L/3$ liści.
-Ale ponieważ $T'$ ma więcej niż $2L/3$ liści, to liczba liści $RT'$ jest większa niż $L/3$, zatem $RT'$ jest szukanym poddrzewem.
+\noindent Niech $T$ będzie drzewem binarnym o~$L\ge2$ liściach.
+Założymy nie wprost, że w~$T$ nie ma poddrzewa mające między $L/3$ a~$2L/3$ liści włącznie.
+Ponieważ $L\ge2$, to korzeń $T$ nie jest liściem.
+Będziemy podążać ścieżką od korzenia do liścia, w~każdym kroku przechodząc z~węzła do jego syna, w~którego poddrzewie jest więcej liści.
+Liczba liści poddrzewa o~korzeniu w~aktualnym węźle na tej ścieżce zmniejsza się od $L$ do 1.
+Na podstawie założenia, na ścieżce istnieje węzeł $x$, mający w~swoim poddrzewie więcej niż $2L/3$ liści, oraz jego syn $y$ o~mniej niż $L/3$ liściach w~swoim poddrzewie.
+Drugi syn węzła $x$ ma mniej potomnych liści niż $y$ (0, jeśli nie istnieje), a~to prowadzi do sprzeczności, bo suma potomnych liści synów węzła $x$ jest mniejsza niż $2L/3$.
