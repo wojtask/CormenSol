@@ -5,10 +5,7 @@ Zamiast dowolnych drzew rozważmy bez straty ogólności drzewa ukorzenione.
 Krawędzie w~takim drzewie są incydentne z~węzłami z~sąsiednich poziomów, a~więc można węzłom nadać kolory na podstawie parzystości ich głębokości w~drzewie.
 
 \subproblem %B-1(b)
-Rozważmy bez straty ogólności tylko grafy spójne, gdyż stwierdzenia te pozostaną równoważne, jeżeli zostaną zastosowane osobno dla każdej składowej.
-\medskip
-
-$1.\Rightarrow 2.$: W~grafie dwudzielnym krawędzie łączą wierzchołki między dwoma rozłącznymi zbiorami, zatem można pokolorować wierzchołki dwiema barwami w~zależności od ich przynależności do danego zbioru, uzyskując prawidłowe \singledash{2}{kolorowanie}.
+$1.\Rightarrow 2.$: Skoro $G$ jest grafem dwudzielnym, to można podzielić jego zbiór wierzchołków $V$ na 2 rozłączne zbiory $V_1$ i~$V_2$, między którymi nie ma krawędzi, i~nadać wierzchołkom z~$V_1$ kolor 0, a~wierzchołkom z~$V_2$ -- kolor 1, uzyskując prawidłowe \singledash{2}{kolorowanie}.
 \medskip
 
 $2.\Rightarrow 3.$: Załóżmy, że graf $G$ jest \singledash{2}{kolorowalny} i~że ma cykl nieparzysty $\langle v_1,v_2,\dots,v_{2k+1},v_1\rangle$ dla pewnego $k\ge1$.
@@ -20,12 +17,13 @@ Wnioskujemy zatem, że $G$ nie zawiera cyklu o~długości nieparzystej.
 
 $3.\Rightarrow 1.$: Ustalmy pewne $v\in V$.
 Niech $V_1$ będzie zbiorem wszystkich wierzchołków grafu $G$, które znajdują się w~odległości parzystej od $v$ oraz niech $V_2=V\setminus V_1$.
-Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden jego wierzchołek nie sąsiaduje z~innym wierzchołkiem ze swojego zbioru, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
+Ponieważ $G$ nie zawiera cyklu nieparzystego, to żaden wierzchołek z~$V_1$ nie sąsiaduje z~innym wierzchołkiem z~$V_1$ i~analogicznie dla zbioru $V_2$, a~to oznacza, że graf $G=\langle V_1\cup V_2,E\rangle$ jest dwudzielny.
 
 \subproblem %B-1(c)
 Dowód przeprowadzimy indukcyjnie ze względu na liczbę wierzchołków w~grafie $G$.
 Jeśli graf ma jeden wierzchołek, to oczywiście wystarcza jeden kolor.
-Załóżmy więc, że $|V|\ge2$.
+
+Załóżmy teraz, że $|V|\ge2$.
 Wybierzmy dowolny wierzchołek $v\in V$ i~oznaczmy przez $G'$ podgraf $G$ indukowany przez zbiór $V\setminus\{v\}$.
 Na mocy założenia indukcyjnego $G'$ da się pokolorować $d'+1$ barwami, gdzie $d'$ to maksymalny stopień wierzchołka w~$G'$.
 Ale $d'\le d$, więc tym bardziej wystarczy $d+1$ kolorów.
@@ -34,8 +32,7 @@ Wybierając ten kolor dla $v$, uzyskujemy poprawne \singledash{$(d+1)$}{kolorowa
 
 \subproblem %B-1(d)
 Jeżeli $k$ barw wystarcza do optymalnego pokolorowania (czyli takiego, które wykorzystuje możliwie najmniej kolorów) grafu $G$, to dla każdych dwóch różnych barw istnieje krawędź w~$E$ incydentna z~wierzchołkami o~takich barwach.
-W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać.
-Do pokolorowania grafu wystarczyłoby ich zatem $k-1$, co przeczyłoby optymalności kolorowania.
+W~przeciwnym przypadku istniałyby dwie różne barwy, których moglibyśmy nie rozróżniać i~w~ten sposób zmniejszyć liczbę wymaganych barw, co przeczyłoby optymalności kolorowania.
 
 Na podstawie powyższego rozumowania mamy $\binom{k}{2}\le|E|$.
 Korzystamy z~tego, że dla $k\ge2$ zachodzi $k/2\le k-1$ i~stąd
