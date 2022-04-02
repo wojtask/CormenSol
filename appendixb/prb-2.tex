@@ -9,32 +9,31 @@ Oznacza to, że jest $n$ wierzchołków, ale tylko co najwyżej $n-1$ liczb mog�
 \end{proof}
 
 \subproblem %B-2(b)
-\textsf{\textbf{Twierdzenie.}} \textit{Graf pełny posiadający\/ $3$ wierzchołki jest podgrafem dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$, w~którym\/ $|V|=6$, lub jego dopełnienia\/ $\overline{G}$.}
+\textsf{\textbf{Twierdzenie.}} \textit{Graf nieskierowany\/ $G=\langle V,E\rangle$, w~którym\/ $|V|=6$, lub jego dopełnienie\/ $\overline{G}$ zawierają klikę o~3 wierzchołkach.}
 \begin{proof}
 Wybierzmy pewne $v\in V$.
 Istnieją wtedy w~$V$ trzy inne wierzchołki $v_1$, $v_2$, $v_3$ wszystkie sąsiednie z~$v$ albo wszystkie niesąsiednie z~$v$.
 Ponieważ przypadki te są symetryczne, rozważmy pierwszy z~nich.
 Jeśli nie istnieje wśród $v_1$, $v_2$, $v_3$ para wierzchołków sąsiednich, to twierdzenie zachodzi.
 Załóżmy więc, że istnieje krawędź między pewnymi dwoma.
-Wtedy jednak tworzą one wraz z~$v$ graf pełny, a~więc również w~tym przypadku twierdzenie jest prawdziwe.
+Wtedy jednak tworzą one wraz z~$v$ klikę, a~więc również w~tym przypadku twierdzenie jest prawdziwe.
 \end{proof}
 
-Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m,n)$ \cite{ramseynumber}; powyższe twierdzenie pokazuje, że $R(3,3)\le6$.
+Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m,n)$~\cite{ramseynumber}; powyższe twierdzenie pokazuje, że $R(3,3)\le6$.
 
 \subproblem %B-2(c)
 \textsf{\textbf{Twierdzenie.}} \textit{Zbiór wierzchołków dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$ można podzielić na dwa rozłączne zbiory tak, aby dla dowolnego wierzchołka\/ $v\in V$ co najmniej połowa jego sąsiadów nie należała do zbioru, do którego należy\/ $v$.}
 \begin{proof}
-Przypiszmy każdemu wierzchołkowi $v\in V$ wagę $d(v)$ równą liczbie jego sąsiadów spoza jego zbioru pomniejszoną o~liczbę sąsiadów ze zbioru, do którego $v$ należy.
-Dowód sprowadza się do pokazania, że istnieje taki podział zbioru wierzchołków, że $d(v)\ge0$ dla każdego $v\in V$\!.
+Pokażemy, że istnieje taki podział zbioru wierzchołków grafu nieskierowanego $G=\langle V,E\rangle$, że dla każdego $v\in V$\! zachodzi $d(v)\ge0$, gdzie $d(v)$ jest liczbą sąsiadów $v$ z~części podziału niezawierającej $v$ pomniejszoną o~liczbę sąsiadów $v$ z~części podziału zawierającą $v$.
 
-Zdefiniujmy $\sigma=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podziały $V$ na podzbiory $V_1$ i~$V_2$.
+Zdefiniujmy $D=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podział $V=V_1\cup V_2$.
 Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$.
 Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie.
 Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny.
 Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2.
-W~wyniku przeniesienia $v$ wartość $\sigma$ wzrosłaby o~$-4d(v)$.
-Widać więc, że aby zwiększyć $\sigma$, należy przenosić wierzchołki o~ujemnych wagach.
-Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
+W~wyniku przeniesienia $v$ wartość $D$ wzrosłaby o~$-4d(v)$.
+Widać więc, że aby zwiększyć $D$, należy przenosić wierzchołki o~ujemnych wagach.
+Ponieważ $D$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
 \end{proof}
 
 \subproblem %B-2(d)
@@ -49,11 +48,11 @@ Ponieważ $\sigma$ nie może rosnąć w~nieskończoność (jest ograniczone od g
 Oznaczmy przez $n$ liczbę wierzchołków grafu $G$.
 Przypuśćmy, że lemat jest fałszywy, czyli że dla pewnego $n$ istnieje kontrprzykład -- graf $G=\langle V,E\rangle$, w~którym $|V|=n$ i~który spełnia założenie lematu, ale nie jest hamiltonowski.
 Spośród wszystkich takich grafów rozpatrzmy ten, dla którego $|E|$ jest maksymalne.
-Wówczas $G$ musi mieć ścieżkę Hamiltona $\langle v_1,v_2,\dots,v_n\rangle$ -- w~przeciwnym przypadku moglibyśmy uzupełnić go o~pewne brakujące krawędzie, nie naruszając warunku z~założenia lematu i~otrzymując w~wyniku graf o~więcej niż $|E|$ krawędziach.
+Wówczas $G$ musi mieć ścieżkę Hamiltona $\langle v_1,v_2,\dots,v_n\rangle$ -- w~przeciwnym przypadku moglibyśmy dodać do niego brakujące krawędzie, nie naruszając warunku z~założenia lematu i~otrzymując w~wyniku graf o~więcej niż $|E|$ krawędziach.
 Ponieważ $G$ nie ma cyklu Hamiltona, to nie istnieje krawędź łącząca $v_1$ z~$v_n$.
 Z~kolei z~założenia wiemy, że $\deg(v_1)+\deg(v_n)\ge n$.
 
-Można teraz zdefiniować podzbiory $S_1$ i~$S_n$ zbioru $\{2,3,\dots,n\}$ takie, że
+Zdefiniujemy teraz podzbiory $S_1$ i~$S_n$ zbioru $\{2,3,\dots,n\}$ takie, że
 \[
 	S_1 = \bigl\{\,i:\{v_1,v_i\}\in E\,\bigr\} \quad\text{oraz}\quad S_n = \bigl\{\,i:\{v_{i-1},v_n\}\in E\,\bigr\}.
 \]
