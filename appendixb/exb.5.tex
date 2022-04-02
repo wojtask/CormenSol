@@ -66,16 +66,15 @@ Oznaczmy przez $e'$ oraz $i'$, odpowiednio, długość nowej ścieżki zewnętrz
 Zachodzi $e'=e-d+2(d+1)=i+2(n-1)+d+2$ oraz $i'=i+d$, a~zatem $e'=i'+2n$ i~twierdzenie jest spełnione, gdyż teraz w~drzewie jest $n$ węzłów wewnętrznych.
 
 \exercise %B.5-6
-Niech $h$ będzie wysokością drzewa binarnego $T$.
-Zauważmy, że badana suma wag liści drzewa $T$ nie zmniejszy się, jeśli do każdego węzła o~stopniu 1 w~tym drzewie dołączymy jego brakującego syna.
-Nowe węzły są nowymi liśćmi drzewa, zatem powiększają one sumę wag liści.
-Wagą liścia $x$ na głębokości $d$ jest $2^{-d}=2\cdot2^{-(d+1)}$, więc jeśli uczynimy z~$x$ ojca dwóch nowych węzłów, to suma wag liści pozostanie niezmieniona.
-Powtarzając tę czynność dla każdego liścia $x$ (również dla tych, które powstają w~wyniku tej procedury) o~głębokości mniejszej niż $h$, otrzymamy w~końcu pełne drzewo binarne $T'$ o~wysokości $h$.
-Suma wag liści drzewa $T$ nie przekracza sumy wag liści drzewa $T'$, która wynosi
-\[
-	\sum_{x}w(x) = 2^h\cdot2^{-h} = 1,
-\]
-gdzie sumujemy względem wszystkich liści $x$ z~$T'$.
+Podamy dowód nierówności przez indukcję po liczbie węzłów $n$ drzewa.
+W~drzewie pustym ($n=0$) suma wag liści wynosi 0, co oczywiście spełnia nierówność.
+Gdy $n=1$, to drzewo składa się z~jednego liścia o~głębokości 0, więc suma wag liści wynosi $2^{-0}=1$.
+
+Załóżmy, że $n>1$ i~że nierówność zachodzi dla drzew o~co najwyżej $n-1$ węzłach.
+Niech $T$ będzie drzewem binarnym o~$n$ węzłach, a~$T_L$, $T_R$ -- odpowiednio -- jego lewym i~prawym poddrzewem.
+Z~założenia indukcyjnego mamy, że nierówność jest spełniona osobno dla drzew $T_L$ i~$T_R$.
+Głębokości liści drzewa $T$ są o~1 większe od głębokości tych samych liści w~$T_L$ i~$T_R$, stąd wagi liści $T$ są o~połowę mniejsze w~porównaniu z~wagami tych samych liści w~tych poddrzewach.
+Zatem w~drzewie $T$ sumy wag liści zarówno z~$T_L$, jak i~$T_R$, nie przekraczają $1/2$, a~więc łączna suma wag liści w~$T$ nie przekracza 1.
 
 \exercise %B.5-7
 \note{W~tekście zadania występuje błąd.
