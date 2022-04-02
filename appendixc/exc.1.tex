@@ -1,14 +1,14 @@
 \subchapter{Zliczanie}
 
 \exercise %C.1-1
-Załóżmy, że $k=1$, 2, \dots, $n$, to znaczy nie rozważamy podsłów pustych.
-Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje 1, 2, \dots, $k$, drugie -- 2, 3, \dots, $k+1$ itd.
-Ostatnie \singledash{$k$}{podsłowo} leży na pozycjach $n-k+1$, $n-k+2$, \dots, $n$.
+Uwzględnimy tylko \singledash{$k$}{podsłowa} niepuste, a~więc $k\ge1$.
+Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje od 1 do $k$, drugie -- od 2 do $k+1$ itd.
+Ostatnie \singledash{$k$}{podsłowo} kończy się na pozycji $n$, więc musi mieć początek na pozycji $n-k+1$.
 Istnieje zatem $n-k+1$ wszystkich \singledash{$k$}{podsłów} \singledash{$n$}{słowa}.
 
-By obliczyć łączną ilość podsłów \singledash{$n$}{słowa}, należy zsumować liczby \singledash{$k$}{podsłów} po wszystkich $k=1$, 2, \dots, $n$, co daje
+Łączna liczba podsłów \singledash{$n$}{słowa} jest sumą liczb \singledash{$k$}{podsłów} po wszystkich $k=1$, 2, \dots, $n$:
 \[
-	\sum_{k=1}^n(n-k+1) = \sum_{k=1}^nk = \frac{n(n+1)}{2}.
+	\sum_{k=1}^n(n-k+1) = \sum_{k=1}^nk = \frac{n(n+1)}{2} = \binom{n+1}{2}.
 \]
 
 \exercise %C.1-2
