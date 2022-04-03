@@ -101,14 +101,16 @@ Sprawdźmy, która wartość jest większa:
 Mamy więc, że $b_n$ przyjmuje maksimum dla $k=n/2=\lfloor n/2\rfloor=\lceil n/2\rceil$.
 
 \exercise %C.1-11
-Dla liczb naturalnych $n$, $j$, $k$ takich, że $j+k\le n$, sprawdzamy zachowanie stosunku
-\[
-	\frac{\binom{n}{j+k}}{\binom{n}{j}\binom{n-j}{k}} = \frac{n!}{(j+k)!\,(n-j-k)!}\cdot\frac{j!\,(n-j)!}{n!}\cdot\frac{k!\,(n-j-k)!}{(n-j)!} = \frac{j!\,k!}{(j+k)!} = \frac{\prod_{i=1}^ki}{\prod_{i=1}^k(j+i)}.
-\]
-Oczywistym jest, że iloczyn kolejnych liczb całkowitych od 1 do $k$ nie przekracza iloczynu kolejnych liczb całkowitych od $j+1$ do $j+k$, zatem badany stosunek nie przekracza 1.
-Równość zachodzi tylko w~przypadku, gdy $j=0$ lub $k=0$.
+Wpierw uzasadnimy, że $(j+k)!\ge j!\,k!$.
+Wystarczy bowiem podzielić obie strony przez $j!$ i~porównać pozostałe czynniki.
+Równość zachodzi tylko wtedy, gdy $j=0$ lub $k=0$.
+Mamy teraz:
+\begin{align*}
+	\binom{n}{j+k} &= \frac{n!}{(j+k)!\,(n-j-k)!} \\
+	&\le \frac{n!}{j!\,k!\,(n-j-k)!} = \frac{n!}{j!\,(n-j)!}\cdot\frac{(n-j)!}{k!\,(n-j-k)!} = \binom{n}{j}\binom{n-j}{k}.
+\end{align*}
 
-Lewą stronę nierówności (C.9) można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
+Lewą stronę nierówności można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
 W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów.
 Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście.
 Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
