@@ -54,9 +54,9 @@ co także dąży do $1/e$, bo mianownik zbliża się do 1 wraz ze wzrostem $n$.
 
 \exercise %C.4-6
 Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów.
-W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \singledash{$2n$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna.
+W~pierwszym z~nich będziemy traktować wynik każdego doświadczenia jako \singledash{$(2n)$}{elementowy} ciąg orłów i~reszek taki, że jego początkowych $n$ wyrazów oznacza wyniki uzyskane przez profesora Rosencrantza, a~$n$ końcowych -- wyniki profesora Guildensterna.
 Wszystkich takich ciągów jest $2^{2n}=4^n$.
-Niech sukcesem dla profesora Rosencrantza będzie uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki.
+Sukcesem dla profesora Rosencrantza jest uzyskanie orła, a~dla profesora Guildensterna -- uzyskanie reszki.
 Zauważmy, że wyrzucenie równej liczby orłów przez obu profesorów jest równoważne z~osiągnięciem przez nich w~sumie $n$ sukcesów.
 Liczba sposobów, na jakie można to zrobić, jest liczbą możliwości wyboru spośród $2n$ pozycji ciągu $n$ odpowiedzialnych za sukces.
 Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest równe
@@ -64,11 +64,11 @@ Wartość ta wynosi $\binom{2n}{n}$, a~zatem szukane prawdopodobieństwo jest r�
 	\frac{\binom{2n}{n}}{4^n}.
 \]
 
-Drugi sposób polega na zdefiniowaniu $X$ i~$Y$ jako zmiennych losowych przyjmujących liczby orłów uzyskane kolejno przez obu profesorów.
-Obie te zmienne są rozkładu dwumianowego $b(k;n,1/2)$.
-Zdarzenia $X=k$ i~$Y=k$ są niezależne, zatem prawdopodobieństwo uzyskania przez obu profesorów równej ilości orłów wynosi
+W~drugim sposobie zdefiniujemy zmienne losowe $R$ i~$G$ przyjmujące liczby orłów uzyskane przez każdego z~profesorów.
+Zmienne te mają rozkład dwumianowy $b(k;n,1/2)$.
+Zdarzenia $R=k$ i~$G=k$ są niezależne, zatem prawdopodobieństwo uzyskania przez obu profesorów równej ilości orłów wynosi
 \begin{align*}
-	\sum_{k=0}^n\Pr(X=k\;\;\text{i}\;\;Y=k) &= \sum_{k=0}^n\Pr(X=k)\Pr(Y=k) \\
+	\sum_{k=0}^n\Pr(R=k\;\;\text{i}\;\;G=k) &= \sum_{k=0}^n\Pr(R=k)\Pr(G=k) \\
 	&= \sum_{k=0}^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n\binom{n}{k}\biggl(\frac{1}{2}\biggr)^n \\
 	&= \frac{\sum_{k=0}^n\binom{n}{k}^2}{4^n}.
 \end{align*}
