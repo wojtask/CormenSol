@@ -37,15 +37,16 @@ A~zatem, dla odpowiednio dużych $n$, prawdopodobieństwo uzyskania mniej niż $
 
 \exercise %C.5-2
 \begin{proof}[Dowód wniosku C.6]
-	Ponieważ uzyskanie więcej niż $k$ sukcesów w~$n$ próbach jest równoważne uzyskaniu mniej niż $n-k$ porażek, to zachodzi $\Pr(X>k)=\Pr(Y<n-k)$, gdzie $Y$ jest zmienną losową oznaczającą liczbę porażek uzyskanych w~tym doświadczeniu.
-Mamy $np<k<n$, skąd $0<n-k<nq$, a~zatem możemy zastosować tw.\ C.4 dla zmiennej losowej $Y$, zamieniając ze sobą role sukcesu i~porażki, dzięki czemu uzyskujemy żądaną nierówność.
+	Niech $Y$ będzie zmienną losową przyjmującą liczbę porażek uzyskanych w~tym doświadczeniu.
+Zachodzi $\Pr(X>k)=\Pr(Y<n-k)$.
+Mamy $np<k<n$, skąd $0<n-k<nq$, a~zatem możemy zastosować tw.\ C.4 dla zmiennej losowej $Y$, zamieniając ze sobą role sukcesu i~porażki i~uzyskując dzięki temu żądaną nierówność.
 \end{proof}
 
 \begin{proof}[Dowód wniosku C.7]
 	Jeśli $k=n$, to wniosek jest oczywiście prawdziwy, bo szanse uzyskania więcej niż $n$ sukcesów są zerowe.
 Załóżmy więc, że $k<n$.
 Analogicznie do poprzedniego dowodu potraktujmy prawdopodobieństwo uzyskania więcej niż $k$ sukcesów jako prawdopodobieństwo uzyskania mniej niż $n-k$ porażek.
-Ponieważ $(np+n)/2<k<n$, to $0<n-k<nq/2$ i~po zamianie sukcesu z~porażką stosujemy wniosek C.5.
+Ponieważ $(np+n)/2<k<n$, to $0<n-k<nq/2$ i~po zamianie sukcesu z~porażką postulowana nierówność wynika z~wniosku C.5.
 \end{proof}
 
 \exercise %C.5-3
