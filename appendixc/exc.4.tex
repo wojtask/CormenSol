@@ -93,19 +93,19 @@ wynikającą ze wzoru (C.6), otrzymujemy
 \note{Znak nierówności, którą należy udowodnić w~tym zadaniu, powinien być skierowany przeciwnie.}
 
 \noindent Niech $X'$ będzie zmienną losową przyjmującą liczbę sukcesów w~serii prób Bernoulliego, każda o~prawdopodobieństwie sukcesu równym $p$.
-Z~\refExercise{C.4-9}, po zdefiniowaniu $p_i'=p$ dla każdego $i=1$, 2, \dots, $n$, wynika wzór
+Z~\refExercise{C.4-9}, po przyjęciu $p_i'=p$ dla każdego $i=1$, 2, \dots, $n$, wynika wzór
 \[
     \Pr(X\ge k) \le \Pr(X'\ge k).
 \]
-Zmienna losowa $X$ jest rozkładu dwumianowego, zatem powyższą nierówność można zapisać w~postaci
+Zmienna losowa $X'$ jest rozkładu dwumianowego, zatem powyższą nierówność można zapisać w~postaci
 \[
     \Pr(X\ge k) \le \sum_{i=k}^nb(i;n,p),
 \]
 skąd, po wykorzystaniu wzoru (C.35), dostajemy
 \[
-    1-\Pr(X<k) \le 1-\sum_{i=0}^{k-1}b(i;n,p).
+    1-\Pr(X<k) \le 1-\sum_{i=0}^{k-1}b(i;n,p)
 \]
-Aby dokończyć dowód, wystarczy od obu stron nierówności odjąć jedynki i~obustronnie pomnożyć przez $-1$.
+i~po przekształceniach dostajemy szukaną nierówność.
 
 \exercise %C.4-9
 Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych \singledash{$n$}{słów} nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces.
