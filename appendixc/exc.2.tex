@@ -98,34 +98,25 @@ dla każdego $k>2$ i~dowolnych, parami różnych indeksów $1\le i_1$, \dots, $i
 Zdarzenia $A_1$, $A_2$, \dots, $A_n$ są więc parami niezależne, ale żaden ich \singledash{$k$}{podzbiór}, gdzie $k>2$, nie jest wzajemnie niezależny.
 
 \exercise %C.2-8
-Rozważmy pewną grupę 300 osób, z~których 100 jest w~wieku powyżej 50 lat.
-Wśród młodszych osób znajduje się 22 programistów i~15 matematyków, przy czym tylko 5 osób jednocześnie programuje i~zajmuje się matematyką.
-W~skład grupy seniorów wchodzi 8 programistów oraz 9 matematyków, a~3 jednocześnie jest programistami i~matematykami.
-Rys.\ \ref{fig:C.2-8} stanowi ilustrację przedstawionego opisu.
-\begin{figure}[!ht]
-	\centering \input{figc.2-8}
-	\caption{Diagramy Venna ilustrujące rozważaną grupę ludzi.
-Liczby w~poszczególnych obszarach oznaczają liczby osób o~danej profesji w~danej grupie wiekowej.} \label{fig:C.2-8}
-\end{figure}
-
-Wybieramy losowo jedną osobę z~całej grupy.
-Oznaczmy następujące zdarzenia:
+Załóżmy, że dysponujemy dwiema monetami -- pierwsza z~nich jest symetryczna, a~druga zawsze zwraca orła.
+Będziemy losowo wybierać jedną z~monet i~rzucać nią 2 razy.
+Oznaczmy zdarzenia:
 \begin{itemize}
-	\item[$A$] -- wybrano osobę w~wieku powyżej 50 lat,
-	\item[$B$] -- wybrano programistę,
-	\item[$C$] -- wybrano matematyka.
+	\item[$A$] -- w~pierwszym rzucie uzyskano orła,
+	\item[$B$] -- w~drugim rzucie uzyskano orła,
+	\item[$C$] -- wylosowano monetę symetryczną.
 \end{itemize}
 Ich prawdopodobieństwa wynoszą:
 \[
-	\Pr(A) = \frac{1}{3}, \quad \Pr(B) = \frac{1}{10}, \quad \Pr(C) = \frac{2}{25}.
+	\Pr(A) = \Pr(B) = \frac{1}{2}\cdot\frac{1}{2}+\frac{1}{2}\cdot1 = \frac{3}{4}, \quad \Pr(C) = \frac{1}{2}.
 \]
-Zauważmy, że zdarzenia $A$ i~$B$ nie są niezależne, ponieważ
+Zdarzenia $A$ i~$B$ nie są niezależne, ponieważ
 \[
-	\Pr(A\cap B) = \frac{2}{75} \ne \frac{1}{30} = \Pr(A)\Pr(B).
+	\Pr(A\cap B) = \frac{1}{2}\cdot\frac{1}{4}+\frac{1}{2}\cdot1 = \frac{5}{8} \ne \frac{9}{16} = \Pr(A)\Pr(B).
 \]
-Są jednak warunkowo zależne od zdarzenia $C$:
+Są one jednak warunkowo zależne od zdarzenia $C$:
 \[
-	\Pr(A\cap B\mid C) = \frac{1}{8} = \frac{3}{8}\cdot\frac{1}{3} = \Pr(A\mid C)\Pr(B\mid C).
+	\Pr(A\cap B\mid C) = \frac{1}{4} = \frac{1}{2}\cdot\frac{1}{2} = \Pr(A\mid C)\Pr(B\mid C).
 \]
 
 \exercise %C.2-9
