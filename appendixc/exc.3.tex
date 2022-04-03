@@ -83,17 +83,11 @@ Zachodzi więc
 \exercise %C.3-7
 Ustalmy $t\in\mathbb{R}$.
 Niech $A=\{\,s\in S:X(s)\ge t\,\}$ oraz $A'=\{\,s\in S:X'(s)\ge t\,\}$.
-Wprost z~definicji zmiennej losowej mamy
+Z~założenia wynika, że jeśli $X'(s)\ge t$, to $X(s)\ge t$, a~więc $A'\subseteq A$.
+Wprost z~definicji zmiennej losowej mamy:
 \[
-	\Pr(X\ge t) = \sum_{s\in A}\Pr(s) \quad\text{oraz}\quad \Pr(X'\ge t) = \sum_{s\in A'}\Pr(s).
+	\Pr(X\ge t) = \sum_{s\in A}\Pr(s) = \sum_{s\in A'}\Pr(s)+\sum_{s\in A\setminus A'}\Pr(s) \ge \sum_{s\in A'}\Pr(s) = \Pr(X'\ge t).
 \]
-Dowodzimy, że
-\[
-	\sum_{s\in A}\Pr(s) \ge \sum_{s\in A'}\Pr(s).
-\]
-Z~założenia wynika, że jeśli $X'(s)\ge t$, to $X(s)\ge t$, lub równoważnie, $A'\subseteq A$.
-A~zatem suma po lewej stronie powyższej nierówności zawiera o~$|A\setminus A'|$ więcej składników niż suma po prawej stronie.
-Wszystkie te składniki są liczbami nieujemnymi, więc nierówność jest spełniona.
 
 \exercise %C.3-8
 Wariancja zmiennej losowej $X$ jest liczbą nieujemną, a~więc po skorzystaniu ze wzoru (C.26) otrzymujemy, że $\E(X^2)\ge\E^2(X)$.
