@@ -1,19 +1,16 @@
 \subchapter{Prawdopodobieństwo}
 
 \exercise %C.2-1
-Utwórzmy skończoną lub przeliczalną rodzinę zdarzeń $\{C_1,C_2,\dots\}$, gdzie
+Niech $\mathcal{C}=\{C_1,C_2,\dots\}$ będzie skończoną lub przeliczalną rodziną zdarzeń, gdzie
 \[
 	C_i = A_i\setminus\bigcup_{j=1}^{i-1}A_j
 \]
 dla każdego $i=1$, 2, \dots.
-Korzystając z~faktu, że $\bigcup_iA_i = \bigcup_iC_i$ oraz z~tego, że każde dwa zdarzenia z~rodziny $\{C_1,C_2,\dots\}$ wzajemnie się wykluczają, otrzymujemy
+Korzystając z~faktu, że $\bigcup_iA_i = \bigcup_iC_i$ oraz z~tego, że każde dwa zdarzenia z~rodziny $\mathcal{C}$ wzajemnie się wykluczają, otrzymujemy
 \[
-	\Pr\biggl(\bigcup_iA_i\biggr) = \Pr\biggl(\bigcup_iC_i\biggr) = \sum_i\Pr(C_i).
+	\Pr\biggl(\bigcup_iA_i\biggr) = \Pr\biggl(\bigcup_iC_i\biggr) = \sum_i\Pr(C_i) \le \sum_i\Pr(A_i).
 \]
-Ponieważ $\Pr(C_i)\le\Pr(A_i)$ dla każdego $i=1$, 2, \dots, to prawdą jest, że
-\[
-	\Pr\biggl(\bigcup_iA_i\biggr) \le \sum_i\Pr(A_i).
-\]
+Ostatnia nierówność zachodzi, ponieważ $\Pr(C_i)\le\Pr(A_i)$ dla każdego $i=1$, 2, \dots.
 
 \exercise %C.2-2
 Zdefiniujmy \singledash{3}{słowo} nad alfabetem $\{{\scriptstyle\rm O},{\scriptstyle\rm R}\}$ w~następujący sposób.
