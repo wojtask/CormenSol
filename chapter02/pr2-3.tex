@@ -28,13 +28,13 @@ Dowodzimy w~trzech krokach:
 	    y = \sum_{k=0}^{n-(i+1)}a_{k+i+1}x^k = \sum_{k=0}^{-1}a_{k+n+1}x^k = 0,
 	\]
 	co zgadza się z~początkową wartością $y$.
-	\item[Utrzymanie:] Podczas kolejnych iteracji $y$ przyjmuje wartość $a_i+xy$.
+	\item[Utrzymanie:] Podczas każdej następnej iteracji $y$ przyjmuje wartość $a_i+xy$.
 Przy założeniu, że niezmiennik jest spełniony przed bieżącą iteracją, mamy
 	\[
 		y = a_i+\sum_{k=0}^{n-(i+1)}a_{k+i+1}x^{k+1} = a_ix^0+\sum_{k=1}^{n-i}a_{k+i}x^k = \sum_{k=0}^{n-i}a_{k+i}x^k
 	\]
 	i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
-	\item[Zakończenie:] Na końcu mamy $i=-1$, więc
+	\item[Zakończenie:] Tuż po zakończeniu pętli mamy $i=-1$, więc
 	\[
 		y = \sum_{k=0}^{n-(i+1)}a_{k+i+1}x^k = \sum_{k=0}^na_kx^k = P(x),
 	\]
