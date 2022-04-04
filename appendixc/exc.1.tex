@@ -161,18 +161,16 @@ Otrzymujemy ostatecznie
 \]
 
 \exercise %C.1-14
-Obliczamy pierwszą pochodną funkcji entropii $H$:
+Obliczamy pochodne funkcji entropii $H$:
 \begin{align*}
     \frac{dH}{d\lambda}(\lambda) &= -\biggl(\lg\lambda+\lambda\cdot\frac{1}{\lambda\ln2}\biggr)-\biggl(-\lg(1-\lambda)+(1-\lambda)\cdot\frac{-1}{(1-\lambda)\ln2}\biggr) \\[1mm]
 	&= -\lg\lambda-\lg e+\lg(1-\lambda)+\lg e \\[1mm]
-	&= \lg\frac{1-\lambda}{\lambda}.
+	&= \lg\frac{1-\lambda}{\lambda}, \\[1mm]
+	\frac{d^2\!H}{d\lambda^2}(\lambda) &= \frac{\lambda}{(1-\lambda)\ln2}\cdot\frac{-\lambda-(1-\lambda)}{\lambda^2} \\[1mm]
+	&= -\frac{\lg e}{\lambda(1-\lambda)}.
 \end{align*}
-Powyższe wyrażenie przyjmuje wartość 0, gdy $\lambda=1/2$.
-Należy jeszcze zbadać drugą pochodną:
-\[
-	\frac{d^2\!H}{d\lambda^2}(\lambda) = \frac{\lambda}{(1-\lambda)\ln2}\cdot\frac{-\lambda-(1-\lambda)}{\lambda^2} = -\frac{\lg e}{\lambda(1-\lambda)}.
-\]
-W~punkcie $\lambda=1/2$ druga pochodna jest ujemna, czyli binarna funkcja entropii $H$ osiąga maksimum wynoszące $H(1/2)=1$.
+Pierwsza pochodna zeruje się, gdy $\lambda=1/2$.
+Dla $\lambda=1/2$ druga pochodna jest ujemna, czyli binarna funkcja entropii $H$ osiąga maksimum wynoszące $H(1/2)=1$.
 
 \exercise %C.1-15
 Dla $n=0$ równość jest trywialna, przyjmijmy więc, że $n\ge1$.
