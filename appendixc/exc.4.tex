@@ -39,18 +39,16 @@ Stąd dostajemy przybliżenie
 na maksymalną wartość rozkładu dwumianowego $b(k;n,p)$.
 
 \exercise %C.4-5
-Niech $X$ będzie zmienną losową przyjmującą liczbę sukcesów w~$n$ próbach Bernoulliego.
-Wówczas
+Możemy wyznaczyć przybliżenie prawdopodobieństwa nieuzyskania żadnego sukcesu $b(0;n,1/n)$, badając jego graniczną wartość:
 \[
-	\Pr(X=0) = b(0;n,1/n) = \biggl(1-\frac{1}{n}\biggr)^n.
+	\lim_{n\to\infty}b(0;n,1/n) = \lim_{n\to\infty}(1-1/n)^n = 1/e.
 \]
-Wyrażenie to dąży do $1/e$ wraz ze wzrostem $n$, ponieważ dla dowolnej liczby rzeczywistej $a$ ciąg $e_n={(1+a/n)}^n$ ma granicę równą $e^a$ przy $n$ dążącym do $\infty$.
+Skorzystano z~faktu, że dla dowolnej liczby rzeczywistej $a$, $\lim_{n\to\infty}(1+a/n)^n=e^a$.
 
-Analogicznie,
+Przybliżenie prawdopodobieństwa uzyskania dokładnie jednego sukcesu $b(1;n,1/n)$ otrzymujemy analogicznie:
 \[
-	\Pr(X=1) = b(1;n,1/n) = \frac{\bigl(1-\frac{1}{n}\bigr)^n}{1-\frac{1}{n}},
+	\lim_{n\to\infty}b(1;n,1/n) = \lim_{n\to\infty}\frac{\bigl(1-1/n\bigr)^n}{1-1/n} = \frac{1/e}{1} = 1/e.
 \]
-co także dąży do $1/e$, bo mianownik zbliża się do 1 wraz ze wzrostem $n$.
 
 \exercise %C.4-6
 Obliczymy dwoma sposobami prawdopodobieństwo uzyskania przez profesorów równej liczby orłów.
