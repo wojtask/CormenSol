@@ -57,9 +57,9 @@ Wstawienie elementu $A[n]$ w~posortowaną podtablicę $A[1\twodots n-1]$ odbywa 
 
 \exercise %2.3-5
 Algorytm wyszukiwania binarnego przyjmuje na wejściu posortowaną niemalejąco tablicę $A$ oraz szukaną wartość $v$.
-Podczas wyszukiwania $v$ w~podtablicy $A[\id{low}\twodots\id{high}]$, $v$ jest porównywane z~$A[\lfloor(\id{low}+\id{high})/2\rfloor]$, czyli elementem środkowym tego fragmentu i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę tej podtablicy.
+Podczas wyszukiwania $v$ w~podtablicy $A[\id{low}\twodots\id{high}]$, algorytm porównuje $v$ z~$A[\lfloor(\id{low}+\id{high})/2\rfloor]$, czyli elementem środkowym tego fragmentu i~na podstawie wyniku tego porównania eliminuje z~dalszych rozważań odpowiednią połowę tej podtablicy.
 
-Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną algorytmu wyszukiwania binarnego.
+Poniżej przedstawiono wersję rekurencyjną oraz iteracyjną tego algorytmu.
 W~przypadku odnalezienia wartości $v$ w~tablicy $A$ zwracany jest taki indeks $i$, że $A[i]=v$.
 Jeśli elementu $v$ nie ma w~tablicy, to wynikiem procedury jest specjalna wartość \const{nil}.
 Wersja rekurencyjna przyjmuje dodatkowo parametry $\id{low}$ i~$\id{high}$ będące indeksami początku i~końca przetwarzanego fragmentu tablicy $A$.
