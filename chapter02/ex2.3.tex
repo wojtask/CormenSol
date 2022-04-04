@@ -20,30 +20,19 @@ Poniżej przedstawiono implementację procedury \proc{Merge}, w~której nie wyko
 \li	\For $j\gets1$ \To $n_2$
 \li		\Do $R[j]\gets A[q+j]$
 		\End
-\li	$i\gets j\gets1$
-\li $k\gets p$
-\li \While $i\le n_1$ i~$j\le n_2$ \label{li:merge'-while-begin}
-\li		\Do \If $L[i]\le R[j]$
+\li	$i\gets1$
+\li $j\gets1$
+\li \For $k\gets p$ \To $r$
+\li		\Do \If $j>n_2$ lub ($i\le n_1$ i~$L[i]\le R[j]$) \label{li:merge'-condition}
 \li				\Then $A[k]\gets L[i]$
 \li					$i\gets i+1$
 \li				\Else $A[k]\gets R[j]$
 \li					$j\gets j+1$
 				\End
-\li				$k\gets k+1$
-		\End \label{li:merge'-while-end}
-\li \While $i\le n_1$
-\li		\Do $A[k]\gets L[i]$
-\li			$i\gets i+1$
-\li			$k\gets k+1$
-		\End
-\li \While $j\le n_2$
-\li		\Do $A[k]\gets R[j]$
-\li			$j\gets j+1$
-\li			$k\gets k+1$
 		\End
 \end{codebox}
-Po zakończeniu wykonywania pętli \kw{while} z~wierszy \doubledash{\ref{li:merge'-while-begin}}{\ref{li:merge'-while-end}} wszystkie elementy z~co najmniej jednej tablicy $L$ lub $R$ zostały przekopiowane do $A$, więc w~kolejnych dwóch pętlach \kw{while} przeprowadzane jest kopiowanie pozostałej części $L$ lub $R$ na koniec $A$.
-Tylko co najwyżej jedna z~tych pętli wykona swój kod.
+W~porównaniu z~oryginalną procedurą zmieniono warunek, jaki algorytm stosuje podczas wyboru tablicy pomocniczej, $L$ lub $R$, w~celu pobrania elementu do $A[k]$.
+W~powyższej procedurze w~wierszu~\ref{li:merge'-condition}, zamiast polegać na istnieniu wartowników, algorytm sprawdza za pomocą indeksów $i$ i~$j$, czy nie został już osiągnięty koniec tablicy $L$ lub $R$.
 
 \exercise %2.3-3
 Przeprowadzimy dowód przez indukcję względem $k$.
