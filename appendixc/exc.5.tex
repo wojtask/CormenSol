@@ -1,13 +1,24 @@
 \subchapter{Krańce rozkładu dwumianowego}
 
 \exercise %C.5-1
-Zanim przejdziemy do porównywania prawdopodobieństw, udowodnimy pomocniczą nierówność
+Zdefiniujmy $X$ i~$Y$ jako zmienne losowe przyjmujące liczby uzyskanych orłów, odpowiednio, w~pierwszym i~w~drugim doświadczeniu.
+Mamy:
+\begin{align*}
+	\Pr(X=0) &= b(0;n,1/2) = \binom{n}{0}\cdot2^{-0}\cdot2^{-n} = 2^{-n}, \\
+	\Pr(Y<n) &= \sum_{i=0}^{n-1}b(i;4n,1/2) = \sum_{i=0}^{n-1}\binom{4n}{i}\cdot2^{-i}\cdot2^{-(4n-i)} = 2^{-4n}\sum_{i=0}^{n-1}\binom{4n}{i}.
+\end{align*}
+Zbadajmy stosunek tych prawdopodobieństw:
 \[
-    \binom{4n}{n-1} > 8^n
+    Q_n = \frac{\Pr(Y<n)}{\Pr(X=0)} = \frac{2^{-4n}\sum_{i=0}^{n-1}\binom{4n}{i}}{2^{-n}} = 2^{-3n}\sum_{i=0}^{n-1}\binom{4n}{i} \ge 2^{-3n}\binom{4n}{n-1}.
 \]
-dla $n\ge20$, stosując indukcję matematyczną.
-Przypadek bazowy indukcji można zweryfikować, obliczając wartości obu stron nierówności.
-Załóżmy zatem, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
+Dla $n\ge20$ pokażemy przez indukcję, że
+\[
+	\binom{4n}{n-1} > 8^n,
+\]
+dzięki czemu będziemy mieć $Q_n>1$.
+
+Przypadek bazowy indukcji można zweryfikować, obliczając stosunek $\binom{80}{19}/8^{20}\approx1{,}005>1$.
+Załóżmy teraz, że $n>20$ i~skorzystajmy z~\refExercise{C.1-5}, a~następnie trzykrotnie z~\refExercise{C.1-6}:
 \[
     \binom{4n}{n-1} = \frac{4n}{n-1}\cdot\binom{4n-1}{n-2} = \frac{4n}{n-1}\cdot\frac{4n-1}{3n+1}\cdot\frac{4n-2}{3n}\cdot\frac{4n-3}{3n-1}\cdot\binom{4(n-1)}{n-2}.
 \]
@@ -15,25 +26,45 @@ Na mocy założenia indukcyjnego zachodzi
 \[
     \binom{4n}{n-1} > \frac{(4n)(4n-1)(4n-2)(4n-3)}{(n-1)(3n+1)(3n)(3n-1)}\cdot8^{n-1} = \frac{(4n-1)(2n-1)(4n-3)}{3(n-1)(3n+1)(3n-1)}\cdot8^n.
 \]
-Okazuje się, że dla $n\ge2$, a~więc w~szczególności dla $n\ge20$ spełnione jest
-\[
-    \frac{(4n-1)(2n-1)(4n-3)}{3(n-1)(3n+1)(3n-1)} \ge 1,
-\]
-co dowodzi tezy.
-
-Zdefiniujmy teraz $X$ i~$Y$ jako zmienne losowe przyjmujące liczby uzyskanych orłów, odpowiednio, w~pierwszym i~w~drugim doświadczeniu.
-Mamy zatem
+Aby dokończyć dowód, pokażemy, że ułamek w~ostatnim wyrażeniu wynosi co najmniej 1, lub, co równoważne, różnica jego licznika i~mianownika jest nieujemna.
+Pamiętając o~założeniu, że $n>20$, mamy:
 \begin{align*}
-	\Pr(X=0) &= b(0;n,1/2) = \binom{n}{0}\biggl(\frac{1}{2}\biggr)^0\biggl(\frac{1}{2}\biggr)^n = \biggl(\frac{1}{2}\biggr)^n, \\
-	\Pr(Y<n) &= \sum_{i=0}^{n-1}b(i;4n,1/2) = \sum_{i=0}^{n-1}\binom{4n}{i}\biggl(\frac{1}{2}\biggr)^i\biggl(\frac{1}{2}\biggr)^{4n-i} = \biggl(\frac{1}{2}\biggr)^{4n}\sum_{i=0}^{n-1}\binom{4n}{i}.
+	(4n-1)(2n-1)(4n-3)-3(n-1)(3n+1)(3n-1) &= 5n^3-21n^2+25n-6 \\
+	&> 5n^3-21n^2 \\
+	&= (5n-21)n^2 \\
+	&> 79n^2 \\
+	&> 0.
 \end{align*}
-Dzięki uprzednio udowodnionej nierówności pokazujemy, że jeśli $n\ge20$, to
-\[
-    \frac{\Pr(Y<n)}{\Pr(X=0)} = \frac{\bigl(\frac{1}{2}\bigr)^{4n}\sum_{i=0}^{n-1}\binom{4n}{i}}{\bigl(\frac{1}{2}\bigr)^n} = \frac{\sum_{i=0}^{n-1}\binom{4n}{i}}{8^n} > \frac{\binom{4n}{n-1}}{8^n} > 1.
-\]
-Wartości obu prawdopodobieństw w~przypadku, gdy $n<20$, obliczamy bezpośrednio.
-Otrzymujemy ostatecznie, że $\Pr(X=0)>\Pr(Y<n)$, gdy $n\le17$, oraz $\Pr(X=0)<\Pr(Y<n)$ w~przeciwnym przypadku.
-A~zatem, dla odpowiednio dużych $n$, prawdopodobieństwo uzyskania mniej niż $n$ orłów w~$4n$ rzutach monetą jest większe niż nieuzyskanie żadnego orła w~$n$ rzutach.
+
+Wartości ilorazu $Q_n$ dla $n<20$ wyznaczono i~zebrano w~tabeli~\ref{tab:C.5-1}.
+\begin{table}[!ht]
+	\centering
+		\begin{tabular}{r|r}
+			$n$ & $Q_n$ \\ \hline
+			1 & 0{,}125 \\
+			2 & 0{,}141 \\
+			3 & 0{,}154 \\
+			4 & 0{,}170 \\
+			5 & 0{,}189 \\
+			6 & 0{,}212 \\
+			7 & 0{,}238 \\
+			8 & 0{,}269 \\
+			9 & 0{,}305 \\
+			10 & 0{,}348 \\
+			11 & 0{,}397 \\
+			12 & 0{,}455 \\
+			13 & 0{,}522 \\
+			14 & 0{,}601 \\
+			15 & 0{,}692 \\
+			16 & 0{,}798 \\
+			17 & 0{,}922 \\
+			18 & 1{,}067 \\
+			19 & 1{,}236
+		\end{tabular}
+		\caption{Przybliżone wartości stosunku prawdopodobieństw $Q_n=\Pr(Y<n)/\Pr(X=0)$ dla $n<20$.} \label{tab:C.5-1}
+\end{table}
+\noindent Otrzymujemy ostatecznie, że $\Pr(X=0)>\Pr(Y<n)$, gdy $n\le17$, oraz $\Pr(X=0)<\Pr(Y<n)$ w~przeciwnym przypadku.
+A~zatem, dla odpowiednio dużych $n$, prawdopodobieństwo uzyskania mniej niż $n$ orłów w~$4n$ rzutach monetą jest większe od nieuzyskania żadnego orła w~$n$ rzutach.
 
 \exercise %C.5-2
 \begin{proof}[Dowód wniosku C.6]
