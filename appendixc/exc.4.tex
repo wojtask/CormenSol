@@ -106,17 +106,18 @@ skąd, po wykorzystaniu wzoru (C.35), dostajemy
 i~po przekształceniach dostajemy szukaną nierówność.
 
 \exercise %C.4-9
-Niech $S$ będzie przestrzenią zdarzeń złożoną z~wszystkich możliwych $n$\nbhyphen słów nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces.
+Niech $S$ będzie przestrzenią zdarzeń złożoną ze wszystkich możliwych $n$\nbhyphen słów nad alfabetem $\{{\scriptstyle\rm P},{\scriptstyle\rm S}\}$, gdzie ${\scriptstyle\rm P}$ oznacza porażkę, a~${\scriptstyle\rm S}$ -- sukces.
 Ciągowi prób $A$ odpowiada zatem pewne słowo $s\in S$, przy czym $X(s)$ to liczba wystąpień ${\scriptstyle\rm S}$ w~$s$.
-Utwórzmy teraz nowy ciąg prób Bernoulliego $A'$ poprzez doświadczenie na próbach z~ciągu $A$.
-Przez $A_i$ będziemy rozumieć zdarzenie oznaczające wystąpienie sukcesu w~$i$\nbhyphen tej próbie w~ciągu $A$, a~przez $A_i'$ -- zdarzenie oznaczające sukces w~$i$\nbhyphen tej próbie w~ciągu $A'$.
+
+Zobaczymy, jak uzyskać ciąg prób Bernoulliego $A'$ przez wykonanie doświadczeń na próbach z~ciągu $A$.
+Przez $A_i$ oznaczymy zdarzenie polegające na wystąpieniu sukcesu w~$i$\nbhyphen tej próbie ciągu $A$, a~przez $A_i'$ -- analogiczne zdarzenie dla ciągu $A'$.
 Jeśli zachodzi $A_i$, to przyjmiemy, że zachodzi także $A_i'$.
-W~przeciwnym przypadku będziemy generować sukces w~$i$\nbhyphen tej próbie ciągu $A'$ z~pewnym prawdopodobieństwem $r_i$.
-Ze wzoru Bayesa (C.17) wynika, że
+W~przeciwnym przypadku sukces w~$i$\nbhyphen tej próbie ciągu $A'$ będzie generowany z~pewnym prawdopodobieństwem $r_i$.
+Mamy
 \[
-    p_i' = \Pr(A_i') = \Pr(A_i)\Pr(A_i'\mid A_i)+\Pr(\overline{A_i})\Pr(A_i'\mid\overline{A_i}) = p_i\cdot1+(1-p_i)\cdot r_i,
+    p_i' = \Pr(A_i') = \Pr(A_i'\cap A_i)+\Pr(A_i'\cap\overline{A_i}) = p_i+(1-p_i)\cdot r_i,
 \]
-więc
+skąd
 \[
     r_i = \frac{p_i'-p_i}{1-p_i}.
 \]
