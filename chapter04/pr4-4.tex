@@ -115,14 +115,14 @@ Drzewo zostało przedstawione na rys.\ \ref{fig:4-4f}.
 
 Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi.
 Niech $T(1)=1$.
-Ponieważ koszt węzła z~tej gałęzi znajdującego się na \singledash{$i$}{tym} poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$.
-Łącznym kosztem na \singledash{$i$}{tym} poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu \singledash{$h$}{tego}, otrzymujemy oszacowanie rekurencji od dołu:
+Ponieważ koszt węzła z~tej gałęzi znajdującego się na $i$\nbhyphen tym poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$.
+Łącznym kosztem na $i$\nbhyphen tym poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu $h$\nbhyphen tego, otrzymujemy oszacowanie rekurencji od dołu:
 \[
 	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-(7/8)n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
 \]
 
 Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi.
-Węzły te wnoszą koszt równy $n/2^i$ na \singledash{$i$}{tym} poziomie, więc liść znajduje się na poziomie $H=\lg n$.
+Węzły te wnoszą koszt równy $n/2^i$ na $i$\nbhyphen tym poziomie, więc liść znajduje się na poziomie $H=\lg n$.
 Mamy
 \[
 	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-7/8} = O(n),

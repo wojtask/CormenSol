@@ -5,7 +5,7 @@ Rys.\ \ref{fig:2.1-1} przedstawia działanie algorytmu \proc{Insertion-Sort} dla
 \begin{figure}[!ht]
 	\centering \input{fig2.1-1}
 	\caption{Działanie algorytmu \proc{Insertion-Sort} dla tablicy $A=\langle31,41,59,26,41,58\rangle$.
-{\sffamily\bfseries\doubledash{(a)}{(e)}} Iteracje pętli \kw{for} w~wierszach \doubledash{1}{8}.
+{\sffamily\bfseries(a)\nbendash(e)} Iteracje pętli \kw{for} w~wierszach 1\nbendash8.
 {\sffamily\bfseries(f)} Wynikowa posortowana tablica.} \label{fig:2.1-1}
 \end{figure}
 
@@ -32,7 +32,7 @@ Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
 
 Udowodnimy dla powyższej procedury niezmiennik pętli:
 \begin{quote}
-Na początku każdej iteracji pętli \kw{while} w~wierszach \doubledash{\ref{li:linear-search-while-begin}}{\ref{li:linear-search-while-end}} fragment tablicy $A[1\twodots i-1]$ nie zawiera elementu $v$.
+Na początku każdej iteracji pętli \kw{while} w~wierszach \ref{li:linear-search-while-begin}\nbendash\ref{li:linear-search-while-end} fragment tablicy $A[1\twodots i-1]$ nie zawiera elementu $v$.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc fragment $A[1\twodots i-1]$ jest pusty.
@@ -48,8 +48,8 @@ Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A
 W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które są reprezentowane przez tablice bitów w~kolejności od najmniej do najbardziej znaczącego.
 
 \bigskip
-\noindent\textbf{Dane wejściowe:} \singledash{$n$}{elementowe} tablice $A$ i~$B$ zawierające reprezentacje binarne \singledash{$n$}{bitowych} liczb całkowitych nieujemnych $a$ i~$b$.\\
-\textbf{Wynik:} \singledash{$(n+1)$}{elementowa} tablica $C$ zawierająca reprezentację binarną \singledash{$(n+1)$}{bitowej} liczby całkowitej $c$ takiej, że $c=a+b$.
+\noindent\textbf{Dane wejściowe:} $n$\nbhyphen elementowe tablice $A$ i~$B$ zawierające reprezentacje binarne $n$\nbhyphen bitowych liczb całkowitych nieujemnych $a$ i~$b$.\\
+\textbf{Wynik:} $(n+1)$\nbhyphen elementowa tablica $C$ zawierająca reprezentację binarną $(n+1)$\nbhyphen bitowej liczby całkowitej $c$ takiej, że $c=a+b$.
 
 \begin{codebox}
 \Procname{$\proc{Binary-Add}(A,B)$}
@@ -65,5 +65,5 @@ W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które s
 \li	\Return $C$
 \end{codebox}
 
-Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wierszach \doubledash{\ref{li:binary-add-for-begin}}{\ref{li:binary-add-for-end}} procedura dodaje poszczególne bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego.
+Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wierszach \ref{li:binary-add-for-begin}\nbendash\ref{li:binary-add-for-end} procedura dodaje poszczególne bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego.
 W~rzeczywistości przeprowadzane jest dodawanie modulo 2, a~bit przeniesienia jest zapamiętywany na kolejnej pozycji w~tablicy wynikowej i~uczestniczy w~kolejnej iteracji pętli (zakładając, że obecna iteracja nie jest ostatnią).

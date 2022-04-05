@@ -195,15 +195,15 @@ Jesteśmy gotowi do zapisania rekurencyjnej części algorytmu opisanego w~Podr�
     \li         $\proc{B-Tree-Safe-Delete}(y,k)$ \label{li:b-tree-safe-delete-recursive-call-2}
             \End
 \end{codebox}
-Procedura rozpoczyna od wyszukania w~węźle $x$ pozycji $i$ klucza $k$ (linie \doubledash{\ref{li:b-tree-safe-delete-search-begin}}{\ref{li:b-tree-safe-delete-search-end}}).
+Procedura rozpoczyna od wyszukania w~węźle $x$ pozycji $i$ klucza $k$ (linie \ref{li:b-tree-safe-delete-search-begin}\nbendash\ref{li:b-tree-safe-delete-search-end}).
 Jeśli klucz został odnaleziony, czyli $1\le i\le\attribxx{x}{n}$, a~$x$ jest liściem, to w~linii \ref{li:b-tree-safe-delete-remove-from-leaf} realizowany jest krok 1.
-W~wierszach \doubledash{\ref{li:b-tree-safe-delete-remove-predecessor-begin}}{\ref{li:b-tree-safe-delete-remove-predecessor-end}} algorytm znajduje i~usuwa rekurencyjnie poprzednik klucza $k$ w~poddrzewie o~korzeniu w~$y=\attribxx{x}{c_i}$, czyli jednocześnie maksymalny klucz tego poddrzewa (podkrok 2a).
-Analogicznie, w~wierszach \doubledash{\ref{li:b-tree-safe-delete-remove-successor-begin}}{\ref{li:b-tree-safe-delete-remove-successor-end}} w~poddrzewie o~korzeniu w~$z=\attribxx{x}{c_{i+1}}$ jest znajdowany i~usuwany następnik klucza $k$ (podkrok 2b).
+W~wierszach \ref{li:b-tree-safe-delete-remove-predecessor-begin}\nbendash\ref{li:b-tree-safe-delete-remove-predecessor-end} algorytm znajduje i~usuwa rekurencyjnie poprzednik klucza $k$ w~poddrzewie o~korzeniu w~$y=\attribxx{x}{c_i}$, czyli jednocześnie maksymalny klucz tego poddrzewa (podkrok 2a).
+Analogicznie, w~wierszach \ref{li:b-tree-safe-delete-remove-successor-begin}\nbendash\ref{li:b-tree-safe-delete-remove-successor-end} w~poddrzewie o~korzeniu w~$z=\attribxx{x}{c_{i+1}}$ jest znajdowany i~usuwany następnik klucza $k$ (podkrok 2b).
 Implementacja przypadku 2c polega na scaleniu węzłów $y$ i~$z$ dzięki wywołaniu procedury pomocniczej w~linii \ref{li:b-tree-safe-delete-remove-merge-children-1} oraz wywołaniu rekurencyjnym dla scalonego węzła $y$ w~linii \ref{li:b-tree-safe-delete-recursive-call-1}.
 
 Pozostała część algorytmu stanowi implementację kroku 3.
 Sąsiedni bracia $z_L$ i~$z_R$ węzła $y=\attribxx{x}{c_i}$ są wczytywani do pamięci wewnętrznej, przy czym należy pamiętać, że co najwyżej jeden z~tych braci może nie istnieć.
-W~zależności od liczby kluczy znajdujących się w~$y$, $z_L$ i~$z_R$, algorytm wykonuje odpowiednie rotacje (podkrok 3a; wiersze \doubledash{\ref{li:b-tree-safe-delete-rotations-begin}}{\ref{li:b-tree-safe-delete-rotations-end}}) albo scala odpowiednie węzły (podkrok 3b; wiersze \doubledash{\ref{li:b-tree-safe-delete-remove-mergers-begin}}{\ref{li:b-tree-safe-delete-remove-mergers-end}}).
+W~zależności od liczby kluczy znajdujących się w~$y$, $z_L$ i~$z_R$, algorytm wykonuje odpowiednie rotacje (podkrok 3a; wiersze \ref{li:b-tree-safe-delete-rotations-begin}\nbendash\ref{li:b-tree-safe-delete-rotations-end}) albo scala odpowiednie węzły (podkrok 3b; wiersze \ref{li:b-tree-safe-delete-remove-mergers-begin}\nbendash\ref{li:b-tree-safe-delete-remove-mergers-end}).
 W~przypadku, gdy istnieje lewy brat węzła $y$, zostaje on scalony z~$y$, po czym wskaźnik $y$ ustawiany jest na wynikowy węzeł, który to zostanie następnie przekazany do wywołania rekurencyjnego.
 W~razie braku lewego brata, scalany jest $y$ z~jego prawym bratem.
 Wreszcie, w~linii \ref{li:b-tree-safe-delete-recursive-call-2} algorytm zostaje wywołany rekurencyjne dla węzła $y$.

@@ -70,7 +70,7 @@ Aby wyznaczyć rangę klucza $k$ w~drzewie statystyk pozycyjnych $T$ zawierając
 
 \exercise %14.1-5
 Załóżmy, że ranga klucza \attrib{x}{key} wynosi $r$.
-Wystarczy zauważyć, że \singledash{$i$}{ty} następnik węzła $x$ jest węzłem z~kluczem o~randze $r+i$.
+Wystarczy zauważyć, że $i$\nbhyphen ty następnik węzła $x$ jest węzłem z~kluczem o~randze $r+i$.
 Najpierw wyznaczamy więc $r$ w~czasie $O(\lg n)$, wywołując $\proc{OS-Rank}(T,x)$, a~następnie, również w~czasie $O(\lg n)$, szukamy w~$T$ elementu o~randze $r+i$, czyli wykonujemy $\proc{OS-Select}(\attrib{T}{root},r+i)$.
 
 \exercise %14.1-6
@@ -91,7 +91,7 @@ Modyfikacje rang w~przypadku prawej rotacji są analogiczne.
 \exercise %14.1-7
 Niech $A[1\twodots n]$ będzie tablicą zawierającą $n$ różnych liczb.
 Oznaczmy przez $r_i$ rangę elementu $A[i]$ w~podtablicy $A[1\twodots i]$.
-Dla każdego $i=1$, 2, \dots, $n$ element $A[i]$ jest zatem \singledash{$r_i$}{tym} najmniejszym elementem w~podtablicy $A[1\twodots i]$, dlatego z~pozostałymi jej elementami tworzy $i-r_i$ inwersji.
+Dla każdego $i=1$, 2, \dots, $n$ element $A[i]$ jest zatem $r_i$\nbhyphen tym najmniejszym elementem w~podtablicy $A[1\twodots i]$, dlatego z~pozostałymi jej elementami tworzy $i-r_i$ inwersji.
 Sumaryczna liczba inwersji w~tablicy $A$ jest więc równa $\sum_{i=1}^n(i-r_i)$.
 
 Rangi elementów tablicy $A$ możemy wyznaczyć, wstawiając do drzewa statystyk pozycyjnych kolejno, $A[1]$, $A[2]$, \dots, $A[n]$.
@@ -141,5 +141,5 @@ Rozmiar drzewa pozycyjnego $T$ wynosi \attribb{T}{root}{size}, a~do znajdowania 
 \li	\Return \id{intersections}
 \end{codebox}
 
-Zauważmy, że każda z~$n$ etykiet jest wstawiana do $T$ dokładnie raz i~dla każdej z~nich dokładnie raz wykonane zostaną operacje w~wierszach \doubledash{\ref{li:intersecting-chords-count-intersections-begin}}{\ref{li:intersecting-chords-count-intersections-end}}.
+Zauważmy, że każda z~$n$ etykiet jest wstawiana do $T$ dokładnie raz i~dla każdej z~nich dokładnie raz wykonane zostaną operacje w~wierszach \ref{li:intersecting-chords-count-intersections-begin}\nbendash\ref{li:intersecting-chords-count-intersections-end}.
 Ponieważ wszystkie operacje słownikowe, jak również \proc{OS-Rank}, na drzewie pozycyjnym o~$n$ węzłach działają w~czasie $O(\lg n)$, to stąd czasem działania algorytmu jest $O(n\lg n)$.

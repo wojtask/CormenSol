@@ -27,7 +27,7 @@ Dla $i=1$, 2, \dots, $k$ zdefiniujmy jeszcze
 \[
 	C_i = \overline{A_i}\cap\bigcap_{\substack{j=1\\j\ne i}}^kA_j
 \]
-jako zdarzenie polegające na tym, że wśród $k$ osób tylko \singledash{$i$}{ta} obchodzi urodziny dnia $r$.
+jako zdarzenie polegające na tym, że wśród $k$ osób tylko $i$\nbhyphen ta obchodzi urodziny dnia $r$.
 Zachodzi
 \[
 	B_k = \bigcap_{i=1}^kA_i\cup\bigcup_{i=1}^kC_i.
@@ -49,8 +49,8 @@ W~wyniku takich obliczeń można ustalić, że szukaną wartością jest $k=613$
 
 \exercise %5.4-2
 Niech $X$ oznacza liczbę potrzebnych rzutów, zanim w~pewnej urnie znajdą się dwie kule.
-Załóżmy, że po $k$ rzutach ($k=1$, 2, \dots, $b$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po \singledash{$(k+1)$}{szym} rzucie nie będzie kolizji.
-Ponieważ jest zajętych $k$ urn, to \singledash{$(k+1)$}{sza} kula wpada do pustej urny z~prawdopodobieństwem równym
+Załóżmy, że po $k$ rzutach ($k=1$, 2, \dots, $b$) nie było urny z~więcej niż jedną kulą i~obliczmy szanse, że również po $(k+1)$\nbhyphen szym rzucie nie będzie kolizji.
+Ponieważ jest zajętych $k$ urn, to $(k+1)$\nbhyphen sza kula wpada do pustej urny z~prawdopodobieństwem równym
 \[
 	\Pr(X>k+1\mid X>k) = \frac{b-k}{b}.
 \]
@@ -86,7 +86,7 @@ Wystarczy zatem założenie, że zdarzenia te są parami niezależne.
 
 \exercise %5.4-4
 Niech $n$ będzie liczbą dni w~roku.
-Oznaczmy przez $P_1(k,n)$ prawdopodobieństwo tego, że wszystkie osoby z~\singledash{$k$}{osobowej} grupy mają urodziny w~różne dni, a~$P_2(k,n)$ niech będzie prawdopodobieństwem tego, że pewnego dnia w~roku urodziły się dokładnie dwie osoby z~tej grupy.
+Oznaczmy przez $P_1(k,n)$ prawdopodobieństwo tego, że wszystkie osoby z~$k$\nbhyphen osobowej grupy mają urodziny w~różne dni, a~$P_2(k,n)$ niech będzie prawdopodobieństwem tego, że pewnego dnia w~roku urodziły się dokładnie dwie osoby z~tej grupy.
 Szanse na to, aby wśród tych $k$ osób co najmniej troje miało urodziny tego samego dnia, są równe
 \[
 	P(k,n) = 1-(P_1(k,n)+P_2(k,n)).
@@ -113,9 +113,9 @@ Ustalając wartość $n$ na 365, można teraz obliczyć prawdopodobieństwa $P(k
 Okazuje się, że rozwiązaniem jest $k=88$.
 
 \exercise %5.4-5
-Wszystkich możliwych \singledash{$k$}{słów} nad zbiorem \singledash{$n$}{elementowym} jest $n^k$.
-Aby \singledash{$k$}{słowo} było w~istocie \singledash{$k$}{permutacją}, na pierwszy z~jego elementów należy wybrać jeden z~$n$ elementów zbioru, na drugi element jeden z~$n-1$ dotychczas niewybranych itd.
-Istnieje zatem $n(n-1)\dots(n-k+1)$ możliwych \singledash{$k$}{permutacji}, więc prawdopodobieństwo, że dane \singledash{$k$}{słowo} będzie jedną z~nich wynosi
+Wszystkich możliwych $k$\nbhyphen słów nad zbiorem $n$\nbhyphen elementowym jest $n^k$.
+Aby $k$\nbhyphen słowo było w~istocie $k$\nbhyphen permutacją, na pierwszy z~jego elementów należy wybrać jeden z~$n$ elementów zbioru, na drugi element jeden z~$n-1$ dotychczas niewybranych itd.
+Istnieje zatem $n(n-1)\dots(n-k+1)$ możliwych $k$\nbhyphen permutacji, więc prawdopodobieństwo, że dane $k$\nbhyphen słowo będzie jedną z~nich wynosi
 \[
 	\frac{n(n-1)\dots(n-k+1)}{n^k} = \biggl(1-\frac{1}{n}\biggr)\biggl(1-\frac{2}{n}\biggr)\dots\biggl(1-\frac{k-1}{n}\biggr).
 \]
@@ -124,16 +124,16 @@ Problem jest analogiczny do pytania o~prawdopodobieństwo zdarzenia, że wśród
 
 \exercise %5.4-6
 Obliczmy najpierw oczekiwaną liczbę pustych urn.
-Niech $S_i$, dla $i=1$, 2, \dots, $n$, będzie zdarzeniem, że \singledash{$i$}{ta} urna jest pusta po wykonaniu $n$ rzutów.
+Niech $S_i$, dla $i=1$, 2, \dots, $n$, będzie zdarzeniem, że $i$\nbhyphen ta urna jest pusta po wykonaniu $n$ rzutów.
 Definiujemy zmienną losową $X_i=\I(S_i)$ oraz $X=\sum_{i=1}^nX_i$, która oznacza liczbę pustych urn.
 Wtedy
 \[
 	\E(X) = \E\biggl(\sum_{i=1}^nX_i\biggr) = \sum_{i=1}^n\E(X_i) = \sum_{i=1}^n\Pr(S_i).
 \]
 
-Rozważmy teraz \singledash{$i$}{tą} urnę i~potraktujmy każdy rzut kulą jako próbę Bernoulliego, gdzie sukcesem jest trafienie do tej urny.
+Rozważmy teraz $i$\nbhyphen tą urnę i~potraktujmy każdy rzut kulą jako próbę Bernoulliego, gdzie sukcesem jest trafienie do tej urny.
 Mamy zatem $n$ niezależnych prób Bernoulliego, każda z~prawdopodobieństwem sukcesu $p=1/n$.
-Aby \singledash{$i$}{ta} urna pozostała pusta, nie możemy uzyskać żadnego sukcesu, a~zatem korzystając z~rozkładu dwumianowego, dostajemy
+Aby $i$\nbhyphen ta urna pozostała pusta, nie możemy uzyskać żadnego sukcesu, a~zatem korzystając z~rozkładu dwumianowego, dostajemy
 \[
 	\Pr(S_i) = b(0;n,p) = \binom{n}{0}\biggl(\frac{1}{n}\biggr)^0\biggl(1-\frac{1}{n}\biggr)^n = \biggl(1-\frac{1}{n}\biggr)^n
 \]
@@ -143,12 +143,12 @@ oraz
 \]
 
 Wyznaczmy teraz oczekiwaną liczbę urn z~dokładnie jedną kulą.
-W~tym celu, podobnie jak poprzednio, dla $i=1$, 2, \dots, $n$ zdefiniujemy zdarzenie $S_i$, że \singledash{$i$}{ta} urna po wykonaniu $n$ rzutów zawiera dokładnie jedną kulę.
+W~tym celu, podobnie jak poprzednio, dla $i=1$, 2, \dots, $n$ zdefiniujemy zdarzenie $S_i$, że $i$\nbhyphen ta urna po wykonaniu $n$ rzutów zawiera dokładnie jedną kulę.
 Definicje zmiennych losowych $X_i$ oraz $X$ pozostają bez zmian i, tak jak poprzednio, zachodzi
 \[
 	\E(X) = \sum_{i=1}^n\Pr(S_i).
 \]
-Dla analogicznej serii prób Bernoulliego stwierdzamy, że aby \singledash{$i$}{ta} urna zawierała dokładnie jedną kulę, potrzebny jest 1 sukces i~$n-1$ porażek, więc
+Dla analogicznej serii prób Bernoulliego stwierdzamy, że aby $i$\nbhyphen ta urna zawierała dokładnie jedną kulę, potrzebny jest 1 sukces i~$n-1$ porażek, więc
 \[
 	\Pr(S_i) = b(1;n,p) = \binom{n}{1}\biggl(\frac{1}{n}\biggr)^1\biggl(1-\frac{1}{n}\biggr)^{n-1} = \biggl(1-\frac{1}{n}\biggr)^{n-1}
 \]

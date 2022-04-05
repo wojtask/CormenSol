@@ -42,12 +42,12 @@ Pseudokod tej procedury pomocniczej został przedstawiony poniżej.
 Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$.
 Po wykonaniu wiersza \ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$.
 Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$.
-Następnie, w~wierszach \doubledash{\ref{li:fuzzy-partition-q-init}}{\ref{li:fuzzy-partition-for-end}}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy.
+Następnie, w~wierszach \ref{li:fuzzy-partition-q-init}\nbendash\ref{li:fuzzy-partition-for-end}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy.
 W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania.
 Na końcu zwracane są indeksy początku i~końca tego obszaru.
 
 \subproblem %7-6(b)
-Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy \singledash{$n$}{elementowej} w~przypadku średnim wynosi $\Theta(n\lg n)$.
+Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy $n$\nbhyphen elementowej w~przypadku średnim wynosi $\Theta(n\lg n)$.
 Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta.
 Na każdym poziomie rekursji będzie więc sortowany tylko jeden obszar.
 Randomizacja zapewnia, że oczekiwaną pozycją elementu rozdzielającego jest środek podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy.

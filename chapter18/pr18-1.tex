@@ -5,7 +5,7 @@ Każda operacja na stosie w~tej implementacji wymaga stałej liczby dostępów d
 Zatem ciąg $n$ operacji na stosie wymaga $\Theta(n)$ dostępów do dysku i~$\Theta(mn)$ czasu.
 
 \subproblem %18-1(b)
-W~ciągu $n$ operacji \proc{Push}, mniej więcej co \singledash{$m$}{ta} operacja wiąże się ze zmianą strony.
+W~ciągu $n$ operacji \proc{Push}, mniej więcej co $m$\nbhyphen ta operacja wiąże się ze zmianą strony.
 Wynika stąd, że liczba dostępów do dysku wynosi sumarycznie $\Theta(n/m)$.
 Całkowity czas procesora jest sumą czasu spędzonego na samym wstawianiu na stos oraz czasu potrzebnego do wczytywania i~zapisywania strony na dysku, wynosi więc $\Theta(n+m\cdot n/m)=\Theta(n)$.
 

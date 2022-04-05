@@ -6,7 +6,7 @@ Należy jeszcze pokazać, że tablica $A'$ stanowi permutację tablicy $A$.
 \subproblem %2-2(b)
 Niezmiennik wewnętrznej pętli \kw{for}:
 \begin{quote}
-Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{2}{4} najmniejszym elementem podtablicy $A[j\twodots\id{length}[A]]$ jest $A[j]$.
+Przed każdą iteracją pętli \kw{for} w~wierszach 2\nbendash4 najmniejszym elementem podtablicy $A[j\twodots\id{length}[A]]$ jest $A[j]$.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $j=\attrib{A}{length}$, więc $A[j\twodots\attrib{A}{length}]$ zawiera tylko jeden element, który oczywiście jest najmniejszy w~tej podtablicy i~jest nim $A[j]$.
@@ -20,7 +20,7 @@ W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmnie
 \subproblem %2-2(c)
 Niezmiennik zewnętrznej pętli \kw{for}:
 \begin{quote}
-Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{1}{4} podtablica $A[1\twodots i-1]$ zawiera $i-1$ najmniejszych elementów tablicy $A$ uporządkowanych niemalejąco.
+Przed każdą iteracją pętli \kw{for} w~wierszach 1\nbendash4 podtablica $A[1\twodots i-1]$ zawiera $i-1$ najmniejszych elementów tablicy $A$ uporządkowanych niemalejąco.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, czyli podtablica $A[1\twodots i-1]$ jest pusta, a~więc jest trywialnie posortowana.
@@ -34,7 +34,7 @@ Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco
 
 \subproblem %2-2(d)
 Niech $n=\attrib{A}{length}$.
-Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy \doubledash{2}{4} wykonuje $n-i$ iteracji dla każdego $i=1$, 2, \dots, $n$.
+Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy 2\nbendash4 wykonuje $n-i$ iteracji dla każdego $i=1$, 2, \dots, $n$.
 Pesymistyczny czas działania sortowania bąbelkowego wynosi zatem
 \[
 	T(n) = \sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2),

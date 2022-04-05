@@ -6,7 +6,7 @@ Na rys.\ \ref{fig:8.4-1} zostało przedstawione działanie sortowania kubełkowe
 	\centering \input{fig8.4-1}
 	\caption{Działanie procedury \proc{Bucket-Sort} dla tablicy $A=\langle0{,}79$, $0{,}13$, $0{,}16$, $0{,}64$, $0{,}39$, $0{,}20$, $0{,}89$, $0{,}53$,\! $0{,}71$,\! $0{,}42\rangle$.
 {\sffamily\bfseries(a)} Wejściowa tablica $A$.
-{\sffamily\bfseries(b)} Tablica $B$ zawierająca posortowane listy (kubełki) po wykonaniu pętli w~wierszach \doubledash{4}{5}.} \label{fig:8.4-1}
+{\sffamily\bfseries(b)} Tablica $B$ zawierająca posortowane listy (kubełki) po wykonaniu pętli w~wierszach 4\nbendash5.} \label{fig:8.4-1}
 \end{figure}
 
 \exercise %8.4-2
@@ -18,7 +18,7 @@ Aby obliczyć średni czas działania sortowania kubełkowego w~takim wariancie,
 \[
 	\E(T(n)) = \Theta(n)+\sum_{i=0}^{n-1}O(\E(n_i\lg n_i)) \le O(n)+\sum_{i=0}^{n-1}O(\E(n_i^2)) = O(n).
 \]
-Ponadto pętla \kw{for} w~wierszach \doubledash{2}{3} zajmuje czas liniowy, skąd mamy $\E(T(n))=\Omega(n)$.
+Ponadto pętla \kw{for} w~wierszach 2\nbendash3 zajmuje czas liniowy, skąd mamy $\E(T(n))=\Omega(n)$.
 A~zatem oczekiwany czas działania sortowania kubełkowego po modyfikacji pozostaje liniowy.
 
 \exercise %8.4-3
@@ -37,7 +37,7 @@ Dzięki temu punkty będą umieszczane w~poszczególnych kubełkach z~jednakowym
 Łatwo zauważyć, że obszary te będą pierścieniami kołowymi (z~wyjątkiem jednego, który będzie kołem) o~jednakowych powierzchniach równych $\pi/n$.
 Pozostaje tylko wyznaczyć ich promienie.
 
-Ponumerujmy obszary (kubełki) kolejnymi liczbami całkowitymi od 0 do $n-1$ w~kolejności od środka do brzegu koła jednostkowego i~oznaczmy przez $r_j$ długość promienia wewnętrznego pierścienia kołowego stanowiącego \singledash{$j$}{ty} obszar.
+Ponumerujmy obszary (kubełki) kolejnymi liczbami całkowitymi od 0 do $n-1$ w~kolejności od środka do brzegu koła jednostkowego i~oznaczmy przez $r_j$ długość promienia wewnętrznego pierścienia kołowego stanowiącego $j$\nbhyphen ty obszar.
 Obszar zerowy jest kołem o~polu $\pi/n$, więc $r_1=\sqrt{1/n}$.
 Ponieważ suma tego koła z~pierścieniem do niego przylegającym jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$.
 Rozumowanie przeprowadzamy dla pozostałych pierścieni, otrzymując $r_j=\sqrt{j/n}$ dla każdego $j=1$, 2, \dots, $n-1$.

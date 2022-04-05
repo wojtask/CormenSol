@@ -1,15 +1,15 @@
 \problem{Zamortyzowane drzewa zrównoważone} %17-3
 
 \subproblem %17-3(a)
-Węzeł $x$ jest \singledash{$1/2$}{zrównoważony}, gdy klucz w~tym węźle stanowi medianę zbioru kluczy znajdujących się w~poddrzewie o~korzeniu w~$x$.
+Węzeł $x$ jest $1/2$\nbhyphen zrównoważony, gdy klucz w~tym węźle stanowi medianę zbioru kluczy znajdujących się w~poddrzewie o~korzeniu w~$x$.
 W~lewym poddrzewie $x$ znajdują się wtedy klucze na lewo od mediany, a~w~prawym poddrzewie -- klucze na prawo od mediany.
-Aby zrównoważyć całe poddrzewo o~korzeniu w~$x$, należy rekursywnie \singledash{$1/2$}{zrównoważyć} lewe i~prawe poddrzewo węzła $x$.
+Aby zrównoważyć całe poddrzewo o~korzeniu w~$x$, należy rekursywnie $1/2$\nbhyphen zrównoważyć lewe i~prawe poddrzewo węzła $x$.
 Dzięki wykorzystaniu dodatkowej pamięci rzędu $O(\attrib{x}{size})$ można posortować klucze z~poddrzewa o~korzeniu w~$x$, przechodząc je w~porządku inorder.
-Kolejne mediany można wyznaczać wtedy w~czasie $O(1)$ każda i~zbudowanie \singledash{$1/2$}{zrównoważonego} poddrzewa o~korzeniu w~$x$ zajmuje czas $\Theta(\attrib{x}{size})$.
+Kolejne mediany można wyznaczać wtedy w~czasie $O(1)$ każda i~zbudowanie $1/2$\nbhyphen zrównoważonego poddrzewa o~korzeniu w~$x$ zajmuje czas $\Theta(\attrib{x}{size})$.
 
 \subproblem %17-3(b)
 Czas wykonania operacji \proc{Search} w~drzewie wyszukiwań binarnych w~najgorszym przypadku jest rzędu $O(h)$, gdzie $h$ jest wysokością drzewa.
-Pokażemy, że w~drzewie \singledash{$\alpha$}{zrównoważonym} $h=O(\lg n)$.
+Pokażemy, że w~drzewie $\alpha$\nbhyphen zrównoważonym $h=O(\lg n)$.
 Dla dowolnego węzła $x$ w~tym drzewie rozmiar któregokolwiek poddrzewa $x$ jest równy co najwyżej $\alpha\cdot\attrib{x}{size}$.
 Rozmiar pewnego poddrzewa $x$ znajdującego się $d$ poziomów niżej od $x$ wynosi zatem co najwyżej $\alpha^d\cdot\attrib{x}{size}$.
 Jeśli więc jako $x$ przyjmiemy korzeń drzewa, to $\attrib{x}{size}=n$ i~$h$ poziomów niżej od $x$ znajdują się poddrzewa składające się z~co najwyżej jednego węzła.
@@ -20,14 +20,14 @@ Zatem $\alpha^hn\le 1$, skąd
 
 \subproblem %17-3(c)
 Funkcja potencjału dowolnego drzewa $T$ jest oczywiście nieujemna jako suma wartości bezwzględnych.
-Jeśli drzewo $T$ jest \singledash{$1/2$}{zrównoważone}, to dla każdego jego węzła $x$,
+Jeśli drzewo $T$ jest $1/2$\nbhyphen zrównoważone, to dla każdego jego węzła $x$,
 \[
 	\Delta(x) = \bigl|\attribb{x}{left}{size}-\attribb{x}{right}{size}\bigr| = 1.
 \]
 Wówczas suma w~definicji funkcji potencjału składa się z~zerowej liczby składników, a~zatem jest równa 0.
 
 \subproblem %17-3(d)
-Niech $T$ będzie drzewem wyszukiwań binarnych o~$m$ węzłach, dla którego własność \singledash{$\alpha$}{zrównoważenia} jest naruszona w~korzeniu $r=\attrib{T}{root}$ i~bez utraty ogólności przyjmijmy, że to lewe poddrzewo ma zbyt duży rozmiar:
+Niech $T$ będzie drzewem wyszukiwań binarnych o~$m$ węzłach, dla którego własność $\alpha$\nbhyphen zrównoważenia jest naruszona w~korzeniu $r=\attrib{T}{root}$ i~bez utraty ogólności przyjmijmy, że to lewe poddrzewo ma zbyt duży rozmiar:
 \[
 	\attribb{r}{left}{size} > \alpha\cdot\attrib{r}{size} = \alpha m.
 \]
@@ -45,8 +45,8 @@ By za pomocą takiego potencjału przebudować drzewo $T$, musi być spełniony 
 
 \subproblem %17-3(e)
 W~celu wstawienia do drzewa nowego węzła $z$ należy wyszukać odpowiedni liść tego drzewa, który stanie się ojcem $z$.
-Z~punktu (b) wiadomo, że wyszukiwanie w~\singledash{$\alpha$}{zrównoważonym} drzewie wyszukiwań binarnych zabiera czas $O(\lg n)$.
-W~wyniku działania operacji wstawiania zmianie ulegają wartości $\Delta(x)$ dla wszystkich przodków $x$ węzła $z$, co może doprowadzić do stanu, w~którym drzewo nie jest już \singledash{$\alpha$}{zrównoważone}.
+Z~punktu (b) wiadomo, że wyszukiwanie w~$\alpha$\nbhyphen zrównoważonym drzewie wyszukiwań binarnych zabiera czas $O(\lg n)$.
+W~wyniku działania operacji wstawiania zmianie ulegają wartości $\Delta(x)$ dla wszystkich przodków $x$ węzła $z$, co może doprowadzić do stanu, w~którym drzewo nie jest już $\alpha$\nbhyphen zrównoważone.
 Identyczna sytuacja jest skutkiem wykonania operacji usuwania, gdzie $z$ jest faktycznie usuniętym węzłem.
 Zrównoważenie drzewa można przywrócić, równoważąc kolejne niezrównoważone węzły na ścieżce od $z$ aż do korzenia drzewa.
 Z~poprzedniego punktu wiadomo, że zamortyzowany koszt każdej takiej operacji wynosi $O(1)$.

@@ -20,7 +20,7 @@ Na podstawie założenia spełnione są zatem wszystkie nierówności z~następu
 		A[1,n-1]+A[2,n] &\le\,\,\, A[1,n]+A[2,n-1] \\
 	\end{cases}.
 \]
-Dodając stronami nierówności z~tego układu od \singledash{$j$}{tej} do \singledash{$l$}{tej} włącznie, a~następnie redukując powtarzające się składniki, otrzymujemy nierówność $A[1,j]+A[2,l]\le A[1,l]+A[2,j]$ z~tezy twierdzenia.
+Dodając stronami nierówności z~tego układu od $j$\nbhyphen tej do $l$\nbhyphen tej włącznie, a~następnie redukując powtarzające się składniki, otrzymujemy nierówność $A[1,j]+A[2,l]\le A[1,l]+A[2,j]$ z~tezy twierdzenia.
 
 Niech teraz $m>2$.
 Przyjmujemy założenie indukcyjne, że tablica $A$ pozbawiona ostatniego wiersza stanowi tablicę Monge'a.
@@ -66,13 +66,13 @@ Z~drugiej strony $\mu<A[1,j]$ dla każdego $1\le j<f(1)$.
 Dowód kolejnych nierówności przebiega analogicznie.
 
 \subproblem %4-7(d)
-Aby odnaleźć minimum wiersza \singledash{$i$}{tego} (nieparzystego), sprawdzamy indeksy minimów wierszy \singledash{$(i-1)$}{szego} oraz \singledash{$(i+1)$}{szego} (parzystych).
+Aby odnaleźć minimum wiersza $i$\nbhyphen tego (nieparzystego), sprawdzamy indeksy minimów wierszy $(i-1)$\nbhyphen szego oraz $(i+1)$\nbhyphen szego (parzystych).
 Wartości te zostały wyznaczone w~pierwszej części algorytmu.
 Na podstawie poprzedniego punktu mamy, że $f(i-1)\le f(i)\le f(i+1)$, wystarczy więc sprawdzić komórki $A[i,f(i-1)]$, $A[i,f(i-1)+1]$, \dots, $A[i,f(i+1)]$ i~wybrać spośród nich element minimalny.
 Oczywiście nie istnieje wiersz zerowy, dlatego przetwarzając pierwszy wiersz, nie szukamy minimum poprzedniego, ale przyjmujemy dla uproszczenia procedury, że $f(0)=1$.
 Podobny przypadek może się zdarzyć dla ostatniego nieparzystego wiersza, jeśli jest on ostatnim wierszem tablicy -- wtedy wystarczy przyjąć $f(m+1)=n$.
 
-Poszukując minimum wiersza \singledash{$i$}{tego}, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu.
+Poszukując minimum wiersza $i$\nbhyphen tego, sprawdzamy $f(i+1)-f(i-1)+1$ komórek w~tym wierszu.
 Podczas działania procedury w~pesymistycznym przypadku zostanie sprawdzonych
 \begin{align*}
 	\sum_{\substack{1\le i\le m\\2\,\nmid\,i}}(f(i+1)-f(i-1)+1) &= \sum_{k=0}^{\lceil m/2\rceil-1}(f(2k+2)-f(2k)+1) \\[-4mm]
@@ -93,7 +93,7 @@ Na podstawie tego faktu i~oszacowania pokazanego w~poprzednim punkcie formułuje
 	\end{cases}
 \]
 Dla uproszczenia pominiemy sufit w~argumencie rekurencji.
-Na \singledash{$i$}{tym} poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$.
+Na $i$\nbhyphen tym poziomie rekurencja ta wprowadza koszt równy $O(m/2^i+n)$.
 Łatwo zauważyć, że jest $\lg m+1$ poziomów, a~zatem całkowity koszt wynosi:
 \begin{align*}
 	T(m,n) &= \sum_{i=0}^{\lg m-1}O\biggl(\frac{m}{2^i}+n\biggr)+O(n) \\

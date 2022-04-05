@@ -20,10 +20,10 @@ Poniższy algorytm implementuje sortowanie przez wybieranie:
 \end{codebox}
 Zewnętrzna pętla algorytmu zachowuje następujący niezmiennik:
 \begin{quote}
-Na początku każdej iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:selection-sort-for-begin}}{\ref{li:selection-sort-for-end}} podtablica $A[1\twodots j-1]$ jest posortowana niemalejąco i~zawiera $j-1$ najmniejszych elementów znajdujących się początkowo w~tablicy $A$.
+Na początku każdej iteracji pętli \kw{for} w~wierszach \ref{li:selection-sort-for-begin}\nbendash\ref{li:selection-sort-for-end} podtablica $A[1\twodots j-1]$ jest posortowana niemalejąco i~zawiera $j-1$ najmniejszych elementów znajdujących się początkowo w~tablicy $A$.
 \end{quote}
 
-Nie trzeba wykonywać $n$ iteracji pętli \kw{for} z~wierszy \doubledash{\ref{li:selection-sort-for-begin}}{\ref{li:selection-sort-for-end}}, gdyż po jej zakończeniu (po $n-1$ iteracjach) fragment $A[1\twodots n-1]$ zawiera $n-1$ najmniejszych elementów tablicy $A$ w~porządku niemalejącym, zatem element $A[n]$ jest większy lub równy względem każdego elementu z~podtablicy $A[1\twodots n-1]$, a~to oznacza, że cała tablica pozostaje posortowana niemalejąco.
+Nie trzeba wykonywać $n$ iteracji pętli \kw{for} z~wierszy \ref{li:selection-sort-for-begin}\nbendash\ref{li:selection-sort-for-end}, gdyż po jej zakończeniu (po $n-1$ iteracjach) fragment $A[1\twodots n-1]$ zawiera $n-1$ najmniejszych elementów tablicy $A$ w~porządku niemalejącym, zatem element $A[n]$ jest większy lub równy względem każdego elementu z~podtablicy $A[1\twodots n-1]$, a~to oznacza, że cała tablica pozostaje posortowana niemalejąco.
 
 Przeprowadzanych jest $n-1$ iteracji zewnętrznej pętli \kw{for}, a~wewnętrzna pętla \kw{for} iteruje po wszystkich elementach aktualnie nieposortowanego fragmentu tablicy, szukając jego minimalnego elementu.
 Łącznie wykonywanych jest więc

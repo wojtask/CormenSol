@@ -22,11 +22,11 @@ Stąd oczywiście wynika, że algorytm działa w~czasie $O(n)$.
 \subproblem %8-3(b)
 Skorzystajmy z~obserwacji, że jeśli pierwsza litera napisu $x$ jest leksykograficznie mniejsza od pierwszej litery napisu $y$, to $x$ wystąpi w~wynikowej tablicy przed $y$.
 Można zatem sortować napisy przez zliczanie według ich pierwszych liter, a~następnie, w~obrębie każdej grupy napisów o~takiej samej literze początkowej, sortować napisy według ich drugiej litery itd.
-Pamiętajmy jednak, że napisy mają różną długość, dlatego po ich posortowaniu względem \singledash{$i$}{tych} liter, należy wyłączyć z~kolejnej fazy słowa o~dokładnie $i$ literach, umieszczając je w~tablicy wynikowej przed grupą napisów, które będą sortowane w~kolejnej fazie.
+Pamiętajmy jednak, że napisy mają różną długość, dlatego po ich posortowaniu względem $i$\nbhyphen tych liter, należy wyłączyć z~kolejnej fazy słowa o~dokładnie $i$ literach, umieszczając je w~tablicy wynikowej przed grupą napisów, które będą sortowane w~kolejnej fazie.
 
 Zauważmy, że napis $x$ składający się z~$i$ liter będzie brał udział w~co najwyżej $i$ fazach sortowania.
 Niech $m_i$ oznacza liczbę napisów na wejściu posiadających dokładnie $i$ liter.
-Wówczas operacje odpowiedzialne za sortowanie napisów \singledash{$i$}{literowych} wymagają czasu $O(im_i)$.
+Wówczas operacje odpowiedzialne za sortowanie napisów $i$\nbhyphen literowych wymagają czasu $O(im_i)$.
 Korzystając z~faktu, że $\sum_{i=1}^nim_i=n$, otrzymujemy, że czasem działania algorytmu jest
 \[
     \sum_{i=1}^nO(im_i) = O\biggl(\sum_{i=1}^nim_i\biggr) = O(n).

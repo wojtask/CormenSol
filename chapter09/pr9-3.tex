@@ -4,18 +4,18 @@
 \note{W~treści problemu występuje błąd w~sformułowaniu rekurencji\/ $U_i(n)$.
 Wartość\/ $T(n)$ powinna być zwracana dla\/ $i\ge n/2$, a~część rekurencyjna -- dla pozostałych wartości\/ $i$.}
 
-\noindent Jeśli $i\ge n/2$, to w~celu znalezienia \singledash{$i$}{tej} statystyki pozycyjnej tablicy wejściowej wywołujemy algorytm \proc{Select}.
+\noindent Jeśli $i\ge n/2$, to w~celu znalezienia $i$\nbhyphen tej statystyki pozycyjnej tablicy wejściowej wywołujemy algorytm \proc{Select}.
 Stąd $U_i(n)=T(n)$.
 
 Załóżmy teraz, że $i<n/2$ i~że tablicą wejściową jest $A[p\twodots r]$, gdzie $n=r-p+1$.
-Algorytm będzie wyszukiwał \singledash{$i$}{tą} statystykę pozycyjną tablicy wejściowej, przy okazji partycjonując tablicę wokół szukanego elementu.
+Algorytm będzie wyszukiwał $i$\nbhyphen tą statystykę pozycyjną tablicy wejściowej, przy okazji partycjonując tablicę wokół szukanego elementu.
 Niech $m=\lfloor n/2\rfloor$.
 Rozważmy podtablice $L=A[p\twodots p+m-1]$ oraz $R=A[p+m\twodots r]$ tablicy wejściowej.
 Dla każdego $j=0$, 1, \dots, $m-1$ porównamy elementy $A[p+j]$ oraz $A[p+m+j]$ i~ewentualnie zamienimy je, aby zachodziło $A[p+j]>A[p+m+j]$.
-Wywołamy następnie nasz algorytm rekurencyjnie w~celu znalezienia \singledash{$i$}{tego} najmniejszego elementu podtablicy $R$, czego efektem ubocznym będzie podział tej podtablicy względem szukanego elementu.
+Wywołamy następnie nasz algorytm rekurencyjnie w~celu znalezienia $i$\nbhyphen tego najmniejszego elementu podtablicy $R$, czego efektem ubocznym będzie podział tej podtablicy względem szukanego elementu.
 Po powrocie z~wywołania rekurencyjnego podtablica $L$ zostanie podzielona w~analogiczny sposób.
 Dokładniej, dla każdej pary elementów $A[j]$ i~$A[k]$ zamienionych w~wywołaniu rekurencyjnym, gdzie $p+m\le j<k\le r$, zamienione zostaną również elementy $A[j-m]$ i~$A[k-m]$.
-Dzięki temu, po wyznaczeniu \singledash{$i$}{tej} statystyki pozycyjnej podtablicy $R$, fragmenty $A[p\twodots p+i-1]$ oraz $A[p+m\twodots p+m+i-1]$ będą zawierać po $i$ najmniejszych elementów ze swoich podtablic.
+Dzięki temu, po wyznaczeniu $i$\nbhyphen tej statystyki pozycyjnej podtablicy $R$, fragmenty $A[p\twodots p+i-1]$ oraz $A[p+m\twodots p+m+i-1]$ będą zawierać po $i$ najmniejszych elementów ze swoich podtablic.
 Najmniejszy element tablicy wejściowej znajduje się w~którymś z~tych fragmentów, więc wystarczy połączyć je w~tablicę $B[1\twodots2i]$, a~następnie zwrócić $\proc{Select}(B,1,2i,i)$.
 
 Omówimy teraz pokrótce szczegóły implementacyjne.

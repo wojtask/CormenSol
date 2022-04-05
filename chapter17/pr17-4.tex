@@ -16,13 +16,13 @@ W~przypadku 1 procedury \proc{RB-Insert-Fixup} ojciec i~stryj węzła $z$ zmieni
 Liczba czerwonych węzłów w~drzewie zmniejsza się zatem o~1, czyli $\Phi(T')=\Phi(T)-1$.
 
 \subproblem %17-4(d)
-W~liniach \doubledash{1}{16} procedury \proc{RB-Insert} następuje umieszczenie nowego węzła w~drzewie i~pokolorowanie go na czerwono -- rośnie więc o~1 potencjał drzewa.
+W~liniach 1\nbendash16 procedury \proc{RB-Insert} następuje umieszczenie nowego węzła w~drzewie i~pokolorowanie go na czerwono -- rośnie więc o~1 potencjał drzewa.
 Niekończący przypadek 1 procedury \proc{RB-Insert-Fixup} wykonuje 3 zmiany koloru, zmniejszając przy tym potencjał o~1.
 W~każdym z~przypadków kończących (2 i~3) wykonywana jest jedna rotacja, a~potencjał drzewa nie zmienia się.
 Ponadto w~przypadku 3 kolor zmieniają 2 węzły.
 
 \subproblem %17-4(e)
-Zarówno liczba wykonywanych modyfikacji strukturalnych, jak i~różnica potencjału odpowiadająca liniom \doubledash{1}{16} procedury \proc{RB-Insert} oraz kończącym przypadkom \proc{RB-Insert-Fixup}, są rzędu $O(1)$.
+Zarówno liczba wykonywanych modyfikacji strukturalnych, jak i~różnica potencjału odpowiadająca liniom 1\nbendash16 procedury \proc{RB-Insert} oraz kończącym przypadkom \proc{RB-Insert-Fixup}, są rzędu $O(1)$.
 Niekończący przypadek \proc{RB-Insert-Fixup} może powtórzyć się w~jednym wywołaniu $O(\lg n)$ razy, ale zamortyzowana liczba modyfikacji strukturalnych wynosi 0, gdyż obniżeniem potencjału drzewa jesteśmy w~stanie zapłacić za wykonywane wtedy modyfikacje strukturalne.
 W~związku z~tym zamortyzowana liczba modyfikacji strukturalnych przeprowadzanych w~wywołaniu \proc{RB-Insert} wynosi $O(1)$.
 

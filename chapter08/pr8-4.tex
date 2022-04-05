@@ -7,12 +7,12 @@ Po znalezieniu pasującego możemy wyłączyć go z~poszukiwań dla kolejnych cz
 
 \subproblem %8-4(b)
 Ponumerujmy czerwone dzbanki kolejnymi liczbami całkowitymi od 1 do $n$ i~analogicznie dzbanki niebieskie.
-Problem sprowadza się do znalezienia takiej permutacji $\pi$ niebieskich dzbanków, w~której \singledash{$i$}{ty} dzbanek czerwony jest tej samej pojemności, co dzbanek niebieski o~numerze $\pi(i)$.
+Problem sprowadza się do znalezienia takiej permutacji $\pi$ niebieskich dzbanków, w~której $i$\nbhyphen ty dzbanek czerwony jest tej samej pojemności, co dzbanek niebieski o~numerze $\pi(i)$.
 
 Zilustrujemy za pomocą drzewa decyzyjnego działanie algorytmu wyznaczającego tę permutację.
 Każdy węzeł w~tym drzewie będzie odpowiadać porównaniu pewnego dzbanka czerwonego z~pewnym dzbankiem niebieskim.
 Wynikiem każdego takiego porównania jest jedna z~trzech możliwości: dzbanek czerwony ma mniejszą pojemność niż dzbanek niebieski, dzbanek czerwony ma większą pojemność niż dzbanek niebieski albo oba dzbanki mają tę samą pojemność.
-Z~tego powodu drzewo decyzyjne jest drzewem \singledash{3}{arnym} o~$n!$ osiągalnych liściach, bo tyle jest permutacji niebieskich dzbanków.
+Z~tego powodu drzewo decyzyjne jest drzewem 3\nbhyphen arnym o~$n!$ osiągalnych liściach, bo tyle jest permutacji niebieskich dzbanków.
 Wysokość $h$ tego drzewa oznacza pesymistyczną liczbę porównań wykonywanych przez algorytm.
 Każdy węzeł w~tym drzewie ma co najwyżej 3 synów, prawdziwa jest zatem nierówność $3^h\ge n!$, skąd
 \[
@@ -57,16 +57,16 @@ Zwracanym wynikiem jest pozycja elementu rozdzielającego (która jest identyczn
 		\End \label{li:jugs-partition-for1-end}
 \li	zamień $B[i+1]\leftrightarrow B[r]$ \label{li:jugs-partition-first-partition-end}
 \li	$x\gets B[i+1]$
-\li	powtórz kroki z~wierszy \doubledash{\ref{li:jugs-partition-first-partition-begin}}{\ref{li:jugs-partition-first-partition-end}} dla tablicy $R$ \label{li:jugs-partition-second-partition}
+\li	powtórz kroki z~wierszy \ref{li:jugs-partition-first-partition-begin}\nbendash\ref{li:jugs-partition-first-partition-end} dla tablicy $R$ \label{li:jugs-partition-second-partition}
 \li	\Return $i+1$
 \end{codebox}
 
 Procedura wybiera najpierw losowo element rozdzielający $x$ z~tablicy $R[p\twodots r]$.
 Elementy równe $x$ są dla uproszczenia późniejszych kroków przenoszone na ostatnie pozycje swoich tablic.
-Następnie pętla \kw{for} z~wierszy \doubledash{\ref{li:jugs-partition-for1-begin}}{\ref{li:jugs-partition-for1-end}} dokonuje podziału tablicy $B[p\twodots r]$ względem $x$.
+Następnie pętla \kw{for} z~wierszy \ref{li:jugs-partition-for1-begin}\nbendash\ref{li:jugs-partition-for1-end} dokonuje podziału tablicy $B[p\twodots r]$ względem $x$.
 Po zakończeniu pętli $B[r]=x$, podtablica $B[p\twodots i]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r-1]$ -- elementy większe niż $x$.
 Wystarczy jeszcze zamienić element rozdzielający z~$B[i+1]$, aby zakończyć podział tablicy $B$.
-W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \doubledash{\ref{li:jugs-partition-first-partition-begin}}{\ref{li:jugs-partition-first-partition-end}}, uprzednio nadając zmiennej $x$ wartość dotychczasowego elementu rozdzielającego, ale pobranego z~tablicy $B$.
+W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \ref{li:jugs-partition-first-partition-begin}\nbendash\ref{li:jugs-partition-first-partition-end}, uprzednio nadając zmiennej $x$ wartość dotychczasowego elementu rozdzielającego, ale pobranego z~tablicy $B$.
 
 Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Match} wynosi $O(n\lg n)$.
 Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort.

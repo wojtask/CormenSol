@@ -116,7 +116,7 @@ W~tym samym kroku wyznaczane jest $m$ -- rozmiar listy $L$.
 
 Kolejne przejście po liście to właściwe kompaktowanie.
 Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo.
-Pętla \kw{while} w~wierszach \doubledash{\ref{li:compactify-list-while2-begin}}{\ref{li:compactify-list-while2-end}} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu \ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
+Pętla \kw{while} w~wierszach \ref{li:compactify-list-while2-begin}\nbendash\ref{li:compactify-list-while2-end} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu \ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
 Należy jeszcze uaktualnić pola \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \ref{li:compactify-list-update-prev-next} i~\ref{li:compactify-list-update-next-prev}), pole \id{next} poprzednika $x$ na liście $L$ (wiersz \ref{li:compactify-list-update-predecessor-next}), jak również wskaźniki $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \ref{li:compactify-free-list-head-update} oraz \ref{li:compactify-list-head-update}).
 
 Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu \ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.

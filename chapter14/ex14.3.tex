@@ -40,7 +40,7 @@ Jeśli przedział taki istnieje, czyli $x\ne\attrib{T}{nil}$, to począwszy od $
 
 Udowodnimy następujący niezmiennik pętli \kw{while}:
 \begin{quote}
-Przed każdą iteracją pętli \kw{while} w~wierszach \doubledash{\ref{li:min-interval-search-while-begin}}{\ref{li:min-interval-search-while-end}}, jeśli w~drzewie $T$ znajduje się przedział zachodzący na $i$ o~lewym końcu mniejszym niż \attribb{x}{int}{low}, to należy on do poddrzewa o~korzeniu w~$y$.
+Przed każdą iteracją pętli \kw{while} w~wierszach \ref{li:min-interval-search-while-begin}\nbendash\ref{li:min-interval-search-while-end}, jeśli w~drzewie $T$ znajduje się przedział zachodzący na $i$ o~lewym końcu mniejszym niż \attribb{x}{int}{low}, to należy on do poddrzewa o~korzeniu w~$y$.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją pętli \kw{while} $y=\attrib{x}{left}$.
@@ -51,7 +51,7 @@ Jeśli w~linii \ref{li:min-interval-search-overlap-test} przedział $i$ zachodzi
 Niezmiennik pozostaje spełniony, bo jeśli w~drzewie $T$ istnieje przedział zachodzący na $i$ o~mniejszym lewym końcu od nowej wartości $x$, to należy on do lewego poddrzewa $x$, a~w~wierszu \ref{li:min-interval-search-y-modification} $y$ jest aktualizowane na \attrib{x}{left}.
 
 Załóżmy teraz, że przedział $i$ nie zachodzi na \attrib{y}{int}.
-Zauważmy, że wiersze \doubledash{\ref{li:min-interval-search-no-overlap-begin}}{\ref{li:min-interval-search-no-overlap-end}} stanowią ciało pętli \kw{while} z~procedury \proc{Interval-Search} z~$y$ w~miejscu $x$.
+Zauważmy, że wiersze \ref{li:min-interval-search-no-overlap-begin}\nbendash\ref{li:min-interval-search-no-overlap-end} stanowią ciało pętli \kw{while} z~procedury \proc{Interval-Search} z~$y$ w~miejscu $x$.
 Wykorzystując niezmiennik pętli \kw{while} tamtej procedury do obecnej iteracji pętli w~procedurze \proc{Min-Interval-Search} otrzymujemy, że jeśli przed aktualizacją $y$ poddrzewo o~korzeniu $y$ zawierało przedział zachodzący na $i$, to zawiera go też poddrzewo o~korzeniu w~węźle wskazywanym przez nową wartość wskaźnika $y$.
 Niezmiennik jest więc zachowany, gdyż jak zobaczyliśmy wcześniej, $y$ znajduje się zawsze w~lewym poddrzewie $x$.
 	\item[Zakończenie:] Pętla kończy działanie, gdy $y=\attrib{T}{nil}$.

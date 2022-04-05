@@ -14,7 +14,7 @@ Oto zmodyfikowana procedura \proc{Randomize-In-Place}:
 Treść niezmiennika pozostaje taka sama (z~wyjątkiem fragmentu, który podaje linie kodu zawierające ciało pętli).
 Modyfikacji wymaga jedynie dowód jego pierwszej własności.
 \begin{description}
-	\item[Inicjowanie:] Gdy $i=2$, niezmiennik pętli mówi, że dla każdej \singledash{1}{permutacji} fragment tablicy $A[1\twodots1]$ zawiera tę permutację z~prawdopodobieństwem $(n-1)!/n!=1/n$.
+	\item[Inicjowanie:] Gdy $i=2$, niezmiennik pętli mówi, że dla każdej 1\nbhyphen permutacji fragment tablicy $A[1\twodots1]$ zawiera tę permutację z~prawdopodobieństwem $(n-1)!/n!=1/n$.
 Podtablica $A[1\twodots1]$ stanowi tylko jeden element $A[1]$, który z~prawdopodobieństwem $1/n$ jest pewnym ustalonym elementem spośród $n$ elementów tablicy.
 A~więc niezmiennik jest spełniony przed pierwszą iteracją.
 \end{description}
@@ -56,7 +56,7 @@ Ponieważ nie jest zmieniana wzajemna kolejność elementów, to nie każdą per
 \exercise %5.3-5
 Spróbujmy skonstruować tablicę $P$, w~której wszystkie elementy są różne.
 Na pierwszy element tej tablicy możemy wybrać jedną z~$n^3$ liczb, drugi element może przyjąć jedną z~$n^3-1$ pozostałych wartości, trzeci -- jedną z~$n^3-2$ pozostałych itd.
-Ogólnie, \singledash{$i$}{ty} z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach.
+Ogólnie, $i$\nbhyphen ty z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach.
 A~zatem prawdopodobieństwo tego, że wszystkie elementy tablicy $P$ są różne, wynosi
 \[
 	\prod_{i=1}^n\frac{n^3-i+1}{n^3} = \prod_{i=0}^{n-1}\frac{n^3-i}{n^3} = \prod_{i=0}^{n-1}\biggl(1-\frac{i}{n^3}\biggr) > \prod_{i=0}^{n-1}\biggl(1-\frac{n}{n^3}\biggr) = \biggl(1-\frac{1}{n^2}\biggr)^n.
@@ -65,7 +65,7 @@ Wykorzystując teraz fakt, że ciąg $e_n={(1-1/n)}^n$ jest rosnący, otrzymujem
 \[
 	\biggl(1-\frac{1}{n^2}\biggr)^{n^2} \ge \biggl(1-\frac{1}{n}\biggr)^n
 \]
-i~po zastosowaniu pierwiastka \singledash{$n$}{tego} stopnia do obu stron nierówności otrzymujemy żądany wynik.
+i~po zastosowaniu pierwiastka $n$\nbhyphen tego stopnia do obu stron nierówności otrzymujemy żądany wynik.
 
 \exercise %5.3-6
 Gdy dwa priorytety powtarzają się, czyli $P[i]=P[j]$ dla pewnych $i\ne j$, to deterministyczny algorytm sortujący szereguje odpowiadające im elementy $A[i]$ oraz $A[j]$ zawsze w~tej samej kolejności.

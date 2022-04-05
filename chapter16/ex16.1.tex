@@ -25,7 +25,7 @@ W~poniższym algorytmie przyjmujemy, że zajęcia zostały uporządkowane niemal
 \li	\Return $A_{0,n+1}$
 \end{codebox}
 Algorytm oblicza wartości $c[i,j]$ oraz konstruuje zbiory $A_{i,j}$ dla $0\le i<j\le n+1$.
-W~pierwszej iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:dynamic-activity-selector-main-loop-begin}}{\ref{li:dynamic-activity-selector-main-loop-end}} dla $i=0$, 1, \dots, $n$ za pomocą równania (16.3) wyznaczane są wartości $c[i,i+1]$, a~na podstawie wzoru (16.2) zbiory $A_{i,i+1}$, czyli rozwiązywane są podproblemy składające się z~dokładnie dwóch zajęć.
+W~pierwszej iteracji pętli \kw{for} w~wierszach \ref{li:dynamic-activity-selector-main-loop-begin}\nbendash\ref{li:dynamic-activity-selector-main-loop-end} dla $i=0$, 1, \dots, $n$ za pomocą równania (16.3) wyznaczane są wartości $c[i,i+1]$, a~na podstawie wzoru (16.2) zbiory $A_{i,i+1}$, czyli rozwiązywane są podproblemy składające się z~dokładnie dwóch zajęć.
 W~kolejnych iteracjach wyznaczane są rozwiązania podproblemów z~coraz większą ilością zajęć.
 Zwracanym wynikiem jest najliczniejszy zbiór zajęć stanowiący rozwiązanie podproblemu $S_{0,n+1}=S$.
 
@@ -79,7 +79,7 @@ Jeśli kolejnym napotkanym zdarzeniem jest rozpoczęcie pewnych zajęć $a_i$, t
 Gdy z~kolei napotkamy zakończenie pewnych zajęć $a_j$, to w~zbiorze $B$ należy odszukać jedyną salę zajmowaną przez $a_j$, a~następnie umieścić ją na stosie $F$.
 
 Wykorzystanie stosu do przechowywania wolnych sal sprawia, że użyjemy ich tylko tyle, ile potrzeba.
-Załóżmy, że w~trakcie działania algorytmu największym rozmiarem zbioru $B$ jest $m$ i~niech $a_k$ będą pierwszymi zajęciami przypisanymi do \singledash{$m$}{tej} sali.
+Załóżmy, że w~trakcie działania algorytmu największym rozmiarem zbioru $B$ jest $m$ i~niech $a_k$ będą pierwszymi zajęciami przypisanymi do $m$\nbhyphen tej sali.
 Powodem, dla którego zajęcia $a_k$ zajęły tę salę, jest to, że pozostałe $m-1$ sal było zajętych w~chwili $s_k$, co oznacza, że w~chwili tej odbywa się jednocześnie $m$ zajęć.
 Stąd w~każdym przydziale zajęć do sal musi być użytych co najmniej $m$ sal, więc przydział zwracany przez nasz algorytm jest optymalny.
 

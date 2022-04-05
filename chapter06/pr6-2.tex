@@ -1,8 +1,8 @@
 \problem{Analiza kopców rzędu $d$} %6-2
 
 \subproblem %6-2(a)
-\singledash{$d$}{kopiec} będziemy reprezentować w~tablicy w~następujący sposób.
-Podobnie jak w~reprezentacji tablicowej kopców binarnych tablica $A$ reprezentująca \singledash{$d$}{kopiec} będzie mieć atrybuty \attrib{A}{length} oraz \attrib{A}{heap-size}.
+$d$\nbhyphen kopiec będziemy reprezentować w~tablicy w~następujący sposób.
+Podobnie jak w~reprezentacji tablicowej kopców binarnych tablica $A$ reprezentująca $d$\nbhyphen kopiec będzie mieć atrybuty \attrib{A}{length} oraz \attrib{A}{heap-size}.
 Na pierwszej pozycji tablicy znajdzie się korzeń kopca, a~pozycje $2\twodots d+1$ będą zajmowane przez $d$ synów korzenia.
 Synowie pierwszego z~lewej syna korzenia zajmą pozycje $d+2\twodots2d+1$, synowie drugiego od lewej syna korzenia -- pozycje $2d+2\twodots3d+1$ itd.
 Ogólnie, mając dany indeks węzła $i$, można wyznaczyć indeks jego ojca, korzystając ze wzoru $\lceil(i-1)/d\rceil$.
@@ -12,7 +12,7 @@ Uogólnienie procedury \proc{Parent} dla kopca rzędu $d$ wygląda zatem następ
 \zi	\Return $\lceil(i-1)/d\rceil$
 \end{codebox}
 
-Łatwo pokazać, że indeks \singledash{$k$}{tego} od lewej syna węzła o~indeksie $i$, gdzie $k=1$, 2, \dots, $d$, jest opisany wzorem $d(i-1)+k+1$.
+Łatwo pokazać, że indeks $k$\nbhyphen tego od lewej syna węzła o~indeksie $i$, gdzie $k=1$, 2, \dots, $d$, jest opisany wzorem $d(i-1)+k+1$.
 Poniższa procedura stanowi uogólnienie procedur \proc{Left} i~\proc{Right} dla kopca rzędu $d$ -- w~porównaniu do nich przyjmuje dodatkowy parametr $k$ oznaczający numer szukanego syna węzła $i$.
 \begin{codebox}
 \Procname{$\proc{Multiary-Child}(d,i,k)$}
@@ -23,9 +23,9 @@ Można sprawdzić, że zachodzi $\proc{Multiary-Parent}(d,\proc{Multiary-Child}(
 
 \subproblem %6-2(b)
 Uogólnimy rozumowanie z~\refExercise{6.1-1} na kopce rzędu $d$.
-Potraktujmy taki kopiec jak drzewo \singledash{$d$}{arne} o~wysokości $h$ i~$n$ węzłach.
-Na \singledash{$i$}{tym} poziomie tego drzewa, gdzie $i=0$, 1, \dots, $h-1$, znajduje się $d^i$ węzłów.
-Najniższy, \singledash{$h$}{ty} poziom, może zawierać od 1 do $d^h$ węzłów.
+Potraktujmy taki kopiec jak drzewo $d$\nbhyphen arne o~wysokości $h$ i~$n$ węzłach.
+Na $i$\nbhyphen tym poziomie tego drzewa, gdzie $i=0$, 1, \dots, $h-1$, znajduje się $d^i$ węzłów.
+Najniższy, $h$\nbhyphen ty poziom, może zawierać od 1 do $d^h$ węzłów.
 Mamy zatem
 \[
     \sum_{i=0}^{h-1}d^i+1 \le n \le \sum_{i=0}^hd^i.
@@ -55,18 +55,18 @@ W~tym celu stosujemy pętlę przeglądającą wszystkich synów bieżącego węz
 \li			$\proc{Multiary-Max-Heapify}(A,d,\id{largest})$
 		\End
 \end{codebox}
-Zauważmy, że podczas wykonywania pętli \kw{while} w~wierszach \doubledash{\ref{li:multiary-max-heapify-while-begin}}{\ref{li:multiary-max-heapify-while-end}} zmienna $k$ może przyjąć wartość $d+1$ i~wówczas w~wierszu \ref{li:multiary-max-heapify-child} zostaje wyznaczony indeks nieistniejącego, \singledash{$(d+1)$}{szego} syna węzła $i$.
+Zauważmy, że podczas wykonywania pętli \kw{while} w~wierszach \ref{li:multiary-max-heapify-while-begin}\nbendash\ref{li:multiary-max-heapify-while-end} zmienna $k$ może przyjąć wartość $d+1$ i~wówczas w~wierszu \ref{li:multiary-max-heapify-child} zostaje wyznaczony indeks nieistniejącego, $(d+1)$\nbhyphen szego syna węzła $i$.
 Jednak wartości tej nigdzie później nie wykorzystujemy, ponieważ następną operacją jest przerwanie pętli \kw{while}.
 
 Na każdym poziomie rekursji (z~wyjątkiem być może ostatniego) wykonywanych jest $\Theta(d)$ operacji.
 Na mocy poprzedniego punktu mamy $\Theta(\log_dn)$ wywołań rekurencyjnych, a~zatem czasem działania powyższej procedury jest $\Theta(d\log_dn)$.
 
-Procedura \proc{Multiary-Heap-Extract-Max}, która implementuje operację \proc{Extract-Max} dla \singledash{$d$}{kopca}, przyjmuje jako parametry kopiec $A$ oraz jego rząd $d$.
+Procedura \proc{Multiary-Heap-Extract-Max}, która implementuje operację \proc{Extract-Max} dla $d$\nbhyphen kopca, przyjmuje jako parametry kopiec $A$ oraz jego rząd $d$.
 Działa ona identyczne jak operacja \proc{Extract-Max} dla kopca binarnego, jednak w~wierszu 6 zamiast procedury \proc{Max-Heapify} wywołuje procedurę \proc{Multiary-Max-Heapify} przedstawioną powyżej.
 Czas działania tej operacji wynosi $\Theta(d\log_dn)$.
 
 \subproblem %6-2(d)
-Procedura \proc{Multiary-Max-Heap-Insert} implementująca operację \proc{Insert} dla \singledash{$d$}{kopca} przyjmuje na wejściu kopiec $A$, rząd kopca $d$ oraz wartość \id{key}, która będzie wstawiana do $A$.
+Procedura \proc{Multiary-Max-Heap-Insert} implementująca operację \proc{Insert} dla $d$\nbhyphen kopca przyjmuje na wejściu kopiec $A$, rząd kopca $d$ oraz wartość \id{key}, która będzie wstawiana do $A$.
 Jej działanie jest analogiczne do działania procedury wstawiania węzła do kopca binarnego.
 Jedyną różnicą jest wiersz \ref{li:multiary-max-heap-insert-increase-key}, który zamiast \proc{Heap-Increase-Key} zawiera analogiczne wywołanie procedury \proc{Multiary-Heap-Increase-Key} zwiększającej wartość węzła w~kopcu rzędu $d$.
 \begin{codebox}
@@ -76,11 +76,11 @@ Jedyną różnicą jest wiersz \ref{li:multiary-max-heap-insert-increase-key}, k
 \li	$\proc{Multiary-Heap-Increase-Key}(A,d,\attrib{A}{heap-size},\id{key})$ \label{li:multiary-max-heap-insert-increase-key}
 \end{codebox}
 
-Czas działania operacji \proc{Insert} dla \singledash{$d$}{kopca} jest tego samego rzędu co czas działania wywołania z~wiersza 3.
+Czas działania operacji \proc{Insert} dla $d$\nbhyphen kopca jest tego samego rzędu co czas działania wywołania z~wiersza 3.
 Implementacja wywoływanej procedury \proc{Multiary-Heap-Increase-Key} i~analiza jej czasu działania zostały opisane w~następnym punkcie.
 
 \subproblem %6-2(e)
-Implementacja tej operacji dla \singledash{$d$}{kopca} jest analogiczna do jej implementacji dla kopca binarnego.
+Implementacja tej operacji dla $d$\nbhyphen kopca jest analogiczna do jej implementacji dla kopca binarnego.
 Jednak zamiast sprawdzania poprawności parametru $k$, do $A[i]$ przypisujemy natychmiast odpowiednią wartość.
 \begin{codebox}
 \Procname{$\proc{Multiary-Heap-Increase-Key}(A,d,i,k)$}

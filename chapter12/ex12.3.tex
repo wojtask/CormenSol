@@ -32,7 +32,7 @@ Czynność tę wykonuje poniższy pseudokod, który powinien być wywoływany, a
 Podczas wstawiania do drzewa nowego węzła $z$ o~kluczu $k$ pokonana zostanie ścieżka od korzenia w~dół drzewa w~celu odnalezienia liścia, który stanie się ojcem węzła $z$.
 Z~kolei wyszukiwanie węzła o~kluczu $k$ wiąże się z~przejściem po podobnej ścieżce w~celu jego odnalezienia w~drzewie.
 Porównajmy instrukcje odpowiedzialne za poruszanie się po tych ścieżkach w~\proc{Tree-Insert} oraz w~iteracyjnej wersji wyszukiwania, \proc{Iterative-Tree-Search}.
-W~pierwszej procedurze są to wiersze \doubledash{3}{7}, a~w~drugiej -- wiersze \doubledash{1}{4}.
+W~pierwszej procedurze są to wiersze 3\nbendash7, a~w~drugiej -- wiersze 1\nbendash4.
 W~\proc{Tree-Insert} obecność linii 4 nie wpływa na wybór ścieżki, a~$\attrib{z}{key}=k$, więc $\attrib{x}{key}$ w~obu procedurach porównywane jest z~tą samą wartością.
 Ostatnią różnicą jest występowanie w~\proc{Iterative-Tree-Search} dodatkowego warunku $k\ne\attrib{x}{key}$ w~pętli \kw{while}.
 Z~założenia o~unikalności kluczy w~drzewie wnioskujemy, że warunek ten będzie prawdziwy dla każdego węzła na ścieżce, zanim osiągnięty zostanie szukany węzeł.

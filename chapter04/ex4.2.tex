@@ -7,8 +7,8 @@ Dokonamy pewnego uproszczenia, pomijając podłogę w~argumencie rekurencji i~ro
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=3T(n/2)+n$.} \label{fig:4.2-1}
 \end{figure}
 Drzewo tej rekursji przedstawione na rys.\ \ref{fig:4.2-1} ma wysokość równą $\lg n$, czyli jest w~nim $\lg n+1$ poziomów.
-Na \singledash{$i$}{tym} poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści.
-Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na \singledash{$i$}{tej} głębokości jest równy $(3/2)^in$.
+Na $i$\nbhyphen tym poziomie znajduje się $3^i$ węzłów, zatem jest $n^{\lg3}$ liści.
+Koszt węzła na poziomie $i$ wynosi $n/2^i$, skąd wynika, że łączny koszt wszystkich węzłów na $i$\nbhyphen tej głębokości jest równy $(3/2)^in$.
 Przyjmujemy, że $T(1)=1$, a~więc na ostatnim poziomie jest $\Theta(n^{\lg3})$.
 Na podstawie tych wartości rozwiązujemy rekurencję:
 \begin{align*}
@@ -50,7 +50,7 @@ To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\
 Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym.
 Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$.
 Liść tej gałęzi znajduje się na poziomie $h=\log_3n$.
-Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej \singledash{$h$}{tego}, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$.
+Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej $h$\nbhyphen tego, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$.
 Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
 
 \exercise %4.2-3
@@ -59,7 +59,7 @@ W~metodzie drzewa rekursji dla uproszczenia pominiemy branie części całkowity
 	\centering \input{fig4.2-3}
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=4T(n/2)+cn$.} \label{fig:4.2-3}
 \end{figure}
-W~drzewie rekursji z~rys.\ \ref{fig:4.2-3} na \singledash{$i$}{tym} poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$.
+W~drzewie rekursji z~rys.\ \ref{fig:4.2-3} na $i$\nbhyphen tym poziomie jest $4^i$ węzłów, z~których każdy wnosi koszt równy $cn/2^i$.
 Stąd kosztem całego poziomu jest $2^icn$.
 Współczynnik przy $n$ w~koszcie węzła maleje dwukrotnie wraz z~głębokością drzewa, więc jego wysokością jest $\lg n$.
 Wnioskujemy zatem, że liczbą liści w~tym drzewie jest $4^{\lg n}=n^2$ i~że koszt ostatniego poziomu wynosi $\Theta(n^2)$.
@@ -116,7 +116,7 @@ Drzewo rekursji $T(n)$ zostało zilustrowane na rys.\ \ref{fig:4.2-4}.
 	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n-a)+T(a)+cn$.} \label{fig:4.2-4}
 \end{figure}
 Wysokością tego drzewa jest $n/a$.
-Koszt wnoszony przez \singledash{$i$}{ty} poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$.
+Koszt wnoszony przez $i$\nbhyphen ty poziom (z~wyjątkiem zerowego i~ostatniego) wynosi $c(n-a(i-1))$, przy czym na ostatnim poziomie jest tylko jeden liść, który kosztuje $\Theta(1)$.
 Mamy zatem:
 \begin{align*}
 	T(n) &= cn+\sum_{i=1}^{n/a-1}c(n-a(i-1))+\Theta(1) \\
@@ -134,12 +134,12 @@ Zauważmy, że drzewo rekurencji $T(n)$ z~rys.\ \ref{fig:4.2-5} dla parametru $\
 \end{figure}
 
 Wyznaczmy najpierw oszacowanie dolne rekurencji.
-Na \singledash{$i$}{tym} poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi.
+Na $i$\nbhyphen tym poziomie drzewa najmniejszy koszt wnoszą elementy o~wartościach $c\alpha^in$, a~więc węzły ze skrajnie lewej gałęzi.
 Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$.
 Oznaczmy przez $h$ głębokość tego poziomu.
 Wtedy $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$.
 Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$.
-Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż \singledash{$h$}{ty}, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
+Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż $h$\nbhyphen ty, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
 
 Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt na każdym poziomie, możemy dojść do oszacowania górnego dla $T(n)$.
 Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)=\Theta(\lg n)$, a~więc $T(n)\le cn(H+1)=O(n\lg n)$.

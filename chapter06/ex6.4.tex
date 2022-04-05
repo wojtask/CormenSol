@@ -6,7 +6,7 @@ Na rys.\ \ref{fig:6.4-1} zilustrowano działanie sortowania przez kopcowanie dla
 	\centering \input{fig6.4-1}
 	\caption{Działanie procedury \proc{Heapsort} dla tablicy $A=\langle5,13,2,25,7,17,20,8,4\rangle$.
 {\sffamily\bfseries(a)} Kopiec zaraz po jego zbudowaniu przez \proc{Build-Max-Heap}.
-{\sffamily\bfseries\doubledash{(b)}{(i)}} Kopiec i~elementy z~niego usunięte po każdym wywołaniu \proc{Max-Heapify} w~wierszu 5.
+{\sffamily\bfseries(b)\nbendash(i)} Kopiec i~elementy z~niego usunięte po każdym wywołaniu \proc{Max-Heapify} w~wierszu 5.
 {\sffamily\bfseries(j)} Wynikowa posortowana tablica.} \label{fig:6.4-1}
 \end{figure}
 
@@ -45,13 +45,13 @@ Dokonamy analizy liczby wykonywanych instrukcji z~linii 9 procedury \proc{Max-He
 Załóżmy, że algorytm heapsort działa na tablicy $A$ o~rozmiarze $n=2^{h+1}-1$, gdzie $h$ jest dodatnią liczbą całkowitą.
 A~zatem kopiec zbudowany z~$A$ stanowi pełne drzewo binarne o~wysokości $h$.
 Rozważanie tylko takich kopców nie powoduje zmniejszenia ogólności analizy.
-Przez \singledash{$j$}{ty} etap działania algorytmu heapsort, gdzie $j=0$, 1, \dots, $h-1$, będziemy rozumieć działania wykonywane podczas iteracji pętli \kw{for} z~procedury \proc{Heapsort}, w~których $2^{h-j}\le i\le2^{h-j+1}-1$.
-Inaczej mówiąc, \singledash{$j$}{ty} etap pozbawia kopiec \singledash{$(h-j)$}{tego} poziomu.
+Przez $j$\nbhyphen ty etap działania algorytmu heapsort, gdzie $j=0$, 1, \dots, $h-1$, będziemy rozumieć działania wykonywane podczas iteracji pętli \kw{for} z~procedury \proc{Heapsort}, w~których $2^{h-j}\le i\le2^{h-j+1}-1$.
+Inaczej mówiąc, $j$\nbhyphen ty etap pozbawia kopiec $(h-j)$\nbhyphen tego poziomu.
 
 \medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ \singledash{$j$}{tego} etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii 9 procedury \proc{Max-Heapify} jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
+\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ $j$\nbhyphen tego etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii 9 procedury \proc{Max-Heapify} jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
 \begin{proof}
-Oznaczmy przez $m_j$ badaną liczbę zamian elementów wykonywanych w~\singledash{$j$}{tym} etapie.
+Oznaczmy przez $m_j$ badaną liczbę zamian elementów wykonywanych w~$j$\nbhyphen tym etapie.
 Niech $j=0$ i~bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$.
 Liczbę $k$ będziemy nazywać \textbf{dużą}, jeśli $k\ge(n+1)/2$.
 Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
@@ -89,7 +89,7 @@ Powracając teraz do oszacowania na $m_0$, mamy
 \]
 czyli lemat jest prawdziwy, gdy $j=0$.
 
-Na początku \singledash{$j$}{tego} etapu kopiec ma wysokość $h-j$, więc dowód lematu dla \singledash{$j$}{tego} etapu, gdzie $1\le j\le h-1$, sprowadza się do dowodu oszacowania $m_0$ dla kopca o~rozmiarze $n=2^{h-j+1}-1$.
+Na początku $j$\nbhyphen tego etapu kopiec ma wysokość $h-j$, więc dowód lematu dla $j$\nbhyphen tego etapu, gdzie $1\le j\le h-1$, sprowadza się do dowodu oszacowania $m_0$ dla kopca o~rozmiarze $n=2^{h-j+1}-1$.
 \end{proof}
 
 Załóżmy teraz, że $h\ge5$ i~wykorzystajmy oznaczenie $m_j$ z~powyższego dowodu.

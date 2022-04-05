@@ -1,7 +1,7 @@
 \problem{Odległość redakcyjna} %15-3
 
 \subproblem %15-3(a)
-Podobnie jak w~problemie NWP, będziemy korzystać z~notacji $X_i$ jako \singledash{$i$}{tego} prefiksu słowa $x$ oraz $Y_j$ jako \singledash{$j$}{tego} prefiksu słowa $y$.
+Podobnie jak w~problemie NWP, będziemy korzystać z~notacji $X_i$ jako $i$\nbhyphen tego prefiksu słowa $x$ oraz $Y_j$ jako $j$\nbhyphen tego prefiksu słowa $y$.
 W~podproblemach, jakie się pojawią, będziemy wyznaczać odległość redakcyjną prefiksów $X_i$ i~$Y_j$.
 
 Niech $c[i,j]$ będzie optymalnym kosztem przekształcenia $X_i$ do $Y_j$.
@@ -30,7 +30,7 @@ Na podstawie tej analizy otrzymujemy następującą zależność rekurencyjną:
 
 Rozważmy teraz sytuacje z~$i=0$ lub $j=0$.
 Jeśli $i=0$, to prefiks $X_i$ jest słowem pustym i~przekształcenie go do słowa $Y_j$ polega na wykonaniu $j$ operacji wstawienia znaku, czyli $c[0,j]=j\cdot\mathrm{koszt}(\text{wstaw})$.
-Podobnie, jeśli $j=0$, to słowo $Y_j$ jest puste i~można je uzyskać poprzez \singledash{$i$}{krotne} usunięcie znaku ze słowa $X_i$, czyli $c[i,0]=i\cdot\mathrm{koszt}(\text{usuń})$.
+Podobnie, jeśli $j=0$, to słowo $Y_j$ jest puste i~można je uzyskać poprzez $i$\nbhyphen krotne usunięcie znaku ze słowa $X_i$, czyli $c[i,0]=i\cdot\mathrm{koszt}(\text{usuń})$.
 
 Poniższy pseudokod wypełnia tablicę $c$ od najwyższego do najniższego wiersza oraz od lewej do prawej w~obrębie wierszy.
 Równocześnie konstruowana jest także tablica $\id{op}[0\twodots m,0\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta do przekształcenia $X_i$ do $Y_j$, a~także tablice $l[0\twodots m,0\twodots n]$ i~$r[0\twodots m,0\twodots n]$ przechowujące rozmiary rozważanych podproblemów podczas tych przekształceń.

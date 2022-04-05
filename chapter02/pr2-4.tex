@@ -10,7 +10,7 @@ Inwersją jest wtedy każda para $\langle i,j\rangle$, gdzie $1\le i<j\le n$.
 
 \subproblem %2-4(c)
 Dla danej tablicy $A[1\twodots n]$ przez $\mathrm{inv}(j)$ oznaczmy liczbę inwersji postaci $\langle i,j\rangle$.
-W~procedurze \proc{Insertion-Sort} pętla \kw{while} w~wierszach \doubledash{5}{7} przenosi element znajdujący się początkowo na pozycji $j$ o~$\mathrm{inv}(j)$ pozycji w~lewo, dzięki czemu wyeliminowanych zostaje $\mathrm{inv}(j)$ inwersji.
+W~procedurze \proc{Insertion-Sort} pętla \kw{while} w~wierszach 5\nbendash7 przenosi element znajdujący się początkowo na pozycji $j$ o~$\mathrm{inv}(j)$ pozycji w~lewo, dzięki czemu wyeliminowanych zostaje $\mathrm{inv}(j)$ inwersji.
 Pętla \kw{while} działa dla każdego $j=2$, 3, \dots, $n$, wykonując łącznie $I=\sum_{j=2}^n\mathrm{inv}(j)$ iteracji, czyli dokładnie tyle, ile inwersji było w~wejściowej tablicy.
 Z~tej analizy płynie wniosek, że czas działania sortowania przez wstawianie wynosi $\Theta(n+I)$.
 
@@ -22,7 +22,7 @@ W~przeciwnym przypadku $a>b$, a~ponieważ scalane podtablice są posortowane, to
 Liczba elementów $A$ należących do $L$ wynosi $n_1$, zatem w~momencie przetwarzania elementu $b$ jest w~niej $n_1-i+1$ elementów nieprzetworzonych, a~więc tyle inwersji tworzy z~nimi $b$.
 Od tego momentu element ten będzie z~nimi w~jednej podtablicy, więc nie policzymy żadnej inwersji dwukrotnie.
 
-W~ten sposób, modyfikując algorytm sortowania przez scalanie, wyznaczamy liczbę inwersji \singledash{$n$}{elementowej} tablicy $A$ w~czasie $\Theta(n\lg n)$, czego efektem ubocznym jest jej posortowanie.
+W~ten sposób, modyfikując algorytm sortowania przez scalanie, wyznaczamy liczbę inwersji $n$\nbhyphen elementowej tablicy $A$ w~czasie $\Theta(n\lg n)$, czego efektem ubocznym jest jej posortowanie.
 W~procedurze \proc{Merge-Sort} wystarczy początkowo wyzerować licznik inwersji i~następnie sumować częściowe wyniki zwracane z~wywołań rekurencyjnych, a~w~\proc{Merge} -- doliczać odpowiednią liczbę inwersji tworzonych przez element $b$.
 Poniższe pseudokody implementują to podejście.
 

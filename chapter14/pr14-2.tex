@@ -3,7 +3,7 @@
 \subproblem %14-2(a)
 Podamy algorytm, który będzie symulował opisany proces eliminowania osób.
 Wykorzystamy do tego celu listę cykliczną zawierającą początkowo liczby całkowite, kolejno 1, 2, \dots, $n$.
-Symulacja polega na przechodzeniu po liście i~zatrzymywaniu się na co \singledash{$m$}{tym} węźle.
+Symulacja polega na przechodzeniu po liście i~zatrzymywaniu się na co $m$\nbhyphen tym węźle.
 Klucz tego węzła jest wypisywany i~usuwany z~listy, po czym kroki są powtarzane aż do wyczerpania elementów.
 Dzięki temu, że lista jest cykliczna, nie musimy troszczyć się o~obsługę przypadku, w~którym osiągniemy ogon listy, zanim dotrzemy do następnego w~kolejności węzła do usunięcia.
 
@@ -16,7 +16,7 @@ Usuwanie węzła z~listy odbywa się w~czasie $O(1)$, skąd całkowity czas dzia
 ponieważ $m$ jest stałą.
 
 \subproblem %14-2(b)
-Załóżmy, że w~pewnym momencie odliczanie zatrzymało się na osobie o~\singledash{$j$}{tym} największym numerze spośród pozostałych $k\le n$ osób.
+Załóżmy, że w~pewnym momencie odliczanie zatrzymało się na osobie o~$j$\nbhyphen tym największym numerze spośród pozostałych $k\le n$ osób.
 Osoba ta zostaje usunięta, co powoduje dekrementację zmiennej $k$.
 Numer kolejnej osoby w~permutacji wyznaczamy przez zwiększenie $j$ o~$m$, ale ponieważ liczba ta może przekroczyć liczbę pozostałych $k$ osób w~okręgu, to należy wziąć resztę z~jej dzielenia przez $k$, a~także uwzględnić fakt, że osoby numerowane są liczbami od 1 do $n$, poprzez odjęcie jedynki przed braniem reszty, a~następnie dodanie jej do wynikowej liczby.
 W~rezultacie otrzymujemy, że następna osoba ma numer na pozycji $(j+m-1)\bmod k+1$ na uszeregowanej rosnąco liście numerów pozostałych osób.

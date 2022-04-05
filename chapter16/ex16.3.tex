@@ -15,7 +15,7 @@ Jeden z~optymalnych kodów Huffmana dla podanego zbioru liter i~ich częstości 
 
 Zastanówmy się, jak może wyglądać optymalny kod Huffmana dla $n$ liter o~częstościach będących początkowymi liczbami Fibonacciego.
 Przyjrzyjmy się wartości \attrib{z}{f} obliczanej w~algorytmie \proc{Huffman} w~linii 7.
-Nietrudno zauważyć, że w~\singledash{$i$}{tej} iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ początkowych liczb Fibonacciego:
+Nietrudno zauważyć, że w~$i$\nbhyphen tej iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ początkowych liczb Fibonacciego:
 \[
 	\attrib{z}{f} = \sum_{k=1}^{i+1}F_k = F_{i+3}-1.
 \]
@@ -107,7 +107,7 @@ Aby możliwe było zbudowanie drzewa regularnego, liczba znaków w~zbiorze $C$ m
 Jeśli jest inaczej, to alfabet $C$ zostaje rozszerzony o~dodatkowy specjalny znak~\#, dla którego przyjmujemy $\attrib{\#}{f}=0$.
 Dodanie nowego znaku nie zmienia kosztu tego drzewa, zaś podczas odczytywania wynikowego kodowania znak ten może zostać bezpiecznie zignorowany.
 
-Algorytm wykonuje $\lfloor n/2\rfloor$ iteracji pętli \kw{for} w~wierszach \doubledash{\ref{li:ternary-huffman-for-begin}}{\ref{li:ternary-huffman-for-end}} tworzących kolejne węzły wewnętrzne budowanego drzewa.
+Algorytm wykonuje $\lfloor n/2\rfloor$ iteracji pętli \kw{for} w~wierszach \ref{li:ternary-huffman-for-begin}\nbendash\ref{li:ternary-huffman-for-end} tworzących kolejne węzły wewnętrzne budowanego drzewa.
 Z~kolejki priorytetowej $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach, które stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$, a~za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
 W~drzewie trójkowym zbudowanym w~algorytmie przyjmujemy, że krawędź do lewego syna jest etykietowana przez 0, krawędź do środkowego syna -- przez 1, a~krawędź do prawego syna -- przez 2.
 Wówczas słowem kodowym znaku $c\in C$ jest ciąg tritów wyznaczonych przez etykiety na ścieżce od korzenia drzewa do liścia reprezentującego znak $c$.
@@ -136,7 +136,7 @@ To sprawia, że każdy znak zajmie ten sam, najniższy poziom w~tworzonym drzewi
 Nie jest to więc żadne usprawnienie w~porównaniu z~zastosowaniem kodu binarnego o~stałej długości, w~którym każdy znak zapisywany jest jako ciąg 8 bitów.
 
 \exercise %16.3-8
-Istnieje $2^{8k}$ możliwych plików składających się z~$k$ znaków \singledash{8}{bitowych}, czyli
+Istnieje $2^{8k}$ możliwych plików składających się z~$k$ znaków 8\nbhyphen bitowych, czyli
 \[
 	C_n = \sum_{k=0}^n2^{8k} = \sum_{k=0}^n256^k = \frac{256^{n+1}-1}{255}
 \]

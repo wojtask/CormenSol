@@ -60,7 +60,7 @@ Wystarczy więc wywołać $\proc{RB-Insert-Fixup}(T,x)$, aby przywrócić narusz
 
 \subproblem %13-2(e)
 W~sytuacji symetrycznej algorytm z~punktu (b) będzie wyszukiwał w~drzewie $T_2$ czarny węzeł $y$ o~możliwie najmniejszym kluczu spośród węzłów o~czarnej wysokości \attrib{T_1}{bh}, preferując lewych synów w~poruszaniu się po ścieżce w~dół drzewa.
-Można to zrealizować, modyfikując pseudokod \proc{RB-Join-Point} poprzez zamianę $T_1$ z~$T_2$ w~liniach \doubledash{\ref{li:rb-join-point-initial-node}}{\ref{li:rb-join-point-while-begin}} oraz zamianę pól \id{left} i~\id{right} w~liniach \doubledash{\ref{li:rb-join-point-if-begin}}{\ref{li:rb-join-point-if-end}}.
+Można to zrealizować, modyfikując pseudokod \proc{RB-Join-Point} poprzez zamianę $T_1$ z~$T_2$ w~liniach \ref{li:rb-join-point-initial-node}\nbendash\ref{li:rb-join-point-while-begin} oraz zamianę pól \id{left} i~\id{right} w~liniach \ref{li:rb-join-point-if-begin}\nbendash\ref{li:rb-join-point-if-end}.
 Węzeł $x$ należy następnie umieścić w~drzewie $T_2$ jako nowego ojca węzła $y$, który teraz staje się prawym synem $x$, a~drzewo $T_1$ uczynić lewym poddrzewem $x$.
 Nadanie koloru węzłowi $x$ i~przywrócenie własności drzewa czerwono-czarnego w~wynikowym drzewie $T$ odbywa się identycznie jak w~punkcie (d).
 
@@ -94,10 +94,10 @@ Prześledźmy działanie algorytmu \proc{RB-Join}, którego pseudokod został po
 \li	$\proc{RB-Insert-Fixup}(T,x)$ \label{li:rb-join-rb-insert-fixup}
 \li	\Return $T$
 \end{codebox}
-W~wierszach \doubledash{\ref{li:rb-join-if-begin}}{\ref{li:rb-join-if-end}} wykonywane są działania w~przypadku, gdy czarna wysokość drzewa $T_2$ nie przekracza czarnej wysokości drzewa $T_1$.
+W~wierszach \ref{li:rb-join-if-begin}\nbendash\ref{li:rb-join-if-end} wykonywane są działania w~przypadku, gdy czarna wysokość drzewa $T_2$ nie przekracza czarnej wysokości drzewa $T_1$.
 Jeśli jedynym węzłem drzewa $T_2$ jest jego liść \const{nil}, to w~celu złączenia $T_1$ oraz węzła $x$, wystarczy ten ostatni wstawić do $T_1$ za pomocą zwykłej operacji wstawiania, po czym zwrócić wynikowe drzewo $T_1$.
 W~przeciwnym przypadku wykonywane są operacje opisane w~punkcie (c).
-W~wierszu~\ref{li:rb-join-symmetric-case} obsługiwany jest przypadek, gdy $\attrib{T_1}{bh}<\attrib{T_2}{bh}$, poprzez przeprowadzenie analogicznych działań do tych z~linii \doubledash{\ref{li:rb-join-if-begin}}{\ref{li:rb-join-if-end}}, ale z~zamienionymi $T_1$ i~$T_2$ oraz \id{left} i~\id{right}.
+W~wierszu~\ref{li:rb-join-symmetric-case} obsługiwany jest przypadek, gdy $\attrib{T_1}{bh}<\attrib{T_2}{bh}$, poprzez przeprowadzenie analogicznych działań do tych z~linii \ref{li:rb-join-if-begin}\nbendash\ref{li:rb-join-if-end}, ale z~zamienionymi $T_1$ i~$T_2$ oraz \id{left} i~\id{right}.
 Wywołanie odpowiadające temu z~linii \ref{li:rb-join-rb-join-point} jest z~kolei zastąpione wersją symetryczną opisaną w~części (e).
 Pod koniec działania procedura koloruje węzeł $x$ na czerwono i~przywraca naruszone własności czerwono-czarne w~drzewie $T$.
 

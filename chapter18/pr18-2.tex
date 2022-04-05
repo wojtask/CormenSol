@@ -148,10 +148,10 @@ Niech $m'=\attrib{L'}{length}$ i~$m''=\attrib{L''}{length}$.
 Jak zauważyliśmy wcześniej, $m'\le3h+3$ i~$m''\le3h+3$.
 Oznaczmy przez $h_i'$ dla $i=0$, 1, \dots, $m'-1$ wysokość drzewa $T_i'$ znajdującego się tuż po linii \ref{li:2-3-4-tree-split-right-partition} w~$L'[i]$ i~podobnie, przez $h_i''$ dla $i=0$, 1, \dots, $m''-1$ wysokość drzewa $T_i''$ znajdującego się wtedy w~$L''[i]$.
 Na mocy obserwacji z~punktu (c) mamy, że oba te ciągi wysokości są nierosnące, ponadto $h_m'-h_0'\le h$ i~$h_m''-h_0''\le h$.
-Czas działania utworzenia $T'$ w~wierszach \doubledash{\ref{li:2-3-4-tree-split-left-tree-create-begin}}{\ref{li:2-3-4-tree-split-left-tree-create-end}} wynosi zatem
+Czas działania utworzenia $T'$ w~wierszach \ref{li:2-3-4-tree-split-left-tree-create-begin}\nbendash\ref{li:2-3-4-tree-split-left-tree-create-end} wynosi zatem
 \[
     \sum_{i=1}^mO(1+|h_i'-h_{i-1}'|) = O\biggl(\sum_{i=1}^m(1+(h_i'-h_{i-1}'))\biggr) = O(m+h_m'-h_0') = O(h),
 \]
 co z~tw.\ 12.1 daje $O(\lg n)$.
-Oczywiście analogicznie otrzymuje się identyczne oszacowanie na czas budowy drzewa $T''$ w~liniach \doubledash{\ref{li:2-3-4-tree-split-right-tree-create-begin}}{\ref{li:2-3-4-tree-split-right-tree-create-end}}.
+Oczywiście analogicznie otrzymuje się identyczne oszacowanie na czas budowy drzewa $T''$ w~liniach \ref{li:2-3-4-tree-split-right-tree-create-begin}\nbendash\ref{li:2-3-4-tree-split-right-tree-create-end}.
 A~zatem czas działania operacji rozbijania 2-3-4 drzewa wynosi $O(\lg n)$.

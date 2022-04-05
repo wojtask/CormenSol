@@ -25,16 +25,16 @@ Poniższy pseudokod implementuje algorytm o~zadanych własnościach:
 Sortowanie przez wstawianie.
 
 \subproblem %8-2(d)
-Do posortowania $n$ rekordów \singledash{$b$}{bitowych} w~czasie $O(bn)$ za pomocą algorytmu sortowania pozycyjnego, potrzebna jest pomocnicza procedura, która sortuje stabilnie i~działa w~czasie $O(n)$.
+Do posortowania $n$ rekordów $b$\nbhyphen bitowych w~czasie $O(bn)$ za pomocą algorytmu sortowania pozycyjnego, potrzebna jest pomocnicza procedura, która sortuje stabilnie i~działa w~czasie $O(n)$.
 Takie warunki spełnia jedynie algorytm z~części (a).
 W~każdej kolejnej fazie sortowania rekordy powinny być porządkowane względem coraz bardziej znaczących bitów.
 
 \subproblem %8-2(e)
-W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identycznie jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort}.
+W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identycznie jak w~wierszach 1\nbendash7 procedury \proc{Counting-Sort}.
 Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwych obszarów tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zebranych w~tablicy $C$ na początku działania algorytmu.
 \begin{codebox}
 \Procname{$\proc{Counting-Sort-In-Place}(A,k)$}
-\li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach \doubledash{1}{7} procedury \proc{Counting-Sort}
+\li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach 1\nbendash7 procedury \proc{Counting-Sort}
 \li	skopiuj zawartość tablicy $C$ do tablicy $C'$
 \li	$i\gets1$
 \li	\While $i\le\attrib{A}{length}-1$ \label{li:counting-sort-in-place-while-begin}
@@ -48,7 +48,7 @@ Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, 
 \end{codebox}
 
 Początkowy stan tablicy $C$ zostaje zapamiętany w~tablicy $C'$.
-Następnie pętla \kw{while} w~wierszach \doubledash{\ref{li:counting-sort-in-place-while-begin}}{\ref{li:counting-sort-in-place-while-end}} przegląda tablicę wejściową w~poszukiwaniu elementów, które nie powinny znajdować się w~posortowanej tablicy na aktualnej pozycji.
+Następnie pętla \kw{while} w~wierszach \ref{li:counting-sort-in-place-while-begin}\nbendash\ref{li:counting-sort-in-place-while-end} przegląda tablicę wejściową w~poszukiwaniu elementów, które nie powinny znajdować się w~posortowanej tablicy na aktualnej pozycji.
 Do sprawdzenia, czy element znajduje się we właściwym miejscu, używany jest test z~wiersza \ref{li:counting-sort-in-place-test}.
 W~przypadku negatywnego wyniku tego testu element z~aktualnej pozycji zostaje przeniesiony na swoją docelową pozycję po zamianie z~elementem, który tam się znajduje.
 Ten ostatni będzie sprawdzany w~następnej iteracji pętli \kw{while}.

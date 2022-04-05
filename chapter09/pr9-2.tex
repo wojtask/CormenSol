@@ -53,7 +53,7 @@ W~przeciwnym przypadku obszar tablicy wejściowej, który zawiera medianę wraz 
 
 W~powyższym pseudokodzie rozważana jest tablica $A[p\twodots r]$ o~$n=r-p+1$ elementach.
 Pierwszym krokiem jest sprawdzenie przypadków brzegowych -- jeśli $n=1$, to wystarczy zwrócić jedyny element wejściowy, a~jeśli $n=2$, to zwracany jest element o~większej wadze.
-Działanie to implementujemy za pomocą pojedynczej instrukcji \kw{if} w~wierszach \doubledash{\ref{li:weighted-median-boundary-case-begin}}{\ref{li:weighted-median-boundary-case-end}}.
+Działanie to implementujemy za pomocą pojedynczej instrukcji \kw{if} w~wierszach \ref{li:weighted-median-boundary-case-begin}\nbendash\ref{li:weighted-median-boundary-case-end}.
 Następnie elementy wraz z~ich wagami są dzielone względem mediany (która po wykonaniu wiersza \ref{li:weighted-median-partition} znajduje się w~$A$ na pozycji $q=\lfloor(p+r)/2\rfloor$) i~obliczane są sumy wag obu części tego podziału.
 W~zależności od tego, czy jedna z~tych wartości wynosi co najmniej $1/2$, zwracana jest wyznaczona wcześniej mediana, bądź algorytm zostaje wywoływany rekurencyjnie dla odpowiedniej części podziału.
 Aby zachować warunek mówiący o~tym, że suma wag wszystkich elementów tablicy wejściowej wynosi 1, przed kolejnym wywołaniem algorytmu zwiększamy wagę mediany do odpowiedniej wartości -- $w[q]$ ,,kumuluje'' więc wagi tej części tablicy, którą odrzucamy.
@@ -97,13 +97,13 @@ W~powyższym iloczynie pierwszy z~czynników jest ujemny, a~drugi można ogranic
 A~zatem także w~tym przypadku mamy $f(p_l)>f(p_k)$, co kończy dowód twierdzenia.
 
 \subproblem %9-2(e)
-Niech $p_i=\langle x_i,y_i\rangle$, gdzie $i=1$, 2, \dots, $n$, będą punktami wejściowymi w~\singledash{2}{wymiarowym} problemie lokalizacji urzędu pocztowego z~metryką miejską.
+Niech $p_i=\langle x_i,y_i\rangle$, gdzie $i=1$, 2, \dots, $n$, będą punktami wejściowymi w~2\nbhyphen wymiarowym problemie lokalizacji urzędu pocztowego z~metryką miejską.
 Jego rozwiązaniem jest taki punkt $p=\langle x_p,y_p\rangle$, dla którego suma $\sum_{i=1}^nw_i(|x_p-x_i|+|y_p-y_i|)$ przyjmuje najmniejszą możliwą wartość.
 Zauważmy, że
 \[
     \min_{\langle x_p,y_p\rangle\in\mathbb{R}\times\mathbb{R}}\biggl(\sum_{i=1}^nw_i(|x_p-x_i|+|y_p-y_i|)\biggr) = \min_{x_p\in\mathbb{R}}\biggl(\sum_{i=1}^nw_i|x_p-x_i|\biggr)+\min_{y_p\in\mathbb{R}}\biggl(\sum_{i=1}^nw_i|y_p-y_i|\biggr).
 \]
-A~zatem w~celu wyznaczenia optymalnego punktu $p$ wystarczy znaleźć jego współrzędne niezależnie jako rozwiązania \singledash{1}{wymiarowej} wersji problemu.
+A~zatem w~celu wyznaczenia optymalnego punktu $p$ wystarczy znaleźć jego współrzędne niezależnie jako rozwiązania 1\nbhyphen wymiarowej wersji problemu.
 Na podstawie poprzedniego punktu zadanie to sprowadza się do wyznaczenia mediany ważonej $x_p$ spośród elementów $x_1$, $x_2$, \dots, $x_n$ o~wagach $w_1$, $w_2$, \dots, $w_n$ i~analogicznie mediany ważonej $y_p$ spośród elementów $y_1$, $y_2$, \dots, $y_n$ o~tych samych wagach, a~następnie zwróceniu pary $\langle x_p,y_p\rangle$.
 
 Zauważmy, że oba ciągi współrzędnych, które przeszukujemy celem znalezienia ich median ważonych, mogą zawierać powtarzające się elementy -- w~szczególności wszystkie punkty mogą mieć równe pierwsze (lub drugie) współrzędne.

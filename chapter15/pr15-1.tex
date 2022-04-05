@@ -73,6 +73,6 @@ Wywołanie $\proc{Print-Path}(p,r,i,j)$ wypisuje ścieżkę o~minimalnej długo�
 W~zależności od wyniku porównania $i$ z~$j$ wypisane zostają punkty z~podścieżki biegnącej w~lewo albo, w~kolejności odwrotnej do ich napotykania, punkty z~podścieżki biegnącej w~prawo.
 Procedura stosuje dodatkowe warunki, aby nie dopuścić do podwójnego wypisania punktu $p_1$.
 
-Dla każdego $j>1$ co najwyżej 2 pozycje $b[i,j]$ obliczane są w~algorytmie \proc{Bitonic-TSP} w~wierszach \doubledash{\ref{li:bitonic-tsp-min-begin}}{\ref{li:bitonic-tsp-min-end}} przy użyciu $O(n)$ iteracji, a~każda inna pozycja tablicy $b$ wyznaczona zostaje w~czasie stałym.
+Dla każdego $j>1$ co najwyżej 2 pozycje $b[i,j]$ obliczane są w~algorytmie \proc{Bitonic-TSP} w~wierszach \ref{li:bitonic-tsp-min-begin}\nbendash\ref{li:bitonic-tsp-min-end} przy użyciu $O(n)$ iteracji, a~każda inna pozycja tablicy $b$ wyznaczona zostaje w~czasie stałym.
 Ponieważ sortowanie punktów w~wierszu \ref{li:bitonic-tsp-sorting} można wykonać w~czasie $O(n\lg n)$, to czasem działania tego algorytmu jest $\Theta(n^2)$.
 Wypisanie znalezionej ścieżki bitonicznej za pomocą procedury \proc{Print-Bitonic-Path} odbywa się w~czasie $\Theta(n)$, gdyż każdy punkt wypisywany jest dokładnie raz, a~na każdy z~nich przypada stała liczba wykonywanych operacji.

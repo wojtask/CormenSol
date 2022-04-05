@@ -9,7 +9,7 @@ Wobec tego wartość oczekiwana zmiennej $X_i$, gdzie $i=1$, 2, \dots, $n$, wyno
 Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy.
 Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$.
 Zmienna losowa $X_i$ zdefiniowana w~punkcie (a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0.
-Stąd czas potrzebny na posortowanie \singledash{$n$}{elementowej} tablicy wyraża się wzorem
+Stąd czas potrzebny na posortowanie $n$\nbhyphen elementowej tablicy wyraża się wzorem
 \[
 	T(n) = T(q-1)+T(n-q)+\Theta(n) = \sum_{i=1}^nX_i(T(i-1)+T(n-i)+\Theta(n)).
 \]

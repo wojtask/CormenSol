@@ -1,14 +1,14 @@
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 
 \exercise %9.3-1
-Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy będą dzielone na grupy \singledash{7}{elementowe}.
+Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy będą dzielone na grupy 7\nbhyphen elementowe.
 Wówczas w~co najmniej połowie spośród $\lceil n/7\rceil$ grup są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez 7, i~jednej grupy zawierającej sam element $x$.
 Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
 \[
 	4\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{7}\Bigr\rceil\biggr\rceil-2\biggr) \ge \frac{2n}{7}-8.
 \]
 Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$.
-Stąd procedura wywoła się rekurencyjnie dla zbioru co najwyżej \singledash{$(5n/7+8)$}{elementowego}.
+Stąd procedura wywoła się rekurencyjnie dla zbioru co najwyżej $(5n/7+8)$\nbhyphen elementowego.
 Rekurencja przyjmuje więc postać
 \[
 	T(n) \le \begin{cases}
@@ -34,7 +34,7 @@ Dla $n>63$ warunek ten jest spełniony, kiedy $c\ge7a(n/(n-63))$.
 Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~wtedy musi być $c\ge14a$.
 Można zatem przyjąć za $d$ wartość 126, co kończy dowód.
 
-Pokażemy teraz, że jeśli podział będzie dokonywany na grupy \singledash{3}{elementowe}, to czas działania tak zmodyfikowanego algorytmu \proc{Select} będzie wyższy od liniowego.
+Pokażemy teraz, że jeśli podział będzie dokonywany na grupy 3\nbhyphen elementowe, to czas działania tak zmodyfikowanego algorytmu \proc{Select} będzie wyższy od liniowego.
 Rozważmy w~szczególności przypadek, kiedy jest dokładnie $\bigl\lceil\frac{1}{2}\bigl\lceil\frac{n}{3}\bigr\rceil\bigr\rceil$ grup o~medianach większych lub równych $x$, w~tym ostatnia, niepełna grupa, która zawiera 2 elementy większe niż $x$.
 Stąd całkowita liczba elementów większych od $x$ wynosi
 \[
@@ -68,10 +68,10 @@ Można więc w~algorytmie quicksort zastąpić wywołanie procedury \proc{Partit
 W~rezultacie wykonywane będą najbardziej zrównoważone podziały i~pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
 
 \exercise %9.3-4
-Jedynym źródłem informacji o~elementach we wspomnianym algorytmie wyznaczającym \singledash{$i$}{tą} najmniejszą wartość są porównania.
+Jedynym źródłem informacji o~elementach we wspomnianym algorytmie wyznaczającym $i$\nbhyphen tą najmniejszą wartość są porównania.
 Ponadto tablica wejściowa zawierająca te elementy nie jest modyfikowana -- po zakończeniu działania algorytmu ma ona identyczną zawartość jak na początku.
 Zakładamy, że wynik każdego porównania liczb (tzn.\ ustalenie relacji $\le$ albo $>$) jest zapamiętywany, więc przy następnej próbie sprawdzenia tych samych liczb wystarczy odczytać wynik z~pamięci.
-W~związku z~tym pozostaje nam udowodnić, że porównania, które przeprowadzono i~zapamiętano podczas działania algorytmu, aby jednoznacznie stwierdzić, który element jest \singledash{$i$}{tym} najmniejszym, są wystarczające, by jednoznacznie wskazać $i-1$ najmniejszych oraz $n-i$ największych elementów.
+W~związku z~tym pozostaje nam udowodnić, że porównania, które przeprowadzono i~zapamiętano podczas działania algorytmu, aby jednoznacznie stwierdzić, który element jest $i$\nbhyphen tym najmniejszym, są wystarczające, by jednoznacznie wskazać $i-1$ najmniejszych oraz $n-i$ największych elementów.
 
 Oznaczmy przez $u$ element zwrócony przez algorytm.
 W~rozwiązaniu będziemy korzystać z~przechodniości relacji porządku liczb.
@@ -80,7 +80,7 @@ Wykażemy, że dzięki tej obserwacji możemy uzyskać informacje o~wzajemnym po
 Załóżmy nie-wprost, że istnieje para $\langle x,y\rangle$, przy czym nie potrafimy stwierdzić, czy $x\le y$, czy $x>y$.
 Wówczas nie potrafimy także wskazać relacji między $x$ i~każdym elementem, z~którym jesteśmy w~stanie porównać $y$, i~na odwrót.
 W~szczególności istnieje element $v$, którego relacja z~$u$ nie jest nam znana.
-Ale to leży w~sprzeczności z~faktem, że $u$ zostało jednoznacznie wskazane jako \singledash{$i$}{ty} najmniejszy ze zbioru wejściowego -- $v$ może bowiem leżeć po jednej albo po drugiej stronie $u$, a~to prowadzi do niejednoznaczności przy określaniu pozycji $u$ w~zbiorze wejściowym.
+Ale to leży w~sprzeczności z~faktem, że $u$ zostało jednoznacznie wskazane jako $i$\nbhyphen ty najmniejszy ze zbioru wejściowego -- $v$ może bowiem leżeć po jednej albo po drugiej stronie $u$, a~to prowadzi do niejednoznaczności przy określaniu pozycji $u$ w~zbiorze wejściowym.
 
 Mając informacje na temat każdej pary, możemy przejrzeć wyniki porównań elementu $u$ z~każdym innym i~na tej podstawie klasyfikować elementy do jednego z~dwóch zbiorów wynikowych.
 
@@ -111,7 +111,7 @@ Na podstawie powyższego opisu otrzymujemy następujący algorytm oparty o~metod
 \li		\Then \Return $\emptyset$
 		\End
 \li	$n\gets r-p+1$
-\li	$q_1\gets p+\lfloor\lfloor k/2\rfloor(n/k)\rfloor$ \>\>\>\>\>\>\Comment pozycje zajmowane przez \singledash{$\lfloor k/2\rfloor$}{ty} i~\singledash{$\lceil k/2\rceil$}{ty} kwantyl rzędu $k$
+\li	$q_1\gets p+\lfloor\lfloor k/2\rfloor(n/k)\rfloor$ \>\>\>\>\>\>\Comment pozycje zajmowane przez $\lfloor k/2\rfloor$\nbhyphen ty i~$\lceil k/2\rceil$\nbhyphen ty kwantyl rzędu $k$
 \li	$q_2\gets p+\lfloor\lceil k/2\rceil(n/k)\rfloor$ \>\>\>\>\>\>\>podtablicy $A[p\twodots r]$, gdyby została ona uporządkowana
 \li	$\proc{Select}(A,p,r,q_1-p+1)$
 \li	\If $q_1\ne q_2$
@@ -144,7 +144,7 @@ W~pierwszej wersji definicji $k$ najbliższymi liczbami medianie zbioru $S$ są 
 Znając więc ich pozycje w~uporządkowanym zbiorze, możemy je wyznaczyć za pomocą odpowiednich wywołań algorytmu \proc{Select}.
 Następnie wystarczy przeglądnąć elementy zbioru $S$ i~zwrócić te, które znajdują się pomiędzy wyznaczonymi statystykami pozycyjnymi.
 
-Poniższy pseudokod przyjmuje na wejściu \singledash{$n$}{elementową} tablicę $A$ zawierającą elementy zbioru $S$ oraz liczbę $k$ i~zwraca \singledash{$k$}{elementowy} zbiór $N$ ,,sąsiadów'' mediany według powyższego opisu.
+Poniższy pseudokod przyjmuje na wejściu $n$\nbhyphen elementową tablicę $A$ zawierającą elementy zbioru $S$ oraz liczbę $k$ i~zwraca $k$\nbhyphen elementowy zbiór $N$ ,,sąsiadów'' mediany według powyższego opisu.
 \begin{codebox}
 \Procname{$\proc{Median-Neighbors}(A,k)$}
 \li	$n\gets\attrib{A}{length}$
@@ -165,7 +165,7 @@ Wówczas czas działania powyższego algorytmu wynosi $O(n)$.
 
 Jeśli z~kolei będziemy stosować wartość bezwzględną do określenia bliskości między elementami zbioru $S$, to wyznaczenie $k$ liczb najbliższych medianie w~takim rozumieniu odbywa się następująco.
 Wyznaczymy medianę $x$ zbioru $S$, a~następnie obliczymy odległość każdego elementu z~$S$ od $x$, czyli wartość bezwzględną z~ich różnicy.
-Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich \singledash{$k$}{tej} statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
+Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich $k$\nbhyphen tej statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
 
 Pojawiają się jednak dwie subtelności.
 O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach.
@@ -237,14 +237,14 @@ Jej rozwiązaniem jest oczywiście $T(n)=O(\lg n)$.
 
 \exercise %9.3-9
 Oznaczmy przez $y_1$ i~$y_2$, odpowiednio, medianę dolną i~górną współrzędnych $y$ wszystkich wież.
-Umieścimy główny rurociąg na współrzędnej $y$ równej $y_r$ takiej, że $y_1\le y_r\le y_2$ i~zbadamy, jak będzie zmieniać się suma długości odnóg \singledash{północ}{południe} $s$, gdy będziemy zmieniać jego położenie.
+Umieścimy główny rurociąg na współrzędnej $y$ równej $y_r$ takiej, że $y_1\le y_r\le y_2$ i~zbadamy, jak będzie zmieniać się suma długości odnóg północ\nbhyphen południe $s$, gdy będziemy zmieniać jego położenie.
 
 Wybierzmy $y_r'$, spełniające nierówności $y_1\le y_r'\le y_2$, na współrzędną $y$ nowego położenia głównego rurociągu.
 Niech $d=|y_r-y_r'|$.
 Jeśli $y_1=y_2$, to $y_r'=y_r$, rozważmy więc przypadek przeciwny.
 Wtedy zarówno na północ, jak i~na południe od głównego rurociągu znajduje się $n/2$ wież wiertniczych.
 Do jednych zbliżyliśmy się o~odległość $d$, ale od pozostałych o~tyle samo się oddaliliśmy.
-Widać stąd, że wybór dowolnego $y_r'$ znajdującego się pomiędzy medianami nie zmienia sumy długości odnóg \singledash{północ}{południe}.
+Widać stąd, że wybór dowolnego $y_r'$ znajdującego się pomiędzy medianami nie zmienia sumy długości odnóg północ\nbhyphen południe.
 
 Niech teraz $y_r'$ będzie współrzędną $y$ głównego rurociągu taką, że $y_r'<y_1$ lub $y_r'>y_2$.
 Podobnie jak poprzednio, niech $d=|y_r-y_r'|$.
@@ -259,5 +259,5 @@ Nową sumę długości odnóg można więc ograniczyć od dołu:
     s' \ge s+d(n+1)/2-d(n-1)/2 = s+d > s.
 \]
 
-A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg \singledash{północ}{południe} -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna.
+A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg północ\nbhyphen południe -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna.
 Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$ mimo braku założenia o~tym, że elementy, spośród których wyznaczamy medianę, są parami różne (co zauważyliśmy w~\refExercise{9.3-7}).

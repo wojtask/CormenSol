@@ -1,18 +1,18 @@
 \subchapter{Zliczanie}
 
 \exercise %C.1-1
-Uwzględnimy tylko \singledash{$k$}{podsłowa} niepuste, a~więc $k\ge1$.
-Pierwsze \singledash{$k$}{podsłowo} zajmuje w~\singledash{$n$}{słowie} pozycje od 1 do $k$, drugie -- od 2 do $k+1$ itd.
-Ostatnie \singledash{$k$}{podsłowo} kończy się na pozycji $n$, więc musi mieć początek na pozycji $n-k+1$.
-Istnieje zatem $n-k+1$ wszystkich \singledash{$k$}{podsłów} \singledash{$n$}{słowa}.
+Uwzględnimy tylko $k$\nbhyphen podsłowa niepuste, a~więc $k\ge1$.
+Pierwsze $k$\nbhyphen podsłowo zajmuje w~$n$\nbhyphen słowie pozycje od 1 do $k$, drugie -- od 2 do $k+1$ itd.
+Ostatnie $k$\nbhyphen podsłowo kończy się na pozycji $n$, więc musi mieć początek na pozycji $n-k+1$.
+Istnieje zatem $n-k+1$ wszystkich $k$\nbhyphen podsłów $n$\nbhyphen słowa.
 
-Łączna liczba podsłów \singledash{$n$}{słowa} jest sumą liczb \singledash{$k$}{podsłów} po wszystkich $k=1$, 2, \dots, $n$:
+Łączna liczba podsłów $n$\nbhyphen słowa jest sumą liczb $k$\nbhyphen podsłów po wszystkich $k=1$, 2, \dots, $n$:
 \[
 	\sum_{k=1}^n(n-k+1) = \sum_{k=1}^nk = \frac{n(n+1)}{2} = \binom{n+1}{2}.
 \]
 
 \exercise %C.1-2
-Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, \singledash{$n$}{bitowych} i~\singledash{$m$}{bitowych}.
+Niech $X=\{0,1,\dots,2^n-1\}$ i~$Y=\{0,1,\dots,2^m-1\}$ będą zbiorami liczb całkowitych, odpowiednio, $n$\nbhyphen bitowych i~$m$\nbhyphen bitowych.
 Funkcji logicznych o~$n$ wejściach i~$m$ wyjściach jest tyle samo, co funkcji $f\colon X\to Y$.
 Kwestia sprowadza się zatem do wyznaczenia liczby wszystkich ciągów $\langle y_1,\dots,y_{2^n}\!\rangle$ o~wyrazach ze zbioru $Y$.
 Każdy wyraz możemy wybrać na $2^m$ sposobów, co daje $(2^m)^{2^n}=2^{m2^n}\!$ możliwości wyboru ciągu $\langle y_1,\dots,y_{2^n}\!\rangle$.
@@ -46,8 +46,8 @@ W~pierwszej opcji możemy dokonać wyboru na $\binom{50}{3}$ sposobów, a~w drug
 \]
 
 \exercise %C.1-7
-Niech $S$ będzie zbiorem \singledash{$n$}{elementowym} oraz niech $s\in S$.
-Ze zbioru $S$ można wybrać $\binom{n}{k}$ \singledash{$k$}{podzbiorów}.
+Niech $S$ będzie zbiorem $n$\nbhyphen elementowym oraz niech $s\in S$.
+Ze zbioru $S$ można wybrać $\binom{n}{k}$ $k$\nbhyphen podzbiorów.
 Podzbiory te możemy podzielić na takie, które nie zawierają $s$ i~na takie, które zawierają $s$.
 Łatwo zauważyć, że tych pierwszych jest $\binom{n-1}{k}$, a~drugich $\binom{n-1}{k-1}$.
 Stąd wnioskujemy, że
@@ -68,7 +68,7 @@ Początkowe wiersze trójkąta Pascala:
 		1 && 6 && 15 && 20 && 15 && 6 && 1
 	\end{array}
 \]
-W~\singledash{$n$}{tym} wierszu na lewym krańcu jest element $\binom{n}{0}=1$, a~na prawym krańcu -- element $\binom{n}{n}=1$.
+W~$n$\nbhyphen tym wierszu na lewym krańcu jest element $\binom{n}{0}=1$, a~na prawym krańcu -- element $\binom{n}{n}=1$.
 Pozostałe elementy wyznaczane są na podstawie tożsamości z~\refExercise{C.1-7}.
 
 \exercise %C.1-9
@@ -110,7 +110,7 @@ Mamy teraz:
 	&\le \frac{n!}{j!\,k!\,(n-j-k)!} = \frac{n!}{j!\,(n-j)!}\cdot\frac{(n-j)!}{k!\,(n-j-k)!} = \binom{n}{j}\binom{n-j}{k}.
 \end{align*}
 
-Lewą stronę nierówności można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru \singledash{$n$}{elementowego}, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
+Lewą stronę nierówności można zinterpretować jako liczbę możliwych sposobów wyboru $j+k$ przedmiotów ze zbioru $n$\nbhyphen elementowego, prawą zaś jako liczbę możliwości wyboru najpierw $j$ przedmiotów spośród $n$, a~następnie $k$ przedmiotów spośród $n-j$ pozostawionych po pierwszym wyborze.
 W~obu strategiach wyznaczony zostaje zbiór $A$ złożony z~$j+k$ przedmiotów.
 Jest tylko jeden sposób wybrania zadanego zbioru $A$ przy pierwszej strategii i~o~wiele więcej, jeśli zastosuje się drugie podejście.
 Można bowiem dowolnie podzielić elementy z~$A$ na $j$ takich, które będą wybierane w~pierwszym kroku i~$k$ pozostałych, które wybierzemy w~drugim kroku.
