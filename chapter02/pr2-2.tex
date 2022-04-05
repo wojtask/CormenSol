@@ -20,14 +20,14 @@ W~przeciwnym przypadku zamiana nie następuje, przez co $A[j-1]$ stanowi najmnie
 \subproblem %2-2(c)
 Niezmiennik zewnętrznej pętli \kw{for}:
 \begin{quote}
-Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{1}{4} podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco.
+Przed każdą iteracją pętli \kw{for} w~wierszach \doubledash{1}{4} podtablica $A[1\twodots i-1]$ zawiera $i-1$ najmniejszych elementów tablicy $A$ uporządkowanych niemalejąco.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, czyli podtablica $A[1\twodots i-1]$ jest pusta, a~więc jest trywialnie posortowana.
-	\item[Utrzymanie:] Z~założenia, że podtablica $A[1\twodots i-1]$ jest posortowana niemalejąco wynika, że $A[i-1]$ jest największym elementem tej podtablicy.
-Wewnętrzna pętla \kw{for} wyszukuje w~podtablicy $A[i\twodots\attrib{A}{length}]$ najmniejszy element i~umieszcza go na pozycji $i$ (dowód w~poprzednim punkcie).
-W~podtablicy $A[i\twodots\attrib{A}{length}]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem w~szczególności zachodzi $A[i-1]\le A[i]$.
-Stąd wnioskujemy, że podtablica $A[1\twodots i]$ jest posortowana niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
+	\item[Utrzymanie:] Z~założenia o~uporządkowaniu podtablicy $A[1\twodots i-1]$ wynika, że $A[i-1]$ stanowi jej największy element.
+Wewnętrzna pętla \kw{for} wyszukuje najmniejszy element podtablicy $A[i\twodots\attrib{A}{length}]$ i~umieszcza go na pozycji $i$ (dowód w~poprzednim punkcie).
+Z~założenia mamy też, że w~podtablicy $A[i\twodots\attrib{A}{length}]$ nie ma mniejszych elementów od $A[i-1]$, a~zatem w~szczególności zachodzi $A[i-1]\le A[i]$.
+Stąd wnioskujemy, że podtablica $A[1\twodots i]$ zawiera $i$ najmniejszych elementów tablicy $A$ posortowanych niemalejąco i~po aktualizacji $i$ niezmiennik zostaje odtworzony.
 	\item[Zakończenie:] Na końcu mamy $i=\attrib{A}{length}+1$.
 Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco, a~zatem algorytm sortuje poprawnie.
 \end{description}
