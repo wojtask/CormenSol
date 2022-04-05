@@ -4,30 +4,27 @@
 $\langle1,5\rangle$, $\langle2,5\rangle$, $\langle3,4\rangle$, $\langle3,5\rangle$, $\langle4,5\rangle$
 
 \subproblem %2-4(b)
-Największą możliwą liczbę inwersji ma tablica posortowana malejąco.
-Każdy element na pozycji $i$ tworzy inwersję z~każdym z~$n-i$ elementów na prawo od niego w~tej tablicy.
-Liczba inwersji wynosi zatem
-\[
-	\sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2}.
-\]
+Dla zbioru $\{1,2,\dots,n\}$ tablicą o~największej możliwej liczbie inwersji jest tablica posortowana malejąco, czyli $\langle n,n-1,\dots,1\rangle$.
+Inwersją jest wtedy każda para $\langle i,j\rangle$, gdzie $1\le i<j\le n$.
+Łącznie w~tej tablicy jest zatem $\binom{n}{2}=n(n-1)/2$ inwersji.
 
 \subproblem %2-4(c)
-Załóżmy, że tablica $A$ ma inwersję $\langle i,j\rangle$.
-To znaczy, że $i<j$ oraz $A[i]>A[j]$.
-Wtedy w~procedurze \proc{Insertion-Sort} pewna iteracja pętli \kw{while} w~wierszach \doubledash{5}{7} przesunie $A[i]$ o~jedną pozycję w~prawo, podczas gdy element będący pierwotnie na pozycji $j$ będzie znajdował się na lewo od niego, przez co wyeliminowana zostanie jedna z~inwersji.
-Tak więc każda iteracja pętli \kw{while} usuwa jedną inwersję tablicy $A$, skąd wnioskujemy, że ich liczba jest tego samego rzędu, co czas działania algorytmu sortowania przez wstawianie wykonanego na $A$.
+Dla danej tablicy $A[1\twodots n]$ przez $\mathrm{inv}(j)$ oznaczmy liczbę inwersji postaci $\langle i,j\rangle$.
+W~procedurze \proc{Insertion-Sort} pętla \kw{while} w~wierszach \doubledash{5}{7} przenosi element znajdujący się początkowo na pozycji $j$ o~$\mathrm{inv}(j)$ pozycji w~lewo, dzięki czemu wyeliminowanych zostaje $\mathrm{inv}(j)$ inwersji.
+Pętla \kw{while} działa dla każdego $j=2$, 3, \dots, $n$, wykonując łącznie $I=\sum_{j=2}^n\mathrm{inv}(j)$ iteracji, czyli dokładnie tyle, ile inwersji było w~wejściowej tablicy.
+Z~tej analizy płynie wniosek, że czas działania sortowania przez wstawianie wynosi $\Theta(n+I)$.
 
 \subproblem %2-4(d)
 Niech $a$ i~$b$ będą dwoma różnymi elementami tablicy $A$.
 Załóżmy, że podczas sortowania przez scalanie w~procedurze \proc{Merge} w~pewnym momencie $L[i]=a$ oraz $R[j]=b$.
 Jeśli warunek z~wiersza 13 procedury \proc{Merge} zachodzi, to znaczy, że $a$ i~$b$ nie tworzą inwersji.
 W~przeciwnym przypadku $a>b$, a~ponieważ scalane podtablice są posortowane, to $b$ jest mniejsze od każdego dotychczas nieprzetworzonego elementu podtablicy $L$.
-Liczba elementów $A$ należących do $L$ wynosi $n_1$, zatem w~momencie przetwarzania elementu $b$, jest w~niej $n_1-i+1$ elementów nieprzetworzonych, a~więc tyle inwersji tworzy z~nimi $b$.
+Liczba elementów $A$ należących do $L$ wynosi $n_1$, zatem w~momencie przetwarzania elementu $b$ jest w~niej $n_1-i+1$ elementów nieprzetworzonych, a~więc tyle inwersji tworzy z~nimi $b$.
 Od tego momentu element ten będzie z~nimi w~jednej podtablicy, więc nie policzymy żadnej inwersji dwukrotnie.
 
 W~ten sposób, modyfikując algorytm sortowania przez scalanie, wyznaczamy liczbę inwersji \singledash{$n$}{elementowej} tablicy $A$ w~czasie $\Theta(n\lg n)$, czego efektem ubocznym jest jej posortowanie.
 W~procedurze \proc{Merge-Sort} wystarczy początkowo wyzerować licznik inwersji i~następnie sumować częściowe wyniki zwracane z~wywołań rekurencyjnych, a~w~\proc{Merge} -- doliczać odpowiednią liczbę inwersji tworzonych przez element $b$.
-Poniższe pseudokody implementują to rozumowanie.
+Poniższe pseudokody implementują to podejście.
 
 \begin{codebox}
 \Procname{$\proc{Count-Inversions}(A,p,r)$}
@@ -53,7 +50,8 @@ Poniższe pseudokody implementują to rozumowanie.
 \li		\Do $R[j]\gets A[q+j]$
 		\End
 \li	$L[n_1+1]\gets R[n_2+1]\gets\infty$
-\li	$i\gets j\gets1$
+\li	$i\gets1$
+\li $j\gets1$
 \li	$\id{inversions}\gets0$
 \li	\For $k\gets p$ \To $r$
 \li		\Do \If $L[i]\le R[j]$
@@ -66,3 +64,4 @@ Poniższe pseudokody implementują to rozumowanie.
 		\End
 \li	\Return \id{inversions}
 \end{codebox}
+Aby wyznaczyć liczbę inwersji tablicy $A[1\twodots n]$, należy wywołać $\proc{Count-Inversions}(A,1,n)$.
