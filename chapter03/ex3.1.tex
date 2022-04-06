@@ -45,19 +45,26 @@ Mamy $2^{2n}=2^n\cdot2^n\le c2^n$, z~czego wynika, że $c\ge2^n$, co jednak uzal
 Stąd otrzymujemy, że $2^{2n}\ne O(2^n)$.
 
 \exercise %3.1-5
-Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$, $c_2$, $n_0>0$, że nierówności
+Z~definicji notacji $\Theta$ mamy, że $f(n)=\Theta(g(n))$, gdy istnieją takie stałe $c_1$, $c_2$, $n_0>0$, że
 \[
 	0 \le c_1g(n) \le f(n) \le c_2g(n)
 \]
-zachodzą dla wszystkich $n\ge n_0$.
-Możemy je zapisać w~formie układu
+dla wszystkich $n\ge n_0$.
+Powyższe nierówności można rozdzielić na $0\le c_1g(n)\le f(n)$, co daje $f(n)=\Omega(n)$ oraz $0\le f(n)\le c_2g(n)$, czyli $f(n)=O(n)$.
+
+Dla dowodu w~drugą stronę załóżmy, że $f(n)=\Omega(g(n))$, czyli że istnieją stałe $c_1$, $n_1>0$, że dla każdego $n\ge n_1$ zachodzi
 \[
-	\begin{cases}
-		0 \le c_1g(n) \le f(n) \\
-		0 \le f(n) \le c_2g(n)
-	\end{cases}.
+	0 \le c_1g(n) \le f(n).
 \]
-Z~pierwszej nierówności układu dostajemy, że $f(n)=\Omega(g(n))$, a~z~drugiej, że $f(n)=O(g(n))$.
+Podobnie załóżmy, że $f(n)=O(g(n))$, czyli że istnieją stałe $c_2$, $n_2>0$, że dla każdego $n\ge n_2$ zachodzi
+\[
+	0 \le f(n) \le c_2g(n).
+\]
+Wybierając teraz $n_0=\max(n_1,n_2)$ i~łącząc powyższe nierówności, dostajemy, że dla dowolnego $n\ge n_0$ zachodzi
+\[
+	0 \le c_1g(n) \le f(n) \le c_2g(n),
+\]
+czyli $f(n)=\Theta(g(n))$.
 
 \exercise %3.1-6
 Niech $c_1$, $c_2$, $n_1$, $n_2$ będą pewnymi stałymi dodatnimi.
