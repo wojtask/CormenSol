@@ -80,20 +80,9 @@ Ostatni krok wynika z~tożsamości $\lg^bn=o(n^a)$ prawdziwej dla stałych $a$, 
 Otrzymany rezultat potwierdza, że $\lg(\lceil\lg\lg n\rceil!)=O(\lg n)$, a~zatem funkcja $\lceil\lg\lg n\rceil!$ jest ograniczona wielomianowo.
 
 \exercise %3.2-5
-Zdefiniujmy $n$ jako
-\[
-    2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k$}\kern0pt},
-\]
-przy czym $0<\epsilon\le1$, a~$k\ge1$ oznacza liczbę dwójek w~powyższym zapisie.
-Zachodzi
-\[
-    \lg^*n=k \quad\text{oraz}\quad \lg n = 2^{2^{\cdot^{\cdot^{\cdot^{2^\epsilon}}}}}\vbox{\hbox{$\Big\}\scriptstyle k-1$}\kern0pt},
-\]
-a~zatem
-\[
-    \lg\lg^*n = \lg k \quad\text{oraz}\quad \lg^*\lg n = k-1.
-\]
-Oczywiście $k-1=\omega(\lg k)$, więc otrzymujemy, że $\lg^*\lg n=\omega(\lg\lg^*n)$.
+Niech $x=\lg^*n$.
+Wtedy $\lg\lg^*n=\lg x$, a~$\lg^*\lg n=x-1$.
+Funkcja liniowa $x-1$ jest asymptotycznie większa od logarytmicznej $\lg x$, dlatego $\lg^*\lg n=\omega(\lg\lg^*n)$.
 
 \exercise %3.2-6
 Łatwo sprawdzić, że dla $i=0$ oraz $i=1$ wzór jest prawdziwy.
