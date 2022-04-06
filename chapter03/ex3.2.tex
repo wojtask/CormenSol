@@ -18,8 +18,8 @@ Jeśli ponadto założymy, że funkcje $f(n)$ i~$g(n)$ są nieujemne, to począt
 	\]
 	Wykorzystując wzór Stirlinga i~wybierając pewną stałą $c>0$, ograniczamy $\lg(n!)$ od dołu:
 	\begin{align*}
-		\lg(n!) &\ge \lg\biggl(\!\sqrt{2\pi n}\,\biggl(\frac{n}{e}\biggr)^n\biggl(1+\frac{c}{n}\biggr)\biggr) \\
-		&= \lg\sqrt{2\pi n}+\lg\biggl(\frac{n}{e}\biggr)^n+\lg\biggl(1+\frac{c}{n}\biggr) \\
+		\lg(n!) &\ge \lg\left(\!\sqrt{2\pi n}\,\left(\frac{n}{e}\right)^n\left(1+\frac{c}{n}\right)\right) \\
+		&= \lg\sqrt{2\pi n}+\lg\left(\frac{n}{e}\right)^n+\lg\left(1+\frac{c}{n}\right) \\
 		&> n\lg n-n\lg e \\
 		&\ge n\lg n-\frac{n\lg n}{2} \\
 		&= \frac{n\lg n}{2}.
@@ -37,7 +37,7 @@ Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierd
 	\[
 	    \frac{n!}{2^n} = \biggl(\frac{1}{2}\biggr)\biggl(\frac{2}{2}\biggr)\dots\biggl(\frac{n}{2}\biggr).
 	\]
-	Wszystkie czynniki powyższego iloczynu są dodatnie, a~przy coraz większym $n$ ostatnie czynniki rosną nieograniczenie, zatem cały iloczyn dąży do $\infty$.
+	Wszystkie czynniki powyższego iloczynu są dodatnie, a~przy wzrastającym $n$ końcowe czynniki mogą być dowolnie duże, zatem cały iloczyn dąży do $\infty$.
 \end{proof}
 
 \begin{proof}[Dowód tożsamości $n!=o(n^n)$]
@@ -49,8 +49,7 @@ Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierd
 	\[
 	    \frac{n!}{n^n} = \biggl(\frac{1}{n}\biggr)\biggl(\frac{2}{n}\biggr)\dots\biggl(\frac{n}{n}\biggr).
 	\]
-	Każdy czynnik po prawej stronie znaku równości jest dodatni i~nie przekracza 1.
-Ponadto dla $n$ dążącego do $\infty$ początkowe czynniki zmierzają do 0, a~zatem granicą tego iloczynu jest 0.
+	Każdy czynnik po prawej stronie jest dodatni i~nie przekracza 1, a~dla wystarczająco dużego $n$ początkowe czynniki mogą być dowolnie blisko 0, zatem granicą tego iloczynu jest 0.
 \end{proof}
 
 \exercise %3.2-4
