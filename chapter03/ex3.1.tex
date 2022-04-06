@@ -1,18 +1,16 @@
 \subchapter{Notacja asymptotyczna}
 
 \exercise %3.1-1
-Załóżmy, że dziedziną funkcji $f(n)$ i~$g(n)$ jest $\mathbb{N}$.
-Niech $A=\{\,n\in\mathbb{N}:f(n)\ge g(n)\,\}$.
-Dla odpowiednio dużych $n\in A$, dla których obie funkcje przyjmują wartości nieujemne, mamy
+Niech $n_0$ będzie najmniejszym $n$, dla którego $f(n)\ge0$ i~$\ge g(n)\ge0$.
+Dla każdego $n\ge n_0$ mamy
 \[
-    \max(f(n),g(n)) = f(n) \le f(n)+g(n) = O(f(n)+g(n)).
+    \max(f(n),g(n)) \le f(n)+g(n) = O(f(n)+g(n)) \tag{dla $c=1$ w~definicji $O$}
 \]
-Z~kolei
+oraz
 \[
-    \max(f(n),g(n)) = f(n) \ge \frac{f(n)+g(n)}{2} = \Omega(f(n)+g(n))
+    \max(f(n),g(n)) \ge \frac{f(n)+g(n)}{2} = \Omega(f(n)+g(n)). \tag{dla $c=1/2$ w~definicji $\Omega$}
 \]
-i~na mocy tw.\ 3.1 otrzymujemy, że $\max(f(n),g(n))=\Theta(f(n)+g(n))$.
-Identyczny rezultat można uzyskać dla $n\in\mathbb{N}\setminus A$, tzn.\ gdy $f(n)<g(n)$.
+Na mocy tw.\ 3.1 otrzymujemy, że $\max(f(n),g(n))=\Theta(f(n)+g(n))$.
 
 \exercise %3.1-2
 Aby pokazać, że $(n+a)^b=\Theta(n^b)$, należy znaleźć stałe $c_1$, $c_2$, $n_0>0$ takie, że
