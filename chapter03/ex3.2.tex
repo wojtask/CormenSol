@@ -85,17 +85,19 @@ Wtedy $\lg\lg^*n=\lg x$, a~$\lg^*\lg n=x-1$.
 Funkcja liniowa $x-1$ jest asymptotycznie większa od logarytmicznej $\lg x$, dlatego $\lg^*\lg n=\omega(\lg\lg^*n)$.
 
 \exercise %3.2-6
-Łatwo sprawdzić, że dla $i=0$ oraz $i=1$ wzór jest prawdziwy.
-Załóżmy teraz, że zachodzi
+W~przypadkach bazowych, gdy $i=0$ lub $i=1$, mamy
 \[
-	F_i = \frac{\phi^i-\widehat\phi^i}{\sqrt{5}} \quad\text{oraz}\quad F_{i+1} = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}
+	\frac{\phi^0-\widehat\phi^0}{\sqrt{5}} = 0 = F_0 \quad\text{oraz}\quad \frac{\phi^1-\widehat\phi^1}{\sqrt{5}} = \frac{1+\sqrt{5}-\left(1-\sqrt{5}\right)}{2\sqrt{5}} = 1 = F_1.
 \]
-dla pewnego $i\ge0$.
-Po wykorzystaniu zależności $\phi+1=\phi^2$ i~$\widehat\phi+1=\widehat\phi^2$ otrzymujemy
+Załóżmy teraz, że $i\ge2$ i~że zachodzi
 \[
-	F_{i+2} = F_{i+1}+F_i = \frac{\phi^{i+1}-\widehat\phi^{i+1}}{\sqrt{5}}+\frac{\phi^i-\widehat\phi^i}{\sqrt{5}} = \frac{\phi^i(\phi+1)-\widehat\phi^i\bigl(\widehat\phi+1\bigr)}{\sqrt{5}} = \frac{\phi^{i+2}-\widehat\phi^{i+2}}{\sqrt{5}},
+	F_{i-2} = \frac{\phi^{i-2}-\widehat\phi^{i-2}}{\sqrt{5}} \quad\text{oraz}\quad F_{i-1} = \frac{\phi^{i-1}-\widehat\phi^{i-1}}{\sqrt{5}}.
 \]
-a~zatem wzór jest spełniony dla każdego $i\ge0$.
+Dzięki zależnościom $1+\phi=\phi^2$ i~$1+\widehat\phi=\widehat\phi^2$ otrzymujemy
+\[
+	F_i = F_{i-2}+F_{i-1} = \frac{\phi^{i-2}-\widehat\phi^{i-2}}{\sqrt{5}}+\frac{\phi^{i-1}-\widehat\phi^{i-1}}{\sqrt{5}} = \frac{\phi^{i-2}(1+\phi)-\widehat\phi^{i-2}\bigl(1+\widehat\phi\bigr)}{\sqrt{5}} = \frac{\phi^i-\widehat\phi^i}{\sqrt{5}},
+\]
+co kończy dowód.
 
 \exercise %3.2-7
 Korzystając z~wyniku z~poprzedniego zadania, mamy
