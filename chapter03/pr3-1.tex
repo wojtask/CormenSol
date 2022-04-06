@@ -1,14 +1,5 @@
 \problem{Asymptotyczne zachowanie wielomianów} %3-1
-Udowodnimy najpierw fakt, że $p(n)=\Theta(n^d)$.
-Należy znaleźć stałe $c_1$, $c_2$, $n_0>0$ takie, że dla $n\ge n_0$ prawdziwe są nierówności:
-\[
-	0 \le c_1n^d \le a_dn^d+a_{d-1}n^{d-1}+\dots+a_0 \le c_2n^d.
-\]
-Po podzieleniu ich przez $n^d$ dostajemy
-\[
-	0 \le c_1 \le a_d+\underbrace{\frac{a_{d-1}}{n}+\dots+\frac{a_0}{n^d}}_\delta \le c_2,
-\]
-a~ponieważ składnik $\delta$ można dowolnie zbliżyć do zera, zwiększając parametr $n_0$, to stąd obie wartości $c_1$ i~$c_2$ mogą być dowolnie bliskie $a_d$.
+W~podrozdziale 3.2 odnotowano, że asymptotycznie dodatni wielomian $p(n)$ stopnia $d$ jest rzędu $\Theta(n^d)$.
 
 \subproblem %3-1(a)
 Zachodzi $p(n)=\Theta(n^d)$, zatem w~szczególności $p(n)=O(n^d)$, co oznacza, że istnieją stałe $c$, $n_0>0$, że dla wszystkich $n\ge n_0$ prawdą jest $0\le p(n)\le cn^d$.
@@ -19,7 +10,7 @@ Nierówność $k\le d$ implikuje $n^k\le n^d$ dla $n\ge1$.
 Korzystając z~tego, że $p(n)=\Omega(n^d)$, mamy $0\le cn^k\le cn^d\le p(n)$, skąd wynika $p(n)=\Omega(n^k)$.
 
 \subproblem %3-1(c)
-Dla $k=d$ tożsamość $p(n)=\Theta(n^d)=\Theta(n^k)$ zachodzi w~oczywisty sposób.
+Dla $k=d$ tożsamość $p(n)=\Theta(n^d)=\Theta(n^k)$ zachodzi trywialnie.
 
 \subproblem %3-1(d)
 Zachodzi $p(n)=O(n^d)$, tzn.\ istnieją stałe $c$, $n_0>0$ takie, że dla każdego $n\ge n_0$ spełniona jest nierówność $0\le p(n)\le cn^d$.
