@@ -53,12 +53,18 @@ Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierd
 \end{proof}
 
 \exercise %3.2-4
-Funkcja $f(n)$ jest ograniczona wielomianowo, jeżeli istnieją stałe $c$, $k$, $n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$.
-Stąd $\lg f(n)\le k\lg n+\lg c\le(k+1)\lg n$, o~ile $n\ge c$, a~więc $\lg f(n)=O(\lg n)$.
-Stwierdzenie, że funkcja $f(n)$ jest ograniczona wielomianowo, jest więc równoważne stwierdzeniu, że $\lg f(n)=O(\lg n)$.
+Z~definicji, funkcja $f(n)$ jest ograniczona wielomianowo, gdy istnieją stałe $c$, $k$, $n_0>0$ takie, że dla każdego $n\ge n_0$ zachodzi $f(n)\le cn^k$.
+Po zlogarytmowaniu obu stron mamy
+\[
+	\lg f(n) \le \lg(cn^k) = \lg c+k\lg n \le (k+1)\lg n,
+\]
+o~ile $n\ge c$, co oznacza, że $\lg f(n)=O(\lg n)$.
 
 Zanim przejdziemy do głównego dowodu, zauważmy, że $\lceil\lg n\rceil=\Theta(\lg n)$.
-Zachodzi bowiem $\lceil\lg n\rceil\ge\lg n$ oraz $\lceil\lg n\rceil<\lg n+1\le2\lg n$ dla każdego $n\ge2$.
+Dla każdego $n\ge2$ zachodzi bowiem
+\[
+	\lg n \le \lceil\lg n\rceil < \lg n+1 \le 2\lg n.
+\]
 
 Logarytmując pierwszą badaną funkcję przy wykorzystaniu wzoru (3.18), dostajemy
 \[
