@@ -11,9 +11,9 @@ Natomiast nie jest prawdą podobne twierdzenie, gdyby zastosować notację $\Ome
 \subproblem %3-5(b)
 Zaletą nowej notacji jest fakt, że jeśli o~pewnej funkcji $f(n)$ wiemy, że nie jest klasy $O(g(n))$, to jest klasy $\overset{\infty}{\Omega}(g(n))$ (z~poprzedniego punktu) -- nie istnieją zatem funkcje, których nie da się porównać z~innymi za pomocą pary notacji $O$ i~$\overset{\infty}{\Omega}$.
 
-Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie dominuje nad funkcją $g(n)$, gdyż w~nieskończenie wielu punktach może przyjmować wartości mniejsze od wartości $g(n)$.
-Nieskończenie wiele punktów, o~których mowa w~definicji $\overset{\infty}{\Omega}$, może też występować daleko ponad maksymalnym rozmiarem danych wejściowych algorytmu, którego czas działania opisujemy przy użyciu nowej notacji.
-Wady te sprawiają, że nowa notacja ma niewielkie zastosowanie praktyczne i~jest użyteczna głównie w~rozważaniach teoretycznych.
+Niestety, jeśli $f(n)=\overset{\infty}{\Omega}(g(n))$, to funkcja $f(n)$ niekoniecznie ,,dominuje'' nad funkcją $g(n)$ w~tym sensie, że $f$ dla nieskończenie wielu punktów może przyjmować wartości mniejsze niż $g$ dla tych samych punktów.
+Nieskończenie wiele punktów, o~których mowa w~definicji $\overset{\infty}{\Omega}$, może też występować daleko za maksymalnym rozmiarem danych wejściowych algorytmu, którego czas działania opisujemy przy użyciu tej notacji.
+Wady te sprawiają, że notacja $\overset{\infty}{\Omega}$ ma niewielkie zastosowanie praktyczne.
 
 \subproblem %3-5(c)
 W~przypadku implikacji w~lewą stronę z~warunku $f(n)=\Theta(g(n))$ wynika, że $f(n)\ge0$ od pewnego dodatniego $n_0$, a~więc $f(n)$ jest funkcją asymptotycznie nieujemną i~twierdzenie stosuje się bez zmian, czyli implikacja zachodzi.
@@ -39,21 +39,26 @@ Oto definicje notacji $\widetilde{\Omega}$ i~$\widetilde{\Theta}$:
 		\widetilde{\Omega}(g(n)) &= \bigl\{\,f(n):\text{istnieją dodatnie stałe $c$, $k$, $n_0$ takie, że} \\
 		&\qquad 0 \le cg(n)\lg^kn \le f(n) \text{ dla wszystkich $n \ge n_0$}\,\bigr\}, \\
 		\widetilde{\Theta}(g(n)) &= \bigl\{\,f(n):\text{istnieją dodatnie stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_0$ takie, że} \\
-		&\qquad 0 \le c_1g(n)\lg^{k_1}n \le f(n) \le c_2g(n)\lg^{k_2}n \text{ dla wszystkich $n \ge n_0$}\,\bigr\}.
+		&\qquad 0 \le c_1g(n)\lg^{k_1}\!n \le f(n) \le c_2g(n)\lg^{k_2}\!n \text{ dla wszystkich $n \ge n_0$}\,\bigr\}.
 	\end{split}
 \]
 
 Dowód twierdzenia 3.1 dla notacji $\widetilde{O}$, $\widetilde{\Omega}$ i~$\widetilde{\Theta}$ przebiega analogicznie do dowodu jego oryginalnego odpowiednika przeprowadzonego w~\refExercise{3.1-5}.
-Z~definicji notacji $\widetilde{\Theta}$ mamy, że $f(n)=\widetilde{\Theta}(g(n))$ wtedy i~tylko wtedy, gdy istnieją takie stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_0>0$, że nierówności
+Z~definicji notacji $\widetilde{\Theta}$ mamy, że $f(n)=\widetilde{\Theta}(g(n))$, gdy istnieją takie stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_0>0$, że nierówności
 \[
-	0 \le c_1g(n)\lg^{k_1}n \le f(n) \le c_2g(n)\lg^{k_2}n
+	0 \le c_1g(n)\lg^{k_1}\!n \le f(n) \le c_2g(n)\lg^{k_2}\!n
 \]
 zachodzą dla wszystkich $n\ge n_0$.
-Zapiszmy je w~postaci układu
+Po ich rozdzieleniu mamy $0\le c_1g(n)\lg^{k_1}\!n\le f(n)$, skąd $f(n)=\widetilde{\Omega}(g(n))$, oraz $0\le f(n)\le c_2g(n)\lg^{k_2}\!n$, skąd $f(n)=\widetilde{O}(g(n))$.
+
+W~drugą stronę, niech $f(n)=\widetilde{\Omega}(g(n))$ i~$f(n)=\widetilde{O}(g(n))$.
+Istnieją więc stałe $c_1$, $c_2$, $k_1$, $k_2$, $n_1$, $n_2>0$, że
 \[
-	\begin{cases}
-		0 \le c_1g(n)\lg^{k_1}n \le f(n) \\
-		0 \le f(n) \le c_2g(n)\lg^{k_2}n
-	\end{cases}.
+	0 \le c_1g(n)\lg^{k_1}\!n \le f(n)
 \]
-Z~pierwszej nierówności mamy, że $f(n)=\widetilde{\Omega}(g(n))$, a~z~drugiej, że $f(n)=\widetilde{O}(g(n))$.
+dla wszystkich $n\ge n_1$ oraz
+\[
+	0 \le f(n) \le c_2g(n)\lg^{k_2}\!n
+\]
+dla wszystkich $n\ge n_2$.
+Wybierając $n_0=\max(n_1,n_2)$, spełniamy obie nierówności dla każdego $n\ge n_0$, skąd wynika $f(n)=\widetilde{\Theta}(g(n))$.
