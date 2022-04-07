@@ -67,10 +67,22 @@ Wybierając teraz $n_0=\max(n_1,n_2)$ i~łącząc powyższe nierówności, dosta
 czyli $f(n)=\Theta(g(n))$.
 
 \exercise %3.1-6
-Niech $c_1$, $c_2$, $n_1$, $n_2$ będą pewnymi stałymi dodatnimi.
-Pesymistyczny czas działania algorytmu wynosi $O(g(n))$ wtedy i~tylko wtedy, gdy dla dowolnych danych wejściowych rozmiaru $n\ge n_1$ czas jego działania $f(n)$ nie przekracza $c_1g(n)$.
-Z~kolei to, że optymistyczny czas wynosi $\Omega(g(n))$, oznacza, że dla dowolnych danych wejściowych rozmiaru $n\ge n_2$ czas działania algorytmu $f(n)$ jest nie mniejszy niż $c_2g(n)$.
-Widać zatem, że dla dowolnych danych rozmiaru $n\ge\max(n_1,n_2)$ mamy $0\le c_2g(n)\le f(n)\le c_1g(n)$, a~to jest równoważne z~tym, że $f(n)=\Theta(g(n))$.
+Niech $T(n)$ będzie czasem działania algorytmu dla danych wejściowych rozmiaru $n$.
+Wielkość tę można traktować jak zmienną losową przyjmującą konkretne wartości w~zależności od egzemplarza danych wejściowych.
+Oznaczmy przez $T_\mathrm{min}(n)$ i~$T_\mathrm{max}(n)$, odpowiednio, minimalną i~maksymalną wartość zmiennej losowej $T(n)$, czyli optymistyczny i~pesymistyczny czas działania algorytmu dla danych rozmiaru $n$.
+
+Załóżmy, że $T(n)=\Theta(g(n))$.
+Wśród danych rozmiaru $n$ wymagających takiego czasu są w~szczególności te, które stanowią dla algorytmu przypadki optymistyczny i~pesymistyczny.
+Mamy więc zarówno $T_\mathrm{min}(n)=\Theta(g(n))$, jak i~$T_\mathrm{max}(n)=\Theta(g(n))$, a~z~tw.\ 3.1 wynika w~szczególności $T_\mathrm{min}(n)=\Omega(g(n))$ i~$T_\mathrm{max}(n)=O(g(n))$.
+
+Niech teraz $T_\mathrm{min}(n)=\Omega(g(n))$ i~$T_\mathrm{max}(n)=O(g(n))$.
+Z~definicji notacji $\Omega$ i~$O$ mamy, że istnieją dodatnie stałe $c_1$, $c_2$, $n_1$, $n_2$ takie, że $0\le c_1g(n)\le T_\mathrm{min}(g(n))$ dla każdego $n\ge n_1$ oraz $0\le T_\mathrm{max}(g(n))\le c_2g(n)$ dla każdego $n\ge n_2$.
+Niech $n_0=\max(n_1,n_2)$.
+Wówczas dla dowolnych $n\ge n_0$ zachodzi
+\[
+	0 \le c_1g(n) \le T_\mathrm{min}(n) \le T(n) \le T_\mathrm{max}(n) \le c_2g(n),
+\]
+czyli $T(n)=\Theta(g(n))$.
 
 \exercise %3.1-7
 Załóżmy niepustość tego zbioru i~rozważmy pewne $f(n)\in o(g(n))\cap\omega(g(n))$.
