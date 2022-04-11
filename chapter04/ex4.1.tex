@@ -69,44 +69,49 @@ Rekurencję (4.2) można przedstawić w~alternatywny sposób:
 \[
 	T(n) =
 	\begin{cases}
-		d_1, & \text{jeśli $n=1$}, \\
-		T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+d_2n, & \text{jeśli $n>1$},
+		a, & \text{jeśli $n=1$}, \\
+		T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+bn, & \text{jeśli $n>1$},
 	\end{cases}
 \]
-gdzie $d_1$, $d_2>0$ są stałymi.
-Udowodnimy oszacowania górne i~dolne dla $T(n)$ przy użyciu indukcji, przy czym założymy, że $n\ge4$ i~skorzystamy z~obserwacji, że $T(n)$ jest funkcją niemalejącą.
+dla stałych $a$, $b>0$.
+
+Niech $n\ge4$.
+Udowodnimy oszacowania górne i~dolne dla $T(n)$ przy użyciu indukcji i~korzystając z~obserwacji, że $T(n)$ jest funkcją niemalejącą.
 Dla stałych $c_1$, $c_2>0$ przyjmijmy założenia
 \[
 	T(\lfloor n/2\rfloor) \ge c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor \quad\text{oraz}\quad T(\lceil n/2\rceil) \le c_2\lceil n/2\rceil\lg\lceil n/2\rceil.
 \]
-
-W~przypadku dolnego oszacowania mamy:
+Dla oszacowania dolnego mamy:
 \begin{align*}
-	T(n) &\ge 2T(\lfloor n/2\rfloor)+d_2n \\
-	&\ge 2c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+d_2n \\
-	&> 2c_1(n/2-1)\lg(n/4)+d_2n \\
-	&= c_1n\lg n-2c_1n-2c_1\!\lg(n/4)+d_2n \\
+	T(n) &= T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+bn \\
+	&\ge T(\lfloor n/2\rfloor)+T(\lfloor n/2\rfloor)+bn \\
+	&\ge 2c_1\lfloor n/2\rfloor\lg\lfloor n/2\rfloor+bn \\
+	&> 2c_1(n/2-1)\lg(n/4)+bn \\
+	&= c_1n\lg n-2c_1n-2c_1\!\lg(n/4)+bn \\
 	&\ge c_1n\lg n,
 \end{align*}
 ponieważ zachodzi $\lfloor n/2\rfloor>n/2-1$ i~$\lfloor n/2\rfloor\ge n/4$ oraz można tak dobrać stałą $c_1$, aby prawdziwa była ostatnia nierówność powyższego wyprowadzenia.
-Po podstawieniu $c_1=d_2/4$ sprowadza się ona do postaci $n\ge\lg(n/4)$, co jest prawdą dla wszystkich $n$ dodatnich.
-Podstawę indukcji stanowi $n=1$, gdyż $T(1)\ge c_1\cdot 1\cdot\lg1=0$, a~zatem $T(n)=\Omega(n\lg n)$.
+Po podstawieniu $c_1=b/4$ sprowadza się ona do postaci $n\ge\lg(n/4)$, co jest prawdą dla wszystkich $n$ dodatnich.
+Podstawę indukcji stanowi $n=1$, gdyż $T(1)=a\ge c_1\cdot 1\cdot\lg1=0$.
+Stąd $T(n)=\Omega(n\lg n)$.
 
 Wykorzystując nierówność $\lceil n/2\rceil<n/2+1$, dowodzimy górnego oszacowania:
 \begin{align*}
-	T(n) &\le 2T(\lceil n/2\rceil)+d_2n \\
-	&\le 2c_2\lceil n/2\rceil\lg\lceil n/2\rceil+d_2n \\
-	&< 2c_2(n/2+1)\lg\frac{n\lceil n/2\rceil}{n}+d_2n \\
-	&\le c_2n\lg n+c_2(n+2)\lg\frac{\lceil n/2\rceil}{n}+2c_2\lg n+d_2n \\
+	T(n) &= T(\lceil n/2\rceil)+T(\lfloor n/2\rfloor)+bn \\
+	&\le T(\lceil n/2\rceil)+T(\lceil n/2\rceil)+bn \\
+	&\le 2c_2\lceil n/2\rceil\lg\lceil n/2\rceil+bn \\
+	&< 2c_2(n/2+1)\lg\frac{n\lceil n/2\rceil}{n}+bn \\
+	&= c_2(n+2)\biggl(\lg n+\lg\frac{\lceil n/2\rceil}{n}\biggr)+bn \\
+	&\le c_2n\lg n+2c_2\lg n+c_2(n+2)\lg\frac{\lceil n/2\rceil}{n}+bn \\
 	&\le c_2n\lg n.
 \end{align*}
-W~ostatniej nierówności skorzystano z~faktu, że dla $n\ge2$ wyrażenie $\lg\frac{\lceil n/2\rceil}{n}$ jest ujemne, a~zatem, dobierając odpowiednio duże $c_2$, można uzasadnić nierówność, gdyż funkcja liniowa rośnie szybciej od logarytmicznej.
-Dokładniej, okazuje się, że przyjęcie $c_2\ge10d_2$ wystarcza, aby spełnić nierówność dla $n\ge4$.
+W~ostatniej nierówności skorzystano z~faktu, że dla $n\ge2$, $\lceil n/2\rceil<n$, więc $\lg\frac{\lceil n/2\rceil}{n}<0$, a~zatem, dobierając odpowiednio duże $c_2$, można uzasadnić nierówność, gdyż funkcja liniowa rośnie szybciej od logarytmicznej.
+Dokładniej, okazuje się, że przyjęcie $c_2\ge10b$ wystarcza, aby spełnić nierówność dla $n\ge4$.
 
 Ponieważ dla $n\ge4$ rekurencja nie zależy bezpośrednio od $T(1)$, to za podstawę indukcji można przyjąć $n=2$ i~$n=3$.
-Mamy $T(2)=2d_1+2d_2$ oraz $T(3)=3d_1+5d_2$.
-Łatwo sprawdzić, że otrzymane oszacowanie zachodzi dla tych dwóch wartości, o~ile $d_1$ jest dostatecznie małe.
-W~przeciwnym przypadku górne oszacowanie może nie być wystarczające, jednak zwiększenie $c_2$ pozwala na dowolne ograniczenie rekurencji od góry w~zależności od wartości stałych $d_1$ i~$d_2$.
+Zachodzi $T(2)=2a+2b$, $T(3)=3a+5b$.
+Łatwo sprawdzić, że wartości te spełniają otrzymane oszacowanie, o~ile $a$ jest dostatecznie małe.
+W~przeciwnym przypadku wybranie większej stałej $c_2$ pozwala na dowolne ograniczenie rekurencji od góry w~zależności od stałych $a$ i~$b$.
 Niezależnie od ich doboru oszacowaniem górnym rekurencji $T(n)$ jest $O(n\lg n)$, co na mocy wcześniejszego wyniku dolnego oszacowania implikuje $T(n)=\Theta(n\lg n)$.
 
 \exercise %4.1-5
