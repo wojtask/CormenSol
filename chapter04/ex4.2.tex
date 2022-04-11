@@ -44,11 +44,12 @@ Mamy $T(1)=1$, $T(2)=3T(1)+2=5$ i~dalej:
 To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
 
 \exercise %4.2-2
+W~naszym uzasadnieniu opieramy się na rys.\ 4.2 z~Podręcznika.
 Drzewo rekursji $T(n)$ nie jest pełnym drzewem binarnym.
 Najkrótszą ścieżką od korzenia do liścia jest $cn\to cn/3\to cn/9\to\dots\to cn/3^i\to\dots\to T(1)$.
 Liść tej gałęzi znajduje się na poziomie $h=\log_3n$.
 Gdybyśmy pominęli wszystkie poziomy tego drzewa poniżej $h$\nbhyphen tego, to uzyskalibyśmy pełne drzewo binarne o~wysokości $h$ i~łącznym koszcie $\Theta(n\lg n)$.
-Ale tak zmodyfikowane drzewo jest mniejsze niż drzewo rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
+Ale drzewo to jest tylko częścią drzewa rekursji $T(n)$, przez co jego koszt stanowi oszacowanie dolne rekurencji $T(n)$, czyli $T(n)=\Omega(n\lg n)$.
 
 \exercise %4.2-3
 W~metodzie drzewa rekursji dla uproszczenia pominiemy branie części całkowitych.
