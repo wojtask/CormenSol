@@ -136,8 +136,8 @@ Na $i$\nbhyphen tym poziomie drzewa najmniejszy koszt wnoszą elementy o~wartoś
 Najgłębszym poziomem o~komplecie węzłów w~tym drzewie jest ten, na którym element ze skrajnie lewej gałęzi drzewa osiąga wartość stałą $d>0$.
 Oznaczmy przez $h$ głębokość tego poziomu.
 Wtedy $c\alpha^hn=d$, skąd otrzymujemy $h=\log_{1/\alpha}(cn/d)$.
-Ponieważ $\alpha$ jest stałe, to $h=\Theta(\lg n)$.
-Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach wyższych niż $h$\nbhyphen ty, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cnh=\Omega(n\lg n)$.
+Ponieważ $\alpha$, $c$, $d$ są stałymi, to $h=\Theta(\lg n)$.
+Sumując koszty węzłów drzewa $T(n)$ znajdujące się na poziomach płytszych niż $h$\nbhyphen ty, uzyskujemy oszacowanie dolne rekurencji, które wynosi $T(n)\ge cn(h+1)=\Omega(n\lg n)$.
 
 Badając teraz skrajnie prawą gałąź, której elementy wnoszą największy koszt na każdym poziomie, możemy dojść do oszacowania górnego dla $T(n)$.
 Na głębokości $H$ równej wysokości drzewa mamy $c(1-\alpha)^Hn=d$, skąd $H=\log_{1/(1-\alpha)}(cn/d)=\Theta(\lg n)$, a~więc $T(n)\le cn(H+1)=O(n\lg n)$.
