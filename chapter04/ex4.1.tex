@@ -141,7 +141,7 @@ Można pokazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie
 Analiza tej rekurencji z~każdą inną stałą w~miejscu 17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$ oraz wartości brzegowe rekursji i~podstawa indukcji, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
 
 \exercise %4.1-6
-Przyjmijmy, że $n=2^m$, skąd $m=\lg n$.
+Załóżmy, że $n=2^m$, skąd $m=\lg n$.
 Rekurencja przyjmuje teraz postać
 \[
 	T(2^m) = 2T(2^{m/2})+1.
@@ -150,18 +150,15 @@ Z~kolei podstawiając $S(m)$ za $T(2^m)$, dostajemy nową rekurencję
 \[
 	S(m) = 2S(m/2)+1,
 \]
-dla której udowodnimy rozwiązanie $\Theta(\lg m)$.
-
-Ponieważ całkowitość argumentów nie jest dla nas istotna, to możemy rekurencję potraktować jako $S(m)=S(\lfloor m/2\rfloor)+S(\lceil m/2\rceil)+1$, co, według Podręcznika, jest $O(m)$.
-
+dla której udowodnimy rozwiązanie $\Theta(m)$.
+Ponieważ całkowitość argumentów nie jest dla nas istotna, to możemy rekurencję potraktować jak $S(m)=S(\lfloor m/2\rfloor)+S(\lceil m/2\rceil)+1$, co, według Podręcznika, jest $O(m)$.
 Aby uzyskać oszacowanie dokładne, pozostaje udowodnić, że $S(m)=\Omega(m)$.
 Przyjmujemy zatem założenie, że $S(m/2)\ge cm/2$ dla $c>0$ i~na jego podstawie otrzymujemy:
 \[
 	S(m) \ge 2cm/2+1 = cm+1 > cm,
 \]
 co zachodzi dla dowolnej wartości $c$.
-Niech $S(1)=1$.
+Przyjmijmy, że $S(1)=1$.
 Przyjęcie $m=1$ na podstawę indukcji wystarcza, bo warunek $S(1)\ge c$ spełnia każde $c\le1$, a~zatem $S(m)=\Omega(m)$.
-
 Stosując tw.\ 3.1, mamy $S(m)=\Theta(m)$.
-Wracając teraz do oryginalnej rekurencji i~starej zmiennej, dostajemy $T(n)=T(2^m)=S(m)=\Theta(m)=\Theta(\lg n)$.
+Wracając do oryginalnej rekurencji i~starej zmiennej, dostajemy $T(n)=T(2^m)=S(m)=\Theta(m)=\Theta(\lg n)$.
