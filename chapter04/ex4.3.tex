@@ -23,8 +23,8 @@ Rozwiążmy $T(n)$, korzystając z~metody rekurencji uniwersalnej.
 Stosujemy przypadek 1 tw.\ 4.1 i~stwierdzamy, że $n^2=O(n^{\lg7-\epsilon})$ dla $\epsilon\le\lg7-2$, a~więc zachodzi $T(n)=\Theta(n^{\lg7})$.
 
 Pozostaje teraz zbadanie nierówności $T'(n)<T(n)$ w~zależności od parametru $a$, bo w~rekurencji $T'(n)$ jest $n^{\log_ba}=n^{\log_4a}$ oraz $f(n)=n^2$.
-Załóżmy, że dla pewnej stałej $\epsilon>0$, $f(n)=O(n^{\log_4a-\epsilon})$, co jest prawdą dla $a>16$ i~wtedy $T'(n)=\Theta(n^{\log_4a})$.
-Algorytm $A'$ jest efektywniejszy od algorytmu $A$, gdy $\log_4a<\lg7$, skąd $16<a<49$.
+Dla pewnej stałej $\epsilon>0$ zachodzi $f(n)=O(n^{\log_4a-\epsilon})$, o~ile $a>16$ i~wtedy $T'(n)=\Theta(n^{\log_4a})$.
+A~zatem $T'(n)<T(n)$, gdy $\log_4a<\lg7$, skąd $16<a<49$.
 Pozostałe przypadki tw.\ 4.1 można stosować, o~ile $a\le16$, ale pominiemy ich sprawdzanie, bo dążymy do maksymalizacji $a$.
 
 Największym całkowitym $a$, dla którego algorytm $A'$ jest bardziej efektywny od algorytmu $A$, jest $a=48$.
