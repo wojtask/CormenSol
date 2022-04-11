@@ -19,22 +19,12 @@ Na podstawie tych wartości rozwiązujemy rekurencję:
 	&= O(n^{\lg3}).
 \end{align*}
 
-Pokażemy teraz, że otrzymany wynik stanowi górne oszacowanie dla oryginalnej rekurencji.
+Udowodnimy teraz, że otrzymany wynik w~istocie stanowi górne oszacowanie oryginalnej rekurencji.
 Przyjmujemy założenie, że
 \[
-    T(\lfloor n/2\rfloor)\le c\lfloor n/2\rfloor^{\lg3}
+	T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^{\lg3}-b\lfloor n/2\rfloor
 \]
-dla pewnej stałej $c>0$.
-Dowodzimy oszacowania dla oryginalnej rekurencji metodą podstawiania:
-\[
-	T(n) \le 3c\lfloor n/2\rfloor^{\lg3}+n \le 3c(n/2)^{\lg3}+n = cn^{\lg3}+n.
-\]
-Nie możemy jednak na podstawie tego wyniku wywnioskować szukanego oszacowania.
-Wzmocnijmy zatem nasze założenie, niech
-\[
-	T(\lfloor n/2\rfloor) \le c\lfloor n/2\rfloor^{\lg3}-b\lfloor n/2\rfloor,
-\]
-gdzie $b\ge0$ jest nową stałą.
+dla stałych $b$, $c\ge0$.
 Korzystając ze wzoru (3.3), mamy teraz:
 \begin{align*}
 	T(n) &\le 3c\lfloor n/2\rfloor^{\lg3}-3b\lfloor n/2\rfloor+n \\
@@ -43,7 +33,14 @@ Korzystając ze wzoru (3.3), mamy teraz:
 	&\le cn^{\lg3}-bn,
 \end{align*}
 co zachodzi dla $n\ge7$, o~ile $b\ge14$.
-Przyjmujemy wszystkie $n=3$, 4, 5, 6 na podstawę indukcji, ponieważ dla dowolnie ustalonego $b$ można dobrać dla stałej $c$ odpowiednią wartość tak, aby pokazane oszacowanie zachodziło dla takich $n$.
+Jeśli przyjmiemy $b=14$, to $c=9$ spełnia oszacowanie dla $n=3$, 4, 5, 6, dlatego przypadki te przyjmujemy na podstawę indukcji.
+Mamy $T(1)=1$, $T(2)=3T(1)+2=5$ i~dalej:
+\begin{alignat*}{3}
+	& T(3)=3T(1)+3=6 && \le9\cdot3^{\lg3}-14\cdot3 && \approx9, \\
+	& T(4)=3T(2)+4=19 && \le9\cdot4^{\lg3}-14\cdot4 && =25, \\
+	& T(5)=3T(2)+5=20 && \le9\cdot5^{\lg3}-14\cdot5 && \approx45, \\
+	& T(6)=3T(3)+6=24 && \le9\cdot6^{\lg3}-14\cdot6 && \approx70.
+\end{alignat*}
 To kończy dowód faktu, że górnym oszacowaniem rekurencji $T(n)$ jest $O(n^{\lg3})$.
 
 \exercise %4.2-2
