@@ -56,7 +56,7 @@ a~zatem, iterując tę nierówność, dostajemy
 \[
 	f(n) \ge (a/c)f(n/b) \ge (a/c)^2f(n/b^2) \ge \dots \ge (a/c)^if(n/b^i).
 \]
-Zakładamy, że nie można wykonać większej ilości iteracji, tzn.\ $n/b^{i-1}\ge n_0$ oraz $n/b^i<n_0$.
+Załóżmy, że nierówność iterowana była dokładnie $i$ razy, tzn.\ $n/b^{i-1}\ge n_0$ oraz $n/b^i<n_0$.
 Stąd $\log_b(n/n_0)<i\le\log_b(n/n_0)+1$, czyli, ze wzoru (3.3), $i=\lfloor\log_b(n/n_0)+1\rfloor$.
 Zachodzi więc
 \[
@@ -72,7 +72,7 @@ Mamy następnie
 	&= \frac{(n/n_0)^{\log_ba}}{(n/n_0)^{\log_bc}}\,f(n_0/b) \\[1mm]
 	&= n^{\log_ba-\log_bc}\cdot n_0^{\log_bc-\log_ba}\cdot f(n_0/b).
 \end{align*}
-Dwa ostatnie czynniki powyższego wyrażenia są dodatnie i~niezależne od $n$, możemy więc potraktować ich iloczyn jako stałą $d>0$.
+Dwa ostatnie czynniki powyższego wyrażenia są dodatnie i~niezależne od $n$, możemy więc potraktować ich iloczyn jak stałą $d>0$.
 Ponieważ $0<c<1$ oraz $b>1$, to $\log_bc<0$, przyjmijmy więc $\epsilon=-\log_bc$.
 Otrzymujemy zatem, że dla dowolnego $n\ge n_0$
 \[
