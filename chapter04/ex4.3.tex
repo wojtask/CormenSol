@@ -36,43 +36,7 @@ W~rekurencji tej $f(n)$ także jest stałe, a~więc $f(n)=\Theta(n^{\log_ba})$ i
 \exercise %4.3-4
 Dla rekurencji $T(n)$ mamy $a=4$, $b=2$ oraz $f(n)=n^2\lg n$, a~więc $n^{\log_ba}=n^2$, ale nie istnieje takie $\epsilon>0$, że $f(n)=\Omega(n^{2+\epsilon})$.
 Nie można zatem zastosować w~rozwiązaniu twierdzenia o~rekurencji uniwersalnej.
-Asymptotyczne górne oszacowanie na $T(n)$ znajdziemy natomiast, zgadując rozwiązanie, a~następnie dowodząc jego poprawności metodą podstawiania.
-
-W~pierwszym wywołaniu rekurencja wnosi koszt równy $n^2\lg n$.
-Następnie mamy 4 wywołania $T(n/2)$, co daje koszt
-\[
-	4T(n/2) = 4(n/2)^2\lg(n/2) = n^2\lg n-n^2.
-\]
-Kolejne poziomy wywołań kosztują:
-\begin{gather*}
-	16T(n/4) = 16(n/4)^2\lg(n/4) = n^2\lg n-2n^2, \qquad\phantom{\text{itd.}} \\
-	64T(n/8) = 64(n/8)^2\lg(n/8) = n^2\lg n-3n^2 \qquad\text{itd.}
-\end{gather*}
-Z~otrzymanych wyników wnioskujemy, że $i$\nbhyphen ty poziom wprowadza koszt równy $n^2\lg n-in^2$.
-Liście o~koszcie stałym znajdują się na poziomie $\lg n$ i~jest ich $4^{\lg n}=n^2$, więc dostajemy:
-\begin{align*}
-	T(n) &= \sum_{i=0}^{\lg n-1}(n^2\lg n-in^2)+\Theta(n^2) \\
-	&= n^2\lg^2n-n^2\sum_{i=0}^{\lg n-1}i+\Theta(n^2) \\[1mm]
-	&= n^2\lg^2n-\frac{n^2\lg n(\lg n-1)}{2}+\Theta(n^2) \\[1mm]
-	&= O(n^2\lg^2n).
-\end{align*}
-
-Udowodnimy teraz metodą podstawiania, że otrzymane przypuszczenie jest istotnie oszacowaniem górnym dla $T(n)$.
-Przyjmijmy założenie
-\[
-	T(n/2) \le c(n/2)^2\lg^2(n/2)
-\]
-dla pewnej stałej $c>0$.
-Mamy teraz:
-\begin{align*}
-	T(n) &\le 4c(n/2)^2\lg^2(n/2)+n^2\lg n \\
-	&= cn^2(\lg n-1)^2+n^2\lg n \\
-	&= cn^2\lg^2n-2cn^2\lg n+cn^2+n^2\lg n \\
-	&\le cn^2\lg^2n.
-\end{align*}
-Ostatnią nierówność dla wszystkich $n\ge4$ spełniamy, dobierając $c\ge2/3$.
-Przyjmujemy $T(1)=1$ jako warunek brzegowy rekurencji, zaś $n=2$ oraz $n=3$ jako podstawę indukcji, ponieważ dla $n\ge4$ rekurencja nie zależy już bezpośrednio od $T(1)$, a~otrzymane oszacowanie dla $T(2)=8$ i~$T(3)=4+9\lg3$ jest spełnione, o~ile $c\ge2$.
-Rozwiązaniem rekurencji $T(n)$ jest zatem $O(n^2\lg^2n)$.
+Można jednak skorzystać z~\refExercise{4.4-2}, aby uzyskać rozwiązanie $T(n)=\Theta(n^2\lg^2n)$.
 
 \exercise %4.3-5
 Przyjmując $a=1$, $b=2$ oraz $f(n)=n(2-\cos n)$, dostajemy, że $f(n)=\Omega(n^\epsilon)$ dla dowolnego $0<\epsilon\le1$.
