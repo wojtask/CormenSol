@@ -12,14 +12,14 @@ co należało pokazać.
 
 \exercise %4.4-2
 Zastąpmy przypadek 2 tw.\ 4.1 ogólniejszym warunkiem, tzn.\ jeśli $f(n)=\Theta(n^{\log_ba}\lg^kn)$ dla $k\ge0$, to zachodzi $T(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$.
-Dla tak zmodyfikowanego twierdzenia przeprowadzimy dowody analogicznie zmodyfikowanych lematów 4.3 i~4.4 (oznaczonych poniżej przez 4.3$'$ i~4.4$'$).
+Dla tak zmodyfikowanego twierdzenia przeprowadzimy dowody analogicznie zmodyfikowanego przypadku 2 w~lemacie 4.3 i~w~lemacie 4.4, skąd bezpośrednio wyniknie teza twierdzenia.
 
-\begin{proof}[Dowód lematu 4.3\/$'$]
-	Przy założeniu, że $f(n)=\Theta(n^{\log_ba}\lg^kn)$, otrzymujemy
+\begin{proof}[Dowód zmodyfikowanego przypadku 2 z~lematu 4.3]
+	Skoro $f(n)=\Theta(n^{\log_ba}\lg^kn)$, to dostajemy oszacowanie
 	\[
 		f(n/b^j)=\Theta\bigl((n/b^j)^{\log_ba}\lg^k(n/b^j)\bigr)
 	\]
-	i~podstawiamy do wzoru (4.7):
+	i~podstawiamy je do wzoru (4.7):
 	\[
 		g(n) = \Theta\biggl(\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j}\biggr).
 	\]
@@ -27,26 +27,20 @@ Dla tak zmodyfikowanego twierdzenia przeprowadzimy dowody analogicznie zmodyfiko
 	\begin{align*}
 		\sum_{j=0}^{\log_bn-1}a^j\biggl(\frac{n}{b^j}\biggr)^{\log_ba}\lg^k\frac{n}{b^j} &= n^{\log_ba}\sum_{j=0}^{\log_bn-1}\biggl(\frac{a}{b^{\log_ba}}\biggr)^j\lg^k\frac{n}{b^j} \\
 		&= n^{\log_ba}\sum_{j=0}^{\log_bn-1}(\lg n-j\lg b)^k \\
-		&= n^{\log_ba}\cdot\Theta(\lg^{k+1}n) \\[1mm]
+		&= n^{\log_ba}\sum_{j=0}^{\log_bn-1}\Theta(\lg^kn) \\
+		&= n^{\log_ba}\cdot\log_bn\cdot\Theta(\lg^kn) \\[1mm]
 		&= \Theta(n^{\log_ba}\lg^{k+1}n).
 	\end{align*}
-	Skorzystano ze wzoru (3.2), podstawiając $\lg n$ w~miejsce $n$, a~następnie z~tego, że
-	\[
-		\sum_{j=0}^{\log_bn-1}\Theta(\lg^kn) = \log_bn\cdot\Theta(\lg^kn) = \Theta(\lg^{k+1}n).
-	\]
-	Pokazano, że $g(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$, a~więc lemat jest prawdziwy.
+	W~wyprowadzeniu skorzystaliśmy ze wzoru (3.2), podstawiając $\lg n$ w~miejsce $n$.
+	Zachodzi więc $g(n)=\Theta(n^{\log_ba}\lg^{k+1}n)$, skąd wynika teza.
 \end{proof}
 
-\begin{proof}[Dowód lematu 4.4\/$'$]
-	Wystarczy wykazać jedynie drugi przypadek, bo $f(n)=\Theta(n^{\log_ba}\lg^kn)$.
-Z~lematów 4.2 i~4.3$'$:
+\begin{proof}[Dowód zmodyfikowanego przypadku 2 z~lematu 4.4]
+	Z~lematu 4.2 i~zmodyfikowanego przypadku 2 lematu 4.3:
 	\[
-		T(n) = \Theta(n^{\log_ba})+\Theta(n^{\log_ba}\lg^{k+1}n) = \Theta(n^{\log_ba}\lg^{k+1}n),
+		T(n) = \Theta(n^{\log_ba})+\Theta(n^{\log_ba}\lg^{k+1}n) = \Theta(n^{\log_ba}\lg^{k+1}n). \qedhere
 	\]
-	co należało udowodnić.
 \end{proof}
-
-Twierdzenie wynika bezpośrednio z~lematu 4.4$'$.
 
 \exercise %4.4-3
 \note{Aby udowodnić to wynikanie, musimy założyć dodatkowo, że\/ $c>0$ i~że funkcja\/ $f(n)$ jest asymptotycznie dodatnia.
