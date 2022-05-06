@@ -82,20 +82,16 @@ W~klasycznym problemie dnia urodzin zostało wyznaczone
 \]
 pozostaje zatem obliczyć $P_2(k,n)$.
 
-Spośród $n$ dni w~roku wybierzmy jeden, który będzie urodzinami pewnych dwóch osób z~naszej grupy.
-Pozostałe $k-2$ osób możemy rozdzielić między $n-1$ dni oznaczających ich urodziny.
-Ponieważ rozróżniamy osoby, to liczbę sposobów takiego wyboru należy pomnożyć przez liczbę ich permutacji $k!$ i~podzielić przez 2 z~racji tego, że zmiana kolejności dwóch osób wybranych do tego samego dnia w~roku nie jest odrębnym przypadkiem.
-Ale takich par może być więcej.
-Można tak naprawdę wybrać $i\le\lfloor k/2\rfloor$ różnych dni, którym przypiszemy pary osób wtedy urodzonych -- liczba możliwości wynosi $\binom{n}{i}$.
-Pozostałe osoby rozdzielamy między pozostałe dni w~roku tak, aby każdej przypadł inny dzień, co da się wykonać na $\binom{n-i}{k-2i}$ sposobów.
-Podobnie jak wcześniej rozróżnianie osób wprowadza czynnik $k!/2^i$ -- kolejność w~parze w~ramach tego samego dnia jest bowiem nieistotna.
-Ponieważ liczba możliwości przypisania $k$ osób do $n$ różnych dni wynosi $n^k$, to ostatecznie otrzymujemy wzór
+Spośród $n$ dni w~roku wybierzmy $i$ różnych ($1\le i\le\lfloor k/2\rfloor$), które potraktujemy jak urodziny pewnych $i$ par osób z naszej grupy -- liczba możliwości wyboru dni wynosi $\binom{n}{i}$.
+Pozostałym $k-2i$ osobom możemy przypisać dowolne niepowtarzające się dni spośród pozostałych $n-i$, co da się wykonać na $\binom{n-i}{k-2i}$ sposobów.
+Ponieważ rozróżniamy poszczególne osoby, to liczbę sposobów takiego wyboru należy pomnożyć przez liczbę permutacji tych osób, czyli $k!$, oraz podzielić przez $2^i$ z~racji tego, że kolejność w~parze osób urodzonych tego samego dnia jest nieistotna.
+Z~drugiej strony liczba możliwości przyporządkowania urodzin $k$ osobom wynosi $n^k$, więc ostatecznie otrzymujemy wzór
 \[
 	P_2(k,n) = \frac{k!}{n^k}\sum_{i=1}^{\lfloor k/2\rfloor}\frac{1}{2^i}\binom{n}{i}\binom{n-i}{k-2i}.
 \]
 
-Ustalając wartość $n$ na 365, można teraz obliczyć prawdopodobieństwa $P(k,n)$ dla wszystkich $k=1$, 2, \dots, $n$, po czym wyznaczyć najmniejszą wartość $k$, dla której $P(k,n)\ge1/2$.
-Okazuje się, że rozwiązaniem jest $k=88$.
+Dla $n=365$ można obliczyć prawdopodobieństwa $P(k,n)$ dla wszystkich $k=1$, 2, \dots, $n$, po czym wyznaczyć najmniejszą wartość $k$, dla której $P(k,n)\ge1/2$.
+Rozwiązaniem jest $k=88$.
 
 \exercise %5.4-5
 Wszystkich możliwych $k$\nbhyphen słów nad zbiorem $n$\nbhyphen elementowym jest $n^k$.
