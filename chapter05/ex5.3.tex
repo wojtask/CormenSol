@@ -24,11 +24,8 @@ A~więc niezmiennik jest spełniony przed pierwszą iteracją.
 Pętla \kw{for} w~tej procedurze powinna iterować po wszystkich\/ $i$ od\/ $1$ do\/ $n-1$.}
 
 \noindent Algorytm ten nie działa zgodnie z~zamierzeniem.
-Jako przykład weźmy dowolną tablicę o~$n=3$ elementach.
-Istnieje $n!-1=5$ permutacji tej tablicy różnych niż identycznościowa.
-Pętla \kw{for} w~pierwszej iteracji zamienia pierwszy element tablicy z~losowo wybranym z~pozostałych dwóch.
-W~drugiej iteracji może zostać wybrana tylko jedna wartość na drugi element.
-Za pomocą tej procedury jesteśmy więc w~stanie utworzyć tylko dwie permutacje wejściowej tablicy.
+Jeśli $n>1$, to daje on w~wyniku permutacje, w~których na każdej pozycji znajduje się element inny od tego, który zajmował tę pozycję na początku.
+Zatem dla przykładowej tablicy wejściowej $A=\langle1,2,3\rangle$ algorytm jest w~stanie wyprodukować jeden z~dwóch wyników: $\langle2,1,3\rangle$ albo $\langle3,1,2\rangle$.
 
 \exercise %5.3-3
 Zauważmy, że kolejne wywołania generatora liczb losowych w~procedurze \proc{Permute-With-All} generują jeden z~$n^n$ możliwych ciągów pozycji tablicy, podczas gdy istnieje $n!$ możliwych wyników procedury.
