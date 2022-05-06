@@ -1,7 +1,7 @@
 \subchapter{Analiza probabilistyczna i~dalsze zastosowania zmiennych losowych wskaźnikowych}
 
 \exercise %5.4-1
-Podobnie jak w~analizie paradoksu dnia urodzin przyjmiemy, że $n$ jest liczbą dni w~roku i~ponumerujemy osoby znajdujące się w~pokoju liczbami całkowitymi 1, 2, \dots, $k$.
+Podobnie jak w~analizie paradoksu dnia urodzin oznaczymy przez $n$ liczbę dni w~roku i~ponumerujemy osoby znajdujące się w~pokoju liczbami całkowitymi 1, 2, \dots, $k$.
 Dla $i=1$, 2, \dots, $k$ niech $A_i$ będzie zdarzeniem polegającym na tym, że osoba $i$ ma urodziny kiedy indziej niż ja.
 Wówczas
 \[
@@ -13,39 +13,24 @@ Przy założeniu, że zdarzenia $A_1$, $A_2$, \dots, $A_k$ są wzajemnie niezale
 \[
 	\Pr(B_k) = \Pr\biggl(\bigcap_{i=1}^kA_i\biggr) = \prod_{i=1}^k\Pr(A_i) = \prod_{i=1}^k\biggl(1-\frac{1}{n}\biggr) = \biggl(1-\frac{1}{n}\biggr)^k.
 \]
-Prawdopodobieństwo zdarzenia, że wśród $k$ osób jest przynajmniej jedna, która ma urodziny tego samego dnia co ja, ma być mniejsze niż $1/2$, czyli
+Badamy dla jakich $k$ prawdopodobieństwo zdarzenia komplementarnego do $B_k$ wynosi co najmniej $1/2$, czyli równoważnie
 \[
 	\biggl(1-\frac{1}{n}\biggr)^k \le \frac{1}{2}.
 \]
-Rozwiązując tę nierówność ze względu na $k$, otrzymujemy $k\ge\log_{1-1/n}(1/2)$ i~po przyjęciu $n=365$ mamy, że najmniejszym całkowitym $k$ spełniającym tę nierówność jest $k=253$.
+Rozwiązując tę nierówność ze względu na $k$, otrzymujemy $k\ge\log_{1-1/n}(1/2)$ i~po przyjęciu $n=365$ dostajemy, że najmniejszym całkowitym $k$ spełniającym tę nierówność jest $k=253$.
 
-W~rozwiązaniu drugiej części zadania pozostaniemy przy poprzednim znaczeniu symbolu $n$ i~numeracji osób kolejnymi liczbami całkowitymi.
-Ponadto przez $r$ oznaczymy dzień 3 maja.
-Niech teraz $B_k$ będzie zdarzeniem polegającym na tym, że wśród $k$ osób co najwyżej jedna ma urodziny w~dniu $r$ oraz $A_i$, dla $i=1$, 2, \dots, $k$, niech będzie zdarzeniem, że osoba $i$ ma urodziny w~inny dzień niż $r$.
-Podobnie jak w~pierwszej części zadania zachodzi $\Pr(A_1)=\Pr(A_2)=\dots=\Pr(A_k)=1-1/n$.
-Dla $i=1$, 2, \dots, $k$ zdefiniujmy jeszcze
+W~rozwiązaniu drugiej części zadania pozostaniemy przy poprzednim znaczeniu symboli $n$ i~$k$.
+Rozważymy zdarzenie komplementarne do szukanego, czyli takie, w~którym co najwyżej jedna osoba ma urodziny 3 maja.
+Prawdopodobieństwo, że spośród $k$ osób dokładnie $i$ ma urodziny ustalonego dnia w~roku wynosi
 \[
-	C_i = \overline{A_i}\cap\bigcap_{\substack{j=1\\j\ne i}}^kA_j
+	p_i = \binom{k}{i}\biggl(1-\frac{1}{n}\biggr)^{k-i}
 \]
-jako zdarzenie polegające na tym, że wśród $k$ osób tylko $i$\nbhyphen ta obchodzi urodziny dnia $r$.
-Zachodzi
+i~stąd
 \[
-	B_k = \bigcap_{i=1}^kA_i\cup\bigcup_{i=1}^kC_i.
+	p_0+p_1 = \biggl(1-\frac{1}{n}\biggr)^k\!+k\biggl(1-\frac{1}{n}\biggr)^{k-1}\!\! = \biggl(1-\frac{1}{n}\biggr)^{k-1}\!\biggl(1-\frac{1}{n}+\frac{m}{n}\biggr) = \biggl(1-\frac{1}{n}\biggr)^{k-1}\!\biggl(1+\frac{m-1}{n}\biggr).
 \]
-Obliczmy $\Pr(C_i)$, zakładając, że zdarzenia $A_1$, $A_2$, \dots, $A_k$ są wzajemnie niezależne:
-\[
-	\Pr(C_i) = (1-\Pr(A_i))\prod_{\substack{j=1\\j\ne i}}^k\Pr(A_j) = \frac{1}{n}\prod_{\substack{j=1\\j\ne i}}^k\biggl(1-\frac{1}{n}\biggr) = \frac{1}{n}\biggl(1-\frac{1}{n}\biggr)^{k-1}.
-\]
-Zdarzenia $\bigcap_{i=1}^kA_i$, $C_1$, $C_2$, \dots, $C_k$ wzajemnie się wykluczają, a~więc dostajemy
-\begin{align*}
-	\Pr(B_k) &= \Pr\biggl(\bigcap_{i=1}^kA_i\biggr)+\Pr\biggl(\bigcup_{i=1}^kC_i\biggr) \\
-	&= \prod_{i=1}^k\Pr(A_i)+\sum_{i=1}^k\Pr(C_i) \\
-	&= \biggl(1-\frac{1}{n}\biggr)^k+\frac{k}{n}\biggl(1-\frac{1}{n}\biggr)^{k-1} \\
-	&= \biggl(1+\frac{k-1}{n}\biggr)\biggl(1-\frac{1}{n}\biggr)^{k-1}.
-\end{align*}
-To czego poszukujemy, to najmniejsze $k$ takie, że $\Pr(B_k)<1/2$.
-Można w~tym momencie przyjąć $n=365$ i~obliczać prawdopodobieństwa $B_k$ dla kolejnych naturalnych wartości $k$.
-W~wyniku takich obliczeń można ustalić, że szukaną wartością jest $k=613$.
+Szukaną wartością jest najmniejsze $k$ spełniające nierówność $p_0+p_1<1/2$.
+Dla $n=365$ rozwiązaniem jest $k=613$.
 
 \exercise %5.4-2
 Niech $X$ oznacza liczbę potrzebnych rzutów, zanim w~pewnej urnie znajdą się dwie kule.
