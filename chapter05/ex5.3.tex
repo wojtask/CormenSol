@@ -51,18 +51,13 @@ Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że
 Ponieważ nie jest zmieniana wzajemna kolejność elementów, to nie każdą permutację można otrzymać w~wyniku działania tej procedury -- na przykład nie dostaniemy nigdy permutacji będącej odwróceniem tablicy wejściowej, o~ile jej rozmiar jest większy niż 2.
 
 \exercise %5.3-5
-Spróbujmy skonstruować tablicę $P$, w~której wszystkie elementy są różne.
-Na pierwszy element tej tablicy możemy wybrać jedną z~$n^3$ liczb, drugi element może przyjąć jedną z~$n^3-1$ pozostałych wartości, trzeci -- jedną z~$n^3-2$ pozostałych itd.
-Ogólnie, $i$\nbhyphen ty z~kolei element tablicy $P$ może być jedną z~$n^3-i+1$ liczb pozostałych po poprzednich wyborach.
-A~zatem prawdopodobieństwo tego, że wszystkie elementy tablicy $P$ są różne, wynosi
+Niech $X_{i,j}$ dla $1\le i<j\le n$ będzie zdarzeniem oznaczającym, że $P[i]=P[j]$, z~prawdopodobieństwem $\Pr(X_{i,j})=1/n^3$.
+Wtedy zdarzenie, że wszystkie elementy tablicy $P$ są różne, jest komplementarne do tego, w~którym co najmniej jedno ze zdarzeń $X_{i,j}$ zachodzi.
+Pozostaje więc udowodnić, że $\Pr\bigl(\bigcup_{1\le i<j\le n}X_{i,j}\bigr)\le1/n$.
+Ze wzoru~(C.18) mamy:
 \[
-	\prod_{i=1}^n\frac{n^3-i+1}{n^3} = \prod_{i=0}^{n-1}\frac{n^3-i}{n^3} = \prod_{i=0}^{n-1}\biggl(1-\frac{i}{n^3}\biggr) > \prod_{i=0}^{n-1}\biggl(1-\frac{n}{n^3}\biggr) = \biggl(1-\frac{1}{n^2}\biggr)^n.
+	\Pr\biggl(\bigcup_{1\le i<j\le n}X_{i,j}\biggr) \le \sum_{i=1}^{n-1}\sum_{j=i+1}^n\Pr(X_{i,j}) = \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac{1}{n^3} = \binom{n}{2}\frac{1}{n^3} = \frac{n(n-1)}{2n^3} < \frac{1}{2n} < \frac{1}{n}.
 \]
-Wykorzystując teraz fakt, że ciąg $e_n={(1-1/n)}^n$ jest rosnący, otrzymujemy, że
-\[
-	\biggl(1-\frac{1}{n^2}\biggr)^{n^2} \ge \biggl(1-\frac{1}{n}\biggr)^n
-\]
-i~po zastosowaniu pierwiastka $n$\nbhyphen tego stopnia do obu stron nierówności otrzymujemy żądany wynik.
 
 \exercise %5.3-6
 Gdy dwa priorytety powtarzają się, czyli $P[i]=P[j]$ dla pewnych $i\ne j$, to deterministyczny algorytm sortujący szereguje odpowiadające im elementy $A[i]$ oraz $A[j]$ zawsze w~tej samej kolejności.
