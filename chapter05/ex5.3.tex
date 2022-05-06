@@ -45,7 +45,8 @@ Na podstawie otrzymanej sprzeczności wnioskujemy, że procedura \proc{Permute-W
 
 \exercise %5.3-4
 Na początku działania procedury losowana jest liczba \id{offset}, o~jaką zostaną przesunięte elementy tablicy $A$ cyklicznie w~prawo.
-Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset})\bmod n$ w~tablicy $B$.
+Element z~pozycji $i$ znajdzie się w~wyniku tego przesunięcia na pozycji $\id{dest}=(i+\id{offset}-1)\bmod n+1$ w~tablicy $B$ (odejmowanie, a~na końcu dodawanie jedynki bierze się z~indeksowania tablic od~1).
+Ustalenie wartości \id{offset} determinuje więc postać wynikowej permutacji.
 Ponieważ istnieje $n$ możliwych wartości zmiennej \id{offset}, to szanse, że element $A[i]$ znajdzie się na pewnej ustalonej pozycji w~$B$, są równe $1/n$.
 
 Ponieważ nie jest zmieniana wzajemna kolejność elementów, to nie każdą permutację można otrzymać w~wyniku działania tej procedury -- na przykład nie dostaniemy nigdy permutacji będącej odwróceniem tablicy wejściowej, o~ile jej rozmiar jest większy niż 2.
