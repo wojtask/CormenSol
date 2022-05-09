@@ -38,7 +38,7 @@ Rozważmy ponownie zmienną losową $X$ i~analogiczną serię prób Bernoulliego
 Jednak w~tym przypadku sukces następuje z~prawdopodobieństwem $p=k/n$, a~zatem średnią liczbą wybranych indeksów przed odnalezieniem $x$ jest $\E(X)=1/p=n/k$.
 
 \subproblem %5-2(d)
-Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów.
+Ten przypadek wyszukiwania można sprowadzić do problemu kolekcjonera kuponów (patrz sekcja 5.4.2).
 Pozycje tablicy $A$ reprezentują kupony, których skompletowanie (odpowiadające sprawdzeniu wszystkich pozycji tablicy) jest celem problemu.
 Zgodnie z~uzasadnieniem podanym w~Podręczniku, aby uzbierać pełny zestaw $n$ kuponów pojawiających się losowo, należy zdobyć ich około $n\ln n$.
 
@@ -47,40 +47,46 @@ Procedura \proc{Deterministic-Search} jest identyczna z~algorytmem wyszukiwania 
 Z~rozwiązania \refExercise{2.2-3} wynika zatem, że czas tego algorytmu -- wyrażony jako liczba sprawdzanych indeksów tablicy -- wynosi w~średnim przypadku $(n+1)/2$, a~w~pesymistycznym $n$.
 
 \subproblem %5-2(f)
-Oznaczmy przez $X$ zmienną losową przyjmującą liczbę wybranych indeksów tablicy $A$ przed odnalezieniem $x$.
-Zdarzenie $X=i$ zachodzi wtedy i~tylko wtedy, gdy pierwsza z~lewej wartość $x$ zajmuje w~$A$ pozycję $i$.
-Pozostałe $k-1$ elementów o~wartości $x$ można rozmieścić w~obszarze $A[i+1\twodots n]$ na $\binom{n-i}{k-1}$ sposobów.
-Stąd $\Pr(X=i)=\binom{n-i}{k-1}/\binom{n}{k}$.
-Wartość oczekiwana $X$ wynosi zatem
+Niech $X$ będzie zmienną losową przyjmującą liczbę sprawdzonych indeksów tablicy $A$ przed odnalezieniem $x$.
+Dla $i=1$, 2, \dots, $n-k+1$, niech $X_i$ będzie zmienną losową wskaźnikową związaną ze zdarzeniem $B_i$ oznaczającym, że algorytm \proc{Deterministic-Search} sprawdzi pozycję $i$.
+Zdarzenie to zachodzi, o~ile wszystkie egzemplarze $x$ tablicy $A$ znajdują się we fragmencie $A[i\twodots n]$.
+Mamy zatem
 \[
-    \E(X) = \sum_{i=1}^{n-k+1}i\Pr(X=i) = \frac{1}{\binom{n}{k}}\sum_{i=1}^{n-k+1}i\binom{n-i}{k-1}.
+	\Pr(B_i) = \frac{\binom{n-i+1}{k}}{\binom{n}{k}}.
 \]
-
-Pokażemy przez indukcję po $n$, że dla dowolnego $k=1$, 2, \dots, $n$ zachodzi $E(X)=\frac{n+1}{k+1}$, co na mocy wzoru (C.8) jest równoważne z~udowodnieniem tożsamości
+Oczywiście $X=\sum_{i=1}^{n-k+1}X_i$, stąd
 \[
-    \binom{n+1}{k+1} = \sum_{i=1}^{n-k+1}i\binom{n-i}{k-1}.
+	\E(X) = \sum_{i=1}^{n-k+1}\E(X_i) = \sum_{i=1}^{n-k+1}\Pr(B_i) = \frac{\sum_{i=1}^{n-k+1}\binom{n-i+1}{k}}{\binom{n}{k}} = \frac{\sum_{i=k}^n\binom{i}{k}}{\binom{n}{k}}.
 \]
+Celem uproszczenia ostatniego wyrażenia posłużymy się poniższym lematem.
 
-Jeśli $k=n$, to po lewej stronie powyższego wzoru mamy $\binom{n+1}{n+1}=1$, a~po prawej stronie $\sum_{i=1}^1i\binom{n-i}{n-1}=\binom{n-1}{n-1}=1$.
-A~więc w~tym przypadku wzór jest prawdziwy.
-Pokazaliśmy przy okazji, że spełniony jest pierwszy krok indukcji, gdy $n=1$.
+\medskip
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnego\/ $k=1$, $2$, \dots, $n$ zachodzi}
+	\[
+		\sum_{i=k}^n\binom{i}{k} = \binom{n+1}{k+1}.
+	\]
+\begin{proof}
+	Zastosujemy indukcję po $n$.
+	Jeśli $n=1$, to wzór przyjmuje postać $1=1$.
+	Załóżmy teraz, że $n>1$ oraz że dla każdego $k=1$, 2, \dots, $n-1$,
+	\[
+		\sum_{i=k}^{n-1}\binom{i}{k} = \binom{n}{k+1}.
+	\]
+	Wówczas
+	\[
+		\sum_{i=k}^n\binom{i}{k} = \sum_{i=k}^{n-1}\binom{i}{k}+\binom{n}{k} = \binom{n}{k+1}+\binom{n}{k} = \binom{n+1}{k+1},
+	\]
+	przy czym w~ostatniej równości wykorzystaliśmy \refExercise{C.1-7}.
+	Jeśli $k=n$, to po obu stronach dowodzonej równości jest 1, zatem tożsamość zachodzi dla wszystkich $k=1$, 2, \dots, $n$.
+\end{proof}
 
-W~drugim kroku zakładamy, że $n>1$ i~że dla każdego $k=1$, 2, \dots, $n$ zachodzi
+Wracając do wartości oczekiwanej zmiennej losowej $X$ i~stosując wzór (C.8), otrzymujemy
 \[
-    \binom{n}{k} = \sum_{i=1}^{n-k+1}i\binom{n-1-i}{k-2}.
+	\E(X) = \frac{\binom{n+1}{k+1}}{\binom{n}{k}} = \frac{n+1}{k+1}.
 \]
-Korzystając dwukrotnie z~\refExercise{C.1-7}, dla dowolnego $k=1$, 2, \dots, $n-1$ mamy
-\begin{align*}
-    \binom{n+1}{k+1} &= \binom{n}{k+1}+\binom{n}{k} \\
-	&= \sum_{i=1}^{n-k}i\binom{n-1-i}{k-1}+\sum_{i=1}^{n-k+1}i\binom{n-1-i}{k-2} \\
-	&= \sum_{i=1}^{n-k}i\biggl(\binom{n-1-i}{k-1}+\binom{n-1-i}{k-2}\biggr)+(n-k+1)\binom{k-2}{k-2} \\
-	&= \sum_{i=1}^{n-k}i\binom{n-i}{k-1}+(n-k+1)\binom{k-1}{k-1} \\
-	&= \sum_{i=1}^{n-k+1}i\binom{n-i}{k-1}.
-\end{align*}
-Wzór jest zatem prawdziwy dla wszystkich $n$ naturalnych i~wszystkich $k=1$, 2, \dots, $n$.
 
 Pesymistyczny przypadek dla algorytmu \proc{Deterministic-Search} ma miejsce wtedy, gdy wszystkie egzemplarze $x$ zajmują w~tablicy $k$ końcowych pozycji.
-Algorytm sprawdzi wówczas $n-k$ komórek tablicy, zanim odnajdzie pierwsze wystąpienie $x$.
+Algorytm sprawdzi wówczas $n-k+1$ komórek tablicy, zanim odnajdzie pierwsze wystąpienie $x$.
 
 \subproblem %5-2(g)
 Przypadek średni i~pesymistyczny są równoważne przy braku $x$ w~tablicy $A$, bowiem w~obu tych przypadkach algorytm przegląda całą tablicę, co zajmuje czas $n$.
