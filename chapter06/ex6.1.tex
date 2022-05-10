@@ -10,9 +10,10 @@ Z~poprzedniego zadania mamy, że $2^h\le n<2^{h+1}$, skąd dostajemy $h\le\lg n<
 Ponieważ $h$ jest całkowite, to $h=\lfloor\lg n\rfloor$.
 
 \exercise %6.1-3
-Wartość korzenia każdego poddrzewa w~kopcu typu max jest równa lub większa od wartości obu synów tego korzenia (o~ile istnieją).
-Dla dowolnego poddrzewa $T$ można łatwo dowieść przez indukcję względem jego wysokości, że wartości węzłów wchodzących w~skład ścieżek od liści w~górę $T$, tworzą ciągi niemalejące.
-Ponieważ wszystkie takie ścieżki kończą się w~korzeniu poddrzewa $T$, to musi on mieć największą wartość w~$T$.
+Załóżmy, że największy element danego poddrzewa kopca typu max nie znajduje się w~korzeniu tego poddrzewa.
+Jeśli w~poddrzewie jest więcej niż jeden największy element, to rozważmy ten o~najniższej pozycji w~kopcu.
+Wtedy ojciec tego elementu także należy do poddrzewa.
+Jednak to prowadzi do sprzeczności, bo ojciec jest mniejszy niż jego syn i~naruszona zostaje własność kopca typu max.
 
 \exercise %6.1-4
 Analizując ścieżki od liści do korzenia kopca jak w~poprzednim zadaniu, stwierdzamy, że najmniejsza wartość w~każdej takiej ścieżce znajduje się w~jej pierwszym elemencie.
