@@ -14,14 +14,13 @@ Po przywróceniu własności kopca w~linii 6 procedura zwraca wartość \id{max}
 
 \exercise %6.5-2
 Procedura \proc{Max-Heap-Insert} rozpoczyna działanie od dodania do kopca nowego elementu o~wartości $-\infty$.
-Wartość ta jest następnie odpowiednio modyfikowana i~element jest umieszczany w~odpowiednim miejscu w~kopcu dzięki wywołaniu \proc{Heap-Increase-Key}.
+Wartość ta jest następnie odpowiednio modyfikowana i~element jest umieszczany na właściwej pozycji w~kopcu dzięki wywołaniu \proc{Heap-Increase-Key}.
 Działanie procedury $\proc{Max-Heap-Insert}(A,10)$ zostało przedstawione na rys.\ \ref{fig:6.5-2}.
 \begin{figure}[!ht]
 	\centering \input{fig6.5-2}
 	\caption{Działanie procedury $\proc{Max-Heap-Insert}(A,10)$ dla kopca $A=\langle$15,\! 13,\! 9,\! 5,\! 12,\! 8,\! 7,\! 4,\! 0,\! 6,\! 2,\! 1$\rangle$.
 {\sffamily\bfseries(a)} Kopiec po dodaniu nowego elementu o~wartości początkowej $-\infty$.
-{\sffamily\bfseries(b)} Działa teraz procedura \proc{Heap-Increase-Key}.
-Na rysunku pokazano wartość zmiennej $i$ w~tej procedurze.
+{\sffamily\bfseries(b)} W~trakcie działania procedury \proc{Heap-Increase-Key}.
 Wartość nowego elementu została zwiększona i~wynosi teraz 10.
 {\sffamily\bfseries(c)} Po wykonaniu pierwszej iteracji pętli \kw{while} procedury \proc{Heap-Increase-Key} nowy element został zamieniony ze swoim ojcem.
 {\sffamily\bfseries(d)} Po drugiej iteracji pętli nastąpiła jeszcze jedna zamiana nowego elementu i~jego aktualnego ojca, dzięki czemu $A$ spełnia już własność kopca i~procedura kończy działanie.} \label{fig:6.5-2}
