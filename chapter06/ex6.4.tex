@@ -11,19 +11,19 @@ Na rys.\ \ref{fig:6.4-1} zilustrowano działanie sortowania przez kopcowanie dla
 \end{figure}
 
 \exercise %6.4-2
-Pokażemy, że podany niezmiennik jest spełniony przed pierwszą iteracją pętli \kw{for}, że każda iteracja tej pętli zachowuje niezmiennik i~że po zakończeniu pętli z~niezmiennika można wywnioskować poprawność procedury.
+Poprawność algorytmu wynika z~dowodu podanego niezmiennika pętli \kw{for}:
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją pętli mamy $i=\attrib{A}{length}=n$.
-Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty.
+Wówczas fragment $A[1\twodots i]$ jest całą tablicą $A$, która stanowi kopiec typu max, utworzony w~wyniku działania procedury \proc{Build-Max-Heap}, natomiast fragment $A[i+1\twodots n]$ jest pusty, a~więc trywialnie posortowany.
 	\item[Utrzymanie:] Załóżmy, że niezmiennik jest prawdziwy przed wykonaniem kolejnej iteracji pętli.
 Podtablica $A[1\twodots i]$ tworzy więc kopiec typu max, którego korzeniem jest $A[1]$, czyli największy element w~tej podtablicy.
-Po wykonaniu wiersza 3 znajdzie się on na pozycji $i$.
-Dekrementacja \attrib{A}{heap-size} powoduje, że element $A[i]$ nie wchodzi teraz w~skład kopca, ale podtablica $A[i\twodots n]$ zawiera teraz $n-i+1$ największych elementów z~$A[1\twodots n]$ posortowanych niemalejąco, ponieważ element $A[i]$ jest równy lub mniejszy od wcześniej umieszczonych tam elementów.
-W~tym momencie korzeń może naruszać własność kopca typu max, dlatego w~wierszu 5 zostaje wywołana dla niego procedura \proc{Max-Heapify} przywracająca tę własność.
+W~wyniku wykonania wiersza 3 zostaje on przeniesiony na pozycję $i$, zaś dekrementacja \attrib{A}{heap-size} powoduje, że przestaje on wchodzić w~skład kopca.
+Z~kolei podtablica $A[i\twodots n]$ składa się $n-i+1$ największych elementów tablicy $A$ posortowanych niemalejąco, ponieważ element $A[i]$ jest mniejszy lub równy pozostałym elementom z~tej podtablicy.
+W~tym momencie korzeń może naruszać własność kopca typu max, dlatego w~wierszu 5 zostaje wywołana na nim procedura \proc{Max-Heapify} przywracająca tę własność.
 Uaktualnienie $i$ powoduje odtworzenie niezmiennika.
 	\item[Zakończenie:] Po zakończeniu działania pętli jest $i=1$, zatem podtablica $A[1\twodots i]$ składa się z~jednego elementu, który jest najmniejszym elementem tablicy $A$.
 Ponadto $n-1$ pozostałych elementów jest uszeregowanych w~kolejności niemalejącej w~podtablicy $A[2\twodots n]$.
-Stąd mamy, że tablica $A$ jest posortowana.
+To oznacza, że tablica $A$ jest posortowana.
 \end{description}
 
 \exercise %6.4-3
