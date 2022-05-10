@@ -15,25 +15,20 @@ Gdy wywołujemy $\proc{Max-Heapify}(A,i)$, to zakładamy, że poddrzewa o~korzen
 Jeżeli podczas budowy kopca procedura \proc{Max-Heapify} byłaby wywoływana dla węzłów o~rosnących indeksach, to nie moglibyśmy zagwarantować spełnienia tego warunku.
 
 \exercise %6.3-3
-Oznaczmy kopiec przez $T$, a~przez $n_h$ -- ilość węzłów kopca $T$ znajdujących się na wysokości $h$.
+Oznaczmy przez $n_h$ liczbę węzłów kopca znajdujących się na wysokości $h$.
 Udowodnimy fakt przez indukcję względem $h$.
 
-W~pierwszym kroku indukcji musimy pokazać, że $n_0\le\lceil n/2\rceil$.
-W~rzeczywistości udowodnimy, że $n_0=\lceil n/2\rceil$.
-Korzystając z~\refExercise{6.1-7}, mamy, że węzły znajdujące się w~$T$ na wysokości 0, czyli jego liście, zajmują pozycje $\lfloor n/2\rfloor+1\twodots n$.
+Z~\refExercise{6.1-7} wiemy, że węzły znajdujące się w~kopcu na wysokości 0, czyli jego liście, zajmują pozycje $\lfloor n/2\rfloor+1$, $\lfloor n/2\rfloor+2$, \dots, $n$.
 Jest ich zatem
 \[
-    n_0 = n-(\lfloor n/2\rfloor+1)+1 = n-\lfloor n/2\rfloor = \lceil n/2\rceil.
+    n_0 = n-(\lfloor n/2\rfloor+1)+1 = n-\lfloor n/2\rfloor = \lceil n/2\rceil,
 \]
-A~więc przypadek bazowy indukcji jest spełniony.
+a~więc przypadek bazowy indukcji jest spełniony.
 
-Załóżmy teraz, że $h>0$ i~że twierdzenie jest spełnione dla węzłów na wysokości $h-1$.
-Ponadto niech $T'$ będzie kopcem powstałym z~$T$ po usunięciu z~niego wszystkich jego liści.
-Nowy kopiec ma zatem $n'=n-n_0$ węzłów.
-Ponieważ w~kroku bazowym pokazaliśmy, że $n_0=\lceil n/2\rceil$, to stąd $n'=n-\lceil n/2\rceil=\lfloor n/2\rfloor$.
-Węzły, które w~kopcu $T$ znajdują się na wysokości $h$, w~$T'$ zajmują wysokość $h-1$, więc jeśli oznaczymy przez $n_{h-1}'$ liczbę węzłów na wysokości $h-1$ w~kopcu $T'$, to wówczas będzie $n_h=n_{h-1}'$.
-Wykorzystując założenie indukcyjne, dostajemy
+Załóżmy teraz, że $h>0$ i~że $n_{h-1}\le\lceil n/2^h\rceil$.
+Zauważmy, że gdy $n_{h-1}$ jest parzyste, to każdy węzeł na wysokości $h$ ma dokładnie dwóch synów, skąd $n_h=n_{h-1}/2=\lceil n_{h-1}/2\rceil$.
+Z~kolei gdy $n_{h-1}$ jest nieparzyste, to jeden z~węzłów na wysokości $h$ ma jednego syna, a~pozostałe węzły po dwóch synów, zatem $n_h=(n_{h-1}-1)/2+1=\lceil n_{h-1}/2\rceil$.
+Niezależnie od przypadku zachodzi więc
 \[
-    n_h = n_{h-1}' \le \lceil n'\!/2^h\rceil = \lceil\lfloor n/2\rfloor/2^h\rceil \le \lceil(n/2)/2^h\rceil = \lceil n/2^{h+1}\rceil,
+    n_h = \lceil n_{h-1}/2\rceil \le \bigl\lceil\lceil n/2^h\rceil/2\bigr\rceil = \lceil n/2^{h+1}\rceil.
 \]
-co kończy dowód.
