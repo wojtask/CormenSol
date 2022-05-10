@@ -99,8 +99,8 @@ Dzięki temu elementy pobierane są w~kolejności odwrotnej do tej, w~której by
 
 \noindent Przedstawiona poniżej procedura \proc{Max-Heap-Delete} zamienia element $A[i]$ w~$n$\nbhyphen elementowym kopcu $A$ typu max z~jego liściem $A[\attrib{A}{heap-size}]$, po czym dekrementuje \attrib{A}{heap-size}.
 Po tym kroku własność kopca może być naruszona przez węzeł $A[i]$ na dwa sposoby.
-W~pierwszym przypadku mamy sytuację, w~której $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}.
-W~drugim przypadku $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wystarczy wykonać podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}.
+W~pierwszym przypadku może zachodzić $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}.
+W~drugim przypadku może być $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wykonujemy podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}.
 Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~kopcu pozycję $i$.
 \begin{codebox}
 \Procname{$\proc{Max-Heap-Delete}(A,i)$}
@@ -114,7 +114,7 @@ Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~ko
 \li	\Return $A[\attrib{A}{heap-size}+1]$
 \end{codebox}
 
-Zarówno wywołanie z~wiersza \ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \ref{li:max-heap-delete-while-begin}\nbendash\ref{li:max-heap-delete-while-end} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
+Zarówno wywołanie z~wiersza~\ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \ref{li:max-heap-delete-while-begin}\nbendash\ref{li:max-heap-delete-while-end} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
 
 \exercise %6.5-8
 W~algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą.
