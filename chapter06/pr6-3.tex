@@ -13,20 +13,27 @@ Jedną z~tablic Younga zawierających podane elementy jest
 
 \subproblem %6-3(b)
 Załóżmy, że $Y[1,1]=\infty$ i~że tablica $Y$ nie jest pusta, tzn.\ $Y[i,j]\ne\infty$ dla pewnych $i$, $j$ takich, że $1\le i\le m$ oraz $1\le j\le n$.
-Ale z~własności tablicy Younga otrzymujemy, że $Y[1,1]\le Y[1,j]\le Y[i,j]$, co prowadzi do sprzeczności z~założeniem.
+Ale z~własności tablicy Younga otrzymujemy, że
+\[
+	\infty = Y[1,1] \le Y[1,j] \le Y[i,j] \ne \infty,
+\]
+co prowadzi do sprzeczności z~założeniem.
 A~więc tablica Younga $Y$, w~której $Y[1,1]=\infty$, jest pusta.
 
-Dowód drugiej własności przebiega analogicznie.
-Przypuśćmy, że $Y[m,n]\ne\infty$ i~że tablica $Y$ nie jest pełna, tzn.\ $Y[i,j]=\infty$ dla pewnych $i$, $j$, gdzie $1\le i\le m$ oraz $1\le j\le n$.
-Wykorzystując własność tablicy Younga, dostajemy $Y[i,j]\le Y[i,n]\le Y[m,n]$, co jest sprzeczne z~założeniem.
+Analogicznie, załóżmy, że $Y[m,n]\ne\infty$ i~że tablica $Y$ nie jest pełna, tzn.\ $Y[i,j]=\infty$ dla pewnych $i$, $j$, gdzie $1\le i\le m$ oraz $1\le j\le n$.
+Wykorzystując własność tablicy Younga, dostajemy
+\[
+	\infty = Y[i,j] \le Y[i,n] \le Y[m,n] \ne \infty,
+\]
+co jest sprzeczne z~założeniem.
 Tablica Younga $Y$, w~której $Y[m,n]\ne\infty$, jest pełna.
 
 \subproblem %6-3(c)
 Procedura ekstrakcji najmniejszego elementu tablicy Younga $Y$ o~rozmiarach $m\times n$ będzie opierać się o~pomysł z~\proc{Max-Heapify}.
 Najmniejszym elementem tablicy $Y$ jest $y=Y[1,1]$.
 Przetransportujemy go na ostatnią pozycję ostatniego wiersza tablicy, skąd będzie można bezpiecznie go usunąć przy jednoczesnym zachowaniu własności tablicy Younga.
-W~tym celu porównajmy $y$ z~elementem znajdującym się bezpośrednio na prawo i~elementem bezpośrednio w~dół od niego (o~ile istnieją).
-Mniejszy z~nich zamieniany jest następnie z~$y$, po czym procedura wywołuje się rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$, w~której $y$ stanowi pierwszy element pierwszej kolumny.
+W~tym celu porównamy $y$ z~elementem znajdującym się bezpośrednio na prawo i~elementem bezpośrednio w~dół od niego (o~ile istnieją).
+Mniejszy z~nich zamienimy następnie z~$y$, po czym wywołamy procedurę rekurencyjnie dla podtablicy Younga o~rozmiarach $(m-1)\times n$ albo $m\times(n-1)$, w~której $y$ stanowi pierwszy element pierwszej kolumny.
 Otrzymując w~wyniku tego postępowania tablicę o~rozmiarach $1\times1$, można usunąć jej jedyny element będący najmniejszym elementem początkowej tablicy Younga (zastępując go wartością $\infty$) i~zwrócić go jako wynik algorytmu.
 
 Opisany sposób został zaimplementowany w~poniższym pseudokodzie.
@@ -87,7 +94,7 @@ Wówczas jednak własność tablicy Younga może być naruszona, dlatego korzyst
 \end{codebox}
 
 Analiza poprawności i~czasu działania procedury \proc{Youngify} opiera się na analizie procedury \proc{Max-Heapify}.
-W~każdym kolejnym wywołaniu rekurencyjnym jedna z~liczb, $i$ lub $j$, jest mniejsza o~1.
+W~każdym kolejnym wywołaniu rekurencyjnym jedna z~liczb, $i$ lub $j$, jest zmniejszana o~1.
 Koniec działania następuje w~najgorszym przypadku, gdy $i=j=1$, po wykonaniu $O(m+n)$ operacji.
 A~zatem czasem działania operacji \proc{Young-Insert} jest również $O(m+n)$.
 
@@ -107,15 +114,16 @@ Następnie liczby te są pobierane w~kolejności niemalejącej dzięki $n^2$ wyw
 		\End
 \end{codebox}
 
-Czas działania obu wywoływanych procedur wynosi $O(n)$, zatem powyższy algorytm działa w~czasie $O(n^3)$.
+Czas działania obu wywołań, w~liniach 4 i~6, wynosi $O(n)$, zatem powyższy algorytm działa w~czasie $O(n^3)$.
 Jeśli mamy danych $m=n^2$ liczb, to jesteśmy w~stanie posortować je przy użyciu tego algorytmu w~czasie $O(m^{3/2})$.
 Jest to lepsza złożoność niż kwadratowa, ale gorsza od złożoności liniowo-logarytmicznej.
 
 \subproblem %6-3(f)
-Zbadajmy, jak szukana liczba $v$ ma się do ostatniego elementu pierwszego wiersza tablicy Younga $m\times n$.
-Jeśli wartości te są równe, to oczywiście można zakończyć poszukiwania z~rezultatem pozytywnym.
-W~przeciwnym przypadku, w~zależności od tego, która z~liczb jest większa, odrzucamy z~dalszych poszukiwań cały pierwszy wiersz lub całą ostatnią kolumnę i~kontynuujemy szukanie $v$ w~otrzymanej podtablicy, która stanowi tablicę Younga $(m-1)\times n$ albo $m\times(n-1)$.
-W~momencie uzyskania tablicy pustej wiadomo, że szukanej liczby nie ma w~początkowej tablicy.
+Porównamy szukaną liczbę $v$ z~ostatnim elementem pierwszego wiersza tablicy Younga $m\times n$.
+Jeśli $v=Y[1,n]$, to oczywiście można zakończyć poszukiwania z~rezultatem pozytywnym.
+Element $Y[1,n]$ jest największy w~swoim wierszu i~jednocześnie najmniejszy w~swojej kolumnie.
+Dlatego w~zależności od wyniku porównania, można odrzucić z~dalszych poszukiwań pierwszy wiersz lub ostatnią kolumnę i~kontynuować szukanie $v$ w~tak zredukowanej podtablicy, stanowiącej tablicę Younga $(m-1)\times n$ albo $m\times(n-1)$.
+W~momencie uzyskania tablicy pustej wiadomo, że szukanej liczby nie ma w~wejściowej tablicy.
 \begin{codebox}
 \Procname{$\proc{Young-Search}(Y,m,n,v)$}
 \li	$i\gets1$
