@@ -123,8 +123,8 @@ Jest oczywiste, że wśród tych elementów znajduje się najmniejszy element li
 Aby go uzyskać, wystarczy wywołać na kolejce operację \proc{Extract-Min}.
 Kolejnego elementu należy szukać wśród aktualnych węzłów kolejki lub w~głowie listy, do której początkowo należało usunięte przed chwilą minimum.
 Głowę tej listy, o~ile istnieje, przenosimy do kolejki.
-W~kolejnych iteracjach powtarzamy te operacje -- pobieramy najmniejszy element kolejki i~wstawiamy na listę wynikową, po czym uzupełniamy kolejkę głową listy, do której należał pobrany element, o~ile lista ta nie jest jeszcze pusta.
-Proces ten powtarzamy aż do opróżnienia kolejki, co następuje po przetworzeniu zawartości wszystkich list.
+W~kolejnych iteracjach powtarzamy te operacje aż do opróżnienia kolejki -- pobieramy najmniejszy element kolejki i~wstawiamy na listę wynikową, po czym uzupełniamy kolejkę głową listy, do której należał pobrany element, o~ile lista ta nie jest jeszcze pusta.
+Po zakończeniu wykonywania tych działań wszystkie listy zostają przetworzone.
 Aby zachować kolejność niemalejącą na liście wynikowej, musimy wstawiać elementy na jej koniec, pamiętając wskaźnik do ogona tej listy.
 
 Podczas działania algorytmu wykonamy $n$ razy operację wstawienia węzła do kolejki zawierającej co najwyżej $k$ elementów i~tyleż samo operacji \proc{Extract-Min}.
