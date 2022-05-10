@@ -63,9 +63,8 @@ Poniższe procedury stanowią implementację kolejki priorytetowej typu min i~dz
 \end{codebox}
 
 \exercise %6.5-4
-Po wykonaniu wiersza 1 procedury \proc{Max-Heap-Insert} wartość $A[\attrib{A}{heap-size}]$ pozostaje niezdefiniowana i~może zawierać liczbę większą niż \id{key}.
-Wówczas jednak wywołanie \proc{Heap-Increase-Key} zakończy się z~błędem.
-Radzimy sobie z~tym problemem poprzez nadanie elementowi wartości $-\infty$.
+Po wykonaniu wiersza 1 procedury \proc{Max-Heap-Insert} element $A[\attrib{A}{heap-size}]$ mógłby być większy od \id{key} i~wywołanie \proc{Heap-Increase-Key} zakończyłoby się błędem.
+Radzimy sobie z~tą sytuacją poprzez nadanie elementowi wartości $-\infty$.
 
 \exercise %6.5-5
 Dowodzimy, że niezmiennik spełniony jest przed każdą iteracją pętli \kw{while} oraz że po zakończeniu tej pętli z~niezmiennika wynika, że procedura jest poprawna.
