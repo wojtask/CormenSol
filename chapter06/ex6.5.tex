@@ -83,16 +83,16 @@ Z~prawdziwości niezmiennika pętli wynika, że procedura \proc{Heap-Increase-Ke
 
 \exercise %6.5-6
 Kolejkę FIFO implementujemy, wykorzystując do tego celu kolejkę priorytetową typu min.
-Przyjmiemy, że elementy kolejki oprócz kluczy zawierają też dodatkowe dane, natomiast klucze będą odpowiednio modyfikowane tak, aby symulować działanie kolejki FIFO.
+Przyjmiemy, że elementy kolejki oprócz kluczy zawierają też dodatkowe dane, natomiast klucze posłużą jedynie do symulowania działania kolejki FIFO.
 Podczas inicjalizacji kolejki ustawimy dodatkowy jej atrybut \id{rank} na 1.
-Przed dodaniem nowego elementu do kolejki FIFO ustawimy jego klucz na aktualną wartość pola \id{rank}, następnie wstawimy element do kolejki priorytetowej procedurą \proc{Min-Heap-Insert}, po czym zwiększymy wartość pola \id{rank} o~1.
+Przed dodaniem nowego elementu do kolejki FIFO ustawimy jego klucz na aktualną wartość pola \id{rank}, następnie wstawimy element do kolejki priorytetowej procedurą \proc{Min-Heap-Insert} i~wreszcie zinkrementujemy wartość pola \id{rank}.
 Z~kolei usuwanie elementów sprowadza się do zwykłego wywołania procedury \proc{Heap-Extract-Min}.
-Taka implementacja operacji kolejki FIFO zapewnia, że w~danym momencie w~strukturze danych nie będzie dwóch różnych elementów z~tym samym kluczem i~elementy pobierane będą w~odpowiedniej kolejności.
+Taka implementacja operacji kolejki FIFO zapewnia, że w~danym momencie w~strukturze danych nie ma dwóch różnych elementów z~tym samym kluczem i~elementy pobierane są w~odpowiedniej kolejności.
 
 Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej typu max.
 Podczas wstawiania elementów na stos korzystamy z~procedury \proc{Max-Heap-Insert} i~inkrementujemy jego pole \id{rank} (zainicjalizowane na 1 w~momencie utworzenia stosu).
-Usuwanie polega na odnalezieniu i~pobraniu elementu z~największym kluczem, co realizowane jest za pomocą \proc{Heap-Extract-Max}.
-W~wyniku tego elementy pobierane są w~kolejności odwrotnej do tej, w~której były wstawiane.
+Usuwanie polega na odnalezieniu i~pobraniu elementu z~największym kluczem przy pomocy \proc{Heap-Extract-Max}.
+Dzięki temu elementy pobierane są w~kolejności odwrotnej do tej, w~której były wstawiane.
 
 \exercise %6.5-7
 \note{Zmienimy nazwę operacji z~sugerowanej w~Podręczniku \proc{Heap-Delete} na \proc{Max-Heap-Delete}, aby odróżnić ją od analogicznej procedury dla kopca typu min.}
