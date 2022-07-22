@@ -18,13 +18,13 @@ Po przyjęciu $c_2=d_2$, spełniamy ostatnią nierówność dla wszystkich $n\ge
 Przypadek brzegowy $n=n_0$ można przyjąć za podstawę obu powyższych indukcji dla podanych wartości stałych, co kończy dowód, że $T(n)=\Theta(n^2)$.
 
 \exercise %7.2-2
-Procedura \proc{Partition} w~takim przypadku zwraca wartość $q=r$ (\refExercise{7.1-2}), a~więc w~następnych wywołaniach rekurencyjnych procedury \proc{Quicksort} będą przetwarzane podtablice rozmiarów 0 i~$n-1$.
-Napotykając w~każdym wywołaniu rekurencyjnym przypadek pesymistyczny, algorytm będzie działać w~czasie opisanym przez rekurencję z~\refExercise{7.2-1}, której rozwiązaniem jest $\Theta(n^2)$.
+Procedura \proc{Partition} w~takim przypadku zwraca $q=r$ (\refExercise{7.1-2}), a~więc w~następnych wywołaniach rekurencyjnych procedury \proc{Quicksort} będą przetwarzane podtablice o~rozmiarach 0 i~$n-1$.
+Tworząc za każdym razem najgorszy przypadek podziałów, algorytm działa w~czasie opisanym przez rekurencję z~\refExercise{7.2-1}, której rozwiązaniem jest $\Theta(n^2)$.
 
 \exercise %7.2-3
-W~tym przypadku podczas każdego wywołania rekurencyjnego procedury \proc{Partition} elementem rozdzielającym jest najmniejszy element przetwarzanej podtablicy $A[p\twodots r]$.
-W~każdym wywołaniu jedyne elementy, które zostaną zamienione, to element rozdzielający i~$A[p]$, po czym zwrócona zostanie wartość $q=r$.
-Przypadek ten jest zatem analogiczny do rozważanego w~poprzednim zadaniu, a~więc czasem działania procedury \proc{Quicksort} dla tablicy posortowanej malejąco jest $\Theta(n^2)$.
+W~tym przypadku podczas każdego wywołania procedury \proc{Partition} na element rozdzielający zostaje wybrany najmniejszy element przetwarzanej podtablicy $A[p\twodots r]$.
+Warunek z~wiersza 4 jest zawsze fałszywy, dlatego jedynymi zamienionymi elementami są $A[p]$ i~$A[r]$ (wiersz 7), i~zwracana jest wartość $q=p$.
+Podobnie jak dla tablicy o~identycznych elementach rozważanej w~poprzednim zadaniu, tworzone podziały są za każdym razem najbardziej niezrównoważone, a~więc czas działania algorytmu opisuje rekurencja z~\refExercise{7.2-1}.
 
 \exercise %7.2-4
 Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort.
