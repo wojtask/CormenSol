@@ -28,11 +28,11 @@ Podobnie jak dla tablicy o~identycznych elementach rozważanej w~poprzednim zada
 
 \exercise %7.2-4
 Prawie posortowany ciąg jest niemal najgorszym przypadkiem dla algorytmu quicksort.
-W~wielu wywołaniach rekurencyjnych na element rozdzielający wybierany jest bowiem największy element przetwarzanej podtablicy.
+W~wielu wywołaniach rekurencyjnych na element rozdzielający z~dużym prawdopodobieństwem wybrany zostanie największy lub prawie największy element przetwarzanej podtablicy.
 Wykonywane są wówczas niezrównoważone podziały, przez co czas działania procedury \proc{Quicksort} zbliża się do kwadratowego.
 
-Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} jest tego samego rzędu, co ilość inwersji w~ciągu wejściowym (punkt (c) problemu \refProblem{2-4}).
-W~ciągu prawie posortowanym ilość inwersji jest niewielka, możemy zatem mówić o~co najwyżej liniowym czasie działania sortowania przez wstawianie dla tego przypadku.
+Z~kolei dla sortowania przez wstawianie ciąg taki jest przypadkiem zbliżonym do optymistycznego, ponieważ czas działania procedury \proc{Insertion-Sort} zależy od liczby inwersji $I$ w~ciągu wejściowym (punkt (c) problemu \refProblem{2-4}).
+W~ciągu prawie posortowanym $I$ jest niewielkie, zatem czas działania sortowania przez wstawianie dla tego przypadku nie odbiega zbytnio od zależności liniowej.
 
 \exercise %7.2-5
 Rozważmy drzewo rekursji dla opisanego przypadku dokonywania podziałów.
