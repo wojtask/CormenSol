@@ -5,8 +5,7 @@ Randomizacja algorytmu sprawia, że dla każdych danych wejściowych szanse na z
 Można więc przyjąć, że dla dowolnych danych wejściowych algorytm zachowuje się jak w~przypadku średnim.
 
 \exercise %7.3-2
-W~przypadku pesymistycznym generator liczb losowych za każdym razem wybiera wartości, które tworzą najbardziej niezrównoważony podział podtablicy, czyli $p$ lub $r$.
-W~takiej sytuacji liczba wywołań generatora jest rzędu $\Theta(n)$.
+W~przypadku pesymistycznym generator liczb losowych za każdym razem wybiera wartości, które $n$\nbhyphen elementową tablicę dzielą na podtablice o~rozmiarach 0 i~$n-1$.
+Liczba wywołań generatora spełnia więc zależność $R(n)=R(n-1)+1$, której rozwiązaniem jest $R(n)=\Theta(n)$.
 
-W~przypadku optymistycznym generator za każdym razem zwraca liczbę bliską $(p+r)/2$.
-Tworzone podziały są zatem zrównoważone i~liczba wywołań generatora w~tym przypadku wynosi $\Theta(\lg n)$.
+W~przypadku optymistycznym tworzone są najbardziej zrównoważone podziały tablicy, zatem liczbę wywołań generatora opisuje wówczas rekurencja $R(n)=2R(n/2)+1$, również o~rozwiązaniu $R(n)=\Theta(n)$.
