@@ -1,21 +1,21 @@
 \subchapter{Czas działania algorytmu quicksort}
 
 \exercise %7.2-1
-Niech $c_1$, $d_1>0$ będą stałymi.
-Korzystając z~założenia, że $T(n-1)\le c_1(n-1)^2$, dostajemy
+Niech $d_1$, $d_2$, $n_0>0$ będą takimi stałymi, że dla wszystkich $n\ge n_0$ składnik $\Theta(n)$ jest ograniczony od dołu przez $d_1n$ oraz od góry przez $d_2n$.
+Przyjmijmy, że $n\ge n_0$.
+Korzystając z~założenia, że $T(n-1)\ge c_1(n-1)^2$ dla pewnej stałej $c_1>0$, dostajemy
 \[
-	T(n) = T(n-1)+\Theta(n) \le c_1(n-1)^2+d_1n = c_1n^2+(d_1-2c_1)n+c_1 \le c_1n^2.
+	T(n) = T(n-1)+\Theta(n) \ge c_1(n-1)^2+d_1n = c_1n^2+(d_1-2c_1)n+c_1 \ge c_1n^2.
 \]
-Ostatnia nierówność jest spełniona dla każdego $n\ge1$, jeśli np.\ $c_1=d_1=1$.
+Ostatnia nierówność jest spełniona, gdy ustalimy $c_1=d_1/2$.
 
-Weźmy teraz inne stałe $c_2$, $d_2>0$.
-Dolnego oszacowania na $T(n)$ dowodzimy analogicznie, wychodząc z~założenia, że $T(n-1)\ge c_2(n-1)^2$:
+Górne oszacowanie na $T(n)$ dowodzimy analogicznie, zakładając, że $T(n-1)\le c_2(n-1)^2$ dla pewnej stałej $c_2>0$:
 \[
-	T(n) = T(n-1)+\Theta(n) \ge c_2(n-1)^2+d_2n = c_2n^2+(d_2-2c_2)n+c_2 \ge c_2n^2.
+	T(n) = T(n-1)+\Theta(n) \le c_2(n-1)^2+d_2n = c_2n^2+(d_2-2c_2)n+c_2 \le c_2n^2.
 \]
-Przyjmujemy $c_2=1/2$, $d_2=2$, dzięki czemu ostatnia nierówność zachodzi dla wszystkich $n\ge1$.
+Po przyjęciu $c_2=d_2$, spełniamy ostatnią nierówność dla wszystkich $n\ge1$.
 
-Przypadek brzegowy $n=1$ można przyjąć za podstawę obu powyższych indukcji dla podanych wartości stałych, co kończy dowód, że $T(n)=\Theta(n^2)$.
+Przypadek brzegowy $n=n_0$ można przyjąć za podstawę obu powyższych indukcji dla podanych wartości stałych, co kończy dowód, że $T(n)=\Theta(n^2)$.
 
 \exercise %7.2-2
 Procedura \proc{Partition} w~takim przypadku zwraca wartość $q=r$ (\refExercise{7.1-2}), a~więc w~następnych wywołaniach rekurencyjnych procedury \proc{Quicksort} będą przetwarzane podtablice rozmiarów 0 i~$n-1$.
