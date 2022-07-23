@@ -5,30 +5,39 @@ Działanie procedury \proc{Hoare-Partition} dla przykładowej tablicy $A$ zosta�
 \begin{figure}[!ht]
 	\centering \input{fig7-1a}
 	\caption{Działanie procedury \proc{Hoare-Partition} dla tablicy $A=\langle13,19,9,5,12,8,7,4,11,2,6,21\rangle$.
-Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x$.
+Wszystkie elementy jasnoszare stanowią obszar złożony z~wartości nie większych niż $x=A[p]=13$.
 Ciemnoszare elementy tworzą obszar złożony z~wartości nie mniejszych niż $x$.
 {\sffamily\bfseries(a)} Wejściowa tablica wraz z~początkowym ustawieniem zmiennych.
 {\sffamily\bfseries(b)\nbendash(d)} Tablica i~bieżące wartości zmiennych po wykonaniu, odpowiednio, jednej, dwóch i~trzech iteracji pętli \kw{while} w~wierszach 4\nbendash11.} \label{fig:7-1a}
 \end{figure}
 
 \subproblem %7-1(b)
-W~pierwszej iteracji pętli \kw{while} zmienna $j$ zatrzyma się na pewnym indeksie $q\ge p$, a~zmienna $i$ pozostanie na indeksie $p$, pod którym przechowywana jest wartość $x$.
+W~pierwszej iteracji pętli \kw{while} indeks $j$ zatrzyma się na pozycji $q$, gdzie $p\le q\le r$, a~indeks $i$ pozostanie na pozycji $p$, na której znajduje się wartość $x$.
 Jeśli $i=j$, to procedura kończy działanie, załóżmy więc, że $i<j$.
-Element $A[i]=A[p]=x$ zostanie zamieniony z~$A[q]$.
-W~kolejnych iteracjach pętli \kw{while} zmienna $i$ może dotrzeć najdalej na indeks $q$, natomiast $j$ nie będzie nigdy mniejsze niż $p$, bo $A[p]$ zawiera teraz wartość mniejszą bądź równą $x$.
-Ponieważ $q>p$, to w~pewnym momencie podczas działania pętli indeksy $i$ i~$j$ miną się, czyli będzie $i\ge j$, co spowoduje przerwanie pętli w~wierszu 11.
+Elementy $A[i]=A[p]=x$ i~$A[q]$ zostaną wówczas zamienione miejscami.
+W~trakcie dalszego działania procedury indeks $i$ nie przekroczy $q$, a~indeks $j$ nie zostanie zmniejszony poniżej $p$, bo $A[p]$ zawiera teraz wartość mniejszą bądź równą $x$.
 
 \subproblem %7-1(c)
 \note{Zakładamy, że podtablica\/ $A[p\twodots r]$ składa się z~co najmniej dwóch elementów.}
 
-\noindent Fakt udowodniony w~punkcie (b) mówi o~tym, że $p\le j\le r$.
-Załóżmy, że $A[r]\le x$, bowiem w~przeciwnym przypadku $j<r$ już po pierwszej iteracji pętli \kw{while}.
-W~pierwszej iteracji element $A[p]$ jest zamieniany z~$A[r]$, po czym w~kolejnych iteracjach indeks $j$ jest zmniejszany i~również w~tym przypadku mamy $j<r$.
+\noindent W~pierwszej iteracji pętli \kw{while} indeks $i$ zatrzymuje się na pozycji $p$, bo $A[p]=x\ge x$.
+Jeśli więc procedura kończy działanie, wykonawszy tylko jedną iterację, to musi być $j=p<r$.
+W~przypadku wykonania przez procedurę więcej niż jednej iteracji również będzie $j<r$, bo indeks $j$ jest dekrementowany w~każdej iteracji.
+Ponadto, na podstawie punktu (b), $j\ge p$.
 
 \subproblem %7-1(d)
-Wynika to z~warunków stopu obu pętli \kw{repeat} i~testu z~wiersza 9.
-Każda para elementów tablicy, która tworzyła inwersję, jest odwracana, dzięki czemu elementy, które naruszały warunek posortowania, po zamianie będą znajdować się w~odpowiednich obszarach tablicy.
-Jak tylko indeksy $i$ i~$j$ miną się, każdy element z~podtablicy $A[p\twodots j]$ będzie równy bądź mniejszy od każdego elementu z~$A[j+1\twodots r]$.
+Teza wynika wprost z~niezmiennika pętli:
+\begin{quote}
+W~każdej iteracji pętli \kw{while} tuż przed porównaniem $i$ z~$j$ każdy element $A[p\twodots i-1]$ jest mniejszy lub równy $x$, a~każdy element $A[j+1\twodots r]$ jest większy lub równy $x$.
+\end{quote}
+\begin{description}
+	\item[Inicjowanie:] W~pierwszej iteracji niezmiennik zachodzi, dzięki wykonaniu obu pętli \kw{repeat}.
+	\item[Utrzymanie:] Załóżmy, że niezmiennik jest spełniony i~że warunek w~wierszu 9 jest prawdziwy.
+Skutkuje to zamianą elementu $A[i]$ z~$A[j]$, dzięki czemu teraz każdy element $A[p\twodots i]$ jest mniejszy lub równy $x$, a~każdy element $A[j\twodots r]$ jest większy lub równy $x$.
+Inkrementacja indeksu $i$ oraz dekrementacja indeksu $j$ w~kolejnej iteracji przywraca niezmiennik.
+	\item[Zakończenie:] Pętla kończy działanie, gdy $i\ge j$.
+Niezmiennik oczywiście pozostaje prawdziwy.
+\end{description}
 
 \subproblem %7-1(e)
 Jedyną różnicą w~porównaniu z~procedurą \proc{Quicksort} jest to, że element rozdzielający nie znajduje się w~$A[q]$ po wykonaniu \proc{Hoare-Partition}, musimy więc sortować rekurencyjnie fragment $A[p\twodots q]$ zamiast $A[p\twodots q-1]$.
