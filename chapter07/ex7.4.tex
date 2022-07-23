@@ -82,16 +82,17 @@ Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy 
 W~praktyce jednak $k$ powinno być dobrane eksperymentalnie tak, aby sortowanie przez wstawianie tablicy o~długości $k$ było wykonywane szybciej od sortowania takiej tablicy algorytmem quicksort.
 
 \exercise %7.4-6
-Niech $P$ będzie szukaną funkcją zmiennej $0<\alpha<1$.
+Niech $P$ będzie szukanym prawdopodobieństwem zależnym od parametru $0<\alpha<1$.
 Zauważmy, że funkcja ta spełnia własność $P(\alpha)=P(1-\alpha)$, w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$.
 Niech $i<j<k$ będą indeksami elementów losowo wybranych z~$A$.
-Utworzenie w~najgorszym przypadku podziału $\alpha$ do $1-\alpha$ jest równoważne temu, że $\alpha n\le j\le(1-\alpha)n$.
-Możliwe są następujące przypadki ze względu na wartości przyjmowane przez pozostałe indeksy:
-\begin{enumerate}
-	\renewcommand{\labelenumi}{(\roman{enumi})}
-	\item $i<\alpha n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $6\alpha^2(1-2\alpha)$;
-	\item $i<\alpha n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
-	\item $\alpha n\le i\le(1-\alpha)n$, $k>(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $3\alpha(1-2\alpha)^2$;
-	\item $\alpha n\le i\le(1-\alpha)n$, $\alpha n\le k\le(1-\alpha)n$, co zachodzi z~prawdopodobieństwem około $(1-2\alpha)^3$.
-\end{enumerate}
-Sumując prawdopodobieństwa z~wszystkich przypadków, otrzymujemy $P(\alpha)\approx4\alpha^3-6\alpha^2+1$.
+Podział $\alpha$ do $(1-\alpha)$ powstaje w~najgorszym przypadku wtedy i~tylko wtedy, gdy $\alpha n\le j\le(1-\alpha)n$.
+Rozważmy możliwe przypadki wyboru $i$ oraz $k$ i~obliczmy prawdopodobieństwa ich zajścia:
+\[
+	\begin{array}{rcrclcl}
+	p_{00} &=& \Pr\bigl(i<\alpha n &\text{i}& (1-\alpha)n<k\bigr) &\approx& 6\alpha^2(1-2\alpha), \\[1mm]
+	p_{01} &=& \Pr\bigl(i<\alpha n &\text{i}& \alpha n\le k\le(1-\alpha)n\bigr) &\approx& 3\alpha(1-2\alpha)^2, \\[1mm]
+	p_{10} &=& \Pr\bigl(\alpha n\le i\le(1-\alpha)n &\text{i}& (1-\alpha)n<k\bigr) &\approx& 3\alpha(1-2\alpha)^2, \\[1mm]
+	p_{11} &=& \Pr\bigl(\alpha n\le i\le(1-\alpha)n &\text{i}& \alpha n\le k\le(1-\alpha)n\bigr) &\approx& (1-2\alpha)^3.
+	\end{array}
+\]
+Dostajemy w~końcu $P(\alpha)=p_{00}+p_{01}+p_{10}+p_{11}\approx4\alpha^3-6\alpha^2+1$.
