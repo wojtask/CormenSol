@@ -23,43 +23,35 @@ Czas algorytmu quicksort w~przypadku optymistycznym jest opisany przez rekurencj
 \[
     T(n) = \min_{0\le q\le n-1}(T(q)+T(n-q-1))+\Theta(n).
 \]
-Rozwiążemy ją metodą podstawiania.
-Niech $c>0$ będzie stałą.
-Zgadujemy, że $T(q)\ge cq\lg q$ dla każdego $q=0$, 1, \dots, $n-1$ (przyjmujemy dla wygody, że $0\lg0=0$) i~podstawiamy:
-\begin{align*}
-    T(n) &\ge \min_{0\le q\le n-1}(cq\lg q+c(n-q-1)\lg(n-q-1))+\Theta(n) \\
-	&= c\cdot\!\!\!\min_{0\le q\le n-1}(q\lg q+(n-q-1)\lg(n-q-1))+\Theta(n).
-\end{align*}
+Pokażemy, że $T(n)=\Omega(n\lg n)$, używając metody podstawiania.
 
-Obliczymy teraz minimum wyrażenia $q\lg q+(n-q-1)\lg(n-q-1)$, gdy $0\le q\le n-1$.
-Jeśli $q=0$ lub $q=n-1$, to wyrażenie ma wartość $(n-1)\lg(n-1)$.
-W~pozostałych przypadkach potraktujmy je jako funkcję $f$ zmiennej $q$.
-Pochodne $f$ są postaci:
+Wpierw jednak wyznaczymy minimum wyrażenia $(q+1)\lg(q+1)+(n-q)\lg(n-q)$ (dla $0\le q\le n-1$), które pojawi się w~dowodzie oszacowania.
+Potraktujmy je jak funkcję $f$ zmiennej $q$ i~wyznaczmy jej pierwszą i~drugą pochodną:
 \begin{align*}
-    \frac{df}{dq}(q) &= \frac{d}{dq}\biggl(\frac{q\ln q+(n-q-1)\ln(n-q-1)}{\ln2}\biggr) = \frac{\ln q-\ln(n-q-1)}{\ln2}, \\[1mm]
-	\frac{d^2\!f}{dq^2}(q) &= \frac{d}{dq}\biggl(\frac{\ln q-\ln(n-q-1)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q}+\frac{1}{n-q-1}\biggr).
+    \frac{df}{dq}(q) &= \frac{d}{dq}\biggl(\frac{(q+1)\ln(q+1)+(n-q)\ln(n-q)}{\ln2}\biggr) = \frac{\ln(q+1)-\ln(n-q)}{\ln2}, \\[1mm]
+	\frac{d^2\!f}{dq^2}(q) &= \frac{d}{dq}\biggl(\frac{\ln(q+1)-\ln(n-q)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q+1}+\frac{1}{n-q}\biggr) = \frac{n+1}{\ln2\cdot(q+1)(n-q)}.
 \end{align*}
-Pierwsza pochodna zeruje się tylko wtedy, gdy $q=(n-1)/2$.
-Wyznaczamy drugą pochodną w~tym punkcie:
+Pierwsza pochodna zeruje się tylko wtedy, gdy $q+1=n-q$, skąd $q=(n-1)/2$.
+Wyznaczamy wartość drugiej pochodnej w~tym punkcie:
 \[
-    \frac{d^2\!f}{dq^2}\biggl(\frac{n-1}{2}\biggr) = \frac{1}{\ln2}\biggl(\frac{2}{n-1}+\frac{2}{2n-(n-1)-2}\biggr) = \frac{4}{\ln2\cdot(n-1)}.
+    \frac{d^2\!f}{dq^2}\biggl(\frac{n-1}{2}\biggr) = \frac{4(n+1)}{\ln2\cdot(n+1)(n+1)} = \frac{4}{\ln2\cdot(n+1)} > 0.
 \]
-Liczba ta jest dodatnia, o~ile $n>1$.
-Mamy zatem, że minimum funkcji $f$ znajduje się w~punkcie $q=(n-1)/2$ i~wynosi $(n-1)\lg((n-1)/2)$.
-Wartość ta stanowi tym samym minimum szukanego wyrażenia.
+W~związku z~powyższym stwierdzamy, że funkcja $f$ przyjmuje minimum w~punkcie $q=(n-1)/2$ wynoszące $(n+1)\lg((n+1)/2)$.
 
-Powracamy do oszacowania rekurencji $T(n)$, przyjmując $n\ge2$:
+Podobnie jak w~poprzednim zadaniu, niech $c$, $n_0>0$ będą stałymi takimi, że $cn$ stanowi ograniczenie dolne składnika $\Theta(n)$ dla wszystkich $n\ge n_0$.
+Niech $d>0$ będzie inną stałą i~niech $n\ge n_0$.
+Zgadujemy, że $T(q)\ge d(q+1)\lg(q+1)$ dla każdego $q=0$, 1, \dots, $n-1$ i~stosujemy to oszacowanie dla $T(q)$ i~$T(n-q-1)$:
 \begin{align*}
-    T(n) &\ge c(n-1)\lg\frac{n-1}{2}+\Theta(n) \\
-	&= c(n-1)\lg(n-1)-c(n-1)+\Theta(n) \\
-	&= cn\lg(n-1)-c\lg(n-1)-c(n-1)+\Theta(n) \\
-	&\ge cn\lg(n/2)-c\lg(n-1)-c(n-1)+\Theta(n) \\
-	&= cn\lg n-c(2n+\lg(n-1)-1)+\Theta(n) \\
-	&\ge cn\lg n.
+    T(n) &\ge \min_{0\le q\le n-1}(d(q+1)\lg(q+1)+d(n-q)\lg(n-q))+cn \\
+    &\ge d(n+1)\lg\frac{n+1}{2}+cn \\
+	&= d(n+1)\lg(n+1)-d(n+1)+cn \\
+	&= d(n+1)\lg(n+1)+n(c-d)-d \\
+	&\ge d(n+1)\lg(n+1).
 \end{align*}
-Ostatnia nierówność zachodzi, o~ile stała $c$ jest na tyle mała, że wyrażenie $c(2n+\lg(n-1)-1)$ jest zdominowane przez składnik $\Theta(n)$.
-Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(0)=d$, gdzie $d\ge0$ jest pewną stałą.
-Na podstawę indukcji możemy więc przyjąć $n=0$, dla którego $T(n)$ spełnia rozważane oszacowanie, a~zatem $T(n)=\Omega(n\lg n)$.
+Ostatnia nierówność jest spełniona, o~ile dobierzemy wystarczająco małe $d$ tak, aby wyrażenie $n(c-d)-d$ było nieujemne.
+
+Przyjmijmy, że przypadkiem brzegowym rekurencji jest $T(0)=1$.
+Wówczas zachodzi $T(0)>d\cdot1\cdot\lg1=0$, dlatego $n=0$ można przyjąć jako podstawę indukcji.
 
 \exercise %7.4-3
 Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$.
