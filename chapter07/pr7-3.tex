@@ -1,16 +1,20 @@
 \problem{Nieefektywne sortowanie} %7-3
 
 \subproblem %7-3(a)
-Udowodnimy poprawność algorytmu przez indukcję względem rozmiaru tablicy $n$.
-Łatwo sprawdzić, że algorytm działa poprawnie w~przypadku, gdy $n\le2$.
-Załóżmy więc, że $n>2$ i~że poprawnie sortowane są tablice o~rozmiarach mniejszych niż $n$.
-W~wyniku wykonania wiersza 6 na pozycjach $\lfloor n/3\rfloor+1\twodots n-\lfloor n/3\rfloor$ znajdują się elementy nie mniejsze od tych z~pozycji $1\twodots\lfloor n/3\rfloor$.
-A~zatem, po wykonaniu wiersza 7, $\lfloor n/3\rfloor$ największych elementów tablicy $A$ znajduje się w~obszarze $A[n-\lfloor n/3\rfloor+1\twodots n]$.
-Aby zakończyć sortowanie tablicy $A$, wystarczy uporządkować fragment $A[1\twodots n-\lfloor n/3\rfloor]$, co realizuje wiersz 8.
+Udowodnimy poprawność algorytmu przez indukcję względem rozmiaru $m=j-i+1$ tablicy wejściowej $A[i\twodots j]$.
+Łatwo sprawdzić, że algorytm działa poprawnie w~przypadku, gdy $m\le2$ -- kończy on wtedy działanie w~linii 4, nie wykonując wywołań rekurencyjnych.
+
+Załóżmy więc, że $m>2$ i~że poprawnie sortowane są tablice rozmiarów mniejszych niż $m$.
+W~wierszu 5 wyznaczane jest $k=\lfloor m/3\rfloor$.
+Na podstawie założenia, w~wyniku wykonania wiersza 6, w~podtablicy $A[i+\lfloor m/3\rfloor+1\twodots j-\lfloor m/3\rfloor]$ znajdują się elementy nie mniejsze od tych znajdujących się w~$A[i\twodots i+\lfloor m/3\rfloor]$.
+A~zatem, po wykonaniu wiersza 7, $\lfloor m/3\rfloor$ największych elementów tablicy $A[i\twodots j]$ znajduje się w~obszarze $A[j-\lfloor m/3\rfloor+1\twodots j]$.
+Aby dokończyć sortowanie tablicy $A[i\twodots j]$, wystarczy uporządkować fragment $A[i\twodots j-\lfloor m/3\rfloor]$, co realizuje wiersz 8.
+
+Z~dowodu poprawności sortowania tablicy $A[i\twodots j]$ dla dowolnych $i\le j$ wynika w~szczególności poprawność sortowania tablicy $A[1\twodots n]$.
 
 \subproblem %7-3(b)
 Procedura jest wywoływana rekurencyjnie 3 razy, zaś każde wywołanie otrzymuje tablicę o~rozmiarze około $2/3$ rozmiaru oryginalnej tablicy.
-Ponadto praca poza wywołaniami rekurencyjnymi jest wykonywana w~czasie stałym.
+Praca poza wywołaniami rekurencyjnymi jest wykonywana w~czasie stałym.
 Stąd dostajemy równanie rekurencyjne
 \[
 	T(n) =
@@ -22,5 +26,5 @@ Stąd dostajemy równanie rekurencyjne
 które rozwiązujemy przy użyciu twierdzenia o~rekurencji uniwersalnej, otrzymując wynik $T(n)=\Theta(n^{\log_{3/2}3})\approx \Theta(n^{2{,}71})$.
 
 \subproblem %7-3(c)
-Pesymistyczny czas działania algorytmu \proc{Stooge-Sort} jest wyższego rzędu nie tylko od pesymistycznego czasu działania algorytmów sortowania przez scalanie, kopcowanie czy sortowania szybkiego, ale również od mniej efektywnego sortowania przez wstawianie.
-Metoda sortowania profesorów jest więc poprawna, ale bardzo powolna.
+Zarówno pesymistyczne czasy działania sortowania przez scalanie i~algorytmu heapsort ($\Theta(n\lg n)$), jak i~pesymistyczne czasy sortowania przez wstawianie i~algorytmu quicksort ($\Theta(n^2)$) są asymptotycznie mniejsze od pesymistycznego czasu procedury \proc{Stooge-Sort}.
+Metoda sortowania profesorów jest więc poprawna, ale nieefektywna.
