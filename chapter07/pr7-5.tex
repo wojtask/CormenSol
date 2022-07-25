@@ -1,9 +1,9 @@
 \problem{Podział względem mediany trzech wartości} %7-5
 
 \subproblem %7-5(a)
-Element rozdzielający $x$ znajdzie się na pozycji $i$ w~tablicy $A'$, jeżeli drugi z~wybranych elementów będzie na lewo od $i$ w~tej tablicy, a~trzeci wybrany element -- na prawo od $i$.
-Liczby możliwych pozycji, jakie mogą zająć drugi i~trzeci element, wynoszą, odpowiednio, $i-1$ i~$n-i$.
-Otrzymujemy zatem
+W~metodzie mediany trzech wartości element $A'[i]$ stanowił element rozdzielający, jeżeli był on medianą wybranego zbioru trzech wartości, w~którym znalazły się też $A'[j]$, gdzie $1\le j<i$, oraz $A'[k]$, gdzie $i<k\le n$.
+Istnieje zatem $i-1$ możliwości wyboru indeksu $j$ oraz $n-i$ możliwości wyboru indeksu $k$.
+Stąd
 \[
 	p_i = \frac{(i-1)(n-i)}{\binom{n}{3}}.
 \]
@@ -29,12 +29,12 @@ więc granica stosunku wynosi
 A~zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
 
 \subproblem %7-5(c)
-W~tradycyjnym podejściu szansa na uzyskanie dobrego podziału jest bliska $1/3$.
-Szanse na dobry podział w~metodzie mediany trzech wartości wynoszą
+W~tradycyjnym podejściu szanse uzyskania dobrego podziału zmierzają do $1/3$ wraz ze wzrostem $n$.
+W~metodzie mediany trzech wartości stanowią one sumę
 \[
 	\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-2\sum_{i=1}^{n/3}\frac{(i-1)(n-i)}{\binom{n}{3}} = 1-\frac{12}{n(n-1)(n-2)}\sum_{i=1}^{n/3}(i-1)(n-i).
 \]
-Ostatnią sumę przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
+Sumę w~ostatnim wyrażeniu przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
 \begin{align*}
     \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]_0^{n/3-1} \\[1mm]
 	&= \frac{(n-1)(n/3-1)^2}{2}-\frac{(n/3-1)^3}{3} \\[1mm]
@@ -51,5 +51,6 @@ Dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego szanse na 
 \]
 
 \subproblem %7-5(d)
-Nowy sposób wyboru elementu rozdzielającego zwiększa jedynie szanse na uzyskanie podziału zrównoważonego, co z~kolei obniża prawdopodobieństwo, że algorytm quicksort będzie działał w~czasie kwadratowym.
-Jednakże dolne oszacowanie na czas działania algorytmu pozostaje bez zmian i~wynosi nadal $\Omega(n\lg n)$ -- można sobie wyobrazić sytuację, w~której oryginalny sposób wyboru elementu rozdzielającego generuje za każdym razem najbardziej zrównoważony podział.
+Przypadek optymistyczny algorytmu quicksort jest identyczny niezależnie od zastosowanego podejścia podziału tablicy.
+Użycie metody mediany trzech wartości zwiększa jedynie prawdopodobieństwo uzyskania podziału zrównoważonego, a~co za tym idzie szanse na zajście przypadku optymistycznego.
+Wpływa to więc co najwyżej na stały współczynnik w~dolnym oszacowaniu na czas działania algorytmu.
