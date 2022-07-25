@@ -2,8 +2,8 @@
 
 \subproblem %7-6(a)
 Niech $A$ będzie tablicą wejściową, przy czym $A[i]=[a_i,b_i]$ dla $i=1$, 2, \dots, $n$.
-Zauważmy, że jeśli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$, czyli przedziały $A[i]$ i~$A[j]$ nachodzą na siebie, to mogą wystąpić w~tablicy wynikowej w~dowolnej kolejności.
-Algorytm działa podobnie jak quicksort, ale wykorzystuje tę obserwację, znajdując zbiór przedziałów nachodzących na przedział stanowiący element rozdzielający i~pomijając wywołanie rekurencyjne dla podtablicy utworzonej przez ten zbiór przedziałów.
+Algorytm działa podobnie jak quicksort, ale wykorzystuje obserwację, że jeśli przedziały $A[i]$ i~$A[j]$ nachodzą na siebie (czyli $[a_i,b_i]\cap[a_j,b_j]\ne\emptyset$), to w~tablicy wynikowej mogą one wystąpić w~dowolnej kolejności.
+Dzięki temu zbiór przedziałów nachodzących na przedział stanowiący element rozdzielający nie musi uczestniczyć w~kolejnym wywołaniu rekurencyjnym.
 
 Procedura \proc{Fuzzy-Sort} implementuje rozmyte sortowanie przedziałów.
 Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\attrib{A}{length})$.
@@ -16,11 +16,9 @@ Aby posortować całą tablicę $A$, należy wywołać $\proc{Fuzzy-Sort}(A,1,\a
 		\End
 \end{codebox}
 
-Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twodots r]$ na 3 podtablice: $A[q_1\twodots q_2]$, która nie musi być dalej sortowana, oraz $A[p\twodots q_1-1]$ i~$A[q_2+1\twodots r]$, które następnie sortowane są w~wywołaniach rekurencyjnych w~wierszach \ref{li:fuzzy-sort-recursion1} i~\ref{li:fuzzy-sort-recursion2}.
-Pseudokod tej procedury pomocniczej został przedstawiony poniżej.
+Pomocnicza procedura \proc{Fuzzy-Partition} dokonuje podziału tablicy $A[p\twodots r]$ na 3 podtablice: $A[q_1\twodots q_2]$, której nie trzeba już dalej sortować, oraz $A[p\twodots q_1-1]$ i~$A[q_2+1\twodots r]$, które przekazywane są do wywołań rekurencyjnych w~wierszach \ref{li:fuzzy-sort-recursion1} i~\ref{li:fuzzy-sort-recursion2}.
 \begin{codebox}
 \Procname{$\proc{Fuzzy-Partition}(A,p,r)$}
-\li	zamień $A[r]\leftrightarrow A[\proc{Random}(p,r)]$
 \li	$x\gets a_r$
 \li $i\gets p-1$
 \li	\For $j\gets p$ \To $r-1$
@@ -39,16 +37,13 @@ Pseudokod tej procedury pomocniczej został przedstawiony poniżej.
 		\End \label{li:fuzzy-partition-for-end}
 \li	\Return $\langle q,i+1\rangle$
 \end{codebox}
-Lewy koniec przedziału stanowiącego element rozdzielający, wybrany losowo spośród wszystkich elementów tablicy wejściowej, zostaje przypisany do zmiennej $x$.
+Przyjmujemy przedział $A[r]$ jako element rozdzielający, którego lewy koniec przypisujemy do zmiennej $x$.
 Po wykonaniu wiersza \ref{li:fuzzy-partition-swap} tablica $A$ jest podzielona na dwie podtablice według lewych końców przedziałów względem $x$.
-Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}, w~wyniku czego dostajemy dwa obszary tablicy rozdzielone elementem $x$.
+Ta część jest więc analogiczna do zwykłej procedury \proc{Partition}.
 Następnie, w~wierszach \ref{li:fuzzy-partition-q-init}\nbendash\ref{li:fuzzy-partition-for-end}, wszystkie przedziały z~podtablicy $A[p\twodots i]$, które nachodzą na element rozdzielający znajdujący się teraz w~$A[i+1]$, zostają przeniesione na koniec tej podtablicy.
-W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania.
-Na końcu zwracane są indeksy początku i~końca tego obszaru.
+W~rezultacie z~przedziałów tych utworzony zostaje trzeci obszar tablicy, niewymagający dalszego sortowania, a~jako wynik procedury zwracane są krańce tego obszaru.
 
 \subproblem %7-6(b)
-Algorytm został oparty o~randomizowaną wersję quicksorta, więc jego czas działania dla tablicy $n$\nbhyphen elementowej w~przypadku średnim wynosi $\Theta(n\lg n)$.
-Jeśli jednak wszystkie przedziały na siebie nachodzą, to lewa część podtablicy podzielonej w~wyniku działania procedury \proc{Fuzzy-Partition} będzie za każdym razem pusta.
-Na każdym poziomie rekursji będzie więc sortowany tylko jeden obszar.
-Randomizacja zapewnia, że oczekiwaną pozycją elementu rozdzielającego jest środek podtablicy $A[p\twodots r]$ (patrz \refExercise{C.3-2}) i~w~kolejnym wywołaniu rekurencyjnym sortowany fragment jest o~połowę mniejszy.
-Oczekiwany czas działania algorytmu w~tym przypadku jest więc opisany przez rekurencję $T(n)=T(n/2)+\Theta(n)$, której rozwiązaniem jest $\Theta(n)$.
+W~porównaniu z~oryginalnym \proc{Partition}, procedura \proc{Fuzzy-Partition} wykonuje dodatkową pracę w~czasie stałym.
+Jeśli żadne dwa przedziały z~wejściowego zbioru nie nachodzą na siebie, to algorytm, poza wspomnianą różnicą, zachowuje się identycznie jak oryginalny quicksort i~jego oczekiwany czas wynosi $\Theta(n\lg n)$.
+W~przypadku, gdy wszystkie przedziały na siebie nachodzą, algorytm nie wywoła się rekurencyjnie i~zakończy działanie po czasie $\Theta(n)$.
