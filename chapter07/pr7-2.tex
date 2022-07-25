@@ -1,14 +1,14 @@
 \problem{Alternatywna analiza algorytmu quicksort} %7-2
 
 \subproblem %7-2(a)
-W~procedurze \proc{Randomized-Partition} element $A[r]$ jest zamieniany z~elementem losowo wybranym z~tablicy $A$ o~rozmiarze $n$.
-Stąd szanse, że pewien ustalony element tablicy $A$ zostanie elementem rozdzielającym, wynoszą $1/n$.
+W~procedurze \proc{Randomized-Partition} element $A[r]$ jest zamieniany z~elementem wybranym losowo z~podtablicy $A[p\twodots r]$ o~rozmiarze $n=r-p+1$.
+Stąd szanse, że dany element tej podtablicy stanie się elementem rozdzielającym, wynoszą $1/n$.
 Wobec tego wartość oczekiwana zmiennej $X_i$, gdzie $i=1$, 2, \dots, $n$, wynosi $\E(X_i)=\Pr(X_i=1)=1/n$.
 
 \subproblem %7-2(b)
 Wywołanie procedury \proc{Randomized-Quicksort} dla tablicy wejściowej $A$ o~rozmiarze $n$ potrzebuje czasu $\Theta(n)$ na podział tablicy.
-Zostaje wyznaczony pewien indeks $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$.
-Zmienna losowa $X_i$ zdefiniowana w~punkcie (a) przyjmuje wartość 1, gdy $i=q$, a~w~pozostałych przypadkach przyjmuje wartość 0.
+Zostaje wyznaczony indeks $q$, gdzie $1\le q\le n$, po czym procedura jest wywoływana rekurencyjnie dla podtablic rozmiarów $q-1$ i~$n-q$.
+Zmienna losowa $X_i$ zdefiniowana w~punkcie (a) przyjmuje wartość 1, gdy $i=q$, a~0 w~pozostałych przypadkach.
 Stąd czas potrzebny na posortowanie $n$\nbhyphen elementowej tablicy wyraża się wzorem
 \[
 	T(n) = T(q-1)+T(n-q)+\Theta(n) = \sum_{i=1}^nX_i(T(i-1)+T(n-i)+\Theta(n)).
@@ -16,21 +16,23 @@ Stąd czas potrzebny na posortowanie $n$\nbhyphen elementowej tablicy wyraża si
 Biorąc wartości oczekiwane skrajnych wyrażeń, otrzymujemy wzór (7.5) na oczekiwany czas działania algorytmu quicksort.
 
 \subproblem %7-2(c)
-\note{Przyjmiemy, że we wzorze (7.6) sumowanie przebiega od\/ $q=2$ do\/ $q=n-1$.}
+\note{W~tekście oryginalnym we wzorze (7.6) sumowanie przebiega od\/ $q=2$.}
 
-\noindent Wykorzystując części (a) i~(b) oraz liniowość wartości oczekiwanej, otrzymujemy
+\noindent Wykorzystując części (a) i~(b) oraz liniowość wartości oczekiwanej, otrzymujemy:
 \begin{align*}
 	\E(T(n)) &= \sum_{q=1}^n\E\bigl(X_q(T(q-1)+T(n-q)+\Theta(n))\bigr) \\
 	&= \sum_{q=1}^n\E(X_q)\bigl(\E(T(q-1))+\E(T(n-q))+\E(\Theta(n))\bigr) \\
-	&= \sum_{q=1}^n\frac{1}{n}\bigl(\E(T(q-1))+\E(T(n-q))+\Theta(n)\bigr) \\
-	&= \frac{1}{n}\sum_{q=0}^{n-1}2\E(T(q))+\frac{1}{n}\sum_{q=1}^n\Theta(n) \\
-	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\frac{2}{n}\bigl(\E(T(0))+\E(T(1))\bigr)+\Theta(n) \\
+	&= \sum_{q=1}^n\frac{1}{n}\bigl(2\E(T(q-1)))+\Theta(n)\bigr) \\
+	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\frac{2}{n}\bigl(\E(T(0))+\E(T(1))\bigr)+\frac{1}{n}\sum_{q=1}^n\Theta(n) \\
 	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n).
 \end{align*}
-Skorzystaliśmy z~faktu, że $\E(T(0))$ i~$\E(T(1))$ są stałymi i~mogą zostać wchłonięte przez $\Theta(n)$.
+Skorzystaliśmy z~obserwacji, że składnik $2(\E(T(0))+\E(T(1)))/n$ jest ograniczony przez stałą i~może być wchłonięty przez $\Theta(n)$.
 
 \subproblem %7-2(d)
-Rozdzielamy sumę na dwie części:
+\note{W~tekście oryginalnym we wzorze (7.7) sumowanie przebiega od\/ $k=2$.}
+
+\noindent Przyjmiemy, że $n>2$ i~rozważymy równoważną sumę od $k=1$, bowiem $1\cdot\lg1=0$.
+Rozbijamy ją na dwie części:
 \[
 	\sum_{k=1}^{n-1}k\lg k = \sum_{k=1}^{\lceil n/2\rceil-1}k\lg k+\sum_{k=\lceil n/2\rceil}^{n-1}k\lg k,
 \]
@@ -43,20 +45,20 @@ Stąd
 	&= \frac{n^2\lg n}{2}-\frac{n\lg n}{2}-\frac{n^2}{8}+\frac{n}{4} \\[1mm]
 	&\le \frac{n^2\lg n}{2}-\frac{n^2}{8},
 \end{align*}
-przy czym ostatnia nierówność zachodzi, gdy $n\ge\sqrt{2}$.
+przy czym ostatnia nierówność zachodzi dla $n\ge\sqrt{2}$.
 
 \subproblem %7-2(e)
 Załóżmy, że $n>2$ i~przyjmijmy założenie indukcyjne $\E(T(q))\le aq\lg q$ dla każdego $q=2$, 3, \dots, $n-1$ oraz pewnej stałej $a>0$.
 Z~punktu (c) mamy
 \[
-	\E(T(n)) = \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n) \le \frac{2}{n}\sum_{q=2}^{n-1}aq\lg q+\Theta(n) = \frac{2a}{n}\sum_{q=1}^{n-1}q\lg q+\Theta(n).
+	\E(T(n)) = \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n) \le \frac{2a}{n}\sum_{q=2}^{n-1}q\lg q+\Theta(n).
 \]
-Wykorzystując teraz wynik z~punktu (d), dostajemy
+Wykorzystując teraz nierówność (7.7), dostajemy
 \[
 	\E(T(n)) \le \frac{2a}{n}\biggl(\frac{n^2\lg n}{2}-\frac{n^2}{8}\biggr)+\Theta(n) = an\lg n-\frac{an}{4}+\Theta(n) \le an\lg n,
 \]
-gdyż możemy wybrać $a$ wystarczająco duże, by wyrażenie $an/4$ dominowało nad składnikiem $\Theta(n)$.
+gdyż możemy tak zwiększyć $a$, by wyrażenie $an/4$ dominowało nad składnikiem $\Theta(n)$.
 
-Jeśli przyjmiemy, że $\E(T(2))=1$, to wówczas będziemy mieć $1\le a\cdot2\cdot\lg2=2a$, skąd $a\ge1/2$.
+Jeśli przyjmiemy, że $\E(T(2))=1$, to wówczas nierówność $\E(T(2))\le a\cdot2\cdot\lg2=2a$ będzie zachodzić, o~ile $a\ge1/2$.
 A~zatem można przyjąć $n=2$ na podstawę indukcji i~dowód faktu, że $\E(T(n))=O(n\lg n)$ jest zakończony.
 Łącząc ten wynik z~oszacowaniem $\Omega(n\lg n)$ dla przypadku optymistycznego, które zostało wyznaczone w~\refExercise{7.4-2}, dostajemy, że oczekiwanym czasem działania algorytmu quicksort jest $\Theta(n\lg n)$.
