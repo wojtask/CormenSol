@@ -3,13 +3,13 @@
 \subproblem %7-4(a)
 \proc{Quicksort}$'$ wykonuje te same operacje na tablicy $A$ co oryginalny algorytm quicksort.
 Różnica jest tylko w~przetwarzaniu podtablicy $A[q+1\twodots r]$.
-Zamiast drugiego wywołania rekurencyjnego procedura wykonuje przypisanie w~wierszu 5, po czym następuje kolejna iteracja pętli \kw{while}, co działa identycznie jak wywołanie $\proc{Quicksort}'(A,q+1,r)$, ale bez zwiększania stosu rekurencji.
+Zamiast drugiego wywołania rekurencyjnego procedura wykonuje przypisanie w~wierszu 5 i~kolejna iteracja pętli \kw{while} wykonuje identyczne operacje, jak gdyby wywołane zostało $\proc{Quicksort}'(A,q+1,r)$.
 Poprawność algorytmu wynika zatem z~poprawności oryginalnego algorytmu quicksort.
 
 \subproblem %7-4(b)
 Stos rekurencji może urosnąć do rozmiaru $\Theta(n)$ w~sytuacji, gdy będzie $\Theta(n)$ wywołań rekurencyjnych \proc{Quicksort}$'$.
-Dzieje się tak wtedy, gdy na każdym poziomie rekursji procedura \proc{Partition} zwraca $q=r$.
-Do wywołania rekurencyjnego przekazywana jest wtedy podtablica o~1 mniejsza w~porównaniu z~początkową tablicą.
+Dzieje się tak na przykład wtedy, gdy na każdym poziomie rekursji procedura \proc{Partition} zwraca $q=r$.
+Wywołanie rekurencyjne działa wtedy na podtablicy o~rozmiarze o~1 mniejszym w~porównaniu z~początkową tablicą.
 Algorytm zachowuje się w~ten sposób, jeśli na wejście dostanie tablicę posortowaną niemalejąco.
 
 \subproblem %7-4(c)
