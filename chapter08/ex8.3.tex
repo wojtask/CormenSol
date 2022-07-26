@@ -27,7 +27,7 @@ Dla $d=1$ algorytm \proc{Radix-Sort} sprowadza się do wywołania pomocniczej pr
 Załóżmy teraz, że $d>1$ i~że wywołanie algorytmu \proc{Radix-Sort} po $d-1$ fazach zwróciło tablicę elementów, które, obcięte do $d-1$ ostatnich pozycji, wyznaczają porządek niemalejący.
 Teraz elementy sortowane są względem pozycji $d$.
 Niech $a$ i~$b$ będą cyframi porównywanymi podczas tej fazy.
-Jeśli $a\ne b$, to niezależnie od pozostałych cyfr elementów, których częściami są $a$ i~$b$, elementy te zostaną ustawione w~odpowiedniej kolejności.
+Jeśli $a\ne b$, to niezależnie od pozostałych cyfr elementów, których częściami są $a$ i~$b$, elementy te zostaną ustawione w~odpowiedniej kolejności, po ich obcięciu do $d$ najmniej znaczących cyfr.
 Jeśli jednak $a=b$, to elementy nie zostaną zamienione miejscami, bo pomocnicza procedura sortuje stabilnie.
 Elementy pozostają jednak we właściwym porządku, bo jest on wyznaczony przez ich $d-1$ ostatnich pozycji, a~te, na mocy założenia indukcyjnego, zostały poprawnie uporządkowane w~poprzednich fazach algorytmu.
 
