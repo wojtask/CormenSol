@@ -1,9 +1,11 @@
 \subchapter{Dolne ograniczenia dla problemu sortowania}
 
 \exercise %8.1-1
-Łatwo zauważyć, że do znalezienia uporządkowania $n$ elementów ciągu wejściowego potrzebnych jest w~najlepszym przypadku $n-1$ porównań.
-Sytuacja zachodzi np.\ dla ciągu niemalejącego.
-A~zatem najmniejszą głębokością liścia w~drzewie decyzyjnym jest $n-1$.
+Rozważmy $n$\nbhyphen elementowy ciąg wejściowy $\langle a_1,a_2,\dots,a_n\rangle$.
+Jeśli w~szczególności ciąg byłby uporządkowany rosnąco, to w~celu stwierdzenia tego faktu należałoby porównać elementy w~każdej parze postaci $\langle a_i,a_{i+1}\rangle$ dla $i=1$, 2, \dots, $n-1$, czyli wykonać co najmniej $n-1$ porównań.
+Dopóki dana para elementów nie jest porównana, dopóty nie jest znana informacja o~wzajemnej kolejności elementów z~tej pary.
+
+Stąd najmniejszą głębokością liścia w~drzewie decyzyjnym dla ciągu $n$\nbhyphen elementowego jest $n-1$.
 
 \exercise %8.1-2
 Górne oszacowanie znajdujemy w~prosty sposób:
