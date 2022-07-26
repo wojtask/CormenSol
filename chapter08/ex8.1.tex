@@ -8,17 +8,13 @@ Dopóki dana para elementów nie jest porównana, dopóty nie jest znana informa
 Stąd najmniejszą głębokością liścia w~drzewie decyzyjnym dla ciągu $n$\nbhyphen elementowego jest $n-1$.
 
 \exercise %8.1-2
-Górne oszacowanie znajdujemy w~prosty sposób:
+Oszacowanie górne:
 \[
 	\lg(n!) = \sum_{k=1}^n\lg k \le \sum_{k=1}^n\lg n = n\lg n = O(n\lg n).
 \]
-Aby uzyskać oszacowanie dolne, rozdzielamy sumę, korzystając z~faktu, że $n=\lfloor n/2\rfloor+\lceil n/2\rceil$:
+Oszacowanie dolne:
 \[
-	\lg(n!) = \sum_{k=1}^n\lg k = \sum_{k=1}^{\lfloor n/2\rfloor}\lg k+\sum_{k=\lceil n/2\rceil}^n\lg k.
-\]
-W~pierwszej sumie po prawej ograniczamy $\lg k$ od dołu przez $\lg1$, a~w~drugiej -- przez $\lg\lceil n/2\rceil$:
-\[
-	\lg(n!) \ge \sum_{k=1}^{\lfloor n/2\rfloor}\lg1+\sum_{k=\lceil n/2\rceil}^n\lg\lceil n/2\rceil \ge 0+(n/2)\lg\lceil n/2\rceil \ge (n/2)\lg(n/2) = \Omega(n\lg n).
+	\lg(n!) = \sum_{k=1}^n\lg k \ge \sum_{k=\lceil n/2\rceil}^n\lg k \ge \sum_{k=\lceil n/2\rceil}^n\lg\lceil n/2\rceil \ge \lfloor n/2\rfloor\lg\lceil n/2\rceil = \Omega(n\lg n).
 \]
 
 \exercise %8.1-3
