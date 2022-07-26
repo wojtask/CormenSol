@@ -38,15 +38,15 @@ W~lemacie 8.3 mamy $d=2$ oraz $k=n$, zatem opisane sortowanie działa w~czasie $
 
 \exercise %8.3-5
 Rozważmy sortowanie pozycyjne w~wersji intuicyjnej dla liczb trzycyfrowych.
-W~pierwszej fazie sortujemy po najbardziej znaczącej cyfrze wejściowego ciągu liczb.
-Podczas drugiej fazy dokonujemy sortowania w~obrębie fragmentów tablicy zawierających liczby o~tej samej najbardziej znaczącej cyfrze.
-W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich fragmentów, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach.
-Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego fragmentu utworzy się po 10 jeszcze mniejszych fragmentów o~poszczególnych kombinacjach dwóch pierwszych cyfr.
-Będzie zatem maksymalnie 100 takich podtablic, których posortowanie będzie wymagało 100 kolejnych faz.
+Pierwsza faza polega na sortowaniu wejściowego pliku kart z~liczbami po najbardziej znaczących cyfrach.
+Podczas drugiej fazy sortowanie odbywa się w~obrębie plików kart zawierających liczby o~tej samej najbardziej znaczącej cyfrze.
+W~najgorszym przypadku po pierwszej fazie dostaniemy 10 takich plików, każdy o~innej najbardziej znaczącej cyfrze, a~zatem środkowe cyfry sortowane będą w~kolejnych 10 fazach.
+Sytuacja w~najgorszym przypadku powtórzy się -- z~każdego sortowanego pliku utworzy się po 10 jeszcze mniejszych plików o~poszczególnych kombinacjach dwóch pierwszych cyfr.
+Będzie zatem maksymalnie 100 takich plików kart, których posortowanie będzie wymagało 100 kolejnych faz.
 Łącznie algorytm wykona zatem 111 faz.
 
-Najwięcej tymczasowych podtablic pozostawionych do późniejszego przetworzenia istnieje wówczas, gdy rozpoczyna się sortowanie ostatnich cyfr.
-W~przypadku sortowania liczb trzycyfrowych jest łącznie 27 takich podtablic -- 9 powstałych po posortowaniu najbardziej znaczących cyfr, 9 kolejnych powstałych po posortowaniu środkowych cyfr w~obrębie pierwszego fragmentu i~9 takich, które czekają na posortowanie po najmniej znaczących cyfrach.
+Najwięcej tymczasowych plików kart pozostawionych do późniejszego przetworzenia istnieje wówczas, gdy rozpoczyna się sortowanie ostatnich cyfr.
+Podczas sortowania liczb trzycyfrowych w~najgorszym przypadku jest łącznie 27 takich plików -- 9 plików o~najbardziej znaczących cyfrach od 1 do 9, 9 kolejnych o~najbardziej znaczącej cyfrze 0 i~środkowych cyfrach od 1 do 9 i~9 takich, które na pierwszej i~drugiej pozycji mają cyfry 0 i~czekają na posortowanie po najmniej znaczących cyfrach.
 
 W~ogólności do posortowania liczb $d$\nbhyphen cyfrowych tym algorytmem wymaganych jest co najwyżej $\sum_{i=0}^{d-1}10^i=(10^d-1)/9$ faz.
-Najwięcej tymczasowych fragmentów istnieje w~momencie rozpoczęcia sortowania po najmniej znaczącej cyfrze -- jest ich wtedy maksymalnie $9d$.
+Najwięcej tymczasowych plików kart istnieje w~momencie rozpoczęcia sortowania po najmniej znaczącej cyfrze -- jest ich wtedy maksymalnie $9d$.
