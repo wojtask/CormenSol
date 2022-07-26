@@ -6,17 +6,12 @@ Sortowanie przez zliczanie dla $k=1$.
 \subproblem %8-2(b)
 Poniższy pseudokod implementuje algorytm o~zadanych własnościach:
 \begin{codebox}
-\Procname{$\proc{Bitwise-Sort}(A)$}
-\li	$n\gets\attrib{A}{length}$
+\Procname{$\proc{Bit-Sort}(A)$}
 \li	$i\gets1$
-\li	$j\gets n$
-\li	\While $i<j$
-\li		\Do zamień $A[i]\leftrightarrow A[j]$
-\li			\While $i\le n$ i~$A[i]=0$
-\li				\Do $i\gets i+1$
-				\End
-\li			\While $j\ge1$ i~$A[j]=1$
-\li				\Do $j\gets j-1$
+\li	\For $j\gets1$ \To \attrib{A}{length}
+\li		\Do \If $A[j]=0$
+\li				\Then zamień $A[i]\leftrightarrow A[j]$
+\li					$i\gets i+1$
 				\End
 		\End
 \end{codebox}
@@ -25,13 +20,13 @@ Poniższy pseudokod implementuje algorytm o~zadanych własnościach:
 Sortowanie przez wstawianie.
 
 \subproblem %8-2(d)
-Do posortowania $n$ rekordów $b$\nbhyphen bitowych w~czasie $O(bn)$ za pomocą algorytmu sortowania pozycyjnego, potrzebna jest pomocnicza procedura, która sortuje stabilnie i~działa w~czasie $O(n)$.
+Do posortowania $n$ rekordów $b$\nbhyphen bitowych w~czasie $O(bn)$ metodą sortowania pozycyjnego potrzebna jest pomocnicza procedura, która sortuje stabilnie i~działa w~czasie $O(n)$.
 Takie warunki spełnia jedynie algorytm z~części (a).
-W~każdej kolejnej fazie sortowania rekordy powinny być porządkowane względem coraz bardziej znaczących bitów.
+W~kolejnych fazach sortowania rekordy będą porządkowane względem coraz bardziej znaczących bitów.
 
 \subproblem %8-2(e)
 W~algorytmie wykorzystamy tablicę pomocniczą $C[0\twodots k]$ tworzoną identycznie jak w~wierszach 1\nbendash7 procedury \proc{Counting-Sort}.
-Ideą algorytmu jest przejrzenie tablicy wejściowej w~poszukiwaniu elementów, które należą do niewłaściwych obszarów tablicy, a~następnie umieszczenie ich na właściwych pozycjach, które znajdujemy, korzystając z~informacji zebranych w~tablicy $C$ na początku działania algorytmu.
+Ideą algorytmu jest przeglądanie tablicy wejściowej w~poszukiwaniu elementów, które w~posortowanej tablicy zajmowałyby niewłaściwe pozycje, oraz ich relokację na docelowe pozycje na podstawie informacji zebranych w~tablicy $C$.
 \begin{codebox}
 \Procname{$\proc{Counting-Sort-In-Place}(A,k)$}
 \li	utwórz tablicę $C[0\twodots k]$ jak w~wierszach 1\nbendash7 procedury \proc{Counting-Sort}
