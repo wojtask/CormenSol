@@ -7,7 +7,7 @@ Po znalezieniu pasującego możemy wyłączyć go z~poszukiwań dla kolejnych cz
 
 \subproblem %8-4(b)
 Ponumerujmy czerwone dzbanki kolejnymi liczbami całkowitymi od 1 do $n$ i~analogicznie dzbanki niebieskie.
-Problem sprowadza się do znalezienia takiej permutacji $\pi$ niebieskich dzbanków, w~której $i$\nbhyphen ty dzbanek czerwony jest tej samej pojemności, co dzbanek niebieski o~numerze $\pi(i)$.
+Problem sprowadza się do znalezienia takiej permutacji $\pi$ niebieskich dzbanków, w~której $i$\nbhyphen ty dzbanek czerwony jest tej samej pojemności, co $\pi(i)$\nbhyphen ty dzbanek niebieski.
 
 Zilustrujemy za pomocą drzewa decyzyjnego działanie algorytmu wyznaczającego tę permutację.
 Każdy węzeł w~tym drzewie będzie odpowiadać porównaniu pewnego dzbanka czerwonego z~pewnym dzbankiem niebieskim.
@@ -35,8 +35,8 @@ Poniższa procedura stanowi adaptację algorytmu quicksort do omawianego problem
 \end{codebox}
 
 Poniżej znajduje się zmodyfikowana procedura \proc{Randomized-Partition}.
-Przyjmuje ona dwie tablice $R$ i~$B$, z~których jedna jest permutacją drugiej i~w~każdej z~nich wszystkie elementy są parami różne.
-Przyjmujemy, że operacja porównania dwóch dzbanków jest w~rzeczywistości porównaniem ich pojemności.
+Przyjmuje ona dwie tablice $R$ i~$B$, z~których jedna składa się z~dzbanków o~takich samych pojemnościach jak druga i~w~każdej z~nich wszystkie pojemności są parami różne.
+Potraktujemy jakiekolwiek porównanie dwóch dzbanków jak odpowiednie porównanie ich pojemności.
 Procedura dokonuje podziału obu tablic na podstawie losowo wybranego elementu rozdzielającego, przy czym nie porównuje elementów z~tej samej tablicy.
 Zwracanym wynikiem jest pozycja elementu rozdzielającego (która jest identyczna w~obu wynikowych tablicach).
 \begin{codebox}
@@ -62,15 +62,15 @@ Zwracanym wynikiem jest pozycja elementu rozdzielającego (która jest identyczn
 \end{codebox}
 
 Procedura wybiera najpierw losowo element rozdzielający $x$ z~tablicy $R[p\twodots r]$.
-Elementy równe $x$ są dla uproszczenia późniejszych kroków przenoszone na ostatnie pozycje swoich tablic.
+Dzbanki o~pojemnościach równych pojemności dzbanka $x$ są dla uproszczenia późniejszych kroków przenoszone na ostatnie pozycje swoich tablic.
 Następnie pętla \kw{for} z~wierszy \ref{li:jugs-partition-for1-begin}\nbendash\ref{li:jugs-partition-for1-end} dokonuje podziału tablicy $B[p\twodots r]$ względem $x$.
-Po zakończeniu pętli $B[r]=x$, podtablica $B[p\twodots i]$ zawiera elementy mniejsze niż $x$, a~podtablica $B[i+1\twodots r-1]$ -- elementy większe niż $x$.
+Po zakończeniu pętli $B[r]=x$, podtablica $B[p\twodots i]$ zawiera dzbanki o~pojemnościach mniejszych niż $x$, a~podtablica $B[i+1\twodots r-1]$ -- dzbanki o~pojemnościach większych niż $x$.
 Wystarczy jeszcze zamienić element rozdzielający z~$B[i+1]$, aby zakończyć podział tablicy $B$.
-W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \ref{li:jugs-partition-first-partition-begin}\nbendash\ref{li:jugs-partition-first-partition-end}, uprzednio nadając zmiennej $x$ wartość dotychczasowego elementu rozdzielającego, ale pobranego z~tablicy $B$.
+W~celu przeprowadzenia podziału tablicy $R$ algorytm wykonuje analogiczne kroki z~wierszy \ref{li:jugs-partition-first-partition-begin}\nbendash\ref{li:jugs-partition-first-partition-end}, ale z~elementem rozdzielającym $x$ pobranym z~tablicy $B$.
 
 Udowodnimy teraz, że oczekiwana liczba porównań wykonywanych przez algorytm \proc{Jugs-Match} wynosi $O(n\lg n)$.
 Nasza analiza będzie opierać się na analizie średniego przypadku algorytmu quicksort.
-Niech $\langle r_1,r_2,\dots,r_n\rangle$ będzie ciągiem dzbanków czerwonych uporządkowanym rosnąco, a~$\langle b_1,b_2,\dots,b_n\rangle$ -- rosnącym ciągiem dzbanków niebieskich.
+Niech $\langle r_1,r_2,\dots,r_n\rangle$ i~$\langle b_1,b_2,\dots,b_n\rangle$ będą ciągami dzbanków, odpowiednio, czerwonych i~niebieskich, o~rosnących pojemnościach.
 Definiujemy zmienną losową wskaźnikową
 \[
     X_{ij} = \I(\text{$r_i$ jest porównywane z~$b_j$}).
@@ -102,7 +102,7 @@ Mamy zatem
 	&= \frac{1}{j-i+1}+\frac{1}{j-i+1} \\
 	&= \frac{2}{j-i+1}.
 \end{align*}
-Wstawiając obliczony wynik do wzoru na $\E(X)$ i~ograniczając tę wartość od góry, dostajemy $\E(X)=O(n\lg n)$, co stanowi oczekiwaną liczbę porównań wykonywaną przez algorytm \proc{Jugs-Match}.
+Wstawiając ten wynik do wzoru na $\E(X)$ i~szacując od góry, dostajemy $\E(X)=O(n\lg n)$, co stanowi oczekiwaną liczbę porównań wykonywanych w~algorytmie \proc{Jugs-Match}.
 
-Pesymistyczny przypadek zachodzi wtedy, gdy na każdym poziomie rekursji elementy rozdzielające są wybierane tak, że tworzą się podziały najbardziej niezrównoważone, czyli z~tablicy o~$n$ elementach zostaje utworzona w~wyniku podziału podtablica o~$n-1$ elementach i~podtablica pusta.
+Pesymistyczny przypadek zachodzi wtedy, gdy na każdym poziomie rekursji wybór elementów rozdzielających prowadzi do utworzenia podziałów najbardziej niezrównoważonych, czyli z~tablicy o~$n$ elementach zostaje utworzona w~wyniku podziału podtablica o~$n-1$ elementach i~podtablica pusta.
 Wówczas algorytm wykonuje $O(n^2)$ porównań.
