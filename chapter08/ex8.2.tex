@@ -12,8 +12,10 @@ Rys.\ \ref{fig:8.2-1} przedstawia działanie procedury \proc{Counting-Sort} dla 
 \end{figure}
 
 \exercise %8.2-2
-Elementy tablicy wejściowej przetwarzane są od końca, a~wartości w~tablicy $C$ stanowiące indeksy tablicy wynikowej, na które trafią wejściowe elementy, są systematycznie zmniejszane.
-A~zatem równe sobie elementy będą umieszczane na coraz niższych pozycjach w~tablicy wynikowej, dzięki czemu ich początkowa kolejność zostanie zachowana.
+Załóżmy, że na pozycjach $j_1$, $j_2$ ($j_1<j_2$) tablicy wejściowej $A$ znajduje się ta sama wartość $v$.
+W~procedurze \proc{Counting-Sort} podczas budowy wynikowej tablicy $B$ wpierw zbadana zostanie wartość $A[j_2]$, którą algorytm umieści na docelowej pozycji $m=C[v]$ tablicy wynikowej.
+Ponieważ $C[v]$ jest następnie dekrementowane w~linii 12 i~później nigdy już nie inkrementowane, mamy gwarancję, że gdy rozpatrywana będzie wartość $A[j_1]$, będzie zachodzić $C[v]<m$.
+Oznacza to, że $A[j_1]$ wystąpi w~tablicy wynikowej wcześniej niż $A[j_2]$, dowodząc stabilności algorytmu.
 
 \exercise %8.2-3
 Po wprowadzeniu takiej modyfikacji tablica $A$ będzie przeglądana od lewej do prawej, a~równe elementy będą umieszczane w~odpowiedniej części tablicy wynikowej na coraz niższych pozycjach.
