@@ -18,15 +18,17 @@ Oszacowanie dolne:
 \]
 
 \exercise %8.1-3
-Jeśli sortowanie działa w~czasie $\Theta(n)$ dla $l$ permutacji wejściowych długości $n$, to drzewo decyzyjne składające się z~gałęzi odpowiadających tylko tym permutacjom, ma wysokość $h=\Theta(n)$.
-Powtarzając rozumowanie z~dowodu tw.\ 8.1, dostajemy nierówność $2^h\ge l$, a~stąd $h\ge\lg l$.
-Pozostaje więc sprawdzić, czy $h$ jest asymptotycznie ograniczone funkcją liniową względem $n$ dla poszczególnych wartości przyjmowanych przez $l$:
-\begin{itemize}
-	\item jeśli $l=n!/2$, to $h\ge\lg l=\lg(n!/2)=\lg(n!)-1=\Omega(n\lg n)$;
-	\item jeśli $l=n!/n$, to $h\ge\lg l=\lg(n!/n)=\lg(n!)-\lg n=\Omega(n\lg n)$;
-	\item jeśli $l=n!/2^n$, to $h\ge\lg l=\lg(n!/2^n)=\lg(n!)-n=\Omega(n\lg n)$.
-\end{itemize}
-W~każdym badanym przypadku $h=\Omega(n\lg n)$, zatem nie istnieje algorytm sortujący za pomocą porównań i~działający w~czasie liniowym dla poszczególnych ilości permutacji wejściowych.
+Załóżmy, że istnieje algorytm sortujący za pomocą porównań, który dla $m$ permutacji wejściowych o~długości $n$ działa w~czasie $O(n)$.
+Rozważmy drzewo decyzyjne o~liściach odpowiadającym tylko tym $m$ permutacjom mające, zgodnie z~założeniem, wysokość $h=O(n)$.
+Powtarzając rozumowanie z~dowodu tw.\ 8.1, dostajemy nierówność $2^h\ge m$, a~stąd $h\ge\lg m$.
+Zbadajmy asymptotyczne tempo wzrostu $h$ w~zależności od $n$ dla poszczególnych wartości $m$:
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\roman{enumi})}
+	\item jeśli $m=n!/2$, to $h\ge\lg m=\lg(n!/2)=\lg(n!)-1=\Omega(n\lg n)$;
+	\item jeśli $m=n!/n$, to $h\ge\lg m=\lg(n!/n)=\lg(n!)-\lg n=\Omega(n\lg n)$;
+	\item jeśli $m=n!/2^n$, to $h\ge\lg m=\lg(n!/2^n)=\lg(n!)-n=\Omega(n\lg n)$.
+\end{enumerate}
+W~każdym badanym przypadku $h=\Omega(n\lg n)$, co stoi w~sprzeczności z~założeniem.
 
 \exercise %8.1-4
 Rozważmy drzewo decyzyjne reprezentujące sortowanie takiego częściowo uporządkowanego ciągu.
