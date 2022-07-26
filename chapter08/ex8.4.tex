@@ -31,20 +31,20 @@ Na podstawie tych wartości obliczamy:
 \end{align*}
 
 \exercise %8.4-4
-Algorytm będzie opierał się na pomyśle z~sortowania kubełkowego z~$n$ kubełkami.
+Algorytm oprzemy na pomyśle z~sortowania kubełkowego z~$n$ kubełkami.
 Podzielimy koło jednostkowe na $n$ obszarów o~równych polach reprezentujących przedziały odległości od środka koła i~z~każdym takim obszarem skojarzymy inny kubełek.
-Dzięki temu punkty będą umieszczane w~poszczególnych kubełkach z~jednakowym prawdopodobieństwem.
-Łatwo zauważyć, że obszary te będą pierścieniami kołowymi (z~wyjątkiem jednego, który będzie kołem) o~jednakowych powierzchniach równych $\pi/n$.
-Pozostaje tylko wyznaczyć ich promienie.
+Dzięki temu w~trakcie działania algorytmu punkty będą umieszczane w~poszczególnych kubełkach zgodnie z~rozkładem jednostajnym.
+Obszarami tymi będą pierścienie kołowe (z~wyjątkiem jednego, który będzie kołem) o~środkach w~punkcie $\langle0,0\rangle$ i~jednakowych powierzchniach $\pi/n$, dające w~sumie koło jednostkowe.
+Wyznaczymy ich promienie.
 
-Ponumerujmy obszary (kubełki) kolejnymi liczbami całkowitymi od 0 do $n-1$ w~kolejności od środka do brzegu koła jednostkowego i~oznaczmy przez $r_j$ długość promienia wewnętrznego pierścienia kołowego stanowiącego $j$\nbhyphen ty obszar.
+Ponumerujmy obszary (kubełki) kolejnymi liczbami całkowitymi od 0 do $n-1$ w~kolejności od środka do brzegu koła jednostkowego i~oznaczmy przez $r_j$ długość wewnętrznego promienia pierścienia kołowego stanowiącego $j$\nbhyphen ty obszar.
 Obszar zerowy jest kołem o~polu $\pi/n$, więc $r_1=\sqrt{1/n}$.
-Ponieważ suma tego koła z~pierścieniem do niego przylegającym jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$.
+Ponieważ suma tego koła z~pierścieniem o~numerze 1 jest kołem o~polu $2\pi/n$, to stąd mamy $r_2=\sqrt{2/n}$.
 Rozumowanie przeprowadzamy dla pozostałych pierścieni, otrzymując $r_j=\sqrt{j/n}$ dla każdego $j=1$, 2, \dots, $n-1$.
 Przyjmijmy ponadto $r_0=0$ oraz $r_n=1$.
 
-Punkty sortowane są względem ich odległości od środka koła jednostkowego przy wykorzystaniu opisanych kubełków.
-Dla każdego punktu $p_i=\langle x_i,y_i\rangle$ obliczane jest $d_i=\sqrt{x_i^2+y_i^2}$ i~jeśli zachodzi $r_j<d_i\le r_{j+1}$, to punkt umieszczany jest w~kubełku o~numerze $j$, który można wyznaczyć ze wzoru $j=\lceil d_i^2n\rceil-1$.
+Dla każdego punktu $p_i$ o~odległości $d_i$ od środka koła jednostkowego, jeśli $r_j<d_i\le r_{j+1}$, to punkt $p_i$ umieszczony zostanie w~kubełku o~numerze $j=\lceil d_i^2n\rceil-1$.
+Po rozmieszczeniu wszystkich punktów wejściowych i~uporządkowaniu ich w~obrębie każdego kubełka, zostaną one scalone w~wynikową listę.
 
 \exercise %8.4-5
 Niech $X$ będzie zmienną losową o~ciągłej dystrybuancie $P_X$.

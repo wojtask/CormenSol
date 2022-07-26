@@ -23,7 +23,7 @@ Mamy zatem
 \subproblem %8-1(c)
 \note{W~tekście zadania wykorzystywane jest\/ $d(1)$ mimo braku jego definicji -- przyjmujemy zatem\/ $d(1)=0$.}
 
-\noindent W~celu udowodnienia wzoru z~treści zadania pokażemy, że zachodzą nierówności
+\noindent W~celu udowodnienia wzoru z~treści zadania wykażemy z~osobna nierówności
 \[
     d(k) \le \min_{1\le i\le k-1}(d(i)+d(k-i)+k) \quad\text{oraz}\quad d(k) \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
 \]
@@ -37,8 +37,7 @@ Korzystając z~definicji $d(k)$ i~wzoru z~części (b), mamy
 \]
 Ponieważ otrzymana nierówność zachodzi dla każdego $i=1$, 2, \dots, $k-1$, to możemy napisać $d(k)\le\min_{1\le i\le k-1}(d(i)+d(k-i)+k)$.
 
-Pokażemy teraz, że zachodzi także nierówność przeciwna.
-Ustalmy w~tym celu drzewo binarne $T$ o~$k$ liściach, dla którego $d(k)=D(T)$.
+Dla dowodu drugiej nierówności ustalmy drzewo binarne $T$ o~$k$ liściach, dla którego $d(k)=D(T)$.
 Niech $LT$ i~$RT$ będą poddrzewami drzewa $T$, odpowiednio, lewym i~prawym.
 Niech $i_0$, gdzie $1\le i_0\le k-1$, będzie liczbą liści w~drzewie $LT$, a~$k-i_0$ -- liczbą liści w~drzewie $RT$.
 Wówczas
@@ -46,7 +45,7 @@ Wówczas
     d(k) = D(T) = D(LT)+D(RT)+k \ge d(i_0)+d(k-i_0)+k \ge \min_{1\le i\le k-1}(d(i)+d(k-i)+k).
 \]
 Założyliśmy tutaj, że ani $LT$, ani $RT$ nie są puste.
-Gdyby tak jednak było, to drugie poddrzewo $T$ zawierałoby wszystkie $k$ liści drzewa $T$ i~wówczas, na mocy punktu (b), funkcja $D$ dla niego przyjęłaby wartość $D(T)-k$.
+Gdyby tak jednak było, to drugie poddrzewo $T$ zawierałoby wszystkie $k$ liści drzewa $T$ i~wówczas, na mocy punktu (b), funkcja $D$ dla tego poddrzewa przyjęłaby wartość $D(T)-k$.
 To jednak przeczyłoby wyborowi $T$ jako drzewa o~$k$ liściach z~minimalną wartością funkcji $D$.
 
 \subproblem %8-1(d)
@@ -65,13 +64,12 @@ Pokażemy oszacowanie na $d(k)$ przez indukcję, zakładając w~tym celu, że $d
 Podstawa indukcji zachodzi trywialnie, bo $d(1)=0\ge 1\lg1$, a~zatem $d(k)=\Omega(k\lg k)$.
 
 \subproblem %8-1(e)
-Zauważmy, że możemy usunąć wszystkie nieosiągalne węzły z~drzewa $T_A$, ponieważ nie wpływają one na czas działania algorytmu $A$.
-A~zatem, na mocy punktu (a), po ich usunięciu $T_A$ zawiera dokładnie $n!$ liści.
+W~naszej analizie pominiemy w~drzewie $T_A$ wszystkie liście, które nie są osiągane w~trakcie działania algorytmu $A$, ponieważ nie wpływają one na czas jego działania.
+A~zatem, na podstawie wyniku z~punktu (a), weźmiemy pod uwagę tylko $n!$ liści z~niezerowymi prawdopodobieństwami.
 Wykorzystując definicję $d(k)$ oraz wynik z~poprzedniej części, mamy
 \[
 	D(T_A) \ge d(n!) = \Omega(n!\lg(n!)).
 \]
-
 $D(T_A)$ stanowi sumę głębokości liści drzewa decyzyjnego $T_A$, a~głębokość każdego liścia jest proporcjonalna do czasu działania algorytmu $A$ dla permutacji reprezentowanej przez ten liść.
 Ponieważ prawdopodobieństwo osiągnięcia dowolnego liścia drzewa $T_A$ jest równe $1/n!$, to oczekiwany czas algorytmu $A$ wynosi
 \[
@@ -80,7 +78,7 @@ Ponieważ prawdopodobieństwo osiągnięcia dowolnego liścia drzewa $T_A$ jest 
 
 \subproblem %8-1(f)
 Niech $B$ będzie dowolnym randomizowanym algorytmem sortującym za pomocą porównań, a~$T_B$ -- jego drzewem decyzyjnym.
-Istnieje wówczas deterministyczny algorytm $A$ sortujący za pomocą porównań, którego drzewo decyzyjne $T_A$ powstaje z~drzewa $T_B$ poprzez zastąpienie każdego węzła zrandomizowanego minimalnym poddrzewem o~korzeniu będącym synem tegoż węzła zrandomizowanego.
-Przez minimalne poddrzewo rozumiemy tutaj takie, które posiada minimalną średnią odległość od swojego korzenia od liścia.
+Istnieje wówczas deterministyczny algorytm $A$ sortujący za pomocą porównań, którego drzewo decyzyjne $T_A$ powstaje z~drzewa $T_B$ poprzez zastąpienie każdego węzła zrandomizowanego $x$ optymalnym poddrzewem o~korzeniu będącym synem $x$.
+Przez optymalne poddrzewo rozumiemy tutaj takie, które posiada minimalną średnią odległość od swojego korzenia od liścia.
 Algorytm $A$ wybiera zatem najlepszą możliwość zawsze wtedy, gdy algorytm $B$ dokonuje losowego wyboru spośród $r$ możliwości.
 Dlatego w~średnim przypadku $A$ wykonuje co najwyżej tyle porównań, co $B$.
