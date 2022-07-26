@@ -7,11 +7,11 @@ Zgodnie z~definicją tablica $A[1\twodots n]$ jest 1\nbhyphen posortowana, jeśl
 Jedną z~takich permutacji jest $\langle2,1,5,3,7,4,8,6,10,9\rangle$.
 
 \subproblem %8-5(c)
-Aby udowodnić ten fakt, wystarczy nierówność
+Aby udowodnić ten fakt, wystarczy obie strony nierówności
 \[
 	\frac{\sum_{j=i}^{i+k-1}A[j]}{k} \le \frac{\sum_{j=i+1}^{i+k}A[j]}{k}
 \]
-pomnożyć przez $k$ i~zredukować te same składniki po obu stronach znaku nierówności.
+pomnożyć przez $k$ i~zredukować powtarzające się składniki.
 
 \subproblem %8-5(d)
 Jednym ze sposobów $k$\nbhyphen posortowania tablicy $A[1\twodots n]$ jest zastosowanie algorytmu quicksort, którego rekursja zatrzymuje się dla podtablic o~rozmiarach nieprzekraczających $k$.
@@ -19,34 +19,22 @@ Dokładniej, należy zamienić warunek z~wiersza 1 procedury \proc{Quicksort} na
 \begin{codebox}
 \li	\If $p+k-1<r$
 \end{codebox}
-Po zakończeniu działania algorytmu mamy, że $A[i]\le A[i+k]$ dla każdego $i=1$, 2, \dots, $n-k$.
-Warunek ten, na podstawie części (c), jest równoważny temu, że tablica $A$ jest $k$\nbhyphen posortowana.
+Po zakończeniu działania algorytmu będzie zachodzić $A[i]\le A[i+k]$ dla każdego $i=1$, 2, \dots, $n-k$, co, na podstawie części (c), jest równoważne $k$\nbhyphen posortowaniu tablicy $A$.
 
 W~\refExercise{7.4-5} pokazaliśmy, że quicksort po takiej modyfikacji działa w~oczekiwanym czasie $O(n\lg(n/k))$.
-Aby było to oszacowanie na czas w~przypadku pesymistycznym, musimy zagwarantować najlepszy przypadek wyboru elementów rozdzielających.
+Aby było to oszacowanie na czas w~przypadku pesymistycznym, musimy na każdym poziomie rekurencji zagwarantować najlepszy przypadek wyboru elementów rozdzielających.
 Można to zrealizować poprzez wybieranie do tej roli mediany bieżącej podtablicy, jak to opisano w~\refExercise{9.3-3}.
 
 \subproblem %8-5(e)
-W~$k$\nbhyphen posortowanej tablicy każdy z~ciągów postaci $\langle A[j],A[j+k],A[j+2k],\dots,A[j+m_jk]\rangle$, gdzie $j=1$, 2 \dots, $k$ i~$j+m_jk\le n$, jest uporządkowany niemalejąco i~wszystkie one zawierają łącznie $n$ elementów.
-Wystarczy więc scalić je w~jedną posortowaną tablicę, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
+Z~punktu (c) wynika wniosek, że w~$k$\nbhyphen posortowanej tablicy każdy z~ciągów postaci
+\[
+    \langle A[j],A[j+k],A[j+2k],\dots,A[j+m_jk]\rangle,
+\]
+gdzie $j=1$, 2 \dots, $k$ i~$j+m_jk\le n$, jest uporządkowany niemalejąco.
+Ponadto każda z~$n$ liczb tablicy $A$ wchodzi w~skład dokładnie jednego takiego ciągu.
+Wystarczy więc scalić te ciągi w~tablicę posortowaną, co na podstawie \refExercise{6.5-8} można wykonać w~czasie $O(n\lg k)$.
 
 \subproblem %8-5(f)
-Przyjmiemy dla wygody, że $n$ jest podzielne przez $k$ -- nie spowoduje to zmniejszenia ogólności naszej analizy.
-
-W~dowodzie dolnego ograniczenia czasowego tego problemu wykorzystamy model drzew decyzyjnych.
-Niech $T$ będzie drzewem decyzyjnym pewnego algorytmu $k$\nbhyphen sortowania za pomocą porównań tablicy o~$n$ elementach.
-Drzewo $T$ jest podobne do drzewa decyzyjnego algorytmu zwykłego sortowania za pomocą porównań -- każdy jego liść odpowiada pewnej permutacji tablicy wejściowej.
-Jednak liczba osiągalnych liści jest na ogół mniejsza niż w~drzewie zwykłego sortowania.
-Wynikowa tablica składa się z~$n/k$ podtablic $k$\nbhyphen elementowych, w~których uporządkowanie elementów nie ma znaczenia.
-Osiągalnych liści w~tym drzewie jest zatem
-\[
-    \frac{n!}{(k!)^{n/k}}.
-\]
-
-Niech $h$ oznacza wysokość drzewa $T$.
-Liczba liści w~$T$ nie przekracza $2^h$, więc
-\[
-    h \ge \lg\frac{n!}{(k!)^{n/k}} = \lg(n!)-(n/k)\lg(k!) = \Omega(n\lg n),
-\]
-ponieważ traktujemy $k$ jako stałą.
-Wyznaczone oszacowanie na $h$ stanowi dolne ograniczenie na czas działania dowolnego algorytmu $k$\nbhyphen sortowania za pomocą porównań tablicy o~$n$ elementach.
+Załóżmy, że $k$\nbhyphen posortowanie tablicy $n$\nbhyphen elementowej jest możliwe w~czasie $o(n\lg n)$.
+Ponieważ $k$ jest stałą, to $k$\nbhyphen posortowaną tablicę można byłoby następnie scalić w~tablicę posortowaną w~czasie $O(n)$ (punkt (e)), otrzymując tym samym algorytm sortowania za pomocą porównań o~czasie $o(n\lg n)$.
+Stoi to jednak w~sprzeczności z~tw.\ 8.1.
