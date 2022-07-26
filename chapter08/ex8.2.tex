@@ -18,8 +18,10 @@ Ponieważ $C[v]$ jest następnie dekrementowane w~linii 12 i~później nigdy ju�
 Oznacza to, że $A[j_1]$ wystąpi w~tablicy wynikowej wcześniej niż $A[j_2]$, dowodząc stabilności algorytmu.
 
 \exercise %8.2-3
-Po wprowadzeniu takiej modyfikacji tablica $A$ będzie przeglądana od lewej do prawej, a~równe elementy będą umieszczane w~odpowiedniej części tablicy wynikowej na coraz niższych pozycjach.
-Oczywiście kolejność przetwarzania elementów tablicy $A$ nie wpływa na poprawność algorytmu \proc{Counting-Sort}, jednak zastosowanie opisanej zmiany powoduje, że sortowanie nie jest stabilne.
+Przy identycznym założeniu jak w~poprzednim zadaniu spróbujemy prześledzić, jak budowana jest tablica wynikowa po wprowadzeniu tej modyfikacji.
+Spośród rozważanych przez nas elementów wpierw do tablicy $B$ trafi $A[j_1]$, na pozycję $m=C[v]$.
+W~momencie przetwarzania elementu $A[j_2]$ wartość $C[v]$ będzie mniejsza niż $m$, dlatego element ten zajmie w~$B$ pozycję na lewo od $A[j_1]$.
+Odwrócenie kolejności przetwarzania elementów tablicy $A$ nie wpływa na poprawność algorytmu \proc{Counting-Sort}, jednak sprawia, że sortowanie przestaje być stabilne.
 
 \exercise %8.2-4
 Algorytm będzie zliczać elementy z~wejściowej tablicy w~czasie $\Theta(n+k)$, zapamiętując wyniki w~pomocniczej tablicy $C[0\twodots k]$.
