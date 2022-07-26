@@ -12,7 +12,7 @@ W~drzewie decyzyjnym jest więc tyleż osiągalnych liści.
 Wyznaczając oszacowanie wysokości $h$ tego drzewa, znajdziemy ograniczenie dla maksymalnej liczby porównań wykonanych przez algorytm scalania list.
 Mamy $2^h\ge\binom{2n}{n}$ i~korzystając z~\refExercise{C.1-13}, dostajemy
 \[
-    h \ge \lg\binom{2n}{n} = \lg\biggl(\frac{2^{2n}}{\sqrt{\pi n}}(1+O(1/n))\biggr) \ge \lg\frac{2^{2n}}{\sqrt{\pi n}} = 2n-\frac{\lg\pi}{2}-\frac{\lg n}{2} = 2n-o(n).
+    h \ge \lg\binom{2n}{n} = \lg\biggl(\frac{2^{2n}}{\sqrt{\pi n}}(1+O(1/n))\biggr) \ge \lg\frac{2^{2n}}{\sqrt{\pi n}} = 2n-\frac{\lg\pi n}{2} = 2n-o(n).
 \]
 
 \subproblem %8-6(c)
@@ -24,5 +24,5 @@ A~zatem, aby rozstrzygnąć, w~jakiej kolejności powinny wystąpić $a_i$ i~$b_
 
 \subproblem %8-6(d)
 Jeśli do wynikowej listy będą trafiać elementy z~pierwszej listy na przemian z~elementami z~drugiej, to każde dwa sąsiednie elementy w~wynikowej liście będą pochodzić z~dwóch różnych list wejściowych.
-Takich par sąsiadujących elementów będzie w~sumie $2n-1$.
+Takich par sąsiadujących elementów jest w~sumie $2n-1$.
 Na mocy poprzedniego punktu wnioskujemy, że w~tym przypadku algorytm scalania list wykona tyleż porównań.
