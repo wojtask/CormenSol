@@ -9,15 +9,16 @@ Przebieg działania procedury \proc{Radix-Sort} dla podanej listy słów został
 
 \exercise %8.3-2
 Algorytmami stabilnymi są sortowanie przez wstawianie i~sortowanie przez scalanie.
-W~pierwszym z~nich, wstawiając element $A[j]$ do podtablicy $A[1\twodots j-1]$, zatrzymujemy się na pierwszym elemencie z~tej podtablicy, który jest mniejszy lub równy od $A[j]$.
-Zatem elementy równe sobie nie zostaną wymieszane.
-Podobnie w~procedurze \proc{Merge}, jeśli porównywane elementy będą sobie równe, to do wynikowej tablicy zostanie wstawiony najpierw element z~tablicy $L$ i~dopiero potem ten z~tablicy $R$.
+W pierwszym z~nich, podczas wstawiania elementu $A[j]$ do podtablicy $A[1\twodots j-1]$, algorytm przegląda tę podtablicę od prawej do lewej i~zatrzymuje się na pierwszym elemencie mniejszym lub równym $A[j]$ (o~ile taki istnieje).
+Wstawienie następuje tuż za ostatnio sprawdzonym indeksem, zatem elementy równe sobie nie zostają wymieszane.
+Podobnie w~procedurze \proc{Merge}, jeśli porównywane elementy są sobie równe, to do wynikowej tablicy wstawiany jest najpierw element z~tablicy $L$ i~dopiero potem ten z~tablicy $R$.
 Stabilność algorytmu wynika na podstawie indukcji po scalanych fragmentach.
-Natomiast zarówno heapsort, jak i~quicksort nie sortuje stabilnie -- przykładem danych wejściowych, które ilustrują ten fakt w~obu tych algorytmach, jest ciąg $A=\langle2,2,1\rangle$.
+Natomiast zarówno heapsort, jak i~quicksort nie sortują stabilnie -- przykładem danych wejściowych, które ilustrują ten fakt w~obu tych algorytmach, jest ciąg $A=\langle2,2,1\rangle$.
 
-Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można zapamiętywać z~każdym elementem jego początkową pozycję w~tablicy wejściowej i~przy każdym teście dającym odpowiedź, że elementy są sobie równe, porządkować je za pomocą ich początkowych pozycji.
+Aby dowolny algorytm sortowania za pomocą porównań uczynić stabilnym, można zapamiętywać z~każdym elementem jego początkową pozycję w~tablicy wejściowej i~z~każdym porównaniem elementów przeprowadzać też test ich równości.
+Równe elementy porządkowane byłyby względem ich początkowych pozycji.
 Do realizacji takiego podejścia wymagana jest dodatkowa pamięć rzędu $\Theta(n)$, gdzie $n$ jest długością sortowanej tablicy.
-Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyfikowanego sortowania, ponieważ przeprowadzenie dodatkowego testu odbywa się w~czasie stałym.
+Nie zwiększa się natomiast asymptotyczne oszacowanie na czas działania zmodyfikowanego sortowania, ponieważ przeprowadzenie dodatkowego porównania początkowych pozycji odbywa się w~czasie stałym.
 
 \exercise %8.3-3
 Przeprowadzimy dowód przez indukcję względem liczby cyfr $d$ elementów wejściowych.
