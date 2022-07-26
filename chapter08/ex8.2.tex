@@ -26,7 +26,7 @@ Odwrócenie kolejności przetwarzania elementów tablicy $A$ nie wpływa na popr
 \exercise %8.2-4
 Algorytm będzie zliczać elementy z~wejściowej tablicy w~czasie $\Theta(n+k)$, zapamiętując wyniki w~pomocniczej tablicy $C[0\twodots k]$.
 Następnie, zapytany o~liczbę elementów z~przedziału $a\twodots b$ na podstawie danych z~tablicy pomocniczej, zwróci liczbę elementów z~zakresu $0\twodots b$ pomniejszoną o~liczbę elementów z~zakresu $0\twodots a-1$.
-Dokładniej, jego pierwsza faza jest równoważna wierszom 1\nbendash8 procedury \proc{Counting-Sort}, natomiast w~drugiej fazie zwracany jest odpowiedni wynik w~zależności od przypadku:
+Dokładniej, jego pierwsza faza będzie równoważna wierszom 1\nbendash8 procedury \proc{Counting-Sort}, natomiast w~drugiej fazie zwrócony zostanie odpowiedni wynik w~zależności od przypadku:
 \begin{enumerate}
 	\renewcommand{\labelenumi}{(\roman{enumi})}
 	\item $C[b]-C[a-1]$, jeśli $0<a\le b\le k$;
