@@ -5,7 +5,7 @@ Zakładamy, że parametr $i$ jest liczbą całkowitą spełniającą nierównoś
 Wywołanie procedury \proc{Randomized-Partition} w~wierszu 3 zwraca liczbę całkowitą $q$ taką, że $p\le q\le r$.
 Dla liczby $k$ wyznaczonej w~kolejnym wierszu zachodzi więc $1\le k\le r-p+1$.
 Wywołanie rekurencyjne w~wierszu 8 nastąpi dla tablicy długości 0, jeśli $i<k$ i~$q=p$, ale wówczas $k=1$, co jest sprzeczne z~założeniem o~parametrze $i$.
-Podobnie w~wierszu 9 funkcja zostanie wywołana rekurencyjnie dla pustej tablicy, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$ i~również w~tym przypadku dochodzimy do sprzeczności.
+Podobnie w~wierszu 9 do wywołania rekurencyjnego zostanie przekazana pusta tablica, o~ile $i>k$ i~$q=r$, lecz wtedy $k=r-p+1$ i~również w~tym przypadku dochodzimy do sprzeczności.
 
 \exercise %9.2-2
 Czas działania procedury \proc{Randomized-Partition} dla tablicy o~mniej niż $n$ elementach jest niezależny od tego, jak została podzielona tablica o~$n$ elementach w~poprzednim wywołaniu rekurencyjnym.
