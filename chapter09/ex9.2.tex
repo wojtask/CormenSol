@@ -31,5 +31,6 @@ Po dokonaniu oczywistych zmian w~oryginalnej procedurze, otrzymujemy następują
 \end{codebox}
 
 \exercise %9.2-4
-W~przypadku szukania elementu najmniejszego pesymistyczny przypadek dzielenia podtablicy występuje, gdy na element rozdzielający wybierany jest za każdym razem jej największy element.
-Kolejne wywołania rekurencyjne zmniejszają wówczas obszar poszukiwań o~1, jednocześnie umieszczając na końcu tablicy elementy w~kolejności rosnącej, w~wyniku czego, jako efekt uboczny, tablica zostaje posortowana.
+W~przypadku szukania elementu najmniejszego pesymistyczny przypadek występuje, gdy na element rozdzielający wybierany jest za każdym razem największy element aktualnej podtablicy.
+Dla podanej tablicy $A$ kolejno wybieranymi elementami rozdzielającymi są wówczas: 9, 8, 7, 6, 5, 4, 3, 2, 1.
+Każde kolejne wywołanie rekurencyjne działa na podtablicy o~1 mniejszej, jednocześnie umieszczając na jej końcu aktualny element rozdzielający, w~wyniku czego, jako efekt uboczny, tablica $A$ zostaje posortowana.
