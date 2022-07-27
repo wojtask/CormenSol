@@ -1,17 +1,16 @@
 \subchapter{Minimum i~maksimum}
 
 \exercise %9.1-1
-Wyznaczmy najpierw $\mu$ -- najmniejszą spośród $n$ liczb -- w~następujący sposób.
-Łączymy liczby w~pary i~odrzucamy te, które są większe w~swoich parach, po czym wykonujemy te operacje rekurencyjnie dla zbioru pozostawionych liczb, aż do uzyskania jednej liczby, którą oczywiście będzie $\mu$.
-Przyjmujemy, że w~razie nieparzystej liczby elementów na danym poziomie rekurencji, element bez pary nie jest porównywany z~żadnym innym i~zwyczajnie przechodzi do kolejnego etapu.
-Ponieważ na każdym poziomie z~$k$ liczb zostaje $\lceil k/2\rceil$, to będzie $\lceil\lg n\rceil$ wywołań rekurencyjnych tej procedury i~co najwyżej tylu testom będzie poddawany element $\mu$.
-Zauważmy, że każdy test odrzuca jedną liczbę, wykonamy zatem dokładnie $n-1$ porównań.
+Wyznaczmy najpierw $\mu$ -- najmniejszy spośród $n$ elementów -- w~następujący sposób.
+Elementy łączymy w~pary i~odrzucamy te, które są większe w~swoich parach (przyjmujemy, że element bez pary zwyczajnie przechodzi do kolejnego etapu), po czym wykonujemy te operacje rekurencyjnie dla pozostałego zbioru, aż do uzyskania jednego elementu, którym oczywiście będzie $\mu$.
+Na każdym etapie spośród $k$ elementów do kolejnego przechodzi $\lceil k/2\rceil$, będzie więc $\lceil\lg n\rceil$ wywołań rekurencyjnych i~co najwyżej tylu testom poddamy element $\mu$.
+Zauważmy, że każdy test odrzuca jeden element, wykonamy zatem dokładnie $n-1$ porównań.
 
-Zastanówmy się teraz, która z~pozostałych liczb może być drugą najmniejszą w~zbiorze.
-Liczba ta została odrzucona po porównaniu jej z~elementem $\mu$, więc problem sprowadza się do wyznaczenia minimum zbioru tych liczb, które były testowane z~$\mu$.
-Na mocy wcześniejszej obserwacji mamy, że zbiór ten składa się z~$\lceil\lg n\rceil$ elementów, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
+Zastanówmy się teraz, który element zbioru wejściowego może być drugim najmniejszym.
+Element ten został odrzucony po porównaniu go z~$\mu$, więc problem sprowadza się do wyznaczenia minimum zbioru tych elementów, które były testowane z~$\mu$.
+Z~wcześniejszej obserwacji zbiór ten jest mocy $\lceil\lg n\rceil$, więc wystarczy $\lceil\lg n\rceil-1$ porównań do wyznaczenia jego minimum.
 
-Ostatecznie dostajemy, że drugą najmniejszą spośród $n$ liczb można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
+Ostatecznie dostajemy, że drugi najmniejszy element zbioru $n$\nbhyphen elementowego można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
 
 \exercise %9.1-2
 Zadanie rozwiążemy prostszą metodą, niż sugeruje nam to wskazówka.
