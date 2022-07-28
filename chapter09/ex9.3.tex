@@ -74,10 +74,9 @@ Gdy $n\ge140$, to
 \exercise %9.3-3
 \note{W~rozwiązaniu przyjmujemy założenie, że elementy tablicy wejściowej są parami różne.}
 
-\noindent Wykorzystamy algorytm \proc{Select} do znalezienia mediany $x$ elementów z~tablicy wejściowej.
-Przy okazji tablica wejściowa zostanie podzielona względem $x$.
-Można więc w~algorytmie quicksort zastąpić wywołanie procedury \proc{Partition} wywołaniem \proc{Select} szukającym mediany.
-W~rezultacie wykonywane będą najbardziej zrównoważone podziały i~pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
+\noindent W~algorytmie quicksort zamiast użycia procedury \proc{Partition} do podziału tablicy wejściowej wykorzystamy algorytm \proc{Select} do odszukania mediany elementów wejściowych.
+Dzięki temu wykonywane będą najbardziej zrównoważone podziały.
+Pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
 
 \exercise %9.3-4
 Jedynym źródłem informacji o~elementach we wspomnianym algorytmie wyznaczającym $i$\nbhyphen tą najmniejszą wartość są porównania.
