@@ -1,24 +1,28 @@
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 
 \exercise %9.3-1
-Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy będą dzielone na grupy 7\nbhyphen elementowe.
-Wówczas w~co najmniej połowie spośród $\lceil n/7\rceil$ grup są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest podzielne przez 7, i~jednej grupy zawierającej sam element $x$.
-Odliczając te dwie grupy, wnioskujemy, że liczba elementów większych od $x$ wynosi co najmniej
+Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy są dzielone na grupy 7\nbhyphen elementowe.
+Wówczas w~co najmniej połowie spośród $\lceil n/7\rceil$ grup są po 4 elementy większe od $x$, oprócz jednej grupy o~mniej niż 7 elementach, jeśli $n$ nie jest wielokrotnością 7, i~jednej grupy zawierającej sam element $x$.
+Odliczając te dwie grupy, dostajemy, że liczba elementów większych od $x$ wynosi co najmniej
 \[
 	4\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{7}\Bigr\rceil\biggr\rceil-2\biggr) \ge \frac{2n}{7}-8.
 \]
 Podobnie wykazuje się, że liczba elementów mniejszych od $x$ wynosi co najmniej $2n/7-8$.
-Stąd procedura wywoła się rekurencyjnie dla zbioru co najwyżej $(5n/7+8)$\nbhyphen elementowego.
+Stąd w~kroku 5 algorytm wywoła się rekurencyjnie dla co najwyżej $5n/7+8$ elementów.
+
+Znajdziemy zależność rekurencyjną $T(n)$ opisującą czas działania tego algorytmu w~przypadku pesymistycznym.
+Tak jak w~oryginalnej wersji kroki 1, 2 i~4 zajmują czas $O(n)$.
+Krok 3 zajmuje czas $T(\lceil n/7\rceil)$, a~krok 5 -- co najwyżej czas $T(5n/7+8)$, przy założeniu, że $T$ jest funkcją niemalejącą.
 Rekurencja przyjmuje więc postać
 \[
-	T(n) \le \begin{cases}
-		\Theta(1), & \text{jeśli $n<d$}, \\
+	T(n) = \begin{cases}
+		O(1), & \text{jeśli $n<d$}, \\
 		T(\lceil n/7\rceil)+T(5n/7+8)+O(n), & \text{jeśli $n\ge d$},
 	\end{cases}
 \]
-przy czym $d>0$ jest pewną stałą, którą wyznaczymy później.
+gdzie $d>0$ jest pewną stałą, którą wyznaczymy później.
 
-Wykażemy metodą przez podstawianie, że $T(n)=O(n)$.
+Wykażemy metodą podstawiania, że $T(n)=O(n)$.
 Zachodzi oczywiście $T(n)\le cn$ dla pewnej stałej $c>0$ oraz wszystkich $n<d$.
 Załóżmy teraz, że $n\ge d$ i~że $T(k)\le ck$ dla pewnej stałej $c>0$ i~wszystkich $k<n$.
 Dla pewnej stałej $a>0$ zachodzi wówczas
@@ -32,24 +36,33 @@ Dla pewnej stałej $a>0$ zachodzi wówczas
 o~ile składnik $-cn/7+9c+an$ jest niedodatni.
 Dla $n>63$ warunek ten jest spełniony, kiedy $c\ge7a(n/(n-63))$.
 Jeśli z~kolei $n\ge126$, to $n/(n-63)\le2$ i~wtedy musi być $c\ge14a$.
-Można zatem przyjąć za $d$ wartość 126, co kończy dowód.
+Można zatem przyjąć $d=126$, co kończy dowód.
 
 Pokażemy teraz, że jeśli podział będzie dokonywany na grupy 3\nbhyphen elementowe, to czas działania tak zmodyfikowanego algorytmu \proc{Select} będzie wyższy od liniowego.
-Rozważmy w~szczególności przypadek, kiedy jest dokładnie $\bigl\lceil\frac{1}{2}\bigl\lceil\frac{n}{3}\bigr\rceil\bigr\rceil$ grup o~medianach większych lub równych $x$, w~tym ostatnia, niepełna grupa, która zawiera 2 elementy większe niż $x$.
-Stąd całkowita liczba elementów większych od $x$ wynosi
+W~takim podziale w~co najmniej połowie z~$\lceil n/3\rceil$ grup są po 2 elementy większe (mniejsze) od $x$, oprócz ewentualnie jednej niepełnej grupy i~jednej grupy zawierającej sam element $x$.
+Liczba elementów większych (mniejszych) od $x$ wynosi zatem co najmniej
 \[
-	2\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{3}\Bigr\rceil\biggr\rceil-1\biggr)+1 = 2\Bigl\lceil\frac{n}{6}\Bigr\rceil-1.
+	2\biggl(\biggl\lceil\frac{1}{2}\Bigl\lceil\frac{n}{3}\Bigr\rceil\biggr\rceil-2\biggr) \ge \frac{n}{3}-4.
 \]
-Procedura jest wywoływana rekurencyjne dla co najmniej $n-(2\lceil n/6\rceil-1)\ge n-(2(n/6+1)-1)=2n/3-1$ elementów nieprzekraczających $x$.
-Na mocy faktu, że sortowanie elementów w~kroku 2 algorytmu \proc{Select} zabiera czas dokładnie $\Theta(n)$, otrzymujemy rekurencję opisującą czas działania algorytmu w~tym przypadku:
+Prowadzi to do następującej rekurencji na czas działania algorytmu w~najgorszym przypadku:
 \[
-	T(n) \ge \begin{cases}
-		\Theta(1), & \text{jeśli $n<d$}, \\
-		T(\lceil n/3\rceil)+T(2n/3-1)+\Theta(n), & \text{jeśli $n\ge d$},
+	T(n) = \begin{cases}
+		O(1), & \text{jeśli $n<d$}, \\
+		T(\lceil n/3\rceil)+T(2n/3+4)+O(n), & \text{jeśli $n\ge d$},
 	\end{cases}
 \]
 gdzie $d>0$ jest pewną stałą.
-Można wykazać, stosując metodę przez podstawianie, że rozwiązaniem powyższej rekurencji jest $T(n)=\Omega(n\lg n)$, co oznacza, że algorytm w~tym wariancie nie działa w~czasie liniowym.
+
+Użyjemy metody podstawiania do pokazania, że $T(n)=\omega(n)$, a~dokładniej, że dla dowolnej stałej $c>0$ i~odpowiednio dużych $n$ zachodzi $T(n)>cn$.
+Ustalmy $c$.
+Załóżmy, że istnieje stała $n_0\ge d$ taka, że dla wszystkich $n\ge n_0$ prawdziwe są nierówności
+\[
+	T(\lceil n/3\rceil) > c\lceil n/3\rceil \quad\text{oraz}\quad T(2n/3+4) > c(2n/3+4).
+\]
+Dla $n\ge n_0$ mamy:
+\[
+	T(n) > c\lceil n/3\rceil+c(2n/3+4) \ge cn/3+2cn/3+4c = cn+4c > cn.
+\]
 
 \exercise %9.3-2
 Z~analizy algorytmu \proc{Select} wynika, że zarówno liczba elementów większych od $x$, jak i~liczba elementów mniejszych od $x$, wynosi co najmniej $3n/10-6$.
