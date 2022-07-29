@@ -1,4 +1,6 @@
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
+\note{Ponieważ nie jest to sprecyzowane w~Podręczniku, w~rozwiązaniach przyjmiemy, że parametry procedury \proc{Select} odpowiadają parametrom procedury \proc{Randomized-Select}, czyli są nimi kolejno: tablica reprezentująca zbiór wejściowy, początkowy i~końcowy indeks przeszukiwanego fragmentu tej tablicy oraz numer szukanej statystyki pozycyjnej.}
+\bignegskip
 
 \exercise %9.3-1
 Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy są dzielone na grupy 7\nbhyphen elementowe.
@@ -102,17 +104,11 @@ W~każdym wywołaniu rekurencyjnym będzie wówczas dokonywany najbardziej zrów
 Rozwiązaniem tej rekurencji jest $T(n)=O(n)$.
 
 \exercise %9.3-6
-Oznaczmy przez $S$ badany zbiór, a~przez $Q_k(S)$ -- zbiór jego kwantyli rzędu $k$.
-Dopuszczalnymi wartościami parametru $k$ są liczby całkowite od 1 do $n+1$, gdzie $n=|S|$.
+Oznaczmy przez $S$ badany zbiór, a~przez $Q_k(S)$ -- zbiór jego kwantyli rzędu $k$, gdzie $1\le k\le|S|+1$.
 Zbiór kwantyli nie jest jednoznacznie zdefiniowany, opiszemy jednak jeden z~poprawnych sposobów jego konstrukcji.
-Oczywiście $Q_1(S)=\emptyset$.
-Jeśli $k$ jest parzyste, to $Q_k(S)$ składa się z~mediany $m$ zbioru $S$ oraz kwantyli rzędu $k/2$ zbiorów $\{\,x\in S:x<m\,\}$ i~$\{\,x\in S:x>m\,\}$.
-W~przypadku, gdy $k$ jest liczbą nieparzystą i~większą od 1, musimy wyznaczyć te kwantyle rzędu $k$, które znajdują się najbliżej mediany $m$ i~są od niej różne.
-Oznaczmy je przez $m_1$ i~$m_2$.
-Wówczas
-\[
-	Q_k(S) = Q_{(k-1)/2}(\{\,x\in S:x<m_1\,\})\cup\{m_1,m_2\}\cup Q_{(k-1)/2}(\{\,x\in S:x>m_2\,\}).
-\]
+Oczywiście zbiór kwantyli rzędu $k=1$ jest pusty.
+Jeśli $k$ jest parzyste, to w~skład zbioru kwantyli rzędu $k$ wchodzi mediana $m$ zbioru $S$ oraz kwantyle rzędu $k/2$ zbiorów $\{\,x\in S:x<m\,\}$ i~$\{\,x\in S:x>m\,\}$.
+W~przypadku, gdy $k$ jest liczbą nieparzystą większą od 1, a~$m_1$, $m_2$ kwantylami rzędu $k$ najbliższymi mediany $m$, to zbiór kwantyli rzędu $k$, oprócz $m_1$ i~$m_2$, zawiera także kwantyle rzędu $(k-1)/2$ zbiorów $\{\,x\in S:x<m_1\,\}$ i~$\{\,x\in S:x>m_2\,\}$.
 
 Zbiór $S$ reprezentujemy jako tablicę $A$ parami różnych elementów.
 Na podstawie powyższego opisu otrzymujemy następujący algorytm oparty o~metodę ,,dziel i~zwyciężaj'':
@@ -136,14 +132,13 @@ Aby wyznaczyć $Q_k(S)$, należy wywołać $\proc{Quantiles}(A,1,n,k)$, gdzie $n
 
 W~pseudokodzie nie rozdzielamy przypadków explicite ze względu na parzystość $k$.
 Po wyznaczeniu długości przetwarzanego fragmentu $A[p\twodots r]$ obliczane są pozycje $q_1$ i~$q_2$ zajmowane przez kwantyle $m_1$ i~$m_2$ (jeśli $k$ jest nieparzyste) lub medianę $m$ (jeśli $k$ jest parzyste -- wówczas $q_1=q_2$), gdyby uporządkować podtablicę $A[p\twodots r]$.
-Następnie korzystamy z~algorytmu \proc{Select}, aby podzielić tę podtablicę względem elementu $m_1$ lub $m$ (w~zależności od parzystości $k$).
-Przyjmujemy, że parametrami procedury \proc{Select} są kolejno: tablica wejściowa, indeks początku przetwarzanego fragmentu tej tablicy, indeks końca tego fragmentu oraz numer statystyki pozycyjnej, którą zamierzamy odnaleźć w~tym fragmencie.
+Następnie korzystamy z~algorytmu \proc{Select}, aby podzielić tę podtablicę względem elementu $m_1$ (lub $m$ dla parzystego $k$).
 Jeśli $k$ jest nieparzyste (czyli $q_1\ne q_2$), to w~wierszu \ref{li:quantiles-second-select} fragment tablicy $A$ zawierający elementy większe niż $m_1$ dzielimy względem $m_2$.
-W~tym momencie fragment $A[p\twodots q_1-1]$ składa się z~elementów mniejszych niż $A[q_1]=m_1$, fragment $A[q_2+1\twodots r]$ -- z~elementów większych niż $A[q_2]=m_2$, natomiast elementy z~$A[q_1+1\twodots q_2-1]$ (o~ile istnieją) są pomiędzy $m_1$ a~$m_2$.
-Teraz wystarczy znaleźć kwantyle rzędu $\lfloor k/2\rfloor$ w~pierwszym i~drugim fragmencie, wykorzystując wywołania rekurencyjne, po czym zwrócić wynikowy zbiór.
+W~tym momencie fragment $A[p\twodots q_1-1]$ składa się z~elementów mniejszych niż $A[q_1]=m_1$, a~fragment $A[q_2+1\twodots r]$ z~elementów większych niż $A[q_2]=m_2$.
+Teraz wystarczy znaleźć kwantyle rzędu $\lfloor k/2\rfloor$ w~obu tych fragmentach i~zwrócić wynikowy zbiór.
 
-Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisująca całkowity czas działania przyjmuje postać $T(n,k)\le2T(\lfloor n/2\rfloor,\lfloor k/2\rfloor)+O(n)$.
-Jej rozwiązaniem jest $T(n,k)=O(n\lg k)$, o~czym można się przekonać, przeprowadzając analizę z~wykorzystaniem metody drzewa rekursji.
+Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisująca pesymistyczny czas jego działania przyjmuje postać $T(n,k)=2T(\lfloor n/2\rfloor,\lfloor k/2\rfloor)+O(n)$.
+Jej rozwiązaniem jest $T(n,k)=O(n\lg k)$, o~czym można się przekonać, stosując na przykład metodę drzewa rekursji.
 
 \exercise %9.3-7
 Liczby najbliższe medianie zbioru $S$ można zdefiniować dwa sposoby.
