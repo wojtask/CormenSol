@@ -202,43 +202,37 @@ Poniższy algorytm stanowi implementację opisanego podejścia i~przy założeni
 \end{codebox}
 
 \exercise %9.3-8
-Niech $m_X$ będzie medianą elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą elementów z~tablicy $Y$.
-Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (bądź równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych).
+Niech $m_X$ będzie medianą (dolną) elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą (dolną) elementów z~tablicy $Y$.
+Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (lub równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych).
 Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb.
-Załóżmy teraz, że $m_X\ne m_Y$ i~bez utraty ogólności, niech $m_X<m_Y$.
-Pomijając teraz około $n/2$ elementów $X$ mniejszych lub równych $m_X$ i~około $n/2$ elementów $Y$ większych lub równych $m_Y$, sprowadzamy problem do identycznego, ale o~około połowę mniejszego, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów.
-Dokładniej, podproblem będzie operował na tablicach o~rozmiarach $\lfloor n/2\rfloor+1$.
+Załóżmy teraz, że $n>1$ i, bez straty ogólności, że $m_X<m_Y$.
+Odrzucając teraz około $n/2$ elementów $X$ na lewo od $m_X$ i~około $n/2$ elementów $Y$ na prawo od $m_Y$, sprowadzamy problem do podproblemu mniejszego o~około połowę, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów.
+Ponadto, jeśli $n$ jest parzyste, to element $m_X$ także może zostać odrzucony, bo na pewno nie jest szukaną medianą.
+Do podproblemu trafią zatem pozostawione fragmenty tablic $X$ i~$Y$ o~rozmiarach $\lceil n/2\rceil$ każdy.
 
-W~celu wyznaczenia mediany $2n$ liczb nasz algorytm będzie wykorzystywał rekurencję o~przypadku brzegowym, gdy $n\le2$.
-Jeśli $n=1$, to jako wynik algorytmu wystarczy zwrócić mniejszy z~dwóch wejściowych elementów (zgodnie z~konwencją, że interesuje nas mediana dolna).
-W~przypadku zaś, gdy $n=2$, wyznaczamy większy z~elementów znajdujących się w~pierwszych komórkach tablic oraz mniejszy z~elementów zajmujących drugie komórki.
-Łatwo sprawdzić, że jeden z~nich to mediana dolna, a~drugi to mediana górna czterech liczb wejściowych.
-Jako wynik podajemy zatem minimum z~obu tych liczb.
-
-Poniższy pseudokod implementuje opisany algorytm.
-Po sprawdzeniu warunku brzegowego obliczane są indeksy median dolnych elementów z~każdej tablicy, jak również indeksy ich median górnych.
-Te ostatnie przekazywane są w~wywołaniach rekurencyjnych w~celu zapewnienia jednakowych rozmiarów obu tablic na kolejnym poziomie rekursji.
-Aby odnaleźć medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, wywołujemy $\proc{Two-Arrays-Median}(X,1,n,Y,1,n)$.
-
+Podamy rekurencyjny algorytm rozwiązujący zadany problem.
+Gdy $n=1$, to algorytm zwróci mniejszy z~dwóch wejściowych elementów (wynikiem jest mediana dolna).
+W~przeciwnym przypadku wyznaczane są indeksy median dolnych i~górnych obu tablic, które dzięki uporządkowaniu obu tablic, jesteśmy w~stanie wyznaczyć natychmiast, po czym algorytm wywołuje się rekurencyjnie zgodnie z~powyższym opisem.
+Aby odnaleźć wspólną medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, należy wywołać $\proc{Joint-Median}(X,1,n,Y,1,n)$.
 \begin{codebox}
-\Procname{$\proc{Two-Arrays-Median}(X,p_X,r_X,Y,p_Y,r_Y)$}
-\li	\If $r_X-p_X\le1$
-\li		\Then \Return $\min(\max(X[p_X],Y[p_Y]),\min(X[r_X],Y[r_Y]))$
+\Procname{$\proc{Joint-Median}(X,p_X,r_X,Y,p_Y,r_Y)$}
+\li	\If $p_X=r_X$
+\li		\Then \Return $\min(X[p_X],Y[p_Y])$
 		\End
-\li	$q_X\gets\lfloor(p_X+r_X)/2\rfloor$
-\li	$q_X'\gets\lceil(p_X+r_X)/2\rceil$
-\li	$q_Y\gets\lfloor(p_Y+r_Y)/2\rfloor$
-\li	$q_Y'\gets\lceil(p_Y+r_Y)/2\rceil$
+\li	$q_X\gets\lfloor(p_X+r_X)/2\rfloor$ \>\>\>\>\>\>\Comment indeks mediany dolnej podtablicy $X[p_X\twodots r_X]$
+\li	$q_X'\gets\lceil(p_X+r_X)/2\rceil$ \>\>\>\>\>\>\Comment indeks mediany górnej podtablicy $X[p_X\twodots r_X]$
+\li	$q_Y\gets\lfloor(p_Y+r_Y)/2\rfloor$ \>\>\>\>\>\>\Comment indeks mediany dolnej podtablicy $Y[p_Y\twodots r_Y]$
+\li	$q_Y'\gets\lceil(p_Y+r_Y)/2\rceil$ \>\>\>\>\>\>\Comment indeks mediany górnej podtablicy $Y[p_Y\twodots r_Y]$
 \li	\If $X[q_X]=Y[q_Y]$
 \li		\Then \Return $X[q_X]$
 		\End
 \li	\If $X[q_X]<Y[q_Y]$
-\li		\Then \Return $\proc{Two-Arrays-Median}(X,q_X,r_X,Y,p_Y,q_Y')$
-\li		\Else \Return $\proc{Two-Arrays-Median}(X,p_X,q_X',Y,q_Y,r_Y)$
+\li		\Then \Return $\proc{Joint-Median}(X,q_X',r_X,Y,p_Y,q_Y)$
+\li		\Else \Return $\proc{Joint-Median}(X,p_X,q_X,Y,q_Y',r_Y)$
 		\End
 \end{codebox}
 
-Czas działania podanego algorytmu w~przypadku pesymistycznym jest opisany przez rekurencję $T(n)=T(\lfloor n/2\rfloor+1)+\Theta(1)$, gdzie $n=r_X-p_X+1$.
+Pesymistyczny czas działania algorytmu opisuje rekurencja $T(n)=T(\lceil n/2\rceil)+\Theta(1)$, gdzie $n=r_X-p_X+1$.
 Jej rozwiązaniem jest oczywiście $T(n)=O(\lg n)$.
 
 \exercise %9.3-9
