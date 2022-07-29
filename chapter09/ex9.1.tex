@@ -13,10 +13,15 @@ Z~wcześniejszej obserwacji zbiór ten jest mocy $\lceil\lg n\rceil$, więc wyst
 Ostatecznie dostajemy, że drugi najmniejszy element zbioru $n$\nbhyphen elementowego można wyznaczyć, wykonując $n+\lceil\lg n\rceil-2$ porównań.
 
 \exercise %9.1-2
-Zadanie rozwiążemy prostszą metodą, niż sugeruje nam to wskazówka.
+Niech $m$ oznacza zbiór potencjalnych minimów, a~$M$ zbiór potencjalnych maksimów.
+Początkowo przyjmiemy, że oba te zbiory są wejściowym zbiorem liczb i~naszym celem będzie zredukowanie ich do singletonów przez wykonywanie porównań na elementach.
 
-Jeśli $n$ jest parzyste, to zgodnie z~podaną w~Podręczniku informacją, wykonywanych jest $3n/2-2$ porównań.
-Ale dla parzystego $n$ zachodzi $3n/2=\lceil3n/2\rceil$, więc wzór na liczbę potrzebnych porównań przyjmuje postać $\lceil3n/2\rceil-2$.
-Niech teraz $n$ będzie liczbą nieparzystą, czyli $n=2k+1$ dla pewnego całkowitego $k$.
-Chcemy wykazać, że koniecznych jest $\lceil3n/2\rceil-2$ porównań, czyli $\lceil3k+3/2\rceil-2=3k+2-2=3k$.
-Ale wynik ten zgadza się z~opisanym w~Podręczniku dolnym oszacowaniem na liczbę porównań dla nieparzystego $n$, bo $3\lfloor n/2\rfloor=3\lfloor k+1/2\rfloor=3k$.
+Gdy z~porównania dwóch różnych elementów $a$, $b\in m\cap M$ okaże się, że $a<b$, to możemy usunąć $a$ ze zbioru $M$, a~$b$ ze zbioru $m$, redukując rozmiary obu zbiorów o~1.
+Wykonując porównanie dwóch elementów należących do tego samego zbioru, redukujemy o~1 rozmiar tylko tego zbioru.
+Widać zatem, że w~celu zminimalizowania łącznej liczby porównań opłacalne jest preferowanie porównań pierwszego typu.
+Można wykonać ich $\lfloor n/2\rfloor$, zanim przecięcie $m\cap M$ stanie się zbiorem co najwyżej jednoelementowym.
+Wtedy zbiory $m$ i~$M$ będą rozmiaru $\lceil n/2\rceil$ każdy i~ich redukcję do singletonów dokończymy, przeprowadzając porównania drugiego typu.
+Stąd łączna liczba wykonanych porównań wynosi
+\[
+    \lfloor n/2\rfloor+(\lceil n/2\rceil-1)+(\lceil n/2\rceil-1) = n+\lceil n/2\rceil-2 = \lceil3n/2\rceil-2.
+\]
