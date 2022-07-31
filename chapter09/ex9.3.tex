@@ -1,6 +1,18 @@
 \subchapter{Wybór w~pesymistycznym czasie liniowym}
 \note{Ponieważ nie jest to sprecyzowane w~Podręczniku, w~rozwiązaniach przyjmiemy, że parametry procedury \proc{Select} odpowiadają parametrom procedury \proc{Randomized-Select}, czyli są nimi kolejno: tablica reprezentująca zbiór wejściowy, początkowy i~końcowy indeks przeszukiwanego fragmentu tej tablicy oraz numer szukanej statystyki pozycyjnej.}
-\bignegskip
+
+\noindent Algorytm \proc{Select} działa poprawnie także dla zbioru z~powtórzeniami, ale wtedy w~przypadku pesymistycznym czas działania algorytmu rośnie do $O(n^2)$.
+Przypadek taki ma miejsce, gdy w~zbiorze wejściowym wielokrotnie powtórzona jest mediana median $x$, co skutkuje tworzeniem niezrównoważonych podziałów tablicy wejściowej w~kroku 4 algorytmu i~przekazywaniem niewiele mniejszych tablic do kolejnych wywołań rekurencyjnych.
+
+Jednym ze sposobów utrzymania liniowej złożoności pesymistycznej jest użycie w~kroku 4 zmodyfikowanej metody \proc{Partition}, która dzieli tablicę wejściową względem $x$ na trzy spójne fragmenty: dolny z~elementami mniejszymi od $x$, środkowy z~elementami równymi $x$ oraz górny z~elementami większymi od $x$.
+Niech $k_1$ będzie o~jeden większe niż liczba elementów w~dolnej części podziału i~niech $k_2$ będzie o~jeden większe niż suma elementów w~dolnej i~środkowej części podziału, czyli w~górnej części jest $n-k_2$ elementów.
+Krok 5 zastępujemy poniższym:
+\begin{quote}
+	Jeśli $k_1\le i\le k_2$, to zwróć $x$.
+	W~przeciwnym razie wywołaj rekurencyjnie procedurę \proc{Select}, by wyznaczyć $i$\nbhyphen ty najmniejszy element w~dolnej części podziału, jeśli $i<k_1$, lub $(i-k_2)$\nbhyphen ty najmniejszy element w~górnej części, jeśli $i>k_2$.
+\end{quote}
+
+Usprawnienie to będzie nam potrzebne w~rozwiązaniach niektórych zadań, gdzie nie ma założenia o~parami różnych elementach w~zbiorze wejściowym dla algorytmu \proc{Select}.
 
 \exercise %9.3-1
 Dokonajmy analizy algorytmu \proc{Select} w~przypadku, gdy elementy są dzielone na grupy 7\nbhyphen elementowe.
