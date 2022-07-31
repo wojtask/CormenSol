@@ -81,21 +81,16 @@ Dzięki temu wykonywane będą najbardziej zrównoważone podziały.
 Pesymistyczny czas algorytmu quicksort po takiej modyfikacji sprowadzi się do rekurencji $T(n)=2T(\lfloor n/2\rfloor)+O(n)$, której rozwiązaniem jest $T(n)=O(n\lg n)$.
 
 \exercise %9.3-4
-Jedynym źródłem informacji o~elementach we wspomnianym algorytmie wyznaczającym $i$\nbhyphen tą najmniejszą wartość są porównania.
-Ponadto tablica wejściowa zawierająca te elementy nie jest modyfikowana -- po zakończeniu działania algorytmu ma ona identyczną zawartość jak na początku.
-Zakładamy, że wynik każdego porównania liczb (tzn.\ ustalenie relacji $\le$ albo $>$) jest zapamiętywany, więc przy następnej próbie sprawdzenia tych samych liczb wystarczy odczytać wynik z~pamięci.
-W~związku z~tym pozostaje nam udowodnić, że porównania, które przeprowadzono i~zapamiętano podczas działania algorytmu, aby jednoznacznie stwierdzić, który element jest $i$\nbhyphen tym najmniejszym, są wystarczające, by jednoznacznie wskazać $i-1$ najmniejszych oraz $n-i$ największych elementów.
+Elementy zbioru wejściowego utożsamimy z~wierzchołkami grafu skierowanego $G$, a~wyniki porównań na tych elementach uzyskane przez algorytm -- z~krawędziami $G$.
+Dokładniej, jeśli algorytm porównuje elementy $x$, $y$ i~$x<y$, to w~grafie $G$ istnieje krawędź $\langle x,y\rangle$.
+Dla wierzchołka $x$ grafu $G$ przez $\mathrm{pred}(x)$ oznaczymy liczbę wierzchołków, z~których osiągalny jest $x$, a~przez $\mathrm{succ}(x)$ -- liczbę wierzchołków osiągalnych z~$x$.
 
-Oznaczmy przez $u$ element zwrócony przez algorytm.
-W~rozwiązaniu będziemy korzystać z~przechodniości relacji porządku liczb.
-Jeśli algorytm stwierdził, że $x\le y$ oraz $y\le z$, to wnioskujemy, że $x\le z$.
-Wykażemy, że dzięki tej obserwacji możemy uzyskać informacje o~wzajemnym porządku w~każdej parze elementów ze zbioru wejściowego.
-Załóżmy nie-wprost, że istnieje para $\langle x,y\rangle$, przy czym nie potrafimy stwierdzić, czy $x\le y$, czy $x>y$.
-Wówczas nie potrafimy także wskazać relacji między $x$ i~każdym elementem, z~którym jesteśmy w~stanie porównać $y$, i~na odwrót.
-W~szczególności istnieje element $v$, którego relacja z~$u$ nie jest nam znana.
-Ale to leży w~sprzeczności z~faktem, że $u$ zostało jednoznacznie wskazane jako $i$\nbhyphen ty najmniejszy ze zbioru wejściowego -- $v$ może bowiem leżeć po jednej albo po drugiej stronie $u$, a~to prowadzi do niejednoznaczności przy określaniu pozycji $u$ w~zbiorze wejściowym.
-
-Mając informacje na temat każdej pary, możemy przejrzeć wyniki porównań elementu $u$ z~każdym innym i~na tej podstawie klasyfikować elementy do jednego z~dwóch zbiorów wynikowych.
+Z~założenia algorytm poprawnie odnajduje $i$\nbhyphen ty najmniejszy element $x_i$ zbioru tylko na podstawie porównań elementów.
+Z~definicji $i$\nbhyphen tej statystyki pozycyjnej wynika, że $\mathrm{pred}(x_i)\le i-1$ oraz $\mathrm{succ}(x_i)\le n-i$.
+Jeśli $\mathrm{pred}(x_i)<i-1$ lub $\mathrm{succ}(x_i)<n-i$, to istnieje wierzchołek $z$, który jednocześnie nie jest osiągalny z~$x_i$ i~z~którego $x_i$ nie jest osiągalny.
+Oznacza to, że algorytm nie rozstrzygnął, czy $x_i<z$, czy $z<x_i$, bezpośrednio je porównując lub pośrednio z~przechodniości relacji $<$, dlatego wskazana przez niego $i$\nbhyphen ta statystyka pozycyjna może być niewłaściwa.
+Musi więc zachodzić $\mathrm{pred}(x_i)=i-1$ i~$\mathrm{succ}(x_i)=n-i$.
+A~zatem po wyznaczeniu $i$\nbhyphen tego najmniejszego elementu zbioru algorytm dysponuje już wszystkimi informacjami, aby jednoznacznie wskazać $i-1$ najmniejszych oraz $n-i$ największych elementów zbioru bez konieczności wykonywania dodatkowych porównań.
 
 \exercise %9.3-5
 Zmodyfikujemy procedurę \proc{Randomized-Select}, dokonując zmiany w~wierszu 3.
