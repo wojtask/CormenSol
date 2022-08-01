@@ -9,7 +9,7 @@ Dla tak przyjętych wag elementów mamy
 	\sum_{x_i<x_k}w_i = \frac{k-1}{n} \quad\text{oraz}\quad \sum_{x_i>x_k}w_i = \frac{n-k}{n}.
 \]
 Jeśli ograniczymy obie sumy od góry przez $1/2$ -- pierwszą ostro, drugą nieostro -- to dostaniemy, że medianą ważoną elementów $x_1$, $x_2$, \dots, $x_n$ jest $x_k$, gdzie $n/2\le k<n/2+1$.
-Ponieważ $k$ jest całkowite, to musi być $k=\lfloor(n+1)/2\rfloor$.
+Ponieważ $k$ jest całkowite, to musi być $k=\lceil n/2\rceil=\lfloor(n+1)/2\rfloor$.
 A~zatem $x_k$ jest również zwykłą medianą (dolną) elementów $x_1$, $x_2$, \dots, $x_n$.
 
 \subproblem %9-2(b)
@@ -19,94 +19,86 @@ Wówczas wystarczy zwrócić ostatnio przeglądany element.
 Złożoność tej procedury zależy od efektywności sortowania, ale używając odpowiedniego algorytmu, jesteśmy w~stanie osiągnąć czas $O(n\lg n)$ w~pesymistycznym przypadku.
 
 \subproblem %9-2(c)
-Rozwiążemy problem metodą ,,dziel i~zwyciężaj''.
-Przyjmijmy, że elementy przechowywane są w~tablicy $A[1\twodots n]$, a~ich wagi w~tablicy $w[1\twodots n]$, przy czym $w[i]$ jest wagą elementu $A[i]$ dla $i=1$, 2, \dots, $n$.
-Najpierw dzielimy elementy względem ich mediany algorytmem \proc{Select}, w~którym dodatkowo przy każdej zmianie pozycji elementu $A[i]$ na indeks $j$ w~tablicy $A$, będziemy także zmieniać pozycję wagi $w[i]$ na indeks $j$ w~tablicy $w$.
-Następnie wyznaczamy $W_L$ i~$W_R$ -- sumy wag elementów, odpowiednio, mniejszych i~większych od znalezionej mediany.
-Jeśli $W_L<1/2$ i~$W_R<1/2$, to medianą ważoną jest zwykła mediana.
-W~przeciwnym przypadku obszar tablicy wejściowej, który zawiera medianę wraz z~elementami o~większej sumie wag, przekazujemy do następnego wywołania rekurencyjnego.
+Rozważmy następujący algorytm rekurencyjny rozwiązujący zadany problem:
 \begin{codebox}
 \Procname{$\proc{Weighted-Median}(A,w,p,r)$}
-\li	\If $r-p+1\le2$ \label{li:weighted-median-boundary-case-begin}
-\li		\Then \If $w[p]\ge w[r]$
-\li				\Then \Return $A[p]$
-\li				\Else \Return $A[r]$
-				\End \label{li:weighted-median-boundary-case-end}
+\li	\If $p=r$
+\li		\Then \Return $A[p]$
 		\End
-\li	podziel elementy w~$A[p\twodots r]$ i~ich wagi względem mediany tablicy $A[p\twodots r]$ \label{li:weighted-median-partition}
+\li	podziel elementy w~$A[p\twodots r]$ i~ich wagi w~$w[p\twodots r]$ względem mediany tablicy $A[p\twodots r]$ \label{li:weighted-median-partition}
 \li	$q\gets\lfloor(p+r)/2\rfloor$
 \li	$W_L\gets0$
 \li	\For $i\gets p$ \To $q-1$
 \li		\Do $W_L\gets W_L+w[i]$
 		\End
-\li	$W_R\gets1-W_L-w[q]$
-\li	\If $W_L<1/2$ i~$W_R<1/2$
+\li	$W_H\gets1-W_L-w[q]$
+\li	\If $W_L<1/2$ i~$W_H\le1/2$
 \li		\Then \Return $A[q]$
 		\End
 \li	\If $W_L\ge1/2$
-\li		\Then $w[q]\gets w[q]+W_R$
+\li		\Then $w[q]\gets w[q]+W_H$
 \li			\Return $\proc{Weighted-Median}(A,w,p,q)$
 \li		\Else $w[q]\gets w[q]+W_L$
 \li			\Return $\proc{Weighted-Median}(A,w,q,r)$
 		\End
 \end{codebox}
+Algorytm działa na elementach znajdujących się w~podtablicy $A[p\twodots r]$ oraz ich wagach w~podtablicy $w[p\twodots r]$, gdzie $w[i]$ jest wagą elementu $A[i]$ dla $i=p$, $p+1$, \dots, $r$.
+W~przypadku brzegowym, gdy $p=r$, zwracany jest jedyny element tablicy.
+Jeśli $p<r$, to elementy wraz z~ich wagami są dzielone względem ich mediany, do realizacji czego używany jest zmodyfikowany algorytm \proc{Select}, w~którym podczas podziału elementów jednocześnie wykonywany jest analogiczny podział ich wag.
+Dokładniej, wraz z~zamianą elementów $A[i]$, $A[j]$, zamieniane są także wagi $w[i]$, $w[j]$.
+W~wyniku wykonania podziału mediana podtablicy $A[p\twodots r]$ znajduje się na pozycji $q=\lfloor(p+r)/2\rfloor$.
+Na podstawie definicji mediany ważonej, jeżeli suma wag elementów z~dolnej części podziału $W_L$ jest mniejsza niż $1/2$ i~suma wag elementów z~górnej części podziału $W_H$ jest mniejsza bądź równa $1/2$, to medianą ważoną jest mediana $A[q]$.
+W~przeciwnym przypadku część podziału o~elementach z~większą sumą wag, razem z~medianą, jest przekazywana do kolejnego wywołania rekurencyjnego.
+Algorytm utrzymuje stałą sumę wag przetwarzanych elementów wynoszącą 1, dlatego tuż przed kolejnym zejściem rekurencyjnym waga mediany zostaje zwiększona do odpowiedniej wartości -- $w[q]$ ,,kumuluje'' więc wagi odrzucanej części podziału.
 
-W~powyższym pseudokodzie rozważana jest tablica $A[p\twodots r]$ o~$n=r-p+1$ elementach.
-Pierwszym krokiem jest sprawdzenie przypadków brzegowych -- jeśli $n=1$, to wystarczy zwrócić jedyny element wejściowy, a~jeśli $n=2$, to zwracany jest element o~większej wadze.
-Działanie to implementujemy za pomocą pojedynczej instrukcji \kw{if} w~wierszach \ref{li:weighted-median-boundary-case-begin}\nbendash\ref{li:weighted-median-boundary-case-end}.
-Następnie elementy wraz z~ich wagami są dzielone względem mediany (która po wykonaniu wiersza \ref{li:weighted-median-partition} znajduje się w~$A$ na pozycji $q=\lfloor(p+r)/2\rfloor$) i~obliczane są sumy wag obu części tego podziału.
-W~zależności od tego, czy jedna z~tych wartości wynosi co najmniej $1/2$, zwracana jest wyznaczona wcześniej mediana, bądź algorytm zostaje wywoływany rekurencyjnie dla odpowiedniej części podziału.
-Aby zachować warunek mówiący o~tym, że suma wag wszystkich elementów tablicy wejściowej wynosi 1, przed kolejnym wywołaniem algorytmu zwiększamy wagę mediany do odpowiedniej wartości -- $w[q]$ ,,kumuluje'' więc wagi tej części tablicy, którą odrzucamy.
+Aby znaleźć medianę ważoną elementów $x_1$, $x_2$, \dots, $x_n$ zapisanych w~tablicy $A[1\twodots n]$ o~wagach $w_1$, $w_2$, \dots, $w_n$ zapisanych w~tablicy $w[1\twodots n]$, należy wywołać $\proc{Weighted-Median}(A,w,1,n)$.
+W~wyniku uruchomienia algorytmu kolejność elementów w~tablicach $A$ i~$w$ może zostać zmieniona, a~suma wag w~tablicy $w$ może nie sumować się do 1.
 
-Przy założeniu, że wiersz \ref{li:weighted-median-partition} w~najgorszym przypadku zajmuje czas $\Theta(n)$, pesymistyczny czas działania opisanego algorytmu spełnia równanie rekurencyjne $T(n)=T(\lfloor n/2\rfloor+1)+\Theta(n)$, którego rozwiązaniem jest $T(n)=\Theta(n)$.
+Przy założeniu, że wykonanie podziału w~wierszu \ref{li:weighted-median-partition} w~najgorszym przypadku zajmuje czas $\Theta(n)$, pesymistyczny czas działania opisanego algorytmu spełnia równanie rekurencyjne $T(n)=T(\lfloor n/2\rfloor+1)+\Theta(n)$, którego rozwiązaniem jest $T(n)=\Theta(n)$.
 
 \subproblem %9-2(d)
-Niech $p_k$ będzie medianą ważoną danych punktów $p_1$, $p_2$, \dots, $p_n$ (które są liczbami rzeczywistymi) i~ich wag $w_1$, $w_2$, \dots, $w_n$.
-Dla dowolnego punktu $p$ niech $f(p)=\sum_{i=1}^nw_i|p-p_i|$.
-Szukamy takiego punktu $p$ spośród danych, dla którego $f(p)$ przyjmuje możliwie najmniejszą wartość.
-Pokażemy, że szukanym punktem jest $p_k$.
+W~wariancie 1\nbhyphen wymiarowym minimalizowana jest suma $\sigma(p)=\sum_{i=1}^nw_i|p-p_i|$.
+Pokażemy, że szukanym minimum funkcji $\sigma$ jest tak naprawdę mediana ważona $p_k$ punktów $p_1$, $p_2$, \dots, $p_n$.
 
-Niech $p_l$ będzie dowolnym punktem różnym od $p_k$.
+Niech $p_l\ne p_k$.
 Zbadamy znak różnicy
 \[
-    f(p_l)-f(p_k) = \sum_{i=1}^nw_i|p_l-p_i|-\sum_{i=1}^nw_i|p_k-p_i| = \sum_{i=1}^nw_i(|p_l-p_i|-|p_k-p_i|).
+    \sigma(p_k)-\sigma(p_l) = \sum_{i=1}^nw_i|p_k-p_i|-\sum_{i=1}^nw_i|p_l-p_i| = \sum_{i=1}^nw_i(|p_k-p_i|-|p_l-p_i|).
 \]
-
-Niech $p_l<p_k$.
-Zauważmy, że w~przypadku, gdy $p_l\le p_i<p_k$, zachodzi $|p_l-p_i|-|p_k-p_i|=p_i-p_l-p_k+p_i\ge2p_l-p_l-p_k=p_l-p_k$.
+Jeżeli $p_l<p_k$, to dla każdego $p_i$ spełniającego $p_l\le p_i<p_k$ zachodzi
+\[
+    |p_k-p_i|-|p_l-p_i|=p_k-p_i-p_i+p_l\le p_k+p_l-2p_l=p_k-p_l.
+\]
 Mamy zatem
 \begin{align*}
-    f(p_l)-f(p_k) &= \sum_{p_i<p_l}w_i(p_l-p_i-p_k+p_i) \\
-	&\quad {}+\!\!\!\sum_{p_l\le p_i<p_k}\!\!\!\!w_i(p_i-p_l-p_k+p_i) \\
-	&\quad {}+\,\sum_{p_k\le p_i}w_i(p_i-p_l-p_i+p_k) \\
-	&\ge (p_k-p_l)\biggl(\sum_{p_k\le p_i}w_i-\sum_{p_i<p_k}w_i\biggr).
+    \sigma(p_k)-\sigma(p_l) &= \sum_{p_i<p_l}w_i(p_k-p_i-p_l+p_i) \\
+	&\quad {}+\!\!\!\sum_{p_l\le p_i<p_k}\!\!\!\!w_i(|p_k-p_i|-|p_l-p_i|) \\
+	&\quad {}+\,\sum_{p_k\le p_i}w_i(p_i-p_k-p_i+p_l) \\
+	&\le (p_k-p_l)\biggl(\sum_{p_i<p_k}w_i-\sum_{p_k\le p_i}w_i\biggr).
 \end{align*}
-Pierwszy czynnik ostatniego iloczynu jest dodatni.
-Na mocy faktu, że wszystkie wagi sumują się do 1 oraz z~definicji mediany ważonej, mamy
+Oczywiście czynnik $(p_k-p_l)$ jest dodatni.
+Ponieważ suma wszystkich wag wynosi 1, to z~definicji mediany ważonej mamy
 \[
-    \sum_{p_k\le p_i}w_i-\sum_{p_i<p_k}w_i = 1-2\sum_{p_i<p_k}w_i > 1-2\cdot1/2 = 0,
+    \sum_{p_i<p_k}w_i-\sum_{p_k\le p_i}w_i = 2\sum_{p_i<p_k}w_i-1 < 2\cdot1/2-1 = 0,
 \]
-czyli drugi z~czynników także jest dodatni.
-Pokazaliśmy tym samym, że dla dowolnego $p_l<p_k$ zachodzi $f(p_l)>f(p_k)$, co oznacza, że mediana ważona $p_k$ minimalizuje wartość funkcji $f$.
+czyli drugi z~czynników, a w rezultacie także cały iloczyn, jest ujemny.
+Pokazaliśmy tym samym, że dla dowolnego $p_l<p_k$ zachodzi $\sigma(p_k)<\sigma(p_l)$, co oznacza, że mediana ważona $p_k$ minimalizuje wartość funkcji $\sigma$.
 
-Podobnie wnioskujemy, gdy $p_l>p_k$, otrzymując
+Podobnie wnioskujemy, gdy $p_l>p_k$:
 \[
-    f(p_l)-f(p_k) \ge (p_k-p_l)\biggl(\sum_{p_k<p_i}w_i-\sum_{p_i\le p_k}w_i\biggr) = (p_k-p_l)\biggl(2\sum_{p_k<p_i}w_i-1\biggr).
+    \sigma(p_k)-\sigma(p_l) \le (p_l-p_k)\biggl(\sum_{p_i>p_k}w_i-\sum_{p_i\le p_k}w_i\biggr) = (p_l-p_k)\biggl(2\sum_{p_i>p_k}w_i-1\biggr).
 \]
-W~powyższym iloczynie pierwszy z~czynników jest ujemny, a~drugi można ograniczyć od góry (tym razem nieostro) przez $2\cdot1/2-1=0$.
-A~zatem także w~tym przypadku mamy $f(p_l)>f(p_k)$, co kończy dowód twierdzenia.
+W~ostatnim iloczynie pierwszy z~czynników jest dodatni, a~drugi można ograniczyć od góry (tym razem nieostro) przez $2\cdot1/2-1=0$.
+A~zatem także w~tym przypadku mamy $\sigma(p_k)<\sigma(p_l)$.
 
 \subproblem %9-2(e)
-Niech $p_i=\langle x_i,y_i\rangle$, gdzie $i=1$, 2, \dots, $n$, będą punktami wejściowymi w~2\nbhyphen wymiarowym problemie lokalizacji urzędu pocztowego z~metryką miejską.
+\note{Oryginalna treść nie wymaga zaprojektowania algorytmu, tylko znalezienia optymalnego rozwiązania problemu.}
+
+\noindent Niech $p_i=\langle x_i,y_i\rangle$, gdzie $i=1$, 2, \dots, $n$, będą punktami wejściowymi w~2\nbhyphen wymiarowym problemie lokalizacji urzędu pocztowego z~metryką miejską.
 Jego rozwiązaniem jest taki punkt $p=\langle x_p,y_p\rangle$, dla którego suma $\sum_{i=1}^nw_i(|x_p-x_i|+|y_p-y_i|)$ przyjmuje najmniejszą możliwą wartość.
 Zauważmy, że
 \[
     \min_{\langle x_p,y_p\rangle\in\mathbb{R}\times\mathbb{R}}\biggl(\sum_{i=1}^nw_i(|x_p-x_i|+|y_p-y_i|)\biggr) = \min_{x_p\in\mathbb{R}}\biggl(\sum_{i=1}^nw_i|x_p-x_i|\biggr)+\min_{y_p\in\mathbb{R}}\biggl(\sum_{i=1}^nw_i|y_p-y_i|\biggr).
 \]
-A~zatem w~celu wyznaczenia optymalnego punktu $p$ wystarczy znaleźć jego współrzędne niezależnie jako rozwiązania 1\nbhyphen wymiarowej wersji problemu.
-Na podstawie poprzedniego punktu zadanie to sprowadza się do wyznaczenia mediany ważonej $x_p$ spośród elementów $x_1$, $x_2$, \dots, $x_n$ o~wagach $w_1$, $w_2$, \dots, $w_n$ i~analogicznie mediany ważonej $y_p$ spośród elementów $y_1$, $y_2$, \dots, $y_n$ o~tych samych wagach, a~następnie zwróceniu pary $\langle x_p,y_p\rangle$.
-
-Zauważmy, że oba ciągi współrzędnych, które przeszukujemy celem znalezienia ich median ważonych, mogą zawierać powtarzające się elementy -- w~szczególności wszystkie punkty mogą mieć równe pierwsze (lub drugie) współrzędne.
-Jedynym miejscem w~procedurze \proc{Weighted-Median} z~części (c), gdzie mają znaczenie wartości elementów, jest linia \ref{li:weighted-median-partition}, w~której dokonywany jest podział elementów algorytmem opartym o~\proc{Select}.
-Okazuje się jednak, o~czym łatwo się przekonać, że algorytm ten działa poprawnie nawet wówczas, gdy elementy w~tablicy wejściowej powtarzają się -- zmienić się może jedynie jego czas działania, który w~przypadku pesymistycznym wzrasta do kwadratowego.
-A~zatem procedura z~punktu (c) może posłużyć jako narzędzie do szukania median ważonych współrzędnych punktów w~algorytmie rozwiązującym rozważany wariant problemu lokalizacji urzędu pocztowego.
+A~zatem każda ze współrzędnych optymalnego punktu $p$ stanowi rozwiązanie 1\nbhyphen wymiarowej wersji problemu.
+Innymi słowy, rozwiązaniem niniejszego wariantu problemu jest punkt $p=\langle x_p,y_p\rangle$, gdzie $x_p$ to mediana ważona elementów $x_1$, $x_2$, \dots, $x_n$ o~wagach $w_1$, $w_2$, \dots, $w_n$, a~$y_p$ to mediana ważona elementów $y_1$, $y_2$, \dots, $y_n$ o~tych samych wagach.
