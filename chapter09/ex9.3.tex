@@ -235,18 +235,18 @@ Pesymistyczny czas działania algorytmu opisuje rekurencja $T(n)=T(\lceil n/2\rc
 Jej rozwiązaniem jest oczywiście $T(n)=O(\lg n)$.
 
 \exercise %9.3-9
-Oznaczmy przez $y_1$ i~$y_2$, odpowiednio, medianę dolną i~górną współrzędnych $y$ wszystkich wież.
-Umieścimy główny rurociąg na współrzędnej $y$ równej $y_r$ takiej, że $y_1\le y_r\le y_2$ i~zbadamy, jak będzie zmieniać się suma długości odnóg północ\nbhyphen południe $s$, gdy będziemy zmieniać jego położenie.
+Oznaczmy przez $y_L$ i~$y_U$, odpowiednio, medianę dolną i~medianę górną współrzędnych $y$ wszystkich wież.
+Umieścimy główny rurociąg początkowo na współrzędnej $y=y_0$ takiej, że $y_L\le y_0\le y_U$ i~zbadamy, jak będzie zmieniać się suma $s$ długości odnóg północ\nbhyphen południe, gdy będziemy zmieniać jego położenie.
 
-Wybierzmy $y_r'$, spełniające nierówności $y_1\le y_r'\le y_2$, na współrzędną $y$ nowego położenia głównego rurociągu.
-Niech $d=|y_r-y_r'|$.
-Jeśli $y_1=y_2$, to $y_r'=y_r$, rozważmy więc przypadek przeciwny.
+Wybierzmy nową współrzędną $y=y_0'$ położenia głównego rurociągu, spełniającą nierówności $y_L\le y_0'\le y_U$.
+Niech $d=|y_0-y_0'|$.
+Jeśli $y_L=y_U$, to $y_0'=y_0$, rozważmy więc przypadek przeciwny.
 Wtedy zarówno na północ, jak i~na południe od głównego rurociągu znajduje się $n/2$ wież wiertniczych.
-Do jednych zbliżyliśmy się o~odległość $d$, ale od pozostałych o~tyle samo się oddaliliśmy.
-Widać stąd, że wybór dowolnego $y_r'$ znajdującego się pomiędzy medianami nie zmienia sumy długości odnóg północ\nbhyphen południe.
+Do jednych zbliżyliśmy główny rurociąg o~odległość $d$, ale od drugich o~tyle samo go oddaliliśmy.
+Widać stąd, że wybór dowolnego $y_0'$ znajdującego się pomiędzy medianami nie zmienia sumy $s$.
 
-Niech teraz $y_r'$ będzie współrzędną $y$ głównego rurociągu taką, że $y_r'<y_1$ lub $y_r'>y_2$.
-Podobnie jak poprzednio, niech $d=|y_r-y_r'|$.
+Niech teraz $y_0'$ będzie współrzędną $y$ głównego rurociągu taką, że $y_0'<y_L$ lub $y_0'>y_U$.
+Podobnie jak poprzednio, niech $d=|y_0-y_0'|$.
 Gdy $n$ jest parzyste, to po jednej stronie rurociągu mamy co najmniej $n/2+1$ wież, a~po drugiej -- co najwyżej $n/2-1$.
 Stąd otrzymujemy oszacowanie na nową sumę długości odnóg:
 \[
@@ -258,5 +258,5 @@ Nową sumę długości odnóg można więc ograniczyć od dołu:
     s' \ge s+d(n+1)/2-d(n-1)/2 = s+d > s.
 \]
 
-A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_1$ i~$y_2$, wiąże się z~powiększeniem sumy długości odnóg północ\nbhyphen południe -- dowolna wartość $y_r$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna.
-Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$ mimo braku założenia o~tym, że elementy, spośród których wyznaczamy medianę, są parami różne (co zauważyliśmy w~\refExercise{9.3-7}).
+A~zatem, niezależnie od parzystości $n$, przesunięcie rurociągu poza obszar wyznaczony przez mediany $y_L$ i~$y_U$, wiąże się z~powiększeniem sumy długości odnóg północ\nbhyphen południe -- dowolna wartość $y_0$ pomiędzy tymi medianami, łącznie z~nimi, jest optymalna.
+Problem sprowadza się zatem do wyznaczenia mediany współrzędnych $y$ wież wiertniczych i~można go rozwiązać w~czasie liniowym względem $n$ mimo braku założenia o~tym, że elementy, spośród których wyznaczamy medianę, są parami różne (co opisaliśmy na początku tego podrozdziału).
