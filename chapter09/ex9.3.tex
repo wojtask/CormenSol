@@ -148,64 +148,56 @@ Nierekurencyjna część algorytmu zajmuje czas $O(n)$, zatem rekursja opisując
 Jej rozwiązaniem jest $T(n,k)=O(n\lg k)$, o~czym można się przekonać, stosując na przykład metodę drzewa rekursji.
 
 \exercise %9.3-7
-Liczby najbliższe medianie zbioru $S$ można zdefiniować dwa sposoby.
-Są to albo ,,sąsiedzi'' mediany otaczający ją równolicznie po obu stronach w~uporządkowanym zbiorze, albo liczby najbliższe w~sensie wartości bezwzględnej.
-Ponieważ treść zadania nie definiuje pojęcia ,,bliskości'', a~obydwie podane definicje są równie racjonalne, to podamy algorytmy rozwiązujące ten problem z~zastosowaniem każdej z~tych definicji.
-Jak się okaże, w~obu przypadkach istnieje algorytm o~złożoności $O(n)$.
+Pojęcie ,,bliskości'' można rozumieć jako możliwie najmniejszą odległość w~sensie pozycji w~uporządkowanym zbiorze albo w~sensie wartości bezwzględnej.
+Podamy algorytmy wyznaczające liczby najbliższe medianie zbioru przy użyciu zarówno pierwszej, jak i~drugiej definicji.
+Jak się okaże, w~obu przypadkach istnieją algorytmy o~złożoności $O(n)$.
 
-W~pierwszej wersji definicji $k$ najbliższymi liczbami medianie zbioru $S$ są elementy oddalone od mediany o~nie więcej niż około $(k-1)/2$ pozycji, gdybyśmy ustawili elementy $S$ w~kolejności rosnącej.
-Znając więc ich pozycje w~uporządkowanym zbiorze, możemy je wyznaczyć za pomocą odpowiednich wywołań algorytmu \proc{Select}.
-Następnie wystarczy przeglądnąć elementy zbioru $S$ i~zwrócić te, które znajdują się pomiędzy wyznaczonymi statystykami pozycyjnymi.
-
-Poniższy pseudokod przyjmuje na wejściu $n$\nbhyphen elementową tablicę $A$ zawierającą elementy zbioru $S$ oraz liczbę $k$ i~zwraca $k$\nbhyphen elementowy zbiór $N$ ,,sąsiadów'' mediany według powyższego opisu.
+W~pierwszej definicji $k$ liczbami najbliższymi medianie zbioru $S$ są elementy oddalone od mediany o~nie więcej niż około $(k-1)/2$ pozycji po ustawieniu elementów $S$ w~kolejności rosnącej.
+Zbiór $S$ będzie reprezentowany w~algorytmie jako $n$\nbhyphen elementowa tablica $A$.
+W~uporządkowanej tablicy wejściowej pozycją mediany (dolnej) jest $m=\lfloor(n+1)/2\rfloor$, a~szukani ,,sąsiedzi'' mediany zajmują pozycje od $l=m-\lfloor(k-1)/2\rfloor$ do $l+k-1$.
+Tablicy $A$ nie trzeba jednak sortować, ale wykorzystać algorytm \proc{Select} do podzielenia jej w~taki sposób, aby fragment $A[l\twodots l+k-1]$ zawierał elementy od $l$\nbhyphen tego najmniejszego do $(l+k-1)$\nbhyphen tego najmniejszego.
+Wpierw wyszukany zostanie $l$\nbhyphen ty najmniejszy element tablicy $A[1\twodots n]$, dzięki czemu po tym wywołaniu podtablica $A[l\twodots n]$ będzie zawierać $n-l+1$ największych elementów zbioru wejściowego.
+Teraz wystarczy wywołać algorytm \proc{Select} ponownie na ostatniej podtablicy w~celu wyszukania jej $k$\nbhyphen tego najmniejszego elementu i~jednocześnie wykonania jej docelowego podziału.
 \begin{codebox}
 \Procname{$\proc{Median-Neighbors}(A,k)$}
 \li	$n\gets\attrib{A}{length}$
-\li	$m\gets\lfloor(n+1)/2\rfloor$
-\li	$\id{leftmost}\gets\proc{Select}(A,1,n,m-\lfloor(k-1)/2\rfloor)$
-\li	$\id{rightmost}\gets\proc{Select}(A,1,n,m+\lceil(k-1)/2\rceil)$
-\li	$N\gets\emptyset$
-\li	\For $i=1$ \To $n$
-\li		\Do \If $\id{leftmost}\le A[i]\le\id{rightmost}$
-\li				\Then $N\gets N\cup\{A[i]\}$
-				\End
-		\End
-\li	\Return $N$
+\li $l\gets\lfloor(n+1)/2\rfloor-\lfloor(k-1)/2\rfloor$
+\li	$\proc{Select}(A,1,n,l)$
+\li	$\proc{Select}(A,l,n,k)$
+\li	\Return $A[l\twodots l+k-1]$
 \end{codebox}
-Zakładamy, że operacje inicjalizacji zbioru oraz dodania do niego nowego elementu zajmują czas stały, natomiast zarówno pobieranie jego rozmiaru, jak i~usuwanie z~niego pojedynczego elementu, odbywa się w~czasie co najwyżej proporcjonalnym do rozmiaru tego zbioru.
-Założenia te można łatwo spełnić, implementując zbiór $N$ np.\ jako listę dwukierunkową (patrz podrozdział 10.2).
-Wówczas czas działania powyższego algorytmu wynosi $O(n)$.
 
-Jeśli z~kolei będziemy stosować wartość bezwzględną do określenia bliskości między elementami zbioru $S$, to wyznaczenie $k$ liczb najbliższych medianie w~takim rozumieniu odbywa się następująco.
-Wyznaczymy medianę $x$ zbioru $S$, a~następnie obliczymy odległość każdego elementu z~$S$ od $x$, czyli wartość bezwzględną z~ich różnicy.
-Problem sprowadza się w~tym momencie do znalezienia $k$ najmniejszych odległości, co można zrealizować, szukając wśród nich $k$\nbhyphen tej statystyki pozycyjnej $y$, a~następnie zwracając elementy odległe od $x$ o~nie więcej niż $y$.
+Zajmijmy się teraz opracowaniem algorytmu rozwiązującego problem po przyjęciu drugiej definicji liczb ,,najbliższych'' medianie.
+Algorytm ten wyznaczy medianę $x$ zbioru $S$, a~następnie obliczy odległość każdego elementu z~$S$ od $x$, czyli wartość bezwzględną ich różnicy.
+Po znalezieniu $k$\nbhyphen tej najmniejszej odległości $d_k$ zwrócony zostanie zbiór $C$ elementów odległych od $x$ o~nie więcej niż $d_k$.
 
-Pojawiają się jednak dwie subtelności.
 O~ile elementy wejściowe z~założenia są parami różne, to odległości od mediany mogą się powtarzać -- dokładniej, każda odległość może występować w~co najwyżej dwóch egzemplarzach.
-Analiza czasu działania algorytmu \proc{Select} przeprowadzona w~Podręczniku pozostaje jednak prawdziwa, gdy rozszerzymy ją na przypadek powtarzających się elementów w~tablicy wejściowej, dlatego oszacowanie na czas działania tego algorytmu nie zmienia się.
-Może się także zdarzyć, że zbiór elementów o~odległościach nieprzekraczających $y$ będzie mieć $k+1$ elementów.
-Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $y$.
-Przed zwróceniem wynikowego zbioru wystarczy więc usunąć z~niego element $x+y$ albo $x-y$.
+Jednak powtarzające się elementy w~zbiorze wejściowym nie wpływają na poprawność działania algorytmu \proc{Select}, jak również w~tym przypadku na jego efektywność.
+Może się też zdarzyć, że skonstruowany zbiór $C$ będzie rozmiaru $k+1$.
+Jest tak wówczas, gdy wśród wyznaczonych odległości są dwie kopie $d_k$, a~więc do $C$ trafił zarówno element $x-d_k$, jak i~$x+d_k$ -- wtedy z~$C$ wystarczy usunąć jeden z~nich.
 
-Poniższy algorytm stanowi implementację opisanego podejścia i~przy założeniu efektywnej implementacji na zbiorach działa w~czasie $O(n)$.
+Zbiór dynamiczny $C$ można zaimplementować, opierając się o~listę dwukierunkową (patrz podrozdział 10.2).
+Wówczas operacje inicjalizacji zbioru oraz dodawania nowego elementu zajmują czas stały (nie trzeba sprawdzać unikalności wstawianego elementu, bo działamy na elementach parami różnych), natomiast zarówno odczytywanie rozmiaru zbioru, jak i~usuwanie z~niego elementu, odbywa się w~czasie co najwyżej proporcjonalnym do rozmiaru zbioru.
+Dzięki temu algorytm działa w czasie $O(n)$.
 \begin{codebox}
-\Procname{$\proc{Median-Nearest}(A,k)$}
+\Procname{$\proc{Closest-To-Median}(A,k)$}
 \li	$n\gets\attrib{A}{length}$
 \li	$x\gets\proc{Select}(A,1,n,\lfloor(n+1)/2\rfloor)$
+\li utwórz tablicę $D[1\twodots n]$
 \li	\For $i\gets1$ \To $n$
-\li		\Do $\id{dist}[i]\gets|A[i]-x|$
+\li		\Do $D[i]\gets|A[i]-x|$
 		\End
-\li	$y\gets\proc{Select}(\id{dist},1,n,k)$
-\li	$N\gets\emptyset$
+\li	$d_k\gets\proc{Select}(D,1,n,k)$
+\li	$C\gets\emptyset$
 \li	\For $i\gets1$ \To $n$
-\li		\Do \If $|A[i]-x|\le y$
-\li				\Then $N\gets N\cup\{A[i]\}$
+\li		\Do \If $|A[i]-x|\le d_k$
+\li				\Then $C\gets C\cup\{A[i]\}$
 				\End
 		\End
-\li	\If $|N|=k+1$
-\li		\Then $N\gets N\setminus\{x+y\}$
+\li	\If $|C|=k+1$
+\li		\Then $C\gets C\setminus\{x+d_k\}$
 		\End
-\li	\Return $N$
+\li	\Return $C$
 \end{codebox}
 
 \exercise %9.3-8
