@@ -1,6 +1,9 @@
 \ProvidesPackage{cormensol}
 
 \RequirePackage{fancyhdr}
+\RequirePackage{tocloft}
+\RequirePackage{titlesec}
+\RequirePackage{amsmath}
 \RequirePackage{tikz}
 
 % odpowiedni wygląd liczników
@@ -34,6 +37,9 @@
 % zwiększenie pudełka zawierającego numer podrozdziału w spisie treści
 \setlength{\cftsecnumwidth}{2.6em}
 
+% zwiększenie odstępu do stopki
+\setlength{\footskip}{12pt}
+
 % głębokość numerowania wewnątrz spisu treści
 \setcounter{tocdepth}{1}
 
@@ -44,9 +50,11 @@
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{\small\sffamily\bfseries #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\small\sffamily\thesection\ {\mdseries #1}}{}}
-\lhead[\small\sffamily\bfseries\thepage]{\rightmark}
-\rhead[\leftmark]{\small\sffamily\bfseries\thepage}
-\cfoot{}
+\fancyhead[LE]{\small\sffamily\bfseries\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyhead[RO]{\small\sffamily\bfseries\thepage}
+\fancyfoot[C]{}
 
 % zredefiniowanie stylu plain używanego na pierwszych stronach części i rozdziału
 \fancypagestyle{plain}{%
@@ -82,7 +90,8 @@
 	\originalchapter{#1}
 	\setcounter{subsection}{0}
 	\def\thesubsection{\thechapter.\arabic{section}-\arabic{subsection}}
-	\lhead[\small\sffamily\bfseries\thepage]{\rightmark}
+	\fancyhead[LE]{\small\sffamily\bfseries\thepage}
+	\fancyhead[LO]{\rightmark}
 }
 
 % zmiana wyglądu nagłówka rozdziału
@@ -143,7 +152,8 @@
 \newcommand\problems{%
 	\section*{\sffamily\mdseries Problemy}
 	\addcontentsline{toc}{section}{Problemy}
-	\lhead[\small\sffamily\bfseries\thepage]{\small\sffamily Problemy}
+	\fancyhead[LE]{\small\sffamily\bfseries\thepage}
+	\fancyhead[LO]{\small\sffamily Problemy}
 }
 
 % polecenie tworzące problem wraz z jego tytułem
