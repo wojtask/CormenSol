@@ -22,8 +22,7 @@ Załóżmy, że istnieje algorytm sortujący za pomocą porównań, który dla $
 Rozważmy drzewo decyzyjne o~liściach odpowiadającym tylko tym $m$ permutacjom mające, zgodnie z~założeniem, wysokość $h=O(n)$.
 Powtarzając rozumowanie z~dowodu tw.\ 8.1, dostajemy nierówność $2^h\ge m$, a~stąd $h\ge\lg m$.
 Zbadajmy asymptotyczne tempo wzrostu $h$ w~zależności od $n$ dla poszczególnych wartości $m$:
-\begin{enumerate}
-	\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{enumerate}[(i)]
 	\item jeśli $m=n!/2$, to $h\ge\lg m=\lg(n!/2)=\lg(n!)-1=\Omega(n\lg n)$;
 	\item jeśli $m=n!/n$, to $h\ge\lg m=\lg(n!/n)=\lg(n!)-\lg n=\Omega(n\lg n)$;
 	\item jeśli $m=n!/2^n$, to $h\ge\lg m=\lg(n!/2^n)=\lg(n!)-n=\Omega(n\lg n)$.
