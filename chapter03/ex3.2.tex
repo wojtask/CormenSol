@@ -12,23 +12,15 @@ Jeśli ponadto założymy, że funkcje $f(n)$ i~$g(n)$ są nieujemne, to począt
 
 \exercise %3.2-3
 \begin{proof}[Dowód wzoru (3.18)]
-	Górne oszacowanie na $\lg(n!)$ dostajemy dzięki wykorzystaniu własności logarytmów:
-	\[
-	    \lg(n!) = \lg\biggl(\prod_{i=1}^ni\biggr) = \sum_{i=1}^n\lg i \le \sum_{i=1}^n\lg n = n\lg n = O(n\lg n).
-	\]
-	Wykorzystując wzór Stirlinga i~wybierając pewną stałą $c>0$, ograniczamy $\lg(n!)$ od dołu:
+	Z~definicji $n!$ i~własności logarytmów:
 	\begin{align*}
-		\lg(n!) &\ge \lg\left(\!\sqrt{2\pi n}\,\left(\frac{n}{e}\right)^n\left(1+\frac{c}{n}\right)\right) \\
-		&= \lg\sqrt{2\pi n}+\lg\left(\frac{n}{e}\right)^n+\lg\left(1+\frac{c}{n}\right) \\
-		&> n\lg n-n\lg e \\
-		&\ge n\lg n-\frac{n\lg n}{2} \\
-		&= \frac{n\lg n}{2}.
+		\lg(n!) &= \lg\biggl(\prod_{i=1}^ni\biggr) = \sum_{i=1}^n\lg i \le \sum_{i=1}^n\lg n = n\lg n = O(n\lg n), \\[1mm]
+		\lg(n!) &= \lg\biggl(\prod_{i=1}^ni\biggr) = \sum_{i=1}^n\lg i \ge \sum_{i=\lceil n/2\rceil}^n\!\!\lg\lfloor n/2\rfloor = \lfloor n/2\rfloor\lg\lfloor n/2\rfloor = \Omega(n\lg n).
 	\end{align*}
-	Przedostatnia nierówność zachodzi, o~ile $n\ge e^2$.
-Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierdzenia 3.1 dostajemy $\lg(n!)=\Theta(n\lg n)$.
+	Po skorzystaniu z~twierdzenia 3.1 dostajemy $\lg(n!)=\Theta(n\lg n)$.
 \end{proof}
 
-\begin{proof}[Dowód tożsamości $n!=\omega(2^n)$]
+\begin{proof}[Dowód wzoru $n!=\omega(2^n)$]
 	Równoważnie należy pokazać, że zachodzi
 	\[
 		\lim_{n\to\infty}\frac{n!}{2^n} = \infty.
@@ -40,7 +32,7 @@ Otrzymany wynik dowodzi, że $\lg(n!)=\Omega(n\lg n)$ i~po skorzystaniu z~twierd
 	Wszystkie czynniki powyższego iloczynu są dodatnie, a~przy wzrastającym $n$ końcowe czynniki mogą być dowolnie duże, zatem cały iloczyn dąży do $\infty$.
 \end{proof}
 
-\begin{proof}[Dowód tożsamości $n!=o(n^n)$]
+\begin{proof}[Dowód wzoru $n!=o(n^n)$]
 	Na podstawie wzoru (3.1) dowód sprowadza się do pokazania, że
 	\[
 		\lim_{n\to\infty}\frac{n!}{n^n} = 0.
