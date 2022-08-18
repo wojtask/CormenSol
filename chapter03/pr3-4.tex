@@ -18,7 +18,7 @@ Prawda.
 Z~faktu, że $f(n)=O(g(n))$, wynika $f(n)\le cg(n)$ dla $n\ge n_0$, gdzie $c$, $n_0>0$ są pewnymi stałymi.
 Z~założenia, że $\lg g(n)\ge1$ i~$f(n)\ge1$, otrzymujemy
 \[
-	0 \le \lg f(n) \le \lg c+\lg g(n) \le \lg c\lg g(n)+\lg g(n) = (\lg c+1)\lg g(n) = O(\lg g(n)).
+	\lg f(n) \le \lg c+\lg g(n) \le \lg c\lg g(n)+\lg g(n) = (\lg c+1)\lg g(n) = O(\lg g(n)).
 \]
 
 \subproblem %3-4(d)
@@ -38,8 +38,7 @@ Dzieląc obie strony nierówności przez $c$, otrzymujemy $0\le f(n)/c\le g(n)$,
 
 \subproblem %3-4(g)
 Fałsz.
-Niech np.\ $f(n)=2^n$.
-Wtedy $f(n/2)=2^{n/2}=\sqrt{2^n}$.
+Dla $f(n)=2^n$, $f(n/2)=2^{n/2}=\sqrt{2^n}$.
 Gdyby zachodziło $2^n=O\bigl(\!\sqrt{2^n}\bigr)$, to dla pewnej stałej $c>0$ i~odpowiednio dużych $n$ mielibyśmy $2^n\le c\sqrt{2^n}$.
 Ale wówczas $c\ge\sqrt{2^n}$ nie mogłoby być stałą.
 
