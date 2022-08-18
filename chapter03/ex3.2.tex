@@ -72,9 +72,21 @@ Ostatni krok wynika z~tożsamości $\lg^bn=o(n^a)$ prawdziwej dla stałych $a$, 
 Otrzymany rezultat potwierdza, że $\lg(\lceil\lg\lg n\rceil!)=O(\lg n)$, a~zatem funkcja $\lceil\lg\lg n\rceil!$ jest ograniczona wielomianowo.
 
 \exercise %3.2-5
-Niech $x=\lg^*n$.
-Wtedy $\lg\lg^*n=\lg x$, a~$\lg^*\lg n=x-1$.
-Funkcja liniowa $x-1$ jest asymptotycznie większa od logarytmicznej $\lg x$, dlatego $\lg^*\lg n=\omega(\lg\lg^*n)$.
+Każdy dodatni wielomian rośnie szybciej niż każda funkcja polilogarytmiczna, w~szczególności $m-1=\omega(\lg m)$.
+Zatem dla każdego $c>0$ istnieje $m_0>0$, takie że $0\le c\lg m<m-1$ dla wszystkich $m\ge m_0$.
+Zauważmy, że dla
+\[
+	\setlength{\abovedisplayskip}{2pt}
+	\setlength{\belowdisplayskip}{2pt}
+	n \ge n_0 = 2\mathbin{\uparrow\uparrow}m_0 = \underbrace{2^{2^{\cdot^{\cdot^{\cdot^{2}}}}}}_{m_0}
+\]
+wyrażenie $\lg^*n$ przyjmuje wszystkie wartości rzeczywiste większe lub równe $m_0$.
+W~miejsce $m$ możemy więc wstawić $\lg^*n$.
+Dokładniej, dla każdego $c>0$ istnieje $n_0>0$, takie że
+\[
+	0 \le c\lg\lg^*n < \lg^*n-1 = \lg^*\lg n
+\]
+dla wszystkich $n\ge n_0$, co oznacza, że $\lg^*\lg n=\omega(\lg\lg^*n)$.
 
 \exercise %3.2-6
 W~przypadkach bazowych, gdy $i=0$ lub $i=1$, mamy
