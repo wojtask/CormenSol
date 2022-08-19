@@ -115,11 +115,19 @@ Poniżej znajduje się lista dowodów zależności $g_i(n)=\omega(g_{i+1}(n))$ (
 	zatem z~(O1) wynika $\lg\bigl(\!\sqrt{2}\bigr)^{\lg n}=\omega\Bigl(\lg2^{\sqrt{2\lg n}}\Bigr)$.
 	Wystarczy więc skorzystać z~(O2).
 	\item[$2^{\sqrt{2\lg n}}=\omega(\lg^2n)$:]
-	Zachodzi
+	Rozważmy
 	\[
-		\lg\lg2^{\sqrt{2\lg n}} = \Theta(\lg\lg n) \quad\text{oraz}\quad \lg\lg\lg^2n = \Theta(\lg\lg\lg n),
+		\lg\lg2^{\sqrt{2\lg n}} = \Theta(\lg\lg n) \quad\text{oraz}\quad \lg\lg\lg^2n = \Theta(\lg\lg\lg n).
 	\]
-	zatem $\lg\lg2^{\sqrt{2\lg n}}=\omega(\lg\lg\lg^2n)$, więc dwukrotne skorzystanie z~(O2) kończy dowód.
+
+	Można uzasadnić, że $\lg\lg n=\omega(\lg\lg\lg n)$, zaczynając od zależności $\lg m=\omega(m)$ oznaczającej, że dla każdego $c>0$ istnieje $m_0>0$, takie że $m>c\lg m$ dla wszystkich $m\ge m_0$.
+	Następnie, rozumując podobnie jak w~\refExercise{3.2-5}, zastępujemy $m$ wyrażeniem $\lceil\lg\lg n\rceil$ po stwierdzeniu, że dla $n\ge2^{2^{m_0}}$\!, wyrażenie to przyjmuje każde całkowite $m\ge m_0$.
+	Wtedy dla każdego $c>0$ istnieje $n_0>0$, że dla wszystkich $n\ge n_0$ zachodzi
+	\[
+		\lg\lg n \ge \frac{\lceil\lg\lg n\rceil}{2} > \frac{c\lg\lceil\lg\lg n\rceil}{2} \ge \frac{c\lg\lg\lg n}{2}.
+	\]
+
+	Powracając do głównego dowodu, mamy $\lg\lg2^{\sqrt{2\lg n}}=\omega(\lg\lg\lg^2n)$, więc dwukrotnie korzystamy z~(O2).
 	\item[$\lg^2n=\omega(\ln n)$:]
 	Z~(O1), $\lg^2n=\omega(\lg n)$, zaś $\ln n=\Theta(\lg n)$, więc zależność zachodzi dzięki (O3).
 	\item[$\ln n=\omega\bigl(\!\sqrt{\lg n}\bigr)$:]
