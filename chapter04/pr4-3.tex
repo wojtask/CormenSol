@@ -1,8 +1,7 @@
 \problem{Koszty przekazywania parametrów} %4-3
 
 \subproblem %4-3(a)
-W~pierwszej strategii rekurencja przyjmuje postać z~\refExercise{2.3-5}, której rozwiązaniem jest $T(n)=\Theta(\lg n)$.
-Po przyjęciu $n=N$ dostajemy $T(N)=\Theta(\lg N)$.
+W~pierwszej strategii rekurencja przyjmuje postać z~\refExercise{2.3-5}, której rozwiązaniem jest $T(n)=\Theta(\lg n)$, skąd $T(N)=\Theta(\lg N)$.
 
 W~przypadku drugiej strategii na każdym poziomie rekursji należy dodać składnik $\Theta(N)$ odpowiedzialny za przekazywanie tablicy do wywołań rekurencyjnych.
 Otrzymujemy zatem
@@ -27,14 +26,18 @@ Otrzymujemy wynik $T(n)=\Theta(n)$, skąd $T(N)=\Theta(N)$.
 \subproblem %4-3(b)
 W~przypadku zwykłego przekazywania wskaźnika mamy oryginalną postać rekurencji, której rozwiązaniem dla $n=N$ jest $T(N)=\Theta(N\lg N)$.
 
-Ponieważ w~drugiej strategii należy przekazać całą tablicę do obu wywołań rekurencyjnych, to czas działania wygląda następująco:
+Ponieważ w~drugiej strategii do każdego z~obu wywołań rekurencyjnych przekazywana jest cała tablica, to czas działania wygląda następująco:
 \[
 	T(n) = \begin{cases}
 		\Theta(1), & \text{jeśli $n=1$}, \\
 		2T(\lfloor n/2\rfloor)+\Theta(n)+2\Theta(N), & \text{jeśli $n>1$}.
 	\end{cases}
 \]
-Na każdym poziomie dodajemy składnik rzędu $\Theta(N)$, zatem rozwiązaniem tej rekurencji jest iloczyn tegoż składnika i~rozwiązania rekurencji z~pierwszego przypadku, czyli $T(n)=\Theta(Nn\lg n)$, a~stąd mamy $T(N)=\Theta(N^2\lg N)$.
+Rozwiązaniem tej rekurencji jest suma rozwiązania rekurencji z~pierwszej strategii oraz iloczynu składnika $2\Theta(N)$ i~łącznej liczby wywołań rekurencyjnych, których jest
+\[
+	2^1+2^2+\dots+2^{\lfloor\lg n\rfloor} < \frac{2^{\lg n+1}}{2-1} = 2n.
+\]
+Mamy zatem $T(n)=\Theta(n\lg n)+\Theta(Nn)$, a~stąd $T(N)=\Theta(N^2)$.
 
 W~ostatniej strategii do każdego wywołania rekurencyjnego przekazujemy podtablicę o~rozmiarze podproblemu, jednak czas na to poświęcany jest identyczny ze składnikiem liniowym odpowiadającym za czas przeznaczany na procedurę \proc{Merge}.
 Rekurencja ma zatem identyczną postać jak w~oryginalnej analizie tego algorytmu i~jej rozwiązaniem jest $T(N)=\Theta(N\lg N)$.
