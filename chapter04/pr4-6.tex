@@ -1,18 +1,14 @@
 \problem{Testowanie układów VLSI} %4-6
 
 \subproblem %4-6(a)
-Niech $D$ i~$Z$ będą zbiorami, odpowiednio, układów dobrych i~układów złych.
-Podczas testowania każdy zły układ może twierdzić, że każdy inny układ ze zbioru $Z$ jest dobry, a~każdy układ ze zbioru $D$ jest zły.
-Z~kolei dobry układ może orzekać o~każdym układzie z~$Z$, że jest zły, natomiast o~każdym innym z~$D$, że jest dobry.
-Inaczej ujmując, zbiór $Z$ będzie wskazywał, że sam jest zbiorem układów dobrych, a~zbiór $D$ złych i~symetrycznie dla zbioru $D$.
-W~ogólności $Z$ może składać się z~podzbiorów układów, które będą twierdzić, że wyłącznie one są dobre.
-Nie da się natomiast rozdzielić w~taki sposób zbioru $D$, ponieważ jego układy zawsze orzekają prawdziwie.
-Aby zatem jednoznacznie wskazać zbiór dobrych układów, wymagane jest założenie, że $|D|>|Z|$.
+Rozważmy podział zbioru układów na podzbiór układów dobrych i~podzbiór układów złych.
+Podczas testowania każdy układ może twierdzić o~każdym układzie ze swojego podzbioru, że jest dobry, a~o~każdym układzie z~drugiego podzbioru, że jest zły.
+A~zatem podzbiory te są nierozróżnialne na podstawie testów i, przy braku dodatkowych założeń, żadna strategia testowania nie będzie w~stanie zidentyfikować dobrych układów.
 
 \subproblem %4-6(b)
 Potraktujmy wynik każdego testu dwóch układów jako parę $\langle a,b\rangle\in\{{\scriptstyle\rm D},{\scriptstyle\rm Z}\}^2$.
-Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza pozytywny wynik testu, a~${\scriptstyle\rm Z}$ -- negatywny.
-Możliwe jest uzyskanie jednego z~czterech wyników:
+Pierwszy element pary jest stwierdzeniem pierwszego układu o~drugim, a~drugi element -- drugiego o~pierwszym, przy czym ${\scriptstyle\rm D}$ oznacza, że układ został odnotowany jako dobry, a~${\scriptstyle\rm Z}$ -- jako negatywny.
+Możliwe jest uzyskanie jednego z~czterech wyników, z~których wynikają następujące wnioski:
 \begin{itemize}
 	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$ -- oba układy są dobre albo oba są złe;
 	\item $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$ -- tylko pierwszy z~układów jest zły;
@@ -41,7 +37,7 @@ Wynik ten jest prawdziwy także w~przypadku optymistycznym -- wówczas dobry uk�
 
 Potrafimy wyznaczyć dobry układ $u$ -- wykorzystajmy go więc do znalezienia kolejnych.
 Testujemy tenże układ z~pozostałymi $n-1$.
-Wynikiem testu $u$ z~pewnym innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje.
+Wynikiem testu $u$ z~innym układem $v$ nie może być $\langle{\scriptstyle\rm D},{\scriptstyle\rm Z}\rangle$, a~więc możliwe są trzy sytuacje.
 Jeśli otrzymamy $\langle{\scriptstyle\rm D},{\scriptstyle\rm D}\rangle$, to oznacza to, że oba układy są tak samo dobre, a~więc $v$ również jest dobry.
 Uzyskując wynik $\langle{\scriptstyle\rm Z},{\scriptstyle\rm D}\rangle$, mamy natychmiast, że $v$ jest zły, podobnie w~wypadku, gdy wynikiem testu będzie $\langle{\scriptstyle\rm Z},{\scriptstyle\rm Z}\rangle$ -- wtedy co najmniej jeden z~testowanych układów jest zły, ale nie może nim być $u$.
 Wynika stąd, że po wykonaniu $n-1$ takich testów wyznaczymy pozostałe dobre układy.
