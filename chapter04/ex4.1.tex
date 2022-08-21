@@ -115,30 +115,28 @@ W~przeciwnym przypadku wybranie większej stałej $c_2$ pozwala na dowolne ogran
 Niezależnie od ich doboru oszacowaniem górnym rekurencji $T(n)$ jest $O(n\lg n)$, co na mocy wcześniejszego wyniku dolnego oszacowania implikuje $T(n)=\Theta(n\lg n)$.
 
 \exercise %4.1-5
-Wykorzystując założenie
+Przyjmijmy, że przypadkami brzegowymi rekurencji są $T(n)=1$ dla każdego $n\le34$.
+Wówczas $T(35)=2T(34)+35=37$.
+Udowodnimy metodą podstawiania, że dla $n\ge36$ zachodzi $T(n)\le c(n-34)\lg(n-34)$, skąd będzie wynikać $T(n)=O(n\lg n)$.
+Wykorzystując założenie indukcyjne
 \[
-	T(\lfloor n/2\rfloor+17) \le c(\lfloor n/2\rfloor+17)\lg(\lfloor n/2\rfloor+17)
+	T(\lfloor n/2\rfloor+17) \le c(\lfloor n/2\rfloor+17-34)\lg(\lfloor n/2\rfloor+17-34) = c(\lfloor n/2\rfloor-17)\lg(\lfloor n/2\rfloor-17),
 \]
-dla pewnej stałej $c>0$, otrzymujemy:
+gdzie $c>0$, otrzymujemy:
 \begin{align*}
-	T(n) &\le 2c(\lfloor n/2\rfloor+17)\lg(\lfloor n/2\rfloor+17)+n \\
-	&\le 2c(n/2+17)\lg(n/2+17)+n \\
-	&\le c(n+34)\lg(11n/20)+n \\
-	&< cn\lg n+cn\lg(11/20)+34c\lg n+n \\
-	&\le cn\lg n.
+	T(n) &\le 2c(\lfloor n/2\rfloor-17)\lg(\lfloor n/2\rfloor-17)+n \\
+	&\le 2c(n/2-17)\lg(n/2-17)+n \\
+	&= c(n-34)\lg(n-34)-c(n-34)+n \\
+	&\le c(n-34)\lg(n-34).
 \end{align*}
-Nierówności zachodzą, o~ile $n/2+17\le 11n/20$, czyli $n\ge340$, oraz
-\[
-	cn\lg(11/20)+34c\lg n+n \le 0.
-\]
-Badając ostatnią nierówność, można dojść do rezultatu, że przyjęcie $c\ge47$ wystarcza, aby spełnić ją dla wszystkich $n\ge n_0$, gdzie $n_0=340$.
+Ostatni krok zachodzi, o~ile $c\ge n/(n-34)\ge18$.
 
-Zauważmy, że stosowanie wzoru $T(n)=2T(\lfloor n/2\rfloor+17)+n$ dla $n\le34$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
-Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le34$ i~niech stanowi to przypadek brzegowy rekurencji.
-Za podstawę indukcji musimy wtedy przyjąć wszystkie $n=187$, 188, \dots, 339.
-Można pokazać, że dla $c\ge47$ wszystkie te wartości spełniają oszacowanie, a~zatem $T(n)=O(n\lg n)$.
-
-Analiza tej rekurencji z~każdą inną stałą w~miejscu 17 przebiega analogicznie, zmianie ulegają natomiast wartości $n_0$ i~$c$ oraz wartości brzegowe rekursji i~podstawa indukcji, jednak w~każdym takim przypadku rekurencja jest klasy $O(n\lg n)$.
+Podstawą indukcji są przypadki $n=36$ i~$n=37$, bo kolejne wyrazy rekurencji nie zależą już bezpośrednio od $T(35)$, a~nierówności
+\begin{align*}
+	T(36) &= 2T(35)+36 = 110 \le c\cdot2\cdot\lg2, \\
+	T(37) &= 2T(35)+37 = 111 \le c\cdot3\cdot\lg3
+\end{align*}
+spełnia dowolne $c\ge55$.
 
 \exercise %4.1-6
 Załóżmy, że $n=2^m$, skąd $m=\lg n$.
