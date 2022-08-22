@@ -28,15 +28,20 @@ Wykorzystamy technikę zamiany zmiennych, podstawiając $m=\log_an$, skąd $n=a^
 \]
 Możemy teraz podstawić $S_a(m)=T_a(a^m)$, otrzymując nową rekurencję
 \[
-	S_a(m) = aS_a(m-1)+\frac{a^m}{m\lg a},
+	S_a(m) = aS_a(m-1)+\frac{a^m}{m\lg a}.
 \]
-którą rozwiązujemy następująco (po przyjęciu $S_a(0)=T_a(1)=d$ dla pewnej stałej $d>0$):
-\begin{align*}
-	S_a(m) &= \frac{1}{\lg a}\biggl(\frac{a^m}{m}+a\cdot\frac{a^{m-1}}{m-1}+a^2\cdot\frac{a^{m-2}}{m-2}+\dots+a^{m-1}\cdot\frac{a^1}{1}+a^md\biggr) \\[1mm]
-	&= \frac{1}{\lg a}\biggl(\sum_{k=1}^m\frac{a^m}{k}+a^md\biggr) \\[1mm]
-	&= \frac{a^m(H_m+d)}{\lg a} \\[1mm]
-	&= \Theta(a^m\lg m).
-\end{align*}
+
+Przyjmiemy, że $S_a(0)=T_a(1)=d$ dla pewnej stałej $d>0$ i~udowodnimy, że dla $m\ge1$, $S_a(m)=a^m(H_m+d)/\lg a$, gdzie $H_m$ jest $m$\nbhyphen tą liczbą harmoniczną.
+W~kroku bazowym:
+\[
+	S_a(1) = ad+\frac{a}{\lg a} = \frac{a^1(H_1+d)}{\lg a}.
+\]
+W~kroku indukcyjnym, gdy $m\ge2$, polegamy na założeniu $S_a(m-1)=a^{m-1}(H_{m-1}+d)/\lg a$:
+\[
+	S_a(m) = a\cdot\frac{a^{m-1}(H_{m-1}+d)}{\lg a}+\frac{a^m}{m\lg a} = \frac{a^m(H_{m-1}+d)+\frac{a^m}{m}}{\lg a} = \frac{a^m(H_m+d)}{\lg a}.
+\]
+
+Wzór (A.7) implikuje więc zależność $S_a(m)=\Theta(a^m\lg m)$.
 Zamieniając z~powrotem $S_a(m)$ na $T_a(n)$, otrzymujemy rozwiązanie
 \[
 	T_a(n) = T_a(a^m) = S_a(m) = \Theta(a^m\lg m) = \Theta(n\lg\log_a n) = \Theta(n\lg\lg n).
@@ -45,61 +50,43 @@ Zamieniając z~powrotem $S_a(m)$ na $T_a(n)$, otrzymujemy rozwiązanie
 Stosując znalezione oszacowanie do rekurencji $T(n)\equiv T_5(n)$ z~treści zadania, dostajemy oczywiście $T(n)=\Theta(n\lg\lg n)$.
 
 \subproblem %4-4(c)
-Z~twierdzenia o~rekurencji uniwersalnej mamy $n^{\log_ba}=n^{\lg4}=n^2$ oraz $f(n)=n^{5/2}=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1/2$.
-Badamy warunek regularności:
-\begin{align*}
-	4f(n/2) &\le cf(n), \\
-	\frac{4n^{5/2}}{2^{5/2}} &\le cn^{5/2}, \\
-	c &\ge \frac{1}{\sqrt{2}}
-\end{align*}
-i~stwierdzamy, że $T(n)=\Theta(n^{5/2})$.
+Z~twierdzenia o~rekurencji uniwersalnej mamy $n^{\log_ba}=n^2$ i~$f(n)=n^{5/2}=\Omega(n^{2+\epsilon})$, gdzie $\epsilon\le1/2$.
+Dla $c\ge2^{-1/2}$ mamy
+\[
+	4f(n/2) = \frac{4n^{5/2}}{2^{5/2}} \le cn^{5/2} = cf(n),
+\]
+zatem warunek regularności zachodzi i~$T(n)=\Theta(n^{5/2})$.
 
 \subproblem %4-4(d)
-Wykażemy, że stała 5 w~argumencie rekurencji $T(n)$ nie wpływa na postać rozwiązania.
-Rozważając rekurencję $T'(n)=3T'(n/3)+n/2$ i~rozwiązując ją za pomocą twierdzenia o~rekurencji uniwersalnej, dostajemy $T'(n)=\Theta(n\lg n)$.
-Udowodnimy teraz metodą podstawiania, że identyczny wynik jest rozwiązaniem $T(n)$.
-
-Wykorzystując założenie
+Stosując metodę podstawiania, udowodnimy, że $T(n)=O(n\lg n)$, a~dokładniej, że istnieje $c>0$, że dla każdego $n\ge9$ zachodzi $T(n)\le c(n-15/2)\log_3(n-15/2)$.
+W~tym celu wykorzystamy założenie indukcyjne
 \[
-	T(n/3+5) \le c_1(n/3+5)\lg(n/3+5)
+	T(n/3+5) \le c(n/3+5-15/2)\log_3(n/3+5-15/2) = c(n/3-5/2)\log_3(n/3-5/2).
 \]
-dla pewnej stałej $c_1>0$, otrzymujemy:
+Mamy następnie:
 \begin{align*}
-	T(n) &\le 3c_1(n/3+5)\lg(n/3+5)+n/2 \\
-	&\le c_1(n+15)\lg(2n/5)+n/2 \\
-	&< c_1n\lg n+c_1n\lg(2/5)+15c_1\!\lg n+n/2 \\
-	&\le c_1n\lg n.
+	T(n) &= 3T(n/3+5)+n/2 \\
+	&\le 3c(n/3-5/2)\log_3(n/3-5/2)+n/2 \\
+	&= c(n-15/2)\log_3(n-15/2)-c(n-15/2)+n/2 \\
+	&\le c(n-15/2)\log_3(n-15/2),
 \end{align*}
-Powyższe wnioskowanie jest prawdziwe, o~ile $n/3+5\le2n/5$, skąd $n\ge75$, oraz
-\[
-	c_1n\lg(2/5)+15c_1\!\lg n+n/2 \le 0.
-\]
-Przeprowadzając podobną analizę jak w~\refExercise{4.1-5}, dostajemy, że dowolne $c_1\ge7$ spełnia ostatnią nierówność dla $n\ge75$.
+o~ile $-c(n-15/2)+n/2\le0$, czyli $c\ge n/(2n-15)$, co dla każdego $n\ge9$ jest spełnione, gdy $c\ge3$.
 
-Analogicznie dla dolnego oszacowania przyjmujemy, że
-\[
-	T(n/3+5) \ge c_2(n/3+5)\lg(n/3+5),
-\]
-gdzie $c_2>0$ jest pewną stałą.
-Wówczas:
+Przyjmiemy, że w~przypadku, gdy argument rekurencji jest niecałkowity, będziemy brać jego podłogę.
+Założymy, że przypadkami brzegowymi rekurencji są $T(n)=1$ dla $n=1$, 2, \dots, 7.
+Wówczas $T(8)=3T(7)+4=7$.
+Krokiem bazowym indukcji możemy uczynić przypadki $n=9$, 10, 11, bo wyrazy następujące po nich nie zależą już od $T(8)$.
+Wszystkie poniższe nierówności
 \begin{align*}
-	T(n) &\ge 3c_2(n/3+5)\lg(n/3+5)+n/2 \\
-	&> 3c_2(n/3)\lg(n/3)+n/2 \\
-	&= c_2n\lg n-c_2n\lg3+n/2 \\
-	&\ge c_2n\lg n,
+	T(9) &= 3T(8)+\phantom{1}9/2 = 51/2 \le c(3/2)\log_3(3/2), \\
+	T(10) &= 3T(8)+10/2 = 52/2 \le c(5/2)\log_3(5/2), \\
+	T(11) &= 3T(8)+11/2 = 53/2 \le c(7/2)\log_3(7/2)
 \end{align*}
-przy czym ostatnia nierówność zachodzi, o~ile
-\[
-	-c_2n\lg3+n/2 \ge 0.
-\]
-Warunek ten spełniamy poprzez przyjęcie $c_2\le0{,}3$.
+spełnia np.\ $c=47$ i~dowód górnego oszacowania na $T(n)$ jest zakończony.
 
-Dowód asymptotycznie dokładnego oszacowania dla $T(n)$ kończymy, wybierając odpowiednie wartości dla podstaw obu indukcji.
-Zauważmy, że obliczanie wartości rekurencji ze wzoru $T(n)=3T(n/3+5)+n/2$ dla $n\le7$ nie ma sensu, bo wtedy $T(n)$ nie zależy od niższych wyrazów.
-Przyjmijmy zatem, że $T(n)=1$ dla wszystkich $n\le7$ będzie przypadkiem brzegowym rekurencji.
-W~dowodzie górnego oszacowania założyliśmy, że $n\ge75$, więc podstawą obu indukcji możemy uczynić wszystkie $n=30$, 31, \dots, 74.
-Można sprawdzić, że dla takich wartości oba oszacowania są spełnione, co uzasadnia poprawny dobór stałych $c_1$ i~$c_2$.
-A~zatem $T(n)=\Theta(n\lg n)$.
+Aby uzyskać dolne oszacowanie, skorzystamy z~obserwacji, że funkcja $T(n)$ jest monotonicznie rosnąca, więc od dołu ogranicza ją rekurencja $T'(n)=3T'(n/3)+n/2$.
+Wystarczy teraz powołać się na metodę rekurencji uniwersalnej dla $T'(n)$.
+Według oznaczeń z~tw.\ 4.1 mamy $n^{\log_ba}=n$ oraz $f(n)=n/2=\Theta(n)$, zatem $T'(n)=\Theta(n\lg n)$, skąd $T(n)=\Omega(n\lg n)$.
 
 \subproblem %4-4(e)
 Mamy do czynienia z~rekurencją $T_a(n)$ dla $a=2$, którą rozważaliśmy w~punkcie (b).
@@ -142,46 +129,63 @@ Mamy zatem
 	T(n) \ge c_1n/2+c_1n/4+c_1n/8+n = 7c_1n/8+n \ge c_1n,
 \]
 co jest spełnione dla dowolnego $n$, o~ile $c_1\le8$.
-Dowód górnego oszacowania przebiega analogicznie, przy czym zakładamy, że $c_2\ge8$.
+Dowód górnego oszacowania przebiega analogicznie, przy założeniu, że $c_2\ge8$.
 
 Jako warunek brzegowy rekurencji przyjmijmy $T(1)=T(2)=\dots=T(7)=1$.
 Aby spełnić przypadek bazowy indukcji dla $n=1$, 2, \dots, 7, musimy przyjąć dodatkowo, że $c_1\le1/7$.
-Udowodniliśmy zatem, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
+To kończy dowód, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
 
 \subproblem %4-4(g)
 Załóżmy dla uproszczenia rachunków, że $T(1)=1$.
-Rozwijając rekurencję, otrzymujemy
+Pokażemy przez indukcję, że $T(n)=H_n$, gdzie $H_n$ to $n$\nbhyphen ta liczba harmoniczna.
+Mamy $T(1)=1=H_1$, więc krok bazowy zachodzi.
+Gdy $n>1$, przy założeniu, że $T(n-1)=H_{n-1}$:
 \[
-	T(n) = \frac{1}{n}+\frac{1}{n-1}+\dots+\frac{1}{2}+\frac{1}{1} = H_n,
+	T(n) = T(n-1)+\frac{1}{n} = H_{n-1}+\frac{1}{n} = H_n.
 \]
-a~zatem, korzystając ze wzoru (A.7), mamy $T(n)=\Theta(\lg n)$.
+Z~(A.7) dostajemy $T(n)=\Theta(\lg n)$.
 
 \subproblem %4-4(h)
 Dla ułatwienia przyjmijmy, że $T(1)=0$.
-Wówczas
+Pokażemy przez indukcję, że $T(n)=\lg(n!)$.
+W~kroku bazowym mamy $T(1)=0=\lg(0!)$.
+Dla $n>1$ i~z~założenia, że $T(n-1)=\lg((n-1)!)$:
 \[
-	T(n) = \lg n+\lg(n-1)+\dots+\lg2+\lg1 = \lg\biggl(\prod_{i=1}^ni\biggr) = \lg(n!)
+	T(n) = T(n-1)+\lg n = \lg((n-1)!)+\lg n = \lg\biggl(\prod_{i=1}^{n-1}i\biggr)+\lg n = \lg\biggl(\prod_{i=1}^ni\biggr) = \lg(n!).
 \]
-i~ze wzoru (3.18) dostajemy $T(n)=\Theta(n\lg n)$.
+Z~(3.18) dostajemy $T(n)=\Theta(n\lg n)$.
 
 \subproblem %4-4(i)
-Przyjmijmy, że $T(2)=2$ i~rozważmy przypadek, gdy $n$ jest parzyste.
-Rozwijamy rekurencję, otrzymując
+Przyjmiemy, że przypadkami brzegowymi rekurencji są $T(1)=0$ i~$T(2)=2$.
+Gdy $n=2k-1$ dla pewnego $k\ge1$, to $T(2k-1)=T(2(k-1)-1)+2\lg(2k-1)$.
+Podstawiając następnie $S_1(k)=T(2k-1)$, dostajemy nową rekurencję
 \[
-	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg4+2\lg2 = 2\lg\biggl(\prod_{i=1}^{n/2}2i\biggr) = 2\bigl(\lg((n/2)!)+n/2\bigr).
+	S_1(k) = S_1(k-1)+2\lg(2k-1).
 \]
-Wykorzystując wzór (3.18), dostajemy
+Podobnie, gdy $n=2k$ dla pewnego $k\ge1$, to $T(2k)=T(2(k-1))+2\lg(2k)$, więc po podstawieniu $S_2(k)=T(2k)$, dostajemy rekurencję
 \[
-	T(n) = 2\cdot\Theta((n/2)\lg (n/2))+n = \Theta(n\lg n).
+	S_2(k) = S_2(k-1)+2\lg(2k).
+\]
+Ponieważ $S_1(1)=0$, $S_2(1)=2$, a~$S_1(k)-S_1(k-1)\le S_2(k)-S_2(k-1)$, to dla każdego $k\ge1$ zachodzi $S_1(k)\le S_2(k)$.
+
+Pokażemy przez indukcję, że $S_1(k)\ge\lg(k!)$.
+Oczywiście dla $k=1$ nierówność zachodzi.
+Niech teraz $k\ge2$ i~rozważmy założenie indukcyjne $S_1(k-1)\ge\lg((k-1)!)$.
+Korzystając z~faktu, że dla $k\ge1$, $2\lg(2k-1)\ge\lg(k)$, mamy
+\[
+	S_1(k) = S_1(k-1)+2\lg(2k-1) \ge \lg((k-1)!)+\lg(k) = \lg(k!).
+\]
+Na podstawie obserwacji z~poprzedniego paragrafu, $\lg(k!)$ jest także dolnym oszacowaniem dla $S_2(k)$.
+
+Teraz udowodnimy indukcyjnie, że $S_2(k)=2\lg(k!)+2k$, co będzie stanowić też górne oszacowanie dla $S_1(k)$.
+Równość jest prawdziwa, gdy $k=1$, niech więc $k\ge2$.
+Z~założenia indukcyjnego, że $S_2(k-1)=2\lg((k-1)!)+2(k-1)$, dostajemy
+\[
+	S_2(k) = S_2(k-1)+2\lg(2k) = 2\lg((k-1)!)+2(k-1)+2\lg k+2 = 2\lg(k!)+2k.
 \]
 
-Dla $n$ nieparzystego, po przyjęciu $T(1)=0$ sprowadzamy rekurencję do sumy
-\[
-	T(n) = 2\lg n+2\lg(n-2)+\dots+2\lg3+2\lg1 = 2\lg\biggl(\prod_{i=1}^{(n+1)/2}(2i-1)\biggr),
-\]
-którą można ograniczyć z~góry przez $2\lg\Bigl(\prod_{i=1}^{(n+1)/2}2i\Bigr)$, a~z~dołu przez $2\lg\Bigl(\prod_{i=1}^{(n-1)/2}2i\Bigr)$.
-Po pewnych przekształceniach i~po skorzystaniu ze wzoru (3.18) oba te wyrażenia sprowadzamy do postaci $\Theta(n\lg n)$.
-Na podstawie tego faktu i~uzasadnienia z~poprzedniego paragrafu wnioskujemy, że $T(n)$ jest klasy $\Theta(n\lg n)$.
+Ze~wzoru (3.18) dostajemy, że oszacowaniem dokładnym zarówno $S_1(k)$, jak i~$S_2(k)$, jest $\Theta(k\lg k)$.
+Powracając do $T(n)$, otrzymujemy, że niezależnie od parzystości $n$, $T(n)=\Theta(n\lg n)$.
 
 \subproblem %4-4(j)
 Po podzieleniu rekurencji $T(n)$ przez $n$ dostajemy
