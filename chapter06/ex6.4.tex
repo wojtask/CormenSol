@@ -27,9 +27,9 @@ To oznacza, że tablica $A$ jest posortowana.
 \end{description}
 
 \exercise %6.4-3
-Na podstawie analizy zamieszczonej w~Podręczniku czasem działania algorytmu heapsort dla tablicy o~rozmiarze $n$ jest $O(n\lg n)$.
-Z~\refExercise{6.4-5} mamy, że jest to w~rzeczywistości oszacowanie dokładne.
-A~zatem w~szczególności dla tablicy posortowanej rosnąco i~tablicy posortowanej malejąco heapsort działa w~czasie $\Theta(n\lg n)$.
+Na podstawie analizy w~Podręczniku czasem działania algorytmu heapsort dla tablicy $n$\nbhyphen elementowej jest $O(n\lg n)$.
+W~\refExercise{6.4-5} pokazane jest natomiast dolne oszacowanie $\Omega(n\lg n)$ na optymistyczny czas działania.
+A~zatem dla dowolnej tablicy o~długości $n$, w~szczególności dla tablicy posortowanej rosnąco lub malejąco, algorytm heapsort działa w~czasie $\Theta(n\lg n)$.
 
 \exercise %6.4-4
 Przypadek pesymistyczny algorytmu heapsort ma miejsce wtedy, gdy każde wywołanie \proc{Max-Heapify} z~wiersza 5 schodzi rekurencyjnie aż do ostatniego poziomu drzewa.
@@ -37,7 +37,7 @@ Na mocy wyniku z~\refExercise{6.2-6} oraz wzoru (3.18) wywołania te zabierają 
 \[
 	\sum_{i=2}^n\Omega(\lg i) = \Omega(\lg(n!)) = \Omega(n\lg n)
 \]
-i~taki jest też czas działania algorytmu heapsort w~pesymistycznym przypadku.
+i~taki jest też pesymistyczny czas działania algorytmu heapsort.
 
 \exercise %6.4-5
 Dokonamy analizy liczby wykonywanych instrukcji z~linii 9 procedury \proc{Max-Heapify} podczas działania algorytmu sortowania przez kopcowanie w~przypadku optymistycznym.
