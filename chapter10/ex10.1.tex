@@ -37,9 +37,13 @@ Ciąg operacji na kolejce $Q$ ilustruje rys.\ \ref{fig:10.1-3}.
 \end{figure}
 
 \exercise %10.1-4
-Poniżej znajduje się pseudokod operacji analogicznej do \proc{Stack-Empty}, ale testującej pustość kolejki.
-Wykorzystujemy ją podczas wykrywania błędów niedomiaru.
-
+Błąd niedomiaru można wykrywać, dodając następujący fragment na sam początek procedury \proc{Dequeue}:
+\begin{codebox}
+\zi	\If $\proc{Queue-Empty}(Q)$
+\zi		\Then \Error ,,niedomiar''
+		\End
+\end{codebox}
+Wykorzystana operacja \proc{Queue-Empty}, analogicznie do \proc{Stack-Empty}, testuje pustość kolejki:
 \begin{codebox}
 \Procname{$\proc{Queue-Empty}(Q)$}
 \li	\If $\attrib{Q}{head}=\attrib{Q}{tail}$
@@ -48,20 +52,19 @@ Wykorzystujemy ją podczas wykrywania błędów niedomiaru.
 \End
 \end{codebox}
 
-Następujące wiersze należy dodać na początek procedury \proc{Enqueue}:
+Podobnie, dzięki wstawieniu poniższego pseudokodu na początek procedury \proc{Enqueue}, możemy rozpoznawać błąd nadmiaru:
 \begin{codebox}
-\zi	\If $\attrib{Q}{head}=\attrib{Q}{tail}+1$
-\zi		\Then \Error ,,nadmiar''
-		\End
-\zi	\If $\attrib{Q}{head}=1$ i~$\attrib{Q}{tail}=\attrib{Q}{length}$
+\zi	\If $\proc{Queue-Full}(Q)$
 \zi		\Then \Error ,,nadmiar''
 		\End
 \end{codebox}
-Z~kolei poniższy fragment kodu umieszczamy na początku procedury \proc{Dequeue}:
+Operacja \proc{Queue-Full} służy do rozstrzygania, czy kolejka jest pełna:
 \begin{codebox}
-\zi	\If $\proc{Queue-Empty}(Q)$
-\zi		\Then \Error ,,niedomiar''
-		\End
+\Procname{$\proc{Queue-Full}(Q)$}
+\li	\If $\attrib{Q}{head}=\attrib{Q}{tail}+1$ lub ($\attrib{Q}{head}=1$ i~$\attrib{Q}{tail}=\attrib{Q}{length}$)
+\li		\Then \Return \const{true}
+\li		\Else \Return \const{false}
+\End
 \end{codebox}
 
 \exercise %10.1-5
