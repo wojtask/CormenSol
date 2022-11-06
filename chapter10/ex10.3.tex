@@ -35,12 +35,13 @@ Wykorzystujemy tutaj fakt, że polu \id{next} odpowiada przesunięcie 1 względe
 Lista wolnych pozycji jest listą jednokierunkową -- nie są więc wykorzystywane w~niej pola \id{prev}.
 
 \exercise %10.3-4
-Korzystając ze wskazówki z~treści zadania, zaimplementujemy listę wolnych pozycji jako stos.
-Będzie on zajmował wszystkie pozycje na prawo od tej wskazywanej przez \id{free}, na której znajdzie się jego wierzchołek.
-Stos jest pusty wtedy i~tylko wtedy, gdy $\id{free}=\const{nil}$.
-Przydzielanie pamięci polega na wywołaniu na tym stosie operacji \proc{Pop}, a~więc procedura \proc{Compact-List-Allocate-Object} jest identyczna z~oryginalną \proc{Allocate-Object}.
-Z~kolei zwalnianie pamięci to wywołanie na nim operacji \proc{Push}.
-Wcześniej jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu.
+W~naszej implementacji lista wolnych pozycji będzie zajmować kolejne komórki tablic, począwszy od \id{free}, zatem wskaźniki \id{next} dla tej listy nie będą mieć znaczenia.
+Korzystając ze wskazówki z~treści zadania, będziemy traktować tę listę jak stos, z~wierzchołkiem na pozycji \id{free}.
+Gdy $\id{free}=\const{nil}$, stos ten jest pusty.
+Przydzielanie pamięci polega na wywołaniu na tym stosie operacji \proc{Pop}, czyli zwiększeniu \id{free} o~1 i~zwróceniu poprzedniej wartości \id{free}.
+Procedura \proc{Compact-List-Allocate-Object} jest więc identyczna z~oryginalną \proc{Allocate-Object}.
+Z~kolei zwalnianie pamięci to wywołanie na nim operacji \proc{Push}, czyli zmniejszenie \id{free} o~1 i~wstawienie zwalnianego elementu na pozycję \id{free}.
+Wpierw jednak należy zamienić zwalniany element z~tym, który znajduje się bezpośrednio na lewo od wierzchołka stosu.
 Poniższy pseudokod stanowi implementację tej operacji.
 \begin{codebox}
 \Procname{$\proc{Compact-List-Free-Object}(x)$}
