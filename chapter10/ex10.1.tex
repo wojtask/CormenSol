@@ -128,9 +128,8 @@ Nieco bardziej efektywna implementacja kolejki na dwóch stosach z~punktu widzen
 
 \exercise %10.1-7
 Rozwiązanie jest analogiczne do rozwiązania poprzedniego zadania.
-Dodawanie nowego elementu do stosu pokrywa się z~operacją \proc{Enqueue} dla pierwszej kolejki, natomiast usuwanie polega na ekstrakcji elementu znajdującego się w~ogonie pierwszej kolejki.
-Dysponując jednak jedynie operacjami słownikowymi kolejek, musimy w~tym celu posłużyć się drugą kolejką.
-Przenosimy do niej kolejno wszystkie elementy, jednocześnie zliczając je.
-Następnie wszystkie z~wyjątkiem ostatniego przenosimy z~powrotem do pierwszej kolejki, a~ostatni z~nich ściągamy i~zwracamy jako wynik operacji usuwania.
+Wstawienie nowego elementu na stos pokrywa się z~operacją \proc{Enqueue} dla pierwszej kolejki, natomiast usunięcie elementu ze stosu polega na ekstrakcji elementu znajdującego się w~ogonie pierwszej kolejki.
+Aby taką ekstrakcję zrealizować przy pomocy operacji słownikowych kolejki, należy posłużyć się pomocniczą kolejką, przenosząc do niej wszystkie elementy głównej kolejki, jednocześnie je zliczając.
+Dysponując liczbą $n$ elementów w~pomocniczej kolejce, wystarczy teraz przenieść pierwsze $n-1$ z~powrotem do pierwszej kolejki, a~ostatni z~nich ściągnąć i~zwrócić jako wynik operacji usuwania.
 
 Operacja odpowiedzialna za wstawienie nowego elementu na stos działa w~czasie stałym, a~operacja usuwania -- w~czasie liniowym względem liczby elementów na stosie.
