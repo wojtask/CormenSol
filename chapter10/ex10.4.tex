@@ -100,8 +100,8 @@ Aby móc jednoznacznie określać, czy węzeł wskazywany przez ten atrybut jest
 Nazwijmy następująco atrybuty każdego węzła $x$ w~nowej reprezentacji:
 \begin{itemize}
 	\item \attrib{x}{left-child} -- wskazuje na najbardziej lewego syna $x$ albo \const{nil}, jeśli $x$ jest liściem (identyczny z~\attrib{x}{left-child} z~reprezentacji ,,na lewo syn, na prawo brat'');
-	\item \attrib{x}{next} -- wskazuje na kolejnego brata $x$ albo na ojca $x$, jeśli $x$ jest korzeniem drzewa lub najbardziej na prawo wysuniętym synem swojego ojca;
-	\item \attrib{x}{last-sibling} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem lub najbardziej na prawo wysuniętym synem swojego ojca i~\const{false} w~przeciwnym przypadku.
+	\item \attrib{x}{next} -- wskazuje na kolejnego brata $x$ albo -- jeśli $x$ jest korzeniem drzewa albo najbardziej na prawo wysuniętym synem swojego ojca -- na ojca $x$;
+	\item \attrib{x}{last-sibling} -- zmienna boolowska przyjmująca wartość \const{true}, jeśli węzeł $x$ jest korzeniem albo najbardziej na prawo wysuniętym synem swojego ojca, i~\const{false} w~przeciwnym przypadku.
 \end{itemize}
 
 Dzięki tak zdefiniowanym atrybutom, dla danego węzła $x$ możemy wyznaczyć wszystkich jego synów poprzez przejście do węzła \attrib{x}{left-child}, a~następnie poruszając się po wskaźnikach \id{next}.
