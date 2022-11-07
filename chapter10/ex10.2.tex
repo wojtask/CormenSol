@@ -2,17 +2,14 @@
 
 \exercise %10.2-1
 Operację \proc{Insert}, dodającą nowy element $x$ na początek listy jednokierunkowej $L$, można zaimplementować w~czasie stałym -- wystarczy ustawić pole \attrib{x}{next} na głowę listy $L$ (albo na \const{nil}, jeśli lista $L$ jest pusta) i~uaktualnić wskaźnik \attrib{L}{head}.
-Operacja \proc{Delete}, czyli usuwanie z~listy jednokierunkowej elementu wskazywanego przez $x$, wymaga jednak czasu wyższego niż stały.
-Jest tak dlatego, że jedynym sposobem na dotarcie do elementu poprzedzającego $x$ na liście $L$ w~celu aktualizacji jego pola \id{next}, jest przejście tej listy od głowy aż do tegoż elementu.
-Czynność ta w~najgorszym przypadku zajmuje czas proporcjonalny do liczby elementów listy $L$.
-
-Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzystać w~późniejszych zadaniach.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Insert}(L,x)$}
 \li	$\attrib{x}{next}\gets\attrib{L}{head}$
 \li	$\attrib{L}{head}\gets x$
 \end{codebox}
 
+W~operacji \proc{Delete} w~celu usunięcia elementu $x$ z~listy $L$ należy odnaleźć jego poprzednika $y$ i~zaktualizować pole \attrib{y}{next}, albo wskaźnik \attrib{L}{head}, gdy $x$ jest głową listy $L$.
+Czynność ta w~najgorszym przypadku zajmuje czas proporcjonalny do liczby elementów listy $L$.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Delete}(L,x)$}
 \li	\If $x=\attrib{L}{head}$
@@ -24,6 +21,10 @@ Poniżej zamieszczamy implementacje obu tych operacji -- będziemy z~nich korzys
 \li			$\attrib{y}{next}\gets\attrib{x}{next}$
 		\End
 \end{codebox}
+
+Istnieje sposób na poprawienie średniego czasu działania operacji \proc{Delete}.
+O~ile usuwany element $x$ nie jest ostatnim elementem listy, można wpierw skopiować z~\attrib{x}{next} do $x$ klucz wraz z~danymi dodatkowymi, a~następnie wskaźnik \id{next}, pozbawiając w~ten sposób listę oryginalnego następnika $x$ zamiast samego $x$.
+Jednak gdy $x$ jest ogonem listy, nadal wymagane jest przejście przez całą listę, by zaktualizować poprzednika $x$.
 
 \exercise %10.2-2
 Wszystkie elementy implementowanego stosu będziemy trzymać na liście jednokierunkowej $L$ w~kolejności od szczytu w~głowie listy do dna stosu w~ogonie.
