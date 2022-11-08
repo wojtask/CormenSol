@@ -66,7 +66,7 @@ Wówczas:
 
 \exercise %11.3-5
 Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$.
-Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które zostały odwzorowane na $j$ przez funkcję $h$.
+Dla ustalonej funkcji haszującej $h\in\mathcal{H}$ i~dla każdego elementu $j\in B$ niech $u_j$ będzie liczbą elementów z~$U$, które funkcja $h$ odwzorowuje na $j$.
 Wówczas liczba kolizji powstałych na danym elemencie $j\in B$ wynosi $\binom{u_j}{2}=u_j(u_j-1)/2$.
 
 Pokażemy, że sumaryczna liczba kolizji generowanych przez funkcję $h$ jest minimalna, gdy $u_j=u/b$ dla każdego $j\in B$.
@@ -82,7 +82,7 @@ Zbadajmy znak różnicy $S'-S$:
 	&= u_k-u_i+1 \\
 	&> 0.
 \end{align*}
-Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ odbiegają od $u/b$.
+Otrzymaliśmy, że $S'>S$, czyli że sumaryczna liczba kolizji zwiększa się, kiedy wartości $u_j$ oddalają się od $u/b$.
 Stąd wniosek, że liczba kolizji jest możliwie najmniejsza, gdy dla wszystkich elementów $j\in B$ zachodzi $u_j=u/b$.
 
 Na podstawie powyższego faktu dostajemy, że dowolnie wybrana funkcja haszująca z~$\mathcal{H}$ generuje łącznie co najmniej $b(u/b)(u/b-1)/2$ kolizji.
