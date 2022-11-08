@@ -134,7 +134,7 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 Użyjemy dwukierunkowych list cyklicznych z~wartownikami do reprezentowania łączonych zbiorów.
 Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy.
 Operacja \proc{Union} będzie więc jedynie ,,sklejać'' listy $L_1$ i~$L_2$ implementujące zbiory $S_1$ i~$S_2$.
-Podczas działania tej operacji następnikiem ogona listy $L_1$ staje się głowa listy $L_2$, a~ogon listy $L_2$ zostaje umieszczony tuż przed wartownikiem $\attrib{L_1}{nil}$.
+Podczas działania tej operacji następnikiem ogona listy $L_1$ staje się głowa listy $L_2$, a~ogon listy $L_2$ zostaje umieszczony tuż przed wartownikiem \attrib{L_1}{nil}.
 Powstała lista $L_1$ reprezentuje teraz sumę $S_1\cup S_2$, zaś lista $L_2$ ulega zniszczeniu.
 \begin{codebox}
 \Procname{$\proc{List-Union}(L_1,L_2)$}
@@ -148,7 +148,7 @@ Powstała lista $L_1$ reprezentuje teraz sumę $S_1\cup S_2$, zaś lista $L_2$ u
 \exercise %10.2-7
 W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy wstawiać kolejno usuwane elementy z~głowy listy $L$.
 Łatwo zauważyć, że po przeprowadzeniu tego ciągu operacji przeniesione elementy będą znajdować się w~$L'$ w~porządku odwrotnym względem początkowego ustawienia na liście $L$.
-Nadanie atrybutowi \attrib{L}{head} wartości \attrib{L'}{head} wystarczy, aby przenieść całą zawartość listy $L'$ do listy $L$.
+Przestawienie atrybutu \attrib{L}{head} na \attrib{L'}{head} wystarczy, aby w~jednym kroku przenieść całą zawartość listy $L'$ do listy $L$.
 \begin{codebox}
 \Procname{$\proc{Singly-Linked-List-Reverse}(L)$}
 \li	$\attrib{L'}{head}\gets\const{nil}$
@@ -160,7 +160,7 @@ Nadanie atrybutowi \attrib{L}{head} wartości \attrib{L'}{head} wystarczy, aby p
 \li	$\attrib{L}{head}\gets\attrib{L'}{head}$
 \end{codebox}
 
-Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zostały przedstawione w~\refExercise{10.2-1}.
+Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zostały zaprezentowane w~\refExercise{10.2-1}.
 Ich wywołania w~powyższym algorytmie zajmują czas stały, stąd czasem działania algorytmu jest $\Theta(n)$.
 
 \exercise %10.2-8
