@@ -11,8 +11,9 @@ Ponadto w~każdym ciągu z~lewego poddrzewa na $(i+1)$\nbhyphen szej pozycji jes
 A~zatem ciąg $s$ leksykograficznie poprzedza ciągi na lewo od $x$, które z~kolei leksykograficznie poprzedzają ciągi na prawo od $x$.
 W~wynikowej posortowanej permutacji bezpośrednio po $s$ znajdą się więc wszystkie klucze z~$S$ należące do lewego poddrzewa węzła $x$, po czym wszystkie klucze z~$S$ należące do jego prawego poddrzewa.
 Klucze w~takiej kolejności możemy wypisać, przechodząc poddrzewo o~korzeniu w~$x$ metodą preorder.
-Zbiór $S$ posortujemy więc poprzez wywołanie \proc{Preorder-Tree-Walk} na całym drzewie pozycyjnym, przy czym wypisywane będą tylko klucze należące do zbioru $S$.
+Zbiór $S$ posortujemy więc poprzez wywołanie \proc{Preorder-Tree-Walk} (\refExercise{12.1-4}) na całym drzewie pozycyjnym, przy czym wypisywane będą tylko klucze należące do zbioru $S$.
 
+W~analizie czasu sortowania leksykograficznego dla uproszczenia zakładamy, że w~$S$ nie ma ciągu pustego -- założenie to nie wpływa jednak na postać oszacowania.
 Wstawienie węzła o~kluczu $s$ do drzewa pozycyjnego zajmuje czas $\Theta(|s|)$, gdzie $|s|$ oznacza długość ciągu $s$, gdyż węzeł ten zostanie umieszczony na poziomie $|s|$.
 Budowa drzewa pozycyjnego z~elementów zbioru $S$ odbywa się więc w~czasie
 \[
@@ -20,8 +21,8 @@ Budowa drzewa pozycyjnego z~elementów zbioru $S$ odbywa się więc w~czasie
 \]
 Podczas wstawiania węzła o~kluczu $s$ tworzonych jest co najwyżej $|s|+1$ nowych węzłów, zatem drzewo przechowujące zbiór $S$ posiada nie więcej niż
 \[
-	\sum_{s\in S}(|s|+1) \le (|\varepsilon|+1)+\sum_{s\in S\setminus\{\varepsilon\}}2|s| = 1+2n = O(n)
+	\sum_{s\in S}(|s|+1) \le \sum_{s\in S}(|s|+|s|) = 2\sum_{s\in S}|s| = 2n = O(n)
 \]
-węzłów ($\varepsilon$ oznacza ciąg pusty).
+węzłów.
 Przechodzenie drzewa w~porządku preorder działa w~czasie proporcjonalnym do liczby jego węzłów.
 Wraz z~czasem spędzonym na budowaniu drzewa, opisane sortowanie odbywa się w~czasie $\Theta(n)$.
