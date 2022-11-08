@@ -6,9 +6,9 @@ Jeśli zbiór $S$ jest pusty, to tablica $T$ jest wypełniona wartościami \cons
 Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
-W~skład elementów wchodzą tylko klucze, wystarczy więc pamiętać tylko, czy dany klucz należy do zbioru, czy nie.
-Na pozycji $k$ wektora bitowego o~długości $m$ będzie znajdować się jedynka wtedy i~tylko wtedy, gdy element o~kluczu $k$ należy do zbioru dynamicznego.
-Wyszukiwanie elementu o~kluczu $k$ polega na odczytaniu $k$\nbhyphen tej pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
+W~skład elementów wchodzą tylko klucze, wystarczy więc zapamiętywać jedynie fakt przynależności kluczy do zbioru.
+Dokładniej, na pozycji $k$ wektora bitowego $V[0\twodots m-1]$ będzie znajdować się jedynka wtedy i~tylko wtedy, gdy element o~kluczu $k$ należy do zbioru dynamicznego.
+Wyszukiwanie elementu o~kluczu $k$ polega na zwróceniu $k$ albo \const{nil} w~zależności od wartości $k$\nbhyphen tej pozycji wektora, dodanie tego elementu do zbioru -- na wpisaniu na tę pozycję jedynki, a~usunięcie -- na wpisaniu tam zera.
 
 \exercise %11.1-3
 W~naszej implementacji elementy przechowywane w~tablicy $T$, oprócz klucza i~dodatkowych danych, zawierać będą wskaźniki \id{prev} i~\id{next}, dzięki którym elementy będą mogły zostać uszeregowane w~listy dwukierunkowe.
