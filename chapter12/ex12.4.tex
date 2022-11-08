@@ -94,17 +94,17 @@ Otrzymany wynik dowodzi wypukłości funkcji $f(x)=c^x$, a~więc w~szczególnoś
 \exercise %12.4-5
 \note{Wymagane jest założenie, że elementy tablicy wejściowej algorytmu \proc{Randomized-Quicksort} są parami różne.}
 
-\noindent Liczba wykonywanych porównań przez algorytm \proc{Randomized-Quicksort} dla danej permutacji wejściowej  zależy tylko i~wyłącznie od elementów rozdzielających wybieranych losowo na każdym poziomie rekursji.
+\noindent Liczba wykonywanych porównań przez algorytm \proc{Randomized-Quicksort} dla danej permutacji wejściowej zależy wyłącznie od elementów rozdzielających wybieranych losowo na każdym poziomie rekursji.
 Wybór permutacji wejściowej nie wpływa więc na czas działania algorytmu.
-Dowód sprowadza się do pokazania, że dla dowolnej stałej $k>0$ algorytm \proc{Randomized-Quicksort} wywołany $n!$ razy dla dowolnych tablic wejściowych zawierających $n$ różnych liczb, w~co najwyżej $O(1/n^k)$ części wszystkich wywołań wykona $\omega(n\lg n)$ porównań.
-Równoważnie należy pokazać, że prawdopodobieństwo, że algorytm wykona $\omega(n\lg n)$ porównań dla tablicy $n$\nbhyphen elementowej, jest równe $O(1/n^k)$ dla dowolnej stałej $k>0$.
+Dowód sprowadza się do pokazania, że dla dowolnej stałej $k>0$ algorytm \proc{Randomized-Quicksort} wywołany dla dowolnych tablic wejściowych zawierających $n$ różnych liczb, w~co najwyżej $O(1/n^k)$ części wszystkich wywołań wykona $\omega(n\lg n)$ porównań.
+Równoważnie należy pokazać, że prawdopodobieństwo wykonania przez algorytm $\omega(n\lg n)$ porównań dla tablicy $n$\nbhyphen elementowej wynosi $O(1/n^k)$ dla dowolnej stałej $k>0$.
 
 Niech $T_n$ będzie zmienną losową oznaczającą liczbę porównań wykonywanych przez algorytm \proc{Randomized-Quicksort} dla tablicy o~długości $n$.
 Z~analizy tego algorytmu z~podrozdziału 7.4 mamy, że $\E(T_n)=O(n\lg n)$.
-Nietrudno pokazać, że dla dowolnego $k>0$ funkcja $f(n)=n^{1+k}\lg n$ jest klasy $\omega(n\lg n)$.
-Korzystając z~nierówności Markowa (C.29), mamy więc:
+Łatwo przekonać się, że dla dowolnego $k>0$ funkcja $f_k(n)=n^{1+k}\lg n$ jest klasy $\omega(n\lg n)$.
+Korzystając z~nierówności Markowa (C.29), mamy:
 \[
 	\Pr(T_n\ge n^{1+k}\lg n) \le \frac{\E(T_n)}{n^{1+k}\lg n} = \frac{O(n\lg n)}{n^{1+k}\lg n} = O(1/n^k).
 \]
-Mówiąc nieformalnie, przez odpowiedni dobór stałej $k$ możemy funkcją $f(n)$ zbliżyć się dowolnie blisko klasy $O(n\lg n)$, pozostając nadal w~klasie $\omega(n\lg n)$.
+Mówiąc nieformalnie, przez odpowiedni dobór stałej $k$ możemy funkcją $f_k(n)$ zbliżyć się dowolnie blisko klasy $O(n\lg n)$, pozostając nadal w~klasie $\omega(n\lg n)$.
 Z~tego powodu $\Pr(T_n=O(n\lg n))=1-O(1/n^k)$, a~więc czas $O(n\lg n)$ jest osiągany przez algorytm dla wszystkich oprócz co najwyżej $O(1/n^k)$ części jego wywołań.
