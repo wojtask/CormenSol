@@ -2,12 +2,12 @@
 
 \subproblem %12-1(a)
 Pierwsze wywołanie \proc{Tree-Insert} umieszcza nowy węzeł w~korzeniu drzewa.
-W~pozostałych wywołaniach warunki w~liniach 5 i~11 są fałszywe, co oznacza, że każdy nowy węzeł zawsze umieszczany będzie w~prawym poddrzewie.
+W~pozostałych wywołaniach warunki w~liniach 5 i~11 są fałszywe, co oznacza, że każdy nowy węzeł będzie lokowany jako prawy syn najbardziej wysuniętego na prawo liścia drzewa.
 Po $n$ wywołaniach operacji \proc{Tree-Insert} powstanie drzewo o~wysokości $n$, w~którym lewe poddrzewo każdego węzła jest puste.
 Każde kolejne wywołanie działa na drzewie o~wysokości o~1 większej niż poprzednie -- sumarycznie więc w~wierszu 5 sprawdzonych zostanie $\Theta(n^2)$ węzłów i~taki też będzie czas działania ciągu wstawień.
 
 \subproblem %12-1(b)
-Nowe węzły kierowane do poddrzewa o~korzeniu w~$x$ wstawiane są na przemian, raz do lewego poddrzewa $x$, raz do prawego poddrzewa $x$.
+Nowe węzły kierowane do poddrzewa o~korzeniu w~$x$ wstawiane są naprzemiennie, raz do lewego poddrzewa $x$, raz do prawego poddrzewa $x$.
 Można udowodnić przez indukcję, że drzewo tworzone w~tej strategii w~dowolnym momencie spełnia następującą własność: dla każdego węzła $x$ rozmiar lewego poddrzewa $x$ jest równy lub o~1 większy od rozmiaru prawego poddrzewa $x$.
 Taka sama relacja zachodzi też dla wysokości obu poddrzew.
 Podczas pierwszego wywołania \proc{Tree-Insert} drzewo jest puste, a~w~każdym kolejnym wywołaniu jego wysokość wynosi $\Theta(\lg i)$.
@@ -21,7 +21,7 @@ Dodanie węzła do listy węzłów o~tym samym kluczu odbywa się w~czasie stał
 Ciąg $n$ wywołań \proc{Tree-Insert} wykona się więc w~czasie $\Theta(n)$.
 
 \subproblem %12-1(d)
-W~pesymistycznym przypadku $x$ zawsze przyjmuje wartość \attrib{x}{left} (albo zawsze \attrib{x}{right}) i~ciąg operacji \proc{Tree-Insert} w~tej strategii buduje takie samo (albo symetryczne) drzewo jak w~punkcie (a) i~wymaga czasu $\Theta(n)$.
+W~pesymistycznym przypadku $x$ zawsze przyjmuje wartość \attrib{x}{left} (albo zawsze \attrib{x}{right}) i~ciąg operacji \proc{Tree-Insert} w~tej strategii buduje takie samo (albo symetryczne) drzewo jak w~punkcie (a) i~wymaga czasu $\Theta(n^2)$.
 
 W~przypadku średnim $x$ z~jednakowym prawdopodobieństwem przyjmie \attrib{x}{left} albo \attrib{x}{right}, co oznacza, że są równe szanse na to, że wstawiany węzeł trafi do lewego bądź do prawego poddrzewa węzła, z~którym jest aktualnie porównywany.
 Wejściowy ciąg $n$ kluczy jest więc nieodróżnialny od każdej innej swojej permutacji, dlatego powstające drzewo można potraktować jak losowo skonstruowane drzewo wyszukiwań binarnych o~$n$ węzłach.
