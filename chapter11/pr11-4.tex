@@ -1,6 +1,6 @@
 \problem{Haszowanie $k$\nbhyphen uniwersalne i~uwierzytelnianie} %11-4
 \note{Poprawki wprowadzone w~angielskiej treści tego problemu okazały się na tyle znaczące, że problem został napisany od nowa.
-Poniżej prezentujemy polskie tłumaczenie jego nowej wersji.}
+Poniżej zamieszczamy autorskie tłumaczenie jego nowej wersji.}
 
 \noindent Niech $\mathcal{H}$ będzie rodziną funkcji haszujących, które odwzorowują uniwersum kluczy $U$ w~zbiór $\{0,1,\dots,m-1\}$.
 Powiemy, że $\mathcal{H}$ jest \textbf{$k$\nbhyphen uniwersalna}, jeśli dla każdego ustalonego ciągu $k$ różnych kluczy $\langle x^{(1)},x^{(2)},\dots,x^{(k)}\rangle$ oraz funkcji $h$ wybranej losowo z~$\mathcal{H}$ ciąg $\langle h(x^{(1)}),h(x^{(2)}),\dots,h(x^{(k)})\rangle$ jest z~jednakowym prawdopodobieństwem równy dowolnemu spośród $m^k$ ciągów $k$ elementów ze zbioru $\{0,1,\dots,m-1\}$.
@@ -37,7 +37,7 @@ Wykaż, że prawdopodobieństwo, iż przeciwnikowi uda się oszukać Boba i~że 
 
 \subproblem %11-4(a)
 Niech $\mathcal{H}$ będzie 2\nbhyphen uniwersalną rodziną funkcji haszujących oraz niech $\langle x,y\rangle$ będzie parą różnych kluczy z~$U$.
-Wówczas, dla losowo wybranej funkcji haszującej $h_a\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$.
+Wówczas, dla losowo wybranej funkcji haszującej $h\in\mathcal{H}$, para $\langle h(x),h(y)\rangle$ jest z~jednakowym prawdopodobieństwem dowolną spośród $m^2$ par o~elementach ze zbioru $\{0,1,\dots,m-1\}$.
 A~zatem kolizja, czyli zdarzenie, że $h(x)=h(y)$, wystąpi z~prawdopodobieństwem $1/m$.
 Rodzina $\mathcal{H}$ jest więc uniwersalna.
 
@@ -66,7 +66,10 @@ Prawdopodobieństwo tego zdarzenia, przy założeniu, że funkcja $h_a$ jest wyb
 \subproblem %11-4(c)
 Ustalmy parę kluczy $\langle x,y\rangle$ z~$U$, dla których $x_0\ne y_0$, i~wybierzmy pewną funkcję $h_{a,b}'$ z~$\mathcal{H}'$.
 Wprowadźmy oznaczenia $\alpha=h_{a,b}'(x)$, $\beta=h_{a,b}'(y)$ oraz $X=\sum_{j=1}^{n-1}a_jx_j$, $Y=\sum_{j=1}^{n-1}a_jy_j$.
-Zachodzi $\alpha=(a_0x_0+X+b)\bmod p$ oraz $\beta=(a_0y_0+Y+b)\bmod p$.
+Zachodzi
+\[
+	\alpha = (a_0x_0+X+b)\bmod p \quad\text{oraz}\quad \beta = (a_0y_0+Y+b)\bmod p.
+\]
 Zauważmy, że aby wygenerować każdą możliwą parę $\langle\alpha,\beta\rangle$, wystarczy abyśmy byli w~stanie wygenerować dowolne $\alpha-\beta$ i~dowolne $\beta$.
 Mamy $\alpha-\beta=(a_0(x_0-y_0)+X-Y)\bmod p$, skąd
 \[
@@ -79,10 +82,10 @@ Mając ustalone $a_0$ i~dobierając różne wartości dla $b$, możemy z~kolei w
 Jest dokładnie $p^2$ możliwych par $\langle\alpha,\beta\rangle$ i~tyleż samo możliwości wyboru $a_0$ i~$b$.
 Stąd wnioskujemy, że każda para $\langle\alpha,\beta\rangle$ jest jednoznacznie generowana przez odpowiednie $a_0$ i~$b$.
 Istnieje zatem $p^{n-1}$ funkcji $h_{a,b}'\in\mathcal{H}'$, które generują zadaną parę $\langle\alpha,\beta\rangle$.
-Wnioskujemy stąd, że uzyskanie każdej takiej pary jest jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest 2\nbhyphen uniwersalna.
+Uzyskanie każdej takiej pary jest więc jednakowo prawdopodobne, gdy funkcja $h_{a,b}'$ jest wybrana losowo z~$\mathcal{H}'$, a~to oznacza, że rodzina $\mathcal{H}'$ jest 2\nbhyphen uniwersalna.
 
 \subproblem %11-4(d)
-Ponieważ rodzina $\mathcal{H}$ jest 2\nbhyphen uniwersalna, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, gdy funkcja $h$ zostanie wybrana losowo z~$\mathcal{H}$.
-W~szczególności każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia.
+Ponieważ rodzina $\mathcal{H}$ jest 2\nbhyphen uniwersalna, to dla każdej pary kluczy $\langle m,m'\rangle$, w~której $m\ne m'$, uzyskanie dowolnej pary wartości $\langle h(m),h(m')\rangle$ jest jednakowo prawdopodobne, o~ile funkcja $h$ jest wybrana losowo z~$\mathcal{H}$.
+W~szczególności dla ustalonego $t$ każda z~$p$ par postaci $\langle t,h(m')\rangle$ ma jednakowe szanse wystąpienia.
 Dlatego przeciwnik, nawet jeśli dysponuje pełną wiedzą na temat rodziny $\mathcal{H}$ i~przechwyci parę $\langle m,t\rangle$, to nie zyskuje żadnej informacji o~wartości $h(m')$, którą powinien przesłać jako $t'$ celem oszukania Boba.
 Przeciwnik może więc tylko zgadywać, a~szansa, że wybierze właściwą spośród $p$ wartości, jest równa $1/p$.
