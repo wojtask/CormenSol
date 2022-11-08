@@ -8,24 +8,24 @@ Jeśli $x=\const{nil}$, to procedura natychmiast zakończy działanie, zwracają
 W~przeciwnym przypadku będzie schodzić rekurencyjnie w~dół poddrzewa o~korzeniu w~$x$ odpowiednią ścieżką tak, aby na końcu tego procesu uczynić $z$ synem liścia znajdującego się na tej ścieżce.
 Następnie, po aktualizacji lewego lub prawego syna $x$ na wynik poprzedniego wywołania rekurencyjnego, zwrócone zostanie $x$.
 \begin{codebox}
-\Procname{$\proc{Recursive-Tree-Insert}(x,z)$}
+\Procname{$\proc{Recursive-Subtree-Insert}(x,z)$}
 \li	\If $x=\const{nil}$
 \li		\Then \Return $z$
 		\End
 \li	\If $\attrib{z}{key}<\attrib{x}{key}$
-\li		\Then $\attrib{x}{left}\gets\proc{Recursive-Tree-Insert}(\attrib{x}{left},z)$
+\li		\Then $\attrib{x}{left}\gets\proc{Recursive-Subtree-Insert}(\attrib{x}{left},z)$
 \li			$\attribb{x}{left}{p}\gets x$
-\li		\Else $\attrib{x}{right}\gets\proc{Recursive-Tree-Insert}(\attrib{x}{right},z)$
+\li		\Else $\attrib{x}{right}\gets\proc{Recursive-Subtree-Insert}(\attrib{x}{right},z)$
 \li			$\attribb{x}{right}{p}\gets x$
 		\End
 \li	\Return $x$
 \end{codebox}
 
-Procedura ta nie powinna być używana bezpośrednio, gdyż nie aktualizuje ona pola \id{root} drzewa $T$, do którego wstawiany jest nowy węzeł $z$.
-Czynność tę wykonuje poniższy pseudokod, który powinien być wywoływany, aby skorzystać z~procedury \proc{Recursive-Tree-Insert}.
+Wstawianie do drzewa $T$ w~wersji rekurencyjnej inicjuje poniższa procedura, wywołująca \proc{Recursive-Subtree-Insert} dla korzenia drzewa $T$.
+Po powrocie z~tej ostatniej aktualizowane jest także pole \id{root}, co jest konieczne, gdy wstawianie odbywało się do pustego drzewa.
 \begin{codebox}
-\Procname{$\proc{Recursive-Tree-Insert-Wrapper}(T,z)$}
-\li	$\attrib{T}{root}\gets\proc{Recursive-Tree-Insert}(\attrib{T}{root},z)$
+\Procname{$\proc{Recursive-Tree-Insert}(T,z)$}
+\li	$\attrib{T}{root}\gets\proc{Recursive-Subtree-Insert}(\attrib{T}{root},z)$
 \end{codebox}
 
 \exercise %12.3-2
