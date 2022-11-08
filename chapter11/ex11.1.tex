@@ -33,10 +33,10 @@ Powiemy, że klucz $k$ należy do zbioru dynamicznego reprezentowanego przez ogr
 Innymi słowy, zachodzą zależności: $1\le T[k]\le\attrib{S}{top}$, $\attrib{S[T[k]]}{key}=k$ oraz $T[\attrib{S[j]}{key}]=j$.
 Tablice $T$ i~$S$ weryfikują się więc wzajemnie.
 
-Inicjowanie tablicy $T$ sprowadza się do utworzenia tablicy $S$.
+Inicjowanie tablicy $T$ sprowadza się do utworzenia tablicy $S$ z~atrybutem \attrib{S}{top} ustawionym na 0.
 Aby wyszukać element o~kluczu $k$, wystarczy sprawdzić, czy $1\le T[k]\le\attrib{S}{top}$ i~$\attrib{S[T[k]]}{key}=k$.
-Jeśli warunki te są spełnione, to należy zwrócić element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
-W~celu wstawienia elementu $x$ (przy założeniu, że nie ma go jeszcze w~tablicy) należy umieścić $x$ na stosie $S$, po czym zaktualizować $T[\attrib{x}{key}]$:
+Jeśli warunki te są spełnione, to zwracany jest element $S[T[k]]$, w~przeciwnym przypadku zaś \const{nil}.
+W~celu wstawienia elementu $x$ o~kluczu $k$ (przy założeniu, że nie ma go jeszcze w~tablicy), umieszczamy $x$ na stosie $S$, po czym aktualizujemy $T[k]$:
 \begin{codebox}
 \Procname{$\proc{Huge-Array-Insert}(T,S,x)$}
 \li	$\proc{Push}(S,x)$
@@ -46,10 +46,9 @@ Usuwanie elementu $x$ o~kluczu $k$ polega na przeniesieniu elementu usuniętego 
 Dokładniej, operacja ta sprowadza się do poniższego pseudokodu:
 \begin{codebox}
 \Procname{$\proc{Huge-Array-Delete}(T,S,x)$}
-\li	$k\gets\attrib{x}{key}$
 \li	$y\gets\proc{Pop}(S)$
-\li	$S[T[k]]\gets y$
-\li	$T[\attrib{y}{key}]\gets T[k]$
+\li	$S[T[\attrib{x}{key}]]\gets y$
+\li	$T[\attrib{y}{key}]\gets T[\attrib{x}{key}]$
 \end{codebox}
 
-Wszystkie omówione operacje działają w~czasie $\Theta(1)$, a~każdy element znajdujący się w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
+Każda omówiona operacja działa w~czasie $\Theta(1)$, a~każdy element znajdujący się w~ogromnej tablicy (nie licząc dodatkowych danych z~nim związanych) zajmuje $\Theta(1)$ pamięci.
