@@ -10,7 +10,7 @@ W~przeciwnym przypadku wykonaj\/ $i\gets(i+j)\bmod m$, a~następnie wróć do kr
 
 \subproblem %11-3(a)
 Dla klucza $k$ algorytm ten, o~ile wcześniej nie zostanie przerwany, odwołuje się kolejno do pozycji $h(k)$, $(h(k)+1)\bmod m$, $(h(k)+1+2)\bmod m$, \dots, $\bigl(h(k)+\sum_{j=1}^{m-1}j\bigr)\bmod m$.
-Stąd mamy, że $i$\nbhyphen tą sprawdzaną pozycją tablicy ($i=0$, 1, \dots, $m-1$) jest
+W~tym ciągu kontrolnym $i$\nbhyphen tą pozycją ($i=0$, 1, \dots, $m-1$) jest
 \[
 	\biggl(h(k)+\sum_{j=0}^ij\biggr)\bmod m = \biggl(h(k)+\frac{i(i+1)}{2}\biggr)\bmod m = \biggl(h(k)+\frac{i}{2}+\frac{i^2}{2}\biggr)\bmod m.
 \]
@@ -20,7 +20,7 @@ Jest to zatem przykład adresowania kwadratowego, w~którym $c_1=c_2=1/2$.
 Niech $h'(k,i)=(h(k)+i/2+i^2\!/2)\bmod m$.
 Udowodnimy, że dla dowolnego klucza $k$ wyrazy ciągu $\langle h'(k,0),h'(k,1),\dots,h'(k,m-1)\rangle$ są parami różne.
 
-Załóżmy nie-wprost, że istnieje klucz $k$ oraz liczby całkowite $i$, $j$ takie, że $0\le i<j<m$ oraz $h'(k,i)=h'(k,j)$.
+Załóżmy nie wprost, że istnieje klucz $k$ oraz liczby całkowite $i$, $j$ takie, że $0\le i<j<m$ oraz $h'(k,i)=h'(k,j)$.
 Wówczas
 \[
 	h(k)+i(i+1)/2 \equiv h(k)+j(j+1)/2 \pmod m,
@@ -40,4 +40,4 @@ Nie może nim być $j-i$, gdyż $j-i<m<2^{p+1}$.
 Ale czynnik $j+i+1$ również nie dzieli się przez $2^{p+1}$, bo $j+i+1\le(m-1)+(m-2)+1=2m-2<2^{p+1}$.
 Otrzymana sprzeczność prowadzi do wniosku, że $h'(k,i)\ne h'(k,j)$.
 
-Udowodnione stwierdzenie implikuje to, że dla dowolnego klucza $k$ algorytm wyszukiwania, używający opisanej tu funkcji haszującej $h$, w~pesymistycznym przypadku sprawdzi każdą pozycję tablicy w~celu odnalezienia $k$.
+Z~pokazanego faktu wynika, że algorytm stosujący opisaną tu funkcję haszującą $h$, podczas wyszukiwania dowolnego klucza $k$, w~pesymistycznym przypadku sprawdzi każdą pozycję tablicy.
