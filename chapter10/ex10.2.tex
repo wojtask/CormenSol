@@ -131,12 +131,19 @@ Poniższe procedury stanowią implementacje tych trzech operacji słownikowych.
 Łatwo sprawdzić, że procedura implementująca operację \proc{Insert} działa w~czasie stałym, natomiast pozostałe dwie procedury dla listy o~$n$ elementach w~pesymistycznym przypadku potrzebują czasu $\Theta(n)$.
 
 \exercise %10.2-6
-Zbiory można zaimplementować jako jednokierunkowe listy cykliczne.
+Użyjemy dwukierunkowych list cyklicznych z~wartownikami do reprezentowania łączonych zbiorów.
 Zbiory $S_1$ i~$S_2$ są rozłączne, więc w~reprezentacji sumy $S_1\cup S_2$ nie pojawią się powtarzające się elementy.
-Operacja \proc{Union} może więc tylko ,,sklejać'' listy reprezentujące zbiory $S_1$ i~$S_2$.
-Podczas działania tej operacji następnikiem głowy pierwszej listy staje się następnik głowy drugiej listy, a~następnikiem głowy drugiej staje się początkowy następnik głowy pierwszej.
-Działania te są wykonywane tylko wtedy, gdy obie listy są niepuste.
-Wykonując stałą liczbę kroków, otrzymujemy w~wyniku tej operacji jednokierunkową listę cykliczną (której głową może być dowolny jej element) reprezentującą zbiór $S_1\cup S_2$.
+Operacja \proc{Union} będzie więc jedynie ,,sklejać'' listy $L_1$ i~$L_2$ implementujące zbiory $S_1$ i~$S_2$.
+Podczas działania tej operacji następnikiem ogona listy $L_1$ staje się głowa listy $L_2$, a~ogon listy $L_2$ zostaje umieszczony tuż przed wartownikiem $\attrib{L_1}{nil}$.
+Powstała lista $L_1$ reprezentuje teraz sumę $S_1\cup S_2$, zaś lista $L_2$ ulega zniszczeniu.
+\begin{codebox}
+\Procname{$\proc{List-Union}(L_1,L_2)$}
+\li	$\attribbb{L_2}{nil}{next}{prev}\gets\attribb{L_1}{nil}{prev}$
+\li	$\attribbb{L_1}{nil}{prev}{next}\gets\attribb{L_2}{nil}{next}$
+\li	$\attribbb{L_2}{nil}{prev}{next}\gets\attrib{L_1}{nil}$
+\li	$\attribb{L_1}{nil}{prev}\gets\attribb{L_2}{nil}{prev}$
+\li	\Return $L_1$
+\end{codebox}
 
 \exercise %10.2-7
 W~algorytmie wykorzystamy pomocniczą listę jednokierunkową $L'$, na którą będziemy wstawiać kolejno usuwane elementy z~głowy listy $L$.
