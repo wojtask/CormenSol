@@ -1,8 +1,8 @@
 \subchapter{Tablice z~adresowaniem bezpośrednim}
 
 \exercise %11.1-1
-Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, i~zwróci element z~pierwszej niepustej pozycji.
-Jeśli zbiór $S$ jest pusty, to na wszystkich pozycjach tablicy $T$ znajduje się wartość \const{nil} i~wówczas procedura przeglądnie całą tablicę, po czym zwróci \const{nil}.
+Procedura wyszukująca największy element zbioru $S$ będzie przeglądać liniowo tablicę $T$ od końca, to znaczy od indeksu $m-1$ ku jej początkowi, i~zwróci element z~pierwszej pozycji, na której nie ma \const{nil}.
+Jeśli zbiór $S$ jest pusty, to tablica $T$ jest wypełniona wartościami \const{nil} i~w~trakcie działania procedury zostanie ona przeglądnięta w~całości.
 Jest to przypadek pesymistyczny, który wymaga czasu $\Theta(m)$.
 
 \exercise %11.1-2
