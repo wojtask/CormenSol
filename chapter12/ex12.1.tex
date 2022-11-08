@@ -10,11 +10,11 @@ Przykładowe drzewa BST przedstawiono na rys.\ \ref{fig:12.1-1}.
 \exercise %12.1-2
 \note{Wyrażenie ,,właściwa kolejność'' użyte w~treści zadania oznacza kolejność niemalejącą.}
 
-\noindent Niech $x$ będzie węzłem drzewa $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$.
-Jeśli drzewo $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\attrib{y}{key}\le\attrib{x}{key}\le\attrib{z}{key}$.
-Jeśli z~kolei drzewo $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\attrib{x}{key}\le\attrib{y}{key}$ oraz $\attrib{x}{key}\le\attrib{z}{key}$.
-Ta różnica sprawia, że podczas przechodzenia kopca typu min w~kolejności niemalejących węzłów, po odwiedzeniu węzła $x$ nie jest wiadomo, które jego poddrzewo należałoby następnie odwiedzić, ponieważ nie jest znana relacja między $y$ a~$z$.
-Oznacza to, że wypisanie wszystkich $n$ węzłów kopca typu min w~kolejności niemalejącej zajmuje czas wyższy niż $O(n)$.
+\noindent Niech $x$ będzie węzłem drzewa binarnego $T$, a~$y$, $z$, odpowiednio, lewym i~prawym synem $x$.
+Jeśli $T$ byłoby drzewem BST, czyli spełniałoby własność drzewa BST, to wówczas prawdziwe byłyby nierówności $\attrib{y}{key}\le\attrib{x}{key}\le\attrib{z}{key}$.
+Jeśli z~kolei $T$ stanowiłoby kopiec typu min, czyli spełniałoby własność kopca typu min, to zachodziłoby wtedy $\attrib{x}{key}\le\attrib{y}{key}$ oraz $\attrib{x}{key}\le\attrib{z}{key}$.
+Ta różnica sprawia, że podczas przechodzenia kopca typu min w~kolejności niemalejących węzłów, po wypisaniu klucza węzła $x$ nie jest wiadomo, które jego poddrzewo należałoby następnie odwiedzić w~celu odnalezienia następnika $x$.
+Oznacza to, że wypisanie wszystkich $n$ węzłów kopca typu min w~kolejności niemalejącej zajmuje czas $\omega(n)$.
 W~przeciwnym przypadku moglibyśmy zaimplementować algorytm heapsort w~czasie liniowym.
 
 \exercise %12.1-3
