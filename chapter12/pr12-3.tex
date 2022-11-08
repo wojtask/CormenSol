@@ -37,7 +37,7 @@ Na podstawie poprzedniego punktu mamy:
 W~ostatnim przekształceniu skorzystaliśmy z~tego, że $P(0)=0$, i~opuściliśmy ten składnik sumy.
 
 \subproblem %12-3(e)
-Podobnie jak w~problemie \refProblem{7-2} pokażemy, że $P(n)\le an\lg n$ dla pewnej dodatniej stałej $a$.
+Podobnie jak w~problemie \refProblem{7-2} dla $\E(T(n))$, tu pokażemy, że $P(n)\le an\lg n$ dla pewnej dodatniej stałej $a$.
 Podstawą indukcji niech będzie $n=1$.
 Oczywiście $P(1)=0$ oraz $a\cdot1\cdot\lg1=0$, więc podstawa jest spełniona dla każdego $a$.
 Niech teraz $n>1$.
@@ -46,7 +46,7 @@ Wówczas:
 \[
 	P(n) = \frac{2}{n}\sum_{k=1}^{n-1}P(k)+\Theta(n) \le \frac{2}{n}\sum_{k=1}^{n-1}ak\lg k+\Theta(n) = \frac{2a}{n}\sum_{k=1}^{n-1}{k\lg k}+\Theta(n).
 \]
-Posługując się nierównością (7.7) udowodnioną w~punkcie (d) problemu \refProblem{7-2} i~dobierając odpowiednio duże $a$ tak, aby wyrażenie $an/4$ było równe co najmniej składnikowi $\Theta(n)$, mamy
+Posługując się nierównością (7.7) i~dobierając odpowiednio duże $a$ tak, aby wyrażenie $an/4$ było równe co najmniej składnikowi $\Theta(n)$, mamy
 \[
 	P(n) \le \frac{2a}{n}\biggl(\frac{n^2\lg n}{2}-\frac{n^2}{8}\biggr)+\Theta(n) = an\lg n-\frac{an}{4}+\Theta(n) \le an\lg n = O(n\lg n).
 \]
