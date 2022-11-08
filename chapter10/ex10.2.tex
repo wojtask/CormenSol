@@ -164,17 +164,19 @@ Procedury \proc{Singly-Linked-List-Insert} i~\proc{Singly-Linked-List-Delete} zo
 Ich wywołania w~powyższym algorytmie zajmują czas stały, stąd czasem działania algorytmu jest $\Theta(n)$.
 
 \exercise %10.2-8
-Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednik i~następnik posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników.
-Załóżmy, że znamy adres elementu $x$ na liście $L$ i~elementu $y$ będącego poprzednikiem $x$ w~$L$.
-Niech $z$ będzie następnikiem $x$ na tej liście.
-Wówczas $\attrib{x}{np}=z\func{XOR}y$, zatem na podstawie własności operacji \func{XOR}, aby dostać się do $z$, wystarczy obliczyć wartość
+Zgodnie z~opisem w~treści zadania przyjmijmy, że każdy element listy zamiast wskaźników na poprzednika i~następnika posiada atrybut \id{np}, będący alternatywą wykluczającą tych dwóch wskaźników.
+Niech $x$ będzie dowolnym elementem listy $L$, $y$ -- poprzednikiem $x$, a~$z$ -- następnikiem $x$.
+Wówczas $\attrib{x}{np}=z\func{XOR}y=y\func{XOR}z$, zatem na podstawie własności operacji \func{XOR},
 \[
-    z = z\func{XOR}0 = z\func{XOR}{}(y\func{XOR}y) = (z\func{XOR}y)\func{XOR}y = \attrib{x}{np}\func{XOR}y.
+	y = y\func{XOR}0 = y\func{XOR}{}(z\func{XOR}z) = (y\func{XOR}z)\func{XOR}z = \attrib{x}{np}\func{XOR}z.
 \]
-Podobnie ma się rzecz podczas wyznaczania $y$ na podstawie $x$ i~$z$ -- wówczas $y=\attrib{x}{np}\func{XOR}z$.
+Analogicznie,
+\[
+	z = \attrib{x}{np}\func{XOR}y.
+\]
 Zauważmy, że jeśli element $x$ jest ogonem listy, to $\attrib{x}{np}=\const{nil}\func{XOR}y=0\func{XOR}y=y$, skąd mamy $z=\attrib{x}{np}\func{XOR}y=0=\const{nil}$ i~analogicznie dla głowy listy, z~faktu, że $\attrib{x}{np}=z\func{XOR}0=z$ wynika $y=\const{nil}$.
 Podobnie jak w~zwykłych listach przyjmujemy, że atrybut \attrib{L}{head} przechowuje wskaźnik do głowy listy $L$.
-Ponadto z~listą związujemy atrybut \attrib{L}{tail}, który będzie wskazywał na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów na liście działała w~czasie stałym.
+Ponadto z~listą związujemy atrybut \attrib{L}{tail} wskazujący na jej ogon -- jest on konieczny do tego, aby operacja odwracania kolejności elementów listy działała w~czasie stałym.
 
 Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{Insert} i~\proc{Delete} dla takiej listy.
 \begin{codebox}
@@ -221,6 +223,7 @@ Poniżej przedstawiono procedury implementujące operacje \proc{Search}, \proc{I
 		\End
 \end{codebox}
 
-Procedury \proc{XOR-Linked-List-Search} i~\proc{XOR-Linked-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej i~pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$.
-W~procedurze \proc{XOR-Linked-List-Delete} należy odszukać na liście poprzednika i~następnika elementu $x$, aby uaktualnić ich pola \id{np}, co w~pesymistycznym przypadku zajmuje czas $\Theta(n)$.
-Odwracanie kolejności elementów listy w~opisanej tu implementacji można zrealizować poprzez zamianę wartości jej atrybutów $head$ i~$tail$.
+Procedury \proc{XOR-Linked-List-Search} i~\proc{XOR-Linked-List-Insert} są analogiczne do swoich odpowiedników dla zwykłej listy dwukierunkowej.
+Dla listy o~$n$ elementach pesymistyczny czas ich działania wynosi odpowiednio $\Theta(n)$ oraz $\Theta(1)$.
+W~procedurze \proc{XOR-Linked-List-Delete} odszukiwany jest poprzednik i~następnik elementu $x$ w~celu aktualizacji ich pól \id{np}, zatem w~pesymistycznym przypadku operacja wymaga czasu $\Theta(n)$ dla listy o~długości $n$.
+Odwracanie kolejności elementów listy $L$ w~opisanej implementacji można zrealizować poprzez zamianę wartości atrybutów \attrib{L}{head} i~\attrib{L}{tail}.
