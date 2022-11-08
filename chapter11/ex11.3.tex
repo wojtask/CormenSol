@@ -93,12 +93,18 @@ Stąd prawdopodobieństwo $p_{\mathcal{H}}$ wystąpienia kolizji przy losowo wyb
 Jeśli rodzina $\mathcal{H}$ jest $\epsilon$\nbhyphen uniwersalna, to $p_{\mathcal{H}}\le\epsilon$, a~stąd dostajemy $\epsilon>1/b-1/u=1/|B|-1/|U|$.
 
 \exercise %11.3-6
-Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi $n$\nbhyphen tkami o~wartościach z~$\mathbb{Z}_p$.
+\note{Aby przeciwdziedziną funkcji\/ $h_b$ był zbiór\/ $\mathbb{Z}_p$, powinna ona być zdefiniowana następująco:
+\[
+	h_b(\langle a_0,a_1,\dots,a_{n-1}\rangle) = \sum_{j=0}^{n-1}a_jb^j \bmod p.
+\]
+Błąd występuje też w~wersji oryginalnej.}
+
+\noindent Niech $x=\langle x_0,x_1,\dots,x_{n-1}\rangle$, $y=\langle y_0,y_1,\dots,y_{n-1}\rangle$ będą dwiema różnymi $n$\nbhyphen tkami o~wartościach z~$\mathbb{Z}_p$.
 Dla losowo wybranej funkcji $h_b\in\mathcal{H}$ mamy:
 \[
-	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j-\sum_{j=0}^{n-1}y_jb^j = \sum_{j=0}^{n-1}(x_j-y_j)b^j.
+	h_b(x)-h_b(y) = \sum_{j=0}^{n-1}x_jb^j\bmod p-\sum_{j=0}^{n-1}y_jb^j\bmod p = \sum_{j=0}^{n-1}(x_j-y_j)b^j\bmod p.
 \]
-Kolizja między $x$ a~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem.
+Kolizja $x$ z~$y$ wystąpi wówczas, gdy powyższa różnica będzie zerem.
 Wyrażenie po prawej stronie jest wielomianem stopnia $n-1$ zmiennej $b$ o~współczynnikach z~$\mathbb{Z}_p$, a~z~\refExercise{31.4-4} mamy, że taki wielomian posiada co najwyżej $n-1$ różnych pierwiastków modulo $p$.
-A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję między $x$ a~$y$.
+A~zatem co najwyżej $n-1$ spośród $p$ funkcji z~rodziny $\mathcal{H}$ spowoduje kolizję $x$ z~$y$.
 Prawdopodobieństwo kolizji nie przekracza więc $(n-1)/p$, czyli rodzina $\mathcal{H}$ jest $((n-1)/p)$\nbhyphen uniwersalna według definicji z~\refExercise{11.3-5}.
