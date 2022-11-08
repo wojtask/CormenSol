@@ -22,32 +22,14 @@ Wewnętrzną sumę na podstawie punktu (a) zamieniamy na $b_{n+1}$ i~przy zało�
 \[
 	B^2(x) = \sum_{n=0}^\infty b_{n+1}x^n = \frac{1}{x}\sum_{n=0}^\infty b_{n+1}x^{n+1} = \frac{1}{x}\sum_{n=1}^\infty b_nx^n = \frac{1}{x}\biggl(\sum_{n=0}^\infty b_nx^n-1\biggr) = \frac{B(x)-1}{x}.
 \]
-Stąd $B(x)=xB^2(x)+1$ i~jednym z~rozwiązań tego równania ze względu na $B(x)$ jest
+Stąd $B(x)=xB^2(x)+1$ i~rozwiązaniem tego równania ze względu na $B(x)$ jest
 \[
-	B(x) = \frac{1-\sqrt{1-4x}}{2x}.
+	B(x) = \frac{1-\sqrt{1-4x}}{2x},
 \]
-
-Pokażemy teraz, że jest to szukana postać funkcji $B(x)$, podczas gdy drugie z~rozwiązań,
+co weryfikujemy przez podstawienie:
 \[
-	B(x) = \frac{1+\sqrt{1-4x}}{2x},
+	xB^2(x)+1 = x\cdot\frac{1+1-4x-2\sqrt{1-4x}}{4x^2}+1 = \frac{2-2\sqrt{1-4x}}{4x}-1+1 = \frac{1-\sqrt{1-4x}}{2x} = B(x).
 \]
-prowadzi do sprzeczności z~definicją $B(x)$.
-Zauważmy, że
-%W~tym celu obliczymy granice prawostronne w~0 obu otrzymanych postaci funkcji i~porównamy z~wartością obliczoną na podstawie wzoru z~definicji funkcji $B(x)$, czyli
-\[
-	\lim_{x\to0^+}\sum_{n=0}^\infty b_nx^n = b_0 = 1,
-\]
-a~więc taką samą wartość powinna przyjmować granica prawostronna w~0 odpowiedniej postaci funkcji $B(x)$.
-W~przypadku pierwszej otrzymanej postaci mamy
-\[
-	\lim_{x\to0^+}B(x) = \lim_{x\to0^+}\frac{1-\sqrt{1-4x}}{2x} = \lim_{x\to0^+}\frac{\frac{2}{\sqrt{1-4x}}}{2} = \lim_{x\to0^+}\frac{1}{\sqrt{1-4x}} = 1
-\]
-(w~drugim przejściu skorzystaliśmy z~reguły de l'Hospitala).
-Natomiast dla drugiego rozwiązania otrzymujemy
-\[
-	\lim_{x\to0^+}B(x) = \lim_{x\to0^+}\frac{1+\sqrt{1-4x}}{2x} = \infty,
-\]
-a~zatem postać ta jest sprzeczna z~definicją funkcji $B(x)$.
 
 \subproblem %12-4(c)
 \note{Rozwinięciem Taylora funkcji\/ $f(x)$ wokół punktu\/ $x=a$ jest\/ $f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}(x-a)^k$.}
@@ -55,7 +37,7 @@ a~zatem postać ta jest sprzeczna z~definicją funkcji $B(x)$.
 \noindent Aby skorzystać z~rozwinięcia Taylora funkcji $f(x)$, musimy wyznaczyć jej kolejne pochodne.
 
 \medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Jeśli\/ $f(x)=\sqrt{1-4x}$, to dla\/ każdego całkowitego $k\ge1$ zachodzi
+\noindent\textsf{\textbf{Lemat.}} \textit{$k$\nbhyphen tą pochodną funkcji\/ $f(x)=\sqrt{1-4x}$ jest
 \[
 	f^{(k)}(x) = -\frac{2(2k-2)!}{(k-1)!}\,(1-4x)^{1/2-k}.
 \]
@@ -80,7 +62,7 @@ Rozwinięcie Taylora funkcji $f(x)=\sqrt{1-4x}$ wokół punktu $x=0$ ma postać:
 \]
 Podstawiając uzyskany wynik do postaci $B(x)$ wyprowadzonej w~części (b), dostajemy
 \[
-	B(x) = \frac{1-\sqrt{1-4x}}{2x} = \sum_{k=0}^\infty\binom{2k}{k}\frac{x^k}{k+1}.
+	B(x) = \frac{1-\sqrt{1-4x}}{2x} = \sum_{n=0}^\infty\binom{2n}{n}\frac{x^n}{n+1}.
 \]
 co po przyrównaniu do wzoru z~definicji funkcji $B(x)$, daje
 \[
