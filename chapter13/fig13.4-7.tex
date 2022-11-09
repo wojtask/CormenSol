@@ -15,16 +15,16 @@
 		child[missing];
 	
 	\node[right=45mm of left root, blackened] (middle root) {2}
-		child {node[label=$z$] {1}}
+		child {node[label=$x$] {1}}
 		child {node {3}};
 	
-	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {$\proc{RB-Insert}(T,z)$} (middle root.west);
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {$\proc{RB-Insert}(T,x)$} (middle root.west);
 	
 	\node[right=45mm of middle root, blackened] (right root) {2}
 		child[missing]
 		child {node {3}};
 	
-	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {$\proc{RB-Delete}(T,z)$} (right root.west);
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {$\proc{RB-Delete}(T,x)$} (right root.west);
 	
 	\node[subpicture label, draw=none, fill=none, left=20mm of left root] {(a)};
 \end{tikzpicture}
@@ -41,18 +41,18 @@
 	
 	\node[right=45mm of left root, blackened] (middle root) {3}
 		child {node[blackened] {2}
-			child {node[label=$z$] {1}}
+			child {node[label=$x$] {1}}
 			child[missing]
 		}
 		child {node[blackened] {4}};
 	
-	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {$\proc{RB-Insert}(T,z)$} (middle root.west);
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (left root.east) -- node[index node] {$\proc{RB-Insert}(T,x)$} (middle root.west);
 	
 	\node[right=45mm of middle root, blackened] (right root) {3}
 		child {node[blackened] {2}}
 		child {node[blackened] {4}};
 	
-	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {$\proc{RB-Delete}(T,z)$} (right root.west);
+	\draw[arrow, shorten >=10mm, shorten <=10mm, dashed, thick] (middle root.east) -- node[index node] {$\proc{RB-Delete}(T,x)$} (right root.west);
 	
 	\node[subpicture label, draw=none, fill=none, left=20mm of left root] {(b)};
 \end{tikzpicture}
