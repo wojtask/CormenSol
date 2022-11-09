@@ -66,11 +66,11 @@ Innym przykładem drzew $T_1$ i~$T_2$ są dowolne 2 drzewa, które przechowują 
 Niech teraz $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach takimi, że $T_1$ jest prawostronnie przekształcalne do $T_2$.
 Załóżmy, że $n>0$ -- w~przeciwnym przypadku bowiem drzewa są puste i~nie jest potrzebna żadna rotacja, aby przekształcić $T_1$ w~$T_2$.
 
-Wykonanie prawej rotacji na węźle $x$ skutkuje tym, że jego lewy syn zostaje przeniesiony na mniejszą głębokość w~drzewie, stając się nowym synem ojca $x$.
-Wynika stąd, że jedynie węzły leżące na lewym kręgosłupie drzewa mogą być przeniesione w~miejsce korzenia.
-Korzeń $r$ drzewa $T_2$ leży zatem na lewym kręgosłupie $T_1$.
-Można więc z~$T_1$ utworzyć drzewo $T_1'$ poprzez wykonywanie prawych rotacji na aktualnym korzeniu, aż $r$ stanie się korzeniem.
-Oczywiście $T_1'$ jest prawostronnie przekształcalne do $T_2$, więc także lewe i~prawe poddrzewo $T_1'$ jest prawostronnie przekształcalne do, odpowiednio, lewego i~prawego poddrzewa $T_2$.
+Wykonanie prawej rotacji na pewnym węźle skutkuje tym, że jego lewy syn $y$ zostaje przeniesiony na głębokość o~1 mniejszą.
+Kolejne prawe rotacje mogą wynosić węzeł $y$ coraz bliżej korzenia, dopóki $y$ pozostaje lewym synem swojego ojca.
+Wynika stąd, że korzeń drzewa może być zastąpiony tylko przez węzły z~lewego kręgosłupa.
+Na mocy założenia mamy, że korzeń $r$ drzewa $T_2$ znajduje się na lewym kręgosłupie $T_1$ i, wykonując odpowiednią ilość prawych rotacji na aktualnym korzeniu $T_1$, można uzyskać drzewo $T_1'$ o~korzeniu $r$.
+Drzewo $T_1'$ pozostaje prawostronnie przekształcalne do $T_2$, więc także lewe i~prawe poddrzewo $T_1'$ są prawostronnie przekształcalne do, odpowiednio, lewego i~prawego poddrzewa $T_2$.
 W~celu otrzymania drzewa $T_2$ wystarczy więc powtórzyć opisane ciągi prawych rotacji rekurencyjnie na lewym i~prawym poddrzewie drzewa $T_1'$.
 
 Liczbę rotacji potrzebnych do przekształcenia drzewa $T_1$ w~$T_1'$ można ograniczyć od góry przez długość lewego kręgosłupa drzewa $T_1$, która wynosi co najwyżej $n-1$.
