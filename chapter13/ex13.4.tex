@@ -36,16 +36,16 @@ Ciąg drzew po każdej operacji usunięcia węzła został zilustrowany na rys.\
 \end{figure}
 
 \exercise %13.4-4
-Gdy z~drzewa czerwono-czarnego $T$ efektywnie usuwany jest czarny węzeł $y$, którego obaj synowie są \attrib{T}{nil}, to do procedury \proc{RB-Delete-Fixup} przekazywany jest jako parametr wartownik \attrib{T}{nil}, którego pole $p$ pokazuje na \attrib{y}{p}.
-A~zatem wszystkie odniesienia do pól parametru $x$ w~liniach 1, 2, 3, 6, 7, 8, 11, 16, 17, 18, 20, 22 i~23 tej procedury są odniesieniami do pól wartownika \attrib{T}{nil}.
-Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów brata $w$ węzła $x$, przy czym $w$ także może mieć obu synów równych \attrib{T}{nil} i~operacje te mogą odbywać się na atrybucie \id{color} wartownika.
+Gdy z~drzewa czerwono-czarnego $T$ efektywnie usuwany jest czarny węzeł $y$, którego obaj synowie to \attrib{T}{nil}, do procedury \proc{RB-Delete-Fixup} przekazywany jest jako parametr wartownik \attrib{T}{nil}, którego pole $p$ pokazuje na \attrib{y}{p}.
+A~zatem wszystkie odwołania do pól parametru $x$ w~liniach 1, 2, 3, 6, 7, 8, 11, 16, 17, 18, 20, 22 i~23 tej procedury są odwołaniami do pól wartownika \attrib{T}{nil}.
+Ponadto w~liniach 9, 12 i~13 odczytywany bądź modyfikowany jest kolor synów brata $w$ węzła $x$, przy czym synem $w$ może być \attrib{T}{nil} i~operacje te mogą odbywać się na atrybucie \id{color} wartownika.
 
-Zastanówmy się teraz, czy w~jakimkolwiek innym miejscu w~\proc{RB-Delete-Fixup} pola \attrib{T}{nil} mogą być odczytywane lub aktualizowane.
+Zastanówmy się teraz, czy w~jakimkolwiek innym wierszu \proc{RB-Delete-Fixup} pola \attrib{T}{nil} mogą być odczytywane bądź aktualizowane.
 Jeśli efektywnie usuniętym węzłem $y$ jest korzeń drzewa $T$, to procedura zostaje wywołana dla $x=\attrib{T}{root}$ i~pętla \kw{while} nie wykonuje się.
-Gdy z~kolei $y$ nie jest korzeniem, to posiada brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku przed wywołaniem operacji usuwania własność 5 byłaby zaburzona dla \attrib{y}{p}.
-Jak łatwo też zauważyć, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury -- zarówno w~linii 8, jak i~16 $\attribb{x}{p}{right}\ne\attrib{T}{nil}$.
+Gdy z~kolei $y$ nie jest korzeniem, to w~momencie wywołania procedury jest czarny i~ma brata $w\ne\attrib{T}{nil}$, gdyż w~przeciwnym przypadku własność 5 byłaby zaburzona dla \attrib{y}{p}.
+Jak wynika z~analizy przypadków w~Podręczniku, $w$ nie zostaje nigdy zaktualizowane na \attrib{T}{nil} w~trakcie działania procedury -- zarówno w~linii 8, jak i~16 $\attribb{x}{p}{right}\ne\attrib{T}{nil}$.
 Dzięki temu w~wierszach 4, 5, 10, 14 i~15 nigdy nie pojawi się wartownik \attrib{T}{nil}.
-Możemy wyeliminować też linijki 19 -- węzeł \attrib{w}{right} początkowo jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
+Możemy wyeliminować też linię 19 -- węzeł \attrib{w}{right} na początku przypadku 4 jest czerwony, dlatego nie może być \attrib{T}{nil} -- oraz 21.
 
 Także w~żadnym z~wywołań \proc{Left-Rotate} i~\proc{Right-Rotate} w~procedurze \proc{RB-Delete-Fixup} nie ma odwołań do pól wartownika, ponieważ wszystkie węzły, na których operacje te pracują, są węzłami wewnętrznymi.
 
