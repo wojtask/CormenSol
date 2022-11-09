@@ -28,12 +28,13 @@ Jeśli $x$ nie ma czerwonego syna, to w~wyniku pochłaniania czerwonych węzłó
 Jeśli $x$ ma dokładnie jednego czerwonego syna $y$, to pochłaniając go, przyjmuje czarnych synów $y$, zwiększając swój stopień do 3.
 Gdy obaj synowie $y_1$, $y_2$ węzła $x$ są czerwoni, to po ich pochłonięciu $x$ będzie ojcem 4 czarnych węzłów, które początkowo były synami węzłów $y_1$ i~$y_2$.
 
-Po pochłonięciu wszystkich czerwonych węzłów dowolna prosta ścieżka od korzenia do liścia będzie składać się z~tej samej liczby węzłów, skąd wynika, że głębokość każdego liścia będzie równa czarnej wysokości początkowego drzewa czerwono-czarnego.
+Jak wynika z~własności 5 drzewa czerwono-czarnego, po pochłonięciu wszystkich czerwonych węzłów dowolna prosta ścieżka od korzenia do liścia będzie składać się z~tej samej liczby węzłów równej czarnej wysokości początkowego drzewa czerwono-czarnego.
+Liczba ta będzie więc głębokością każdego liścia w~wynikowym drzewie.
 
 \exercise %13.1-5
-Skorzystamy z~faktu, że każda prosta ścieżka z~ustalonego węzła $x$ do jego potomnego czarnego liścia w~danym drzewie czerwono-czarnym składa się z~tej samej liczby czarnych węzłów.
-Na możliwie najkrótszej takiej ścieżce są same czarne węzły (być może z~wyjątkiem $x$) i~jej długością jest czarna wysokość węzła $x$.
-Najdłuższa możliwa ścieżka powstaje z~najkrótszej poprzez umieszczenie czerwonego węzła pomiędzy każdą parą sąsiednich czarnych węzłów, w~wyniku czego długość ścieżki może zwiększyć się maksymalnie dwukrotnie.
+Korzystamy z~własności 5 drzewa czerwono-czarnego.
+Na możliwie najkrótszej prostej ścieżce z~ustalonego węzła $x$ do jego potomnego czarnego liścia są same czarne węzły (być może z~wyjątkiem $x$) i~jej długością jest $\mathrm{bh}(x)$.
+Z~kolei powołując się na własność 4, stwierdzamy, że na możliwie najdłuższej prostej ścieżce od $x$ do potomnego liścia kolory węzłów występują naprzemiennie, dlatego długość tej ścieżki może wynosić co najwyżej $2\cdot\mathrm{bh}(x)$.
 
 \exercise %13.1-6
 Drzewo czerwono-czarne o~czarnej wysokości $k$ ma najmniejszą możliwą liczbę węzłów wewnętrznych, jeśli każda prosta ścieżka od korzenia do liścia jest możliwie najkrótsza.
