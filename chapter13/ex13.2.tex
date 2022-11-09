@@ -41,13 +41,13 @@ A~zatem głębokość dowolnego węzła $a$ z~$\alpha$ zwiększa się o~1, głę
 
 \exercise %13.2-4
 \note{Rozwiązanie zakłada, że zadanie dotyczy drzew wyszukiwań binarnych, zgodnie z~treścią oryginalną.
-Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym każdy węzeł znajduje się na jego prawym kręgosłupie (patrz problem 13.4).}
+Przyjmiemy też, że przekształcane drzewa reprezentują ten sam zbiór kluczy.
+Ponadto doprecyzujemy pojęcie (prawego) łańcucha z~treści zadania -- jest to drzewo wyszukiwań binarnych, w~którym każdy węzeł znajduje się na prawym kręgosłupie drzewa (patrz problem 13.4).}
 
-\noindent Wykażemy stwierdzenie podane we wskazówce.
-Jeśli drzewo $T$ nie jest prawym łańcuchem, to istnieje węzeł $y$ na prawym kręgosłupie $T$ mający lewego syna $x$ spoza prawego kręgosłupa.
+\noindent Udowodnimy tezę postawioną we wskazówce.
+Jeśli drzewo $T$ nie jest prawym łańcuchem, to istnieje węzeł $y$ na prawym kręgosłupie $T$ mający lewego syna $x$ (spoza prawego kręgosłupa).
 Zauważmy, że wykonanie prawej rotacji na węźle $y$ dodaje $x$ do prawego kręgosłupa, jednocześnie nie usuwając z~niego żadnego innego węzła.
 Prawa rotacja zwiększa więc długość prawego kręgosłupa o~1, dlatego wystarczy wykonać co najwyżej $n-1$ rotacji, aby przekształcić $T$ w~prawy łańcuch.
-
 Jeśli znamy ciąg prawych rotacji przekształcających drzewo $T$ w~prawy łańcuch $T'$, to możemy powrócić od $T'$ do $T$ poprzez wykonanie tego ciągu w~odwrotnej kolejności, zamieniając każdą prawą rotację w~odpowiadającą jej lewą rotację.
 
 Niech $T_1$, $T_2$ będą drzewami wyszukiwań binarnych o~$n$ węzłach, a~$T'$ -- jedynym prawym łańcuchem powstałym z~$T_1$ bądź z~$T_2$ po przeprowadzeniu powyżej opisanej transformacji.
