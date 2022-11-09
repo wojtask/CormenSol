@@ -40,10 +40,9 @@ Drzewo, do którego $z$ zostało wstawione, nie jest puste, więc $z$ nie może 
 Dlatego również ostatni wiersz procedury \proc{RB-Insert-Fixup} nie zaktualizuje koloru $z$ na czarny.
 
 \exercise %13.3-6
-Podczas wstawiania węzła do drzewa czerwono-czarnego w~reprezentacji bez wskaźników do ojców, do zapamiętania ścieżki od korzenia do nowego węzła użyjemy stosu.
-Wstawimy do niego każdy węzeł, na który kiedykolwiek w~trakcie działania procedury \proc{RB-Insert} wskazuje zmienna $y$.
-Tuż po każdej aktualizacji tej zmiennej będziemy wywoływać $\proc{Push}(S,y)$, gdzie $S$ jest początkowo pustym stosem.
-Ponadto przypisanie z~linii 8 nie będzie wykonywane.
+Podczas wstawiania węzła do drzewa czerwono-czarnego w~reprezentacji bez wskaźników do ojców, do zapamiętania ścieżki od korzenia do nowego węzła użyjemy stosu $S$.
+Wstawimy do niego kolejno te węzły, na które w~trakcie działania procedury \proc{RB-Insert} aktualizowana jest zmienna $y$.
+Ponadto z~procedury tej usuniemy przypisanie z~linii 8.
 
 Elementy zebrane na stosie $S$ są wystarczające dla procedury \proc{RB-Insert-Fixup}, ponieważ korzysta ona ze wskaźnika $p$ jedynie dla węzłów znajdujących się w~$S$.
 Musimy następnie zmodyfikować procedurę \proc{RB-Insert-Fixup} tak, aby każde odwołanie do przodka danego węzła przy pomocy wskaźnika $p$ było zamienione na odwołanie do odpowiedniego elementu stosu.
@@ -75,7 +74,7 @@ Implementacja tej procedury została przedstawiona na poniższym pseudokodzie.
 \end{codebox}
 W~każdej iteracji pętli \kw{while}, oprócz węzła $z$, potrzebujemy znać także jego ojca i~dziadka (ojca ojca).
 Węzły te są pobierane ze stosu $S$ przekazywanego do procedury i~umieszczane w~zmiennych, odpowiednio, $p$ i~$r$.
-Ponieważ rotacje także wykorzystują wskaźniki do ojca, to wyeliminujemy te użycia poprzez przekazanie im dodatkowego parametru w~postaci wskaźnika na ojca węzła, dla którego rotacja jest wykonywana.
+Odwołania do wskaźników do ojca w~procedurach rotacji wyeliminujemy poprzez przekazanie do tych procedur dodatkowego parametru w~postaci wskaźnika na ojca węzła, dla którego rotacja jest wykonywana.
 W~wierszu \ref{li:parentless-rb-insert-fixup-left-rotate} powyższej procedury ojciec węzła $r$ jest ściągany ze stosu i~przekazywany do operacji rotacji.
 Pobranie dodatkowego elementu ze stosu $S$ nie powoduje jednak problemów, bo pętla \kw{while} nie wykona więcej iteracji i~żaden element nie będzie już ściągany z~$S$.
 
