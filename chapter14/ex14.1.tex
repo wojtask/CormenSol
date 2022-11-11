@@ -1,16 +1,20 @@
 \subchapter{Dynamiczne statystyki pozycyjne}
 
 \exercise %14.1-1
-Algorytm rozpoczyna działanie z~parametrami $x$ pokazującym na korzeń drzewa $T$ oraz $i=10$.
-Ranga klucza 26 wyznaczona w~linii 1 wynosi 13, więc algorytm zostaje wywołany rekurencyjnie dla lewego poddrzewa, czyli dla węzła o~kluczu 17.
-W~wywołaniu tym obliczona ranga klucza 17 wynosi 8.
-Szukany element jest więc $10-8=2$ (drugim) największym elementem w~prawym poddrzewie aktualnego węzła.
-Algorytm zostaje więc wywołany rekurencyjnie dla $x$ wskazującego na jeden z~węzłów o~kluczu 21, ten na głębokości 2, oraz $i=2$.
-Ranga tego klucza zostaje wyznaczona na 3, dlatego szukany klucz należy do lewego poddrzewa.
-W~kolejnym wywołaniu $x$ wskazuje na węzeł o~kluczu 19, a~$i=2$.
-Tym razem jednak lewe poddrzewo składa się tylko z~wartownika \attrib{T}{nil}, ale zdefiniowanie \attribb{T}{nil}{size} jako 0 pozwala obliczyć rangę obecnego elementu jako 1.
-Algorytm wywoływany jest więc rekurencyjnie jeszcze raz w~celu znalezienia $2-1=1$ (pierwszego) elementu w~prawym poddrzewie.
-Po wyznaczeniu rangi i~porównaniu z~wartością zmiennej $i=1$ zwracany jest wskaźnik do węzła o~kluczu 20.
+Działanie algorytmu ilustruje tabela \ref{tab:14.1-1}.
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{rrrl}
+		\attrib{x}{key} & $i$ & $r$ & akcja \\ \hline
+		26 & 10 & 13 & szukaj w~lewym poddrzewie \\
+		17 & 10 & 8 & szukaj w~prawym poddrzewie \\
+		21 & 2 & 3 & szukaj w~lewym poddrzewie \\
+		19 & 2 & 1 & szukaj w~prawym poddrzewie \\
+		20 & 1 & 1 & zwróć $x$
+	\end{tabular}
+	\caption{Przebieg działania wywołania $\proc{OS-Select}(\attrib{T}{root},10)$ dla drzewa $T$ z~rys.\ 14.1 z~Podręcznika.
+Każdy wiersz pokazuje wartości w~kolejnych wywołaniach rekurencyjnych -- klucz węzła $x$, pozycję $i$ szukanego klucza w~poddrzewie o~korzeniu w~$x$ i~rangę $r$ węzła $x$ -- a~także wykonywaną w~tym wywołaniu akcję (zejście rekurencyjne albo zwrócenie wyniku).} \label{tab:14.1-1}
+\end{table}
 
 \exercise %14.1-2
 Na początku działania procedury zmienna $r$ zostaje zainicjalizowana na 1, a~$y$ początkowo wskazuje węzeł $x$.
