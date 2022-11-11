@@ -1,20 +1,21 @@
 \problem{Drzepce, czyli drzewa ,,treaps''} %13-4
 
 \subproblem %13-4(a)
-Dla danego zbioru węzłów $x_1$, $x_2$, \dots, $x_n$ istnieje wiele możliwych drzew wyszukiwań binarnych z~nich zbudowanych.
-Jeśli $\attrib{x_i}{key}<\attrib{x_j}{key}$, to węzeł $x_i$ może znajdować się w~lewym poddrzewie węzła $x_j$ albo $x_j$ może znajdować się w~prawym poddrzewie $x_i$.
-Powiązanie z~każdym węzłem priorytetów i~utrzymywanie na ich podstawie własności kopca typu min w~drzepcu sprawia, że niejednoznaczność ta znika -- węzeł o~wyższym priorytecie znajduje się w~drzepcu głębiej od węzła o~niższym priorytecie.
-A~zatem, jeśli dodatkowo $\attrib{x_i}{priority}<\attrib{x_j}{priority}$, to węzeł $x_i$ jest przodkiem $x_j$, a~w~przeciwnym przypadku $x_i$ jest potomkiem $x_j$.
-Dla każdej pary węzłów z~danego zbioru istnieje jednoznacznie wyznaczone ich wzajemne rozmieszczenie w~drzepcu, dlatego istnieje dokładnie jeden drzepiec dla tego zbioru węzłów i~powiązanych z~nimi priorytetów.
+Bez straty ogólności założymy, że dla wszystkich $1\le i<j\le n$, $\attrib{x_i}{key}<\attrib{x_j}{key}$.
+Niech $x_k$ będzie węzłem o~najmniejszym priorytecie spośród węzłów ze zbioru $x_1$, $x_2$, \dots, $x_n$.
+Korzeniem drzepca może być jedynie $x_k$, wówczas w~lewym poddrzewie znajdują się węzły $x_1$, $x_2$, \dots, $x_{k-1}$, a~w~prawym poddrzewie -- węzły $x_{k+1}$, $x_{k+2}$, \dots, $x_n$.
+Istnieje zatem jednoznaczny sposób wyboru korzenia i~węzłów do lewego poddrzewa i~węzłów do prawego poddrzewa.
+Powyższe rozumowanie stosuje się rekurencyjnie do obu poddrzew, skąd wynika teza.
 
 \subproblem %13-4(b)
 Niech $T$ będzie drzepcem zbudowanym z~węzłów $x_1$, $x_2$, \dots, $x_n$.
 Załóżmy bez utraty ogólności, że priorytety węzłów w~$T$ zostały wybrane ze zbioru $\{1,2,\dots,n\}$ losowo i~niezależnie od każdego węzła.
-Oznaczmy przez $\pi$ permutację tego zbioru przyporządkowującą priorytety dla ciągu węzłów drzepca $T$ taką, że dla $i=1$, 2, \dots, $n$ priorytetem $x_i$ jest $\pi(i)$.
-Oczywiście każda z~$n!$ takich permutacji jest jednakowo prawdopodobna, co oznacza, że każda permutacja kluczy węzłów, wyznaczona przez ich rosnące priorytety, czyli $\pi^{-1}$, jest również jednakowo prawdopodobna.
-Możemy zatem potraktować drzepiec $T$ jak drzewo wyszukiwań binarnych utworzone przez wstawienie do niego węzłów o~coraz większym priorytecie, czyli, kolejno $x_{\pi^{-1}(1)}$, $x_{\pi^{-1}(2)}$, \dots, $x_{\pi^{-1}(n)}$.
+Oznaczmy przez $\pi$ permutację tego zbioru przyporządkowującą priorytety dla ciągu węzłów drzepca $T$, czyli że $\pi(i)$ jest priorytetem węzła $x_i$ dla $i=1$, 2, \dots, $n$.
+Oczywiście każda z~$n!$ takich permutacji jest jednakowo prawdopodobna.
+Własność tę zachowuje każda permutacja odwrotna $\pi^{-1}$, czyli permutacja indeksów węzłów wyznaczona przez ich rosnące priorytety.
+Możemy zatem potraktować drzepiec $T$ jak drzewo wyszukiwań binarnych utworzone przez wstawianie do niego węzłów o~rosnących priorytetach, czyli, kolejno $x_{\pi^{-1}(1)}$, $x_{\pi^{-1}(2)}$, \dots, $x_{\pi^{-1}(n)}$.
 Drzewo $T$ jest zatem losowo skonstruowanym drzewem wyszukiwań binarnych, które, na podstawie analizy z~podrozdziału 12.4, ma wysokość $h=O(\lg n)$.
-Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, daje nam oczekiwaną wysokość drzepca równą $\Theta(\lg n)$.
+Wynik ten, wraz z~dolnym oszacowaniem na $h$ otrzymanym w~\refExercise{B.5-4}, daje nam oczekiwaną wysokość drzepca rzędu $\Theta(\lg n)$.
 
 \subproblem %13-4(c)
 Procedura \proc{Treap-Insert} wstawia nowy węzeł $x$ do drzepca $T$ tak, jakby $T$ było zwykłym drzewem wyszukiwań binarnych.
@@ -41,7 +42,7 @@ A~zatem oczekiwany czas działania procedury \proc{Treap-Insert} wynosi $\Theta(
 \subproblem %13-4(e)
 Bezpośrednio po umieszczeniu nowego węzła $x$ w~drzepcu w~wierszu \ref{li:treap-insert-tree-insert} procedury \proc{Treap-Insert}, zarówno lewe, jak i~prawe poddrzewo $x$ jest puste -- ich lewy i~prawy kręgosłup mają długość~0.
 Każde wykonanie lewej rotacji w~tej procedurze na węźle $y=\attrib{x}{p}$ przenosi węzeł $x$ o~jeden poziom w~górę drzepca oraz dodaje $y$ do prawego kręgosłupa lewego poddrzewa $x$.
-Analogicznie prawa rotacja zwiększa o~1 lewy kręgosłup prawego poddrzewa węzła $x$.
+Analogicznie prawa rotacja zwiększa o~1 długość lewego kręgosłupa prawego poddrzewa węzła $x$.
 Wartość $C$ jest więc równa ilości wywołań z~linii \ref{li:treap-insert-left-rotate}, a~$D$ jest równe ilości wywołań z~linii \ref{li:treap-insert-right-rotate}.
 Łączna liczba wykonanych rotacji w~procedurze \proc{Treap-Insert} wynosi zatem $C+D$.
 
@@ -61,14 +62,14 @@ Zastanówmy się teraz, które węzły $z\in T$ spełniają nierówności $\attr
 Pierwsza z~nich jest prawdziwa wtedy, gdy $z\in T^R_y$ albo $y\in T^L_z$, a~druga, gdy $z\in T^L_x$ albo $x\in T^R_z$.
 Przy założeniu, że $y\in T^L_x$, obydwie nierówności zachodzą w~następujących przypadkach:
 \begin{enumerate}[(i)]
-	\item $z\in T^L_x$ i~$y\in T^L_z$;
-	\item $z\in T^R_y$.
+	\item $z\in T^R_y$;
+	\item $z\in T^L_x$ i~$y\in T^L_z$.
 \end{enumerate}
-Przypadek (i) obejmuje węzły $z$ z~lewego poddrzewa $x$, które z~kolei w~swoim lewym poddrzewie mają $y$.
-Zgodnie z~własnościami drzepca oznacza to, że $\attrib{x}{priority}<\attrib{z}{priority}<\attrib{y}{priority}$.
-W~przypadku (ii) zaś zachodzi $\attrib{y}{priority}<\attrib{z}{priority}$.
-Jeśli nie istnieje węzeł $z\in T$, który spełnia warunek (i), to $y$ znajduje się na prawym kręgosłupie drzewa $T^L_x$.
-Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to nie istnieje węzeł $z\in T^L_x$, dla którego $y\in T^L_z$.
+Zgodnie z~własnościami drzepca przypadek (i) wyznacza węzły $z$, dla których $\attrib{y}{priority}<\attrib{z}{priority}$.
+Przypadek (ii) obejmuje węzły $z$ z~lewego poddrzewa $x$, które z~kolei w~swoich lewych poddrzewach mają $y$, czyli równoważnie spełniające nierówności $\attrib{x}{priority}<\attrib{z}{priority}<\attrib{y}{priority}$.
+Jeśli nie istnieje węzeł $z\in T$, który spełnia warunek (ii), to $y$ znajduje się na prawym kręgosłupie drzewa $T^L_x$.
+Podobnie w~drugą stronę, jeśli $y$ jest na prawym kręgosłupie $T^L_x$, to nie istnieje węzeł $z\in T^L_x$, dla którego $y\in T^L_z$, czyli żaden $z$ nie spełnia (ii).
+
 
 \subproblem %13-4(g)
 Załóżmy, że $i<k$.
@@ -102,7 +103,7 @@ Rozumując analogicznie jak w~części (g), otrzymujemy
 \]
 Ponieważ prawe poddrzewo węzła $x$ o~kluczu $k$ zawiera węzły o~kluczach $j>k$, to stąd $D=\sum_{j=k+1}^nY_{j,k}$ i~podobnie jak w~(h):
 \[
-	\E(D) = \sum_{j=k+1}^n\Pr(Y_{j,k}=1) = \sum_{j=k+1}^n\frac{1}{(j-k+1)(j-k)} = \sum_{j=1}^{n-k}\frac{1}{j(j+1)} = \frac{1}{n-k+1}.
+	\E(D) = \sum_{j=k+1}^n\Pr(Y_{j,k}=1) = \sum_{j=k+1}^n\frac{1}{(j-k+1)(j-k)} = \sum_{j=1}^{n-k}\frac{1}{j(j+1)} = 1-\frac{1}{n-k+1}.
 \]
 
 \subproblem %13-4(j)
