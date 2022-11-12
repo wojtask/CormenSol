@@ -1,25 +1,21 @@
 \problem{Permutacja Józefa} %14-2
 
 \subproblem %14-2(a)
-Podamy algorytm, który będzie symulował opisany proces eliminowania osób.
+Podamy algorytm symulujący opisany proces eliminowania osób.
 Wykorzystamy do tego celu listę cykliczną zawierającą początkowo liczby całkowite, kolejno 1, 2, \dots, $n$.
-Symulacja polega na przechodzeniu po liście i~zatrzymywaniu się na co $m$\nbhyphen tym węźle.
-Klucz tego węzła jest wypisywany i~usuwany z~listy, po czym kroki są powtarzane aż do wyczerpania elementów.
+Symulacja polega na przechodzeniu po liście i~zatrzymywaniu się na co $m$\nbhyphen tym węźle celem wypisania jego klucza i~usunięcia węzła z~listy.
+Kroki te są powtarzane aż do wyczerpania elementów.
 Dzięki temu, że lista jest cykliczna, nie musimy troszczyć się o~obsługę przypadku, w~którym osiągniemy ogon listy, zanim dotrzemy do następnego w~kolejności węzła do usunięcia.
 
 Do efektywnego zaimplementowania opisanej symulacji wystarczy jednokierunkowa lista cykliczna.
 Podczas przechodzenia po niej, należy utrzymywać wskaźnik $x$ na węzeł poprzedzający aktualny, dzięki czemu usuwanie aktualnego węzła będzie polegać na aktualizacji pola \attrib{x}{next} na \attribb{x}{next}{next} i~ewentualnie wskaźnika na głowę listy.
-Usuwanie węzła z~listy odbywa się w~czasie $O(1)$, skąd całkowity czas działania symulacji wynosi
-\[
-	\sum_{k=1}^n(m+O(1)) = mn+O(n) = O(n),
-\]
-ponieważ $m$ jest stałą.
+Usuwanie węzła z~listy odbywa się w~czasie $O(1)$, skąd całkowity czas działania symulacji, przy założeniu, że $m$ jest stałą, wynosi $O(n)$.
 
 \subproblem %14-2(b)
-Załóżmy, że w~pewnym momencie odliczanie zatrzymało się na osobie o~$j$\nbhyphen tym największym numerze spośród pozostałych $k\le n$ osób.
-Osoba ta zostaje usunięta, co powoduje dekrementację zmiennej $k$.
+Załóżmy, że liczbę pozostałych osób w~okręgu przechowujemy w~zmiennej $k$ i~że w~pewnym momencie odliczanie zatrzymało się na osobie o~$j$\nbhyphen tym największym numerze spośród pozostałych $k\le n$ osób.
+Osoba ta zostaje wyeliminowana, co powoduje dekrementację zmiennej $k$.
 Numer kolejnej osoby w~permutacji wyznaczamy przez zwiększenie $j$ o~$m$, ale ponieważ liczba ta może przekroczyć liczbę pozostałych $k$ osób w~okręgu, to należy wziąć resztę z~jej dzielenia przez $k$, a~także uwzględnić fakt, że osoby numerowane są liczbami od 1 do $n$, poprzez odjęcie jedynki przed braniem reszty, a~następnie dodanie jej do wynikowej liczby.
-W~rezultacie otrzymujemy, że następna osoba ma numer na pozycji $(j+m-1)\bmod k+1$ na uszeregowanej rosnąco liście numerów pozostałych osób.
+W~rezultacie otrzymujemy, że numer następnej osoby w~permutacji znajduje się na pozycji $(j+m-1)\bmod k+1$ na uszeregowanej rosnąco liście numerów pozostałych osób.
 
 Na podstawie powyższego opisu w~algorytmie wykorzystamy drzewo statystyk pozycyjnych.
 Będziemy używać operacji \proc{OS-Insert} oraz \proc{OS-Delete}, które stanowią implementacje operacji słownikowych \proc{Insert} i~\proc{Delete} na drzewie statystyk pozycyjnych.
@@ -40,5 +36,5 @@ Będziemy używać operacji \proc{OS-Insert} oraz \proc{OS-Delete}, które stano
 \end{codebox}
 
 Zbudowanie drzewa statystyk pozycyjnych $T$ zajmuje czas $O(n\lg n)$.
-Następnie wykonywanych jest $n$ wywołań procedur działających na tym drzewie, z~których każde potrzebuje czasu $O(\lg n)$.
+Następnie wykonywanych jest po $n$ wywołań procedur \proc{OS-Select} i~\proc{OS-Delete} działających na tym drzewie, z~których każde potrzebuje czasu $O(\lg n)$.
 A~zatem czas działania algorytmu wynosi $O(n\lg n)$.
