@@ -5,13 +5,13 @@ Poniższa rekurencyjna procedura wypisuje wszystkie stanowiska o~numerach od 1 d
 Do wywołania rekurencyjnego przekazywany jest numer wykorzystanej linii na stanowisku $j-1$ odczytany z~$l_i[j]$.
 Imitowane jest dzięki temu zachowanie pętli z~oryginalnej procedury.
 \begin{codebox}
-\Procname{$\proc{Print-Stations}'(l,i,j)$}
+\Procname{$\proc{Print-Stations-Increasing}(l,i,j)$}
 \li	\If $j\ge1$
-\li	\Then $\proc{Print-Stations}'(l,l_i[j],j-1)$
+\li	\Then $\proc{Print-Stations-Increasing}(l,l_i[j],j-1)$
 \li		wypisz ,,linia '' $i$ ,,{}, stanowisko '' $j$
 	\End
 \end{codebox}
-Aby wypisać cały ciąg stanowisk, należy wywołać $\proc{Print-Stations}'(l,l^*\!,n)$.
+Aby wypisać cały ciąg stanowisk, należy wywołać $\proc{Print-Stations-Increasing}(l,l^*\!,n)$.
 
 \exercise %15.1-2
 W~pierwszym kroku indukcyjnym wzór oczywiście zachodzi:
