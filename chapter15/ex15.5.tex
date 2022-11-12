@@ -65,9 +65,9 @@ Zauważmy, że pętla \kw{for} w~wierszach 9\nbendash13 wykonuje także $\Theta(
 A~zatem modyfikacja ta nie wpłynie na asymptotyczny czas działania algorytmu.
 
 \exercise %15.5-4
-Wykorzystamy podaną obserwację i~w~najbardziej wewnętrznej pętli w~procedurze \proc{Optimal-BST}, zamiast iterować zmienną $r$ od $i$ do $j$, będziemy przebiegać wszystkie wartości od $\id{root}[i,j-1]$ do $\id{root}[i+1,j]$.
+Wykorzystamy podaną obserwację i~w~najbardziej wewnętrznej pętli w~procedurze \proc{Optimal-BST}, zamiast iterować zmienną $r$ od $i$ do $j$, będziemy przeglądać wszystkie wartości od $\id{root}[i,j-1]$ do $\id{root}[i+1,j]$.
 Aby jednak skorzystać z~tego usprawnienia, musimy upewnić się, że $i<j$.
-Warunek ten zachodzi, gdy $l>1$, zatem w~pętli \kw{for} w~wierszach 4\nbendash13 zmienna $l$ będzie przyjmować wartości od 2 do $n$, natomiast działania wykonywane, gdy $l=1$, będziemy imitować następującym fragmentem, który wstawimy tuż przed tę pętlę:
+Warunek ten zachodzi, gdy $l>1$, zatem w~pętli \kw{for} w~wierszach 4\nbendash13 zmienna $l$ będzie przyjmować wartości od 2 do $n$, natomiast działania wykonywane gdy $l=1$, sprowadzają się do następującego fragmentu, który wstawimy tuż przed tę pętlę:
 \begin{codebox}
 \zi	\For $i\gets1$ \To $n$
 \zi		\Do $w[i,i]\gets w[i,i-1]+p_i+q_i$
@@ -77,8 +77,12 @@ Warunek ten zachodzi, gdy $l>1$, zatem w~pętli \kw{for} w~wierszach 4\nbendash1
 \end{codebox}
 
 Pokażemy, że tablice $e$ i~\id{root} zostaną wypełnione w~czasie $\Theta(n^2)$.
-Pętla w~wierszach 1\nbendash3 wraz z~tą stanowiącą nowy fragment wykonują w~sumie $2n+1$ iteracji.
-Dla każdego $2\le l\le n$ pętla \kw{for} w~wierszach 9\nbendash13 wykona łącznie $S(n,l)=\sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1)$ iteracji.
+Pętla w~wierszach 1\nbendash3 wraz z~tą podaną powyżej wykonują w~sumie $2n+1$ iteracji.
+Dla każdego $l=2$, 3, \dots, $n$ pętla \kw{for} w~wierszach 9\nbendash13 wykona łącznie
+\[
+	S(n,l) = \sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1)
+\]
+iteracji.
 Po podstawieniu $j=i+l-1$ i~skorzystaniu z~własności sumy teleskopowej otrzymujemy:
 \begin{align*}
 	S(n,l) &= \sum_{i=1}^{n-l+1}(\id{root}[i+1,j]-\id{root}[i,j-1]+1) \\
