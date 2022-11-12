@@ -98,18 +98,17 @@ Dlatego czas działania nie może też przekroczyć $O(k\lg n)$, gdyż wysokoś�
 Łącząc te ograniczenia, dostajemy, że algorytm działa w~czasie $O(\min(n,k\lg n))$.
 
 \exercise %14.3-5
-Zmodyfikujemy operację wstawiania do drzewa przedziałowego w~taki sposób, aby w~przypadku powtarzających się kluczy (lewych końców przedziałów) uporządkowanie wyznaczone było na podstawie prawych końców przedziałów.
-Podczas wstawiania nowego węzła $z$ jeśli w~trakcie schodzenia w~dół drzewa napotkany zostanie węzeł $x$, w~którym $\attribb{x}{int}{low}=\attribb{z}{int}{low}$, to porównane zostaną prawe końce przedziałów \attrib{x}{int} i~\attrib{z}{int}, i~w~zależności od wyniku węzeł $z$ zostanie umieszczony w~odpowiednim poddrzewie $x$.
+Zmodyfikujemy operację wstawiania do drzewa przedziałowego w~taki sposób, aby w~przypadku powtarzających się kluczy (lewych końców przedziałów) porządek inorder wyznaczony był na podstawie prawych końców przedziałów.
+Podczas wstawiania nowego węzła $z$, jeśli w~trakcie schodzenia w~dół drzewa napotkany będzie węzeł $x$, w~którym $\attribb{x}{int}{low}=\attribb{z}{int}{low}$, to porównane zostaną prawe końce przedziałów \attrib{x}{int} i~\attrib{z}{int}, i~w~zależności od wyniku węzeł $z$ zostanie umieszczony w~odpowiednim poddrzewie $x$.
 W~procedurze \proc{Interval-Insert} test odpowiadający testowi z~wiersza 5 procedury \proc{RB-Insert}, na której ta pierwsza się opiera, należy zamienić na
 \begin{codebox}
 \zi \If $\attribb{z}{int}{low}<\attribb{x}{int}{low}$ lub ($\attribb{z}{int}{low}=\attribb{x}{int}{low}$ i~$\attribb{z}{int}{high}<\attribb{x}{int}{high}$)
 \end{codebox}
 oraz analogicznie test z~wiersza 11 z~$y$ w~miejscu $x$.
-Dzięki temu w~porządku inorder wyznaczonym na podstawie lewych końców przedziałów, w~obrębie bloków z~równymi lewymi końcami przedziały uporządkowane będą względem swoich prawych końców.
 Oczywiście rotacje zachowują porządek inorder w~drzewie.
 Opisana modyfikacja nie zwiększa asymptotycznego czasu działania operacji wstawiania.
 
-Procedura \proc{Interval-Search-Exactly} wyznacza szukany węzeł w~identyczny sposób jak opisane powyżej wyszukiwanie miejsca w~drzewie podczas wstawiania do niego nowego węzła.
+Procedura \proc{Interval-Search-Exactly} wyszukuje zadany przedział, pokonując tę samą ścieżkę od korzenia w~dół drzewa, co opisane powyżej wstawianie takiego przedziału podczas wstawiania do niego nowego węzła.
 Stąd też czas działania nowej operacji można ograniczyć od góry przez $O(\lg n)$, gdzie $n$ jest liczbą węzłów w~drzewie wejściowym.
 \begin{codebox}
 \Procname{$\proc{Interval-Search-Exactly}(T,i)$}
