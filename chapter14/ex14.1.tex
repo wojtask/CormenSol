@@ -18,11 +18,11 @@ Każdy wiersz pokazuje wartości w~kolejnych wywołaniach rekurencyjnych -- kluc
 
 \exercise %14.1-2
 Na początku działania procedury zmienna $r$ zostaje zainicjalizowana na 1, a~$y$ początkowo wskazuje węzeł $x$.
-W~tabeli \ref{tab:14.1-2} zamieszczono wartości \attrib{y}{key} oraz $r$ na początku każdej iteracji pętli \kw{while}.
+W~tabeli \ref{tab:14.1-2} zilustrowano kolejne iteracje pętli \kw{while}.
 Wynikiem zwracanym przez procedurę jest 16.
 \begin{table}[!ht]
 	\centering
-		\begin{tabular}{rrr}
+		\begin{tabular}{r|rr}
 			iteracja & \attrib{y}{key} & $r$ \\ \hline
 			1 & 35 & 1 \\
 			2 & 38 & 1 \\
@@ -30,7 +30,8 @@ Wynikiem zwracanym przez procedurę jest 16.
 			4 & 41 & 3 \\
 			5 & 26 & 16
 		\end{tabular}
-		\caption{Przebieg działania pętli \kw{while} w~procedurze \proc{OS-Rank} wywołanej dla drzewa $T$ z~rys.\ 14.1 z~Podręcznika oraz $x$ takiego, że $\attrib{x}{key}=35$.} \label{tab:14.1-2}
+		\caption{Przebieg działania procedury \proc{OS-Rank} wywołanej dla drzewa $T$ z~rys.\ 14.1 z~Podręcznika i~węzła $x$ o~kluczu 35.
+Każdy wiersz tabeli zawiera klucz węzła $y$ oraz jego rangę $r$ na początku danej iteracji pętli \kw{while}.} \label{tab:14.1-2}
 \end{table}
 
 \exercise %14.1-3
