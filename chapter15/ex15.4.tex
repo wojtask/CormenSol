@@ -76,9 +76,10 @@ Aby tablica $c$ była rozmiaru $2\cdot\min(m,n)$, przed jej utworzeniem należy 
 Jeśli nie, to wystarczy uruchomić procedurę z~ciągami $X$ i~$Y$ zamienionymi miejscami.
 
 Można jednak jeszcze bardziej ograniczyć zapotrzebowanie procedury na pamięć.
-Dwuwymiarowa tablica $c$ może zostać zamieniona na jednowymiarową tablicę $C[1\twodots n]$, która reprezentować będzie aktualnie obliczany wiersz tablicy $c$ w~trakcie działania procedury.
-W~momencie obliczania $c[i,j]$ reprezentowanego przez $C[j]$, komórka $C[j]$ przechowuje wartość $c[i-1,j]$ z~poprzedniego wiersza.
-Jeśli w~osobnej zmiennej $p$ zapamiętamy $c[i-1,j-1]$, czyli wartość $C[j-1]$ przed jej aktualizacją, to będziemy dysponować wszystkimi danymi potrzebnymi do obliczenia $C[j]$.
+Załóżmy, że $n<m$.
+Dwuwymiarowa tablica $c$ może zostać zamieniona na jednowymiarową tablicę $C[0\twodots n]$ przechowującą wartości z~tablicy $c$ z~wiersza $i-1$ oraz nadpisujące je wartości z~wiersza $i$.
+Dokładniej, w~momencie obliczania $c[i,j]$ fragment $C[0\twodots j-1]$ zawiera kolejne wartości $c[i,0\twodots j-1]$, a~fragment $C[j\twodots n]$ -- kolejne wartości $c[i-1,j\twodots n]$.
+Jeśli w~osobnej zmiennej $p$ zapamiętamy $c[i-1,j-1]$, czyli wartość $C[j-1]$ zanim została zaktualizowana w~poprzedniej iteracji, to będziemy dysponować wszystkimi danymi potrzebnymi do obliczenia $C[j]$.
 Jeśli $x_i=y_j$, to $C[j]$ ustawione zostanie na $p+1$, co odpowiada wierszowi 10 z~oryginalnej procedury \proc{LCS-Length}.
 W~przeciwnym przypadku do $C[j]$ wpisane zostanie $\max(C[j],C[j-1])$, co odpowiada wierszom 12\nbendash16.
 Ostatnim krokiem w~bieżącej iteracji pętli jest aktualizacja zmiennej $p$ na wartość znajdującą się w~$C[j]$ przed modyfikacją tej komórki.
