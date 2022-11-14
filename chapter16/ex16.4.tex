@@ -25,7 +25,7 @@ Uzyskana sprzeczność dowodzi istnienia kolumny $x\in B\setminus A$ liniowo nie
 
 \exercise %16.4-3
 Wybierzmy $B'\in\mathcal{I}'$ i~niech $A'\subseteq B'$.
-Na mocy definicji rodziny $\mathcal{I}'$ mamy, że istnieje taki zbiór maksymalny $B\in\mathcal{I}$, że $B\subseteq S\setminus B'$.
+Z~definicji rodziny $\mathcal{I}'$ mamy, że istnieje taki zbiór maksymalny $B\in\mathcal{I}$, że $B\subseteq S\setminus B'$.
 Inkluzja $A'\subseteq B'$ implikuje inkluzję $S\setminus B'\subseteq S\setminus A'$, skąd $B\subseteq S\setminus A'$, a~to oznacza, że $A'\in\mathcal{I}'$.
 
 Pozostaje do wykazania, że zachodzi własność wymiany dla $\langle S,\mathcal{I}'\rangle$.
@@ -44,13 +44,12 @@ skąd
 \]
 Z~założenia, że $|A'|<|B'|$ mamy $|A'\cap B'|+|A'\cap B|<|A'\cap B'|+|A\cap B'|$, skąd $|A'\cap B|<|A\cap B'|$.
 
-Skonstruujemy teraz pewien maksymalny zbiór niezależny $C$.
-Początkowo przyjmijmy $C=B\setminus A'$.
+Aby pokazać, że $\langle S,\mathcal{I}'\rangle$ ma własność wymiany, znajdziemy pewien szczególny maksymalny zbiór niezależny w~$\mathcal{I}$.
+Niech $C=B\setminus A'$.
 Oczywiście $|C|\le|B|=|A|$ oraz $C\in\mathcal{I}$.
 Jeśli $|C|<|A|$, to możemy skorzystać z~własności wymiany matroidu $\langle S,\mathcal{I}\rangle$, by stwierdzić, że istnieje $y\in A\setminus C$ takie, że $C\cup\{y\}\in\mathcal{I}$.
-Dodajmy więc $y$ do $C$, a~następnie zastosujmy własność wymiany dla otrzymanego zbioru.
-Proces ten powtarzamy, aż $C$ osiągnie moc równą $|A|$.
-W~tym momencie $C\in\mathcal{I}$ oraz $|C|=|A|$, czyli $C$ jest maksymalnym zbiorem niezależnym w~$\langle S,\mathcal{I}\rangle$.
+Wstawiamy teraz $C\cup\{y\}$ w~miejsce $C$ i~powtarzamy stosowanie własności wymiany dla zbioru $C$, aż $C$ osiągnie moc $|A|$.
+Wówczas $C\in\mathcal{I}$ oraz $|C|=|A|$, czyli $C$ jest maksymalnym zbiorem niezależnym w~$\langle S,\mathcal{I}\rangle$.
 Na podstawie pokazanej wcześniej nierówności wnioskujemy, że $C$ nie zawiera wszystkich elementów zbioru $A\cap B'$, czyli że istnieje element $x\in(A\cap B')\setminus C$.
 Wynika stąd, że $C\subseteq S\setminus(A'\cup\{x\})$, czyli $A'\cup\{x\}\in\mathcal{I}'$, co kończy dowód, że $\langle S,\mathcal{I}'\rangle$ jest matroidem.
 
