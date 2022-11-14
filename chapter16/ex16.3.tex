@@ -131,7 +131,7 @@ Wówczas drzewo\/ $T$, otrzymane z\/~$T'$ przez zastąpienie liścia odpowiadaj�
 \note{Maksymalna częstość wystąpienia znaku powinna być ostro mniejsza niż dwukrotność najmniejszej częstości wystąpienia innego znaku.}
 
 \noindent Jeśli w~zbiorze znaków najmniejszą częstością jest $a$, to największa częstość jest mniejsza niż $2a$.
-W~algorytmie \proc{Huffman} każdy tworzony węzeł $z$ będzie miał częstość $\attrib{z}{f}\ge2a$, zatem każdy znak zostanie przetworzony i~usunięty z~kolejki $Q$, zanim zostanie pobrany z~niej węzeł $z$.
+W~algorytmie \proc{Huffman} dla każdego utworzonego węzła $z$ w~linii 4 zachodzi $\attrib{z}{f}\ge2a$, zatem każdy znak zostanie przetworzony i~usunięty z~kolejki $Q$, zanim zostanie pobrany z~niej węzeł $z$.
 To sprawia, że każdy znak zajmie ten sam, najniższy poziom w~tworzonym drzewie, a~co za tym idzie, każdemu znakowi odpowiadać będzie słowo kodowe o~tej samej długości.
 Nie jest to więc żadne usprawnienie w~porównaniu z~zastosowaniem kodu binarnego o~stałej długości, w~którym każdy znak zapisywany jest jako ciąg 8 bitów.
 
