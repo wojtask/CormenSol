@@ -83,16 +83,16 @@ Można więc użyć łącznie $n\lceil\lg n\rceil$ bitów do zapisania ciągu ws
 
 \exercise %16.3-6
 Podobnie jak kody binarne składają się z~bitów, o~kodach trójkowych będziemy mówić, że składają się z~\textbf{tritów} przyjmujących wartości 0, 1 lub 2.
-W~naszym algorytmie budowane będzie drzewo trójkowe odpowiadające optymalnemu trójkowemu kodu Huffmana.
+Algorytm będzie budował drzewo trójkowe odpowiadające optymalnemu trójkowemu kodowi Huffmana.
 Każdy węzeł $x$ takiego drzewa, oprócz pól \attrib{x}{left} i~\attrib{x}{right} wyposażony jest dodatkowo w~pole \attrib{x}{middle}, będące wskaźnikiem na środkowego syna $x$.
 
 \begin{codebox}
 \Procname{$\proc{Ternary-Huffman}(C)$}
 \li	$n\gets|C|$
-\li	\If $n\bmod2=0$
-\li		\Then $C\gets C\cup\{\#\}$ \>\>\>\>\Comment \# -- specjalny znak o~częstości 0
+\li	\If $n\bmod2=1$
+\li		\Then $Q\gets C$
+\li		\Else $Q\gets C\cup\{\#\}$ \>\>\>\>\Comment \# -- specjalny znak o~częstości 0
 		\End
-\li	$Q\gets C$
 \li	\For $i\gets1$ \To $\lfloor n/2\rfloor$ \label{li:ternary-huffman-for-begin}
 \li		\Do utwórz nowy węzeł $w$
 \li			$\attrib{w}{left}\gets x\gets\proc{Extract-Min}(Q)$
@@ -103,9 +103,9 @@ Każdy węzeł $x$ takiego drzewa, oprócz pól \attrib{x}{left} i~\attrib{x}{ri
 		\End \label{li:ternary-huffman-for-end}
 \li	\Return $\proc{Extract-Min}(Q)$
 \end{codebox}
-Aby możliwe było zbudowanie drzewa regularnego, liczba znaków w~zbiorze $C$ musi być nieparzysta.
-Jeśli jest inaczej, to alfabet $C$ zostaje rozszerzony o~dodatkowy specjalny znak~\#, dla którego przyjmujemy $\attrib{\#}{f}=0$.
-Dodanie nowego znaku nie zmienia kosztu tego drzewa, zaś podczas odczytywania wynikowego kodowania znak ten może zostać bezpiecznie zignorowany.
+Drzewo regularne może powstać jedynie w~przypadku, gdy rozmiar kolejki priorytetowej $Q$ tuż po jej zbudowaniu jest nieparzysty.
+Jeśli alfabet $C$ składa się z~parzystej liczby znaków, to do $Q$, oprócz wszystkich elementów z~$C$, zostaje dodany specjalny znak $\#\not\in C$, dla którego przyjmujemy $\attrib{\#}{f}=0$.
+Zastosowanie sztucznego znaku nie zmienia kosztu drzewa, a~podczas odczytywania wynikowego kodowania znak ten może zostać bezpiecznie zignorowany.
 
 Algorytm wykonuje $\lfloor n/2\rfloor$ iteracji pętli \kw{for} w~wierszach \ref{li:ternary-huffman-for-begin}\nbendash\ref{li:ternary-huffman-for-end} tworzących kolejne węzły wewnętrzne budowanego drzewa.
 Z~kolejki priorytetowej $Q$ pobierane są trzy węzły $x$, $y$ i~$z$ o~najmniejszych częstościach, które stają się odpowiednio, lewym, środkowym i~prawym synem nowo utworzonego węzła $w$, a~za częstość węzła $w$ przyjmowana jest suma częstości węzłów $x$, $y$ i~$z$.
