@@ -141,13 +141,13 @@ Otrzymujemy stąd zależność opisującą czas wymagany przez algorytm:
 której rozwiązaniem jest $T(n)=O(n)$.
 
 \exercise %16.2-7
-Posortujmy zbiór $A$ i~zbiór $B$ niemalejąco.
+Rozważmy elementy zbiorów $A$ i~$B$ uporządkowane niemalejąco.
 Niech $1\le i<j\le n$.
 Wówczas $a_i\le a_j$, $b_i\le b_j$ oraz
 \[
 	\frac{a_i^{b_i}a_j^{b_j}}{a_i^{b_j}a_j^{b_i}} = \frac{a_j^{b_j-b_i}}{a_i^{b_j-b_i}} = \biggl(\frac{a_j}{a_i}\biggr)^{b_j-b_i} \ge 1.
 \]
 Ostatnia nierówność zachodzi, ponieważ $a_j/a_i\ge1$ i~$b_j-b_i\ge0$.
-Wynika z~tego, że w~iloczynie będącym zyskiem z~uporządkowania bardziej opłacalne są czynniki postaci $a^b$, w~których podstawa $a$ jest tą samą statystyką pozycyjną w~zbiorze $A$, co wykładnik $b$ w~zbiorze $B$.
+Wynika z~tego, że w~iloczynie będącym zyskiem z~uporządkowania bardziej opłacalne są czynniki postaci $a^b$, w~których podstawa $a$ ma tę samą pozycję w~porządku niemalejącym zbioru $A$, co $b$ w~porządku niemalejącym zbioru $B$.
 Przykładem uporządkowania maksymalizującego zysk jest więc porządek niemalejący obu zbiorów lub porządek nierosnący obu zbiorów.
 Algorytm rozwiązujący ten problem może zatem jedynie sortować oba zbiory, co przy efektywnej implementacji zajmuje czas $\Theta(n\lg n)$.
