@@ -41,8 +41,12 @@ Rozważymy funkcję potencjału
 \]
 Dla pustego kopca mamy $\Phi(D_0)=0$, a~dla każdego $i\ge1$, $\Phi(D_i)\ge0$.
 
-Gdy do kopca $D_{i-1}$ wstawiany jest nowy węzeł, to ląduje on na głębokości $\lfloor\lg(n_{i-1}+1)\rfloor$, nie naruszając przy tym pozycji innych węzłów.
-Mamy więc $n_i=n_{i-1}+1$ oraz $\Phi(D_i)-\Phi(D_{i-1})=k(\lfloor\lg(n_{i-1}+1)\rfloor+1)=k(\lfloor\lg n_i\rfloor+1)$, skąd zamortyzowanym kosztem operacji \proc{Insert} jest
+Po wstawieniu do kopca $D_{i-1}$ nowego węzła, w~wynikowym kopcu $D_i$ nowy węzeł znajduje się na głębokości $\lfloor\lg(n_{i-1}+1)\rfloor$.
+Mamy więc $n_i=n_{i-1}+1$ oraz
+\[
+	\Phi(D_i)-\Phi(D_{i-1}) = k(\lfloor\lg(n_{i-1}+1)\rfloor+1) = k(\lfloor\lg n_i\rfloor+1),
+\]
+skąd zamortyzowanym kosztem operacji \proc{Insert} jest
 \[
 	\widehat{c_I} = c_I+\Phi(D_i)-\Phi(D_{i-1}) \le k\lg n_{i-1}+k(\lfloor\lg n_i\rfloor+1) < k\lg n_i+k(\lg n_i+1) = O(\lg n_i).
 \]
