@@ -16,12 +16,12 @@ W~naszej analizie skorzystamy z~następującej funkcji potencjału:
 	\Phi(D_i) = \begin{cases}
 		0, & \text{jeśli $i=0$}, \\
 		k+2, & \text{jeśli $i=2^k$, $k=0$, 1, \dots, $\lfloor\lg n\rfloor$}, \\
-		\Phi(D_{i-1})+2, & \text{w~przeciwnym przypadku}.
+		\Phi(D_{i-1})+2, & \text{w~pozostałych przypadkach}.
 	\end{cases}
 \]
-Gdy $i=1$ lub $i$ nie jest potęgą 2, to $\widehat{c_i}=c_i+\Phi(D_i)-\Phi(D_{i-1})=1+2=3$.
+Gdy $i=1$ lub $i$ nie jest potęgą 2, to $c_i=1$, więc $\widehat{c_i}=c_i+\Phi(D_i)-\Phi(D_{i-1})=1+2=3$.
 Przyjmijmy teraz, że $i=2^k$ dla pewnego $k=1$, 2, \dots, $\lfloor\lg n\rfloor$.
-Mamy
+Mamy:
 \begin{align*}
 	\widehat{c_{2^k}} &= c_{2^k}+\Phi(D_{2^k})-\Phi(D_{2^k-1}) \\
 	&= 2^k+k+2-\bigl(\Phi(D_{2^{k-1}})+2(2^k-1-2^{k-1})\bigr) \\
