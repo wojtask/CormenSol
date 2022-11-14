@@ -59,19 +59,18 @@ Mamy więc:
 
 \exercise %16.3-4
 Niech $C=\{c_1,c_2,\dots,c_n\}$ będzie zbiorem znaków o~częstościach $f(c_1)\ge f(c_2)\ge\dots\ge f(c_n)$.
-Niech $T$ będzie drzewem odpowiadającym optymalnemu kodowi Huffmana dla znaków ze zbioru $C$.
-Przypomnijmy, że głębokość liścia reprezentującego znak $c\in C$ w~drzewie $T$ jest długością słowa kodowego przypisanego do znaku $c$.
-Udowodnimy żądaną własność nie-wprost, poprzez założenie, że istnieją takie $1\le i<j\le n$, że $d_T(c_i)>d_T(c_j)$ i~doprowadzenie do sprzeczności.
-
+Niech $T$ będzie drzewem odpowiadającym optymalnemu kodowi Huffmana dla znaków z~alfabetu $C$.
+Przypomnijmy, że głębokość liścia reprezentującego znak $c\in C$ w~drzewie $T$ jest długością słowa kodowego przypisanego do $c$.
+Załóżmy, że istnieją takie $1\le i<j\le n$, dla których $d_T(c_i)>d_T(c_j)$.
 Suma kosztów wnoszonych przez znaki $c_i$ i~$c_j$ do łącznego kosztu drzewa $B(T)$ wynosi $f(c_i)d_T(c_i)+f(c_j)d_T(c_j)$.
-Porównajmy ją z~sumą kosztów tych znaków w~sytuacji, gdy są one zamienione miejscami w~drzewie $T$.
+Porównajmy ją z~sumą kosztów tych znaków, jaką wprowadzałyby, gdyby zostały zamienione miejscami w~drzewie $T$.
 Różnica
 \[
 	\bigl(f(c_i)d_T(c_i)+f(c_j)d_T(c_j)\bigr)-\bigl(f(c_i)d_T(c_j)+f(c_j)d_T(c_i)\bigr) = \bigl(f(c_i)-f(c_j)\bigr)\bigl(d_T(c_i)-d_T(c_j)\bigr)
 \]
 jest dodatnia, na podstawie przyjętych założeń.
 A~zatem drzewo powstałe z~$T$ poprzez zamianę miejscami znaków $c_i$ i~$c_j$ ma niższy koszt niż drzewo $T$, dlatego $T$ nie może reprezentować optymalnego kodowania.
-Wynika stąd, że w~optymalnym drzewie każda para znaków o~niemalejących częstościach zajmuje nierosnące głębokości, a~więc słowa kodowe tej pary znaków także mają nierosnące długości.
+Wynika stąd, że dla każdej pary znaków $c$, $c'$, dla których $f(c)\ge f(c')$, w~optymalnym drzewie znak $c$ nie może znajdować się głębiej od znaku $c'$, czyli słowo kodowe $c$ nie może być dłuższe od słowa kodowego $c'$.
 
 \exercise %16.3-5
 Na podstawie \refExercise{16.3-1} drzewo $T$ reprezentujące optymalne kodowanie zbioru $C$ jest regularne, więc posiada $n$ liści i~$n-1$ węzłów wewnętrznych.
