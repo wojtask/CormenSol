@@ -12,14 +12,16 @@ A~zatem $M=\langle S,\mathcal{I}_k\rangle$ spełnia własność wymiany, co koń
 Dziedziczność rodziny $\mathcal{I}$ wynika z~faktu, że każdy podzbiór zbioru kolumn liniowo niezależnych także składa się z~kolumn liniowo niezależnych.
 
 W~dowodzie własności wymiany wykorzystamy pojęcie rzędu macierzy, czyli mocy największego zbioru jej kolumn liniowo niezależnych (patrz podrozdział 28.1).
-Załóżmy, że $A$, $B\in\mathcal{I}$ i~$|A|<|B|$.
+Przy założeniu, że $n\ge1$, rodzina $\mathcal{I}$ zawiera co najmniej 2 elementy -- zbiór pusty i~singleton złożony z~dowolnej kolumny macierzy $T$.
+Wybierzmy dowolne $A$, $B\in\mathcal{I}$ takie, że $|A|<|B|$.
 Kolumny w~zbiorze $A$ są niezależne, więc jeśli zbudujemy z~nich macierz $T_A$, to $\mathrm{rank}(T_A)=|A|$, i~podobnie dla macierzy $T_B$ złożonej z~kolumn ze zbioru $B$, $\mathrm{rank}(T_B)=|B|$.
 Ponieważ $|A|<|B|$, to $\mathrm{rank}(T_A)<\mathrm{rank}(T_B)$.
 
-Załóżmy teraz nie-wprost, że każda kolumna w~$B$ jest liniową kombinacją kolumn w~$A$.
+Załóżmy teraz nie wprost, że każda kolumna w~$B$ jest liniową kombinacją kolumn w~$A$.
 Oznacza to, że każdy wektor będący liniową kombinacją kolumn z~$B$ jest także liniową kombinacją kolumn z~$A$.
 Zatem przestrzeń liniowa generowana przez wektory będące kolumnami macierzy $T_B$ stanowi podprzestrzeń przestrzeni liniowej generowanej przez kolumny macierzy $T_A$.
 Z~własności podprzestrzeni, jej baza (czyli zbiór wektorów liniowo niezależnych generujący tę podprzestrzeń) ma moc nie większą niż baza obejmującej ją przestrzeni; zachodzi zatem $\mathrm{rank}(T_B)\le\mathrm{rank}(T_A)$, co jest sprzeczne z~poprzednią nierównością.
+Uzyskana sprzeczność dowodzi istnienia kolumny $x\in B\setminus A$ liniowo niezależnej z~kolumnami z~$A$, dlatego $A\cup\{x\}\in\mathcal{I}$.
 
 \exercise %16.4-3
 Wybierzmy $B'\in\mathcal{I}'$ i~niech $A'\subseteq B'$.
