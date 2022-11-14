@@ -97,12 +97,17 @@ Koszty zamortyzowane obu operacji w~tej implementacji wynoszą zatem $O(1)$.
 \note{Zgodnie z~oryginalnym tekstem w\/~$S$ dopuszczalne są powtarzające się elementy, dlatego\/ $S$ jest multizbiorem dynamicznym, a~nie zbiorem dynamicznym.}
 
 \noindent Do zaimplementowania opisanej struktury danych użyjemy listy dwukierunkowej.
-Operacja \proc{Insert} będzie działać jak zwyczajne wstawienie elementu na tę listę.
-Z~kolei w~wywołaniu \proc{Delete-Larger-Half} znaleziona zostanie mediana $M$ multizbioru $S$, po czym usunięte zostaną wszystkie elementy większe od $M$.
-Na końcu wyrzucona zostanie odpowiednia ilość elementów równych $M$ tak, aby z~$S$ łącznie usuniętych zostało dokładnie $\lceil|S|/2\rceil$ elementów.
-Do efektywnego wyszukiwania mediany używany jest algorytm \proc{Select} z~podrozdziału 9.3.
+Operacja \proc{Insert} będzie zwyczajnym wstawieniem elementu na tę listę.
+Z~kolei w~operacji \proc{Delete-Larger-Half} znaleziona zostanie mediana $x$ multizbioru $S$, następnie usunięte zostaną wszystkie elementy większe od $x$ i~wreszcie wykasowana zostanie odpowiednia ilość elementów równych $x$ tak, aby łączną liczbą usuniętych elementów było $\lceil|S|/2\rceil$.
+Do efektywnego odszukania mediany zostanie użyty algorytm \proc{Select} z~podrozdziału 9.3.
 
 Dla analizy kosztu zamortyzowanego przyjmijmy funkcję potencjału $\Phi(S)=2|S|$.
-Rzeczywisty koszt $c_I$ operacji \proc{Insert} wynosi 1, co daje koszt zamortyzowany $\widehat{c_I}=c_I+(2|S|+2-2|S|)=3$.
-Rzeczywistym kosztem $c_D$ wywołania $\proc{Delete-Larger-Half}(S)$ jest $|S|$, zaś jej koszt zamortyzowany to $\widehat{c_D}\le c_D+(|S|-2|S|)=0$.
+Rzeczywisty koszt $c_I$ operacji \proc{Insert} wynosi 1, co daje koszt zamortyzowany
+\[
+	\widehat{c_I} = c_I+(2(|S|+1)-2|S|) = 3.
+\]
+Rzeczywistym kosztem $c_D$ wywołania $\proc{Delete-Larger-Half}(S)$ jest $|S|$, a~kosztem zamortyzowanym
+\[
+	\widehat{c_D} \le c_D+(|S|-2|S|) = 0.
+\]
 A~zatem obie operacje potrzebują zamortyzowanego kosztu rzędu $O(1)$ lub, równoważnie, czas działania dowolnego ciągu $m$ tych operacji wynosi $O(m)$.
