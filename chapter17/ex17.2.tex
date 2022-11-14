@@ -25,10 +25,10 @@ Z~\refExercise{17.1-3} wiemy, że $\sum_{i=1}^nc_i<3n$, dlatego kredyt w~żadnym
 Łączny koszt zamortyzowany ciągu $n$ operacji jest więc rzędu $O(n)$, co jest także ograniczeniem na łączny koszt rzeczywisty tego ciągu operacji.
 
 \exercise %17.2-3
-W~naszej implementacji licznika, z~wektorem bitów $A$ powiążemy atrybut \id{highest}, w~którym będziemy pamiętać pozycję najbardziej znaczącej jedynki w~tym liczniku.
-Dokładniej, $\attrib{A}{highest}=k$, gdzie $k\ge0$, jeśli wartość licznika znajduje się w~przedziale $[2^k,2^{k+1})$.
-Jeśli wartością licznika jest 0, to przyjmiemy $\attrib{A}{highest}=-1$.
-Poniżej przedstawiono pseudokod wersji procedury \proc{Increment}, która dodatkowo aktualizuje wartość pola \attrib{A}{highest} oraz procedury zerującej licznik.
+W~naszej implementacji licznika z~wektorem bitów $A$ powiążemy atrybut \id{highest}, w~którym będziemy pamiętać pozycję najbardziej znaczącej jedynki w~tym liczniku.
+Dokładniej, $\attrib{A}{highest}=k$, gdzie $k\ge0$, jeśli wartość licznika jest w~przedziale $[2^k,2^{k+1})$.
+Gdy licznik jest wyzerowany, to przyjmiemy $\attrib{A}{highest}=-1$.
+Poniżej przedstawiono pseudokod wersji procedury \proc{Increment}, która dodatkowo aktualizuje wartość pola \attrib{A}{highest}, oraz procedury zerującej licznik.
 \begin{codebox}
 \Procname{$\proc{Increment}'(A)$}
 \li	$i\gets0$
@@ -55,5 +55,11 @@ Poniżej przedstawiono pseudokod wersji procedury \proc{Increment}, która dodat
 Podobnie jak w~analizie kosztu zamortyzowanego przeprowadzonej w~Podręczniku, za każde ustawienie bitu na 1 w~procedurze $\proc{Increment}'$ płacimy 1~zł, po czym ,,kładziemy'' na tym bicie 1~zł jako kredyt.
 Dodatkowo, jeśli zwiększy się wartość pola \attrib{A}{highest} (linia \ref{li:increment'-highest-increased}), to kolejne 1~zł ,,kładziemy'' na nowej jedynce najwyższego rzędu.
 Ten dodatkowy kredyt wykorzystany będzie do spłacenia kosztu zerowania licznika procedurą \proc{Reset}.
-Możemy zatem powiązać koszt zamortyzowany równy 3 z~każdym wywołaniem $\proc{Increment}'$ oraz zerowy koszt zamortyzowany z~każdym wywołaniem \proc{Reset}.
+Możemy zatem powiązać z~operacjami następujące koszty zamortyzowane:
+\begin{flushleft}
+	\begin{tabular}{lr}
+		$\proc{Increment}'$ & 3, \\
+		\proc{Reset} & 0.
+	\end{tabular}
+\end{flushleft}
 Wnioskujemy stąd, że dowolny ciąg $n$ operacji inkrementacji i~zerowania licznika można wykonać w~czasie $O(n)$.
