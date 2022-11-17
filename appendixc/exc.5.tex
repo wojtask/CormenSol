@@ -126,53 +126,40 @@ W~dowodzie nierówności z~drugiej części zadania zauważmy, że $\mu=\E(X)=np
 \note{W~treści zadania występuje błąd.
 Prawa strona nierówności ze wskazówki powinna mieć postać\/ $e^{\alpha^2\!/2}$.}
 
-\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych $\alpha>0$, \/$p$, \/$q\ge0$, spełniających\/ $p+q=1$, prawdziwa jest nierówność}
+\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych\/ $\alpha$,\/ $p$,\/ $q\ge0$, spełniających\/ $p+q=1$, prawdziwa jest nierówność}
 	\[
 		pe^{\alpha q}+qe^{-\alpha p} \le e^{\alpha^2\!/2}.
 	\]
 \begin{proof}
-	Przekształćmy nierówność do alternatywnej postaci:
+	Dla $\alpha\ge0$ zdefiniujmy funkcję $f(\alpha)=e^{\alpha^2\!/2}-(pe^{\alpha q}+qe^{-\alpha p})$ i~rozważmy jej pochodne:
 	\begin{align*}
-		pe^{\alpha q}+qe^{-\alpha p} &\le e^{\alpha^2\!/2}, \\
-		pe^{\alpha(1-p)}+(1-p)e^{-\alpha p} &\le e^{\alpha^2\!/2}, \\
-		pe^\alpha-p+1 &\le e^{\alpha^2\!/2+\alpha p}, \\
-		\ln(pe^\alpha-p+1) &\le \alpha^2\!/2+\alpha p, \\
-		\ln(pe^\alpha-p+1)-\alpha^2\!/2-\alpha p &\le 0.
+		f'(\alpha) &= \alpha e^{\alpha^2\!/2}-pq(e^{\alpha q}-e^{-\alpha p}), \\
+		f''(\alpha) &= \alpha^2e^{\alpha^2\!/2}+e^{\alpha^2\!/2}-pq(qe^{\alpha q}+pe^{-\alpha p}).
 	\end{align*}
-	Ustalmy $p$ i~potraktujmy wyrażenie po lewej stronie znaku ostatniej nierówności jako funkcję $f_p$ zmiennej $\alpha$.
-Zauważmy, że granicą prawostronną tej funkcji w~punkcie 0 dla dowolnego $0\le p\le1$ jest 0.
-Udowodnimy, że wraz ze wzrostem $\alpha$ funkcja $f_p$ maleje, co będzie oznaczać, że przyjmuje ona wyłącznie wartości niedodatnie i~uzasadni nierówność.
-Obliczmy w~tym celu pochodną $f_p$:
-	\[
-	    \frac{df_p}{d\alpha}(\alpha) = \frac{pe^\alpha}{pe^\alpha-p+1}-\alpha-p = \frac{pe^\alpha(1-\alpha-p)+(\alpha+p)(p-1)}{pe^\alpha-p+1}.
-	\]
-	Mianownik ostatniego ułamka jest dodatni.
-Wystarczy wykazać, że licznik jest ujemny dla każdych $\alpha>0$, $0\le p\le1$, czyli, równoważnie,
-	\[
-	    (\alpha+p)(p-1) < pe^\alpha(\alpha+p-1).
-	\]
 
-	Rozważmy dwa przypadki w~zależności od znaku wyrażenia $\alpha+p-1$.
-Jeśli $\alpha+p-1\ge0$, to $\alpha\ge1-p$.
-Zachodzi
+	Zachodzi $f''(0)=1-pq\ge0$.
+	Udowodnimy, że dla $\alpha>0$, $f''(\alpha)>0$.
+	Mamy $pq\le1/4$, bo $pq-1/4=p(1-p)-1/4=-p^2+p-1/4=-(p-1/2)^2\le0$, więc:
 	\[
-	    (\alpha+p)(p-1)-p(1+\alpha)(\alpha+p-1) = -\alpha(\alpha p+p^2-p+1) < 0.
+		pq(qe^{\alpha q}+pe^{-\alpha p}) \le \frac{qe^{\alpha q}+pe^{-\alpha p}}{4} \le \frac{e^{\alpha q}+e^{-\alpha p}}{4} = \frac{e^{-\alpha p}(e^{\alpha q+\alpha p}+1)}{4} = \frac{e^{-\alpha p}(e^\alpha+1)}{4} \le \frac{e^\alpha+1}{4}.
 	\]
-	Korzystając ze wzoru (3.12) i~z~tego, że $\alpha>0$, mamy $1+\alpha<e^\alpha$, zatem
+	Korzystając ponadto z~faktu, że $\alpha^2e^{\alpha^2\!/2}>0$, mamy
 	\[
-	    (\alpha+p)(p-1) < p(1+\alpha)(\alpha+p-1) < pe^\alpha(\alpha+p-1).
+		f''(\alpha) > e^{\alpha^2\!/2}-\frac{e^\alpha+1}{4}.
 	\]
-	W~drugim przypadku, czyli gdy $\alpha+p-1<0$, mamy $0<\alpha<1-p$ oraz
+	Wystarczy teraz pokazać, że $4e^{\alpha^2\!/2}\ge e^\alpha+1$ lub, po uwzględnieniu zależności $e^{\alpha^2\!/2}>1$, że
 	\[
-	    (\alpha+p)(p-1)-p(1+\alpha+\alpha^2)(\alpha+p-1) = -\alpha(\alpha^2p+\alpha p^2+p^2-p+1) < 0.
+		3e^{\alpha^2\!/2} \ge e^\alpha.
 	\]
-	Wykorzystując ponownie wzór (3.12), dostajemy $e^\alpha<1+\alpha+\alpha^2$, więc
+	Stosując logarytm naturalny do obu stron nierówności, dostajemy równoważną
 	\[
-		(\alpha+p)(p-1) < p(1+\alpha+\alpha^2)(\alpha+p-1) < pe^\alpha(\alpha+p-1).
+		\alpha^2\!/2-\alpha+\ln3 \ge 0,
 	\]
+	która zachodzi, bo lewa strona przyjmuje minimum dla $\alpha=1$ wynoszące $\ln3-1/2>0$.
 
-	Otrzymaliśmy ostatecznie, że pochodna funkcji $f_p$, gdzie $0\le p\le1$, jest ujemna dla każdego $\alpha>0$.
-A~zatem funkcja $f_p$ jest malejąca.
+	Otrzymany wynik oznacza, że pierwsza pochodna funkcji $f$ jest monotonicznie rosnąca dla $\alpha\ge0$.
+	Ponieważ $f'(0)=0$, to stąd $f'(\alpha)\ge0$ dla $\alpha\ge0$.
+	Analogicznie, wynika stąd, że funkcja $f$ jest monotonicznie rosnąca, a~ponieważ $f(0)=0$, to $f(\alpha)\ge0$ dla $\alpha\ge0$, co kończy dowód.
 \end{proof}
 
 Początek głównego rozumowania prowadzimy w~oparciu o~dowód twierdzenia C.8:
