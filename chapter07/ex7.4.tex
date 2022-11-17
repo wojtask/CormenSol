@@ -28,13 +28,13 @@ Pokażemy, że $T(n)=\Omega(n\lg n)$, używając metody podstawiania.
 Wpierw jednak wyznaczymy minimum wyrażenia $(q+1)\lg(q+1)+(n-q)\lg(n-q)$ (dla $0\le q\le n-1$), które pojawi się w~dowodzie oszacowania.
 Potraktujmy je jak funkcję $f$ zmiennej $q$ i~wyznaczmy jej pierwszą i~drugą pochodną:
 \begin{align*}
-    \frac{df}{dq}(q) &= \frac{d}{dq}\biggl(\frac{(q+1)\ln(q+1)+(n-q)\ln(n-q)}{\ln2}\biggr) = \frac{\ln(q+1)-\ln(n-q)}{\ln2}, \\[1mm]
-	\frac{d^2\!f}{dq^2}(q) &= \frac{d}{dq}\biggl(\frac{\ln(q+1)-\ln(n-q)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q+1}+\frac{1}{n-q}\biggr) = \frac{n+1}{\ln2\cdot(q+1)(n-q)}.
+    f'(q) &= \frac{d}{dq}\biggl(\frac{(q+1)\ln(q+1)+(n-q)\ln(n-q)}{\ln2}\biggr) = \frac{\ln(q+1)-\ln(n-q)}{\ln2}, \\[1mm]
+	f''(q) &= \frac{d}{dq}\biggl(\frac{\ln(q+1)-\ln(n-q)}{\ln2}\biggr) = \frac{1}{\ln2}\biggl(\frac{1}{q+1}+\frac{1}{n-q}\biggr) = \frac{n+1}{\ln2\cdot(q+1)(n-q)}.
 \end{align*}
 Pierwsza pochodna zeruje się tylko wtedy, gdy $q+1=n-q$, skąd $q=(n-1)/2$.
 Wyznaczamy wartość drugiej pochodnej w~tym punkcie:
 \[
-    \frac{d^2\!f}{dq^2}\biggl(\frac{n-1}{2}\biggr) = \frac{4(n+1)}{\ln2\cdot(n+1)(n+1)} = \frac{4}{\ln2\cdot(n+1)} > 0.
+    f''\biggl(\frac{n-1}{2}\biggr) = \frac{4(n+1)}{\ln2\cdot(n+1)(n+1)} = \frac{4}{\ln2\cdot(n+1)} > 0.
 \]
 W~związku z~powyższym stwierdzamy, że funkcja $f$ przyjmuje minimum w~punkcie $q=(n-1)/2$ wynoszące $(n+1)\lg((n+1)/2)$.
 
@@ -55,11 +55,10 @@ Wówczas zachodzi $T(0)>d\cdot1\cdot\lg1=0$, dlatego $n=0$ można przyjąć jako
 
 \exercise %7.4-3
 Potraktujmy wyrażenie jako funkcję $f(q)=q^2+(n-q-1)^2$, gdzie $0\le q\le n-1$.
-W~celu znalezienia maksimum globalnego tej funkcji obliczmy jej pierwszą i~drugą pochodną:
-\begin{align*}
-    \frac{df}{dq}(q) &= 2q-2(n-q-1), \\
-	\frac{d^2\!f}{dq^2}(q) &= 4.
-\end{align*}
+W~celu znalezienia maksimum globalnego tej funkcji wyznaczmy jej pochodne:
+\[
+    f'(q) = 2q-2(n-q-1) \quad\text{oraz}\quad f''(q) = 4.
+\]
 Ponieważ druga pochodna jest dodatnia, to funkcja $f$ nie posiada maksimum lokalnego i~jej największej wartości należy szukać w~punktach brzegowych dziedziny.
 Mamy $f(0)=f(n-1)=(n-1)^2$, więc maksimum jest osiągane w~obu tych punktach.
 
