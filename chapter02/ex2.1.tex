@@ -20,26 +20,23 @@ Aby sortować w~porządku nierosnącym, wystarczy w~warunku pętli \kw{while} w~
 Przedstawiony opis prowadzi do następującego algorytmu wyszukiwania liniowego:
 \begin{codebox}
 \Procname{$\proc{Linear-Search}(A,v)$}
-\li	$i\gets1$
-\li	\While $i\le\attrib{A}{length}$ i~$A[i]\ne v$ \label{li:linear-search-while-begin}
-\li		\Do $i\gets i+1$
-		\End \label{li:linear-search-while-end}
-\li	\If $i\le\attrib{A}{length}$
-\li		\Then \Return $i$
-		\End
+\li	\For $i\gets1$ \To \attrib{A}{length} \label{li:linear-search-for-begin}
+\li		\Do \If $A[i]=v$
+\li				\Then \Return $i$
+				\End
+		\End \label{li:linear-search-for-end}
 \li	\Return \const{nil}
 \end{codebox}
 
 Udowodnimy dla powyższej procedury niezmiennik pętli:
 \begin{quote}
-Na początku każdej iteracji pętli \kw{while} w~wierszach \ref{li:linear-search-while-begin}\nbendash\ref{li:linear-search-while-end} fragment tablicy $A[1\twodots i-1]$ nie zawiera elementu $v$.
+Na początku każdej iteracji pętli \kw{for} w~wierszach \ref{li:linear-search-for-begin}\nbendash\ref{li:linear-search-for-end} fragment tablicy $A[1\twodots i-1]$ nie zawiera elementu $v$.
 \end{quote}
 \begin{description}
 	\item[Inicjowanie:] Przed pierwszą iteracją $i=1$, więc fragment $A[1\twodots i-1]$ jest pusty.
 	\item[Utrzymanie:] Załóżmy, że podtablica $A[1\twodots i-1]$ nie zawiera elementu $v$.
-W~warunku pętli \kw{while} sprawdzamy, czy $A[i]$ jest różne od $v$.
-Jeśli tak, to $i$ jest zwiększane o~1, więc niezmiennik jest zachowany.
-W~przeciwnym przypadku (odnaleziono $v$) przerywamy pętlę.
+W~ciele pętli \kw{for} sprawdzamy, czy $A[i]=v$ i~jeśli tak, to pętla zostaje przerwana.
+W~przeciwnym przypadku $i$ jest zwiększane o~1, więc niezmiennik jest zachowany.
 	\item[Zakończenie:] Pętla kończy swe działanie, kiedy zostanie odnaleziony indeks $i$ taki, że $A[i]=v$ albo $i=\attrib{A}{length}+1$.
 Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A$, a~drugi -- że przejrzeliśmy całą tablicę, nie znajdując $v$ ($A[1\twodots i-1]$ jest teraz całą tablicą $A$).
 \end{description}
