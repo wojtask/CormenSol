@@ -35,8 +35,9 @@ Podtablica $A[1\twodots i-1]$ jest całą tablicą $A$ posortowaną niemalejąco
 \subproblem %2-2(d)
 Niech $n=\attrib{A}{length}$.
 Dla wszystkich przypadków danych wejściowych pętla \kw{for} z~wierszy 2\nbendash4 wykonuje $n-i$ iteracji dla każdego $i=1$, 2, \dots, $n$.
-Pesymistyczny czas działania sortowania bąbelkowego wynosi zatem
+Łącznie algorytm przeprowadza więc
 \[
-	T(n) = \sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2} = \Theta(n^2),
+	\sum_{i=1}^n(n-i) = \sum_{i=0}^{n-1}i = \frac{n(n-1)}{2}
 \]
-jest on więc równy pesymistycznemu czasowi sortowania przez wstawianie.
+porównań -- tyle samo, ile w~pesymistycznym przypadku algorytm sortowania przez wstawianie.
+Pesymistyczne czasy obu algorytmów są asymptotycznie równoważne i~wynoszą $\Theta(n^2)$.
