@@ -93,47 +93,22 @@ Mamy do czynienia z~rekurencją $T_a(n)$ dla $a=2$, którą rozważaliśmy w~pun
 Zgodnie z~przedstawionym tam rozumowaniem wnioskujemy, że $T(n)=\Theta(n\lg\lg n)$.
 
 \subproblem %4-4(f)
-W~celu rozwiązania rekurencji wykorzystamy metodę drzewa rekursji do odgadnięcia rozwiązania, które następnie udowodnimy.
-Drzewo zostało przedstawione na rys.\ \ref{fig:4-4f}.
-\begin{figure}[!ht]
-	\centering \input{fig4-4f}
-	\caption{Drzewo rekursji dla równania rekurencyjnego $T(n)=T(n/2)+T(n/4)+T(n/8)+n$.} \label{fig:4-4f}
-\end{figure}
-
-Zauważmy, że najszybciej maleją argumenty na skrajnie prawej gałęzi.
-Niech $T(1)=1$.
-Ponieważ koszt węzła z~tej gałęzi znajdującego się na $i$\nbhyphen tym poziomie wynosi $n/8^i$, to liść zajmuje poziom $h=\log_8n$.
-Łącznym kosztem na $i$\nbhyphen tym poziomie jest $(7/8)^in$, więc sumując te wartości od korzenia aż do poziomu $h$\nbhyphen tego, otrzymujemy oszacowanie rekurencji od dołu:
+Oczywiście wyrazy rekurencji są nieujemne, więc
 \[
-	T(n) \ge \sum_{i=0}^{\log_8n}\biggl(\frac{7}{8}\biggr)^in = \frac{1-(7/8)^{\log_8n+1}}{1-7/8}\,n = 8n(1-(7/8)n^{\log_8(7/8)}) \ge 8n(1-7/8) = \Omega(n).
+	T(n) = T(n/2)+T(n/4)+T(n/8)+n \ge n = \Omega(n).
 \]
 
-Zbadajmy teraz górne oszacowanie rekurencji $T(n)$ poprzez dokonanie obserwacji, że najwolniej malejącymi węzłami drzewa są te ze skrajnie lewej gałęzi.
-Węzły te wnoszą koszt równy $n/2^i$ na $i$\nbhyphen tym poziomie, więc liść znajduje się na poziomie $H=\lg n$.
-Mamy
+Udowodnimy teraz metodą podstawiania, że $T(n)\le cn$ dla pewnego $c>0$.
+Załóżmy, że $T(k)\le ck$ dla każdego $1\le k<n$.
+Wtedy
 \[
-	T(n) \le \sum_{i=0}^{\lg n}\biggl(\frac{7}{8}\biggr)^in < \sum_{i=0}^\infty\biggl(\frac{7}{8}\biggr)^in = \frac{n}{1-7/8} = O(n),
+	T(n) = T(n/2)+T(n/4)+T(n/8)+n \le cn/2+cn/4+cn/8+n = 7cn/8+n \le cn,
 \]
-co pozwala przypuszczać, że oszacowaniem dokładnym na $T(n)$ jest $\Theta(n)$.
-
-Przeprowadźmy teraz dowód tego wyniku metodą podstawiania.
-Załóżmy, że:
-\begin{gather*}
-	c_1(n/2) \le T(n/2) \le c_2(n/2), \\
-	c_1(n/4) \le T(n/4) \le c_2(n/4), \\
-	c_1(n/8) \le T(n/8) \le c_2(n/8),
-\end{gather*}
-gdzie $c_1$, $c_2>0$ to pewne stałe.
-Mamy zatem
-\[
-	T(n) \ge c_1n/2+c_1n/4+c_1n/8+n = 7c_1n/8+n \ge c_1n,
-\]
-co jest spełnione dla dowolnego $n$, o~ile $c_1\le8$.
-Dowód górnego oszacowania przebiega analogicznie, przy założeniu, że $c_2\ge8$.
-
+co jest spełnione dla dowolnego $n$, o~ile $c\ge8$.
 Jako warunek brzegowy rekurencji przyjmijmy $T(1)=T(2)=\dots=T(7)=1$.
-Aby spełnić przypadek bazowy indukcji dla $n=1$, 2, \dots, 7, musimy przyjąć dodatkowo, że $c_1\le1/7$.
-To kończy dowód, że dokładnym rozwiązaniem rekurencji jest $T(n)=\Theta(n)$.
+Wówczas krokiem bazowym indukcji mogą być przypadki $n=1$, 2, \dots, 7 i~oszacowanie zachodzi w~każdym z~nich dla dowolnego $c\ge1$.
+
+Na podstawie powyższych uzasadnień otrzymujemy $T(n)=\Theta(n)$.
 
 \subproblem %4-4(g)
 Załóżmy dla uproszczenia rachunków, że $T(1)=1$.
