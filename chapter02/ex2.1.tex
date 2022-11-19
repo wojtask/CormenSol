@@ -42,25 +42,31 @@ Pierwszy przypadek oznacza odnalezienie pierwszego wystąpienia $v$ w~tablicy $A
 \end{description}
 
 \exercise %2.1-4
-W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne, które są reprezentowane przez tablice bitów w~kolejności od najmniej do najbardziej znaczącego.
+W~tym problemie rozważać będziemy tylko liczby całkowite nieujemne.
 
 \bigskip
-\noindent\textbf{Dane wejściowe:} $n$\nbhyphen elementowe tablice $A$ i~$B$ zawierające reprezentacje binarne $n$\nbhyphen bitowych liczb całkowitych nieujemnych $a$ i~$b$.\\
-\textbf{Wynik:} $(n+1)$\nbhyphen elementowa tablica $C$ zawierająca reprezentację binarną $(n+1)$\nbhyphen bitowej liczby całkowitej $c$ takiej, że $c=a+b$.
+\noindent\textbf{Dane wejściowe:} Tablice $A[0\twodots n-1]$ i~$B[0\twodots n-1]$ zer i~jedynek stanowiące reprezentacje binarne $n$\nbhyphen bitowych liczb całkowitych nieujemnych $a$ i~$b$, czyli:
+\[
+	a = \sum_{i=0}^{n-1}2^iA[i] \quad\text{i}\quad b = \sum_{i=0}^{n-1}2^iB[i].
+\]
+\textbf{Wynik:} Tablica $C[0\twodots n]$ zer i~jedynek stanowiąca reprezentację binarną $(n+1)$\nbhyphen bitowej liczby całkowitej $c=a+b$, czyli
+\[
+	c = \sum_{i=0}^n2^iC[i].
+\]
 
 \begin{codebox}
 \Procname{$\proc{Binary-Add}(A,B)$}
 \li	$n\gets\attrib{A}{length}$
-\li	\For $i\gets1$ \To $n+1$
-\li		\Do $C[i]\gets0$
-		\End
-\li	\For $i\gets1$ \To $n$ \label{li:binary-add-for-begin}
-\li		\Do $\id{sum}\gets A[i]+B[i]+C[i]$
-\li			$C[i]\gets\id{sum}\bmod2$
-\li			$C[i+1]\gets\lfloor\id{sum}/2\rfloor$
+\li	utwórz tablicę $C[0\twodots n]$
+\li	$\id{carry}\gets0$
+\li	\For $i\gets0$ \To $n-1$ \label{li:binary-add-for-begin}
+\li		\Do $C[i]\gets(A[i]+B[i]+\id{carry})\bmod2$
+\li			$\id{carry}\gets\lfloor(A[i]+B[i]+\id{carry})/2\rfloor$
 		\End \label{li:binary-add-for-end}
+\li	$C[n]\gets\id{carry}$
 \li	\Return $C$
 \end{codebox}
 
-Po utworzeniu tablicy $C$ i~wypełnieniu jej zerami, w~pętli \kw{for} w~wierszach \ref{li:binary-add-for-begin}\nbendash\ref{li:binary-add-for-end} procedura dodaje poszczególne bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego.
-W~rzeczywistości przeprowadzane jest dodawanie modulo 2, a~bit przeniesienia jest zapamiętywany na kolejnej pozycji w~tablicy wynikowej i~uczestniczy w~kolejnej iteracji pętli (zakładając, że obecna iteracja nie jest ostatnią).
+Po utworzeniu tablicy $C$ w~pętli \kw{for} w~wierszach \ref{li:binary-add-for-begin}\nbendash\ref{li:binary-add-for-end} symulowane są kroki zwykłego dodawania pisemnego.
+Dokładniej, bity liczb $a$ i~$b$ w~kolejności od najmniej do najbardziej znaczącego dodawane są modulo 2 wraz z~aktualnym ,,bitem przeniesienia'' i~wynik tego dodawania umieszczany jest na kolejnej pozycji w~tablicy $C$.
+Po zakończeniu działania pętli aktualny bit przeniesienia staje się najbardziej znaczącym bitem liczby $c$.
