@@ -98,24 +98,22 @@ Klucz nowo wstawianego elementu może być bowiem ustawiany na wartość o~1 wi�
 \exercise %6.5-7
 \note{Zmienimy nazwę operacji z~sugerowanej w~Podręczniku \proc{Heap-Delete} na \proc{Max-Heap-Delete}, aby odróżnić ją od analogicznej procedury dla kopca typu min.}
 
-\noindent Przedstawiona poniżej procedura \proc{Max-Heap-Delete} zamienia element $A[i]$ w~$n$\nbhyphen elementowym kopcu $A$ typu max z~jego liściem $A[\attrib{A}{heap-size}]$, po czym dekrementuje \attrib{A}{heap-size}.
-Po tym kroku własność kopca może być naruszona przez węzeł $A[i]$ na dwa sposoby.
-W~pierwszym przypadku może zachodzić $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$ -- przywracamy więc własność kopca za pomocą wywołania \proc{Max-Heapify}.
-W~drugim przypadku może być $A[i]>A[\proc{Parent}(i)]$, więc w~celu odbudowy struktury kopca wykonujemy podobne operacje, jak w~procedurze \proc{Heap-Increase-Key}.
-Ostatni krok procedury to zwrócenie elementu, który początkowo zajmował w~kopcu pozycję $i$.
+\noindent Ideą realizowaną w~przedstawionej poniżej procedurze \proc{Max-Heap-Delete} jest przeniesienie elementu $A[\attrib{A}{heap-size}]$ na pozycję $i$, a~następnie przywrócenie własności kopca typu max.
+Ta ostatnia może być naruszona przez nową wartość $A[i]$ na dwa sposoby.
+Jeżeli $A[i]<A[\proc{Left}(i)]$ lub $A[i]<A[\proc{Right}(i)]$, to wystarczy wywołać \proc{Max-Heapify} po uprzednim zmniejszeniu rozmiaru kopca.
+Z~kolei gdy $A[i]>A[\proc{Parent}(i)]$, to własność kopca przywracamy, wywołując procedurę \proc{Heap-Increase-Key}, a~następnie zmniejszając rozmiar kopca.
 \begin{codebox}
 \Procname{$\proc{Max-Heap-Delete}(A,i)$}
-\li	zamień $A[i]\leftrightarrow A[\attrib{A}{heap-size}]$
-\li	$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
-\li	$\proc{Max-Heapify}(A,i)$ \label{li:max-heap-delete-heapify}
-\li	\While $i>1$ i~$A[\proc{Parent}(i)]<A[i]$ \label{li:max-heap-delete-while-begin}
-\li		\Do zamień $A[i]\leftrightarrow A[\proc{Parent}(i)]$
-\li			$i\gets\proc{Parent}(i)$
-		\End \label{li:max-heap-delete-while-end}
-\li	\Return $A[\attrib{A}{heap-size}+1]$
+\li	\If $A[i]\ge A[\attrib{A}{heap-size}]$
+\li		\Then $A[i]\gets A[\attrib{A}{heap-size}]$
+\li			$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
+\li			$\proc{Max-Heapify}(A,i)$ \label{li:max-heap-delete-heapify}
+\li		\Else $\proc{Heap-Increase-Key}(A,i,A[\attrib{A}{heap-size}])$ \label{li:max-heap-delete-increase-key}
+\li			$\attrib{A}{heap-size}\gets\attrib{A}{heap-size}-1$
+		\End
 \end{codebox}
 
-Zarówno wywołanie z~wiersza~\ref{li:max-heap-delete-heapify}, jak i~pętla \kw{while} w~wierszach \ref{li:max-heap-delete-while-begin}\nbendash\ref{li:max-heap-delete-while-end} zajmuje czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
+Wywołania z~wierszy~\ref{li:max-heap-delete-heapify} i~\ref{li:max-heap-delete-increase-key} zajmują czas $O(\lg n)$, a~więc czasem działania procedury \proc{Max-Heap-Delete} jest również $O(\lg n)$.
 
 \exercise %6.5-8
 W~algorytmie wykorzystamy kolejkę priorytetową typu min jako strukturę pomocniczą.
