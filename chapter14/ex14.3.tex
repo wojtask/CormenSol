@@ -1,14 +1,14 @@
 \subchapter{Drzewa przedziałowe}
 
 \exercise %14.3-1
-Procedura \proc{Interval-Left-Rotate} dla drzew przedziałowych działa identycznie jak procedura \proc{Left-Rotate} dla drzew czerwono-czarnych, z~tą różnicą, że tuż przed zakończeniem działania modyfikuje pola \attrib{x}{max} i~\attrib{y}{max}, gdzie $y$ jest nowym ojcem $x$ po przeprowadzeniu rotacji.
-Modyfikacje te polegają najpierw na aktualizacji \attrib{x}{max} wprost z~definicji pola \id{max}, a~następnie analogicznym zaktualizowaniu \attrib{y}{max}, które po wykonaniu rotacji zależy od \attrib{x}{max}.
+Procedura \proc{Interval-Left-Rotate} dla drzew przedziałowych działa identycznie jak procedura \proc{Left-Rotate}, aktualizując jeszcze przed zakończeniem pola \attribb{x}{p}{max} i~\attrib{x}{max}.
+Po wykonaniu rotacji największy koniec przedziału w~poddrzewie o~korzeniu w~\attrib{x}{p} jest taki sam jak w~poddrzewie o~korzeniu w~węźle $x$ sprzed rotacji.
+Do \attribb{x}{p}{max} zostaje zatem przypisana wartość \attrib{x}{max}, po czym nowa wartość pola \attrib{x}{max} zostaje wyliczona bezpośrednio z~definicji.
 \begin{codebox}
 \Procname{$\proc{Interval-Left-Rotate}(T,x)$}
 \li	$\proc{Left-Rotate}(T,x)$
-\li	$y\gets\attrib{x}{p}$
+\li	$\attribb{x}{p}{max}\gets\attrib{x}{max}$
 \li	$\attrib{x}{max}\gets\max(\attribb{x}{int}{high},\attribb{x}{left}{max},\attribb{x}{right}{max})$
-\li	$\attrib{y}{max}\gets\max(\attribb{y}{int}{high},\attrib{x}{max},\attribb{y}{right}{max})$
 \end{codebox}
 
 \exercise %14.3-2
