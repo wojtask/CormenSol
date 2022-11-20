@@ -71,56 +71,32 @@ Poniższy pseudokod stanowi implementację tej operacji.
 \end{codebox}
 
 \exercise %10.3-5
-Ogólna idea procedury \proc{Compactify-List} wygląda następująco.
-Podczas przechodzenia po liście $L$ wyznaczane są te elementy, które zajmują pozycje na prawo od $m$.
-Wszystkie one muszą być zamienione z~elementami listy $F$ znajdującymi się na pozycjach do $m$ włącznie.
-Aby zachować czas $\Theta(m)$, procedura nie może przechodzić po liście $F$, która składa się z~$n-m$ elementów.
-Zamiast tego będzie ona przeszukiwać liniowo tablice implementujące listy i~wyznaczać rekordy należące do listy wolnych pozycji.
-Jednym ze sposobów rozróżniania elementów list $L$ i~$F$ jest wykorzystanie wskaźników \id{prev}.
-Na początku działania procedury do pól \id{prev} wszystkich elementów listy $L$ zostanie wpisana specjalna wartość, nie będąca poprawnym indeksem tablicy, np.\ $-1$.
-Tuż przed końcem procedury wskaźnikom \id{prev} zostaną nadane właściwe wartości, ale wpierw pola te posłużą do identyfikacji elementów listy.
+Idea procedury \proc{Compactify-List} polega na przechodzeniu po liście $L$ i~przenoszeniu kolejnych jej elementów na początkowe pozycje tablic \id{key}, \id{next} i~\id{prev}.
 \begin{codebox}
 \Procname{$\proc{Compactify-List}(L,F)$}
-\li	wpisz $-1$ do pól \id{prev} elementów listy $L$ i~wyznacz liczbę jej elementów $m$ \label{li:compactify-list-preprocess}
-\li $x\gets L$
-\li	$x'\gets\const{nil}$
-\li	$y\gets1$
-\li	\While $x\ne\const{nil}$ \label{li:compactify-list-while-begin}
-\li		\Do \If $x\le m$
-\li				\Then $x'\gets x$
-\li					$x\gets\id{next}[x]$
-\li				\Else \While $\id{prev}[y]=-1$ \label{li:compactify-list-while2-begin}
-\li						\Do $y\gets y+1$
-						\End \label{li:compactify-list-while2-end}
-\li					zamień wartości pól \id{key}, \id{next} i~\id{prev} elementu $x$ z~polami elementu $y$ \label{li:compactify-list-swap}
-\li					\If $\id{next}[x]\ne\const{nil}$
-\li						\Then $\id{prev}[\id{next}[x]]\gets x$ \label{li:compactify-list-update-prev-next}
-						\End
-\li					\If $\id{prev}[x]\ne\const{nil}$
-\li						\Then $\id{next}[\id{prev}[x]]\gets x$ \label{li:compactify-list-update-next-prev}
-\li						\Else $F\gets x$ \label{li:compactify-free-list-head-update}
-						\End
-\li					\If $x'\ne\const{nil}$
-\li						\Then $\id{next}[x']\gets y$ \label{li:compactify-list-update-predecessor-next}
-\li						\Else $L\gets y$ \label{li:compactify-list-head-update}
-						\End
-\li					$x'\gets y$
-\li					$x\gets\id{next}[y]$
+\li	$k\gets1$
+\li	$l\gets L$
+\li	\While $l\ne\const{nil}$ \label{li:compactify-list-while-begin}
+\li		\Do zamień elementy na pozycjach $k$ i~$l$ w~tablicach \id{key}, \id{next} i~\id{prev}
+\li			\If $F=k$
+\li				\Then $F\gets l$
 				\End
+\li			$l\gets\id{next}[k]$
+\li			$\id{next}[k]\gets k+1$
+\li			$\id{prev}[k]\gets k-1$
+\li			$k\gets k+1$
 		\End \label{li:compactify-list-while-end}
-\li	przywróć poprawne wartości w~polach \id{prev} elementów listy $L$ \label{li:compactify-list-postprocess}
+\li	$\id{prev}[1]\gets\id{next}[k-1]\gets\const{nil}$
+\li	$L\gets1$
 \end{codebox}
 
-Procedura przechodzi przez listę $L$ trzy razy.
-Najpierw w~wierszu \ref{li:compactify-list-preprocess} tablice przechowujące listy $L$ i~$F$ są przygotowywane do właściwego przetwarzania poprzez ustawienie pól \id{prev} wszystkich elementów listy $L$ na $-1$.
-W~tym samym kroku wyznaczane jest $m$ -- rozmiar listy $L$.
+W~procedurze utrzymywane są kolejny indeks $k$ tablic \id{key}, \id{next} i~\id{prev} oraz indeks $l$ aktualnego elementu listy $L$.
+Przenoszenie elementów listy $L$ polega na zamianie ze sobą elementów na pozycjach $k$ i~$l$, z~jednoczesną aktualizacją wskaźników \id{prev} i~\id{next} ich poprzedników i~następników.
+Ponadto, należy pamiętać o~ewentualnym przestawieniu głowy listy wolnych pozycji w~celu utrzymania jej poprawności, a~także zaktualizowaniu poprzednika i~następnika przeniesionego elementu listy $L$.
+Po wyczerpaniu elementów z~listy $L$ poprzednik jej głowy i~następnik jej ogona zostają ustawione na \const{nil}, a~zmienna $L$ -- na pierwszą pozycję tablic.
 
-Kolejne przejście po liście to właściwe kompaktowanie.
-Jeśli dany element $x$ listy $L$ zajmuje w~tablicach pozycję wyższą niż $m$, to zostaje zamieniony z~elementem $y$ listy $F$ znajdującym się najbardziej na lewo.
-Pętla \kw{while} w~wierszach \ref{li:compactify-list-while2-begin}\nbendash\ref{li:compactify-list-while2-end} wyznacza $y$ poprzez liniowe przeglądanie tablicy \id{prev}, po czym w~wierszu \ref{li:compactify-list-swap} elementy $x$ i~$y$ zamieniają swoje pozycje.
-Należy jeszcze uaktualnić pola \id{prev} i~\id{next} elementów sąsiednich na liście $F$ (wiersze \ref{li:compactify-list-update-prev-next} i~\ref{li:compactify-list-update-next-prev}), pole \id{next} poprzednika $x$ na liście $L$ (wiersz \ref{li:compactify-list-update-predecessor-next}), jak również wskaźniki $L$ i~$F$, w~przypadku gdy wśród zamienianych elementów była głowa którejś z~list (wiersze \ref{li:compactify-free-list-head-update} oraz \ref{li:compactify-list-head-update}).
-
-Ostatnim krokiem procedury jest ponowne przejście przez listę $L$ w~wierszu \ref{li:compactify-list-postprocess} i~przywrócenie odpowiednich wartości w~polach \id{prev} wszystkich jej elementów.
-
-Po wykonaniu procedury elementy z~listy wolnych pozycji nie zawsze będą umieszczone w~tablicach według ich kolejności na tej liście.
-Z~tego powodu na liście przetworzonej procedurą \proc{Compactify-List} nie możemy korzystać z~procedur \proc{Compact-List-Allocate-Object} i~\proc{Compact-List-Free-Object} z~\refExercise{10.3-4}, które zakładają, że reprezentacja tablicowa listy wolnych pozycji stanowi stos.
+Poprawność procedury można uzasadnić na podstawie niezmiennika pętli \kw{while}:
+\begin{quote}
+Przed każdą iteracją pętli \kw{while} w~wierszach \ref{li:compactify-list-while-begin}\nbendash\ref{li:compactify-list-while-end} pierwsze $k-1$ pozycji tablic \id{key}, \id{next} i~\id{prev} zawiera kolejne elementy listy $L$, a~zmienna $l$ zawiera indeks $k$\nbhyphen tego elementu listy $L$ (albo \const{nil} jeśli $k>m)$.
+Ponadto, lista wolnych pozycji z~głową na pozycji $F$ jest poprawną listą dwukierunkową o~długości $n-m$.
+\end{quote}
