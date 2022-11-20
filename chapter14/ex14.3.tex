@@ -72,7 +72,7 @@ Drzewo $T$ nie jest modyfikowane w~trakcie działania algorytmu.
 \li	\If $\attrib{x}{left}\ne\attrib{T}{nil}$ i~$\attribb{x}{left}{max}\ge\attrib{i}{low}$ \label{li:interval-search-all-examine-left}
 \li		\Then $\proc{Interval-Search-All}(T,\attrib{x}{left},i)$
 		\End
-\li \If $x\ne\attrib{T}{nil}$ oraz $i$ zachodzi na \attrib{x}{int} \label{li:interval-search-all-overlap}
+\li \If $x\ne\attrib{T}{nil}$ oraz $i$ zachodzi na \attrib{x}{int}
 \li		\Then wypisz \attrib{x}{int}
 		\End
 \li	\If $\attrib{x}{right}\ne\attrib{T}{nil}$ i~$\attribb{x}{right}{max}\ge\attrib{i}{low}$ i~$\attribb{x}{int}{low}\le\attrib{i}{high}$ \label{li:interval-search-all-examine-right}
@@ -81,20 +81,20 @@ Drzewo $T$ nie jest modyfikowane w~trakcie działania algorytmu.
 \end{codebox}
 
 Zastanówmy się nad testami przeprowadzanymi, zanim wykonane zostaną wywołania rekurencyjne.
-W~linii \ref{li:interval-search-all-examine-left}, gdyby $\attribb{x}{left}{max}<\attrib{i}{low}$, to każdy przedział z~lewego poddrzewa $x$ leżałby na lewo od $i$, więc wywołanie byłoby zbędne.
-Podobnie w~wierszu \ref{li:interval-search-all-examine-right} -- gdyby $\attribb{x}{right}{max}<\attrib{i}{low}$, to wszystkie przedziały z~prawego poddrzewa $x$ leżałyby na lewo od $i$.
-Jeśli ponadto zachodziłoby $\attribb{x}{int}{low}>\attrib{i}{high}$, to zarówno \attrib{x}{int}, jak i~każdy przedział z~prawego poddrzewa $x$ znajdowałby się na prawo od $i$, dlatego także wtedy do wywołania rekurencyjnego nie dochodzi.
+W~linii \ref{li:interval-search-all-examine-left}, gdy $\attribb{x}{left}{max}<\attrib{i}{low}$, to każdy przedział z~lewego poddrzewa $x$ leży na lewo od $i$, więc wyszukiwanie w~tym poddrzewie można pominąć.
+Podobnie w~wierszu \ref{li:interval-search-all-examine-right} -- jeśli $\attribb{x}{right}{max}<\attrib{i}{low}$, to wszystkie przedziały z~prawego poddrzewa $x$ leżą na lewo od $i$.
+Jeśli ponadto zachodzi $\attribb{x}{int}{low}>\attrib{i}{high}$, to zarówno \attrib{x}{int}, jak i~każdy przedział z~prawego poddrzewa $x$ znajduje się na prawo od $i$, dlatego także wtedy wyszukiwanie w~poddrzewie jest zbędne.
 
 Załóżmy teraz, że poddrzewo o~korzeniu w~$x$ nie zawiera przedziałów zachodzących na $i$.
 Jeśli $i$ leży na lewo od \attrib{x}{int}, to procedura może zostać wywołana rekurencyjnie tylko dla lewego poddrzewa $x$.
-Jeśli z~kolei $i$ leży na prawo od \attrib{x}{int}, to procedura nie zostanie wywołana rekurencyjne dla lewego poddrzewa.
+Jeśli z~kolei $i$ leży na prawo od \attrib{x}{int}, to procedura nie zostanie wywołana rekurencyjnie dla lewego poddrzewa.
 Gdyby tak było, to musiałoby zachodzić $\attribb{x}{left}{max}\ge\attrib{i}{low}$, czyli w~lewym poddrzewie $x$ znajdowałby się przedział $i'$, dla którego $\attrib{i'}{high}=\attribb{x}{left}{max}\ge\attrib{i}{low}$, a~zatem przedział $i'$ zachodziłby na $i$, co przeczyłoby założeniu.
 Wynika stąd, że jeśli w~poddrzewie o~korzeniu w~$x$ nie ma przedziału zachodzącego na $i$, to procedura na każdym poziomie wykonuje co najwyżej jedno zejście rekurencyjne, schodząc najdalej do ojca potomnego liścia.
 
-Każdy wewnętrzny węzeł drzewa $T$ testowany jest w~algorytmie co najwyżej dwa razy -- raz w~linii \ref{li:interval-search-all-examine-left} albo \ref{li:interval-search-all-examine-right} i~raz w~linii \ref{li:interval-search-all-overlap}.
-Każdy taki test zajmuje czas stały, dlatego czas działania algorytmu nie przekracza $O(n)$.
+Algorytm wywołany początkowo dla korzenia odwiedza węzły, poruszając się zawsze w~kierunku liści, dlatego żaden węzeł nie zostanie odwiedzony powtórnie.
+Każde wywołanie rekurencyjne zajmuje czas stały, a~więc czas działania algorytmu nie przekroczy $O(n)$.
 Z~drugiej strony procedura dociera do każdego węzła z~przedziałem zachodzącym na $i$, po czym może zejść rekurencyjnie od niego aż do ojca jednego z~jego potomnych liści (na podstawie poprzedniego paragrafu).
-Dlatego czas działania nie może też przekroczyć $O(k\lg n)$, gdyż wysokość drzewa $T$ wynosi $O(\lg n)$, a~liczba przedziałów zachodzących na $i$ w~$T$ wynosi $k$.
+Dlatego czas działania można też ograniczyć przez $O(k\lg n)$, gdyż wysokość drzewa $T$ wynosi $O(\lg n)$, a~liczba przedziałów zachodzących na $i$ w~$T$ wynosi $k$.
 Łącząc te ograniczenia, dostajemy, że algorytm działa w~czasie $O(\min(n,k\lg n))$.
 
 \exercise %14.3-5
