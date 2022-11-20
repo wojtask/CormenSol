@@ -89,10 +89,11 @@ Przed dodaniem nowego elementu do kolejki FIFO ustawimy jego klucz na aktualną 
 Z~kolei usuwanie elementów sprowadza się do zwykłego wywołania procedury \proc{Heap-Extract-Min}.
 Taka implementacja operacji kolejki FIFO zapewnia, że w~danym momencie w~strukturze danych nie ma dwóch różnych elementów z~tym samym kluczem i~elementy pobierane są w~odpowiedniej kolejności.
 
-Realizacja stosu jest podobna, ale używamy do tego celu kolejki priorytetowej typu max.
-Podczas wstawiania elementów na stos korzystamy z~procedury \proc{Max-Heap-Insert} i~inkrementujemy jego pole \id{rank} (zainicjalizowane na 1 w~momencie utworzenia stosu).
-Usuwanie polega na odnalezieniu i~pobraniu elementu z~największym kluczem przy pomocy \proc{Heap-Extract-Max}.
-Dzięki temu elementy pobierane są w~kolejności odwrotnej do tej, w~której były wstawiane.
+Można zaproponować analogiczną realizację stosu na kolejce priorytetowej typu max.
+Podczas wstawiania elementów na stos wykorzystywana byłaby procedura \proc{Max-Heap-Insert} i~inkrementowane pole \id{rank} (zainicjalizowane na 1 w~momencie utworzenia stosu).
+Usuwanie polegałoby na odnalezieniu i~pobraniu elementu z~największym kluczem przy pomocy \proc{Heap-Extract-Max}.
+W~rzeczywistości jednak utrzymywanie pola \id{rank} jest zbędne.
+Klucz nowo wstawianego elementu może być bowiem ustawiany na wartość o~1 większą od wyniku operacji \proc{Heap-Maximum} albo na 1 w~przypadku wstawiania do pustego stosu.
 
 \exercise %6.5-7
 \note{Zmienimy nazwę operacji z~sugerowanej w~Podręczniku \proc{Heap-Delete} na \proc{Max-Heap-Delete}, aby odróżnić ją od analogicznej procedury dla kopca typu min.}
