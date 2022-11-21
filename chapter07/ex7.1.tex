@@ -16,10 +16,11 @@
 \note{Poprawną wartością dla\/ $q$ z~treści zadania powinno być\/ $\lfloor(p+r)/2\rfloor$.}
 
 \noindent Gdy wszystkie elementy $A[p\twodots r]$ mają taką samą wartość, to warunek z~wiersza 4 procedury \proc{Partition} jest spełniony w~każdej iteracji pętli \kw{for}.
-Oznacza to, że po wykonaniu pętli zachodzi $i=r-1$ i~procedura zwraca $q=r$.
+Oznacza to, że po wykonaniu pętli zachodzi $i=r-1$ i~procedura zwraca $q=i+1=r$.
 
-Odpowiedniej modyfikacji procedury dokonujemy poprzez dodanie do ciała pętli \kw{for} zliczania elementów w~podtablicy $A[p\twodots r-1]$ równych elementowi rozdzielającemu $A[r]$.
-Jeśli po zakończeniu wykonywania pętli naliczono ich $r-p$, oznacza to, że wszystkie elementy w~$A[p\twodots r]$ są jednakowe i~należy zwrócić $q=\lfloor(p+r)/2\rfloor$.
+Procedurę modyfikujemy przez wprowadzenie do ciała pętli \kw{for} zliczania elementów równych elementowi rozdzielającemu $x$.
+Niech $d$ będzie liczbą elementów równych $x$ w~podtablicy $A[p\twodots r]$.
+Wynikem zwracanym przez procedurę będzie wówczas $q=i+1-\lfloor d/2\rfloor$, co dla podtablicy $A[p\twodots r]$ o~jednakowych elementach da $q=r-\lfloor(r-p+1)/2\rfloor=\lfloor(p+r)/2\rfloor$.
 
 \exercise %7.1-3
 Podczas przetwarzania podtablicy $A[p\twodots r]$ o~rozmiarze $n=r-p+1$ wykonywanych jest $n-1$ iteracji pętli \kw{for}, a~każda z~nich przeprowadza operacje zajmujące czas stały.
