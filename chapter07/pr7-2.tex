@@ -23,7 +23,7 @@ Biorąc wartości oczekiwane skrajnych wyrażeń, otrzymujemy wzór (7.5) na ocz
 	\E(T(n)) &= \sum_{q=1}^n\E\bigl(X_q(T(q-1)+T(n-q)+\Theta(n))\bigr) \\
 	&= \sum_{q=1}^n\E(X_q)\bigl(\E(T(q-1))+\E(T(n-q))+\E(\Theta(n))\bigr) \\
 	&= \sum_{q=1}^n\frac{1}{n}\bigl(2\E(T(q-1)))+\Theta(n)\bigr) \\
-	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\frac{2}{n}\bigl(\E(T(0))+\E(T(1))\bigr)+\frac{1}{n}\sum_{q=1}^n\Theta(n) \\
+	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\frac{2(\E(T(0))+\E(T(1)))}{n}+\frac{1}{n}\sum_{q=1}^n\Theta(n) \\
 	&= \frac{2}{n}\sum_{q=2}^{n-1}\E(T(q))+\Theta(n).
 \end{align*}
 Skorzystaliśmy z~obserwacji, że składnik $2(\E(T(0))+\E(T(1)))/n$ jest ograniczony przez stałą i~może być wchłonięty przez $\Theta(n)$.
