@@ -81,17 +81,19 @@ Teoretycznie parametr $k$ powinien być rzędu co najwyżej $O(\lg n)$ -- wtedy 
 W~praktyce jednak $k$ powinno być dobrane eksperymentalnie tak, aby sortowanie przez wstawianie tablicy o~długości $k$ było wykonywane szybciej od sortowania takiej tablicy algorytmem quicksort.
 
 \exercise %7.4-6
-Niech $P$ będzie szukanym prawdopodobieństwem zależnym od parametru $0<\alpha<1$.
-Zauważmy, że funkcja ta spełnia własność $P(\alpha)=P(1-\alpha)$, w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$.
-Niech $i<j<k$ będą indeksami elementów losowo wybranych z~$A$.
-Podział $\alpha$ do $(1-\alpha)$ powstaje w~najgorszym przypadku wtedy i~tylko wtedy, gdy $\alpha n\le j\le(1-\alpha)n$.
-Rozważmy możliwe przypadki wyboru $i$ oraz $k$ i~obliczmy prawdopodobieństwa ich zajścia:
+Znajdziemy funkcję $Q(\alpha)$ przybliżającą prawdopodobieństwo otrzymania w~najlepszym wypadku podziału $\alpha$ do $(1-\alpha)$.
+Zauważmy, że $Q(\alpha)=Q(1-\alpha)$ -- w~rozwiązaniu będziemy więc zakładać, że $\alpha\le1/2$.
+Dla uproszczenia przyjmiemy, że wybrane losowo elementy mogą się powtarzać.
+
+Podział $\alpha$ do $(1-\alpha)$ lub gorszy powstaje, kiedy mediana $m$ wybranych elementów jest wśród $\lfloor\alpha n\rfloor$ najmniejszych albo $\lfloor\alpha n\rfloor$ największych elementów tablicy o~rozmiarze $n$.
+Przypadki te są symetryczne -- rozważmy więc pierwszy z~nich.
+Niech $a$ będzie $\lfloor\alpha n\rfloor$\nbhyphen tym elementem tablicy.
+Szanse, że dowolny wybrany losowo element tablicy nie przekracza $a$, wynoszą w~przybliżeniu $\alpha$.
+Natomiast zdarzenie, że $m\le a$, jest identyczne z~tym, że co najmniej dwa wybrane elementy nie przekraczają $a$.
+Ze wzoru (C.33) prawdopodobieństwo, że mniejsze lub równe $a$ są dokładnie dwa elementy, przybliża wartość $3\alpha^2(1-\alpha)$, a~że dokładnie trzy -- $\alpha^3$.
+Zatem $\Pr(m\le a)=Q(\alpha)\approx3\alpha^2(1-\alpha)+\alpha^3=\alpha^2(3-2\alpha)$.
+
+Łącząc wyniki z~obu przypadków, otrzymujemy funkcję przybliżającą szukane prawdopodobieństwo:
 \[
-	\begin{array}{rcrclcl}
-	p_{00} &=& \Pr\bigl(i<\alpha n &\text{i}& (1-\alpha)n<k\bigr) &\approx& 6\alpha^2(1-2\alpha), \\[1mm]
-	p_{01} &=& \Pr\bigl(i<\alpha n &\text{i}& \alpha n\le k\le(1-\alpha)n\bigr) &\approx& 3\alpha(1-2\alpha)^2, \\[1mm]
-	p_{10} &=& \Pr\bigl(\alpha n\le i\le(1-\alpha)n &\text{i}& (1-\alpha)n<k\bigr) &\approx& 3\alpha(1-2\alpha)^2, \\[1mm]
-	p_{11} &=& \Pr\bigl(\alpha n\le i\le(1-\alpha)n &\text{i}& \alpha n\le k\le(1-\alpha)n\bigr) &\approx& (1-2\alpha)^3.
-	\end{array}
+    P(\alpha) \approx 1-Q(\alpha) \approx 1-2\alpha^2(3-2\alpha).
 \]
-Dostajemy w~końcu $P(\alpha)=p_{00}+p_{01}+p_{10}+p_{11}\approx4\alpha^3-6\alpha^2+1$.
