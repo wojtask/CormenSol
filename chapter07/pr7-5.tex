@@ -29,26 +29,10 @@ więc granica stosunku wynosi
 A~zatem niezależnie od parzystości $n$ szanse na to, że mediana tablicy $A[1\twodots n]$ zostanie wybrana na element rozdzielający, są większe o~50\% w~metodzie mediany trzech wartości dla dostatecznie dużych $n$.
 
 \subproblem %7-5(c)
-W~tradycyjnym podejściu szanse uzyskania dobrego podziału zmierzają do $1/3$ wraz ze wzrostem $n$.
-W~metodzie mediany trzech wartości stanowią one sumę
-\[
-	\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-2\sum_{i=1}^{n/3}\frac{(i-1)(n-i)}{\binom{n}{3}} = 1-\frac{12}{n(n-1)(n-2)}\sum_{i=1}^{n/3}(i-1)(n-i).
-\]
-Sumę w~ostatnim wyrażeniu przybliżamy za pomocą całki $\int_1^{n/3}(x-1)(n-x)\,dx$, podstawiając $t=x-1$:
-\begin{align*}
-    \int_0^{n/3-1}t(n-t-1)\,dt &= \biggl[\frac{(n-1)t^2}{2}-\frac{t^3}{3}\biggr]_0^{n/3-1} \\[1mm]
-	&= \frac{(n-1)(n/3-1)^2}{2}-\frac{(n/3-1)^3}{3} \\[1mm]
-	&= \frac{(n-1)(n-3)^2}{18}-\frac{(n-3)^3}{81}.
-\end{align*}
-Wracając do oszacowania prawdopodobieństwa uzyskania dobrego podziału, otrzymujemy
-\[
-    \sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i \approx 1-\frac{2(n-3)^2}{3n(n-2)}+\frac{4(n-3)^3}{27n(n-1)(n-2)}.
-\]
-
-Dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego szanse na utworzenie dobrego podziału wzrastają o~czynnik
-\[
-	\lim_{n\to\infty}\frac{\sum_{i=\lceil n/3\rceil}^{\lfloor 2n/3\rfloor}p_i}{1/3} \approx \frac{1-2/3+4/27}{1/3} = \frac{13}{9}.
-\]
+Zgodnie z~\refExercise{7.2-6} dla $\alpha=1/3$, w~tradycyjnym podejściu szanse uzyskania dobrego podziału wynoszą w~przybliżeniu $1-2\alpha=1/3$.
+W~podejściu z~medianą trzech wartości, zamiast badać sumę $\sum_{i=n/3}^{2n/3}p_i$ i~przybliżać ją całką, skorzystamy z~wyniku otrzymanego w~\refExercise{7.4-6}.
+Według niego dobry podział uzyskamy z~prawdopodobieństwem około $1-2\alpha^2(3-2\alpha)=13/27$.
+A~zatem, dzięki zastosowaniu nowej strategii wyboru elementu rozdzielającego, szanse na utworzenie dobrego podziału wzrastają o~czynnik $(13/27)/(1/3)=13/9$.
 
 \subproblem %7-5(d)
 Przypadek optymistyczny algorytmu quicksort jest identyczny niezależnie od zastosowanego podejścia podziału tablicy.
