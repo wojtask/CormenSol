@@ -58,12 +58,13 @@ Potencjał kopca maleje więc o~$k(\lfloor\lg n_{i-1}\rfloor+1)$ i~zamortyzowany
 \]
 
 \exercise %17.3-4
-Jeśli skorzystamy z~funkcji $\Phi$ przyjmującej wysokość stosu, to $\Phi(D_0)=s_0$ i~$\Phi(D_n)=s_n$.
-Na podstawie równania (17.3) oraz oszacowania na zamortyzowany koszt $n$ operacji na początkowo pustym stosie dostajemy, że łączny koszt zamortyzowany ciągu $n$ operacji na stosie o~początkowo $s_0$ elementach wynosi
+Podobnie jak w~analizie w~Podręczniku, definiujemy funkcję $\Phi$ dla stosu jako jego wysokość.
+Mamy tu $\Phi(D_0)=s_0$ i~$\Phi(D_n)=s_n$.
+Na podstawie równania (17.3) oraz oszacowania na łączny koszt $n$ operacji na początkowo pustym stosie dostajemy, że sumaryczny koszt zamortyzowany ciągu $n$ operacji na stosie o~początkowo $s_0$ elementach wynosi
 \[
 	\sum_{i=1}^n\widehat{c_i} = \sum_{i=1}^nc_i+\Phi(D_n)-\Phi(D_0) = O(n)+s_n-s_0.
 \]
-Jeśli $s_n\ge s_0$, to wyrażenie powyższe stanowi górne ograniczenie łącznego kosztu faktycznego.
+Przy założeniu, że $s_n\ge s_0$, powyższe wyrażenie stanowi górne ograniczenie łącznego kosztu faktycznego.
 
 \exercise %17.3-5
 Jeśli $n=\Omega(b)$, to $b=O(n)$.
