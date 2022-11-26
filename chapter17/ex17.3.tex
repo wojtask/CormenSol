@@ -1,14 +1,14 @@
 \subchapter{Metoda potencjału}
 
 \exercise %17.3-1
-By zachować takie same koszty zamortyzowane operacji, musimy zapewnić, że przyrosty potencjału względem funkcji $\Phi'$ są identyczne jak przyrosty potencjału względem $\Phi$.
-A~zatem dla każdego $i=1$, 2, \dots, $n$ musi zachodzić
-\[
-	\Phi'(D_i)-\Phi'(D_{i-1}) = \Phi(D_i)-\Phi(D_{i-1}).
-\]
-Stąd mamy $\Phi'(D_1)-\Phi'(D_0)=\Phi(D_1)-\Phi(D_0)$, czyli $\Phi'(D_1)=\Phi(D_1)-\Phi(D_0)$.
-Następnie $\Phi'(D_2)=\Phi(D_2)-\Phi(D_1)+\Phi'(D_1)$ i~wstawiając uprzednio wyznaczone $\Phi'(D_1)$, dostajemy $\Phi'(D_2)=\Phi(D_2)-\Phi(D_0)$.
-Postępując w~ten sposób dla kolejnych $D_i$, konstruujemy funkcję $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$, gdzie $i=0$, 1, \dots, $n$.
+Dla każdego $i\ge0$ definiujemy potencjał $\Phi'(D_i)=\Phi(D_i)-\Phi(D_0)$.
+Wtedy $\Phi'(D_i)\ge0$, $\Phi'(D_0)=\Phi(D_0)-\Phi(D_0)=0$, a~koszt zamortyzowany względem $\Phi'$ wynosi:
+\begin{align*}
+	\widehat{c_i}' &= c_i+\Phi'(D_i)-\Phi'(D_{i-1}) \\
+	&= c_i+(\Phi(D_i)-\Phi(D_0))-(\Phi(D_{i-1})-\Phi(D_0)) \\
+	&= c_i+\Phi(D_i)-\Phi(D_{i-1}) \\
+	&= \widehat{c_i}.
+\end{align*}
 
 \exercise %17.3-2
 W~naszej analizie skorzystamy z~następującej funkcji potencjału:
