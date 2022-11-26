@@ -3,7 +3,7 @@
 \subproblem %17-1(a)
 Poniższa procedura oblicza kolejne wartości funkcji $\mathrm{rev}_k$ i~zamienia miejscami elementy wejściowej tablicy, o~ile nie zostały one zamienione już wcześniej.
 \begin{codebox}
-\Procname{$\proc{Bit-Reversal}(A)$}
+\Procname{$\proc{Bit-Reversal-Permutation}(A)$}
 \li	$n\gets\attrib{A}{length}$
 \li	$k\gets\lg n$
 \li	\For $i\gets1$ \To $n-2$
@@ -18,15 +18,15 @@ Nietrudno zauważyć, że czas działania tej procedury ograniczony jest przez $
 
 \subproblem %17-1(b)
 Kolejna wartość licznika powstaje w~wyniku zinkrementowania bieżącej wartości, ale na odwróconych bitach, czyli przy potraktowaniu skrajnie lewego bitu jako najmniej znaczącego, a~skrajnie prawego -- jako najbardziej znaczącego.
-Zaimplementujemy procedurę \proc{Increment} z~podrozdziału 17.1 przy pomocy operacji bitowych, a~następnie zmodyfikujemy ją, aby działała dla odwróconej kolejności bitów.
+Opiszemy implementację procedury \proc{Increment} z~podrozdziału 17.1 przy pomocy operacji bitowych, a~następnie dostosujemy ją do działania na liczniku z~odwróconymi bitami.
 
-Pętla \kw{while} w~tej procedurze wyszukuje w~liczniku zero umiejscowione najbardziej na prawo oraz zeruje wszystkie mniej znaczące jedynki.
-Można zasymulować działanie tej pętli przez utrzymywanie tzw.\ \textbf{maski bitowej} $m$ -- wartości początkowo równej 1, która, przesuwana bitowo w~lewo w~kolejnych iteracjach, posłuży do szybkiego odczytu danego bitu licznika i~jego modyfikacji.
-W~$i$\nbhyphen tej iteracji, gdzie $i=0$, 1, \dots, $k-1$, maska będzie mieć wartość $m=2^i$ otrzymaną przez przesunięcie jedynki w~lewo o~$i$.
-Aby pobrać $i$\nbhyphen ty najmniej znaczący bit licznika, należy wykonać operację bitową AND między licznikiem i~aktualną maską.
-Podobnie, aby wyzerować ten bit, należy wykonać bitowe XOR.
-Po odnalezieniu szukanego zera, jego zamiana na jedynkę realizowana jest za pomocą bitowego OR.
-Przystosowanie opisanych kroków do działania na odwróconych bitach wymaga zastosowania maski początkowo równej $2^{k-1}$, a~następnie przesuwania jej bitowo w~prawo.
+W~pętli \kw{while} procedury \proc{Increment} wszystkie mniej znaczące jedynki od najmniej znaczącego zera są zamieniane na zera.
+Można zasymulować te czynności przez utrzymywanie tzw.\ \textbf{maski bitowej} służącej do szybkiego odczytu danego bitu licznika i~jego modyfikacji.
+W~$i$\nbhyphen tej iteracji, gdzie $i=0$, 1, \dots, $k-1$, maska będzie mieć wartość $2^i$ otrzymaną przez wykonywanie operacji przesunięcia bitowego w~lewo na początkowej wartości $2^0=1$.
+Aby odczytać $i$\nbhyphen ty najmniej znaczący bit licznika, należy wykonać operację bitową AND na liczniku i~aktualnej masce.
+Podobnie, aby wyzerować ten bit, należy wykonać bitowe XOR\@.
+Zamiana znalezionego zera na jedynkę realizowana jest za pomocą bitowego OR\@.
+Przystosowanie opisanych kroków do działania na odwrotnej kolejności bitów wymaga zastosowania maski zainicjalizowanej na $2^{k-1}$ i~przesuwania jej bitowo w~prawo.
 
 W~pseudokodzie poniżej \func{SHL} oznacza operację przesunięcia bitowego w~lewo, a~\func{SHR} -- operację przesunięcia bitowego w~prawo.
 \begin{codebox}
@@ -38,9 +38,9 @@ W~pseudokodzie poniżej \func{SHL} oznacza operację przesunięcia bitowego w~le
 		\End
 \li	\Return $a\func{OR}m$
 \end{codebox}
-W~celu wykonania permutacji odwracającej bity utrzymujemy dwa $k$\nbhyphen bitowe liczniki binarne -- zwykły oraz z~odwróconymi bitami -- i~zamieniamy elementy w~tablicy $A$ znajdujące się na indeksach równych tym licznikom, upewniając się, że zamiany te nie powtarzają się.
+W~celu wyznaczenia permutacji odwracającej bity utrzymujemy dwa $k$\nbhyphen bitowe liczniki binarne -- zwykły oraz z~odwróconymi bitami -- i~zamieniamy elementy w~tablicy $A$ znajdujące się na indeksach równych tym licznikom, upewniając się, że zamiany te nie powtarzają się.
 \begin{codebox}
-\Procname{$\proc{Bit-Reversal}'(A)$}
+\Procname{$\proc{Bit-Reversal-Permutation}'(A)$}
 \li	$n\gets\attrib{A}{length}$
 \li	$k\gets\lg n$
 \li	$j\gets0$
@@ -53,9 +53,9 @@ W~celu wykonania permutacji odwracającej bity utrzymujemy dwa $k$\nbhyphen bito
 \end{codebox}
 
 Procedura \proc{Bit-Reversed-Increment} działa w~tym samym czasie co \proc{Increment}, na której jest oparta, zatem $n$ kolejnych jej wywołań wymaga czasu $O(n)$.
-Jest to też czas, jaki potrzebuje procedura $\proc{Bit-Reversal}'$ wywołana na tablicy $A[0\twodots n-1]$.
+Jest to też czas, jaki potrzebuje procedura $\proc{Bit-Reversal-Permutation}'$ wywołana na tablicy $A[0\twodots n-1]$.
 
 \subproblem %17-1(c)
 Przy takim założeniu inicjalizacja maski w~procedurze \proc{Bit-Reversed-Increment} wymaga czasu $\Theta(k)$.
 Sprawia to, że $n$ kolejnych wywołań tej procedury zajmuje czas $O(nk)$.
-Bez przygotowania maski nie jesteśmy jednak w~stanie przeglądać bitów w~kolejności od lewej do prawej i~wykonanie permutacji odwracającej bity w~czasie $O(n)$ jest w~tym przypadku niemożliwe.
+Bez przygotowania maski nie jesteśmy jednak w~stanie przeglądać bitów w~kolejności od lewej do prawej i~wyznaczenie permutacji odwracającej bity w~czasie $O(n)$ jest w~tym przypadku niemożliwe.
