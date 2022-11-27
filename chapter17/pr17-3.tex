@@ -3,16 +3,16 @@
 \subproblem %17-3(a)
 Węzeł $x$ jest $1/2$\nbhyphen zrównoważony, gdy klucz w~tym węźle stanowi medianę zbioru kluczy znajdujących się w~poddrzewie o~korzeniu w~$x$.
 W~lewym poddrzewie $x$ znajdują się wtedy klucze na lewo od mediany, a~w~prawym poddrzewie -- klucze na prawo od mediany.
-Aby zrównoważyć całe poddrzewo o~korzeniu w~$x$, należy rekursywnie $1/2$\nbhyphen zrównoważyć lewe i~prawe poddrzewo węzła $x$.
-Dzięki wykorzystaniu dodatkowej pamięci rzędu $O(\attrib{x}{size})$ można posortować klucze z~poddrzewa o~korzeniu w~$x$, przechodząc je w~porządku inorder.
+Aby przebudować całe poddrzewo o~korzeniu w~$x$, należy wpierw rekursywnie przebudować lewe i~prawe poddrzewo węzła $x$.
+Przechodząc po poddrzewie o~korzeniu w~$x$ w~porządku inorder, możemy wszystkie jego klucze zebrać w~uporządkowaną tablicę rozmiaru $\attrib{x}{size}$.
 Kolejne mediany można wyznaczać wtedy w~czasie $O(1)$ każda i~zbudowanie $1/2$\nbhyphen zrównoważonego poddrzewa o~korzeniu w~$x$ zajmuje czas $\Theta(\attrib{x}{size})$.
 
 \subproblem %17-3(b)
 Czas wykonania operacji \proc{Search} w~drzewie wyszukiwań binarnych w~najgorszym przypadku jest rzędu $O(h)$, gdzie $h$ jest wysokością drzewa.
 Pokażemy, że w~drzewie $\alpha$\nbhyphen zrównoważonym $h=O(\lg n)$.
-Dla dowolnego węzła $x$ w~tym drzewie rozmiar któregokolwiek poddrzewa $x$ jest równy co najwyżej $\alpha\cdot\attrib{x}{size}$.
-Rozmiar pewnego poddrzewa $x$ znajdującego się $d$ poziomów niżej od $x$ wynosi zatem co najwyżej $\alpha^d\cdot\attrib{x}{size}$.
-Jeśli więc jako $x$ przyjmiemy korzeń drzewa, to $\attrib{x}{size}=n$ i~$h$ poziomów niżej od $x$ znajdują się poddrzewa składające się z~co najwyżej jednego węzła.
+Dla dowolnego węzła $x$ w~tym drzewie rozmiar któregokolwiek poddrzewa $x$ (lewego lub prawego) jest równy co najwyżej $\alpha\cdot\attrib{x}{size}$.
+Ogólnie, jeśli $y$ jest potomkiem $x$ znajdującym się $d$ poziomów głębiej od $x$, to rozmiar poddrzewa o~korzeniu w~$y$ wynosi co najwyżej $\alpha^d\cdot\attrib{x}{size}$.
+A~więc gdy $x$ stanowi korzeń drzewa, to $\attrib{x}{size}=n$ i~$h$ poziomów niżej od $x$ znajdują się poddrzewa składające się z~co najwyżej jednego węzła.
 Zatem $\alpha^hn\le 1$, skąd
 \[
 	h\le\log_\alpha(1/n) = \log_{1/\alpha}n = \frac{\lg n}{\lg(1/\alpha)} = O(\lg n).
@@ -20,10 +20,7 @@ Zatem $\alpha^hn\le 1$, skąd
 
 \subproblem %17-3(c)
 Funkcja potencjału dowolnego drzewa $T$ jest oczywiście nieujemna jako suma wartości bezwzględnych.
-Jeśli drzewo $T$ jest $1/2$\nbhyphen zrównoważone, to dla każdego jego węzła $x$,
-\[
-	\Delta(x) = \bigl|\attribb{x}{left}{size}-\attribb{x}{right}{size}\bigr| = 1.
-\]
+Jeśli drzewo $T$ jest $1/2$\nbhyphen zrównoważone, to dla każdego $x\in T$, $\Delta(x)\le1$.
 Wówczas suma w~definicji funkcji potencjału składa się z~zerowej liczby składników, a~zatem jest równa 0.
 
 \subproblem %17-3(d)
@@ -37,17 +34,18 @@ Wówczas rozmiar prawego poddrzewa wynosi
 \]
 Stąd
 \[
-	\Delta(r) = \attribb{r}{left}{size}-\attribb{r}{right}{size} > \alpha m-(1-\alpha)m = (2\alpha-1)m.
+	\Delta(r) = \attribb{r}{left}{size}-\attribb{r}{right}{size} > \alpha m-(1-\alpha)m = m(2\alpha-1).
 \]
 Z~założenia, że $\alpha>1/2$ wynika, że lewe poddrzewo ma rozmiar większy o~co najmniej 2 od rozmiaru prawego poddrzewa.
 Zatem $\Delta(r)\ge2$ i~$c\cdot\Delta(r)$ jest składnikiem potencjału drzewa $T$, skąd $\Phi(T)\ge c\cdot\Delta(r)>cm(2\alpha-1)$.
 By za pomocą takiego potencjału przebudować drzewo $T$, musi być spełniony warunek $cm(2\alpha-1)\ge m$, skąd otrzymujemy $c\ge\frac{1}{2\alpha-1}$.
 
 \subproblem %17-3(e)
-W~celu wstawienia do drzewa nowego węzła $z$ należy wyszukać odpowiedni liść tego drzewa, który stanie się ojcem $z$.
-Z~punktu (b) wiadomo, że wyszukiwanie w~$\alpha$\nbhyphen zrównoważonym drzewie wyszukiwań binarnych zabiera czas $O(\lg n)$.
+By wstawić do drzewa nowy węzeł $z$, należy wyznaczyć odpowiedni liść tego drzewa, który stanie się ojcem $z$.
+Z~punktu (b) wiadomo, że wyszukiwanie w~$\alpha$\nbhyphen zrównoważonym drzewie zabiera czas $O(\lg n)$.
 W~wyniku działania operacji wstawiania zmianie ulegają wartości $\Delta(x)$ dla wszystkich przodków $x$ węzła $z$, co może doprowadzić do stanu, w~którym drzewo nie jest już $\alpha$\nbhyphen zrównoważone.
 Identyczna sytuacja jest skutkiem wykonania operacji usuwania, gdzie $z$ jest faktycznie usuniętym węzłem.
-Zrównoważenie drzewa można przywrócić, równoważąc kolejne niezrównoważone węzły na ścieżce od $z$ aż do korzenia drzewa.
+
+$\alpha$\nbhyphen zrównoważenie drzewa można przywrócić, poruszając się po ścieżce od $z$ do korzenia i~przebudowując napotykane poddrzewa, o~ile nie są $\alpha$\nbhyphen zrównoważone.
 Z~poprzedniego punktu wiadomo, że zamortyzowany koszt każdej takiej operacji wynosi $O(1)$.
-Ponieważ niezrównoważonych węzłów jest co najwyżej $O(\lg n)$, to całkowity zamortyzowany koszt wstawienia lub usunięcia elementu wynosi $O(\lg n)$.
+Poddrzew wymagających przebudowy może być co najwyżej $O(\lg n)$, a~więc całkowity zamortyzowany koszt wstawiania lub usuwania wynosi $O(\lg n)$.
