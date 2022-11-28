@@ -70,22 +70,21 @@ Poniższy pseudokod jest implementacją wariantu iteracyjnego.
 \end{codebox}
 
 \exercise %16.1-3
-Założymy, że liczba dostępnych sal wykładowych jest odpowiednio duża, aby pomieścić wszystkie zajęcia.
-Wykorzystamy pomysł z~rozwiązania \refExercise{14.3-7}.
-Zdarzenia polegające na rozpoczęciu lub zakończeniu zajęć będziemy przeglądać od najwcześniejszego do najpóźniejszego, przy czym w~danej chwili zakończenia będą rozważane przed rozpoczęciami (co wynika z~prawostronnej otwartości przedziałów czasowych zajmowanych przez zajęcia).
-Równocześnie będziemy utrzymywać stos $F$ złożony z~wolnych sal wykładowych oraz zbiór $B$ sal zajmowanych w~danej chwili.
-Początkowo zbiór $B$ jest pusty.
-Jeśli kolejnym napotkanym zdarzeniem jest rozpoczęcie pewnych zajęć $a_i$, to przypiszemy je do nowej wolnej sali poprzez pobranie jej ze stosu $F$ i~umieszczenie w~zbiorze $B$ wraz z~informacją, że jest ona zajmowana przez zajęcia $a_i$.
-Gdy z~kolei napotkamy zakończenie pewnych zajęć $a_j$, to w~zbiorze $B$ należy odszukać jedyną salę zajmowaną przez $a_j$, a~następnie umieścić ją na stosie $F$.
+Podobnie jak w~oryginalnym problemie wyboru zajęć, wejściowe zajęcia oznaczymy przez $a_1$, $a_2$, \dots, $a_n$ i~przyjmiemy, że przedziały czasowe, w~których się one odbywają, są prawostronnie otwarte.
 
-Wykorzystanie stosu do przechowywania wolnych sal sprawia, że użyjemy ich tylko tyle, ile potrzeba.
-Załóżmy, że w~trakcie działania algorytmu największym rozmiarem zbioru $B$ jest $m$ i~niech $a_k$ będą pierwszymi zajęciami przypisanymi do $m$\nbhyphen tej sali.
-Powodem, dla którego zajęcia $a_k$ zajęły tę salę, jest to, że pozostałe $m-1$ sal było zajętych w~chwili $s_k$, co oznacza, że w~chwili tej odbywa się jednocześnie $m$ zajęć.
-Stąd w~każdym przydziale zajęć do sal musi być użytych co najmniej $m$ sal, więc przydział zwracany przez nasz algorytm jest optymalny.
+W~algorytmie będziemy przeglądać chronologicznie zdarzenia polegające na rozpoczęciu lub zakończeniu zajęć.
+Jeśli pewne zdarzenie rozpoczęcia odbywa się w~tym samym momencie co inne zdarzenie zakończenia, to wpierw rozważymy to drugie -- strategia ta jest konsekwencją przyjęcia założenia o~prawostronnej otwartości przedziałów czasowych.
+Równocześnie będziemy utrzymywać stos wolnych sal wykładowych oraz tablicę $H[1\twodots n]$, w~której na $i$\nbhyphen tej pozycji znajdzie się sala zajmowana w~danej chwili przez zajęcia $a_i$, albo \const{nil}, jeżeli zajęcia $a_i$ aktualnie nie trwają.
+Na początku na stos włożymy dowolne $n$ dostępnych sal wykładowych, a~tablicę $H$ wypełnimy wartościami \const{nil}.
+Jeśli kolejnym napotkanym zdarzeniem jest rozpoczęcie pewnych zajęć $a_i$, to $a_i$ przydzielimy do nowej wolnej sali poprzez zdjęcie jej ze stosu i~umieszczenie w~$H[i]$.
+Gdy z~kolei napotkamy zakończenie pewnych zajęć $a_j$, to salę $H[j]$ włożymy na stos, po czym ustawimy $H[j]$ na \const{nil}.
 
-Czas działania algorytmu jest sumą czasu spędzonego na sortowaniu rozpoczęć i~zakończeń zajęć oraz czasu spędzonego na ich przeglądaniu i~konstruowaniu rozwiązania.
-Do efektywnego zaimplementowania zbioru dynamicznego $B$ można zastosować np.\ drzewa czerwono-czarne.
-Jesteśmy więc w~stanie podać implementację tego algorytmu działającą w~czasie $O(n\lg n)$, gdzie $n$ jest ilością zajęć na wejściu.
+Dzięki wykorzystaniu stosu do przechowywania wolnych sal, użyjemy możliwie najmniejszej ich liczby wymaganych do przydziału zajęć $a_1$, $a_2$, \dots, $a_n$.
+Załóżmy, że w~trakcie działania algorytmu w~tablicy $H$ nie było więcej niż $m\le n$ sal i~niech $a_k$ będą pierwszymi zajęciami przydzielonymi do $m$\nbhyphen tej sali.
+Przydział ten został poczyniony, ponieważ pozostałe $m-1$ sal było zajętych w~momencie rozpoczęcia zajęć $a_k$, co oznacza, że w~chwili tej odbywało się jednocześnie $m$ zajęć.
+Stąd w~każdym przydziale zajęć $a_1$, $a_2$, \dots, $a_n$ musi być użytych co najmniej $m$ sal, więc rozwiązanie znalezione w~algorytmie jest optymalne.
+
+Czas działania algorytmu jest zdominowany przez czas spędzony na sortowaniu rozpoczęć i~zakończeń zajęć, który, na przykład dla sortowania szybkiego, wynosi $O(n\lg n)$.
 
 \exercise %16.1-4
 \note{Oryginalna treść zadania wymaga też podania kontrprzykładu dla strategii polegającej na wyborze zajęć o~najwcześniejszym czasie rozpoczęcia spośród zajęć zgodnych z~dotychczas wybranymi.}
