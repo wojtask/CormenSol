@@ -72,28 +72,11 @@ Korzystając z~tych własności, możemy podać prosty algorytm zachłanny wyzna
 \exercise %16.2-5
 \note{Przyjmiemy, że punkty ze zbioru wejściowego znajdują się na prostej rzeczywistej, według oryginalnej treści zadania.}
 
-\noindent Punkty wejściowe utożsamimy z~ich współrzędnymi na prostej rzeczywistej.
-Rozważmy podproblem $S_i$ tego problemu, w~którym zbiorem punktów wejściowych jest $X_i=\{x_i,x_{i+1},\dots,x_n\}$, przy czym $x_i$ jest punktem położonym na prostej rzeczywistej najbardziej na lewo spośród punktów z~$X_i$.
-Udowodnimy, że problem wykazuje własność optymalnej podstruktury.
-Niech $C_i$ będzie rozwiązaniem podproblemu $S_i$, czyli najmniejszym zbiorem przedziałów domkniętych o~długości jednostkowej, których suma zawiera wszystkie punkty z~$X_i$.
-Rozważmy jeden z~przedziałów $I\in C_i$ zawierający punkt $x_i$.
-Jeśli przedział ten pokrywa wszystkie punkty z~$X_i$, to $C_i=\{I\}$.
-W~przeciwnym przypadku niech $x_j$ będzie punktem w~$X_i\setminus I$ o~najmniejszej współrzędnej rzeczywistej.
-Wówczas $C_i=\{I\}\cup C_j$.
-Oczywiście zbiór $C_j$ jest optymalnym rozwiązaniem podproblemu $S_j$.
-Gdyby było inaczej, moglibyśmy zastąpić go mniejszym, uzyskując dla $S_i$ rozwiązanie o~mniejszej liczności niż $C_i$, co stoi w~sprzeczności z~definicją zbioru $C_i$.
-
-Problem ma też własność wyboru zachłannego.
-Załóżmy, że dysponujemy rozwiązaniem podproblemu $S_i$ zawierającym taki przedział $I=[a,a+1]$, że $a<x_i\le a+1$.
-Usuńmy teraz $I$ z~rozwiązania i~zastąpmy go przedziałem $I'=[x_i,x_i+1]$.
-Podobnie jak $I$, przedział $I'$ też zawiera punkt $x_i$, a~ponadto może potencjalnie pokryć więcej punktów wejściowych niż $I$, bo jego prawy koniec $x_i+1$ leży na prawo od prawego końca $a+1$ przedziału $I$.
-Nowe rozwiązanie jest więc niegorsze od początkowego, zawierającego $I$.
-
-Algorytm rozwiązujący problem będzie sortował punkty wejściowe, a~następnie przeglądał je od lewej do prawej.
-W~każdym kroku pętli znajdowany będzie najbardziej na lewo położony punkt $x$, który nie został jeszcze pokryty żadnym przedziałem.
-Następnie do rozwiązania dodawany będzie przedział o~lewym końcu pokrywającym się z~punktem $x$.
-Po wyczerpaniu wszystkich punktów zwrócony zostanie skonstruowany zbiór przedziałów.
-Czas działania algorytmu zdominowany jest przez czas spędzony na sortowaniu punktów.
+\noindent Niech $x$ będzie punktem o~najmniejszej współrzędnej spośród wszystkich punktów wejściowych.
+Zastanówmy się nad optymalną pozycją przedziału $I$ pokrywającego punkt $x$.
+Zauważmy, że nic nie zyskamy, jeśli choć część przedziału $I$ będzie sięgać dalej na lewo od $x$ -- przesuwając przedział w~lewo, możemy tylko sprawić, że inne punkty wejściowe przestaną należeć do $I$ i~ich pokrycie może wymagać większej liczby przedziałów.
+A~zatem problem posiada własność wyboru zachłannego i~wybór $I$ w~taki sposób, że $x$ stanowi jego lewy koniec, jest optymalny.
+Możemy teraz usunąć wszystkie punkty wejściowe obejmowane przez $I$ i~powtórzyć rozumowanie dla kolejnego przedziału i~pozostałych punktów, aż do ich wyczerpania, uzyskując optymalne rozwiązanie.
 
 \exercise %16.2-6
 Załóżmy, że przedmioty $a_1$, $a_2$, \dots, $a_n$ zostały posortowane według nierosnących wartości na jednostkę masy, tzn.\ zachodzi $v_1/w_1\ge v_2/w_2\ge\dots\ge v_n/w_n$.
