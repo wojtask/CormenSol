@@ -13,25 +13,17 @@ Jeden z~optymalnych kodów Huffmana dla podanego zbioru liter i~ich częstości 
 {\sffamily\bfseries(b)} Drzewo odpowiadające temu kodowi uzyskane w~wyniku działania procedury \proc{Huffman}.} \label{fig:16.3-2}
 \end{figure}
 
-Zastanówmy się, jak może wyglądać optymalny kod Huffmana dla $n$ liter o~częstościach będących początkowymi liczbami Fibonacciego.
-Przyjrzyjmy się wartości \attrib{z}{f} obliczanej w~algorytmie \proc{Huffman} w~linii 7.
-Nietrudno zauważyć, że w~$i$\nbhyphen tej iteracji pętli \kw{for} jest to suma najmniejszych $i+1$ częstości liter, czyli suma $i+1$ początkowych liczb Fibonacciego:
+W~celu zanalizowania ogólnego przypadku $n$ liter o~częstościach będących kolejnymi liczbami Fibonacciego, przyjrzyjmy się wartości \attrib{z}{f} obliczanej w~algorytmie \proc{Huffman} w~linii 7.
+Nietrudno zauważyć, że w~$i$\nbhyphen tej iteracji pętli \kw{for} jest to suma $i+1$ najmniejszych częstości liter, czyli suma $i+1$ początkowych liczb Fibonacciego:
 \[
 	\attrib{z}{f} = \sum_{k=1}^{i+1}F_k = F_{i+3}-1.
 \]
-Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego \attrib{z}{f} w~iteracji $i+1$ jest drugą najmniejszą wartością w~kolejce $Q$ i~węzeł o~tej wartości zostaje wybrany na prawego syna kolejnego węzła $z$.
-W~pierwszej iteracji zachodzi $\attrib{z}{f}=2=F_3$.
-Jeśli kolejka priorytetowa zaimplementowana jest jako kopiec binarny typu min na podstawie informacji w~rozdziale 6, to także w~tym przypadku doprowadzi to do opisanego powiązania węzłów.
-Zbudowane drzewo będzie mieć wysokość $n-1$, przy czym lewy syn każdego jego węzła wewnętrznego będzie liściem.
-W~otrzymanym kodzie Huffmana, literze o~częstości $F_k$, gdzie $3\le k\le n$, przypisane zostanie słowo kodowe postaci
-\[
-	\underbrace{11\cdots1}_{n-k}0.
-\]
-Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego problemu, więc następujące słowa kodowe
-\[
-	\underbrace{11\cdots1}_{n-2}0 \quad\text{oraz}\quad \underbrace{11\cdots1}_{n-1}
-\]
-mogą być przypisane do tych liter w~dowolnej kolejności.
+Gdy $i>1$, to $F_{i+2}<\attrib{z}{f}<F_{i+3}$, dlatego \attrib{z}{f} w~$(i+1)$\nbhyphen szej iteracji jest drugą najmniejszą wartością w~kolejce $Q$ i~węzeł o~takim kluczu zostaje wybrany na prawego syna kolejnego węzła $z$.
+Dla $i=1$ zachodzi $\attrib{z}{f}=2=F_3$.
+Jeśli kolejka priorytetowa zaimplementowana jest jako kopiec binarny typu min na podstawie opisu z~rozdziału 6, to także w~pierwszej iteracji pętli prawym synem węzła $z$ staje się węzeł o~kluczu $\attrib{z}{f}$.
+Zbudowane drzewo ma wysokość $n-1$, przy czym lewy syn każdego jego węzła wewnętrznego jest liściem.
+W~otrzymanym kodzie Huffmana literze o~częstości $F_k$, gdzie $3\le k\le n$, przypisane zostanie słowo kodowe postaci $1^{n-k}0$.
+Litery o~częstościach $F_1=F_2=1$ są nierozróżnialne z~punktu widzenia tego problemu, więc słowa kodowe $1^{n-2}0$ oraz $1^{n-1}$ mogą być przypisane do tych liter w~dowolnej kolejności.
 
 \exercise %16.3-3
 Dowód przeprowadzimy przez indukcję względem wysokości drzewa $h$.
