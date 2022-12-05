@@ -2,25 +2,23 @@
 
 \subproblem %16-2(a)
 Rozważmy dowolne uszeregowanie zadań stanowiące rozwiązanie przedstawionego problemu.
-Załóżmy, że dla pewnych zadań $a_i$, $a_j$ w~tym uszeregowaniu, tuż po zakończeniu wykonywania zadania $a_i$ w~chwili $c_i$ następuje przerwa, czyli kolejne zadanie $a_j$ rozpoczęte zostaje w~chwili $b_j$ późniejszej niż $c_i$.
-Moglibyśmy wtedy jednak usunąć ten odstęp, rozpoczynając wszystkie zadania następujące po $a_i$ o~$c_i-b_j$ jednostek czasu wcześniej.
-W~rezultacie czasy zakończenia tychże zadań zostałyby zmniejszone o~tyle samo jednostek i~otrzymane w~ten sposób uszeregowanie miałoby niższy średni koszt zakończenia zadania.
-Wnioskujemy więc, że w~optymalnym uporządkowaniu zadania wykonywane są bezpośrednio po sobie.
+Załóżmy, że dla pewnych zadań $a_i$, $a_j$ w~tym uszeregowaniu, tuż po zakończeniu wykonywania zadania $a_i$ w~chwili $c_i$ komputer przerywa pracę na jakiś czas -- czyli kolejne zadanie $a_j$ rozpoczęte zostaje w~chwili $b_j$ późniejszej niż $c_i$.
+Jednakże przez wyeliminowanie tej przerwy moglibyśmy przesunąć rozpoczęcie wykonywania wszystkich zadań występujących po $a_i$ o~$c_i-b_j$ jednostek czasu wcześniej.
+W~rezultacie wykonywanie tych zadań zakończyłoby się wcześniej o~tyle samo jednostek czasu i~otrzymane w~ten sposób uszeregowanie miałoby niższy średni czas zakończenia.
+Wnioskujemy stąd, że w~optymalnym uporządkowaniu zadania wykonywane są bezpośrednio po sobie.
 
 Przyjmijmy teraz, że w~uszeregowaniu nie ma przerw między zadaniami i~że istnieją zadania $a_i$, $a_j$, dla których $p_i>p_j$ oraz $a_i$ wykonywane jest bezpośrednio przed $a_j$.
 Suma ich czasów zakończenia wnoszona do średniego czasu zakończenia rozważanego uszeregowania wynosi $C=c_i+c_j$.
 Oznaczmy przez $c_i'$, $c_j'$, odpowiednio, czasy zakończenia zadań $a_i$, $a_j$, gdyby zostały one zamienione miejscami w~tym uporządkowaniu.
-Z~założenia $c_i'=c_j$ oraz $c_j'<c_i$, a~więc suma nowych czasów zakończenia wynosi $C'=c_i'+c_j'<c_j+c_i=C$.
-Wynika stąd, że w~każdej parze sąsiednich zadań najpierw powinno być wykonywane to, które wymaga krótszego czasu.
-Reasumując, optymalnym uszeregowaniem zadań minimalizującym średni czas zakończenia zadania jest takie, w~którym zadania wykonywane są w~kolejności niemalejących czasów wykonywania, bez przerw między nimi.
+Z~założenia $c_i'=c_j$ oraz $c_j'<c_i$, a~więc suma nowych czasów zakończenia wynosi $C'=c_i'+c_j'<c_j+c_i=C$, podczas gdy czasy zakończenia pozostałych zadań nie ulegają zmianie.
+Wynika stąd, że w~optymalnym uszeregowaniu zadania powinny występować według ich czasów wykonywania, od najkrótszego do najdłuższego.
 
-Na podstawie powyższej analizy otrzymujemy algorytm rozwiązujący ten problem, w~którym zadania z~wejściowego zbioru $S$ są sortowane według ich czasów wykonywania.
-Jeśli $a_1$, $a_2$, \dots, $a_n$ jest kolejnością po posortowaniu, to dla każdego $k=1$, 2, \dots, $n$ wystarczy przyjąć $c_k=\sum_{i=1}^kp_i$.
+Na podstawie powyższej analizy wynika, że w~celu rozwiązania postawionego problemu wystarczy posortować zadania ze zbioru $S$ według ich czasów wykonywania, co daje algorytm działający w~czasie $O(n\lg n)$.
 
 \subproblem %16-2(b)
-Każde zadanie ze zbioru wejściowego będziemy reprezentować jako element o~wadze początkowo równej ilości jednostek czasu potrzebnej do jego wykonania.
+Każde zadanie ze zbioru wejściowego będziemy reprezentować jako element o~wadze początkowo równej liczbie jednostek czasu potrzebnej do jego wykonania.
 Elementy reprezentujące zadania gotowe do wykonania w~danej chwili na podstawie czasów pojawienia się, przechowywane będą w~zbiorze dynamicznym $S$.
-W~danej chwili $b$ do zbioru $S$ dodane zostaną zadania, które stają się gotowe do wykonania, czyli takie, dla których $r_i=b$.
+W~danej chwili $b$ do zbioru $S$ zostaną dodane zadania, które właśnie stały się gotowe do wykonania, czyli takie, dla których $r_i=b$.
 W~razie wyboru zadania $a_i$ do uszeregowania w~chwili $b$, waga tego zadania w~zbiorze $S$ zostanie zmniejszona o~1, co reprezentuje wykonanie fragmentu tego zadania w~chwili $b$ o~długości jednostki czasu.
 Jeśli waga danego zadania osiąga 0, to jest ono usuwane z~$S$.
 
