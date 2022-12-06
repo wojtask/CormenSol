@@ -1,50 +1,15 @@
 \subchapter{Podstawy programowania dynamicznego}
 
 \exercise %15.3-1
-W~podrozdziale 15.2 stwierdzono, że liczba wszystkich możliwych nawiasowań ciągu $n$ macierzy jest rzędu $\Omega(4^n\!/n^{3/2})$, zatem algorytm przeglądający wszystkie nawiasowania w~poszukiwaniu optymalnego kosztu mnożenia macierzy, wymaga czasu co najmniej tego rzędu.
-Aby uzyskać górne oszacowanie na czas działania $T(n)$ procedury \proc{Recursive-Matrix-Chain}, zastosujemy analizę podobną do tej z~Podręcznika, która posłużyła do znalezienia dolnego oszacowania na $T(n)$.
-W~naszej analizie przyjmiemy, że wykonanie instrukcji w~wierszach 1\nbendash2 oraz wierszach 6\nbendash7 zajmuje co najwyżej $c$ jednostek czasu, gdzie $c$ jest stałą.
-Prowadzi to do rekurencji
-\[
-	T(n) \le \begin{cases}
-		c, & \text{jeśli $n=1$}, \\
-		c+\displaystyle\sum_{k=1}^{n-1}(T(k)+T(n-k)+c), & \text{jeśli $n>1$},
-	\end{cases}
-\]
-którą możemy przekształcić do postaci
-\[
-	T(n) \le 2\sum_{i=1}^{n-1}T(i)+cn.
-\]
+Efektywniejszą metodą znajdowania optymalnego nawiasowania iloczynu ciągu macierzy jest wywołanie procedury \proc{Recursive-Matrix-Chain}.
+Aby się o~tym przekonać, przyjrzyjmy się działaniu obu metod dla podciągu $A_iA_{i+1}\dots A_j$.
 
-Wykorzystamy metodę podstawiania do pokazania, że $T(n)\le c(7/2)^n$.
-Dla $n=1$ mamy $T(1)=1\le c(7/2)$, co jest spełnione przez każde $c\ge2/7$.
-W~drugim kroku indukcyjnym przyjmijmy $n\ge2$.
-Mamy wówczas:
-\begin{align*}
-	T(n) &\le 2\sum_{i=1}^{n-1}T(i)+cn \\
-	&\le 2c\sum_{i=1}^{n-1}(7/2)^i+cn \\
-	&= 2c\cdot\frac{(7/2)^n-1}{5/2}+cn \\
-	&= c(4/5)(7/2)^n-c(4/5)+cn \\
-	&= c(7/2)^n-c((1/5)(7/2)^n+4/5-n) \\
-	&\le c(7/2)^n.
-\end{align*}
-Można sprawdzić, że ostatnia nierówność zachodzi dla każdych $n$, $c>0$, co ostatecznie kończy dowód oszacowania $T(n)=O((7/2)^n)$.
+Procedura \proc{Recursive-Matrix-Chain} tworzy podziały tego podciągu na dwie części i~rekurencyjnie rozwiązuje powstałe podproblemy.
+Dokładniej, dla każdego $k=i$, $i+1$, \dots, $j-1$ oddzielnie znajduje rozwiązanie dla podciągu $A_iA_{i+1}\dots A_k$ i~podciągu $A_{k+1}A_{k+2}\dots A_j$, a~następnie łączy te rozwiązania, aby otrzymać rozwiązanie dla $A_iA_{i+1}\dots A_j$.
 
-Udowodnimy jeszcze następujący lemat, dzięki któremu będziemy mogli porównać czasy działania obu metod obliczania optymalnego nawiasowania iloczynu macierzy.
-
-\medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Dla dowolnych liczb rzeczywistych\/ $n$, $p$, $q$ i\/~$b$, takich że\/ $n>0$,\/ $p>q>0$ zachodzi}
-\[
-	q^n = o(p^n\!/n^b).
-\]
-\begin{proof}
-Ze wzoru (3.9) mamy, że dla dowolnych stałych rzeczywistych $a$ i~$b$, gdzie $a>1$, zachodzi $n^b=o(a^n)$.
-Z~definicji notacji $o$, dla każdej stałej $c>0$ istnieje stała $n_0>0$, że $0\le n^b<ca^n$ dla wszystkich $n\ge n_0$.
-Wybierzmy $a=p/q$.
-Wówczas nierówność sprowadza się do $0\le n^b\le c(p/q)^n$, skąd po przekształceniu otrzymujemy $0\le q^n<cp^n\!/n^b$, a~to oznacza, że $q^n=o(p^n\!/n^b)$.
-\end{proof}
-
-Z~powyższego lematu wynika w~szczególności, że $(7/2)^n=o(4^n\!/n^{3/2})$, a~zatem wywołanie procedury \proc{Recursive-Matrix-Chain} jest efektywniejsze od generowania wszystkich możliwych nawiasowań i~obliczania liczby mnożeń skalarnych w~każdym z~nich.
+Z~kolei w~trakcie generowania wszystkich poprawnych nawiasowań podciągu $A_iA_{i+1}\dots A_j$, dla każdego $k=i$, $i+1$, \dots, $j-1$ i~każdego poprawnego nawiasowania podciągu $A_iA_{i+1}\dots A_k$ zostanie rozważone każde poprawne nawiasowanie podciągu $A_{k+1}A_{k+2}\dots A_j$.
+Oczywistym jest, że to podejście wymaga znacznie większej liczby operacji.
+Jest tak dlatego, że nie wykorzystuje ono własności optymalnej podstruktury tego problemu.
 
 \exercise %15.3-2
 Sortowanie przez scalanie jest algorytmem realizującym podejście ,,dziel i~zwyciężaj'', w~którym początkowy problem dzielony jest na podproblemy rozwiązywane rekurencyjnie.
