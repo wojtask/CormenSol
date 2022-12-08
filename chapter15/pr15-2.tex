@@ -1,12 +1,12 @@
 \problem{Estetyczny wydruk} %15-2
-Danymi wejściowymi w~naszym rozwiązaniu będzie ciąg długości słów wejściowych $l$ oraz pojemność wiersza $M$.
+Danymi wejściowymi w~naszym rozwiązaniu będzie ciąg $l$ długości słów wejściowych oraz pojemność wiersza $M$.
 Przedstawiony algorytm można nietrudno przekształcić tak, aby przyjmował rzeczywisty akapit tekstu i~wypisywał jego słowa podzielone na linie.
 Zakładamy ponadto, że każde słowo z~tego akapitu mieści się w~wierszu, tzn.\ $l_i\le M$ dla każdego $i=1$, 2, \dots, $n$.
 
 Zdefiniujmy $\id{extras}[i,j]$, gdzie $i\le j$, jako liczbę zbędnych znaków odstępu na końcu wiersza zawierającego słowa o~numerach od $i$ do $j$, czyli $\id{extras}[i,j]=M-j+i-\sum_{k=i}^jl_k$.
 Z~kolei $\id{lc}[i,j]$ niech będzie kosztem wprowadzanym przez wiersz ze słowami od $i$ do $j$.
 Przyjmiemy, że $\id{lc}[i,j]=\infty$, jeśli słowa te nie mieszczą się w~wierszu -- taki zabieg sprawi, że podczas minimalizacji tych wartości przepełnione wiersze nie będą wybierane.
-Ostatni wiersz, jeśli nie jest przepełniony, wprowadza zerowy koszt, według opisu z~treści problemu.
+Ostatni wiersz, jeśli nie jest przepełniony, wprowadza zerowy koszt, zgodnie ze specyfikacją problemu.
 Mamy więc:
 \[
 	\id{lc}[i,j] = \begin{cases}
@@ -39,11 +39,11 @@ Stąd podczas obliczania $c[j]$ można tak naprawdę ograniczyć zakres sprawdza
 Zauważmy też, że możemy zrezygnować z~tablic \id{extras} oraz \id{lc} i~pamiętać jedynie potrzebne w~danej chwili wartości.
 Posłużymy się w~tym celu ciągiem sum prefiksowych długości słów, który przechowamy w~tablicy $L[0\twodots n]$.
 Dokładniej, dla każdego $j=0$, 1, \dots, $n$, $L[j]=\sum_{k=1}^jl_k$.
-Wielkość zdefiniowana jako $\id{extras}[i,j]$ wynosi wówczas $M-j+i-(L[j]-L[i-1])$ i~można ją wyznaczyć w~czasie stałym.
+Zdefiniowane wcześniej $\id{extras}[i,j]$ wynosi wówczas $M-j+i-(L[j]-L[i-1])$ i~wartość tę można wyznaczyć w~czasie stałym.
 Podobnie wartości z~tablicy \id{lc} można wyliczać na bieżąco, ponieważ w~danym momencie wykorzystywana jest tylko jedna z~nich.
 
 Do zapamiętywania, na~których pozycjach wejściowego ciągu następuje podział na wiersze, wykorzystamy dodatkową tablicę $p$.
-W~trakcie obliczania $c[j]$, jeśli $c[j]=c[i-1]+\id{lc}[i,j]$, to wartość $i$ wstawimy do $p[j]$.
+W~trakcie obliczania $c[j]$, jeśli $c[j]=c[i-1]+\id{lc}[i,j]$, to do $p[j]$ wpiszemy $i$.
 Dzięki temu będziemy wiedzieć, że ostatni wiersz w~znalezionym rozwiązaniu zawiera słowa o~numerach od $p[n]$ do $n$, przedostatni -- słowa o~numerach od $p[p[n]-1]$ do $p[n]-1$ itd.
 
 \begin{codebox}
