@@ -23,20 +23,20 @@ Na podstawie tej analizy dostajemy następującą zależność rekurencyjną:
 \]
 
 Aby zrekonstruować rozwiązanie, dla każdych $1\le i\le j\le n$ obliczymy $r[i,j]$, czyli indeks punktu bezpośrednio poprzedzającego $p_j$ na ścieżce $\beta_{i,j}$.
-Poniższy pseudokod wyznacza wartości w~tablicach $b$ i~$r$, wykorzystując programowanie dynamiczne.
+Poniższy pseudokod przyjmuje tablicę punktów $P[1\twodots n]$ i~wyznacza tablice $b$ i~$r$, wykorzystując programowanie dynamiczne.
 \begin{codebox}
-\Procname{$\proc{Bitonic-TSP}(p)$}
-\li	$n\gets\attrib{p}{length}$
-\li	posortuj ciąg punktów wejściowych $p$ rosnąco względem ich współrzędnych $x$ \label{li:bitonic-tsp-sorting}
+\Procname{$\proc{Bitonic-TSP}(P)$}
+\li	$n\gets\attrib{P}{length}$
+\li	posortuj tablicę punktów $P$ rosnąco według ich współrzędnych $x$ \label{li:bitonic-tsp-sorting}
 \li	$b[1,1]\gets0$
 \li	\For $j\gets2$ \To $n$
 \li		\Do \For $i\gets1$ \To $j$
 \li				\Do \If $i=1$ lub $i<j-1$
-\li						\Then $b[i,j]\gets b[i,j-1]+|p_{j-1}p_j|$
+\li						\Then $b[i,j]\gets b[i,j-1]+\bigl|P[j-1]P[j]\bigr|$
 \li							$r[i,j]\gets j-1$
 \li						\Else $b[i,j]\gets\infty$ \label{li:bitonic-tsp-min-begin}
 \li							\For $k\gets1$ \To $i-1$
-\li								\Do $q\gets b[k,i]+|p_kp_j|$
+\li								\Do $q\gets b[k,i]+\bigl|P[k]P[j]\bigr|$
 \li									\If $q<b[i,j]$
 \li										\Then $b[i,j]\gets q$
 \li											$r[i,j]\gets k$
@@ -48,28 +48,28 @@ Poniższy pseudokod wyznacza wartości w~tablicach $b$ i~$r$, wykorzystując pro
 \li	\Return $b$ i~$r$
 \end{codebox}
 
-Dla punktów wejściowych $p$ posortowanych według współrzędnych $x$ wypiszemy znalezione rozwiązanie, rozpoczynając od $p_n$, następnie przechodząc po punktach z~podścieżki zawierającej $p_{n-1}$, aż do $p_1$, a~następnie po pozostałych punktach z~podścieżki biegnącej w~prawo aż do $p_n$.
+Dla wejściowej tablicy punktów $P$ posortowanej według współrzędnych $x$ wypiszemy znalezione rozwiązanie, rozpoczynając od $P[n]$, następnie przechodząc po punktach z~podścieżki zawierającej $P[n-1]$, aż do $P[1]$, a~następnie po pozostałych punktach z~podścieżki biegnącej w~prawo aż do $P[n]$.
 \begin{codebox}
-\Procname{$\proc{Print-Bitonic-Path}(p,r)$}
-\li	$n\gets\attrib{p}{length}$
-\li	wypisz $p_n$
-\li	wypisz $p_{n-1}$
-\li	$\proc{Print-Path}(p,r,n-1,n)$
+\Procname{$\proc{Print-Bitonic-Path}(P,r)$}
+\li	$n\gets\attrib{P}{length}$
+\li	wypisz $P[n]$
+\li	wypisz $P[n-1]$
+\li	$\proc{Print-Path}(P,r,n-1,n)$
 \end{codebox}
 \begin{codebox}
-\Procname{$\proc{Print-Path}(p,r,i,j)$}
+\Procname{$\proc{Print-Path}(P,r,i,j)$}
 \li	\If $i<j$ i~($i>1$ lub $r[i,j]>1$)
-\li		\Then $\proc{Print-Path}(p,r,i,r[i,j])$
-\li			wypisz $p_{r[i,j]}$
+\li		\Then $\proc{Print-Path}(P,r,i,r[i,j])$
+\li			wypisz $P[r[i,j]]$
 		\End
 \li	\If $i>j$ i~($j>1$ lub $r[j,i]>1$)
-\li		\Then wypisz $p_{r[j,i]}$
-\li			$\proc{Print-Path}(p,r,r[j,i],j)$
+\li		\Then wypisz $P[r[j,i]]$
+\li			$\proc{Print-Path}(P,r,r[j,i],j)$
 		\End
 \end{codebox}
-Wywołanie $\proc{Print-Path}(p,r,i,j)$ wypisuje ścieżkę o~minimalnej długości między punktami $p_i$ i~$p_j$.
+Wywołanie $\proc{Print-Path}(P,r,i,j)$ wypisuje ścieżkę o~minimalnej długości między punktami $P[i]$ i~$P[j]$.
 W~zależności od wyniku porównania $i$ z~$j$ wypisane zostają punkty z~podścieżki biegnącej w~lewo albo, w~kolejności odwrotnej do ich napotykania, punkty z~podścieżki biegnącej w~prawo.
-Procedura stosuje dodatkowe warunki, aby nie dopuścić do podwójnego wypisania punktu $p_1$.
+Procedura stosuje dodatkowe warunki, aby nie dopuścić do podwójnego wypisania punktu $P[1]$.
 
 Dla każdego $j>1$ co najwyżej dwie wartości $b[i,j]$ obliczane są w~algorytmie \proc{Bitonic-TSP} w~wierszach \ref{li:bitonic-tsp-min-begin}\nbendash\ref{li:bitonic-tsp-min-end} przy użyciu $O(n)$ iteracji, a~każda inna pozycja tablicy $b$ wyznaczona zostaje w~czasie stałym.
 Ponieważ sortowanie punktów w~wierszu \ref{li:bitonic-tsp-sorting} można wykonać w~czasie $O(n\lg n)$, to czasem działania tego algorytmu jest $\Theta(n^2)$.
