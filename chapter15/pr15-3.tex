@@ -1,19 +1,18 @@
 \problem{Odległość redakcyjna} %15-3
 
 \subproblem %15-3(a)
-Podobnie jak w~problemie NWP, będziemy korzystać z~notacji $X_i$ jako $i$\nbhyphen tego prefiksu słowa $x$ oraz $Y_j$ jako $j$\nbhyphen tego prefiksu słowa $y$.
+Podobnie jak w~problemie NWP, przez $X_i$ oznaczymy $i$\nbhyphen ty prefiks słowa $x$, a~przez $Y_j$ -- $j$\nbhyphen ty prefiks słowa $y$.
 W~podproblemach, jakie się pojawią, będziemy wyznaczać odległość redakcyjną prefiksów $X_i$ i~$Y_j$.
 
-Niech $c[i,j]$ będzie optymalnym kosztem przekształcenia $X_i$ do $Y_j$.
-Załóżmy, że $i$, $j>0$ i~że znana jest ostatnia operacja w~tym przekształceniu.
-Jeśli operacją tą było kopiowanie lub zastąpienie znaku innym, to problemem do rozwiązania pozostaje znalezienie odległości redakcyjnej $X_{i-1}$ i~$Y_{j-1}$.
+Niech $c[i,j]$ będzie kosztem optymalnego przekształcenia $X_i$ do $Y_j$ dla $i$, $j>0$.
+Jeśli ostatnią operacją w~tym przekształceniu było skopiowanie lub zastąpienie znaku, to problemem do rozwiązania pozostaje znalezienie odległości redakcyjnej $X_{i-1}$ i~$Y_{j-1}$.
 Można to stwierdzenie uzasadnić rozumowaniem ,,wytnij i~wklej''.
-Zatem $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj})$ w~przypadku, gdy znak $x[i]$ został skopiowany  do $y[j]$ oraz $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})$, jeśli $x[i]$ został zastąpiony przez inny znak $y[j]$.
-W~przypadku usuwania znaku podproblem stanowi wyznaczenie odległości redakcyjnej między $X_{i-1}$ a~$Y_j$, skąd $c[i,j]=c[i-1,j]+\mathrm{koszt}(\text{usuń})$.
+Zatem $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{skopiuj})$ w~przypadku, gdy znak $x[i]$ został skopiowany do $y[j]$ oraz $c[i,j]=c[i-1,j-1]+\mathrm{koszt}(\text{zastąp})$, jeśli $x[i]$ został zastąpiony przez inny znak $y[j]$.
+Dla usuwania znaku podproblem stanowi wyznaczenie odległości redakcyjnej między $X_{i-1}$ a~$Y_j$, skąd $c[i,j]=c[i-1,j]+\mathrm{koszt}(\text{usuń})$.
 Podobnie, jeśli ostatnio wstawiany był nowy znak, to podproblemem jest odległość $X_i$ od $Y_{j-1}$ i~wówczas $c[i,j]=c[i,j-1]+\mathrm{koszt}(\text{wstaw})$.
 Do zamiany znaków doszło, gdy $x[i]=y[j-1]$ oraz $x[i-1]=y[j]$, o~ile $i$, $j\ge2$.
-Wystarczy w~tym przypadku obliczyć odległość między słowami $X_{i-2}$ i~$Y_{j-2}$, a~następnie dodać do niej koszt operacji zamiany: $c[i,j]=c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$.
-W~końcu, jeśli ostatnią operacją było wyrzucenie reszty słowa $X_i$, to znaczy to, że konwersja z~$X_m$ do $Y_n$ została zakończona, czyli w~momencie wykonania tej operacji było $i=m$ oraz $j=n$.
+W~tym przypadku problem sprowadza się do obliczenia odległości redakcyjnej między słowami $X_{i-2}$ i~$Y_{j-2}$, mamy więc $c[i,j]=c[i-2,j-2]+\mathrm{koszt}(\text{zamień})$.
+W~końcu, jeśli ostatnią operacją było wyrzucenie reszty słowa $X_i$, to znaczy to, że konwersja słowa $x$ do $y$ została zakończona, czyli w~momencie wykonania tej operacji było $i=m$ oraz $j=n$.
 Jeśli potraktujemy wyrzucenie reszty słowa jako wielokrotne usuwanie ostatniego jego znaku, to przekonamy się, że podproblem stanowi w~tym przypadku każde przekształcenie z~$X_k$ do $Y_n$, gdzie $0\le k<m$.
 Mamy zatem $c[m,n]=\min_{0\le k<m}(c[k,n])+\mathrm{koszt}(\text{wyrzuć})$.
 Na podstawie tej analizy otrzymujemy następującą zależność rekurencyjną:
@@ -32,8 +31,8 @@ Rozważmy teraz sytuacje z~$i=0$ lub $j=0$.
 Jeśli $i=0$, to prefiks $X_i$ jest słowem pustym i~przekształcenie go do słowa $Y_j$ polega na wykonaniu $j$ operacji wstawienia znaku, czyli $c[0,j]=j\cdot\mathrm{koszt}(\text{wstaw})$.
 Podobnie, jeśli $j=0$, to słowo $Y_j$ jest puste i~można je uzyskać poprzez $i$\nbhyphen krotne usunięcie znaku ze słowa $X_i$, czyli $c[i,0]=i\cdot\mathrm{koszt}(\text{usuń})$.
 
-Poniższy pseudokod wypełnia tablicę $c$ od najwyższego do najniższego wiersza oraz od lewej do prawej w~obrębie wierszy.
-Równocześnie konstruowana jest także tablica $\id{op}[0\twodots m,0\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta do przekształcenia $X_i$ do $Y_j$, a~także tablice $l[0\twodots m,0\twodots n]$ i~$r[0\twodots m,0\twodots n]$ przechowujące rozmiary rozważanych podproblemów podczas tych przekształceń.
+Poniższy pseudokod wypełnia tablicę $c$ wierszami i~od lewej do prawej w~obrębie wierszy.
+Równocześnie konstruowana jest także tablica $\id{op}[0\twodots m,0\twodots n]$, w~której po zakończeniu działania algorytmu na pozycji $\id{op}[i,j]$ znajdzie się ostatnia operacja użyta w~optymalnym przekształceniu $X_i$ do $Y_j$, a~także tablice $l[0\twodots m,0\twodots n]$ i~$r[0\twodots m,0\twodots n]$ przechowujące rozmiary rozważanych podproblemów podczas tych przekształceń.
 
 \begin{codebox}
 \Procname{$\proc{Edit-Distance}(x,y)$}
@@ -82,10 +81,12 @@ Równocześnie konstruowana jest także tablica $\id{op}[0\twodots m,0\twodots n
 \li	\Return $c$, \id{op}, $l$ i~$r$
 \end{codebox}
 
-Zarówno złożoność czasowa, jak i~pamięciowa tego algorytmu wynoszą $\Theta(mn)$.
-Wypisanie optymalnego ciągu operacji przekształcających słowo $x$ do słowa $y$ realizuje następująca procedura.
-Jej początkowym wywołaniem jest $\proc{Print-Operations}(\id{op},l,r,m,n)$.
-Aby zapewnić odpowiednią kolejność, przed wypisaniem bieżącej operacji procedura wywoływana jest rekurencyjnie dla podproblemu na podstawie wartości w~tablicach $l$ i~$r$ wyznaczonych w~\proc{Edit-Distance}.
+Algorytm działa w~czasie $\Theta(mn)$.
+W~rzeczywistości moglibyśmy nie zapamiętywać całej tablicy $c$ i~całkowicie zrezygnować z~tablic $l$ i~$r$.
+Wciąż jednak wymagamy utrzymywania całej tablicy \id{op}, stąd złożonością pamięciową algorytmu jest także $\Theta(mn)$.
+
+W~celu wypisania optymalnego ciągu operacji przekształcających słowo $x$ do słowa $y$ stosujemy wywołanie $\proc{Print-Operations}(\id{op},l,r,m,n)$.
+Aby zapewnić odpowiednią kolejność, przed wypisaniem bieżącej operacji procedura ta wywoływana jest rekurencyjnie dla podproblemu na podstawie wartości w~tablicach $l$ i~$r$ wyznaczonych w~\proc{Edit-Distance}.
 \begin{codebox}
 \Procname{$\proc{Print-Operations}(\id{op},l,r,i,j)$}
 \li	\If $i>0$ lub $j>0$
@@ -99,17 +100,17 @@ Możemy sprowadzić problem optymalnego uliniowienia do problemu odległości re
 Załóżmy, że $x'$ i~$y'$ są wynikowymi ciągami powstałymi w~wyniku optymalnego uliniowienia sekwencji DNA, odpowiednio, $x$ i~$y$.
 Jeśli $x'[j]=y'[j]$, to w~problemie odległości redakcyjnej możemy tę sytuację rozumieć jako skopiowanie znaku $x'[j]$.
 Jeśli $x'[j]\ne y'[j]$ i~żaden z~tych znaków nie jest spacją, to mamy tutaj sytuację po zastąpieniu znaku $x'[j]$ przez znak $y'[j]$.
-W~końcu, spację na pozycję $x'[j]$ można uzyskać przez wykonanie operacji wstawienia znaku $y'[j]$, a~spację na pozycji $y'[j]$ -- przez wykonanie operacji usunięcia znaku $x'[j]$.
+W~końcu, spację w~$x'[j]$ można uzyskać przez wykonanie operacji wstawienia znaku $y'[j]$, a~spację w~$y'[j]$ -- przez wykonanie operacji usunięcia znaku $x'[j]$.
 
-Teraz wystarczy jeszcze przypisać odpowiednie koszty dla poszczególnych operacji elementarnych.
 W~problemie optymalnego uliniowienia odpowiednio zdefiniowana ocena jest maksymalizowana, zaś problem odległości redakcyjnej ma na celu minimalizację odpowiadającego tej ocenie kosztu.
 Wystarczy więc jako koszt wziąć liczbę przeciwną do odpowiadającej mu oceny.
-Poszczególne operacje wartościujemy następująco:
+Poszczególne operacje elementarne wartościujemy następująco:
 \begin{align*}
 	\mathrm{koszt}(\text{skopiuj}) &= -1, \\
 	\mathrm{koszt}(\text{zamień}) &= +1, \\
 	\mathrm{koszt}(\text{usuń}) &= +2, \\
 	\mathrm{koszt}(\text{wstaw}) &= +2.
 \end{align*}
-Operacje zamień i~wyrzuć nie są wykorzystywane, więc jako ich koszt można przyjąć wartość $\infty$.
-Wynikowa ocena optymalnego uliniowienia wejściowych sekwencji DNA stanowi liczbę przeciwną do ich odległości redakcyjnej, zaś do wypisania rozwiązania można użyć procedury podobnej do \proc{Print-Operations}.
+Operacje ,,zamień'' i~,,wyrzuć'' nie są wykorzystywane, więc jako ich koszt przyjmujemy $\infty$.
+Wynikowa ocena optymalnego uliniowienia wejściowych sekwencji DNA stanowi liczbę przeciwną do ich odległości redakcyjnej.
+Do wypisania rozwiązania można użyć procedury podobnej do \proc{Print-Operations}.
