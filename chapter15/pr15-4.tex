@@ -1,15 +1,15 @@
 \problem{Planowanie bankietu w~firmie} %15-4
 Ogólnie rzecz biorąc, naszym zamierzeniem w~tym problemie jest zapraszanie pracowników o~wysokim ,,współczynniku towarzyskości'', zaś wykluczanie takich, dla których współczynnik ten jest niski.
 Dla każdego pracownika będziemy rozważać, czy opłaca się zaprosić go na bankiet.
-Jeśli to zrobimy, to musimy wykluczyć z~bankietu wszystkich jego bezpośrednich podwładnych i~bezpośredniego przełożonego (o~ile ten istnieje).
+Jeśli to zrobimy, to musimy wykluczyć z~bankietu wszystkich jego bezpośrednich podwładnych i~bezpośredniego przełożonego (o~ile taki istnieje).
 
 Załóżmy, że dane wejściowe do problemu stanowi drzewo $T$ w~reprezentacji ,,na lewo syn, na prawo brat'', w~którym każdy węzeł $x$, oprócz wskaźników na inne węzły ma atrybut \id{name} przechowujący nazwisko pracownika oraz \id{conv} zawierający jego ,,współczynnik towarzyskości''.
-Potraktujemy każde poddrzewo drzewa wejściowego jako podproblem naszego problemu i~rozwiążemy każdy z~nich, poruszając się od poddrzew składających się z~tylko jednego węzła (liścia drzewa $T$), aż do całego drzewa $T$.
+Potraktujemy każde poddrzewo drzewa wejściowego jako podproblem naszego problemu i~rozwiążemy każdy z~nich, przechodząc od poddrzew składających się z~tylko jednego węzła (liścia drzewa $T$), aż do całego drzewa $T$.
 Każdy węzeł $x$ drzewa $T$ wzbogacimy o~dwa dodatkowe pola -- \id{invited} oraz \id{uninvited}.
-W~pierwszym z~nich obliczana będzie największa możliwa suma ,,współczynników towarzyskości'' dla podproblemu stanowiącego poddrzewo o~korzeniu $x$, przy założeniu, że osoba reprezentowana przez węzeł $x$ jest zaproszona na bankiet.
+Pierwsze z~nich będzie przechowywać największą możliwą sumę ,,współczynników towarzyskości'' dla podproblemu stanowiącego poddrzewo o~korzeniu $x$, przy założeniu, że osoba reprezentowana przez węzeł $x$ jest zaproszona na bankiet.
 Rola atrybutu \id{uninvited} jest identyczna, ale dla sytuacji, w~której osoba $x$ nie zostaje zaproszona na bankiet.
 
-Łatwo zauważyć, że dla dowolnego węzła $x$ w~$T$, gdzie $C_x$ jest zbiorem jego dzieci, zachodzą następujące zależności:
+Łatwo zauważyć, że dla dowolnego węzła $x$ w~$T$ o~dzieciach w~zbiorze $C_x$ zachodzą następujące zależności:
 \begin{align*}
 	\attrib{x}{invited} &= \attrib{x}{conv}+\sum_{y\in C_x}\attrib{y}{uninvited}, \\
 	\attrib{x}{uninvited} &= \sum_{y\in C_x}\max(\attrib{y}{invited},\attrib{y}{uninvited}).
@@ -34,7 +34,7 @@ Wywołanie $\proc{Company-Party}(\attrib{T}{root})$ zwróci zatem rozwiązanie p
 \li	\Return $\max(\attrib{x}{invited},\attrib{x}{uninvited})$
 \end{codebox}
 
-W~celu wypisania zaproszonych gości dla tak wzbogaconego drzewa $T$ używamy wywołania $\proc{Print-Guests}(\attrib{T}{root})$ następującej procedury:
+W~celu wypisania zaproszonych gości dla tak wzbogaconego drzewa $T$ używamy następującej procedury wywołanej dla $x=\attrib{T}{root}$:
 \begin{codebox}
 \Procname{$\proc{Print-Guests}(x)$}
 \li	\If $\attrib{x}{invited}>\attrib{x}{uninvited}$
@@ -57,5 +57,6 @@ Używana tu procedura pomocnicza \proc{Print-Invited-Subordinates} wypisuje opty
 			\End
 \end{codebox}
 
-Każdy węzeł drzewa $T$ w~wywołaniu $\proc{Company-Party}(\attrib{T}{root})$ jest wskazywany przez $x$ w~dokładnie jednym wywołaniu rekurencyjnym oraz przez $y$ w~co najwyżej jednym wywołaniu rekurencyjnym.
+Procedura \proc{Company-Party} przechodzi przez drzewo $T$, odwiedzając każdy jego węzeł.
+Ponadto każde wywołanie rekurencyjne zostaje wywołane dla innego węzła.
 Wynika stąd, że dla hierarchii $n$ pracowników firmy, algorytm wyznacza optymalne rozwiązanie w~czasie $\Theta(n)$.
