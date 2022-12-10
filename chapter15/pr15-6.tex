@@ -1,11 +1,11 @@
 \problem{Przesuwanie pionka} %15-6
-Ponumerujmy kolejnymi liczbami całkowitymi od 1 do $n$ wiersze z~dołu do góry, oraz kolumny z~lewej do prawej.
-Każde pole szachownicy utożsamimy z~jego położeniem na szachownicy w~postaci pary $\langle i,j\rangle$, gdzie $i$ to numer wiersza tego pola, a~$j$ -- numer jego kolumny.
-Zdefiniujmy $g[i,j]$ dla $1\le i$, $j\le n$ jako największą liczbę złotych możliwą do uzyskania, przechodząc pionkiem z~pewnego pola na dolnym brzegu szachownicy na pole $\langle i,j\rangle$, wykonując przy tym tylko dopuszczalne ruchy.
+Ponumerujmy kolejnymi liczbami całkowitymi od 1 do $n$ wiersze z~dołu do góry, oraz kolumny od lewej do prawej.
+Każde pole utożsamimy z~jego położeniem na szachownicy w~postaci pary $\langle i,j\rangle$, gdzie $i$ to numer wiersza tego pola, a~$j$ -- numer jego kolumny.
+Zdefiniujmy $g[i,j]$ dla $1\le i$, $j\le n$ jako największy zysk możliwy do uzyskania przez przejście pionkiem z~pewnego pola na dolnym brzegu szachownicy na pole $\langle i,j\rangle$, wykonując przy tym tylko dopuszczalne ruchy.
 Oczywiście $g[1,j]=0$ dla $j=1$, 2, \dots, $n$.
 Maksymalny zysk w~polu $\langle i,j\rangle$ możemy osiągnąć, przechodząc na nie z~pola $\langle i-1,j-1\rangle$ (o~ile $j>1$), $\langle i-1,j\rangle$ albo $\langle i-1,j+1\rangle$ (o~ile $j<n$).
 Każda możliwość do sumarycznego zysku dodaje częściowy zysk związany z~przejściem na pole $\langle i,j\rangle$, zdefiniowanym przez funkcję $p$.
-Dla $i=2$, 3, \dots, $n$ zachodzi następująca zależność:
+Dla $i=2$, 3, \dots, $n$ zachodzi więc następująca zależność:
 \[
 	g[i,j] = \max\begin{cases}
 		g[i-1,j-1]+p(\langle i-1,j-1\rangle,\langle i,j\rangle), & \text{jeśli $j>1$,} \\
@@ -37,17 +37,17 @@ Ponadto w~zmiennej $m^*\!$ po zakończeniu działania algorytmu znajdzie się nu
 						\End
 				\End
 		\End
-\li	$\id{result}\gets-\infty$
+\li	$\id{max-gain}\gets-\infty$ \label{li:checkerboard-max-gain-begin}
 \li	$m^*\!\gets1$
 \li	\For $j\gets1$ \To $n$
-\li		\Do \If $g[n,j]>\id{result}$
-\li				\Then $\id{result}\gets g[n,j]$
+\li		\Do \If $g[n,j]>\id{max-gain}$
+\li				\Then $\id{max-gain}\gets g[n,j]$
 \li					$m^*\!\gets j$
 				\End
-		\End
-\li	\Return $\id{result}$, $m$ i~$m^*\!$
+		\End \label{li:checkerboard-max-gain-end}
+\li	\Return \id{max-gain}, $m$ i~$m^*\!$
 \end{codebox}
-Wykorzystując zwrócone wartości przez powyższy algorytm, możemy wypisać optymalną ścieżkę jako ciąg odwiedzonych pól, używając w~tym celu wywołania $\proc{Print-Moves}(m,n,m^*\!)$.
+Wykorzystując zwrócone wartości przez powyższy algorytm, możemy wypisać optymalną ścieżkę, używając w~tym celu wywołania $\proc{Print-Moves}(m,n,m^*\!)$.
 Pseudokod tej procedury przedstawiono poniżej.
 \begin{codebox}
 \Procname{$\proc{Print-Moves}(m,i,j)$}
@@ -57,5 +57,6 @@ Pseudokod tej procedury przedstawiono poniżej.
 \li	wypisz ,,$\langle$'' $i$ ,,{}, '' $j$ ,,$\rangle$''
 \end{codebox}
 
-Algorytm \proc{Checkerboard} wypełnia tablicę $g$, dla każdej z~$n^2$ jej komórek wykonując operacje w~czasie ograniczonym przez stałą.
-Stąd czasem działania algorytmu jest $\Theta(n^2)$.
+Procedura \proc{Checkerboard} wypełnia tablicę $g$, dla każdej z~$n^2$ jej komórek wykonując operacje w~czasie ograniczonym przez stałą.
+Zarówno wyznaczenie maksymalnego zysku w~wierszach \ref{li:checkerboard-max-gain-begin}\nbendash\ref{li:checkerboard-max-gain-end}, jak i~wypisanie optymalnej ścieżki w~procedurze \proc{Print-Moves}, zajmują czas $\Theta(n)$.
+Stąd sumarycznie algorytm zabiera czas $\Theta(n^2)$.
