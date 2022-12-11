@@ -24,9 +24,11 @@ Do rozwiązywania kolizji używana jest metoda łańcuchowa.} \label{fig:11.2-2}
 
 \exercise %11.2-3
 Zakładamy, że listy są dwukierunkowe i~wartości funkcji haszującej można wyznaczać w~czasie stałym.
-Na podstawie wyników z~problemu \refProblem{10-1} usuwanie elementu z~tablicy z~haszowaniem będzie działać w~czasie $\Theta(1)$.
-Aby wstawić nowy element do tablicy, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania.
-W~pesymistycznym przypadku dla tablicy o~$n$ elementach zajmie to czas $\Theta(n)$, podobnie jak wyszukiwanie elementu, gdyż operacja ta także polega na liniowym przejrzeniu jednej z~list.
+Wyszukiwanie zakończone porażką wymaga liniowego przejrzenia jednej z~list, co zajmuje czas $\Theta(1+\alpha)$.
+Posortowanie list umożliwia wcześniejsze zakończenie wyszukiwania, które kończy się sukcesem, ale asymptotycznie też wymaga ono czasu $\Theta(1+\alpha)$.
+Aby wstawić nowy element do tablicy z~haszowaniem, należy umieścić go na liście wskazanej przez funkcję haszującą, znajdując wpierw odpowiednie miejsce na tej liście, aby dodanie elementu nie zaburzyło jej uporządkowania.
+Zostaną więc wykonane identyczne kroki jak podczas wyszukiwania zakończonego sukcesem, stąd czas wstawiania wynosi $\Theta(1+\alpha)$.
+Natomiast usuwanie elementu z~tablicy to usunięcie go z~jednej z~list, co na podstawie wyniku z~problemu \refProblem{10-1} zajmuje czas $\Theta(1)$.
 
 \exercise %11.2-4
 Każda pozycja tablicy $T$ w~takiej reprezentacji będzie zawierać znacznik przechowujący informację o~tym, czy pozycja ta jest zajęta.
