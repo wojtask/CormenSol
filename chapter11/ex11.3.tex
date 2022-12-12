@@ -22,35 +22,20 @@ Założymy zatem, że napis $x$ można uzyskać z~$y$, dokonując tylko jednej t
 Łatwo pokazać przez indukcję, że jeśli występuje kolizja dla takiej pary napisów, to ma ona miejsce również dla par napisów różniących się więcej niż jedną parą znaków.
 
 Podobnie jak w~poprzednim zadaniu będziemy traktować zamiennie znak oraz jego reprezentację w~kodzie ASCII\@.
-Pokażemy, że $h(x)=h(y)$, czyli że różnica
-\[
-	h(x)-h(y) = \biggl(\sum_{i=0}^{r-1}x_i2^{ip}\biggr)\bmod(2^p-1)-\biggl(\sum_{i=0}^{r-1}y_i2^{ip}\biggr)\bmod(2^p-1)
-\]
-jest zerem.
-Mamy:
+Mamy
 \begin{align*}
-	h(x)-h(y) &= \bigl((x_a2^{ap}+x_b2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
-	&= \bigl((y_b2^{ap}+y_a2^{bp})-(y_a2^{ap}+y_b2^{bp})\bigr)\bmod(2^p-1) \\
-	&= \bigl((y_a-y_b)2^{bp}-(y_a-y_b)2^{ap}\bigr)\bmod(2^p-1) \\
-	&= \bigl((y_a-y_b)(2^{bp}-2^{ap})\bigr)\bmod(2^p-1) \\
-	&= \bigl((y_a-y_b)2^{ap}(2^{(b-a)p}-1)\bigr)\bmod(2^p-1).
+	h(x) &= \biggl(\sum_{i=0}^{r-1}x_i2^{ip}\biggr)\bmod m \\
+	&= \sum_{i=0}^{r-1}(x_i\bmod m)(2^{ip}\bmod(2^p-1)) \\
+	&= \sum_{i=0}^{r-1}(x_i\bmod m)(2^p\bmod(2^p-1))^i \\
+	&= \sum_{i=0}^{r-1}(x_i\bmod m).
 \end{align*}
-Ze wzoru (A.5) zachodzi
+Znaki napisu $x$ możemy oczywiście sumować w~dowolnej kolejności, zatem
 \[
-	\sum_{i=0}^{b-a-1}2^{pi} = \frac{2^{(b-a)p}-1}{2^p-1},
+	h(x) = \sum_{i=0}^{r-1}(x_i\bmod m) = \sum_{i=0}^{r-1}(y_i\bmod m) = h(y).
 \]
-skąd
-\[
-	(2^p-1)\sum_{i=0}^{b-a-1}2^{pi} = 2^{(b-a)p}-1
-\]
-i~ostatecznie
-\[
-	h(x)-h(y) = \biggl((y_a-y_b)2^{ap}(2^p-1)\sum_{i=0}^{b-a-1}2^{pi}\biggr)\bmod(2^p-1) = 0,
-\]
-ponieważ jeden z~czynników jest równy $2^p-1$.
 
-Jeśli napisami będą np.\ sekwencje DNA, to użycie $h$ jako funkcji haszującej może doprowadzić do powstania dużej ilości kolizji.
-Każda sekwencja DNA stanowi bowiem ciąg nukleotydów czterech typów (reprezentowanych jako symbole \texttt{A}, \texttt{C}, \texttt{G} i~\texttt{T}), zatem prawdopodobieństwo, że jakaś sekwencja jest permutacją innej, jest stosunkowo duże.
+Użycie $h$ w~roli funkcji haszującej może doprowadzić do dużej ilości kolizji w~tablicy z~haszowaniem, w~której przechowywanych jest wiele napisów składających się z~tych samych znaków, ale w~zmienionej kolejności.
+Przykładami są zbiory anagramów albo zbiory sekwencji DNA o~jednakowej długości.
 
 \exercise %11.3-4
 Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy zatem $p=9$.
