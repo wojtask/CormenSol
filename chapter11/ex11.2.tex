@@ -64,6 +64,9 @@ Operacje \proc{Insert}, \proc{Delete} i~\proc{Search} działają więc tutaj w~o
 Aby go uzyskać, musieliśmy założyć, że lista wolnych pozycji $F$ jest listą dwukierunkową -- w~przeciwnym przypadku bowiem nie można byłoby usuwać z~niej w~czasie stałym.
 
 \exercise %11.2-5
-Funkcja haszująca przyjmuje $m$ różnych wartości, a~elementów zbioru $U$ jest więcej niż $nm$.
-Z~tego powodu istnieje taka wartość, która została przyporządkowana więcej niż $n$ kluczom ze zbioru $U$.
-Fakt ten wynika z~nieco zmodyfikowanej \textbf{zasady szufladkowej Dirichleta} \cite{pigeonholeprinciple} zwanej także \textbf{zasadą gołębnika}.
+Załóżmy, że na każdą z~$m-1$ pewnych pozycji tablicy odwzorowywanych jest co najwyżej $n-1$ kluczy z~$U$.
+Na ostatnią pozycję trafi więc co najmniej
+\[
+	|U|-(m-1)(n-1) > nm-(m-1)(n-1) = n+m-1 \ge n
+\]
+kluczy.
