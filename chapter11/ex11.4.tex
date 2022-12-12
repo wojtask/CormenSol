@@ -37,19 +37,15 @@ Dany klucz trafia ostatecznie na pierwszą wolną pozycję ze swojego ciągu kon
 \end{table}
 
 \exercise %11.4-2
-Pseudokod procedury \proc{Hash-Delete} przedstawiono poniżej:
+Procedura \proc{Hash-Delete} wstawia wartość \const{deleted} na pozycję tablicy zajmowaną przez klucz $k$.
 \begin{codebox}
 \Procname{$\proc{Hash-Delete}(T,k)$}
-\li	$i\gets0$
-\li	\Repeat $j\gets h(k,i)$
-\li		\If $T[j]=k$
-\li			\Then $T[j]\gets\const{deleted}$
-\li				\Return
-			\End
-\li		$i\gets i+1$
-\li	\Until $T[j]=\const{nil}$ lub $i=m$
+\li	$i\gets\proc{Hash-Search}(T,k)$
+\li	\If $i\ne\const{nil}$
+\li		\Then $T[i]\gets\const{deleted}$
+		\End
 \end{codebox}
-W~procedurze \proc{Hash-Insert} wystarczy zmienić wiersz 3 na następujący:
+Natomiast w~procedurze \proc{Hash-Insert} wystarczy zmienić wiersz 3 na następujący:
 \begin{codebox}
 \setcounter{codelinenumber}{2}
 \li	\If $T[j]=\const{nil}$ lub $T[j]=\const{deleted}$
