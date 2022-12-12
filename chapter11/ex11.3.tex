@@ -38,16 +38,15 @@ Użycie $h$ w~roli funkcji haszującej może doprowadzić do dużej ilości koli
 Przykładami są zbiory anagramów albo zbiory sekwencji DNA o~jednakowej długości.
 
 \exercise %11.3-4
-Największą potęgą 2 nieprzekraczającą $m=1000$ jest $2^9=512$, przyjmujemy zatem $p=9$.
-Założymy, że słowo maszynowe ma długość $w=32$ bity i~przybliżymy stałą $A$ wartością $s/2^w=2654435769/2^{32}$.
-Wówczas:
-\begin{itemize}
-	\item jeśli $k=61$, to $k\cdot s=161920581909=37\cdot2^{32}+3006791957$, więc $h(61)=358$;
-	\item jeśli $k=62$, to $k\cdot s=164575017678=38\cdot2^{32}+1366260430$, więc $h(62)=162$;
-	\item jeśli $k=63$, to $k\cdot s=167229453447=38\cdot2^{32}+4020696199$, więc $h(63)=479$;
-	\item jeśli $k=64$, to $k\cdot s=169883889216=39\cdot2^{32}+2380164672$, więc $h(64)=283$;
-	\item jeśli $k=65$, to $k\cdot s=172538324985=40\cdot2^{32}+739633145$, więc $h(65)=88$.
-\end{itemize}
+Rozmiar tablicy $m$ nie jest potęgą 2, dlatego nie możemy wyznaczyć wartości funkcji $h$ za pomocą metody opisanej w~Podręczniku.
+Obliczając je bezpośrednio ze wzoru, mamy:
+\begin{gather*}
+	h(61) = 700, \\
+	h(62) = 318, \\
+	h(63) = 936, \\
+	h(64) = 554, \\
+	h(65) = 172.
+\end{gather*}
 
 \exercise %11.3-5
 Wprowadźmy oznaczenia $u=|U|$ oraz $b=|B|$.
