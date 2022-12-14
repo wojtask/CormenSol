@@ -61,15 +61,13 @@ Istnienie węzła $z$ stoi jednak w~sprzeczności z~faktem, że $y$ jest następ
 Analogiczne rozumowanie przeprowadza się dla poprzednika węzła $x$.
 
 \exercise %12.2-6
-Udowodnimy to stwierdzenie bez użycia założenia o~unikalności kluczy w~drzewie.
+Wpierw udowodnimy, że $y$ musi być przodkiem $x$.
+Załóżmy więc, że $y$ nie jest przodkiem $x$ i~rozważmy węzeł $z$ -- najniższy wspólny przodek $x$ i~$y$.
+Z~własności drzew wyszukiwań binarnych zachodzi wtedy $\attrib{x}{key}<\attrib{z}{key}<\attrib{y}{key}$, co stoi w~sprzeczności z~założeniem, że $y$ jest następnikiem $x$.
 
-Oczywiście następnik węzła $x$ nie należy do jego lewego poddrzewa.
-Nie jest nim także żaden przodek $x$, którego prawe poddrzewo zawiera $x$, ani żaden węzeł z~lewego poddrzewa takiego przodka.
-Wszystkie te węzły bowiem występują w~porządku inorder przed $x$.
-Następnika $x$ należy więc szukać wśród tych przodków $x$, które zawierają $x$ w~swoich lewych poddrzewach.
-Niech $y_1$, $y_2$ będą dwoma takimi przodkami $x$ i~przyjmijmy, że $y_1$ zajmuje głębszy poziom od $y_2$.
-Wynika stąd, że $y_1$ należy do lewego poddrzewa $y_2$, a~więc $y_1$ występuje pomiędzy $x$ a~$y_2$ w~porządku inorder.
-Wnioskujemy zatem, że następnikiem węzła $x$ jest najniższy przodek $x$ mający $x$ w swoim lewym poddrzewie, a~to jest równoważne temu, że jego lewy syn także jest przodkiem $x$.
+Zauważmy teraz, że \attrib{y}{left} musi być przodkiem $x$, gdyż w~przeciwnym razie, to \attrib{y}{right} byłby przodkiem $x$, skąd byłoby $\attrib{x}{key}>\attrib{y}{key}$.
+W~końcu załóżmy, że to nie $y$, a~inny węzeł $z$ jest najniższym przodkiem węzła $x$, którego lewy syn jest także przodkiem $x$.
+Wówczas $z$ należy do lewego poddrzewa $y$, skąd $\attrib{z}{key}<\attrib{y}{key}$, co przeczy temu, że $y$ jest następnikiem $x$.
 
 \exercise %12.2-7
 Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie w~czasie $\Omega(n)$ kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.
