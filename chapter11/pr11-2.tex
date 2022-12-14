@@ -17,28 +17,20 @@ Z~własności prawdopodobieństwa i~z~punktu (a) mamy
 \]
 
 \subproblem %11-2(c)
-Zauważmy, że dla całkowitych $n$, $k$ spełniających $0<k\le n$ zachodzi
+Załóżmy, że $k>0$.
+Z~definicji współczynnika dwumianowego:
 \[
-	(n-k+1)(n-k+2)\dots n\cdot(n-1)^{n-k} < n^n,
+	\binom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{(n-k+1)(n-k+2)\dots n}{k!}.
 \]
-gdyż po lewej stronie jest iloczyn $n$ czynników nieprzekraczających $n$.
-Mnożąc tę nierówność obustronnie przez $(n-k)!$, dostajemy
+Każdy z~czynników w~liczniku ograniczamy od góry przez $n$.
+Z~drugiej strony, na podstawie wzoru Stirlinga, mamy $k!=\sqrt{2\pi k}\,(k/e)^k(1+\Theta(1/k))>(k/e)^k$.
+Stąd
 \[
-	n!\,(n-1)^{n-k} < (n-k)!\,n^n.
+	\binom{n}{k} < \frac{n^k}{(k/e)^k} = \biggl(\frac{ne}{k}\biggr)^k.
 \]
-Ponadto ze wzoru Stirlinga dla całkowitego $k>0$ wynika
+Wykorzystując tę nierówność, mamy
 \[
-	\frac{1}{k!} = \frac{e^k}{k^k\sqrt{2\pi k}\,(1+\Theta(1/k))} < \frac{e^k}{k^k}.
-\]
-
-Jeśli $k=0$, to oczywiście
-\[
-	Q_0 = \biggl(1-\frac{1}{n}\biggr)^n < 1 = \frac{e^0}{0^0}.
-\]
-Załóżmy teraz, że $k>0$.
-Wykorzystując nierówności z~poprzedniego paragrafu, mamy
-\[
-	Q_k = \frac{n!}{k!\,(n-k)!}\biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k} = \frac{n!\,(n-1)^{n-k}}{k!\,(n-k)!\,n^n} < \frac{1}{k!} < \frac{e^k}{k^k}.
+	Q_k = \biggl(\frac{1}{n}\biggr)^k\biggl(1-\frac{1}{n}\biggr)^{n-k}\binom{n}{k} < \frac{(n-1)^{n-k}}{n^n}\biggl(\frac{ne}{k}\biggr)^k = \biggl(\frac{n-1}{n}\biggr)^{n-k}\biggl(\frac{e}{k}\biggr)^k < \frac{e^k}{k^k}.
 \]
 
 \subproblem %11-2(d)
@@ -48,41 +40,27 @@ Wykorzystując nierówności z~poprzedniego paragrafu, mamy
 Z~poprzedniego punktu mamy, że $Q_{k_0}<e^{k_0}\!/{k_0}^{k_0}$, a~więc
 \begin{align*}
 	\lg Q_{k_0} &< k_0\lg e-k_0\lg k_0 \\
-	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n}{\lg\lg n}\lg\frac{c\lg n}{\lg\lg n} \\[1mm]
-	&= \frac{c\lg n\lg e}{\lg\lg n}-\frac{c\lg n(\lg c+\lg\lg n-\lg\lg\lg n)}{\lg\lg n} \\[1mm]
-	&= \frac{c\lg n(\lg e-\lg c)}{\lg\lg n}+\frac{c\lg n\lg\lg\lg n}{\lg\lg n}-c\lg n.
+	&= \frac{c\lg n}{\lg\lg n}\biggl(\lg e-\lg\frac{c\lg n}{\lg\lg n}\biggr) \\[1mm]
+	&= \frac{c\lg n}{\lg\lg n}(\lg e-\lg c-\lg\lg n+\lg\lg\lg n).
 \end{align*}
-Niech $c\ge3+c'$ dla pewnej nowej stałej $c'\ge0$.
-Wówczas pierwszy składnik powyższej sumy jest ujemny.
-Wyznaczymy jeszcze takie wartości $c'$, dla których nierówność
+Nierówność $Q_{k_0}<1/n^3$ jest równoważna $\lg Q_{k_0}<-3\lg n$, zatem na podstawie powyższego:
 \[
-	\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c' \le 0
+	\frac{c\lg n}{\lg\lg n}(\lg e-\lg c-\lg\lg n+\lg\lg\lg n) < -3\lg n.
 \]
-jest spełniona dla wszystkich $n$.
-Dla uproszczenia zapisu przyjmijmy $m=\lg\lg\lg n$.
-Powyższa nierówność sprowadza się do $(3+c')m\le c'2^m$, skąd
+Po podzieleniu obu stron tej nierówności przez $-\lg n$ dostajemy
 \[
-	c' \ge \frac{3m}{2^m-m}.
+	c\biggl(1-\frac{\lg\lg\lg n}{\lg\lg n}+\frac{\lg(c/e)}{\lg\lg n}\biggr) > 3.
 \]
-Można pokazać przez indukcję po $m$, że wyrażenie po prawej stronie jest mniejsze niż 4 niezależnie od wartości $m$, możemy zatem przyjąć $c'\ge4$.
+Można pokazać, że $\lg\lg\lg n/\lg\lg n<1$.
+Zatem dla $c\ge e$ wyrażenie w~nawiasie jest dodatnie i~wybierając wystarczająco duże $c$, możemy spełnić nierówność.
 
-Powracając teraz do głównego oszacowania, mamy
+Ustalmy $c$ tak, aby $k_0>e$.
+Wówczas $e/k_0<1$ i~dla $k\ge k_0$ wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$.
+Łącząc tę obserwację z~wynikami z~poprzednich części, otrzymujemy, że
 \[
-	\lg Q_{k_0} < \biggl(\frac{(3+c')\lg\lg\lg n}{\lg\lg n}-c'-3\biggr)\lg n \le -3\lg n,
+	P_k\le nQ_k < ne^k\!/k^k \le ne^{k_0}\!/k_0^{k_0} < n\cdot1/n^3 = 1/n^2
 \]
-skąd $Q_{k_0}<2^{-3\lg n}=1/n^3$, o~ile wybierzemy $c\ge7$.
-
-Aby udowodnić, że $P_k<1/n^2$ dla wszystkich $k\ge k_0$, wykorzystamy część (b), w~której pokazaliśmy, że $P_k\le nQ_k$ dla dowolnego $k$.
-Dla $k=k_0$ mamy $P_{k_0}\le nQ_{k_0}=n\cdot1/n^3=1/n^2$.
-Udowodnimy teraz, że dobierając odpowiednią stałą $c$, możemy spełnić nierówność $Q_k<1/n^3$ dla każdego $k\ge k_0$ i~na tej podstawie wywnioskujemy, że $P_k<1/n^2$ dla każdego $k\ge k_0$.
-Wybierzmy wystarczająco dużą stałą $c$ tak, aby $k_0>e$.
-Wówczas $e/k<1$ dla wszystkich $k\ge k_0$ i~wyrażenie $(e/k)^k$ maleje wraz ze wzrostem $k$.
-Wcześniej pokazaliśmy, że $e^{k_0}\!/k_0^{k_0}<1/n^3$.
-Mamy więc
-\[
-	Q_k < e^k\!/k^k \le e^{k_0}\!/k_0^{k_0} < 1/n^3,
-\]
-a~zatem badane oszacowanie jest spełnione.
+dla dowolnego $k\ge k_0$.
 
 \subproblem %11-2(e)
 Niech $k_0=c\lg n/\!\lg\lg n$.
@@ -91,9 +69,9 @@ Wówczas
 	\E(M) &= \sum_{k=0}^nkP_k = \sum_{k=0}^{k_0}kP_k+\sum_{k=k_0+1}^nkP_k \\
 	&\le k_0\sum_{k=0}^{k_0}P_k+n\sum_{k=k_0+1}^nP_k = k_0\Pr(M\le k_0)+n\Pr(M>k_0).
 \end{align*}
-Aby pokazać, że $\E(M)=O(\lg n/\!\lg\lg n)$, wykorzystamy fakt, który udowodniliśmy w~punkcie (d), że $P_k<1/n^2$ dla $k\ge k_0$.
-Mamy
+
+W~celu uzasadnienia górnego oszacowania dla $\E(M)$, wykorzystamy fakt, który udowodniliśmy w~punkcie (d):
 \begin{align*}
-	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\Pr(M\le k_0)+n\sum_{k=k_0+1}^nP_k \\
-	&< k_0\cdot1+n\sum_{k=k_0+1}^n1/n^2 \le k_0+n^2\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
+	\E(M) &\le k_0\Pr(M\le k_0)+n\Pr(M>k_0) = k_0\cdot1+n\sum_{k=k_0+1}^nP_k \\
+	&< k_0+n\sum_{k=k_0+1}^n1/n^2 \le k_0+n\cdot n\cdot1/n^2 = k_0+1 = O(\lg n/\!\lg\lg n).
 \end{align*}
