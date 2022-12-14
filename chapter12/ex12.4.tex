@@ -5,7 +5,7 @@ Sumę $\sum_{i=0}^{n-1}\binom{i+3}{3}$ zapisujemy w~równoważnej postaci $\sum_
 Teza wynika bezpośrednio z~lematu z~rozwiązania części (f) problemu \refProblem{5-2}, dla $k=3$ i~z~$n+2$ w~miejscu $n$.
 
 \exercise %12.4-2
-Rozważmy drzewo binarne o~$n\ge16$ węzłach, w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów (dla zwiększenia czytelności pomijamy branie części całkowitych), natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce w~dół od jednego z~węzłów pełnego drzewa i~rozciąga się na $\sqrt{n\lg n}$ poziomów.
+Rozważmy drzewo binarne o~$n\ge16$ węzłach, w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów (dla zwiększenia czytelności pomijamy branie części całkowitych), natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce w~dół od jednego z~węzłów z~kompletnego poziomu i~rozciąga się na $\sqrt{n\lg n}$ poziomów.
 Drzewo takie ma wysokość
 \[
 	\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)+\sqrt{n\lg n} = \Theta\bigl(\!\sqrt{n\lg n}\bigr) = \omega(\lg n).
@@ -17,7 +17,7 @@ W~oszacowaniu górnym użyjemy $O(\lg n)$ jako ograniczenia na głębokość ka�
 \[
 	\frac{1}{n}\cdot O\bigl(\bigl(n-\sqrt{n\lg n}\bigr)\lg n+\sqrt{n\lg n}\,\bigl(\lg n+\sqrt{n\lg n}\bigr)\bigr) = \frac{1}{n}\cdot O(n\lg n) = O(\lg n).
 \]
-Z~kolei zauważmy, że najniższy poziom pełnego drzewa binarnego składa się z~$n-\sqrt{n\lg n}$ węzłów, z~których każdy ma głębokość $\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)$.
+Z~kolei zauważmy, że najniższy poziom z~kompletem węzłów składa się z~$n-\sqrt{n\lg n}$ węzłów, z~których każdy ma głębokość $\Theta\bigl(\lg\bigl(n-\sqrt{n\lg n}\bigr)\bigr)$.
 Dla $n\ge16$ zachodzi $\sqrt{n\lg n}\le n/2$, dlatego liczbę węzłów w~pełnym drzewie binarnym można ograniczyć przez $n-\sqrt{n\lg n}\ge n-n/2=\Omega(n)$, a~wysokość każdego z~nich przez $\Omega(\lg n)$.
 Stąd średnia głębokość węzła ograniczona jest z~dołu przez
 \[
