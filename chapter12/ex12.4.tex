@@ -1,17 +1,8 @@
 \subchapter{Losowo skonstruowane drzewa wyszukiwań binarnych}
 
 \exercise %12.4-1
-Wzór udowodnimy przez indukcję względem $n$.
-Jeśli $n=1$, to po obu stronach znaku równości jest 1.
-Załóżmy teraz, że $n>1$ i~że spełnione jest założenie indukcyjne
-\[
-	\sum_{i=0}^{n-2}\binom{i+3}{3} = \binom{n+2}{4}.
-\]
-Mamy
-\[
-	\sum_{i=0}^{n-1}\binom{i+3}{3} = \sum_{i=0}^{n-2}\binom{i+3}{3}+\binom{n+2}{3} = \binom{n+2}{4}+\binom{n+2}{3} = \binom{n+3}{4},
-\]
-przy czym w~ostatniej równości wykorzystaliśmy \refExercise{C.1-7}.
+Sumę $\sum_{i=0}^{n-1}\binom{i+3}{3}$ zapisujemy w~równoważnej postaci $\sum_{i=3}^{n+2}\binom{i}{3}$.
+Teza wynika bezpośrednio z~lematu z~rozwiązania części (f) problemu \refProblem{5-2}, dla $k=3$ i~z~$n+2$ w~miejscu $n$.
 
 \exercise %12.4-2
 Rozważmy drzewo binarne o~$n\ge16$ węzłach, w~którym początkowe poziomy stanowią pełne drzewo binarne składające się z~$n-\sqrt{n\lg n}$ węzłów (dla zwiększenia czytelności pomijamy branie części całkowitych), natomiast pozostałe $\sqrt{n\lg n}$ węzłów znajduje się na ścieżce w~dół od jednego z~węzłów pełnego drzewa i~rozciąga się na $\sqrt{n\lg n}$ poziomów.
