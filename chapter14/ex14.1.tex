@@ -105,26 +105,27 @@ Wstawienie dowolnego elementu tablicy $A$ do drzewa oraz obliczenie jego rangi w
 Nadajmy cięciwom etykiety w~postaci kolejnych liczb naturalnych od 1 do $n$.
 Utwórzmy teraz ciąg o~długości $2n$ uzyskany w~wyniku poruszania się wzdłuż okręgu w~ustalonym kierunku (rozpoczynając od dowolnego z~jego punktów) i~odczytywania etykiety cięciwy w~momencie napotkania jednego z~jej końców.
 Ciąg ten przechowamy w~tablicy $C[1\twodots2n]$.
-Nietrudno udowodnić fakt, że cięciwa o~etykiecie $i$ przecina się z~cięciwą o~etykiecie $j$ wtedy i~tylko wtedy, gdy dokładnie jeden egzemplarz $i$ znajduje się w~tablicy $C$ pomiędzy dwoma egzemplarzami $j$.
+Nietrudno udowodnić fakt, że cięciwa o~etykiecie $i$ przecina się z~cięciwą o~etykiecie $j$ wtedy i~tylko wtedy, gdy w~tablicy $C$ pomiędzy jednym a~drugim wystąpieniem $j$ znajduje się dokładnie jedno wystąpienie $i$.
 
-Tablica $C$ będzie stanowić dane wejściowe dla algorytmu \proc{Intersecting-Chords} wyznaczającego liczbę przecinających się cięciw.
-Ogólna idea algorytmu będzie polegała na przeglądnięciu tablicy $C$ od lewej do prawej i~policzeniu etykiet, które pojawiają się dokładnie raz między dwoma egzemplarzami innej etykiety.
-Algorytm zwróci na końcu sumę takich wystąpień.
+Tablica $C$ stanowi dane wejściowe dla algorytmu \proc{Intersecting-Chords} wyznaczającego liczbę przecinających się cięciw.
+Ogólna idea algorytmu polega na przeglądaniu tablicy $C$ od lewej do prawej i~zliczaniu etykiet, które pojawiają się dokładnie raz między dwoma egzemplarzami innej etykiety.
+Algorytm zwraca w~wyniku sumę takich wystąpień.
 
-Do stwierdzania, czy dana etykieta została już napotkana podczas przeglądania tablicy $C$, wykorzystamy tablicę $P[1\twodots n]$, którą wypełnimy początkowo zerami.
+Do stwierdzania, czy dana etykieta została już napotkana podczas przeglądania tablicy $C$, wykorzystamy tablicę $P[1\twodots n]$ początkowo wypełnioną zerami.
 Będziemy też utrzymywać zbiór dynamiczny $T$ przechowujący pozycje w~$C$ końców cięciw, które pojawiły się do tej pory dokładnie raz.
-Dla każdej kolejnej pozycji $k=1$, 2, \dots, $2n$, jeśli etykieta $j=C[k]$ pojawia się pierwszy raz, to do $P[j]$ wpiszemy wartość $k$ i~wstawimy $k$ do zbioru $T$.
-W~przeciwnym przypadku znajdziemy liczbę elementów zbioru $T$ większych od $P[j]$ i~dodamy ją do liczby aktualnych przecięć, a~następnie usuniemy $P[j]$ z~$T$.
+Dla każdego kolejnego $k=1$, 2, \dots, $2n$, jeśli etykietę $j=C[k]$ napotykamy pierwszy raz, to pozycję $k$ wpisujemy do $P[j]$ i~wstawiamy ją do zbioru $T$.
+W~przeciwnym przypadku znajdujemy liczbę elementów zbioru $T$ większych od $P[j]$ i~zwiększamy o~nią aktualną liczbę przecięć, po czym usuwamy $P[j]$ z~$T$.
 
 Aby efektywnie wykonywać operacje na zbiorze dynamicznym $T$, zaimplementujemy go jako drzewo statystyk pozycyjnych.
 Do wstawiania, usuwania i~wyszukiwania elementów w~tym drzewie wykorzystamy operacje \proc{OS-Insert}, \proc{OS-Delete} i~\proc{OS-Search}, które działają jak odpowiednie operacje na drzewach czerwono-czarnych i~ewentualnie aktualizują wartości atrybutów \id{size}.
-Pierwsze dwie z~nich zostały opisane w~Podręczniku, a~\proc{OS-Search} działa identycznie jak wyszukiwanie zadanego klucza w~drzewie czerwono-czarnym.
-W~trackie działania algorytmu w~drzewie $T$ nigdy nie będzie powtarzających się kluczy, więc wyszukiwanie danego klucza w~$T$ zwróci jedyny węzeł z~takim kluczem.
-Można też zauważyć, że dla dowolnego węzła $x$ rozmiar drzewa $T$ pomniejszony o~rangę $x$ w~$T$, jest liczbą węzłów o~kluczach większych niż \attrib{x}{key}.
+Pierwsze dwie z~nich zostały opisane w~Podręczniku, a~\proc{OS-Search} działa identycznie jak wyszukiwanie w~drzewie czerwono-czarnym.
+W~trakcie działania algorytmu w~drzewie $T$ nigdy nie będzie powtarzających się kluczy, więc wyszukiwanie danego klucza w~$T$ zwróci jedyny węzeł z~takim kluczem.
+Skorzystamy też z~faktu, że dla dowolnego węzła $x$ rozmiar drzewa $T$ pomniejszony o~rangę $x$ w~$T$ jest liczbą węzłów o~kluczach większych niż \attrib{x}{key}.
 Rozmiar drzewa pozycyjnego $T$ wynosi \attribb{T}{root}{size}, a~do znajdowania rangi elementu wykorzystamy operację \proc{OS-Rank}.
 \begin{codebox}
 \Procname{$\proc{Intersecting-Chords}(C)$}
 \li $n\gets\attrib{C}{length}/2$
+\li	utwórz tablicę $P[1\twodots n]$
 \li	\For $k=1$ \To $n$
 \li		\Do $P[k]=0$
 		\End
@@ -145,4 +146,4 @@ Rozmiar drzewa pozycyjnego $T$ wynosi \attribb{T}{root}{size}, a~do znajdowania 
 \end{codebox}
 
 Zauważmy, że każda z~$n$ etykiet jest wstawiana do $T$ dokładnie raz i~dla każdej z~nich dokładnie raz wykonane zostaną operacje w~wierszach \ref{li:intersecting-chords-count-intersections-begin}\nbendash\ref{li:intersecting-chords-count-intersections-end}.
-Ponieważ wszystkie operacje słownikowe, jak również \proc{OS-Rank}, na drzewie pozycyjnym o~$n$ węzłach działają w~czasie $O(\lg n)$, to stąd czasem działania algorytmu jest $O(n\lg n)$.
+Ponieważ wszystkie operacje słownikowe, jak również \proc{OS-Rank}, na drzewie pozycyjnym o~co najwyżej $n$ węzłach działają w~czasie $O(\lg n)$, to stąd czasem działania algorytmu jest $O(n\lg n)$.
