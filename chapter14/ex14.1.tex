@@ -79,17 +79,17 @@ Najpierw wyznaczamy więc $r$ w~czasie $O(\lg n)$, wywołując $\proc{OS-Rank}(T
 \exercise %14.1-6
 Przyjmijmy, że ranga klucza dowolnego węzła $x$ w~poddrzewie o~korzeniu $x$ przechowywana jest w~atrybucie \attrib{x}{rank}.
 
-Podczas wstawiania nowego węzła $z$ do drzewa statystyk pozycyjnych szukamy dla niego odpowiedniego miejsca na ścieżce w~dół od korzenia drzewa.
-Dla każdego węzła $x$ na tej ścieżce, jeśli węzeł $z$ jest umieszczany w~lewym poddrzewie $x$, to rozmiar tego poddrzewa rośnie o~1, a~co za tym idzie, również \attrib{x}{rank} rośnie o~1.
-Jeśli z~kolei $z$ ląduje w~prawym poddrzewie $x$, to \attrib{x}{rank} nie zmienia się.
-Podobnie w~usuwaniu, o~1 zostanie zmniejszona ranga każdego węzła $x$, który w~swoim lewym poddrzewie zawierał efektywnie usunięty węzeł, a~rangi każdego innego węzła pozostaną niezmienione.
-
-Opiszemy jeszcze zmiany rang, jakie zachodzą podczas przeprowadzania rotacji.
+Wpierw opiszemy zmiany rang, jakie zachodzą podczas przeprowadzania rotacji.
 Rozważmy węzeł $x$, którego prawy syn $y$ jest węzłem wewnętrznym drzewa, i~wykonajmy na $x$ lewą rotację.
 Wartość \attrib{x}{rank} nie zmieni się, ponieważ lewe poddrzewo $x$ nie zmienia swojego rozmiaru w~wyniku przeprowadzenia rotacji.
 Węzeł $x$ staje się lewym synem węzła $y$, a~lewe poddrzewo $y$ sprzed rotacji staje się prawym poddrzewem $x$, w~dalszym ciągu jednak pozostając w~lewym poddrzewie $y$.
 Wynika stąd, że po wykonaniu rotacji \attrib{y}{rank} zostanie powiększone o~\attrib{x}{rank}.
-Modyfikacje rang w~przypadku prawej rotacji są analogiczne.
+Symetrycznie, w~trakcie prawej rotacji węzła $x$ o~lewym synu $y$, zmianie ulegnie jedynie \attrib{x}{rank} -- dokładniej, zmniejszy się o~\attrib{y}{rank}.
+
+Podczas wstawiania nowego węzła $z$ do drzewa statystyk pozycyjnych pokonywana jest ścieżka od korzenia do jednego z~liści.
+Dla każdego węzła $x$ na tej ścieżce, jeśli węzeł $z$ jest umieszczany w~lewym poddrzewie $x$, to rozmiar tego poddrzewa rośnie o~1, a~co za tym idzie, również \attrib{x}{rank} rośnie o~1.
+Jeśli z~kolei $z$ ląduje w~prawym poddrzewie $x$, to \attrib{x}{rank} nie zmienia się.
+Podobnie w~usuwaniu, ranga każdego węzła $x$, który w~swoim lewym poddrzewie zawierał efektywnie usunięty węzeł, zostanie zmniejszona o~1.
 
 \exercise %14.1-7
 Niech $A[1\twodots n]$ będzie tablicą zawierającą $n$ różnych liczb.
