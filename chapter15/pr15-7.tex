@@ -5,43 +5,44 @@ Kluczowy w~naszym rozwiązaniu będzie następujący lemat:
 \noindent\textsf{\textbf{Lemat.}} \textit{W~uporządkowaniu o~maksymalnym zysku prace uszeregowane są według terminów ich ukończenia.}
 \begin{proof}
 Rozważmy optymalne uszeregowanie prac, w~którym praca $a_i$ jest wykonywana przed pracą $a_j$, ale $d_i>d_j$.
-Zamiana $a_i$ z~$a_j$ w~tym uporządkowaniu może jedynie powiększyć zysk, dlatego możemy zamienić każdą taką parę, uzyskując w~wyniku zysk niemniejszy niż przez zamianą.
+Zamiana $a_i$ z~$a_j$ w~tym uporządkowaniu może jedynie powiększyć zysk, dlatego możemy zamienić każdą taką parę, otrzymując w~wyniku zysk niemniejszy niż przed zamianą.
 Ciąg, w~którym nie można już wykonać takiej zamiany, jest uporządkowaniem prac według terminów ich ukończenia.
 \end{proof}
 
 Nasz algorytm będzie konstruował optymalny harmonogram prac jako ciąg pewnego podzbioru prac wejściowych.
-Aby uzyskać maksymalny sumaryczny zysk, należy wykonać na maszynie prace kolejno z~tego ciągu bezzwłocznie po rozpoczęciu działania maszyny i~bez przerw między pracami.
-Zauważmy, że żadna praca o~czasie wykonania dłuższym niż termin jej ukończenia, nie wprowadza zysku do optymalnego harmonogramu, dlatego będziemy zakładać, że algorytm operuje na pracach $a_j$, dla których zachodzi $t_j\le d_j$.
+Aby uzyskać maksymalny sumaryczny zysk, należy wykonać na maszynie prace kolejno z~tego ciągu bezzwłocznie po rozpoczęciu działania maszyny i~bez okresów bezczynności między pracami.
+Zauważmy, że żadna praca o~czasie wykonania dłuższym niż termin jej ukończenia, nie wprowadza zysku do optymalnego harmonogramu, dlatego będziemy zakładać, że w~wejściowym zbiorze nie ma prac o~takiej własności.
+Ponadto, z~założenia, że wykonanie każdej pracy zajmuje maksymalnie $n$ jednostek czasu, przyjmiemy, że ich terminy ukończenia wynoszą maksymalnie $n^2$.
+Mając na uwadze powyższy lemat, założymy, że prace wejściowe zostały uporządkowane względem ich terminów ukończenia, tzn.\ dla każdych $1\le i\le j\le n$, termin pracy $a_i$ wypada nie później niż termin pracy $a_j$.
+Zachodzi więc $t_i\le d_i\le d_j\le n^2$.
 
-Posortujemy prace według ich terminów tak, aby zachodziło $d_1\le d_2\le\dots\le d_n$.
-Z~założenia, że czas wykonania każdej pracy wynosi co najwyżej $n$ jednostek czasu, możemy też każdy termin wykonania $d_i$, który jest większy niż $n^2$, zredukować do $n^2$.
-Zdefiniujmy $P_{i,j}$ dla $0\le i\le n$, $0\le j\le d_n$ jako maksymalny zysk możliwy do osiągnięcia przez planowanie prac $a_1$, $a_2$, \dots, $a_i$ w~przedziale czasowym $[0,j]$.
-Rozwiązaniem problemu jest wówczas $P_{n,d_n}$, gdyż wykonanie dowolnej pracy po terminie jej ukończenia, a~w~szczególności po $d_n$, nie prowadzi do powiększenia sumarycznego zysku.
+Zdefiniujmy $P_{i,k}$ dla $0\le i\le n$, $0\le k\le d_n$ jako maksymalny zysk możliwy do osiągnięcia przez rozplanowanie prac $a_1$, $a_2$, \dots, $a_i$ w~przedziale czasowym $[0,k]$.
+Rozwiązaniem problemu jest wówczas $P_{n,d_n}$\!, gdyż wykonanie dowolnej pracy po terminie jej ukończenia, a~w~szczególności po $d_n$, nie prowadzi do powiększenia sumarycznego zysku.
 
-Zastanówmy się teraz, jak obliczyć wartości $P_{i,j}$.
-Jeśli $i=0$ lub $j=0$, to przyjmiemy $P_{i,j}=0$.
+Zastanówmy się teraz, jak obliczyć wartości $P_{i,k}$.
+Jeśli $i=0$ lub $k=0$, to przyjmiemy $P_{i,k}=0$.
 Niech $i\ge1$.
-Jeśli $j<t_i$, to praca $a_i$ nie może być wykonana w~przedziale $[0,j]$, dlatego $P_{i,j}=P_{i-1,j}$.
-Gdy jednak $j\ge t_i$, to mamy wówczas dwie możliwości -- możemy pominąć pracę $a_i$ w~naszym uporządkowaniu, co daje $P_{i,j}=P_{i-1,j}$, albo włączyć ją do uporządkowania, w~której to sytuacji, aby otrzymać zysk za wykonanie pracy $a_i$, musimy wykonać ją przed terminem jej wykonania, dlatego pozostały przedział czasowy, jaki pozostaje do rozplanowania pozostałych prac to $[0,\min(j,d_i)-t_i]$.
-Udowodniony powyżej lemat mówi nam, że pozostałymi pracami, jakie należy rozplanować w~tym przedziale, są $a_1$, $a_2$, \dots, $a_{i-1}$.
-Stąd, jeżeli praca $a_i$ będzie włączona do uporządkowania, to zachodzi $P_{i,j}=P_{i-1,\min(j,d_i)-t_i}+p_i$.
+Jeśli $k<t_i$, to praca $a_i$ nie może być wykonana w~przedziale $[0,k]$, dlatego $P_{i,k}=P_{i-1,k}$.
+W~przeciwnym razie mamy dwie możliwości -- możemy pominąć pracę $a_i$ w~naszym uporządkowaniu, co daje $P_{i,k}=P_{i-1,k}$, albo włączyć ją do uporządkowania, w~której to sytuacji, aby otrzymać zysk za wykonanie pracy $a_i$, musimy wykonać ją przed terminem jej ukończenia, dlatego pozostały przedział czasowy, jaki pozostaje do rozplanowania pozostałych prac to $[0,\min(k,d_i)-t_i]$.
+Udowodniony powyżej lemat mówi nam, że pozostałymi pracami, jakie pozostają do rozplanowania w~tym przedziale, są $a_1$, $a_2$, \dots, $a_{i-1}$.
+Stąd, jeżeli praca $a_i$ będzie włączona do uporządkowania, to $P_{i,k}=P_{i-1,\min(k,d_i)-t_i}+p_i$.
 Dostajemy zależność rekurencyjną:
 \[
-	P_{i,j} = \begin{cases}
-		0, & \text{jeśli $i=0$ lub $j=0$}, \\
-		P_{i-1,j}, & \text{jeśli $i\ge1$, $1\le j<t_i$}, \\
-		\max\bigl(P_{i-1,j},P_{i-1,\min(j,d_i)-t_i}+p_i\bigr), & \text{jeśli $i\ge1$, $t_i\le j\le d_n$}.
+	P_{i,k} = \begin{cases}
+		0, & \text{jeśli $i=0$ lub $k=0$}, \\
+		P_{i-1,k}, & \text{jeśli $i\ge1$ i~$1\le k<t_i$}, \\
+		\max\bigl(P_{i-1,k},P_{i-1,\min(k,d_i)-t_i}+p_i\bigr), & \text{jeśli $i\ge1$ i~$t_i\le k\le d_n$}.
 	\end{cases}
 \]
 
-Zauważmy, że tak naprawdę nie trzeba przechowywać równocześnie wszystkich wartości $P_{i,j}$.
+Zauważmy, że tak naprawdę nie trzeba przechowywać równocześnie wszystkich wartości $P_{i,k}$.
 Wystarczy w~danym momencie pamiętać wszystkie $d_n+1$ tylko dla ustalonego $i$.
-Jeśli $i<n$, to ciąg $P_{i+1,j}$ można uzyskać, iterując zmienną $j$ po coraz mniejszych liczbach od $d_n$ do 0 i~wykorzystując do obliczeń aktualny ciąg $P_{i,j}$ oraz obserwację, że wartość $P_{i+1,j}$ nie zależy od żadnego $P_{i,j'}$, gdzie $j'>j$.
-Do zapamiętania wartości $P_{i,j}$ wystarczy zatem $O(n^2)$ komórek pamięci.
+Jeśli $i<n$, to ciąg $P_{i+1,k}$ można uzyskać, zmieniając $k$ od $d_n$ w~dół aż do 0 i~wykorzystując do obliczeń aktualny ciąg $P_{i,k}$ oraz obserwację, że wartość $P_{i+1,k}$ nie zależy od żadnego $P_{i,k'}$, gdzie $k'>k$.
+Do zapamiętania wartości $P_{i,k}$ wystarczy zatem $O(n^2)$ komórek pamięci.
 
-Można teraz łatwo ułożyć algorytm wykorzystujący programowanie dynamiczne, który wyznacza wartości $P_{i,j}$ i~zwraca w~wyniku $P_{n,d_n}$\!.
-Czas wymagany na policzenie ich wszystkich jest proporcjonalny do $O(nd_n)=O(n^3)$.
-Jeśli od algorytmu oczekujemy także wypisania znalezionego rozwiązania, to należy użyć dodatkowej tablicy, w~której zapamiętana zostanie informacja o~tym, czy praca $a_i$ należy do optymalnego uporządkowania w~przedziale czasowym $[0,j]$, i~skorzystać z~tej tablicy w~celu zrekonstruowania tego optymalnego uporządkowania.
+Można teraz łatwo ułożyć algorytm wykorzystujący programowanie dynamiczne, który wyznacza wartości $P_{i,k}$ i~zwraca w~wyniku $P_{n,d_n}$\!.
+Czas wymagany do policzenia ich wszystkich jest proporcjonalny do $O(nd_n)=O(n^3)$.
+Jeśli od algorytmu oczekujemy także wypisania znalezionego rozwiązania, to wystarczy użyć dodatkowej tablicy, w~której zapamiętana zostanie informacja o~tym, czy praca $a_i$ należy do optymalnego uporządkowania w~przedziale czasowym $[0,k]$, i~skorzystać z~tej tablicy w~celu zrekonstruowania tego optymalnego uporządkowania.
 
 Założenie, z~którego korzystaliśmy w~zadaniu pozwoliło na zaprojektowanie wielomianowego algorytmu dla tego problemu.
 W~ogólności, czyli przy dopuszczeniu dowolnie dużych czasów wykonania, problem staje się NP\nbhyphen zupełny i~prawdopodobnie nie istnieje dla niego algorytm o~czasie niższym niż wykładniczy względem rozmiaru danych wejściowych.
