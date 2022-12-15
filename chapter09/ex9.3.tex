@@ -189,36 +189,26 @@ Dzięki temu algorytm działa w czasie $O(n)$.
 \end{codebox}
 
 \exercise %9.3-8
-Niech $m_X$ będzie medianą (dolną) elementów z~tablicy $X$ i~niech $m_Y$ będzie medianą (dolną) elementów z~tablicy $Y$.
-Jeśli $m_X=m_Y$, to wśród wszystkich $2n$ elementów obu tablic co najmniej $n$ jest większych (lub równych) od obu median i~co najmniej $n$ jest od nich mniejszych (lub równych).
-Wartość $m_X$ jest więc szukaną medianą wszystkich $2n$ liczb.
-Załóżmy teraz, że $n>1$ i, bez straty ogólności, że $m_X<m_Y$.
-Odrzucając teraz około $n/2$ elementów $X$ na lewo od $m_X$ i~około $n/2$ elementów $Y$ na prawo od $m_Y$, sprowadzamy problem do podproblemu mniejszego o~około połowę, ponieważ wiadomo, że poszukiwana mediana znajduje się wśród pozostawionych elementów.
-Ponadto, jeśli $n$ jest parzyste, to element $m_X$ także może zostać odrzucony, bo na pewno nie jest szukaną medianą.
-Do podproblemu trafią zatem pozostawione fragmenty tablic $X$ i~$Y$ o~rozmiarach $\lceil n/2\rceil$ każdy.
-
 Podamy rekurencyjny algorytm rozwiązujący zadany problem.
-Gdy $n=1$, to algorytm zwróci mniejszy z~dwóch wejściowych elementów (wynikiem jest mediana dolna).
-W~przeciwnym przypadku wyznaczane są indeksy median dolnych i~górnych obu tablic, które dzięki uporządkowaniu obu tablic, jesteśmy w~stanie wyznaczyć natychmiast, po czym algorytm wywołuje się rekurencyjnie zgodnie z~powyższym opisem.
-Aby odnaleźć wspólną medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, należy wywołać $\proc{Joint-Median}(X,1,n,Y,1,n)$.
+Gdy $n=1$, to algorytm zwraca mniejszy z~dwóch wejściowych elementów (wynikiem jest mediana dolna).
+W~przeciwnym razie algorytm działa na podtablicach $X[p_X\twodots r_X]$ i~$Y[p_Y\twodots r_Y]$, gdzie $p_X<r_X$, $p_Y<r_Y$ oraz $r_X-p_X=r_Y-p_Y$.
+Jeśli mediana pierwszej z~nich, $m_X$ jest mniejsza od mediany drugiej, $m_Y$, to z~faktu, że obie te podtablice są uporządkowane mamy, że szukana wspólna mediana nie może znajdować się zarówno w~$X$ na lewo od $m_X$, jak i~w~$Y$ na prawo od $m_Y$.
+Odrzucając te fragmenty obu tablic, sprowadzamy problem do podproblemu o~około połowę mniejszego, który rozwiązujemy przez rekurencyjne wywołanie algorytmu dla pozostałych fragmentów.
+Analogiczny wniosek i~zachowanie algorytmu mają miejsce w~przypadku, gdy $m_X\ge m_Y$.
 \begin{codebox}
 \Procname{$\proc{Joint-Median}(X,p_X,r_X,Y,p_Y,r_Y)$}
-\li	\If $p_X=r_X$
+\li	$n\gets r_X-p_X+1$
+\li	\If $n=1$
 \li		\Then \Return $\min(X[p_X],Y[p_Y])$
 		\End
-\li	$q_X\gets\lfloor(p_X+r_X)/2\rfloor$ \>\>\>\>\>\>\Comment indeks mediany dolnej podtablicy $X[p_X\twodots r_X]$
-\li	$q_X'\gets\lceil(p_X+r_X)/2\rceil$ \>\>\>\>\>\>\Comment indeks mediany górnej podtablicy $X[p_X\twodots r_X]$
-\li	$q_Y\gets\lfloor(p_Y+r_Y)/2\rfloor$ \>\>\>\>\>\>\Comment indeks mediany dolnej podtablicy $Y[p_Y\twodots r_Y]$
-\li	$q_Y'\gets\lceil(p_Y+r_Y)/2\rceil$ \>\>\>\>\>\>\Comment indeks mediany górnej podtablicy $Y[p_Y\twodots r_Y]$
-\li	\If $X[q_X]=Y[q_Y]$
-\li		\Then \Return $X[q_X]$
-		\End
-\li	\If $X[q_X]<Y[q_Y]$
-\li		\Then \Return $\proc{Joint-Median}(X,q_X',r_X,Y,p_Y,q_Y)$
-\li		\Else \Return $\proc{Joint-Median}(X,p_X,q_X,Y,q_Y',r_Y)$
+\li	$m\gets\lfloor(n+1)/2\rfloor$
+\li	\If $X[p_X+m-1]<Y[p_Y+m-1]$
+\li		\Then \Return $\proc{Joint-Median}(X,r_X-m+1,r_X,Y,p_Y,p_Y+m-1)$
+\li		\Else \Return $\proc{Joint-Median}(X,p_X,p_X+m-1,Y,r_Y-m+1,r_Y)$
 		\End
 \end{codebox}
 
+Aby odnaleźć wspólną medianę $2n$ elementów z~tablic $X[1\twodots n]$ i~$Y[1\twodots n]$, należy wywołać $\proc{Joint-Median}(X,1,n,Y,1,n)$.
 Pesymistyczny czas działania algorytmu opisuje rekurencja $T(n)=T(\lceil n/2\rceil)+\Theta(1)$, gdzie $n=r_X-p_X+1$.
 Jej rozwiązaniem jest oczywiście $T(n)=O(\lg n)$.
 
