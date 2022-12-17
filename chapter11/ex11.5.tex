@@ -3,31 +3,31 @@
 \exercise %11.5-1
 \note{W~treści zadania zamiast haszowania uniwersalnego powinno być haszowanie równomierne.}
 
-\noindent Rozważmy prawdopodobieństwo $q(n,m)$, że wystąpi przynajmniej jedna kolizja.
-Jest $\binom{n}{2}$ par kluczy, które mogą tworzyć kolizję z~prawdopodobieństwem $1/m$ każda.
-Mamy więc
-\[
-	q(n,m) = \binom{n}{2}\frac{1}{m} = \frac{n(n-1)}{2m}
-\]
-i~teraz, dzięki skorzystaniu ze wzoru (3.11), otrzymujemy
-\[
-	p(n,m) = 1-q(n,m) = 1-\frac{n(n-1)}{2m} \le e^{-n(n-1)/2m}.
-\]
+\noindent Wzór udowodnimy przez indukcję po $n$.
+Oczywiście jeden klucz sam nie utworzy kolizji, więc $p(1,m)=1$ i~oszacowanie górne zachodzi.
+Niech $n\ge2$ i~niech $p(n-1,m)\le e^{-(n-1)(n-2)/2m}$.
+Przy założeniu, że pierwszych $n-1$ kluczy nie spowodowało kolizji, wstawienie $n$\nbhyphen tego klucza $k$ też do tego nie doprowadzi, o~ile pierwszą pozycją w~ciągu kontrolnym klucza $k$ jest jedna z~$m-(n-1)$ wolnych pozycji tablicy.
+A~zatem prawdopodobieństwo, że kolizja nie wystąpi, wynosi
+\begin{align*}
+	p(n,m) &= p(n-1,m)\cdot\frac{m-(n-1)}{m} \\[1mm]
+	&\le e^{-(n-1)(n-2)/2m}\biggl(1-\frac{n-1}{m}\biggr) \\[1mm]
+	&\le e^{-(n-1)(n-2)/2m}\cdot e^{-(n-1)/m} \tag{ze wzoru (3.11)} \\
+	&= e^{-(n-1)(n-2+2)/2m} \\
+	&= e^{-n(n-1)/2m}.
+\end{align*}
 
-W~drugiej części zadania rozważymy funkcję $f(x)=e^{-x(x-1)/2m}$ zmiennej rzeczywistej $x$, traktując $m$ jak stałą dodatnią.
-Wyznaczając jej pierwszą i~drugą pochodną, mamy
+W~drugiej części zadania przyjmijmy, że $n=s\sqrt{m}+1$ dla $s\ge1$.
+Wówczas
 \[
-	f'(x) = e^{-x(x-1)/2m}\,\frac{1-2x}{2m}
+	\frac{n(n-1)}{2m} \ge \frac{(n-1)^2}{2m} = \frac{s^2}{2}
 \]
-oraz
+i~prawdopodobieństwo uniknięcia kolizji wynosi
 \[
-	f''(x) = e^{-x(x-1)/2m}\biggl(\frac{1-2x}{2m}\biggr)^2+e^{-x(x-1)/2m}\cdot\frac{-1}{m} = e^{-x(x-1)/2m}\,\frac{(2x-1)^2-4m}{4m^2}.
+	p(n,m) \le e^{-n(n-1)/2m} \le e^{-s^2\!/2}.
 \]
-Czynnik $e^{-x(x-1)/2m}$ jest dodatni niezależnie od wartości $x$ i~$m$.
-Funkcja $f'$ jest ujemna dla $x>1/2$.
-Z~kolei dla $x>\sqrt{m}+1/2$ funkcja $f''$ jest dodatnia, bo
+Wyznaczmy pochodne funkcji $f(s)=e^{-s^2\!/2}$:
 \[
-	\frac{(2x-1)^2-4m}{4m^2} > \frac{(2\sqrt{m})^2-4m}{4m^2} = 0.
+	f'(s) = -se^{-s^2\!/2} \quad\text{oraz}\quad f''(s) = -e^{-s^2\!/2}+s^2e^{-s^2\!/2} = e^{-s^2\!/2}(s^2-1).
 \]
-Dla $x>\sqrt{m}+1/2$ funkcja $f$ jest więc malejąca i~wypukła.
-Oznacza to, że prawdopodobieństwo niewystępowania kolizji $p(n,m)$ ograniczone od góry przez $f(n)$ maleje wraz ze wzrostem $n$, aby dla $n>\sqrt{m}+1/2$ gwałtownie zbiegać do $\lim_{x\to\infty}f(x)=0$.
+Dla $s\ge1$, $f'(s)<0$, co znaczy, że funkcja $f(s)$ jest ściśle malejąca, oraz $f''(s)\ge0$, co znaczy, że jest też wypukła.
+A~zatem zarówno funkcja $f(s)$, jak i~ograniczone przez nią prawdopodobieństwo $p(n,m)$ maleje i~zbiega do $\lim_{s\to\infty}f(s)=0$, choć nie jest to tak gwałtowny spadek, jak gdyby funkcja ta w~pewnych obszarach była wklęsła.
