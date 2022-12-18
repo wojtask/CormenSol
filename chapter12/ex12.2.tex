@@ -77,13 +77,16 @@ Oczywiście $h=O(n)$, zatem algorytm ten działa w~czasie $O(n)$.
 Dolne oszacowanie $\Omega(n)$ wynika z~faktu, że algorytm musi odwiedzić każdy z~$n$ węzłów drzewa.
 
 \exercise %12.2-8
-Niech $x$ będzie początkowym węzłem, a~$y$ -- jego $k$\nbhyphen tym następnikiem.
-Z~rozwiązania poprzedniego zadania mamy, że każda krawędź drzewa pokonywana jest w~wywołaniach \proc{Tree-Successor} co najwyżej dwukrotnie.
-A~zatem każdy z~$k$ węzłów od $x$ do $y$ w~porządku inorder będzie odwiedzany w~serii wywołań \proc{Tree-Successor} co najwyżej 3 razy.
-Oznaczmy przez $z$ najniższego wspólnego przodka węzłów $x$ i~$y$.
-W~ciągu wywołań \proc{Tree-Successor} badane są także węzły będące poprzednikami $x$ i~węzły będące następnikami $y$.
-Wszystkie one występują na prostej ścieżce z~$x$ do $z$ lub na prostej ścieżce z~$z$ do $y$, dlatego ich liczbę można ograniczyć od góry przez $2h$.
-Górne ograniczenie na czas działania danego ciągu wywołań wynosi zatem $3k+2h=O(k+h)$.
+Czas działania tego ciągu operacji jest proporcjonalny do liczby przejść po krawędziach drzewa, dlatego skupimy się na znalezieniu oszacowania dla tej wielkości.
+
+W~trakcie wyszukiwania $k$ kolejnych następników dowolnego węzła w~drzewie o~wysokości $h$, każda krawędź będzie pokonywana co najwyżej dwukrotnie -- co najwyżej raz podczas przechodzenia w~dół drzewa i~co najwyżej raz podczas przechodzenia w~górę drzewa.
+Przejście krawędzią $\langle u,v\rangle$ w~dół rozpoczyna wyszukiwanie następników w~poddrzewie o~korzeniu w~$v$.
+Węzły tego poddrzewa tworzą spójny fragment w~porządku inorder, a~więc zanim krawędź $\langle u,v\rangle$ zostanie pokonana ponownie w~drodze w~górę drzewa, kolejne wywołania \proc{Tree-Successor} zwrócą wszystkie węzły poddrzewa o~korzeniu w~$v$, po czym krawędź ta nie będzie już wykorzystywana.
+Liczba krawędzi pokonywanych dwukrotnie wynosi więc co najwyżej $k$, zatem wykonanych zostanie co najwyżej $2k$ przejść po tych krawędziach.
+Z~kolei liczba krawędzi odwiedzanych jednokrotnie nie przekracza $2h$, gdyż $2h$ jest maksymalną długością ścieżki prostej w~drzewie.
+Jeśli po pokonaniu takiej ścieżki należy przejść do kolejnego następnika, to w~tym celu wykorzystywane są już odwiedzone krawędzie, pokonywane po raz drugi.
+
+Zatem łączna liczba przejść po krawędziach drzewa jest ograniczona przez $2k+2h=O(k+h)$.
 
 \exercise %12.2-9
 \note{Wymagane jest założenie, że wszystkie klucze w~drzewie $T$ są parami różne.}
