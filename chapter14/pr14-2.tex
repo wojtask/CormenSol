@@ -12,9 +12,11 @@ Podczas przechodzenia po niej, należy utrzymywać wskaźnik $x$ na węzeł popr
 Usuwanie węzła z~listy odbywa się w~czasie $O(1)$, skąd całkowity czas działania symulacji, przy założeniu, że $m$ jest stałą, wynosi $O(n)$.
 
 \subproblem %14-2(b)
-Załóżmy, że liczbę pozostałych osób w~okręgu przechowujemy w~zmiennej $k$ i~że w~pewnym momencie odliczanie zatrzymało się na osobie o~$j$\nbhyphen tym największym numerze spośród pozostałych $k\le n$ osób.
-Osoba ta zostaje wyeliminowana, co powoduje dekrementację zmiennej $k$.
-Numer kolejnej osoby w~permutacji wyznaczamy przez zwiększenie $j$ o~$m$, ale ponieważ liczba ta może przekroczyć liczbę pozostałych $k$ osób w~okręgu, to należy wziąć resztę z~jej dzielenia przez $k$, a~także uwzględnić fakt, że osoby numerowane są liczbami od 1 do $n$, poprzez odjęcie jedynki przed braniem reszty, a~następnie dodanie jej do wynikowej liczby.
+Niech $k$ będzie zmienną oznaczającą aktualną liczbę osób w~okręgu podczas symulacji eliminowania osób.
+Załóżmy, że odliczanie zatrzymało się na osobie o~$j$\nbhyphen tym największym numerze spośród pozostałych $k\le n$ osób.
+Osoba o~tym numerze zostaje wyeliminowana, co powoduje dekrementację zmiennej $k$.
+Numer kolejnej osoby w~permutacji wyznaczamy przez zwiększenie $j$ o~$m$, ale ponieważ $j$ może teraz przekraczać $k$, to bierzemy resztę z~dzielenia przez $k$.
+Należy przy tym uwzględnić fakt, że osoby numerowane są liczbami od 1 do $n$, poprzez odjęcie jedynki przed braniem reszty, a~następnie dodanie jej do wynikowej liczby.
 W~rezultacie otrzymujemy, że numer następnej osoby w~permutacji znajduje się na pozycji $(j+m-1)\bmod k+1$ na uszeregowanej rosnąco liście numerów pozostałych osób.
 
 Na podstawie powyższego opisu w~algorytmie wykorzystamy drzewo statystyk pozycyjnych.
