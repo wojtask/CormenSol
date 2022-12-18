@@ -1,16 +1,12 @@
 \problem{Inne metody szeregowania} %16-4
 
 \subproblem %16-4(a)
-Suma kar za niedotrzymanie terminu w~tym problemie zależy wyłącznie od zbioru $L$ zadań spóźnionych.
-Wartość tę można próbować zmniejszyć poprzez usunięcie z~$L$ pewnego zadania, czyniąc go terminowym.
-Alternatywnie można próbować wymienić pewne zadanie z~$L$ z~innym zadaniem terminowym.
-Dzięki zachłannej naturze problemu, każde zmniejszenie kosztu rozwiązania jedną z~opisanych modyfikacji, zbliża nas do optymalnego zbioru $L_0$, dla którego suma kar za spóźnione zadania jest minimalna.
-
 Rozważmy rozwiązanie zwrócone przez opisany algorytm.
-Niech $a_j$ będzie dowolnym zadaniem w~zbiorze $L$ tego rozwiązania zajmującym przedział $k>d_j$.
-Wynika stąd, że w~trakcie działania algorytmu $d_j$ zadań o~wyższych karach zdążyło już zająć przedziały 1, 2, \dots, $d_j$ i~wszystkie z~nich są zadaniami terminowymi.
-Zamiana miejscami zadania $a_j$ z~innym takim zadaniem terminowym $a_i$ może tylko powiększyć koszt rozwiązania, bowiem $k>d_i$.
-Gdyby zachodziło $k\le d_i$, to zadanie $a_i$, które jest przetwarzane przed $a_j$, byłoby umieszczone w~najpóźniejszym pustym przedziale przed terminem $d_i$, a~skoro przedział $k$ był pusty, zanim przetwarzane było zadanie $a_j$, to przedział ten zostałby wybrany dla $a_i$.
+Niech $a_j$ będzie dowolnym zadaniem spóźnionym zajmującym w~tym rozwiązaniu przedział $s_j>d_j$.
+Wynika stąd, że w~trakcie działania algorytmu $d_j$ zadań o~nie mniejszych karach zdążyło już zająć przedziały 1, 2, \dots, $d_j$ i~wszystkie z~nich są zadaniami terminowymi.
+Niech $a_i$ będzie jednym z~tych zadań, umieszczonym w~przedziale $s_i$.
+Zamiana miejscami zadania $a_j$ z~$a_i$ może tylko powiększyć koszt rozwiązania, bowiem $s_j>d_i$.
+Gdyby zachodziło $s_j\le d_i$, to w~momencie przyporządkowania $a_i$ do przedziału $s_i\le d_j$, wszystkie przedziały od $s_i+1$ do $d_i$ byłyby już zajęte i~zadanie $a_j$ musiałoby wówczas zająć przedział na prawo od $d_i$ -- sprzeczność.
 A~zatem nie sposób zmniejszyć kosztu tego rozwiązania, skąd wynika, że jest ono optymalne.
 
 \subproblem %16-4(b)
