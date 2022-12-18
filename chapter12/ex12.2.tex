@@ -70,21 +70,11 @@ W~końcu załóżmy, że to nie $y$, a~inny węzeł $z$ jest najniższym przodki
 Wówczas $z$ należy do lewego poddrzewa $y$, skąd $\attrib{z}{key}<\attrib{y}{key}$, co przeczy temu, że $y$ jest następnikiem $x$.
 
 \exercise %12.2-7
-Wywołanie \proc{Tree-Minimum}, po którym następuje $n-1$ wywołań \proc{Tree-Successor}, spowoduje oczywiście wypisanie w~czasie $\Omega(n)$ kluczy wszystkich $n$ węzłów drzewa w~tej samej kolejności, co wywołanie na tym drzewie \proc{Inorder-Tree-Walk}.
-Pokażemy jeszcze, że każda krawędź drzewa jest pokonywana co najwyżej dwukrotnie, skąd wynika górne oszacowanie $O(n)$ na czas działania algorytmu.
-
-Niech $u$ będzie węzłem drzewa, a~$v$ jego lewym synem.
-W~trakcie działania algorytmu przed wypisaniem klucza $u$ wpierw wypisane zostaną klucze wszystkich węzłów z~jego lewego poddrzewa, którego korzeniem jest $v$, co zostanie zapoczątkowane przez przejście krawędzią $\langle u,v\rangle$.
-Następnie w~celu wypisania klucza $u$ procedura \proc{Tree-Successor} przejdzie w~górę drzewa ścieżką do $u$ od maksymalnego elementu poddrzewa o~korzeniu w~$v$.
-Na tej ścieżce oczywiście znajduje się krawędź $\langle u,v\rangle$.
-Po pokonaniu ścieżki krawędź ta nie zostanie ponownie wykorzystana, ponieważ wszystkie węzły w~lewym poddrzewie $u$ zostały już odwiedzone.
-
-Załóżmy teraz, że $v$ jest prawym synem $u$.
-Tuż po wypisaniu klucza $u$ wywoływane jest $\proc{Tree-Successor}(u)$.
-Aby dostać się do następnika węzła $u$ znajdującego się w~jego prawym poddrzewie, algorytm musi zejść krawędzią $\langle u,v\rangle$.
-Przejście nią w~drodze powrotnej nastąpi po odwiedzeniu wszystkich węzłów z~prawego poddrzewa $u$, o~ile będą wówczas jeszcze nieodwiedzone węzły w~drzewie.
-Będzie to miało miejsce podczas wywołania \proc{Tree-Successor} dla węzła o~maksymalnym kluczu w~prawym poddrzewie $u$, kiedy to algorytm będzie przechodził w~górę drzewa do węzła następującego po $u$ w~porządku inorder.
-Krawędź $\langle u,v\rangle$ należy do tej ścieżki i~z~racji tego, że wszystkie węzły prawego poddrzewa $u$ zostały odwiedzone, nie zostanie już użyta ponownie.
+Niech $h$ będzie wysokością drzewa.
+Wywołanie \proc{Tree-Minimum} zajmuje oczywiście czas $O(h)$.
+Z~\refExercise{12.2-8} mamy, że kolejne $n-1$ wywołań \proc{Tree-Successor} potrzebuje czasu $O(n+h)$.
+Oczywiście $h=O(n)$, zatem algorytm ten działa w~czasie $O(n)$.
+Dolne oszacowanie $\Omega(n)$ wynika z~faktu, że algorytm musi odwiedzić każdy z~$n$ węzłów drzewa.
 
 \exercise %12.2-8
 Niech $x$ będzie początkowym węzłem, a~$y$ -- jego $k$\nbhyphen tym następnikiem.
