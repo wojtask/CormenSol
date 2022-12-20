@@ -39,6 +39,18 @@ Jeśli czarną wysokość wewnętrznego węzła $x$ w~drzewie czerwono-czarnym $
 \]
 A~zatem na mocy tw.\ 14.1 mamy, że złożoność asymptotyczna operacji słownikowych na tak wzbogaconym drzewie czerwono-czarnym nie ulegnie zmianie.
 
+Opiszemy teraz modyfikacje, jakie należy wprowadzić do oryginalnych procedur \proc{RB-Insert} i~\proc{RB-Delete}, aby utrzymywać poprawne wartości atrybutu \id{bh} w~każdym węźle drzewa.
+Podczas wstawiania nowego węzła $z$ do drzewa czerwono-czarnego \attrib{z}{bh} będzie inicjalizowane na 1.
+Rozważmy modyfikacje czarnych wysokości węzłów zachodzące w~każdym przypadku procedury \proc{RB-Insert-Fixup}, posiłkując się rysunkami z~\refExercise{13.3-3}.
+Zmianie ulega jedynie czarna wysokość węzła $C$ w~przypadku 1.
+Wystarczy więc zinkrementować \attribbb{z}{p}{p}{bh} tuż po linii 7 w~\proc{RB-Insert-Fixup}.
+
+Podobnie, polegając na rys.\ 13.7 z~Podręcznika, możemy przeanalizować każdy z~przypadków procedury \proc{RB-Delete-Fixup} pod kątem zmian w~czarnych wysokościach.
+W~przypadku 2 węzeł $D$ zmienia kolor na czerwony, przez co czarna wysokość węzła $B$ maleje o~1.
+Fakt ten można odnotować tuż po linii 10 procedury \proc{RB-Delete-Fixup}, ustawiając \attribb{x}{p}{bh} na $\attrib{x}{bh}+1$.
+Z~kolei w~przypadku 4 czarna wysokość węzła $B$ maleje o~1, a~czarna wysokość węzła $D$ rośnie o~1.
+Tuż po linii 20 wystarczy więc najpierw do \attribb{x}{p}{bh} wpisać $\attrib{x}{bh}+1$, po czym do \attribbb{x}{p}{p}{bh} wpisać $\attribb{x}{p}{bh}+1$.
+
 \exercise %14.2-3
 Nie można tego zrobić przy zachowaniu efektywnych czasów działania operacji na drzewie, ponieważ głębokość węzła zależy od głębokości jego ojca.
 Gdy zmienia się głębokość węzła $x$, to zmieniają się także głębokości wszystkich potomków $x$.
