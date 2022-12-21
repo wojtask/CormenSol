@@ -57,23 +57,18 @@ Gdy zmienia się głębokość węzła $x$, to zmieniają się także głęboko�
 A~zatem aktualizacja głębokości korzenia drzewa o~$n$ węzłach niesie za sobą konieczność aktualizacji pozostałych $n-1$ węzłów i~operacje wstawiania i~usuwania wymagają wtedy czasu $\Omega(n\lg n)$.
 
 \exercise %14.2-4
-Posługując się rys.\ 13.2 z~Podręcznika, oznaczmy przez $r_\alpha$, $r_\beta$, $r_\gamma$ korzenie poddrzew, odpowiednio, $\alpha$, $\beta$, $\gamma$.
-Ponieważ operacja $\otimes$ jest łączna, to mamy
+Rotacje nie zmieniają porządku inorder węzłów w~żadnym z~poddrzew $\alpha$, $\beta$ i~$\gamma$ według oznaczeń z~rys.\ 13.2 z~Podręcznika.
+Po przeprowadzeniu lewej rotacji zachodzi:
 \begin{align*}
-	\attrib{x}{f} &= \attrib{r_\alpha}{f}\otimes\attrib{x}{a}\otimes\attrib{r_\beta}{f}\otimes\attrib{y}{a}\otimes\attrib{r_\gamma}{f}, \\
-	\attrib{y}{f} &= \phantom{\attrib{r_\alpha}{f}\otimes\attrib{x}{a}\otimes{}}\attrib{r_\beta}{f}\otimes\attrib{y}{a}\otimes\attrib{r_\gamma}{f}.
+	\attrib{x}{f} &= \attribb{x}{left}{f}\otimes\attrib{x}{a}\otimes\attribb{x}{right}{f}, \\
+	\attrib{y}{f} &= \attribb{x}{left}{f}\otimes\attrib{x}{a}\otimes\attribb{x}{right}{f}\otimes\attrib{y}{a}\otimes\attribb{y}{right}{f} = \attrib{x}{f}\otimes\attrib{y}{a}\otimes\attribb{y}{right}{f}.
 \end{align*}
-Rotacje nie zmieniają porządku inorder węzłów w~żadnym z~poddrzew $\alpha$, $\beta$ i~$\gamma$, dlatego po przeprowadzeniu lewej rotacji wartości pola $f$ wynoszą
-\begin{align*}
-	\attrib{x}{f} &= \attrib{r_\alpha}{f}\otimes\attrib{x}{a}\otimes\attrib{r_\beta}{f}, \\
-	\attrib{y}{f} &= \attrib{r_\alpha}{f}\otimes\attrib{x}{a}\otimes\attrib{r_\beta}{f}\otimes\attrib{y}{a}\otimes\attrib{r_\gamma}{f}
-\end{align*}
-i~mogą zostać obliczone w~czasie $O(1)$.
+Zatem wartości pól $f$ modyfikowanych w~rotacji węzłów mogą zostać zaktualizowane w~czasie $O(1)$.
 Rozumowanie w~przypadku prawej rotacji przeprowadza się analogicznie.
 
 W~drzewie czerwono-czarnym $T$ zdefiniujmy teraz dla każdego węzła pole $a$ przyjmujące wartość 0 dla liści drzewa (reprezentowanych przez \attrib{T}{nil}) oraz 1 dla jego węzłów wewnętrznych.
-Jeśli operacją $\otimes$ będzie zwykłe dodawanie, to wartość \attrib{x}{f} zdefiniowana jak w~treści zadania, będzie rozmiarem poddrzewa o~korzeniu w~$x$, czyli pole $f$ będzie identyczne z~polem \id{size} z~drzew statystyk pozycyjnych.
-Dzięki powyżej przedstawionej argumentacji pole \id{size} może być aktualizowane w~czasie $O(1)$ po każdym wykonaniu rotacji w~drzewie $T$.
+Jeśli operacją $\otimes$ jest zwykłe dodawanie, to \attrib{x}{f} zdefiniowane jak w~treści zadania, stanowi rozmiar poddrzewa o~korzeniu w~$x$, czyli pole $f$ jest identyczne z~polem \id{size} z~drzew statystyk pozycyjnych.
+Na podstawie powyższej argumentacji pole \id{size} może być aktualizowane w~czasie $O(1)$ po każdym wykonaniu rotacji w~drzewie $T$.
 
 \exercise %14.2-5
 Następujący algorytm stanowi implementację nowej operacji.
