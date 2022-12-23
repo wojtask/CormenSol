@@ -12,9 +12,10 @@ Do \attribb{x}{p}{max} zostaje zatem przypisana wartość \attrib{x}{max}, po cz
 \end{codebox}
 
 \exercise %14.3-2
-Pseudokod procedury \proc{Interval-Search} nie zmieni się.
-Jedyna różnica będzie ukryta w~linii 2 tej procedury w~definicji zachodzenia przedziałów.
+Modyfikacją pseudokodu operacji \proc{Interval-Search} wymaganą do wspierania przedziałów otwartych jest zamiana nierówności nieostrej na ostrą w~linii 3.
+Wynika to z~faktu, że w~przypadku przedziałów otwartych warunek $\attribb{x}{left}{max}=\attrib{i}{low}$ oznacza, że żaden przedział z~lewego poddrzewa $x$ nie zachodzi na $i$.
 Powiemy, że dwa przedziały otwarte $i$ oraz $i'$ zachodzą na siebie, jeśli $i\cap i'\ne\emptyset$, tj.\ jeśli $\attrib{i}{low}<\attrib{i'}{high}$ i~$\attrib{i'}{low}<\attrib{i}{high}$.
+Do takiej definicji powinna odwoływać się zmodyfikowana operacja \proc{Interval-Search} w~linii 2.
 
 \exercise %14.3-3
 Algorytm wyszukuje w~drzewie przedziałowym $T$ dowolny węzeł $x$, taki że przedział \attrib{x}{int} zachodzi na przedział $i$, wywołując w~tym celu procedurę \proc{Interval-Search}.
