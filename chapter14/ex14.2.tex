@@ -71,39 +71,44 @@ Jeśli operacją $\otimes$ jest zwykłe dodawanie, to \attrib{x}{f} zdefiniowane
 Na podstawie powyższej argumentacji pole \id{size} może być aktualizowane w~czasie $O(1)$ po każdym wykonaniu rotacji w~drzewie $T$.
 
 \exercise %14.2-5
+Podamy wpierw pomocniczą procedurę opartą na zwykłym wyszukiwaniu w~drzewie czerwono-czarnym, ale w~przypadku braku węzła o~zadanym kluczu, zwracającą następnik tego węzła.
+Innymi słowy, procedura ta dla danego klucza $k$ znajdzie węzeł o~najmniejszym możliwym kluczu równym co najmniej $k$, albo \attrib{T}{nil} gdy węzeł taki nie istnieje.
+\begin{codebox}
+\Procname{$\proc{RB-Search-At-Least}(T,x,y,k)$}
+\li	\If $x=\attrib{T}{nil}$ \label{li:rb-search-at-least-leaf-reached}
+\li		\Then \Return $y$
+		\End
+\li	\If $k=\attrib{x}{key}$
+\li		\Then \Return $x$
+		\End
+\li	\If $k<\attrib{x}{key}$
+\li		\Then \Return $\proc{RB-Search-At-Least}(T,\attrib{x}{left},x,k)$
+\li		\Else \Return $\proc{RB-Search-At-Least}(T,\attrib{x}{right},y,k)$
+		\End
+\end{codebox}
+Procedura przyjmuje, oprócz drzewa $T$ i~klucza $k$, także korzeń $x$ aktualnie przeszukiwanego poddrzewa oraz węzeł $y$ do zwrócenia w~przypadku nieodnalezienia węzła o~kluczu $k$.
+W~każdym wywołaniu rekurencyjnym $y$ jest najniżej położonym węzłem na pokonywanej ścieżce, którego lewy syn też jest na tej ścieżce, albo \attrib{T}{nil} w~razie nieistnienia takiego węzła.
+Jeśli w~drzewie $T$ nie ma węzła o~kluczu $k$, to w~końcu w~linii \ref{li:rb-search-at-least-leaf-reached} osiągany jest liść $x$, który należałoby zastąpić węzłem o~kluczu $k$, gdybyśmy wstawiali go do drzewa.
+Prawe poddrzewo tego hipotetycznego węzła byłoby puste, a~więc na podstawie \refExercise{12.2-6} węzeł $y$ stanowiłby wówczas następnik węzła $x$, co dowodzi poprawności algorytmu w~tym przypadku.
+
+Wywołanie $\proc{RB-Search-At-Least}(T,\attrib{T}{root},\attrib{T}{nil},k)$ pozwala znaleźć węzeł o~najmniejszym kluczu w~drzewie $T$ nie mniejszym niż $k$.
+Dla drzewa $T$ o~$n$ węzłach wywołanie to potrzebuje czasu $O(\lg n)$.
+
 Następujący algorytm stanowi implementację nowej operacji.
 Przyjmuje on dodatkowo jako parametr drzewo $T$ potrzebne do odwołania się do \attrib{T}{nil} i~wypisuje szukane klucze w~porządku niemalejącym.
+Przechodzenie po kolejnych węzłach realizuje seria wywołań \proc{RB-Successor}, czyli procedury będącej adaptacją \proc{Tree-Successor} do drzew czerwono-czarnych.
 \begin{codebox}
-\Procname{$\proc{RB-Enumerate}(T,x,a,b)$}
-\li \If $x\ne\attrib{T}{nil}$
-\li		\Then \If $\attrib{x}{key}>a$
-\li				\Then $\proc{RB-Enumerate}(T,\attrib{x}{left},a,b)$ \label{li:rb-enumerate-recurse-left-subtree}
-				\End
-\li			\If $a\le\attrib{x}{key}\le b$
-\li				\Then wypisz \attrib{x}{key} \label{li:rb-enumerate-print}
-				\End
-\li			\If $\attrib{x}{key}<b$
-\li				\Then $\proc{RB-Enumerate}(T,\attrib{x}{right},a,b)$ \label{li:rb-enumerate-recurse-right-subtree}
-				\End
+\Procname{$\proc{RB-Enumerate}(T,a,b)$}
+\li $x\gets\proc{RB-Search-At-Least}(T,\attrib{T}{root},\attrib{T}{nil},a)$ \label{li:rb-enumerate-starting-node}
+\li	\While $x\ne\attrib{T}{nil}$ i~$\attrib{x}{key}\le b$
+\li		\Do wypisz \attrib{x}{key} \label{li:rb-enumerate-print}
+\li			$x\gets\proc{RB-Successor}(T,x)$
 		\End
 \end{codebox}
 
-Udowodnimy poprawność tego algorytmu.
-Klucz węzła $x$ wypisywany jest w~linii \ref{li:rb-enumerate-print} tylko wtedy, gdy $a\le\attrib{x}{key}\le b$.
-Jeśli $\attrib{x}{key}<a$, to wiadomo, że każdy klucz w~lewym poddrzewie $x$ również jest mniejszy od $a$, dlatego procedura nie schodzi rekurencyjnie do lewego poddrzewa.
-Podobnie w~przypadku, gdy $\attrib{x}{key}>b$.
-Wykorzystując indukcję, można więc dowieść, że wywołanie $\proc{RB-Enumerate}(T,\attrib{T}{root},a,b)$ wypisze każdy klucz z~drzewa $T$ leżący w~przedziale $[a,b]$ i~nie wypisze kluczy spoza tego przedziału.
-
-Załóżmy, że procedura \proc{RB-Enumerate} została wywołana dla $x=\attrib{T}{root}$, gdzie $T$ jest drzewem o~$n$ węzłach wewnętrznych, i~oszacujmy, ile węzłów jest odwiedzanych w~trakcie tego wywołania.
-Oznaczmy przez $S$ zbiór tych węzłów drzewa $T$, których klucze leżą w~przedziale $[a,b]$.
-Na podstawie poprzedniego paragrafu odwiedzony zostanie każdy z~$m$ węzłów ze zbioru $S$.
-Zauważmy, że jeśli $x\in S$, to procedura może zostać wywołana rekurencyjnie zarówno dla lewego poddrzewa $x$, jak i~jego prawego poddrzewa.
-Gdy z~kolei $x\not\in S$ oraz $x\ne\attrib{T}{nil}$, to $\attrib{x}{key}<a$ albo $\attrib{x}{key}>b$.
-W~pierwszej sytuacji wiersz \ref{li:rb-enumerate-recurse-left-subtree} nie zostanie wykonany, a~w~drugiej -- wiersz \ref{li:rb-enumerate-recurse-right-subtree}.
-Wynika stąd, że jeśli $x\not\in S$ i~$x\ne\attrib{T}{nil}$, to procedura wywoła się rekurencyjnie co najwyżej raz.
-Zaobserwujmy, że dla każdych $x$, $y\in S$, jeśli węzeł $y$ znajduje się w~lewym poddrzewie $x$, to wszystkie węzły z~prawego poddrzewa $y$ także należą do $S$, i~symetrycznie w~przypadku, gdy węzeł $y$ jest w~prawym poddrzewie $x$.
-Wynika stąd, że gdy algorytm osiągnie najwyżej położony w~$T$ węzeł $z\in S$, to na każdym następnym poziomie rekursji algorytm wywołany będzie dla co najwyżej jednego węzła spoza $S$.
-Innymi słowy, na każdym poziomie drzewa głębiej od $z$ odwiedzane są w~kolejnych wywołaniach rekurencyjnych co najwyżej dwa węzły spoza $S$, jeden w~lewym poddrzewie $z$, a~drugi w~prawym poddrzewie $z$.
-Z~tego powodu sumaryczna liczba węzłów spoza $S$ odwiedzanych w~algorytmie jest ograniczona od góry przez $2h=O(\lg n)$.
-Sumaryczna liczba sprawdzonych węzłów wynosi zatem $O(m+\lg n)$.
-Nie jest to oszacowanie dokładne, jak sugeruje treść zadania, ponieważ rekurencja w~optymistycznym przypadku nie zejdzie do liści drzewa i~algorytm może potrzebować tylko czasu rzędu $\Omega(m)$.
+Na podstawie \refExercise{12.2-8} ciąg wyszukiwań kolejnych $m$ następników w~drzewie czerwono-czarnym zajmuje czas $O(m+\lg n)$ i~takie jest też górne oszacowanie na czas działania tego algorytmu.
+Dla dolnego oszacowania zauważmy, że pętla \kw{while} wykona zawsze $m$ iteracji.
+Jeśli wywołanie z~linii \ref{li:rb-enumerate-starting-node} zwróciło \attrib{T}{nil} albo węzeł $x$ o~pustym prawym poddrzewie, to podczas tego wywołania musiała zostać pokonana ścieżka o~długości $\Omega(\lg n)$.
+W~przeciwnym razie zwrócony został węzeł $x$ o~niepustym prawym poddrzewie.
+Wówczas pierwsze wywołanie \proc{RB-Successor} przejdzie po ścieżce od $x$ do liścia będącego następnikiem $x$, a~więc oba wywołania sumarycznie pokonają ścieżkę długości $\Omega(\lg n)$.
+Dolnym oszacowaniem na czas działania algorytmu jest zatem $\Omega(m+\lg n)$.
