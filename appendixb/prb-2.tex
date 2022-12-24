@@ -24,16 +24,12 @@ Problem rozważany w~tym punkcie jest związany z~\textbf{liczbami Ramseya} $R(m
 \subproblem %B-2(c)
 \textsf{\textbf{Twierdzenie.}} \textit{Zbiór wierzchołków dowolnego grafu nieskierowanego\/ $G=\langle V,E\rangle$ można podzielić na dwa rozłączne zbiory tak, aby dla dowolnego wierzchołka\/ $v\in V$ co najmniej połowa jego sąsiadów nie należała do zbioru, do którego należy\/ $v$.}
 \begin{proof}
-Pokażemy, że istnieje taki podział zbioru wierzchołków grafu nieskierowanego $G=\langle V,E\rangle$, że dla każdego $v\in V$\! zachodzi $d(v)\ge0$, gdzie $d(v)$ jest liczbą sąsiadów $v$ z~części podziału niezawierającej $v$ pomniejszoną o~liczbę sąsiadów $v$ z~części podziału zawierającą $v$.
-
-Zdefiniujmy $D=\sum_{v\in V}d(v)$ i~zastanówmy się, jak tę wartość można zmaksymalizować, wyznaczając podział $V=V_1\cup V_2$.
-Załóżmy, że dokonaliśmy już pewnego takiego podziału i~wybierzmy pewien wierzchołek $v$ należący do zbioru $V_1$.
-Dowód w~przypadku gdy $v\in V_2$ przebiega symetrycznie.
-Zauważmy, że jeśli przenieślibyśmy wierzchołek $v$ do $V_2$, to jego waga $d(v)$ zmieniłaby znak na przeciwny.
-Ponadto waga każdego sąsiada $v$ należącego do zbioru $V_1$ wzrosłaby o~2, a~waga każdego sąsiada $v$ z~$V_2$ zmalałaby o~2.
-W~wyniku przeniesienia $v$ wartość $D$ wzrosłaby o~$-4d(v)$.
-Widać więc, że aby zwiększyć $D$, należy przenosić wierzchołki o~ujemnych wagach.
-Ponieważ $D$ nie może rosnąć w~nieskończoność (jest ograniczone od góry przez $2|E|$ w~grafach dwudzielnych), to po skończonej liczbie takich operacji wszystkie wierzchołki grafu $G$ będą mieć wagi nieujemne, czego należało dowieść.
+Podzielmy wierzchołki grafu $G$ dowolnie na dwa rozłączne zbiory $V_1$ i~$V_2$.
+Niech $S=\bigl\{\,\{v_1,v_2\}\in E:v_1\in V_1,\,v_2\in V_2\,\bigr\}$.
+Jeśli więcej niż połowa sąsiadów pewnego wierzchołka $v\in V_1$ znajduje się w~tym samym zbiorze, $V_1$, to przeniesienie $v$ do zbioru $V_2$ zwiększa rozmiar zbioru $S$.
+Analogicznie dla wierzchołków $v\in V_2$ o~takiej własności -- przenosząc je do zbioru $V_1$, powiększamy zbiór $S$.
+Proces ten musi się zakończyć po skończonej liczbie kroków, gdyż $S$ nie może rosnąć w~nieskończoność.
+Wtedy to uzyskany podział $V=V_1\cup V_2$ spełnia żądany warunek.
 \end{proof}
 
 \subproblem %B-2(d)
