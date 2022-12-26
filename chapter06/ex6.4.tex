@@ -40,69 +40,35 @@ Na mocy wyniku z~\refExercise{6.2-6} oraz wzoru (3.18) wywołania te zabierają 
 i~taki jest też pesymistyczny czas działania algorytmu heapsort.
 
 \exercise %6.4-5
-Dokonamy analizy liczby wykonywanych instrukcji z~linii 9 procedury \proc{Max-Heapify} podczas działania algorytmu sortowania przez kopcowanie w~przypadku optymistycznym.
+Udowodnimy dolne oszacowanie $\Omega(n\lg n)$ na czas działania algorytmu heapsort przez pokazanie, że zachodzi ono dla kopców o~wysokości $h\ge4$ będących pełnymi drzewami binarnymi, czyli takich, w~których $n=2^{h+1}-1$.
 
-Załóżmy, że algorytm heapsort działa na tablicy $A$ o~rozmiarze $n=2^{h+1}-1$, gdzie $h$ jest dodatnią liczbą całkowitą.
-A~zatem kopiec zbudowany z~$A$ stanowi pełne drzewo binarne o~wysokości $h$.
-Rozważanie tylko takich kopców nie powoduje zmniejszenia ogólności analizy.
-Przez $j$\nbhyphen ty etap działania algorytmu heapsort, gdzie $j=0$, 1, \dots, $h-1$, będziemy rozumieć działania wykonywane podczas iteracji pętli \kw{for} z~procedury \proc{Heapsort}, w~których $2^{h-j}\le i\le2^{h-j+1}-1$.
-Inaczej mówiąc, $j$\nbhyphen ty etap pozbawia kopiec $(h-j)$\nbhyphen tego poziomu.
+Niech $L$ będzie zbiorem $2^h$ największych elementów kopca.
+Algorytm usunie te elementy z~kopca w~pierwszej kolejności, pozbawiając go tym samym jego $h$\nbhyphen tego poziomu.
+Elementy z~$L$ w~początkowym kopcu tworzą poddrzewo binarne, tzn.\ jeśli dany węzeł kopca należy do $L$, to jego ojciec także, co wynika z~własności kopca typu max.
+Oznaczmy teraz przez $L'$ podzbiór elementów z~$L$ zajmujących w~kopcu poziomy 0, 1, \dots, $h-1$.
+Elementy z~$L'$ mogą zostać usunięte z~kopca jedynie dzięki przetransportowaniu ich do korzenia za pomocą zamian z~linii 9 procedury \proc{Max-Heapify}.
+Jednym ze sposobów na znalezienie dolnego oszacowania na czas działania algorytmu heapsort jest oszacowanie sumarycznej liczby $s$ tych zamian wykonanych na elementach z~$L'$.
 
-\medskip
-\noindent\textsf{\textbf{Lemat.}} \textit{Podczas\/ $j$\nbhyphen tego etapu działania algorytmu heapsort na kopcu\/ $A$ o~rozmiarze\/ $n=2^{h+1}-1$,\/ $h\ge5$, którego wszystkie elementy są różne, liczba wykonanych zamian elementów w~linii 9 procedury \proc{Max-Heapify} jest większa niż\/ $(h-j-5)2^{h-j-3}$.}
-\begin{proof}
-Oznaczmy przez $m_j$ badaną liczbę zamian elementów wykonywanych w~$j$\nbhyphen tym etapie.
-Niech $j=0$ i~bez utraty ogólności załóżmy, że $\langle A[1],A[2],\dots,A[n]\rangle$ jest permutacją $\langle1,2,\dots,n\rangle$.
-Liczbę $k$ będziemy nazywać \textbf{dużą}, jeśli $k\ge(n+1)/2$.
-Niech $S$ będzie zbiorem indeksów dużych elementów w~kopcu $A$, które nie są liśćmi, czyli
-\[
-    S = \biggl\{\,i\in\Bigl\{1,2,\dots,\frac{n-1}{2}\Bigr\}:A[i]\ge\frac{n+1}{2}\,\biggr\}.
-\]
-Zauważmy, że wszystkie elementy, których pozycjami w~$A$ są indeksy ze zbioru $S$, zostaną usunięte z~kopca w~etapie $j=0$.
-A~zatem muszą wpierw znaleźć się w~korzeniu kopca za sprawą wykonania pewnej liczby zamian z~linii 9 procedury \proc{Max-Heapify}.
-Stąd $m_0$ spełnia nierówność
-\[
-    m_0 \ge \sum_{i\in S}d_i,
-\]
-gdzie $d_i$ oznacza głębokość węzła o~początkowej pozycji $i$ w~kopcu $A$.
+W~tym celu musimy znaleźć rozmiar zbioru $L'$.
+Załóżmy, że na poziomie $h$ znajduje się co najmniej $2^{h-1}+1$ węzłów z~$L$.
+Ojciec każdego takiego węzła znajdujący się na poziomie $h-1$ także należy do $L$, więc w~najlepszym przypadku na poziomie $h-1$ jest ich co najmniej $2^{h-2}+1$.
+To z~kolei oznacza, że na poziomie $h-2$ jest co najmniej $2^{h-3}+1$ węzłów z~$L$ itd.
+Sumując węzły z~$L$ ze wszystkich poziomów, mamy ich $2^{h-1}+2^{h-2}+2^{h-3}+\dots+2^0+(h+1)=2^h+h>2^h$.
+Wynik ten jest jednak sprzeczny z~definicją zbioru $L$, co oznacza, że początkowe założenie było błędne i~na poziomie $h$ jest maksymalnie $2^{h-1}$ węzłów.
+Stąd wynika, że $|L'|\ge|L|-2^{h-1}=2^{h-1}$.
 
-Węzły o~indeksach ze zbioru $S$ tworzą w~kopcu $A$ poddrzewo $T$ o~korzeniu w~$A[1]$.
-Jest tak dlatego, że jeśli węzeł $A[i]$ jest duży, to $A[\proc{Parent}(i)]$ również jest duży, a~więc także wszystkie węzły na ścieżce od $A[i]$ do korzenia kopca, czyli $A[1]$.
-Jeśli zastąpimy każde puste poddrzewo w~$T$ pojedynczym węzłem, to dostaniemy regularne drzewo binarne, którego długość ścieżki wewnętrznej (patrz \refExercise{B.5-5}) wynosi $m_0$.
-W~zbiorze wszystkich drzew binarnych o~$|S|$ węzłach wewnętrznych najmniejsza możliwa długość ścieżki wewnętrznej jest osiągana dla pełnego drzewa binarnego (przy czym ostatni poziom tego drzewa może nie być wypełniony) i~wynosi $\sum_{k=1}^{|S|}\lfloor\lg k\rfloor$.
-Korzystając ze wzoru (3.3) i~\refExercise{8.1-2}, mamy
+Aby wynieść element $j$ z~poziomu $d_j$ na poziom 0, musi zostać wykonanych $d_j$ zamian w~procedurze \proc{Max-Heapify}.
+Sumaryczna ich liczba dla elementów z~$L'$ wynosi zatem $s=\sum_{j\in L'}d_j$.
+Suma ta minimalizowana jest, gdy elementy z~$L'$ tworzą pełne drzewo binarne z~ewentualnie niepełnym ostatnim poziomem.
+W~takiej postaci $L'$ wypełnia $h-2$ początkowych poziomów kopca, skąd
 \[
-    m_0 \ge \sum_{k=1}^{|S|}\lfloor\lg k\rfloor > \sum_{k=1}^{|S|}(\lg k-1) = \sum_{k=1}^{|S|}\lg k-|S| \ge \frac{|S|}{2}\lg\frac{|S|}{2}-|S| = \frac{|S|}{2}\lg|S|-\frac{3}{2}|S|.
+	s \ge \sum_{k=0}^{h-2}k2^k.
 \]
-
-Pokażemy teraz, że $|S|\ge2^{h-2}$.
-Rozważmy w~tym celu permutację $\pi$ elementów kopca $A$ na początku zerowego etapu w~kolejności ich odwiedzania podczas przechodzenia kopca metodą inorder.
-Jeśli $\pi(i)$, gdzie $i\ge2$, jest liściem kopca, to $\pi(i-1)$ nie może być liściem kopca.
-Jeśli w~dodatku $\pi(i)$ jest dużym liściem, to $\pi(i-1)$ jest dużym węzłem wewnętrznym.
-Stąd indeks elementu $\pi(i-1)$ należy do $S$.
-Mamy więc, że $l$ -- liczba dużych liści -- nie przekracza $|S|+1$, nawet jeśli $\pi(1)$ jest dużym liściem.
-Ponieważ liczba dużych elementów w~kopcu wynosi $(n+1)/2=2^h$, to otrzymujemy, że $|S|=2^h-l\ge2^h-(|S|+1)$, skąd $|S|\ge2^{h-1}-1/2\ge2^{h-2}$.
-
-Powracając teraz do oszacowania na $m_0$, mamy
+Sumę tę obliczamy przez skorzystanie ze wzoru (A.5):
 \[
-    m_0 > \frac{|S|}{2}\lg|S|-\frac{3}{2}|S| = \frac{|S|}{2}(\lg|S|-3) \ge 2^{h-3}(h-5),
+    \sum_{k=0}^{h-2}kx^k = x\cdot\frac{d}{dx}\biggl(\sum_{k=0}^{h-2}x^k\biggr) = x\cdot\frac{d}{dx}\biggl(\frac{x^{h-1}-1}{x-1}\biggr) = x\,\frac{(h-1)x^{h-2}(x-1)-(x^{h-1}-1)}{(x-1)^2}.
 \]
-czyli lemat jest prawdziwy, gdy $j=0$.
-
-Na początku $j$\nbhyphen tego etapu kopiec ma wysokość $h-j$, więc dowód lematu dla $j$\nbhyphen tego etapu, gdzie $1\le j\le h-1$, sprowadza się do dowodu oszacowania $m_0$ dla kopca o~rozmiarze $n=2^{h-j+1}-1$.
-\end{proof}
-
-Załóżmy teraz, że $h\ge5$ i~wykorzystajmy oznaczenie $m_j$ z~powyższego dowodu.
-Sumaryczną liczbę zamian elementów podczas sortowania $n$ liczb, na podstawie lematu, ograniczamy od dołu:
+Przyjmując teraz $x=2$ i~korzystając z~zależności $h=\lg(n+1)-1>\lg n-1$, mamy ostatecznie
 \[
-    \sum_{j=0}^{h-1}m_j > \sum_{j=0}^{h-5}m_j > \sum_{j=0}^{h-5}(h-j-5)2^{h-j-3} = \sum_{j=0}^{h-5}j2^{j+2} = 4\sum_{j=0}^{h-5}j2^j.
+    s \ge \sum_{k=0}^{h-2}k2^k = (h-1)2^{h-1}-2^h+2 > (h-3)2^{h-1} > (\lg n-4)2^{\lg n-2} = \frac{n\lg n}{4}-n = \Omega(n\lg n).
 \]
-Ostatnią sumę obliczamy poprzez skorzystanie ze wzoru (A.5):
-\[
-    \sum_{j=0}^{h-5}jx^j = x\cdot\frac{d}{dx}\biggl(\sum_{j=0}^{h-5}x^j\biggr) = x\cdot\frac{d}{dx}\biggl(\frac{x^{h-4}-1}{x-1}\biggr) = x\,\frac{(h-4)x^{h-5}(x-1)-(x^{h-4}-1)}{(x-1)^2}.
-\]
-Przyjmując teraz $x=2$ i~korzystając z~nierówności $2^h>n/2$ i~$h>\lg n-1$, mamy ostatecznie
-\[
-    4\sum_{j=0}^{h-5}j2^j = (h-4)2^{h-2}-2^{h-1}+8 > (h-6)2^{h-2} > \frac{1}{8}n\lg n-\frac{7}{8}n = \Omega(n\lg n).
-\]
-Otrzymany wynik stanowi oszacowanie czasu działania algorytmu heapsort w~przypadku optymistycznym.
