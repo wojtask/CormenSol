@@ -117,7 +117,7 @@ Sprzeczność.
 
 Zamiast zapamiętywania ciągu $Z$, w~algorytmie będziemy korzystać z~tablicy $a[0\twodots n]$, w~której na $j$\nbhyphen tej pozycji, gdzie $j=1$, 2, \dots, $m$, będziemy przechowywać indeks $i$, taki że $z_j=x_i$.
 Dla pozycji $j=0$ oraz $j=m+1$, $m+2$, \dots, $n$, przyjmiemy $a[j]=0$.
-Przechowywanie indeksów elementów pozwoli nam na zbudowanie tablicy $b$, dzięki której będzie można odtworzyć znaleziony NNP.
+Przechowywanie indeksów elementów pozwoli nam na zbudowanie tablicy $b$, dzięki której będzie można odtworzyć znaleziony NNP\@.
 
 Załóżmy, że w~trakcie przeglądania ciągu $X$ od lewej do prawej, aktualnie przetwarzanym elementem jest $x_i$, a~w~zmiennej $m$ przechowywana jest długość najdłuższego niemalejącego podciągu fragmentu $\langle x_1$, \dots, $x_{i-1}\rangle$.
 Niech $k$ będzie takim indeksem w~tablicy $a$, że $x_{a[j]}\le x_i$ dla każdego $j=1$, 2, \dots, $k-1$, oraz $x_{a[j]}>x_i$ dla każdego $j=k$, $k+1$, \dots, $m$.
@@ -154,7 +154,7 @@ W~wierszach \ref{li:lmis-length-a-init-begin}\nbendash\ref{li:lmis-length-a-init
 Elementy ciągu $X$ przeglądane są następnie od lewej do prawej.
 W~wierszach \ref{li:lmis-length-binary-search-begin}\nbendash\ref{li:lmis-length-binary-search-end} dla elementu $x_i$ odbywa się wyszukiwanie odpowiedniego indeksu tablicy $a$, gdzie należy umieścić $i$, aby zachować uporządkowanie elementów ciągu $X$ indukowane przez fragment $a[1\twodots m]$.
 Po aktualizacji odpowiedniej komórki tablicy $a$, do $b[i]$ wpisywany jest indeks poprzedniego elementu w~ciągu $Z$ (lub 0, jeśli element $x_i$ rozpoczyna nowy podciąg niemalejący), a~następnie aktualizowana jest wartość zmiennej $m$.
-Procedura zwraca informacje służące do odtworzenia znalezionego NNP.
+Procedura zwraca informacje służące do odtworzenia znalezionego NNP\@.
 Można go otrzymać (w~odwrotnej kolejności) przez wypisanie $x_{a[m]}$, a~następnie $x_{b[a[m]]}$, $x_{b[b[a[m]]}$ itd., dopóki indeks nie jest zerem.
 Następująca rekurencyjna procedura pozwala wypisać NNP we właściwej kolejności:
 \begin{codebox}
