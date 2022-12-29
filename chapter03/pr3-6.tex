@@ -64,9 +64,9 @@ Oszacowanie dokładne: $f_2^*(n)=\Theta(\lg\lg n)$.
 
 \subproblem %3-6(h)
 Kolejne iteracje funkcji $f(n)=n/\!\lg n$ mają zbyt skomplikowaną postać, aby można było je badać podobnie jak w~poprzednich punktach.
-Dlatego naszą analizę przeprowadzimy dla oszacowań górnego i~dolnego funkcji $f(n)$.
+Dlatego naszą analizę przeprowadzimy osobno dla oszacowania górnego i~oszacowania dolnego funkcji $f(n)$.
 
-Niech $g(n)$ i~$h(n)$ będą funkcjami monotonicznie rosnącymi, a~$c$ dowolną stałą rzeczywistą.
+Niech $g(n)$ będzie funkcją monotonicznie rosnącą, a~$c$ dowolną stałą rzeczywistą.
 Pokażemy, że jeśli dla każdego $n>c$, $f(n)\le g(n)$ oraz $f_c^*(n)$ i~$g_c^*(n)$ są dobrze określone, to $f_c^*(n)\le g_c^*(n)$.
 Niech $i<f_c^*(n)$.
 Wtedy
@@ -74,7 +74,6 @@ Wtedy
 	c < f^{(i)}(n) = f^{(i-1)}(f(n)) \le f^{(i-2)}(f(g(n))) \le f^{(i-3)}(f(g(g(n)))) \le \dots \le g^{(i)}(n).
 \]
 A~zatem $i<g_c^*(n)$ i~teza zachodzi.
-Analogicznie można uzasadnić, że gdy dla każdego $n>c$, $f(n)\ge h(n)$ i~wartości $f_c^*(n)$, $h_c^*(n)$ są dobrze określone, to $f_c^*(n)\ge h_c^*(n)$.
 
 Dla $g(n)=n/2$, $f(n)\le g(n)$, gdy $n\ge4$.
 Wykorzystując wynik z~punktu (d), otrzymujemy $g_4^*(n)=g_2^*(n)-1=\Theta(\lg n)$, a~zatem
@@ -82,10 +81,25 @@ Wykorzystując wynik z~punktu (d), otrzymujemy $g_4^*(n)=g_2^*(n)-1=\Theta(\lg n
 	f_2^*(n) = f_4^*(n)+1 \le g_4^*(n)+1 = O(\lg n).
 \]
 
-Z~kolei dla $h(n)=\sqrt{n}$, $f(n)\ge h(n)$, gdy $n\ge16$.
-Z~punktu (e) mamy $h_{16}^*(n)=h_2^*(n)-2=\Theta(\lg\lg n)$, skąd
+Dla dolnego oszacowania zaobserwujmy, że dla dowolnego $i\ge0$,
 \[
-	f_2^*(n) = f_{16}^*(n)+2 \ge h_{16}^*(n)+2 = \Omega(\lg\lg n).
+	f\bigl(n/\!\lg^in\bigr) = \frac{n/\!\lg n}{\lg^i(n/\!\lg n)} = \frac{n}{\lg n(\lg n-\lg\lg n)^i} \ge n/\!\lg^{i+1}n.
+\]
+Niech $k$ będzie takie, że dla wszystkich $i=0$, 1, \dots, $k-1$, $n/\!\lg^in>2$ oraz $n/\!\lg^kn\le2$.
+Wówczas $f_2^*\bigl(n/\!\lg^kn\bigr)=0$ i~z~powyższej nierówności mamy:
+\[
+	\begin{array}{l@{\ }c@{\ }l@{\ }c@{\ }l@{\ }}
+	f_2^*(n) &=& 1+f_2^*(f(n)) &=& 1+f_2^*\bigl(n/\!\lg n\bigr) \\[1mm]
+	&=& 2+f_2^*\bigl(f\bigl(n/\!\lg n\bigr)\bigr) &\ge& 2+f_2^*\bigl(n/\!\lg^2n\bigr) \\[1mm]
+	&=& 3+f_2^*\bigl(f\bigl(n/\!\lg^2n\bigr)\bigr) &\ge& 3+f_2^*\bigl(n/\!\lg^3n\bigr) \\[1mm]
+	&\vdots& &\vdots& \\[1mm]
+	&=& k+f_2^*\bigl(f\bigl(n/\!\lg^{k-1}n\bigr)\bigr) &\ge& k+f_2^*\bigl(n/\!\lg^kn\bigr) \\[1mm]
+	&=& k. &&
+	\end{array}
+\]
+Logarytmując obie strony nierówności $n/\!\lg^kn\le2$, otrzymujemy $\lg n\le1+k\lg\lg n$, skąd
+\[
+	f_2^*(n) \ge k \ge \frac{\lg n-1}{\lg\lg n} = \Omega\biggl(\frac{\lg n}{\lg\lg n}\biggr).
 \]
 
-Tempo wzrostu funkcji $f_2^*(n)$ znajduje się zatem pomiędzy $\Omega(\lg\lg n)$ a~$O(\lg n)$.
+Tempo wzrostu funkcji $f_2^*(n)$ znajduje się zatem pomiędzy $\Omega\Bigl(\frac{\lg n}{\lg\lg n}\Bigr)$ a~$O(\lg n)$.
