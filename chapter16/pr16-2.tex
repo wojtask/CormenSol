@@ -16,15 +16,17 @@ Wynika stąd, że w~optymalnym uszeregowaniu zadania powinny występować wedłu
 Na podstawie powyższej analizy wynika, że w~celu rozwiązania postawionego problemu wystarczy posortować zadania ze zbioru $S$ według ich czasów wykonywania, co daje algorytm działający w~czasie $O(n\lg n)$.
 
 \subproblem %16-2(b)
-Każde zadanie ze zbioru wejściowego będziemy reprezentować jako element o~wadze początkowo równej liczbie jednostek czasu potrzebnej do jego wykonania.
-Elementy reprezentujące zadania gotowe do wykonania w~danej chwili na podstawie czasów pojawienia się, przechowywane będą w~zbiorze dynamicznym $S$.
-W~danej chwili $b$ do zbioru $S$ zostaną dodane zadania, które właśnie stały się gotowe do wykonania, czyli takie, dla których $r_i=b$.
-W~razie wyboru zadania $a_i$ do uszeregowania w~chwili $b$, waga tego zadania w~zbiorze $S$ zostanie zmniejszona o~1, co reprezentuje wykonanie fragmentu tego zadania w~chwili $b$ o~długości jednostki czasu.
-Jeśli waga danego zadania osiąga 0, to jest ono usuwane z~$S$.
+Ponieważ wykonanie każdego zadania można dowolnie przerywać, to o~zadaniach można myśleć jak o~obiektach mających wagę równą liczbie jednostek czasu potrzebnych do ich ukończenia.
+Wykonywanie zadania o~wadze $p_i$ przez $t$ jednostek czasu ($0<t\le p_i$) zmniejszałoby jego wagę o~$t$, symbolizując skrócenie pozostałego czasu do jego ukończenia.
+Podobnie jak w~punkcie (a), dążymy do minimalizacji średniego czasu zakończenia, więc opłaca się priorytetyzować zadania gotowe do wykonania o~jak najniższych wagach.
+Stwierdzenie to uzasadniamy jak w~rozwiązaniu powyżej -- zamiana zadań w~optymalnym rozwiązaniu tak, aby wpierw wykonane było to o~dłuższym czasie wykonywania, może tylko powiększyć sumaryczny czas zakończenia.
 
-W~celu minimalizacji średniego czasu zakończenia zadań, postępujemy według podobnego schematu jak w~punkcie (a).
-Ponieważ aktualna waga elementu w~$S$ oznacza pozostały czas wymagany do wykonania tego zadania, to w~danym momencie optymalnym wyborem jest to zadanie ze zbioru $S$, które ma minimalną wagę (o~ile $S$ nie jest zbiorem pustym).
-Zaimplementowanie zbioru dynamicznego $S$ w~postaci kolejki priorytetowej typu min pozwala na szybkie pobieranie elementu o~minimalnej wadze oraz na dekrementowanie wag elementów.
-W~trakcie działania algorytmu każde zadanie zostanie wstawione do $S$, a~po wyzerowaniu jego wagi usunięte.
-Łącznie wykonanych będzie $P=\sum_{i=1}^np_i$ dekrementacji wag elementów i~tyle samo wyszukiwań elementu o~najmniejszej wadze w~$S$.
-Zbiór $S$ może zawierać maksymalnie $n$ elementów, zatem algorytm wykona co najwyżej $O(P\lg n)$ operacji.
+Do pamiętania zadań gotowych do wykonania wykorzystamy kolejkę priorytetową $Q$ typu min porządkującą zadania względem ich wag.
+Załóżmy, że ciąg $\langle a_1,a_2,\dots,a_n\rangle$ stanowi uszeregowanie zadań według ich czasów pojawienia się.
+Algorytm będzie kolejno przeglądał zadania z~tego ciągu i~aktualizował kolejkę $Q$.
+Dla zadania $a_i$ o~czasie pojawienia się $r_i$, po dodaniu go do kolejki $Q$, czas między chwilą $r_i$ a~$r_{i+1}-1$ włącznie (dla wygody można przyjąć $r_{n+1}=\infty$) zostanie maksymalnie wykorzystany na wykonanie zadań aktualnie znajdujących się w~kolejce.
+Częściowe wykonanie danego zadania polega na zmniejszeniu jego wagi, co można zrealizować operacją \proc{Decrease-Key}.
+Na każde zadanie pojawiające się do wykonania, co najwyżej jedno zadanie wykona się częściowo.
+Z~kolei wykonawszy zadanie w~całości, zwyczajnie usuniemy go z~kolejki.
+W~trakcie działania algorytmu każde zadanie dokładnie raz zostanie wstawione i~dokładnie raz usunięte z~kolejki $Q$, więc w~kolejce znajdzie się maksymalnie $n$ elementów.
+W~najgorszym przypadku algorytm wykona po $n$ operacji \proc{Insert}, \proc{Extract-Min} i~\proc{Decrease-Key}, zatem jego czasem działania algorytmu jest $O(n\lg n)$.
