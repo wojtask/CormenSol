@@ -18,14 +18,12 @@ Usuwając dowolną krawędź tego drzewa, dzielimy zbiór jego wierzchołków na
 \end{figure}
 
 \subproblem %B-3(c)
-Rozważmy następującą procedurę podziału zbioru wierzchołków.
-Na początku przyjmujemy, że wynikowe zbiory $A$ i~$B$ są puste.
-Usuwając jedną krawędź, możemy podzielić $n$\nbhyphen elementowy zbiór wierzchołków drzewa na dwa podzbiory, z~których większy będzie składać się z~co najwyżej $3n/4$ wierzchołków, co wynika na podstawie punktu (a).
-Mniejszy podzbiór sumujemy z~jednym ze zbiorów wynikowych, natomiast większy z~nich będzie podlegał dalszemu podziałowi.
-Podczas działania procedury pilnujemy, aby rozmiary zbiorów $A$ i~$B$ nie przekroczyły $\lceil n/2\rceil$.
-Procedurę podziału zakończymy w~momencie, gdy jeden z~tych zbiorów będzie zawierał $\lceil n/2\rceil$ elementów, gdyż drugi zbiór zawiera wtedy $\lfloor n/2\rfloor$ elementów.
+Pokażemy, jak usuwać krawędzie w~drzewie binarnym $T$ o~$n$ wierzchołkach tak, aby wydzielić podzbiór $A$ jego wierzchołków o~rozmiarze $\lfloor n/2\rfloor$.
+Początkowo przyjmujemy $A=\emptyset$ i~powtarzamy następujące kroki.
+Usunięcie dowolnej krawędzi z~drzewa $T$ dzieli go na poddrzewa $T_1$ i~$T_2$, z~których $T_1$ ma rozmiar $s$ nieprzekraczający rozmiaru drzewa $T_2$.
+Wybierzmy do usunięcia krawędź, dla której $s$ jest możliwie największe.
+Jeśli $s+|A|\le\lfloor n/2\rfloor$, to do zbioru $A$ dodajemy $s$ wierzchołków poddrzewa $T_1$.
+Procedurę kontynuujemy dla $T_2$ w~miejscu $T$, aż do uzyskania $|A|=\lfloor n/2\rfloor$.
 
-Zauważmy, że maksymalną liczbę podziałów dla zadanego drzewa wykonamy w~przypadku, gdy po każdym kroku zostanie do podziału zbiór o~rozmiarze $3/4$ rozmiaru zbioru z~poprzedniego kroku.
-Niech $k$ będzie taką maksymalną liczbą podziałów drzewa o~$n$ wierzchołkach.
-Zachodzi wtedy $(3/4)^kn=1$, ponieważ zbioru jednoelementowego nie trzeba już dalej dzielić.
-Stąd mamy $k=\log_{4/3}n$, a~zatem należy usunąć co najwyżej $k=O(\lg n)$ krawędzi.
+Na podstawie punktu (a), liczba usuwanych krawędzi będzie maksymalizowana, gdy za każdym razem rozmiar drzewa $T_2$ będzie stanowić dokładnie $3/4$ rozmiaru drzewa $T$.
+Będzie wówczas usuniętych $\log_{4/3}n=O(\lg n)$ krawędzi.
